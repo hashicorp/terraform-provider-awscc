@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ses_configuration_set", configurationSetResourceType)
+	registry.AddResourceTypeFactory("awscc_ses_configuration_set", configurationSetResourceType)
 }
 
-// configurationSetResourceType returns the Terraform aws_ses_configuration_set resource type.
+// configurationSetResourceType returns the Terraform awscc_ses_configuration_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
 func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -40,14 +39,13 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::SES::ConfigurationSet.",
 		Version:     1,
 		Attributes:  attributes,
@@ -55,7 +53,12 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("aws_ses_configuration_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"name": "Name",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -67,7 +70,7 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ses_configuration_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ses_configuration_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

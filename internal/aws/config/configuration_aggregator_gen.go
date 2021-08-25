@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_configuration_aggregator", configurationAggregatorResourceType)
+	registry.AddResourceTypeFactory("awscc_config_configuration_aggregator", configurationAggregatorResourceType)
 }
 
-// configurationAggregatorResourceType returns the Terraform aws_config_configuration_aggregator resource type.
+// configurationAggregatorResourceType returns the Terraform awscc_config_configuration_aggregator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
 func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"account_aggregation_sources": {
 			// Property: AccountAggregationSources
 			// CloudFormation resource type schema:
@@ -55,8 +56,8 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"account_ids": {
 						// Property: AccountIds
 						Type:     types.ListType{ElemType: types.StringType},
@@ -73,7 +74,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -129,8 +130,8 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"all_aws_regions": {
 						// Property: AllAwsRegions
 						Type:     types.BoolType,
@@ -183,9 +184,8 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "uniqueItems": true
 			// }
 			Description: "The tags for the configuration aggregator.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -199,22 +199,22 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Config::ConfigurationAggregator",
 		Version:     1,
 		Attributes:  attributes,
@@ -222,7 +222,22 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("aws_config_configuration_aggregator").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("awscc_config_configuration_aggregator")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_aggregation_sources":     "AccountAggregationSources",
+		"account_ids":                     "AccountIds",
+		"all_aws_regions":                 "AllAwsRegions",
+		"aws_regions":                     "AwsRegions",
+		"configuration_aggregator_arn":    "ConfigurationAggregatorArn",
+		"configuration_aggregator_name":   "ConfigurationAggregatorName",
+		"key":                             "Key",
+		"organization_aggregation_source": "OrganizationAggregationSource",
+		"role_arn":                        "RoleArn",
+		"tags":                            "Tags",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -234,7 +249,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_config_configuration_aggregator", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_configuration_aggregator", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

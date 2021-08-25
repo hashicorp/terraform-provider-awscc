@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNetworkManagerTransitGatewayRegistration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkManager::TransitGatewayRegistration", "aws_networkmanager_transit_gateway_registration", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkManager::TransitGatewayRegistration", "awscc_networkmanager_transit_gateway_registration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

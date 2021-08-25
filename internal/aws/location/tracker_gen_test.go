@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLocationTracker_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Location::Tracker", "aws_location_tracker", "test")
+	td := acctest.NewTestData(t, "AWS::Location::Tracker", "awscc_location_tracker", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCodeGuruProfilerProfilingGroup_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CodeGuruProfiler::ProfilingGroup", "aws_codeguruprofiler_profiling_group", "test")
+	td := acctest.NewTestData(t, "AWS::CodeGuruProfiler::ProfilingGroup", "awscc_codeguruprofiler_profiling_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

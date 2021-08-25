@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_source", flowSourceResourceType)
+	registry.AddResourceTypeFactory("awscc_mediaconnect_flow_source", flowSourceResourceType)
 }
 
-// flowSourceResourceType returns the Terraform aws_mediaconnect_flow_source resource type.
+// flowSourceResourceType returns the Terraform awscc_mediaconnect_flow_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowSource resource type.
 func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"decryption": {
 			// Property: Decryption
 			// CloudFormation resource type schema:
@@ -82,8 +81,8 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Information about the encryption of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"algorithm": {
 						// Property: Algorithm
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -294,14 +293,13 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaConnect::FlowSource",
 		Version:     1,
 		Attributes:  attributes,
@@ -309,7 +307,34 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowSource").WithTerraformTypeName("aws_mediaconnect_flow_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowSource").WithTerraformTypeName("awscc_mediaconnect_flow_source")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                      "Algorithm",
+		"constant_initialization_vector": "ConstantInitializationVector",
+		"decryption":                     "Decryption",
+		"description":                    "Description",
+		"device_id":                      "DeviceId",
+		"entitlement_arn":                "EntitlementArn",
+		"flow_arn":                       "FlowArn",
+		"ingest_ip":                      "IngestIp",
+		"ingest_port":                    "IngestPort",
+		"key_type":                       "KeyType",
+		"max_bitrate":                    "MaxBitrate",
+		"max_latency":                    "MaxLatency",
+		"name":                           "Name",
+		"protocol":                       "Protocol",
+		"region":                         "Region",
+		"resource_id":                    "ResourceId",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"source_arn":                     "SourceArn",
+		"stream_id":                      "StreamId",
+		"url":                            "Url",
+		"vpc_interface_name":             "VpcInterfaceName",
+		"whitelist_cidr":                 "WhitelistCidr",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -321,7 +346,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediaconnect_flow_source", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_source", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

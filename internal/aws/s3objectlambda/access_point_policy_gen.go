@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3objectlambda_access_point_policy", accessPointPolicyResourceType)
+	registry.AddResourceTypeFactory("awscc_s3objectlambda_access_point_policy", accessPointPolicyResourceType)
 }
 
-// accessPointPolicyResourceType returns the Terraform aws_s3objectlambda_access_point_policy resource type.
+// accessPointPolicyResourceType returns the Terraform awscc_s3objectlambda_access_point_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPointPolicy resource type.
 func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"object_lambda_access_point": {
 			// Property: ObjectLambdaAccessPoint
 			// CloudFormation resource type schema:
@@ -50,14 +49,13 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS::S3ObjectLambda::AccessPointPolicy resource is an Amazon S3ObjectLambda policy type that you can use to control permissions for your S3ObjectLambda",
 		Version:     1,
 		Attributes:  attributes,
@@ -65,7 +63,13 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPointPolicy").WithTerraformTypeName("aws_s3objectlambda_access_point_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3ObjectLambda::AccessPointPolicy").WithTerraformTypeName("awscc_s3objectlambda_access_point_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"object_lambda_access_point": "ObjectLambdaAccessPoint",
+		"policy_document":            "PolicyDocument",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -77,7 +81,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_s3objectlambda_access_point_policy", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3objectlambda_access_point_policy", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

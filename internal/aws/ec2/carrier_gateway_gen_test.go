@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2CarrierGateway_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::CarrierGateway", "aws_ec2_carrier_gateway", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::CarrierGateway", "awscc_ec2_carrier_gateway", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

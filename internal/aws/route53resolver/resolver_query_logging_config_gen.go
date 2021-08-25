@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResourceType)
+	registry.AddResourceTypeFactory("awscc_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResourceType)
 }
 
-// resolverQueryLoggingConfigResourceType returns the Terraform aws_route53resolver_resolver_query_logging_config resource type.
+// resolverQueryLoggingConfigResourceType returns the Terraform awscc_route53resolver_resolver_query_logging_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
 func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -164,14 +163,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.",
 		Version:     1,
 		Attributes:  attributes,
@@ -179,7 +171,21 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("aws_route53resolver_resolver_query_logging_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"association_count":  "AssociationCount",
+		"creation_time":      "CreationTime",
+		"creator_request_id": "CreatorRequestId",
+		"destination_arn":    "DestinationArn",
+		"id":                 "Id",
+		"name":               "Name",
+		"owner_id":           "OwnerId",
+		"share_status":       "ShareStatus",
+		"status":             "Status",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -191,7 +197,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53resolver_resolver_query_logging_config", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_resolver_query_logging_config", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

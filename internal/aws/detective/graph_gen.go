@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_detective_graph", graphResourceType)
+	registry.AddResourceTypeFactory("awscc_detective_graph", graphResourceType)
 }
 
-// graphResourceType returns the Terraform aws_detective_graph resource type.
+// graphResourceType returns the Terraform awscc_detective_graph resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Detective::Graph resource type.
 func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -58,8 +57,8 @@ func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ ",
@@ -73,20 +72,19 @@ func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Detective::Graph",
 		Version:     1,
 		Attributes:  attributes,
@@ -94,7 +92,15 @@ func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Detective::Graph").WithTerraformTypeName("aws_detective_graph").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Detective::Graph").WithTerraformTypeName("awscc_detective_graph")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":   "Arn",
+		"key":   "Key",
+		"tags":  "Tags",
+		"value": "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -106,7 +112,7 @@ func graphResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_detective_graph", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_detective_graph", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

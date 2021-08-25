@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appintegrations_event_integration", eventIntegrationResourceType)
+	registry.AddResourceTypeFactory("awscc_appintegrations_event_integration", eventIntegrationResourceType)
 }
 
-// eventIntegrationResourceType returns the Terraform aws_appintegrations_event_integration resource type.
+// eventIntegrationResourceType returns the Terraform awscc_appintegrations_event_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
 func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"associations": {
 			// Property: Associations
 			// CloudFormation resource type schema:
@@ -90,13 +89,13 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "array"
 			// }
 			Description: "The associations with the event integration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"client_association_metadata": {
 						// Property: ClientAssociationMetadata
 						Description: "The metadata associated with the client.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Description: "A key to identify the metadata.",
@@ -110,7 +109,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -139,7 +138,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 				},
 			),
@@ -192,8 +191,8 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source": {
 						// Property: Source
 						Description: "The source of the events.",
@@ -267,8 +266,8 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "array"
 			// }
 			Description: "The tags (keys and values) associated with the event integration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A key to identify the tag.",
@@ -282,7 +281,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 200,
 				},
@@ -291,14 +290,13 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::AppIntegrations::EventIntegration",
 		Version:     1,
 		Attributes:  attributes,
@@ -306,7 +304,26 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("aws_appintegrations_event_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"associations":                      "Associations",
+		"client_association_metadata":       "ClientAssociationMetadata",
+		"client_id":                         "ClientId",
+		"description":                       "Description",
+		"event_bridge_bus":                  "EventBridgeBus",
+		"event_bridge_rule_name":            "EventBridgeRuleName",
+		"event_filter":                      "EventFilter",
+		"event_integration_arn":             "EventIntegrationArn",
+		"event_integration_association_arn": "EventIntegrationAssociationArn",
+		"event_integration_association_id":  "EventIntegrationAssociationId",
+		"key":                               "Key",
+		"name":                              "Name",
+		"source":                            "Source",
+		"tags":                              "Tags",
+		"value":                             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -318,7 +335,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_appintegrations_event_integration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_appintegrations_event_integration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_service_profile", serviceProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_iotwireless_service_profile", serviceProfileResourceType)
 }
 
-// serviceProfileResourceType returns the Terraform aws_iotwireless_service_profile resource type.
+// serviceProfileResourceType returns the Terraform awscc_iotwireless_service_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::ServiceProfile resource type.
 func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -112,8 +111,8 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"add_gw_metadata": {
 						// Property: AddGwMetadata
 						Type:     types.BoolType,
@@ -253,7 +252,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "A list of key-value pairs that contain metadata for the service profile.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -273,14 +272,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -288,7 +280,37 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::ServiceProfile").WithTerraformTypeName("aws_iotwireless_service_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::ServiceProfile").WithTerraformTypeName("awscc_iotwireless_service_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"add_gw_metadata":           "AddGwMetadata",
+		"arn":                       "Arn",
+		"channel_mask":              "ChannelMask",
+		"dev_status_req_freq":       "DevStatusReqFreq",
+		"dl_bucket_size":            "DlBucketSize",
+		"dl_rate":                   "DlRate",
+		"dl_rate_policy":            "DlRatePolicy",
+		"dr_max":                    "DrMax",
+		"dr_min":                    "DrMin",
+		"hr_allowed":                "HrAllowed",
+		"id":                        "Id",
+		"key":                       "Key",
+		"lo_ra_wan":                 "LoRaWAN",
+		"min_gw_diversity":          "MinGwDiversity",
+		"name":                      "Name",
+		"nwk_geo_loc":               "NwkGeoLoc",
+		"pr_allowed":                "PrAllowed",
+		"ra_allowed":                "RaAllowed",
+		"report_dev_status_battery": "ReportDevStatusBattery",
+		"report_dev_status_margin":  "ReportDevStatusMargin",
+		"tags":                      "Tags",
+		"target_per":                "TargetPer",
+		"ul_bucket_size":            "UlBucketSize",
+		"ul_rate":                   "UlRate",
+		"ul_rate_policy":            "UlRatePolicy",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -300,7 +322,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotwireless_service_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_service_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

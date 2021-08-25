@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_appflow_connector_profile", connectorProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_appflow_connector_profile", connectorProfileResourceType)
 }
 
-// connectorProfileResourceType returns the Terraform aws_appflow_connector_profile resource type.
+// connectorProfileResourceType returns the Terraform awscc_appflow_connector_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AppFlow::ConnectorProfile resource type.
 func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"connection_mode": {
 			// Property: ConnectionMode
 			// CloudFormation resource type schema:
@@ -637,17 +636,17 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "object"
 			// }
 			Description: "Connector specific configurations needed to create connector profile",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connector_profile_credentials": {
 						// Property: ConnectorProfileCredentials
 						Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"amplitude": {
 									// Property: Amplitude
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
 												Type:     types.StringType,
@@ -664,8 +663,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"datadog": {
 									// Property: Datadog
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
 												Type:     types.StringType,
@@ -682,8 +681,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"api_token": {
 												// Property: ApiToken
 												Type:     types.StringType,
@@ -695,8 +694,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
 												Type:     types.StringType,
@@ -714,8 +713,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"auth_code": {
 															// Property: AuthCode
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
@@ -743,8 +742,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_key_id": {
 												// Property: AccessKeyId
 												Type:     types.StringType,
@@ -771,8 +770,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"marketo": {
 									// Property: Marketo
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
 												Type:     types.StringType,
@@ -790,8 +789,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"auth_code": {
 															// Property: AuthCode
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
@@ -814,8 +813,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"redshift": {
 									// Property: Redshift
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
 												Type:     types.StringType,
@@ -832,8 +831,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"salesforce": {
 									// Property: Salesforce
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
 												Type:     types.StringType,
@@ -846,8 +845,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"auth_code": {
 															// Property: AuthCode
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
@@ -875,8 +874,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"service_now": {
 									// Property: ServiceNow
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
 												Type:     types.StringType,
@@ -893,8 +892,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"singular": {
 									// Property: Singular
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
 												Type:     types.StringType,
@@ -906,8 +905,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"slack": {
 									// Property: Slack
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
 												Type:     types.StringType,
@@ -925,8 +924,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"auth_code": {
 															// Property: AuthCode
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
@@ -949,8 +948,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"snowflake": {
 									// Property: Snowflake
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
 												Type:     types.StringType,
@@ -967,8 +966,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"trendmicro": {
 									// Property: Trendmicro
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"api_secret_key": {
 												// Property: ApiSecretKey
 												Type:     types.StringType,
@@ -980,8 +979,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"veeva": {
 									// Property: Veeva
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
 												Type:     types.StringType,
@@ -998,8 +997,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"zendesk": {
 									// Property: Zendesk
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
 												Type:     types.StringType,
@@ -1017,8 +1016,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"auth_code": {
 															// Property: AuthCode
 															Description: "The code provided by the connector when it has been authenticated via the connected app.",
@@ -1046,12 +1045,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"connector_profile_properties": {
 						// Property: ConnectorProfileProperties
 						Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"datadog": {
 									// Property: Datadog
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1063,8 +1062,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"dynatrace": {
 									// Property: Dynatrace
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1076,8 +1075,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"infor_nexus": {
 									// Property: InforNexus
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1089,8 +1088,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"marketo": {
 									// Property: Marketo
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1102,8 +1101,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"redshift": {
 									// Property: Redshift
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
 												Type:     types.StringType,
@@ -1130,8 +1129,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"salesforce": {
 									// Property: Salesforce
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1148,8 +1147,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"service_now": {
 									// Property: ServiceNow
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1161,8 +1160,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"slack": {
 									// Property: Slack
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1174,8 +1173,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"snowflake": {
 									// Property: Snowflake
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"account_name": {
 												// Property: AccountName
 												Type:     types.StringType,
@@ -1217,8 +1216,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"veeva": {
 									// Property: Veeva
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1230,8 +1229,8 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"zendesk": {
 									// Property: Zendesk
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
 												Type:     types.StringType,
@@ -1322,14 +1321,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::AppFlow::ConnectorProfile",
 		Version:     1,
 		Attributes:  attributes,
@@ -1337,7 +1335,65 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::ConnectorProfile").WithTerraformTypeName("aws_appflow_connector_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::ConnectorProfile").WithTerraformTypeName("awscc_appflow_connector_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_key_id":                 "AccessKeyId",
+		"access_token":                  "AccessToken",
+		"account_name":                  "AccountName",
+		"amplitude":                     "Amplitude",
+		"api_key":                       "ApiKey",
+		"api_secret_key":                "ApiSecretKey",
+		"api_token":                     "ApiToken",
+		"application_key":               "ApplicationKey",
+		"auth_code":                     "AuthCode",
+		"bucket_name":                   "BucketName",
+		"bucket_prefix":                 "BucketPrefix",
+		"client_credentials_arn":        "ClientCredentialsArn",
+		"client_id":                     "ClientId",
+		"client_secret":                 "ClientSecret",
+		"connection_mode":               "ConnectionMode",
+		"connector_o_auth_request":      "ConnectorOAuthRequest",
+		"connector_profile_arn":         "ConnectorProfileArn",
+		"connector_profile_config":      "ConnectorProfileConfig",
+		"connector_profile_credentials": "ConnectorProfileCredentials",
+		"connector_profile_name":        "ConnectorProfileName",
+		"connector_profile_properties":  "ConnectorProfileProperties",
+		"connector_type":                "ConnectorType",
+		"credentials_arn":               "CredentialsArn",
+		"database_url":                  "DatabaseUrl",
+		"datadog":                       "Datadog",
+		"datakey":                       "Datakey",
+		"dynatrace":                     "Dynatrace",
+		"google_analytics":              "GoogleAnalytics",
+		"infor_nexus":                   "InforNexus",
+		"instance_url":                  "InstanceUrl",
+		"is_sandbox_environment":        "isSandboxEnvironment",
+		"kms_arn":                       "KMSArn",
+		"marketo":                       "Marketo",
+		"password":                      "Password",
+		"private_link_service_name":     "PrivateLinkServiceName",
+		"redirect_uri":                  "RedirectUri",
+		"redshift":                      "Redshift",
+		"refresh_token":                 "RefreshToken",
+		"region":                        "Region",
+		"role_arn":                      "RoleArn",
+		"salesforce":                    "Salesforce",
+		"secret_access_key":             "SecretAccessKey",
+		"secret_key":                    "SecretKey",
+		"service_now":                   "ServiceNow",
+		"singular":                      "Singular",
+		"slack":                         "Slack",
+		"snowflake":                     "Snowflake",
+		"stage":                         "Stage",
+		"trendmicro":                    "Trendmicro",
+		"user_id":                       "UserId",
+		"username":                      "Username",
+		"veeva":                         "Veeva",
+		"warehouse":                     "Warehouse",
+		"zendesk":                       "Zendesk",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ConnectorProfileConfig",
@@ -1352,7 +1408,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_appflow_connector_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_appflow_connector_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

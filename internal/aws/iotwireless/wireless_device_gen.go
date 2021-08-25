@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_wireless_device", wirelessDeviceResourceType)
+	registry.AddResourceTypeFactory("awscc_iotwireless_wireless_device", wirelessDeviceResourceType)
 }
 
-// wirelessDeviceResourceType returns the Terraform aws_iotwireless_wireless_device resource type.
+// wirelessDeviceResourceType returns the Terraform awscc_iotwireless_wireless_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::WirelessDevice resource type.
 func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -218,12 +217,12 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"abp_v10_x": {
 						// Property: AbpV10x
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dev_addr": {
 									// Property: DevAddr
 									Type:     types.StringType,
@@ -231,8 +230,8 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"session_keys": {
 									// Property: SessionKeys
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"app_s_key": {
 												// Property: AppSKey
 												Type:     types.StringType,
@@ -253,8 +252,8 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"abp_v11": {
 						// Property: AbpV11
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dev_addr": {
 									// Property: DevAddr
 									Type:     types.StringType,
@@ -262,8 +261,8 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"session_keys": {
 									// Property: SessionKeys
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"app_s_key": {
 												// Property: AppSKey
 												Type:     types.StringType,
@@ -304,8 +303,8 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"otaa_v10_x": {
 						// Property: OtaaV10x
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"app_eui": {
 									// Property: AppEui
 									Type:     types.StringType,
@@ -322,8 +321,8 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"otaa_v11": {
 						// Property: OtaaV11
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"app_key": {
 									// Property: AppKey
 									Type:     types.StringType,
@@ -392,7 +391,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -449,14 +448,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
 		Attributes:  attributes,
@@ -464,7 +456,42 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("aws_iotwireless_wireless_device").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_device")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"abp_v10_x":               "AbpV10x",
+		"abp_v11":                 "AbpV11",
+		"app_eui":                 "AppEui",
+		"app_key":                 "AppKey",
+		"app_s_key":               "AppSKey",
+		"arn":                     "Arn",
+		"description":             "Description",
+		"destination_name":        "DestinationName",
+		"dev_addr":                "DevAddr",
+		"dev_eui":                 "DevEui",
+		"device_profile_id":       "DeviceProfileId",
+		"f_nwk_s_int_key":         "FNwkSIntKey",
+		"id":                      "Id",
+		"join_eui":                "JoinEui",
+		"key":                     "Key",
+		"last_uplink_received_at": "LastUplinkReceivedAt",
+		"lo_ra_wan":               "LoRaWAN",
+		"name":                    "Name",
+		"nwk_key":                 "NwkKey",
+		"nwk_s_enc_key":           "NwkSEncKey",
+		"nwk_s_key":               "NwkSKey",
+		"otaa_v10_x":              "OtaaV10x",
+		"otaa_v11":                "OtaaV11",
+		"s_nwk_s_int_key":         "SNwkSIntKey",
+		"service_profile_id":      "ServiceProfileId",
+		"session_keys":            "SessionKeys",
+		"tags":                    "Tags",
+		"thing_arn":               "ThingArn",
+		"thing_name":              "ThingName",
+		"type":                    "Type",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -476,7 +503,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotwireless_wireless_device", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_wireless_device", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

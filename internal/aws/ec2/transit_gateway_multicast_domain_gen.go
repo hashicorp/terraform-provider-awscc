@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_domain", transitGatewayMulticastDomainResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_multicast_domain", transitGatewayMulticastDomainResourceType)
 }
 
-// transitGatewayMulticastDomainResourceType returns the Terraform aws_ec2_transit_gateway_multicast_domain resource type.
+// transitGatewayMulticastDomainResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomain resource type.
 func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -57,8 +56,8 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			//   "type": "object"
 			// }
 			Description: "The options for the transit gateway multicast domain.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auto_accept_shared_associations": {
 						// Property: AutoAcceptSharedAssociations
 						Description: "Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable",
@@ -114,8 +113,8 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			//   "type": "array"
 			// }
 			Description: "The tags for the transit gateway multicast domain.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
@@ -129,7 +128,7 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -169,14 +168,13 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::EC2::TransitGatewayMulticastDomain type",
 		Version:     1,
 		Attributes:  attributes,
@@ -184,7 +182,23 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomain").WithTerraformTypeName("aws_ec2_transit_gateway_multicast_domain").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomain").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_accept_shared_associations":      "AutoAcceptSharedAssociations",
+		"creation_time":                        "CreationTime",
+		"igmpv_2_support":                      "Igmpv2Support",
+		"key":                                  "Key",
+		"options":                              "Options",
+		"state":                                "State",
+		"static_sources_support":               "StaticSourcesSupport",
+		"tags":                                 "Tags",
+		"transit_gateway_id":                   "TransitGatewayId",
+		"transit_gateway_multicast_domain_arn": "TransitGatewayMulticastDomainArn",
+		"transit_gateway_multicast_domain_id":  "TransitGatewayMulticastDomainId",
+		"value":                                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -196,7 +210,7 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_multicast_domain", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_multicast_domain", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

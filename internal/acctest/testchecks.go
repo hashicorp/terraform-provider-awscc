@@ -9,8 +9,12 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	tfcloudformation "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/service/cloudformation"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
+	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+)
+
+const (
+	deleteResourceTimeout = 120 * time.Minute
 )
 
 // CheckDestroy returns a TestCheckFunc that tests whether a resource has been destroyed in AWS.
@@ -60,7 +64,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, 120*time.Minute)
+		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 

@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_health_check", healthCheckResourceType)
+	registry.AddResourceTypeFactory("awscc_route53_health_check", healthCheckResourceType)
 }
 
-// healthCheckResourceType returns the Terraform aws_route53_health_check resource type.
+// healthCheckResourceType returns the Terraform awscc_route53_health_check resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HealthCheck resource type.
 func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"health_check_config": {
 			// Property: HealthCheckConfig
 			// CloudFormation resource type schema:
@@ -138,13 +137,13 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A complex type that contains information about the health check.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"alarm_identifier": {
 						// Property: AlarmIdentifier
 						Description: "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
@@ -163,7 +162,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"child_health_checks": {
 						// Property: ChildHealthChecks
-						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -216,7 +214,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"regions": {
 						// Property: Regions
-						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
@@ -293,7 +290,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag.",
@@ -313,14 +310,13 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53::HealthCheck.",
 		Version:     1,
 		Attributes:  attributes,
@@ -328,7 +324,35 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("aws_route53_health_check").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::HealthCheck").WithTerraformTypeName("awscc_route53_health_check")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_identifier":                "AlarmIdentifier",
+		"child_health_checks":             "ChildHealthChecks",
+		"enable_sni":                      "EnableSNI",
+		"failure_threshold":               "FailureThreshold",
+		"fully_qualified_domain_name":     "FullyQualifiedDomainName",
+		"health_check_config":             "HealthCheckConfig",
+		"health_check_id":                 "HealthCheckId",
+		"health_check_tags":               "HealthCheckTags",
+		"health_threshold":                "HealthThreshold",
+		"insufficient_data_health_status": "InsufficientDataHealthStatus",
+		"inverted":                        "Inverted",
+		"ip_address":                      "IPAddress",
+		"key":                             "Key",
+		"measure_latency":                 "MeasureLatency",
+		"name":                            "Name",
+		"port":                            "Port",
+		"region":                          "Region",
+		"regions":                         "Regions",
+		"request_interval":                "RequestInterval",
+		"resource_path":                   "ResourcePath",
+		"routing_control_arn":             "RoutingControlArn",
+		"search_string":                   "SearchString",
+		"type":                            "Type",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -340,7 +364,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53_health_check", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_health_check", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

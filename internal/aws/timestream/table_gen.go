@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_timestream_table", tableResourceType)
+	registry.AddResourceTypeFactory("awscc_timestream_table", tableResourceType)
 }
 
-// tableResourceType returns the Terraform aws_timestream_table resource type.
+// tableResourceType returns the Terraform awscc_timestream_table resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Timestream::Table resource type.
 func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -74,8 +73,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The retention duration of the memory store and the magnetic store.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"magnetic_store_retention_period_in_days": {
 						// Property: MagneticStoreRetentionPeriodInDays
 						Description: "The duration for which data must be stored in the magnetic store.",
@@ -132,8 +131,8 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -145,7 +144,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 200,
 				},
 			),
@@ -153,14 +152,13 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::Timestream::Table resource creates a Timestream Table.",
 		Version:     1,
 		Attributes:  attributes,
@@ -168,7 +166,21 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Table").WithTerraformTypeName("aws_timestream_table").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Table").WithTerraformTypeName("awscc_timestream_table")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"database_name": "DatabaseName",
+		"key":           "Key",
+		"magnetic_store_retention_period_in_days": "MagneticStoreRetentionPeriodInDays",
+		"memory_store_retention_period_in_hours":  "MemoryStoreRetentionPeriodInHours",
+		"name":                                    "Name",
+		"retention_properties":                    "RetentionProperties",
+		"table_name":                              "TableName",
+		"tags":                                    "Tags",
+		"value":                                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -180,7 +192,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_timestream_table", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_timestream_table", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

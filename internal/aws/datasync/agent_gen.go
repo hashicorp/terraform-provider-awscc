@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_agent", agentResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_agent", agentResourceType)
 }
 
-// agentResourceType returns the Terraform aws_datasync_agent resource type.
+// agentResourceType returns the Terraform awscc_datasync_agent resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Agent resource type.
 func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"activation_key": {
 			// Property: ActivationKey
 			// CloudFormation resource type schema:
@@ -95,10 +94,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Computed:    true,
 			// SecurityGroupArns is a force-new attribute.
 		},
 		"subnet_arns": {
@@ -115,10 +113,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Computed:    true,
 			// SubnetArns is a force-new attribute.
 		},
 		"tags": {
@@ -158,7 +155,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -194,14 +191,13 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::Agent.",
 		Version:     1,
 		Attributes:  attributes,
@@ -209,7 +205,21 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Agent").WithTerraformTypeName("aws_datasync_agent").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Agent").WithTerraformTypeName("awscc_datasync_agent")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"activation_key":      "ActivationKey",
+		"agent_arn":           "AgentArn",
+		"agent_name":          "AgentName",
+		"endpoint_type":       "EndpointType",
+		"key":                 "Key",
+		"security_group_arns": "SecurityGroupArns",
+		"subnet_arns":         "SubnetArns",
+		"tags":                "Tags",
+		"value":               "Value",
+		"vpc_endpoint_id":     "VpcEndpointId",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ActivationKey",
@@ -224,7 +234,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_agent", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_agent", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

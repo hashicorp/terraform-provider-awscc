@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_authorizer", authorizerResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_authorizer", authorizerResourceType)
 }
 
-// authorizerResourceType returns the Terraform aws_iot_authorizer resource type.
+// authorizerResourceType returns the Terraform awscc_iot_authorizer resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::Authorizer resource type.
 func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -100,8 +99,8 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -113,7 +112,7 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -144,14 +143,13 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Creates an authorizer.",
 		Version:     1,
 		Attributes:  attributes,
@@ -159,7 +157,21 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::Authorizer").WithTerraformTypeName("aws_iot_authorizer").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::Authorizer").WithTerraformTypeName("awscc_iot_authorizer")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"authorizer_function_arn":   "AuthorizerFunctionArn",
+		"authorizer_name":           "AuthorizerName",
+		"key":                       "Key",
+		"signing_disabled":          "SigningDisabled",
+		"status":                    "Status",
+		"tags":                      "Tags",
+		"token_key_name":            "TokenKeyName",
+		"token_signing_public_keys": "TokenSigningPublicKeys",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -171,7 +183,7 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_authorizer", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_authorizer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

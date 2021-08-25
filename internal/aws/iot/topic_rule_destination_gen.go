@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_topic_rule_destination", topicRuleDestinationResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_topic_rule_destination", topicRuleDestinationResourceType)
 }
 
-// topicRuleDestinationResourceType returns the Terraform aws_iot_topic_rule_destination resource type.
+// topicRuleDestinationResourceType returns the Terraform awscc_iot_topic_rule_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::TopicRuleDestination resource type.
 func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -45,8 +46,8 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"confirmation_url": {
 						// Property: ConfirmationUrl
 						Type:     types.StringType,
@@ -112,8 +113,8 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"role_arn": {
 						// Property: RoleArn
 						Type:     types.StringType,
@@ -121,15 +122,15 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 					"vpc_id": {
 						// Property: VpcId
@@ -144,14 +145,13 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IoT::TopicRuleDestination",
 		Version:     1,
 		Attributes:  attributes,
@@ -159,7 +159,21 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("aws_iot_topic_rule_destination").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("awscc_iot_topic_rule_destination")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                 "Arn",
+		"confirmation_url":    "ConfirmationUrl",
+		"http_url_properties": "HttpUrlProperties",
+		"role_arn":            "RoleArn",
+		"security_groups":     "SecurityGroups",
+		"status":              "Status",
+		"status_reason":       "StatusReason",
+		"subnet_ids":          "SubnetIds",
+		"vpc_id":              "VpcId",
+		"vpc_properties":      "VpcProperties",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -171,7 +185,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_topic_rule_destination", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_topic_rule_destination", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

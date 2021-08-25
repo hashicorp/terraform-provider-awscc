@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_nfs", locationNFSResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_nfs", locationNFSResourceType)
 }
 
-// locationNFSResourceType returns the Terraform aws_datasync_location_nfs resource type.
+// locationNFSResourceType returns the Terraform awscc_datasync_location_nfs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
 func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"location_arn": {
 			// Property: LocationArn
 			// CloudFormation resource type schema:
@@ -70,8 +69,8 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The NFS mount options that DataSync can use to mount your NFS share.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"version": {
 						// Property: Version
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
@@ -108,14 +107,13 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"agent_arns": {
 						// Property: AgentArns
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 					},
 				},
 			),
@@ -187,7 +185,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -209,14 +207,13 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::LocationNFS",
 		Version:     1,
 		Attributes:  attributes,
@@ -224,7 +221,22 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("aws_datasync_location_nfs").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationNFS").WithTerraformTypeName("awscc_datasync_location_nfs")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_arns":      "AgentArns",
+		"key":             "Key",
+		"location_arn":    "LocationArn",
+		"location_uri":    "LocationUri",
+		"mount_options":   "MountOptions",
+		"on_prem_config":  "OnPremConfig",
+		"server_hostname": "ServerHostname",
+		"subdirectory":    "Subdirectory",
+		"tags":            "Tags",
+		"value":           "Value",
+		"version":         "Version",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerHostname",
@@ -240,7 +252,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_nfs", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_nfs", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

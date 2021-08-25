@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResourceType)
 }
 
-// transitGatewayPeeringAttachmentResourceType returns the Terraform aws_ec2_transit_gateway_peering_attachment resource type.
+// transitGatewayPeeringAttachmentResourceType returns the Terraform awscc_ec2_transit_gateway_peering_attachment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
 func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -98,8 +97,8 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"code": {
 						// Property: Code
 						Description: "The status code.",
@@ -138,8 +137,8 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			//   "type": "array"
 			// }
 			Description: "The tags for the transit gateway peering attachment.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
@@ -153,7 +152,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -182,14 +181,13 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::EC2::TransitGatewayPeeringAttachment type",
 		Version:     1,
 		Attributes:  attributes,
@@ -197,7 +195,24 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("aws_ec2_transit_gateway_peering_attachment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachment")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"code":                          "Code",
+		"creation_time":                 "CreationTime",
+		"key":                           "Key",
+		"message":                       "Message",
+		"peer_account_id":               "PeerAccountId",
+		"peer_region":                   "PeerRegion",
+		"peer_transit_gateway_id":       "PeerTransitGatewayId",
+		"state":                         "State",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
+		"transit_gateway_id":            "TransitGatewayId",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -209,7 +224,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_peering_attachment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_peering_attachment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEMRStudioSessionMapping_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EMR::StudioSessionMapping", "aws_emr_studio_session_mapping", "test")
+	td := acctest.NewTestData(t, "AWS::EMR::StudioSessionMapping", "awscc_emr_studio_session_mapping", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

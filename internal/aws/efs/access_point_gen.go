@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_efs_access_point", accessPointResourceType)
+	registry.AddResourceTypeFactory("awscc_efs_access_point", accessPointResourceType)
 }
 
-// accessPointResourceType returns the Terraform aws_efs_access_point resource type.
+// accessPointResourceType returns the Terraform awscc_efs_access_point resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EFS::AccessPoint resource type.
 func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_point_id": {
 			// Property: AccessPointId
 			// CloudFormation resource type schema:
@@ -57,7 +56,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -135,8 +134,8 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"gid": {
 						// Property: Gid
 						Description: "The POSIX group ID used for all file system operations using this access point.",
@@ -204,12 +203,12 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"creation_info": {
 						// Property: CreationInfo
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"owner_gid": {
 									// Property: OwnerGid
 									Description: "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
@@ -250,14 +249,13 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EFS::AccessPoint",
 		Version:     1,
 		Attributes:  attributes,
@@ -265,7 +263,28 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EFS::AccessPoint").WithTerraformTypeName("aws_efs_access_point").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EFS::AccessPoint").WithTerraformTypeName("awscc_efs_access_point")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_id":   "AccessPointId",
+		"access_point_tags": "AccessPointTags",
+		"arn":               "Arn",
+		"client_token":      "ClientToken",
+		"creation_info":     "CreationInfo",
+		"file_system_id":    "FileSystemId",
+		"gid":               "Gid",
+		"key":               "Key",
+		"owner_gid":         "OwnerGid",
+		"owner_uid":         "OwnerUid",
+		"path":              "Path",
+		"permissions":       "Permissions",
+		"posix_user":        "PosixUser",
+		"root_directory":    "RootDirectory",
+		"secondary_gids":    "SecondaryGids",
+		"uid":               "Uid",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -277,7 +296,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_efs_access_point", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_efs_access_point", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

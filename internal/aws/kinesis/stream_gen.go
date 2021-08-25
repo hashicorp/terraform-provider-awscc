@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kinesis_stream", streamResourceType)
+	registry.AddResourceTypeFactory("awscc_kinesis_stream", streamResourceType)
 }
 
-// streamResourceType returns the Terraform aws_kinesis_stream resource type.
+// streamResourceType returns the Terraform awscc_kinesis_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Kinesis::Stream resource type.
 func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -99,8 +98,8 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. Removing this property from your stack template and updating your stack disables encryption.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption_type": {
 						// Property: EncryptionType
 						Description: "The encryption type to use. The only valid value is KMS. ",
@@ -150,9 +149,8 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -166,20 +164,19 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Kinesis::Stream",
 		Version:     1,
 		Attributes:  attributes,
@@ -187,7 +184,21 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("aws_kinesis_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Kinesis::Stream").WithTerraformTypeName("awscc_kinesis_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"encryption_type":        "EncryptionType",
+		"key":                    "Key",
+		"key_id":                 "KeyId",
+		"name":                   "Name",
+		"retention_period_hours": "RetentionPeriodHours",
+		"shard_count":            "ShardCount",
+		"stream_encryption":      "StreamEncryption",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -199,7 +210,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_kinesis_stream", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kinesis_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

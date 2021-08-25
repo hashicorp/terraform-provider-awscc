@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_device_profile", deviceProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_iotwireless_device_profile", deviceProfileResourceType)
 }
 
-// deviceProfileResourceType returns the Terraform aws_iotwireless_device_profile resource type.
+// deviceProfileResourceType returns the Terraform awscc_iotwireless_device_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::DeviceProfile resource type.
 func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -100,8 +99,8 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
 						Type:     types.NumberType,
@@ -216,7 +215,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Description: "A list of key-value pairs that contain metadata for the device profile.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -236,14 +235,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Device Profile's resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -251,7 +243,32 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::DeviceProfile").WithTerraformTypeName("aws_iotwireless_device_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::DeviceProfile").WithTerraformTypeName("awscc_iotwireless_device_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"class_b_timeout":       "ClassBTimeout",
+		"class_c_timeout":       "ClassCTimeout",
+		"id":                    "Id",
+		"key":                   "Key",
+		"lo_ra_wan":             "LoRaWAN",
+		"mac_version":           "MacVersion",
+		"max_duty_cycle":        "MaxDutyCycle",
+		"max_eirp":              "MaxEirp",
+		"name":                  "Name",
+		"ping_slot_dr":          "PingSlotDr",
+		"ping_slot_freq":        "PingSlotFreq",
+		"ping_slot_period":      "PingSlotPeriod",
+		"reg_params_revision":   "RegParamsRevision",
+		"rf_region":             "RfRegion",
+		"supports_32_bit_f_cnt": "Supports32BitFCnt",
+		"supports_class_b":      "SupportsClassB",
+		"supports_class_c":      "SupportsClassC",
+		"supports_join":         "SupportsJoin",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -263,7 +280,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotwireless_device_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_device_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

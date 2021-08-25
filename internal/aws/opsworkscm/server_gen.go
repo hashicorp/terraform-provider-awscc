@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_opsworkscm_server", serverResourceType)
+	registry.AddResourceTypeFactory("awscc_opsworkscm_server", serverResourceType)
 }
 
-// serverResourceType returns the Terraform aws_opsworkscm_server resource type.
+// serverResourceType returns the Terraform awscc_opsworkscm_server resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::OpsWorksCM::Server resource type.
 func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -161,8 +160,8 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -174,7 +173,7 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			// EngineAttributes is a write-only attribute.
@@ -358,8 +357,8 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -371,20 +370,13 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::OpsWorksCM::Server",
 		Version:     1,
 		Attributes:  attributes,
@@ -392,7 +384,38 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("aws_opsworkscm_server").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::OpsWorksCM::Server").WithTerraformTypeName("awscc_opsworkscm_server")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                          "Arn",
+		"associate_public_ip_address":  "AssociatePublicIpAddress",
+		"backup_id":                    "BackupId",
+		"backup_retention_count":       "BackupRetentionCount",
+		"custom_certificate":           "CustomCertificate",
+		"custom_domain":                "CustomDomain",
+		"custom_private_key":           "CustomPrivateKey",
+		"disable_automated_backup":     "DisableAutomatedBackup",
+		"endpoint":                     "Endpoint",
+		"engine":                       "Engine",
+		"engine_attributes":            "EngineAttributes",
+		"engine_model":                 "EngineModel",
+		"engine_version":               "EngineVersion",
+		"id":                           "Id",
+		"instance_profile_arn":         "InstanceProfileArn",
+		"instance_type":                "InstanceType",
+		"key":                          "Key",
+		"key_pair":                     "KeyPair",
+		"name":                         "Name",
+		"preferred_backup_window":      "PreferredBackupWindow",
+		"preferred_maintenance_window": "PreferredMaintenanceWindow",
+		"security_group_ids":           "SecurityGroupIds",
+		"server_name":                  "ServerName",
+		"service_role_arn":             "ServiceRoleArn",
+		"subnet_ids":                   "SubnetIds",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CustomPrivateKey",
@@ -408,7 +431,7 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_opsworkscm_server", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_opsworkscm_server", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_map", mapResourceType)
+	registry.AddResourceTypeFactory("awscc_location_map", mapResourceType)
 }
 
-// mapResourceType returns the Terraform aws_location_map resource type.
+// mapResourceType returns the Terraform awscc_location_map resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::Map resource type.
 func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -51,8 +50,8 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"style": {
 						// Property: Style
 						Type:     types.StringType,
@@ -150,14 +149,13 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of AWS::Location::Map Resource Type",
 		Version:     1,
 		Attributes:  attributes,
@@ -165,7 +163,21 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Location::Map").WithTerraformTypeName("aws_location_map").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::Map").WithTerraformTypeName("awscc_location_map")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":           "Arn",
+		"configuration": "Configuration",
+		"create_time":   "CreateTime",
+		"data_source":   "DataSource",
+		"description":   "Description",
+		"map_arn":       "MapArn",
+		"map_name":      "MapName",
+		"pricing_plan":  "PricingPlan",
+		"style":         "Style",
+		"update_time":   "UpdateTime",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -177,7 +189,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_location_map", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_map", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

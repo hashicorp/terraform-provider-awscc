@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_accessanalyzer_analyzer", analyzerResourceType)
+	registry.AddResourceTypeFactory("awscc_accessanalyzer_analyzer", analyzerResourceType)
 }
 
-// analyzerResourceType returns the Terraform aws_accessanalyzer_analyzer resource type.
+// analyzerResourceType returns the Terraform awscc_accessanalyzer_analyzer resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource type.
 func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"analyzer_name": {
 			// Property: AnalyzerName
 			// CloudFormation resource type schema:
@@ -99,23 +98,19 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"filter": {
 						// Property: Filter
-						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"contains": {
 									// Property: Contains
-									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"eq": {
 									// Property: Eq
-									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -126,7 +121,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"neq": {
 									// Property: Neq
-									// Multiset.
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
 								},
@@ -136,7 +130,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -149,7 +143,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -200,7 +194,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -236,14 +230,13 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::AccessAnalyzer::Analyzer type specifies an analyzer of the user's account",
 		Version:     1,
 		Attributes:  attributes,
@@ -251,7 +244,25 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("aws_accessanalyzer_analyzer").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzer")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"analyzer_name": "AnalyzerName",
+		"archive_rules": "ArchiveRules",
+		"arn":           "Arn",
+		"contains":      "Contains",
+		"eq":            "Eq",
+		"exists":        "Exists",
+		"filter":        "Filter",
+		"key":           "Key",
+		"neq":           "Neq",
+		"property":      "Property",
+		"rule_name":     "RuleName",
+		"tags":          "Tags",
+		"type":          "Type",
+		"value":         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -263,7 +274,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_accessanalyzer_analyzer", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_accessanalyzer_analyzer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

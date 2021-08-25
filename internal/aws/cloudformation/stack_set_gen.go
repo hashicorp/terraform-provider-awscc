@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_stack_set", stackSetResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_stack_set", stackSetResourceType)
 }
 
-// stackSetResourceType returns the Terraform aws_cloudformation_stack_set resource type.
+// stackSetResourceType returns the Terraform awscc_cloudformation_stack_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::StackSet resource type.
 func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"administration_role_arn": {
 			// Property: AdministrationRoleARN
 			// CloudFormation resource type schema:
@@ -53,8 +52,8 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"enabled": {
 						// Property: Enabled
 						Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
@@ -171,8 +170,8 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"failure_tolerance_count": {
 						// Property: FailureToleranceCount
 						Type:     types.NumberType,
@@ -238,7 +237,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The input parameters for the stack set template.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"parameter_key": {
 						// Property: ParameterKey
 						Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
@@ -358,12 +357,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A group of stack instances with parameters in some specific accounts and regions.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"deployment_targets": {
 						// Property: DeploymentTargets
 						Description: " The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"accounts": {
 									// Property: Accounts
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
@@ -384,7 +383,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ParameterOverrides
 						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
 						Attributes: providertypes.SetNestedAttributes(
-							map[string]schema.Attribute{
+							map[string]tfsdk.Attribute{
 								"parameter_key": {
 									// Property: ParameterKey
 									Description: "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.",
@@ -474,7 +473,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
@@ -523,14 +522,13 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "StackSet as a resource provides one-click experience for provisioning a StackSet and StackInstances",
 		Version:     1,
 		Attributes:  attributes,
@@ -538,7 +536,43 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("aws_cloudformation_stack_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::StackSet").WithTerraformTypeName("awscc_cloudformation_stack_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accounts":                         "Accounts",
+		"administration_role_arn":          "AdministrationRoleARN",
+		"auto_deployment":                  "AutoDeployment",
+		"call_as":                          "CallAs",
+		"capabilities":                     "Capabilities",
+		"deployment_targets":               "DeploymentTargets",
+		"description":                      "Description",
+		"enabled":                          "Enabled",
+		"execution_role_name":              "ExecutionRoleName",
+		"failure_tolerance_count":          "FailureToleranceCount",
+		"failure_tolerance_percentage":     "FailureTolerancePercentage",
+		"key":                              "Key",
+		"max_concurrent_count":             "MaxConcurrentCount",
+		"max_concurrent_percentage":        "MaxConcurrentPercentage",
+		"operation_preferences":            "OperationPreferences",
+		"organizational_unit_ids":          "OrganizationalUnitIds",
+		"parameter_key":                    "ParameterKey",
+		"parameter_overrides":              "ParameterOverrides",
+		"parameter_value":                  "ParameterValue",
+		"parameters":                       "Parameters",
+		"permission_model":                 "PermissionModel",
+		"region_concurrency_type":          "RegionConcurrencyType",
+		"region_order":                     "RegionOrder",
+		"regions":                          "Regions",
+		"retain_stacks_on_account_removal": "RetainStacksOnAccountRemoval",
+		"stack_instances_group":            "StackInstancesGroup",
+		"stack_set_id":                     "StackSetId",
+		"stack_set_name":                   "StackSetName",
+		"tags":                             "Tags",
+		"template_body":                    "TemplateBody",
+		"template_url":                     "TemplateURL",
+		"value":                            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateURL",
@@ -555,7 +589,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_stack_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_stack_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

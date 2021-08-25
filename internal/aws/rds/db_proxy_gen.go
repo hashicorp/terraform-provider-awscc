@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_db_proxy", dBProxyResourceType)
+	registry.AddResourceTypeFactory("awscc_rds_db_proxy", dBProxyResourceType)
 }
 
-// dBProxyResourceType returns the Terraform aws_rds_db_proxy resource type.
+// dBProxyResourceType returns the Terraform awscc_rds_db_proxy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxy resource type.
 func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auth": {
 			// Property: Auth
 			// CloudFormation resource type schema:
@@ -65,9 +64,8 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The authorization mechanism that the proxy uses.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auth_scheme": {
 						// Property: AuthScheme
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -99,7 +97,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -226,9 +224,8 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -240,7 +237,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -268,9 +265,8 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "VPC security group IDs to associate with the new proxy.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -285,21 +281,19 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "VPC subnet IDs to associate with the new proxy.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
 			// VpcSubnetIds is a force-new attribute.
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxy",
 		Version:     1,
 		Attributes:  attributes,
@@ -307,7 +301,31 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("aws_rds_db_proxy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auth":                   "Auth",
+		"auth_scheme":            "AuthScheme",
+		"db_proxy_arn":           "DBProxyArn",
+		"db_proxy_name":          "DBProxyName",
+		"debug_logging":          "DebugLogging",
+		"description":            "Description",
+		"endpoint":               "Endpoint",
+		"engine_family":          "EngineFamily",
+		"iam_auth":               "IAMAuth",
+		"idle_client_timeout":    "IdleClientTimeout",
+		"key":                    "Key",
+		"require_tls":            "RequireTLS",
+		"role_arn":               "RoleArn",
+		"secret_arn":             "SecretArn",
+		"tags":                   "Tags",
+		"user_name":              "UserName",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
+		"vpc_security_group_ids": "VpcSecurityGroupIds",
+		"vpc_subnet_ids":         "VpcSubnetIds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -319,7 +337,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_rds_db_proxy", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_rds_db_proxy", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

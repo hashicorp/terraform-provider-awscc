@@ -15,3 +15,11 @@ updates:
     schedule:
       # Check for updates to Go modules every weekday
       interval: "daily"
+
+  - package-ecosystem: "gomod"
+    directory: "/tools"
+    ignore:
+      - dependency-name: "golang.org/x/tools"
+      - dependency-name: "google.golang.org/grpc"
+    schedule:
+      interval: "daily"

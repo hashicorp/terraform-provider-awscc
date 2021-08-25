@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_customerprofiles_integration", integrationResourceType)
+	registry.AddResourceTypeFactory("awscc_customerprofiles_integration", integrationResourceType)
 }
 
-// integrationResourceType returns the Terraform aws_customerprofiles_integration resource type.
+// integrationResourceType returns the Terraform awscc_customerprofiles_integration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CustomerProfiles::Integration resource type.
 func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"created_at": {
 			// Property: CreatedAt
 			// CloudFormation resource type schema:
@@ -466,8 +465,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"description": {
 						// Property: Description
 						Type:     types.StringType,
@@ -485,8 +484,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"source_flow_config": {
 						// Property: SourceFlowConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"connector_profile_name": {
 									// Property: ConnectorProfileName
 									Type:     types.StringType,
@@ -499,8 +498,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"incremental_pull_config": {
 									// Property: IncrementalPullConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"datetime_type_field_name": {
 												// Property: DatetimeTypeFieldName
 												Type:     types.StringType,
@@ -512,12 +511,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"source_connector_properties": {
 									// Property: SourceConnectorProperties
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"marketo": {
 												// Property: Marketo
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
 															Type:     types.StringType,
@@ -529,8 +528,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"s3": {
 												// Property: S3
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"bucket_name": {
 															// Property: BucketName
 															Type:     types.StringType,
@@ -547,8 +546,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"salesforce": {
 												// Property: Salesforce
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"enable_dynamic_field_update": {
 															// Property: EnableDynamicFieldUpdate
 															Type:     types.BoolType,
@@ -570,8 +569,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"service_now": {
 												// Property: ServiceNow
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
 															Type:     types.StringType,
@@ -583,8 +582,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"zendesk": {
 												// Property: Zendesk
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"object": {
 															// Property: Object
 															Type:     types.StringType,
@@ -604,12 +603,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tasks": {
 						// Property: Tasks
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"connector_operator": {
 									// Property: ConnectorOperator
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"marketo": {
 												// Property: Marketo
 												Type:     types.StringType,
@@ -651,8 +650,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"task_properties": {
 									// Property: TaskProperties
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"operator_property_key": {
 												// Property: OperatorPropertyKey
 												Type:     types.StringType,
@@ -664,7 +663,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -674,22 +673,22 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
 					"trigger_config": {
 						// Property: TriggerConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"trigger_properties": {
 									// Property: TriggerProperties
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"scheduled": {
 												// Property: Scheduled
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_pull_mode": {
 															// Property: DataPullMode
 															Type:     types.StringType,
@@ -803,8 +802,8 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags (keys and values) associated with the integration",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -816,7 +815,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -840,14 +839,13 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The resource schema for creating an Amazon Connect Customer Profiles Integration.",
 		Version:     1,
 		Attributes:  attributes,
@@ -855,7 +853,58 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("aws_customerprofiles_integration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Integration").WithTerraformTypeName("awscc_customerprofiles_integration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket_name":                 "BucketName",
+		"bucket_prefix":               "BucketPrefix",
+		"connector_operator":          "ConnectorOperator",
+		"connector_profile_name":      "ConnectorProfileName",
+		"connector_type":              "ConnectorType",
+		"created_at":                  "CreatedAt",
+		"data_pull_mode":              "DataPullMode",
+		"datetime_type_field_name":    "DatetimeTypeFieldName",
+		"description":                 "Description",
+		"destination_field":           "DestinationField",
+		"domain_name":                 "DomainName",
+		"enable_dynamic_field_update": "EnableDynamicFieldUpdate",
+		"first_execution_from":        "FirstExecutionFrom",
+		"flow_definition":             "FlowDefinition",
+		"flow_name":                   "FlowName",
+		"include_deleted_records":     "IncludeDeletedRecords",
+		"incremental_pull_config":     "IncrementalPullConfig",
+		"key":                         "Key",
+		"kms_arn":                     "KmsArn",
+		"last_updated_at":             "LastUpdatedAt",
+		"marketo":                     "Marketo",
+		"object":                      "Object",
+		"object_type_name":            "ObjectTypeName",
+		"operator_property_key":       "OperatorPropertyKey",
+		"property":                    "Property",
+		"s3":                          "S3",
+		"salesforce":                  "Salesforce",
+		"schedule_end_time":           "ScheduleEndTime",
+		"schedule_expression":         "ScheduleExpression",
+		"schedule_offset":             "ScheduleOffset",
+		"schedule_start_time":         "ScheduleStartTime",
+		"scheduled":                   "Scheduled",
+		"service_now":                 "ServiceNow",
+		"source_connector_properties": "SourceConnectorProperties",
+		"source_fields":               "SourceFields",
+		"source_flow_config":          "SourceFlowConfig",
+		"tags":                        "Tags",
+		"task_properties":             "TaskProperties",
+		"task_type":                   "TaskType",
+		"tasks":                       "Tasks",
+		"timezone":                    "Timezone",
+		"trigger_config":              "TriggerConfig",
+		"trigger_properties":          "TriggerProperties",
+		"trigger_type":                "TriggerType",
+		"uri":                         "Uri",
+		"value":                       "Value",
+		"zendesk":                     "Zendesk",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/FlowDefinition",
@@ -870,7 +919,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_customerprofiles_integration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_customerprofiles_integration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

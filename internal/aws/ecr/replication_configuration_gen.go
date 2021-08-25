@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_replication_configuration", replicationConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_ecr_replication_configuration", replicationConfigurationResourceType)
 }
 
-// replicationConfigurationResourceType returns the Terraform aws_ecr_replication_configuration resource type.
+// replicationConfigurationResourceType returns the Terraform awscc_ecr_replication_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::ReplicationConfiguration resource type.
 func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"registry_id": {
 			// Property: RegistryId
 			// CloudFormation resource type schema:
@@ -90,18 +89,18 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "type": "object"
 			// }
 			Description: "An object representing the replication configuration for a registry.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"rules": {
 						// Property: Rules
 						Description: "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destinations": {
 									// Property: Destinations
 									Description: "An array of objects representing the details of a replication destination.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"region": {
 												// Property: Region
 												Description: "A Region to replicate to.",
@@ -115,7 +114,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 25,
 										},
@@ -123,7 +122,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 1,
 							},
@@ -136,14 +135,13 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::ECR::ReplicationConfiguration resource configures the replication destinations for an Amazon Elastic Container Registry (Amazon Private ECR). For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication.html",
 		Version:     1,
 		Attributes:  attributes,
@@ -151,7 +149,16 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("aws_ecr_replication_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("awscc_ecr_replication_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"destinations":              "Destinations",
+		"region":                    "Region",
+		"registry_id":               "RegistryId",
+		"replication_configuration": "ReplicationConfiguration",
+		"rules":                     "Rules",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -163,7 +170,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecr_replication_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecr_replication_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

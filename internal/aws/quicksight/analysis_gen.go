@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_analysis", analysisResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_analysis", analysisResourceType)
 }
 
-// analysisResourceType returns the Terraform aws_quicksight_analysis resource type.
+// analysisResourceType returns the Terraform awscc_quicksight_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Analysis resource type.
 func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"analysis_id": {
 			// Property: AnalysisId
 			// CloudFormation resource type schema:
@@ -123,8 +122,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Errors associated with the analysis.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"message": {
 						// Property: Message
 						Description: "<p>The message associated with the analysis error.</p>",
@@ -137,7 +136,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -297,13 +296,13 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"date_time_parameters": {
 						// Property: DateTimeParameters
 						Description: "<p>Date-time parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for the date-time parameter.</p>",
@@ -317,7 +316,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -327,8 +326,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"decimal_parameters": {
 						// Property: DecimalParameters
 						Description: "<p>Decimal parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for the decimal parameter.</p>",
@@ -342,7 +341,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -352,8 +351,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"integer_parameters": {
 						// Property: IntegerParameters
 						Description: "<p>Integer parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>The name of the integer parameter.</p>",
@@ -367,7 +366,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -377,8 +376,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"string_parameters": {
 						// Property: StringParameters
 						Description: "<p>String parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for a string parameter.</p>",
@@ -392,7 +391,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -440,8 +439,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A structure that describes the principals and the resource-level permissions on an\n            analysis. You can use the <code>Permissions</code> structure to grant permissions by\n            providing a list of AWS Identity and Access Management (IAM) action information for each\n            principal listed by Amazon Resource Name (ARN). </p>\n\n        <p>To specify no permissions, omit <code>Permissions</code>.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -455,7 +454,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -491,8 +490,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
@@ -506,7 +505,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 20,
 				},
@@ -565,13 +564,13 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>The source entity of an analysis.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source_template": {
 						// Property: SourceTemplate
 						Description: "<p>The source template of an analysis.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Description: "<p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>",
@@ -581,8 +580,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"data_set_references": {
 									// Property: DataSetReferences
 									Description: "<p>The dataset references of the source template of an analysis.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_set_arn": {
 												// Property: DataSetArn
 												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
@@ -596,7 +595,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -663,8 +662,8 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the\n            analysis.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -678,7 +677,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -698,14 +697,13 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::Analysis Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
@@ -713,7 +711,42 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Analysis").WithTerraformTypeName("aws_quicksight_analysis").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Analysis").WithTerraformTypeName("awscc_quicksight_analysis")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":              "Actions",
+		"analysis_id":          "AnalysisId",
+		"arn":                  "Arn",
+		"aws_account_id":       "AwsAccountId",
+		"created_time":         "CreatedTime",
+		"data_set_arn":         "DataSetArn",
+		"data_set_arns":        "DataSetArns",
+		"data_set_placeholder": "DataSetPlaceholder",
+		"data_set_references":  "DataSetReferences",
+		"date_time_parameters": "DateTimeParameters",
+		"decimal_parameters":   "DecimalParameters",
+		"errors":               "Errors",
+		"integer_parameters":   "IntegerParameters",
+		"key":                  "Key",
+		"last_updated_time":    "LastUpdatedTime",
+		"message":              "Message",
+		"name":                 "Name",
+		"parameters":           "Parameters",
+		"permissions":          "Permissions",
+		"principal":            "Principal",
+		"sheet_id":             "SheetId",
+		"sheets":               "Sheets",
+		"source_entity":        "SourceEntity",
+		"source_template":      "SourceTemplate",
+		"status":               "Status",
+		"string_parameters":    "StringParameters",
+		"tags":                 "Tags",
+		"theme_arn":            "ThemeArn",
+		"type":                 "Type",
+		"value":                "Value",
+		"values":               "Values",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Parameters",
@@ -732,7 +765,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_analysis", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_analysis", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

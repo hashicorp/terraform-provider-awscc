@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_logging_configuration", loggingConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_wafv2_logging_configuration", loggingConfigurationResourceType)
 }
 
-// loggingConfigurationResourceType returns the Terraform aws_wafv2_logging_configuration resource type.
+// loggingConfigurationResourceType returns the Terraform awscc_wafv2_logging_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::LoggingConfiguration resource type.
 func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"log_destination_configs": {
 			// Property: LogDestinationConfigs
 			// CloudFormation resource type schema:
@@ -135,8 +134,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "object"
 			// }
 			Description: "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"default_behavior": {
 						// Property: DefaultBehavior
 						Description: "Default handling for logs that don't match any of the specified filtering conditions.",
@@ -146,8 +145,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"filters": {
 						// Property: Filters
 						Description: "The filters that you want to apply to the logs.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"behavior": {
 									// Property: Behavior
 									Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
@@ -157,13 +156,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 								"conditions": {
 									// Property: Conditions
 									Description: "Match conditions for the filter.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"action_condition": {
 												// Property: ActionCondition
 												Description: "A single action condition.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"action": {
 															// Property: Action
 															Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
@@ -177,8 +176,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 											"label_name_condition": {
 												// Property: LabelNameCondition
 												Description: "A single label name condition.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"label_name": {
 															// Property: LabelName
 															Description: "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
@@ -190,7 +189,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -203,7 +202,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -315,14 +314,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "array"
 			// }
 			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"json_body": {
 						// Property: JsonBody
 						Description: "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"invalid_fallback_behavior": {
 									// Property: InvalidFallbackBehavior
 									Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
@@ -332,8 +330,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 								"match_pattern": {
 									// Property: MatchPattern
 									Description: "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"all": {
 												// Property: All
 												Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
@@ -375,8 +373,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"single_header": {
 						// Property: SingleHeader
 						Description: "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "The name of the query header to inspect.",
@@ -394,7 +392,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -412,14 +410,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A WAFv2 Logging Configuration Resource Provider",
 		Version:     1,
 		Attributes:  attributes,
@@ -427,7 +424,36 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("aws_wafv2_logging_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("awscc_wafv2_logging_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                      "Action",
+		"action_condition":            "ActionCondition",
+		"all":                         "All",
+		"behavior":                    "Behavior",
+		"conditions":                  "Conditions",
+		"default_behavior":            "DefaultBehavior",
+		"filters":                     "Filters",
+		"included_paths":              "IncludedPaths",
+		"invalid_fallback_behavior":   "InvalidFallbackBehavior",
+		"json_body":                   "JsonBody",
+		"label_name":                  "LabelName",
+		"label_name_condition":        "LabelNameCondition",
+		"log_destination_configs":     "LogDestinationConfigs",
+		"logging_filter":              "LoggingFilter",
+		"managed_by_firewall_manager": "ManagedByFirewallManager",
+		"match_pattern":               "MatchPattern",
+		"match_scope":                 "MatchScope",
+		"method":                      "Method",
+		"name":                        "Name",
+		"query_string":                "QueryString",
+		"redacted_fields":             "RedactedFields",
+		"requirement":                 "Requirement",
+		"resource_arn":                "ResourceArn",
+		"single_header":               "SingleHeader",
+		"uri_path":                    "UriPath",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -439,7 +465,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_wafv2_logging_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_logging_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

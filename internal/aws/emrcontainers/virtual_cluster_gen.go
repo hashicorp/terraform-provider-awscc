@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_emrcontainers_virtual_cluster", virtualClusterResourceType)
+	registry.AddResourceTypeFactory("awscc_emrcontainers_virtual_cluster", virtualClusterResourceType)
 }
 
-// virtualClusterResourceType returns the Terraform aws_emrcontainers_virtual_cluster resource type.
+// virtualClusterResourceType returns the Terraform awscc_emrcontainers_virtual_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource type.
 func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -81,8 +80,8 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"id": {
 						// Property: Id
 						Description: "The ID of the container cluster",
@@ -91,12 +90,12 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"info": {
 						// Property: Info
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"eks_info": {
 									// Property: EksInfo
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"namespace": {
 												// Property: Namespace
 												Type:     types.StringType,
@@ -179,7 +178,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "An array of key-value pairs to apply to this virtual cluster.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -199,14 +198,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Schema of AWS::EMRContainers::VirtualCluster Type",
 		Version:     1,
 		Attributes:  attributes,
@@ -214,7 +206,22 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("aws_emrcontainers_virtual_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"container_provider": "ContainerProvider",
+		"eks_info":           "EksInfo",
+		"id":                 "Id",
+		"info":               "Info",
+		"key":                "Key",
+		"name":               "Name",
+		"namespace":          "Namespace",
+		"tags":               "Tags",
+		"type":               "Type",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -226,7 +233,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_emrcontainers_virtual_cluster", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_emrcontainers_virtual_cluster", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

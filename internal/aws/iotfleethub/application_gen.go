@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotfleethub_application", applicationResourceType)
+	registry.AddResourceTypeFactory("awscc_iotfleethub_application", applicationResourceType)
 }
 
-// applicationResourceType returns the Terraform aws_iotfleethub_application resource type.
+// applicationResourceType returns the Terraform awscc_iotfleethub_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTFleetHub::Application resource type.
 func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
@@ -195,7 +194,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of key-value pairs that contain metadata for the application.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -218,14 +217,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTFleetHub::Application",
 		Version:     1,
 		Attributes:  attributes,
@@ -233,7 +231,25 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetHub::Application").WithTerraformTypeName("aws_iotfleethub_application").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetHub::Application").WithTerraformTypeName("awscc_iotfleethub_application")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_arn":              "ApplicationArn",
+		"application_creation_date":    "ApplicationCreationDate",
+		"application_description":      "ApplicationDescription",
+		"application_id":               "ApplicationId",
+		"application_last_update_date": "ApplicationLastUpdateDate",
+		"application_name":             "ApplicationName",
+		"application_state":            "ApplicationState",
+		"application_url":              "ApplicationUrl",
+		"error_message":                "ErrorMessage",
+		"key":                          "Key",
+		"role_arn":                     "RoleArn",
+		"sso_client_id":                "SsoClientId",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -245,7 +261,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotfleethub_application", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotfleethub_application", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

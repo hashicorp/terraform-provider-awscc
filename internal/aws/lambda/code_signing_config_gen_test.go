@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSLambdaCodeSigningConfig_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Lambda::CodeSigningConfig", "aws_lambda_code_signing_config", "test")
+	td := acctest.NewTestData(t, "AWS::Lambda::CodeSigningConfig", "awscc_lambda_code_signing_config", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

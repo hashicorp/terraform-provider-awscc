@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_customerprofiles_object_type", objectTypeResourceType)
+	registry.AddResourceTypeFactory("awscc_customerprofiles_object_type", objectTypeResourceType)
 }
 
-// objectTypeResourceType returns the Terraform aws_customerprofiles_object_type resource type.
+// objectTypeResourceType returns the Terraform awscc_customerprofiles_object_type resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CustomerProfiles::ObjectType resource type.
 func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"allow_profile_creation": {
 			// Property: AllowProfileCreation
 			// CloudFormation resource type schema:
@@ -147,9 +146,8 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of the name and ObjectType field.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -158,8 +156,8 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"object_type_field": {
 						// Property: ObjectTypeField
 						Description: "Represents a field in a ProfileObjectType.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"content_type": {
 									// Property: ContentType
 									Description: "The content type of the field. Used for determining equality when searching.",
@@ -183,7 +181,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -243,9 +241,8 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of unique keys that can be used to map data to the profile.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -253,9 +250,8 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"object_type_key_list": {
 						// Property: ObjectTypeKeyList
-						// Multiset.
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"field_names": {
 									// Property: FieldNames
 									Description: "The reference for the key name of the fields map. ",
@@ -269,12 +265,12 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -336,8 +332,8 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags (keys and values) associated with the integration.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -349,7 +345,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -372,14 +368,13 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An ObjectType resource of Amazon Connect Customer Profiles",
 		Version:     1,
 		Attributes:  attributes,
@@ -387,7 +382,33 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("aws_customerprofiles_object_type").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("awscc_customerprofiles_object_type")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_profile_creation": "AllowProfileCreation",
+		"content_type":           "ContentType",
+		"created_at":             "CreatedAt",
+		"description":            "Description",
+		"domain_name":            "DomainName",
+		"encryption_key":         "EncryptionKey",
+		"expiration_days":        "ExpirationDays",
+		"field_names":            "FieldNames",
+		"fields":                 "Fields",
+		"key":                    "Key",
+		"keys":                   "Keys",
+		"last_updated_at":        "LastUpdatedAt",
+		"name":                   "Name",
+		"object_type_field":      "ObjectTypeField",
+		"object_type_key_list":   "ObjectTypeKeyList",
+		"object_type_name":       "ObjectTypeName",
+		"source":                 "Source",
+		"standard_identifiers":   "StandardIdentifiers",
+		"tags":                   "Tags",
+		"target":                 "Target",
+		"template_id":            "TemplateId",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -399,7 +420,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_customerprofiles_object_type", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_customerprofiles_object_type", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

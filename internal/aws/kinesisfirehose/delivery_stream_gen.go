@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kinesisfirehose_delivery_stream", deliveryStreamResourceType)
+	registry.AddResourceTypeFactory("awscc_kinesisfirehose_delivery_stream", deliveryStreamResourceType)
 }
 
-// deliveryStreamResourceType returns the Terraform aws_kinesisfirehose_delivery_stream resource type.
+// deliveryStreamResourceType returns the Terraform awscc_kinesisfirehose_delivery_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KinesisFirehose::DeliveryStream resource type.
 func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -56,8 +57,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key_arn": {
 						// Property: KeyARN
 						Type:     types.StringType,
@@ -376,12 +377,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"buffering_hints": {
 						// Property: BufferingHints
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
 									Type:     types.NumberType,
@@ -396,10 +397,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -441,8 +442,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -450,14 +451,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"processors": {
 									// Property: Processors
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
 															Type:     types.StringType,
@@ -469,9 +468,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -479,9 +479,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -489,8 +490,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
 									Type:     types.NumberType,
@@ -512,8 +513,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -521,8 +522,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -537,10 +538,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -567,12 +568,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -617,8 +618,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"vpc_configuration": {
 						// Property: VpcConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
@@ -626,15 +627,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
-									Required: true,
+									Type:       types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Required:   true,
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									// Ordered set.
-									Type:     types.ListType{ElemType: types.StringType},
-									Required: true,
+									Type:       types.ListType{ElemType: types.StringType},
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Required:   true,
 								},
 							},
 						),
@@ -1047,8 +1048,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"bucket_arn": {
 						// Property: BucketARN
 						Type:     types.StringType,
@@ -1056,8 +1057,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
 									Type:     types.NumberType,
@@ -1072,10 +1073,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -1102,8 +1103,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"data_format_conversion_configuration": {
 						// Property: DataFormatConversionConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -1111,21 +1112,21 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"input_format_configuration": {
 									// Property: InputFormatConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"deserializer": {
 												// Property: Deserializer
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"hive_json_ser_de": {
 															// Property: HiveJsonSerDe
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
-																		// Ordered set.
-																		Type:     types.ListType{ElemType: types.StringType},
-																		Optional: true,
+																		Type:       types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+																		Optional:   true,
 																	},
 																},
 															),
@@ -1133,8 +1134,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 														},
 														"open_x_json_ser_de": {
 															// Property: OpenXJsonSerDe
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"case_insensitive": {
 																		// Property: CaseInsensitive
 																		Type:     types.BoolType,
@@ -1165,16 +1166,16 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"output_format_configuration": {
 									// Property: OutputFormatConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"serializer": {
 												// Property: Serializer
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"orc_ser_de": {
 															// Property: OrcSerDe
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
 																		Type:     types.NumberType,
@@ -1182,9 +1183,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
-																		// Ordered set.
-																		Type:     types.ListType{ElemType: types.StringType},
-																		Optional: true,
+																		Type:       types.ListType{ElemType: types.StringType},
+																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+																		Optional:   true,
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
@@ -1232,8 +1233,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 														},
 														"parquet_ser_de": {
 															// Property: ParquetSerDe
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
 																		Type:     types.NumberType,
@@ -1278,8 +1279,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"schema_configuration": {
 									// Property: SchemaConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"catalog_id": {
 												// Property: CatalogId
 												Type:     types.StringType,
@@ -1320,12 +1321,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"kms_encryption_config": {
 									// Property: KMSEncryptionConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"awskms_key_arn": {
 												// Property: AWSKMSKeyARN
 												Type:     types.StringType,
@@ -1356,8 +1357,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -1365,14 +1366,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"processors": {
 									// Property: Processors
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
 															Type:     types.StringType,
@@ -1384,9 +1383,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -1394,9 +1394,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -1409,8 +1410,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -1418,8 +1419,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -1434,10 +1435,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -1464,12 +1465,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -1778,12 +1779,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"buffering_hints": {
 						// Property: BufferingHints
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
 									Type:     types.NumberType,
@@ -1798,10 +1799,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -1823,8 +1824,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"endpoint_configuration": {
 						// Property: EndpointConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"access_key": {
 									// Property: AccessKey
 									Type:     types.StringType,
@@ -1846,8 +1847,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -1855,14 +1856,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"processors": {
 									// Property: Processors
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
 															Type:     types.StringType,
@@ -1874,9 +1873,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -1884,9 +1884,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -1894,13 +1895,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"request_configuration": {
 						// Property: RequestConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"common_attributes": {
 									// Property: CommonAttributes
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"attribute_name": {
 												// Property: AttributeName
 												Type:     types.StringType,
@@ -1912,12 +1912,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 0,
 											MaxItems: 50,
 										},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 								"content_encoding": {
 									// Property: ContentEncoding
@@ -1930,8 +1931,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
 									Type:     types.NumberType,
@@ -1953,8 +1954,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -1962,8 +1963,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -1978,10 +1979,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -2008,12 +2009,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -2080,8 +2081,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"kinesis_stream_arn": {
 						// Property: KinesisStreamARN
 						Type:     types.StringType,
@@ -2425,12 +2426,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
-					"cloud_watch_logging_options": {
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -2457,8 +2458,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"copy_command": {
 						// Property: CopyCommand
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"copy_options": {
 									// Property: CopyOptions
 									Type:     types.StringType,
@@ -2485,8 +2486,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -2494,14 +2495,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"processors": {
 									// Property: Processors
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
 															Type:     types.StringType,
@@ -2513,9 +2512,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -2523,9 +2523,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -2533,8 +2534,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
 									Type:     types.NumberType,
@@ -2551,8 +2552,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -2560,8 +2561,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -2576,10 +2577,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -2606,12 +2607,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -2656,8 +2657,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -2665,8 +2666,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -2681,10 +2682,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -2711,12 +2712,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -2859,8 +2860,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"bucket_arn": {
 						// Property: BucketARN
 						Type:     types.StringType,
@@ -2868,8 +2869,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
 									Type:     types.NumberType,
@@ -2884,10 +2885,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
-					"cloud_watch_logging_options": {
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -2914,12 +2915,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"kms_encryption_config": {
 									// Property: KMSEncryptionConfig
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"awskms_key_arn": {
 												// Property: AWSKMSKeyARN
 												Type:     types.StringType,
@@ -3160,12 +3161,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
-					"cloud_watch_logging_options": {
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cloudwatch_logging_options": {
 						// Property: CloudWatchLoggingOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -3207,8 +3208,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enabled": {
 									// Property: Enabled
 									Type:     types.BoolType,
@@ -3216,14 +3217,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"processors": {
 									// Property: Processors
-									// Ordered set.
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"parameters": {
 												// Property: Parameters
-												// Ordered set.
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"parameter_name": {
 															// Property: ParameterName
 															Type:     types.StringType,
@@ -3235,9 +3234,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 															Required: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
-												Optional: true,
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Optional:   true,
 											},
 											"type": {
 												// Property: Type
@@ -3245,9 +3245,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
-									Optional: true,
+									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+									Optional:   true,
 								},
 							},
 						),
@@ -3255,8 +3256,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"retry_options": {
 						// Property: RetryOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
 									Type:     types.NumberType,
@@ -3273,8 +3274,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_arn": {
 									// Property: BucketARN
 									Type:     types.StringType,
@@ -3282,8 +3283,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
 												Type:     types.NumberType,
@@ -3298,10 +3299,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									),
 									Optional: true,
 								},
-								"cloud_watch_logging_options": {
+								"cloudwatch_logging_options": {
 									// Property: CloudWatchLoggingOptions
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"enabled": {
 												// Property: Enabled
 												Type:     types.BoolType,
@@ -3328,12 +3329,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"kms_encryption_config": {
 												// Property: KMSEncryptionConfig
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"awskms_key_arn": {
 															// Property: AWSKMSKeyARN
 															Type:     types.StringType,
@@ -3403,8 +3404,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -3416,7 +3417,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 50,
 				},
@@ -3425,14 +3426,13 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::KinesisFirehose::DeliveryStream",
 		Version:     1,
 		Attributes:  attributes,
@@ -3440,7 +3440,116 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("aws_kinesisfirehose_delivery_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_key":           "AccessKey",
+		"arn":                  "Arn",
+		"attribute_name":       "AttributeName",
+		"attribute_value":      "AttributeValue",
+		"awskms_key_arn":       "AWSKMSKeyARN",
+		"block_size_bytes":     "BlockSizeBytes",
+		"bloom_filter_columns": "BloomFilterColumns",
+		"bloom_filter_false_positive_probability": "BloomFilterFalsePositiveProbability",
+		"bucket_arn":                               "BucketARN",
+		"buffering_hints":                          "BufferingHints",
+		"case_insensitive":                         "CaseInsensitive",
+		"catalog_id":                               "CatalogId",
+		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
+		"cluster_endpoint":                         "ClusterEndpoint",
+		"cluster_jdbcurl":                          "ClusterJDBCURL",
+		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
+		"common_attributes":                        "CommonAttributes",
+		"compression":                              "Compression",
+		"compression_format":                       "CompressionFormat",
+		"content_encoding":                         "ContentEncoding",
+		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
+		"copy_command":                             "CopyCommand",
+		"copy_options":                             "CopyOptions",
+		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
+		"data_table_columns":                       "DataTableColumns",
+		"data_table_name":                          "DataTableName",
+		"database_name":                            "DatabaseName",
+		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
+		"delivery_stream_name":                           "DeliveryStreamName",
+		"delivery_stream_type":                           "DeliveryStreamType",
+		"deserializer":                                   "Deserializer",
+		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
+		"domain_arn":                                     "DomainARN",
+		"duration_in_seconds":                            "DurationInSeconds",
+		"elasticsearch_destination_configuration":        "ElasticsearchDestinationConfiguration",
+		"enable_dictionary_compression":                  "EnableDictionaryCompression",
+		"enable_padding":                                 "EnablePadding",
+		"enabled":                                        "Enabled",
+		"encryption_configuration":                       "EncryptionConfiguration",
+		"endpoint_configuration":                         "EndpointConfiguration",
+		"error_output_prefix":                            "ErrorOutputPrefix",
+		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
+		"format_version":                                 "FormatVersion",
+		"hec_acknowledgment_timeout_in_seconds":          "HECAcknowledgmentTimeoutInSeconds",
+		"hec_endpoint":                                   "HECEndpoint",
+		"hec_endpoint_type":                              "HECEndpointType",
+		"hec_token":                                      "HECToken",
+		"hive_json_ser_de":                               "HiveJsonSerDe",
+		"http_endpoint_destination_configuration":        "HttpEndpointDestinationConfiguration",
+		"index_name":                                     "IndexName",
+		"index_rotation_period":                          "IndexRotationPeriod",
+		"input_format_configuration":                     "InputFormatConfiguration",
+		"interval_in_seconds":                            "IntervalInSeconds",
+		"key":                                            "Key",
+		"key_arn":                                        "KeyARN",
+		"key_type":                                       "KeyType",
+		"kinesis_stream_arn":                             "KinesisStreamARN",
+		"kinesis_stream_source_configuration":            "KinesisStreamSourceConfiguration",
+		"kms_encryption_config":                          "KMSEncryptionConfig",
+		"log_group_name":                                 "LogGroupName",
+		"log_stream_name":                                "LogStreamName",
+		"max_padding_bytes":                              "MaxPaddingBytes",
+		"name":                                           "Name",
+		"no_encryption_config":                           "NoEncryptionConfig",
+		"open_x_json_ser_de":                             "OpenXJsonSerDe",
+		"orc_ser_de":                                     "OrcSerDe",
+		"output_format_configuration":                    "OutputFormatConfiguration",
+		"padding_tolerance":                              "PaddingTolerance",
+		"page_size_bytes":                                "PageSizeBytes",
+		"parameter_name":                                 "ParameterName",
+		"parameter_value":                                "ParameterValue",
+		"parameters":                                     "Parameters",
+		"parquet_ser_de":                                 "ParquetSerDe",
+		"password":                                       "Password",
+		"prefix":                                         "Prefix",
+		"processing_configuration":                       "ProcessingConfiguration",
+		"processors":                                     "Processors",
+		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
+		"region":                                         "Region",
+		"request_configuration":                          "RequestConfiguration",
+		"retry_options":                                  "RetryOptions",
+		"role_arn":                                       "RoleARN",
+		"row_index_stride":                               "RowIndexStride",
+		"s3_backup_configuration":                        "S3BackupConfiguration",
+		"s3_backup_mode":                                 "S3BackupMode",
+		"s3_configuration":                               "S3Configuration",
+		"s3_destination_configuration":                   "S3DestinationConfiguration",
+		"schema_configuration":                           "SchemaConfiguration",
+		"security_group_ids":                             "SecurityGroupIds",
+		"serializer":                                     "Serializer",
+		"size_in_m_bs":                                   "SizeInMBs",
+		"splunk_destination_configuration":               "SplunkDestinationConfiguration",
+		"stripe_size_bytes":                              "StripeSizeBytes",
+		"subnet_ids":                                     "SubnetIds",
+		"table_name":                                     "TableName",
+		"tags":                                           "Tags",
+		"timestamp_formats":                              "TimestampFormats",
+		"type":                                           "Type",
+		"type_name":                                      "TypeName",
+		"url":                                            "Url",
+		"username":                                       "Username",
+		"value":                                          "Value",
+		"version_id":                                     "VersionId",
+		"vpc_configuration":                              "VpcConfiguration",
+		"writer_version":                                 "WriterVersion",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -3452,7 +3561,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_kinesisfirehose_delivery_stream", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kinesisfirehose_delivery_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

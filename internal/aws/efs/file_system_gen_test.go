@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEFSFileSystem_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EFS::FileSystem", "aws_efs_file_system", "test")
+	td := acctest.NewTestData(t, "AWS::EFS::FileSystem", "awscc_efs_file_system", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSEFSFileSystem_basic(t *testing.T) {
 }
 
 func TestAccAWSEFSFileSystem_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EFS::FileSystem", "aws_efs_file_system", "test")
+	td := acctest.NewTestData(t, "AWS::EFS::FileSystem", "awscc_efs_file_system", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

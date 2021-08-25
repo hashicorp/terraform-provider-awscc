@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSEC2PrefixList_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::PrefixList", "aws_ec2_prefix_list", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::PrefixList", "awscc_ec2_prefix_list", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

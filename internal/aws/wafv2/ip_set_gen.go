@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_ip_set", iPSetResourceType)
+	registry.AddResourceTypeFactory("awscc_wafv2_ip_set", iPSetResourceType)
 }
 
-// iPSetResourceType returns the Terraform aws_wafv2_ip_set resource type.
+// iPSetResourceType returns the Terraform awscc_wafv2_ip_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::IPSet resource type.
 func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"addresses": {
 			// Property: Addresses
 			// CloudFormation resource type schema:
@@ -142,8 +141,8 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -155,7 +154,7 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -163,14 +162,7 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Contains a list of IP addresses. This can be either IPV4 or IPV6. The list will be mutually",
 		Version:     1,
 		Attributes:  attributes,
@@ -178,7 +170,21 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::IPSet").WithTerraformTypeName("aws_wafv2_ip_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::IPSet").WithTerraformTypeName("awscc_wafv2_ip_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"addresses":          "Addresses",
+		"arn":                "Arn",
+		"description":        "Description",
+		"id":                 "Id",
+		"ip_address_version": "IPAddressVersion",
+		"key":                "Key",
+		"name":               "Name",
+		"scope":              "Scope",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -190,7 +196,7 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_wafv2_ip_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_ip_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

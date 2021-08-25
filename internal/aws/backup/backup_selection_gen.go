@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_selection", backupSelectionResourceType)
+	registry.AddResourceTypeFactory("awscc_backup_backup_selection", backupSelectionResourceType)
 }
 
-// backupSelectionResourceType returns the Terraform aws_backup_backup_selection resource type.
+// backupSelectionResourceType returns the Terraform awscc_backup_backup_selection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupSelection resource type.
 func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"backup_plan_id": {
 			// Property: BackupPlanId
 			// CloudFormation resource type schema:
@@ -82,8 +81,8 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_role_arn": {
 						// Property: IamRoleArn
 						Type:     types.StringType,
@@ -91,8 +90,8 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"list_of_tags": {
 						// Property: ListOfTags
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"condition_key": {
 									// Property: ConditionKey
 									Type:     types.StringType,
@@ -109,7 +108,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -148,14 +147,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Backup::BackupSelection",
 		Version:     1,
 		Attributes:  attributes,
@@ -163,7 +155,22 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupSelection").WithTerraformTypeName("aws_backup_backup_selection").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupSelection").WithTerraformTypeName("awscc_backup_backup_selection")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"backup_plan_id":   "BackupPlanId",
+		"backup_selection": "BackupSelection",
+		"condition_key":    "ConditionKey",
+		"condition_type":   "ConditionType",
+		"condition_value":  "ConditionValue",
+		"iam_role_arn":     "IamRoleArn",
+		"id":               "Id",
+		"list_of_tags":     "ListOfTags",
+		"resources":        "Resources",
+		"selection_id":     "SelectionId",
+		"selection_name":   "SelectionName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -175,7 +182,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_backup_backup_selection", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_backup_backup_selection", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_applicationinsights_application", applicationResourceType)
+	registry.AddResourceTypeFactory("awscc_applicationinsights_application", applicationResourceType)
 }
 
-// applicationResourceType returns the Terraform aws_applicationinsights_application resource type.
+// applicationResourceType returns the Terraform awscc_applicationinsights_application resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApplicationInsights::Application resource type.
 func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"application_arn": {
 			// Property: ApplicationARN
 			// CloudFormation resource type schema:
@@ -769,8 +768,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The monitoring settings of the components.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_arn": {
 						// Property: ComponentARN
 						Description: "The ARN of the compnonent.",
@@ -792,18 +791,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"custom_component_configuration": {
 						// Property: CustomComponentConfiguration
 						Description: "The configuration settings of the component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"configuration_details": {
 									// Property: ConfigurationDetails
 									Description: "The configuration settings.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"alarm_metrics": {
 												// Property: AlarmMetrics
 												Description: "A list of metrics to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_metric_name": {
 															// Property: AlarmMetricName
 															Description: "The name of the metric to be monitored for the component.",
@@ -811,15 +810,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"alarms": {
 												// Property: Alarms
 												Description: "A list of alarms to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_name": {
 															// Property: AlarmName
 															Description: "The name of the CloudWatch alarm to be monitored for the component.",
@@ -833,15 +832,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
 												Description: "The JMX Prometheus Exporter settings.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"host_port": {
 															// Property: HostPort
 															Description: "Java agent host port",
@@ -867,8 +866,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"logs": {
 												// Property: Logs
 												Description: "A list of logs to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"encoding": {
 															// Property: Encoding
 															Description: "The type of encoding of the logs to be monitored.",
@@ -900,15 +899,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"windows_events": {
 												// Property: WindowsEvents
 												Description: "A list of Windows Events to log.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"event_levels": {
 															// Property: EventLevels
 															Description: "The levels of event to log. ",
@@ -934,7 +933,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -945,18 +944,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"sub_component_type_configurations": {
 									// Property: SubComponentTypeConfigurations
 									Description: "Sub component configurations of the component.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"sub_component_configuration_details": {
 												// Property: SubComponentConfigurationDetails
 												Description: "The configuration settings of sub components.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_metrics": {
 															// Property: AlarmMetrics
 															Description: "A list of metrics to monitor for the component.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"alarm_metric_name": {
 																		// Property: AlarmMetricName
 																		Description: "The name of the metric to be monitored for the component.",
@@ -964,15 +963,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
 														"logs": {
 															// Property: Logs
 															Description: "A list of logs to monitor for the component.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"encoding": {
 																		// Property: Encoding
 																		Description: "The type of encoding of the logs to be monitored.",
@@ -1004,15 +1003,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
 														"windows_events": {
 															// Property: WindowsEvents
 															Description: "A list of Windows Events to log.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"event_levels": {
 																		// Property: EventLevels
 																		Description: "The levels of event to log. ",
@@ -1038,7 +1037,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -1053,7 +1052,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -1066,18 +1065,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"default_overwrite_component_configuration": {
 						// Property: DefaultOverwriteComponentConfiguration
 						Description: "The configuration settings of the component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"configuration_details": {
 									// Property: ConfigurationDetails
 									Description: "The configuration settings.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"alarm_metrics": {
 												// Property: AlarmMetrics
 												Description: "A list of metrics to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_metric_name": {
 															// Property: AlarmMetricName
 															Description: "The name of the metric to be monitored for the component.",
@@ -1085,15 +1084,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"alarms": {
 												// Property: Alarms
 												Description: "A list of alarms to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_name": {
 															// Property: AlarmName
 															Description: "The name of the CloudWatch alarm to be monitored for the component.",
@@ -1107,15 +1106,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
 												Description: "The JMX Prometheus Exporter settings.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"host_port": {
 															// Property: HostPort
 															Description: "Java agent host port",
@@ -1141,8 +1140,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"logs": {
 												// Property: Logs
 												Description: "A list of logs to monitor for the component.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"encoding": {
 															// Property: Encoding
 															Description: "The type of encoding of the logs to be monitored.",
@@ -1174,15 +1173,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"windows_events": {
 												// Property: WindowsEvents
 												Description: "A list of Windows Events to log.",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"event_levels": {
 															// Property: EventLevels
 															Description: "The levels of event to log. ",
@@ -1208,7 +1207,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
@@ -1219,18 +1218,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"sub_component_type_configurations": {
 									// Property: SubComponentTypeConfigurations
 									Description: "Sub component configurations of the component.",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"sub_component_configuration_details": {
 												// Property: SubComponentConfigurationDetails
 												Description: "The configuration settings of sub components.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"alarm_metrics": {
 															// Property: AlarmMetrics
 															Description: "A list of metrics to monitor for the component.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"alarm_metric_name": {
 																		// Property: AlarmMetricName
 																		Description: "The name of the metric to be monitored for the component.",
@@ -1238,15 +1237,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
 														"logs": {
 															// Property: Logs
 															Description: "A list of logs to monitor for the component.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"encoding": {
 																		// Property: Encoding
 																		Description: "The type of encoding of the logs to be monitored.",
@@ -1278,15 +1277,15 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
 														"windows_events": {
 															// Property: WindowsEvents
 															Description: "A list of Windows Events to log.",
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"event_levels": {
 																		// Property: EventLevels
 																		Description: "The levels of event to log. ",
@@ -1312,7 +1311,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -1327,7 +1326,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -1344,7 +1343,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1388,8 +1387,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The custom grouped components.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_name": {
 						// Property: ComponentName
 						Description: "The name of the component.",
@@ -1403,7 +1402,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1470,13 +1469,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The log pattern sets.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"log_patterns": {
 						// Property: LogPatterns
 						Description: "The log patterns of a set.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"pattern": {
 									// Property: Pattern
 									Description: "The log pattern.",
@@ -1496,7 +1495,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -1509,7 +1508,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1587,8 +1586,8 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags of Application Insights application.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -1602,7 +1601,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1610,14 +1609,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ApplicationInsights::Application",
 		Version:     1,
 		Attributes:  attributes,
@@ -1625,7 +1623,57 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApplicationInsights::Application").WithTerraformTypeName("aws_applicationinsights_application").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApplicationInsights::Application").WithTerraformTypeName("awscc_applicationinsights_application")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_metric_name":                         "AlarmMetricName",
+		"alarm_metrics":                             "AlarmMetrics",
+		"alarm_name":                                "AlarmName",
+		"alarms":                                    "Alarms",
+		"application_arn":                           "ApplicationARN",
+		"auto_configuration_enabled":                "AutoConfigurationEnabled",
+		"component_arn":                             "ComponentARN",
+		"component_configuration_mode":              "ComponentConfigurationMode",
+		"component_monitoring_settings":             "ComponentMonitoringSettings",
+		"component_name":                            "ComponentName",
+		"configuration_details":                     "ConfigurationDetails",
+		"custom_component_configuration":            "CustomComponentConfiguration",
+		"custom_components":                         "CustomComponents",
+		"cwe_monitor_enabled":                       "CWEMonitorEnabled",
+		"default_overwrite_component_configuration": "DefaultOverwriteComponentConfiguration",
+		"encoding":                                  "Encoding",
+		"event_levels":                              "EventLevels",
+		"event_name":                                "EventName",
+		"host_port":                                 "HostPort",
+		"jmx_prometheus_exporter":                   "JMXPrometheusExporter",
+		"jmxurl":                                    "JMXURL",
+		"key":                                       "Key",
+		"log_group_name":                            "LogGroupName",
+		"log_path":                                  "LogPath",
+		"log_pattern_sets":                          "LogPatternSets",
+		"log_patterns":                              "LogPatterns",
+		"log_type":                                  "LogType",
+		"logs":                                      "Logs",
+		"ops_center_enabled":                        "OpsCenterEnabled",
+		"ops_item_sns_topic_arn":                    "OpsItemSNSTopicArn",
+		"pattern":                                   "Pattern",
+		"pattern_name":                              "PatternName",
+		"pattern_set":                               "PatternSet",
+		"pattern_set_name":                          "PatternSetName",
+		"prometheus_port":                           "PrometheusPort",
+		"rank":                                      "Rank",
+		"resource_group_name":                       "ResourceGroupName",
+		"resource_list":                             "ResourceList",
+		"severity":                                  "Severity",
+		"sub_component_configuration_details":       "SubComponentConfigurationDetails",
+		"sub_component_type":                        "SubComponentType",
+		"sub_component_type_configurations":         "SubComponentTypeConfigurations",
+		"tags":                                      "Tags",
+		"tier":                                      "Tier",
+		"value":                                     "Value",
+		"windows_events":                            "WindowsEvents",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -1637,7 +1685,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_applicationinsights_application", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_applicationinsights_application", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

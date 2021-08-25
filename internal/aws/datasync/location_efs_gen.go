@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_efs", locationEFSResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_efs", locationEFSResourceType)
 }
 
-// locationEFSResourceType returns the Terraform aws_datasync_location_efs resource type.
+// locationEFSResourceType returns the Terraform awscc_datasync_location_efs resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
 func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"ec_2_config": {
 			// Property: Ec2Config
 			// CloudFormation resource type schema:
@@ -56,14 +55,13 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The subnet and security group that DataSync uses to access target EFS file system.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"security_group_arns": {
 						// Property: SecurityGroupArns
 						Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 					},
 					"subnet_arn": {
 						// Property: SubnetArn
@@ -170,7 +168,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -192,14 +190,13 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::LocationEFS.",
 		Version:     1,
 		Attributes:  attributes,
@@ -207,7 +204,21 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("aws_datasync_location_efs").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("awscc_datasync_location_efs")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"ec_2_config":         "Ec2Config",
+		"efs_filesystem_arn":  "EfsFilesystemArn",
+		"key":                 "Key",
+		"location_arn":        "LocationArn",
+		"location_uri":        "LocationUri",
+		"security_group_arns": "SecurityGroupArns",
+		"subdirectory":        "Subdirectory",
+		"subnet_arn":          "SubnetArn",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EfsFilesystemArn",
@@ -223,7 +234,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_efs", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_efs", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

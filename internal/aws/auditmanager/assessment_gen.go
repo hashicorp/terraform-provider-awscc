@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_auditmanager_assessment", assessmentResourceType)
+	registry.AddResourceTypeFactory("awscc_auditmanager_assessment", assessmentResourceType)
 }
 
-// assessmentResourceType returns the Terraform aws_auditmanager_assessment resource type.
+// assessmentResourceType returns the Terraform awscc_auditmanager_assessment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::AuditManager::Assessment resource type.
 func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -70,8 +69,8 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The destination in which evidence reports are stored for the specified assessment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"destination": {
 						// Property: Destination
 						Description: "The URL of the specified Amazon S3 bucket.",
@@ -120,8 +119,8 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The AWS account associated with the assessment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"email_address": {
 						// Property: EmailAddress
 						Description: "The unique identifier for the email account.",
@@ -243,8 +242,8 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The list of delegations.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"assessment_id": {
 						// Property: AssessmentId
 						Type:     types.StringType,
@@ -310,7 +309,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -387,8 +386,8 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The list of roles for the specified assessment.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"role_arn": {
 						// Property: RoleArn
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
@@ -402,7 +401,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -464,13 +463,13 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The wrapper that contains the AWS accounts and AWS services in scope for the assessment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"aws_accounts": {
 						// Property: AwsAccounts
 						Description: "The AWS accounts included in scope.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"email_address": {
 									// Property: EmailAddress
 									Description: "The unique identifier for the email account.",
@@ -490,15 +489,15 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"aws_services": {
 						// Property: AwsServices
 						Description: "The AWS services included in scope.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"service_name": {
 									// Property: ServiceName
 									Description: "The name of the AWS service.",
@@ -506,7 +505,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -560,8 +559,8 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags associated with the assessment.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -575,20 +574,19 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An entity that defines the scope of audit evidence collected by AWS Audit Manager.",
 		Version:     1,
 		Attributes:  attributes,
@@ -596,7 +594,40 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::AuditManager::Assessment").WithTerraformTypeName("aws_auditmanager_assessment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AuditManager::Assessment").WithTerraformTypeName("awscc_auditmanager_assessment")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                            "Arn",
+		"assessment_id":                  "AssessmentId",
+		"assessment_name":                "AssessmentName",
+		"assessment_reports_destination": "AssessmentReportsDestination",
+		"aws_account":                    "AwsAccount",
+		"aws_accounts":                   "AwsAccounts",
+		"aws_services":                   "AwsServices",
+		"comment":                        "Comment",
+		"control_set_id":                 "ControlSetId",
+		"created_by":                     "CreatedBy",
+		"creation_time":                  "CreationTime",
+		"delegations":                    "Delegations",
+		"description":                    "Description",
+		"destination":                    "Destination",
+		"destination_type":               "DestinationType",
+		"email_address":                  "EmailAddress",
+		"framework_id":                   "FrameworkId",
+		"id":                             "Id",
+		"key":                            "Key",
+		"last_updated":                   "LastUpdated",
+		"name":                           "Name",
+		"role_arn":                       "RoleArn",
+		"role_type":                      "RoleType",
+		"roles":                          "Roles",
+		"scope":                          "Scope",
+		"service_name":                   "ServiceName",
+		"status":                         "Status",
+		"tags":                           "Tags",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Name",
@@ -612,7 +643,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_auditmanager_assessment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_auditmanager_assessment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

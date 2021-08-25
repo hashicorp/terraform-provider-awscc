@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow_vpc_interface", flowVpcInterfaceResourceType)
+	registry.AddResourceTypeFactory("awscc_mediaconnect_flow_vpc_interface", flowVpcInterfaceResourceType)
 }
 
-// flowVpcInterfaceResourceType returns the Terraform aws_mediaconnect_flow_vpc_interface resource type.
+// flowVpcInterfaceResourceType returns the Terraform awscc_mediaconnect_flow_vpc_interface resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::FlowVpcInterface resource type.
 func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"flow_arn": {
 			// Property: FlowArn
 			// CloudFormation resource type schema:
@@ -98,14 +97,13 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaConnect::FlowVpcInterface",
 		Version:     1,
 		Attributes:  attributes,
@@ -113,7 +111,17 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowVpcInterface").WithTerraformTypeName("aws_mediaconnect_flow_vpc_interface").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowVpcInterface").WithTerraformTypeName("awscc_mediaconnect_flow_vpc_interface")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"flow_arn":              "FlowArn",
+		"name":                  "Name",
+		"network_interface_ids": "NetworkInterfaceIds",
+		"role_arn":              "RoleArn",
+		"security_group_ids":    "SecurityGroupIds",
+		"subnet_id":             "SubnetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -125,7 +133,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediaconnect_flow_vpc_interface", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_vpc_interface", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

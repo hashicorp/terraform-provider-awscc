@@ -2,11 +2,12 @@ package acctest
 
 import (
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/provider"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 )
 
 type TestData struct {
@@ -27,11 +28,20 @@ type TestData struct {
 
 // EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
 func (td *TestData) EmptyConfig() string {
-	return fmt.Sprintf(`
-resource %[1]q %[2]q {
-  provider = cloudapi
-}
+	config := fmt.Sprintf(`
+resource %[1]q %[2]q {}
 `, td.TerraformResourceType, td.ResourceLabel)
+
+	if role := os.Getenv("TF_AWS_ASSUME_ROLE_ARN"); role != "" {
+		config = fmt.Sprintf(`
+provider "awscc" {
+  assume_role={
+    role_arn = %[1]q
+  }
+}
+`, role) + config
+	}
+	return config
 }
 
 // RandomName returns a new random name with the standard prefix `tf-acc-test`.
@@ -45,7 +55,7 @@ func (td *TestData) RandomAlphaString(n int) string {
 }
 
 // NewTestData returns a new TestData structure.
-func NewTestData(t *testing.T, cfResourceType, tfResourceType, resourceLabel string) TestData {
+func NewTestData(_ *testing.T, cfResourceType, tfResourceType, resourceLabel string) TestData {
 	data := TestData{
 		CloudFormationResourceType: cfResourceType,
 		ResourceLabel:              resourceLabel,

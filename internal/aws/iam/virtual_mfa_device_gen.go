@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iam_virtual_mfa_device", virtualMFADeviceResourceType)
+	registry.AddResourceTypeFactory("awscc_iam_virtual_mfa_device", virtualMFADeviceResourceType)
 }
 
-// virtualMFADeviceResourceType returns the Terraform aws_iam_virtual_mfa_device resource type.
+// virtualMFADeviceResourceType returns the Terraform awscc_iam_virtual_mfa_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource type.
 func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"path": {
 			// Property: Path
 			// CloudFormation resource type schema:
@@ -78,8 +77,8 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -93,7 +92,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -126,14 +125,13 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IAM::VirtualMFADevice",
 		Version:     1,
 		Attributes:  attributes,
@@ -141,7 +139,18 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("aws_iam_virtual_mfa_device").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("awscc_iam_virtual_mfa_device")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                     "Key",
+		"path":                    "Path",
+		"serial_number":           "SerialNumber",
+		"tags":                    "Tags",
+		"users":                   "Users",
+		"value":                   "Value",
+		"virtual_mfa_device_name": "VirtualMfaDeviceName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -153,7 +162,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iam_virtual_mfa_device", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iam_virtual_mfa_device", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

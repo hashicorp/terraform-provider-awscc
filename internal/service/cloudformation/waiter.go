@@ -13,12 +13,16 @@ import (
 	smithywaiter "github.com/aws/smithy-go/waiter"
 )
 
+const (
+	waitForResourceRequestMinDelay = 5 * time.Second
+)
+
 // WaitForResourceRequestSuccess waits up to maxWaitTime for the specified reource request to succeed.
 func WaitForResourceRequestSuccess(ctx context.Context, client *cloudformation.Client, requestToken string, maxWaitTime time.Duration) (string, error) {
 	var progressEvent *types.ProgressEvent
 
 	waiter := NewResourceRequestStatusSuccessWaiter(client, func(o *ResourceRequestStatusSuccessWaiterOptions) {
-		o.MinDelay = 5 * time.Second
+		o.MinDelay = waitForResourceRequestMinDelay
 
 		o.Retryable = func(ctx context.Context, input *cloudformation.GetResourceRequestStatusInput, output *cloudformation.GetResourceRequestStatusOutput, err error) (bool, error) {
 			if err == nil {
@@ -95,6 +99,11 @@ type ResourceRequestStatusSuccessWaiterOptions struct {
 	Retryable func(context.Context, *cloudformation.GetResourceRequestStatusInput, *cloudformation.GetResourceRequestStatusOutput, error) (bool, error)
 }
 
+const (
+	resourceRequestStatusSuccessWaiterDefaultMinDelay = 30 * time.Second
+	resourceRequestStatusSuccessWaiterDefaultMaxDelay = 120 * time.Second
+)
+
 // ResourceRequestStatusSuccessWaiter defines the waiters for ResourceRequestStatusSuccess
 type ResourceRequestStatusSuccessWaiter struct {
 	client GetResourceRequestStatusAPIClient
@@ -104,11 +113,12 @@ type ResourceRequestStatusSuccessWaiter struct {
 
 // NewResourceRequestStatusSuccessWaiter constructs a ResourceRequestStatusSuccessWaiter.
 func NewResourceRequestStatusSuccessWaiter(client GetResourceRequestStatusAPIClient, optFns ...func(*ResourceRequestStatusSuccessWaiterOptions)) *ResourceRequestStatusSuccessWaiter {
-	options := ResourceRequestStatusSuccessWaiterOptions{}
-	options.MinDelay = 30 * time.Second
-	options.MaxDelay = 120 * time.Second
-	options.Retryable = func(context.Context, *cloudformation.GetResourceRequestStatusInput, *cloudformation.GetResourceRequestStatusOutput, error) (bool, error) {
-		return false, fmt.Errorf("retryable not implemented")
+	options := ResourceRequestStatusSuccessWaiterOptions{
+		MinDelay: resourceRequestStatusSuccessWaiterDefaultMinDelay,
+		MaxDelay: resourceRequestStatusSuccessWaiterDefaultMaxDelay,
+		Retryable: func(context.Context, *cloudformation.GetResourceRequestStatusInput, *cloudformation.GetResourceRequestStatusOutput, error) (bool, error) {
+			return false, fmt.Errorf("retryable not implemented")
+		},
 	}
 
 	for _, fn := range optFns {
@@ -134,7 +144,7 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 	}
 
 	if options.MaxDelay <= 0 {
-		options.MaxDelay = 120 * time.Second
+		options.MaxDelay = resourceRequestStatusSuccessWaiterDefaultMaxDelay
 	}
 
 	if options.MinDelay > options.MaxDelay {

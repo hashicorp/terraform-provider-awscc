@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudwatch_metric_stream", metricStreamResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudwatch_metric_stream", metricStreamResourceType)
 }
 
-// metricStreamResourceType returns the Terraform aws_cloudwatch_metric_stream resource type.
+// metricStreamResourceType returns the Terraform awscc_cloudwatch_metric_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
 func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -73,9 +74,8 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"namespace": {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -83,11 +83,12 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1000,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"firehose_arn": {
 			// Property: FirehoseArn
@@ -128,9 +129,8 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"namespace": {
 						// Property: Namespace
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -138,11 +138,12 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1000,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"last_update_date": {
 			// Property: LastUpdateDate
@@ -242,9 +243,8 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A set of tags to assign to the delivery stream.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A unique identifier for the tag.",
@@ -258,23 +258,23 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 			// Tags is a write-only attribute.
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for Metric Stream",
 		Version:     1,
 		Attributes:  attributes,
@@ -282,7 +282,25 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("aws_cloudwatch_metric_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":              "Arn",
+		"creation_date":    "CreationDate",
+		"exclude_filters":  "ExcludeFilters",
+		"firehose_arn":     "FirehoseArn",
+		"include_filters":  "IncludeFilters",
+		"key":              "Key",
+		"last_update_date": "LastUpdateDate",
+		"name":             "Name",
+		"namespace":        "Namespace",
+		"output_format":    "OutputFormat",
+		"role_arn":         "RoleArn",
+		"state":            "State",
+		"tags":             "Tags",
+		"value":            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -297,7 +315,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudwatch_metric_stream", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudwatch_metric_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

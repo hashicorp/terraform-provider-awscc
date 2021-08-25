@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ivs_stream_key", streamKeyResourceType)
+	registry.AddResourceTypeFactory("awscc_ivs_stream_key", streamKeyResourceType)
 }
 
-// streamKeyResourceType returns the Terraform aws_ivs_stream_key resource type.
+// streamKeyResourceType returns the Terraform awscc_ivs_stream_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::StreamKey resource type.
 func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -82,7 +81,7 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -113,14 +112,13 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IVS::StreamKey",
 		Version:     1,
 		Attributes:  attributes,
@@ -128,7 +126,16 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IVS::StreamKey").WithTerraformTypeName("aws_ivs_stream_key").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IVS::StreamKey").WithTerraformTypeName("awscc_ivs_stream_key")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"channel_arn": "ChannelArn",
+		"key":         "Key",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -140,7 +147,7 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ivs_stream_key", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ivs_stream_key", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_asset", assetResourceType)
+	registry.AddResourceTypeFactory("awscc_mediapackage_asset", assetResourceType)
 }
 
-// assetResourceType returns the Terraform aws_mediapackage_asset resource type.
+// assetResourceType returns the Terraform awscc_mediapackage_asset resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::Asset resource type.
 func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -71,8 +72,8 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The list of egress endpoints available for the Asset.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"packaging_configuration_id": {
 						// Property: PackagingConfigurationId
 						Description: "The ID of the PackagingConfiguration being applied to the Asset.",
@@ -86,7 +87,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -170,9 +171,8 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -184,20 +184,14 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::Asset",
 		Version:     1,
 		Attributes:  attributes,
@@ -205,7 +199,24 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("aws_mediapackage_asset").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("awscc_mediapackage_asset")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                        "Arn",
+		"created_at":                 "CreatedAt",
+		"egress_endpoints":           "EgressEndpoints",
+		"id":                         "Id",
+		"key":                        "Key",
+		"packaging_configuration_id": "PackagingConfigurationId",
+		"packaging_group_id":         "PackagingGroupId",
+		"resource_id":                "ResourceId",
+		"source_arn":                 "SourceArn",
+		"source_role_arn":            "SourceRoleArn",
+		"tags":                       "Tags",
+		"url":                        "Url",
+		"value":                      "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -217,7 +228,7 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediapackage_asset", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediapackage_asset", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_gateway", gatewayResourceType)
+	registry.AddResourceTypeFactory("awscc_iotsitewise_gateway", gatewayResourceType)
 }
 
-// gatewayResourceType returns the Terraform aws_iotsitewise_gateway resource type.
+// gatewayResourceType returns the Terraform awscc_iotsitewise_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Gateway resource type.
 func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"gateway_capability_summaries": {
 			// Property: GatewayCapabilitySummaries
 			// CloudFormation resource type schema:
@@ -49,9 +50,8 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A list of gateway capability summaries that each contain a namespace and status.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"capability_configuration": {
 						// Property: CapabilityConfiguration
 						Description: "The JSON document that defines the gateway capability's configuration.",
@@ -65,9 +65,10 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"gateway_id": {
 			// Property: GatewayId
@@ -119,13 +120,13 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Contains a gateway's platform information.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"greengrass": {
 						// Property: Greengrass
 						Description: "Contains the ARN of AWS IoT Greengrass Group that the gateway runs on.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"group_arn": {
 									// Property: GroupArn
 									Description: "The ARN of the Greengrass group.",
@@ -167,8 +168,8 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "A list of key-value pairs that contain metadata for the gateway.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -180,20 +181,19 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::Gateway",
 		Version:     1,
 		Attributes:  attributes,
@@ -201,7 +201,22 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("aws_iotsitewise_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("awscc_iotsitewise_gateway")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"capability_configuration":     "CapabilityConfiguration",
+		"capability_namespace":         "CapabilityNamespace",
+		"gateway_capability_summaries": "GatewayCapabilitySummaries",
+		"gateway_id":                   "GatewayId",
+		"gateway_name":                 "GatewayName",
+		"gateway_platform":             "GatewayPlatform",
+		"greengrass":                   "Greengrass",
+		"group_arn":                    "GroupArn",
+		"key":                          "Key",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -213,7 +228,7 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotsitewise_gateway", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotsitewise_gateway", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

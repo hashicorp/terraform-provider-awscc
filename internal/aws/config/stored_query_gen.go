@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_stored_query", storedQueryResourceType)
+	registry.AddResourceTypeFactory("awscc_config_stored_query", storedQueryResourceType)
 }
 
-// storedQueryResourceType returns the Terraform aws_config_stored_query resource type.
+// storedQueryResourceType returns the Terraform awscc_config_stored_query resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::StoredQuery resource type.
 func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"query_arn": {
 			// Property: QueryArn
 			// CloudFormation resource type schema:
@@ -115,9 +116,8 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The tags for the stored query.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -131,22 +131,22 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Config::StoredQuery",
 		Version:     1,
 		Attributes:  attributes,
@@ -154,7 +154,19 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Config::StoredQuery").WithTerraformTypeName("aws_config_stored_query").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::StoredQuery").WithTerraformTypeName("awscc_config_stored_query")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":               "Key",
+		"query_arn":         "QueryArn",
+		"query_description": "QueryDescription",
+		"query_expression":  "QueryExpression",
+		"query_id":          "QueryId",
+		"query_name":        "QueryName",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -166,7 +178,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_config_stored_query", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_stored_query", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

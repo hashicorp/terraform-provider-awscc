@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cassandra_keyspace", keyspaceResourceType)
+	registry.AddResourceTypeFactory("awscc_cassandra_keyspace", keyspaceResourceType)
 }
 
-// keyspaceResourceType returns the Terraform aws_cassandra_keyspace resource type.
+// keyspaceResourceType returns the Terraform awscc_cassandra_keyspace resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Cassandra::Keyspace resource type.
 func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"keyspace_name": {
 			// Property: KeyspaceName
 			// CloudFormation resource type schema:
@@ -65,9 +66,8 @@ func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -79,23 +79,23 @@ func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Cassandra::Keyspace",
 		Version:     1,
 		Attributes:  attributes,
@@ -103,7 +103,15 @@ func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("aws_cassandra_keyspace").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("awscc_cassandra_keyspace")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":           "Key",
+		"keyspace_name": "KeyspaceName",
+		"tags":          "Tags",
+		"value":         "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -115,7 +123,7 @@ func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cassandra_keyspace", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cassandra_keyspace", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -3,7 +3,7 @@ package naming_test
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
 func TestParseCloudFormationTypeName(t *testing.T) {
@@ -69,6 +69,41 @@ func TestParseCloudFormationTypeName(t *testing.T) {
 			}
 			if gotResource != testCase.ExpectedResource {
 				t.Errorf("expected Resource: %s, got: %s", testCase.ExpectedResource, gotResource)
+			}
+		})
+	}
+}
+
+func TestCreateTerraformTypeName(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		Organization  string
+		Service       string
+		Resource      string
+		ExpectedValue string
+	}{
+		{
+			TestName:      "valid type name",
+			Organization:  "aws",
+			Service:       "kms",
+			Resource:      "key",
+			ExpectedValue: "aws_kms_key",
+		},
+		{
+			TestName:      "valid type name multiple underscores in resource",
+			Organization:  "aws",
+			Service:       "logs",
+			Resource:      "log_group",
+			ExpectedValue: "aws_logs_log_group",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			gotValue := naming.CreateTerraformTypeName(testCase.Organization, testCase.Service, testCase.Resource)
+
+			if gotValue != testCase.ExpectedValue {
+				t.Errorf("expected type name: %s, got: %s", testCase.ExpectedValue, gotValue)
 			}
 		})
 	}

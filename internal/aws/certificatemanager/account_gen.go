@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_certificatemanager_account", accountResourceType)
+	registry.AddResourceTypeFactory("awscc_certificatemanager_account", accountResourceType)
 }
 
-// accountResourceType returns the Terraform aws_certificatemanager_account resource type.
+// accountResourceType returns the Terraform awscc_certificatemanager_account resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CertificateManager::Account resource type.
 func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"account_id": {
 			// Property: AccountId
 			// CloudFormation resource type schema:
@@ -43,8 +42,8 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"days_before_expiry": {
 						// Property: DaysBeforeExpiry
 						Type:     types.NumberType,
@@ -56,14 +55,13 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::CertificateManager::Account.",
 		Version:     1,
 		Attributes:  attributes,
@@ -71,7 +69,14 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CertificateManager::Account").WithTerraformTypeName("aws_certificatemanager_account").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CertificateManager::Account").WithTerraformTypeName("awscc_certificatemanager_account")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                  "AccountId",
+		"days_before_expiry":          "DaysBeforeExpiry",
+		"expiry_events_configuration": "ExpiryEventsConfiguration",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -83,7 +88,7 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_certificatemanager_account", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_certificatemanager_account", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

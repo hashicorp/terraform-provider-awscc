@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mwaa_environment", environmentResourceType)
+	registry.AddResourceTypeFactory("awscc_mwaa_environment", environmentResourceType)
 }
 
-// environmentResourceType returns the Terraform aws_mwaa_environment resource type.
+// environmentResourceType returns the Terraform awscc_mwaa_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MWAA::Environment resource type.
 func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"airflow_configuration_options": {
 			// Property: AirflowConfigurationOptions
 			// CloudFormation resource type schema:
@@ -265,14 +264,14 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Logging configuration for the environment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"dag_processing_logs": {
 						// Property: DagProcessingLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
-								"cloud_watch_log_group_arn": {
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -297,9 +296,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"scheduler_logs": {
 						// Property: SchedulerLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
-								"cloud_watch_log_group_arn": {
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -324,9 +323,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"task_logs": {
 						// Property: TaskLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
-								"cloud_watch_log_group_arn": {
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -351,9 +350,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"webserver_logs": {
 						// Property: WebserverLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
-								"cloud_watch_log_group_arn": {
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -378,9 +377,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"worker_logs": {
 						// Property: WorkerLogs
 						Description: "Logging configuration for a specific airflow component.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
-								"cloud_watch_log_group_arn": {
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"cloudwatch_log_group_arn": {
 									// Property: CloudWatchLogGroupArn
 									Description: "",
 									Type:        types.StringType,
@@ -479,8 +478,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Configures the network resources of the environment.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Description: "A list of security groups to use for the environment.",
@@ -629,14 +628,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MWAA::Environment",
 		Version:     1,
 		Attributes:  attributes,
@@ -644,7 +642,43 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MWAA::Environment").WithTerraformTypeName("aws_mwaa_environment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MWAA::Environment").WithTerraformTypeName("awscc_mwaa_environment")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"airflow_configuration_options":   "AirflowConfigurationOptions",
+		"airflow_version":                 "AirflowVersion",
+		"arn":                             "Arn",
+		"cloudwatch_log_group_arn":        "CloudWatchLogGroupArn",
+		"dag_processing_logs":             "DagProcessingLogs",
+		"dag_s3_path":                     "DagS3Path",
+		"enabled":                         "Enabled",
+		"environment_class":               "EnvironmentClass",
+		"execution_role_arn":              "ExecutionRoleArn",
+		"kms_key":                         "KmsKey",
+		"log_level":                       "LogLevel",
+		"logging_configuration":           "LoggingConfiguration",
+		"max_workers":                     "MaxWorkers",
+		"min_workers":                     "MinWorkers",
+		"name":                            "Name",
+		"network_configuration":           "NetworkConfiguration",
+		"plugins_s3_object_version":       "PluginsS3ObjectVersion",
+		"plugins_s3_path":                 "PluginsS3Path",
+		"requirements_s3_object_version":  "RequirementsS3ObjectVersion",
+		"requirements_s3_path":            "RequirementsS3Path",
+		"scheduler_logs":                  "SchedulerLogs",
+		"schedulers":                      "Schedulers",
+		"security_group_ids":              "SecurityGroupIds",
+		"source_bucket_arn":               "SourceBucketArn",
+		"subnet_ids":                      "SubnetIds",
+		"tags":                            "Tags",
+		"task_logs":                       "TaskLogs",
+		"webserver_access_mode":           "WebserverAccessMode",
+		"webserver_logs":                  "WebserverLogs",
+		"webserver_url":                   "WebserverUrl",
+		"weekly_maintenance_window_start": "WeeklyMaintenanceWindowStart",
+		"worker_logs":                     "WorkerLogs",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(0)
 
@@ -656,7 +690,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mwaa_environment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mwaa_environment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

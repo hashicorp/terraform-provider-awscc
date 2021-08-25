@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudfront_realtime_log_config", realtimeLogConfigResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudfront_realtime_log_config", realtimeLogConfigResourceType)
 }
 
-// realtimeLogConfigResourceType returns the Terraform aws_cloudfront_realtime_log_config resource type.
+// realtimeLogConfigResourceType returns the Terraform awscc_cloudfront_realtime_log_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource type.
 func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -68,12 +67,12 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"kinesis_stream_config": {
 						// Property: KinesisStreamConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
 									Type:     types.StringType,
@@ -94,7 +93,7 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -135,14 +134,13 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::RealtimeLogConfig",
 		Version:     1,
 		Attributes:  attributes,
@@ -150,7 +148,20 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("aws_cloudfront_realtime_log_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"end_points":            "EndPoints",
+		"fields":                "Fields",
+		"kinesis_stream_config": "KinesisStreamConfig",
+		"name":                  "Name",
+		"role_arn":              "RoleArn",
+		"sampling_rate":         "SamplingRate",
+		"stream_arn":            "StreamArn",
+		"stream_type":           "StreamType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -162,7 +173,7 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudfront_realtime_log_config", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudfront_realtime_log_config", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

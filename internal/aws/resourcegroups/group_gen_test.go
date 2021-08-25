@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSResourceGroupsGroup_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ResourceGroups::Group", "aws_resourcegroups_group", "test")
+	td := acctest.NewTestData(t, "AWS::ResourceGroups::Group", "awscc_resourcegroups_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

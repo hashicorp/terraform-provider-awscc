@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_project", projectResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_project", projectResourceType)
 }
 
-// projectResourceType returns the Terraform aws_sagemaker_project resource type.
+// projectResourceType returns the Terraform awscc_sagemaker_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Project resource type.
 func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -131,8 +130,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Provisioned ServiceCatalog  Details",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"provisioned_product_id": {
 						// Property: ProvisionedProductId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
@@ -210,8 +209,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Input ServiceCatalog Provisioning Details",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"path_id": {
 						// Property: PathId
 						Description: "The path identifier of the product.",
@@ -233,8 +232,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"provisioning_parameters": {
 						// Property: ProvisioningParameters
 						Description: "Parameters specified by the administrator that are required for provisioning the product.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Description: "The parameter key.",
@@ -248,7 +247,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -290,8 +289,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -305,7 +304,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 40,
 				},
 			),
@@ -315,14 +314,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::Project",
 		Version:     1,
 		Attributes:  attributes,
@@ -330,7 +328,28 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("aws_sagemaker_project").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                      "CreationTime",
+		"key":                                "Key",
+		"path_id":                            "PathId",
+		"product_id":                         "ProductId",
+		"project_arn":                        "ProjectArn",
+		"project_description":                "ProjectDescription",
+		"project_id":                         "ProjectId",
+		"project_name":                       "ProjectName",
+		"project_status":                     "ProjectStatus",
+		"provisioned_product_id":             "ProvisionedProductId",
+		"provisioned_product_status_message": "ProvisionedProductStatusMessage",
+		"provisioning_artifact_id":           "ProvisioningArtifactId",
+		"provisioning_parameters":            "ProvisioningParameters",
+		"service_catalog_provisioned_product_details": "ServiceCatalogProvisionedProductDetails",
+		"service_catalog_provisioning_details":        "ServiceCatalogProvisioningDetails",
+		"tags":                                        "Tags",
+		"value":                                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -342,7 +361,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_project", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_project", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

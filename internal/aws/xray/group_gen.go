@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_xray_group", groupResourceType)
+	registry.AddResourceTypeFactory("awscc_xray_group", groupResourceType)
 }
 
-// groupResourceType returns the Terraform aws_xray_group resource type.
+// groupResourceType returns the Terraform awscc_xray_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::Group resource type.
 func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"filter_expression": {
 			// Property: FilterExpression
 			// CloudFormation resource type schema:
@@ -76,8 +75,8 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"insights_enabled": {
 						// Property: InsightsEnabled
 						Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
@@ -116,8 +115,8 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -129,20 +128,19 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This schema provides construct and validation rules for AWS-XRay Group resource parameters.",
 		Version:     1,
 		Attributes:  attributes,
@@ -150,7 +148,20 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::XRay::Group").WithTerraformTypeName("aws_xray_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::XRay::Group").WithTerraformTypeName("awscc_xray_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"filter_expression":      "FilterExpression",
+		"group_arn":              "GroupARN",
+		"group_name":             "GroupName",
+		"insights_configuration": "InsightsConfiguration",
+		"insights_enabled":       "InsightsEnabled",
+		"key":                    "Key",
+		"notifications_enabled":  "NotificationsEnabled",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -162,7 +173,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_xray_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_xray_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

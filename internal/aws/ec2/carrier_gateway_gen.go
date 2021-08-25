@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_carrier_gateway", carrierGatewayResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_carrier_gateway", carrierGatewayResourceType)
 }
 
-// carrierGatewayResourceType returns the Terraform aws_ec2_carrier_gateway resource type.
+// carrierGatewayResourceType returns the Terraform awscc_ec2_carrier_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::CarrierGateway resource type.
 func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"carrier_gateway_id": {
 			// Property: CarrierGatewayId
 			// CloudFormation resource type schema:
@@ -83,7 +82,7 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -113,14 +112,13 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -128,7 +126,18 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::CarrierGateway").WithTerraformTypeName("aws_ec2_carrier_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::CarrierGateway").WithTerraformTypeName("awscc_ec2_carrier_gateway")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"carrier_gateway_id": "CarrierGatewayId",
+		"key":                "Key",
+		"owner_id":           "OwnerId",
+		"state":              "State",
+		"tags":               "Tags",
+		"value":              "Value",
+		"vpc_id":             "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -140,7 +149,7 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_carrier_gateway", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_carrier_gateway", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

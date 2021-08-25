@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_events_api_destination", apiDestinationResourceType)
+	registry.AddResourceTypeFactory("awscc_events_api_destination", apiDestinationResourceType)
 }
 
-// apiDestinationResourceType returns the Terraform aws_events_api_destination resource type.
+// apiDestinationResourceType returns the Terraform awscc_events_api_destination resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
 func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -109,14 +108,13 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Events::ApiDestination.",
 		Version:     1,
 		Attributes:  attributes,
@@ -124,7 +122,18 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("aws_events_api_destination").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destination")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                              "Arn",
+		"connection_arn":                   "ConnectionArn",
+		"description":                      "Description",
+		"http_method":                      "HttpMethod",
+		"invocation_endpoint":              "InvocationEndpoint",
+		"invocation_rate_limit_per_second": "InvocationRateLimitPerSecond",
+		"name":                             "Name",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -136,7 +145,7 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_events_api_destination", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_events_api_destination", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_synthetics_canary", canaryResourceType)
+	registry.AddResourceTypeFactory("awscc_synthetics_canary", canaryResourceType)
 }
 
-// canaryResourceType returns the Terraform aws_synthetics_canary resource type.
+// canaryResourceType returns the Terraform awscc_synthetics_canary resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Synthetics::Canary resource type.
 func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"artifact_s3_location": {
 			// Property: ArtifactS3Location
 			// CloudFormation resource type schema:
@@ -61,8 +60,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"handler": {
 						// Property: Handler
 						Type:     types.StringType,
@@ -173,8 +172,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"active_tracing": {
 						// Property: ActiveTracing
 						Description: "Enable active tracing if set to true",
@@ -233,8 +232,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"duration_in_seconds": {
 						// Property: DurationInSeconds
 						Type:     types.StringType,
@@ -312,8 +311,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -327,7 +326,7 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -359,8 +358,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"security_group_ids": {
 						// Property: SecurityGroupIds
 						Type:     types.ListType{ElemType: types.StringType},
@@ -420,8 +419,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"base_canary_run_id": {
 						// Property: BaseCanaryRunId
 						Description: "Canary run id to be used as base reference for visual testing",
@@ -431,8 +430,8 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"base_screenshots": {
 						// Property: BaseScreenshots
 						Description: "List of screenshots used as base reference for visual testing",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ignore_coordinates": {
 									// Property: IgnoreCoordinates
 									Description: "List of coordinates of rectangles to be ignored during visual testing",
@@ -446,7 +445,7 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -456,14 +455,7 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Synthetics::Canary",
 		Version:     1,
 		Attributes:  attributes,
@@ -471,7 +463,46 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("aws_synthetics_canary").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("awscc_synthetics_canary")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"active_tracing":              "ActiveTracing",
+		"artifact_s3_location":        "ArtifactS3Location",
+		"base_canary_run_id":          "BaseCanaryRunId",
+		"base_screenshots":            "BaseScreenshots",
+		"code":                        "Code",
+		"duration_in_seconds":         "DurationInSeconds",
+		"environment_variables":       "EnvironmentVariables",
+		"execution_role_arn":          "ExecutionRoleArn",
+		"expression":                  "Expression",
+		"failure_retention_period":    "FailureRetentionPeriod",
+		"handler":                     "Handler",
+		"id":                          "Id",
+		"ignore_coordinates":          "IgnoreCoordinates",
+		"key":                         "Key",
+		"memory_in_mb":                "MemoryInMB",
+		"name":                        "Name",
+		"run_config":                  "RunConfig",
+		"runtime_version":             "RuntimeVersion",
+		"s3_bucket":                   "S3Bucket",
+		"s3_key":                      "S3Key",
+		"s3_object_version":           "S3ObjectVersion",
+		"schedule":                    "Schedule",
+		"screenshot_name":             "ScreenshotName",
+		"script":                      "Script",
+		"security_group_ids":          "SecurityGroupIds",
+		"start_canary_after_creation": "StartCanaryAfterCreation",
+		"state":                       "State",
+		"subnet_ids":                  "SubnetIds",
+		"success_retention_period":    "SuccessRetentionPeriod",
+		"tags":                        "Tags",
+		"timeout_in_seconds":          "TimeoutInSeconds",
+		"value":                       "Value",
+		"visual_reference":            "VisualReference",
+		"vpc_config":                  "VPCConfig",
+		"vpc_id":                      "VpcId",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Code/S3Bucket",
@@ -489,7 +520,7 @@ func canaryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_synthetics_canary", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_synthetics_canary", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

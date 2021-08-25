@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ivs_recording_configuration", recordingConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_ivs_recording_configuration", recordingConfigurationResourceType)
 }
 
-// recordingConfigurationResourceType returns the Terraform aws_ivs_recording_configuration resource type.
+// recordingConfigurationResourceType returns the Terraform awscc_ivs_recording_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IVS::RecordingConfiguration resource type.
 func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -67,13 +66,13 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "object"
 			// }
 			Description: "Recording Destination Configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"s3": {
 						// Property: S3
 						Description: "Recording S3 Destination Configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"bucket_name": {
 									// Property: BucketName
 									Type:     types.StringType,
@@ -154,7 +153,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -174,14 +173,13 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::IVS::RecordingConfiguration",
 		Version:     1,
 		Attributes:  attributes,
@@ -189,7 +187,20 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("aws_ivs_recording_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("awscc_ivs_recording_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"bucket_name":               "BucketName",
+		"destination_configuration": "DestinationConfiguration",
+		"key":                       "Key",
+		"name":                      "Name",
+		"s3":                        "S3",
+		"state":                     "State",
+		"tags":                      "Tags",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -201,7 +212,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ivs_recording_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ivs_recording_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

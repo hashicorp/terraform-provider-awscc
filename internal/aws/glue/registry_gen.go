@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_registry", registryResourceType)
+	registry.AddResourceTypeFactory("awscc_glue_registry", registryResourceType)
 }
 
-// registryResourceType returns the Terraform aws_glue_registry resource type.
+// registryResourceType returns the Terraform awscc_glue_registry resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::Registry resource type.
 func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -93,8 +92,8 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of tags to tag the Registry",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A key to identify the tag.",
@@ -108,7 +107,7 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 10,
 				},
@@ -120,14 +119,13 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource creates a Registry for authoring schemas as part of Glue Schema Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -135,7 +133,17 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Glue::Registry").WithTerraformTypeName("aws_glue_registry").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Glue::Registry").WithTerraformTypeName("awscc_glue_registry")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"description": "Description",
+		"key":         "Key",
+		"name":        "Name",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -150,7 +158,7 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_glue_registry", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_registry", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

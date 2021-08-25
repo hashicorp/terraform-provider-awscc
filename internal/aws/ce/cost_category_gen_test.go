@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCECostCategory_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CE::CostCategory", "aws_ce_cost_category", "test")
+	td := acctest.NewTestData(t, "AWS::CE::CostCategory", "awscc_ce_cost_category", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

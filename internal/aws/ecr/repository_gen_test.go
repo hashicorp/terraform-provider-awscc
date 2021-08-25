@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECRRepository_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECR::Repository", "aws_ecr_repository", "test")
+	td := acctest.NewTestData(t, "AWS::ECR::Repository", "awscc_ecr_repository", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSECRRepository_basic(t *testing.T) {
 }
 
 func TestAccAWSECRRepository_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECR::Repository", "aws_ecr_repository", "test")
+	td := acctest.NewTestData(t, "AWS::ECR::Repository", "awscc_ecr_repository", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

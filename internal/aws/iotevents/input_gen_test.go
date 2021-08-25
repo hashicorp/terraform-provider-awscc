@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTEventsInput_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoTEvents::Input", "aws_iotevents_input", "test")
+	td := acctest.NewTestData(t, "AWS::IoTEvents::Input", "awscc_iotevents_input", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

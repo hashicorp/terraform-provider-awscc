@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_module_version", moduleVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_module_version", moduleVersionResourceType)
 }
 
-// moduleVersionResourceType returns the Terraform aws_cloudformation_module_version resource type.
+// moduleVersionResourceType returns the Terraform awscc_cloudformation_module_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ModuleVersion resource type.
 func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -148,14 +147,13 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A module that has been registered in the CloudFormation registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -163,7 +161,21 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleVersion").WithTerraformTypeName("aws_cloudformation_module_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleVersion").WithTerraformTypeName("awscc_cloudformation_module_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"description":        "Description",
+		"documentation_url":  "DocumentationUrl",
+		"is_default_version": "IsDefaultVersion",
+		"module_name":        "ModuleName",
+		"module_package":     "ModulePackage",
+		"schema":             "Schema",
+		"time_created":       "TimeCreated",
+		"version_id":         "VersionId",
+		"visibility":         "Visibility",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -178,7 +190,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_module_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_module_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

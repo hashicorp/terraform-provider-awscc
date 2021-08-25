@@ -6,24 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_task", taskResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_task", taskResourceType)
 }
 
-// taskResourceType returns the Terraform aws_datasync_task resource type.
+// taskResourceType returns the Terraform awscc_datasync_task resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::Task resource type.
 func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
-		"cloud_watch_log_group_arn": {
+	attributes := map[string]tfsdk.Attribute{
+		"cloudwatch_log_group_arn": {
 			// Property: CloudWatchLogGroupArn
 			// CloudFormation resource type schema:
 			// {
@@ -64,9 +63,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"error_code": {
 			// Property: ErrorCode
@@ -121,9 +119,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"filter_type": {
 						// Property: FilterType
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
@@ -137,7 +134,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 1,
 				},
@@ -285,8 +282,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"atime": {
 						// Property: Atime
 						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
@@ -395,8 +392,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Specifies the schedule you want your task to use for repeated executions.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"schedule_expression": {
 						// Property: ScheduleExpression
 						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
@@ -435,9 +432,8 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"status": {
 			// Property: Status
@@ -494,7 +490,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -529,14 +525,13 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::Task.",
 		Version:     1,
 		Attributes:  attributes,
@@ -544,7 +539,43 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Task").WithTerraformTypeName("aws_datasync_task").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Task").WithTerraformTypeName("awscc_datasync_task")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"atime":                              "Atime",
+		"bytes_per_second":                   "BytesPerSecond",
+		"cloudwatch_log_group_arn":           "CloudWatchLogGroupArn",
+		"destination_location_arn":           "DestinationLocationArn",
+		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
+		"error_code":                         "ErrorCode",
+		"error_detail":                       "ErrorDetail",
+		"excludes":                           "Excludes",
+		"filter_type":                        "FilterType",
+		"gid":                                "Gid",
+		"key":                                "Key",
+		"log_level":                          "LogLevel",
+		"mtime":                              "Mtime",
+		"name":                               "Name",
+		"options":                            "Options",
+		"overwrite_mode":                     "OverwriteMode",
+		"posix_permissions":                  "PosixPermissions",
+		"preserve_deleted_files":             "PreserveDeletedFiles",
+		"preserve_devices":                   "PreserveDevices",
+		"schedule":                           "Schedule",
+		"schedule_expression":                "ScheduleExpression",
+		"security_descriptor_copy_flags":     "SecurityDescriptorCopyFlags",
+		"source_location_arn":                "SourceLocationArn",
+		"source_network_interface_arns":      "SourceNetworkInterfaceArns",
+		"status":                             "Status",
+		"tags":                               "Tags",
+		"task_arn":                           "TaskArn",
+		"task_queueing":                      "TaskQueueing",
+		"transfer_mode":                      "TransferMode",
+		"uid":                                "Uid",
+		"value":                              "Value",
+		"verify_mode":                        "VerifyMode",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -556,7 +587,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_task", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_task", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

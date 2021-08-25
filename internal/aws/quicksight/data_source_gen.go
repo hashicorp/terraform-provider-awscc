@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_data_source", dataSourceResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_data_source", dataSourceResourceType)
 }
 
-// dataSourceResourceType returns the Terraform aws_quicksight_data_source resource type.
+// dataSourceResourceType returns the Terraform awscc_quicksight_data_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::DataSource resource type.
 func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alternate_data_source_parameters": {
 			// Property: AlternateDataSourceParameters
 			// CloudFormation resource type schema:
@@ -437,13 +436,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the <code>DataSourceParameters</code> structure that's in the request\n            with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the <code>AlternateDataSourceParameters</code> list is null,\n            the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>\n            are automatically allowed.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"amazon_elasticsearch_parameters": {
 						// Property: AmazonElasticsearchParameters
 						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
@@ -457,8 +456,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"athena_parameters": {
 						// Property: AthenaParameters
 						Description: "<p>Amazon Athena parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"work_group": {
 									// Property: WorkGroup
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -472,8 +471,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_parameters": {
 						// Property: AuroraParameters
 						Description: "<p>Amazon Aurora parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -499,8 +498,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
 						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -526,8 +525,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
 						Description: "<p>MariaDB parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -553,8 +552,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"my_sql_parameters": {
 						// Property: MySqlParameters
 						Description: "<p>MySQL parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -579,8 +578,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"oracle_parameters": {
 						// Property: OracleParameters
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Type:     types.StringType,
@@ -603,8 +602,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
 						Description: "<p>PostgreSQL parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -630,8 +629,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"presto_parameters": {
 						// Property: PrestoParameters
 						Description: "<p>Presto parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
 									Description: "<p>Catalog.</p>",
@@ -657,8 +656,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rds_parameters": {
 						// Property: RdsParameters
 						Description: "<p>Amazon RDS parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -678,8 +677,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redshift_parameters": {
 						// Property: RedshiftParameters
 						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cluster_id": {
 									// Property: ClusterId
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
@@ -711,13 +710,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_parameters": {
 						// Property: S3Parameters
 						Description: "<p>S3 parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"manifest_file_location": {
 									// Property: ManifestFileLocation
 									Description: "<p>Amazon S3 manifest file location.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Description: "<p>Amazon S3 bucket.</p>",
@@ -741,8 +740,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
 						Description: "<p>Snowflake parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -768,8 +767,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"spark_parameters": {
 						// Property: SparkParameters
 						Description: "<p>Spark parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
@@ -789,8 +788,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
 						Description: "<p>SQL Server parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -816,8 +815,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"teradata_parameters": {
 						// Property: TeradataParameters
 						Description: "<p>Teradata parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -841,7 +840,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 50,
 				},
@@ -1333,8 +1332,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"copy_source_arn": {
 						// Property: CopySourceArn
 						Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
@@ -1344,18 +1343,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"credential_pair": {
 						// Property: CredentialPair
 						Description: "<p>The combination of user name and password that are used as credentials.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"alternate_data_source_parameters": {
 									// Property: AlternateDataSourceParameters
 									Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"amazon_elasticsearch_parameters": {
 												// Property: AmazonElasticsearchParameters
 												Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"domain": {
 															// Property: Domain
 															Description: "<p>The Amazon Elasticsearch Service domain.</p>",
@@ -1369,8 +1368,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"athena_parameters": {
 												// Property: AthenaParameters
 												Description: "<p>Amazon Athena parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"work_group": {
 															// Property: WorkGroup
 															Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -1384,8 +1383,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"aurora_parameters": {
 												// Property: AuroraParameters
 												Description: "<p>Amazon Aurora parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1411,8 +1410,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"aurora_postgre_sql_parameters": {
 												// Property: AuroraPostgreSqlParameters
 												Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1438,8 +1437,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"maria_db_parameters": {
 												// Property: MariaDbParameters
 												Description: "<p>MariaDB parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1465,8 +1464,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"my_sql_parameters": {
 												// Property: MySqlParameters
 												Description: "<p>MySQL parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1491,8 +1490,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"oracle_parameters": {
 												// Property: OracleParameters
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Type:     types.StringType,
@@ -1515,8 +1514,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"postgre_sql_parameters": {
 												// Property: PostgreSqlParameters
 												Description: "<p>PostgreSQL parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1542,8 +1541,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"presto_parameters": {
 												// Property: PrestoParameters
 												Description: "<p>Presto parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"catalog": {
 															// Property: Catalog
 															Description: "<p>Catalog.</p>",
@@ -1569,8 +1568,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"rds_parameters": {
 												// Property: RdsParameters
 												Description: "<p>Amazon RDS parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1590,8 +1589,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"redshift_parameters": {
 												// Property: RedshiftParameters
 												Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"cluster_id": {
 															// Property: ClusterId
 															Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
@@ -1623,13 +1622,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"s3_parameters": {
 												// Property: S3Parameters
 												Description: "<p>S3 parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"manifest_file_location": {
 															// Property: ManifestFileLocation
 															Description: "<p>Amazon S3 manifest file location.</p>",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"bucket": {
 																		// Property: Bucket
 																		Description: "<p>Amazon S3 bucket.</p>",
@@ -1653,8 +1652,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"snowflake_parameters": {
 												// Property: SnowflakeParameters
 												Description: "<p>Snowflake parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1680,8 +1679,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"spark_parameters": {
 												// Property: SparkParameters
 												Description: "<p>Spark parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"host": {
 															// Property: Host
 															Description: "<p>Host.</p>",
@@ -1701,8 +1700,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"sql_server_parameters": {
 												// Property: SqlServerParameters
 												Description: "<p>SQL Server parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1728,8 +1727,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"teradata_parameters": {
 												// Property: TeradataParameters
 												Description: "<p>Teradata parameters.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"database": {
 															// Property: Database
 															Description: "<p>Database.</p>",
@@ -1753,7 +1752,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 											MaxItems: 50,
 										},
@@ -2201,13 +2200,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"amazon_elasticsearch_parameters": {
 						// Property: AmazonElasticsearchParameters
 						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
@@ -2221,8 +2220,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"athena_parameters": {
 						// Property: AthenaParameters
 						Description: "<p>Amazon Athena parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"work_group": {
 									// Property: WorkGroup
 									Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -2236,8 +2235,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_parameters": {
 						// Property: AuroraParameters
 						Description: "<p>Amazon Aurora parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2263,8 +2262,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"aurora_postgre_sql_parameters": {
 						// Property: AuroraPostgreSqlParameters
 						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2290,8 +2289,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"maria_db_parameters": {
 						// Property: MariaDbParameters
 						Description: "<p>MariaDB parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2317,8 +2316,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"my_sql_parameters": {
 						// Property: MySqlParameters
 						Description: "<p>MySQL parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2343,8 +2342,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"oracle_parameters": {
 						// Property: OracleParameters
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Type:     types.StringType,
@@ -2367,8 +2366,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"postgre_sql_parameters": {
 						// Property: PostgreSqlParameters
 						Description: "<p>PostgreSQL parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2394,8 +2393,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"presto_parameters": {
 						// Property: PrestoParameters
 						Description: "<p>Presto parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
 									Description: "<p>Catalog.</p>",
@@ -2421,8 +2420,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rds_parameters": {
 						// Property: RdsParameters
 						Description: "<p>Amazon RDS parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2442,8 +2441,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redshift_parameters": {
 						// Property: RedshiftParameters
 						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cluster_id": {
 									// Property: ClusterId
 									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
@@ -2475,13 +2474,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3_parameters": {
 						// Property: S3Parameters
 						Description: "<p>S3 parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"manifest_file_location": {
 									// Property: ManifestFileLocation
 									Description: "<p>Amazon S3 manifest file location.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
 												Description: "<p>Amazon S3 bucket.</p>",
@@ -2505,8 +2504,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"snowflake_parameters": {
 						// Property: SnowflakeParameters
 						Description: "<p>Snowflake parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2532,8 +2531,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"spark_parameters": {
 						// Property: SparkParameters
 						Description: "<p>Spark parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"host": {
 									// Property: Host
 									Description: "<p>Host.</p>",
@@ -2553,8 +2552,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sql_server_parameters": {
 						// Property: SqlServerParameters
 						Description: "<p>SQL Server parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2580,8 +2579,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"teradata_parameters": {
 						// Property: TeradataParameters
 						Description: "<p>Teradata parameters.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"database": {
 									// Property: Database
 									Description: "<p>Database.</p>",
@@ -2635,8 +2634,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Error information for the data source creation or update.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"message": {
 						// Property: Message
 						Description: "<p>Error message.</p>",
@@ -2712,8 +2711,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A list of resource permissions on the data source.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -2727,7 +2726,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -2748,8 +2747,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"disable_ssl": {
 						// Property: DisableSsl
 						Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
@@ -2810,8 +2809,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -2825,7 +2824,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -2885,8 +2884,8 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>VPC connection properties.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"vpc_connection_arn": {
 						// Property: VpcConnectionArn
 						Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
@@ -2899,14 +2898,13 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::DataSource Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
@@ -2914,7 +2912,65 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("aws_quicksight_data_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("awscc_quicksight_data_source")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                          "Actions",
+		"alternate_data_source_parameters": "AlternateDataSourceParameters",
+		"amazon_elasticsearch_parameters":  "AmazonElasticsearchParameters",
+		"arn":                              "Arn",
+		"athena_parameters":                "AthenaParameters",
+		"aurora_parameters":                "AuroraParameters",
+		"aurora_postgre_sql_parameters":    "AuroraPostgreSqlParameters",
+		"aws_account_id":                   "AwsAccountId",
+		"bucket":                           "Bucket",
+		"catalog":                          "Catalog",
+		"cluster_id":                       "ClusterId",
+		"copy_source_arn":                  "CopySourceArn",
+		"created_time":                     "CreatedTime",
+		"credential_pair":                  "CredentialPair",
+		"credentials":                      "Credentials",
+		"data_source_id":                   "DataSourceId",
+		"data_source_parameters":           "DataSourceParameters",
+		"database":                         "Database",
+		"disable_ssl":                      "DisableSsl",
+		"domain":                           "Domain",
+		"error_info":                       "ErrorInfo",
+		"host":                             "Host",
+		"instance_id":                      "InstanceId",
+		"key":                              "Key",
+		"last_updated_time":                "LastUpdatedTime",
+		"manifest_file_location":           "ManifestFileLocation",
+		"maria_db_parameters":              "MariaDbParameters",
+		"message":                          "Message",
+		"my_sql_parameters":                "MySqlParameters",
+		"name":                             "Name",
+		"oracle_parameters":                "OracleParameters",
+		"password":                         "Password",
+		"permissions":                      "Permissions",
+		"port":                             "Port",
+		"postgre_sql_parameters":           "PostgreSqlParameters",
+		"presto_parameters":                "PrestoParameters",
+		"principal":                        "Principal",
+		"rds_parameters":                   "RdsParameters",
+		"redshift_parameters":              "RedshiftParameters",
+		"s3_parameters":                    "S3Parameters",
+		"snowflake_parameters":             "SnowflakeParameters",
+		"spark_parameters":                 "SparkParameters",
+		"sql_server_parameters":            "SqlServerParameters",
+		"ssl_properties":                   "SslProperties",
+		"status":                           "Status",
+		"tags":                             "Tags",
+		"teradata_parameters":              "TeradataParameters",
+		"type":                             "Type",
+		"username":                         "Username",
+		"value":                            "Value",
+		"vpc_connection_arn":               "VpcConnectionArn",
+		"vpc_connection_properties":        "VpcConnectionProperties",
+		"warehouse":                        "Warehouse",
+		"work_group":                       "WorkGroup",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Credentials",
@@ -2929,7 +2985,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_data_source", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_data_source", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

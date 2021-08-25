@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ses_contact_list", contactListResourceType)
+	registry.AddResourceTypeFactory("awscc_ses_contact_list", contactListResourceType)
 }
 
-// contactListResourceType returns the Terraform aws_ses_contact_list resource type.
+// contactListResourceType returns the Terraform awscc_ses_contact_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SES::ContactList resource type.
 func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"contact_list_name": {
 			// Property: ContactListName
 			// CloudFormation resource type schema:
@@ -78,8 +77,8 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags (keys and values) associated with the contact list.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -91,7 +90,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -139,8 +138,8 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The topics associated with the contact list.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"default_subscription_status": {
 						// Property: DefaultSubscriptionStatus
 						Type:     types.StringType,
@@ -165,7 +164,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 20,
 				},
@@ -174,14 +173,13 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::SES::ContactList.",
 		Version:     1,
 		Attributes:  attributes,
@@ -189,7 +187,20 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SES::ContactList").WithTerraformTypeName("aws_ses_contact_list").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SES::ContactList").WithTerraformTypeName("awscc_ses_contact_list")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"contact_list_name":           "ContactListName",
+		"default_subscription_status": "DefaultSubscriptionStatus",
+		"description":                 "Description",
+		"display_name":                "DisplayName",
+		"key":                         "Key",
+		"tags":                        "Tags",
+		"topic_name":                  "TopicName",
+		"topics":                      "Topics",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -201,7 +212,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ses_contact_list", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ses_contact_list", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

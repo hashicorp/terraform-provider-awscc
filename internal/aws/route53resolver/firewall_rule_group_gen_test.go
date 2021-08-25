@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRoute53ResolverFirewallRuleGroup_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53Resolver::FirewallRuleGroup", "aws_route53resolver_firewall_rule_group", "test")
+	td := acctest.NewTestData(t, "AWS::Route53Resolver::FirewallRuleGroup", "awscc_route53resolver_firewall_rule_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSRoute53ResolverFirewallRuleGroup_basic(t *testing.T) {
 }
 
 func TestAccAWSRoute53ResolverFirewallRuleGroup_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53Resolver::FirewallRuleGroup", "aws_route53resolver_firewall_rule_group", "test")
+	td := acctest.NewTestData(t, "AWS::Route53Resolver::FirewallRuleGroup", "awscc_route53resolver_firewall_rule_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

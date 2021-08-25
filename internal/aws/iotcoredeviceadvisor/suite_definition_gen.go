@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotcoredeviceadvisor_suite_definition", suiteDefinitionResourceType)
+	registry.AddResourceTypeFactory("awscc_iotcoredeviceadvisor_suite_definition", suiteDefinitionResourceType)
 }
 
-// suiteDefinitionResourceType returns the Terraform aws_iotcoredeviceadvisor_suite_definition resource type.
+// suiteDefinitionResourceType returns the Terraform awscc_iotcoredeviceadvisor_suite_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource type.
 func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"suite_definition_arn": {
 			// Property: SuiteDefinitionArn
 			// CloudFormation resource type schema:
@@ -93,8 +92,8 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"device_permission_role_arn": {
 						// Property: DevicePermissionRoleArn
 						Description: "The device permission role arn of the test suite.",
@@ -104,8 +103,8 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"devices": {
 						// Property: Devices
 						Description: "The devices being tested in the test suite",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"certificate_arn": {
 									// Property: CertificateArn
 									Type:     types.StringType,
@@ -117,7 +116,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 2,
 							},
@@ -206,7 +205,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -226,14 +225,13 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -241,7 +239,25 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTCoreDeviceAdvisor::SuiteDefinition").WithTerraformTypeName("aws_iotcoredeviceadvisor_suite_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTCoreDeviceAdvisor::SuiteDefinition").WithTerraformTypeName("awscc_iotcoredeviceadvisor_suite_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":                "CertificateArn",
+		"device_permission_role_arn":     "DevicePermissionRoleArn",
+		"devices":                        "Devices",
+		"intended_for_qualification":     "IntendedForQualification",
+		"key":                            "Key",
+		"root_group":                     "RootGroup",
+		"suite_definition_arn":           "SuiteDefinitionArn",
+		"suite_definition_configuration": "SuiteDefinitionConfiguration",
+		"suite_definition_id":            "SuiteDefinitionId",
+		"suite_definition_name":          "SuiteDefinitionName",
+		"suite_definition_version":       "SuiteDefinitionVersion",
+		"tags":                           "Tags",
+		"thing_arn":                      "ThingArn",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -253,7 +269,7 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotcoredeviceadvisor_suite_definition", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotcoredeviceadvisor_suite_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_flow_log", flowLogResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_flow_log", flowLogResourceType)
 }
 
-// flowLogResourceType returns the Terraform aws_ec2_flow_log resource type.
+// flowLogResourceType returns the Terraform awscc_ec2_flow_log resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::FlowLog resource type.
 func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"deliver_logs_permission_arn": {
 			// Property: DeliverLogsPermissionArn
 			// CloudFormation resource type schema:
@@ -169,8 +168,8 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "The tags to apply to the flow logs.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -182,7 +181,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -205,14 +204,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Specifies a VPC flow log, which enables you to capture IP traffic for a specific network interface, subnet, or VPC.",
 		Version:     1,
 		Attributes:  attributes,
@@ -220,7 +212,24 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("aws_ec2_flow_log").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
+		"id":                          "Id",
+		"key":                         "Key",
+		"log_destination":             "LogDestination",
+		"log_destination_type":        "LogDestinationType",
+		"log_format":                  "LogFormat",
+		"log_group_name":              "LogGroupName",
+		"max_aggregation_interval":    "MaxAggregationInterval",
+		"resource_id":                 "ResourceId",
+		"resource_type":               "ResourceType",
+		"tags":                        "Tags",
+		"traffic_type":                "TrafficType",
+		"value":                       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -232,7 +241,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_flow_log", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_flow_log", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

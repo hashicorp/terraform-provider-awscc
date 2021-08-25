@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_eks_fargate_profile", fargateProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_eks_fargate_profile", fargateProfileResourceType)
 }
 
-// fargateProfileResourceType returns the Terraform aws_eks_fargate_profile resource type.
+// fargateProfileResourceType returns the Terraform awscc_eks_fargate_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EKS::FargateProfile resource type.
 func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -117,12 +118,12 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"labels": {
 						// Property: Labels
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Description: "The key name of the label.",
@@ -136,7 +137,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -146,7 +147,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -199,9 +200,8 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -215,20 +215,20 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Schema for AWS::EKS::FargateProfile",
 		Version:     1,
 		Attributes:  attributes,
@@ -236,7 +236,22 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("aws_eks_fargate_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"cluster_name":           "ClusterName",
+		"fargate_profile_name":   "FargateProfileName",
+		"key":                    "Key",
+		"labels":                 "Labels",
+		"namespace":              "Namespace",
+		"pod_execution_role_arn": "PodExecutionRoleArn",
+		"selectors":              "Selectors",
+		"subnets":                "Subnets",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -248,7 +263,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_eks_fargate_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_eks_fargate_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

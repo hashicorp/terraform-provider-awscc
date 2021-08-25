@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSImageBuilderImagePipeline_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ImageBuilder::ImagePipeline", "aws_imagebuilder_image_pipeline", "test")
+	td := acctest.NewTestData(t, "AWS::ImageBuilder::ImagePipeline", "awscc_imagebuilder_image_pipeline", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSImageBuilderImagePipeline_basic(t *testing.T) {
 }
 
 func TestAccAWSImageBuilderImagePipeline_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ImageBuilder::ImagePipeline", "aws_imagebuilder_image_pipeline", "test")
+	td := acctest.NewTestData(t, "AWS::ImageBuilder::ImagePipeline", "awscc_imagebuilder_image_pipeline", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

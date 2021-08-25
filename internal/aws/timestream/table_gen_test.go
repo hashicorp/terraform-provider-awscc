@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSTimestreamTable_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Timestream::Table", "aws_timestream_table", "test")
+	td := acctest.NewTestData(t, "AWS::Timestream::Table", "awscc_timestream_table", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

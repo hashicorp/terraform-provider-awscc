@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_site", siteResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_site", siteResourceType)
 }
 
-// siteResourceType returns the Terraform aws_networkmanager_site resource type.
+// siteResourceType returns the Terraform awscc_networkmanager_site resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Site resource type.
 func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -68,8 +67,8 @@ func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The location of the site",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"address": {
 						// Property: Address
 						Description: "The physical address.",
@@ -135,8 +134,8 @@ func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags for the site.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -148,20 +147,19 @@ func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::Site type describes a site.",
 		Version:     1,
 		Attributes:  attributes,
@@ -169,7 +167,22 @@ func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Site").WithTerraformTypeName("aws_networkmanager_site").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Site").WithTerraformTypeName("awscc_networkmanager_site")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":           "Address",
+		"description":       "Description",
+		"global_network_id": "GlobalNetworkId",
+		"key":               "Key",
+		"latitude":          "Latitude",
+		"location":          "Location",
+		"longitude":         "Longitude",
+		"site_arn":          "SiteArn",
+		"site_id":           "SiteId",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -181,7 +194,7 @@ func siteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_site", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_site", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

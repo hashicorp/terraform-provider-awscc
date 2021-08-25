@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_app", appResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_app", appResourceType)
 }
 
-// appResourceType returns the Terraform aws_sagemaker_app resource type.
+// appResourceType returns the Terraform awscc_sagemaker_app resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::App resource type.
 func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"app_arn": {
 			// Property: AppArn
 			// CloudFormation resource type schema:
@@ -142,8 +141,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"instance_type": {
 						// Property: InstanceType
 						Description: "The instance type that the image version runs on.",
@@ -197,8 +196,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "A list of tags to apply to the app.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -210,7 +209,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 50,
 				},
@@ -237,14 +236,13 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::App",
 		Version:     1,
 		Attributes:  attributes,
@@ -252,7 +250,23 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("aws_sagemaker_app").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("awscc_sagemaker_app")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_arn":                      "AppArn",
+		"app_name":                     "AppName",
+		"app_type":                     "AppType",
+		"domain_id":                    "DomainId",
+		"instance_type":                "InstanceType",
+		"key":                          "Key",
+		"resource_spec":                "ResourceSpec",
+		"sage_maker_image_arn":         "SageMakerImageArn",
+		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
+		"tags":                         "Tags",
+		"user_profile_name":            "UserProfileName",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -267,7 +281,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_app", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_app", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

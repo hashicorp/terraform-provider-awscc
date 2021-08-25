@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_gamelift_alias", aliasResourceType)
+	registry.AddResourceTypeFactory("awscc_gamelift_alias", aliasResourceType)
 }
 
-// aliasResourceType returns the Terraform aws_gamelift_alias resource type.
+// aliasResourceType returns the Terraform awscc_gamelift_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::Alias resource type.
 func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alias_id": {
 			// Property: AliasId
 			// CloudFormation resource type schema:
@@ -89,8 +88,8 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"fleet_id": {
 						// Property: FleetId
 						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
@@ -115,14 +114,13 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameLift) fleet destination.",
 		Version:     1,
 		Attributes:  attributes,
@@ -130,7 +128,18 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Alias").WithTerraformTypeName("aws_gamelift_alias").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Alias").WithTerraformTypeName("awscc_gamelift_alias")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias_id":         "AliasId",
+		"description":      "Description",
+		"fleet_id":         "FleetId",
+		"message":          "Message",
+		"name":             "Name",
+		"routing_strategy": "RoutingStrategy",
+		"type":             "Type",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -142,7 +151,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_gamelift_alias", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_gamelift_alias", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

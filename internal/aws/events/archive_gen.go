@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_events_archive", archiveResourceType)
+	registry.AddResourceTypeFactory("awscc_events_archive", archiveResourceType)
 }
 
-// archiveResourceType returns the Terraform aws_events_archive resource type.
+// archiveResourceType returns the Terraform awscc_events_archive resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Events::Archive resource type.
 func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"archive_name": {
 			// Property: ArchiveName
 			// CloudFormation resource type schema:
@@ -80,14 +79,13 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Events::Archive",
 		Version:     1,
 		Attributes:  attributes,
@@ -95,7 +93,17 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("aws_events_archive").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Events::Archive").WithTerraformTypeName("awscc_events_archive")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"archive_name":   "ArchiveName",
+		"arn":            "Arn",
+		"description":    "Description",
+		"event_pattern":  "EventPattern",
+		"retention_days": "RetentionDays",
+		"source_arn":     "SourceArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -107,7 +115,7 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_events_archive", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_events_archive", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

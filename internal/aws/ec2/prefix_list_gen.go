@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_prefix_list", prefixListResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_prefix_list", prefixListResourceType)
 }
 
-// prefixListResourceType returns the Terraform aws_ec2_prefix_list resource type.
+// prefixListResourceType returns the Terraform awscc_ec2_prefix_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::PrefixList resource type.
 func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"address_family": {
 			// Property: AddressFamily
 			// CloudFormation resource type schema:
@@ -75,8 +74,8 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Entries of Prefix List.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"cidr": {
 						// Property: Cidr
 						Type:     types.StringType,
@@ -88,7 +87,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -164,8 +163,8 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Tags for Prefix List",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -177,7 +176,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -194,14 +193,13 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema of AWS::EC2::PrefixList Type",
 		Version:     1,
 		Attributes:  attributes,
@@ -209,7 +207,24 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::PrefixList").WithTerraformTypeName("aws_ec2_prefix_list").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::PrefixList").WithTerraformTypeName("awscc_ec2_prefix_list")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address_family":   "AddressFamily",
+		"arn":              "Arn",
+		"cidr":             "Cidr",
+		"description":      "Description",
+		"entries":          "Entries",
+		"key":              "Key",
+		"max_entries":      "MaxEntries",
+		"owner_id":         "OwnerId",
+		"prefix_list_id":   "PrefixListId",
+		"prefix_list_name": "PrefixListName",
+		"tags":             "Tags",
+		"value":            "Value",
+		"version":          "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -221,7 +236,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_prefix_list", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_prefix_list", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

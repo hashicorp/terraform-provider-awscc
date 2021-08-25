@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_athena_data_catalog", dataCatalogResourceType)
+	registry.AddResourceTypeFactory("awscc_athena_data_catalog", dataCatalogResourceType)
 }
 
-// dataCatalogResourceType returns the Terraform aws_athena_data_catalog resource type.
+// dataCatalogResourceType returns the Terraform awscc_athena_data_catalog resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Athena::DataCatalog resource type.
 func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -92,8 +91,8 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -105,7 +104,7 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -127,14 +126,13 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Athena::DataCatalog",
 		Version:     1,
 		Attributes:  attributes,
@@ -142,7 +140,18 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Athena::DataCatalog").WithTerraformTypeName("aws_athena_data_catalog").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Athena::DataCatalog").WithTerraformTypeName("awscc_athena_data_catalog")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description": "Description",
+		"key":         "Key",
+		"name":        "Name",
+		"parameters":  "Parameters",
+		"tags":        "Tags",
+		"type":        "Type",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -154,7 +163,7 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_athena_data_catalog", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_athena_data_catalog", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

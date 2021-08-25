@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_groundstation_mission_profile", missionProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_groundstation_mission_profile", missionProfileResourceType)
 }
 
-// missionProfileResourceType returns the Terraform aws_groundstation_mission_profile resource type.
+// missionProfileResourceType returns the Terraform awscc_groundstation_mission_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GroundStation::MissionProfile resource type.
 func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -74,8 +73,8 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array"
 			// }
 			Description: "",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"destination": {
 						// Property: Destination
 						Type:     types.StringType,
@@ -87,7 +86,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -154,8 +153,8 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -167,7 +166,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -182,14 +181,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Ground Station Mission Profile resource type for CloudFormation.",
 		Version:     1,
 		Attributes:  attributes,
@@ -197,7 +189,25 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("aws_groundstation_mission_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("awscc_groundstation_mission_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
+		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"dataflow_edges":                     "DataflowEdges",
+		"destination":                        "Destination",
+		"id":                                 "Id",
+		"key":                                "Key",
+		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
+		"name":                "Name",
+		"region":              "Region",
+		"source":              "Source",
+		"tags":                "Tags",
+		"tracking_config_arn": "TrackingConfigArn",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -209,7 +219,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_groundstation_mission_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_groundstation_mission_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

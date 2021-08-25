@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_kms_replica_key", replicaKeyResourceType)
+	registry.AddResourceTypeFactory("awscc_kms_replica_key", replicaKeyResourceType)
 }
 
-// replicaKeyResourceType returns the Terraform aws_kms_replica_key resource type.
+// replicaKeyResourceType returns the Terraform awscc_kms_replica_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::KMS::ReplicaKey resource type.
 func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -136,7 +135,7 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -156,14 +155,13 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::KMS::ReplicaKey resource specifies a multi-region replica customer master key (CMK) in AWS Key Management Service (AWS KMS).",
 		Version:     1,
 		Attributes:  attributes,
@@ -171,7 +169,21 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::KMS::ReplicaKey").WithTerraformTypeName("aws_kms_replica_key").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::KMS::ReplicaKey").WithTerraformTypeName("awscc_kms_replica_key")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"description":            "Description",
+		"enabled":                "Enabled",
+		"key":                    "Key",
+		"key_id":                 "KeyId",
+		"key_policy":             "KeyPolicy",
+		"pending_window_in_days": "PendingWindowInDays",
+		"primary_key_arn":        "PrimaryKeyArn",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PendingWindowInDays",
@@ -186,7 +198,7 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_kms_replica_key", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kms_replica_key", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

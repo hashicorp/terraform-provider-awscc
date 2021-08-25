@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_primary_task_set", primaryTaskSetResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_primary_task_set", primaryTaskSetResourceType)
 }
 
-// primaryTaskSetResourceType returns the Terraform aws_ecs_primary_task_set resource type.
+// primaryTaskSetResourceType returns the Terraform awscc_ecs_primary_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource type.
 func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
@@ -59,14 +58,13 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A pseudo-resource that manages which of your ECS task sets is primary.",
 		Version:     1,
 		Attributes:  attributes,
@@ -74,7 +72,14 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::PrimaryTaskSet").WithTerraformTypeName("aws_ecs_primary_task_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::PrimaryTaskSet").WithTerraformTypeName("awscc_ecs_primary_task_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster":     "Cluster",
+		"service":     "Service",
+		"task_set_id": "TaskSetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -86,7 +91,7 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_primary_task_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_primary_task_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

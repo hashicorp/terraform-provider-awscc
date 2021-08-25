@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3outposts_endpoint", endpointResourceType)
+	registry.AddResourceTypeFactory("awscc_s3outposts_endpoint", endpointResourceType)
 }
 
-// endpointResourceType returns the Terraform aws_s3outposts_endpoint resource type.
+// endpointResourceType returns the Terraform awscc_s3outposts_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3Outposts::Endpoint resource type.
 func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_type": {
 			// Property: AccessType
 			// CloudFormation resource type schema:
@@ -130,18 +131,18 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The network interfaces of the endpoint.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"network_interface_id": {
 						// Property: NetworkInterfaceId
 						Type:     types.StringType,
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Computed: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Computed:   true,
 		},
 		"outpost_id": {
 			// Property: OutpostId
@@ -202,14 +203,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type Definition for AWS::S3Outposts::Endpoint",
 		Version:     1,
 		Attributes:  attributes,
@@ -217,7 +211,23 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("aws_s3outposts_endpoint").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("awscc_s3outposts_endpoint")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_type":               "AccessType",
+		"arn":                       "Arn",
+		"cidr_block":                "CidrBlock",
+		"creation_time":             "CreationTime",
+		"customer_owned_ipv_4_pool": "CustomerOwnedIpv4Pool",
+		"id":                        "Id",
+		"network_interface_id":      "NetworkInterfaceId",
+		"network_interfaces":        "NetworkInterfaces",
+		"outpost_id":                "OutpostId",
+		"security_group_id":         "SecurityGroupId",
+		"status":                    "Status",
+		"subnet_id":                 "SubnetId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -229,7 +239,7 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_s3outposts_endpoint", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3outposts_endpoint", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

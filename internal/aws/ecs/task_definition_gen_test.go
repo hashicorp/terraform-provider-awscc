@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECSTaskDefinition_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "awscc_ecs_task_definition", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSECSTaskDefinition_basic(t *testing.T) {
 }
 
 func TestAccAWSECSTaskDefinition_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "aws_ecs_task_definition", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::TaskDefinition", "awscc_ecs_task_definition", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

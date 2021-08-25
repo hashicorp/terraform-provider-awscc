@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_domain_name", domainNameResourceType)
+	registry.AddResourceTypeFactory("awscc_apigateway_domain_name", domainNameResourceType)
 }
 
-// domainNameResourceType returns the Terraform aws_apigateway_domain_name resource type.
+// domainNameResourceType returns the Terraform awscc_apigateway_domain_name resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::DomainName resource type.
 func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn
 			// CloudFormation resource type schema:
@@ -75,8 +74,8 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"types": {
 						// Property: Types
 						Type:     types.ListType{ElemType: types.StringType},
@@ -101,8 +100,8 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"truststore_uri": {
 						// Property: TruststoreUri
 						Type:     types.StringType,
@@ -180,8 +179,8 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -193,20 +192,19 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::DomainName.",
 		Version:     1,
 		Attributes:  attributes,
@@ -214,7 +212,28 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DomainName").WithTerraformTypeName("aws_apigateway_domain_name").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DomainName").WithTerraformTypeName("awscc_apigateway_domain_name")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":                        "CertificateArn",
+		"distribution_domain_name":               "DistributionDomainName",
+		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
+		"domain_name":                            "DomainName",
+		"endpoint_configuration":                 "EndpointConfiguration",
+		"key":                                    "Key",
+		"mutual_tls_authentication":              "MutualTlsAuthentication",
+		"ownership_verification_certificate_arn": "OwnershipVerificationCertificateArn",
+		"regional_certificate_arn":               "RegionalCertificateArn",
+		"regional_domain_name":                   "RegionalDomainName",
+		"regional_hosted_zone_id":                "RegionalHostedZoneId",
+		"security_policy":                        "SecurityPolicy",
+		"tags":                                   "Tags",
+		"truststore_uri":                         "TruststoreUri",
+		"truststore_version":                     "TruststoreVersion",
+		"types":                                  "Types",
+		"value":                                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -226,7 +245,7 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_apigateway_domain_name", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_domain_name", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

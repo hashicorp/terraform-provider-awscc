@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecr_repository", repositoryResourceType)
+	registry.AddResourceTypeFactory("awscc_ecr_repository", repositoryResourceType)
 }
 
-// repositoryResourceType returns the Terraform aws_ecr_repository resource type.
+// repositoryResourceType returns the Terraform awscc_ecr_repository resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECR::Repository resource type.
 func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -60,8 +59,8 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.\n\nBy default, when no encryption configuration is set or the AES256 encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.\n\nFor more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption_type": {
 						// Property: EncryptionType
 						Description: "The encryption type to use.",
@@ -98,8 +97,8 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"scan_on_push": {
 						// Property: ScanOnPush
 						Description: "The setting that determines whether images are scanned after being pushed to a repository.",
@@ -149,8 +148,8 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The LifecyclePolicy property type specifies a lifecycle policy. For information about lifecycle policy syntax, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"lifecycle_policy_text": {
 						// Property: LifecyclePolicyText
 						Description: "The JSON repository policy text to apply to the repository.",
@@ -238,7 +237,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -260,14 +259,13 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::ECR::Repository resource specifies an Amazon Elastic Container Registry (Amazon ECR) repository, where users can push and pull Docker images. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html",
 		Version:     1,
 		Attributes:  attributes,
@@ -275,7 +273,27 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECR::Repository").WithTerraformTypeName("aws_ecr_repository").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECR::Repository").WithTerraformTypeName("awscc_ecr_repository")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                          "Arn",
+		"encryption_configuration":     "EncryptionConfiguration",
+		"encryption_type":              "EncryptionType",
+		"image_scanning_configuration": "ImageScanningConfiguration",
+		"image_tag_mutability":         "ImageTagMutability",
+		"key":                          "Key",
+		"kms_key":                      "KmsKey",
+		"lifecycle_policy":             "LifecyclePolicy",
+		"lifecycle_policy_text":        "LifecyclePolicyText",
+		"registry_id":                  "RegistryId",
+		"repository_name":              "RepositoryName",
+		"repository_policy_text":       "RepositoryPolicyText",
+		"repository_uri":               "RepositoryUri",
+		"scan_on_push":                 "ScanOnPush",
+		"tags":                         "Tags",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -287,7 +305,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecr_repository", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecr_repository", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

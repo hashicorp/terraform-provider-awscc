@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_safety_rule", safetyRuleResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoverycontrol_safety_rule", safetyRuleResourceType)
 }
 
-// safetyRuleResourceType returns the Terraform aws_route53recoverycontrol_safety_rule resource type.
+// safetyRuleResourceType returns the Terraform awscc_route53recoverycontrol_safety_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::SafetyRule resource type.
 func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"assertion_rule": {
 			// Property: AssertionRule
 			// CloudFormation resource type schema:
@@ -49,14 +48,13 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "An assertion rule enforces that, when a routing control state is changed, that the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"asserted_controls": {
 						// Property: AssertedControls
 						Description: "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 					},
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
@@ -117,21 +115,19 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"gating_controls": {
 						// Property: GatingControls
 						Description: "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 					},
 					"target_controls": {
 						// Property: TargetControls
 						Description: "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
 					},
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
@@ -187,8 +183,8 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"inverted": {
 						// Property: Inverted
 						Description: "Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.",
@@ -242,14 +238,13 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS Route53 Recovery Control basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -257,7 +252,25 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::SafetyRule").WithTerraformTypeName("aws_route53recoverycontrol_safety_rule").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::SafetyRule").WithTerraformTypeName("awscc_route53recoverycontrol_safety_rule")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"asserted_controls": "AssertedControls",
+		"assertion_rule":    "AssertionRule",
+		"control_panel_arn": "ControlPanelArn",
+		"gating_controls":   "GatingControls",
+		"gating_rule":       "GatingRule",
+		"inverted":          "Inverted",
+		"name":              "Name",
+		"rule_config":       "RuleConfig",
+		"safety_rule_arn":   "SafetyRuleArn",
+		"status":            "Status",
+		"target_controls":   "TargetControls",
+		"threshold":         "Threshold",
+		"type":              "Type",
+		"wait_period_ms":    "WaitPeriodMs",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -269,7 +282,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoverycontrol_safety_rule", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_safety_rule", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_component", componentResourceType)
+	registry.AddResourceTypeFactory("awscc_imagebuilder_component", componentResourceType)
 }
 
-// componentResourceType returns the Terraform aws_imagebuilder_component resource type.
+// componentResourceType returns the Terraform awscc_imagebuilder_component resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::Component resource type.
 func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -207,14 +206,13 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::Component",
 		Version:     1,
 		Attributes:  attributes,
@@ -222,7 +220,24 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Component").WithTerraformTypeName("aws_imagebuilder_component").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Component").WithTerraformTypeName("awscc_imagebuilder_component")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"change_description":    "ChangeDescription",
+		"data":                  "Data",
+		"description":           "Description",
+		"encrypted":             "Encrypted",
+		"kms_key_id":            "KmsKeyId",
+		"name":                  "Name",
+		"platform":              "Platform",
+		"supported_os_versions": "SupportedOsVersions",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"uri":                   "Uri",
+		"version":               "Version",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -239,7 +254,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_imagebuilder_component", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_component", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

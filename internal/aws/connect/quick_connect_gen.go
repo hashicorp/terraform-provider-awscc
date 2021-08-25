@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_connect_quick_connect", quickConnectResourceType)
+	registry.AddResourceTypeFactory("awscc_connect_quick_connect", quickConnectResourceType)
 }
 
-// quickConnectResourceType returns the Terraform aws_connect_quick_connect resource type.
+// quickConnectResourceType returns the Terraform awscc_connect_quick_connect resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Connect::QuickConnect resource type.
 func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -153,13 +152,13 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Configuration settings for the quick connect.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"phone_config": {
 						// Property: PhoneConfig
 						Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"phone_number": {
 									// Property: PhoneNumber
 									Description: "The phone number in E.164 format.",
@@ -173,8 +172,8 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"queue_config": {
 						// Property: QueueConfig
 						Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"contact_flow_arn": {
 									// Property: ContactFlowArn
 									Description: "The identifier of the contact flow.",
@@ -200,8 +199,8 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"user_config": {
 						// Property: UserConfig
 						Description: "The user configuration. This is required only if QuickConnectType is USER.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"contact_flow_arn": {
 									// Property: ContactFlowArn
 									Description: "The identifier of the contact flow.",
@@ -257,7 +256,7 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "One or more tags.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -279,14 +278,13 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Connect::QuickConnect",
 		Version:     1,
 		Attributes:  attributes,
@@ -294,7 +292,27 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("aws_connect_quick_connect").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Connect::QuickConnect").WithTerraformTypeName("awscc_connect_quick_connect")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"contact_flow_arn":     "ContactFlowArn",
+		"description":          "Description",
+		"instance_arn":         "InstanceArn",
+		"key":                  "Key",
+		"name":                 "Name",
+		"phone_config":         "PhoneConfig",
+		"phone_number":         "PhoneNumber",
+		"queue_arn":            "QueueArn",
+		"queue_config":         "QueueConfig",
+		"quick_connect_arn":    "QuickConnectArn",
+		"quick_connect_config": "QuickConnectConfig",
+		"quick_connect_type":   "QuickConnectType",
+		"tags":                 "Tags",
+		"user_arn":             "UserArn",
+		"user_config":          "UserConfig",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -306,7 +324,7 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_connect_quick_connect", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_connect_quick_connect", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

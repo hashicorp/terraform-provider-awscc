@@ -1,1 +1,1 @@
-# CloudAPI Generated Resource Tests
+# Cloud Control API Generated Resource Tests

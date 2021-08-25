@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSDataSyncLocationFSxWindows_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::DataSync::LocationFSxWindows", "aws_datasync_location_f_sx_windows", "test")
+	td := acctest.NewTestData(t, "AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_f_sx_windows", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

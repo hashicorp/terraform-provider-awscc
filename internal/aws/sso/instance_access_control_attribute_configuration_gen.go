@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResourceType)
 }
 
-// instanceAccessControlAttributeConfigurationResourceType returns the Terraform aws_sso_instance_access_control_attribute_configuration resource type.
+// instanceAccessControlAttributeConfigurationResourceType returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
 func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_control_attributes": {
 			// Property: AccessControlAttributes
 			// CloudFormation resource type schema:
@@ -64,8 +63,8 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//   "maxItems": 50,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -73,8 +72,8 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 					},
 					"value": {
 						// Property: Value
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"source": {
 									// Property: Source
 									Type:     types.ListType{ElemType: types.StringType},
@@ -85,7 +84,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -144,12 +143,12 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//   "type": "object"
 			// }
 			Description: "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"access_control_attributes": {
 						// Property: AccessControlAttributes
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -157,8 +156,8 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 								},
 								"value": {
 									// Property: Value
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"source": {
 												// Property: Source
 												Type:     types.ListType{ElemType: types.StringType},
@@ -169,7 +168,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MaxItems: 50,
 							},
 						),
@@ -196,14 +195,13 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for SSO InstanceAccessControlAttributeConfiguration",
 		Version:     1,
 		Attributes:  attributes,
@@ -211,7 +209,17 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("aws_sso_instance_access_control_attribute_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_control_attributes":                       "AccessControlAttributes",
+		"instance_access_control_attribute_configuration": "InstanceAccessControlAttributeConfiguration",
+		"instance_arn": "InstanceArn",
+		"key":          "Key",
+		"source":       "Source",
+		"value":        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -223,7 +231,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sso_instance_access_control_attribute_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sso_instance_access_control_attribute_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECRReplicationConfiguration_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECR::ReplicationConfiguration", "aws_ecr_replication_configuration", "test")
+	td := acctest.NewTestData(t, "AWS::ECR::ReplicationConfiguration", "awscc_ecr_replication_configuration", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

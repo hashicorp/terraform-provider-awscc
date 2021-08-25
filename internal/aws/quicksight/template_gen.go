@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_template", templateResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_template", templateResourceType)
 }
 
-// templateResourceType returns the Terraform aws_quicksight_template resource type.
+// templateResourceType returns the Terraform awscc_quicksight_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Template resource type.
 func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -122,8 +121,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A list of resource permissions to be set on the template. </p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -137,7 +136,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -209,13 +208,13 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>The source entity of the template.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source_analysis": {
 						// Property: SourceAnalysis
 						Description: "<p>The source analysis of the template.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
@@ -225,8 +224,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"data_set_references": {
 									// Property: DataSetReferences
 									Description: "<p>A structure containing information about the dataset references used as placeholders\n            in the template.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_set_arn": {
 												// Property: DataSetArn
 												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
@@ -240,7 +239,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -253,8 +252,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"source_template": {
 						// Property: SourceTemplate
 						Description: "<p>The source template of the template.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
@@ -303,8 +302,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -318,7 +317,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -518,8 +517,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>A version of a template.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"created_time": {
 						// Property: CreatedTime
 						Description: "<p>The time that this template version was created.</p>",
@@ -529,18 +528,18 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"data_set_configurations": {
 						// Property: DataSetConfigurations
 						Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"column_group_schema_list": {
 									// Property: ColumnGroupSchemaList
 									Description: "<p>A structure containing the list of column group schemas.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"column_group_column_schema_list": {
 												// Property: ColumnGroupColumnSchemaList
 												Description: "<p>A structure containing the list of schemas for column group columns.</p>",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"name": {
 															// Property: Name
 															Description: "<p>The name of the column group's column schema.</p>",
@@ -548,7 +547,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 0,
 														MaxItems: 500,
 													},
@@ -562,7 +561,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 0,
 											MaxItems: 500,
 										},
@@ -572,13 +571,13 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"data_set_schema": {
 									// Property: DataSetSchema
 									Description: "<p>Dataset schema.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"column_schema_list": {
 												// Property: ColumnSchemaList
 												Description: "<p>A structure containing the list of column schemas.</p>",
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"data_type": {
 															// Property: DataType
 															Description: "<p>The data type of the column schema.</p>",
@@ -598,7 +597,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 0,
 														MaxItems: 500,
 													},
@@ -616,7 +615,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 30,
 							},
@@ -632,8 +631,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"errors": {
 						// Property: Errors
 						Description: "<p>Errors associated with this template version.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"message": {
 									// Property: Message
 									Description: "<p>Description of the error type.</p>",
@@ -646,7 +645,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -655,8 +654,8 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sheets": {
 						// Property: Sheets
 						Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
@@ -670,7 +669,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 20,
 							},
@@ -721,14 +720,13 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::Template Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
@@ -736,7 +734,49 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Template").WithTerraformTypeName("aws_quicksight_template").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Template").WithTerraformTypeName("awscc_quicksight_template")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                         "Actions",
+		"arn":                             "Arn",
+		"aws_account_id":                  "AwsAccountId",
+		"column_group_column_schema_list": "ColumnGroupColumnSchemaList",
+		"column_group_schema_list":        "ColumnGroupSchemaList",
+		"column_schema_list":              "ColumnSchemaList",
+		"created_time":                    "CreatedTime",
+		"data_set_arn":                    "DataSetArn",
+		"data_set_configurations":         "DataSetConfigurations",
+		"data_set_placeholder":            "DataSetPlaceholder",
+		"data_set_references":             "DataSetReferences",
+		"data_set_schema":                 "DataSetSchema",
+		"data_type":                       "DataType",
+		"description":                     "Description",
+		"errors":                          "Errors",
+		"geographic_role":                 "GeographicRole",
+		"key":                             "Key",
+		"last_updated_time":               "LastUpdatedTime",
+		"message":                         "Message",
+		"name":                            "Name",
+		"permissions":                     "Permissions",
+		"placeholder":                     "Placeholder",
+		"principal":                       "Principal",
+		"sheet_id":                        "SheetId",
+		"sheets":                          "Sheets",
+		"source_analysis":                 "SourceAnalysis",
+		"source_entity":                   "SourceEntity",
+		"source_entity_arn":               "SourceEntityArn",
+		"source_template":                 "SourceTemplate",
+		"status":                          "Status",
+		"tags":                            "Tags",
+		"template_id":                     "TemplateId",
+		"theme_arn":                       "ThemeArn",
+		"type":                            "Type",
+		"value":                           "Value",
+		"version":                         "Version",
+		"version_description":             "VersionDescription",
+		"version_number":                  "VersionNumber",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VersionDescription",
@@ -755,7 +795,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_template", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_template", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

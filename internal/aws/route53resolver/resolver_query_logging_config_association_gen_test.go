@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRoute53ResolverResolverQueryLoggingConfigAssociation_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation", "aws_route53resolver_resolver_query_logging_config_association", "test")
+	td := acctest.NewTestData(t, "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation", "awscc_route53resolver_resolver_query_logging_config_association", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSRoute53ResolverResolverQueryLoggingConfigAssociation_basic(t *tes
 }
 
 func TestAccAWSRoute53ResolverResolverQueryLoggingConfigAssociation_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation", "aws_route53resolver_resolver_query_logging_config_association", "test")
+	td := acctest.NewTestData(t, "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation", "awscc_route53resolver_resolver_query_logging_config_association", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

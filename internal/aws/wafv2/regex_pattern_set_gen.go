@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_wafv2_regex_pattern_set", regexPatternSetResourceType)
+	registry.AddResourceTypeFactory("awscc_wafv2_regex_pattern_set", regexPatternSetResourceType)
 }
 
-// regexPatternSetResourceType returns the Terraform aws_wafv2_regex_pattern_set resource type.
+// regexPatternSetResourceType returns the Terraform awscc_wafv2_regex_pattern_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WAFv2::RegexPatternSet resource type.
 func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -122,8 +121,8 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -135,7 +134,7 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -143,14 +142,7 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Contains a list of Regular expressions based on the provided inputs. RegexPatternSet can be used with other WAF entities with RegexPatternSetReferenceStatement to perform other actions .",
 		Version:     1,
 		Attributes:  attributes,
@@ -158,7 +150,20 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::RegexPatternSet").WithTerraformTypeName("aws_wafv2_regex_pattern_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::RegexPatternSet").WithTerraformTypeName("awscc_wafv2_regex_pattern_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                     "Arn",
+		"description":             "Description",
+		"id":                      "Id",
+		"key":                     "Key",
+		"name":                    "Name",
+		"regular_expression_list": "RegularExpressionList",
+		"scope":                   "Scope",
+		"tags":                    "Tags",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -170,7 +175,7 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_wafv2_regex_pattern_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_regex_pattern_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

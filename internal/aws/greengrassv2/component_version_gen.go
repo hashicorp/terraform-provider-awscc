@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_greengrassv2_component_version", componentVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_greengrassv2_component_version", componentVersionResourceType)
 }
 
-// componentVersionResourceType returns the Terraform aws_greengrassv2_component_version resource type.
+// componentVersionResourceType returns the Terraform awscc_greengrassv2_component_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource type.
 func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -260,13 +259,13 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_dependencies": {
 						// Property: ComponentDependencies
 						// Pattern: ""
-						Attributes: schema.MapNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.MapNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dependency_type": {
 									// Property: DependencyType
 									Type:     types.StringType,
@@ -278,14 +277,14 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Optional: true,
 								},
 							},
-							schema.MapNestedAttributesOptions{},
+							tfsdk.MapNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"component_lambda_parameters": {
 						// Property: ComponentLambdaParameters
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"environment_variables": {
 									// Property: EnvironmentVariables
 									// Pattern: ""
@@ -294,8 +293,8 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"event_sources": {
 									// Property: EventSources
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"topic": {
 												// Property: Topic
 												Type:     types.StringType,
@@ -307,7 +306,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -323,16 +322,16 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"linux_process_params": {
 									// Property: LinuxProcessParams
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"container_params": {
 												// Property: ContainerParams
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"devices": {
 															// Property: Devices
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"add_group_owner": {
 																		// Property: AddGroupOwner
 																		Type:     types.BoolType,
@@ -349,7 +348,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -365,8 +364,8 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 														},
 														"volumes": {
 															// Property: Volumes
-															Attributes: schema.ListNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"add_group_owner": {
 																		// Property: AddGroupOwner
 																		Type:     types.BoolType,
@@ -388,7 +387,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		Optional: true,
 																	},
 																},
-																schema.ListNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
 														},
@@ -446,8 +445,8 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"component_platforms": {
 						// Property: ComponentPlatforms
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attributes": {
 									// Property: Attributes
 									// Pattern: ""
@@ -460,7 +459,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -500,14 +499,13 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource for Greengrass component version.",
 		Version:     1,
 		Attributes:  attributes,
@@ -515,7 +513,49 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("aws_greengrassv2_component_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"add_group_owner":             "AddGroupOwner",
+		"arn":                         "Arn",
+		"attributes":                  "Attributes",
+		"component_dependencies":      "ComponentDependencies",
+		"component_lambda_parameters": "ComponentLambdaParameters",
+		"component_name":              "ComponentName",
+		"component_platforms":         "ComponentPlatforms",
+		"component_version":           "ComponentVersion",
+		"container_params":            "ContainerParams",
+		"dependency_type":             "DependencyType",
+		"destination_path":            "DestinationPath",
+		"devices":                     "Devices",
+		"environment_variables":       "EnvironmentVariables",
+		"event_sources":               "EventSources",
+		"exec_args":                   "ExecArgs",
+		"inline_recipe":               "InlineRecipe",
+		"input_payload_encoding_type": "InputPayloadEncodingType",
+		"isolation_mode":              "IsolationMode",
+		"lambda_arn":                  "LambdaArn",
+		"lambda_function":             "LambdaFunction",
+		"linux_process_params":        "LinuxProcessParams",
+		"max_idle_time_in_seconds":    "MaxIdleTimeInSeconds",
+		"max_instances_count":         "MaxInstancesCount",
+		"max_queue_size":              "MaxQueueSize",
+		"memory_size_in_kb":           "MemorySizeInKB",
+		"mount_ro_sysfs":              "MountROSysfs",
+		"name":                        "Name",
+		"path":                        "Path",
+		"permission":                  "Permission",
+		"pinned":                      "Pinned",
+		"source_path":                 "SourcePath",
+		"status_timeout_in_seconds":   "StatusTimeoutInSeconds",
+		"tags":                        "Tags",
+		"timeout_in_seconds":          "TimeoutInSeconds",
+		"topic":                       "Topic",
+		"type":                        "Type",
+		"version_requirement":         "VersionRequirement",
+		"volumes":                     "Volumes",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/LambdaFunction",
@@ -531,7 +571,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_greengrassv2_component_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_greengrassv2_component_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

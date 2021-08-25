@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_access_policy", accessPolicyResourceType)
+	registry.AddResourceTypeFactory("awscc_iotsitewise_access_policy", accessPolicyResourceType)
 }
 
-// accessPolicyResourceType returns the Terraform aws_iotsitewise_access_policy resource type.
+// accessPolicyResourceType returns the Terraform awscc_iotsitewise_access_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::AccessPolicy resource type.
 func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_policy_arn": {
 			// Property: AccessPolicyArn
 			// CloudFormation resource type schema:
@@ -88,13 +87,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The identity for this access policy. Choose either an SSO user or group or an IAM user or role.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_role": {
 						// Property: IamRole
 						Description: "Contains information for an IAM role identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: arn
 									Description: "The ARN of the IAM role.",
@@ -108,8 +107,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"iam_user": {
 						// Property: IamUser
 						Description: "Contains information for an IAM user identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: arn
 									Description: "The ARN of the IAM user.",
@@ -123,8 +122,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"user": {
 						// Property: User
 						Description: "Contains information for a user identity in an access policy.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The AWS SSO ID of the user.",
@@ -183,13 +182,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"portal": {
 						// Property: Portal
 						Description: "A portal resource.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The ID of the portal.",
@@ -203,8 +202,8 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"project": {
 						// Property: Project
 						Description: "A project resource.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"id": {
 									// Property: id
 									Description: "The ID of the project.",
@@ -221,14 +220,13 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::AccessPolicy",
 		Version:     1,
 		Attributes:  attributes,
@@ -236,7 +234,23 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AccessPolicy").WithTerraformTypeName("aws_iotsitewise_access_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AccessPolicy").WithTerraformTypeName("awscc_iotsitewise_access_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_policy_arn":        "AccessPolicyArn",
+		"access_policy_id":         "AccessPolicyId",
+		"access_policy_identity":   "AccessPolicyIdentity",
+		"access_policy_permission": "AccessPolicyPermission",
+		"access_policy_resource":   "AccessPolicyResource",
+		"arn":                      "arn",
+		"iam_role":                 "IamRole",
+		"iam_user":                 "IamUser",
+		"id":                       "id",
+		"portal":                   "Portal",
+		"project":                  "Project",
+		"user":                     "User",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -248,7 +262,7 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotsitewise_access_policy", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotsitewise_access_policy", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

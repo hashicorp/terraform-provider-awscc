@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRDSDBProxy_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::RDS::DBProxy", "aws_rds_db_proxy", "test")
+	td := acctest.NewTestData(t, "AWS::RDS::DBProxy", "awscc_rds_db_proxy", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

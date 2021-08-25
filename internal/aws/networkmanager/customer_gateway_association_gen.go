@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_customer_gateway_association", customerGatewayAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_customer_gateway_association", customerGatewayAssociationResourceType)
 }
 
-// customerGatewayAssociationResourceType returns the Terraform aws_networkmanager_customer_gateway_association resource type.
+// customerGatewayAssociationResourceType returns the Terraform awscc_networkmanager_customer_gateway_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource type.
 func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"customer_gateway_arn": {
 			// Property: CustomerGatewayArn
 			// CloudFormation resource type schema:
@@ -73,14 +72,13 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::CustomerGatewayAssociation type associates a customer gateway with a device and optionally, with a link.",
 		Version:     1,
 		Attributes:  attributes,
@@ -88,7 +86,15 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CustomerGatewayAssociation").WithTerraformTypeName("aws_networkmanager_customer_gateway_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CustomerGatewayAssociation").WithTerraformTypeName("awscc_networkmanager_customer_gateway_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"customer_gateway_arn": "CustomerGatewayArn",
+		"device_id":            "DeviceId",
+		"global_network_id":    "GlobalNetworkId",
+		"link_id":              "LinkId",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -100,7 +106,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_customer_gateway_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_customer_gateway_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

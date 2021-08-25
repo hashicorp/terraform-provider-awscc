@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_attribute_group", attributeGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalogappregistry_attribute_group", attributeGroupResourceType)
 }
 
-// attributeGroupResourceType returns the Terraform aws_servicecatalogappregistry_attribute_group resource type.
+// attributeGroupResourceType returns the Terraform awscc_servicecatalogappregistry_attribute_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroup resource type.
 func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -96,14 +95,7 @@ func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroup.",
 		Version:     1,
 		Attributes:  attributes,
@@ -111,7 +103,17 @@ func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("aws_servicecatalogappregistry_attribute_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"attributes":  "Attributes",
+		"description": "Description",
+		"id":          "Id",
+		"name":        "Name",
+		"tags":        "Tags",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -123,7 +125,7 @@ func attributeGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_servicecatalogappregistry_attribute_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalogappregistry_attribute_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

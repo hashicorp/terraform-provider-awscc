@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResourceType)
 }
 
-// infrastructureConfigurationResourceType returns the Terraform aws_imagebuilder_infrastructure_configuration resource type.
+// infrastructureConfigurationResourceType returns the Terraform awscc_imagebuilder_infrastructure_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
 func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -106,13 +105,13 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "object"
 			// }
 			Description: "The logging configuration of the infrastructure configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"s3_logs": {
 						// Property: S3Logs
 						Description: "The S3 path in which to store the logs.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"s3_bucket_name": {
 									// Property: S3BucketName
 									Description: "S3BucketName",
@@ -230,14 +229,13 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::ImageBuilder::InfrastructureConfiguration",
 		Version:     1,
 		Attributes:  attributes,
@@ -245,7 +243,27 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("aws_imagebuilder_infrastructure_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                           "Arn",
+		"description":                   "Description",
+		"instance_profile_name":         "InstanceProfileName",
+		"instance_types":                "InstanceTypes",
+		"key_pair":                      "KeyPair",
+		"logging":                       "Logging",
+		"name":                          "Name",
+		"resource_tags":                 "ResourceTags",
+		"s3_bucket_name":                "S3BucketName",
+		"s3_key_prefix":                 "S3KeyPrefix",
+		"s3_logs":                       "S3Logs",
+		"security_group_ids":            "SecurityGroupIds",
+		"sns_topic_arn":                 "SnsTopicArn",
+		"subnet_id":                     "SubnetId",
+		"tags":                          "Tags",
+		"terminate_instance_on_failure": "TerminateInstanceOnFailure",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -257,7 +275,7 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_imagebuilder_infrastructure_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_infrastructure_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

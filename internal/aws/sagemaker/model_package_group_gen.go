@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_model_package_group", modelPackageGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_model_package_group", modelPackageGroupResourceType)
 }
 
-// modelPackageGroupResourceType returns the Terraform aws_sagemaker_model_package_group resource type.
+// modelPackageGroupResourceType returns the Terraform awscc_sagemaker_model_package_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource type.
 func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -137,8 +136,8 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "array"
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -152,7 +151,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -160,14 +159,13 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::ModelPackageGroup",
 		Version:     1,
 		Attributes:  attributes,
@@ -175,7 +173,20 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("aws_sagemaker_model_package_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("awscc_sagemaker_model_package_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                   "CreationTime",
+		"key":                             "Key",
+		"model_package_group_arn":         "ModelPackageGroupArn",
+		"model_package_group_description": "ModelPackageGroupDescription",
+		"model_package_group_name":        "ModelPackageGroupName",
+		"model_package_group_policy":      "ModelPackageGroupPolicy",
+		"model_package_group_status":      "ModelPackageGroupStatus",
+		"tags":                            "Tags",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -187,7 +198,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_model_package_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_model_package_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

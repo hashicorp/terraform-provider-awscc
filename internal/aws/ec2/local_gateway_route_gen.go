@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_local_gateway_route", localGatewayRouteResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_local_gateway_route", localGatewayRouteResourceType)
 }
 
-// localGatewayRouteResourceType returns the Terraform aws_ec2_local_gateway_route resource type.
+// localGatewayRouteResourceType returns the Terraform awscc_ec2_local_gateway_route resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource type.
 func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"destination_cidr_block": {
 			// Property: DestinationCidrBlock
 			// CloudFormation resource type schema:
@@ -82,14 +81,13 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Describes a route for a local gateway route table.",
 		Version:     1,
 		Attributes:  attributes,
@@ -97,7 +95,16 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRoute").WithTerraformTypeName("aws_ec2_local_gateway_route").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRoute").WithTerraformTypeName("awscc_ec2_local_gateway_route")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"destination_cidr_block":                   "DestinationCidrBlock",
+		"local_gateway_route_table_id":             "LocalGatewayRouteTableId",
+		"local_gateway_virtual_interface_group_id": "LocalGatewayVirtualInterfaceGroupId",
+		"state": "State",
+		"type":  "Type",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -109,7 +116,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_local_gateway_route", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_local_gateway_route", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

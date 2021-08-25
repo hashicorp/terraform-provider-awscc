@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_fms_notification_channel", notificationChannelResourceType)
+	registry.AddResourceTypeFactory("awscc_fms_notification_channel", notificationChannelResourceType)
 }
 
-// notificationChannelResourceType returns the Terraform aws_fms_notification_channel resource type.
+// notificationChannelResourceType returns the Terraform awscc_fms_notification_channel resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FMS::NotificationChannel resource type.
 func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"sns_role_name": {
 			// Property: SnsRoleName
 			// CloudFormation resource type schema:
@@ -52,14 +51,13 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.",
 		Version:     1,
 		Attributes:  attributes,
@@ -67,7 +65,13 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("aws_fms_notification_channel").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("awscc_fms_notification_channel")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"sns_role_name": "SnsRoleName",
+		"sns_topic_arn": "SnsTopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -79,7 +83,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_fms_notification_channel", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_fms_notification_channel", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

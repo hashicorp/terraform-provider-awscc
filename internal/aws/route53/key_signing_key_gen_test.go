@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRoute53KeySigningKey_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53::KeySigningKey", "aws_route53_key_signing_key", "test")
+	td := acctest.NewTestData(t, "AWS::Route53::KeySigningKey", "awscc_route53_key_signing_key", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

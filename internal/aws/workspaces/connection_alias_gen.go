@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_workspaces_connection_alias", connectionAliasResourceType)
+	registry.AddResourceTypeFactory("awscc_workspaces_connection_alias", connectionAliasResourceType)
 }
 
-// connectionAliasResourceType returns the Terraform aws_workspaces_connection_alias resource type.
+// connectionAliasResourceType returns the Terraform awscc_workspaces_connection_alias resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource type.
 func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alias_id": {
 			// Property: AliasId
 			// CloudFormation resource type schema:
@@ -73,8 +72,8 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "minLength": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"associated_account_id": {
 						// Property: AssociatedAccountId
 						Type:     types.StringType,
@@ -96,7 +95,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -150,8 +149,8 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -163,7 +162,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -171,14 +170,13 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::WorkSpaces::ConnectionAlias",
 		Version:     1,
 		Attributes:  attributes,
@@ -186,7 +184,22 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("aws_workspaces_connection_alias").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("awscc_workspaces_connection_alias")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias_id":               "AliasId",
+		"associated_account_id":  "AssociatedAccountId",
+		"association_status":     "AssociationStatus",
+		"associations":           "Associations",
+		"connection_alias_state": "ConnectionAliasState",
+		"connection_identifier":  "ConnectionIdentifier",
+		"connection_string":      "ConnectionString",
+		"key":                    "Key",
+		"resource_id":            "ResourceId",
+		"tags":                   "Tags",
+		"value":                  "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -198,7 +211,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_workspaces_connection_alias", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_workspaces_connection_alias", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

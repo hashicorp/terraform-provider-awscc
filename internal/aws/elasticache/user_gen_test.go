@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSElastiCacheUser_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ElastiCache::User", "aws_elasticache_user", "test")
+	td := acctest.NewTestData(t, "AWS::ElastiCache::User", "awscc_elasticache_user", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

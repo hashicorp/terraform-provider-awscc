@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_globalaccelerator_accelerator", acceleratorResourceType)
+	registry.AddResourceTypeFactory("awscc_globalaccelerator_accelerator", acceleratorResourceType)
 }
 
-// acceleratorResourceType returns the Terraform aws_globalaccelerator_accelerator resource type.
+// acceleratorResourceType returns the Terraform awscc_globalaccelerator_accelerator resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GlobalAccelerator::Accelerator resource type.
 func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"accelerator_arn": {
 			// Property: AcceleratorArn
 			// CloudFormation resource type schema:
@@ -128,8 +127,8 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "Key of the tag. Value can be 1 to 127 characters.",
@@ -143,20 +142,19 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::GlobalAccelerator::Accelerator",
 		Version:     1,
 		Attributes:  attributes,
@@ -164,7 +162,20 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("aws_globalaccelerator_accelerator").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("awscc_globalaccelerator_accelerator")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_arn": "AcceleratorArn",
+		"dns_name":        "DnsName",
+		"enabled":         "Enabled",
+		"ip_address_type": "IpAddressType",
+		"ip_addresses":    "IpAddresses",
+		"key":             "Key",
+		"name":            "Name",
+		"tags":            "Tags",
+		"value":           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -176,7 +187,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_globalaccelerator_accelerator", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_globalaccelerator_accelerator", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

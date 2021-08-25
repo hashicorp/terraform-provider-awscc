@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_ec2_fleet", eC2FleetResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_ec2_fleet", eC2FleetResourceType)
 }
 
-// eC2FleetResourceType returns the Terraform aws_ec2_ec2_fleet resource type.
+// eC2FleetResourceType returns the Terraform awscc_ec2_ec2_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EC2Fleet resource type.
 func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"context": {
 			// Property: Context
 			// CloudFormation resource type schema:
@@ -143,12 +142,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"launch_template_specification": {
 						// Property: LaunchTemplateSpecification
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"launch_template_id": {
 									// Property: LaunchTemplateId
 									Type:     types.StringType,
@@ -170,8 +169,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"overrides": {
 						// Property: Overrides
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"availability_zone": {
 									// Property: AvailabilityZone
 									Type:     types.StringType,
@@ -189,8 +188,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"placement": {
 									// Property: Placement
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"affinity": {
 												// Property: Affinity
 												Type:     types.StringType,
@@ -251,12 +250,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -299,8 +298,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
@@ -308,8 +307,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"capacity_reservation_options": {
 						// Property: CapacityReservationOptions
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"usage_strategy": {
 									// Property: UsageStrategy
 									Type:     types.StringType,
@@ -396,8 +395,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allocation_strategy": {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
@@ -524,8 +523,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"resource_type": {
 						// Property: ResourceType
 						Type:     types.StringType,
@@ -533,8 +532,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tags": {
 						// Property: Tags
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
 									Type:     types.StringType,
@@ -546,12 +545,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -585,8 +584,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"default_target_capacity_type": {
 						// Property: DefaultTargetCapacityType
 						Type:     types.StringType,
@@ -662,14 +661,13 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::EC2Fleet",
 		Version:     1,
 		Attributes:  attributes,
@@ -677,7 +675,60 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::EC2Fleet").WithTerraformTypeName("aws_ec2_ec2_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::EC2Fleet").WithTerraformTypeName("awscc_ec2_ec2_fleet")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"affinity":                            "Affinity",
+		"allocation_strategy":                 "AllocationStrategy",
+		"availability_zone":                   "AvailabilityZone",
+		"capacity_reservation_options":        "CapacityReservationOptions",
+		"context":                             "Context",
+		"default_target_capacity_type":        "DefaultTargetCapacityType",
+		"excess_capacity_termination_policy":  "ExcessCapacityTerminationPolicy",
+		"fleet_id":                            "FleetId",
+		"group_name":                          "GroupName",
+		"host_id":                             "HostId",
+		"host_resource_group_arn":             "HostResourceGroupArn",
+		"instance_interruption_behavior":      "InstanceInterruptionBehavior",
+		"instance_pools_to_use_count":         "InstancePoolsToUseCount",
+		"instance_type":                       "InstanceType",
+		"key":                                 "Key",
+		"launch_template_configs":             "LaunchTemplateConfigs",
+		"launch_template_id":                  "LaunchTemplateId",
+		"launch_template_name":                "LaunchTemplateName",
+		"launch_template_specification":       "LaunchTemplateSpecification",
+		"max_price":                           "MaxPrice",
+		"max_total_price":                     "MaxTotalPrice",
+		"min_target_capacity":                 "MinTargetCapacity",
+		"on_demand_options":                   "OnDemandOptions",
+		"on_demand_target_capacity":           "OnDemandTargetCapacity",
+		"overrides":                           "Overrides",
+		"partition_number":                    "PartitionNumber",
+		"placement":                           "Placement",
+		"priority":                            "Priority",
+		"replace_unhealthy_instances":         "ReplaceUnhealthyInstances",
+		"resource_type":                       "ResourceType",
+		"single_availability_zone":            "SingleAvailabilityZone",
+		"single_instance_type":                "SingleInstanceType",
+		"spot_options":                        "SpotOptions",
+		"spot_target_capacity":                "SpotTargetCapacity",
+		"spread_domain":                       "SpreadDomain",
+		"subnet_id":                           "SubnetId",
+		"tag_specifications":                  "TagSpecifications",
+		"tags":                                "Tags",
+		"target_capacity_specification":       "TargetCapacitySpecification",
+		"tenancy":                             "Tenancy",
+		"terminate_instances_with_expiration": "TerminateInstancesWithExpiration",
+		"total_target_capacity":               "TotalTargetCapacity",
+		"type":                                "Type",
+		"usage_strategy":                      "UsageStrategy",
+		"valid_from":                          "ValidFrom",
+		"valid_until":                         "ValidUntil",
+		"value":                               "Value",
+		"version":                             "Version",
+		"weighted_capacity":                   "WeightedCapacity",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -689,7 +740,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_ec2_fleet", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_ec2_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

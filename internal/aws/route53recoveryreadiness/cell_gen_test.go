@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSRoute53RecoveryReadinessCell_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53RecoveryReadiness::Cell", "aws_route53recoveryreadiness_cell", "test")
+	td := acctest.NewTestData(t, "AWS::Route53RecoveryReadiness::Cell", "awscc_route53recoveryreadiness_cell", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

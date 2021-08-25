@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAthenaNamedQuery_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Athena::NamedQuery", "aws_athena_named_query", "test")
+	td := acctest.NewTestData(t, "AWS::Athena::NamedQuery", "awscc_athena_named_query", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

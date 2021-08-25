@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_domain_configuration", domainConfigurationResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_domain_configuration", domainConfigurationResourceType)
 }
 
-// domainConfigurationResourceType returns the Terraform aws_iot_domain_configuration resource type.
+// domainConfigurationResourceType returns the Terraform awscc_iot_domain_configuration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource type.
 func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -49,8 +48,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"allow_authorizer_override": {
 						// Property: AllowAuthorizerOverride
 						Type:     types.BoolType,
@@ -167,8 +166,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"server_certificate_arn": {
 						// Property: ServerCertificateArn
 						Type:     types.StringType,
@@ -185,7 +184,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -227,8 +226,8 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -240,7 +239,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -258,14 +257,13 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Create and manage a Domain Configuration",
 		Version:     1,
 		Attributes:  attributes,
@@ -273,7 +271,29 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("aws_iot_domain_configuration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("awscc_iot_domain_configuration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_authorizer_override":        "AllowAuthorizerOverride",
+		"arn":                              "Arn",
+		"authorizer_config":                "AuthorizerConfig",
+		"default_authorizer_name":          "DefaultAuthorizerName",
+		"domain_configuration_name":        "DomainConfigurationName",
+		"domain_configuration_status":      "DomainConfigurationStatus",
+		"domain_name":                      "DomainName",
+		"domain_type":                      "DomainType",
+		"key":                              "Key",
+		"server_certificate_arn":           "ServerCertificateArn",
+		"server_certificate_arns":          "ServerCertificateArns",
+		"server_certificate_status":        "ServerCertificateStatus",
+		"server_certificate_status_detail": "ServerCertificateStatusDetail",
+		"server_certificates":              "ServerCertificates",
+		"service_type":                     "ServiceType",
+		"tags":                             "Tags",
+		"validation_certificate_arn":       "ValidationCertificateArn",
+		"value":                            "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServerCertificateArns",
@@ -288,7 +308,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_domain_configuration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_domain_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

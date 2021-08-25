@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssm_resource_data_sync", resourceDataSyncResourceType)
+	registry.AddResourceTypeFactory("awscc_ssm_resource_data_sync", resourceDataSyncResourceType)
 }
 
-// resourceDataSyncResourceType returns the Terraform aws_ssm_resource_data_sync resource type.
+// resourceDataSyncResourceType returns the Terraform awscc_ssm_resource_data_sync resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::ResourceDataSync resource type.
 func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"bucket_name": {
 			// Property: BucketName
 			// CloudFormation resource type schema:
@@ -113,8 +112,8 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"bucket_name": {
 						// Property: BucketName
 						Type:     types.StringType,
@@ -220,12 +219,12 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"aws_organizations_source": {
 						// Property: AwsOrganizationsSource
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"organization_source_type": {
 									// Property: OrganizationSourceType
 									Type:     types.StringType,
@@ -274,14 +273,13 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SSM::ResourceDataSync",
 		Version:     1,
 		Attributes:  attributes,
@@ -289,7 +287,26 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourceDataSync").WithTerraformTypeName("aws_ssm_resource_data_sync").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourceDataSync").WithTerraformTypeName("awscc_ssm_resource_data_sync")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aws_organizations_source": "AwsOrganizationsSource",
+		"bucket_name":              "BucketName",
+		"bucket_prefix":            "BucketPrefix",
+		"bucket_region":            "BucketRegion",
+		"include_future_regions":   "IncludeFutureRegions",
+		"kms_key_arn":              "KMSKeyArn",
+		"organization_source_type": "OrganizationSourceType",
+		"organizational_units":     "OrganizationalUnits",
+		"s3_destination":           "S3Destination",
+		"source_regions":           "SourceRegions",
+		"source_type":              "SourceType",
+		"sync_format":              "SyncFormat",
+		"sync_name":                "SyncName",
+		"sync_source":              "SyncSource",
+		"sync_type":                "SyncType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -301,7 +318,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ssm_resource_data_sync", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssm_resource_data_sync", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

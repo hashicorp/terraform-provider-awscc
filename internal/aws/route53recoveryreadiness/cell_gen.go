@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_cell", cellResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_cell", cellResourceType)
 }
 
-// cellResourceType returns the Terraform aws_route53recoveryreadiness_cell resource type.
+// cellResourceType returns the Terraform awscc_route53recoveryreadiness_cell resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::Cell resource type.
 func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cell_arn": {
 			// Property: CellArn
 			// CloudFormation resource type schema:
@@ -61,9 +60,8 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 		},
 		"parent_readiness_scopes": {
 			// Property: ParentReadinessScopes
@@ -78,9 +76,8 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"tags": {
 			// Property: Tags
@@ -112,9 +109,8 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -122,25 +118,23 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The API Schema for AWS Route53 Recovery Readiness Cells.",
 		Version:     1,
 		Attributes:  attributes,
@@ -148,7 +142,18 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::Cell").WithTerraformTypeName("aws_route53recoveryreadiness_cell").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::Cell").WithTerraformTypeName("awscc_route53recoveryreadiness_cell")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cell_arn":                "CellArn",
+		"cell_name":               "CellName",
+		"cells":                   "Cells",
+		"key":                     "Key",
+		"parent_readiness_scopes": "ParentReadinessScopes",
+		"tags":                    "Tags",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -160,7 +165,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoveryreadiness_cell", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoveryreadiness_cell", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

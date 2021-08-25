@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lookoutvision_project", projectResourceType)
+	registry.AddResourceTypeFactory("awscc_lookoutvision_project", projectResourceType)
 }
 
-// projectResourceType returns the Terraform aws_lookoutvision_project resource type.
+// projectResourceType returns the Terraform awscc_lookoutvision_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutVision::Project resource type.
 func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -49,14 +48,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::LookoutVision::Project type creates an Amazon Lookout for Vision project. A project is a grouping of the resources needed to create and manage a Lookout for Vision model.",
 		Version:     1,
 		Attributes:  attributes,
@@ -64,7 +62,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::LookoutVision::Project").WithTerraformTypeName("aws_lookoutvision_project").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LookoutVision::Project").WithTerraformTypeName("awscc_lookoutvision_project")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":          "Arn",
+		"project_name": "ProjectName",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -76,7 +80,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lookoutvision_project", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lookoutvision_project", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

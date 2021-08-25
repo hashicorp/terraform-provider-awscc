@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_global_cluster", globalClusterResourceType)
+	registry.AddResourceTypeFactory("awscc_rds_global_cluster", globalClusterResourceType)
 }
 
-// globalClusterResourceType returns the Terraform aws_rds_global_cluster resource type.
+// globalClusterResourceType returns the Terraform awscc_rds_global_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
 func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"deletion_protection": {
 			// Property: DeletionProtection
 			// CloudFormation resource type schema:
@@ -106,14 +105,13 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::RDS::GlobalCluster",
 		Version:     1,
 		Attributes:  attributes,
@@ -121,7 +119,17 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("aws_rds_global_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"deletion_protection":          "DeletionProtection",
+		"engine":                       "Engine",
+		"engine_version":               "EngineVersion",
+		"global_cluster_identifier":    "GlobalClusterIdentifier",
+		"source_db_cluster_identifier": "SourceDBClusterIdentifier",
+		"storage_encrypted":            "StorageEncrypted",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -133,7 +141,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_rds_global_cluster", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_rds_global_cluster", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

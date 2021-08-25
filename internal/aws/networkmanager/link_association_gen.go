@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_link_association", linkAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_link_association", linkAssociationResourceType)
 }
 
-// linkAssociationResourceType returns the Terraform aws_networkmanager_link_association resource type.
+// linkAssociationResourceType returns the Terraform awscc_networkmanager_link_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::LinkAssociation resource type.
 func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"device_id": {
 			// Property: DeviceId
 			// CloudFormation resource type schema:
@@ -60,14 +59,13 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::LinkAssociation type associates a link to a device. The device and link must be in the same global network and the same site.",
 		Version:     1,
 		Attributes:  attributes,
@@ -75,7 +73,14 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::LinkAssociation").WithTerraformTypeName("aws_networkmanager_link_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::LinkAssociation").WithTerraformTypeName("awscc_networkmanager_link_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"device_id":         "DeviceId",
+		"global_network_id": "GlobalNetworkId",
+		"link_id":           "LinkId",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -87,7 +92,7 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_link_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_link_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_client_certificate", clientCertificateResourceType)
+	registry.AddResourceTypeFactory("awscc_apigateway_client_certificate", clientCertificateResourceType)
 }
 
-// clientCertificateResourceType returns the Terraform aws_apigateway_client_certificate resource type.
+// clientCertificateResourceType returns the Terraform awscc_apigateway_client_certificate resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::ClientCertificate resource type.
 func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"client_certificate_id": {
 			// Property: ClientCertificateId
 			// CloudFormation resource type schema:
@@ -69,8 +68,8 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "uniqueItems": false
 			// }
 			Description: "An array of arbitrary tags (key-value pairs) to associate with the client certificate.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -82,20 +81,19 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::ClientCertificate",
 		Version:     1,
 		Attributes:  attributes,
@@ -103,7 +101,16 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("aws_apigateway_client_certificate").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ClientCertificate").WithTerraformTypeName("awscc_apigateway_client_certificate")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"client_certificate_id": "ClientCertificateId",
+		"description":           "Description",
+		"key":                   "Key",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -115,7 +122,7 @@ func clientCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_apigateway_client_certificate", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_client_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

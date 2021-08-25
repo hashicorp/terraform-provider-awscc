@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_hosted_zone", hostedZoneResourceType)
+	registry.AddResourceTypeFactory("awscc_route53_hosted_zone", hostedZoneResourceType)
 }
 
-// hostedZoneResourceType returns the Terraform aws_route53_hosted_zone resource type.
+// hostedZoneResourceType returns the Terraform awscc_route53_hosted_zone resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::HostedZone resource type.
 func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_config": {
 			// Property: HostedZoneConfig
 			// CloudFormation resource type schema:
@@ -38,8 +37,8 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"comment": {
 						// Property: Comment
 						Description: "Any comments that you want to include about the hosted zone.",
@@ -81,7 +80,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag.",
@@ -151,9 +150,9 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "A complex type that contains information about a configuration for DNS query logging.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
-					"cloud_watch_logs_log_group_arn": {
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cloudwatch_logs_log_group_arn": {
 						// Property: CloudWatchLogsLogGroupArn
 						Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
 						Type:        types.StringType,
@@ -193,7 +192,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"vpc_id": {
 						// Property: VPCId
 						Description: "The ID of an Amazon VPC.",
@@ -213,14 +212,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53::HostedZone.",
 		Version:     1,
 		Attributes:  attributes,
@@ -228,7 +220,24 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("aws_route53_hosted_zone").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::HostedZone").WithTerraformTypeName("awscc_route53_hosted_zone")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
+		"comment":                       "Comment",
+		"hosted_zone_config":            "HostedZoneConfig",
+		"hosted_zone_tags":              "HostedZoneTags",
+		"id":                            "Id",
+		"key":                           "Key",
+		"name":                          "Name",
+		"name_servers":                  "NameServers",
+		"query_logging_config":          "QueryLoggingConfig",
+		"value":                         "Value",
+		"vp_cs":                         "VPCs",
+		"vpc_id":                        "VPCId",
+		"vpc_region":                    "VPCRegion",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -240,7 +249,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53_hosted_zone", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_hosted_zone", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

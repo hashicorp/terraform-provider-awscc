@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_dashboard", dashboardResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_dashboard", dashboardResourceType)
 }
 
-// dashboardResourceType returns the Terraform aws_quicksight_dashboard resource type.
+// dashboardResourceType returns the Terraform awscc_quicksight_dashboard resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Dashboard resource type.
 func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -125,13 +124,13 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Dashboard publish options.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ad_hoc_filtering_option": {
 						// Property: AdHocFilteringOption
 						Description: "<p>Ad hoc (one-time) filtering option.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"availability_status": {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
@@ -144,8 +143,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"export_to_csv_option": {
 						// Property: ExportToCSVOption
 						Description: "<p>Export to .csv option.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"availability_status": {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
@@ -158,8 +157,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sheet_controls_option": {
 						// Property: SheetControlsOption
 						Description: "<p>Sheet controls option.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"visibility_state": {
 									// Property: VisibilityState
 									Type:     types.StringType,
@@ -340,13 +339,13 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"date_time_parameters": {
 						// Property: DateTimeParameters
 						Description: "<p>Date-time parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for the date-time parameter.</p>",
@@ -360,7 +359,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -370,8 +369,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"decimal_parameters": {
 						// Property: DecimalParameters
 						Description: "<p>Decimal parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for the decimal parameter.</p>",
@@ -385,7 +384,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -395,8 +394,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"integer_parameters": {
 						// Property: IntegerParameters
 						Description: "<p>Integer parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>The name of the integer parameter.</p>",
@@ -410,7 +409,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -420,8 +419,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"string_parameters": {
 						// Property: StringParameters
 						Description: "<p>String parameters.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for a string parameter.</p>",
@@ -435,7 +434,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 100,
 							},
@@ -483,8 +482,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -498,7 +497,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -556,13 +555,13 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Dashboard source entity.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"source_template": {
 						// Property: SourceTemplate
 						Description: "<p>Dashboard source template.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
@@ -572,8 +571,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"data_set_references": {
 									// Property: DataSetReferences
 									Description: "<p>Dataset references.</p>",
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"data_set_arn": {
 												// Property: DataSetArn
 												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
@@ -587,7 +586,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 1,
 										},
 									),
@@ -635,8 +634,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the\n            dashboard.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -650,7 +649,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -785,8 +784,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>Dashboard version.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
@@ -814,8 +813,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"errors": {
 						// Property: Errors
 						Description: "<p>Errors associated with this dashboard version.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"message": {
 									// Property: Message
 									Description: "<p>Message.</p>",
@@ -828,7 +827,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -837,8 +836,8 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sheets": {
 						// Property: Sheets
 						Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
@@ -852,7 +851,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 0,
 								MaxItems: 20,
 							},
@@ -903,14 +902,13 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::Dashboard Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
@@ -918,7 +916,54 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("aws_quicksight_dashboard").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Dashboard").WithTerraformTypeName("awscc_quicksight_dashboard")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":                   "Actions",
+		"ad_hoc_filtering_option":   "AdHocFilteringOption",
+		"arn":                       "Arn",
+		"availability_status":       "AvailabilityStatus",
+		"aws_account_id":            "AwsAccountId",
+		"created_time":              "CreatedTime",
+		"dashboard_id":              "DashboardId",
+		"dashboard_publish_options": "DashboardPublishOptions",
+		"data_set_arn":              "DataSetArn",
+		"data_set_arns":             "DataSetArns",
+		"data_set_placeholder":      "DataSetPlaceholder",
+		"data_set_references":       "DataSetReferences",
+		"date_time_parameters":      "DateTimeParameters",
+		"decimal_parameters":        "DecimalParameters",
+		"description":               "Description",
+		"errors":                    "Errors",
+		"export_to_csv_option":      "ExportToCSVOption",
+		"integer_parameters":        "IntegerParameters",
+		"key":                       "Key",
+		"last_published_time":       "LastPublishedTime",
+		"last_updated_time":         "LastUpdatedTime",
+		"message":                   "Message",
+		"name":                      "Name",
+		"parameters":                "Parameters",
+		"permissions":               "Permissions",
+		"principal":                 "Principal",
+		"sheet_controls_option":     "SheetControlsOption",
+		"sheet_id":                  "SheetId",
+		"sheets":                    "Sheets",
+		"source_entity":             "SourceEntity",
+		"source_entity_arn":         "SourceEntityArn",
+		"source_template":           "SourceTemplate",
+		"status":                    "Status",
+		"string_parameters":         "StringParameters",
+		"tags":                      "Tags",
+		"theme_arn":                 "ThemeArn",
+		"type":                      "Type",
+		"value":                     "Value",
+		"values":                    "Values",
+		"version":                   "Version",
+		"version_description":       "VersionDescription",
+		"version_number":            "VersionNumber",
+		"visibility_state":          "VisibilityState",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DashboardPublishOptions",
@@ -940,7 +985,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_dashboard", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_dashboard", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

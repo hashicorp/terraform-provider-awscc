@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_public_type_version", publicTypeVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_public_type_version", publicTypeVersionResourceType)
 }
 
-// publicTypeVersionResourceType returns the Terraform aws_cloudformation_public_type_version resource type.
+// publicTypeVersionResourceType returns the Terraform awscc_cloudformation_public_type_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
 func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -135,14 +134,13 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Test and Publish a resource that has been registered in the CloudFormation Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -150,7 +148,19 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("aws_cloudformation_public_type_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"log_delivery_bucket":   "LogDeliveryBucket",
+		"public_type_arn":       "PublicTypeArn",
+		"public_version_number": "PublicVersionNumber",
+		"publisher_id":          "PublisherId",
+		"type":                  "Type",
+		"type_name":             "TypeName",
+		"type_version_arn":      "TypeVersionArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -162,7 +172,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_public_type_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_public_type_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

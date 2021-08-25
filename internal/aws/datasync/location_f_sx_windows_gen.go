@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
 }
 
-// locationFSxWindowsResourceType returns the Terraform aws_datasync_location_f_sx_windows resource type.
+// locationFSxWindowsResourceType returns the Terraform awscc_datasync_location_f_sx_windows resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
 func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"domain": {
 			// Property: Domain
 			// CloudFormation resource type schema:
@@ -108,9 +107,8 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "array"
 			// }
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
 			// SecurityGroupArns is a force-new attribute.
 		},
 		"subdirectory": {
@@ -166,7 +164,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for an AWS resource tag.",
@@ -202,14 +200,13 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataSync::LocationFSxWindows.",
 		Version:     1,
 		Attributes:  attributes,
@@ -217,7 +214,22 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("aws_datasync_location_f_sx_windows").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_f_sx_windows")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"domain":              "Domain",
+		"fsx_filesystem_arn":  "FsxFilesystemArn",
+		"key":                 "Key",
+		"location_arn":        "LocationArn",
+		"location_uri":        "LocationUri",
+		"password":            "Password",
+		"security_group_arns": "SecurityGroupArns",
+		"subdirectory":        "Subdirectory",
+		"tags":                "Tags",
+		"user":                "User",
+		"value":               "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Password",
@@ -234,7 +246,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_datasync_location_f_sx_windows", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_f_sx_windows", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

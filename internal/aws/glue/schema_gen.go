@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_schema", schemaResourceType)
+	registry.AddResourceTypeFactory("awscc_glue_schema", schemaResourceType)
 }
 
-// schemaResourceType returns the Terraform aws_glue_schema resource type.
+// schemaResourceType returns the Terraform awscc_glue_schema resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::Schema resource type.
 func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -53,8 +52,8 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Specify checkpoint version for update. This is only required to update the Compatibility.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"is_latest": {
 						// Property: IsLatest
 						Description: "Indicates if the latest version needs to be updated.",
@@ -169,8 +168,8 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Identifier for the registry which the schema is part of.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "Amazon Resource Name for the Registry.",
@@ -236,8 +235,8 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "List of tags to tag the schema",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "A key to identify the tag.",
@@ -251,7 +250,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 10,
 				},
@@ -263,14 +262,13 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource represents a schema of Glue Schema Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -278,7 +276,25 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Glue::Schema").WithTerraformTypeName("aws_glue_schema").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Glue::Schema").WithTerraformTypeName("awscc_glue_schema")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"checkpoint_version":        "CheckpointVersion",
+		"compatibility":             "Compatibility",
+		"data_format":               "DataFormat",
+		"description":               "Description",
+		"initial_schema_version_id": "InitialSchemaVersionId",
+		"is_latest":                 "IsLatest",
+		"key":                       "Key",
+		"name":                      "Name",
+		"registry":                  "Registry",
+		"schema_definition":         "SchemaDefinition",
+		"tags":                      "Tags",
+		"value":                     "Value",
+		"version_number":            "VersionNumber",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -294,7 +310,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_glue_schema", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_schema", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

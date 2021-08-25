@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSMacieCustomDataIdentifier_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Macie::CustomDataIdentifier", "aws_macie_custom_data_identifier", "test")
+	td := acctest.NewTestData(t, "AWS::Macie::CustomDataIdentifier", "awscc_macie_custom_data_identifier", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIoTDimension_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IoT::Dimension", "aws_iot_dimension", "test")
+	td := acctest.NewTestData(t, "AWS::IoT::Dimension", "awscc_iot_dimension", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

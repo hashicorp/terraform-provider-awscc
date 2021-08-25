@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_resourcegroups_group", groupResourceType)
+	registry.AddResourceTypeFactory("awscc_resourcegroups_group", groupResourceType)
 }
 
-// groupResourceType returns the Terraform aws_resourcegroups_group resource type.
+// groupResourceType returns the Terraform awscc_resourcegroups_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ResourceGroups::Group resource type.
 func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -64,12 +63,12 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"parameters": {
 						// Property: Parameters
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Type:     types.StringType,
@@ -81,7 +80,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -91,7 +90,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -166,12 +165,12 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"query": {
 						// Property: Query
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"resource_type_filters": {
 									// Property: ResourceTypeFilters
 									Type:     types.ListType{ElemType: types.StringType},
@@ -184,8 +183,8 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"tag_filters": {
 									// Property: TagFilters
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -197,7 +196,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -244,8 +243,8 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -257,20 +256,19 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Schema for ResourceGroups::Group",
 		Version:     1,
 		Attributes:  attributes,
@@ -278,7 +276,27 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ResourceGroups::Group").WithTerraformTypeName("aws_resourcegroups_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ResourceGroups::Group").WithTerraformTypeName("awscc_resourcegroups_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"configuration":         "Configuration",
+		"description":           "Description",
+		"key":                   "Key",
+		"name":                  "Name",
+		"parameters":            "Parameters",
+		"query":                 "Query",
+		"resource_query":        "ResourceQuery",
+		"resource_type_filters": "ResourceTypeFilters",
+		"resources":             "Resources",
+		"stack_identifier":      "StackIdentifier",
+		"tag_filters":           "TagFilters",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"value":                 "Value",
+		"values":                "Values",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -290,7 +308,7 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_resourcegroups_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_resourcegroups_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

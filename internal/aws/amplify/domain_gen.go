@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_domain", domainResourceType)
+	registry.AddResourceTypeFactory("awscc_amplify_domain", domainResourceType)
 }
 
-// domainResourceType returns the Terraform aws_amplify_domain resource type.
+// domainResourceType returns the Terraform awscc_amplify_domain resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::Domain resource type.
 func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
@@ -152,8 +151,8 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"branch_name": {
 						// Property: BranchName
 						Type:     types.StringType,
@@ -165,7 +164,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 255,
 				},
 			),
@@ -173,14 +172,13 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::Amplify::Domain resource allows you to connect a custom domain to your app.",
 		Version:     1,
 		Attributes:  attributes,
@@ -188,7 +186,23 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("aws_amplify_domain").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("awscc_amplify_domain")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_id":                            "AppId",
+		"arn":                               "Arn",
+		"auto_sub_domain_creation_patterns": "AutoSubDomainCreationPatterns",
+		"auto_sub_domain_iam_role":          "AutoSubDomainIAMRole",
+		"branch_name":                       "BranchName",
+		"certificate_record":                "CertificateRecord",
+		"domain_name":                       "DomainName",
+		"domain_status":                     "DomainStatus",
+		"enable_auto_sub_domain":            "EnableAutoSubDomain",
+		"prefix":                            "Prefix",
+		"status_reason":                     "StatusReason",
+		"sub_domain_settings":               "SubDomainSettings",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -200,7 +214,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_amplify_domain", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_amplify_domain", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

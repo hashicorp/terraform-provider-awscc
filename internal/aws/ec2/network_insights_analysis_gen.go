@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_network_insights_analysis", networkInsightsAnalysisResourceType)
 }
 
-// networkInsightsAnalysisResourceType returns the Terraform aws_ec2_network_insights_analysis resource type.
+// networkInsightsAnalysisResourceType returns the Terraform awscc_ec2_network_insights_analysis resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
 func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alternate_path_hints": {
 			// Property: AlternatePathHints
 			// CloudFormation resource type schema:
@@ -40,8 +39,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_arn": {
 						// Property: ComponentArn
 						Type:     types.StringType,
@@ -53,7 +52,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -585,12 +584,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"acl": {
 						// Property: Acl
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -607,8 +606,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"acl_rule": {
 						// Property: AclRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -621,8 +620,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -668,8 +667,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"attached_to": {
 						// Property: AttachedTo
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -696,8 +695,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"classic_load_balancer_listener": {
 						// Property: ClassicLoadBalancerListener
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"instance_port": {
 									// Property: InstancePort
 									Type:     types.NumberType,
@@ -714,8 +713,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"component": {
 						// Property: Component
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -732,8 +731,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"customer_gateway": {
 						// Property: CustomerGateway
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -750,8 +749,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"destination": {
 						// Property: Destination
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -768,8 +767,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -791,8 +790,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"elastic_load_balancer_listener": {
 						// Property: ElasticLoadBalancerListener
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -814,8 +813,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"ingress_route_table": {
 						// Property: IngressRouteTable
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -832,8 +831,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"internet_gateway": {
 						// Property: InternetGateway
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -860,8 +859,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"load_balancer_target": {
 						// Property: LoadBalancerTarget
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"address": {
 									// Property: Address
 									Type:     types.StringType,
@@ -874,8 +873,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"instance": {
 									// Property: Instance
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"arn": {
 												// Property: Arn
 												Type:     types.StringType,
@@ -901,8 +900,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"load_balancer_target_group": {
 						// Property: LoadBalancerTargetGroup
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -919,8 +918,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"load_balancer_target_groups": {
 						// Property: LoadBalancerTargetGroups
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -932,7 +931,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -948,8 +947,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"nat_gateway": {
 						// Property: NatGateway
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -966,8 +965,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"network_interface": {
 						// Property: NetworkInterface
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -994,8 +993,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"port_ranges": {
 						// Property: PortRanges
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"from": {
 									// Property: From
 									Type:     types.NumberType,
@@ -1007,14 +1006,14 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"prefix_list": {
 						// Property: PrefixList
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1036,8 +1035,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"route_table": {
 						// Property: RouteTable
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1054,8 +1053,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									Type:     types.StringType,
@@ -1112,8 +1111,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"security_group": {
 						// Property: SecurityGroup
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1130,8 +1129,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -1144,8 +1143,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1181,8 +1180,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1194,14 +1193,14 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"source_vpc": {
 						// Property: SourceVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1223,8 +1222,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"subnet": {
 						// Property: Subnet
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1241,8 +1240,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"subnet_route_table": {
 						// Property: SubnetRouteTable
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1259,8 +1258,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpc": {
 						// Property: Vpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1277,8 +1276,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpc_peering_connection": {
 						// Property: VpcPeeringConnection
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1295,8 +1294,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpn_connection": {
 						// Property: VpnConnection
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1313,8 +1312,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpn_gateway": {
 						// Property: VpnGateway
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1331,8 +1330,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpc_endpoint": {
 						// Property: vpcEndpoint
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1348,7 +1347,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -1645,12 +1644,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"acl_rule": {
 						// Property: AclRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -1663,8 +1662,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1700,8 +1699,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"component": {
 						// Property: Component
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1718,8 +1717,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1736,8 +1735,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"inbound_header": {
 						// Property: InboundHeader
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
@@ -1745,8 +1744,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1758,7 +1757,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1774,8 +1773,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1787,7 +1786,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1797,8 +1796,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"outbound_header": {
 						// Property: OutboundHeader
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
@@ -1806,8 +1805,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1819,7 +1818,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1835,8 +1834,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1848,7 +1847,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -1858,8 +1857,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									Type:     types.StringType,
@@ -1916,8 +1915,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -1930,8 +1929,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -1972,8 +1971,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"source_vpc": {
 						// Property: SourceVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -1990,8 +1989,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"subnet": {
 						// Property: Subnet
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2008,8 +2007,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpc": {
 						// Property: Vpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2025,7 +2024,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -2345,12 +2344,12 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"acl_rule": {
 						// Property: AclRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -2363,8 +2362,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2400,8 +2399,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"component": {
 						// Property: Component
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2418,8 +2417,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"destination_vpc": {
 						// Property: DestinationVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2436,8 +2435,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"inbound_header": {
 						// Property: InboundHeader
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
@@ -2445,8 +2444,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2458,7 +2457,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -2474,8 +2473,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2487,7 +2486,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -2497,8 +2496,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"outbound_header": {
 						// Property: OutboundHeader
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"destination_addresses": {
 									// Property: DestinationAddresses
 									Type:     types.ListType{ElemType: types.StringType},
@@ -2506,8 +2505,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"destination_port_ranges": {
 									// Property: DestinationPortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2519,7 +2518,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -2535,8 +2534,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"source_port_ranges": {
 									// Property: SourcePortRanges
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2548,7 +2547,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -2558,8 +2557,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"route_table_route": {
 						// Property: RouteTableRoute
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"nat_gateway_id": {
 									// Property: NatGatewayId
 									Type:     types.StringType,
@@ -2616,8 +2615,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"security_group_rule": {
 						// Property: SecurityGroupRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"cidr": {
 									// Property: Cidr
 									Type:     types.StringType,
@@ -2630,8 +2629,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 								},
 								"port_range": {
 									// Property: PortRange
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
 												Type:     types.NumberType,
@@ -2672,8 +2671,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"source_vpc": {
 						// Property: SourceVpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2690,8 +2689,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"subnet": {
 						// Property: Subnet
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2708,8 +2707,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 					},
 					"vpc": {
 						// Property: Vpc
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"arn": {
 									// Property: Arn
 									Type:     types.StringType,
@@ -2725,7 +2724,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -2782,8 +2781,8 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -2795,20 +2794,19 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::EC2::NetworkInsightsAnalysis",
 		Version:     1,
 		Attributes:  attributes,
@@ -2816,7 +2814,106 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("aws_ec2_network_insights_analysis").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("awscc_ec2_network_insights_analysis")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"acl":                             "Acl",
+		"acl_rule":                        "AclRule",
+		"address":                         "Address",
+		"addresses":                       "Addresses",
+		"alternate_path_hints":            "AlternatePathHints",
+		"arn":                             "Arn",
+		"attached_to":                     "AttachedTo",
+		"availability_zone":               "AvailabilityZone",
+		"availability_zones":              "AvailabilityZones",
+		"cidr":                            "Cidr",
+		"cidrs":                           "Cidrs",
+		"classic_load_balancer_listener":  "ClassicLoadBalancerListener",
+		"component":                       "Component",
+		"component_arn":                   "ComponentArn",
+		"component_id":                    "ComponentId",
+		"customer_gateway":                "CustomerGateway",
+		"destination":                     "Destination",
+		"destination_addresses":           "DestinationAddresses",
+		"destination_cidr":                "destinationCidr",
+		"destination_port_ranges":         "DestinationPortRanges",
+		"destination_prefix_list_id":      "destinationPrefixListId",
+		"destination_vpc":                 "DestinationVpc",
+		"direction":                       "Direction",
+		"egress":                          "Egress",
+		"egress_only_internet_gateway_id": "egressOnlyInternetGatewayId",
+		"elastic_load_balancer_listener":  "ElasticLoadBalancerListener",
+		"explanation_code":                "ExplanationCode",
+		"explanations":                    "Explanations",
+		"filter_in_arns":                  "FilterInArns",
+		"forward_path_components":         "ForwardPathComponents",
+		"from":                            "From",
+		"gateway_id":                      "gatewayId",
+		"id":                              "Id",
+		"inbound_header":                  "InboundHeader",
+		"ingress_route_table":             "IngressRouteTable",
+		"instance":                        "Instance",
+		"instance_id":                     "instanceId",
+		"instance_port":                   "InstancePort",
+		"internet_gateway":                "InternetGateway",
+		"key":                             "Key",
+		"load_balancer_arn":               "LoadBalancerArn",
+		"load_balancer_listener_port":     "LoadBalancerListenerPort",
+		"load_balancer_port":              "LoadBalancerPort",
+		"load_balancer_target":            "LoadBalancerTarget",
+		"load_balancer_target_group":      "LoadBalancerTargetGroup",
+		"load_balancer_target_groups":     "LoadBalancerTargetGroups",
+		"load_balancer_target_port":       "LoadBalancerTargetPort",
+		"missing_component":               "MissingComponent",
+		"nat_gateway":                     "NatGateway",
+		"nat_gateway_id":                  "NatGatewayId",
+		"network_insights_analysis_arn":   "NetworkInsightsAnalysisArn",
+		"network_insights_analysis_id":    "NetworkInsightsAnalysisId",
+		"network_insights_path_id":        "NetworkInsightsPathId",
+		"network_interface":               "NetworkInterface",
+		"network_interface_id":            "NetworkInterfaceId",
+		"network_path_found":              "NetworkPathFound",
+		"origin":                          "Origin",
+		"outbound_header":                 "OutboundHeader",
+		"packet_field":                    "PacketField",
+		"port":                            "Port",
+		"port_range":                      "PortRange",
+		"port_ranges":                     "PortRanges",
+		"prefix_list":                     "PrefixList",
+		"prefix_list_id":                  "PrefixListId",
+		"protocol":                        "Protocol",
+		"protocols":                       "Protocols",
+		"return_path_components":          "ReturnPathComponents",
+		"route_table":                     "RouteTable",
+		"route_table_route":               "RouteTableRoute",
+		"rule_action":                     "RuleAction",
+		"rule_number":                     "RuleNumber",
+		"security_group":                  "SecurityGroup",
+		"security_group_id":               "SecurityGroupId",
+		"security_group_rule":             "SecurityGroupRule",
+		"security_groups":                 "SecurityGroups",
+		"sequence_number":                 "SequenceNumber",
+		"source_addresses":                "SourceAddresses",
+		"source_port_ranges":              "SourcePortRanges",
+		"source_vpc":                      "SourceVpc",
+		"start_date":                      "StartDate",
+		"state":                           "State",
+		"status":                          "Status",
+		"status_message":                  "StatusMessage",
+		"subnet":                          "Subnet",
+		"subnet_route_table":              "SubnetRouteTable",
+		"tags":                            "Tags",
+		"to":                              "To",
+		"transit_gateway_id":              "TransitGatewayId",
+		"value":                           "Value",
+		"vpc":                             "Vpc",
+		"vpc_endpoint":                    "vpcEndpoint",
+		"vpc_peering_connection":          "VpcPeeringConnection",
+		"vpc_peering_connection_id":       "VpcPeeringConnectionId",
+		"vpn_connection":                  "VpnConnection",
+		"vpn_gateway":                     "VpnGateway",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -2828,7 +2925,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_network_insights_analysis", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_analysis", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codeguruprofiler_profiling_group", profilingGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_codeguruprofiler_profiling_group", profilingGroupResourceType)
 }
 
-// profilingGroupResourceType returns the Terraform aws_codeguruprofiler_profiling_group resource type.
+// profilingGroupResourceType returns the Terraform awscc_codeguruprofiler_profiling_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeGuruProfiler::ProfilingGroup resource type.
 func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"agent_permissions": {
 			// Property: AgentPermissions
 			// CloudFormation resource type schema:
@@ -44,8 +45,8 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "The agent permissions attached to this profiling group.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"principals": {
 						// Property: Principals
 						Description: "The principals for the agent permissions.",
@@ -83,8 +84,8 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array"
 			// }
 			Description: "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"channel_id": {
 						// Property: channelId
 						Description: "Unique identifier for each Channel in the notification configuration of a Profiling Group",
@@ -98,7 +99,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -177,9 +178,8 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "The tags associated with a profiling group.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
@@ -193,22 +193,22 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource schema represents the Profiling Group resource in the Amazon CodeGuru Profiler service.",
 		Version:     1,
 		Attributes:  attributes,
@@ -216,7 +216,22 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruProfiler::ProfilingGroup").WithTerraformTypeName("aws_codeguruprofiler_profiling_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruProfiler::ProfilingGroup").WithTerraformTypeName("awscc_codeguruprofiler_profiling_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_permissions":                            "AgentPermissions",
+		"anomaly_detection_notification_configuration": "AnomalyDetectionNotificationConfiguration",
+		"arn":                  "Arn",
+		"channel_id":           "channelId",
+		"channel_uri":          "channelUri",
+		"compute_platform":     "ComputePlatform",
+		"key":                  "Key",
+		"principals":           "Principals",
+		"profiling_group_name": "ProfilingGroupName",
+		"tags":                 "Tags",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -228,7 +243,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_codeguruprofiler_profiling_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codeguruprofiler_profiling_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

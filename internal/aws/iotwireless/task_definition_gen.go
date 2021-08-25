@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_task_definition", taskDefinitionResourceType)
+	registry.AddResourceTypeFactory("awscc_iotwireless_task_definition", taskDefinitionResourceType)
 }
 
-// taskDefinitionResourceType returns the Terraform aws_iotwireless_task_definition resource type.
+// taskDefinitionResourceType returns the Terraform awscc_iotwireless_task_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::TaskDefinition resource type.
 func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -108,12 +107,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"current_version": {
 						// Property: CurrentVersion
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
 									Type:     types.StringType,
@@ -135,8 +134,8 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"update_version": {
 						// Property: UpdateVersion
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"model": {
 									// Property: Model
 									Type:     types.StringType,
@@ -201,7 +200,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "A list of key-value pairs that contain metadata for the destination.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -309,16 +308,16 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"lo_ra_wan": {
 						// Property: LoRaWAN
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"current_version": {
 									// Property: CurrentVersion
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
 												Type:     types.StringType,
@@ -350,8 +349,8 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"update_version": {
 									// Property: UpdateVersion
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"model": {
 												// Property: Model
 												Type:     types.StringType,
@@ -391,14 +390,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Creates a gateway task definition.",
 		Version:     1,
 		Attributes:  attributes,
@@ -406,7 +398,31 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("aws_iotwireless_task_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("awscc_iotwireless_task_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                 "Arn",
+		"auto_create_tasks":                   "AutoCreateTasks",
+		"current_version":                     "CurrentVersion",
+		"id":                                  "Id",
+		"key":                                 "Key",
+		"lo_ra_wan":                           "LoRaWAN",
+		"lo_ra_wan_update_gateway_task_entry": "LoRaWANUpdateGatewayTaskEntry",
+		"model":                               "Model",
+		"name":                                "Name",
+		"package_version":                     "PackageVersion",
+		"sig_key_crc":                         "SigKeyCrc",
+		"station":                             "Station",
+		"tags":                                "Tags",
+		"task_definition_type":                "TaskDefinitionType",
+		"update":                              "Update",
+		"update_data_role":                    "UpdateDataRole",
+		"update_data_source":                  "UpdateDataSource",
+		"update_signature":                    "UpdateSignature",
+		"update_version":                      "UpdateVersion",
+		"value":                               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -418,7 +434,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotwireless_task_definition", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_task_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

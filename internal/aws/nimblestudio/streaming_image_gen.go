@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_streaming_image", streamingImageResourceType)
+	registry.AddResourceTypeFactory("awscc_nimblestudio_streaming_image", streamingImageResourceType)
 }
 
-// streamingImageResourceType returns the Terraform aws_nimblestudio_streaming_image resource type.
+// streamingImageResourceType returns the Terraform awscc_nimblestudio_streaming_image resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::StreamingImage resource type.
 func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -59,8 +58,8 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key_arn": {
 						// Property: KeyArn
 						Type:     types.StringType,
@@ -153,14 +152,13 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::NimbleStudio::StreamingImage.",
 		Version:     1,
 		Attributes:  attributes,
@@ -168,7 +166,23 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StreamingImage").WithTerraformTypeName("aws_nimblestudio_streaming_image").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StreamingImage").WithTerraformTypeName("awscc_nimblestudio_streaming_image")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":              "Description",
+		"ec_2_image_id":            "Ec2ImageId",
+		"encryption_configuration": "EncryptionConfiguration",
+		"eula_ids":                 "EulaIds",
+		"key_arn":                  "KeyArn",
+		"key_type":                 "KeyType",
+		"name":                     "Name",
+		"owner":                    "Owner",
+		"platform":                 "Platform",
+		"streaming_image_id":       "StreamingImageId",
+		"studio_id":                "StudioId",
+		"tags":                     "Tags",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -180,7 +194,7 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_nimblestudio_streaming_image", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_nimblestudio_streaming_image", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

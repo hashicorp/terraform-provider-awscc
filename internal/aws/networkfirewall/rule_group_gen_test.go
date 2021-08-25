@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNetworkFirewallRuleGroup_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NetworkFirewall::RuleGroup", "aws_networkfirewall_rule_group", "test")
+	td := acctest.NewTestData(t, "AWS::NetworkFirewall::RuleGroup", "awscc_networkfirewall_rule_group", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

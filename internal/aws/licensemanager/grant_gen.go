@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_licensemanager_grant", grantResourceType)
+	registry.AddResourceTypeFactory("awscc_licensemanager_grant", grantResourceType)
 }
 
-// grantResourceType returns the Terraform aws_licensemanager_grant resource type.
+// grantResourceType returns the Terraform awscc_licensemanager_grant resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LicenseManager::Grant resource type.
 func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"allowed_operations": {
 			// Property: AllowedOperations
 			// CloudFormation resource type schema:
@@ -32,9 +33,9 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:       types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 			// AllowedOperations is a write-only attribute.
 		},
 		"grant_arn": {
@@ -90,9 +91,9 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:       types.ListType{ElemType: types.StringType},
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 			// Principals is a write-only attribute.
 		},
 		"status": {
@@ -117,14 +118,13 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -132,7 +132,19 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::Grant").WithTerraformTypeName("aws_licensemanager_grant").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::Grant").WithTerraformTypeName("awscc_licensemanager_grant")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_operations": "AllowedOperations",
+		"grant_arn":          "GrantArn",
+		"grant_name":         "GrantName",
+		"home_region":        "HomeRegion",
+		"license_arn":        "LicenseArn",
+		"principals":         "Principals",
+		"status":             "Status",
+		"version":            "Version",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Principals",
@@ -148,7 +160,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_licensemanager_grant", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_licensemanager_grant", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

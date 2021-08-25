@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lambda_code_signing_config", codeSigningConfigResourceType)
+	registry.AddResourceTypeFactory("awscc_lambda_code_signing_config", codeSigningConfigResourceType)
 }
 
-// codeSigningConfigResourceType returns the Terraform aws_lambda_code_signing_config resource type.
+// codeSigningConfigResourceType returns the Terraform awscc_lambda_code_signing_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource type.
 func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"allowed_publishers": {
 			// Property: AllowedPublishers
 			// CloudFormation resource type schema:
@@ -48,8 +47,8 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "object"
 			// }
 			Description: "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"signing_profile_version_arns": {
 						// Property: SigningProfileVersionArns
 						Description: "List of Signing profile version Arns",
@@ -106,8 +105,8 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "object"
 			// }
 			Description: "Policies to control how to act if a signature is invalid",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"untrusted_artifact_on_deployment": {
 						// Property: UntrustedArtifactOnDeployment
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
@@ -133,14 +132,13 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Lambda::CodeSigningConfig.",
 		Version:     1,
 		Attributes:  attributes,
@@ -148,7 +146,18 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("aws_lambda_code_signing_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("awscc_lambda_code_signing_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_publishers":               "AllowedPublishers",
+		"code_signing_config_arn":          "CodeSigningConfigArn",
+		"code_signing_config_id":           "CodeSigningConfigId",
+		"code_signing_policies":            "CodeSigningPolicies",
+		"description":                      "Description",
+		"signing_profile_version_arns":     "SigningProfileVersionArns",
+		"untrusted_artifact_on_deployment": "UntrustedArtifactOnDeployment",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -160,7 +169,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lambda_code_signing_config", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lambda_code_signing_config", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

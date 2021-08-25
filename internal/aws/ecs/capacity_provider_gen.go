@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_capacity_provider", capacityProviderResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_capacity_provider", capacityProviderResourceType)
 }
 
-// capacityProviderResourceType returns the Terraform aws_ecs_capacity_provider resource type.
+// capacityProviderResourceType returns the Terraform awscc_ecs_capacity_provider resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::CapacityProvider resource type.
 func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_provider": {
 			// Property: AutoScalingGroupProvider
 			// CloudFormation resource type schema:
@@ -70,8 +69,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auto_scaling_group_arn": {
 						// Property: AutoScalingGroupArn
 						Type:     types.StringType,
@@ -81,8 +80,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"managed_scaling": {
 						// Property: ManagedScaling
 						Description: "The managed scaling settings for the Auto Scaling group capacity provider.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"instance_warmup_period": {
 									// Property: InstanceWarmupPeriod
 									Type:     types.NumberType,
@@ -152,8 +151,8 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -165,20 +164,19 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ECS::CapacityProvider.",
 		Version:     1,
 		Attributes:  attributes,
@@ -186,7 +184,24 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("aws_ecs_capacity_provider").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("awscc_ecs_capacity_provider")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_group_arn":         "AutoScalingGroupArn",
+		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
+		"instance_warmup_period":         "InstanceWarmupPeriod",
+		"key":                            "Key",
+		"managed_scaling":                "ManagedScaling",
+		"managed_termination_protection": "ManagedTerminationProtection",
+		"maximum_scaling_step_size":      "MaximumScalingStepSize",
+		"minimum_scaling_step_size":      "MinimumScalingStepSize",
+		"name":                           "Name",
+		"status":                         "Status",
+		"tags":                           "Tags",
+		"target_capacity":                "TargetCapacity",
+		"value":                          "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -198,7 +213,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_capacity_provider", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_capacity_provider", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

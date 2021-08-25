@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSS3StorageLens_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::S3::StorageLens", "aws_s3_storage_lens", "test")
+	td := acctest.NewTestData(t, "AWS::S3::StorageLens", "awscc_s3_storage_lens", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

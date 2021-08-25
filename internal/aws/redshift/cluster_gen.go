@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_redshift_cluster", clusterResourceType)
+	registry.AddResourceTypeFactory("awscc_redshift_cluster", clusterResourceType)
 }
 
-// clusterResourceType returns the Terraform aws_redshift_cluster resource type.
+// clusterResourceType returns the Terraform awscc_redshift_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Redshift::Cluster resource type.
 func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"allow_version_upgrade": {
 			// Property: AllowVersionUpgrade
 			// CloudFormation resource type schema:
@@ -185,8 +186,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"address": {
 						// Property: Address
 						Type:     types.StringType,
@@ -236,9 +237,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
 		},
 		"id": {
 			// Property: Id
@@ -280,8 +281,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"bucket_name": {
 						// Property: BucketName
 						Type:     types.StringType,
@@ -449,8 +450,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "The list of tags for the cluster parameter group.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -464,7 +465,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -487,14 +488,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -502,7 +496,47 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("aws_redshift_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Redshift::Cluster").WithTerraformTypeName("awscc_redshift_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":                             "Address",
+		"allow_version_upgrade":               "AllowVersionUpgrade",
+		"automated_snapshot_retention_period": "AutomatedSnapshotRetentionPeriod",
+		"availability_zone":                   "AvailabilityZone",
+		"bucket_name":                         "BucketName",
+		"cluster_identifier":                  "ClusterIdentifier",
+		"cluster_parameter_group_name":        "ClusterParameterGroupName",
+		"cluster_security_groups":             "ClusterSecurityGroups",
+		"cluster_subnet_group_name":           "ClusterSubnetGroupName",
+		"cluster_type":                        "ClusterType",
+		"cluster_version":                     "ClusterVersion",
+		"db_name":                             "DBName",
+		"elastic_ip":                          "ElasticIp",
+		"encrypted":                           "Encrypted",
+		"endpoint":                            "Endpoint",
+		"hsm_client_certificate_identifier":   "HsmClientCertificateIdentifier",
+		"hsm_configuration_identifier":        "HsmConfigurationIdentifier",
+		"iam_roles":                           "IamRoles",
+		"id":                                  "Id",
+		"key":                                 "Key",
+		"kms_key_id":                          "KmsKeyId",
+		"logging_properties":                  "LoggingProperties",
+		"master_user_password":                "MasterUserPassword",
+		"master_username":                     "MasterUsername",
+		"node_type":                           "NodeType",
+		"number_of_nodes":                     "NumberOfNodes",
+		"owner_account":                       "OwnerAccount",
+		"port":                                "Port",
+		"preferred_maintenance_window":        "PreferredMaintenanceWindow",
+		"publicly_accessible":                 "PubliclyAccessible",
+		"s3_key_prefix":                       "S3KeyPrefix",
+		"snapshot_cluster_identifier":         "SnapshotClusterIdentifier",
+		"snapshot_identifier":                 "SnapshotIdentifier",
+		"tags":                                "Tags",
+		"value":                               "Value",
+		"vpc_security_group_ids":              "VpcSecurityGroupIds",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/MasterUserPassword",
@@ -517,7 +551,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_redshift_cluster", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_redshift_cluster", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

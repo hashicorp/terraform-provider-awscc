@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_task_set", taskSetResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_task_set", taskSetResourceType)
 }
 
-// taskSetResourceType returns the Terraform aws_ecs_task_set resource type.
+// taskSetResourceType returns the Terraform awscc_ecs_task_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::TaskSet resource type.
 func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cluster": {
 			// Property: Cluster
 			// CloudFormation resource type schema:
@@ -104,8 +103,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"container_name": {
 						// Property: ContainerName
 						Description: "The name of the container (as it appears in a container definition) to associate with the load balancer.",
@@ -131,7 +130,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -182,13 +181,13 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "An object representing the network configuration for a task or service.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"aws_vpc_configuration": {
 						// Property: AwsVpcConfiguration
 						Description: "The VPC subnets and security groups associated with a task. All specified subnets and security groups must be from the same VPC.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"assign_public_ip": {
 									// Property: AssignPublicIp
 									Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
@@ -250,8 +249,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"unit": {
 						// Property: Unit
 						Description: "The unit of measure for the scale value.",
@@ -310,8 +309,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"container_name": {
 						// Property: ContainerName
 						Description: "The container name value, already specified in the task definition, to be used for your service discovery service. If the task definition that your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition that your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
@@ -337,7 +336,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -357,14 +356,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
 		Version:     1,
 		Attributes:  attributes,
@@ -372,7 +364,34 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("aws_ecs_task_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"assign_public_ip":      "AssignPublicIp",
+		"aws_vpc_configuration": "AwsVpcConfiguration",
+		"cluster":               "Cluster",
+		"container_name":        "ContainerName",
+		"container_port":        "ContainerPort",
+		"external_id":           "ExternalId",
+		"id":                    "Id",
+		"launch_type":           "LaunchType",
+		"load_balancer_name":    "LoadBalancerName",
+		"load_balancers":        "LoadBalancers",
+		"network_configuration": "NetworkConfiguration",
+		"platform_version":      "PlatformVersion",
+		"port":                  "Port",
+		"registry_arn":          "RegistryArn",
+		"scale":                 "Scale",
+		"security_groups":       "SecurityGroups",
+		"service":               "Service",
+		"service_registries":    "ServiceRegistries",
+		"subnets":               "Subnets",
+		"target_group_arn":      "TargetGroupArn",
+		"task_definition":       "TaskDefinition",
+		"unit":                  "Unit",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -384,7 +403,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_task_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_task_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,23 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmincidents_response_plan", responsePlanResourceType)
+	registry.AddResourceTypeFactory("awscc_ssmincidents_response_plan", responsePlanResourceType)
 }
 
-// responsePlanResourceType returns the Terraform aws_ssmincidents_response_plan resource type.
+// responsePlanResourceType returns the Terraform awscc_ssmincidents_response_plan resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ResponsePlan resource type.
 func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"actions": {
 			// Property: Actions
 			// CloudFormation resource type schema:
@@ -111,14 +111,13 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The list of actions.",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ssm_automation": {
 						// Property: SsmAutomation
 						Description: "The configuration to use when starting the SSM automation document.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"document_name": {
 									// Property: DocumentName
 									Description: "The document name to use when starting the SSM automation document.",
@@ -135,7 +134,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Parameters
 									Description: "The parameters to set when starting the SSM automation document.",
 									Attributes: providertypes.SetNestedAttributes(
-										map[string]schema.Attribute{
+										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -143,9 +142,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"values": {
 												// Property: Values
-												// Ordered set.
-												Type:     types.ListType{ElemType: types.StringType},
-												Required: true,
+												Type:       types.ListType{ElemType: types.StringType},
+												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+												Required:   true,
 											},
 										},
 										providertypes.SetNestedAttributesOptions{
@@ -171,11 +170,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 1,
 				},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"arn": {
 			// Property: Arn
@@ -212,13 +212,13 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The chat channel configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						// Ordered set.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:       types.ListType{ElemType: types.StringType},
+						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+						Optional:   true,
 					},
 				},
 			),
@@ -312,8 +312,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The incident template configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"dedupe_string": {
 						// Property: DedupeString
 						Description: "The deduplication string.",
@@ -329,8 +329,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"notification_targets": {
 						// Property: NotificationTargets
 						Description: "The list of notification targets.",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
 									Description: "The ARN of the Chatbot SNS topic.",
@@ -338,7 +338,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MaxItems: 10,
 							},
 						),
@@ -410,7 +410,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The tags to apply to the response plan.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -431,14 +431,13 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::SSMIncidents::ResponsePlan",
 		Version:     1,
 		Attributes:  attributes,
@@ -446,7 +445,35 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("aws_ssmincidents_response_plan").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plan")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"actions":              "Actions",
+		"arn":                  "Arn",
+		"chat_channel":         "ChatChannel",
+		"chatbot_sns":          "ChatbotSns",
+		"dedupe_string":        "DedupeString",
+		"display_name":         "DisplayName",
+		"document_name":        "DocumentName",
+		"document_version":     "DocumentVersion",
+		"engagements":          "Engagements",
+		"impact":               "Impact",
+		"incident_template":    "IncidentTemplate",
+		"key":                  "Key",
+		"name":                 "Name",
+		"notification_targets": "NotificationTargets",
+		"parameters":           "Parameters",
+		"role_arn":             "RoleArn",
+		"sns_topic_arn":        "SnsTopicArn",
+		"ssm_automation":       "SsmAutomation",
+		"summary":              "Summary",
+		"tags":                 "Tags",
+		"target_account":       "TargetAccount",
+		"title":                "Title",
+		"value":                "Value",
+		"values":               "Values",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -458,7 +485,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ssmincidents_response_plan", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssmincidents_response_plan", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

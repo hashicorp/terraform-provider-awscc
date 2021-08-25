@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_global_network", globalNetworkResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_global_network", globalNetworkResourceType)
 }
 
-// globalNetworkResourceType returns the Terraform aws_networkmanager_global_network resource type.
+// globalNetworkResourceType returns the Terraform awscc_networkmanager_global_network resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::GlobalNetwork resource type.
 func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -76,8 +75,8 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "array"
 			// }
 			Description: "The tags for the global network.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -89,20 +88,13 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::GlobalNetwork type specifies a global network of the user's account",
 		Version:     1,
 		Attributes:  attributes,
@@ -110,7 +102,17 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("aws_networkmanager_global_network").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_network")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":         "Arn",
+		"description": "Description",
+		"id":          "Id",
+		"key":         "Key",
+		"tags":        "Tags",
+		"value":       "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -122,7 +124,7 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_global_network", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_global_network", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

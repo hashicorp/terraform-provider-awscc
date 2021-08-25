@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_finspace_environment", environmentResourceType)
+	registry.AddResourceTypeFactory("awscc_finspace_environment", environmentResourceType)
 }
 
-// environmentResourceType returns the Terraform aws_finspace_environment resource type.
+// environmentResourceType returns the Terraform awscc_finspace_environment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FinSpace::Environment resource type.
 func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"aws_account_id": {
 			// Property: AwsAccountId
 			// CloudFormation resource type schema:
@@ -152,8 +151,8 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Additional parameters to identify Federation mode",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"application_call_back_url": {
 						// Property: ApplicationCallBackURL
 						Description: "SAML metadata URL to link with the Environment",
@@ -257,14 +256,13 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -272,7 +270,29 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FinSpace::Environment").WithTerraformTypeName("aws_finspace_environment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FinSpace::Environment").WithTerraformTypeName("awscc_finspace_environment")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_call_back_url":    "ApplicationCallBackURL",
+		"attribute_map":                "AttributeMap",
+		"aws_account_id":               "AwsAccountId",
+		"dedicated_service_account_id": "DedicatedServiceAccountId",
+		"description":                  "Description",
+		"environment_arn":              "EnvironmentArn",
+		"environment_id":               "EnvironmentId",
+		"environment_url":              "EnvironmentUrl",
+		"federation_mode":              "FederationMode",
+		"federation_parameters":        "FederationParameters",
+		"federation_provider_name":     "FederationProviderName",
+		"federation_urn":               "FederationURN",
+		"kms_key_id":                   "KmsKeyId",
+		"name":                         "Name",
+		"sage_maker_studio_domain_url": "SageMakerStudioDomainUrl",
+		"saml_metadata_document":       "SamlMetadataDocument",
+		"saml_metadata_url":            "SamlMetadataURL",
+		"status":                       "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -284,7 +304,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_finspace_environment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_finspace_environment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

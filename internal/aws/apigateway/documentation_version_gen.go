@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_apigateway_documentation_version", documentationVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_apigateway_documentation_version", documentationVersionResourceType)
 }
 
-// documentationVersionResourceType returns the Terraform aws_apigateway_documentation_version resource type.
+// documentationVersionResourceType returns the Terraform awscc_apigateway_documentation_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ApiGateway::DocumentationVersion resource type.
 func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -61,14 +60,13 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A snapshot of the documentation of an API.",
 		Version:     1,
 		Attributes:  attributes,
@@ -76,7 +74,14 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DocumentationVersion").WithTerraformTypeName("aws_apigateway_documentation_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DocumentationVersion").WithTerraformTypeName("awscc_apigateway_documentation_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":           "Description",
+		"documentation_version": "DocumentationVersion",
+		"rest_api_id":           "RestApiId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -88,7 +93,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_apigateway_documentation_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_documentation_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

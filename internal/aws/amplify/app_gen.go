@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_app", appResourceType)
+	registry.AddResourceTypeFactory("awscc_amplify_app", appResourceType)
 }
 
-// appResourceType returns the Terraform aws_amplify_app resource type.
+// appResourceType returns the Terraform awscc_amplify_app resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::App resource type.
 func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_token": {
 			// Property: AccessToken
 			// CloudFormation resource type schema:
@@ -162,8 +161,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"auto_branch_creation_patterns": {
 						// Property: AutoBranchCreationPatterns
 						Type:     types.ListType{ElemType: types.StringType},
@@ -171,8 +170,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"basic_auth_config": {
 						// Property: BasicAuthConfig
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enable_basic_auth": {
 									// Property: EnableBasicAuth
 									Type:     types.BoolType,
@@ -219,8 +218,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"environment_variables": {
 						// Property: EnvironmentVariables
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"name": {
 									// Property: Name
 									Type:     types.StringType,
@@ -232,7 +231,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -273,8 +272,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"enable_basic_auth": {
 						// Property: EnableBasicAuth
 						Type:     types.BoolType,
@@ -360,8 +359,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"condition": {
 						// Property: Condition
 						Type:     types.StringType,
@@ -383,7 +382,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -445,8 +444,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -458,7 +457,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -537,8 +536,8 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -550,20 +549,19 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a collection of branches.",
 		Version:     1,
 		Attributes:  attributes,
@@ -571,7 +569,45 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Amplify::App").WithTerraformTypeName("aws_amplify_app").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Amplify::App").WithTerraformTypeName("awscc_amplify_app")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_token":                  "AccessToken",
+		"app_id":                        "AppId",
+		"app_name":                      "AppName",
+		"arn":                           "Arn",
+		"auto_branch_creation_config":   "AutoBranchCreationConfig",
+		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
+		"basic_auth_config":             "BasicAuthConfig",
+		"build_spec":                    "BuildSpec",
+		"condition":                     "Condition",
+		"custom_headers":                "CustomHeaders",
+		"custom_rules":                  "CustomRules",
+		"default_domain":                "DefaultDomain",
+		"description":                   "Description",
+		"enable_auto_branch_creation":   "EnableAutoBranchCreation",
+		"enable_auto_build":             "EnableAutoBuild",
+		"enable_basic_auth":             "EnableBasicAuth",
+		"enable_branch_auto_deletion":   "EnableBranchAutoDeletion",
+		"enable_performance_mode":       "EnablePerformanceMode",
+		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"environment_variables":         "EnvironmentVariables",
+		"iam_service_role":              "IAMServiceRole",
+		"key":                           "Key",
+		"name":                          "Name",
+		"oauth_token":                   "OauthToken",
+		"password":                      "Password",
+		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"repository":                    "Repository",
+		"source":                        "Source",
+		"stage":                         "Stage",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"target":                        "Target",
+		"username":                      "Username",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AccessToken",
@@ -589,7 +625,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_amplify_app", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_amplify_app", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

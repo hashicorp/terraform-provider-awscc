@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAthenaDataCatalog_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Athena::DataCatalog", "aws_athena_data_catalog", "test")
+	td := acctest.NewTestData(t, "AWS::Athena::DataCatalog", "awscc_athena_data_catalog", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_portal", portalResourceType)
+	registry.AddResourceTypeFactory("awscc_iotsitewise_portal", portalResourceType)
 }
 
-// portalResourceType returns the Terraform aws_iotsitewise_portal resource type.
+// portalResourceType returns the Terraform awscc_iotsitewise_portal resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Portal resource type.
 func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alarms": {
 			// Property: Alarms
 			// CloudFormation resource type schema:
@@ -41,8 +40,8 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"alarm_role_arn": {
 						// Property: AlarmRoleArn
 						Description: "The ARN of the IAM role that allows the alarm to perform actions and access AWS resources and services, such as AWS IoT Events.",
@@ -198,9 +197,8 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "A list of key-value pairs that contain metadata for the portal.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -212,21 +210,20 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			// Tags is a write-only attribute.
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::Portal",
 		Version:     1,
 		Attributes:  attributes,
@@ -234,7 +231,27 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Portal").WithTerraformTypeName("aws_iotsitewise_portal").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Portal").WithTerraformTypeName("awscc_iotsitewise_portal")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_role_arn":            "AlarmRoleArn",
+		"alarms":                    "Alarms",
+		"key":                       "Key",
+		"notification_lambda_arn":   "NotificationLambdaArn",
+		"notification_sender_email": "NotificationSenderEmail",
+		"portal_arn":                "PortalArn",
+		"portal_auth_mode":          "PortalAuthMode",
+		"portal_client_id":          "PortalClientId",
+		"portal_contact_email":      "PortalContactEmail",
+		"portal_description":        "PortalDescription",
+		"portal_id":                 "PortalId",
+		"portal_name":               "PortalName",
+		"portal_start_url":          "PortalStartUrl",
+		"role_arn":                  "RoleArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
@@ -249,7 +266,7 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotsitewise_portal", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotsitewise_portal", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

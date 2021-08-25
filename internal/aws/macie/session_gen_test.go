@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSMacieSession_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Macie::Session", "aws_macie_session", "test")
+	td := acctest.NewTestData(t, "AWS::Macie::Session", "awscc_macie_session", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSMacieSession_basic(t *testing.T) {
 }
 
 func TestAccAWSMacieSession_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Macie::Session", "aws_macie_session", "test")
+	td := acctest.NewTestData(t, "AWS::Macie::Session", "awscc_macie_session", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

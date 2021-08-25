@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSCodeArtifactRepository_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::CodeArtifact::Repository", "aws_codeartifact_repository", "test")
+	td := acctest.NewTestData(t, "AWS::CodeArtifact::Repository", "awscc_codeartifact_repository", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

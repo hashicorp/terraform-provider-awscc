@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_cluster", clusterResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoverycontrol_cluster", clusterResourceType)
 }
 
-// clusterResourceType returns the Terraform aws_route53recoverycontrol_cluster resource type.
+// clusterResourceType returns the Terraform awscc_route53recoverycontrol_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::Cluster resource type.
 func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
@@ -60,9 +59,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Endpoints for the cluster.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"endpoint": {
 						// Property: Endpoint
 						Type:     types.StringType,
@@ -74,7 +72,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -111,14 +109,13 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Route53 Recovery Control Cluster resource schema",
 		Version:     1,
 		Attributes:  attributes,
@@ -126,7 +123,17 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::Cluster").WithTerraformTypeName("aws_route53recoverycontrol_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::Cluster").WithTerraformTypeName("awscc_route53recoverycontrol_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster_arn":       "ClusterArn",
+		"cluster_endpoints": "ClusterEndpoints",
+		"endpoint":          "Endpoint",
+		"name":              "Name",
+		"region":            "Region",
+		"status":            "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -138,7 +145,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoverycontrol_cluster", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_cluster", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_network_insights_path", networkInsightsPathResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_network_insights_path", networkInsightsPathResourceType)
 }
 
-// networkInsightsPathResourceType returns the Terraform aws_ec2_network_insights_path resource type.
+// networkInsightsPathResourceType returns the Terraform awscc_ec2_network_insights_path resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::NetworkInsightsPath resource type.
 func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"created_date": {
 			// Property: CreatedDate
 			// CloudFormation resource type schema:
@@ -138,9 +137,8 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -152,20 +150,19 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::EC2::NetworkInsightsPath",
 		Version:     1,
 		Attributes:  attributes,
@@ -173,7 +170,23 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsPath").WithTerraformTypeName("aws_ec2_network_insights_path").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsPath").WithTerraformTypeName("awscc_ec2_network_insights_path")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"created_date":              "CreatedDate",
+		"destination":               "Destination",
+		"destination_ip":            "DestinationIp",
+		"destination_port":          "DestinationPort",
+		"key":                       "Key",
+		"network_insights_path_arn": "NetworkInsightsPathArn",
+		"network_insights_path_id":  "NetworkInsightsPathId",
+		"protocol":                  "Protocol",
+		"source":                    "Source",
+		"source_ip":                 "SourceIp",
+		"tags":                      "Tags",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -185,7 +198,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_network_insights_path", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_path", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

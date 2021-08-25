@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_s3_access_point", accessPointResourceType)
+	registry.AddResourceTypeFactory("awscc_s3_access_point", accessPointResourceType)
 }
 
-// accessPointResourceType returns the Terraform aws_s3_access_point resource type.
+// accessPointResourceType returns the Terraform awscc_s3_access_point resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::S3::AccessPoint resource type.
 func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"alias": {
 			// Property: Alias
 			// CloudFormation resource type schema:
@@ -118,8 +117,8 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"is_public": {
 						// Property: IsPublic
 						Description: "Specifies whether the policy is public or not.",
@@ -154,8 +153,8 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"block_public_acls": {
 						// Property: BlockPublicAcls
 						Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
@@ -202,8 +201,8 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The Virtual Private Cloud (VPC) configuration for a bucket access point.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"vpc_id": {
 						// Property: VpcId
 						Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
@@ -218,14 +217,13 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::S3::AccessPoint resource is an Amazon S3 resource type that you can use to access buckets.",
 		Version:     1,
 		Attributes:  attributes,
@@ -233,7 +231,26 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::S3::AccessPoint").WithTerraformTypeName("aws_s3_access_point").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3::AccessPoint").WithTerraformTypeName("awscc_s3_access_point")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias":                             "Alias",
+		"arn":                               "Arn",
+		"block_public_acls":                 "BlockPublicAcls",
+		"block_public_policy":               "BlockPublicPolicy",
+		"bucket":                            "Bucket",
+		"ignore_public_acls":                "IgnorePublicAcls",
+		"is_public":                         "IsPublic",
+		"name":                              "Name",
+		"network_origin":                    "NetworkOrigin",
+		"policy":                            "Policy",
+		"policy_status":                     "PolicyStatus",
+		"public_access_block_configuration": "PublicAccessBlockConfiguration",
+		"restrict_public_buckets":           "RestrictPublicBuckets",
+		"vpc_configuration":                 "VpcConfiguration",
+		"vpc_id":                            "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -245,7 +262,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_s3_access_point", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3_access_point", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSOpsWorksCMServer_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::OpsWorksCM::Server", "aws_opsworkscm_server", "test")
+	td := acctest.NewTestData(t, "AWS::OpsWorksCM::Server", "awscc_opsworkscm_server", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_glue_schema_version_metadata", schemaVersionMetadataResourceType)
+	registry.AddResourceTypeFactory("awscc_glue_schema_version_metadata", schemaVersionMetadataResourceType)
 }
 
-// schemaVersionMetadataResourceType returns the Terraform aws_glue_schema_version_metadata resource type.
+// schemaVersionMetadataResourceType returns the Terraform awscc_glue_schema_version_metadata resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Glue::SchemaVersionMetadata resource type.
 func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"key": {
 			// Property: Key
 			// CloudFormation resource type schema:
@@ -65,14 +64,13 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This resource adds Key-Value metadata to a Schema version of Glue Schema Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -80,7 +78,14 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("aws_glue_schema_version_metadata").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":               "Key",
+		"schema_version_id": "SchemaVersionId",
+		"value":             "Value",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -92,7 +97,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_glue_schema_version_metadata", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_schema_version_metadata", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

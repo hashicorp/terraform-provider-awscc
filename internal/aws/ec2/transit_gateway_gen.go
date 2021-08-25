@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway", transitGatewayResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway", transitGatewayResourceType)
 }
 
-// transitGatewayResourceType returns the Terraform aws_ec2_transit_gateway resource type.
+// transitGatewayResourceType returns the Terraform awscc_ec2_transit_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGateway resource type.
 func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"amazon_side_asn": {
 			// Property: AmazonSideAsn
 			// CloudFormation resource type schema:
@@ -139,8 +138,8 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -152,7 +151,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -179,14 +178,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::TransitGateway",
 		Version:     1,
 		Attributes:  attributes,
@@ -194,7 +186,26 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGateway").WithTerraformTypeName("aws_ec2_transit_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGateway").WithTerraformTypeName("awscc_ec2_transit_gateway")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"amazon_side_asn":                    "AmazonSideAsn",
+		"association_default_route_table_id": "AssociationDefaultRouteTableId",
+		"auto_accept_shared_attachments":     "AutoAcceptSharedAttachments",
+		"default_route_table_association":    "DefaultRouteTableAssociation",
+		"default_route_table_propagation":    "DefaultRouteTablePropagation",
+		"description":                        "Description",
+		"dns_support":                        "DnsSupport",
+		"id":                                 "Id",
+		"key":                                "Key",
+		"multicast_support":                  "MulticastSupport",
+		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
+		"tags":                               "Tags",
+		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",
+		"value":                              "Value",
+		"vpn_ecmp_support":                   "VpnEcmpSupport",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -206,7 +217,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

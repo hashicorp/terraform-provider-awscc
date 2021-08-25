@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_device_fleet", deviceFleetResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_device_fleet", deviceFleetResourceType)
 }
 
-// deviceFleetResourceType returns the Terraform aws_sagemaker_device_fleet resource type.
+// deviceFleetResourceType returns the Terraform awscc_sagemaker_device_fleet resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::DeviceFleet resource type.
 func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -76,8 +75,8 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"kms_key_id": {
 						// Property: KmsKeyId
 						Description: "The KMS key id used for encryption on the S3 bucket",
@@ -141,8 +140,8 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Associate tags with the resource",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -156,20 +155,19 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::SageMaker::DeviceFleet",
 		Version:     1,
 		Attributes:  attributes,
@@ -177,7 +175,20 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("aws_sagemaker_device_fleet").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DeviceFleet").WithTerraformTypeName("awscc_sagemaker_device_fleet")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":        "Description",
+		"device_fleet_name":  "DeviceFleetName",
+		"key":                "Key",
+		"kms_key_id":         "KmsKeyId",
+		"output_config":      "OutputConfig",
+		"role_arn":           "RoleArn",
+		"s3_output_location": "S3OutputLocation",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -189,7 +200,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_device_fleet", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_device_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_databrew_project", projectResourceType)
+	registry.AddResourceTypeFactory("awscc_databrew_project", projectResourceType)
 }
 
-// projectResourceType returns the Terraform aws_databrew_project resource type.
+// projectResourceType returns the Terraform awscc_databrew_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataBrew::Project resource type.
 func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"dataset_name": {
 			// Property: DatasetName
 			// CloudFormation resource type schema:
@@ -98,8 +97,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"size": {
 						// Property: Size
 						Description: "Sample size",
@@ -145,9 +144,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -159,7 +157,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -167,14 +165,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::DataBrew::Project.",
 		Version:     1,
 		Attributes:  attributes,
@@ -182,7 +179,21 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Project").WithTerraformTypeName("aws_databrew_project").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Project").WithTerraformTypeName("awscc_databrew_project")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"dataset_name": "DatasetName",
+		"key":          "Key",
+		"name":         "Name",
+		"recipe_name":  "RecipeName",
+		"role_arn":     "RoleArn",
+		"sample":       "Sample",
+		"size":         "Size",
+		"tags":         "Tags",
+		"type":         "Type",
+		"value":        "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -194,7 +205,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_databrew_project", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_databrew_project", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

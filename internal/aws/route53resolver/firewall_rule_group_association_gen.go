@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResourceType)
 }
 
-// firewallRuleGroupAssociationResourceType returns the Terraform aws_route53resolver_firewall_rule_group_association resource type.
+// firewallRuleGroupAssociationResourceType returns the Terraform awscc_route53resolver_firewall_rule_group_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroupAssociation resource type.
 func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -217,7 +216,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Description: "Tags",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -251,14 +250,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroupAssociation.",
 		Version:     1,
 		Attributes:  attributes,
@@ -266,7 +258,27 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("aws_route53resolver_firewall_rule_group_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"creation_time":          "CreationTime",
+		"creator_request_id":     "CreatorRequestId",
+		"firewall_rule_group_id": "FirewallRuleGroupId",
+		"id":                     "Id",
+		"key":                    "Key",
+		"managed_owner_name":     "ManagedOwnerName",
+		"modification_time":      "ModificationTime",
+		"mutation_protection":    "MutationProtection",
+		"name":                   "Name",
+		"priority":               "Priority",
+		"status":                 "Status",
+		"status_message":         "StatusMessage",
+		"tags":                   "Tags",
+		"value":                  "Value",
+		"vpc_id":                 "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -278,7 +290,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53resolver_firewall_rule_group_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_firewall_rule_group_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_qldb_stream", streamResourceType)
+	registry.AddResourceTypeFactory("awscc_qldb_stream", streamResourceType)
 }
 
-// streamResourceType returns the Terraform aws_qldb_stream resource type.
+// streamResourceType returns the Terraform awscc_qldb_stream resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QLDB::Stream resource type.
 func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -79,8 +78,8 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"aggregation_enabled": {
 						// Property: AggregationEnabled
 						Type:     types.BoolType,
@@ -162,7 +161,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -184,14 +183,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::QLDB::Stream.",
 		Version:     1,
 		Attributes:  attributes,
@@ -199,7 +191,24 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("aws_qldb_stream").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("awscc_qldb_stream")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"aggregation_enabled":   "AggregationEnabled",
+		"arn":                   "Arn",
+		"exclusive_end_time":    "ExclusiveEndTime",
+		"id":                    "Id",
+		"inclusive_start_time":  "InclusiveStartTime",
+		"key":                   "Key",
+		"kinesis_configuration": "KinesisConfiguration",
+		"ledger_name":           "LedgerName",
+		"role_arn":              "RoleArn",
+		"stream_arn":            "StreamArn",
+		"stream_name":           "StreamName",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -211,7 +220,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_qldb_stream", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_qldb_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediaconnect_flow", flowResourceType)
+	registry.AddResourceTypeFactory("awscc_mediaconnect_flow", flowResourceType)
 }
 
-// flowResourceType returns the Terraform aws_mediaconnect_flow resource type.
+// flowResourceType returns the Terraform awscc_mediaconnect_flow resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaConnect::Flow resource type.
 func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"availability_zone": {
 			// Property: AvailabilityZone
 			// CloudFormation resource type schema:
@@ -190,13 +189,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The settings for the source of the flow.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"decryption": {
 						// Property: Decryption
 						Description: "Information about the encryption of the flow.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"algorithm": {
 									// Property: Algorithm
 									Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -355,8 +354,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The settings for source failover",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"recovery_window": {
 						// Property: RecoveryWindow
 						Description: "Search window time to look for dash-7 packets",
@@ -374,14 +373,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaConnect::Flow",
 		Version:     1,
 		Attributes:  attributes,
@@ -389,7 +387,40 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::Flow").WithTerraformTypeName("aws_mediaconnect_flow").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::Flow").WithTerraformTypeName("awscc_mediaconnect_flow")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"algorithm":                      "Algorithm",
+		"availability_zone":              "AvailabilityZone",
+		"constant_initialization_vector": "ConstantInitializationVector",
+		"decryption":                     "Decryption",
+		"description":                    "Description",
+		"device_id":                      "DeviceId",
+		"entitlement_arn":                "EntitlementArn",
+		"flow_arn":                       "FlowArn",
+		"flow_availability_zone":         "FlowAvailabilityZone",
+		"ingest_ip":                      "IngestIp",
+		"ingest_port":                    "IngestPort",
+		"key_type":                       "KeyType",
+		"max_bitrate":                    "MaxBitrate",
+		"max_latency":                    "MaxLatency",
+		"name":                           "Name",
+		"protocol":                       "Protocol",
+		"recovery_window":                "RecoveryWindow",
+		"region":                         "Region",
+		"resource_id":                    "ResourceId",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"source":                         "Source",
+		"source_arn":                     "SourceArn",
+		"source_failover_config":         "SourceFailoverConfig",
+		"state":                          "State",
+		"stream_id":                      "StreamId",
+		"url":                            "Url",
+		"vpc_interface_name":             "VpcInterfaceName",
+		"whitelist_cidr":                 "WhitelistCidr",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -401,7 +432,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediaconnect_flow", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

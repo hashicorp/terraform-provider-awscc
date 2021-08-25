@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudformation.Client, roleARN, typeName, id string) (*types.ResourceDescription, error) {

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_provisioning_template", provisioningTemplateResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_provisioning_template", provisioningTemplateResourceType)
 }
 
-// provisioningTemplateResourceType returns the Terraform aws_iot_provisioning_template resource type.
+// provisioningTemplateResourceType returns the Terraform awscc_iot_provisioning_template resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::ProvisioningTemplate resource type.
 func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -55,8 +54,8 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"payload_version": {
 						// Property: PayloadVersion
 						Type:     types.StringType,
@@ -102,8 +101,8 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -115,7 +114,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -153,14 +152,13 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Creates a fleet provisioning template.",
 		Version:     1,
 		Attributes:  attributes,
@@ -168,7 +166,23 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::ProvisioningTemplate").WithTerraformTypeName("aws_iot_provisioning_template").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::ProvisioningTemplate").WithTerraformTypeName("awscc_iot_provisioning_template")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"description":           "Description",
+		"enabled":               "Enabled",
+		"key":                   "Key",
+		"payload_version":       "PayloadVersion",
+		"pre_provisioning_hook": "PreProvisioningHook",
+		"provisioning_role_arn": "ProvisioningRoleArn",
+		"tags":                  "Tags",
+		"target_arn":            "TargetArn",
+		"template_arn":          "TemplateArn",
+		"template_body":         "TemplateBody",
+		"template_name":         "TemplateName",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -180,7 +194,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_provisioning_template", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_provisioning_template", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

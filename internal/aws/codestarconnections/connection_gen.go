@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_codestarconnections_connection", connectionResourceType)
+	registry.AddResourceTypeFactory("awscc_codestarconnections_connection", connectionResourceType)
 }
 
-// connectionResourceType returns the Terraform aws_codestarconnections_connection resource type.
+// connectionResourceType returns the Terraform awscc_codestarconnections_connection resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CodeStarConnections::Connection resource type.
 func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"connection_arn": {
 			// Property: ConnectionArn
 			// CloudFormation resource type schema:
@@ -134,8 +133,8 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "Specifies the tags applied to a connection.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
@@ -149,20 +148,19 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Schema for AWS::CodeStarConnections::Connection resource which can be used to connect external source providers with AWS CodePipeline",
 		Version:     1,
 		Attributes:  attributes,
@@ -170,7 +168,20 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::Connection").WithTerraformTypeName("aws_codestarconnections_connection").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::Connection").WithTerraformTypeName("awscc_codestarconnections_connection")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_arn":    "ConnectionArn",
+		"connection_name":   "ConnectionName",
+		"connection_status": "ConnectionStatus",
+		"host_arn":          "HostArn",
+		"key":               "Key",
+		"owner_account_id":  "OwnerAccountId",
+		"provider_type":     "ProviderType",
+		"tags":              "Tags",
+		"value":             "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -182,7 +193,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_codestarconnections_connection", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codestarconnections_connection", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

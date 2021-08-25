@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoverycontrol_routing_control", routingControlResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoverycontrol_routing_control", routingControlResourceType)
 }
 
-// routingControlResourceType returns the Terraform aws_route53recoverycontrol_routing_control resource type.
+// routingControlResourceType returns the Terraform awscc_route53recoverycontrol_routing_control resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryControl::RoutingControl resource type.
 func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cluster_arn": {
 			// Property: ClusterArn
 			// CloudFormation resource type schema:
@@ -91,14 +90,13 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Route53 Recovery Control Routing Control resource schema .",
 		Version:     1,
 		Attributes:  attributes,
@@ -106,7 +104,16 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::RoutingControl").WithTerraformTypeName("aws_route53recoverycontrol_routing_control").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryControl::RoutingControl").WithTerraformTypeName("awscc_route53recoverycontrol_routing_control")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cluster_arn":         "ClusterArn",
+		"control_panel_arn":   "ControlPanelArn",
+		"name":                "Name",
+		"routing_control_arn": "RoutingControlArn",
+		"status":              "Status",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ClusterArn",
@@ -121,7 +128,7 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoverycontrol_routing_control", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_routing_control", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

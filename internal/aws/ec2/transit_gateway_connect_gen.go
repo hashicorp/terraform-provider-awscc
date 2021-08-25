@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_connect", transitGatewayConnectResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_connect", transitGatewayConnectResourceType)
 }
 
-// transitGatewayConnectResourceType returns the Terraform aws_ec2_transit_gateway_connect resource type.
+// transitGatewayConnectResourceType returns the Terraform awscc_ec2_transit_gateway_connect resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource type.
 func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"creation_time": {
 			// Property: CreationTime
 			// CloudFormation resource type schema:
@@ -46,8 +45,8 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"protocol": {
 						// Property: Protocol
 						Description: "The tunnel protocol.",
@@ -92,8 +91,8 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "type": "array"
 			// }
 			Description: "The tags for the attachment.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
@@ -107,7 +106,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -147,14 +146,13 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::EC2::TransitGatewayConnect type",
 		Version:     1,
 		Attributes:  attributes,
@@ -162,7 +160,21 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("aws_ec2_transit_gateway_connect").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("awscc_ec2_transit_gateway_connect")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"creation_time":                 "CreationTime",
+		"key":                           "Key",
+		"options":                       "Options",
+		"protocol":                      "Protocol",
+		"state":                         "State",
+		"tags":                          "Tags",
+		"transit_gateway_attachment_id": "TransitGatewayAttachmentId",
+		"transit_gateway_id":            "TransitGatewayId",
+		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
+		"value": "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -174,7 +186,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_connect", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_connect", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

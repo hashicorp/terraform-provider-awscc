@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53_key_signing_key", keySigningKeyResourceType)
+	registry.AddResourceTypeFactory("awscc_route53_key_signing_key", keySigningKeyResourceType)
 }
 
-// keySigningKeyResourceType returns the Terraform aws_route53_key_signing_key resource type.
+// keySigningKeyResourceType returns the Terraform awscc_route53_key_signing_key resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53::KeySigningKey resource type.
 func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"hosted_zone_id": {
 			// Property: HostedZoneId
 			// CloudFormation resource type schema:
@@ -79,14 +78,13 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Represents a key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.",
 		Version:     1,
 		Attributes:  attributes,
@@ -94,7 +92,15 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53::KeySigningKey").WithTerraformTypeName("aws_route53_key_signing_key").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53::KeySigningKey").WithTerraformTypeName("awscc_route53_key_signing_key")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"hosted_zone_id":             "HostedZoneId",
+		"key_management_service_arn": "KeyManagementServiceArn",
+		"name":                       "Name",
+		"status":                     "Status",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -106,7 +112,7 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53_key_signing_key", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_key_signing_key", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

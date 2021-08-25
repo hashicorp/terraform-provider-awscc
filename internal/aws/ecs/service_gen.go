@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_service", serviceResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_service", serviceResourceType)
 }
 
-// serviceResourceType returns the Terraform aws_ecs_service resource type.
+// serviceResourceType returns the Terraform awscc_ecs_service resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::Service resource type.
 func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"capacity_provider_strategy": {
 			// Property: CapacityProviderStrategy
 			// CloudFormation resource type schema:
@@ -43,8 +42,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
 						Type:     types.NumberType,
@@ -61,7 +60,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -107,12 +106,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"deployment_circuit_breaker": {
 						// Property: DeploymentCircuitBreaker
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"enable": {
 									// Property: Enable
 									Type:     types.BoolType,
@@ -158,8 +157,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -249,8 +248,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"container_name": {
 						// Property: ContainerName
 						Type:     types.StringType,
@@ -272,7 +271,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -321,12 +320,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"awsvpc_configuration": {
 						// Property: AwsvpcConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"assign_public_ip": {
 									// Property: AssignPublicIp
 									Type:     types.StringType,
@@ -375,8 +374,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"expression": {
 						// Property: Expression
 						Type:     types.StringType,
@@ -388,7 +387,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -420,8 +419,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"field": {
 						// Property: Field
 						Type:     types.StringType,
@@ -433,7 +432,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -533,8 +532,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"container_name": {
 						// Property: ContainerName
 						Type:     types.StringType,
@@ -556,7 +555,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -580,8 +579,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -593,7 +592,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -608,14 +607,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::ECS::Service",
 		Version:     1,
 		Attributes:  attributes,
@@ -623,7 +621,57 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("aws_ecs_service").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("awscc_ecs_service")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"assign_public_ip":                  "AssignPublicIp",
+		"awsvpc_configuration":              "AwsvpcConfiguration",
+		"base":                              "Base",
+		"capacity_provider":                 "CapacityProvider",
+		"capacity_provider_strategy":        "CapacityProviderStrategy",
+		"cluster":                           "Cluster",
+		"container_name":                    "ContainerName",
+		"container_port":                    "ContainerPort",
+		"deployment_circuit_breaker":        "DeploymentCircuitBreaker",
+		"deployment_configuration":          "DeploymentConfiguration",
+		"deployment_controller":             "DeploymentController",
+		"desired_count":                     "DesiredCount",
+		"enable":                            "Enable",
+		"enable_ecs_managed_tags":           "EnableECSManagedTags",
+		"enable_execute_command":            "EnableExecuteCommand",
+		"expression":                        "Expression",
+		"field":                             "Field",
+		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"key":                               "Key",
+		"launch_type":                       "LaunchType",
+		"load_balancer_name":                "LoadBalancerName",
+		"load_balancers":                    "LoadBalancers",
+		"maximum_percent":                   "MaximumPercent",
+		"minimum_healthy_percent":           "MinimumHealthyPercent",
+		"name":                              "Name",
+		"network_configuration":             "NetworkConfiguration",
+		"placement_constraints":             "PlacementConstraints",
+		"placement_strategies":              "PlacementStrategies",
+		"platform_version":                  "PlatformVersion",
+		"port":                              "Port",
+		"propagate_tags":                    "PropagateTags",
+		"registry_arn":                      "RegistryArn",
+		"role":                              "Role",
+		"rollback":                          "Rollback",
+		"scheduling_strategy":               "SchedulingStrategy",
+		"security_groups":                   "SecurityGroups",
+		"service_arn":                       "ServiceArn",
+		"service_name":                      "ServiceName",
+		"service_registries":                "ServiceRegistries",
+		"subnets":                           "Subnets",
+		"tags":                              "Tags",
+		"target_group_arn":                  "TargetGroupArn",
+		"task_definition":                   "TaskDefinition",
+		"type":                              "Type",
+		"value":                             "Value",
+		"weight":                            "Weight",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(30)
 
@@ -635,7 +683,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_service", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_service", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

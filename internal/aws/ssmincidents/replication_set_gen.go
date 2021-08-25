@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssmincidents_replication_set", replicationSetResourceType)
+	registry.AddResourceTypeFactory("awscc_ssmincidents_replication_set", replicationSetResourceType)
 }
 
-// replicationSetResourceType returns the Terraform aws_ssmincidents_replication_set resource type.
+// replicationSetResourceType returns the Terraform awscc_ssmincidents_replication_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSMIncidents::ReplicationSet resource type.
 func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -86,12 +85,12 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"region_configuration": {
 						// Property: RegionConfiguration
 						Description: "The ReplicationSet regional configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"sse_kms_key_id": {
 									// Property: SseKmsKeyId
 									Description: "The ARN of the ReplicationSet.",
@@ -118,14 +117,13 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::SSMIncidents::ReplicationSet",
 		Version:     1,
 		Attributes:  attributes,
@@ -133,7 +131,17 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ReplicationSet").WithTerraformTypeName("aws_ssmincidents_replication_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ReplicationSet").WithTerraformTypeName("awscc_ssmincidents_replication_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                  "Arn",
+		"deletion_protected":   "DeletionProtected",
+		"region_configuration": "RegionConfiguration",
+		"region_name":          "RegionName",
+		"regions":              "Regions",
+		"sse_kms_key_id":       "SseKmsKeyId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -145,7 +153,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ssmincidents_replication_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssmincidents_replication_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

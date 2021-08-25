@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_config_organization_conformance_pack", organizationConformancePackResourceType)
+	registry.AddResourceTypeFactory("awscc_config_organization_conformance_pack", organizationConformancePackResourceType)
 }
 
-// organizationConformancePackResourceType returns the Terraform aws_config_organization_conformance_pack resource type.
+// organizationConformancePackResourceType returns the Terraform awscc_config_organization_conformance_pack resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Config::OrganizationConformancePack resource type.
 func organizationConformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"conformance_pack_input_parameters": {
 			// Property: ConformancePackInputParameters
 			// CloudFormation resource type schema:
@@ -52,8 +51,8 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "array"
 			// }
 			Description: "A list of ConformancePackInputParameter objects.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"parameter_name": {
 						// Property: ParameterName
 						Type:     types.StringType,
@@ -65,7 +64,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 60,
 				},
@@ -160,14 +159,13 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Config::OrganizationConformancePack.",
 		Version:     1,
 		Attributes:  attributes,
@@ -175,7 +173,20 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Config::OrganizationConformancePack").WithTerraformTypeName("aws_config_organization_conformance_pack").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::OrganizationConformancePack").WithTerraformTypeName("awscc_config_organization_conformance_pack")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"conformance_pack_input_parameters":  "ConformancePackInputParameters",
+		"delivery_s3_bucket":                 "DeliveryS3Bucket",
+		"delivery_s3_key_prefix":             "DeliveryS3KeyPrefix",
+		"excluded_accounts":                  "ExcludedAccounts",
+		"organization_conformance_pack_name": "OrganizationConformancePackName",
+		"parameter_name":                     "ParameterName",
+		"parameter_value":                    "ParameterValue",
+		"template_body":                      "TemplateBody",
+		"template_s3_uri":                    "TemplateS3Uri",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateBody",
@@ -191,7 +202,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_config_organization_conformance_pack", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_organization_conformance_pack", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

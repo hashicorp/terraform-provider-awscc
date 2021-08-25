@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_fms_policy", policyResourceType)
+	registry.AddResourceTypeFactory("awscc_fms_policy", policyResourceType)
 }
 
-// policyResourceType returns the Terraform aws_fms_policy resource type.
+// policyResourceType returns the Terraform awscc_fms_policy resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FMS::Policy resource type.
 func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -76,8 +75,8 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "An FMS includeMap or excludeMap.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"account": {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
@@ -143,8 +142,8 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "An FMS includeMap or excludeMap.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"account": {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
@@ -205,8 +204,8 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxLength": 8,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -218,7 +217,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -281,8 +280,8 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"managed_service_data": {
 						// Property: ManagedServiceData
 						Type:     types.StringType,
@@ -324,8 +323,8 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -337,20 +336,13 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Creates an AWS Firewall Manager policy.",
 		Version:     1,
 		Attributes:  attributes,
@@ -358,7 +350,30 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("aws_fms_policy").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"account":                      "ACCOUNT",
+		"arn":                          "Arn",
+		"delete_all_policy_resources":  "DeleteAllPolicyResources",
+		"exclude_map":                  "ExcludeMap",
+		"exclude_resource_tags":        "ExcludeResourceTags",
+		"id":                           "Id",
+		"include_map":                  "IncludeMap",
+		"key":                          "Key",
+		"managed_service_data":         "ManagedServiceData",
+		"orgunit":                      "ORGUNIT",
+		"policy_name":                  "PolicyName",
+		"remediation_enabled":          "RemediationEnabled",
+		"resource_tags":                "ResourceTags",
+		"resource_type":                "ResourceType",
+		"resource_type_list":           "ResourceTypeList",
+		"security_service_policy_data": "SecurityServicePolicyData",
+		"tags":                         "Tags",
+		"type":                         "Type",
+		"value":                        "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteAllPolicyResources",
@@ -373,7 +388,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_fms_policy", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_fms_policy", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

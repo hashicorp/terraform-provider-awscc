@@ -23,7 +23,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/hcl/v2/hclsimple"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/mitchellh/cli"
 )
 
@@ -34,7 +34,8 @@ type Config struct {
 }
 
 type Defaults struct {
-	SchemaCacheDirectory string `hcl:"schema_cache_directory"`
+	SchemaCacheDirectory    string `hcl:"schema_cache_directory"`
+	TerraformTypeNamePrefix string `hcl:"terraform_type_name_prefix,optional"`
 }
 
 type MetaSchema struct {
@@ -42,13 +43,10 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	CloudFormationSchemaPath string `hcl:"cloudformation_schema_path,optional"`
-	CloudFormationTypeName   string `hcl:"cloudformation_type_name"`
-	ResourceTypeName         string `hcl:"resource_type_name,label"`
-}
-
-type Source struct {
-	Url string `hcl:"url"`
+	CloudFormationSchemaPath   string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName     string `hcl:"cloudformation_type_name"`
+	ResourceTypeName           string `hcl:"resource_type_name,label"`
+	SuppressResourceGeneration bool   `hcl:"suppress_resource_generation,optional"`
 }
 
 var (
@@ -211,6 +209,8 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 		return nil, fmt.Errorf("CloudFormation Resource Provider Definition Schema not loaded")
 	}
 
+	terraformTypeNamePrefix := d.config.Defaults.TerraformTypeNamePrefix
+
 	resources := []*ResourceData{}
 
 	for _, schema := range d.config.ResourceSchemas {
@@ -233,6 +233,15 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("incorrect format for Terraform resource type name: %s", tfResourceTypeName))
+			continue
+		}
+
+		if terraformTypeNamePrefix != "" {
+			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
+		}
+
+		if schema.SuppressResourceGeneration {
+			d.ui.Info(fmt.Sprintf("generation of a Terraform resource schema for %s has been suppressed", tfResourceTypeName))
 			continue
 		}
 
@@ -282,7 +291,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
 		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*?"`).ReplaceAllString(schema, `$1""`)
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644)
+		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("error writing schema to %q: %w", dst, err)

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResourceType)
 }
 
-// enclaveCertificateIamRoleAssociationResourceType returns the Terraform aws_ec2_enclave_certificate_iam_role_association resource type.
+// enclaveCertificateIamRoleAssociationResourceType returns the Terraform awscc_ec2_enclave_certificate_iam_role_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::EnclaveCertificateIamRoleAssociation resource type.
 func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"certificate_arn": {
 			// Property: CertificateArn
 			// CloudFormation resource type schema:
@@ -87,14 +86,13 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This association is based on Amazon Resource Names and it enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave.",
 		Version:     1,
 		Attributes:  attributes,
@@ -102,7 +100,16 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("aws_ec2_enclave_certificate_iam_role_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_arn":            "CertificateArn",
+		"certificate_s3_bucket_name": "CertificateS3BucketName",
+		"certificate_s3_object_key":  "CertificateS3ObjectKey",
+		"encryption_kms_key_id":      "EncryptionKmsKeyId",
+		"role_arn":                   "RoleArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -114,7 +121,7 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_enclave_certificate_iam_role_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_enclave_certificate_iam_role_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

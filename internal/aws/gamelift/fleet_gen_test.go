@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSGameLiftFleet_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GameLift::Fleet", "aws_gamelift_fleet", "test")
+	td := acctest.NewTestData(t, "AWS::GameLift::Fleet", "awscc_gamelift_fleet", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSGameLiftFleet_basic(t *testing.T) {
 }
 
 func TestAccAWSGameLiftFleet_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::GameLift::Fleet", "aws_gamelift_fleet", "test")
+	td := acctest.NewTestData(t, "AWS::GameLift::Fleet", "awscc_gamelift_fleet", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

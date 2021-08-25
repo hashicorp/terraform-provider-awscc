@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_resolver_dnssec_config", resolverDNSSECConfigResourceType)
+	registry.AddResourceTypeFactory("awscc_route53resolver_resolver_dnssec_config", resolverDNSSECConfigResourceType)
 }
 
-// resolverDNSSECConfigResourceType returns the Terraform aws_route53resolver_resolver_dnssec_config resource type.
+// resolverDNSSECConfigResourceType returns the Terraform awscc_route53resolver_resolver_dnssec_config resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::ResolverDNSSECConfig resource type.
 func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
@@ -82,14 +81,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.",
 		Version:     1,
 		Attributes:  attributes,
@@ -97,7 +89,15 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("aws_route53resolver_resolver_dnssec_config").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("awscc_route53resolver_resolver_dnssec_config")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"id":                "Id",
+		"owner_id":          "OwnerId",
+		"resource_id":       "ResourceId",
+		"validation_status": "ValidationStatus",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -109,7 +109,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53resolver_resolver_dnssec_config", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_resolver_dnssec_config", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

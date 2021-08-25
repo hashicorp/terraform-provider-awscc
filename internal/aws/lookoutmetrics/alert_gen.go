@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_lookoutmetrics_alert", alertResourceType)
+	registry.AddResourceTypeFactory("awscc_lookoutmetrics_alert", alertResourceType)
 }
 
-// alertResourceType returns the Terraform aws_lookoutmetrics_alert resource type.
+// alertResourceType returns the Terraform awscc_lookoutmetrics_alert resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource type.
 func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"action": {
 			// Property: Action
 			// CloudFormation resource type schema:
@@ -73,13 +72,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"lambda_configuration": {
 						// Property: LambdaConfiguration
 						Description: "Configuration options for a Lambda alert action.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
 									Type:     types.StringType,
@@ -97,8 +96,8 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sns_configuration": {
 						// Property: SNSConfiguration
 						Description: "Configuration options for an SNS alert action.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
 									Type:     types.StringType,
@@ -188,14 +187,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::LookoutMetrics::Alert",
 		Version:     1,
 		Attributes:  attributes,
@@ -203,7 +201,22 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("aws_lookoutmetrics_alert").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("awscc_lookoutmetrics_alert")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                      "Action",
+		"alert_description":           "AlertDescription",
+		"alert_name":                  "AlertName",
+		"alert_sensitivity_threshold": "AlertSensitivityThreshold",
+		"anomaly_detector_arn":        "AnomalyDetectorArn",
+		"arn":                         "Arn",
+		"lambda_arn":                  "LambdaArn",
+		"lambda_configuration":        "LambdaConfiguration",
+		"role_arn":                    "RoleArn",
+		"sns_configuration":           "SNSConfiguration",
+		"sns_topic_arn":               "SnsTopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -215,7 +228,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_lookoutmetrics_alert", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lookoutmetrics_alert", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

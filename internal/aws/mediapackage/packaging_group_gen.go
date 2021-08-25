@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_packaging_group", packagingGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_mediapackage_packaging_group", packagingGroupResourceType)
 }
 
-// packagingGroupResourceType returns the Terraform aws_mediapackage_packaging_group resource type.
+// packagingGroupResourceType returns the Terraform awscc_mediapackage_packaging_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::PackagingGroup resource type.
 func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -54,8 +55,8 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"cdn_identifier_secret": {
 						// Property: CdnIdentifierSecret
 						Description: "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
@@ -99,8 +100,8 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"log_group_name": {
 						// Property: LogGroupName
 						Description: "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
@@ -151,9 +152,8 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -165,22 +165,16 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
-			Computed: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
+			Computed:   true,
 			// Tags is a force-new attribute.
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingGroup",
 		Version:     1,
 		Attributes:  attributes,
@@ -188,7 +182,22 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("aws_mediapackage_packaging_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                   "Arn",
+		"authorization":         "Authorization",
+		"cdn_identifier_secret": "CdnIdentifierSecret",
+		"domain_name":           "DomainName",
+		"egress_access_logs":    "EgressAccessLogs",
+		"id":                    "Id",
+		"key":                   "Key",
+		"log_group_name":        "LogGroupName",
+		"secrets_role_arn":      "SecretsRoleArn",
+		"tags":                  "Tags",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -200,7 +209,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediapackage_packaging_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediapackage_packaging_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

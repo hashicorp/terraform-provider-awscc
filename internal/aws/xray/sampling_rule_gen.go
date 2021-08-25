@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_xray_sampling_rule", samplingRuleResourceType)
+	registry.AddResourceTypeFactory("awscc_xray_sampling_rule", samplingRuleResourceType)
 }
 
-// samplingRuleResourceType returns the Terraform aws_xray_sampling_rule resource type.
+// samplingRuleResourceType returns the Terraform awscc_xray_sampling_rule resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::XRay::SamplingRule resource type.
 func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"rule_arn": {
 			// Property: RuleARN
 			// CloudFormation resource type schema:
@@ -122,8 +121,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attributes": {
 						// Property: Attributes
 						Description: "Matches attributes derived from the request.",
@@ -297,8 +296,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"created_at": {
 						// Property: CreatedAt
 						Description: "When the rule was created, in Unix time seconds.",
@@ -313,8 +312,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sampling_rule": {
 						// Property: SamplingRule
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"attributes": {
 									// Property: Attributes
 									Description: "Matches attributes derived from the request.",
@@ -474,8 +473,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"attributes": {
 						// Property: Attributes
 						Description: "Matches attributes derived from the request.",
@@ -575,8 +574,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -588,20 +587,19 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "This schema provides construct and validation rules for AWS-XRay SamplingRule resource parameters.",
 		Version:     1,
 		Attributes:  attributes,
@@ -609,7 +607,32 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("aws_xray_sampling_rule").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("awscc_xray_sampling_rule")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"attributes":           "Attributes",
+		"created_at":           "CreatedAt",
+		"fixed_rate":           "FixedRate",
+		"host":                 "Host",
+		"http_method":          "HTTPMethod",
+		"key":                  "Key",
+		"modified_at":          "ModifiedAt",
+		"priority":             "Priority",
+		"reservoir_size":       "ReservoirSize",
+		"resource_arn":         "ResourceARN",
+		"rule_arn":             "RuleARN",
+		"rule_name":            "RuleName",
+		"sampling_rule":        "SamplingRule",
+		"sampling_rule_record": "SamplingRuleRecord",
+		"sampling_rule_update": "SamplingRuleUpdate",
+		"service_name":         "ServiceName",
+		"service_type":         "ServiceType",
+		"tags":                 "Tags",
+		"url_path":             "URLPath",
+		"value":                "Value",
+		"version":              "Version",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -621,7 +644,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_xray_sampling_rule", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_xray_sampling_rule", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

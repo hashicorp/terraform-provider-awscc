@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotsitewise_project", projectResourceType)
+	registry.AddResourceTypeFactory("awscc_iotsitewise_project", projectResourceType)
 }
 
-// projectResourceType returns the Terraform aws_iotsitewise_project resource type.
+// projectResourceType returns the Terraform awscc_iotsitewise_project resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Project resource type.
 func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"portal_id": {
 			// Property: PortalId
 			// CloudFormation resource type schema:
@@ -104,8 +103,8 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "A list of key-value pairs that contain metadata for the project.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -117,20 +116,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::Project",
 		Version:     1,
 		Attributes:  attributes,
@@ -138,7 +136,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Project").WithTerraformTypeName("aws_iotsitewise_project").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Project").WithTerraformTypeName("awscc_iotsitewise_project")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"key":                 "Key",
+		"portal_id":           "PortalId",
+		"project_arn":         "ProjectArn",
+		"project_description": "ProjectDescription",
+		"project_id":          "ProjectId",
+		"project_name":        "ProjectName",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -150,7 +160,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotsitewise_project", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotsitewise_project", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

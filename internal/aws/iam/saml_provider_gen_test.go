@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSIAMSAMLProvider_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::IAM::SAMLProvider", "aws_iam_saml_provider", "test")
+	td := acctest.NewTestData(t, "AWS::IAM::SAMLProvider", "awscc_iam_saml_provider", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

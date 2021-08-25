@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSApiGatewayUsagePlanKey_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ApiGateway::UsagePlanKey", "aws_apigateway_usage_plan_key", "test")
+	td := acctest.NewTestData(t, "AWS::ApiGateway::UsagePlanKey", "awscc_apigateway_usage_plan_key", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

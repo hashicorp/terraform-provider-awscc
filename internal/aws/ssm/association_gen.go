@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ssm_association", associationResourceType)
+	registry.AddResourceTypeFactory("awscc_ssm_association", associationResourceType)
 }
 
-// associationResourceType returns the Terraform aws_ssm_association resource type.
+// associationResourceType returns the Terraform awscc_ssm_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSM::Association resource type.
 func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"apply_only_at_cron_interval": {
 			// Property: ApplyOnlyAtCronInterval
 			// CloudFormation resource type schema:
@@ -212,12 +211,12 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"s3_location": {
 						// Property: S3Location
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"output_s3_bucket_name": {
 									// Property: OutputS3BucketName
 									Type:     types.StringType,
@@ -326,8 +325,8 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The targets that the SSM document sends commands to.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -339,7 +338,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 5,
 				},
@@ -357,14 +356,13 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::SSM::Association resource associates an SSM document in AWS Systems Manager with EC2 instances that contain a configuration agent to process the document.",
 		Version:     1,
 		Attributes:  attributes,
@@ -372,7 +370,34 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSM::Association").WithTerraformTypeName("aws_ssm_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSM::Association").WithTerraformTypeName("awscc_ssm_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"apply_only_at_cron_interval":      "ApplyOnlyAtCronInterval",
+		"association_id":                   "AssociationId",
+		"association_name":                 "AssociationName",
+		"automation_target_parameter_name": "AutomationTargetParameterName",
+		"calendar_names":                   "CalendarNames",
+		"compliance_severity":              "ComplianceSeverity",
+		"document_version":                 "DocumentVersion",
+		"instance_id":                      "InstanceId",
+		"key":                              "Key",
+		"max_concurrency":                  "MaxConcurrency",
+		"max_errors":                       "MaxErrors",
+		"name":                             "Name",
+		"output_location":                  "OutputLocation",
+		"output_s3_bucket_name":            "OutputS3BucketName",
+		"output_s3_key_prefix":             "OutputS3KeyPrefix",
+		"output_s3_region":                 "OutputS3Region",
+		"parameters":                       "Parameters",
+		"s3_location":                      "S3Location",
+		"schedule_expression":              "ScheduleExpression",
+		"sync_compliance":                  "SyncCompliance",
+		"targets":                          "Targets",
+		"values":                           "Values",
+		"wait_for_success_timeout_seconds": "WaitForSuccessTimeoutSeconds",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -384,7 +409,7 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ssm_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssm_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

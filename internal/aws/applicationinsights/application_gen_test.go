@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSApplicationInsightsApplication_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ApplicationInsights::Application", "aws_applicationinsights_application", "test")
+	td := acctest.NewTestData(t, "AWS::ApplicationInsights::Application", "awscc_applicationinsights_application", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

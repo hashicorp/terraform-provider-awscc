@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_device", deviceResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_device", deviceResourceType)
 }
 
-// deviceResourceType returns the Terraform aws_networkmanager_device resource type.
+// deviceResourceType returns the Terraform awscc_networkmanager_device resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::Device resource type.
 func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -90,8 +89,8 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The site location.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"address": {
 						// Property: Address
 						Description: "The physical address.",
@@ -168,8 +167,8 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "The tags for the device.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -181,7 +180,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -209,14 +208,13 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::Device type describes a device.",
 		Version:     1,
 		Attributes:  attributes,
@@ -224,7 +222,27 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Device").WithTerraformTypeName("aws_networkmanager_device").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::Device").WithTerraformTypeName("awscc_networkmanager_device")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"address":           "Address",
+		"description":       "Description",
+		"device_arn":        "DeviceArn",
+		"device_id":         "DeviceId",
+		"global_network_id": "GlobalNetworkId",
+		"key":               "Key",
+		"latitude":          "Latitude",
+		"location":          "Location",
+		"longitude":         "Longitude",
+		"model":             "Model",
+		"serial_number":     "SerialNumber",
+		"site_id":           "SiteId",
+		"tags":              "Tags",
+		"type":              "Type",
+		"value":             "Value",
+		"vendor":            "Vendor",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -236,7 +254,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_device", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_device", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

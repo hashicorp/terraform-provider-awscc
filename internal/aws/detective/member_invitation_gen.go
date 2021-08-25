@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_detective_member_invitation", memberInvitationResourceType)
+	registry.AddResourceTypeFactory("awscc_detective_member_invitation", memberInvitationResourceType)
 }
 
-// memberInvitationResourceType returns the Terraform aws_detective_member_invitation resource type.
+// memberInvitationResourceType returns the Terraform awscc_detective_member_invitation resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Detective::MemberInvitation resource type.
 func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"disable_email_notification": {
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
@@ -86,14 +85,13 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Detective::MemberInvitation",
 		Version:     1,
 		Attributes:  attributes,
@@ -101,7 +99,16 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Detective::MemberInvitation").WithTerraformTypeName("aws_detective_member_invitation").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Detective::MemberInvitation").WithTerraformTypeName("awscc_detective_member_invitation")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"disable_email_notification": "DisableEmailNotification",
+		"graph_arn":                  "GraphArn",
+		"member_email_address":       "MemberEmailAddress",
+		"member_id":                  "MemberId",
+		"message":                    "Message",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -113,7 +120,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_detective_member_invitation", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_detective_member_invitation", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

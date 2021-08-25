@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_signer_signing_profile", signingProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_signer_signing_profile", signingProfileResourceType)
 }
 
-// signingProfileResourceType returns the Terraform aws_signer_signing_profile resource type.
+// signingProfileResourceType returns the Terraform awscc_signer_signing_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Signer::SigningProfile resource type.
 func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -96,8 +95,8 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -139,8 +138,8 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array"
 			// }
 			Description: "A list of tags associated with the signing profile.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -152,20 +151,19 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A signing profile is a signing template that can be used to carry out a pre-defined signing job.",
 		Version:     1,
 		Attributes:  attributes,
@@ -173,7 +171,21 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Signer::SigningProfile").WithTerraformTypeName("aws_signer_signing_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Signer::SigningProfile").WithTerraformTypeName("awscc_signer_signing_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                       "Arn",
+		"key":                       "Key",
+		"platform_id":               "PlatformId",
+		"profile_name":              "ProfileName",
+		"profile_version":           "ProfileVersion",
+		"profile_version_arn":       "ProfileVersionArn",
+		"signature_validity_period": "SignatureValidityPeriod",
+		"tags":                      "Tags",
+		"type":                      "Type",
+		"value":                     "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -185,7 +197,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_signer_signing_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_signer_signing_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

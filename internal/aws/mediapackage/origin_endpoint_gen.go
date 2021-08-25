@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_mediapackage_origin_endpoint", originEndpointResourceType)
+	registry.AddResourceTypeFactory("awscc_mediapackage_origin_endpoint", originEndpointResourceType)
 }
 
-// originEndpointResourceType returns the Terraform aws_mediapackage_origin_endpoint resource type.
+// originEndpointResourceType returns the Terraform awscc_mediapackage_origin_endpoint resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource type.
 func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -56,8 +57,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "CDN Authorization credentials",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"cdn_identifier_secret": {
 						// Property: CdnIdentifierSecret
 						Description: "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
@@ -269,13 +270,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "A Common Media Application Format (CMAF) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption": {
 						// Property: Encryption
 						Description: "A Common Media Application Format (CMAF) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
 									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
@@ -291,8 +292,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
@@ -334,8 +335,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"hls_manifests": {
 						// Property: HlsManifests
 						Description: "A list of HLS manifest configurations",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"ad_markers": {
 									// Property: AdMarkers
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
@@ -397,7 +398,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional:    true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -416,8 +417,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stream_selection": {
 						// Property: StreamSelection
 						Description: "A StreamSelection configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
 									Description: "The maximum video bitrate (bps) to include in output.",
@@ -624,8 +625,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ad_triggers": {
 						// Property: AdTriggers
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
@@ -641,8 +642,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"encryption": {
 						// Property: Encryption
 						Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
 									Description: "Time (in seconds) between each encryption key rotation.",
@@ -652,8 +653,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
@@ -743,8 +744,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stream_selection": {
 						// Property: StreamSelection
 						Description: "A StreamSelection configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
 									Description: "The maximum video bitrate (bps) to include in output.",
@@ -967,8 +968,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"ad_markers": {
 						// Property: AdMarkers
 						Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
@@ -990,8 +991,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"encryption": {
 						// Property: Encryption
 						Description: "An HTTP Live Streaming (HLS) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"constant_initialization_vector": {
 									// Property: ConstantInitializationVector
 									Description: "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
@@ -1019,8 +1020,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
@@ -1092,8 +1093,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stream_selection": {
 						// Property: StreamSelection
 						Description: "A StreamSelection configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
 									Description: "The maximum video bitrate (bps) to include in output.",
@@ -1241,18 +1242,18 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "object"
 			// }
 			Description: "A Microsoft Smooth Streaming (MSS) packaging configuration.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"encryption": {
 						// Property: Encryption
 						Description: "A Microsoft Smooth Streaming (MSS) encryption configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
 									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"certificate_arn": {
 												// Property: CertificateArn
 												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
@@ -1306,8 +1307,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"stream_selection": {
 						// Property: StreamSelection
 						Description: "A StreamSelection configuration.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"max_video_bits_per_second": {
 									// Property: MaxVideoBitsPerSecond
 									Description: "The maximum video bitrate (bps) to include in output.",
@@ -1385,9 +1386,8 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "A collection of tags associated with a resource",
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -1399,9 +1399,10 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"time_delay_seconds": {
 			// Property: TimeDelaySeconds
@@ -1441,14 +1442,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::MediaPackage::OriginEndpoint",
 		Version:     1,
 		Attributes:  attributes,
@@ -1456,7 +1450,66 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("aws_mediapackage_origin_endpoint").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("awscc_mediapackage_origin_endpoint")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"ad_markers":                           "AdMarkers",
+		"ad_triggers":                          "AdTriggers",
+		"ads_on_delivery_restrictions":         "AdsOnDeliveryRestrictions",
+		"arn":                                  "Arn",
+		"authorization":                        "Authorization",
+		"cdn_identifier_secret":                "CdnIdentifierSecret",
+		"certificate_arn":                      "CertificateArn",
+		"channel_id":                           "ChannelId",
+		"cmaf_package":                         "CmafPackage",
+		"constant_initialization_vector":       "ConstantInitializationVector",
+		"dash_package":                         "DashPackage",
+		"description":                          "Description",
+		"encryption":                           "Encryption",
+		"encryption_method":                    "EncryptionMethod",
+		"hls_manifests":                        "HlsManifests",
+		"hls_package":                          "HlsPackage",
+		"id":                                   "Id",
+		"include_iframe_only_stream":           "IncludeIframeOnlyStream",
+		"key":                                  "Key",
+		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
+		"manifest_layout":                      "ManifestLayout",
+		"manifest_name":                        "ManifestName",
+		"manifest_window_seconds":              "ManifestWindowSeconds",
+		"max_video_bits_per_second":            "MaxVideoBitsPerSecond",
+		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
+		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
+		"min_video_bits_per_second":            "MinVideoBitsPerSecond",
+		"mss_package":                          "MssPackage",
+		"origination":                          "Origination",
+		"period_triggers":                      "PeriodTriggers",
+		"playlist_type":                        "PlaylistType",
+		"playlist_window_seconds":              "PlaylistWindowSeconds",
+		"profile":                              "Profile",
+		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
+		"repeat_ext_x_key":                     "RepeatExtXKey",
+		"resource_id":                          "ResourceId",
+		"role_arn":                             "RoleArn",
+		"secrets_role_arn":                     "SecretsRoleArn",
+		"segment_duration_seconds":             "SegmentDurationSeconds",
+		"segment_prefix":                       "SegmentPrefix",
+		"segment_template_format":              "SegmentTemplateFormat",
+		"speke_key_provider":                   "SpekeKeyProvider",
+		"startover_window_seconds":             "StartoverWindowSeconds",
+		"stream_order":                         "StreamOrder",
+		"stream_selection":                     "StreamSelection",
+		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
+		"system_ids":                           "SystemIds",
+		"tags":                                 "Tags",
+		"time_delay_seconds":                   "TimeDelaySeconds",
+		"url":                                  "Url",
+		"use_audio_rendition_group":            "UseAudioRenditionGroup",
+		"utc_timing":                           "UtcTiming",
+		"utc_timing_uri":                       "UtcTimingUri",
+		"value":                                "Value",
+		"whitelist":                            "Whitelist",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -1468,7 +1521,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_mediapackage_origin_endpoint", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediapackage_origin_endpoint", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

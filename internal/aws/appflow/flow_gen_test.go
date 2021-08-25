@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAppFlowFlow_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AppFlow::Flow", "aws_appflow_flow", "test")
+	td := acctest.NewTestData(t, "AWS::AppFlow::Flow", "awscc_appflow_flow", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

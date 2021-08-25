@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iotwireless_wireless_gateway", wirelessGatewayResourceType)
+	registry.AddResourceTypeFactory("awscc_iotwireless_wireless_gateway", wirelessGatewayResourceType)
 }
 
-// wirelessGatewayResourceType returns the Terraform aws_iotwireless_wireless_gateway resource type.
+// wirelessGatewayResourceType returns the Terraform awscc_iotwireless_wireless_gateway resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTWireless::WirelessGateway resource type.
 func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -91,8 +90,8 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"gateway_eui": {
 						// Property: GatewayEui
 						Type:     types.StringType,
@@ -147,7 +146,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A list of key-value pairs that contain metadata for the gateway.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -189,14 +188,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
 		Attributes:  attributes,
@@ -204,7 +196,24 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessGateway").WithTerraformTypeName("aws_iotwireless_wireless_gateway").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessGateway").WithTerraformTypeName("awscc_iotwireless_wireless_gateway")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                     "Arn",
+		"description":             "Description",
+		"gateway_eui":             "GatewayEui",
+		"id":                      "Id",
+		"key":                     "Key",
+		"last_uplink_received_at": "LastUplinkReceivedAt",
+		"lo_ra_wan":               "LoRaWAN",
+		"name":                    "Name",
+		"rf_region":               "RfRegion",
+		"tags":                    "Tags",
+		"thing_arn":               "ThingArn",
+		"thing_name":              "ThingName",
+		"value":                   "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -216,7 +225,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iotwireless_wireless_gateway", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_wireless_gateway", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

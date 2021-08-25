@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sagemaker_image_version", imageVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_sagemaker_image_version", imageVersionResourceType)
 }
 
-// imageVersionResourceType returns the Terraform aws_sagemaker_image_version resource type.
+// imageVersionResourceType returns the Terraform awscc_sagemaker_image_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::ImageVersion resource type.
 func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"base_image": {
 			// Property: BaseImage
 			// CloudFormation resource type schema:
@@ -107,14 +106,13 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::ImageVersion",
 		Version:     1,
 		Attributes:  attributes,
@@ -122,7 +120,17 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ImageVersion").WithTerraformTypeName("aws_sagemaker_image_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ImageVersion").WithTerraformTypeName("awscc_sagemaker_image_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"base_image":        "BaseImage",
+		"container_image":   "ContainerImage",
+		"image_arn":         "ImageArn",
+		"image_name":        "ImageName",
+		"image_version_arn": "ImageVersionArn",
+		"version":           "Version",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -134,7 +142,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sagemaker_image_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_image_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

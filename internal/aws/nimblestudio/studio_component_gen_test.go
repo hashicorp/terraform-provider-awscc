@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSNimbleStudioStudioComponent_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::NimbleStudio::StudioComponent", "aws_nimblestudio_studio_component", "test")
+	td := acctest.NewTestData(t, "AWS::NimbleStudio::StudioComponent", "awscc_nimblestudio_studio_component", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

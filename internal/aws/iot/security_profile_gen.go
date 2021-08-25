@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_security_profile", securityProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_security_profile", securityProfileResourceType)
 }
 
-// securityProfileResourceType returns the Terraform aws_iot_security_profile resource type.
+// securityProfileResourceType returns the Terraform awscc_iot_security_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::SecurityProfile resource type.
 func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"additional_metrics_to_retain_v2": {
 			// Property: AdditionalMetricsToRetainV2
 			// CloudFormation resource type schema:
@@ -76,7 +75,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"metric": {
 						// Property: Metric
 						Description: "What is measured by the behavior.",
@@ -86,8 +85,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"metric_dimension": {
 						// Property: MetricDimension
 						Description: "The dimension of a metric.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dimension_name": {
 									// Property: DimensionName
 									Description: "A unique identifier for the dimension.",
@@ -143,8 +142,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Specifies the destinations to which alerts are sent.",
 			// Pattern: ""
-			Attributes: schema.MapNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.MapNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"alert_target_arn": {
 						// Property: AlertTargetArn
 						Description: "The ARN of the notification target to which alerts are sent.",
@@ -158,7 +157,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				schema.MapNestedAttributesOptions{},
+				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -354,12 +353,12 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"criteria": {
 						// Property: Criteria
 						Description: "The criteria by which the behavior is determined to be normal.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"comparison_operator": {
 									// Property: ComparisonOperator
 									Description: "The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).",
@@ -387,8 +386,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"ml_detection_config": {
 									// Property: MlDetectionConfig
 									Description: "The configuration of an ML Detect Security Profile.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"confidence_level": {
 												// Property: ConfidenceLevel
 												Description: "The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.",
@@ -402,8 +401,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"statistical_threshold": {
 									// Property: StatisticalThreshold
 									Description: "A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"statistic": {
 												// Property: Statistic
 												Description: "The percentile which resolves to a threshold value by which compliance with a behavior is determined",
@@ -417,8 +416,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"value": {
 									// Property: Value
 									Description: "The value to be compared with the metric.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"cidrs": {
 												// Property: Cidrs
 												Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
@@ -472,8 +471,8 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"metric_dimension": {
 						// Property: MetricDimension
 						Description: "The dimension of a metric.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"dimension_name": {
 									// Property: DimensionName
 									Description: "A unique identifier for the dimension.",
@@ -581,7 +580,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Description: "Metadata that can be used to manage the security profile.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The tag's key.",
@@ -621,14 +620,13 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A security profile defines a set of expected behaviors for devices in your account.",
 		Version:     1,
 		Attributes:  attributes,
@@ -636,7 +634,44 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::SecurityProfile").WithTerraformTypeName("aws_iot_security_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::SecurityProfile").WithTerraformTypeName("awscc_iot_security_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_metrics_to_retain_v2": "AdditionalMetricsToRetainV2",
+		"alert_target_arn":                "AlertTargetArn",
+		"alert_targets":                   "AlertTargets",
+		"behaviors":                       "Behaviors",
+		"cidrs":                           "Cidrs",
+		"comparison_operator":             "ComparisonOperator",
+		"confidence_level":                "ConfidenceLevel",
+		"consecutive_datapoints_to_alarm": "ConsecutiveDatapointsToAlarm",
+		"consecutive_datapoints_to_clear": "ConsecutiveDatapointsToClear",
+		"count":                           "Count",
+		"criteria":                        "Criteria",
+		"dimension_name":                  "DimensionName",
+		"duration_seconds":                "DurationSeconds",
+		"key":                             "Key",
+		"metric":                          "Metric",
+		"metric_dimension":                "MetricDimension",
+		"ml_detection_config":             "MlDetectionConfig",
+		"name":                            "Name",
+		"number":                          "Number",
+		"numbers":                         "Numbers",
+		"operator":                        "Operator",
+		"ports":                           "Ports",
+		"role_arn":                        "RoleArn",
+		"security_profile_arn":            "SecurityProfileArn",
+		"security_profile_description":    "SecurityProfileDescription",
+		"security_profile_name":           "SecurityProfileName",
+		"statistic":                       "Statistic",
+		"statistical_threshold":           "StatisticalThreshold",
+		"strings":                         "Strings",
+		"suppress_alerts":                 "SuppressAlerts",
+		"tags":                            "Tags",
+		"target_arns":                     "TargetArns",
+		"value":                           "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -648,7 +683,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_security_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_security_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

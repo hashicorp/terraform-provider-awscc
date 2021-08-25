@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ecs_cluster", clusterResourceType)
+	registry.AddResourceTypeFactory("awscc_ecs_cluster", clusterResourceType)
 }
 
-// clusterResourceType returns the Terraform aws_ecs_cluster resource type.
+// clusterResourceType returns the Terraform awscc_ecs_cluster resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ECS::Cluster resource type.
 func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -76,8 +75,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -89,7 +88,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -136,13 +135,13 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "The configurations to be set at cluster level.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"execute_command_configuration": {
 						// Property: ExecuteCommandConfiguration
 						Description: "The configuration for ExecuteCommand.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"kms_key_id": {
 									// Property: KmsKeyId
 									Type:     types.StringType,
@@ -151,14 +150,14 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"log_configuration": {
 									// Property: LogConfiguration
 									Description: "The session logging configuration for ExecuteCommand.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
-											"cloud_watch_encryption_enabled": {
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"cloudwatch_encryption_enabled": {
 												// Property: CloudWatchEncryptionEnabled
 												Type:     types.BoolType,
 												Optional: true,
 											},
-											"cloud_watch_log_group_name": {
+											"cloudwatch_log_group_name": {
 												// Property: CloudWatchLogGroupName
 												Type:     types.StringType,
 												Optional: true,
@@ -216,8 +215,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
 						Type:     types.NumberType,
@@ -234,7 +233,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -256,8 +255,8 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -269,20 +268,19 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Create an Elastic Container Service (ECS) cluster.",
 		Version:     1,
 		Attributes:  attributes,
@@ -290,7 +288,33 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ECS::Cluster").WithTerraformTypeName("aws_ecs_cluster").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::Cluster").WithTerraformTypeName("awscc_ecs_cluster")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"base":                               "Base",
+		"capacity_provider":                  "CapacityProvider",
+		"capacity_providers":                 "CapacityProviders",
+		"cloudwatch_encryption_enabled":      "CloudWatchEncryptionEnabled",
+		"cloudwatch_log_group_name":          "CloudWatchLogGroupName",
+		"cluster_name":                       "ClusterName",
+		"cluster_settings":                   "ClusterSettings",
+		"configuration":                      "Configuration",
+		"default_capacity_provider_strategy": "DefaultCapacityProviderStrategy",
+		"execute_command_configuration":      "ExecuteCommandConfiguration",
+		"key":                                "Key",
+		"kms_key_id":                         "KmsKeyId",
+		"log_configuration":                  "LogConfiguration",
+		"logging":                            "Logging",
+		"name":                               "Name",
+		"s3_bucket_name":                     "S3BucketName",
+		"s3_encryption_enabled":              "S3EncryptionEnabled",
+		"s3_key_prefix":                      "S3KeyPrefix",
+		"tags":                               "Tags",
+		"value":                              "Value",
+		"weight":                             "Weight",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -302,7 +326,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ecs_cluster", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_cluster", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

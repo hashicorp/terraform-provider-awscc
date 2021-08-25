@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_plan", backupPlanResourceType)
+	registry.AddResourceTypeFactory("awscc_backup_backup_plan", backupPlanResourceType)
 }
 
-// backupPlanResourceType returns the Terraform aws_backup_backup_plan resource type.
+// backupPlanResourceType returns the Terraform awscc_backup_backup_plan resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupPlan resource type.
 func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"backup_plan": {
 			// Property: BackupPlan
 			// CloudFormation resource type schema:
@@ -139,12 +138,12 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"advanced_backup_settings": {
 						// Property: AdvancedBackupSettings
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"backup_options": {
 									// Property: BackupOptions
 									Type:     types.MapType{ElemType: types.StringType},
@@ -156,7 +155,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -167,8 +166,8 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"backup_plan_rule": {
 						// Property: BackupPlanRule
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"completion_window_minutes": {
 									// Property: CompletionWindowMinutes
 									Type:     types.NumberType,
@@ -176,8 +175,8 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"copy_actions": {
 									// Property: CopyActions
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"destination_backup_vault_arn": {
 												// Property: DestinationBackupVaultArn
 												Type:     types.StringType,
@@ -185,8 +184,8 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"lifecycle": {
 												// Property: Lifecycle
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"delete_after_days": {
 															// Property: DeleteAfterDays
 															Type:     types.NumberType,
@@ -202,7 +201,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -213,8 +212,8 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"lifecycle": {
 									// Property: Lifecycle
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"delete_after_days": {
 												// Property: DeleteAfterDays
 												Type:     types.NumberType,
@@ -256,7 +255,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 					},
@@ -309,14 +308,13 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Backup::BackupPlan",
 		Version:     1,
 		Attributes:  attributes,
@@ -324,7 +322,33 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("aws_backup_backup_plan").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("awscc_backup_backup_plan")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"advanced_backup_settings":        "AdvancedBackupSettings",
+		"backup_options":                  "BackupOptions",
+		"backup_plan":                     "BackupPlan",
+		"backup_plan_arn":                 "BackupPlanArn",
+		"backup_plan_id":                  "BackupPlanId",
+		"backup_plan_name":                "BackupPlanName",
+		"backup_plan_rule":                "BackupPlanRule",
+		"backup_plan_tags":                "BackupPlanTags",
+		"completion_window_minutes":       "CompletionWindowMinutes",
+		"copy_actions":                    "CopyActions",
+		"delete_after_days":               "DeleteAfterDays",
+		"destination_backup_vault_arn":    "DestinationBackupVaultArn",
+		"enable_continuous_backup":        "EnableContinuousBackup",
+		"lifecycle":                       "Lifecycle",
+		"move_to_cold_storage_after_days": "MoveToColdStorageAfterDays",
+		"recovery_point_tags":             "RecoveryPointTags",
+		"resource_type":                   "ResourceType",
+		"rule_name":                       "RuleName",
+		"schedule_expression":             "ScheduleExpression",
+		"start_window_minutes":            "StartWindowMinutes",
+		"target_backup_vault":             "TargetBackupVault",
+		"version_id":                      "VersionId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -336,7 +360,7 @@ func backupPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_backup_backup_plan", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_backup_backup_plan", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_tracker", trackerResourceType)
+	registry.AddResourceTypeFactory("awscc_location_tracker", trackerResourceType)
 }
 
-// trackerResourceType returns the Terraform aws_location_tracker resource type.
+// trackerResourceType returns the Terraform awscc_location_tracker resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::Tracker resource type.
 func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -135,14 +134,13 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of AWS::Location::Tracker Resource Type",
 		Version:     1,
 		Attributes:  attributes,
@@ -150,7 +148,20 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Location::Tracker").WithTerraformTypeName("aws_location_tracker").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::Tracker").WithTerraformTypeName("awscc_location_tracker")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                      "Arn",
+		"create_time":              "CreateTime",
+		"description":              "Description",
+		"kms_key_id":               "KmsKeyId",
+		"pricing_plan":             "PricingPlan",
+		"pricing_plan_data_source": "PricingPlanDataSource",
+		"tracker_arn":              "TrackerArn",
+		"tracker_name":             "TrackerName",
+		"update_time":              "UpdateTime",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -162,7 +173,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_location_tracker", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_tracker", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

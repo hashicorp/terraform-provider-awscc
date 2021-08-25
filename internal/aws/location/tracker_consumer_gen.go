@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_location_tracker_consumer", trackerConsumerResourceType)
+	registry.AddResourceTypeFactory("awscc_location_tracker_consumer", trackerConsumerResourceType)
 }
 
-// trackerConsumerResourceType returns the Terraform aws_location_tracker_consumer resource type.
+// trackerConsumerResourceType returns the Terraform awscc_location_tracker_consumer resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Location::TrackerConsumer resource type.
 func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"consumer_arn": {
 			// Property: ConsumerArn
 			// CloudFormation resource type schema:
@@ -49,14 +48,13 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of AWS::Location::TrackerConsumer Resource Type",
 		Version:     1,
 		Attributes:  attributes,
@@ -64,7 +62,13 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Location::TrackerConsumer").WithTerraformTypeName("aws_location_tracker_consumer").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::TrackerConsumer").WithTerraformTypeName("awscc_location_tracker_consumer")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"consumer_arn": "ConsumerArn",
+		"tracker_name": "TrackerName",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -76,7 +80,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_location_tracker_consumer", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_tracker_consumer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

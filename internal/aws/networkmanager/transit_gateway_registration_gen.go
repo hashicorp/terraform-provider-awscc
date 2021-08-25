@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkmanager_transit_gateway_registration", transitGatewayRegistrationResourceType)
+	registry.AddResourceTypeFactory("awscc_networkmanager_transit_gateway_registration", transitGatewayRegistrationResourceType)
 }
 
-// transitGatewayRegistrationResourceType returns the Terraform aws_networkmanager_transit_gateway_registration resource type.
+// transitGatewayRegistrationResourceType returns the Terraform awscc_networkmanager_transit_gateway_registration resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkManager::TransitGatewayRegistration resource type.
 func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"global_network_id": {
 			// Property: GlobalNetworkId
 			// CloudFormation resource type schema:
@@ -48,14 +47,13 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::NetworkManager::TransitGatewayRegistration type registers a transit gateway in your global network. The transit gateway can be in any AWS Region, but it must be owned by the same AWS account that owns the global network. You cannot register a transit gateway in more than one global network.",
 		Version:     1,
 		Attributes:  attributes,
@@ -63,7 +61,13 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("aws_networkmanager_transit_gateway_registration").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"global_network_id":   "GlobalNetworkId",
+		"transit_gateway_arn": "TransitGatewayArn",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -75,7 +79,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkmanager_transit_gateway_registration", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_transit_gateway_registration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

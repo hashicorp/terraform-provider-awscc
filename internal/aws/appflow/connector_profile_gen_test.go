@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSAppFlowConnectorProfile_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::AppFlow::ConnectorProfile", "aws_appflow_connector_profile", "test")
+	td := acctest.NewTestData(t, "AWS::AppFlow::ConnectorProfile", "awscc_appflow_connector_profile", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_iot_scheduled_audit", scheduledAuditResourceType)
+	registry.AddResourceTypeFactory("awscc_iot_scheduled_audit", scheduledAuditResourceType)
 }
 
-// scheduledAuditResourceType returns the Terraform aws_iot_scheduled_audit resource type.
+// scheduledAuditResourceType returns the Terraform awscc_iot_scheduled_audit resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::IoT::ScheduledAudit resource type.
 func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"day_of_month": {
 			// Property: DayOfMonth
 			// CloudFormation resource type schema:
@@ -136,7 +135,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The tag's key.",
@@ -174,14 +173,13 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Scheduled audits can be used to specify the checks you want to perform during an audit and how often the audit should be run.",
 		Version:     1,
 		Attributes:  attributes,
@@ -189,7 +187,20 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::IoT::ScheduledAudit").WithTerraformTypeName("aws_iot_scheduled_audit").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::ScheduledAudit").WithTerraformTypeName("awscc_iot_scheduled_audit")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"day_of_month":         "DayOfMonth",
+		"day_of_week":          "DayOfWeek",
+		"frequency":            "Frequency",
+		"key":                  "Key",
+		"scheduled_audit_arn":  "ScheduledAuditArn",
+		"scheduled_audit_name": "ScheduledAuditName",
+		"tags":                 "Tags",
+		"target_check_names":   "TargetCheckNames",
+		"value":                "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -201,7 +212,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_iot_scheduled_audit", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_scheduled_audit", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -1,12 +1,13 @@
 defaults {
-  schema_cache_directory = "../service/cloudformation/schemas"
+  schema_cache_directory     = "../service/cloudformation/schemas"
+  terraform_type_name_prefix = "awscc"
 }
 
 meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 342 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 344 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name = "AWS::ACMPCA::Certificate"
@@ -184,7 +185,7 @@ resource_schema "aws_cloudfront_cache_policy" {
   cloudformation_type_name = "AWS::CloudFront::CachePolicy"
 }
 
-resource_schema "aws_cloudfront_cloud_front_origin_access_identity" {
+resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
@@ -240,6 +241,10 @@ resource_schema "aws_codestarconnections_connection" {
   cloudformation_type_name = "AWS::CodeStarConnections::Connection"
 }
 
+resource_schema "aws_codestarnotifications_notification_rule" {
+  cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
+}
+
 resource_schema "aws_config_configuration_aggregator" {
   cloudformation_type_name = "AWS::Config::ConfigurationAggregator"
 }
@@ -284,10 +289,12 @@ resource_schema "aws_databrew_project" {
   cloudformation_type_name = "AWS::DataBrew::Project"
 }
 
-# Parameters property is 'anyOf', which we cannot yet handle.
-# resource_schema "aws_databrew_recipe" {
-#   cloudformation_type_name = "AWS::DataBrew::Recipe"
-# }
+resource_schema "aws_databrew_recipe" {
+  cloudformation_type_name = "AWS::DataBrew::Recipe"
+
+  # Parameters property is 'anyOf', which we cannot yet handle.
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_databrew_schedule" {
   cloudformation_type_name = "AWS::DataBrew::Schedule"
@@ -347,6 +354,10 @@ resource_schema "aws_dynamodb_global_table" {
 
 resource_schema "aws_ec2_carrier_gateway" {
   cloudformation_type_name = "AWS::EC2::CarrierGateway"
+}
+
+resource_schema "aws_ec2_dhcp_options" {
+  cloudformation_type_name = "AWS::EC2::DHCPOptions"
 }
 
 resource_schema "aws_ec2_ec2_fleet" {
@@ -503,10 +514,16 @@ resource_schema "aws_elasticache_user_group" {
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
+
+  # error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
+
+  # error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_eventschemas_registry_policy" {
@@ -523,6 +540,9 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
+
+  # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_fis_experiment_template" {
@@ -1161,10 +1181,12 @@ resource_schema "aws_s3outposts_access_point" {
   cloudformation_type_name = "AWS::S3Outposts::AccessPoint"
 }
 
-# AndOperator property is 'oneOf', which we cannot yet handle.
-# resource_schema "aws_s3outposts_bucket" {
-#   cloudformation_type_name = "AWS::S3Outposts::Bucket"
-# }
+resource_schema "aws_s3outposts_bucket" {
+  cloudformation_type_name = "AWS::S3Outposts::Bucket"
+
+  # AndOperator property is 'oneOf', which we cannot yet handle.
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_s3outposts_bucket_policy" {
   cloudformation_type_name = "AWS::S3Outposts::BucketPolicy"
@@ -1290,7 +1312,7 @@ resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
 }
 
-resource_schema "aws_servicecatalog_cloud_formation_provisioned_product" {
+resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
 }
 
@@ -1354,15 +1376,19 @@ resource_schema "aws_wafv2_regex_pattern_set" {
   cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
 }
 
-# Goes into infinite loop while generating code...
-# resource_schema "aws_wafv2_rule_group" {
-#   cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-# }
+resource_schema "aws_wafv2_rule_group" {
+  cloudformation_type_name = "AWS::WAFv2::RuleGroup"
 
-# Goes into infinite loop while generating code...
-# resource_schema "aws_wafv2_web_acl" {
-#   cloudformation_type_name = "AWS::WAFv2::WebACL"
-# }
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation = true
+}
+
+resource_schema "aws_wafv2_web_acl" {
+  cloudformation_type_name = "AWS::WAFv2::WebACL"
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation = true
+}
 
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name = "AWS::WAFv2::WebACLAssociation"

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_servicecatalogappregistry_resource_association", resourceAssociationResourceType)
+	registry.AddResourceTypeFactory("awscc_servicecatalogappregistry_resource_association", resourceAssociationResourceType)
 }
 
-// resourceAssociationResourceType returns the Terraform aws_servicecatalogappregistry_resource_association resource type.
+// resourceAssociationResourceType returns the Terraform awscc_servicecatalogappregistry_resource_association resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::ResourceAssociation resource type.
 func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"application": {
 			// Property: Application
 			// CloudFormation resource type schema:
@@ -93,14 +92,7 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation",
 		Version:     1,
 		Attributes:  attributes,
@@ -108,7 +100,17 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::ResourceAssociation").WithTerraformTypeName("aws_servicecatalogappregistry_resource_association").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::ResourceAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_resource_association")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"application":     "Application",
+		"application_arn": "ApplicationArn",
+		"id":              "Id",
+		"resource":        "Resource",
+		"resource_arn":    "ResourceArn",
+		"resource_type":   "ResourceType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -120,7 +122,7 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_servicecatalogappregistry_resource_association", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_servicecatalogappregistry_resource_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

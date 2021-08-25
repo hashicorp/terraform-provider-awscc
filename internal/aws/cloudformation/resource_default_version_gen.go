@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_resource_default_version", resourceDefaultVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_resource_default_version", resourceDefaultVersionResourceType)
 }
 
-// resourceDefaultVersionResourceType returns the Terraform aws_cloudformation_resource_default_version resource type.
+// resourceDefaultVersionResourceType returns the Terraform awscc_cloudformation_resource_default_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ResourceDefaultVersion resource type.
 func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -72,14 +71,13 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The default version of a resource that has been registered in the CloudFormation Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -87,7 +85,15 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceDefaultVersion").WithTerraformTypeName("aws_cloudformation_resource_default_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceDefaultVersion").WithTerraformTypeName("awscc_cloudformation_resource_default_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":              "Arn",
+		"type_name":        "TypeName",
+		"type_version_arn": "TypeVersionArn",
+		"version_id":       "VersionId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -99,7 +105,7 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_resource_default_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_resource_default_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

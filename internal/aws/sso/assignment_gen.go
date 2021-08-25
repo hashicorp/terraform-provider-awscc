@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_sso_assignment", assignmentResourceType)
+	registry.AddResourceTypeFactory("awscc_sso_assignment", assignmentResourceType)
 }
 
-// assignmentResourceType returns the Terraform aws_sso_assignment resource type.
+// assignmentResourceType returns the Terraform awscc_sso_assignment resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::SSO::Assignment resource type.
 func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"instance_arn": {
 			// Property: InstanceArn
 			// CloudFormation resource type schema:
@@ -113,14 +112,13 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for SSO assignmet",
 		Version:     1,
 		Attributes:  attributes,
@@ -128,7 +126,17 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("aws_sso_assignment").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("awscc_sso_assignment")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"instance_arn":       "InstanceArn",
+		"permission_set_arn": "PermissionSetArn",
+		"principal_id":       "PrincipalId",
+		"principal_type":     "PrincipalType",
+		"target_id":          "TargetId",
+		"target_type":        "TargetType",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -140,7 +148,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_sso_assignment", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sso_assignment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

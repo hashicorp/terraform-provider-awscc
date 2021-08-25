@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSECSCluster_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::Cluster", "aws_ecs_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::Cluster", "awscc_ecs_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
@@ -23,7 +23,7 @@ func TestAccAWSECSCluster_basic(t *testing.T) {
 }
 
 func TestAccAWSECSCluster_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ECS::Cluster", "aws_ecs_cluster", "test")
+	td := acctest.NewTestData(t, "AWS::ECS::Cluster", "awscc_ecs_cluster", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

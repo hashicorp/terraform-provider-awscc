@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_cloudformation_resource_version", resourceVersionResourceType)
+	registry.AddResourceTypeFactory("awscc_cloudformation_resource_version", resourceVersionResourceType)
 }
 
-// resourceVersionResourceType returns the Terraform aws_cloudformation_resource_version resource type.
+// resourceVersionResourceType returns the Terraform awscc_cloudformation_resource_version resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::CloudFormation::ResourceVersion resource type.
 func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -80,8 +79,8 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"log_group_name": {
 						// Property: LogGroupName
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
@@ -183,14 +182,13 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A resource that has been registered in the CloudFormation Registry.",
 		Version:     1,
 		Attributes:  attributes,
@@ -198,7 +196,23 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("aws_cloudformation_resource_version").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceVersion").WithTerraformTypeName("awscc_cloudformation_resource_version")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                    "Arn",
+		"execution_role_arn":     "ExecutionRoleArn",
+		"is_default_version":     "IsDefaultVersion",
+		"log_group_name":         "LogGroupName",
+		"log_role_arn":           "LogRoleArn",
+		"logging_config":         "LoggingConfig",
+		"provisioning_type":      "ProvisioningType",
+		"schema_handler_package": "SchemaHandlerPackage",
+		"type_arn":               "TypeArn",
+		"type_name":              "TypeName",
+		"version_id":             "VersionId",
+		"visibility":             "Visibility",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/SchemaHandlerPackage",
@@ -213,7 +227,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_cloudformation_resource_version", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_resource_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

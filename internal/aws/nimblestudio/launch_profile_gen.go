@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_launch_profile", launchProfileResourceType)
+	registry.AddResourceTypeFactory("awscc_nimblestudio_launch_profile", launchProfileResourceType)
 }
 
-// launchProfileResourceType returns the Terraform aws_nimblestudio_launch_profile resource type.
+// launchProfileResourceType returns the Terraform awscc_nimblestudio_launch_profile resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::LaunchProfile resource type.
 func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -106,8 +105,8 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"clipboard_mode": {
 						// Property: ClipboardMode
 						Type:     types.StringType,
@@ -174,14 +173,13 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::NimbleStudio::LaunchProfile",
 		Version:     1,
 		Attributes:  attributes,
@@ -189,7 +187,24 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::LaunchProfile").WithTerraformTypeName("aws_nimblestudio_launch_profile").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::LaunchProfile").WithTerraformTypeName("awscc_nimblestudio_launch_profile")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"clipboard_mode":                   "ClipboardMode",
+		"description":                      "Description",
+		"ec_2_instance_types":              "Ec2InstanceTypes",
+		"ec_2_subnet_ids":                  "Ec2SubnetIds",
+		"launch_profile_id":                "LaunchProfileId",
+		"launch_profile_protocol_versions": "LaunchProfileProtocolVersions",
+		"max_session_length_in_minutes":    "MaxSessionLengthInMinutes",
+		"name":                             "Name",
+		"stream_configuration":             "StreamConfiguration",
+		"streaming_image_ids":              "StreamingImageIds",
+		"studio_component_ids":             "StudioComponentIds",
+		"studio_id":                        "StudioId",
+		"tags":                             "Tags",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -201,7 +216,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_nimblestudio_launch_profile", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_nimblestudio_launch_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

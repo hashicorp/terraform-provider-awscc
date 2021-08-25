@@ -27,6 +27,10 @@ Each configuration file must contain a single `defaults` block.
 defaults {
   # Schema cache directory. Required.
   schema_cache_directory = "../service/cloudformation/schemas"
+
+  # Prefix for Terraform type names. Optional.
+  # The default is to use the label from the resource_schema block as the type name.
+  terraform_type_name_prefix = "awscc"
 }
 ```
 
@@ -56,5 +60,10 @@ resource_schema "aws_ec2_instance" {
   # Optional.
   # The default value combines the `defaults.schema_cache_directory` value with the CloudFormation type name.
   cloudformation_schema_path = "../service/cloudformation/schemas/ec2-instance.json"
+
+  # Whether or not to suppress Terraform resource generation.
+  # Optional.
+  # The default value is false - A Terraform resource is generated.
+  suppress_resource_generation = true
 }
 ```

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_frauddetector_variable", variableResourceType)
+	registry.AddResourceTypeFactory("awscc_frauddetector_variable", variableResourceType)
 }
 
-// variableResourceType returns the Terraform aws_frauddetector_variable resource type.
+// variableResourceType returns the Terraform awscc_frauddetector_variable resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::FraudDetector::Variable resource type.
 func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -155,9 +154,8 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Description: "Tags associated with this variable.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -169,7 +167,7 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MaxItems: 200,
 				},
 			),
@@ -223,14 +221,13 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "A resource schema for a Variable in Amazon Fraud Detector.",
 		Version:     1,
 		Attributes:  attributes,
@@ -238,7 +235,23 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Variable").WithTerraformTypeName("aws_frauddetector_variable").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Variable").WithTerraformTypeName("awscc_frauddetector_variable")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":               "Arn",
+		"created_time":      "CreatedTime",
+		"data_source":       "DataSource",
+		"data_type":         "DataType",
+		"default_value":     "DefaultValue",
+		"description":       "Description",
+		"key":               "Key",
+		"last_updated_time": "LastUpdatedTime",
+		"name":              "Name",
+		"tags":              "Tags",
+		"value":             "Value",
+		"variable_type":     "VariableType",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -250,7 +263,7 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_frauddetector_variable", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_frauddetector_variable", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_nimblestudio_studio_component", studioComponentResourceType)
+	registry.AddResourceTypeFactory("awscc_nimblestudio_studio_component", studioComponentResourceType)
 }
 
-// studioComponentResourceType returns the Terraform aws_nimblestudio_studio_component resource type.
+// studioComponentResourceType returns the Terraform awscc_nimblestudio_studio_component resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NimbleStudio::StudioComponent resource type.
 func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"configuration": {
 			// Property: Configuration
 			// CloudFormation resource type schema:
@@ -100,16 +99,16 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"active_directory_configuration": {
 						// Property: ActiveDirectoryConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"computer_attributes": {
 									// Property: ComputerAttributes
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"name": {
 												// Property: Name
 												Type:     types.StringType,
@@ -121,7 +120,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
 								},
@@ -141,8 +140,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"compute_farm_configuration": {
 						// Property: ComputeFarmConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"active_directory_user": {
 									// Property: ActiveDirectoryUser
 									Type:     types.StringType,
@@ -159,8 +158,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"license_service_configuration": {
 						// Property: LicenseServiceConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"endpoint": {
 									// Property: Endpoint
 									Type:     types.StringType,
@@ -172,8 +171,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					},
 					"shared_file_system_configuration": {
 						// Property: SharedFileSystemConfiguration
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"endpoint": {
 									// Property: Endpoint
 									Type:     types.StringType,
@@ -252,8 +251,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"launch_profile_protocol_version": {
 						// Property: LaunchProfileProtocolVersion
 						Type:     types.StringType,
@@ -275,7 +274,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -306,8 +305,8 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -319,7 +318,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -382,14 +381,13 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::NimbleStudio::StudioComponent.",
 		Version:     1,
 		Attributes:  attributes,
@@ -397,7 +395,41 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StudioComponent").WithTerraformTypeName("aws_nimblestudio_studio_component").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::StudioComponent").WithTerraformTypeName("awscc_nimblestudio_studio_component")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"active_directory_configuration":         "ActiveDirectoryConfiguration",
+		"active_directory_user":                  "ActiveDirectoryUser",
+		"compute_farm_configuration":             "ComputeFarmConfiguration",
+		"computer_attributes":                    "ComputerAttributes",
+		"configuration":                          "Configuration",
+		"description":                            "Description",
+		"directory_id":                           "DirectoryId",
+		"ec_2_security_group_ids":                "Ec2SecurityGroupIds",
+		"endpoint":                               "Endpoint",
+		"file_system_id":                         "FileSystemId",
+		"initialization_scripts":                 "InitializationScripts",
+		"key":                                    "Key",
+		"launch_profile_protocol_version":        "LaunchProfileProtocolVersion",
+		"license_service_configuration":          "LicenseServiceConfiguration",
+		"linux_mount_point":                      "LinuxMountPoint",
+		"name":                                   "Name",
+		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
+		"platform":                               "Platform",
+		"run_context":                            "RunContext",
+		"script":                                 "Script",
+		"script_parameters":                      "ScriptParameters",
+		"share_name":                             "ShareName",
+		"shared_file_system_configuration":       "SharedFileSystemConfiguration",
+		"studio_component_id":                    "StudioComponentId",
+		"studio_id":                              "StudioId",
+		"subtype":                                "Subtype",
+		"tags":                                   "Tags",
+		"type":                                   "Type",
+		"value":                                  "Value",
+		"windows_mount_drive":                    "WindowsMountDrive",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -409,7 +441,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_nimblestudio_studio_component", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_nimblestudio_studio_component", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

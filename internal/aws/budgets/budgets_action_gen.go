@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_budgets_budgets_action", budgetsActionResourceType)
+	registry.AddResourceTypeFactory("awscc_budgets_budgets_action", budgetsActionResourceType)
 }
 
-// budgetsActionResourceType returns the Terraform aws_budgets_budgets_action resource type.
+// budgetsActionResourceType returns the Terraform awscc_budgets_budgets_action resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource type.
 func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"action_id": {
 			// Property: ActionId
 			// CloudFormation resource type schema:
@@ -54,8 +53,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
@@ -203,12 +202,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"iam_action_definition": {
 						// Property: IamActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"groups": {
 									// Property: Groups
 									Type:     types.ListType{ElemType: types.StringType},
@@ -235,8 +234,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"scp_action_definition": {
 						// Property: ScpActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"policy_id": {
 									// Property: PolicyId
 									Type:     types.StringType,
@@ -253,8 +252,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ssm_action_definition": {
 						// Property: SsmActionDefinition
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"instance_ids": {
 									// Property: InstanceIds
 									Type:     types.ListType{ElemType: types.StringType},
@@ -328,8 +327,8 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"address": {
 						// Property: Address
 						Type:     types.StringType,
@@ -341,7 +340,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 11,
 				},
@@ -350,14 +349,13 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
@@ -365,7 +363,35 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("aws_budgets_budgets_action").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("awscc_budgets_budgets_action")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"action_id":             "ActionId",
+		"action_threshold":      "ActionThreshold",
+		"action_type":           "ActionType",
+		"address":               "Address",
+		"approval_model":        "ApprovalModel",
+		"budget_name":           "BudgetName",
+		"definition":            "Definition",
+		"execution_role_arn":    "ExecutionRoleArn",
+		"groups":                "Groups",
+		"iam_action_definition": "IamActionDefinition",
+		"instance_ids":          "InstanceIds",
+		"notification_type":     "NotificationType",
+		"policy_arn":            "PolicyArn",
+		"policy_id":             "PolicyId",
+		"region":                "Region",
+		"roles":                 "Roles",
+		"scp_action_definition": "ScpActionDefinition",
+		"ssm_action_definition": "SsmActionDefinition",
+		"subscribers":           "Subscribers",
+		"subtype":               "Subtype",
+		"target_ids":            "TargetIds",
+		"type":                  "Type",
+		"users":                 "Users",
+		"value":                 "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -377,7 +403,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_budgets_budgets_action", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_budgets_budgets_action", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

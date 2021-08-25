@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
 func TestAccAWSDevOpsGuruResourceCollection_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::DevOpsGuru::ResourceCollection", "aws_devopsguru_resource_collection", "test")
+	td := acctest.NewTestData(t, "AWS::DevOpsGuru::ResourceCollection", "awscc_devopsguru_resource_collection", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_quicksight_theme", themeResourceType)
+	registry.AddResourceTypeFactory("awscc_quicksight_theme", themeResourceType)
 }
 
-// themeResourceType returns the Terraform aws_quicksight_theme resource type.
+// themeResourceType returns the Terraform awscc_quicksight_theme resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::QuickSight::Theme resource type.
 func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -265,13 +264,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"data_color_palette": {
 						// Property: DataColorPalette
 						Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"colors": {
 									// Property: Colors
 									Description: "<p>The hexadecimal codes for the colors.</p>",
@@ -297,18 +296,18 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"sheet": {
 						// Property: Sheet
 						Description: "<p>The theme display options for sheets. </p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"tile": {
 									// Property: Tile
 									Description: "<p>Display options related to tiles on a sheet.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"border": {
 												// Property: Border
 												Description: "<p>The display options for tile borders for visuals.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"show": {
 															// Property: Show
 															Description: "<p>The option to enable display of borders for visuals.</p>",
@@ -326,13 +325,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"tile_layout": {
 									// Property: TileLayout
 									Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"gutter": {
 												// Property: Gutter
 												Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"show": {
 															// Property: Show
 															Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
@@ -346,8 +345,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"margin": {
 												// Property: Margin
 												Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"show": {
 															// Property: Show
 															Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
@@ -368,19 +367,19 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"typography": {
 						// Property: Typography
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"font_families": {
 									// Property: FontFamilies
-									Attributes: schema.ListNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"font_family": {
 												// Property: FontFamily
 												Type:     types.StringType,
 												Optional: true,
 											},
 										},
-										schema.ListNestedAttributesOptions{
+										tfsdk.ListNestedAttributesOptions{
 											MinItems: 0,
 											MaxItems: 5,
 										},
@@ -394,8 +393,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ui_color_palette": {
 						// Property: UIColorPalette
 						Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n        </p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"accent": {
 									// Property: Accent
 									Description: "<p>This color is that applies to selected states and buttons.</p>",
@@ -574,8 +573,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A valid grouping of resource permissions to apply to the new theme.\n\t\t\t</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"actions": {
 						// Property: Actions
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
@@ -589,7 +588,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 64,
 				},
@@ -629,8 +628,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "<p>A map of the key-value pairs for the resource tag or tags that you want to add to the\n\t\t\tresource.</p>",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "<p>Tag key.</p>",
@@ -644,7 +643,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 200,
 				},
@@ -950,8 +949,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "object"
 			// }
 			Description: "<p>A version of a theme.</p>",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"arn": {
 						// Property: Arn
 						Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
@@ -967,13 +966,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"configuration": {
 						// Property: Configuration
 						Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"data_color_palette": {
 									// Property: DataColorPalette
 									Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"colors": {
 												// Property: Colors
 												Description: "<p>The hexadecimal codes for the colors.</p>",
@@ -999,18 +998,18 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"sheet": {
 									// Property: Sheet
 									Description: "<p>The theme display options for sheets. </p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"tile": {
 												// Property: Tile
 												Description: "<p>Display options related to tiles on a sheet.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"border": {
 															// Property: Border
 															Description: "<p>The display options for tile borders for visuals.</p>",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"show": {
 																		// Property: Show
 																		Description: "<p>The option to enable display of borders for visuals.</p>",
@@ -1028,13 +1027,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"tile_layout": {
 												// Property: TileLayout
 												Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"gutter": {
 															// Property: Gutter
 															Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"show": {
 																		// Property: Show
 																		Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
@@ -1048,8 +1047,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"margin": {
 															// Property: Margin
 															Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-															Attributes: schema.SingleNestedAttributes(
-																map[string]schema.Attribute{
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
 																	"show": {
 																		// Property: Show
 																		Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
@@ -1070,19 +1069,19 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"typography": {
 									// Property: Typography
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"font_families": {
 												// Property: FontFamilies
-												Attributes: schema.ListNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"font_family": {
 															// Property: FontFamily
 															Type:     types.StringType,
 															Optional: true,
 														},
 													},
-													schema.ListNestedAttributesOptions{
+													tfsdk.ListNestedAttributesOptions{
 														MinItems: 0,
 														MaxItems: 5,
 													},
@@ -1096,8 +1095,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"ui_color_palette": {
 									// Property: UIColorPalette
 									Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n        </p>",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"accent": {
 												// Property: Accent
 												Description: "<p>This color is that applies to selected states and buttons.</p>",
@@ -1217,8 +1216,8 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"errors": {
 						// Property: Errors
 						Description: "<p>Errors associated with the theme.</p>",
-						Attributes: schema.ListNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"message": {
 									// Property: Message
 									Description: "<p>The error message.</p>",
@@ -1231,7 +1230,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							schema.ListNestedAttributesOptions{
+							tfsdk.ListNestedAttributesOptions{
 								MinItems: 1,
 							},
 						),
@@ -1269,14 +1268,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Definition of the AWS::QuickSight::Theme Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
@@ -1284,7 +1282,64 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Theme").WithTerraformTypeName("aws_quicksight_theme").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Theme").WithTerraformTypeName("awscc_quicksight_theme")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"accent":               "Accent",
+		"accent_foreground":    "AccentForeground",
+		"actions":              "Actions",
+		"arn":                  "Arn",
+		"aws_account_id":       "AwsAccountId",
+		"base_theme_id":        "BaseThemeId",
+		"border":               "Border",
+		"colors":               "Colors",
+		"configuration":        "Configuration",
+		"created_time":         "CreatedTime",
+		"danger":               "Danger",
+		"danger_foreground":    "DangerForeground",
+		"data_color_palette":   "DataColorPalette",
+		"description":          "Description",
+		"dimension":            "Dimension",
+		"dimension_foreground": "DimensionForeground",
+		"empty_fill_color":     "EmptyFillColor",
+		"errors":               "Errors",
+		"font_families":        "FontFamilies",
+		"font_family":          "FontFamily",
+		"gutter":               "Gutter",
+		"key":                  "Key",
+		"last_updated_time":    "LastUpdatedTime",
+		"margin":               "Margin",
+		"measure":              "Measure",
+		"measure_foreground":   "MeasureForeground",
+		"message":              "Message",
+		"min_max_gradient":     "MinMaxGradient",
+		"name":                 "Name",
+		"permissions":          "Permissions",
+		"primary_background":   "PrimaryBackground",
+		"primary_foreground":   "PrimaryForeground",
+		"principal":            "Principal",
+		"secondary_background": "SecondaryBackground",
+		"secondary_foreground": "SecondaryForeground",
+		"sheet":                "Sheet",
+		"show":                 "Show",
+		"status":               "Status",
+		"success":              "Success",
+		"success_foreground":   "SuccessForeground",
+		"tags":                 "Tags",
+		"theme_id":             "ThemeId",
+		"tile":                 "Tile",
+		"tile_layout":          "TileLayout",
+		"type":                 "Type",
+		"typography":           "Typography",
+		"ui_color_palette":     "UIColorPalette",
+		"value":                "Value",
+		"version":              "Version",
+		"version_description":  "VersionDescription",
+		"version_number":       "VersionNumber",
+		"warning":              "Warning",
+		"warning_foreground":   "WarningForeground",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/VersionDescription",
@@ -1301,7 +1356,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_quicksight_theme", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_theme", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

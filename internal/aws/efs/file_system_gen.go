@@ -6,22 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_efs_file_system", fileSystemResourceType)
+	registry.AddResourceTypeFactory("awscc_efs_file_system", fileSystemResourceType)
 }
 
-// fileSystemResourceType returns the Terraform aws_efs_file_system resource type.
+// fileSystemResourceType returns the Terraform awscc_efs_file_system resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EFS::FileSystem resource type.
 func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -57,8 +58,8 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"status": {
 						// Property: Status
 						Type:     types.StringType,
@@ -132,9 +133,8 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -146,9 +146,10 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -180,18 +181,18 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			// Ordered set.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"transition_to_ia": {
 						// Property: TransitionToIA
 						Type:     types.StringType,
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:   true,
 		},
 		"performance_mode": {
 			// Property: PerformanceMode
@@ -224,14 +225,13 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EFS::FileSystem",
 		Version:     1,
 		Attributes:  attributes,
@@ -239,7 +239,28 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("aws_efs_file_system").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                                "Arn",
+		"availability_zone_name":             "AvailabilityZoneName",
+		"backup_policy":                      "BackupPolicy",
+		"bypass_policy_lockout_safety_check": "BypassPolicyLockoutSafetyCheck",
+		"encrypted":                          "Encrypted",
+		"file_system_id":                     "FileSystemId",
+		"file_system_policy":                 "FileSystemPolicy",
+		"file_system_tags":                   "FileSystemTags",
+		"key":                                "Key",
+		"kms_key_id":                         "KmsKeyId",
+		"lifecycle_policies":                 "LifecyclePolicies",
+		"performance_mode":                   "PerformanceMode",
+		"provisioned_throughput_in_mibps":    "ProvisionedThroughputInMibps",
+		"status":                             "Status",
+		"throughput_mode":                    "ThroughputMode",
+		"transition_to_ia":                   "TransitionToIA",
+		"value":                              "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BypassPolicyLockoutSafetyCheck",
@@ -254,7 +275,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_efs_file_system", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_efs_file_system", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_recovery_group", recoveryGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_recovery_group", recoveryGroupResourceType)
 }
 
-// recoveryGroupResourceType returns the Terraform aws_route53recoveryreadiness_recovery_group resource type.
+// recoveryGroupResourceType returns the Terraform awscc_route53recoveryreadiness_recovery_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::RecoveryGroup resource type.
 func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"cells": {
 			// Property: Cells
 			// CloudFormation resource type schema:
@@ -37,9 +36,8 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "array"
 			// }
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 		},
 		"recovery_group_arn": {
 			// Property: RecoveryGroupArn
@@ -98,9 +96,8 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "array"
 			// }
 			Description: "A collection of tags associated with a resource.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -108,25 +105,23 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "AWS Route53 Recovery Readiness Recovery Group Schema and API specifications.",
 		Version:     1,
 		Attributes:  attributes,
@@ -134,7 +129,17 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::RecoveryGroup").WithTerraformTypeName("aws_route53recoveryreadiness_recovery_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::RecoveryGroup").WithTerraformTypeName("awscc_route53recoveryreadiness_recovery_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"cells":               "Cells",
+		"key":                 "Key",
+		"recovery_group_arn":  "RecoveryGroupArn",
+		"recovery_group_name": "RecoveryGroupName",
+		"tags":                "Tags",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -146,7 +151,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoveryreadiness_recovery_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoveryreadiness_recovery_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

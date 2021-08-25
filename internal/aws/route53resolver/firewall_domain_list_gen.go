@@ -6,23 +6,23 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53resolver_firewall_domain_list", firewallDomainListResourceType)
+	registry.AddResourceTypeFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListResourceType)
 }
 
-// firewallDomainListResourceType returns the Terraform aws_route53resolver_firewall_domain_list resource type.
+// firewallDomainListResourceType returns the Terraform awscc_route53resolver_firewall_domain_list resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53Resolver::FirewallDomainList resource type.
 func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -102,9 +102,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "An inline list of domains to use for this domain list.",
-			// Ordered set.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
+			Optional:    true,
 			// Domains is a write-only attribute.
 		},
 		"id": {
@@ -226,7 +226,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "Tags",
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -246,14 +246,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
-		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
-		Computed:    true,
-	}
-
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallDomainList.",
 		Version:     1,
 		Attributes:  attributes,
@@ -261,7 +254,26 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("aws_route53resolver_firewall_domain_list").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("awscc_route53resolver_firewall_domain_list")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                "Arn",
+		"creation_time":      "CreationTime",
+		"creator_request_id": "CreatorRequestId",
+		"domain_count":       "DomainCount",
+		"domain_file_url":    "DomainFileUrl",
+		"domains":            "Domains",
+		"id":                 "Id",
+		"key":                "Key",
+		"managed_owner_name": "ManagedOwnerName",
+		"modification_time":  "ModificationTime",
+		"name":               "Name",
+		"status":             "Status",
+		"status_message":     "StatusMessage",
+		"tags":               "Tags",
+		"value":              "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Domains",
@@ -277,7 +289,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53resolver_firewall_domain_list", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_firewall_domain_list", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

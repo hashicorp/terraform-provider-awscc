@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_route53recoveryreadiness_resource_set", resourceSetResourceType)
+	registry.AddResourceTypeFactory("awscc_route53recoveryreadiness_resource_set", resourceSetResourceType)
 }
 
-// resourceSetResourceType returns the Terraform aws_route53recoveryreadiness_resource_set resource type.
+// resourceSetResourceType returns the Terraform awscc_route53recoveryreadiness_resource_set resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource type.
 func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"resource_set_arn": {
 			// Property: ResourceSetArn
 			// CloudFormation resource type schema:
@@ -150,9 +149,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A list of resource objects in the resource set.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"component_id": {
 						// Property: ComponentId
 						Description: "The component identifier of the resource, generated when DNS target resource is used.",
@@ -162,8 +160,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"dns_target_resource": {
 						// Property: DnsTargetResource
 						Description: "A component for DNS/routing control readiness checks.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"domain_name": {
 									// Property: DomainName
 									Description: "The domain name that acts as an ingress point to a portion of the customer application.",
@@ -191,13 +189,13 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"target_resource": {
 									// Property: TargetResource
 									Description: "The target resource that the Route 53 record points to.",
-									Attributes: schema.SingleNestedAttributes(
-										map[string]schema.Attribute{
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
 											"nlb_resource": {
 												// Property: NLBResource
 												Description: "The Network Load Balancer resource that a DNS target resource points to.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"arn": {
 															// Property: Arn
 															Description: "A Network Load Balancer resource Amazon Resource Name (ARN).",
@@ -211,8 +209,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"r53_resource": {
 												// Property: R53Resource
 												Description: "The Route 53 resource that a DNS target resource record points to.",
-												Attributes: schema.SingleNestedAttributes(
-													map[string]schema.Attribute{
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
 														"domain_name": {
 															// Property: DomainName
 															Description: "The DNS target domain name.",
@@ -240,9 +238,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"readiness_scopes": {
 						// Property: ReadinessScopes
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
 					},
 					"resource_arn": {
 						// Property: ResourceArn
@@ -251,7 +248,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 4,
 				},
@@ -288,9 +285,8 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array"
 			// }
 			Description: "A tag to associate with the parameters for a resource set.",
-			// Multiset.
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -298,25 +294,23 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						// Multiset.
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Schema for the AWS Route53 Recovery Readiness ResourceSet Resource and API.",
 		Version:     1,
 		Attributes:  attributes,
@@ -324,7 +318,30 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ResourceSet").WithTerraformTypeName("aws_route53recoveryreadiness_resource_set").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ResourceSet").WithTerraformTypeName("awscc_route53recoveryreadiness_resource_set")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                 "Arn",
+		"component_id":        "ComponentId",
+		"dns_target_resource": "DnsTargetResource",
+		"domain_name":         "DomainName",
+		"hosted_zone_arn":     "HostedZoneArn",
+		"key":                 "Key",
+		"nlb_resource":        "NLBResource",
+		"r53_resource":        "R53Resource",
+		"readiness_scopes":    "ReadinessScopes",
+		"record_set_id":       "RecordSetId",
+		"record_type":         "RecordType",
+		"resource_arn":        "ResourceArn",
+		"resource_set_arn":    "ResourceSetArn",
+		"resource_set_name":   "ResourceSetName",
+		"resource_set_type":   "ResourceSetType",
+		"resources":           "Resources",
+		"tags":                "Tags",
+		"target_resource":     "TargetResource",
+		"value":               "Value",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -336,7 +353,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_route53recoveryreadiness_resource_set", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoveryreadiness_resource_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

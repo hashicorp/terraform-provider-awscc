@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_amplify_branch", branchResourceType)
+	registry.AddResourceTypeFactory("awscc_amplify_branch", branchResourceType)
 }
 
-// branchResourceType returns the Terraform aws_amplify_branch resource type.
+// branchResourceType returns the Terraform awscc_amplify_branch resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Amplify::Branch resource type.
 func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"app_id": {
 			// Property: AppId
 			// CloudFormation resource type schema:
@@ -72,8 +71,8 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"enable_basic_auth": {
 						// Property: EnableBasicAuth
 						Type:     types.BoolType,
@@ -184,8 +183,8 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
 						Type:     types.StringType,
@@ -197,7 +196,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -258,8 +257,8 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -271,20 +270,19 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				schema.ListNestedAttributesOptions{},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::Amplify::Branch resource creates a new branch within an app.",
 		Version:     1,
 		Attributes:  attributes,
@@ -292,7 +290,30 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Branch").WithTerraformTypeName("aws_amplify_branch").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Branch").WithTerraformTypeName("awscc_amplify_branch")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_id":                        "AppId",
+		"arn":                           "Arn",
+		"basic_auth_config":             "BasicAuthConfig",
+		"branch_name":                   "BranchName",
+		"build_spec":                    "BuildSpec",
+		"description":                   "Description",
+		"enable_auto_build":             "EnableAutoBuild",
+		"enable_basic_auth":             "EnableBasicAuth",
+		"enable_performance_mode":       "EnablePerformanceMode",
+		"enable_pull_request_preview":   "EnablePullRequestPreview",
+		"environment_variables":         "EnvironmentVariables",
+		"key":                           "Key",
+		"name":                          "Name",
+		"password":                      "Password",
+		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"stage":                         "Stage",
+		"tags":                          "Tags",
+		"username":                      "Username",
+		"value":                         "Value",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BasicAuthConfig",
@@ -307,7 +328,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_amplify_branch", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_amplify_branch", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

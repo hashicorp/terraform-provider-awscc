@@ -3,6 +3,7 @@ package naming
 import (
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 var cloudFormationTypeNameRegexp = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})$`)
@@ -19,7 +20,17 @@ func ParseCloudFormationTypeName(typeName string) (string, string, string, error
 	return matches[1], matches[2], matches[3], nil
 }
 
-var terraformTypeNameRegexp = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})_([a-zA-Z0-9]{2,64})_([a-zA-Z0-9_]{2,})$`)
+const terraformTypeNameSeparator = "_"
+
+// CreateTerraformTypeName creates a Terraform resource type name from 3 parts - Organization, Service and Resource.
+func CreateTerraformTypeName(org, svc, res string) string {
+	parts := []string{org, svc, res}
+	id := strings.Join(parts, terraformTypeNameSeparator)
+
+	return id
+}
+
+var terraformTypeNameRegexp = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})` + terraformTypeNameSeparator + `([a-zA-Z0-9]{2,64})` + terraformTypeNameSeparator + `([a-zA-Z0-9_]{2,})$`)
 
 // ParseTerraformTypeName parses a Terraform resource type name into 3 parts - Organization, Service and Resource.
 func ParseTerraformTypeName(typeName string) (string, string, string, error) {

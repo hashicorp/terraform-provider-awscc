@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_logs_query_definition", queryDefinitionResourceType)
+	registry.AddResourceTypeFactory("awscc_logs_query_definition", queryDefinitionResourceType)
 }
 
-// queryDefinitionResourceType returns the Terraform aws_logs_query_definition resource type.
+// queryDefinitionResourceType returns the Terraform awscc_logs_query_definition resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Logs::QueryDefinition resource type.
 func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"log_group_names": {
 			// Property: LogGroupNames
 			// CloudFormation resource type schema:
@@ -37,9 +36,8 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "Optionally define specific log groups as part of your query definition",
-			// Multiset.
-			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
 		},
 		"name": {
 			// Property: Name
@@ -83,14 +81,13 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The resource schema for AWSLogs QueryDefinition",
 		Version:     1,
 		Attributes:  attributes,
@@ -98,7 +95,15 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Logs::QueryDefinition").WithTerraformTypeName("aws_logs_query_definition").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Logs::QueryDefinition").WithTerraformTypeName("awscc_logs_query_definition")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"log_group_names":     "LogGroupNames",
+		"name":                "Name",
+		"query_definition_id": "QueryDefinitionId",
+		"query_string":        "QueryString",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -110,7 +115,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_logs_query_definition", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_logs_query_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

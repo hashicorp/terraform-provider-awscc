@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_gamelift_game_server_group", gameServerGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_gamelift_game_server_group", gameServerGroupResourceType)
 }
 
-// gameServerGroupResourceType returns the Terraform aws_gamelift_game_server_group resource type.
+// gameServerGroupResourceType returns the Terraform awscc_gamelift_game_server_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::GameLift::GameServerGroup resource type.
 func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"auto_scaling_group_arn": {
 			// Property: AutoScalingGroupArn
 			// CloudFormation resource type schema:
@@ -71,8 +70,8 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "object"
 			// }
 			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"estimated_instance_warmup": {
 						// Property: EstimatedInstanceWarmup
 						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
@@ -82,8 +81,8 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"target_tracking_configuration": {
 						// Property: TargetTrackingConfiguration
 						Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
-						Attributes: schema.SingleNestedAttributes(
-							map[string]schema.Attribute{
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
 								"target_value": {
 									// Property: TargetValue
 									Description: "Desired value to use with a game server group target-based scaling policy.",
@@ -210,8 +209,8 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "A set of EC2 instance types to use when creating instances in the group.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"instance_type": {
 						// Property: InstanceType
 						Description: "An EC2 instance type designation.",
@@ -225,7 +224,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 2,
 					MaxItems: 20,
 				},
@@ -258,8 +257,8 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "object"
 			// }
 			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"launch_template_id": {
 						// Property: LaunchTemplateId
 						Description: "A unique identifier for an existing EC2 launch template.",
@@ -346,8 +345,8 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "array"
 			// }
 			Description: "A list of labels to assign to the new game server group resource.",
-			Attributes: schema.ListNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
@@ -361,7 +360,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				schema.ListNestedAttributesOptions{
+				tfsdk.ListNestedAttributesOptions{
 					MinItems: 0,
 					MaxItems: 200,
 				},
@@ -390,14 +389,13 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift) GameServerGroup.",
 		Version:     1,
 		Attributes:  attributes,
@@ -405,7 +403,35 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameServerGroup").WithTerraformTypeName("aws_gamelift_game_server_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameServerGroup").WithTerraformTypeName("awscc_gamelift_game_server_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_group_arn":        "AutoScalingGroupArn",
+		"auto_scaling_policy":           "AutoScalingPolicy",
+		"balancing_strategy":            "BalancingStrategy",
+		"delete_option":                 "DeleteOption",
+		"estimated_instance_warmup":     "EstimatedInstanceWarmup",
+		"game_server_group_arn":         "GameServerGroupArn",
+		"game_server_group_name":        "GameServerGroupName",
+		"game_server_protection_policy": "GameServerProtectionPolicy",
+		"instance_definitions":          "InstanceDefinitions",
+		"instance_type":                 "InstanceType",
+		"key":                           "Key",
+		"launch_template":               "LaunchTemplate",
+		"launch_template_id":            "LaunchTemplateId",
+		"launch_template_name":          "LaunchTemplateName",
+		"max_size":                      "MaxSize",
+		"min_size":                      "MinSize",
+		"role_arn":                      "RoleArn",
+		"tags":                          "Tags",
+		"target_tracking_configuration": "TargetTrackingConfiguration",
+		"target_value":                  "TargetValue",
+		"value":                         "Value",
+		"version":                       "Version",
+		"vpc_subnets":                   "VpcSubnets",
+		"weighted_capacity":             "WeightedCapacity",
+	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteOption",
@@ -420,7 +446,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_gamelift_game_server_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_gamelift_game_server_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

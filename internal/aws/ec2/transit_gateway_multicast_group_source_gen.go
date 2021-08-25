@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResourceType)
+	registry.AddResourceTypeFactory("awscc_ec2_transit_gateway_multicast_group_source", transitGatewayMulticastGroupSourceResourceType)
 }
 
-// transitGatewayMulticastGroupSourceResourceType returns the Terraform aws_ec2_transit_gateway_multicast_group_source resource type.
+// transitGatewayMulticastGroupSourceResourceType returns the Terraform awscc_ec2_transit_gateway_multicast_group_source resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastGroupSource resource type.
 func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"group_ip_address": {
 			// Property: GroupIpAddress
 			// CloudFormation resource type schema:
@@ -148,14 +147,13 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "The AWS::EC2::TransitGatewayMulticastGroupSource registers and deregisters members and sources (network interfaces) with the transit gateway multicast group",
 		Version:     1,
 		Attributes:  attributes,
@@ -163,7 +161,22 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("aws_ec2_transit_gateway_multicast_group_source").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_source")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"group_ip_address":                    "GroupIpAddress",
+		"group_member":                        "GroupMember",
+		"group_source":                        "GroupSource",
+		"member_type":                         "MemberType",
+		"network_interface_id":                "NetworkInterfaceId",
+		"resource_id":                         "ResourceId",
+		"resource_type":                       "ResourceType",
+		"source_type":                         "SourceType",
+		"subnet_id":                           "SubnetId",
+		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
+		"transit_gateway_multicast_domain_id": "TransitGatewayMulticastDomainId",
+	})
 
 	opts = opts.IsImmutableType(true)
 
@@ -175,7 +188,7 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_ec2_transit_gateway_multicast_group_source", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_multicast_group_source", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

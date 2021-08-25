@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_backup_backup_vault", backupVaultResourceType)
+	registry.AddResourceTypeFactory("awscc_backup_backup_vault", backupVaultResourceType)
 }
 
-// backupVaultResourceType returns the Terraform aws_backup_backup_vault resource type.
+// backupVaultResourceType returns the Terraform awscc_backup_backup_vault resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::Backup::BackupVault resource type.
 func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"access_policy": {
 			// Property: AccessPolicy
 			// CloudFormation resource type schema:
@@ -101,8 +100,8 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"backup_vault_events": {
 						// Property: BackupVaultEvents
 						Type:     types.ListType{ElemType: types.StringType},
@@ -119,14 +118,13 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::Backup::BackupVault",
 		Version:     1,
 		Attributes:  attributes,
@@ -134,7 +132,19 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupVault").WithTerraformTypeName("aws_backup_backup_vault").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupVault").WithTerraformTypeName("awscc_backup_backup_vault")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_policy":       "AccessPolicy",
+		"backup_vault_arn":    "BackupVaultArn",
+		"backup_vault_events": "BackupVaultEvents",
+		"backup_vault_name":   "BackupVaultName",
+		"backup_vault_tags":   "BackupVaultTags",
+		"encryption_key_arn":  "EncryptionKeyArn",
+		"notifications":       "Notifications",
+		"sns_topic_arn":       "SNSTopicArn",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -146,7 +156,7 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_backup_backup_vault", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_backup_backup_vault", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

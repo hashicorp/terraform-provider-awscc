@@ -6,22 +6,21 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_rds_db_proxy_target_group", dBProxyTargetGroupResourceType)
+	registry.AddResourceTypeFactory("awscc_rds_db_proxy_target_group", dBProxyTargetGroupResourceType)
 }
 
-// dBProxyTargetGroupResourceType returns the Terraform aws_rds_db_proxy_target_group resource type.
+// dBProxyTargetGroupResourceType returns the Terraform awscc_rds_db_proxy_target_group resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::RDS::DBProxyTargetGroup resource type.
 func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"connection_pool_configuration_info": {
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
@@ -55,8 +54,8 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "object"
 			// }
-			Attributes: schema.SingleNestedAttributes(
-				map[string]schema.Attribute{
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
 					"connection_borrow_timeout": {
 						// Property: ConnectionBorrowTimeout
 						Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
@@ -84,9 +83,8 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"session_pinning_filters": {
 						// Property: SessionPinningFilters
 						Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-						// Multiset.
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
+						Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
 					},
 				},
 			),
@@ -102,7 +100,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
@@ -116,7 +113,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   },
 			//   "type": "array"
 			// }
-			// Multiset.
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 		},
@@ -162,14 +158,13 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxyTargetGroup",
 		Version:     1,
 		Attributes:  attributes,
@@ -177,7 +172,22 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyTargetGroup").WithTerraformTypeName("aws_rds_db_proxy_target_group").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyTargetGroup").WithTerraformTypeName("awscc_rds_db_proxy_target_group")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_borrow_timeout":          "ConnectionBorrowTimeout",
+		"connection_pool_configuration_info": "ConnectionPoolConfigurationInfo",
+		"db_cluster_identifiers":             "DBClusterIdentifiers",
+		"db_instance_identifiers":            "DBInstanceIdentifiers",
+		"db_proxy_name":                      "DBProxyName",
+		"init_query":                         "InitQuery",
+		"max_connections_percent":            "MaxConnectionsPercent",
+		"max_idle_connections_percent":       "MaxIdleConnectionsPercent",
+		"session_pinning_filters":            "SessionPinningFilters",
+		"target_group_arn":                   "TargetGroupArn",
+		"target_group_name":                  "TargetGroupName",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -189,7 +199,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_rds_db_proxy_target_group", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_rds_db_proxy_target_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

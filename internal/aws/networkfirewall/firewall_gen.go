@@ -6,23 +6,22 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/terraform-plugin-framework/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	. "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/generic"
-	"github.com/hashicorp/terraform-provider-aws-cloudapi/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-aws-cloudapi/internal/types"
+	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddResourceTypeFactory("aws_networkfirewall_firewall", firewallResourceType)
+	registry.AddResourceTypeFactory("awscc_networkfirewall_firewall", firewallResourceType)
 }
 
-// firewallResourceType returns the Terraform aws_networkfirewall_firewall resource type.
+// firewallResourceType returns the Terraform awscc_networkfirewall_firewall resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::NetworkFirewall::Firewall resource type.
 func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
-	attributes := map[string]schema.Attribute{
+	attributes := map[string]tfsdk.Attribute{
 		"delete_protection": {
 			// Property: DeleteProtection
 			// CloudFormation resource type schema:
@@ -150,7 +149,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"subnet_id": {
 						// Property: SubnetId
 						Description: "A SubnetId.",
@@ -193,7 +192,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Attributes: providertypes.SetNestedAttributes(
-				map[string]schema.Attribute{
+				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
@@ -224,14 +223,13 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
-	// Required for acceptance testing.
-	attributes["id"] = schema.Attribute{
+	attributes["id"] = tfsdk.Attribute{
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
 	}
 
-	schema := schema.Schema{
+	schema := tfsdk.Schema{
 		Description: "Resource type definition for AWS::NetworkFirewall::Firewall",
 		Version:     1,
 		Attributes:  attributes,
@@ -239,7 +237,26 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("aws_networkfirewall_firewall").WithTerraformSchema(schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("awscc_networkfirewall_firewall")
+	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithSyntheticIDAttribute(true)
+	opts = opts.WithAttributeNameMap(map[string]string{
+		"delete_protection":                 "DeleteProtection",
+		"description":                       "Description",
+		"endpoint_ids":                      "EndpointIds",
+		"firewall_arn":                      "FirewallArn",
+		"firewall_id":                       "FirewallId",
+		"firewall_name":                     "FirewallName",
+		"firewall_policy_arn":               "FirewallPolicyArn",
+		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
+		"key":                               "Key",
+		"subnet_change_protection":          "SubnetChangeProtection",
+		"subnet_id":                         "SubnetId",
+		"subnet_mappings":                   "SubnetMappings",
+		"tags":                              "Tags",
+		"value":                             "Value",
+		"vpc_id":                            "VpcId",
+	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
@@ -251,7 +268,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "aws_networkfirewall_firewall", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkfirewall_firewall", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }
