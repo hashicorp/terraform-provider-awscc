@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -163,6 +165,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CODE_DEPLOY",
+								"ECS",
+								"EXTERNAL",
+							}),
+						},
 					},
 				},
 			),
@@ -222,6 +231,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EC2",
+					"FARGATE",
+					"EXTERNAL",
+				}),
+			},
 			// LaunchType is a force-new attribute.
 		},
 		"load_balancers": {
@@ -330,6 +346,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AssignPublicIp
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DISABLED",
+											"ENABLED",
+										}),
+									},
 								},
 								"security_groups": {
 									// Property: SecurityGroups
@@ -385,6 +407,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"distinctInstance",
+								"memberOf",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -430,6 +458,13 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"binpack",
+								"random",
+								"spread",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -460,6 +495,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SERVICE",
+					"TASK_DEFINITION",
+				}),
+			},
 			// PropagateTags is a force-new attribute.
 		},
 		"role": {
@@ -486,6 +527,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DAEMON",
+					"REPLICA",
+				}),
+			},
 			// SchedulingStrategy is a force-new attribute.
 		},
 		"service_arn": {

@@ -222,6 +222,14 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PERSONAL",
+					"CUSTOM",
+					"SERVICE",
+					"ESCALATION",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

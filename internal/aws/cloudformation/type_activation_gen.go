@@ -175,6 +175,12 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RESOURCE",
+					"MODULE",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 		"type_name": {
@@ -224,6 +230,12 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MAJOR",
+					"MINOR",
+				}),
+			},
 		},
 	}
 

@@ -137,6 +137,13 @@ func dataCatalogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. ",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"LAMBDA",
+					"GLUE",
+					"HIVE",
+				}),
+			},
 		},
 	}
 

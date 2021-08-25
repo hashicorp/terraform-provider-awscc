@@ -176,6 +176,12 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ENABLED",
+								"DISABLED",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

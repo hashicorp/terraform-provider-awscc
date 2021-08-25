@@ -74,6 +74,12 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Must be RuleName",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RuleName",
+					"MqttTopic",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name

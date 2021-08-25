@@ -138,12 +138,24 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "Rule Action",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALLOW",
+								"BLOCK",
+								"ALERT",
+							}),
+						},
 					},
 					"block_override_dns_type": {
 						// Property: BlockOverrideDnsType
 						Description: "BlockOverrideDnsType",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CNAME",
+							}),
+						},
 					},
 					"block_override_domain": {
 						// Property: BlockOverrideDomain
@@ -168,6 +180,13 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "BlockResponse",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NODATA",
+								"NXDOMAIN",
+								"OVERRIDE",
+							}),
+						},
 					},
 					"firewall_domain_list_id": {
 						// Property: FirewallDomainListId

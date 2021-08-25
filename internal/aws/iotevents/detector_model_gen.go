@@ -4788,6 +4788,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Information about the order in which events are evaluated and how actions are executed.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"BATCH",
+					"SERIAL",
+				}),
+			},
 		},
 		"key": {
 			// Property: Key

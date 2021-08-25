@@ -155,6 +155,12 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"READ_WRITE",
+					"READ_ONLY",
+				}),
+			},
 			// TargetRole is a force-new attribute.
 		},
 		"vpc_id": {

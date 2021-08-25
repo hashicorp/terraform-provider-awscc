@@ -38,6 +38,12 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CustomerOwnedIp",
+					"Private",
+				}),
+			},
 			// AccessType is a force-new attribute.
 		},
 		"arn": {

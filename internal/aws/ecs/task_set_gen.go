@@ -74,6 +74,12 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EC2",
+					"FARGATE",
+				}),
+			},
 			// LaunchType is a force-new attribute.
 		},
 		"load_balancers": {
@@ -195,6 +201,12 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DISABLED",
+											"ENABLED",
+										}),
+									},
 								},
 								"security_groups": {
 									// Property: SecurityGroups
@@ -266,6 +278,11 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The unit of measure for the scale value.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PERCENT",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value

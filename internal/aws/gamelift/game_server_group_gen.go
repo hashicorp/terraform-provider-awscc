@@ -115,6 +115,13 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SPOT_ONLY",
+					"SPOT_PREFERRED",
+					"ON_DEMAND_ONLY",
+				}),
+			},
 		},
 		"delete_option": {
 			// Property: DeleteOption
@@ -132,6 +139,13 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The type of delete to perform.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SAFE_DELETE",
+					"FORCE_DELETE",
+					"RETAIN",
+				}),
+			},
 			// DeleteOption is a write-only attribute.
 		},
 		"game_server_group_arn": {
@@ -182,6 +196,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NO_PROTECTION",
+					"FULL_PROTECTION",
+				}),
+			},
 		},
 		"instance_definitions": {
 			// Property: InstanceDefinitions

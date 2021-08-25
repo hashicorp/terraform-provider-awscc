@@ -122,6 +122,16 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"STANDARD_IA",
+					"ONEZONE_IA",
+					"INTELLIGENT_TIERING",
+					"GLACIER",
+					"DEEP_ARCHIVE",
+				}),
+			},
 			// S3StorageClass is a force-new attribute.
 		},
 		"subdirectory": {

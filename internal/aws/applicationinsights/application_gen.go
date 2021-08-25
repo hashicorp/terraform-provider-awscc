@@ -786,6 +786,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The component monitoring configuration mode.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DEFAULT",
+								"DEFAULT_WITH_OVERWRITE",
+								"CUSTOM",
+							}),
+						},
 					},
 					"component_name": {
 						// Property: ComponentName
@@ -841,6 +848,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Indicates the degree of outage when the alarm goes off.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"HIGH",
+																	"MEDIUM",
+																	"LOW",
+																}),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -884,6 +898,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "The type of encoding of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"utf-8",
+																	"utf-16",
+																	"ascii",
+																}),
+															},
 														},
 														"log_group_name": {
 															// Property: LogGroupName
@@ -1009,6 +1030,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Description: "The type of encoding of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"utf-8",
+																				"utf-16",
+																				"ascii",
+																			}),
+																		},
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
@@ -1103,6 +1131,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The sub component type.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"AWS::EC2::Instance",
+														"AWS::EC2::Volume",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1160,6 +1194,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Indicates the degree of outage when the alarm goes off.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"HIGH",
+																	"MEDIUM",
+																	"LOW",
+																}),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -1203,6 +1244,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "The type of encoding of the logs to be monitored.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"utf-8",
+																	"utf-16",
+																	"ascii",
+																}),
+															},
 														},
 														"log_group_name": {
 															// Property: LogGroupName
@@ -1328,6 +1376,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Description: "The type of encoding of the logs to be monitored.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"utf-8",
+																				"utf-16",
+																				"ascii",
+																			}),
+																		},
 																	},
 																	"log_group_name": {
 																		// Property: LogGroupName
@@ -1422,6 +1477,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The sub component type.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"AWS::EC2::Instance",
+														"AWS::EC2::Volume",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{

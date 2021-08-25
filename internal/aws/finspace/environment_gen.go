@@ -109,6 +109,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Federation mode used with the Environment",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"LOCAL",
+					"FEDERATED",
+				}),
+			},
 		},
 		"federation_parameters": {
 			// Property: FederationParameters

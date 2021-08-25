@@ -169,6 +169,12 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 						Description: "Indicates the role of the member, primary or secondary.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PRIMARY",
+								"SECONDARY",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

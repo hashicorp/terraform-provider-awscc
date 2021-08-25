@@ -132,6 +132,12 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "MutationProtectionStatus",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name

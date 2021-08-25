@@ -86,6 +86,14 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"string-list",
+					"ip-address-list",
+					"number-list",
+					"number",
+				}),
+			},
 			// MetricType is a force-new attribute.
 		},
 		"tags": {

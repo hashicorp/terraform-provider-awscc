@@ -135,6 +135,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 128),
+							validate.StringInSlice([]string{
+								"SIMPLE_PATTERN",
+							}),
 						},
 					},
 					"value": {
@@ -306,6 +309,12 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"BEST_EFFORT",
+							}),
+						},
 					},
 					"bytes_per_second": {
 						// Property: BytesPerSecond
@@ -321,72 +330,151 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The group ID (GID) of the file's owners.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"INT_VALUE",
+								"NAME",
+								"BOTH",
+							}),
+						},
 					},
 					"log_level": {
 						// Property: LogLevel
 						Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"OFF",
+								"BASIC",
+								"TRANSFER",
+							}),
+						},
 					},
 					"mtime": {
 						// Property: Mtime
 						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"overwrite_mode": {
 						// Property: OverwriteMode
 						Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALWAYS",
+								"NEVER",
+							}),
+						},
 					},
 					"posix_permissions": {
 						// Property: PosixPermissions
 						Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"preserve_deleted_files": {
 						// Property: PreserveDeletedFiles
 						Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PRESERVE",
+								"REMOVE",
+							}),
+						},
 					},
 					"preserve_devices": {
 						// Property: PreserveDevices
 						Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"security_descriptor_copy_flags": {
 						// Property: SecurityDescriptorCopyFlags
 						Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"OWNER_DACL",
+								"OWNER_DACL_SACL",
+							}),
+						},
 					},
 					"task_queueing": {
 						// Property: TaskQueueing
 						Description: "A value that determines whether tasks should be queued before executing the tasks.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ENABLED",
+								"DISABLED",
+							}),
+						},
 					},
 					"transfer_mode": {
 						// Property: TransferMode
 						Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CHANGED",
+								"ALL",
+							}),
+						},
 					},
 					"uid": {
 						// Property: Uid
 						Description: "The user ID (UID) of the file's owner.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"INT_VALUE",
+								"NAME",
+								"BOTH",
+							}),
+						},
 					},
 					"verify_mode": {
 						// Property: VerifyMode
 						Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"POINT_IN_TIME_CONSISTENT",
+								"ONLY_FILES_TRANSFERRED",
+								"NONE",
+							}),
+						},
 					},
 				},
 			),

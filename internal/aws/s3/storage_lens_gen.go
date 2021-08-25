@@ -398,12 +398,23 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"CSV",
+														"Parquet",
+													}),
+												},
 											},
 											"output_schema_version": {
 												// Property: OutputSchemaVersion
 												Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"V_1",
+													}),
+												},
 											},
 											"prefix": {
 												// Property: Prefix

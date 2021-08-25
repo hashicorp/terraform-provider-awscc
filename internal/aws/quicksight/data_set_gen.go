@@ -120,6 +120,11 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CountryCode
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"US",
+										}),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -291,6 +296,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SPICE",
+					"DIRECT_QUERY",
+				}),
+			},
 		},
 		"ingestion_wait_policy": {
 			// Property: IngestionWaitPolicy
@@ -679,6 +690,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: NewColumnType
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+													}),
+												},
 											},
 										},
 									),
@@ -837,6 +856,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ColumnGeographicRole
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"COUNTRY",
+																	"STATE",
+																	"COUNTY",
+																	"CITY",
+																	"POSTCODE",
+																	"LONGITUDE",
+																	"LATITUDE",
+																	"POLITICAL1",
+																}),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -925,6 +956,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INNER",
+														"OUTER",
+														"LEFT",
+														"RIGHT",
+													}),
+												},
 											},
 										},
 									),
@@ -1023,6 +1062,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"STRING",
+								"INTEGER",
+								"DECIMAL",
+								"DATETIME",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -1347,6 +1394,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1421,6 +1479,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1481,6 +1550,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1514,6 +1594,16 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Format
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"CSV",
+														"TSV",
+														"CLF",
+														"ELF",
+														"XLSX",
+														"JSON",
+													}),
+												},
 											},
 											"start_from_row": {
 												// Property: StartFromRow
@@ -1528,6 +1618,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: TextQualifier
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DOUBLE_QUOTE",
+														"SINGLE_QUOTE",
+													}),
+												},
 											},
 										},
 									),
@@ -1593,6 +1689,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FormatVersion
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"VERSION_1",
+								"VERSION_2",
+							}),
+						},
 					},
 					"namespace": {
 						// Property: Namespace
@@ -1607,6 +1709,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PermissionPolicy
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"GRANT_ACCESS",
+								"DENY_ACCESS",
+							}),
+						},
 					},
 				},
 			),

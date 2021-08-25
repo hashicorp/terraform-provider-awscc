@@ -221,6 +221,13 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: InsufficientDataHealthStatus
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Healthy",
+								"LastKnownStatus",
+								"Unhealthy",
+							}),
+						},
 					},
 					"inverted": {
 						// Property: Inverted
@@ -288,6 +295,18 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CALCULATED",
+								"CLOUDWATCH_METRIC",
+								"HTTP",
+								"HTTP_STR_MATCH",
+								"HTTPS",
+								"HTTPS_STR_MATCH",
+								"TCP",
+								"RECOVERY_CONTROL",
+							}),
+						},
 						// Type is a force-new attribute.
 					},
 				},

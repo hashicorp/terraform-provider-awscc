@@ -91,6 +91,12 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The assignee's type, user/group",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"USER",
+					"GROUP",
+				}),
+			},
 			// PrincipalType is a force-new attribute.
 		},
 		"target_id": {
@@ -119,6 +125,11 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of resource to be provsioned to, only aws account now",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AWS_ACCOUNT",
+				}),
+			},
 			// TargetType is a force-new attribute.
 		},
 	}

@@ -105,6 +105,12 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Description: "Defines how the dimensionValues of a dimension are interpreted.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"IN",
+											"NOT_IN",
+										}),
+									},
 								},
 							},
 						),
@@ -384,6 +390,20 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Description: "The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"less-than",
+											"less-than-equals",
+											"greater-than",
+											"greater-than-equals",
+											"in-cidr-set",
+											"not-in-cidr-set",
+											"in-port-set",
+											"not-in-port-set",
+											"in-set",
+											"not-in-set",
+										}),
+									},
 								},
 								"consecutive_datapoints_to_alarm": {
 									// Property: ConsecutiveDatapointsToAlarm
@@ -419,6 +439,13 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Description: "The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"LOW",
+														"MEDIUM",
+														"HIGH",
+													}),
+												},
 											},
 										},
 									),
@@ -434,6 +461,22 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Description: "The percentile which resolves to a threshold value by which compliance with a behavior is determined",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Average",
+														"p0",
+														"p0.1",
+														"p0.01",
+														"p1",
+														"p10",
+														"p50",
+														"p90",
+														"p99",
+														"p99.9",
+														"p99.99",
+														"p100",
+													}),
+												},
 											},
 										},
 									),
@@ -516,6 +559,12 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Description: "Defines how the dimensionValues of a dimension are interpreted.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"IN",
+											"NOT_IN",
+										}),
+									},
 								},
 							},
 						),

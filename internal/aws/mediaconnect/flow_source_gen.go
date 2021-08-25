@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -88,6 +90,13 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"aes128",
+								"aes192",
+								"aes256",
+							}),
+						},
 					},
 					"constant_initialization_vector": {
 						// Property: ConstantInitializationVector
@@ -106,6 +115,12 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"speke",
+								"static-key",
+							}),
+						},
 					},
 					"region": {
 						// Property: Region
@@ -246,6 +261,14 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The protocol that is used by the source.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"zixi-push",
+					"rtp-fec",
+					"rtp",
+					"rist",
+				}),
+			},
 		},
 		"source_arn": {
 			// Property: SourceArn

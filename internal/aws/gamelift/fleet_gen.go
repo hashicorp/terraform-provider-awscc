@@ -66,6 +66,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: CertificateType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DISABLED",
+								"GENERATED",
+							}),
+						},
 					},
 				},
 			),
@@ -180,6 +186,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The network communication protocol used by the fleet.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TCP",
+								"UDP",
+							}),
+						},
 					},
 					"to_port": {
 						// Property: ToPort
@@ -241,6 +253,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ON_DEMAND",
+					"SPOT",
+				}),
+			},
 			// FleetType is a force-new attribute.
 		},
 		"instance_role_arn": {
@@ -472,6 +490,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"FullProtection",
+					"NoProtection",
+				}),
+			},
 		},
 		"peer_vpc_aws_account_id": {
 			// Property: PeerVpcAwsAccountId

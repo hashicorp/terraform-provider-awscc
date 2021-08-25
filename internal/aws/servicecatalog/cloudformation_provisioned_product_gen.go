@@ -36,6 +36,13 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"en",
+					"jp",
+					"zh",
+				}),
+			},
 		},
 		"cloudformation_stack_arn": {
 			// Property: CloudformationStackArn
@@ -337,6 +344,13 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 						// Property: StackSetOperationType
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATE",
+								"UPDATE",
+								"DELETE",
+							}),
+						},
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions

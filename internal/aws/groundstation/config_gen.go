@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -294,6 +296,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Units
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"GHz",
+																	"MHz",
+																	"kHz",
+																}),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -312,6 +321,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Units
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"GHz",
+																	"MHz",
+																	"kHz",
+																}),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -326,6 +342,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Polarization
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"LEFT_HAND",
+														"RIGHT_HAND",
+														"NONE",
+													}),
+												},
 											},
 										},
 									),
@@ -377,6 +400,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Units
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"GHz",
+																	"MHz",
+																	"kHz",
+																}),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -395,6 +425,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Units
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"GHz",
+																	"MHz",
+																	"kHz",
+																}),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -409,6 +446,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Polarization
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"LEFT_HAND",
+														"RIGHT_HAND",
+														"NONE",
+													}),
+												},
 											},
 										},
 									),
@@ -434,6 +478,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Units
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"GHz",
+																	"MHz",
+																	"kHz",
+																}),
+															},
 														},
 														"value": {
 															// Property: Value
@@ -448,6 +499,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Polarization
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"LEFT_HAND",
+														"RIGHT_HAND",
+														"NONE",
+													}),
+												},
 											},
 										},
 									),
@@ -461,6 +519,11 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Units
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"dBW",
+													}),
+												},
 											},
 											"value": {
 												// Property: Value
@@ -529,6 +592,13 @@ func configResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Autotrack
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"REQUIRED",
+											"PREFERRED",
+											"REMOVED",
+										}),
+									},
 								},
 							},
 						),

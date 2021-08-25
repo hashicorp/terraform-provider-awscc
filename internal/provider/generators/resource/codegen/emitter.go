@@ -153,6 +153,18 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			}
 		}
 
+		if len(property.Enum) > 0 {
+			sb := strings.Builder{}
+			sb.WriteString("validate.StringInSlice([]string{\n")
+			for _, enum := range property.Enum {
+				sb.WriteString("\"")
+				sb.WriteString(enum.(string))
+				sb.WriteString("\",\n")
+			}
+			sb.WriteString("})")
+			validators = append(validators, sb.String())
+		}
+
 	//
 	// Complex types.
 	//

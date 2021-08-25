@@ -311,6 +311,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Database table name",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NEW_TABLE",
+							}),
+						},
 					},
 					"glue_connection_name": {
 						// Property: GlueConnectionName
@@ -369,6 +374,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Encryption mode",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSE-KMS",
+					"SSE-S3",
+				}),
+			},
 		},
 		"job_sample": {
 			// Property: JobSample
@@ -401,6 +412,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Sample configuration mode for profile jobs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FULL_DATASET",
+								"CUSTOM_ROWS",
+							}),
+						},
 					},
 					"size": {
 						// Property: Size
@@ -426,6 +443,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Log subscription",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLE",
+					"DISABLE",
+				}),
+			},
 		},
 		"max_capacity": {
 			// Property: MaxCapacity
@@ -596,11 +619,35 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"GZIP",
+								"LZ4",
+								"SNAPPY",
+								"BZIP2",
+								"DEFLATE",
+								"LZO",
+								"BROTLI",
+								"ZSTD",
+								"ZLIB",
+							}),
+						},
 					},
 					"format": {
 						// Property: Format
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CSV",
+								"JSON",
+								"PARQUET",
+								"GLUEPARQUET",
+								"AVRO",
+								"ORC",
+								"XML",
+							}),
+						},
 					},
 					"format_options": {
 						// Property: FormatOptions
@@ -1121,6 +1168,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Job type",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PROFILE",
+					"RECIPE",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

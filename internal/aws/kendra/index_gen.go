@@ -223,6 +223,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RankOrder
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ASCENDING",
+											"DESCENDING",
+										}),
+									},
 								},
 								"value_importance_items": {
 									// Property: ValueImportanceItems
@@ -285,6 +291,14 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"STRING_VALUE",
+								"STRING_LIST_VALUE",
+								"LONG_VALUE",
+								"DATE_VALUE",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -307,6 +321,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Edition of index",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DEVELOPER_EDITION",
+					"ENTERPRISE_EDITION",
+				}),
+			},
 			// Edition is a force-new attribute.
 		},
 		"id": {
@@ -456,6 +476,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ATTRIBUTE_FILTER",
+					"USER_TOKEN",
+				}),
+			},
 		},
 		"user_token_configurations": {
 			// Property: UserTokenConfigurations
@@ -597,6 +623,12 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: KeyLocation
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"URL",
+											"SECRET_MANAGER",
+										}),
+									},
 								},
 								"secret_manager_arn": {
 									// Property: SecretManagerArn

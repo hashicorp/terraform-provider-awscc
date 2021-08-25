@@ -80,6 +80,12 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTIVE",
+					"INACTIVE",
+				}),
+			},
 		},
 	}
 

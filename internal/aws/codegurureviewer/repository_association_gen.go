@@ -190,6 +190,14 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The type of repository to be associated.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CodeCommit",
+					"Bitbucket",
+					"GitHubEnterpriseServer",
+					"S3Bucket",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

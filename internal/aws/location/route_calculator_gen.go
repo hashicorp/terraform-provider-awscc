@@ -111,6 +111,12 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"update_time": {

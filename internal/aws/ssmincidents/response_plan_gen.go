@@ -179,6 +179,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The account type to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"IMPACTED_ACCOUNT",
+											"RESPONSE_PLAN_OWNER_ACCOUNT",
+										}),
+									},
 								},
 							},
 						),

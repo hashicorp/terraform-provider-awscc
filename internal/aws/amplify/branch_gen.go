@@ -255,6 +255,15 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EXPERIMENTAL",
+					"BETA",
+					"PULL_REQUEST",
+					"PRODUCTION",
+					"DEVELOPMENT",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

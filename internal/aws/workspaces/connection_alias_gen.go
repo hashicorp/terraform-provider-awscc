@@ -85,6 +85,15 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: AssociationStatus
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NOT_ASSOCIATED",
+								"PENDING_ASSOCIATION",
+								"ASSOCIATED_WITH_OWNER_ACCOUNT",
+								"ASSOCIATED_WITH_SHARED_ACCOUNT",
+								"PENDING_DISASSOCIATION",
+							}),
+						},
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier

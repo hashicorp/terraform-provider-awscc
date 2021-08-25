@@ -47,6 +47,11 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Must be redis.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"redis",
+				}),
+			},
 			// Engine is a force-new attribute.
 		},
 		"status": {

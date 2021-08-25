@@ -67,6 +67,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The encryption type to use.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AES256",
+								"KMS",
+							}),
+						},
 						// EncryptionType is a force-new attribute.
 					},
 					"kms_key": {
@@ -127,6 +133,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The image tag mutability setting for the repository.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MUTABLE",
+					"IMMUTABLE",
+				}),
+			},
 		},
 		"lifecycle_policy": {
 			// Property: LifecyclePolicy

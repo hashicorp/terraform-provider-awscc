@@ -196,6 +196,14 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Level
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALL",
+								"ERROR",
+								"FATAL",
+								"OFF",
+							}),
+						},
 					},
 				},
 			),
@@ -254,6 +262,12 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"EXPRESS",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

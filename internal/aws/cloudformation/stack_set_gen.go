@@ -88,6 +88,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SELF",
+					"DELEGATED_ADMIN",
+				}),
+			},
 			// CallAs is a write-only attribute.
 		},
 		"capabilities": {
@@ -225,6 +231,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SEQUENTIAL",
+								"PARALLEL",
+							}),
+						},
 					},
 					"region_order": {
 						// Property: RegionOrder
@@ -297,6 +309,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SERVICE_MANAGED",
+					"SELF_MANAGED",
+				}),
+			},
 			// PermissionModel is a force-new attribute.
 		},
 		"stack_instances_group": {

@@ -139,6 +139,12 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The desired detector version status for the detector",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DRAFT",
+					"ACTIVE",
+				}),
+			},
 		},
 		"event_type": {
 			// Property: EventType
@@ -563,11 +569,24 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DataSource
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"EVENT",
+										}),
+									},
 								},
 								"data_type": {
 									// Property: DataType
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STRING",
+											"INTEGER",
+											"FLOAT",
+											"BOOLEAN",
+										}),
+									},
 								},
 								"default_value": {
 									// Property: DefaultValue
@@ -631,6 +650,43 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: VariableType
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AUTH_CODE",
+											"AVS",
+											"BILLING_ADDRESS_L1",
+											"BILLING_ADDRESS_L2",
+											"BILLING_CITY",
+											"BILLING_COUNTRY",
+											"BILLING_NAME",
+											"BILLING_PHONE",
+											"BILLING_STATE",
+											"BILLING_ZIP",
+											"CARD_BIN",
+											"CATEGORICAL",
+											"CURRENCY_CODE",
+											"EMAIL_ADDRESS",
+											"FINGERPRINT",
+											"FRAUD_LABEL",
+											"FREE_FORM_TEXT",
+											"IP_ADDRESS",
+											"NUMERIC",
+											"ORDER_ID",
+											"PAYMENT_TYPE",
+											"PHONE_NUMBER",
+											"PRICE",
+											"PRODUCT_CATEGORY",
+											"SHIPPING_ADDRESS_L1",
+											"SHIPPING_ADDRESS_L2",
+											"SHIPPING_CITY",
+											"SHIPPING_COUNTRY",
+											"SHIPPING_NAME",
+											"SHIPPING_PHONE",
+											"SHIPPING_STATE",
+											"SHIPPING_ZIP",
+											"USERAGENT",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -789,6 +845,12 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"FIRST_MATCHED",
+					"ALL_MATCHED",
+				}),
+			},
 		},
 		"rules": {
 			// Property: Rules
@@ -965,6 +1027,11 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Language
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DETECTORPL",
+							}),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime

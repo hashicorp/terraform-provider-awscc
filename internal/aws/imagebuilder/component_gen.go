@@ -129,6 +129,12 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The platform of the component.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Windows",
+					"Linux",
+				}),
+			},
 			// Platform is a force-new attribute.
 			// Platform is a write-only attribute.
 		},

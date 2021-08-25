@@ -411,6 +411,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "PackageType.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Image",
+					"Zip",
+				}),
+			},
 		},
 		"reserved_concurrent_executions": {
 			// Property: ReservedConcurrentExecutions
@@ -547,6 +553,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The tracing mode.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Active",
+								"PassThrough",
+							}),
+						},
 					},
 				},
 			),

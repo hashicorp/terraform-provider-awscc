@@ -54,6 +54,17 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SUN",
+					"MON",
+					"TUE",
+					"WED",
+					"THU",
+					"FRI",
+					"SAT",
+				}),
+			},
 		},
 		"frequency": {
 			// Property: Frequency
@@ -71,6 +82,14 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DAILY",
+					"WEEKLY",
+					"BIWEEKLY",
+					"MONTHLY",
+				}),
+			},
 		},
 		"scheduled_audit_arn": {
 			// Property: ScheduledAuditArn

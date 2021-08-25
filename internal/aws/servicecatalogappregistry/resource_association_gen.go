@@ -94,6 +94,11 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "The type of the CFN Resource for now it's enum CFN_STACK.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CFN_STACK",
+				}),
+			},
 		},
 	}
 

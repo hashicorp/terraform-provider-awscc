@@ -267,6 +267,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Stage
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"EXPERIMENTAL",
+								"BETA",
+								"PULL_REQUEST",
+								"PRODUCTION",
+								"DEVELOPMENT",
+							}),
+						},
 					},
 				},
 			),

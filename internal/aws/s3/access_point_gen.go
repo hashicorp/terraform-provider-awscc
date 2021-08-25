@@ -129,6 +129,12 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Specifies whether the policy is public or not.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"true",
+								"false",
+							}),
+						},
 					},
 				},
 			),

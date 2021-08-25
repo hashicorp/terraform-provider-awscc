@@ -1273,6 +1273,11 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"INTERNAL_FAILURE",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -1285,6 +1290,17 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATION_IN_PROGRESS",
+								"CREATION_SUCCESSFUL",
+								"CREATION_FAILED",
+								"UPDATE_IN_PROGRESS",
+								"UPDATE_SUCCESSFUL",
+								"UPDATE_FAILED",
+								"DELETED",
+							}),
+						},
 					},
 					"version_number": {
 						// Property: VersionNumber

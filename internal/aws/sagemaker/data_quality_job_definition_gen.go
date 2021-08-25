@@ -342,12 +342,24 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"FullyReplicated",
+											"ShardedByS3Key",
+										}),
+									},
 								},
 								"s3_input_mode": {
 									// Property: S3InputMode
 									Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Pipe",
+											"File",
+										}),
+									},
 								},
 							},
 						),
@@ -460,6 +472,12 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Continuous",
+														"EndOfJob",
+													}),
+												},
 											},
 											"s3_uri": {
 												// Property: S3Uri

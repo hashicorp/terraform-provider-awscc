@@ -98,6 +98,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -194,6 +200,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						// Property: ServerCertificateStatus
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"INVALID",
+								"VALID",
+							}),
+						},
 					},
 					"server_certificate_status_detail": {
 						// Property: ServerCertificateStatusDetail
@@ -219,6 +231,13 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DATA",
+					"CREDENTIAL_PROVIDER",
+					"JOBS",
+				}),
+			},
 			// ServiceType is a force-new attribute.
 		},
 		"tags": {

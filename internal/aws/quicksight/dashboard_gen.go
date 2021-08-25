@@ -143,6 +143,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ENABLED",
+											"DISABLED",
+										}),
+									},
 								},
 							},
 						),
@@ -157,6 +163,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ENABLED",
+											"DISABLED",
+										}),
+									},
 								},
 							},
 						),
@@ -171,6 +183,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: VisibilityState
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"EXPANDED",
+											"COLLAPSED",
+										}),
+									},
 								},
 							},
 						),
@@ -855,6 +873,20 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ACCESS_DENIED",
+											"SOURCE_NOT_FOUND",
+											"DATA_SET_NOT_FOUND",
+											"INTERNAL_FAILURE",
+											"PARAMETER_VALUE_INCOMPATIBLE",
+											"PARAMETER_TYPE_INVALID",
+											"PARAMETER_NOT_FOUND",
+											"COLUMN_TYPE_MISMATCH",
+											"COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
+											"COLUMN_REPLACEMENT_MISSING",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -901,6 +933,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATION_IN_PROGRESS",
+								"CREATION_SUCCESSFUL",
+								"CREATION_FAILED",
+								"UPDATE_IN_PROGRESS",
+								"UPDATE_SUCCESSFUL",
+								"UPDATE_FAILED",
+								"DELETED",
+							}),
+						},
 					},
 					"theme_arn": {
 						// Property: ThemeArn

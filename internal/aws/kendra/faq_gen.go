@@ -67,6 +67,13 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CSV",
+					"CSV_WITH_HEADER",
+					"JSON",
+				}),
+			},
 			// FileFormat is a force-new attribute.
 		},
 		"id": {

@@ -1890,6 +1890,18 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: CannedAcl
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"private",
+														"public-read",
+														"public-read-write",
+														"aws-exec-read",
+														"authenticated-read",
+														"bucket-owner-read",
+														"bucket-owner-full-control",
+														"log-delivery-write",
+													}),
+												},
 											},
 											"key": {
 												// Property: Key
@@ -2621,6 +2633,18 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: CannedAcl
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"private",
+														"public-read",
+														"public-read-write",
+														"aws-exec-read",
+														"authenticated-read",
+														"bucket-owner-read",
+														"bucket-owner-full-control",
+														"log-delivery-write",
+													}),
+												},
 											},
 											"key": {
 												// Property: Key

@@ -93,6 +93,12 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The state of the workgroup: ENABLED or DISABLED.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -279,6 +285,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"SSE_S3",
+														"SSE_KMS",
+														"CSE_KMS",
+													}),
+												},
 											},
 											"kms_key": {
 												// Property: KmsKey
@@ -459,6 +472,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"SSE_S3",
+														"SSE_KMS",
+														"CSE_KMS",
+													}),
+												},
 											},
 											"kms_key": {
 												// Property: KmsKey

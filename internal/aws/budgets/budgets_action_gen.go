@@ -61,6 +61,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PERCENTAGE",
+								"ABSOLUTE_VALUE",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value
@@ -84,6 +90,13 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"APPLY_IAM_POLICY",
+					"APPLY_SCP_POLICY",
+					"RUN_SSM_DOCUMENTS",
+				}),
+			},
 			// ActionType is a force-new attribute.
 		},
 		"approval_model": {
@@ -98,6 +111,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AUTOMATIC",
+					"MANUAL",
+				}),
+			},
 		},
 		"budget_name": {
 			// Property: BudgetName
@@ -285,6 +304,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									// Property: Subtype
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STOP_EC2_INSTANCES",
+											"STOP_RDS_INSTANCES",
+										}),
+									},
 								},
 							},
 						),
@@ -315,6 +340,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTUAL",
+					"FORECASTED",
+				}),
+			},
 		},
 		"subscribers": {
 			// Property: Subscribers
@@ -355,6 +386,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SNS",
+								"EMAIL",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

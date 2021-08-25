@@ -37,6 +37,12 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Ip Version of Prefix List.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"IPv4",
+					"IPv6",
+				}),
+			},
 		},
 		"arn": {
 			// Property: Arn

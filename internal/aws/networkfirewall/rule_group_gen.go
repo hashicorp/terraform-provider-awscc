@@ -594,6 +594,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: GeneratedRulesType
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ALLOWLIST",
+														"DENYLIST",
+													}),
+												},
 											},
 											"target_types": {
 												// Property: TargetTypes
@@ -625,6 +631,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Action
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PASS",
+														"DROP",
+														"ALERT",
+													}),
+												},
 											},
 											"header": {
 												// Property: Header
@@ -650,11 +663,40 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Direction
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"FORWARD",
+																	"ANY",
+																}),
+															},
 														},
 														"protocol": {
 															// Property: Protocol
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"IP",
+																	"TCP",
+																	"UDP",
+																	"ICMP",
+																	"HTTP",
+																	"FTP",
+																	"TLS",
+																	"SMB",
+																	"DNS",
+																	"DCERPC",
+																	"SSH",
+																	"SMTP",
+																	"IMAP",
+																	"MSN",
+																	"KRB5",
+																	"IKEV2",
+																	"TFTP",
+																	"NTP",
+																	"DHCP",
+																}),
+															},
 														},
 														"source": {
 															// Property: Source
@@ -1023,6 +1065,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STATELESS",
+					"STATEFUL",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

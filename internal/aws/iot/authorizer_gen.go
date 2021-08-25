@@ -81,6 +81,12 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTIVE",
+					"INACTIVE",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

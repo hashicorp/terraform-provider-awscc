@@ -75,6 +75,17 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"GET",
+					"HEAD",
+					"POST",
+					"OPTIONS",
+					"PUT",
+					"DELETE",
+					"PATCH",
+				}),
+			},
 		},
 		"invocation_endpoint": {
 			// Property: InvocationEndpoint

@@ -118,6 +118,11 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The encryption type to use. The only valid value is KMS. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"KMS",
+							}),
+						},
 					},
 					"key_id": {
 						// Property: KeyId

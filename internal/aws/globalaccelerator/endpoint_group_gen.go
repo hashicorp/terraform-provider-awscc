@@ -158,6 +158,13 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TCP",
+					"HTTP",
+					"HTTPS",
+				}),
+			},
 		},
 		"listener_arn": {
 			// Property: ListenerArn

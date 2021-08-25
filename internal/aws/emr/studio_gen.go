@@ -47,6 +47,12 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSO",
+					"IAM",
+				}),
+			},
 			// AuthMode is a force-new attribute.
 		},
 		"default_s3_location": {

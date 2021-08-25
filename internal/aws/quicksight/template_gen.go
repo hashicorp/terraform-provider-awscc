@@ -670,6 +670,14 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"SOURCE_NOT_FOUND",
+											"DATA_SET_NOT_FOUND",
+											"INTERNAL_FAILURE",
+											"ACCESS_DENIED",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -716,6 +724,17 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATION_IN_PROGRESS",
+								"CREATION_SUCCESSFUL",
+								"CREATION_FAILED",
+								"UPDATE_IN_PROGRESS",
+								"UPDATE_SUCCESSFUL",
+								"UPDATE_FAILED",
+								"DELETED",
+							}),
+						},
 					},
 					"theme_arn": {
 						// Property: ThemeArn

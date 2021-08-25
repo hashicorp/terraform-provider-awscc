@@ -1575,6 +1575,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: IAM
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ENABLED",
+														"DISABLED",
+													}),
+												},
 											},
 										},
 									),
@@ -1594,6 +1600,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: TransitEncryption
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ENABLED",
+											"DISABLED",
+										}),
+									},
 								},
 								"transit_encryption_port": {
 									// Property: TransitEncryptionPort

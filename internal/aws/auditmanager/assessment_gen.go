@@ -84,6 +84,11 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The destination type, such as Amazon S3.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"S3",
+							}),
+						},
 					},
 				},
 			),
@@ -333,12 +338,25 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PROCESS_OWNER",
+								"RESOURCE_OWNER",
+							}),
+						},
 					},
 					"status": {
 						// Property: Status
 						Description: "The status of the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"IN_PROGRESS",
+								"UNDER_REVIEW",
+								"COMPLETE",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -440,6 +458,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PROCESS_OWNER",
+								"RESOURCE_OWNER",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -577,6 +601,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The status of the specified assessment. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTIVE",
+					"INACTIVE",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

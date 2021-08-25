@@ -173,6 +173,12 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The protocol that the object storage server uses to communicate.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"HTTPS",
+					"HTTP",
+				}),
+			},
 		},
 		"subdirectory": {
 			// Property: Subdirectory

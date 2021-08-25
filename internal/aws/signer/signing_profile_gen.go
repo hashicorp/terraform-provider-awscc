@@ -44,6 +44,11 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AWSLambda-SHA384-ECDSA",
+				}),
+			},
 			// PlatformId is a force-new attribute.
 		},
 		"profile_name": {
@@ -103,6 +108,13 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DAYS",
+								"MONTHS",
+								"YEARS",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value

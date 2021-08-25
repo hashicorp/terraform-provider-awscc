@@ -70,6 +70,12 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "IP Address type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"IPV4",
+					"IPV6",
+				}),
+			},
 		},
 		"ip_addresses": {
 			// Property: IpAddresses

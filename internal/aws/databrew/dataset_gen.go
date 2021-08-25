@@ -39,6 +39,14 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Dataset format",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CSV",
+					"JSON",
+					"PARQUET",
+					"EXCEL",
+				}),
+			},
 		},
 		"format_options": {
 			// Property: FormatOptions
@@ -614,12 +622,23 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Order",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ASCENDING",
+											"DESCENDING",
+										}),
+									},
 								},
 								"ordered_by": {
 									// Property: OrderedBy
 									Description: "Ordered by",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"LAST_MODIFIED_DATE",
+										}),
+									},
 								},
 							},
 						),
@@ -774,6 +793,13 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Parameter type",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"String",
+														"Number",
+														"Datetime",
+													}),
+												},
 											},
 										},
 									),

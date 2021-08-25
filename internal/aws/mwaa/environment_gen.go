@@ -305,6 +305,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -332,6 +341,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -359,6 +377,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -386,6 +413,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -413,6 +449,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -651,6 +696,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PRIVATE_ONLY",
+					"PUBLIC_ONLY",
+				}),
+			},
 		},
 		"webserver_url": {
 			// Property: WebserverUrl

@@ -169,6 +169,11 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The identifier for the DBProxyTargetGroup",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"default",
+				}),
+			},
 			// TargetGroupName is a force-new attribute.
 		},
 	}

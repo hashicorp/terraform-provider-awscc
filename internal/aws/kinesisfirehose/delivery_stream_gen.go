@@ -71,6 +71,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: KeyType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AWS_OWNED_CMK",
+								"CUSTOMER_MANAGED_CMK",
+							}),
+						},
 					},
 				},
 			),
@@ -106,6 +112,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DirectPut",
+					"KinesisStreamAsSource",
+				}),
+			},
 			// DeliveryStreamType is a force-new attribute.
 		},
 		"elasticsearch_destination_configuration": {
@@ -454,6 +466,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: IndexRotationPeriod
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NoRotation",
+								"OneHour",
+								"OneDay",
+								"OneWeek",
+								"OneMonth",
+							}),
+						},
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
@@ -494,6 +515,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -532,6 +558,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FailedDocumentsOnly",
+								"AllDocuments",
+							}),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -590,6 +622,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -612,6 +653,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -1149,6 +1195,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"UNCOMPRESSED",
+								"GZIP",
+								"ZIP",
+								"Snappy",
+								"HADOOP_SNAPPY",
+							}),
+						},
 					},
 					"data_format_conversion_configuration": {
 						// Property: DataFormatConversionConfiguration
@@ -1396,6 +1451,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NoEncryption",
+										}),
+									},
 								},
 							},
 						),
@@ -1456,6 +1516,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -1534,6 +1599,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -1556,6 +1630,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -1593,6 +1672,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Disabled",
+								"Enabled",
+							}),
+						},
 					},
 				},
 			),
@@ -1974,6 +2059,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -2026,6 +2116,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ContentEncoding
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"GZIP",
+										}),
+									},
 								},
 							},
 						),
@@ -2114,6 +2210,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2136,6 +2241,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -2661,6 +2771,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -2752,6 +2867,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2774,6 +2898,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -2811,6 +2940,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Disabled",
+								"Enabled",
+							}),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -2869,6 +3004,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2891,6 +3035,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -3087,6 +3236,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"UNCOMPRESSED",
+								"GZIP",
+								"ZIP",
+								"Snappy",
+								"HADOOP_SNAPPY",
+							}),
+						},
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
@@ -3109,6 +3267,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NoEncryption",
+										}),
+									},
 								},
 							},
 						),
@@ -3392,6 +3555,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: HECEndpointType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Raw",
+								"Event",
+							}),
+						},
 					},
 					"hec_token": {
 						// Property: HECToken
@@ -3440,6 +3609,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -3528,6 +3702,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -3550,6 +3733,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),

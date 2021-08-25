@@ -110,6 +110,18 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SYMMETRIC_DEFAULT",
+					"RSA_2048",
+					"RSA_3072",
+					"RSA_4096",
+					"ECC_NIST_P256",
+					"ECC_NIST_P384",
+					"ECC_NIST_P521",
+					"ECC_SECG_P256K1",
+				}),
+			},
 		},
 		"key_usage": {
 			// Property: KeyUsage
@@ -125,6 +137,12 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENCRYPT_DECRYPT",
+					"SIGN_VERIFY",
+				}),
+			},
 		},
 		"multi_region": {
 			// Property: MultiRegion

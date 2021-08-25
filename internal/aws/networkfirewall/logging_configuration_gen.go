@@ -131,11 +131,24 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									// Property: LogDestinationType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"S3",
+											"CloudWatchLogs",
+											"KinesisDataFirehose",
+										}),
+									},
 								},
 								"log_type": {
 									// Property: LogType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ALERT",
+											"FLOW",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{

@@ -514,6 +514,15 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ConnectorType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Salesforce",
+											"Marketo",
+											"ServiceNow",
+											"Zendesk",
+											"S3",
+										}),
+									},
 								},
 								"incremental_pull_config": {
 									// Property: IncrementalPullConfig
@@ -653,26 +662,138 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Marketo
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PROJECTION",
+														"LESS_THAN",
+														"GREATER_THAN",
+														"BETWEEN",
+														"ADDITION",
+														"MULTIPLICATION",
+														"DIVISION",
+														"SUBTRACTION",
+														"MASK_ALL",
+														"MASK_FIRST_N",
+														"MASK_LAST_N",
+														"VALIDATE_NON_NULL",
+														"VALIDATE_NON_ZERO",
+														"VALIDATE_NON_NEGATIVE",
+														"VALIDATE_NUMERIC",
+														"NO_OP",
+													}),
+												},
 											},
 											"s3": {
 												// Property: S3
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PROJECTION",
+														"LESS_THAN",
+														"GREATER_THAN",
+														"BETWEEN",
+														"LESS_THAN_OR_EQUAL_TO",
+														"GREATER_THAN_OR_EQUAL_TO",
+														"EQUAL_TO",
+														"NOT_EQUAL_TO",
+														"ADDITION",
+														"MULTIPLICATION",
+														"DIVISION",
+														"SUBTRACTION",
+														"MASK_ALL",
+														"MASK_FIRST_N",
+														"MASK_LAST_N",
+														"VALIDATE_NON_NULL",
+														"VALIDATE_NON_ZERO",
+														"VALIDATE_NON_NEGATIVE",
+														"VALIDATE_NUMERIC",
+														"NO_OP",
+													}),
+												},
 											},
 											"salesforce": {
 												// Property: Salesforce
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PROJECTION",
+														"LESS_THAN",
+														"GREATER_THAN",
+														"CONTAINS",
+														"BETWEEN",
+														"LESS_THAN_OR_EQUAL_TO",
+														"GREATER_THAN_OR_EQUAL_TO",
+														"EQUAL_TO",
+														"NOT_EQUAL_TO",
+														"ADDITION",
+														"MULTIPLICATION",
+														"DIVISION",
+														"SUBTRACTION",
+														"MASK_ALL",
+														"MASK_FIRST_N",
+														"MASK_LAST_N",
+														"VALIDATE_NON_NULL",
+														"VALIDATE_NON_ZERO",
+														"VALIDATE_NON_NEGATIVE",
+														"VALIDATE_NUMERIC",
+														"NO_OP",
+													}),
+												},
 											},
 											"service_now": {
 												// Property: ServiceNow
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PROJECTION",
+														"LESS_THAN",
+														"GREATER_THAN",
+														"CONTAINS",
+														"BETWEEN",
+														"LESS_THAN_OR_EQUAL_TO",
+														"GREATER_THAN_OR_EQUAL_TO",
+														"EQUAL_TO",
+														"NOT_EQUAL_TO",
+														"ADDITION",
+														"MULTIPLICATION",
+														"DIVISION",
+														"SUBTRACTION",
+														"MASK_ALL",
+														"MASK_FIRST_N",
+														"MASK_LAST_N",
+														"VALIDATE_NON_NULL",
+														"VALIDATE_NON_ZERO",
+														"VALIDATE_NON_NEGATIVE",
+														"VALIDATE_NUMERIC",
+														"NO_OP",
+													}),
+												},
 											},
 											"zendesk": {
 												// Property: Zendesk
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PROJECTION",
+														"GREATER_THAN",
+														"ADDITION",
+														"MULTIPLICATION",
+														"DIVISION",
+														"SUBTRACTION",
+														"MASK_ALL",
+														"MASK_FIRST_N",
+														"MASK_LAST_N",
+														"VALIDATE_NON_NULL",
+														"VALIDATE_NON_ZERO",
+														"VALIDATE_NON_NEGATIVE",
+														"VALIDATE_NUMERIC",
+														"NO_OP",
+													}),
+												},
 											},
 										},
 									),
@@ -699,6 +820,24 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OperatorPropertyKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"VALUE",
+														"VALUES",
+														"DATA_TYPE",
+														"UPPER_BOUND",
+														"LOWER_BOUND",
+														"SOURCE_DATA_TYPE",
+														"DESTINATION_DATA_TYPE",
+														"VALIDATION_ACTION",
+														"MASK_VALUE",
+														"MASK_LENGTH",
+														"TRUNCATE_LENGTH",
+														"MATH_OPERATION_FIELDS_ORDER",
+														"CONCAT_FORMAT",
+														"SUBFIELD_CATEGORY_MAP",
+													}),
+												},
 											},
 											"property": {
 												// Property: Property
@@ -717,6 +856,17 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: TaskType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Arithmetic",
+											"Filter",
+											"Map",
+											"Mask",
+											"Merge",
+											"Truncate",
+											"Validate",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -739,6 +889,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: DataPullMode
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"Incremental",
+																	"Complete",
+																}),
+															},
 														},
 														"first_execution_from": {
 															// Property: FirstExecutionFrom
@@ -791,6 +947,13 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: TriggerType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Scheduled",
+											"Event",
+											"OnDemand",
+										}),
+									},
 								},
 							},
 						),

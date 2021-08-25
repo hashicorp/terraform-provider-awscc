@@ -152,6 +152,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Health Check Protocol",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TCP",
+								"HTTP",
+							}),
+						},
 					},
 					"timeout": {
 						// Property: Timeout
@@ -552,6 +558,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Runtime",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PYTHON_3",
+																	"NODEJS_12",
+																}),
+															},
 														},
 														"runtime_environment_variables": {
 															// Property: RuntimeEnvironmentVariables
@@ -587,6 +599,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Configuration Source",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"REPOSITORY",
+														"API",
+													}),
+												},
 											},
 										},
 									),
@@ -608,6 +626,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Source Code Version Type",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"BRANCH",
+													}),
+												},
 											},
 											"value": {
 												// Property: Value
@@ -682,6 +705,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Image Repository Type",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ECR",
+											"ECR_PUBLIC",
+										}),
+									},
 								},
 							},
 						),

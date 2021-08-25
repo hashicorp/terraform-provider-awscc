@@ -374,6 +374,16 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The type of source access configuration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"BASIC_AUTH",
+								"VPC_SUBNET",
+								"VPC_SECURITY_GROUP",
+								"SASL_SCRAM_512_AUTH",
+								"SASL_SCRAM_256_AUTH",
+								"VIRTUAL_HOST",
+							}),
+						},
 					},
 					"uri": {
 						// Property: URI

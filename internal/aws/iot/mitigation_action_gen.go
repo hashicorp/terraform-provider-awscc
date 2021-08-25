@@ -204,6 +204,14 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Description: " Specifies which types of information are logged.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEBUG",
+											"INFO",
+											"ERROR",
+											"WARN",
+										}),
+									},
 								},
 								"role_arn_for_logging": {
 									// Property: RoleArnForLogging
@@ -245,6 +253,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: TemplateName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"BLANK_POLICY",
+										}),
+									},
 								},
 							},
 						),
@@ -259,6 +272,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Action
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEACTIVATE",
+										}),
+									},
 								},
 							},
 						),
@@ -273,6 +291,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Action
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEACTIVATE",
+										}),
+									},
 								},
 							},
 						),

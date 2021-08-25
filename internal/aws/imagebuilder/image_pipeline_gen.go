@@ -185,6 +185,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The condition configures when the pipeline should trigger a new image build.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"EXPRESSION_MATCH_ONLY",
+								"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE",
+							}),
+						},
 					},
 					"schedule_expression": {
 						// Property: ScheduleExpression
@@ -210,6 +216,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The status of the image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DISABLED",
+					"ENABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

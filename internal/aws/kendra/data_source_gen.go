@@ -1434,6 +1434,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"AUTHOR",
+																	"CONTENT_TYPE",
+																	"CREATED_DATE",
+																	"DISPLAY_URL",
+																	"FILE_SIZE",
+																	"ITEM_TYPE",
+																	"PARENT_ID",
+																	"SPACE_KEY",
+																	"SPACE_NAME",
+																	"URL",
+																	"VERSION",
+																}),
+															},
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
@@ -1480,6 +1495,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"AUTHOR",
+																	"DISPLAY_URL",
+																	"ITEM_TYPE",
+																	"LABELS",
+																	"PUBLISH_DATE",
+																	"SPACE_KEY",
+																	"SPACE_NAME",
+																	"URL",
+																	"VERSION",
+																}),
+															},
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
@@ -1537,6 +1565,22 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"AUTHOR",
+																	"CONTENT_STATUS",
+																	"CREATED_DATE",
+																	"DISPLAY_URL",
+																	"ITEM_TYPE",
+																	"LABELS",
+																	"MODIFIED_DATE",
+																	"PARENT_ID",
+																	"SPACE_KEY",
+																	"SPACE_NAME",
+																	"URL",
+																	"VERSION",
+																}),
+															},
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
@@ -1620,6 +1664,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: DataSourceFieldName
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"DISPLAY_URL",
+																	"ITEM_TYPE",
+																	"SPACE_KEY",
+																	"URL",
+																}),
+															},
 														},
 														"date_field_format": {
 															// Property: DateFieldFormat
@@ -1653,6 +1705,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Version
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CLOUD",
+											"SERVER",
+										}),
+									},
 								},
 								"vpc_configuration": {
 									// Property: VpcConfiguration
@@ -1829,6 +1887,14 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DatabaseEngineType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"RDS_AURORA_MYSQL",
+											"RDS_AURORA_POSTGRESQL",
+											"RDS_MYSQL",
+											"RDS_POSTGRESQL",
+										}),
+									},
 								},
 								"sql_configuration": {
 									// Property: SqlConfiguration
@@ -1838,6 +1904,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: QueryIdentifiersEnclosingOption
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DOUBLE_QUOTES",
+														"NONE",
+													}),
+												},
 											},
 										},
 									),
@@ -2504,6 +2576,27 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Name
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ACCOUNT",
+														"CAMPAIGN",
+														"CASE",
+														"CONTACT",
+														"CONTRACT",
+														"DOCUMENT",
+														"GROUP",
+														"IDEA",
+														"LEAD",
+														"OPPORTUNITY",
+														"PARTNER",
+														"PRICEBOOK",
+														"PRODUCT",
+														"PROFILE",
+														"SOLUTION",
+														"TASK",
+														"USER",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -2701,6 +2794,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ServiceNowBuildVersion
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"LONDON",
+											"OTHERS",
+										}),
+									},
 								},
 							},
 						),
@@ -2792,6 +2891,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SharePointVersion
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"SHAREPOINT_ONLINE",
+										}),
+									},
 								},
 								"urls": {
 									// Property: Urls
@@ -3011,6 +3115,19 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Data source type",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"S3",
+					"SHAREPOINT",
+					"SALESFORCE",
+					"ONEDRIVE",
+					"SERVICENOW",
+					"DATABASE",
+					"CUSTOM",
+					"CONFLUENCE",
+					"GOOGLEDRIVE",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

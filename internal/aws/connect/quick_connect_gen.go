@@ -202,6 +202,13 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PHONE_NUMBER",
+								"QUEUE",
+								"USER",
+							}),
+						},
 					},
 					"user_config": {
 						// Property: UserConfig

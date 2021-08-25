@@ -77,6 +77,14 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AUTOMATIC",
+								"NFS3",
+								"NFS4_0",
+								"NFS4_1",
+							}),
+						},
 					},
 				},
 			),

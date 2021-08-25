@@ -78,6 +78,13 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SMS",
+					"VOICE",
+					"EMAIL",
+				}),
+			},
 			// ChannelType is a force-new attribute.
 		},
 		"contact_id": {

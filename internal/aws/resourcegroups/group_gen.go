@@ -216,6 +216,12 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TAG_FILTERS_1_0",
+								"CLOUDFORMATION_STACK_1_0",
+							}),
+						},
 					},
 				},
 			),

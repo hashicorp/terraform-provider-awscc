@@ -52,6 +52,14 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Description: "Frequency of anomaly detection",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PT5M",
+								"PT10M",
+								"PT1H",
+								"P1D",
+							}),
+						},
 					},
 				},
 			),
@@ -569,6 +577,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Description: "Operator used to aggregate metric values",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AVG",
+											"SUM",
+										}),
+									},
 								},
 								"metric_name": {
 									// Property: MetricName
@@ -608,6 +622,14 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Description: "A frequency period to aggregate the data",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PT5M",
+								"PT10M",
+								"PT1H",
+								"P1D",
+							}),
+						},
 					},
 					"metric_set_name": {
 						// Property: MetricSetName
@@ -863,6 +885,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		// Property: FileCompression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"NONE",
+																				"GZIP",
+																			}),
+																		},
 																	},
 																	"header_list": {
 																		// Property: HeaderList
@@ -897,6 +925,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		// Property: FileCompression
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"NONE",
+																				"GZIP",
+																			}),
+																		},
 																	},
 																},
 															),

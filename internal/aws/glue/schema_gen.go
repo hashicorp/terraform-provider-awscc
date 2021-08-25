@@ -97,6 +97,18 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Compatibility setting for the schema.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NONE",
+					"DISABLED",
+					"BACKWARD",
+					"BACKWARD_ALL",
+					"FORWARD",
+					"FORWARD_ALL",
+					"FULL",
+					"FULL_ALL",
+				}),
+			},
 		},
 		"data_format": {
 			// Property: DataFormat
@@ -112,6 +124,12 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AVRO",
+					"JSON",
+				}),
+			},
 			// DataFormat is a force-new attribute.
 		},
 		"description": {

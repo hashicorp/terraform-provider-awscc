@@ -129,3 +129,58 @@ func StringLenAtLeast(minLength int) tfsdk.AttributeValidator {
 		minLength: minLength,
 	}
 }
+
+// stringInSliceValidator validates that a string Attribute's value matches the value of an element in the valid slice.
+type stringInSliceValidator struct {
+	tfsdk.AttributeValidator
+
+	valid []string
+}
+
+// Description describes the validation in plain text formatting.
+func (v stringInSliceValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be one of %v", v.valid)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (v stringInSliceValidator) MarkdownDescription(ctx context.Context) string {
+	return v.Description(ctx)
+}
+
+// Validate performs the validation.
+func (v stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid value type",
+			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+		})
+
+		return
+	}
+
+	if s.Unknown || s.Null {
+		return
+	}
+
+	for _, val := range v.valid {
+		if s.Value == val {
+			return
+		}
+	}
+
+	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+		Severity: tfprotov6.DiagnosticSeverityError,
+		Summary:  "Invalid value",
+		Detail:   fmt.Sprintf("expected %s to be one of %v, got %s", request.AttributePath, v.valid, s.Value),
+	})
+}
+
+// StringLenAtLeast returns a new string in slice validator.
+func StringInSlice(valid []string) tfsdk.AttributeValidator {
+	return stringInSliceValidator{
+		valid: valid,
+	}
+}

@@ -144,6 +144,13 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetTracking",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"update_time": {

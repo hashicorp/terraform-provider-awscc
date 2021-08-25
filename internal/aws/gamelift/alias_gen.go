@@ -115,6 +115,12 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SIMPLE",
+								"TERMINAL",
+							}),
+						},
 					},
 				},
 			),

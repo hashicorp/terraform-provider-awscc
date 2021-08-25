@@ -288,11 +288,25 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DataType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STRING",
+											"INTEGER",
+											"DOUBLE",
+											"BOOLEAN",
+											"STRUCT",
+										}),
+									},
 								},
 								"data_type_spec": {
 									// Property: DataTypeSpec
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AWS/ALARM_STATE",
+										}),
+									},
 								},
 								"logical_id": {
 									// Property: LogicalId
@@ -469,6 +483,14 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: TypeName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Measurement",
+														"Attribute",
+														"Transform",
+														"Metric",
+													}),
+												},
 											},
 										},
 									),
@@ -826,11 +848,25 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DataType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"STRING",
+								"INTEGER",
+								"DOUBLE",
+								"BOOLEAN",
+								"STRUCT",
+							}),
+						},
 					},
 					"data_type_spec": {
 						// Property: DataTypeSpec
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AWS/ALARM_STATE",
+							}),
+						},
 					},
 					"logical_id": {
 						// Property: LogicalId
@@ -1007,6 +1043,14 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: TypeName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Measurement",
+											"Attribute",
+											"Transform",
+											"Metric",
+										}),
+									},
 								},
 							},
 						),

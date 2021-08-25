@@ -36,6 +36,13 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"en",
+					"jp",
+					"zh",
+				}),
+			},
 		},
 		"definition": {
 			// Property: Definition
@@ -96,6 +103,11 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSM_AUTOMATION",
+				}),
+			},
 		},
 		"description": {
 			// Property: Description

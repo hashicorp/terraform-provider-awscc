@@ -45,6 +45,12 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"BASIC",
+					"FULL",
+				}),
+			},
 		},
 		"event_type_ids": {
 			// Property: EventTypeIds
@@ -99,6 +105,12 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

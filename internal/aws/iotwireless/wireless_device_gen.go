@@ -467,6 +467,12 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device type, currently only Sidewalk and LoRa",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Sidewalk",
+					"LoRaWAN",
+				}),
+			},
 		},
 	}
 

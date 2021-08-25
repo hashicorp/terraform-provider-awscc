@@ -308,6 +308,18 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"WAF",
+								"WAFV2",
+								"SHIELD_ADVANCED",
+								"SECURITY_GROUPS_COMMON",
+								"SECURITY_GROUPS_CONTENT_AUDIT",
+								"SECURITY_GROUPS_USAGE_AUDIT",
+								"NETWORK_FIREWALL",
+								"DNS_FIREWALL",
+							}),
+						},
 					},
 				},
 			),

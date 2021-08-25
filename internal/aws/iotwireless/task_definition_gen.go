@@ -259,6 +259,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A filter to list only the wireless gateway task definitions that use this task definition type",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"UPDATE",
+				}),
+			},
 		},
 		"update": {
 			// Property: Update

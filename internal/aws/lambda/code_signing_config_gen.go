@@ -117,6 +117,12 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Warn",
+								"Enforce",
+							}),
+						},
 					},
 				},
 			),

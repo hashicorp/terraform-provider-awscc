@@ -73,6 +73,13 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SourceUrl",
+								"S3FileUrl",
+								"AttachmentReference",
+							}),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -130,6 +137,13 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"YAML",
+					"JSON",
+					"TEXT",
+				}),
+			},
 			// DocumentFormat is a force-new attribute.
 		},
 		"document_type": {
@@ -158,6 +172,23 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ApplicationConfiguration",
+					"ApplicationConfigurationSchema",
+					"Automation",
+					"Automation.ChangeTemplate",
+					"ChangeCalendar",
+					"CloudFormation",
+					"Command",
+					"DeploymentStrategy",
+					"Package",
+					"Policy",
+					"ProblemAnalysis",
+					"ProblemAnalysisTemplate",
+					"Session",
+				}),
+			},
 			// DocumentType is a force-new attribute.
 		},
 		"name": {

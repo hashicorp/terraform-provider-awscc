@@ -62,6 +62,12 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DEFAULT",
+					"SNI_ONLY",
+				}),
+			},
 			// CertificateMode is a force-new attribute.
 		},
 		"certificate_pem": {
@@ -116,6 +122,15 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTIVE",
+					"INACTIVE",
+					"REVOKED",
+					"PENDING_TRANSFER",
+					"PENDING_ACTIVATION",
+				}),
+			},
 		},
 	}
 

@@ -110,6 +110,15 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CRITICAL",
+					"HIGH",
+					"MEDIUM",
+					"LOW",
+					"UNSPECIFIED",
+				}),
+			},
 		},
 		"document_version": {
 			// Property: DocumentVersion
@@ -309,6 +318,12 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AUTO",
+					"MANUAL",
+				}),
+			},
 		},
 		"targets": {
 			// Property: Targets

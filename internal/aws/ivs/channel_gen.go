@@ -73,6 +73,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel latency mode.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NORMAL",
+					"LOW",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -189,6 +195,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"BASIC",
+				}),
+			},
 		},
 	}
 

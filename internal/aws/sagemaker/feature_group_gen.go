@@ -107,6 +107,13 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FeatureType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Integral",
+								"Fractional",
+								"String",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

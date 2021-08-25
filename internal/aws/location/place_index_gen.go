@@ -78,6 +78,12 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IntendedUse
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SingleUse",
+								"Storage",
+							}),
+						},
 					},
 				},
 			),
@@ -141,6 +147,13 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetTracking",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"update_time": {

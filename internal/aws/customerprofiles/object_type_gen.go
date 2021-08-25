@@ -182,6 +182,15 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The content type of the field. Used for determining equality when searching.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STRING",
+											"NUMBER",
+											"PHONE_NUMBER",
+											"EMAIL_ADDRESS",
+											"NAME",
+										}),
+									},
 								},
 								"source": {
 									// Property: Source

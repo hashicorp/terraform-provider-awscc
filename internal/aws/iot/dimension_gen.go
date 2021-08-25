@@ -147,6 +147,11 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of the dimension.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TOPIC_FILTER",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

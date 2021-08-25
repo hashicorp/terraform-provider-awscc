@@ -73,6 +73,11 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SECRETS",
+							}),
+						},
 					},
 					"description": {
 						// Property: Description
@@ -85,6 +90,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DISABLED",
+								"REQUIRED",
+							}),
+						},
 					},
 					"secret_arn": {
 						// Property: SecretArn
@@ -169,6 +180,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The kinds of databases that the proxy can connect to.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MYSQL",
+					"POSTGRESQL",
+				}),
+			},
 			// EngineFamily is a force-new attribute.
 		},
 		"idle_client_timeout": {

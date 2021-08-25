@@ -98,6 +98,10 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
+				validate.StringInSlice([]string{
+					"NONE",
+					"OVERWRITE",
+				}),
 			},
 			// ResolveConflicts is a write-only attribute.
 		},

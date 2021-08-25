@@ -37,6 +37,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Public",
+					"Private",
+				}),
+			},
 		},
 		"connector_profile_arn": {
 			// Property: ConnectorProfileArn
@@ -1458,6 +1464,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Salesforce",
+					"Singular",
+					"Slack",
+					"Redshift",
+					"Marketo",
+					"Googleanalytics",
+					"Zendesk",
+					"Servicenow",
+					"Datadog",
+					"Trendmicro",
+					"Snowflake",
+					"Dynatrace",
+					"Infornexus",
+					"Amplitude",
+					"Veeva",
+				}),
+			},
 			// ConnectorType is a force-new attribute.
 		},
 		"credentials_arn": {

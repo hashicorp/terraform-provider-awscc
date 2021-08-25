@@ -98,6 +98,12 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CLOUDFRONT",
+					"REGIONAL",
+				}),
+			},
 			// Scope is a force-new attribute.
 		},
 		"tags": {

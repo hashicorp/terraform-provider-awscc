@@ -114,6 +114,13 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AUTOMATIC",
+								"SMB2",
+								"SMB3",
+							}),
+						},
 					},
 				},
 			),

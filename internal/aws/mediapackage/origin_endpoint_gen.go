@@ -345,6 +345,14 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"SCTE35_ENHANCED",
+											"PASSTHROUGH",
+											"DATERANGE",
+										}),
+									},
 								},
 								"ad_triggers": {
 									// Property: AdTriggers
@@ -357,6 +365,14 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"RESTRICTED",
+											"UNRESTRICTED",
+											"BOTH",
+										}),
+									},
 								},
 								"id": {
 									// Property: Id
@@ -381,6 +397,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"EVENT",
+											"VOD",
+										}),
+									},
 								},
 								"playlist_window_seconds": {
 									// Property: PlaylistWindowSeconds
@@ -439,6 +462,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ORIGINAL",
+											"VIDEO_BITRATE_ASCENDING",
+											"VIDEO_BITRATE_DESCENDING",
+										}),
+									},
 								},
 							},
 						),
@@ -641,6 +671,14 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"RESTRICTED",
+								"UNRESTRICTED",
+								"BOTH",
+							}),
+						},
 					},
 					"encryption": {
 						// Property: Encryption
@@ -701,6 +739,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FULL",
+								"COMPACT",
+							}),
+						},
 					},
 					"manifest_window_seconds": {
 						// Property: ManifestWindowSeconds
@@ -731,6 +775,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"HBBTV_1_5",
+							}),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds
@@ -743,6 +793,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NUMBER_WITH_TIMELINE",
+								"TIME_WITH_TIMELINE",
+								"NUMBER_WITH_DURATION",
+							}),
+						},
 					},
 					"stream_selection": {
 						// Property: StreamSelection
@@ -766,6 +823,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ORIGINAL",
+											"VIDEO_BITRATE_ASCENDING",
+											"VIDEO_BITRATE_DESCENDING",
+										}),
+									},
 								},
 							},
 						),
@@ -782,6 +846,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"HTTP-ISO",
+								"HTTP-HEAD",
+								"NONE",
+							}),
+						},
 					},
 					"utc_timing_uri": {
 						// Property: UtcTimingUri
@@ -978,6 +1049,14 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"SCTE35_ENHANCED",
+								"PASSTHROUGH",
+								"DATERANGE",
+							}),
+						},
 					},
 					"ad_triggers": {
 						// Property: AdTriggers
@@ -990,6 +1069,14 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"RESTRICTED",
+								"UNRESTRICTED",
+								"BOTH",
+							}),
+						},
 					},
 					"encryption": {
 						// Property: Encryption
@@ -1007,6 +1094,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "The encryption method to use.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AES_128",
+											"SAMPLE_AES",
+										}),
+									},
 								},
 								"key_rotation_interval_seconds": {
 									// Property: KeyRotationIntervalSeconds
@@ -1074,6 +1167,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"EVENT",
+								"VOD",
+							}),
+						},
 					},
 					"playlist_window_seconds": {
 						// Property: PlaylistWindowSeconds
@@ -1115,6 +1215,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ORIGINAL",
+											"VIDEO_BITRATE_ASCENDING",
+											"VIDEO_BITRATE_DESCENDING",
+										}),
+									},
 								},
 							},
 						),
@@ -1332,6 +1439,13 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A directive that determines the order of streams in the output.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ORIGINAL",
+											"VIDEO_BITRATE_ASCENDING",
+											"VIDEO_BITRATE_DESCENDING",
+										}),
+									},
 								},
 							},
 						),
@@ -1355,6 +1469,12 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ALLOW",
+					"DENY",
+				}),
+			},
 		},
 		"startover_window_seconds": {
 			// Property: StartoverWindowSeconds

@@ -125,6 +125,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Sample type",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FIRST_N",
+								"LAST_N",
+								"RANDOM",
+							}),
+						},
 					},
 				},
 			),

@@ -49,6 +49,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NONE",
+					"SOURCE_IP",
+				}),
+			},
 		},
 		"listener_arn": {
 			// Property: ListenerArn
@@ -128,6 +134,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TCP",
+					"UDP",
+				}),
+			},
 		},
 	}
 

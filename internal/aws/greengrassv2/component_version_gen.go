@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -270,6 +272,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: DependencyType
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"SOFT",
+											"HARD",
+										}),
+									},
 								},
 								"version_requirement": {
 									// Property: VersionRequirement
@@ -304,6 +312,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												// Property: Type
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PUB_SUB",
+														"IOT_CORE",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -319,6 +333,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: InputPayloadEncodingType
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"json",
+											"binary",
+										}),
+									},
 								},
 								"linux_process_params": {
 									// Property: LinuxProcessParams
@@ -346,6 +366,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		// Property: Permission
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"ro",
+																				"rw",
+																			}),
+																		},
 																	},
 																},
 																tfsdk.ListNestedAttributesOptions{},
@@ -380,6 +406,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																		// Property: Permission
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"ro",
+																				"rw",
+																			}),
+																		},
 																	},
 																	"source_path": {
 																		// Property: SourcePath
@@ -399,6 +431,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												// Property: IsolationMode
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"GreengrassContainer",
+														"NoContainer",
+													}),
+												},
 											},
 										},
 									),

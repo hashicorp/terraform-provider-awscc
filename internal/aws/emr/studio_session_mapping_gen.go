@@ -49,6 +49,12 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"USER",
+					"GROUP",
+				}),
+			},
 			// IdentityType is a force-new attribute.
 		},
 		"session_policy_arn": {

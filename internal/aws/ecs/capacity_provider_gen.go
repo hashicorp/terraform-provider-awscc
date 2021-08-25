@@ -103,6 +103,12 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Status
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DISABLED",
+											"ENABLED",
+										}),
+									},
 								},
 								"target_capacity": {
 									// Property: TargetCapacity
@@ -117,6 +123,12 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: ManagedTerminationProtection
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DISABLED",
+								"ENABLED",
+							}),
+						},
 					},
 				},
 			),

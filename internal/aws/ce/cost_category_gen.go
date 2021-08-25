@@ -91,6 +91,11 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CostCategoryExpression.v1",
+				}),
+			},
 		},
 		"rules": {
 			// Property: Rules

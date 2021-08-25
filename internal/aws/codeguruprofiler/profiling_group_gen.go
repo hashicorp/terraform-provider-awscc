@@ -128,6 +128,12 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Default",
+					"AWSLambda",
+				}),
+			},
 			// ComputePlatform is a force-new attribute.
 		},
 		"profiling_group_name": {
