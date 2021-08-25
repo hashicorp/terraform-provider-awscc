@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -82,6 +84,11 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The destination type, such as Amazon S3.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"S3",
+							}),
+						},
 					},
 				},
 			),
@@ -126,18 +133,27 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The unique identifier for the email account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 320),
+						},
 					},
 					"id": {
 						// Property: Id
 						Description: "The identifier for the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(12, 12),
+						},
 					},
 					"name": {
 						// Property: Name
 						Description: "The name of the specified AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 50),
+						},
 					},
 				},
 			),
@@ -248,30 +264,45 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AssessmentId
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(36, 36),
+						},
 					},
 					"assessment_name": {
 						// Property: AssessmentName
 						Description: "The name of the related assessment.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"comment": {
 						// Property: Comment
 						Description: "The comment related to the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 350),
+						},
 					},
 					"control_set_id": {
 						// Property: ControlSetId
 						Description: "The identifier for the specified control set.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 300),
+						},
 					},
 					"created_by": {
 						// Property: CreatedBy
 						Description: "The IAM user or role that performed the action.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
 					},
 					"creation_time": {
 						// Property: CreationTime
@@ -283,6 +314,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Id
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(36, 36),
+						},
 					},
 					"last_updated": {
 						// Property: LastUpdated
@@ -295,18 +329,34 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
 					},
 					"role_type": {
 						// Property: RoleType
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PROCESS_OWNER",
+								"RESOURCE_OWNER",
+							}),
+						},
 					},
 					"status": {
 						// Property: Status
 						Description: "The status of the delegation.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"IN_PROGRESS",
+								"UNDER_REVIEW",
+								"COMPLETE",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -339,6 +389,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(32, 36),
+			},
 			// FrameworkId is a force-new attribute.
 		},
 		"name": {
@@ -354,6 +407,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the related assessment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 127),
+			},
 			// Name is a write-only attribute.
 		},
 		"roles": {
@@ -393,12 +449,21 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
 					},
 					"role_type": {
 						// Property: RoleType
 						Description: " The IAM role type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PROCESS_OWNER",
+								"RESOURCE_OWNER",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -475,18 +540,27 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The unique identifier for the email account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 320),
+									},
 								},
 								"id": {
 									// Property: Id
 									Description: "The identifier for the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(12, 12),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the specified AWS account.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 50),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -527,6 +601,12 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The status of the specified assessment. ",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACTIVE",
+					"INACTIVE",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -566,12 +646,18 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +34,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of Addon",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 			// AddonName is a force-new attribute.
 		},
 		"addon_version": {
@@ -46,6 +50,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Version of Addon",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -69,6 +76,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of Cluster",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 			// ClusterName is a force-new attribute.
 		},
 		"resolve_conflicts": {
@@ -86,6 +96,13 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Resolve parameter value conflicts",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+				validate.StringInSlice([]string{
+					"NONE",
+					"OVERWRITE",
+				}),
+			},
 			// ResolveConflicts is a write-only attribute.
 		},
 		"service_account_role_arn": {
@@ -99,6 +116,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "IAM role to bind to the add-on's service account",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -140,12 +160,18 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

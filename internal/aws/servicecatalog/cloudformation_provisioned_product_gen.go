@@ -36,6 +36,13 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"en",
+					"jp",
+					"zh",
+				}),
+			},
 		},
 		"cloudformation_stack_arn": {
 			// Property: CloudformationStackArn
@@ -59,10 +66,13 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Type:       types.ListType{ElemType: types.StringType},
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
-			Computed:   true,
+			Type:     types.ListType{ElemType: types.StringType},
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+				validate.UniqueItems(),
+			},
 			// NotificationArns is a force-new attribute.
 		},
 		"outputs": {
@@ -93,6 +103,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 		},
 		"path_name": {
 			// Property: PathName
@@ -104,6 +117,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 		},
 		"product_id": {
 			// Property: ProductId
@@ -115,6 +131,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 		},
 		"product_name": {
 			// Property: ProductName
@@ -126,6 +145,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 		},
 		"provisioned_product_id": {
 			// Property: ProvisionedProductId
@@ -149,6 +171,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// ProvisionedProductName is a force-new attribute.
 		},
 		"provisioning_artifact_id": {
@@ -161,6 +186,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 		},
 		"provisioning_artifact_name": {
 			// Property: ProvisioningArtifactName
@@ -202,11 +230,17 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1000),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 4096),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -228,15 +262,21 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			//       "uniqueItems": true
 			//     },
 			//     "StackSetFailureToleranceCount": {
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "StackSetFailureTolerancePercentage": {
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "StackSetMaxConcurrencyCount": {
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "StackSetMaxConcurrencyPercentage": {
+			//       "maximum": 100,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "StackSetOperationType": {
@@ -262,40 +302,63 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				map[string]tfsdk.Attribute{
 					"stack_set_accounts": {
 						// Property: StackSetAccounts
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 					"stack_set_failure_tolerance_percentage": {
 						// Property: StackSetFailureTolerancePercentage
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"stack_set_max_concurrency_count": {
 						// Property: StackSetMaxConcurrencyCount
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
 					},
 					"stack_set_max_concurrency_percentage": {
 						// Property: StackSetMaxConcurrencyPercentage
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 100),
+						},
 					},
 					"stack_set_operation_type": {
 						// Property: StackSetOperationType
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATE",
+								"UPDATE",
+								"DELETE",
+							}),
+						},
 					},
 					"stack_set_regions": {
 						// Property: StackSetRegions
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 				},
 			),
@@ -346,11 +409,17 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +35,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Activation key of the Agent.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 29),
+			},
 			// ActivationKey is a force-new attribute.
 			// ActivationKey is a write-only attribute.
 		},
@@ -63,6 +67,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"endpoint_type": {
 			// Property: EndpointType
@@ -161,12 +168,18 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

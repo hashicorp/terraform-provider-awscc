@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -714,6 +716,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The certificate signing request (CSR) for the Certificate.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 			// CertificateSigningRequest is a force-new attribute.
 			// CertificateSigningRequest is a write-only attribute.
 		},

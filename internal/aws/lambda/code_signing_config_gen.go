@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -54,6 +56,9 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "List of Signing profile version Arns",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 20),
+						},
 					},
 				},
 			),
@@ -112,6 +117,12 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Warn",
+								"Enforce",
+							}),
+						},
 					},
 				},
 			),
@@ -129,6 +140,9 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "A description of the CodeSigningConfig",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 	}
 

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -31,6 +33,9 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 			// ResourceArn is a force-new attribute.
 		},
 		"web_acl_arn": {
@@ -43,6 +48,9 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 			// WebACLArn is a force-new attribute.
 		},
 	}

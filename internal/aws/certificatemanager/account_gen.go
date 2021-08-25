@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -37,6 +39,8 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "DaysBeforeExpiry": {
+			//       "maximum": 45,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -48,6 +52,9 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DaysBeforeExpiry
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 45),
+						},
 					},
 				},
 			),

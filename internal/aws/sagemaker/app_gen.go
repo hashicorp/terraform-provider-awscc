@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -48,6 +50,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the app.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// AppName is a force-new attribute.
 		},
 		"app_type": {
@@ -64,6 +69,12 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of app.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"JupyterServer",
+					"KernelGateway",
+				}),
+			},
 			// AppType is a force-new attribute.
 		},
 		"domain_id": {
@@ -78,6 +89,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The domain ID.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// DomainId is a force-new attribute.
 		},
 		"resource_spec": {
@@ -148,18 +162,60 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The instance type that the image version runs on.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"system",
+								"ml.t3.micro",
+								"ml.t3.small",
+								"ml.t3.medium",
+								"ml.t3.large",
+								"ml.t3.xlarge",
+								"ml.t3.2xlarge",
+								"ml.m5.large",
+								"ml.m5.xlarge",
+								"ml.m5.2xlarge",
+								"ml.m5.4xlarge",
+								"ml.m5.8xlarge",
+								"ml.m5.12xlarge",
+								"ml.m5.16xlarge",
+								"ml.m5.24xlarge",
+								"ml.c5.large",
+								"ml.c5.xlarge",
+								"ml.c5.2xlarge",
+								"ml.c5.4xlarge",
+								"ml.c5.9xlarge",
+								"ml.c5.12xlarge",
+								"ml.c5.18xlarge",
+								"ml.c5.24xlarge",
+								"ml.p3.2xlarge",
+								"ml.p3.8xlarge",
+								"ml.p3.16xlarge",
+								"ml.g4dn.xlarge",
+								"ml.g4dn.2xlarge",
+								"ml.g4dn.4xlarge",
+								"ml.g4dn.8xlarge",
+								"ml.g4dn.12xlarge",
+								"ml.g4dn.16xlarge",
+							}),
+						},
 					},
 					"sage_maker_image_arn": {
 						// Property: SageMakerImageArn
 						Description: "The ARN of the SageMaker image that the image version belongs to.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"sage_maker_image_version_arn": {
 						// Property: SageMakerImageVersionArn
 						Description: "The ARN of the image version created on the instance.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 			),
@@ -202,11 +258,17 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -232,6 +294,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The user profile name.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// UserProfileName is a force-new attribute.
 		},
 	}

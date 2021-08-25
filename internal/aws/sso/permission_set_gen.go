@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The permission set description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 700),
+			},
 		},
 		"inline_policy": {
 			// Property: InlinePolicy
@@ -59,6 +64,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The sso instance arn that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(10, 1224),
+			},
 			// InstanceArn is a force-new attribute.
 		},
 		"managed_policies": {
@@ -77,6 +85,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 20),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -91,6 +102,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The name you want to assign to this permission set.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 32),
+			},
 			// Name is a force-new attribute.
 		},
 		"permission_set_arn": {
@@ -120,6 +134,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 240),
+			},
 		},
 		"session_duration": {
 			// Property: SessionDuration
@@ -134,6 +151,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The length of time that a user can be signed in to an AWS account.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -172,11 +192,17 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

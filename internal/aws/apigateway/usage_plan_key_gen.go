@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -57,6 +59,11 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of usage plan key. Currently, the only valid key type is API_KEY.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"API_KEY",
+				}),
+			},
 			// KeyType is a force-new attribute.
 		},
 		"usage_plan_id": {

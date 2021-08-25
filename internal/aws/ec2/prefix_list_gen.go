@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -35,6 +37,12 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Ip Version of Prefix List.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"IPv4",
+					"IPv6",
+				}),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -80,11 +88,17 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Cidr
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 46),
+						},
 					},
 					"description": {
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -96,11 +110,15 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Max Entries of Prefix List.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "Max Entries of Prefix List.",
 			Type:        types.NumberType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -136,6 +154,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of Prefix List.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -169,11 +190,17 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

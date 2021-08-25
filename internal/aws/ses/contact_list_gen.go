@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -46,6 +48,9 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The description of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 500),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -83,11 +88,17 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -150,12 +161,18 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The description of the topic.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 500),
+						},
 					},
 					"display_name": {
 						// Property: DisplayName
 						Description: "The display name of the topic.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 					"topic_name": {
 						// Property: TopicName

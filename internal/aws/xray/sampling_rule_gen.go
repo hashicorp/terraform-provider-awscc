@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 32),
+			},
 		},
 		"sampling_rule": {
 			// Property: SamplingRule
@@ -64,6 +69,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "FixedRate": {
 			//       "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
+			//       "maximum": 1,
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "HTTPMethod": {
@@ -78,10 +85,13 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Priority": {
 			//       "description": "The priority of the sampling rule.",
+			//       "maximum": 9999,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "ReservoirSize": {
 			//       "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "ResourceARN": {
@@ -116,6 +126,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Version": {
 			//       "description": "The version of the sampling rule format (1)",
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -135,36 +146,54 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 1.000000),
+						},
 					},
 					"http_method": {
 						// Property: HTTPMethod
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10),
+						},
 					},
 					"host": {
 						// Property: Host
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 9999),
+						},
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 					"resource_arn": {
 						// Property: ResourceARN
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 500),
+						},
 					},
 					"rule_arn": {
 						// Property: RuleARN
@@ -177,30 +206,45 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 32),
+						},
 					},
 					"service_name": {
 						// Property: ServiceName
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"service_type": {
 						// Property: ServiceType
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"url_path": {
 						// Property: URLPath
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 					"version": {
 						// Property: Version
 						Description: "The version of the sampling rule format (1)",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
 					},
 				},
 			),
@@ -236,6 +280,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "FixedRate": {
 			//           "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
+			//           "maximum": 1,
+			//           "minimum": 0,
 			//           "type": "number"
 			//         },
 			//         "HTTPMethod": {
@@ -250,10 +296,13 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "Priority": {
 			//           "description": "The priority of the sampling rule.",
+			//           "maximum": 9999,
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "ReservoirSize": {
 			//           "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
+			//           "minimum": 0,
 			//           "type": "integer"
 			//         },
 			//         "ResourceARN": {
@@ -288,6 +337,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "Version": {
 			//           "description": "The version of the sampling rule format (1)",
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         }
 			//       },
@@ -326,36 +376,54 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 1.000000),
+									},
 								},
 								"http_method": {
 									// Property: HTTPMethod
 									Description: "Matches the HTTP method from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 10),
+									},
 								},
 								"host": {
 									// Property: Host
 									Description: "Matches the hostname from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 64),
+									},
 								},
 								"priority": {
 									// Property: Priority
 									Description: "The priority of the sampling rule.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 9999),
+									},
 								},
 								"reservoir_size": {
 									// Property: ReservoirSize
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
 								},
 								"resource_arn": {
 									// Property: ResourceARN
 									Description: "Matches the ARN of the AWS resource on which the service runs.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 500),
+									},
 								},
 								"rule_arn": {
 									// Property: RuleARN
@@ -368,30 +436,45 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 32),
+									},
 								},
 								"service_name": {
 									// Property: ServiceName
 									Description: "Matches the name that the service uses to identify itself in segments.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 64),
+									},
 								},
 								"service_type": {
 									// Property: ServiceType
 									Description: "Matches the origin that the service uses to identify its type in segments.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 64),
+									},
 								},
 								"url_path": {
 									// Property: URLPath
 									Description: "Matches the path from a request URL.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
 								},
 								"version": {
 									// Property: Version
 									Description: "The version of the sampling rule format (1)",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 							},
 						),
@@ -420,6 +503,8 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "FixedRate": {
 			//       "description": "The percentage of matching requests to instrument, after the reservoir is exhausted.",
+			//       "maximum": 1,
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "HTTPMethod": {
@@ -434,10 +519,13 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Priority": {
 			//       "description": "The priority of the sampling rule.",
+			//       "maximum": 9999,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "ReservoirSize": {
 			//       "description": "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "ResourceARN": {
@@ -487,36 +575,54 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 1.000000),
+						},
 					},
 					"http_method": {
 						// Property: HTTPMethod
 						Description: "Matches the HTTP method from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10),
+						},
 					},
 					"host": {
 						// Property: Host
 						Description: "Matches the hostname from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 9999),
+						},
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 					"resource_arn": {
 						// Property: ResourceARN
 						Description: "Matches the ARN of the AWS resource on which the service runs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 500),
+						},
 					},
 					"rule_arn": {
 						// Property: RuleARN
@@ -529,24 +635,36 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 32),
+						},
 					},
 					"service_name": {
 						// Property: ServiceName
 						Description: "Matches the name that the service uses to identify itself in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"service_type": {
 						// Property: ServiceType
 						Description: "Matches the origin that the service uses to identify its type in segments.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"url_path": {
 						// Property: URLPath
 						Description: "Matches the path from a request URL.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 				},
 			),

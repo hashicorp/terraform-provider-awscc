@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -73,6 +74,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "FirewallRuleGroupId",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// FirewallRuleGroupId is a force-new attribute.
 		},
 		"id": {
@@ -128,6 +132,12 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "MutationProtectionStatus",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -142,6 +152,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "FirewallRuleGroupAssociationName",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 64),
+			},
 		},
 		"priority": {
 			// Property: Priority
@@ -222,12 +235,18 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},
@@ -246,6 +265,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "VpcId",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// VpcId is a force-new attribute.
 		},
 	}

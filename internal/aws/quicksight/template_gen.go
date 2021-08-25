@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +45,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(12, 12),
+			},
 			// AwsAccountId is a force-new attribute.
 		},
 		"created_time": {
@@ -84,6 +89,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>A display name for the template.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 		},
 		"permissions": {
 			// Property: Permissions
@@ -128,12 +136,18 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 16),
+						},
 					},
 					"principal": {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -309,12 +323,18 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -335,6 +355,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 			// TemplateId is a force-new attribute.
 		},
 		"version": {
@@ -511,6 +534,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "VersionNumber": {
 			//       "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
+			//       "minimum": 1,
 			//       "type": "number"
 			//     }
 			//   },
@@ -627,6 +651,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The description of the template.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"errors": {
 						// Property: Errors
@@ -643,6 +670,14 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"SOURCE_NOT_FOUND",
+											"DATA_SET_NOT_FOUND",
+											"INTERNAL_FAILURE",
+											"ACCESS_DENIED",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -667,6 +702,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -686,6 +724,17 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATION_IN_PROGRESS",
+								"CREATION_SUCCESSFUL",
+								"CREATION_FAILED",
+								"UPDATE_IN_PROGRESS",
+								"UPDATE_SUCCESSFUL",
+								"UPDATE_FAILED",
+								"DELETED",
+							}),
+						},
 					},
 					"theme_arn": {
 						// Property: ThemeArn
@@ -698,6 +747,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The version number of the template version.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(1.000000),
+						},
 					},
 				},
 			),
@@ -716,6 +768,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>A description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time <code>UpdateTemplate</code> is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the <code>VersionDescription</code> field.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
 			// VersionDescription is a write-only attribute.
 		},
 	}

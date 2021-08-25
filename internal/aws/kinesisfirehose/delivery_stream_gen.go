@@ -63,11 +63,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: KeyARN
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"key_type": {
 						// Property: KeyType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AWS_OWNED_CMK",
+								"CUSTOMER_MANAGED_CMK",
+							}),
+						},
 					},
 				},
 			),
@@ -85,6 +94,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// DeliveryStreamName is a force-new attribute.
 		},
 		"delivery_stream_type": {
@@ -100,6 +112,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DirectPut",
+					"KinesisStreamAsSource",
+				}),
+			},
 			// DeliveryStreamType is a force-new attribute.
 		},
 		"elasticsearch_destination_configuration": {
@@ -424,21 +442,39 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ClusterEndpoint
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"domain_arn": {
 						// Property: DomainARN
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"index_name": {
 						// Property: IndexName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 80),
+						},
 					},
 					"index_rotation_period": {
 						// Property: IndexRotationPeriod
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NoRotation",
+								"OneHour",
+								"OneDay",
+								"OneWeek",
+								"OneMonth",
+							}),
+						},
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
@@ -470,19 +506,28 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -505,11 +550,20 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RoleARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FailedDocumentsOnly",
+								"AllDocuments",
+							}),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -519,6 +573,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -565,6 +622,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -587,6 +653,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -596,16 +667,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -615,6 +695,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: TypeName
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 100),
+						},
 					},
 					"vpc_configuration": {
 						// Property: VpcConfiguration
@@ -624,18 +707,27 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 								"security_group_ids": {
 									// Property: SecurityGroupIds
-									Type:       types.ListType{ElemType: types.StringType},
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Required:   true,
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 5),
+										validate.UniqueItems(),
+									},
 								},
 								"subnet_ids": {
 									// Property: SubnetIds
-									Type:       types.ListType{ElemType: types.StringType},
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Required:   true,
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 16),
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -1054,6 +1146,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: BucketARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
@@ -1100,6 +1195,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"UNCOMPRESSED",
+								"GZIP",
+								"ZIP",
+								"Snappy",
+								"HADOOP_SNAPPY",
+							}),
+						},
 					},
 					"data_format_conversion_configuration": {
 						// Property: DataFormatConversionConfiguration
@@ -1124,9 +1228,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																map[string]tfsdk.Attribute{
 																	"timestamp_formats": {
 																		// Property: TimestampFormats
-																		Type:       types.ListType{ElemType: types.StringType},
-																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-																		Optional:   true,
+																		Type:     types.ListType{ElemType: types.StringType},
+																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.UniqueItems(),
+																		},
 																	},
 																},
 															),
@@ -1183,9 +1289,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"bloom_filter_columns": {
 																		// Property: BloomFilterColumns
-																		Type:       types.ListType{ElemType: types.StringType},
-																		Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-																		Optional:   true,
+																		Type:     types.ListType{ElemType: types.StringType},
+																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.UniqueItems(),
+																		},
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
@@ -1300,6 +1408,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: RoleARN
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 512),
+												},
 											},
 											"table_name": {
 												// Property: TableName
@@ -1340,6 +1451,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NoEncryption",
+										}),
+									},
 								},
 							},
 						),
@@ -1349,11 +1465,17 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ErrorOutputPrefix
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
@@ -1385,19 +1507,28 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -1407,6 +1538,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RoleARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
@@ -1416,6 +1550,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -1462,6 +1599,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -1484,6 +1630,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -1493,16 +1644,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -1512,6 +1672,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Disabled",
+								"Enabled",
+							}),
+						},
 					},
 				},
 			),
@@ -1830,16 +1996,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: AccessKey
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 4096),
+									},
 								},
 								"name": {
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 								"url": {
 									// Property: Url
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1000),
+									},
 								},
 							},
 						),
@@ -1875,19 +2050,28 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -1905,11 +2089,17 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: AttributeName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 256),
+												},
 											},
 											"attribute_value": {
 												// Property: AttributeValue
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 1024),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1917,13 +2107,21 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											MaxItems: 50,
 										},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"content_encoding": {
 									// Property: ContentEncoding
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"GZIP",
+										}),
+									},
 								},
 							},
 						),
@@ -1946,6 +2144,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RoleARN
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"s3_backup_mode": {
 						// Property: S3BackupMode
@@ -1960,6 +2161,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -2006,6 +2210,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2028,6 +2241,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -2037,16 +2255,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -2087,11 +2314,17 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: KinesisStreamARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 				},
 			),
@@ -2455,6 +2688,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ClusterJDBCURL
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"copy_command": {
 						// Property: CopyCommand
@@ -2464,16 +2700,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CopyOptions
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 204800),
+									},
 								},
 								"data_table_columns": {
 									// Property: DataTableColumns
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 204800),
+									},
 								},
 								"data_table_name": {
 									// Property: DataTableName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -2483,6 +2728,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Password
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(6, 512),
+						},
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
@@ -2514,19 +2762,28 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -2549,6 +2806,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: RoleARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"s3_backup_configuration": {
 						// Property: S3BackupConfiguration
@@ -2558,6 +2818,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -2604,6 +2867,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2626,6 +2898,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -2635,16 +2912,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -2654,6 +2940,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: S3BackupMode
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Disabled",
+								"Enabled",
+							}),
+						},
 					},
 					"s3_configuration": {
 						// Property: S3Configuration
@@ -2663,6 +2955,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -2709,6 +3004,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -2731,6 +3035,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -2740,16 +3049,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -2759,6 +3077,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Username
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 				},
 			),
@@ -2866,6 +3187,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: BucketARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 					"buffering_hints": {
 						// Property: BufferingHints
@@ -2912,6 +3236,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: CompressionFormat
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"UNCOMPRESSED",
+								"GZIP",
+								"ZIP",
+								"Snappy",
+								"HADOOP_SNAPPY",
+							}),
+						},
 					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
@@ -2934,6 +3267,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: NoEncryptionConfig
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NoEncryption",
+										}),
+									},
 								},
 							},
 						),
@@ -2943,16 +3281,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ErrorOutputPrefix
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"role_arn": {
 						// Property: RoleARN
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 				},
 			),
@@ -2980,6 +3327,8 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "type": "object"
 			//     },
 			//     "HECAcknowledgmentTimeoutInSeconds": {
+			//       "maximum": 600,
+			//       "minimum": 180,
 			//       "type": "integer"
 			//     },
 			//     "HECEndpoint": {
@@ -3190,21 +3539,36 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: HECAcknowledgmentTimeoutInSeconds
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(180, 600),
+						},
 					},
 					"hec_endpoint": {
 						// Property: HECEndpoint
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
 					},
 					"hec_endpoint_type": {
 						// Property: HECEndpointType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Raw",
+								"Event",
+							}),
+						},
 					},
 					"hec_token": {
 						// Property: HECToken
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
 					},
 					"processing_configuration": {
 						// Property: ProcessingConfiguration
@@ -3236,19 +3600,28 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Lambda",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -3280,6 +3653,9 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: BucketARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 								"buffering_hints": {
 									// Property: BufferingHints
@@ -3326,6 +3702,15 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: CompressionFormat
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"UNCOMPRESSED",
+											"GZIP",
+											"ZIP",
+											"Snappy",
+											"HADOOP_SNAPPY",
+										}),
+									},
 								},
 								"encryption_configuration": {
 									// Property: EncryptionConfiguration
@@ -3348,6 +3733,11 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: NoEncryptionConfig
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"NoEncryption",
+													}),
+												},
 											},
 										},
 									),
@@ -3357,16 +3747,25 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ErrorOutputPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"role_arn": {
 									// Property: RoleARN
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 512),
+									},
 								},
 							},
 						),
@@ -3410,11 +3809,17 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

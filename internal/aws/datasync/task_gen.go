@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +35,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 562),
+			},
 		},
 		"destination_location_arn": {
 			// Property: DestinationLocationArn
@@ -47,6 +51,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of an AWS storage resource's location.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// DestinationLocationArn is a force-new attribute.
 		},
 		"destination_network_interface_arns": {
@@ -126,12 +133,21 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+							validate.StringInSlice([]string{
+								"SIMPLE_PATTERN",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 409600),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -154,6 +170,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"options": {
 			// Property: Options
@@ -173,6 +192,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesPerSecond": {
 			//       "description": "A value that limits the bandwidth used by AWS DataSync.",
 			//       "format": "int64",
+			//       "minimum": -1,
 			//       "type": "integer"
 			//     },
 			//     "Gid": {
@@ -289,84 +309,172 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"BEST_EFFORT",
+							}),
+						},
 					},
 					"bytes_per_second": {
 						// Property: BytesPerSecond
 						Description: "A value that limits the bandwidth used by AWS DataSync.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(-1),
+						},
 					},
 					"gid": {
 						// Property: Gid
 						Description: "The group ID (GID) of the file's owners.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"INT_VALUE",
+								"NAME",
+								"BOTH",
+							}),
+						},
 					},
 					"log_level": {
 						// Property: LogLevel
 						Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"OFF",
+								"BASIC",
+								"TRANSFER",
+							}),
+						},
 					},
 					"mtime": {
 						// Property: Mtime
 						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"overwrite_mode": {
 						// Property: OverwriteMode
 						Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALWAYS",
+								"NEVER",
+							}),
+						},
 					},
 					"posix_permissions": {
 						// Property: PosixPermissions
 						Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"preserve_deleted_files": {
 						// Property: PreserveDeletedFiles
 						Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PRESERVE",
+								"REMOVE",
+							}),
+						},
 					},
 					"preserve_devices": {
 						// Property: PreserveDevices
 						Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"PRESERVE",
+							}),
+						},
 					},
 					"security_descriptor_copy_flags": {
 						// Property: SecurityDescriptorCopyFlags
 						Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"OWNER_DACL",
+								"OWNER_DACL_SACL",
+							}),
+						},
 					},
 					"task_queueing": {
 						// Property: TaskQueueing
 						Description: "A value that determines whether tasks should be queued before executing the tasks.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ENABLED",
+								"DISABLED",
+							}),
+						},
 					},
 					"transfer_mode": {
 						// Property: TransferMode
 						Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CHANGED",
+								"ALL",
+							}),
+						},
 					},
 					"uid": {
 						// Property: Uid
 						Description: "The user ID (UID) of the file's owner.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NONE",
+								"INT_VALUE",
+								"NAME",
+								"BOTH",
+							}),
+						},
 					},
 					"verify_mode": {
 						// Property: VerifyMode
 						Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"POINT_IN_TIME_CONSISTENT",
+								"ONLY_FILES_TRANSFERRED",
+								"NONE",
+							}),
+						},
 					},
 				},
 			),
@@ -399,6 +507,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 			),
@@ -416,6 +527,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the source location for the task.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// SourceLocationArn is a force-new attribute.
 		},
 		"source_network_interface_arns": {
@@ -496,12 +610,18 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

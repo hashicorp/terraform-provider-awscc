@@ -44,8 +44,10 @@ type Property struct {
 	Format               *string              `json:"format,omitempty"`
 	InsertionOrder       *bool                `json:"insertionOrder,omitempty"`
 	Items                *Property            `json:"items,omitempty"`
+	Maximum              *int                 `json:"maximum,omitempty"`
 	MaxItems             *int                 `json:"maxItems,omitempty"`
 	MaxLength            *int                 `json:"maxLength,omitempty"`
+	Minimum              *int                 `json:"minimum,omitempty"`
 	MinItems             *int                 `json:"minItems,omitempty"`
 	MinLength            *int                 `json:"minLength,omitempty"`
 	Pattern              *string              `json:"pattern,omitempty"`

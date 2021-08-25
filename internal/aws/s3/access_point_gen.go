@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -58,6 +60,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the bucket that you want to associate this Access Point with.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(3, 255),
+			},
 			// Bucket is a force-new attribute.
 		},
 		"name": {
@@ -124,6 +129,12 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Specifies whether the policy is public or not.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"true",
+								"false",
+							}),
+						},
 					},
 				},
 			),
@@ -208,6 +219,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "If this field is specified, this access point will only allow connections from the specified VPC ID.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
 					},
 				},
 			),

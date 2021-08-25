@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -113,6 +115,13 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SPOT_ONLY",
+					"SPOT_PREFERRED",
+					"ON_DEMAND_ONLY",
+				}),
+			},
 		},
 		"delete_option": {
 			// Property: DeleteOption
@@ -130,6 +139,13 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The type of delete to perform.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SAFE_DELETE",
+					"FORCE_DELETE",
+					"RETAIN",
+				}),
+			},
 			// DeleteOption is a write-only attribute.
 		},
 		"game_server_group_arn": {
@@ -161,6 +177,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "An identifier for the new game server group.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 		},
 		"game_server_protection_policy": {
 			// Property: GameServerProtectionPolicy
@@ -177,6 +196,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NO_PROTECTION",
+					"FULL_PROTECTION",
+				}),
+			},
 		},
 		"instance_definitions": {
 			// Property: InstanceDefinitions
@@ -287,11 +312,15 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+			//   "minimum": 1,
 			//   "type": "number"
 			// }
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatAtLeast(1.000000),
+			},
 		},
 		"min_size": {
 			// Property: MinSize
@@ -299,11 +328,15 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+			//   "minimum": 0,
 			//   "type": "number"
 			// }
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatAtLeast(0.000000),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -319,6 +352,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -386,6 +422,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 20),
+			},
 		},
 	}
 

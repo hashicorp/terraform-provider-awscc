@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -104,12 +106,24 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"aes128",
+								"aes192",
+								"aes256",
+							}),
+						},
 					},
 					"key_type": {
 						// Property: KeyType
 						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"static-key",
+							}),
+						},
 					},
 					"role_arn": {
 						// Property: RoleArn
@@ -201,6 +215,15 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The protocol that is used by the source or output.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"zixi-push",
+					"rtp-fec",
+					"rtp",
+					"zixi-pull",
+					"rist",
+				}),
+			},
 		},
 		"remote_id": {
 			// Property: RemoteId

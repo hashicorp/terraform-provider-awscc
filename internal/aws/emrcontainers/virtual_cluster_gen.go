@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -87,6 +88,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The ID of the container cluster",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
 					},
 					"info": {
 						// Property: Info
@@ -100,6 +104,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Namespace
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 63),
+												},
 											},
 										},
 									),
@@ -146,6 +153,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Name of the virtual cluster.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// Name is a force-new attribute.
 		},
 		"tags": {

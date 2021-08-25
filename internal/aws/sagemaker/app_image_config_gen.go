@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -48,6 +50,9 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Name of the AppImageConfig.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// AppImageConfigName is a force-new attribute.
 		},
 		"kernel_gateway_image_config": {
@@ -63,10 +68,14 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "properties": {
 			//         "DefaultGid": {
 			//           "description": "The default POSIX group ID (GID). If not specified, defaults to 100.",
+			//           "maximum": 65535,
+			//           "minimum": 0,
 			//           "type": "integer"
 			//         },
 			//         "DefaultUid": {
 			//           "description": "The default POSIX user ID (UID). If not specified, defaults to 1000.",
+			//           "maximum": 65535,
+			//           "minimum": 0,
 			//           "type": "integer"
 			//         },
 			//         "MountPath": {
@@ -125,18 +134,27 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(0, 65535),
+									},
 								},
 								"default_uid": {
 									// Property: DefaultUid
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(0, 65535),
+									},
 								},
 								"mount_path": {
 									// Property: MountPath
 									Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 							},
 						),
@@ -152,12 +170,18 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "The display name of the kernel.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "The name of the kernel.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -208,11 +232,17 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

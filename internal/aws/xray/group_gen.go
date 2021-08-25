@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -57,6 +59,9 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The case-sensitive name of the new group. Names must be unique.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 32),
+			},
 		},
 		"insights_configuration": {
 			// Property: InsightsConfiguration

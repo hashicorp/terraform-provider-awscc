@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -202,6 +204,13 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A rule can be one of the following: ATLEAST, AND, or OR.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AND",
+								"OR",
+								"ATLEAST",
+							}),
+						},
 					},
 				},
 			),

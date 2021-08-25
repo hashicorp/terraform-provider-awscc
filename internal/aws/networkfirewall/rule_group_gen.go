@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +44,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
 		},
 		"rule_group": {
 			// Property: RuleGroup
@@ -335,6 +339,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "additionalProperties": false,
 			//                 "properties": {
 			//                   "Priority": {
+			//                     "maximum": 65535,
+			//                     "minimum": 1,
 			//                     "type": "integer"
 			//                   },
 			//                   "RuleDefinition": {
@@ -357,9 +363,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "additionalProperties": false,
 			//                               "properties": {
 			//                                 "FromPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 },
 			//                                 "ToPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 }
 			//                               },
@@ -395,6 +405,8 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           "Protocols": {
 			//                             "insertionOrder": false,
 			//                             "items": {
+			//                               "maximum": 255,
+			//                               "minimum": 0,
 			//                               "type": "integer"
 			//                             },
 			//                             "type": "array",
@@ -406,9 +418,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "additionalProperties": false,
 			//                               "properties": {
 			//                                 "FromPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 },
 			//                                 "ToPort": {
+			//                                   "maximum": 65535,
+			//                                   "minimum": 0,
 			//                                   "type": "integer"
 			//                                 }
 			//                               },
@@ -578,6 +594,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: GeneratedRulesType
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ALLOWLIST",
+														"DENYLIST",
+													}),
+												},
 											},
 											"target_types": {
 												// Property: TargetTypes
@@ -597,6 +619,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RulesString
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000000),
+									},
 								},
 								"stateful_rules": {
 									// Property: StatefulRules
@@ -606,6 +631,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Action
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PASS",
+														"DROP",
+														"ALERT",
+													}),
+												},
 											},
 											"header": {
 												// Property: Header
@@ -615,31 +647,72 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Destination
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
 														},
 														"destination_port": {
 															// Property: DestinationPort
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
 														},
 														"direction": {
 															// Property: Direction
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"FORWARD",
+																	"ANY",
+																}),
+															},
 														},
 														"protocol": {
 															// Property: Protocol
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"IP",
+																	"TCP",
+																	"UDP",
+																	"ICMP",
+																	"HTTP",
+																	"FTP",
+																	"TLS",
+																	"SMB",
+																	"DNS",
+																	"DCERPC",
+																	"SSH",
+																	"SMTP",
+																	"IMAP",
+																	"MSN",
+																	"KRB5",
+																	"IKEV2",
+																	"TFTP",
+																	"NTP",
+																	"DHCP",
+																}),
+															},
 														},
 														"source": {
 															// Property: Source
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
 														},
 														"source_port": {
 															// Property: SourcePort
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 1024),
+															},
 														},
 													},
 												),
@@ -653,6 +726,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Keyword
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
 														},
 														"settings": {
 															// Property: Settings
@@ -693,6 +769,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: Value
 																								Type:     types.StringType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 128),
+																								},
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -711,6 +790,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ActionName
 															Type:     types.StringType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
 														},
 													},
 													providertypes.SetNestedAttributesOptions{},
@@ -725,6 +807,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Priority
 															Type:     types.NumberType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntBetween(1, 65535),
+															},
 														},
 														"rule_definition": {
 															// Property: RuleDefinition
@@ -747,11 +832,17 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: FromPort
 																								Type:     types.NumberType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																							},
 																							"to_port": {
 																								// Property: ToPort
 																								Type:     types.NumberType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -766,6 +857,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: AddressDefinition
 																								Type:     types.StringType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 255),
+																								},
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -785,11 +879,17 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: FromPort
 																								Type:     types.NumberType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																							},
 																							"to_port": {
 																								// Property: ToPort
 																								Type:     types.NumberType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.IntBetween(0, 65535),
+																								},
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -804,6 +904,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: AddressDefinition
 																								Type:     types.StringType,
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenBetween(1, 255),
+																								},
 																							},
 																						},
 																						providertypes.SetNestedAttributesOptions{},
@@ -892,6 +995,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// RuleGroupName is a force-new attribute.
 		},
 		"tags": {
@@ -930,11 +1036,17 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},
@@ -953,6 +1065,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STATELESS",
+					"STATEFUL",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

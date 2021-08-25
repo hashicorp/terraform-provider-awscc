@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -47,6 +49,12 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"USER",
+					"GROUP",
+				}),
+			},
 			// IdentityType is a force-new attribute.
 		},
 		"session_policy_arn": {
@@ -72,6 +80,9 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(4, 256),
+			},
 			// StudioId is a force-new attribute.
 		},
 	}

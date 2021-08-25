@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// Description is a force-new attribute.
 		},
 		"event_time_feature_name": {
@@ -48,6 +53,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Event Time Feature Name.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// EventTimeFeatureName is a force-new attribute.
 		},
 		"feature_definitions": {
@@ -91,11 +99,21 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FeatureName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"feature_type": {
 						// Property: FeatureType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Integral",
+								"Fractional",
+								"String",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -119,6 +137,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Name of the FeatureGroup.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// FeatureGroupName is a force-new attribute.
 		},
 		"offline_store_config": {
@@ -193,16 +214,25 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Catalog
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 								"database": {
 									// Property: Database
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 								"table_name": {
 									// Property: TableName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 							},
 						),
@@ -221,11 +251,17 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: KmsKeyId
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
 								},
 								"s3_uri": {
 									// Property: S3Uri
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 							},
 						),
@@ -274,6 +310,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: KmsKeyId
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
 								},
 							},
 						),
@@ -298,6 +337,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Record Identifier Feature Name.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// RecordIdentifierFeatureName is a force-new attribute.
 		},
 		"role_arn": {
@@ -314,6 +356,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 			// RoleArn is a force-new attribute.
 		},
 		"tags": {

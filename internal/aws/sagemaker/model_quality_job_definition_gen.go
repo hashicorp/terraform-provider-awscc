@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -58,6 +60,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 			// JobDefinitionName is a force-new attribute.
 		},
 		"job_resources": {
@@ -73,6 +78,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       "properties": {
 			//         "InstanceCount": {
 			//           "description": "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+			//           "maximum": 100,
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "InstanceType": {
@@ -81,10 +88,14 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//         },
 			//         "VolumeKmsKeyId": {
 			//           "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
+			//           "maximum": 2048,
+			//           "minimum": 1,
 			//           "type": "string"
 			//         },
 			//         "VolumeSizeInGB": {
 			//           "description": "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
+			//           "maximum": 16384,
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         }
 			//       },
@@ -114,6 +125,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 100),
+									},
 								},
 								"instance_type": {
 									// Property: InstanceType
@@ -132,6 +146,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 16384),
+									},
 								},
 							},
 						),
@@ -227,12 +244,18 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "An array of arguments for the container used to run the monitoring job.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 50),
+						},
 					},
 					"container_entrypoint": {
 						// Property: ContainerEntrypoint
 						Description: "Specifies the entrypoint for a container used to run the monitoring job.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 					"environment": {
 						// Property: Environment
@@ -247,24 +270,40 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "The container image to be run by the monitoring job.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 					"post_analytics_processor_source_uri": {
 						// Property: PostAnalyticsProcessorSourceUri
 						Description: "The Amazon S3 URI.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"problem_type": {
 						// Property: ProblemType
 						Description: "The status of the monitoring job.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"BinaryClassification",
+								"MulticlassClassification",
+								"Regression",
+							}),
+						},
 					},
 					"record_preprocessor_source_uri": {
 						// Property: RecordPreprocessorSourceUri
 						Description: "The Amazon S3 URI.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 				},
 			),
@@ -309,6 +348,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "The name of a processing job",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 63),
+						},
 					},
 					"constraints_resource": {
 						// Property: ConstraintsResource
@@ -320,6 +362,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "The Amazon S3 URI.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 							},
 						),
@@ -441,30 +486,45 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "The time offsets in ISO duration format",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 15),
+									},
 								},
 								"endpoint_name": {
 									// Property: EndpointName
 									Description: "The name of the endpoint used to run the monitoring job.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 63),
+									},
 								},
 								"inference_attribute": {
 									// Property: InferenceAttribute
 									Description: "Index or JSONpath to locate predicted label(s)",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"local_path": {
 									// Property: LocalPath
 									Description: "Path to the filesystem where the endpoint data is available to the container.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"probability_attribute": {
 									// Property: ProbabilityAttribute
 									Description: "Index or JSONpath to locate probabilities",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"probability_threshold_attribute": {
 									// Property: ProbabilityThresholdAttribute
@@ -476,18 +536,33 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"FullyReplicated",
+											"ShardedByS3Key",
+										}),
+									},
 								},
 								"s3_input_mode": {
 									// Property: S3InputMode
 									Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Pipe",
+											"File",
+										}),
+									},
 								},
 								"start_time_offset": {
 									// Property: StartTimeOffset
 									Description: "The time offsets in ISO duration format",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 15),
+									},
 								},
 							},
 						),
@@ -503,6 +578,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 512),
+									},
 								},
 							},
 						),
@@ -587,6 +665,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
 					},
 					"monitoring_outputs": {
 						// Property: MonitoringOutputs
@@ -603,18 +684,30 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 												Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
 											},
 											"s3_upload_mode": {
 												// Property: S3UploadMode
 												Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Continuous",
+														"EndOfJob",
+													}),
+												},
 											},
 											"s3_uri": {
 												// Property: S3Uri
 												Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -706,12 +799,18 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 5),
+									},
 								},
 								"subnets": {
 									// Property: Subnets
 									Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 16),
+									},
 								},
 							},
 						),
@@ -736,6 +835,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 			// RoleArn is a force-new attribute.
 		},
 		"stopping_condition": {
@@ -747,6 +849,8 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "properties": {
 			//     "MaxRuntimeInSeconds": {
 			//       "description": "The maximum runtime allowed in seconds.",
+			//       "maximum": 86400,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -763,6 +867,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "The maximum runtime allowed in seconds.",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 86400),
+						},
 					},
 				},
 			),
@@ -810,12 +917,18 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

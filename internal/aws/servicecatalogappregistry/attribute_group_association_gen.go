@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The name or the Id of the Application.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"application_arn": {
 			// Property: ApplicationArn
@@ -58,6 +63,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The name or the Id of the AttributeGroup.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"attribute_group_arn": {
 			// Property: AttributeGroupArn

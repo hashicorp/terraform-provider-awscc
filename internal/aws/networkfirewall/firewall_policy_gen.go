@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +34,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
 		},
 		"firewall_policy": {
 			// Property: FirewallPolicy
@@ -139,6 +143,8 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "Priority": {
+			//             "maximum": 65535,
+			//             "minimum": 1,
 			//             "type": "integer"
 			//           },
 			//           "ResourceArn": {
@@ -176,6 +182,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A resource ARN.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 							},
 							providertypes.SetNestedAttributesOptions{},
@@ -202,6 +211,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																		// Property: Value
 																		Type:     types.StringType,
 																		Required: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(1, 128),
+																		},
 																	},
 																},
 																providertypes.SetNestedAttributesOptions{},
@@ -220,6 +232,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: ActionName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
 								},
 							},
 							providertypes.SetNestedAttributesOptions{},
@@ -244,12 +259,18 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: Priority
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntBetween(1, 65535),
+									},
 								},
 								"resource_arn": {
 									// Property: ResourceArn
 									Description: "A resource ARN.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 							},
 							providertypes.SetNestedAttributesOptions{},
@@ -298,6 +319,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// FirewallPolicyName is a force-new attribute.
 		},
 		"tags": {
@@ -336,11 +360,17 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

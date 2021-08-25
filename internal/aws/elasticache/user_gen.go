@@ -59,6 +59,11 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Must be redis.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"redis",
+				}),
+			},
 			// Engine is a force-new attribute.
 		},
 		"no_password_required": {
@@ -87,8 +92,10 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// Passwords is a write-only attribute.
 		},
 		"status": {

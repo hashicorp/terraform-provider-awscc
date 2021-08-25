@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -86,12 +88,18 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"log_role_arn": {
 						// Property: LogRoleArn
 						Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 			),
@@ -111,6 +119,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Major Version of the type you want to enable",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100000),
+			},
 		},
 		"public_type_arn": {
 			// Property: PublicTypeArn
@@ -125,6 +136,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 			// PublicTypeArn is a force-new attribute.
 		},
 		"publisher_id": {
@@ -141,6 +155,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 40),
+			},
 			// PublisherId is a force-new attribute.
 		},
 		"type": {
@@ -158,6 +175,12 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RESOURCE",
+					"MODULE",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 		"type_name": {
@@ -188,6 +211,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(10, 204),
+			},
 			// TypeNameAlias is a force-new attribute.
 		},
 		"version_bump": {
@@ -204,6 +230,12 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Manually updates a previously-enabled type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdateEnabled",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MAJOR",
+					"MINOR",
+				}),
+			},
 		},
 	}
 

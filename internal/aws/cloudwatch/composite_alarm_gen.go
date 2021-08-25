@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -49,6 +51,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
 		},
 		"alarm_description": {
 			// Property: AlarmDescription
@@ -62,6 +67,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The description of the alarm",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"alarm_name": {
 			// Property: AlarmName
@@ -75,6 +83,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The name of the Composite Alarm",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// AlarmName is a force-new attribute.
 		},
 		"alarm_rule": {
@@ -89,6 +100,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 10240),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -120,6 +134,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
 		},
 		"ok_actions": {
 			// Property: OKActions
@@ -138,6 +155,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
 		},
 	}
 

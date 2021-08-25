@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -71,6 +73,11 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SECRETS",
+							}),
+						},
 					},
 					"description": {
 						// Property: Description
@@ -83,6 +90,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DISABLED",
+								"REQUIRED",
+							}),
+						},
 					},
 					"secret_arn": {
 						// Property: SecretArn
@@ -126,6 +139,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 64),
+			},
 			// DBProxyName is a force-new attribute.
 		},
 		"debug_logging": {
@@ -164,6 +180,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The kinds of databases that the proxy can connect to.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MYSQL",
+					"POSTGRESQL",
+				}),
+			},
 			// EngineFamily is a force-new attribute.
 		},
 		"idle_client_timeout": {
@@ -230,11 +252,17 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -267,6 +295,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "VPC security group IDs to associate with the new proxy.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -283,6 +314,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "VPC subnet IDs to associate with the new proxy.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(2),
+			},
 			// VpcSubnetIds is a force-new attribute.
 		},
 	}

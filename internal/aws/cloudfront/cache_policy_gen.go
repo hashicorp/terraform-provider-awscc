@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -31,12 +33,15 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "DefaultTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "MaxTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "MinTTL": {
+			//       "minimum": 0,
 			//       "type": "number"
 			//     },
 			//     "Name": {
@@ -141,16 +146,25 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DefaultTTL
 						Type:     types.NumberType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(0.000000),
+						},
 					},
 					"max_ttl": {
 						// Property: MaxTTL
 						Type:     types.NumberType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(0.000000),
+						},
 					},
 					"min_ttl": {
 						// Property: MinTTL
 						Type:     types.NumberType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(0.000000),
+						},
 					},
 					"name": {
 						// Property: Name

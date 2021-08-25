@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Version of airflow to deploy to the environment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 32),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -71,6 +76,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"environment_class": {
 			// Property: EnvironmentClass
@@ -84,6 +92,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Templated configuration for airflow processes and backing infrastructure.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
@@ -97,6 +108,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "IAM role to be used by tasks.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1224),
+			},
 		},
 		"kms_key": {
 			// Property: KmsKey
@@ -111,6 +125,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1224),
+			},
 			// KmsKey is a force-new attribute.
 		},
 		"logging_configuration": {
@@ -288,6 +305,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -315,6 +341,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -342,6 +377,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -369,6 +413,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -396,6 +449,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"CRITICAL",
+											"ERROR",
+											"WARNING",
+											"INFO",
+											"DEBUG",
+										}),
+									},
 								},
 							},
 						),
@@ -410,22 +472,30 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Maximum worker compute units.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "Maximum worker compute units.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"min_workers": {
 			// Property: MinWorkers
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Minimum worker compute units.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "Minimum worker compute units.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -440,6 +510,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Customer-defined identifier for the environment, unique per customer region.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 80),
+			},
 			// Name is a force-new attribute.
 		},
 		"network_configuration": {
@@ -485,6 +558,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of security groups to use for the environment.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 5),
+						},
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
@@ -492,6 +568,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(2, 2),
+						},
 						// SubnetIds is a force-new attribute.
 					},
 				},
@@ -509,6 +588,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"plugins_s3_path": {
 			// Property: PluginsS3Path
@@ -522,6 +604,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"requirements_s3_object_version": {
 			// Property: RequirementsS3ObjectVersion
@@ -534,6 +619,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents an version ID for an S3 object.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"requirements_s3_path": {
 			// Property: RequirementsS3Path
@@ -547,17 +635,24 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"schedulers": {
 			// Property: Schedulers
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Scheduler compute units.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "Scheduler compute units.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"source_bucket_arn": {
 			// Property: SourceBucketArn
@@ -572,6 +667,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1224),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -598,6 +696,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PRIVATE_ONLY",
+					"PUBLIC_ONLY",
+				}),
+			},
 		},
 		"webserver_url": {
 			// Property: WebserverUrl
@@ -625,6 +729,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Start time for the weekly maintenance window.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 9),
+			},
 		},
 	}
 

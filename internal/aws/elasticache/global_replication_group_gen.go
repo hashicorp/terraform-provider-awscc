@@ -169,14 +169,22 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 						Description: "Indicates the role of the member, primary or secondary.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PRIMARY",
+								"SECONDARY",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"regional_configurations": {
 			// Property: RegionalConfigurations
@@ -258,14 +266,18 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// RegionalConfigurations is a write-only attribute.
 		},
 		"status": {

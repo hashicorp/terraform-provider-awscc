@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -59,6 +61,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 			// ProjectDescription is a force-new attribute.
 		},
 		"project_id": {
@@ -87,6 +92,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the project.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 32),
+			},
 			// ProjectName is a force-new attribute.
 		},
 		"project_status": {
@@ -137,6 +145,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 100),
+						},
 					},
 					"provisioned_product_status_message": {
 						// Property: ProvisionedProductStatusMessage
@@ -216,18 +227,27 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The path identifier of the product.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 100),
+						},
 					},
 					"product_id": {
 						// Property: ProductId
 						Description: "Service Catalog product identifier.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 100),
+						},
 					},
 					"provisioning_artifact_id": {
 						// Property: ProvisioningArtifactId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 100),
+						},
 					},
 					"provisioning_parameters": {
 						// Property: ProvisioningParameters
@@ -239,12 +259,18 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The parameter key.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1000),
+									},
 								},
 								"value": {
 									// Property: Value
 									Description: "The parameter value.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 4096),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -296,12 +322,18 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

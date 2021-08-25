@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -53,6 +55,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 79),
+			},
 			// BackupId is a force-new attribute.
 		},
 		"backup_retention_count": {
@@ -76,6 +81,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2097152),
+			},
 			// CustomCertificate is a force-new attribute.
 		},
 		"custom_domain": {
@@ -89,6 +97,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 253),
+			},
 			// CustomDomain is a force-new attribute.
 		},
 		"custom_private_key": {
@@ -102,6 +113,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
 			// CustomPrivateKey is a force-new attribute.
 			// CustomPrivateKey is a write-only attribute.
 		},
@@ -134,6 +148,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// Engine is a force-new attribute.
 			// Engine is a write-only attribute.
 		},
@@ -166,11 +183,17 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10000),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 10000),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -188,6 +211,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// EngineModel is a force-new attribute.
 		},
 		"engine_version": {
@@ -200,6 +226,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// EngineVersion is a force-new attribute.
 		},
 		"id": {
@@ -222,6 +251,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// InstanceProfileArn is a force-new attribute.
 		},
 		"instance_type": {
@@ -233,6 +265,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// InstanceType is a force-new attribute.
 		},
 		"key_pair": {
@@ -246,6 +281,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// KeyPair is a force-new attribute.
 		},
 		"preferred_backup_window": {
@@ -258,6 +296,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 		},
 		"preferred_maintenance_window": {
 			// Property: PreferredMaintenanceWindow
@@ -269,6 +310,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 		},
 		"security_group_ids": {
 			// Property: SecurityGroupIds
@@ -298,6 +342,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 40),
+			},
 			// ServerName is a force-new attribute.
 		},
 		"service_role_arn": {
@@ -310,6 +357,9 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 10000),
+			},
 			// ServiceRoleArn is a force-new attribute.
 		},
 		"subnet_ids": {
@@ -363,11 +413,17 @@ func serverResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

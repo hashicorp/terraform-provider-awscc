@@ -38,6 +38,12 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CustomerOwnedIp",
+					"Private",
+				}),
+			},
 			// AccessType is a force-new attribute.
 		},
 		"arn": {
@@ -137,12 +143,14 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: NetworkInterfaceId
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Computed:   true,
+			Computed: true,
 		},
 		"outpost_id": {
 			// Property: OutpostId
@@ -170,6 +178,9 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the security group to use with the endpoint.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// SecurityGroupId is a force-new attribute.
 		},
 		"status": {
@@ -199,6 +210,9 @@ func endpointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// SubnetId is a force-new attribute.
 		},
 	}
