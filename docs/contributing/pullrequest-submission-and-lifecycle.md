@@ -89,7 +89,7 @@ Check your code with the linters:
 % make fmt
 ```
 
-The import statement in a Go file follows these rules (see [#15903](https://github.com/hashicorp/terraform-provider-aws/issues/15903)):
+The import statement in a Go file follows these rules:
 
 1. Import declarations are grouped into a maximum of three groups with the following order:
     - Standard packages (also called short import path or built-in packages)
