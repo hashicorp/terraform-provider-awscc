@@ -319,6 +319,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(1.000000, 36.000000),
+						},
 					},
 					"wait_for_spice_ingestion": {
 						// Property: WaitForSpiceIngestion
@@ -1517,6 +1520,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>A row number to start reading data from.</p>",
 												Type:        types.NumberType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.FloatAtLeast(1.000000),
+												},
 											},
 											"text_qualifier": {
 												// Property: TextQualifier

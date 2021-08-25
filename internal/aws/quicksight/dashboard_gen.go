@@ -913,6 +913,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Version number for this version of the dashboard.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(1.000000),
+						},
 					},
 				},
 			),

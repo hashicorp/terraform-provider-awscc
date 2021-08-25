@@ -138,6 +138,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.NumberType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatBetween(1.000000, 100.000000),
+			},
 		},
 	}
 

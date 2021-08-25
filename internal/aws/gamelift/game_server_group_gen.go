@@ -298,6 +298,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatAtLeast(1.000000),
+			},
 		},
 		"min_size": {
 			// Property: MinSize
@@ -311,6 +314,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatAtLeast(0.000000),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn

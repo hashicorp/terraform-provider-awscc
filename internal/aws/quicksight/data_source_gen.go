@@ -526,6 +526,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -559,6 +562,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -592,6 +598,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -625,6 +634,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -654,6 +666,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Port
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -687,6 +702,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -720,6 +738,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -789,6 +810,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -885,6 +909,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -918,6 +945,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -951,6 +981,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -1556,6 +1589,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1589,6 +1625,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1622,6 +1661,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1655,6 +1697,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1684,6 +1729,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Port
 															Type:     types.NumberType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1717,6 +1765,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1750,6 +1801,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1819,6 +1873,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 															Type:        types.NumberType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(0.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1915,6 +1972,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1948,6 +2008,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -1981,6 +2044,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>Port.</p>",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.FloatBetween(1.000000, 65535.000000),
+															},
 														},
 													},
 												),
@@ -2529,6 +2595,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2562,6 +2631,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2595,6 +2667,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2628,6 +2703,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2657,6 +2735,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Port
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2690,6 +2771,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2723,6 +2807,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2792,6 +2879,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2888,6 +2978,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2921,6 +3014,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),
@@ -2954,6 +3050,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Port.</p>",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(1.000000, 65535.000000),
+									},
 								},
 							},
 						),

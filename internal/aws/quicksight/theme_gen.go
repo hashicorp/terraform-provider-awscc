@@ -1291,6 +1291,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The version number of the theme.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(1.000000),
+						},
 					},
 				},
 			),

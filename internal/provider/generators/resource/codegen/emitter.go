@@ -112,6 +112,17 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.NumberType,\n")
 
+		if property.Minimum == nil && property.Maximum != nil {
+			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+		}
+
+		if property.Minimum != nil && property.Maximum == nil {
+			validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
+		}
+		if property.Minimum != nil && property.Maximum != nil {
+			validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
+		}
+
 		if property.Format != nil {
 			if format := *property.Format; format != "double" {
 				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)

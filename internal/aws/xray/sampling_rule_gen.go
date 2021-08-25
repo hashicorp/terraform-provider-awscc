@@ -146,6 +146,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 1.000000),
+						},
 					},
 					"http_method": {
 						// Property: HTTPMethod
@@ -373,6 +376,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 									Type:        types.NumberType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 1.000000),
+									},
 								},
 								"http_method": {
 									// Property: HTTPMethod
@@ -569,6 +575,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 1.000000),
+						},
 					},
 					"http_method": {
 						// Property: HTTPMethod

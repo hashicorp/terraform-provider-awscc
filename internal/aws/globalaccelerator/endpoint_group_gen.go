@@ -248,6 +248,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatBetween(0.000000, 100.000000),
+			},
 		},
 	}
 

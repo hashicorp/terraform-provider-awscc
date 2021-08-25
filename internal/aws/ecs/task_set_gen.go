@@ -272,6 +272,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 100.000000),
+						},
 					},
 				},
 			),
