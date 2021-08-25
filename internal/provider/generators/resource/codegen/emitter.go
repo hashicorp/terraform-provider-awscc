@@ -143,6 +143,16 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
 		}
 
+		if property.Format != nil {
+			switch format := *property.Format; format {
+			case "date-time":
+				validators = append(validators, "validate.IsRFC3339Time()")
+			case "string":
+			default:
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
+
 	//
 	// Complex types.
 	//

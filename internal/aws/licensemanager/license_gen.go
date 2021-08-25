@@ -367,12 +367,18 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IsRFC3339Time(),
+						},
 					},
 					"end": {
 						// Property: End
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IsRFC3339Time(),
+						},
 					},
 				},
 			),
