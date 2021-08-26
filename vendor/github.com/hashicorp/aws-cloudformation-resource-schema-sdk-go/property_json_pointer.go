@@ -3,7 +3,8 @@ package cfschema
 import "strings"
 
 const (
-	PropertyJsonPointerSeparator = "/"
+	propertyJsonPointerPrefix    = "/properties"
+	propertyJsonPointerSeparator = "/"
 )
 
 // PropertyJsonPointer is a simplistic RFC 6901 handler for properties JSON Pointers.
@@ -12,14 +13,24 @@ type PropertyJsonPointer string
 // EqualsPath returns true if all path parts match.
 //
 // This automatically handles stripping the /properties prefix.
-func (p *PropertyJsonPointer) EqualsPath(path []string) bool {
+func (p *PropertyJsonPointer) EqualsPath(other []string) bool {
 	if p == nil || *p == "" {
 		return false
 	}
 
-	trimmedPath := strings.TrimPrefix(string(*p), "/properties/"+strings.Join(path, PropertyJsonPointerSeparator))
+	path := p.Path()
 
-	return !strings.Contains(trimmedPath, PropertyJsonPointerSeparator)
+	if len(path) != len(other) {
+		return false
+	}
+
+	for i, segment := range path {
+		if segment != other[i] {
+			return false
+		}
+	}
+
+	return true
 }
 
 // EqualsStringPath returns true if the path string matches.
@@ -30,7 +41,7 @@ func (p *PropertyJsonPointer) EqualsStringPath(path string) bool {
 		return false
 	}
 
-	trimmedPath := strings.TrimPrefix(string(*p), "/properties")
+	trimmedPath := strings.TrimPrefix(string(*p), propertyJsonPointerPrefix)
 
 	return trimmedPath == path
 }
@@ -43,7 +54,7 @@ func (p *PropertyJsonPointer) Path() []string {
 		return nil
 	}
 
-	pathParts := strings.Split(strings.TrimPrefix(string(*p), "/properties/"), PropertyJsonPointerSeparator)
+	pathParts := strings.Split(strings.TrimPrefix(string(*p), propertyJsonPointerPrefix+propertyJsonPointerSeparator), propertyJsonPointerSeparator)
 
 	return pathParts
 }
