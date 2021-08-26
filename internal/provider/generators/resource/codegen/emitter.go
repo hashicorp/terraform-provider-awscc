@@ -49,8 +49,17 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 		return 0, err
 	}
 
-	for name := range cfResource.Properties {
+	for name, property := range cfResource.Properties {
 		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
+			// Ensure that any schema-declared top-level ID property is of type String and is the primary identifier.
+			if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
+				return 0, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
+			}
+
+			if !cfResource.PrimaryIdentifier.ContainsPath([]string{name}) {
+				return 0, fmt.Errorf("top-level property %s is not a primary identifier", name)
+			}
+
 			features |= HasIDRootProperty
 		}
 
