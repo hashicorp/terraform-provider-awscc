@@ -1314,7 +1314,6 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
-			// Version is a write-only attribute.
 		},
 		"version_description": {
 			// Property: VersionDescription

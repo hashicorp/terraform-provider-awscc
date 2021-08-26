@@ -488,6 +488,13 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
 
+	if readOnly && required {
+		e.warnf("%s is ReadOnly and Required", strings.Join(path, "/"))
+	}
+	if readOnly && writeOnly {
+		e.warnf("%s is ReadOnly and WriteOnly", strings.Join(path, "/"))
+	}
+
 	var optional, computed bool
 
 	if required {
@@ -584,7 +591,7 @@ func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e *Emitter) warnf(format string, a ...interface{}) { //nolint:unused
+func (e *Emitter) warnf(format string, a ...interface{}) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 

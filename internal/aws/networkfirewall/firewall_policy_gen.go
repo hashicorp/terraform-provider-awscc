@@ -280,7 +280,6 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Required: true,
-			// FirewallPolicy is a force-new attribute.
 		},
 		"firewall_policy_arn": {
 			// Property: FirewallPolicyArn

@@ -108,7 +108,14 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Description: "The kind of extension",
 			Type:        types.StringType,
+			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RESOURCE",
+					"MODULE",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 		"type_name": {

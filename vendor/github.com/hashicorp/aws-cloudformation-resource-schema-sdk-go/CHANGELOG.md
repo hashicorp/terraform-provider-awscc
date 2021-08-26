@@ -1,3 +1,8 @@
+## v0.8.0 (August 26, 2021)
+
+Correct `PropertyJsonPointer.EqualsPath`.
+Add `PropertySubschema` to handle `allOf`, `anyO`f and `oneOf` keywords.
+
 ## v0.7.0 (August 24, 2021)
 
 Add maximum and minimum fields to Property.

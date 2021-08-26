@@ -692,8 +692,6 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The issued certificate in base 64 PEM-encoded format.",
 			Type:        types.StringType,
 			Computed:    true,
-			// Certificate is a force-new attribute.
-			// Certificate is a write-only attribute.
 		},
 		"certificate_authority_arn": {
 			// Property: CertificateAuthorityArn

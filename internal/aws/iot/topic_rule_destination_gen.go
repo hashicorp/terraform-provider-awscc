@@ -71,7 +71,14 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Computed: true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"IN_PROGRESS",
+					"DISABLED",
+				}),
+			},
 		},
 		"status_reason": {
 			// Property: StatusReason
