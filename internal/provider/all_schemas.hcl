@@ -631,6 +631,9 @@ resource_schema "aws_greengrassv2_component_version" {
 
 resource_schema "aws_groundstation_config" {
   cloudformation_type_name = "AWS::GroundStation::Config"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -1035,6 +1038,9 @@ resource_schema "aws_nimblestudio_studio_component" {
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_qldb_stream" {
@@ -1083,6 +1089,9 @@ resource_schema "aws_rds_global_cluster" {
 
 resource_schema "aws_redshift_cluster" {
   cloudformation_type_name = "AWS::Redshift::Cluster"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_resourcegroups_group" {
@@ -1194,6 +1203,9 @@ resource_schema "aws_s3outposts_bucket_policy" {
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -1354,6 +1366,9 @@ resource_schema "aws_stepfunctions_state_machine" {
 
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_timestream_database" {

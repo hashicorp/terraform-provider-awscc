@@ -147,7 +147,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_glue_schema_version -cfschema ../service/cloudformation/schemas/AWS_Glue_SchemaVersion.json -package glue -- ../aws/glue/schema_version_gen.go ../aws/glue/schema_version_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_glue_schema_version_metadata -cfschema ../service/cloudformation/schemas/AWS_Glue_SchemaVersionMetadata.json -package glue -- ../aws/glue/schema_version_metadata_gen.go ../aws/glue/schema_version_metadata_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_greengrassv2_component_version -cfschema ../service/cloudformation/schemas/AWS_GreengrassV2_ComponentVersion.json -package greengrassv2 -- ../aws/greengrassv2/component_version_gen.go ../aws/greengrassv2/component_version_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_groundstation_config -cfschema ../service/cloudformation/schemas/AWS_GroundStation_Config.json -package groundstation -- ../aws/groundstation/config_gen.go ../aws/groundstation/config_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_groundstation_dataflow_endpoint_group -cfschema ../service/cloudformation/schemas/AWS_GroundStation_DataflowEndpointGroup.json -package groundstation -- ../aws/groundstation/dataflow_endpoint_group_gen.go ../aws/groundstation/dataflow_endpoint_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_groundstation_mission_profile -cfschema ../service/cloudformation/schemas/AWS_GroundStation_MissionProfile.json -package groundstation -- ../aws/groundstation/mission_profile_gen.go ../aws/groundstation/mission_profile_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_iam_oidc_provider -cfschema ../service/cloudformation/schemas/AWS_IAM_OIDCProvider.json -package iam -- ../aws/iam/oidc_provider_gen.go ../aws/iam/oidc_provider_gen_test.go
@@ -248,7 +247,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_streaming_image -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json -package nimblestudio -- ../aws/nimblestudio/streaming_image_gen.go ../aws/nimblestudio/streaming_image_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_Studio.json -package nimblestudio -- ../aws/nimblestudio/studio_gen.go ../aws/nimblestudio/studio_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio_component -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json -package nimblestudio -- ../aws/nimblestudio/studio_component_gen.go ../aws/nimblestudio/studio_component_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_opsworkscm_server -cfschema ../service/cloudformation/schemas/AWS_OpsWorksCM_Server.json -package opsworkscm -- ../aws/opsworkscm/server_gen.go ../aws/opsworkscm/server_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_qldb_stream -cfschema ../service/cloudformation/schemas/AWS_QLDB_Stream.json -package qldb -- ../aws/qldb/stream_gen.go ../aws/qldb/stream_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_quicksight_analysis -cfschema ../service/cloudformation/schemas/AWS_QuickSight_Analysis.json -package quicksight -- ../aws/quicksight/analysis_gen.go ../aws/quicksight/analysis_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_quicksight_dashboard -cfschema ../service/cloudformation/schemas/AWS_QuickSight_Dashboard.json -package quicksight -- ../aws/quicksight/dashboard_gen.go ../aws/quicksight/dashboard_gen_test.go
@@ -260,7 +258,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_endpoint -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyEndpoint.json -package rds -- ../aws/rds/db_proxy_endpoint_gen.go ../aws/rds/db_proxy_endpoint_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_target_group -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyTargetGroup.json -package rds -- ../aws/rds/db_proxy_target_group_gen.go ../aws/rds/db_proxy_target_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_global_cluster -cfschema ../service/cloudformation/schemas/AWS_RDS_GlobalCluster.json -package rds -- ../aws/rds/global_cluster_gen.go ../aws/rds/global_cluster_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_redshift_cluster -cfschema ../service/cloudformation/schemas/AWS_Redshift_Cluster.json -package redshift -- ../aws/redshift/cluster_gen.go ../aws/redshift/cluster_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_resourcegroups_group -cfschema ../service/cloudformation/schemas/AWS_ResourceGroups_Group.json -package resourcegroups -- ../aws/resourcegroups/group_gen.go ../aws/resourcegroups/group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_dnssec -cfschema ../service/cloudformation/schemas/AWS_Route53_DNSSEC.json -package route53 -- ../aws/route53/dnssec_gen.go ../aws/route53/dnssec_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_health_check -cfschema ../service/cloudformation/schemas/AWS_Route53_HealthCheck.json -package route53 -- ../aws/route53/health_check_gen.go ../aws/route53/health_check_gen_test.go
@@ -286,7 +283,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_s3objectlambda_access_point_policy -cfschema ../service/cloudformation/schemas/AWS_S3ObjectLambda_AccessPointPolicy.json -package s3objectlambda -- ../aws/s3objectlambda/access_point_policy_gen.go ../aws/s3objectlambda/access_point_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_s3outposts_access_point -cfschema ../service/cloudformation/schemas/AWS_S3Outposts_AccessPoint.json -package s3outposts -- ../aws/s3outposts/access_point_gen.go ../aws/s3outposts/access_point_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_s3outposts_bucket_policy -cfschema ../service/cloudformation/schemas/AWS_S3Outposts_BucketPolicy.json -package s3outposts -- ../aws/s3outposts/bucket_policy_gen.go ../aws/s3outposts/bucket_policy_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_s3outposts_endpoint -cfschema ../service/cloudformation/schemas/AWS_S3Outposts_Endpoint.json -package s3outposts -- ../aws/s3outposts/endpoint_gen.go ../aws/s3outposts/endpoint_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ses_configuration_set -cfschema ../service/cloudformation/schemas/AWS_SES_ConfigurationSet.json -package ses -- ../aws/ses/configuration_set_gen.go ../aws/ses/configuration_set_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ses_contact_list -cfschema ../service/cloudformation/schemas/AWS_SES_ContactList.json -package ses -- ../aws/ses/contact_list_gen.go ../aws/ses/contact_list_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssm_association -cfschema ../service/cloudformation/schemas/AWS_SSM_Association.json -package ssm -- ../aws/ssm/association_gen.go ../aws/ssm/association_gen_test.go
@@ -326,7 +322,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_signer_profile_permission -cfschema ../service/cloudformation/schemas/AWS_Signer_ProfilePermission.json -package signer -- ../aws/signer/profile_permission_gen.go ../aws/signer/profile_permission_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_signer_signing_profile -cfschema ../service/cloudformation/schemas/AWS_Signer_SigningProfile.json -package signer -- ../aws/signer/signing_profile_gen.go ../aws/signer/signing_profile_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_state_machine -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json -package stepfunctions -- ../aws/stepfunctions/state_machine_gen.go ../aws/stepfunctions/state_machine_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_synthetics_canary -cfschema ../service/cloudformation/schemas/AWS_Synthetics_Canary.json -package synthetics -- ../aws/synthetics/canary_gen.go ../aws/synthetics/canary_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_database -cfschema ../service/cloudformation/schemas/AWS_Timestream_Database.json -package timestream -- ../aws/timestream/database_gen.go ../aws/timestream/database_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_table -cfschema ../service/cloudformation/schemas/AWS_Timestream_Table.json -package timestream -- ../aws/timestream/table_gen.go ../aws/timestream/table_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_ip_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_IPSet.json -package wafv2 -- ../aws/wafv2/ip_set_gen.go ../aws/wafv2/ip_set_gen_test.go
@@ -418,11 +413,9 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opsworkscm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/qldb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/quicksight"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
@@ -441,7 +434,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/synthetics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspaces"
