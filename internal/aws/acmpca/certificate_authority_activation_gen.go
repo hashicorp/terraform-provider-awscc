@@ -31,7 +31,6 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
 			Type:        types.StringType,
 			Required:    true,
-			// Certificate is a force-new attribute.
 			// Certificate is a write-only attribute.
 		},
 		"certificate_authority_arn": {

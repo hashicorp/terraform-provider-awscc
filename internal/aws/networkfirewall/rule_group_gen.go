@@ -955,8 +955,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 			),
-			Computed: true,
-			// RuleGroup is a force-new attribute.
+			Optional: true,
 		},
 		"rule_group_arn": {
 			// Property: RuleGroupArn

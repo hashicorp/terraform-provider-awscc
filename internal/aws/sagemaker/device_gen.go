@@ -89,8 +89,6 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			Computed: true,
-			// Device is a force-new attribute.
 		},
 		"device_fleet_name": {
 			// Property: DeviceFleetName

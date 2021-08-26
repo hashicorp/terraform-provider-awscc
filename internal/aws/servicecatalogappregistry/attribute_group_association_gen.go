@@ -107,9 +107,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"id":                  "Id",
 	})
 
-	opts = opts.IsImmutableType(true)
-
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+
+	opts = opts.WithUpdateTimeoutInMinutes(0)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 
