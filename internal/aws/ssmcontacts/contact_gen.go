@@ -211,6 +211,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.RequiredAttributes(
+								validate.OneOfRequired(
+									validate.Required(
+										"channel_target_info",
+									),
+									validate.Required(
+										"contact_target_info",
+									),
+								),
+							),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

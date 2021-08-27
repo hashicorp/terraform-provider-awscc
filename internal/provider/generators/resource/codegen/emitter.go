@@ -250,6 +250,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("},\n")
 				e.printf("),\n")
 
+				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+					validators = append(validators, validator)
+				}
+
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
@@ -307,6 +311,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				if arrayType == aggregateOrderedSet {
 					validators = append(validators, "validate.UniqueItems()")
+				}
+
+				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+					validators = append(validators, validator)
 				}
 
 			default:

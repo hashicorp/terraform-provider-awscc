@@ -9,28 +9,28 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
-type RequiredAttributesFunc func(names, required []string) error
+type RequiredAttributesFunc func(as, rs []string) error
 
 func Required(required ...string) RequiredAttributesFunc {
-	return func(names, required []string) error {
+	return func(as, rs []string) error {
 		return nil
 	}
 }
 
 func AllOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names, required []string) error {
+	return func(as, rs []string) error {
 		return nil
 	}
 }
 
 func AnyOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names, required []string) error {
+	return func(as, rs []string) error {
 		return nil
 	}
 }
 
 func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names, required []string) error {
+	return func(as, rs []string) error {
 		return nil
 	}
 }
