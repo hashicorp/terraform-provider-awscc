@@ -87,6 +87,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+			//           "oneOf": [
+			//             {
+			//               "required": [
+			//                 "ChannelTargetInfo"
+			//               ]
+			//             },
+			//             {
+			//               "required": [
+			//                 "ContactTargetInfo"
+			//               ]
+			//             }
+			//           ],
 			//           "properties": {
 			//             "ChannelTargetInfo": {
 			//               "additionalProperties": false,

@@ -64,6 +64,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "The monitoring setting of the component.",
+			//     "oneOf": [
+			//       {
+			//         "required": [
+			//           "ComponentName"
+			//         ]
+			//       },
+			//       {
+			//         "required": [
+			//           "ComponentARN"
+			//         ]
+			//       }
+			//     ],
 			//     "properties": {
 			//       "ComponentARN": {
 			//         "description": "The ARN of the compnonent.",

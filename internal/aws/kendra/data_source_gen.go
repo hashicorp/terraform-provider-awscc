@@ -38,6 +38,48 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "S3Configuration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "SharePointConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "SalesforceConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "OneDriveConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "ServiceNowConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "DatabaseConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "ConfluenceConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "GoogleDriveConfiguration"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "ConfluenceConfiguration": {
 			//       "additionalProperties": false,
@@ -651,6 +693,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "OneDriveUsers": {
 			//           "additionalProperties": false,
+			//           "oneOf": [
+			//             {
+			//               "required": [
+			//                 "OneDriveUserList"
+			//               ]
+			//             },
+			//             {
+			//               "required": [
+			//                 "OneDriveUserS3Path"
+			//               ]
+			//             }
+			//           ],
 			//           "properties": {
 			//             "OneDriveUserList": {
 			//               "items": {
@@ -2121,6 +2175,18 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.RequiredAttributes(
+											validate.OneOfRequired(
+												validate.Required(
+													"one_drive_user_list",
+												),
+												validate.Required(
+													"one_drive_user_s3_path",
+												),
+											),
+										),
+									},
 								},
 								"secret_arn": {
 									// Property: SecretArn
@@ -2941,6 +3007,36 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"s3_configuration",
+						),
+						validate.Required(
+							"share_point_configuration",
+						),
+						validate.Required(
+							"salesforce_configuration",
+						),
+						validate.Required(
+							"one_drive_configuration",
+						),
+						validate.Required(
+							"service_now_configuration",
+						),
+						validate.Required(
+							"database_configuration",
+						),
+						validate.Required(
+							"confluence_configuration",
+						),
+						validate.Required(
+							"google_drive_configuration",
+						),
+					),
+				),
+			},
 		},
 		"description": {
 			// Property: Description

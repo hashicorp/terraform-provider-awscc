@@ -100,6 +100,13 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": true
 			//           },
 			//           "ContentTransformation": {
+			//             "oneOf": [
+			//               {
+			//                 "required": [
+			//                   "AwsLambda"
+			//                 ]
+			//               }
+			//             ],
 			//             "type": "object"
 			//           }
 			//         },

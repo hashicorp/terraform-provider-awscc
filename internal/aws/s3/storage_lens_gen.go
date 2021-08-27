@@ -140,6 +140,18 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "Encryption": {
 			//               "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+			//               "oneOf": [
+			//                 {
+			//                   "required": [
+			//                     "SSES3"
+			//                   ]
+			//                 },
+			//                 {
+			//                   "required": [
+			//                     "SSEKMS"
+			//                   ]
+			//                 }
+			//               ],
 			//               "type": "object"
 			//             },
 			//             "Format": {
