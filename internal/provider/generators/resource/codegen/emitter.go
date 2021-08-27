@@ -649,35 +649,67 @@ func unsupportedTypeError(path []string, typ string) error {
 	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
 }
 
-func addPropertyRequiredAttributes(w io.Writer, p *cfschema.PropertySubschema) {
+func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {
+	var nRequired int
+
 	if len(p.AllOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.AllOfRequired(\n")
 		for _, a := range p.AllOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
 	}
 	if len(p.AnyOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.AnyOfRequired(\n")
 		for _, a := range p.AnyOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
 	}
 	if len(p.OneOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.OneOfRequired(\n")
 		for _, a := range p.OneOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
 	}
 	if len(p.Required) > 0 {
-		wprintf(w, "validate.Required(\n")
+		wprintf(writer, "validate.Required(\n")
 		for _, r := range p.Required {
-			wprintf(w, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
+			wprintf(writer, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
+			nRequired++
 		}
-		wprintf(w, "),\n")
+		wprintf(writer, "),\n")
 	}
+
+	return nRequired
 }
 
 func propertyRequiredAttributesValidator(p *cfschema.Property) string {
@@ -685,31 +717,63 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 		return ""
 	}
 
-	sb := strings.Builder{}
-	w := &sb
-	wprintf(w, "validate.RequiredAttributes(\n")
+	var nRequired int
+	writer := &strings.Builder{}
+
+	wprintf(writer, "validate.RequiredAttributes(\n")
 	if len(p.AllOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.AllOfRequired(\n")
 		for _, a := range p.AllOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
 	}
 	if len(p.AnyOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.AnyOfRequired(\n")
 		for _, a := range p.AnyOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
 	}
 	if len(p.OneOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
 		wprintf(w, "validate.OneOfRequired(\n")
 		for _, a := range p.OneOf {
-			addPropertyRequiredAttributes(w, a)
+			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
-	}
-	wprintf(w, ")")
 
-	return sb.String()
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	wprintf(writer, ")")
+
+	if nRequired == 0 {
+		return ""
+	}
+
+	return writer.String()
 }
