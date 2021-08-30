@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 type RequiredAttributesFunc func(names []string) []*tfprotov6.Diagnostic
@@ -116,34 +117,48 @@ type requiredAttributesValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v requiredAttributesValidator) Description(_ context.Context) string {
+func (validator requiredAttributesValidator) Description(_ context.Context) string {
 	return "required Attributes are specified"
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v requiredAttributesValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator requiredAttributesValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v requiredAttributesValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	object, ok := request.AttributeConfig.(types.Object)
+func (validator requiredAttributesValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	// The attribute is either:
+	// * Object (SingleNestedAttribute)
+	// * List (ListNestedAttribute)
+	// * Set (SetNestedAttribute)
+	switch v := request.AttributeConfig.(type) {
+	case types.Object:
+		if v.Null || v.Unknown {
+			return
+		}
 
-	if !ok {
+	case types.List:
+		if v.Null || v.Unknown {
+			return
+		}
+
+	case providertypes.Set:
+		if v.Null || v.Unknown {
+			return
+		}
+
+	default:
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
 			Severity: tfprotov6.DiagnosticSeverityError,
 			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", v, request.AttributePath),
 		})
 
 		return
 	}
 
-	if object.Null || object.Unknown {
-		return
-	}
-
-	val, err := object.ToTerraformValue(ctx)
+	val, err := request.AttributeConfig.ToTerraformValue(ctx)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -155,9 +170,47 @@ func (v requiredAttributesValidator) Validate(ctx context.Context, request tfsdk
 		return
 	}
 
-	vals := val.(map[string]tftypes.Value)
+	var diags []*tfprotov6.Diagnostic
+	switch v := val.(type) {
+	case map[string]tftypes.Value:
+		// Ensure that the object is fully known.
+		for _, val := range v {
+			if !val.IsFullyKnown() {
+				return
+			}
+		}
 
-	diags := evaluateRequiredAttributesFuncs(specifiedAttributes(vals), v.fs...)
+		diags = evaluateRequiredAttributesFuncs(specifiedAttributes(v), validator.fs...)
+
+	case []tftypes.Value:
+		// Ensure that the array is fully known.
+		for _, val := range v {
+			if !val.IsFullyKnown() {
+				return
+			}
+		}
+
+		for _, val := range v {
+			// Each array element must be an Object.
+			var vals map[string]tftypes.Value
+			if err := val.As(&vals); err != nil {
+				response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+					Severity: tfprotov6.DiagnosticSeverityError,
+					Summary:  "Invalid value type",
+					Detail:   fmt.Sprintf("unable to convert value type: %s", err),
+				})
+
+				return
+			}
+
+			diags = evaluateRequiredAttributesFuncs(specifiedAttributes(vals), validator.fs...)
+
+			// Required attributes must be specified for every element.
+			if tfresource.DiagsHasError(diags) {
+				break
+			}
+		}
+	}
 
 	response.Diagnostics = append(response.Diagnostics, diags...)
 
@@ -181,17 +234,17 @@ type resourceConfigRequiredAttributesValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v resourceConfigRequiredAttributesValidator) Description(_ context.Context) string {
+func (validator resourceConfigRequiredAttributesValidator) Description(_ context.Context) string {
 	return "required Attributes are specified"
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v resourceConfigRequiredAttributesValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator resourceConfigRequiredAttributesValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v resourceConfigRequiredAttributesValidator) Validate(ctx context.Context, request tfsdk.ValidateResourceConfigRequest, response *tfsdk.ValidateResourceConfigResponse) {
+func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.Context, request tfsdk.ValidateResourceConfigRequest, response *tfsdk.ValidateResourceConfigResponse) {
 	val := request.Config.Raw
 
 	if val.IsNull() || !val.IsFullyKnown() {
@@ -220,7 +273,7 @@ func (v resourceConfigRequiredAttributesValidator) Validate(ctx context.Context,
 		return
 	}
 
-	diags := evaluateRequiredAttributesFuncs(specifiedAttributes(vals), v.fs...)
+	diags := evaluateRequiredAttributesFuncs(specifiedAttributes(vals), validator.fs...)
 
 	response.Diagnostics = append(response.Diagnostics, diags...)
 
