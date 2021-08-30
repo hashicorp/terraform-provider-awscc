@@ -45,25 +45,66 @@ func Required(required ...string) RequiredAttributesFunc {
 // "To validate against allOf, the given data must be valid against all of the given subschemas."
 func AllOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	return func(names []string) []*tfprotov6.Diagnostic {
-		diags := make([]*tfprotov6.Diagnostic, 0)
+		output := make([]*tfprotov6.Diagnostic, 0)
 
 		for _, f := range fs {
-			diags = append(diags, f(names)...)
+			output = append(output, f(names)...)
 		}
 
-		return diags
+		return output
 	}
 }
 
+// AnyOfRequired returns a RequiredAttributesFunc that validates that any of the specified validators pass.
+// "To validate against anyOf, the given data must be valid against any (one or more) of the given subschemas."
 func AnyOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	return func(names []string) []*tfprotov6.Diagnostic {
-		return nil
+		output := make([]*tfprotov6.Diagnostic, 0)
+
+		for _, f := range fs {
+			diags := f(names)
+
+			if tfresource.DiagsHasError(diags) {
+				output = append(output, diags...)
+			} else {
+				return nil
+			}
+		}
+
+		return output
 	}
 }
 
+// OneOfRequired returns a RequiredAttributesFunc that validates that excatly one of of the specified validators pass.
+// "To validate against oneOf, the given data must be valid against exactly one of the given subschemas."
 func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	return func(names []string) []*tfprotov6.Diagnostic {
-		return nil
+		output := make([]*tfprotov6.Diagnostic, 0)
+
+		var n int
+		for _, f := range fs {
+			diags := f(names)
+
+			if tfresource.DiagsHasError(diags) {
+				output = append(output, diags...)
+			} else {
+				n++
+			}
+		}
+
+		switch n {
+		case 0:
+		case 1:
+			return nil
+		default:
+			output = append(output, &tfprotov6.Diagnostic{
+				Severity: tfprotov6.DiagnosticSeverityError,
+				Summary:  "Conflicting attributes",
+				Detail:   fmt.Sprintf("%d groups of required attributes match", n),
+			})
+		}
+
+		return output
 	}
 }
 
