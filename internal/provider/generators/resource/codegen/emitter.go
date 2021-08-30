@@ -720,21 +720,15 @@ func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubsche
 	return nRequired
 }
 
-func propertyRequiredAttributesValidator(p *cfschema.Property) string {
-	if len(p.AllOf) == 0 && len(p.AnyOf) == 0 && len(p.OneOf) == 0 {
-		return ""
-	}
-
+func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaComposition) int {
 	var nRequired int
-	writer := &strings.Builder{}
 
-	wprintf(writer, "validate.RequiredAttributes(\n")
-	if len(p.AllOf) > 0 {
+	if allOf := r.All(); len(allOf) > 0 {
 		var n int
 		w := &strings.Builder{}
 
 		wprintf(w, "validate.AllOfRequired(\n")
-		for _, a := range p.AllOf {
+		for _, a := range allOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
@@ -745,12 +739,12 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 
 		nRequired += n
 	}
-	if len(p.AnyOf) > 0 {
+	if anyOf := r.Any(); len(anyOf) > 0 {
 		var n int
 		w := &strings.Builder{}
 
 		wprintf(w, "validate.AnyOfRequired(\n")
-		for _, a := range p.AnyOf {
+		for _, a := range anyOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
@@ -761,12 +755,12 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 
 		nRequired += n
 	}
-	if len(p.OneOf) > 0 {
+	if oneOf := r.One(); len(oneOf) > 0 {
 		var n int
 		w := &strings.Builder{}
 
 		wprintf(w, "validate.OneOfRequired(\n")
-		for _, a := range p.OneOf {
+		for _, a := range oneOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
 		wprintf(w, "),\n")
@@ -777,6 +771,19 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 
 		nRequired += n
 	}
+
+	return nRequired
+}
+
+func propertyRequiredAttributesValidator(p *cfschema.Property) string {
+	if p == nil {
+		return ""
+	}
+
+	writer := &strings.Builder{}
+
+	wprintf(writer, "validate.RequiredAttributes(\n")
+	nRequired := addSchemaCompositionRequiredAttributes(writer, property(*p))
 	wprintf(writer, ")")
 
 	if nRequired == 0 {
@@ -784,4 +791,57 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 	}
 
 	return writer.String()
+}
+
+func resourceRequiredAttributesValidator(r *cfschema.Resource) string {
+	if r == nil {
+		return ""
+	}
+
+	writer := &strings.Builder{}
+
+	wprintf(writer, "validate.RequiredAttributes(\n")
+	nRequired := addSchemaCompositionRequiredAttributes(writer, resource(*r))
+	wprintf(writer, ")")
+
+	if nRequired == 0 {
+		return ""
+	}
+
+	return writer.String()
+}
+
+// The schemaComposition interface can be implemented by Property and Resource.
+type schemaComposition interface {
+	All() []*cfschema.PropertySubschema
+	Any() []*cfschema.PropertySubschema
+	One() []*cfschema.PropertySubschema
+}
+
+type property cfschema.Property
+
+func (p property) All() []*cfschema.PropertySubschema {
+	return p.AllOf
+}
+
+func (p property) Any() []*cfschema.PropertySubschema {
+	return p.AnyOf
+}
+
+func (p property) One() []*cfschema.PropertySubschema {
+	return p.OneOf
+}
+
+type resource cfschema.Resource
+
+func (r resource) All() []*cfschema.PropertySubschema {
+	return r.AllOf
+}
+
+func (r resource) Any() []*cfschema.PropertySubschema {
+	return r.AnyOf
+}
+
+func (r resource) One() []*cfschema.PropertySubschema {
+	return r.OneOf
 }
