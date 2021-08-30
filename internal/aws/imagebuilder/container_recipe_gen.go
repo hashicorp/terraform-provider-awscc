@@ -545,6 +545,28 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+		validate.Required(
+			"dockerfile_template_data",
+			"name",
+			"version",
+			"components",
+			"parent_image",
+			"target_repository",
+			"container_type",
+		),
+		validate.Required(
+			"dockerfile_template_uri",
+			"name",
+			"version",
+			"components",
+			"parent_image",
+			"target_repository",
+			"container_type",
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

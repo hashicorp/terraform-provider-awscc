@@ -276,6 +276,18 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+		validate.Required(
+			"type_name",
+			"publisher_id",
+			"type",
+		),
+		validate.Required(
+			"public_type_arn",
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

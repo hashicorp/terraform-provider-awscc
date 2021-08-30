@@ -827,6 +827,31 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidator(validate.AllOfRequired(
+		validate.Required(
+			"ec2_instance_type",
+			"name",
+		),
+		validate.OneOfRequired(
+			validate.Required(
+				"build_id",
+			),
+			validate.Required(
+				"script_id",
+			),
+		),
+		validate.OneOfRequired(
+			validate.Required(
+				"runtime_configuration",
+			),
+			validate.Required(
+				"server_launch_parameters",
+				"server_launch_path",
+			),
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

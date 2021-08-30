@@ -18,6 +18,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
 
@@ -190,6 +191,18 @@ func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 	}
 }
 
+// WithRequiredAttributesValidator is a helper function to construct functional options
+// that set a resource type's required attributes validator.
+// If multiple WithDeleteTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithRequiredAttributesValidator(fs ...validate.RequiredAttributesFunc) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		o.requiredAttributesValidator = fs
+
+		return nil
+	}
+}
+
 // ResourceTypeOptions is a type alias for a slice of resource type functional options.
 type ResourceTypeOptions []ResourceTypeOptionsFunc
 
@@ -273,19 +286,28 @@ func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOp
 	return append(opts, WithDeleteTimeoutInMinutes(v))
 }
 
+// WithRequiredAttributesValidator is a helper function to construct functional options
+// that set a resource type's required attribyte validator, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithRequiredAttributesValidator(v ...validate.RequiredAttributesFunc) ResourceTypeOptions {
+	return append(opts, WithRequiredAttributesValidator(v...))
+}
+
 // resourceType implements tfsdk.ResourceType.
 type resourceType struct {
-	cfTypeName              string                   // CloudFormation type name for the resource type
-	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
-	tfTypeName              string                   // Terraform type name for resource type
-	tfToCfNameMap           map[string]string        // Map of Terraform attribute name to CloudFormation property name
-	cfToTfNameMap           map[string]string        // Map of CloudFormation property name to Terraform attribute name
-	isImmutableType         bool                     // Resources cannot be updated and must be recreated
-	syntheticIDAttribute    bool                     // Resource type has a synthetic ID attribute
-	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
-	createTimeout           time.Duration            // Maximum wait time for resource creation
-	updateTimeout           time.Duration            // Maximum wait time for resource update
-	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
+	cfTypeName                  string                            // CloudFormation type name for the resource type
+	tfSchema                    tfsdk.Schema                      // Terraform schema for the resource type
+	tfTypeName                  string                            // Terraform type name for resource type
+	tfToCfNameMap               map[string]string                 // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap               map[string]string                 // Map of CloudFormation property name to Terraform attribute name
+	isImmutableType             bool                              // Resources cannot be updated and must be recreated
+	syntheticIDAttribute        bool                              // Resource type has a synthetic ID attribute
+	writeOnlyAttributePaths     []*tftypes.AttributePath          // Paths to any write-only attributes
+	createTimeout               time.Duration                     // Maximum wait time for resource creation
+	updateTimeout               time.Duration                     // Maximum wait time for resource update
+	deleteTimeout               time.Duration                     // Maximum wait time for resource deletion
+	requiredAttributesValidator []validate.RequiredAttributesFunc // Required attributes validator
 }
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.

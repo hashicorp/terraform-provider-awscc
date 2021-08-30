@@ -285,6 +285,22 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+		validate.Required(
+			"assertion_rule",
+			"name",
+			"control_panel_arn",
+			"rule_config",
+		),
+		validate.Required(
+			"gating_rule",
+			"name",
+			"control_panel_arn",
+			"rule_config",
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

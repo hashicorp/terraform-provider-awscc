@@ -36,6 +36,13 @@ type parent struct {
 	}
 }
 
+// EmitResourceSchemaRequiredAttributeValidator generates any resource schema-level required Attributes validators.
+func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() error {
+	e.printf(resourceRequiredAttributesValidator(e.CfResource))
+
+	return nil
+}
+
 // EmitRootSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
@@ -799,10 +806,7 @@ func resourceRequiredAttributesValidator(r *cfschema.Resource) string {
 	}
 
 	writer := &strings.Builder{}
-
-	wprintf(writer, "validate.RequiredAttributes(\n")
 	nRequired := addSchemaCompositionRequiredAttributes(writer, resource(*r))
-	wprintf(writer, ")")
 
 	if nRequired == 0 {
 		return ""

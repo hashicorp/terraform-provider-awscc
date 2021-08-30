@@ -133,6 +133,15 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	rootPropertiesSchema := sb.String()
 	sb.Reset()
 
+	err = codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
+
+	if err != nil {
+		return fmt.Errorf("emitting resource schema required attributes validator: %w", err)
+	}
+
+	requiredAttributesValidator := sb.String()
+	sb.Reset()
+
 	templateData := TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
 		AttributeNameMap:             attributeNameMap,
@@ -141,6 +150,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		HasRequiredAttribute:         true,
 		HasUpdateMethod:              true,
 		PackageName:                  packageName,
+		RequiredAttributesValidator:  requiredAttributesValidator,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
 		SyntheticIDAttribute:         true,
@@ -156,7 +166,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	if codeFeatures&codegen.UsesInternalTypes > 0 {
 		templateData.ImportInternalTypes = true
 	}
-	if codeFeatures&codegen.UsesValidation > 0 {
+	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
 		templateData.ImportValidate = true
 	}
 	if codeFeatures&codegen.HasIDRootProperty > 0 {
@@ -251,6 +261,7 @@ type TemplateData struct {
 	ImportInternalTypes          bool
 	ImportValidate               bool
 	PackageName                  string
+	RequiredAttributesValidator  string
 	RootPropertiesSchema         string
 	SchemaDescription            string
 	SchemaVersion                int64
@@ -325,6 +336,9 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
 {{ if .HasUpdateMethod }}
 	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
+{{- end }}
+{{ if .RequiredAttributesValidator }}
+	opts = opts.WithRequiredAttributesValidator({{ .RequiredAttributesValidator }})
 {{- end }}
 
 	resourceType, err := NewResourceType(ctx, opts...)

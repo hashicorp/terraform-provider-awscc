@@ -148,6 +148,16 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+		validate.Required(
+			"source_db_cluster_identifier",
+		),
+		validate.Required(
+			"engine",
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {
