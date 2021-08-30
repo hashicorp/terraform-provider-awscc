@@ -339,7 +339,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.AnyOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.AnyOfRequired(
 		validate.Required(
 			"firehose_arn",
 			"role_arn",

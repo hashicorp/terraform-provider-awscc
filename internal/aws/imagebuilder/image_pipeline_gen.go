@@ -283,7 +283,7 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"name",
 			"container_recipe_arn",

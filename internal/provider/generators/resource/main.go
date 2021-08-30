@@ -338,7 +338,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
 {{- end }}
 {{ if .RequiredAttributesValidator }}
-	opts = opts.WithRequiredAttributesValidator({{ .RequiredAttributesValidator }})
+	opts = opts.WithRequiredAttributesValidators({{ .RequiredAttributesValidator }})
 {{- end }}
 
 	resourceType, err := NewResourceType(ctx, opts...)

@@ -545,7 +545,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"dockerfile_template_data",
 			"name",

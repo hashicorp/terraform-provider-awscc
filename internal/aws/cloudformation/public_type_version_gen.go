@@ -178,7 +178,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"type_name",
 			"type",

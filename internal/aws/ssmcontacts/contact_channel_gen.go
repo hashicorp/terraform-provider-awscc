@@ -149,7 +149,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"contact_id",
 			"channel_name",

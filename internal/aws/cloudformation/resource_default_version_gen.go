@@ -101,7 +101,7 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"type_version_arn",
 		),

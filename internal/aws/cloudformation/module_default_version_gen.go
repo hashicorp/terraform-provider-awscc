@@ -100,7 +100,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidator(validate.OneOfRequired(
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
 		validate.Required(
 			"arn",
 		),
