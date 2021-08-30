@@ -41,9 +41,17 @@ func Required(required ...string) RequiredAttributesFunc {
 	}
 }
 
+// AllOfRequired returns a RequiredAttributesFunc that validates that all of the specified validators pass.
+// "To validate against allOf, the given data must be valid against all of the given subschemas."
 func AllOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	return func(names []string) []*tfprotov6.Diagnostic {
-		return nil
+		diags := make([]*tfprotov6.Diagnostic, 0)
+
+		for _, f := range fs {
+			diags = append(diags, f(names)...)
+		}
+
+		return diags
 	}
 }
 
