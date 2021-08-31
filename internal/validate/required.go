@@ -76,7 +76,7 @@ func AnyOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	}
 }
 
-// OneOfRequired returns a RequiredAttributesFunc that validates that excatly one of of the specified validators pass.
+// OneOfRequired returns a RequiredAttributesFunc that validates that exactly one of of the specified validators pass.
 // "To validate against oneOf, the given data must be valid against exactly one of the given subschemas."
 func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 	return func(names []string) []*tfprotov6.Diagnostic {
