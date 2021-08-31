@@ -133,12 +133,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	rootPropertiesSchema := sb.String()
 	sb.Reset()
 
-	err = codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
-
-	if err != nil {
-		return fmt.Errorf("emitting resource schema required attributes validator: %w", err)
-	}
-
+	codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
 	requiredAttributesValidator := sb.String()
 	sb.Reset()
 

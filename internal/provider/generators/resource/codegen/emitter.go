@@ -37,10 +37,8 @@ type parent struct {
 }
 
 // EmitResourceSchemaRequiredAttributeValidator generates any resource schema-level required Attributes validators.
-func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() error {
+func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() {
 	e.printf(resourceRequiredAttributesValidator(e.CfResource))
-
-	return nil
 }
 
 // EmitRootSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
