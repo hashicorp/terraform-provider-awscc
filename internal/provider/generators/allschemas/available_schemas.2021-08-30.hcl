@@ -1,12 +1,3 @@
-defaults {
-  schema_cache_directory     = "../service/cloudformation/schemas"
-  terraform_type_name_prefix = "awscc"
-}
-
-meta_schema {
-  path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
-}
-
 # 344 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
@@ -291,9 +282,6 @@ resource_schema "aws_databrew_project" {
 
 resource_schema "aws_databrew_recipe" {
   cloudformation_type_name = "AWS::DataBrew::Recipe"
-
-  # Parameters property is 'anyOf', which we cannot yet handle.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_databrew_schedule" {
@@ -514,16 +502,10 @@ resource_schema "aws_elasticache_user_group" {
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
-
-  # error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
-
-  # error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_eventschemas_registry_policy" {
@@ -540,9 +522,6 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
-
-  # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_fis_experiment_template" {
@@ -631,9 +610,6 @@ resource_schema "aws_greengrassv2_component_version" {
 
 resource_schema "aws_groundstation_config" {
   cloudformation_type_name = "AWS::GroundStation::Config"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -1038,9 +1014,6 @@ resource_schema "aws_nimblestudio_studio_component" {
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_qldb_stream" {
@@ -1089,9 +1062,6 @@ resource_schema "aws_rds_global_cluster" {
 
 resource_schema "aws_redshift_cluster" {
   cloudformation_type_name = "AWS::Redshift::Cluster"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_resourcegroups_group" {
@@ -1192,9 +1162,6 @@ resource_schema "aws_s3outposts_access_point" {
 
 resource_schema "aws_s3outposts_bucket" {
   cloudformation_type_name = "AWS::S3Outposts::Bucket"
-
-  # AndOperator property is 'oneOf', which we cannot yet handle.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_s3outposts_bucket_policy" {
@@ -1203,9 +1170,6 @@ resource_schema "aws_s3outposts_bucket_policy" {
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -1366,9 +1330,6 @@ resource_schema "aws_stepfunctions_state_machine" {
 
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_timestream_database" {
@@ -1393,16 +1354,10 @@ resource_schema "aws_wafv2_regex_pattern_set" {
 
 resource_schema "aws_wafv2_rule_group" {
   cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-
-  # Goes into infinite recursion while generating code...
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl" {
   cloudformation_type_name = "AWS::WAFv2::WebACL"
-
-  # Goes into infinite recursion while generating code...
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
