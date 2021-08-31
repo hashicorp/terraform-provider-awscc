@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccAWSDataSyncLocationFSxWindows_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_f_sx_windows", "test")
+	td := acctest.NewTestData(t, "AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_fsx_windows", "test")
 
 	td.ResourceTest(t, []resource.TestStep{
 		{

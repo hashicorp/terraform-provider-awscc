@@ -10,6 +10,7 @@ var (
 		"CloudFormation": "Cloudformation",
 		"CloudFront":     "Cloudfront",
 		"CloudWatch":     "Cloudwatch",
+		"FSx":            "Fsx",
 	}
 )
 
