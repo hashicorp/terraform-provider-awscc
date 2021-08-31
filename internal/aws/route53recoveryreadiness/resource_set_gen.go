@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -95,6 +97,18 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "TargetResource": {
 			//             "additionalProperties": false,
 			//             "description": "The target resource that the Route 53 record points to.",
+			//             "oneOf": [
+			//               {
+			//                 "required": [
+			//                   "NLBResource"
+			//                 ]
+			//               },
+			//               {
+			//                 "required": [
+			//                   "R53Resource"
+			//                 ]
+			//               }
+			//             ],
 			//             "properties": {
 			//               "NLBResource": {
 			//                 "additionalProperties": false,
@@ -230,6 +244,18 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.RequiredAttributes(
+											validate.OneOfRequired(
+												validate.Required(
+													"nlb_resource",
+												),
+												validate.Required(
+													"r53_resource",
+												),
+											),
+										),
+									},
 								},
 							},
 						),

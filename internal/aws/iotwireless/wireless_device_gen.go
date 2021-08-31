@@ -93,6 +93,28 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "OtaaV11"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "OtaaV10x"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "AbpV11"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "AbpV10x"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "AbpV10x": {
 			//       "additionalProperties": false,
@@ -363,6 +385,24 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"otaa_v11",
+						),
+						validate.Required(
+							"otaa_v10_x",
+						),
+						validate.Required(
+							"abp_v11",
+						),
+						validate.Required(
+							"abp_v10_x",
+						),
+					),
+				),
+			},
 		},
 		"name": {
 			// Property: Name

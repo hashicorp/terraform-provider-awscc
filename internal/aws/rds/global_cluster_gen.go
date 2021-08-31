@@ -91,6 +91,10 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
+			//   "oneOf": [
+			//     {},
+			//     {}
+			//   ],
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
@@ -143,6 +147,16 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"source_db_cluster_identifier",
+		),
+		validate.Required(
+			"engine",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 
