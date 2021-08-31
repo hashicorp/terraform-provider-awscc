@@ -36,10 +36,15 @@ type parent struct {
 	}
 }
 
+// EmitResourceSchemaRequiredAttributeValidator generates any resource schema-level required Attributes validators.
+func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() {
+	e.printf(resourceRequiredAttributesValidator(e.CfResource))
+}
+
 // EmitRootSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
-func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
+func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
 	var features Features
 
 	cfResource := e.CfResource
@@ -73,7 +78,7 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
+func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
 	var features Features
 	var validators []string
 
@@ -250,6 +255,10 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 				e.printf("},\n")
 				e.printf("),\n")
 
+				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+					validators = append(validators, validator)
+				}
+
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
 			}
@@ -307,6 +316,10 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 
 				if arrayType == aggregateOrderedSet {
 					validators = append(validators, "validate.UniqueItems()")
+				}
+
+				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+					validators = append(validators, validator)
 				}
 
 			default:
@@ -480,6 +493,10 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 		e.printf(",\n")
 		e.printf("),\n")
 
+		if validator := propertyRequiredAttributesValidator(property); validator != "" {
+			validators = append(validators, validator)
+		}
+
 	default:
 		return 0, unsupportedTypeError(path, propertyType)
 	}
@@ -542,7 +559,7 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-func (e *Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
+func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
 		names = append(names, name)
@@ -586,13 +603,18 @@ func (e *Emitter) emitSchema(attributeNameMap map[string]string, parent parent, 
 }
 
 // printf emits a formatted string to the underlying writer.
-func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
-	return io.WriteString(e.Writer, fmt.Sprintf(format, a...))
+func (e Emitter) printf(format string, a ...interface{}) (int, error) {
+	return wprintf(e.Writer, format, a...)
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e *Emitter) warnf(format string, a ...interface{}) {
+func (e Emitter) warnf(format string, a ...interface{}) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
+}
+
+// wprintf writes a formatted string to a Writer.
+func wprintf(w io.Writer, format string, a ...interface{}) (int, error) {
+	return io.WriteString(w, fmt.Sprintf(format, a...))
 }
 
 type aggregate int
@@ -638,4 +660,190 @@ func aggregateType(property *cfschema.Property) aggregate {
 
 func unsupportedTypeError(path []string, typ string) error {
 	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
+}
+
+func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {
+	var nRequired int
+
+	if len(p.AllOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.AllOfRequired(\n")
+		for _, a := range p.AllOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	if len(p.AnyOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.AnyOfRequired(\n")
+		for _, a := range p.AnyOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	if len(p.OneOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.OneOfRequired(\n")
+		for _, a := range p.OneOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	if len(p.Required) > 0 {
+		wprintf(writer, "validate.Required(\n")
+		for _, r := range p.Required {
+			wprintf(writer, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
+			nRequired++
+		}
+		wprintf(writer, "),\n")
+	}
+
+	return nRequired
+}
+
+func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaComposition) int {
+	var nRequired int
+
+	if allOf := r.All(); len(allOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.AllOfRequired(\n")
+		for _, a := range allOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	if anyOf := r.Any(); len(anyOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.AnyOfRequired(\n")
+		for _, a := range anyOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+	if oneOf := r.One(); len(oneOf) > 0 {
+		var n int
+		w := &strings.Builder{}
+
+		wprintf(w, "validate.OneOfRequired(\n")
+		for _, a := range oneOf {
+			n += addPropertyRequiredAttributes(w, a)
+		}
+		wprintf(w, "),\n")
+
+		if n > 0 {
+			wprintf(writer, w.String())
+		}
+
+		nRequired += n
+	}
+
+	return nRequired
+}
+
+func propertyRequiredAttributesValidator(p *cfschema.Property) string {
+	if p == nil {
+		return ""
+	}
+
+	writer := &strings.Builder{}
+
+	wprintf(writer, "validate.RequiredAttributes(\n")
+	nRequired := addSchemaCompositionRequiredAttributes(writer, property(*p))
+	wprintf(writer, ")")
+
+	if nRequired == 0 {
+		return ""
+	}
+
+	return writer.String()
+}
+
+func resourceRequiredAttributesValidator(r *cfschema.Resource) string {
+	if r == nil {
+		return ""
+	}
+
+	writer := &strings.Builder{}
+	nRequired := addSchemaCompositionRequiredAttributes(writer, resource(*r))
+
+	if nRequired == 0 {
+		return ""
+	}
+
+	return writer.String()
+}
+
+// The schemaComposition interface can be implemented by Property and Resource.
+type schemaComposition interface {
+	All() []*cfschema.PropertySubschema
+	Any() []*cfschema.PropertySubschema
+	One() []*cfschema.PropertySubschema
+}
+
+type property cfschema.Property
+
+func (p property) All() []*cfschema.PropertySubschema {
+	return p.AllOf
+}
+
+func (p property) Any() []*cfschema.PropertySubschema {
+	return p.AnyOf
+}
+
+func (p property) One() []*cfschema.PropertySubschema {
+	return p.OneOf
+}
+
+type resource cfschema.Resource
+
+func (r resource) All() []*cfschema.PropertySubschema {
+	return r.AllOf
+}
+
+func (r resource) Any() []*cfschema.PropertySubschema {
+	return r.AnyOf
+}
+
+func (r resource) One() []*cfschema.PropertySubschema {
+	return r.OneOf
 }

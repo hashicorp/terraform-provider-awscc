@@ -27,6 +27,18 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: PipelineDefinition
 			// CloudFormation resource type schema:
 			// {
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "PipelineDefinitionBody"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "PipelineDefinitionS3Location"
+			//       ]
+			//     }
+			//   ],
 			//   "type": "object"
 			// }
 			Type:     types.MapType{ElemType: types.StringType},

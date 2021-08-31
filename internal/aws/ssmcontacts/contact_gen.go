@@ -87,6 +87,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+			//           "oneOf": [
+			//             {
+			//               "required": [
+			//                 "ChannelTargetInfo"
+			//               ]
+			//             },
+			//             {
+			//               "required": [
+			//                 "ContactTargetInfo"
+			//               ]
+			//             }
+			//           ],
 			//           "properties": {
 			//             "ChannelTargetInfo": {
 			//               "additionalProperties": false,
@@ -199,6 +211,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.RequiredAttributes(
+								validate.OneOfRequired(
+									validate.Required(
+										"channel_target_info",
+									),
+									validate.Required(
+										"contact_target_info",
+									),
+								),
+							),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

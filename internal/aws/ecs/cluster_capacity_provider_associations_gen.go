@@ -29,6 +29,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// {
 			//   "description": "List of capacity providers to associate with the cluster",
 			//   "items": {
+			//     "anyOf": [
+			//       {},
+			//       {}
+			//     ],
 			//     "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
 			//     "type": "string"
 			//   },
@@ -73,6 +77,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//         "type": "integer"
 			//       },
 			//       "CapacityProvider": {
+			//         "anyOf": [
+			//           {},
+			//           {}
+			//         ],
 			//         "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
 			//         "type": "string"
 			//       },

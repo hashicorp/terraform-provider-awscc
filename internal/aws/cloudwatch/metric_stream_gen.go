@@ -339,6 +339,30 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	opts = opts.WithRequiredAttributesValidators(validate.AnyOfRequired(
+		validate.Required(
+			"firehose_arn",
+			"role_arn",
+			"output_format",
+		),
+		validate.AllOfRequired(
+			validate.Required(
+				"firehose_arn",
+				"role_arn",
+				"output_format",
+			),
+			validate.OneOfRequired(
+				validate.Required(
+					"include_filters",
+				),
+				validate.Required(
+					"exclude_filters",
+				),
+			),
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

@@ -644,6 +644,16 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
 
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"template_url",
+		),
+		validate.Required(
+			"template_body",
+		),
+	),
+	)
+
 	resourceType, err := NewResourceType(ctx, opts...)
 
 	if err != nil {

@@ -72,6 +72,18 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "anyOf": [
+			//     {
+			//       "required": [
+			//         "FleetId"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "Message"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "FleetId": {
 			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
@@ -125,6 +137,18 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.AnyOfRequired(
+						validate.Required(
+							"fleet_id",
+						),
+						validate.Required(
+							"message",
+						),
+					),
+				),
+			},
 		},
 	}
 
