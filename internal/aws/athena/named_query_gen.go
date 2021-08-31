@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The database to which the query belongs.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// Database is a force-new attribute.
 		},
 		"description": {
@@ -48,6 +53,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// Description is a force-new attribute.
 		},
 		"name": {
@@ -61,7 +69,11 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The query name.",
 			Type:        types.StringType,
+			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"named_query_id": {
@@ -87,6 +99,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The contents of the query with all query statements.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 262144),
+			},
 			// QueryString is a force-new attribute.
 		},
 		"work_group": {
@@ -102,6 +117,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// WorkGroup is a force-new attribute.
 		},
 	}

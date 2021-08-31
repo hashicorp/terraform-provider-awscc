@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +45,12 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"BASIC",
+					"FULL",
+				}),
+			},
 		},
 		"event_type_ids": {
 			// Property: EventTypeIds
@@ -70,6 +78,9 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 		"resource": {
 			// Property: Resource
@@ -94,6 +105,12 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags

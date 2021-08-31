@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -60,6 +61,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 156),
+			},
 			// S3BucketArn is a force-new attribute.
 			// S3BucketArn is a write-only attribute.
 		},
@@ -90,6 +94,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the IAM role of the Amazon S3 bucket.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 2048),
+						},
 					},
 				},
 			),
@@ -115,6 +122,16 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"STANDARD_IA",
+					"ONEZONE_IA",
+					"INTELLIGENT_TIERING",
+					"GLACIER",
+					"DEEP_ARCHIVE",
+				}),
+			},
 			// S3StorageClass is a force-new attribute.
 		},
 		"subdirectory": {
@@ -130,6 +147,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
 			// Subdirectory is a force-new attribute.
 			// Subdirectory is a write-only attribute.
 		},
@@ -176,12 +196,18 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

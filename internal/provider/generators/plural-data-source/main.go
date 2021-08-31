@@ -227,7 +227,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 		Attributes:  attributes,
 	}
 
-    var opts PluralDataSourceTypeOptions
+    var opts DataSourceTypeOptions
 
 	opts = opts.FromCloudFormationAndTerraform("{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", schema)
 	

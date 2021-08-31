@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -216,6 +218,17 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Use to override the device's volume type.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"standard",
+											"io1",
+											"io2",
+											"gp2",
+											"gp3",
+											"sc1",
+											"st1",
+										}),
+									},
 								},
 							},
 						),

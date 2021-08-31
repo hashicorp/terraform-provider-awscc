@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -35,6 +36,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 253),
+			},
 			// Domain is a force-new attribute.
 		},
 		"fsx_filesystem_arn": {
@@ -49,6 +53,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// FsxFilesystemArn is a force-new attribute.
 			// FsxFilesystemArn is a write-only attribute.
 		},
@@ -90,6 +97,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
 			// Password is a force-new attribute.
 			// Password is a write-only attribute.
 		},
@@ -124,6 +134,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
 			// Subdirectory is a force-new attribute.
 			// Subdirectory is a write-only attribute.
 		},
@@ -170,12 +183,18 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -196,6 +215,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
 			// User is a force-new attribute.
 		},
 	}

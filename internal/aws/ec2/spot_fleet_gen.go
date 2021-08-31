@@ -565,6 +565,14 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"capacityOptimized",
+								"capacityOptimizedPrioritized",
+								"diversified",
+								"lowestPrice",
+							}),
+						},
 						// AllocationStrategy is a force-new attribute.
 					},
 					"context": {
@@ -576,6 +584,14 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ExcessCapacityTerminationPolicy
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Default",
+								"NoTermination",
+								"default",
+								"noTermination",
+							}),
+						},
 					},
 					"iam_fleet_role": {
 						// Property: IamFleetRole
@@ -588,6 +604,13 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"hibernate",
+								"stop",
+								"terminate",
+							}),
+						},
 						// InstanceInterruptionBehavior is a force-new attribute.
 					},
 					"instance_pools_to_use_count": {
@@ -643,6 +666,17 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: VolumeType
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"gp2",
+																	"gp3",
+																	"io1",
+																	"io2",
+																	"sc1",
+																	"st1",
+																	"standard",
+																}),
+															},
 														},
 													},
 												),
@@ -661,8 +695,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"ebs_optimized": {
 									// Property: EbsOptimized
@@ -741,9 +777,11 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"groups": {
 												// Property: Groups
-												Type:       types.ListType{ElemType: types.StringType},
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"ipv_6_address_count": {
 												// Property: Ipv6AddressCount
@@ -762,8 +800,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"network_interface_id": {
 												// Property: NetworkInterfaceId
@@ -787,8 +827,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Optional:   true,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 											"secondary_private_ip_address_count": {
 												// Property: SecondaryPrivateIpAddressCount
@@ -803,8 +845,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"placement": {
 									// Property: Placement
@@ -824,6 +868,13 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Tenancy
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"dedicated",
+														"default",
+														"host",
+													}),
+												},
 											},
 										},
 									),
@@ -846,8 +897,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"spot_price": {
 									// Property: SpotPrice
@@ -867,6 +920,57 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: ResourceType
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"client-vpn-endpoint",
+														"customer-gateway",
+														"dedicated-host",
+														"dhcp-options",
+														"egress-only-internet-gateway",
+														"elastic-gpu",
+														"elastic-ip",
+														"export-image-task",
+														"export-instance-task",
+														"fleet",
+														"fpga-image",
+														"host-reservation",
+														"image",
+														"import-image-task",
+														"import-snapshot-task",
+														"instance",
+														"internet-gateway",
+														"key-pair",
+														"launch-template",
+														"local-gateway-route-table-vpc-association",
+														"natgateway",
+														"network-acl",
+														"network-insights-analysis",
+														"network-insights-path",
+														"network-interface",
+														"placement-group",
+														"reserved-instances",
+														"route-table",
+														"security-group",
+														"snapshot",
+														"spot-fleet-request",
+														"spot-instances-request",
+														"subnet",
+														"traffic-mirror-filter",
+														"traffic-mirror-session",
+														"traffic-mirror-target",
+														"transit-gateway",
+														"transit-gateway-attachment",
+														"transit-gateway-connect-peer",
+														"transit-gateway-multicast-domain",
+														"transit-gateway-route-table",
+														"volume",
+														"vpc",
+														"vpc-flow-log",
+														"vpc-peering-connection",
+														"vpn-connection",
+														"vpn-gateway",
+													}),
+												},
 											},
 											"tags": {
 												// Property: Tags
@@ -890,8 +994,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"user_data": {
 									// Property: UserData
@@ -906,9 +1012,11 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
-						Computed:   true,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 						// LaunchSpecifications is a force-new attribute.
 					},
 					"launch_template_configs": {
@@ -928,6 +1036,9 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: LaunchTemplateName
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 128),
+												},
 											},
 											"version": {
 												// Property: Version
@@ -970,15 +1081,19 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
-									Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-									Optional:   true,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
-						Computed:   true,
+						Optional: true,
+						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 						// LaunchTemplateConfigs is a force-new attribute.
 					},
 					"load_balancers_config": {
@@ -1001,8 +1116,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Required:   true,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 										},
 									),
@@ -1024,8 +1141,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Required:   true,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.UniqueItems(),
+												},
 											},
 										},
 									),
@@ -1077,6 +1196,11 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: ReplacementStrategy
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"launch",
+													}),
+												},
 											},
 										},
 									),
@@ -1119,6 +1243,12 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Computed: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"maintain",
+								"request",
+							}),
+						},
 						// Type is a force-new attribute.
 					},
 					"valid_from": {

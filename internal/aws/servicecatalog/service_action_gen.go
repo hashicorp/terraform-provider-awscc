@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,13 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"en",
+					"jp",
+					"zh",
+				}),
+			},
 		},
 		"definition": {
 			// Property: Definition
@@ -66,11 +75,17 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1000),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 4096),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -88,6 +103,11 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSM_AUTOMATION",
+				}),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -98,6 +118,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -120,6 +143,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 	}
 

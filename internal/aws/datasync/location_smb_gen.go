@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -40,6 +41,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 4),
+			},
 		},
 		"domain": {
 			// Property: Domain
@@ -53,6 +57,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the Windows domain that the SMB server belongs to.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 253),
+			},
 		},
 		"location_arn": {
 			// Property: LocationArn
@@ -107,6 +114,13 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AUTOMATIC",
+								"SMB2",
+								"SMB3",
+							}),
+						},
 					},
 				},
 			),
@@ -124,6 +138,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
 			// Password is a write-only attribute.
 		},
 		"server_hostname": {
@@ -138,6 +155,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
 			// ServerHostname is a force-new attribute.
 			// ServerHostname is a write-only attribute.
 		},
@@ -153,6 +173,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
 			// Subdirectory is a write-only attribute.
 		},
 		"tags": {
@@ -198,12 +221,18 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -224,6 +253,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 104),
+			},
 		},
 	}
 

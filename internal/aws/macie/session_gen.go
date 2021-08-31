@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -47,6 +49,13 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"FIFTEEN_MINUTES",
+					"ONE_HOUR",
+					"SIX_HOURS",
+				}),
+			},
 		},
 		"service_role": {
 			// Property: ServiceRole
@@ -73,6 +82,12 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"PAUSED",
+				}),
+			},
 		},
 	}
 

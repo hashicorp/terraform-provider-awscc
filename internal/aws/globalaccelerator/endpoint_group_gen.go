@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -39,6 +41,8 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       },
 			//       "Weight": {
 			//         "description": "The weight for the endpoint.",
+			//         "maximum": 255,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -69,6 +73,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -125,11 +132,16 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+			//   "maximum": 65535,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 65535),
+			},
 		},
 		"health_check_protocol": {
 			// Property: HealthCheckProtocol
@@ -146,6 +158,13 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TCP",
+					"HTTP",
+					"HTTPS",
+				}),
+			},
 		},
 		"listener_arn": {
 			// Property: ListenerArn
@@ -169,10 +188,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     "properties": {
 			//       "EndpointPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "ListenerPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -191,12 +214,18 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
 					},
 					"listener_port": {
 						// Property: ListenerPort
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -219,11 +248,16 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The percentage of traffic to sent to an AWS Region",
+			//   "maximum": 100,
+			//   "minimum": 0,
 			//   "type": "number"
 			// }
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatBetween(0.000000, 100.000000),
+			},
 		},
 	}
 

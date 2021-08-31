@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -55,6 +57,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Description of the profile object type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1000),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -69,6 +74,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The unique name of the domain.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// DomainName is a force-new attribute.
 		},
 		"encryption_key": {
@@ -83,17 +91,25 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The default encryption key",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
 		},
 		"expiration_days": {
 			// Property: ExpirationDays
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The default number of days until the data within the domain expires.",
+			//   "maximum": 1098,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The default number of days until the data within the domain expires.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 1098),
+			},
 		},
 		"fields": {
 			// Property: Fields
@@ -152,6 +168,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"object_type_field": {
 						// Property: ObjectTypeField
@@ -163,18 +182,33 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The content type of the field. Used for determining equality when searching.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STRING",
+											"NUMBER",
+											"PHONE_NUMBER",
+											"EMAIL_ADDRESS",
+											"NAME",
+										}),
+									},
 								},
 								"source": {
 									// Property: Source
 									Description: "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1000),
+									},
 								},
 								"target": {
 									// Property: Target
 									Description: "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1000),
+									},
 								},
 							},
 						),
@@ -247,6 +281,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"object_type_key_list": {
 						// Property: ObjectTypeKeyList
@@ -299,6 +336,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// ObjectTypeName is a force-new attribute.
 		},
 		"tags": {
@@ -338,11 +378,17 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -365,6 +411,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A unique identifier for the object template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 	}
 

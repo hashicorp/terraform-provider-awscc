@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -117,16 +118,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: Model
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
 								},
 								"package_version": {
 									// Property: PackageVersion
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 32),
+									},
 								},
 								"station": {
 									// Property: Station
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
 								},
 							},
 						),
@@ -140,16 +150,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: Model
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
 								},
 								"package_version": {
 									// Property: PackageVersion
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 32),
+									},
 								},
 								"station": {
 									// Property: Station
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
 								},
 							},
 						),
@@ -171,6 +190,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The name of the new resource.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -205,11 +227,17 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -231,6 +259,11 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A filter to list only the wireless gateway task definitions that use this task definition type",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"UPDATE",
+				}),
+			},
 		},
 		"update": {
 			// Property: Update
@@ -322,16 +355,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Model
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
 											},
 											"package_version": {
 												// Property: PackageVersion
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 32),
+												},
 											},
 											"station": {
 												// Property: Station
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
 											},
 										},
 									),
@@ -346,6 +388,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: UpdateSignature
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 4096),
+									},
 								},
 								"update_version": {
 									// Property: UpdateVersion
@@ -355,16 +400,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: Model
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
 											},
 											"package_version": {
 												// Property: PackageVersion
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 32),
+												},
 											},
 											"station": {
 												// Property: Station
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
 											},
 										},
 									),
@@ -378,11 +432,17 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: UpdateDataRole
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 					"update_data_source": {
 						// Property: UpdateDataSource
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 4096),
+						},
 					},
 				},
 			),

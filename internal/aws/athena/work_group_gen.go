@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The workgroup description.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -58,6 +63,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The workGroup name.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"recursive_delete_option": {
@@ -85,6 +93,12 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The state of the workgroup: ENABLED or DISABLED.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -117,11 +131,17 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -136,6 +156,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			//       "format": "int64",
+			//       "minimum": 10000000,
 			//       "type": "integer"
 			//     },
 			//     "EnforceWorkGroupConfiguration": {
@@ -206,6 +227,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(10000000),
+						},
 					},
 					"enforce_work_group_configuration": {
 						// Property: EnforceWorkGroupConfiguration
@@ -261,6 +285,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"SSE_S3",
+														"SSE_KMS",
+														"CSE_KMS",
+													}),
+												},
 											},
 											"kms_key": {
 												// Property: KmsKey
@@ -295,6 +326,7 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 			//       "format": "int64",
+			//       "minimum": 10000000,
 			//       "type": "integer"
 			//     },
 			//     "EnforceWorkGroupConfiguration": {
@@ -376,6 +408,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(10000000),
+						},
 					},
 					"enforce_work_group_configuration": {
 						// Property: EnforceWorkGroupConfiguration
@@ -437,6 +472,13 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"SSE_S3",
+														"SSE_KMS",
+														"CSE_KMS",
+													}),
+												},
 											},
 											"kms_key": {
 												// Property: KmsKey

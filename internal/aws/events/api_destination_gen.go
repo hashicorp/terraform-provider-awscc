@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -52,6 +54,9 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 512),
+			},
 		},
 		"http_method": {
 			// Property: HttpMethod
@@ -70,6 +75,17 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"GET",
+					"HEAD",
+					"POST",
+					"OPTIONS",
+					"PUT",
+					"DELETE",
+					"PATCH",
+				}),
+			},
 		},
 		"invocation_endpoint": {
 			// Property: InvocationEndpoint
@@ -86,10 +102,14 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: InvocationRateLimitPerSecond
 			// CloudFormation resource type schema:
 			// {
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Type:     types.NumberType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -104,6 +124,9 @@ func apiDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// Name is a force-new attribute.
 		},
 	}

@@ -186,8 +186,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"home_region": {
 			// Property: HomeRegion
@@ -282,8 +284,10 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"license_name": {
 			// Property: LicenseName
@@ -319,6 +323,9 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ProductSKU of the license.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -360,12 +367,18 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IsRFC3339Time(),
+						},
 					},
 					"end": {
 						// Property: End
 						Description: "Validity begin date for the license.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IsRFC3339Time(),
+						},
 					},
 				},
 			),

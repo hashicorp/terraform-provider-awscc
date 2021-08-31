@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The policy document",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 5120),
+			},
 		},
 		"policy_name": {
 			// Property: PolicyName
@@ -48,6 +53,9 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A name for resource policy",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// PolicyName is a force-new attribute.
 		},
 	}

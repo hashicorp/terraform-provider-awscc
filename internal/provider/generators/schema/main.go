@@ -28,15 +28,9 @@ import (
 	"github.com/mitchellh/cli"
 )
 
-const (
-	SingularDataSourceType = "singular"
-	PluralDataSourceType   = "plural"
-)
-
 type Config struct {
 	Defaults        Defaults         `hcl:"defaults,block"`
 	MetaSchema      MetaSchema       `hcl:"meta_schema,block"`
-	DataSchemas     []DataSchema     `hcl:"data_schema,block"`
 	ResourceSchemas []ResourceSchema `hcl:"resource_schema,block"`
 }
 
@@ -49,16 +43,11 @@ type MetaSchema struct {
 	Path string `hcl:"path"`
 }
 
-type DataSchema struct {
-	CloudFormationTypeName string   `hcl:"cloudformation_type_name"`
-	ResourceTypeName       string   `hcl:"resource_type_name,label"`
-	DataSourceTypes        []string `hcl:"data_source_types"`
-}
-
 type ResourceSchema struct {
 	CloudFormationSchemaPath   string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName     string `hcl:"cloudformation_type_name"`
 	ResourceTypeName           string `hcl:"resource_type_name,label"`
+	SuppressPluralDataSource   bool   `hcl:"suppress_plural_data_source,optional"`
 	SuppressResourceGeneration bool   `hcl:"suppress_resource_generation,optional"`
 }
 
@@ -71,7 +60,7 @@ var (
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -config <configuration-file> -import-path-root <import-path-root> <generated-resources-file> <generated-plural-data-sources-file>\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -config <configuration-file> -import-path-root <import-path-root> <generated-resources-file> <generated-singular-data-sources-file> <generated-plural-data-sources-file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -82,7 +71,7 @@ func main() {
 
 	args := flag.Args()
 
-	if len(args) == 0 || *configFile == "" || *importPathRoot == "" {
+	if len(args) < 3 || *configFile == "" || *importPathRoot == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
@@ -93,7 +82,8 @@ func main() {
 	}
 
 	resourcesFilename := args[0]
-	pluralDataSourcesFilename := args[1]
+	singularDatasourcesFilename := args[1]
+	pluralDatasourcesFilename := args[2]
 
 	generatedCodeRootDirectoryName := "."
 	if *generatedCodeRoot != "" {
@@ -142,7 +132,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	resources, err := downloader.ResourceSchemas()
+	resources, dataSources, err := downloader.Schemas()
 
 	if err != nil {
 		ui.Error(fmt.Sprintf("error processing CloudFormation Resource Provider Schemas: %s", err))
@@ -153,15 +143,17 @@ func main() {
 		ui: ui,
 	}
 
-	// TODO: store singularDataSources
-	_, pluralDataSources := downloader.DataSourceSchemas()
-
 	if err := generator.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform resource generation instructions: %s", err))
 		os.Exit(1)
 	}
 
-	if err := generator.GenerateDataSources(destinationPackage, pluralDataSourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, pluralDataSources); err != nil {
+	if err := generator.GenerateDataSources(destinationPackage, singularDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Singular); err != nil {
+		ui.Error(fmt.Sprintf("error generating Terraform singular data-source generation instructions: %s", err))
+		os.Exit(1)
+	}
+
+	if err := generator.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform plural data-source generation instructions: %s", err))
 		os.Exit(1)
 	}
@@ -225,14 +217,15 @@ func (d *Downloader) MetaSchema() error {
 	return nil
 }
 
-func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
+func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	if d.metaSchema == nil {
-		return nil, fmt.Errorf("CloudFormation Resource Provider Definition Schema not loaded")
+		return nil, nil, fmt.Errorf("CloudFormation Resource Provider Definition Schema not loaded")
 	}
 
 	terraformTypeNamePrefix := d.config.Defaults.TerraformTypeNamePrefix
 
 	resources := []*ResourceData{}
+	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
 		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema)
@@ -274,70 +267,50 @@ func (d *Downloader) ResourceSchemas() ([]*ResourceData, error) {
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
 		})
-	}
 
-	return resources, nil
-}
+		singularDataSources = append(singularDataSources, &DataSourceData{
+			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
+			GeneratedAccTestsFileName:    res + "_data_source_gen_test",
+			GeneratedCodeFileName:        res + "_data_source_gen",
+			GeneratedCodePackageName:     svc,
+			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc),
+			TerraformResourceType:        tfResourceTypeName,
+		})
 
-func (d *Downloader) DataSourceSchemas() ([]*DataSourceData, []*DataSourceData) {
-	terraformTypeNamePrefix := d.config.Defaults.TerraformTypeNamePrefix
+		if !schema.SuppressPluralDataSource {
+			pluralResource := inflection.Plural(res)
 
-	var singularDataSources, pluralDataSources []*DataSourceData
-
-	for _, schema := range d.config.DataSchemas {
-		cfResourceTypeName := schema.CloudFormationTypeName
-
-		_, _, _, err := naming.ParseCloudFormationTypeName(cfResourceTypeName)
-
-		if err != nil {
-			d.ui.Warn(fmt.Sprintf("incorrect format for CloudFormation Data Source Provider Schema type name: %s", cfResourceTypeName))
-			continue
-		}
-
-		tfResourceTypeName := schema.ResourceTypeName
-		org, svc, res, err := naming.ParseTerraformTypeName(tfResourceTypeName)
-
-		if err != nil {
-			d.ui.Warn(fmt.Sprintf("incorrect format for Terraform data source type name: %s", tfResourceTypeName))
-			continue
-		}
-
-		if terraformTypeNamePrefix != "" {
-			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
-		}
-
-		for _, t := range schema.DataSourceTypes {
-			var accTestFileName, codeFileName, tfResourceType string
-
-			if t == SingularDataSourceType {
-				accTestFileName = res + "_data_source_gen_test"
-				codeFileName = res + "_data_source_gen"
-				tfResourceType = tfResourceTypeName
-			} else if t == PluralDataSourceType {
-				accTestFileName = inflection.Plural(res) + "_data_source_gen_test"
-				codeFileName = inflection.Plural(res) + "_data_source_gen"
-				tfResourceType = inflection.Plural(tfResourceTypeName)
+			if strings.HasSuffix(res, "s") {
+				pluralResource = res + "es"
+			} else if regexp.MustCompile(`[0-9]+$`).MatchString(res) {
+				pluralResource = res + "s"
 			}
 
-			d := &DataSourceData{
+			pluralTfResourceTypeName := inflection.Plural(tfResourceTypeName)
+
+			if strings.HasSuffix(tfResourceTypeName, "s") {
+				pluralTfResourceTypeName = tfResourceTypeName + "es"
+			} else if regexp.MustCompile(`[0-9]+$`).MatchString(tfResourceTypeName) {
+				pluralTfResourceTypeName = tfResourceTypeName + "s"
+			}
+
+			pluralDataSources = append(pluralDataSources, &DataSourceData{
 				CloudFormationType:        cfResourceTypeName,
-				GeneratedAccTestsFileName: accTestFileName,                // e.g. "log_group_gen_test"
-				GeneratedCodeFileName:     codeFileName,                   // e.g. "log_group_gen"
-				GeneratedCodePackageName:  svc,                            // e.g. "logs"
-				GeneratedCodePathSuffix:   fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
-				TerraformResourceType:     tfResourceType,
-				Type:                      t,
-			}
-
-			if t == SingularDataSourceType {
-				singularDataSources = append(singularDataSources, d)
-			} else if t == PluralDataSourceType {
-				pluralDataSources = append(pluralDataSources, d)
-			}
+				GeneratedAccTestsFileName: pluralResource + "_data_source_gen_test",
+				GeneratedCodeFileName:     pluralResource + "_data_source_gen",
+				GeneratedCodePackageName:  svc,
+				GeneratedCodePathSuffix:   fmt.Sprintf("%s/%s", org, svc),
+				TerraformResourceType:     pluralTfResourceTypeName,
+			})
 		}
 	}
 
-	return singularDataSources, pluralDataSources
+	dataSources := &DataSources{
+		Singular: singularDataSources,
+		Plural:   pluralDataSources,
+	}
+
+	return resources, dataSources, nil
 }
 
 // ResourceSchema returns the local resource schema file name and type name.
@@ -426,13 +399,18 @@ type ResourceData struct {
 }
 
 type DataSourceData struct {
-	CloudFormationType        string
-	GeneratedAccTestsFileName string
-	GeneratedCodeFileName     string
-	GeneratedCodePackageName  string
-	GeneratedCodePathSuffix   string
-	TerraformResourceType     string
-	Type                      string
+	CloudFormationType           string
+	CloudFormationTypeSchemaFile string
+	GeneratedAccTestsFileName    string
+	GeneratedCodeFileName        string
+	GeneratedCodePackageName     string
+	GeneratedCodePathSuffix      string
+	TerraformResourceType        string
+}
+
+type DataSources struct {
+	Singular []*DataSourceData
+	Plural   []*DataSourceData
 }
 
 type Generator struct {
@@ -522,11 +500,11 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 	sort.Strings(importPathSuffixes)
 
 	templateData := TemplateData{
+		DataSources:                    dataSources,
 		GeneratedCodeRootDirectoryName: generatedCodeRootDirectoryName,
 		ImportPathRoot:                 importPathRoot,
 		ImportPathSuffixes:             importPathSuffixes,
 		PackageName:                    packageName,
-		DataSources:                    dataSources,
 	}
 
 	tmpl, err := template.New("function").Parse(dataSourceTemplateBody)
@@ -589,7 +567,7 @@ var dataSourceTemplateBody = `
 // Code generated by generators/schema/main.go; DO NOT EDIT.
 
 {{- range .DataSources }}
-//go:generate go run generators/{{ .Type }}-data-source/main.go -data-source {{ .TerraformResourceType }} -cftype {{ .CloudFormationType }} -package {{ .GeneratedCodePackageName }} {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go
+{{ if .CloudFormationType }}//go:generate go run generators/plural-data-source/main.go -data-source {{ .TerraformResourceType }} -cftype {{ .CloudFormationType }} -package {{ .GeneratedCodePackageName }} {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go{{ else }}//go:generate go run generators/singular-data-source/main.go -data-source {{ .TerraformResourceType }} -cfschema {{ .CloudFormationTypeSchemaFile }} -package {{ .GeneratedCodePackageName }} {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go{{- end }}
 {{- end }}
 
 package {{ .PackageName }}
@@ -602,10 +580,10 @@ import (
 `
 
 type TemplateData struct {
+	DataSources                    []*DataSourceData
 	GeneratedCodeRootDirectoryName string
 	ImportPathRoot                 string
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
-	DataSources                    []*DataSourceData
 }

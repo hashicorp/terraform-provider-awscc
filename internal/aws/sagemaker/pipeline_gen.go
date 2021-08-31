@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -42,6 +44,9 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The description of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 3072),
+			},
 		},
 		"pipeline_display_name": {
 			// Property: PipelineDisplayName
@@ -56,6 +61,9 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The display name of the Pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"pipeline_name": {
 			// Property: PipelineName
@@ -70,6 +78,9 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the Pipeline.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// PipelineName is a force-new attribute.
 		},
 		"role_arn": {
@@ -85,6 +96,9 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Role Arn",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 		},
 		"tags": {
 			// Property: Tags

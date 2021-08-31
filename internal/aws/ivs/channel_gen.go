@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -72,6 +73,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel latency mode.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NORMAL",
+					"LOW",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -86,6 +93,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"playback_url": {
 			// Property: PlaybackUrl
@@ -111,6 +121,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -149,11 +162,17 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -176,6 +195,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"BASIC",
+				}),
+			},
 		},
 	}
 

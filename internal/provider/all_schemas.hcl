@@ -10,15 +10,18 @@ meta_schema {
 # 344 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
-  cloudformation_type_name = "AWS::ACMPCA::Certificate"
+  cloudformation_type_name    = "AWS::ACMPCA::Certificate"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_acmpca_certificate_authority" {
-  cloudformation_type_name = "AWS::ACMPCA::CertificateAuthority"
+  cloudformation_type_name    = "AWS::ACMPCA::CertificateAuthority"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_acmpca_certificate_authority_activation" {
-  cloudformation_type_name = "AWS::ACMPCA::CertificateAuthorityActivation"
+  cloudformation_type_name    = "AWS::ACMPCA::CertificateAuthorityActivation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_accessanalyzer_analyzer" {
@@ -26,15 +29,18 @@ resource_schema "aws_accessanalyzer_analyzer" {
 }
 
 resource_schema "aws_amplify_app" {
-  cloudformation_type_name = "AWS::Amplify::App"
+  cloudformation_type_name    = "AWS::Amplify::App"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_amplify_branch" {
-  cloudformation_type_name = "AWS::Amplify::Branch"
+  cloudformation_type_name    = "AWS::Amplify::Branch"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_amplify_domain" {
-  cloudformation_type_name = "AWS::Amplify::Domain"
+  cloudformation_type_name    = "AWS::Amplify::Domain"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_apigateway_api_key" {
@@ -46,7 +52,8 @@ resource_schema "aws_apigateway_client_certificate" {
 }
 
 resource_schema "aws_apigateway_documentation_version" {
-  cloudformation_type_name = "AWS::ApiGateway::DocumentationVersion"
+  cloudformation_type_name    = "AWS::ApiGateway::DocumentationVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_apigateway_domain_name" {
@@ -54,19 +61,23 @@ resource_schema "aws_apigateway_domain_name" {
 }
 
 resource_schema "aws_apigateway_model" {
-  cloudformation_type_name = "AWS::ApiGateway::Model"
+  cloudformation_type_name    = "AWS::ApiGateway::Model"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_apigateway_request_validator" {
-  cloudformation_type_name = "AWS::ApiGateway::RequestValidator"
+  cloudformation_type_name    = "AWS::ApiGateway::RequestValidator"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_apigateway_resource" {
-  cloudformation_type_name = "AWS::ApiGateway::Resource"
+  cloudformation_type_name    = "AWS::ApiGateway::Resource"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_apigateway_usage_plan_key" {
-  cloudformation_type_name = "AWS::ApiGateway::UsagePlanKey"
+  cloudformation_type_name    = "AWS::ApiGateway::UsagePlanKey"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_appflow_connector_profile" {
@@ -90,7 +101,8 @@ resource_schema "aws_applicationinsights_application" {
 }
 
 resource_schema "aws_athena_data_catalog" {
-  cloudformation_type_name = "AWS::Athena::DataCatalog"
+  cloudformation_type_name    = "AWS::Athena::DataCatalog"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_athena_named_query" {
@@ -98,7 +110,8 @@ resource_schema "aws_athena_named_query" {
 }
 
 resource_schema "aws_athena_prepared_statement" {
-  cloudformation_type_name = "AWS::Athena::PreparedStatement"
+  cloudformation_type_name    = "AWS::Athena::PreparedStatement"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_athena_work_group" {
@@ -106,23 +119,28 @@ resource_schema "aws_athena_work_group" {
 }
 
 resource_schema "aws_auditmanager_assessment" {
-  cloudformation_type_name = "AWS::AuditManager::Assessment"
+  cloudformation_type_name    = "AWS::AuditManager::Assessment"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_autoscaling_warm_pool" {
-  cloudformation_type_name = "AWS::AutoScaling::WarmPool"
+  cloudformation_type_name    = "AWS::AutoScaling::WarmPool"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_backup_backup_plan" {
-  cloudformation_type_name = "AWS::Backup::BackupPlan"
+  cloudformation_type_name    = "AWS::Backup::BackupPlan"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_backup_backup_selection" {
-  cloudformation_type_name = "AWS::Backup::BackupSelection"
+  cloudformation_type_name    = "AWS::Backup::BackupSelection"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_backup_backup_vault" {
-  cloudformation_type_name = "AWS::Backup::BackupVault"
+  cloudformation_type_name    = "AWS::Backup::BackupVault"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -130,7 +148,8 @@ resource_schema "aws_budgets_budgets_action" {
 }
 
 resource_schema "aws_ce_cost_category" {
-  cloudformation_type_name = "AWS::CE::CostCategory"
+  cloudformation_type_name    = "AWS::CE::CostCategory"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cassandra_keyspace" {
@@ -142,7 +161,8 @@ resource_schema "aws_cassandra_table" {
 }
 
 resource_schema "aws_certificatemanager_account" {
-  cloudformation_type_name = "AWS::CertificateManager::Account"
+  cloudformation_type_name    = "AWS::CertificateManager::Account"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_chatbot_slack_channel_configuration" {
@@ -150,7 +170,8 @@ resource_schema "aws_chatbot_slack_channel_configuration" {
 }
 
 resource_schema "aws_cloudformation_module_default_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ModuleDefaultVersion"
+  cloudformation_type_name    = "AWS::CloudFormation::ModuleDefaultVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cloudformation_module_version" {
@@ -162,19 +183,23 @@ resource_schema "aws_cloudformation_public_type_version" {
 }
 
 resource_schema "aws_cloudformation_publisher" {
-  cloudformation_type_name = "AWS::CloudFormation::Publisher"
+  cloudformation_type_name    = "AWS::CloudFormation::Publisher"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cloudformation_resource_default_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ResourceDefaultVersion"
+  cloudformation_type_name    = "AWS::CloudFormation::ResourceDefaultVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cloudformation_resource_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ResourceVersion"
+  cloudformation_type_name    = "AWS::CloudFormation::ResourceVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cloudformation_stack_set" {
-  cloudformation_type_name = "AWS::CloudFormation::StackSet"
+  cloudformation_type_name    = "AWS::CloudFormation::StackSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_cloudformation_type_activation" {
@@ -234,7 +259,8 @@ resource_schema "aws_codeguruprofiler_profiling_group" {
 }
 
 resource_schema "aws_codegurureviewer_repository_association" {
-  cloudformation_type_name = "AWS::CodeGuruReviewer::RepositoryAssociation"
+  cloudformation_type_name    = "AWS::CodeGuruReviewer::RepositoryAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -242,7 +268,8 @@ resource_schema "aws_codestarconnections_connection" {
 }
 
 resource_schema "aws_codestarnotifications_notification_rule" {
-  cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
+  cloudformation_type_name    = "AWS::CodeStarNotifications::NotificationRule"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_config_configuration_aggregator" {
@@ -262,7 +289,8 @@ resource_schema "aws_config_stored_query" {
 }
 
 resource_schema "aws_connect_quick_connect" {
-  cloudformation_type_name = "AWS::Connect::QuickConnect"
+  cloudformation_type_name    = "AWS::Connect::QuickConnect"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_customerprofiles_domain" {
@@ -270,11 +298,13 @@ resource_schema "aws_customerprofiles_domain" {
 }
 
 resource_schema "aws_customerprofiles_integration" {
-  cloudformation_type_name = "AWS::CustomerProfiles::Integration"
+  cloudformation_type_name    = "AWS::CustomerProfiles::Integration"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_customerprofiles_object_type" {
-  cloudformation_type_name = "AWS::CustomerProfiles::ObjectType"
+  cloudformation_type_name    = "AWS::CustomerProfiles::ObjectType"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_databrew_dataset" {
@@ -291,9 +321,6 @@ resource_schema "aws_databrew_project" {
 
 resource_schema "aws_databrew_recipe" {
   cloudformation_type_name = "AWS::DataBrew::Recipe"
-
-  # Parameters property is 'anyOf', which we cannot yet handle.
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_databrew_schedule" {
@@ -345,7 +372,8 @@ resource_schema "aws_devopsguru_notification_channel" {
 }
 
 resource_schema "aws_devopsguru_resource_collection" {
-  cloudformation_type_name = "AWS::DevOpsGuru::ResourceCollection"
+  cloudformation_type_name    = "AWS::DevOpsGuru::ResourceCollection"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_dynamodb_global_table" {
@@ -369,7 +397,8 @@ resource_schema "aws_ec2_egress_only_internet_gateway" {
 }
 
 resource_schema "aws_ec2_enclave_certificate_iam_role_association" {
-  cloudformation_type_name = "AWS::EC2::EnclaveCertificateIamRoleAssociation"
+  cloudformation_type_name    = "AWS::EC2::EnclaveCertificateIamRoleAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ec2_flow_log" {
@@ -377,7 +406,8 @@ resource_schema "aws_ec2_flow_log" {
 }
 
 resource_schema "aws_ec2_gateway_route_table_association" {
-  cloudformation_type_name = "AWS::EC2::GatewayRouteTableAssociation"
+  cloudformation_type_name    = "AWS::EC2::GatewayRouteTableAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ec2_local_gateway_route" {
@@ -417,15 +447,18 @@ resource_schema "aws_ec2_transit_gateway_multicast_domain" {
 }
 
 resource_schema "aws_ec2_transit_gateway_multicast_domain_association" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomainAssociation"
+  cloudformation_type_name    = "AWS::EC2::TransitGatewayMulticastDomainAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ec2_transit_gateway_multicast_group_member" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastGroupMember"
+  cloudformation_type_name    = "AWS::EC2::TransitGatewayMulticastGroupMember"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ec2_transit_gateway_multicast_group_source" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastGroupSource"
+  cloudformation_type_name    = "AWS::EC2::TransitGatewayMulticastGroupSource"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ec2_transit_gateway_peering_attachment" {
@@ -457,7 +490,8 @@ resource_schema "aws_ecs_cluster_capacity_provider_associations" {
 }
 
 resource_schema "aws_ecs_primary_task_set" {
-  cloudformation_type_name = "AWS::ECS::PrimaryTaskSet"
+  cloudformation_type_name    = "AWS::ECS::PrimaryTaskSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ecs_service" {
@@ -469,7 +503,8 @@ resource_schema "aws_ecs_task_definition" {
 }
 
 resource_schema "aws_ecs_task_set" {
-  cloudformation_type_name = "AWS::ECS::TaskSet"
+  cloudformation_type_name    = "AWS::ECS::TaskSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_efs_access_point" {
@@ -481,11 +516,13 @@ resource_schema "aws_efs_file_system" {
 }
 
 resource_schema "aws_eks_addon" {
-  cloudformation_type_name = "AWS::EKS::Addon"
+  cloudformation_type_name    = "AWS::EKS::Addon"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_eks_fargate_profile" {
-  cloudformation_type_name = "AWS::EKS::FargateProfile"
+  cloudformation_type_name    = "AWS::EKS::FargateProfile"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_emr_studio" {
@@ -513,21 +550,18 @@ resource_schema "aws_elasticache_user_group" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
-
-  # error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-  suppress_resource_generation = true
+  cloudformation_type_name    = "AWS::ElasticLoadBalancingV2::Listener"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
-
-  # error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
-  suppress_resource_generation = true
+  cloudformation_type_name    = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_eventschemas_registry_policy" {
-  cloudformation_type_name = "AWS::EventSchemas::RegistryPolicy"
+  cloudformation_type_name    = "AWS::EventSchemas::RegistryPolicy"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_events_api_destination" {
@@ -540,9 +574,6 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
-
-  # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
-  suppress_resource_generation = true
 }
 
 resource_schema "aws_fis_experiment_template" {
@@ -550,11 +581,13 @@ resource_schema "aws_fis_experiment_template" {
 }
 
 resource_schema "aws_fms_notification_channel" {
-  cloudformation_type_name = "AWS::FMS::NotificationChannel"
+  cloudformation_type_name    = "AWS::FMS::NotificationChannel"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_fms_policy" {
-  cloudformation_type_name = "AWS::FMS::Policy"
+  cloudformation_type_name    = "AWS::FMS::Policy"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_finspace_environment" {
@@ -594,19 +627,23 @@ resource_schema "aws_gamelift_fleet" {
 }
 
 resource_schema "aws_gamelift_game_server_group" {
-  cloudformation_type_name = "AWS::GameLift::GameServerGroup"
+  cloudformation_type_name    = "AWS::GameLift::GameServerGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_globalaccelerator_accelerator" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::Accelerator"
+  cloudformation_type_name    = "AWS::GlobalAccelerator::Accelerator"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_globalaccelerator_endpoint_group" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::EndpointGroup"
+  cloudformation_type_name    = "AWS::GlobalAccelerator::EndpointGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_globalaccelerator_listener" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
+  cloudformation_type_name    = "AWS::GlobalAccelerator::Listener"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_glue_registry" {
@@ -618,11 +655,13 @@ resource_schema "aws_glue_schema" {
 }
 
 resource_schema "aws_glue_schema_version" {
-  cloudformation_type_name = "AWS::Glue::SchemaVersion"
+  cloudformation_type_name    = "AWS::Glue::SchemaVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_glue_schema_version_metadata" {
-  cloudformation_type_name = "AWS::Glue::SchemaVersionMetadata"
+  cloudformation_type_name    = "AWS::Glue::SchemaVersionMetadata"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_greengrassv2_component_version" {
@@ -631,6 +670,9 @@ resource_schema "aws_greengrassv2_component_version" {
 
 resource_schema "aws_groundstation_config" {
   cloudformation_type_name = "AWS::GroundStation::Config"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -670,11 +712,13 @@ resource_schema "aws_ivs_recording_configuration" {
 }
 
 resource_schema "aws_ivs_stream_key" {
-  cloudformation_type_name = "AWS::IVS::StreamKey"
+  cloudformation_type_name    = "AWS::IVS::StreamKey"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_imagebuilder_component" {
-  cloudformation_type_name = "AWS::ImageBuilder::Component"
+  cloudformation_type_name    = "AWS::ImageBuilder::Component"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_imagebuilder_container_recipe" {
@@ -750,7 +794,8 @@ resource_schema "aws_iot_topic_rule_destination" {
 }
 
 resource_schema "aws_iotcoredeviceadvisor_suite_definition" {
-  cloudformation_type_name = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
+  cloudformation_type_name    = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_iotevents_detector_model" {
@@ -766,7 +811,8 @@ resource_schema "aws_iotfleethub_application" {
 }
 
 resource_schema "aws_iotsitewise_access_policy" {
-  cloudformation_type_name = "AWS::IoTSiteWise::AccessPolicy"
+  cloudformation_type_name    = "AWS::IoTSiteWise::AccessPolicy"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_iotsitewise_asset" {
@@ -778,7 +824,8 @@ resource_schema "aws_iotsitewise_asset_model" {
 }
 
 resource_schema "aws_iotsitewise_dashboard" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Dashboard"
+  cloudformation_type_name    = "AWS::IoTSiteWise::Dashboard"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_iotsitewise_gateway" {
@@ -790,7 +837,8 @@ resource_schema "aws_iotsitewise_portal" {
 }
 
 resource_schema "aws_iotsitewise_project" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Project"
+  cloudformation_type_name    = "AWS::IoTSiteWise::Project"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_iotwireless_destination" {
@@ -806,7 +854,8 @@ resource_schema "aws_iotwireless_service_profile" {
 }
 
 resource_schema "aws_iotwireless_task_definition" {
-  cloudformation_type_name = "AWS::IoTWireless::TaskDefinition"
+  cloudformation_type_name    = "AWS::IoTWireless::TaskDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_iotwireless_wireless_device" {
@@ -822,7 +871,8 @@ resource_schema "aws_kms_alias" {
 }
 
 resource_schema "aws_kms_key" {
-  cloudformation_type_name = "AWS::KMS::Key"
+  cloudformation_type_name    = "AWS::KMS::Key"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_kms_replica_key" {
@@ -830,11 +880,13 @@ resource_schema "aws_kms_replica_key" {
 }
 
 resource_schema "aws_kendra_data_source" {
-  cloudformation_type_name = "AWS::Kendra::DataSource"
+  cloudformation_type_name    = "AWS::Kendra::DataSource"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_kendra_faq" {
-  cloudformation_type_name = "AWS::Kendra::Faq"
+  cloudformation_type_name    = "AWS::Kendra::Faq"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_kendra_index" {
@@ -854,7 +906,8 @@ resource_schema "aws_lambda_code_signing_config" {
 }
 
 resource_schema "aws_lambda_event_source_mapping" {
-  cloudformation_type_name = "AWS::Lambda::EventSourceMapping"
+  cloudformation_type_name    = "AWS::Lambda::EventSourceMapping"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_lambda_function" {
@@ -890,7 +943,8 @@ resource_schema "aws_location_tracker" {
 }
 
 resource_schema "aws_location_tracker_consumer" {
-  cloudformation_type_name = "AWS::Location::TrackerConsumer"
+  cloudformation_type_name    = "AWS::Location::TrackerConsumer"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_logs_log_group" {
@@ -922,15 +976,18 @@ resource_schema "aws_mwaa_environment" {
 }
 
 resource_schema "aws_macie_custom_data_identifier" {
-  cloudformation_type_name = "AWS::Macie::CustomDataIdentifier"
+  cloudformation_type_name    = "AWS::Macie::CustomDataIdentifier"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_macie_findings_filter" {
-  cloudformation_type_name = "AWS::Macie::FindingsFilter"
+  cloudformation_type_name    = "AWS::Macie::FindingsFilter"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_macie_session" {
-  cloudformation_type_name = "AWS::Macie::Session"
+  cloudformation_type_name    = "AWS::Macie::Session"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediaconnect_flow" {
@@ -938,23 +995,28 @@ resource_schema "aws_mediaconnect_flow" {
 }
 
 resource_schema "aws_mediaconnect_flow_entitlement" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowEntitlement"
+  cloudformation_type_name    = "AWS::MediaConnect::FlowEntitlement"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediaconnect_flow_output" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowOutput"
+  cloudformation_type_name    = "AWS::MediaConnect::FlowOutput"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediaconnect_flow_source" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowSource"
+  cloudformation_type_name    = "AWS::MediaConnect::FlowSource"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediaconnect_flow_vpc_interface" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowVpcInterface"
+  cloudformation_type_name    = "AWS::MediaConnect::FlowVpcInterface"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediapackage_asset" {
-  cloudformation_type_name = "AWS::MediaPackage::Asset"
+  cloudformation_type_name    = "AWS::MediaPackage::Asset"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediapackage_channel" {
@@ -966,7 +1028,8 @@ resource_schema "aws_mediapackage_origin_endpoint" {
 }
 
 resource_schema "aws_mediapackage_packaging_configuration" {
-  cloudformation_type_name = "AWS::MediaPackage::PackagingConfiguration"
+  cloudformation_type_name    = "AWS::MediaPackage::PackagingConfiguration"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_mediapackage_packaging_group" {
@@ -982,7 +1045,8 @@ resource_schema "aws_networkfirewall_firewall_policy" {
 }
 
 resource_schema "aws_networkfirewall_logging_configuration" {
-  cloudformation_type_name = "AWS::NetworkFirewall::LoggingConfiguration"
+  cloudformation_type_name    = "AWS::NetworkFirewall::LoggingConfiguration"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkfirewall_rule_group" {
@@ -990,11 +1054,13 @@ resource_schema "aws_networkfirewall_rule_group" {
 }
 
 resource_schema "aws_networkmanager_customer_gateway_association" {
-  cloudformation_type_name = "AWS::NetworkManager::CustomerGatewayAssociation"
+  cloudformation_type_name    = "AWS::NetworkManager::CustomerGatewayAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkmanager_device" {
-  cloudformation_type_name = "AWS::NetworkManager::Device"
+  cloudformation_type_name    = "AWS::NetworkManager::Device"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkmanager_global_network" {
@@ -1002,27 +1068,33 @@ resource_schema "aws_networkmanager_global_network" {
 }
 
 resource_schema "aws_networkmanager_link" {
-  cloudformation_type_name = "AWS::NetworkManager::Link"
+  cloudformation_type_name    = "AWS::NetworkManager::Link"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkmanager_link_association" {
-  cloudformation_type_name = "AWS::NetworkManager::LinkAssociation"
+  cloudformation_type_name    = "AWS::NetworkManager::LinkAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkmanager_site" {
-  cloudformation_type_name = "AWS::NetworkManager::Site"
+  cloudformation_type_name    = "AWS::NetworkManager::Site"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_networkmanager_transit_gateway_registration" {
-  cloudformation_type_name = "AWS::NetworkManager::TransitGatewayRegistration"
+  cloudformation_type_name    = "AWS::NetworkManager::TransitGatewayRegistration"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_nimblestudio_launch_profile" {
-  cloudformation_type_name = "AWS::NimbleStudio::LaunchProfile"
+  cloudformation_type_name    = "AWS::NimbleStudio::LaunchProfile"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_nimblestudio_streaming_image" {
-  cloudformation_type_name = "AWS::NimbleStudio::StreamingImage"
+  cloudformation_type_name    = "AWS::NimbleStudio::StreamingImage"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_nimblestudio_studio" {
@@ -1030,39 +1102,50 @@ resource_schema "aws_nimblestudio_studio" {
 }
 
 resource_schema "aws_nimblestudio_studio_component" {
-  cloudformation_type_name = "AWS::NimbleStudio::StudioComponent"
+  cloudformation_type_name    = "AWS::NimbleStudio::StudioComponent"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_qldb_stream" {
-  cloudformation_type_name = "AWS::QLDB::Stream"
+  cloudformation_type_name    = "AWS::QLDB::Stream"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_analysis" {
-  cloudformation_type_name = "AWS::QuickSight::Analysis"
+  cloudformation_type_name    = "AWS::QuickSight::Analysis"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_dashboard" {
-  cloudformation_type_name = "AWS::QuickSight::Dashboard"
+  cloudformation_type_name    = "AWS::QuickSight::Dashboard"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_data_set" {
-  cloudformation_type_name = "AWS::QuickSight::DataSet"
+  cloudformation_type_name    = "AWS::QuickSight::DataSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_data_source" {
-  cloudformation_type_name = "AWS::QuickSight::DataSource"
+  cloudformation_type_name    = "AWS::QuickSight::DataSource"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_template" {
-  cloudformation_type_name = "AWS::QuickSight::Template"
+  cloudformation_type_name    = "AWS::QuickSight::Template"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_quicksight_theme" {
-  cloudformation_type_name = "AWS::QuickSight::Theme"
+  cloudformation_type_name    = "AWS::QuickSight::Theme"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_rds_db_proxy" {
@@ -1074,7 +1157,8 @@ resource_schema "aws_rds_db_proxy_endpoint" {
 }
 
 resource_schema "aws_rds_db_proxy_target_group" {
-  cloudformation_type_name = "AWS::RDS::DBProxyTargetGroup"
+  cloudformation_type_name    = "AWS::RDS::DBProxyTargetGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_rds_global_cluster" {
@@ -1083,6 +1167,9 @@ resource_schema "aws_rds_global_cluster" {
 
 resource_schema "aws_redshift_cluster" {
   cloudformation_type_name = "AWS::Redshift::Cluster"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_resourcegroups_group" {
@@ -1090,7 +1177,8 @@ resource_schema "aws_resourcegroups_group" {
 }
 
 resource_schema "aws_route53_dnssec" {
-  cloudformation_type_name = "AWS::Route53::DNSSEC"
+  cloudformation_type_name    = "AWS::Route53::DNSSEC"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53_health_check" {
@@ -1102,7 +1190,8 @@ resource_schema "aws_route53_hosted_zone" {
 }
 
 resource_schema "aws_route53_key_signing_key" {
-  cloudformation_type_name = "AWS::Route53::KeySigningKey"
+  cloudformation_type_name    = "AWS::Route53::KeySigningKey"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53recoverycontrol_cluster" {
@@ -1114,11 +1203,13 @@ resource_schema "aws_route53recoverycontrol_control_panel" {
 }
 
 resource_schema "aws_route53recoverycontrol_routing_control" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::RoutingControl"
+  cloudformation_type_name    = "AWS::Route53RecoveryControl::RoutingControl"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53recoverycontrol_safety_rule" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::SafetyRule"
+  cloudformation_type_name    = "AWS::Route53RecoveryControl::SafetyRule"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53recoveryreadiness_cell" {
@@ -1126,7 +1217,8 @@ resource_schema "aws_route53recoveryreadiness_cell" {
 }
 
 resource_schema "aws_route53recoveryreadiness_readiness_check" {
-  cloudformation_type_name = "AWS::Route53RecoveryReadiness::ReadinessCheck"
+  cloudformation_type_name    = "AWS::Route53RecoveryReadiness::ReadinessCheck"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53recoveryreadiness_recovery_group" {
@@ -1138,15 +1230,18 @@ resource_schema "aws_route53recoveryreadiness_resource_set" {
 }
 
 resource_schema "aws_route53resolver_firewall_domain_list" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallDomainList"
+  cloudformation_type_name    = "AWS::Route53Resolver::FirewallDomainList"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53resolver_firewall_rule_group" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroup"
+  cloudformation_type_name    = "AWS::Route53Resolver::FirewallRuleGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53resolver_firewall_rule_group_association" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
+  cloudformation_type_name    = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_route53resolver_resolver_dnssec_config" {
@@ -1174,26 +1269,30 @@ resource_schema "aws_s3objectlambda_access_point" {
 }
 
 resource_schema "aws_s3objectlambda_access_point_policy" {
-  cloudformation_type_name = "AWS::S3ObjectLambda::AccessPointPolicy"
+  cloudformation_type_name    = "AWS::S3ObjectLambda::AccessPointPolicy"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_s3outposts_access_point" {
-  cloudformation_type_name = "AWS::S3Outposts::AccessPoint"
+  cloudformation_type_name    = "AWS::S3Outposts::AccessPoint"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_s3outposts_bucket" {
-  cloudformation_type_name = "AWS::S3Outposts::Bucket"
-
-  # AndOperator property is 'oneOf', which we cannot yet handle.
-  suppress_resource_generation = true
+  cloudformation_type_name    = "AWS::S3Outposts::Bucket"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_s3outposts_bucket_policy" {
-  cloudformation_type_name = "AWS::S3Outposts::BucketPolicy"
+  cloudformation_type_name    = "AWS::S3Outposts::BucketPolicy"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -1205,11 +1304,13 @@ resource_schema "aws_ses_contact_list" {
 }
 
 resource_schema "aws_ssm_association" {
-  cloudformation_type_name = "AWS::SSM::Association"
+  cloudformation_type_name    = "AWS::SSM::Association"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ssm_document" {
-  cloudformation_type_name = "AWS::SSM::Document"
+  cloudformation_type_name    = "AWS::SSM::Document"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ssm_resource_data_sync" {
@@ -1217,11 +1318,13 @@ resource_schema "aws_ssm_resource_data_sync" {
 }
 
 resource_schema "aws_ssmcontacts_contact" {
-  cloudformation_type_name = "AWS::SSMContacts::Contact"
+  cloudformation_type_name    = "AWS::SSMContacts::Contact"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ssmcontacts_contact_channel" {
-  cloudformation_type_name = "AWS::SSMContacts::ContactChannel"
+  cloudformation_type_name    = "AWS::SSMContacts::ContactChannel"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_ssmincidents_replication_set" {
@@ -1233,15 +1336,18 @@ resource_schema "aws_ssmincidents_response_plan" {
 }
 
 resource_schema "aws_sso_assignment" {
-  cloudformation_type_name = "AWS::SSO::Assignment"
+  cloudformation_type_name    = "AWS::SSO::Assignment"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sso_instance_access_control_attribute_configuration" {
-  cloudformation_type_name = "AWS::SSO::InstanceAccessControlAttributeConfiguration"
+  cloudformation_type_name    = "AWS::SSO::InstanceAccessControlAttributeConfiguration"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sso_permission_set" {
-  cloudformation_type_name = "AWS::SSO::PermissionSet"
+  cloudformation_type_name    = "AWS::SSO::PermissionSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_app" {
@@ -1253,15 +1359,18 @@ resource_schema "aws_sagemaker_app_image_config" {
 }
 
 resource_schema "aws_sagemaker_data_quality_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::DataQualityJobDefinition"
+  cloudformation_type_name    = "AWS::SageMaker::DataQualityJobDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_device" {
-  cloudformation_type_name = "AWS::SageMaker::Device"
+  cloudformation_type_name    = "AWS::SageMaker::Device"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_device_fleet" {
-  cloudformation_type_name = "AWS::SageMaker::DeviceFleet"
+  cloudformation_type_name    = "AWS::SageMaker::DeviceFleet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_domain" {
@@ -1277,15 +1386,18 @@ resource_schema "aws_sagemaker_image" {
 }
 
 resource_schema "aws_sagemaker_image_version" {
-  cloudformation_type_name = "AWS::SageMaker::ImageVersion"
+  cloudformation_type_name    = "AWS::SageMaker::ImageVersion"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_model_bias_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelBiasJobDefinition"
+  cloudformation_type_name    = "AWS::SageMaker::ModelBiasJobDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelExplainabilityJobDefinition"
+  cloudformation_type_name    = "AWS::SageMaker::ModelExplainabilityJobDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_model_package_group" {
@@ -1293,7 +1405,8 @@ resource_schema "aws_sagemaker_model_package_group" {
 }
 
 resource_schema "aws_sagemaker_model_quality_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelQualityJobDefinition"
+  cloudformation_type_name    = "AWS::SageMaker::ModelQualityJobDefinition"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_sagemaker_monitoring_schedule" {
@@ -1313,7 +1426,8 @@ resource_schema "aws_sagemaker_user_profile" {
 }
 
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
-  cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+  cloudformation_type_name    = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_servicecatalog_service_action" {
@@ -1321,27 +1435,33 @@ resource_schema "aws_servicecatalog_service_action" {
 }
 
 resource_schema "aws_servicecatalog_service_action_association" {
-  cloudformation_type_name = "AWS::ServiceCatalog::ServiceActionAssociation"
+  cloudformation_type_name    = "AWS::ServiceCatalog::ServiceActionAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::Application"
+  cloudformation_type_name    = "AWS::ServiceCatalogAppRegistry::Application"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_servicecatalogappregistry_attribute_group" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::AttributeGroup"
+  cloudformation_type_name    = "AWS::ServiceCatalogAppRegistry::AttributeGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_servicecatalogappregistry_attribute_group_association" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation"
+  cloudformation_type_name    = "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_servicecatalogappregistry_resource_association" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
+  cloudformation_type_name    = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_signer_profile_permission" {
-  cloudformation_type_name = "AWS::Signer::ProfilePermission"
+  cloudformation_type_name    = "AWS::Signer::ProfilePermission"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_signer_signing_profile" {
@@ -1349,11 +1469,15 @@ resource_schema "aws_signer_signing_profile" {
 }
 
 resource_schema "aws_stepfunctions_state_machine" {
-  cloudformation_type_name = "AWS::StepFunctions::StateMachine"
+  cloudformation_type_name    = "AWS::StepFunctions::StateMachine"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_timestream_database" {
@@ -1365,7 +1489,8 @@ resource_schema "aws_timestream_table" {
 }
 
 resource_schema "aws_wafv2_ip_set" {
-  cloudformation_type_name = "AWS::WAFv2::IPSet"
+  cloudformation_type_name    = "AWS::WAFv2::IPSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_wafv2_logging_configuration" {
@@ -1373,1750 +1498,37 @@ resource_schema "aws_wafv2_logging_configuration" {
 }
 
 resource_schema "aws_wafv2_regex_pattern_set" {
-  cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
+  cloudformation_type_name    = "AWS::WAFv2::RegexPatternSet"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_wafv2_rule_group" {
-  cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-
-  # Goes into infinite recursion while generating code...
-  suppress_resource_generation = true
+  cloudformation_type_name    = "AWS::WAFv2::RuleGroup"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_wafv2_web_acl" {
-  cloudformation_type_name = "AWS::WAFv2::WebACL"
-
-  # Goes into infinite recursion while generating code...
-  suppress_resource_generation = true
+  cloudformation_type_name    = "AWS::WAFv2::WebACL"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
-  cloudformation_type_name = "AWS::WAFv2::WebACLAssociation"
+  cloudformation_type_name    = "AWS::WAFv2::WebACLAssociation"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_workspaces_connection_alias" {
-  cloudformation_type_name = "AWS::WorkSpaces::ConnectionAlias"
+  cloudformation_type_name    = "AWS::WorkSpaces::ConnectionAlias"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_xray_group" {
-  cloudformation_type_name = "AWS::XRay::Group"
+  cloudformation_type_name    = "AWS::XRay::Group"
+  suppress_plural_data_source = true
 }
 
 resource_schema "aws_xray_sampling_rule" {
-  cloudformation_type_name = "AWS::XRay::SamplingRule"
+  cloudformation_type_name    = "AWS::XRay::SamplingRule"
+  suppress_plural_data_source = true
 }
 
-data_schema "aws_acmpca_certificate" {
-  cloudformation_type_name = "AWS::ACMPCA::Certificate"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_acmpca_certificate_authority" {
-  cloudformation_type_name = "AWS::ACMPCA::CertificateAuthority"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_acmpca_certificate_authority_activation" {
-  cloudformation_type_name = "AWS::ACMPCA::CertificateAuthorityActivation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_accessanalyzer_analyzer" {
-  cloudformation_type_name = "AWS::AccessAnalyzer::Analyzer"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_amplify_app" {
-  cloudformation_type_name = "AWS::Amplify::App"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_amplify_branch" {
-  cloudformation_type_name = "AWS::Amplify::Branch"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_amplify_domain" {
-  cloudformation_type_name = "AWS::Amplify::Domain"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_apigateway_api_key" {
-  cloudformation_type_name = "AWS::ApiGateway::ApiKey"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_apigateway_client_certificate" {
-  cloudformation_type_name = "AWS::ApiGateway::ClientCertificate"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_apigateway_documentation_version" {
-  cloudformation_type_name = "AWS::ApiGateway::DocumentationVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_apigateway_domain_name" {
-  cloudformation_type_name = "AWS::ApiGateway::DomainName"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_apigateway_model" {
-  cloudformation_type_name = "AWS::ApiGateway::Model"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_apigateway_request_validator" {
-  cloudformation_type_name = "AWS::ApiGateway::RequestValidator"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_apigateway_resource" {
-  cloudformation_type_name = "AWS::ApiGateway::Resource"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_apigateway_usage_plan_key" {
-  cloudformation_type_name = "AWS::ApiGateway::UsagePlanKey"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_appflow_connector_profile" {
-  cloudformation_type_name = "AWS::AppFlow::ConnectorProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_appflow_flow" {
-  cloudformation_type_name = "AWS::AppFlow::Flow"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_appintegrations_event_integration" {
-  cloudformation_type_name = "AWS::AppIntegrations::EventIntegration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_apprunner_service" {
-  cloudformation_type_name = "AWS::AppRunner::Service"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_applicationinsights_application" {
-  cloudformation_type_name = "AWS::ApplicationInsights::Application"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_athena_data_catalog" {
-  cloudformation_type_name = "AWS::Athena::DataCatalog"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_athena_named_query" {
-  cloudformation_type_name = "AWS::Athena::NamedQuery"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_athena_prepared_statement" {
-  cloudformation_type_name = "AWS::Athena::PreparedStatement"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_athena_work_group" {
-  cloudformation_type_name = "AWS::Athena::WorkGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_auditmanager_assessment" {
-  cloudformation_type_name = "AWS::AuditManager::Assessment"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_autoscaling_warm_pool" {
-  cloudformation_type_name = "AWS::AutoScaling::WarmPool"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_backup_backup_plan" {
-  cloudformation_type_name = "AWS::Backup::BackupPlan"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_backup_backup_selection" {
-  cloudformation_type_name = "AWS::Backup::BackupSelection"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_backup_backup_vault" {
-  cloudformation_type_name = "AWS::Backup::BackupVault"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_budgets_budgets_action" {
-  cloudformation_type_name = "AWS::Budgets::BudgetsAction"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ce_cost_category" {
-  cloudformation_type_name = "AWS::CE::CostCategory"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cassandra_keyspace" {
-  cloudformation_type_name = "AWS::Cassandra::Keyspace"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cassandra_table" {
-  cloudformation_type_name = "AWS::Cassandra::Table"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_certificatemanager_account" {
-  cloudformation_type_name = "AWS::CertificateManager::Account"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_chatbot_slack_channel_configuration" {
-  cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudformation_module_default_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ModuleDefaultVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cloudformation_module_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ModuleVersion"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudformation_public_type_version" {
-  cloudformation_type_name = "AWS::CloudFormation::PublicTypeVersion"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudformation_publisher" {
-  cloudformation_type_name = "AWS::CloudFormation::Publisher"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cloudformation_resource_default_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ResourceDefaultVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cloudformation_resource_version" {
-  cloudformation_type_name = "AWS::CloudFormation::ResourceVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cloudformation_stack_set" {
-  cloudformation_type_name = "AWS::CloudFormation::StackSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_cloudformation_type_activation" {
-  cloudformation_type_name = "AWS::CloudFormation::TypeActivation"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_cache_policy" {
-  cloudformation_type_name = "AWS::CloudFront::CachePolicy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_cloud_front_origin_access_identity" {
-  cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_distribution" {
-  cloudformation_type_name = "AWS::CloudFront::Distribution"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_function" {
-  cloudformation_type_name = "AWS::CloudFront::Function"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_key_group" {
-  cloudformation_type_name = "AWS::CloudFront::KeyGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_origin_request_policy" {
-  cloudformation_type_name = "AWS::CloudFront::OriginRequestPolicy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_public_key" {
-  cloudformation_type_name = "AWS::CloudFront::PublicKey"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudfront_realtime_log_config" {
-  cloudformation_type_name = "AWS::CloudFront::RealtimeLogConfig"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudwatch_composite_alarm" {
-  cloudformation_type_name = "AWS::CloudWatch::CompositeAlarm"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_cloudwatch_metric_stream" {
-  cloudformation_type_name = "AWS::CloudWatch::MetricStream"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_codeartifact_domain" {
-  cloudformation_type_name = "AWS::CodeArtifact::Domain"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_codeartifact_repository" {
-  cloudformation_type_name = "AWS::CodeArtifact::Repository"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_codeguruprofiler_profiling_group" {
-  cloudformation_type_name = "AWS::CodeGuruProfiler::ProfilingGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_codegurureviewer_repository_association" {
-  cloudformation_type_name = "AWS::CodeGuruReviewer::RepositoryAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_codestarconnections_connection" {
-  cloudformation_type_name = "AWS::CodeStarConnections::Connection"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_config_configuration_aggregator" {
-  cloudformation_type_name = "AWS::Config::ConfigurationAggregator"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_config_conformance_pack" {
-  cloudformation_type_name = "AWS::Config::ConformancePack"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_config_organization_conformance_pack" {
-  cloudformation_type_name = "AWS::Config::OrganizationConformancePack"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_config_stored_query" {
-  cloudformation_type_name = "AWS::Config::StoredQuery"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_connect_quick_connect" {
-  cloudformation_type_name = "AWS::Connect::QuickConnect"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_customerprofiles_domain" {
-  cloudformation_type_name = "AWS::CustomerProfiles::Domain"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_customerprofiles_integration" {
-  cloudformation_type_name = "AWS::CustomerProfiles::Integration"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_customerprofiles_object_type" {
-  cloudformation_type_name = "AWS::CustomerProfiles::ObjectType"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_databrew_dataset" {
-  cloudformation_type_name = "AWS::DataBrew::Dataset"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_databrew_job" {
-  cloudformation_type_name = "AWS::DataBrew::Job"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_databrew_project" {
-  cloudformation_type_name = "AWS::DataBrew::Project"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_databrew_recipe" {
-  cloudformation_type_name = "AWS::DataBrew::Recipe"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_databrew_schedule" {
-  cloudformation_type_name = "AWS::DataBrew::Schedule"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_agent" {
-  cloudformation_type_name = "AWS::DataSync::Agent"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_efs" {
-  cloudformation_type_name = "AWS::DataSync::LocationEFS"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_f_sx_windows" {
-  cloudformation_type_name = "AWS::DataSync::LocationFSxWindows"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_nfs" {
-  cloudformation_type_name = "AWS::DataSync::LocationNFS"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_object_storage" {
-  cloudformation_type_name = "AWS::DataSync::LocationObjectStorage"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_s3" {
-  cloudformation_type_name = "AWS::DataSync::LocationS3"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_location_smb" {
-  cloudformation_type_name = "AWS::DataSync::LocationSMB"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_datasync_task" {
-  cloudformation_type_name = "AWS::DataSync::Task"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_detective_graph" {
-  cloudformation_type_name = "AWS::Detective::Graph"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_detective_member_invitation" {
-  cloudformation_type_name = "AWS::Detective::MemberInvitation"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_devopsguru_notification_channel" {
-  cloudformation_type_name = "AWS::DevOpsGuru::NotificationChannel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_devopsguru_resource_collection" {
-  cloudformation_type_name = "AWS::DevOpsGuru::ResourceCollection"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_dynamodb_global_table" {
-  cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_carrier_gateway" {
-  cloudformation_type_name = "AWS::EC2::CarrierGateway"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_dhcp_options" {
-  cloudformation_type_name = "AWS::EC2::DHCPOptions"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_ec2_fleet" {
-  cloudformation_type_name = "AWS::EC2::EC2Fleet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_egress_only_internet_gateway" {
-  cloudformation_type_name = "AWS::EC2::EgressOnlyInternetGateway"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_enclave_certificate_iam_role_association" {
-  cloudformation_type_name = "AWS::EC2::EnclaveCertificateIamRoleAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ec2_flow_log" {
-  cloudformation_type_name = "AWS::EC2::FlowLog"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_gateway_route_table_association" {
-  cloudformation_type_name = "AWS::EC2::GatewayRouteTableAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ec2_local_gateway_route" {
-  cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_local_gateway_route_table_vpc_association" {
-  cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVPCAssociation"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_network_insights_analysis" {
-  cloudformation_type_name = "AWS::EC2::NetworkInsightsAnalysis"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_network_insights_path" {
-  cloudformation_type_name = "AWS::EC2::NetworkInsightsPath"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_prefix_list" {
-  cloudformation_type_name = "AWS::EC2::PrefixList"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_spot_fleet" {
-  cloudformation_type_name = "AWS::EC2::SpotFleet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_transit_gateway" {
-  cloudformation_type_name = "AWS::EC2::TransitGateway"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_transit_gateway_connect" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayConnect"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_transit_gateway_multicast_domain" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomain"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ec2_transit_gateway_multicast_domain_association" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomainAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ec2_transit_gateway_multicast_group_member" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastGroupMember"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ec2_transit_gateway_multicast_group_source" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastGroupSource"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ec2_transit_gateway_peering_attachment" {
-  cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecr_registry_policy" {
-  cloudformation_type_name = "AWS::ECR::RegistryPolicy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecr_replication_configuration" {
-  cloudformation_type_name = "AWS::ECR::ReplicationConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecr_repository" {
-  cloudformation_type_name = "AWS::ECR::Repository"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_capacity_provider" {
-  cloudformation_type_name = "AWS::ECS::CapacityProvider"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_cluster" {
-  cloudformation_type_name = "AWS::ECS::Cluster"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_cluster_capacity_provider_associations" {
-  cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_primary_task_set" {
-  cloudformation_type_name = "AWS::ECS::PrimaryTaskSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ecs_service" {
-  cloudformation_type_name = "AWS::ECS::Service"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_task_definition" {
-  cloudformation_type_name = "AWS::ECS::TaskDefinition"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ecs_task_set" {
-  cloudformation_type_name = "AWS::ECS::TaskSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_efs_access_point" {
-  cloudformation_type_name = "AWS::EFS::AccessPoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_efs_file_system" {
-  cloudformation_type_name = "AWS::EFS::FileSystem"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_eks_addon" {
-  cloudformation_type_name = "AWS::EKS::Addon"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_eks_fargate_profile" {
-  cloudformation_type_name = "AWS::EKS::FargateProfile"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_emr_studio" {
-  cloudformation_type_name = "AWS::EMR::Studio"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_emr_studio_session_mapping" {
-  cloudformation_type_name = "AWS::EMR::StudioSessionMapping"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_emrcontainers_virtual_cluster" {
-  cloudformation_type_name = "AWS::EMRContainers::VirtualCluster"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_elasticache_global_replication_group" {
-  cloudformation_type_name = "AWS::ElastiCache::GlobalReplicationGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_elasticache_user" {
-  cloudformation_type_name = "AWS::ElastiCache::User"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_elasticache_user_group" {
-  cloudformation_type_name = "AWS::ElastiCache::UserGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_eventschemas_registry_policy" {
-  cloudformation_type_name = "AWS::EventSchemas::RegistryPolicy"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_events_api_destination" {
-  cloudformation_type_name = "AWS::Events::ApiDestination"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_events_archive" {
-  cloudformation_type_name = "AWS::Events::Archive"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_events_connection" {
-  cloudformation_type_name = "AWS::Events::Connection"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_fis_experiment_template" {
-  cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_fms_notification_channel" {
-  cloudformation_type_name = "AWS::FMS::NotificationChannel"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_fms_policy" {
-  cloudformation_type_name = "AWS::FMS::Policy"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_finspace_environment" {
-  cloudformation_type_name = "AWS::FinSpace::Environment"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_detector" {
-  cloudformation_type_name = "AWS::FraudDetector::Detector"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_entity_type" {
-  cloudformation_type_name = "AWS::FraudDetector::EntityType"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_event_type" {
-  cloudformation_type_name = "AWS::FraudDetector::EventType"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_label" {
-  cloudformation_type_name = "AWS::FraudDetector::Label"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_outcome" {
-  cloudformation_type_name = "AWS::FraudDetector::Outcome"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_frauddetector_variable" {
-  cloudformation_type_name = "AWS::FraudDetector::Variable"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_gamelift_alias" {
-  cloudformation_type_name = "AWS::GameLift::Alias"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_gamelift_fleet" {
-  cloudformation_type_name = "AWS::GameLift::Fleet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_gamelift_game_server_group" {
-  cloudformation_type_name = "AWS::GameLift::GameServerGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_globalaccelerator_accelerator" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::Accelerator"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_globalaccelerator_endpoint_group" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::EndpointGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_globalaccelerator_listener" {
-  cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_glue_registry" {
-  cloudformation_type_name = "AWS::Glue::Registry"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_glue_schema" {
-  cloudformation_type_name = "AWS::Glue::Schema"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_glue_schema_version" {
-  cloudformation_type_name = "AWS::Glue::SchemaVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_glue_schema_version_metadata" {
-  cloudformation_type_name = "AWS::Glue::SchemaVersionMetadata"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_greengrassv2_component_version" {
-  cloudformation_type_name = "AWS::GreengrassV2::ComponentVersion"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_groundstation_config" {
-  cloudformation_type_name = "AWS::GroundStation::Config"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_groundstation_dataflow_endpoint_group" {
-  cloudformation_type_name = "AWS::GroundStation::DataflowEndpointGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_groundstation_mission_profile" {
-  cloudformation_type_name = "AWS::GroundStation::MissionProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iam_oidc_provider" {
-  cloudformation_type_name = "AWS::IAM::OIDCProvider"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iam_saml_provider" {
-  cloudformation_type_name = "AWS::IAM::SAMLProvider"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iam_server_certificate" {
-  cloudformation_type_name = "AWS::IAM::ServerCertificate"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iam_virtual_mfa_device" {
-  cloudformation_type_name = "AWS::IAM::VirtualMFADevice"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ivs_channel" {
-  cloudformation_type_name = "AWS::IVS::Channel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ivs_playback_key_pair" {
-  cloudformation_type_name = "AWS::IVS::PlaybackKeyPair"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ivs_recording_configuration" {
-  cloudformation_type_name = "AWS::IVS::RecordingConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ivs_stream_key" {
-  cloudformation_type_name = "AWS::IVS::StreamKey"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_imagebuilder_component" {
-  cloudformation_type_name = "AWS::ImageBuilder::Component"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_imagebuilder_container_recipe" {
-  cloudformation_type_name = "AWS::ImageBuilder::ContainerRecipe"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_imagebuilder_distribution_configuration" {
-  cloudformation_type_name = "AWS::ImageBuilder::DistributionConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_imagebuilder_image" {
-  cloudformation_type_name = "AWS::ImageBuilder::Image"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_imagebuilder_image_pipeline" {
-  cloudformation_type_name = "AWS::ImageBuilder::ImagePipeline"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_imagebuilder_image_recipe" {
-  cloudformation_type_name = "AWS::ImageBuilder::ImageRecipe"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_imagebuilder_infrastructure_configuration" {
-  cloudformation_type_name = "AWS::ImageBuilder::InfrastructureConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_account_audit_configuration" {
-  cloudformation_type_name = "AWS::IoT::AccountAuditConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_authorizer" {
-  cloudformation_type_name = "AWS::IoT::Authorizer"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_certificate" {
-  cloudformation_type_name = "AWS::IoT::Certificate"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_custom_metric" {
-  cloudformation_type_name = "AWS::IoT::CustomMetric"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_dimension" {
-  cloudformation_type_name = "AWS::IoT::Dimension"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_domain_configuration" {
-  cloudformation_type_name = "AWS::IoT::DomainConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_mitigation_action" {
-  cloudformation_type_name = "AWS::IoT::MitigationAction"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_provisioning_template" {
-  cloudformation_type_name = "AWS::IoT::ProvisioningTemplate"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_scheduled_audit" {
-  cloudformation_type_name = "AWS::IoT::ScheduledAudit"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_security_profile" {
-  cloudformation_type_name = "AWS::IoT::SecurityProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_topic_rule" {
-  cloudformation_type_name = "AWS::IoT::TopicRule"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iot_topic_rule_destination" {
-  cloudformation_type_name = "AWS::IoT::TopicRuleDestination"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotcoredeviceadvisor_suite_definition" {
-  cloudformation_type_name = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_iotevents_detector_model" {
-  cloudformation_type_name = "AWS::IoTEvents::DetectorModel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotevents_input" {
-  cloudformation_type_name = "AWS::IoTEvents::Input"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotfleethub_application" {
-  cloudformation_type_name = "AWS::IoTFleetHub::Application"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotsitewise_access_policy" {
-  cloudformation_type_name = "AWS::IoTSiteWise::AccessPolicy"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_iotsitewise_asset" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Asset"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotsitewise_asset_model" {
-  cloudformation_type_name = "AWS::IoTSiteWise::AssetModel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotsitewise_dashboard" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Dashboard"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_iotsitewise_gateway" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Gateway"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotsitewise_portal" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Portal"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotsitewise_project" {
-  cloudformation_type_name = "AWS::IoTSiteWise::Project"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_iotwireless_destination" {
-  cloudformation_type_name = "AWS::IoTWireless::Destination"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotwireless_device_profile" {
-  cloudformation_type_name = "AWS::IoTWireless::DeviceProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotwireless_service_profile" {
-  cloudformation_type_name = "AWS::IoTWireless::ServiceProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotwireless_task_definition" {
-  cloudformation_type_name = "AWS::IoTWireless::TaskDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_iotwireless_wireless_device" {
-  cloudformation_type_name = "AWS::IoTWireless::WirelessDevice"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_iotwireless_wireless_gateway" {
-  cloudformation_type_name = "AWS::IoTWireless::WirelessGateway"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_kms_alias" {
-  cloudformation_type_name = "AWS::KMS::Alias"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_kms_key" {
-  cloudformation_type_name = "AWS::KMS::Key"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_kms_replica_key" {
-  cloudformation_type_name = "AWS::KMS::ReplicaKey"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_kendra_data_source" {
-  cloudformation_type_name = "AWS::Kendra::DataSource"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_kendra_faq" {
-  cloudformation_type_name = "AWS::Kendra::Faq"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_kendra_index" {
-  cloudformation_type_name = "AWS::Kendra::Index"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_kinesis_stream" {
-  cloudformation_type_name = "AWS::Kinesis::Stream"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_kinesisfirehose_delivery_stream" {
-  cloudformation_type_name = "AWS::KinesisFirehose::DeliveryStream"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_lambda_code_signing_config" {
-  cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_lambda_event_source_mapping" {
-  cloudformation_type_name = "AWS::Lambda::EventSourceMapping"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_lambda_function" {
-  cloudformation_type_name = "AWS::Lambda::Function"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_licensemanager_grant" {
-  cloudformation_type_name = "AWS::LicenseManager::Grant"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_licensemanager_license" {
-  cloudformation_type_name = "AWS::LicenseManager::License"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_geofence_collection" {
-  cloudformation_type_name = "AWS::Location::GeofenceCollection"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_map" {
-  cloudformation_type_name = "AWS::Location::Map"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_place_index" {
-  cloudformation_type_name = "AWS::Location::PlaceIndex"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_route_calculator" {
-  cloudformation_type_name = "AWS::Location::RouteCalculator"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_tracker" {
-  cloudformation_type_name = "AWS::Location::Tracker"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_location_tracker_consumer" {
-  cloudformation_type_name = "AWS::Location::TrackerConsumer"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_logs_log_group" {
-  cloudformation_type_name = "AWS::Logs::LogGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_logs_query_definition" {
-  cloudformation_type_name = "AWS::Logs::QueryDefinition"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_logs_resource_policy" {
-  cloudformation_type_name = "AWS::Logs::ResourcePolicy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_lookoutmetrics_alert" {
-  cloudformation_type_name = "AWS::LookoutMetrics::Alert"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_lookoutmetrics_anomaly_detector" {
-  cloudformation_type_name = "AWS::LookoutMetrics::AnomalyDetector"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_lookoutvision_project" {
-  cloudformation_type_name = "AWS::LookoutVision::Project"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_mwaa_environment" {
-  cloudformation_type_name = "AWS::MWAA::Environment"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_macie_custom_data_identifier" {
-  cloudformation_type_name = "AWS::Macie::CustomDataIdentifier"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_macie_findings_filter" {
-  cloudformation_type_name = "AWS::Macie::FindingsFilter"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_macie_session" {
-  cloudformation_type_name = "AWS::Macie::Session"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediaconnect_flow" {
-  cloudformation_type_name = "AWS::MediaConnect::Flow"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_mediaconnect_flow_entitlement" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowEntitlement"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediaconnect_flow_output" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowOutput"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediaconnect_flow_source" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowSource"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediaconnect_flow_vpc_interface" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowVpcInterface"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediapackage_asset" {
-  cloudformation_type_name = "AWS::MediaPackage::Asset"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediapackage_channel" {
-  cloudformation_type_name = "AWS::MediaPackage::Channel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_mediapackage_origin_endpoint" {
-  cloudformation_type_name = "AWS::MediaPackage::OriginEndpoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_mediapackage_packaging_configuration" {
-  cloudformation_type_name = "AWS::MediaPackage::PackagingConfiguration"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_mediapackage_packaging_group" {
-  cloudformation_type_name = "AWS::MediaPackage::PackagingGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_networkfirewall_firewall" {
-  cloudformation_type_name = "AWS::NetworkFirewall::Firewall"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_networkfirewall_firewall_policy" {
-  cloudformation_type_name = "AWS::NetworkFirewall::FirewallPolicy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_networkfirewall_logging_configuration" {
-  cloudformation_type_name = "AWS::NetworkFirewall::LoggingConfiguration"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkfirewall_rule_group" {
-  cloudformation_type_name = "AWS::NetworkFirewall::RuleGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_networkmanager_customer_gateway_association" {
-  cloudformation_type_name = "AWS::NetworkManager::CustomerGatewayAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkmanager_device" {
-  cloudformation_type_name = "AWS::NetworkManager::Device"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkmanager_global_network" {
-  cloudformation_type_name = "AWS::NetworkManager::GlobalNetwork"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_networkmanager_link" {
-  cloudformation_type_name = "AWS::NetworkManager::Link"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkmanager_link_association" {
-  cloudformation_type_name = "AWS::NetworkManager::LinkAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkmanager_site" {
-  cloudformation_type_name = "AWS::NetworkManager::Site"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_networkmanager_transit_gateway_registration" {
-  cloudformation_type_name = "AWS::NetworkManager::TransitGatewayRegistration"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_nimblestudio_launch_profile" {
-  cloudformation_type_name = "AWS::NimbleStudio::LaunchProfile"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_nimblestudio_streaming_image" {
-  cloudformation_type_name = "AWS::NimbleStudio::StreamingImage"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_nimblestudio_studio" {
-  cloudformation_type_name = "AWS::NimbleStudio::Studio"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_nimblestudio_studio_component" {
-  cloudformation_type_name = "AWS::NimbleStudio::StudioComponent"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_opsworkscm_server" {
-  cloudformation_type_name = "AWS::OpsWorksCM::Server"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_qldb_stream" {
-  cloudformation_type_name = "AWS::QLDB::Stream"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_analysis" {
-  cloudformation_type_name = "AWS::QuickSight::Analysis"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_dashboard" {
-  cloudformation_type_name = "AWS::QuickSight::Dashboard"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_data_set" {
-  cloudformation_type_name = "AWS::QuickSight::DataSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_data_source" {
-  cloudformation_type_name = "AWS::QuickSight::DataSource"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_template" {
-  cloudformation_type_name = "AWS::QuickSight::Template"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_quicksight_theme" {
-  cloudformation_type_name = "AWS::QuickSight::Theme"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_rds_db_proxy" {
-  cloudformation_type_name = "AWS::RDS::DBProxy"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_rds_db_proxy_endpoint" {
-  cloudformation_type_name = "AWS::RDS::DBProxyEndpoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_rds_db_proxy_target_group" {
-  cloudformation_type_name = "AWS::RDS::DBProxyTargetGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_rds_global_cluster" {
-  cloudformation_type_name = "AWS::RDS::GlobalCluster"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_redshift_cluster" {
-  cloudformation_type_name = "AWS::Redshift::Cluster"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_resourcegroups_group" {
-  cloudformation_type_name = "AWS::ResourceGroups::Group"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53_dnssec" {
-  cloudformation_type_name = "AWS::Route53::DNSSEC"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53_health_check" {
-  cloudformation_type_name = "AWS::Route53::HealthCheck"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53_hosted_zone" {
-  cloudformation_type_name = "AWS::Route53::HostedZone"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53_key_signing_key" {
-  cloudformation_type_name = "AWS::Route53::KeySigningKey"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53recoverycontrol_cluster" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::Cluster"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53recoverycontrol_control_panel" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::ControlPanel"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53recoverycontrol_routing_control" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::RoutingControl"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53recoverycontrol_safety_rule" {
-  cloudformation_type_name = "AWS::Route53RecoveryControl::SafetyRule"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53recoveryreadiness_cell" {
-  cloudformation_type_name = "AWS::Route53RecoveryReadiness::Cell"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53recoveryreadiness_readiness_check" {
-  cloudformation_type_name = "AWS::Route53RecoveryReadiness::ReadinessCheck"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53recoveryreadiness_recovery_group" {
-  cloudformation_type_name = "AWS::Route53RecoveryReadiness::RecoveryGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53recoveryreadiness_resource_set" {
-  cloudformation_type_name = "AWS::Route53RecoveryReadiness::ResourceSet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53resolver_firewall_domain_list" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallDomainList"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53resolver_firewall_rule_group" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53resolver_firewall_rule_group_association" {
-  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_route53resolver_resolver_dnssec_config" {
-  cloudformation_type_name = "AWS::Route53Resolver::ResolverDNSSECConfig"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53resolver_resolver_query_logging_config" {
-  cloudformation_type_name = "AWS::Route53Resolver::ResolverQueryLoggingConfig"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_route53resolver_resolver_query_logging_config_association" {
-  cloudformation_type_name = "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_s3_access_point" {
-  cloudformation_type_name = "AWS::S3::AccessPoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_s3_storage_lens" {
-  cloudformation_type_name = "AWS::S3::StorageLens"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_s3objectlambda_access_point" {
-  cloudformation_type_name = "AWS::S3ObjectLambda::AccessPoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_s3objectlambda_access_point_policy" {
-  cloudformation_type_name = "AWS::S3ObjectLambda::AccessPointPolicy"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_s3outposts_access_point" {
-  cloudformation_type_name = "AWS::S3Outposts::AccessPoint"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_s3outposts_bucket" {
-  cloudformation_type_name = "AWS::S3Outposts::Bucket"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_s3outposts_bucket_policy" {
-  cloudformation_type_name = "AWS::S3Outposts::BucketPolicy"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_s3outposts_endpoint" {
-  cloudformation_type_name = "AWS::S3Outposts::Endpoint"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ses_configuration_set" {
-  cloudformation_type_name = "AWS::SES::ConfigurationSet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ses_contact_list" {
-  cloudformation_type_name = "AWS::SES::ContactList"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ssm_association" {
-  cloudformation_type_name = "AWS::SSM::Association"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ssm_document" {
-  cloudformation_type_name = "AWS::SSM::Document"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ssm_resource_data_sync" {
-  cloudformation_type_name = "AWS::SSM::ResourceDataSync"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ssmcontacts_contact" {
-  cloudformation_type_name = "AWS::SSMContacts::Contact"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ssmcontacts_contact_channel" {
-  cloudformation_type_name = "AWS::SSMContacts::ContactChannel"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_ssmincidents_replication_set" {
-  cloudformation_type_name = "AWS::SSMIncidents::ReplicationSet"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_ssmincidents_response_plan" {
-  cloudformation_type_name = "AWS::SSMIncidents::ResponsePlan"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sso_assignment" {
-  cloudformation_type_name = "AWS::SSO::Assignment"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sso_instance_access_control_attribute_configuration" {
-  cloudformation_type_name = "AWS::SSO::InstanceAccessControlAttributeConfiguration"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sso_permission_set" {
-  cloudformation_type_name = "AWS::SSO::PermissionSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_app" {
-  cloudformation_type_name = "AWS::SageMaker::App"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_app_image_config" {
-  cloudformation_type_name = "AWS::SageMaker::AppImageConfig"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_data_quality_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::DataQualityJobDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_device" {
-  cloudformation_type_name = "AWS::SageMaker::Device"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_device_fleet" {
-  cloudformation_type_name = "AWS::SageMaker::DeviceFleet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_domain" {
-  cloudformation_type_name = "AWS::SageMaker::Domain"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_feature_group" {
-  cloudformation_type_name = "AWS::SageMaker::FeatureGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_image" {
-  cloudformation_type_name = "AWS::SageMaker::Image"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_image_version" {
-  cloudformation_type_name = "AWS::SageMaker::ImageVersion"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_model_bias_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelBiasJobDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_model_explainability_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelExplainabilityJobDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_model_package_group" {
-  cloudformation_type_name = "AWS::SageMaker::ModelPackageGroup"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_model_quality_job_definition" {
-  cloudformation_type_name = "AWS::SageMaker::ModelQualityJobDefinition"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_sagemaker_monitoring_schedule" {
-  cloudformation_type_name = "AWS::SageMaker::MonitoringSchedule"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_pipeline" {
-  cloudformation_type_name = "AWS::SageMaker::Pipeline"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_project" {
-  cloudformation_type_name = "AWS::SageMaker::Project"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_sagemaker_user_profile" {
-  cloudformation_type_name = "AWS::SageMaker::UserProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_servicecatalog_cloud_formation_provisioned_product" {
-  cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_servicecatalog_service_action" {
-  cloudformation_type_name = "AWS::ServiceCatalog::ServiceAction"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_servicecatalog_service_action_association" {
-  cloudformation_type_name = "AWS::ServiceCatalog::ServiceActionAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_servicecatalogappregistry_application" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::Application"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_servicecatalogappregistry_attribute_group" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::AttributeGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_servicecatalogappregistry_attribute_group_association" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_servicecatalogappregistry_resource_association" {
-  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_signer_profile_permission" {
-  cloudformation_type_name = "AWS::Signer::ProfilePermission"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_signer_signing_profile" {
-  cloudformation_type_name = "AWS::Signer::SigningProfile"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_stepfunctions_state_machine" {
-  cloudformation_type_name = "AWS::StepFunctions::StateMachine"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_synthetics_canary" {
-  cloudformation_type_name = "AWS::Synthetics::Canary"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_timestream_database" {
-  cloudformation_type_name = "AWS::Timestream::Database"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_timestream_table" {
-  cloudformation_type_name = "AWS::Timestream::Table"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_wafv2_ip_set" {
-  cloudformation_type_name = "AWS::WAFv2::IPSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_wafv2_logging_configuration" {
-  cloudformation_type_name = "AWS::WAFv2::LoggingConfiguration"
-  data_source_types        = ["singular","plural"]
-}
-
-data_schema "aws_wafv2_regex_pattern_set" {
-  cloudformation_type_name = "AWS::WAFv2::RegexPatternSet"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_wafv2_rule_group" {
-  cloudformation_type_name = "AWS::WAFv2::RuleGroup"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_wafv2_web_acl" {
-  cloudformation_type_name = "AWS::WAFv2::WebACL"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_wafv2_web_acl_association" {
-  cloudformation_type_name = "AWS::WAFv2::WebACLAssociation"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_workspaces_connection_alias" {
-  cloudformation_type_name = "AWS::WorkSpaces::ConnectionAlias"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_xray_group" {
-  cloudformation_type_name = "AWS::XRay::Group"
-  data_source_types        = ["singular"]
-}
-
-data_schema "aws_xray_sampling_rule" {
-  cloudformation_type_name = "AWS::XRay::SamplingRule"
-  data_source_types        = ["singular"]
-}

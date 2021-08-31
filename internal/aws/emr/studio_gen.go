@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -46,6 +47,12 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSO",
+					"IAM",
+				}),
+			},
 			// AuthMode is a force-new attribute.
 		},
 		"default_s3_location": {
@@ -61,6 +68,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(6, 10280),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -74,6 +84,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A detailed description of the Studio.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"engine_security_group_id": {
 			// Property: EngineSecurityGroupId
@@ -88,6 +101,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(4, 256),
+			},
 			// EngineSecurityGroupId is a force-new attribute.
 		},
 		"name": {
@@ -103,6 +119,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A descriptive name for the Amazon EMR Studio.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"service_role": {
 			// Property: ServiceRole
@@ -145,6 +164,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -186,12 +208,18 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

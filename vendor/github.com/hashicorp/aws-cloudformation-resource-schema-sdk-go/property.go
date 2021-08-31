@@ -37,6 +37,8 @@ const (
 // Property represents the CloudFormation Resource Schema customization for Definitions and Properties.
 type Property struct {
 	AdditionalProperties *bool                `json:"additionalProperties,omitempty"`
+	AllOf                []*PropertySubschema `json:"allOf,omitempty"`
+	AnyOf                []*PropertySubschema `json:"anyOf,omitempty"`
 	Comment              *string              `json:"$comment,omitempty"`
 	Description          *string              `json:"description,omitempty"`
 	Enum                 []interface{}        `json:"enum,omitempty"`
@@ -44,10 +46,13 @@ type Property struct {
 	Format               *string              `json:"format,omitempty"`
 	InsertionOrder       *bool                `json:"insertionOrder,omitempty"`
 	Items                *Property            `json:"items,omitempty"`
+	Maximum              *int                 `json:"maximum,omitempty"`
 	MaxItems             *int                 `json:"maxItems,omitempty"`
 	MaxLength            *int                 `json:"maxLength,omitempty"`
+	Minimum              *int                 `json:"minimum,omitempty"`
 	MinItems             *int                 `json:"minItems,omitempty"`
 	MinLength            *int                 `json:"minLength,omitempty"`
+	OneOf                []*PropertySubschema `json:"oneOf,omitempty"`
 	Pattern              *string              `json:"pattern,omitempty"`
 	PatternProperties    map[string]*Property `json:"patternProperties,omitempty"`
 	Properties           map[string]*Property `json:"properties,omitempty"`

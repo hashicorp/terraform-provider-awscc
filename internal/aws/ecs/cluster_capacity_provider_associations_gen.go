@@ -37,8 +37,10 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			// }
 			Description: "List of capacity providers to associate with the cluster",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"cluster": {
 			// Property: Cluster
@@ -52,6 +54,9 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			Description: "The name of the cluster",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 			// Cluster is a force-new attribute.
 		},
 		"default_capacity_provider_strategy": {
@@ -63,6 +68,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Base": {
+			//         "maximum": 100000,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "CapacityProvider": {
@@ -70,6 +77,8 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 			//         "type": "string"
 			//       },
 			//       "Weight": {
+			//         "maximum": 1000,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -87,6 +96,9 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 						// Property: Base
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100000),
+						},
 					},
 					"capacity_provider": {
 						// Property: CapacityProvider
@@ -98,6 +110,9 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 						// Property: Weight
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 1000),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

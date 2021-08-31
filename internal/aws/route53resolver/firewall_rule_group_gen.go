@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -95,6 +96,8 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//       },
 			//       "BlockOverrideTtl": {
 			//         "description": "BlockOverrideTtl",
+			//         "maximum": 604800,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "BlockResponse": {
@@ -135,36 +138,64 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "Rule Action",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALLOW",
+								"BLOCK",
+								"ALERT",
+							}),
+						},
 					},
 					"block_override_dns_type": {
 						// Property: BlockOverrideDnsType
 						Description: "BlockOverrideDnsType",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CNAME",
+							}),
+						},
 					},
 					"block_override_domain": {
 						// Property: BlockOverrideDomain
 						Description: "BlockOverrideDomain",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
 						Description: "BlockOverrideTtl",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 604800),
+						},
 					},
 					"block_response": {
 						// Property: BlockResponse
 						Description: "BlockResponse",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NODATA",
+								"NXDOMAIN",
+								"OVERRIDE",
+							}),
+						},
 					},
 					"firewall_domain_list_id": {
 						// Property: FirewallDomainListId
 						Description: "ResourceId",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"priority": {
 						// Property: Priority
@@ -217,6 +248,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// Name is a force-new attribute.
 		},
 		"owner_id": {
@@ -327,12 +361,18 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

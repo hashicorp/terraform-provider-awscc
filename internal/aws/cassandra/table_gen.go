@@ -42,9 +42,11 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
 			//       "properties": {
 			//         "ReadCapacityUnits": {
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "WriteCapacityUnits": {
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         }
 			//       },
@@ -67,6 +69,12 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Capacity mode for the specified table",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PROVISIONED",
+								"ON_DEMAND",
+							}),
+						},
 					},
 					"provisioned_throughput": {
 						// Property: ProvisionedThroughput
@@ -77,11 +85,17 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ReadCapacityUnits
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 								"write_capacity_units": {
 									// Property: WriteCapacityUnits
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 							},
 						),
@@ -158,13 +172,21 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: OrderBy
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ASC",
+								"DESC",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// ClusteringKeyColumns is a force-new attribute.
 		},
 		"encryption_specification": {
@@ -200,6 +222,12 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Server-side encryption type",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AWS_OWNED_KMS_KEY",
+								"CUSTOMER_MANAGED_KMS_KEY",
+							}),
+						},
 					},
 					"kms_key_identifier": {
 						// Property: KmsKeyIdentifier
@@ -269,8 +297,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MinItems: 1,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// PartitionKeyColumns is a force-new attribute.
 		},
 		"point_in_time_recovery_enabled": {
@@ -380,11 +410,17 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -392,8 +428,10 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 50,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 	}
 

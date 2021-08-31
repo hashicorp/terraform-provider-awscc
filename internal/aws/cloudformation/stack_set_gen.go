@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +35,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 		},
 		"auto_deployment": {
 			// Property: AutoDeployment
@@ -84,6 +88,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SELF",
+					"DELEGATED_ADMIN",
+				}),
+			},
 			// CallAs is a write-only attribute.
 		},
 		"capabilities": {
@@ -119,6 +129,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A description of the stack set. You can use the description to identify the stack set's purpose or other important information.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"execution_role_name": {
 			// Property: ExecutionRoleName
@@ -132,6 +145,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 		"operation_preferences": {
 			// Property: OperationPreferences
@@ -140,15 +156,21 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
 			//   "properties": {
 			//     "FailureToleranceCount": {
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "FailureTolerancePercentage": {
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "MaxConcurrentCount": {
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "MaxConcurrentPercentage": {
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "RegionConcurrencyType": {
@@ -176,27 +198,45 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FailureToleranceCount
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"region_concurrency_type": {
 						// Property: RegionConcurrencyType
 						Description: "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SEQUENTIAL",
+								"PARALLEL",
+							}),
+						},
 					},
 					"region_order": {
 						// Property: RegionOrder
@@ -269,6 +309,12 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SERVICE_MANAGED",
+					"SELF_MANAGED",
+				}),
+			},
 			// PermissionModel is a force-new attribute.
 		},
 		"stack_instances_group": {
@@ -435,6 +481,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// StackSetName is a force-new attribute.
 		},
 		"tags": {
@@ -479,12 +528,18 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -505,6 +560,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 51200),
+			},
 		},
 		"template_url": {
 			// Property: TemplateURL
@@ -518,6 +576,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// TemplateURL is a write-only attribute.
 		},
 	}

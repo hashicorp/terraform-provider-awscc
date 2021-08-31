@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -429,6 +431,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//                               },
 			//                               "Seconds": {
 			//                                 "description": "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
+			//                                 "maximum": 31622400,
+			//                                 "minimum": 60,
 			//                                 "type": "integer"
 			//                               },
 			//                               "TimerName": {
@@ -957,6 +961,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//                               },
 			//                               "Seconds": {
 			//                                 "description": "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
+			//                                 "maximum": 31622400,
+			//                                 "minimum": 60,
 			//                                 "type": "integer"
 			//                               },
 			//                               "TimerName": {
@@ -1485,6 +1491,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//                               },
 			//                               "Seconds": {
 			//                                 "description": "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
+			//                                 "maximum": 31622400,
+			//                                 "minimum": 60,
 			//                                 "type": "integer"
 			//                               },
 			//                               "TimerName": {
@@ -2006,6 +2014,8 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//                               },
 			//                               "Seconds": {
 			//                                 "description": "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
+			//                                 "maximum": 31622400,
+			//                                 "minimum": 60,
 			//                                 "type": "integer"
 			//                               },
 			//                               "TimerName": {
@@ -2185,6 +2195,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The state that is entered at the creation of each detector (instance).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"states": {
 						// Property: States
@@ -2215,6 +2228,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -2259,6 +2275,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2319,6 +2338,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2361,6 +2383,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2392,6 +2417,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -2403,6 +2431,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2530,6 +2561,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -2541,6 +2575,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2565,6 +2602,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -2576,6 +2616,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2601,6 +2644,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -2616,18 +2662,27 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
 																				},
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -2643,12 +2698,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -2669,6 +2730,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2685,6 +2749,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																			},
 																		),
@@ -2704,6 +2771,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2741,12 +2811,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Description: "The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"event_name": {
 															// Property: EventName
 															Description: "The name of the event.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 128),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -2781,6 +2857,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -2825,6 +2904,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2885,6 +2967,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2927,6 +3012,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -2958,6 +3046,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -2969,6 +3060,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3096,6 +3190,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -3107,6 +3204,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3131,6 +3231,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -3142,6 +3245,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3167,6 +3273,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3182,18 +3291,27 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
 																				},
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3209,12 +3327,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3235,6 +3359,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3251,6 +3378,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																			},
 																		),
@@ -3270,6 +3400,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3307,12 +3440,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Description: "The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"event_name": {
 															// Property: EventName
 															Description: "The name of the event.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 128),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -3347,6 +3486,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3391,6 +3533,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3451,6 +3596,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3493,6 +3641,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3524,6 +3675,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -3535,6 +3689,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3662,6 +3819,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -3673,6 +3833,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3697,6 +3860,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -3708,6 +3874,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3733,6 +3902,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3748,18 +3920,27 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
 																				},
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3775,12 +3956,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3801,6 +3988,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3817,6 +4007,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																			},
 																		),
@@ -3836,6 +4029,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -3873,12 +4069,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Description: "The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"event_name": {
 															// Property: EventName
 															Description: "The name of the event.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 128),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -3904,6 +4106,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					// Property: TimerName
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -3948,6 +4153,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4008,6 +4216,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4050,6 +4261,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4081,6 +4295,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the AWS IoT Events input where the data is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -4092,6 +4309,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4219,6 +4439,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The MQTT topic of the message. You can use a string expression that includes variables (`$variable.<variable-name>`) and input values (`$input.<input-name>.<path-to-datum>`) as the topic string.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -4230,6 +4453,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4254,6 +4480,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Lambda function that is executed.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																				"payload": {
 																					// Property: Payload
@@ -4265,6 +4494,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4290,6 +4522,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The name of the timer to reset.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -4305,18 +4540,27 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (`$variable.<variable-name>`), and input values (`$input.<input-name>.<path-to-datum>`) as the duration. The range of the duration is `1-31622400` seconds. To ensure accuracy, the minimum duration is `60` seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
 																					Type:        types.StringType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
 																					Type:        types.NumberType,
 																					Optional:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.IntBetween(60, 31622400),
+																					},
 																				},
 																				"timer_name": {
 																					// Property: TimerName
 																					Description: "The name of the timer.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -4332,12 +4576,18 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The new value of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 1024),
+																					},
 																				},
 																				"variable_name": {
 																					// Property: VariableName
 																					Description: "The name of the variable.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 128),
+																					},
 																				},
 																			},
 																		),
@@ -4358,6 +4608,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4374,6 +4627,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																					Description: "The ARN of the Amazon SNS target where the message is sent.",
 																					Type:        types.StringType,
 																					Required:    true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 2048),
+																					},
 																				},
 																			},
 																		),
@@ -4393,6 +4649,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																								Description: "The content of the payload. You can use a string expression that includes quoted strings (`'<string>'`), variables (`$variable.<variable-name>`), input values (`$input.<input-name>.<path-to-datum>`), string concatenations, and quoted strings that contain `${}` as the content. The recommended maximum size of a content expression is 1 KB.",
 																								Type:        types.StringType,
 																								Required:    true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.StringLenAtLeast(1),
+																								},
 																							},
 																							"type": {
 																								// Property: Type
@@ -4430,18 +4689,27 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Description: "A Boolean expression that when `TRUE` causes the `actions` to be performed and the `nextState` to be entered.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"event_name": {
 															// Property: EventName
 															Description: "The name of the event.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
 														},
 														"next_state": {
 															// Property: NextState
 															Description: "The next state to enter.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{},
@@ -4457,6 +4725,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									Description: "The name of the state.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -4480,6 +4751,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "A brief description of the detector model.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"detector_model_name": {
 			// Property: DetectorModelName
@@ -4495,6 +4769,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// DetectorModelName is a force-new attribute.
 		},
 		"evaluation_method": {
@@ -4511,6 +4788,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Information about the order in which events are evaluated and how actions are executed.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"BATCH",
+					"SERIAL",
+				}),
+			},
 		},
 		"key": {
 			// Property: Key
@@ -4526,6 +4809,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Key is a force-new attribute.
 		},
 		"role_arn": {
@@ -4540,6 +4826,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The ARN of the role that grants permission to AWS IoT Events to perform its operations.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 		},
 		"tags": {
 			// Property: Tags

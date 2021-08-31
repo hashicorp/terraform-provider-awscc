@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1000),
+			},
 			// Description is a force-new attribute.
 		},
 		"file_format": {
@@ -62,6 +67,13 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CSV",
+					"CSV_WITH_HEADER",
+					"JSON",
+				}),
+			},
 			// FileFormat is a force-new attribute.
 		},
 		"id": {
@@ -89,6 +101,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique ID of Index",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(36, 36),
+			},
 			// IndexId is a force-new attribute.
 		},
 		"name": {
@@ -101,6 +116,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// Name is a force-new attribute.
 		},
 		"role_arn": {
@@ -114,6 +132,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1284),
+			},
 			// RoleArn is a force-new attribute.
 		},
 		"s3_path": {
@@ -146,11 +167,17 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Bucket
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 63),
+						},
 					},
 					"key": {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
 					},
 				},
 			),
@@ -196,12 +223,18 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

@@ -49,8 +49,17 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 		return 0, err
 	}
 
-	for name := range cfResource.Properties {
+	for name, property := range cfResource.Properties {
 		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
+			// Ensure that any schema-declared top-level ID property is of type String and is the primary identifier.
+			if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
+				return 0, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
+			}
+
+			if !cfResource.PrimaryIdentifier.ContainsPath([]string{name}) {
+				return 0, fmt.Errorf("top-level property %s is not a primary identifier", name)
+			}
+
 			features |= HasIDRootProperty
 		}
 
@@ -66,6 +75,7 @@ func (e *Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (
 // and emits the generated code to the emitter's Writer. Code features are returned.
 func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
 	var features Features
+	var validators []string
 
 	e.printf("{\n")
 	e.printf("// Property: %s\n", name)
@@ -88,11 +98,96 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	case cfschema.PropertyTypeBoolean:
 		e.printf("Type:types.BoolType,\n")
 
-	case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+	case cfschema.PropertyTypeInteger:
 		e.printf("Type:types.NumberType,\n")
+
+		if property.Minimum == nil && property.Maximum != nil {
+			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+		}
+
+		if property.Minimum != nil && property.Maximum == nil {
+			validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
+		}
+		if property.Minimum != nil && property.Maximum != nil {
+			validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
+		}
+
+		if property.Format != nil {
+			if format := *property.Format; format != "int64" {
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
+
+		if len(property.Enum) > 0 {
+			sb := strings.Builder{}
+			sb.WriteString("validate.IntInSlice([]int{\n")
+			for _, enum := range property.Enum {
+				sb.WriteString(fmt.Sprintf("%d", int(enum.(float64))))
+				sb.WriteString(",\n")
+			}
+			sb.WriteString("})")
+			validators = append(validators, sb.String())
+		}
+
+	case cfschema.PropertyTypeNumber:
+		e.printf("Type:types.NumberType,\n")
+
+		if property.Minimum == nil && property.Maximum != nil {
+			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+		}
+
+		if property.Minimum != nil && property.Maximum == nil {
+			validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
+		}
+		if property.Minimum != nil && property.Maximum != nil {
+			validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
+		}
+
+		if property.Format != nil {
+			if format := *property.Format; format != "double" {
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
+
+		if len(property.Enum) > 0 {
+			return 0, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
+		}
 
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
+
+		if property.MinLength != nil && property.MaxLength == nil {
+			validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
+		}
+		if property.MaxLength != nil {
+			minLength := 0
+			if property.MinLength != nil {
+				minLength = *property.MinLength
+			}
+			validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
+		}
+
+		if property.Format != nil {
+			switch format := *property.Format; format {
+			case "date-time":
+				validators = append(validators, "validate.IsRFC3339Time()")
+			case "string":
+			default:
+				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			}
+		}
+
+		if len(property.Enum) > 0 {
+			sb := strings.Builder{}
+			sb.WriteString("validate.StringInSlice([]string{\n")
+			for _, enum := range property.Enum {
+				sb.WriteString("\"")
+				sb.WriteString(enum.(string))
+				sb.WriteString("\",\n")
+			}
+			sb.WriteString("})")
+			validators = append(validators, sb.String())
+		}
 
 	//
 	// Complex types.
@@ -162,15 +257,17 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 			//
 			// List.
 			//
+			var elementType string
+
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type:types.ListType{ElemType:types.BoolType},\n")
+				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type:types.ListType{ElemType:types.NumberType},\n")
+				elementType = "types.NumberType"
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type:types.ListType{ElemType:types.StringType},\n")
+				elementType = "types.StringType"
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -208,13 +305,31 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 				e.printf("},\n")
 				e.printf("),\n")
 
+				if arrayType == aggregateOrderedSet {
+					validators = append(validators, "validate.UniqueItems()")
+				}
+
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
 
-			if arrayType == aggregateOrderedSet {
-				features |= UsesValidation
-				e.printf("Validators:[]tfsdk.AttributeValidator{validate.UniqueItems()},\n")
+			if elementType != "" {
+				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
+
+				if property.MinItems != nil && property.MaxItems == nil {
+					validators = append(validators, fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems))
+				}
+				if property.MaxItems != nil {
+					minItems := 0
+					if property.MinItems != nil {
+						minItems = *property.MinItems
+					}
+					validators = append(validators, fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems))
+				}
+
+				if arrayType == aggregateOrderedSet {
+					validators = append(validators, "validate.UniqueItems()")
+				}
 			}
 		}
 
@@ -373,14 +488,37 @@ func (e *Emitter) emitAttribute(attributeNameMap map[string]string, path []strin
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
 
+	if readOnly && required {
+		e.warnf("%s is ReadOnly and Required", strings.Join(path, "/"))
+	}
+	if readOnly && writeOnly {
+		e.warnf("%s is ReadOnly and WriteOnly", strings.Join(path, "/"))
+	}
+
+	var optional, computed bool
+
 	if required {
 		e.printf("Required:true,\n")
 	} else if !readOnly {
+		optional = true
 		e.printf("Optional:true,\n")
 	}
 
 	if (readOnly || createOnly) && !required {
+		computed = true
 		e.printf("Computed:true,\n")
+	}
+
+	// Don't emit validators for Computed-only attributes.
+	if !computed || optional {
+		if len(validators) > 0 {
+			features |= UsesValidation
+			e.printf("Validators:[]tfsdk.AttributeValidator{\n")
+			for _, validator := range validators {
+				e.printf("%s,\n", validator)
+			}
+			e.printf("},\n")
+		}
 	}
 
 	if createOnly {
@@ -453,7 +591,7 @@ func (e *Emitter) printf(format string, a ...interface{}) (int, error) {
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e *Emitter) warnf(format string, a ...interface{}) { //nolint:unused
+func (e *Emitter) warnf(format string, a ...interface{}) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 

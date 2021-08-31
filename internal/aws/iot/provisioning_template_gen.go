@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -30,6 +32,9 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 500),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -148,6 +153,9 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 36),
+			},
 			// TemplateName is a force-new attribute.
 		},
 	}
