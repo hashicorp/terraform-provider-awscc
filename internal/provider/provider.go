@@ -22,6 +22,7 @@ func New() tfsdk.Provider {
 
 type AwsCloudControlProvider struct {
 	cfClient *cloudformation.Client
+	region   string
 	roleARN  string
 }
 
@@ -223,7 +224,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 		return
 	}
 
-	cfClient, err := newCloudFormationClient(ctx, &config)
+	cfClient, region, err := newCloudFormationClient(ctx, &config)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
@@ -236,6 +237,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	}
 
 	p.cfClient = cfClient
+	p.region = region
 	p.roleARN = config.RoleARN.Value
 }
 
@@ -263,19 +265,42 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 }
 
 func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	return nil, nil
+	var diags []*tfprotov6.Diagnostic
+	dataSources := make(map[string]tfsdk.DataSourceType)
+
+	for name, factory := range registry.DataSourceFactories() {
+		dataSourceType, err := factory(ctx)
+
+		if err != nil {
+			diags = append(diags, &tfprotov6.Diagnostic{
+				Severity: tfprotov6.DiagnosticSeverityError,
+				Summary:  "Error getting Data Source",
+				Detail:   fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
+			})
+
+			continue
+		}
+
+		dataSources[name] = dataSourceType
+	}
+
+	return dataSources, diags
 }
 
 func (p *AwsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
 	return p.cfClient
 }
 
+func (p *AwsCloudControlProvider) Region(_ context.Context) string {
+	return p.region
+}
+
 func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
-// newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
-func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, error) {
+// newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client with the configured region.
+func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
 		AccessKey:            pd.AccessKey.Value,
@@ -308,8 +333,8 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)
 
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
-	return cloudformation.NewFromConfig(cfg), nil
+	return cloudformation.NewFromConfig(cfg), cfg.Region, nil
 }

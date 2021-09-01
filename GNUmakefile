@@ -6,13 +6,18 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build default golangci-lint lint resources schemas test testacc tools
+.PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
 
 all: schemas resources build
 
 build:
 	go install
 
+data-sources:
+	rm -f internal/*/*/*_data_source_gen.go
+	rm -f internal/*/*/*_data_source_gen_test.go
+	go generate internal/provider/plural_data_sources.go
+	# TODO: Generate Singular Data Sources
 resources:
 	rm -f internal/*/*/*_gen.go
 	rm -f internal/*/*/*_gen_test.go
