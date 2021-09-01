@@ -72,24 +72,33 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 	return attributeName.String()
 }
 
+// Pluralize converts a name to its plural form.
+// The inflection package is used as a first attempt to pluralize names,
+// but exceptions to the rule are handled as follows:
+//  - 'es' is appended to a name ending in 's'
+//  - 's' is appended to a name ending in a number
 func Pluralize(name string) string {
 	if name == "" {
 		return name
 	}
 
-	arr := []byte(name)
+	pluralName := inflection.Plural(name)
+
+	if pluralName != name {
+		return pluralName
+	}
+
+	arr := []byte(pluralName)
 	lastChar := arr[len(arr)-1]
 
 	switch {
 	case lastChar == 's':
-		name += "es"
+		pluralName += "es"
 	case isNumeric(lastChar):
-		name += "s"
-	default:
-		name = inflection.Plural(name)
+		pluralName += "s"
 	}
 
-	return name
+	return pluralName
 }
 
 func isCapitalLetter(ch byte) bool {

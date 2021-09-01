@@ -77,6 +77,11 @@ func TestPluralize(t *testing.T) {
 			ExpectedValue: "aws_cloudwatch_event_buses",
 		},
 		{
+			TestName:      "special name ending in s",
+			Value:         "awscc_ec2_network_insights_analysis",
+			ExpectedValue: "awscc_ec2_network_insights_analyses",
+		},
+		{
 			TestName:      "name ending in number",
 			Value:         "aws_datasync_location_s3",
 			ExpectedValue: "aws_datasync_location_s3s",
