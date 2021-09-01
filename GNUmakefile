@@ -6,7 +6,7 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build default golangci-lint lint resources schemas test testacc tools
+.PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
 
 all: schemas resources build
 
