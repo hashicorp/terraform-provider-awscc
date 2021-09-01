@@ -327,7 +327,8 @@ resource_schema "aws_databrew_recipe" {
   cloudformation_type_name = "AWS::DataBrew::Recipe"
 
   # Steps/Action/Parameters is of unsupported type
-  suppress_resource_generation = true
+  suppress_singular_data_source = true
+  suppress_resource_generation  = true
 }
 
 resource_schema "aws_databrew_schedule" {
@@ -1299,7 +1300,8 @@ resource_schema "aws_s3outposts_bucket" {
   suppress_plural_data_source = true
 
   # LifecycleConfiguration/Rules/Filter/AndOperator is of unsupported type
-  suppress_resource_generation = true
+  suppress_singular_data_source = true
+  suppress_resource_generation  = true
 }
 
 resource_schema "aws_s3outposts_bucket_policy" {
