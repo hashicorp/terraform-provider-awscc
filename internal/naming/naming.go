@@ -2,10 +2,12 @@ package naming
 
 import (
 	"strings"
+
+	"github.com/jinzhu/inflection"
 )
 
 var (
-	// Replace all occuurences of these strings in the property name.
+	// Replace all occurrences of these strings in the property name.
 	propertyNameReplacements = map[string]string{
 		"CloudFormation": "Cloudformation",
 		"CloudFront":     "Cloudfront",
@@ -68,6 +70,26 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 	}
 
 	return attributeName.String()
+}
+
+func Pluralize(name string) string {
+	if name == "" {
+		return name
+	}
+
+	arr := []byte(name)
+	lastChar := arr[len(arr)-1]
+
+	switch {
+	case lastChar == 's':
+		name += "es"
+	case isNumeric(lastChar):
+		name += "s"
+	default:
+		name = inflection.Plural(name)
+	}
+
+	return name
 }
 
 func isCapitalLetter(ch byte) bool {

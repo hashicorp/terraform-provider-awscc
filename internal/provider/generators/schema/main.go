@@ -24,7 +24,6 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/jinzhu/inflection"
 	"github.com/mitchellh/cli"
 )
 
@@ -278,21 +277,8 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 		})
 
 		if !schema.SuppressPluralDataSource {
-			pluralResource := inflection.Plural(res)
-
-			if strings.HasSuffix(res, "s") {
-				pluralResource = res + "es"
-			} else if regexp.MustCompile(`[0-9]+$`).MatchString(res) {
-				pluralResource = res + "s"
-			}
-
-			pluralTfResourceTypeName := inflection.Plural(tfResourceTypeName)
-
-			if strings.HasSuffix(tfResourceTypeName, "s") {
-				pluralTfResourceTypeName = tfResourceTypeName + "es"
-			} else if regexp.MustCompile(`[0-9]+$`).MatchString(tfResourceTypeName) {
-				pluralTfResourceTypeName = tfResourceTypeName + "s"
-			}
+			pluralResource := naming.Pluralize(res)
+			pluralTfResourceTypeName := naming.Pluralize(tfResourceTypeName)
 
 			pluralDataSources = append(pluralDataSources, &DataSourceData{
 				CloudFormationType:        cfResourceTypeName,

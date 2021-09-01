@@ -104,11 +104,14 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, ds)
 
+	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", g.cfType)
+
 	templateData := TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
 		CloudFormationTypeName:       g.cfType,
 		FactoryFunctionName:          factoryFunctionName,
 		PackageName:                  packageName,
+		SchemaDescription:            schemaDescription,
 		SchemaVersion:                1,
 		TerraformTypeName:            dataSource.TfType,
 	}
@@ -210,7 +213,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute {
 		"id": {
-			Description: "Uniquely identifies the resource.",
+			Description: "Uniquely identifies the data source.",
 			Type:        types.StringType,
 			Computed:    true,
 		},		
