@@ -124,12 +124,9 @@
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_global_replication_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_GlobalReplicationGroup.json -package elasticache -- ../aws/elasticache/global_replication_group_gen.go ../aws/elasticache/global_replication_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_user -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_User.json -package elasticache -- ../aws/elasticache/user_gen.go ../aws/elasticache/user_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_user_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_UserGroup.json -package elasticache -- ../aws/elasticache/user_group_gen.go ../aws/elasticache/user_group_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_elasticloadbalancingv2_listener -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_Listener.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_gen.go ../aws/elasticloadbalancingv2/listener_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_elasticloadbalancingv2_listener_rule -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_ListenerRule.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_rule_gen.go ../aws/elasticloadbalancingv2/listener_rule_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_eventschemas_registry_policy -cfschema ../service/cloudformation/schemas/AWS_EventSchemas_RegistryPolicy.json -package eventschemas -- ../aws/eventschemas/registry_policy_gen.go ../aws/eventschemas/registry_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_api_destination -cfschema ../service/cloudformation/schemas/AWS_Events_ApiDestination.json -package events -- ../aws/events/api_destination_gen.go ../aws/events/api_destination_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_archive -cfschema ../service/cloudformation/schemas/AWS_Events_Archive.json -package events -- ../aws/events/archive_gen.go ../aws/events/archive_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_events_connection -cfschema ../service/cloudformation/schemas/AWS_Events_Connection.json -package events -- ../aws/events/connection_gen.go ../aws/events/connection_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fis_experiment_template -cfschema ../service/cloudformation/schemas/AWS_FIS_ExperimentTemplate.json -package fis -- ../aws/fis/experiment_template_gen.go ../aws/fis/experiment_template_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_notification_channel -cfschema ../service/cloudformation/schemas/AWS_FMS_NotificationChannel.json -package fms -- ../aws/fms/notification_channel_gen.go ../aws/fms/notification_channel_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_policy -cfschema ../service/cloudformation/schemas/AWS_FMS_Policy.json -package fms -- ../aws/fms/policy_gen.go ../aws/fms/policy_gen_test.go
@@ -380,7 +377,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/efs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/events"
