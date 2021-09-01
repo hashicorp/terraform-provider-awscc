@@ -15,10 +15,10 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_network_insights_analysises", networkInsightsAnalysesDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_ec2_network_insights_analyses", networkInsightsAnalysesDataSourceType)
 }
 
-// networkInsightsAnalysesDataSourceType returns the Terraform awscc_ec2_network_insights_analysises data source type.
+// networkInsightsAnalysesDataSourceType returns the Terraform awscc_ec2_network_insights_analyses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
 func networkInsightsAnalysesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
@@ -43,7 +43,7 @@ func networkInsightsAnalysesDataSourceType(ctx context.Context) (tfsdk.DataSourc
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::NetworkInsightsAnalysis", "awscc_ec2_network_insights_analysises", schema)
+	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::NetworkInsightsAnalysis", "awscc_ec2_network_insights_analyses", schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
@@ -51,7 +51,7 @@ func networkInsightsAnalysesDataSourceType(ctx context.Context) (tfsdk.DataSourc
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_analysises", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_analyses", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }

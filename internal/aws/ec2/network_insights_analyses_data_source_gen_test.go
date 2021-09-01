@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccAWSEC2NetworkInsightsAnalysesDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::NetworkInsightsAnalysis", "awscc_ec2_network_insights_analysises", "test")
+	td := acctest.NewTestData(t, "AWS::EC2::NetworkInsightsAnalysis", "awscc_ec2_network_insights_analyses", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
