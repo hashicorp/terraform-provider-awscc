@@ -50,6 +50,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_origin_request_policy -cfschema ../service/cloudformation/schemas/AWS_CloudFront_OriginRequestPolicy.json -package cloudfront -- ../aws/cloudfront/origin_request_policy_gen.go ../aws/cloudfront/origin_request_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_public_key -cfschema ../service/cloudformation/schemas/AWS_CloudFront_PublicKey.json -package cloudfront -- ../aws/cloudfront/public_key_gen.go ../aws/cloudfront/public_key_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_realtime_log_config -cfschema ../service/cloudformation/schemas/AWS_CloudFront_RealtimeLogConfig.json -package cloudfront -- ../aws/cloudfront/realtime_log_config_gen.go ../aws/cloudfront/realtime_log_config_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_cloudtrail_trail -cfschema ../service/cloudformation/schemas/AWS_CloudTrail_Trail.json -package cloudtrail -- ../aws/cloudtrail/trail_gen.go ../aws/cloudtrail/trail_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudwatch_composite_alarm -cfschema ../service/cloudformation/schemas/AWS_CloudWatch_CompositeAlarm.json -package cloudwatch -- ../aws/cloudwatch/composite_alarm_gen.go ../aws/cloudwatch/composite_alarm_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudwatch_metric_stream -cfschema ../service/cloudformation/schemas/AWS_CloudWatch_MetricStream.json -package cloudwatch -- ../aws/cloudwatch/metric_stream_gen.go ../aws/cloudwatch/metric_stream_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_codeartifact_domain -cfschema ../service/cloudformation/schemas/AWS_CodeArtifact_Domain.json -package codeartifact -- ../aws/codeartifact/domain_gen.go ../aws/codeartifact/domain_gen_test.go
@@ -123,9 +124,12 @@
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_global_replication_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_GlobalReplicationGroup.json -package elasticache -- ../aws/elasticache/global_replication_group_gen.go ../aws/elasticache/global_replication_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_user -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_User.json -package elasticache -- ../aws/elasticache/user_gen.go ../aws/elasticache/user_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_elasticache_user_group -cfschema ../service/cloudformation/schemas/AWS_ElastiCache_UserGroup.json -package elasticache -- ../aws/elasticache/user_group_gen.go ../aws/elasticache/user_group_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_elasticloadbalancingv2_listener -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_Listener.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_gen.go ../aws/elasticloadbalancingv2/listener_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_elasticloadbalancingv2_listener_rule -cfschema ../service/cloudformation/schemas/AWS_ElasticLoadBalancingV2_ListenerRule.json -package elasticloadbalancingv2 -- ../aws/elasticloadbalancingv2/listener_rule_gen.go ../aws/elasticloadbalancingv2/listener_rule_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_eventschemas_registry_policy -cfschema ../service/cloudformation/schemas/AWS_EventSchemas_RegistryPolicy.json -package eventschemas -- ../aws/eventschemas/registry_policy_gen.go ../aws/eventschemas/registry_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_api_destination -cfschema ../service/cloudformation/schemas/AWS_Events_ApiDestination.json -package events -- ../aws/events/api_destination_gen.go ../aws/events/api_destination_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_archive -cfschema ../service/cloudformation/schemas/AWS_Events_Archive.json -package events -- ../aws/events/archive_gen.go ../aws/events/archive_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_events_connection -cfschema ../service/cloudformation/schemas/AWS_Events_Connection.json -package events -- ../aws/events/connection_gen.go ../aws/events/connection_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fis_experiment_template -cfschema ../service/cloudformation/schemas/AWS_FIS_ExperimentTemplate.json -package fis -- ../aws/fis/experiment_template_gen.go ../aws/fis/experiment_template_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_notification_channel -cfschema ../service/cloudformation/schemas/AWS_FMS_NotificationChannel.json -package fms -- ../aws/fms/notification_channel_gen.go ../aws/fms/notification_channel_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_policy -cfschema ../service/cloudformation/schemas/AWS_FMS_Policy.json -package fms -- ../aws/fms/policy_gen.go ../aws/fms/policy_gen_test.go
@@ -259,6 +263,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_target_group -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyTargetGroup.json -package rds -- ../aws/rds/db_proxy_target_group_gen.go ../aws/rds/db_proxy_target_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_global_cluster -cfschema ../service/cloudformation/schemas/AWS_RDS_GlobalCluster.json -package rds -- ../aws/rds/global_cluster_gen.go ../aws/rds/global_cluster_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_resourcegroups_group -cfschema ../service/cloudformation/schemas/AWS_ResourceGroups_Group.json -package resourcegroups -- ../aws/resourcegroups/group_gen.go ../aws/resourcegroups/group_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_robomaker_simulation_application_version -cfschema ../service/cloudformation/schemas/AWS_RoboMaker_SimulationApplicationVersion.json -package robomaker -- ../aws/robomaker/simulation_application_version_gen.go ../aws/robomaker/simulation_application_version_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_dnssec -cfschema ../service/cloudformation/schemas/AWS_Route53_DNSSEC.json -package route53 -- ../aws/route53/dnssec_gen.go ../aws/route53/dnssec_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_health_check -cfschema ../service/cloudformation/schemas/AWS_Route53_HealthCheck.json -package route53 -- ../aws/route53/health_check_gen.go ../aws/route53/health_check_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_hosted_zone -cfschema ../service/cloudformation/schemas/AWS_Route53_HostedZone.json -package route53 -- ../aws/route53/hosted_zone_gen.go ../aws/route53/hosted_zone_gen_test.go
@@ -354,6 +359,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudformation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudfront"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudwatch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
@@ -374,6 +380,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/efs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/events"
@@ -417,6 +424,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/quicksight"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoveryreadiness"

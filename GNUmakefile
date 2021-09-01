@@ -18,6 +18,7 @@ data-sources:
 	rm -f internal/*/*/*_data_source_gen_test.go
 	go generate internal/provider/plural_data_sources.go
 	# TODO: Generate Singular Data Sources
+
 resources:
 	rm -f internal/*/*/*_gen.go
 	rm -f internal/*/*/*_gen_test.go
