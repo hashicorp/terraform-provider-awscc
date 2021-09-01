@@ -16,10 +16,10 @@ import (
 )
 
 func init() {
-	registry.AddResourceTypeFactory("awscc_datasync_location_f_sx_windows", locationFSxWindowsResourceType)
+	registry.AddResourceTypeFactory("awscc_datasync_location_fsx_windows", locationFSxWindowsResourceType)
 }
 
-// locationFSxWindowsResourceType returns the Terraform awscc_datasync_location_f_sx_windows resource type.
+// locationFSxWindowsResourceType returns the Terraform awscc_datasync_location_fsx_windows resource type.
 // This Terraform resource type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
 func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
@@ -236,7 +236,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 
 	var opts ResourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_f_sx_windows")
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_fsx_windows")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
@@ -268,7 +268,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_f_sx_windows", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_fsx_windows", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }
