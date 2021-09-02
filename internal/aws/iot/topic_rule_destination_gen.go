@@ -71,7 +71,14 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Computed: true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"IN_PROGRESS",
+					"DISABLED",
+				}),
+			},
 		},
 		"status_reason": {
 			// Property: StatusReason
@@ -122,15 +129,19 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					},
 					"security_groups": {
 						// Property: SecurityGroups
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"vpc_id": {
 						// Property: VpcId

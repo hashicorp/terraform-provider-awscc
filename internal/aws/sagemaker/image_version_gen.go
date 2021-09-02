@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The registry path of the container image on which this image version is based.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// BaseImage is a force-new attribute.
 		},
 		"container_image": {
@@ -77,6 +82,9 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the image this version belongs to.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// ImageName is a force-new attribute.
 		},
 		"image_version_arn": {
@@ -98,6 +106,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The version number of the image version.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The version number of the image version.",

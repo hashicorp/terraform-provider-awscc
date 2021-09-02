@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -80,6 +82,11 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DOCKER",
+				}),
+			},
 			// ContainerType is a force-new attribute.
 		},
 		"description": {
@@ -277,6 +284,17 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Description: "Use to override the device's volume type.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"standard",
+														"io1",
+														"io2",
+														"gp2",
+														"gp3",
+														"sc1",
+														"st1",
+													}),
+												},
 											},
 										},
 									),
@@ -365,6 +383,12 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Windows",
+					"Linux",
+				}),
+			},
 			// PlatformOverride is a force-new attribute.
 		},
 		"tags": {
@@ -422,6 +446,11 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Description: "Specifies the service in which this image was registered.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ECR",
+							}),
+						},
 					},
 				},
 			),
@@ -515,6 +544,28 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"dockerfile_template_data",
+			"name",
+			"version",
+			"components",
+			"parent_image",
+			"target_repository",
+			"container_type",
+		),
+		validate.Required(
+			"dockerfile_template_uri",
+			"name",
+			"version",
+			"components",
+			"parent_image",
+			"target_repository",
+			"container_type",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

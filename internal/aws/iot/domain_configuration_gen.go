@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -59,6 +61,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						// Property: DefaultAuthorizerName
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 				},
 			),
@@ -76,6 +81,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// DomainConfigurationName is a force-new attribute.
 		},
 		"domain_configuration_status": {
@@ -90,6 +98,12 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENABLED",
+					"DISABLED",
+				}),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -102,6 +116,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 253),
+			},
 			// DomainName is a force-new attribute.
 		},
 		"domain_type": {
@@ -135,6 +152,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 1),
+			},
 			// ServerCertificateArns is a force-new attribute.
 			// ServerCertificateArns is a write-only attribute.
 		},
@@ -172,11 +192,20 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						// Property: ServerCertificateArn
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 					"server_certificate_status": {
 						// Property: ServerCertificateStatus
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"INVALID",
+								"VALID",
+							}),
+						},
 					},
 					"server_certificate_status_detail": {
 						// Property: ServerCertificateStatusDetail
@@ -202,6 +231,13 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DATA",
+					"CREDENTIAL_PROVIDER",
+					"JOBS",
+				}),
+			},
 			// ServiceType is a force-new attribute.
 		},
 		"tags": {

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -71,18 +73,31 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SourceUrl",
+								"S3FileUrl",
+								"AttachmentReference",
+							}),
+						},
 					},
 					"name": {
 						// Property: Name
 						Description: "The name of the document attachment file.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"values": {
 						// Property: Values
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 1),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -122,6 +137,13 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"YAML",
+					"JSON",
+					"TEXT",
+				}),
+			},
 			// DocumentFormat is a force-new attribute.
 		},
 		"document_type": {
@@ -150,6 +172,23 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ApplicationConfiguration",
+					"ApplicationConfigurationSchema",
+					"Automation",
+					"Automation.ChangeTemplate",
+					"ChangeCalendar",
+					"CloudFormation",
+					"Command",
+					"DeploymentStrategy",
+					"Package",
+					"Policy",
+					"ProblemAnalysis",
+					"ProblemAnalysisTemplate",
+					"Session",
+				}),
+			},
 			// DocumentType is a force-new attribute.
 		},
 		"name": {
@@ -200,12 +239,18 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 200),
+						},
 					},
 					"version": {
 						// Property: Version
 						Description: "The document version required by the current document.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 8),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -252,12 +297,18 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The name of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value of the tag.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

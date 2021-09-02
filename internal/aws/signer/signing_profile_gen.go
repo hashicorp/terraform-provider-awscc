@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -42,6 +44,11 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AWSLambda-SHA384-ECDSA",
+				}),
+			},
 			// PlatformId is a force-new attribute.
 		},
 		"profile_name": {
@@ -101,6 +108,13 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DAYS",
+								"MONTHS",
+								"YEARS",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value
@@ -144,11 +158,17 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

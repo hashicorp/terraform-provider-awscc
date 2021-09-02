@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -72,6 +74,12 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EC2",
+					"FARGATE",
+				}),
+			},
 			// LaunchType is a force-new attribute.
 		},
 		"load_balancers": {
@@ -193,18 +201,30 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DISABLED",
+											"ENABLED",
+										}),
+									},
 								},
 								"security_groups": {
 									// Property: SecurityGroups
 									Description: "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 5),
+									},
 								},
 								"subnets": {
 									// Property: Subnets
 									Description: "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 16),
+									},
 								},
 							},
 						),
@@ -244,6 +264,8 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Value": {
 			//       "description": "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "number"
 			//     }
 			//   },
@@ -256,12 +278,20 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The unit of measure for the scale value.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PERCENT",
+							}),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(0.000000, 100.000000),
+						},
 					},
 				},
 			),

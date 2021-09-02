@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Description of the flow.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
 		},
 		"destination_flow_config_list": {
 			// Property: DestinationFlowConfigList
@@ -466,11 +471,37 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Name of connector profile",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 					"connector_type": {
 						// Property: ConnectorType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Salesforce",
+								"Singular",
+								"Slack",
+								"Redshift",
+								"S3",
+								"Marketo",
+								"Googleanalytics",
+								"Zendesk",
+								"Servicenow",
+								"Datadog",
+								"Trendmicro",
+								"Snowflake",
+								"Dynatrace",
+								"Infornexus",
+								"Amplitude",
+								"Veeva",
+								"EventBridge",
+								"Upsolver",
+								"LookoutMetrics",
+							}),
+						},
 					},
 					"destination_connector_properties": {
 						// Property: DestinationConnectorProperties
@@ -489,11 +520,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: BucketName
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
@@ -508,6 +545,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -521,6 +561,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -534,6 +577,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: BucketPrefix
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
@@ -543,11 +589,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: BucketName
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
@@ -562,11 +614,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: IntermediateBucketName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 63),
+												},
 											},
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -580,11 +638,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: BucketName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 63),
+												},
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
@@ -598,6 +662,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: AggregationType
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"None",
+																				"SingleFile",
+																			}),
+																		},
 																	},
 																},
 															),
@@ -607,6 +677,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: FileType
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"CSV",
+																	"JSON",
+																	"PARQUET",
+																}),
+															},
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
@@ -616,11 +693,27 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"YEAR",
+																				"MONTH",
+																				"DAY",
+																				"HOUR",
+																				"MINUTE",
+																			}),
+																		},
 																	},
 																	"prefix_type": {
 																		// Property: PrefixType
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"FILENAME",
+																				"PATH",
+																				"PATH_AND_FILENAME",
+																			}),
+																		},
 																	},
 																},
 															),
@@ -646,11 +739,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: BucketName
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
@@ -671,11 +770,21 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"write_operation_type": {
 												// Property: WriteOperationType
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INSERT",
+														"UPSERT",
+														"UPDATE",
+													}),
+												},
 											},
 										},
 									),
@@ -689,6 +798,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: BucketPrefix
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"error_handling_config": {
 												// Property: ErrorHandlingConfig
@@ -698,11 +810,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: BucketName
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
@@ -717,11 +835,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: IntermediateBucketName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 63),
+												},
 											},
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -735,11 +859,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: BucketName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(16, 63),
+												},
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"s3_output_format_config": {
 												// Property: S3OutputFormatConfig
@@ -753,6 +883,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: AggregationType
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"None",
+																				"SingleFile",
+																			}),
+																		},
 																	},
 																},
 															),
@@ -762,6 +898,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: FileType
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"CSV",
+																	"JSON",
+																	"PARQUET",
+																}),
+															},
 														},
 														"prefix_config": {
 															// Property: PrefixConfig
@@ -771,11 +914,27 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: PrefixFormat
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"YEAR",
+																				"MONTH",
+																				"DAY",
+																				"HOUR",
+																				"MINUTE",
+																			}),
+																		},
 																	},
 																	"prefix_type": {
 																		// Property: PrefixType
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"FILENAME",
+																				"PATH",
+																				"PATH_AND_FILENAME",
+																			}),
+																		},
 																	},
 																},
 															),
@@ -801,11 +960,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: BucketName
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+															},
 														},
 														"bucket_prefix": {
 															// Property: BucketPrefix
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 512),
+															},
 														},
 														"fail_on_first_error": {
 															// Property: FailOnFirstError
@@ -826,11 +991,21 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 											"write_operation_type": {
 												// Property: WriteOperationType
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INSERT",
+														"UPSERT",
+														"UPDATE",
+													}),
+												},
 											},
 										},
 									),
@@ -871,6 +1046,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of the flow.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// FlowName is a force-new attribute.
 		},
 		"kms_arn": {
@@ -887,6 +1065,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 			// KMSArn is a force-new attribute.
 		},
 		"source_flow_config": {
@@ -1166,11 +1347,37 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Name of connector profile",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 					"connector_type": {
 						// Property: ConnectorType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Salesforce",
+								"Singular",
+								"Slack",
+								"Redshift",
+								"S3",
+								"Marketo",
+								"Googleanalytics",
+								"Zendesk",
+								"Servicenow",
+								"Datadog",
+								"Trendmicro",
+								"Snowflake",
+								"Dynatrace",
+								"Infornexus",
+								"Amplitude",
+								"Veeva",
+								"EventBridge",
+								"Upsolver",
+								"LookoutMetrics",
+							}),
+						},
 					},
 					"incremental_pull_config": {
 						// Property: IncrementalPullConfig
@@ -1182,6 +1389,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 							},
 						),
@@ -1200,6 +1410,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1213,6 +1426,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1226,6 +1442,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1239,6 +1458,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1252,6 +1474,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1265,6 +1490,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1278,11 +1506,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: BucketName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 63),
+												},
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1306,6 +1540,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1319,6 +1556,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1332,6 +1572,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1345,6 +1588,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1358,6 +1604,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1371,6 +1620,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1384,6 +1636,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
 											},
 										},
 									),
@@ -1435,12 +1690,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A string used to identify this tag",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "A string containing the value for the tag",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -1821,71 +2082,330 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Amplitude
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"BETWEEN",
+										}),
+									},
 								},
 								"datadog": {
 									// Property: Datadog
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"BETWEEN",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"dynatrace": {
 									// Property: Dynatrace
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"BETWEEN",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"google_analytics": {
 									// Property: GoogleAnalytics
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"BETWEEN",
+										}),
+									},
 								},
 								"infor_nexus": {
 									// Property: InforNexus
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"BETWEEN",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"marketo": {
 									// Property: Marketo
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"GREATER_THAN",
+											"BETWEEN",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"s3": {
 									// Property: S3
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"GREATER_THAN",
+											"BETWEEN",
+											"LESS_THAN_OR_EQUAL_TO",
+											"GREATER_THAN_OR_EQUAL_TO",
+											"EQUAL_TO",
+											"NOT_EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"salesforce": {
 									// Property: Salesforce
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"CONTAINS",
+											"GREATER_THAN",
+											"BETWEEN",
+											"LESS_THAN_OR_EQUAL_TO",
+											"GREATER_THAN_OR_EQUAL_TO",
+											"EQUAL_TO",
+											"NOT_EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"service_now": {
 									// Property: ServiceNow
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"CONTAINS",
+											"GREATER_THAN",
+											"BETWEEN",
+											"LESS_THAN_OR_EQUAL_TO",
+											"GREATER_THAN_OR_EQUAL_TO",
+											"EQUAL_TO",
+											"NOT_EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"singular": {
 									// Property: Singular
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"slack": {
 									// Property: Slack
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"BETWEEN",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"trendmicro": {
 									// Property: Trendmicro
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"veeva": {
 									// Property: Veeva
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"LESS_THAN",
+											"GREATER_THAN",
+											"BETWEEN",
+											"LESS_THAN_OR_EQUAL_TO",
+											"GREATER_THAN_OR_EQUAL_TO",
+											"EQUAL_TO",
+											"NOT_EQUAL_TO",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 								"zendesk": {
 									// Property: Zendesk
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"PROJECTION",
+											"GREATER_THAN",
+											"ADDITION",
+											"MULTIPLICATION",
+											"DIVISION",
+											"SUBTRACTION",
+											"MASK_ALL",
+											"MASK_FIRST_N",
+											"MASK_LAST_N",
+											"VALIDATE_NON_NULL",
+											"VALIDATE_NON_ZERO",
+											"VALIDATE_NON_NEGATIVE",
+											"VALIDATE_NUMERIC",
+											"NO_OP",
+										}),
+									},
 								},
 							},
 						),
@@ -1896,6 +2416,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A field value on which source field should be validated",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 					"source_fields": {
 						// Property: SourceFields
@@ -1912,11 +2435,33 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Key
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"VALUE",
+											"VALUES",
+											"DATA_TYPE",
+											"UPPER_BOUND",
+											"LOWER_BOUND",
+											"SOURCE_DATA_TYPE",
+											"DESTINATION_DATA_TYPE",
+											"VALIDATION_ACTION",
+											"MASK_VALUE",
+											"MASK_LENGTH",
+											"TRUNCATE_LENGTH",
+											"MATH_OPERATION_FIELDS_ORDER",
+											"CONCAT_FORMAT",
+											"SUBFIELD_CATEGORY_MAP",
+											"EXCLUDE_SOURCE_FIELDS_LIST",
+										}),
+									},
 								},
 								"value": {
 									// Property: Value
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -1927,6 +2472,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: TaskType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Arithmetic",
+								"Filter",
+								"Map",
+								"Map_all",
+								"Mask",
+								"Merge",
+								"Truncate",
+								"Validate",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -1998,6 +2555,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DataPullMode
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Incremental",
+											"Complete",
+										}),
+									},
 								},
 								"schedule_end_time": {
 									// Property: ScheduleEndTime
@@ -2008,6 +2571,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ScheduleExpression
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 								"schedule_start_time": {
 									// Property: ScheduleStartTime
@@ -2018,6 +2584,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: TimeZone
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 							},
 						),
@@ -2027,6 +2596,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: TriggerType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Scheduled",
+								"Event",
+								"OnDemand",
+							}),
+						},
 					},
 				},
 			),

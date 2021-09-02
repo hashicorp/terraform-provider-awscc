@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +35,9 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The description of the quick connect.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 250),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn
@@ -59,6 +63,9 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the quick connect.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 127),
+			},
 		},
 		"quick_connect_arn": {
 			// Property: QuickConnectArn
@@ -195,6 +202,13 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"PHONE_NUMBER",
+								"QUEUE",
+								"USER",
+							}),
+						},
 					},
 					"user_config": {
 						// Property: UserConfig
@@ -262,12 +276,18 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

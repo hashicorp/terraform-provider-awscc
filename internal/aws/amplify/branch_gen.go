@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -32,6 +34,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 20),
+			},
 			// AppId is a force-new attribute.
 		},
 		"arn": {
@@ -82,11 +87,17 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Password
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"username": {
 						// Property: Username
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 			),
@@ -104,6 +115,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// BranchName is a force-new attribute.
 		},
 		"build_spec": {
@@ -117,6 +131,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 25000),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -128,6 +145,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
 		},
 		"enable_auto_build": {
 			// Property: EnableAutoBuild
@@ -189,11 +209,17 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Name
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 5500),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -210,6 +236,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 20),
+			},
 		},
 		"stage": {
 			// Property: Stage
@@ -226,6 +255,15 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"EXPERIMENTAL",
+					"BETA",
+					"PULL_REQUEST",
+					"PRODUCTION",
+					"DEVELOPMENT",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -263,11 +301,17 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

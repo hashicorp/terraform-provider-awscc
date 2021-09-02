@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -37,6 +39,14 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Dataset format",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CSV",
+					"JSON",
+					"PARQUET",
+					"EXCEL",
+				}),
+			},
 		},
 		"format_options": {
 			// Property: FormatOptions
@@ -44,6 +54,23 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Format options for dataset",
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "Json"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "Excel"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "Csv"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "Csv": {
 			//       "additionalProperties": false,
@@ -62,6 +89,18 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Excel": {
 			//       "additionalProperties": false,
+			//       "oneOf": [
+			//         {
+			//           "required": [
+			//             "SheetNames"
+			//           ]
+			//         },
+			//         {
+			//           "required": [
+			//             "SheetIndexes"
+			//           ]
+			//         }
+			//       ],
 			//       "properties": {
 			//         "HeaderRow": {
 			//           "type": "boolean"
@@ -112,6 +151,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Delimiter
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1),
+									},
 								},
 								"header_row": {
 									// Property: HeaderRow
@@ -135,15 +177,33 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SheetIndexes
 									Type:     types.ListType{ElemType: types.NumberType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 1),
+									},
 								},
 								"sheet_names": {
 									// Property: SheetNames
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 1),
+									},
 								},
 							},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.RequiredAttributes(
+								validate.OneOfRequired(
+									validate.Required(
+										"sheet_names",
+									),
+									validate.Required(
+										"sheet_indexes",
+									),
+								),
+							),
+						},
 					},
 					"json": {
 						// Property: Json
@@ -162,6 +222,21 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"json",
+						),
+						validate.Required(
+							"excel",
+						),
+						validate.Required(
+							"csv",
+						),
+					),
+				),
+			},
 		},
 		"input": {
 			// Property: Input
@@ -169,6 +244,23 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Input",
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "S3InputDefinition"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "DataCatalogInputDefinition"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "DatabaseInputDefinition"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "DataCatalogInputDefinition": {
 			//       "additionalProperties": false,
@@ -362,6 +454,21 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"s3_input_definition",
+						),
+						validate.Required(
+							"data_catalog_input_definition",
+						),
+						validate.Required(
+							"database_input_definition",
+						),
+					),
+				),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -375,6 +482,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// Name is a force-new attribute.
 		},
 		"path_options": {
@@ -600,12 +710,23 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Order",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ASCENDING",
+											"DESCENDING",
+										}),
+									},
 								},
 								"ordered_by": {
 									// Property: OrderedBy
 									Description: "Ordered by",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"LAST_MODIFIED_DATE",
+										}),
+									},
 								},
 							},
 						),
@@ -620,6 +741,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Filtering expression for a parameter",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(4, 1024),
+									},
 								},
 								"values_map": {
 									// Property: ValuesMap
@@ -629,12 +753,18 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Value
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 1024),
+												},
 											},
 											"value_reference": {
 												// Property: ValueReference
 												Description: "Variable name",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(2, 128),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -668,18 +798,27 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Date/time format of a date parameter",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(2, 100),
+															},
 														},
 														"locale_code": {
 															// Property: LocaleCode
 															Description: "Locale code for a date parameter",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(2, 100),
+															},
 														},
 														"timezone_offset": {
 															// Property: TimezoneOffset
 															Description: "Timezone offset",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 6),
+															},
 														},
 													},
 												),
@@ -694,6 +833,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Filtering expression for a parameter",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(4, 1024),
+															},
 														},
 														"values_map": {
 															// Property: ValuesMap
@@ -703,12 +845,18 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: Value
 																		Type:     types.StringType,
 																		Required: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(0, 1024),
+																		},
 																	},
 																	"value_reference": {
 																		// Property: ValueReference
 																		Description: "Variable name",
 																		Type:        types.StringType,
 																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(2, 128),
+																		},
 																	},
 																},
 																tfsdk.ListNestedAttributesOptions{},
@@ -724,12 +872,22 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Parameter name",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 255),
+												},
 											},
 											"type": {
 												// Property: Type
 												Description: "Parameter type",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"String",
+														"Number",
+														"Datetime",
+													}),
+												},
 											},
 										},
 									),
@@ -740,6 +898,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Parameter name",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -785,11 +946,17 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

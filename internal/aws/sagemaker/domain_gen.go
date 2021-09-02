@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -36,6 +38,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PublicInternetOnly",
+					"VpcOnly",
+				}),
+			},
 			// AppNetworkAccessType is a force-new attribute.
 		},
 		"auth_mode": {
@@ -52,6 +60,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The mode of authentication that members use to access the domain.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SSO",
+					"IAM",
+				}),
+			},
 			// AuthMode is a force-new attribute.
 		},
 		"default_user_settings": {
@@ -155,6 +169,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "ImageVersionNumber": {
 			//                 "description": "The version number of the CustomImage.",
+			//                 "minimum": 0,
 			//                 "type": "integer"
 			//               }
 			//             },
@@ -278,6 +293,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The user profile Amazon Resource Name (ARN).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
 					},
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
@@ -293,18 +311,60 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"system",
+														"ml.t3.micro",
+														"ml.t3.small",
+														"ml.t3.medium",
+														"ml.t3.large",
+														"ml.t3.xlarge",
+														"ml.t3.2xlarge",
+														"ml.m5.large",
+														"ml.m5.xlarge",
+														"ml.m5.2xlarge",
+														"ml.m5.4xlarge",
+														"ml.m5.8xlarge",
+														"ml.m5.12xlarge",
+														"ml.m5.16xlarge",
+														"ml.m5.24xlarge",
+														"ml.c5.large",
+														"ml.c5.xlarge",
+														"ml.c5.2xlarge",
+														"ml.c5.4xlarge",
+														"ml.c5.9xlarge",
+														"ml.c5.12xlarge",
+														"ml.c5.18xlarge",
+														"ml.c5.24xlarge",
+														"ml.p3.2xlarge",
+														"ml.p3.8xlarge",
+														"ml.p3.16xlarge",
+														"ml.g4dn.xlarge",
+														"ml.g4dn.2xlarge",
+														"ml.g4dn.4xlarge",
+														"ml.g4dn.8xlarge",
+														"ml.g4dn.12xlarge",
+														"ml.g4dn.16xlarge",
+													}),
+												},
 											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
 											},
 										},
 									),
@@ -329,18 +389,27 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The Name of the AppImageConfig.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
 											},
 											"image_name": {
 												// Property: ImageName
 												Description: "The name of the CustomImage. Must be unique to your account.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 63),
+												},
 											},
 											"image_version_number": {
 												// Property: ImageVersionNumber
 												Description: "The version number of the CustomImage.",
 												Type:        types.NumberType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(0),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -359,18 +428,60 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The instance type that the image version runs on.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"system",
+														"ml.t3.micro",
+														"ml.t3.small",
+														"ml.t3.medium",
+														"ml.t3.large",
+														"ml.t3.xlarge",
+														"ml.t3.2xlarge",
+														"ml.m5.large",
+														"ml.m5.xlarge",
+														"ml.m5.2xlarge",
+														"ml.m5.4xlarge",
+														"ml.m5.8xlarge",
+														"ml.m5.12xlarge",
+														"ml.m5.16xlarge",
+														"ml.m5.24xlarge",
+														"ml.c5.large",
+														"ml.c5.xlarge",
+														"ml.c5.2xlarge",
+														"ml.c5.4xlarge",
+														"ml.c5.9xlarge",
+														"ml.c5.12xlarge",
+														"ml.c5.18xlarge",
+														"ml.c5.24xlarge",
+														"ml.p3.2xlarge",
+														"ml.p3.8xlarge",
+														"ml.p3.16xlarge",
+														"ml.g4dn.xlarge",
+														"ml.g4dn.2xlarge",
+														"ml.g4dn.4xlarge",
+														"ml.g4dn.8xlarge",
+														"ml.g4dn.12xlarge",
+														"ml.g4dn.16xlarge",
+													}),
+												},
 											},
 											"sage_maker_image_arn": {
 												// Property: SageMakerImageArn
 												Description: "The ARN of the SageMaker image that the image version belongs to.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
 											},
 											"sage_maker_image_version_arn": {
 												// Property: SageMakerImageVersionArn
 												Description: "The ARN of the image version created on the instance.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 256),
+												},
 											},
 										},
 									),
@@ -385,6 +496,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 5),
+						},
 					},
 					"sharing_settings": {
 						// Property: SharingSettings
@@ -396,18 +510,30 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Allowed",
+											"Disabled",
+										}),
+									},
 								},
 								"s3_kms_key_id": {
 									// Property: S3KmsKeyId
 									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 2048),
+									},
 								},
 								"s3_output_path": {
 									// Property: S3OutputPath
 									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 							},
 						),
@@ -455,6 +581,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A name for the domain.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 			// DomainName is a force-new attribute.
 		},
 		"home_efs_file_system_id": {
@@ -482,6 +611,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
 			// KmsKeyId is a force-new attribute.
 		},
 		"single_sign_on_managed_application_instance_id": {
@@ -514,6 +646,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The VPC subnets that Studio uses for communication.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 16),
+			},
 			// SubnetIds is a force-new attribute.
 		},
 		"tags": {
@@ -553,11 +688,17 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -594,6 +735,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 32),
+			},
 			// VpcId is a force-new attribute.
 		},
 	}

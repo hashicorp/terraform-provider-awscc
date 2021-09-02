@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -286,17 +288,34 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: DataType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"STRING",
+											"INTEGER",
+											"DOUBLE",
+											"BOOLEAN",
+											"STRUCT",
+										}),
+									},
 								},
 								"data_type_spec": {
 									// Property: DataTypeSpec
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AWS/ALARM_STATE",
+										}),
+									},
 								},
 								"logical_id": {
 									// Property: LogicalId
 									Description: "Customer provided ID for property.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 								"name": {
 									// Property: Name
@@ -351,11 +370,17 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
 																					Optional: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 256),
+																					},
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 256),
+																					},
 																				},
 																			},
 																		),
@@ -429,11 +454,17 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					// Property: HierarchyLogicalId
 																					Type:     types.StringType,
 																					Optional: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 256),
+																					},
 																				},
 																				"property_logical_id": {
 																					// Property: PropertyLogicalId
 																					Type:     types.StringType,
 																					Required: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.StringLenBetween(1, 256),
+																					},
 																				},
 																			},
 																		),
@@ -452,6 +483,14 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: TypeName
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"Measurement",
+														"Attribute",
+														"Transform",
+														"Metric",
+													}),
+												},
 											},
 										},
 									),
@@ -551,6 +590,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Customer provided ID for hierarchy.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -806,17 +848,34 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DataType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"STRING",
+								"INTEGER",
+								"DOUBLE",
+								"BOOLEAN",
+								"STRUCT",
+							}),
+						},
 					},
 					"data_type_spec": {
 						// Property: DataTypeSpec
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AWS/ALARM_STATE",
+							}),
+						},
 					},
 					"logical_id": {
 						// Property: LogicalId
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -871,11 +930,17 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(1, 256),
+																		},
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
 																		Type:     types.StringType,
 																		Required: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(1, 256),
+																		},
 																	},
 																},
 															),
@@ -949,11 +1014,17 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: HierarchyLogicalId
 																		Type:     types.StringType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(1, 256),
+																		},
 																	},
 																	"property_logical_id": {
 																		// Property: PropertyLogicalId
 																		Type:     types.StringType,
 																		Required: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(1, 256),
+																		},
 																	},
 																},
 															),
@@ -972,6 +1043,14 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: TypeName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"Measurement",
+											"Attribute",
+											"Transform",
+											"Metric",
+										}),
+									},
 								},
 							},
 						),

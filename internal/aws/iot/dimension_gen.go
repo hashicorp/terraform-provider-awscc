@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -47,6 +48,9 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"string_values": {
@@ -110,12 +114,18 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The tag's key.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -137,6 +147,11 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of the dimension.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TOPIC_FILTER",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

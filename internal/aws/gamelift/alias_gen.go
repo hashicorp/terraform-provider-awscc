@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A human-readable description of the alias.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -58,12 +63,27 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"routing_strategy": {
 			// Property: RoutingStrategy
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "anyOf": [
+			//     {
+			//       "required": [
+			//         "FleetId"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "Message"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "FleetId": {
 			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
@@ -107,10 +127,28 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SIMPLE",
+								"TERMINAL",
+							}),
+						},
 					},
 				},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.AnyOfRequired(
+						validate.Required(
+							"fleet_id",
+						),
+						validate.Required(
+							"message",
+						),
+					),
+				),
+			},
 		},
 	}
 

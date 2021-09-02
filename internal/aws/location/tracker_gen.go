@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -55,6 +57,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
 			// Description is a force-new attribute.
 		},
 		"kms_key_id": {
@@ -68,6 +73,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 			// KmsKeyId is a force-new attribute.
 		},
 		"pricing_plan": {
@@ -83,6 +91,13 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetTracking",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"pricing_plan_data_source": {
@@ -118,6 +133,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// TrackerName is a force-new attribute.
 		},
 		"update_time": {

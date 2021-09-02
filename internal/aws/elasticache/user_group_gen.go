@@ -47,6 +47,11 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Must be redis.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"redis",
+				}),
+			},
 			// Engine is a force-new attribute.
 		},
 		"status": {
@@ -87,8 +92,10 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "List of users associated to this user group.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 	}
 

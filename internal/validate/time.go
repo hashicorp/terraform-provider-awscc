@@ -1,0 +1,60 @@
+package validate
+
+import (
+	"context"
+	"fmt"
+	"time"
+
+	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+)
+
+// isRFC3339TimeValidator validates that a string Attribute's length is a valid RFC33349Time.
+type isRFC3339TimeValidator struct {
+	tfsdk.AttributeValidator
+}
+
+// Description describes the validation in plain text formatting.
+func (v isRFC3339TimeValidator) Description(_ context.Context) string {
+	return "string must be a valid RFC3339 date-time"
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (v isRFC3339TimeValidator) MarkdownDescription(ctx context.Context) string {
+	return v.Description(ctx)
+}
+
+// Validate performs the validation.
+func (v isRFC3339TimeValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid value type",
+			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
+		})
+
+		return
+	}
+
+	if s.Unknown || s.Null {
+		return
+	}
+
+	if _, err := time.Parse(time.RFC3339, s.Value); err != nil {
+		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
+			Severity: tfprotov6.DiagnosticSeverityError,
+			Summary:  "Invalid format",
+			Detail:   fmt.Sprintf("expected %s to be a valid RFC3339 date, got %s: %+v", request.AttributePath, s.Value, err),
+		})
+
+		return
+	}
+}
+
+// IsRFC3339Time returns a new string RFC33349Time validator.
+func IsRFC3339Time() tfsdk.AttributeValidator {
+	return isRFC3339TimeValidator{}
+}

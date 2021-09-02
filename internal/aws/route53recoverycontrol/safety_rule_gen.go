@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -202,6 +204,13 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A rule can be one of the following: ATLEAST, AND, or OR.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AND",
+								"OR",
+								"ATLEAST",
+							}),
+						},
 					},
 				},
 			),
@@ -275,6 +284,22 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"assertion_rule",
+			"name",
+			"control_panel_arn",
+			"rule_config",
+		),
+		validate.Required(
+			"gating_rule",
+			"name",
+			"control_panel_arn",
+			"rule_config",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

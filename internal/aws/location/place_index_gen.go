@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -76,6 +78,12 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IntendedUse
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"SingleUse",
+								"Storage",
+							}),
+						},
 					},
 				},
 			),
@@ -94,6 +102,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
 			// Description is a force-new attribute.
 		},
 		"index_arn": {
@@ -118,6 +129,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// IndexName is a force-new attribute.
 		},
 		"pricing_plan": {
@@ -133,6 +147,13 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetTracking",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"update_time": {

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The description of the prepared statement.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"query_statement": {
 			// Property: QueryStatement
@@ -46,6 +51,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The query string for the prepared statement.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 262144),
+			},
 		},
 		"statement_name": {
 			// Property: StatementName
@@ -59,6 +67,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The name of the prepared statement.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// StatementName is a force-new attribute.
 		},
 		"work_group": {
@@ -73,6 +84,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The name of the workgroup to which the prepared statement belongs.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// WorkGroup is a force-new attribute.
 		},
 	}

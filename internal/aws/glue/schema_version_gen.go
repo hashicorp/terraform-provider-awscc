@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -56,6 +58,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "Name of the registry to identify where the Schema is located.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"schema_arn": {
 						// Property: SchemaArn
@@ -68,6 +73,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "Name of the schema. This parameter requires RegistryName to be provided.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 			),
@@ -86,6 +94,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Complete definition of the schema in plain-text.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 170000),
+			},
 			// SchemaDefinition is a force-new attribute.
 		},
 		"version_id": {

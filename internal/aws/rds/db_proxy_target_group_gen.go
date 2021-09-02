@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -37,10 +39,14 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//     },
 			//     "MaxConnectionsPercent": {
 			//       "description": "The maximum size of the connection pool for each target in a target group.",
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "MaxIdleConnectionsPercent": {
 			//       "description": "Controls how actively the proxy closes idle database connections in the connection pool.",
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "SessionPinningFilters": {
@@ -73,12 +79,18 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The maximum size of the connection pool for each target in a target group.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"max_idle_connections_percent": {
 						// Property: MaxIdleConnectionsPercent
 						Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"session_pinning_filters": {
 						// Property: SessionPinningFilters
@@ -128,6 +140,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The identifier for the proxy.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 64),
+			},
 			// DBProxyName is a force-new attribute.
 		},
 		"target_group_arn": {
@@ -154,6 +169,11 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The identifier for the DBProxyTargetGroup",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"default",
+				}),
+			},
 			// TargetGroupName is a force-new attribute.
 		},
 	}

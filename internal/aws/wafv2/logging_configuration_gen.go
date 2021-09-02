@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -141,6 +143,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						Description: "Default handling for logs that don't match any of the specified filtering conditions.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"KEEP",
+								"DROP",
+							}),
+						},
 					},
 					"filters": {
 						// Property: Filters
@@ -152,6 +160,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"KEEP",
+											"DROP",
+										}),
+									},
 								},
 								"conditions": {
 									// Property: Conditions
@@ -168,6 +182,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 															Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"ALLOW",
+																	"BLOCK",
+																	"COUNT",
+																}),
+															},
 														},
 													},
 												),
@@ -200,6 +221,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"MEETS_ALL",
+											"MEETS_ANY",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -326,6 +353,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"MATCH",
+											"NO_MATCH",
+											"EVALUATE_AS_STRING",
+										}),
+									},
 								},
 								"match_pattern": {
 									// Property: MatchPattern
@@ -343,6 +377,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenAtLeast(1),
+												},
 											},
 										},
 									),
@@ -353,6 +390,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Description: "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ALL",
+											"KEY",
+											"VALUE",
+										}),
+									},
 								},
 							},
 						),

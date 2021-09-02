@@ -67,8 +67,10 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"gateway_id": {
 			// Property: GatewayId

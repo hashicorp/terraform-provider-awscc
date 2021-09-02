@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -32,6 +34,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 20),
+			},
 			// AppId is a force-new attribute.
 		},
 		"arn": {
@@ -71,6 +76,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
 		},
 		"certificate_record": {
 			// Property: CertificateRecord
@@ -92,6 +100,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
 			// DomainName is a force-new attribute.
 		},
 		"domain_status": {
@@ -157,11 +168,17 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BranchName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"prefix": {
 						// Property: Prefix
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

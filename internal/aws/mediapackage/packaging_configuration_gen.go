@@ -201,6 +201,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"SCTE35_ENHANCED",
+											"PASSTHROUGH",
+										}),
+									},
 								},
 								"include_iframe_only_stream": {
 									// Property: IncludeIframeOnlyStream
@@ -248,6 +255,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ORIGINAL",
+														"VIDEO_BITRATE_ASCENDING",
+														"VIDEO_BITRATE_DESCENDING",
+													}),
+												},
 											},
 										},
 									),
@@ -423,6 +437,12 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Description: "Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"FULL",
+											"COMPACT",
+										}),
+									},
 								},
 								"manifest_name": {
 									// Property: ManifestName
@@ -441,6 +461,12 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"HBBTV_1_5",
+										}),
+									},
 								},
 								"stream_selection": {
 									// Property: StreamSelection
@@ -464,6 +490,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ORIGINAL",
+														"VIDEO_BITRATE_ASCENDING",
+														"VIDEO_BITRATE_DESCENDING",
+													}),
+												},
 											},
 										},
 									),
@@ -533,6 +566,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NUMBER_WITH_TIMELINE",
+								"TIME_WITH_TIMELINE",
+								"NUMBER_WITH_DURATION",
+							}),
+						},
 					},
 				},
 			),
@@ -687,6 +727,12 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Description: "The encryption method to use.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"AES_128",
+											"SAMPLE_AES",
+										}),
+									},
 								},
 								"speke_key_provider": {
 									// Property: SpekeKeyProvider
@@ -729,6 +775,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"NONE",
+											"SCTE35_ENHANCED",
+											"PASSTHROUGH",
+										}),
+									},
 								},
 								"include_iframe_only_stream": {
 									// Property: IncludeIframeOnlyStream
@@ -776,6 +829,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ORIGINAL",
+														"VIDEO_BITRATE_ASCENDING",
+														"VIDEO_BITRATE_DESCENDING",
+													}),
+												},
 											},
 										},
 									),
@@ -979,6 +1039,13 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 												Description: "A directive that determines the order of streams in the output.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"ORIGINAL",
+														"VIDEO_BITRATE_ASCENDING",
+														"VIDEO_BITRATE_DESCENDING",
+													}),
+												},
 											},
 										},
 									),
@@ -1050,8 +1117,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 	}
 

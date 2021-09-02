@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Dataset name",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -46,6 +51,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Project name",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// Name is a force-new attribute.
 		},
 		"recipe_name": {
@@ -60,6 +68,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Recipe name",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -80,6 +91,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "Size": {
 			//       "description": "Sample size",
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "Type": {
@@ -104,12 +116,22 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Sample size",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
 					},
 					"type": {
 						// Property: Type
 						Description: "Sample type",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"FIRST_N",
+								"LAST_N",
+								"RANDOM",
+							}),
+						},
 					},
 				},
 			),
@@ -150,11 +172,17 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

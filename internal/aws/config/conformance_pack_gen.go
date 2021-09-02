@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -60,12 +62,18 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Description: "Key part of key-value pair with value being parameter value",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 					"parameter_value": {
 						// Property: ParameterValue
 						Description: "Value part of key-value pair with key being parameter Name",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 4096),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -88,6 +96,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Name of the conformance pack which will be assigned as the unique identifier.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// ConformancePackName is a force-new attribute.
 		},
 		"delivery_s3_bucket": {
@@ -102,6 +113,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 		},
 		"delivery_s3_key_prefix": {
 			// Property: DeliveryS3KeyPrefix
@@ -115,6 +129,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The prefix for delivery S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"template_body": {
 			// Property: TemplateBody
@@ -128,6 +145,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 51200),
+			},
 			// TemplateBody is a write-only attribute.
 		},
 		"template_s3_uri": {
@@ -143,6 +163,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// TemplateS3Uri is a write-only attribute.
 		},
 	}

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -76,6 +77,14 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AUTOMATIC",
+								"NFS3",
+								"NFS4_0",
+								"NFS4_1",
+							}),
+						},
 					},
 				},
 			),
@@ -114,6 +123,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "ARN(s) of the agent(s) to use for an NFS location.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 4),
+						},
 					},
 				},
 			),
@@ -131,6 +143,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 255),
+			},
 			// ServerHostname is a force-new attribute.
 			// ServerHostname is a write-only attribute.
 		},
@@ -146,6 +161,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 4096),
+			},
 			// Subdirectory is a write-only attribute.
 		},
 		"tags": {
@@ -191,12 +209,18 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for an AWS resource tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -60,6 +61,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Application Description, should be between 1 and 2048 characters.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 		},
 		"application_id": {
 			// Property: ApplicationId
@@ -99,6 +103,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Application Name, should be between 1 and 256 characters.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"application_state": {
 			// Property: ApplicationState
@@ -146,6 +153,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1600),
+			},
 		},
 		"sso_client_id": {
 			// Property: SsoClientId
@@ -200,12 +210,18 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

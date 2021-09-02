@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +45,9 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Any comments that you want to include about the hosted zone.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 			),
@@ -86,12 +90,18 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},
@@ -118,6 +128,9 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.\n\nIf you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 			// Name is a force-new attribute.
 		},
 		"name_servers": {

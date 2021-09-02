@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -139,6 +140,18 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "Encryption": {
 			//               "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+			//               "oneOf": [
+			//                 {
+			//                   "required": [
+			//                     "SSES3"
+			//                   ]
+			//                 },
+			//                 {
+			//                   "required": [
+			//                     "SSEKMS"
+			//                   ]
+			//                 }
+			//               ],
 			//               "type": "object"
 			//             },
 			//             "Format": {
@@ -397,12 +410,23 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"CSV",
+														"Parquet",
+													}),
+												},
 											},
 											"output_schema_version": {
 												// Property: OutputSchemaVersion
 												Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"V_1",
+													}),
+												},
 											},
 											"prefix": {
 												// Property: Prefix
@@ -442,6 +466,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ID that identifies the Amazon S3 Storage Lens configuration.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 						// Id is a force-new attribute.
 					},
 					"include": {
@@ -518,11 +545,17 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

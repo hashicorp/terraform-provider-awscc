@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -66,6 +67,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The encryption type to use.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"AES256",
+								"KMS",
+							}),
+						},
 						// EncryptionType is a force-new attribute.
 					},
 					"kms_key": {
@@ -74,6 +81,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 						// KmsKey is a force-new attribute.
 					},
 				},
@@ -123,6 +133,12 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The image tag mutability setting for the repository.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"MUTABLE",
+					"IMMUTABLE",
+				}),
+			},
 		},
 		"lifecycle_policy": {
 			// Property: LifecyclePolicy
@@ -155,12 +171,18 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The JSON repository policy text to apply to the repository.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(100, 30720),
+						},
 					},
 					"registry_id": {
 						// Property: RegistryId
 						Description: "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(12, 12),
+						},
 					},
 				},
 			),
@@ -180,6 +202,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(2, 256),
+			},
 			// RepositoryName is a force-new attribute.
 		},
 		"repository_policy_text": {
@@ -243,12 +268,18 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

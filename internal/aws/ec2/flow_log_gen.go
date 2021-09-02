@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -73,6 +75,12 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"cloud-watch-logs",
+					"s3",
+				}),
+			},
 			// LogDestinationType is a force-new attribute.
 		},
 		"log_format": {
@@ -141,6 +149,13 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NetworkInterface",
+					"Subnet",
+					"VPC",
+				}),
+			},
 			// ResourceType is a force-new attribute.
 		},
 		"tags": {
@@ -200,6 +215,13 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ACCEPT",
+					"ALL",
+					"REJECT",
+				}),
+			},
 			// TrafficType is a force-new attribute.
 		},
 	}

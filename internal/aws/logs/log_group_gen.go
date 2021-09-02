@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"log_group_name": {
 			// Property: LogGroupName
@@ -59,6 +64,9 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
 			// LogGroupName is a force-new attribute.
 		},
 		"retention_in_days": {
@@ -90,6 +98,27 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntInSlice([]int{
+					1,
+					3,
+					5,
+					7,
+					14,
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					365,
+					400,
+					545,
+					731,
+					1827,
+					3653,
+				}),
+			},
 		},
 	}
 

@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +35,9 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "Metadata key",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Key is a force-new attribute.
 		},
 		"schema_version_id": {
@@ -60,6 +65,9 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "Metadata value",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// Value is a force-new attribute.
 		},
 	}

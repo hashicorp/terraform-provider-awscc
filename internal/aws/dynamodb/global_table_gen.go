@@ -65,6 +65,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AttributeName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"attribute_type": {
 						// Property: AttributeType
@@ -149,12 +152,15 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "MaxCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "MinCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "SeedCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "TargetTrackingScalingPolicyConfiguration": {
@@ -164,9 +170,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "boolean"
 			//                   },
 			//                   "ScaleInCooldown": {
+			//                     "minimum": 0,
 			//                     "type": "integer"
 			//                   },
 			//                   "ScaleOutCooldown": {
+			//                     "minimum": 0,
 			//                     "type": "integer"
 			//                   },
 			//                   "TargetValue": {
@@ -207,6 +215,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IndexName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 255),
+						},
 					},
 					"key_schema": {
 						// Property: KeySchema
@@ -216,6 +227,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AttributeName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 								"key_type": {
 									// Property: KeyType
@@ -228,8 +242,10 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								MaxItems: 2,
 							},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Required:   true,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"projection": {
 						// Property: Projection
@@ -261,16 +277,25 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: MaxCapacity
 												Type:     types.NumberType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"min_capacity": {
 												// Property: MinCapacity
 												Type:     types.NumberType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
 												Type:     types.NumberType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
@@ -285,11 +310,17 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ScaleInCooldown
 															Type:     types.NumberType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(0),
+															},
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															Type:     types.NumberType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(0),
+															},
 														},
 														"target_value": {
 															// Property: TargetValue
@@ -346,6 +377,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AttributeName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 					"key_type": {
 						// Property: KeyType
@@ -358,8 +392,10 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 2,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Required:   true,
+			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// KeySchema is a force-new attribute.
 		},
 		"local_secondary_indexes": {
@@ -433,6 +469,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: IndexName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 255),
+						},
 					},
 					"key_schema": {
 						// Property: KeySchema
@@ -442,6 +481,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AttributeName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 255),
+									},
 								},
 								"key_type": {
 									// Property: KeyType
@@ -453,8 +495,10 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								MaxItems: 2,
 							},
 						),
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Required:   true,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"projection": {
 						// Property: Projection
@@ -530,12 +574,15 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "additionalProperties": false,
 			//                   "properties": {
 			//                     "MaxCapacity": {
+			//                       "minimum": 1,
 			//                       "type": "integer"
 			//                     },
 			//                     "MinCapacity": {
+			//                       "minimum": 1,
 			//                       "type": "integer"
 			//                     },
 			//                     "SeedCapacity": {
+			//                       "minimum": 1,
 			//                       "type": "integer"
 			//                     },
 			//                     "TargetTrackingScalingPolicyConfiguration": {
@@ -545,9 +592,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           "type": "boolean"
 			//                         },
 			//                         "ScaleInCooldown": {
+			//                           "minimum": 0,
 			//                           "type": "integer"
 			//                         },
 			//                         "ScaleOutCooldown": {
+			//                           "minimum": 0,
 			//                           "type": "integer"
 			//                         },
 			//                         "TargetValue": {
@@ -569,6 +618,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "type": "object"
 			//                 },
 			//                 "ReadCapacityUnits": {
+			//                   "minimum": 1,
 			//                   "type": "integer"
 			//                 }
 			//               },
@@ -599,12 +649,15 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "MaxCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "MinCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "SeedCapacity": {
+			//                 "minimum": 1,
 			//                 "type": "integer"
 			//               },
 			//               "TargetTrackingScalingPolicyConfiguration": {
@@ -614,9 +667,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "boolean"
 			//                   },
 			//                   "ScaleInCooldown": {
+			//                     "minimum": 0,
 			//                     "type": "integer"
 			//                   },
 			//                   "ScaleOutCooldown": {
+			//                     "minimum": 0,
 			//                     "type": "integer"
 			//                   },
 			//                   "TargetValue": {
@@ -638,6 +693,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "object"
 			//           },
 			//           "ReadCapacityUnits": {
+			//             "minimum": 1,
 			//             "type": "integer"
 			//           }
 			//         },
@@ -725,6 +781,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: IndexName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 255),
+									},
 								},
 								"read_provisioned_throughput_settings": {
 									// Property: ReadProvisionedThroughputSettings
@@ -738,16 +797,25 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: MaxCapacity
 															Type:     types.NumberType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(1),
+															},
 														},
 														"min_capacity": {
 															// Property: MinCapacity
 															Type:     types.NumberType,
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(1),
+															},
 														},
 														"seed_capacity": {
 															// Property: SeedCapacity
 															Type:     types.NumberType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(1),
+															},
 														},
 														"target_tracking_scaling_policy_configuration": {
 															// Property: TargetTrackingScalingPolicyConfiguration
@@ -762,11 +830,17 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		// Property: ScaleInCooldown
 																		Type:     types.NumberType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.IntAtLeast(0),
+																		},
 																	},
 																	"scale_out_cooldown": {
 																		// Property: ScaleOutCooldown
 																		Type:     types.NumberType,
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.IntAtLeast(0),
+																		},
 																	},
 																	"target_value": {
 																		// Property: TargetValue
@@ -785,6 +859,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: ReadCapacityUnits
 												Type:     types.NumberType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 										},
 									),
@@ -820,16 +897,25 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: MaxCapacity
 												Type:     types.NumberType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"min_capacity": {
 												// Property: MinCapacity
 												Type:     types.NumberType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
 												Type:     types.NumberType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(1),
+												},
 											},
 											"target_tracking_scaling_policy_configuration": {
 												// Property: TargetTrackingScalingPolicyConfiguration
@@ -844,11 +930,17 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ScaleInCooldown
 															Type:     types.NumberType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(0),
+															},
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
 															Type:     types.NumberType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntAtLeast(0),
+															},
 														},
 														"target_value": {
 															// Property: TargetValue
@@ -867,6 +959,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ReadCapacityUnits
 									Type:     types.NumberType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 							},
 						),
@@ -1049,12 +1144,15 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "MaxCapacity": {
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "MinCapacity": {
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "SeedCapacity": {
+			//           "minimum": 1,
 			//           "type": "integer"
 			//         },
 			//         "TargetTrackingScalingPolicyConfiguration": {
@@ -1064,9 +1162,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "type": "boolean"
 			//             },
 			//             "ScaleInCooldown": {
+			//               "minimum": 0,
 			//               "type": "integer"
 			//             },
 			//             "ScaleOutCooldown": {
+			//               "minimum": 0,
 			//               "type": "integer"
 			//             },
 			//             "TargetValue": {
@@ -1100,16 +1200,25 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MaxCapacity
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 								"min_capacity": {
 									// Property: MinCapacity
 									Type:     types.NumberType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 								"seed_capacity": {
 									// Property: SeedCapacity
 									Type:     types.NumberType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 								"target_tracking_scaling_policy_configuration": {
 									// Property: TargetTrackingScalingPolicyConfiguration
@@ -1124,11 +1233,17 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: ScaleInCooldown
 												Type:     types.NumberType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(0),
+												},
 											},
 											"scale_out_cooldown": {
 												// Property: ScaleOutCooldown
 												Type:     types.NumberType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntAtLeast(0),
+												},
 											},
 											"target_value": {
 												// Property: TargetValue

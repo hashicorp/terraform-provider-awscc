@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -56,6 +58,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Style
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 100),
+						},
 					},
 				},
 			),
@@ -94,6 +99,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1000),
+			},
 			// Description is a force-new attribute.
 		},
 		"map_arn": {
@@ -118,6 +126,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// MapName is a force-new attribute.
 		},
 		"pricing_plan": {
@@ -133,6 +144,13 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RequestBasedUsage",
+					"MobileAssetTracking",
+					"MobileAssetManagement",
+				}),
+			},
 			// PricingPlan is a force-new attribute.
 		},
 		"update_time": {

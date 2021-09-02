@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +45,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device description",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
 		},
 		"destination_name": {
 			// Property: DestinationName
@@ -56,6 +60,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device destination name",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -86,6 +93,28 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "OtaaV11"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "OtaaV10x"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "AbpV11"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "AbpV10x"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "AbpV10x": {
 			//       "additionalProperties": false,
@@ -300,6 +329,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: DeviceProfileId
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 					"otaa_v10_x": {
 						// Property: OtaaV10x
@@ -346,10 +378,31 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ServiceProfileId
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"otaa_v11",
+						),
+						validate.Required(
+							"otaa_v10_x",
+						),
+						validate.Required(
+							"abp_v11",
+						),
+						validate.Required(
+							"abp_v10_x",
+						),
+					),
+				),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -362,6 +415,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device name",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -396,11 +452,17 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{
@@ -445,6 +507,12 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device type, currently only Sidewalk and LoRa",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Sidewalk",
+					"LoRaWAN",
+				}),
+			},
 		},
 	}
 

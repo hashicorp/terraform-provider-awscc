@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +44,9 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A description of the CMK. Use a description that helps you to distinguish this CMK from others in the account, such as its intended use.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 8192),
+			},
 		},
 		"enable_key_rotation": {
 			// Property: EnableKeyRotation
@@ -106,6 +110,18 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SYMMETRIC_DEFAULT",
+					"RSA_2048",
+					"RSA_3072",
+					"RSA_4096",
+					"ECC_NIST_P256",
+					"ECC_NIST_P384",
+					"ECC_NIST_P521",
+					"ECC_SECG_P256K1",
+				}),
+			},
 		},
 		"key_usage": {
 			// Property: KeyUsage
@@ -121,6 +137,12 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ENCRYPT_DECRYPT",
+					"SIGN_VERIFY",
+				}),
+			},
 		},
 		"multi_region": {
 			// Property: MultiRegion
@@ -138,11 +160,16 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
+			//   "maximum": 30,
+			//   "minimum": 7,
 			//   "type": "integer"
 			// }
 			Description: "Specifies the number of days in the waiting period before AWS KMS deletes a CMK that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(7, 30),
+			},
 			// PendingWindowInDays is a write-only attribute.
 		},
 		"tags": {
@@ -185,12 +212,18 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},

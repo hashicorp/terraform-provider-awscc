@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The name of the endpoint used to run the monitoring job.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 		},
 		"failure_reason": {
 			// Property: FailureReason
@@ -57,6 +62,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Contains the reason a monitoring job failed, if it failed.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
@@ -147,12 +155,18 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The name of the endpoint used to run the monitoring job.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 63),
+						},
 					},
 					"failure_reason": {
 						// Property: FailureReason
 						Description: "Contains the reason a monitoring job failed, if it failed.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 					"last_modified_time": {
 						// Property: LastModifiedTime
@@ -165,18 +179,35 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The status of the monitoring job.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Pending",
+								"Completed",
+								"CompletedWithViolations",
+								"InProgress",
+								"Failed",
+								"Stopping",
+								"Stopped",
+							}),
+						},
 					},
 					"monitoring_schedule_name": {
 						// Property: MonitoringScheduleName
 						Description: "The name of the monitoring schedule.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 63),
+						},
 					},
 					"processing_job_arn": {
 						// Property: ProcessingJobArn
 						Description: "The Amazon Resource Name (ARN) of the monitoring job.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 					"scheduled_time": {
 						// Property: ScheduledTime
@@ -439,6 +470,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//               "properties": {
 			//                 "InstanceCount": {
 			//                   "description": "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+			//                   "maximum": 100,
+			//                   "minimum": 1,
 			//                   "type": "integer"
 			//                 },
 			//                 "InstanceType": {
@@ -447,10 +480,14 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//                 },
 			//                 "VolumeKmsKeyId": {
 			//                   "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
+			//                   "maximum": 2048,
+			//                   "minimum": 1,
 			//                   "type": "string"
 			//                 },
 			//                 "VolumeSizeInGB": {
 			//                   "description": "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
+			//                   "maximum": 16384,
+			//                   "minimum": 1,
 			//                   "type": "integer"
 			//                 }
 			//               },
@@ -528,6 +565,8 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           "properties": {
 			//             "MaxRuntimeInSeconds": {
 			//               "description": "The maximum runtime allowed in seconds.",
+			//               "maximum": 86400,
+			//               "minimum": 1,
 			//               "type": "integer"
 			//             }
 			//           },
@@ -605,6 +644,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The Amazon S3 URI.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 1024),
+															},
 														},
 													},
 												),
@@ -620,6 +662,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The Amazon S3 URI.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 1024),
+															},
 														},
 													},
 												),
@@ -647,30 +692,45 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Description: "An array of arguments for the container used to run the monitoring job.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 50),
+												},
 											},
 											"container_entrypoint": {
 												// Property: ContainerEntrypoint
 												Description: "Specifies the entrypoint for a container used to run the monitoring job.",
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 100),
+												},
 											},
 											"image_uri": {
 												// Property: ImageUri
 												Description: "The container image to be run by the monitoring job.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 255),
+												},
 											},
 											"post_analytics_processor_source_uri": {
 												// Property: PostAnalyticsProcessorSourceUri
 												Description: "The Amazon S3 URI.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 1024),
+												},
 											},
 											"record_preprocessor_source_uri": {
 												// Property: RecordPreprocessorSourceUri
 												Description: "The Amazon S3 URI.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 1024),
+												},
 											},
 										},
 									),
@@ -691,24 +751,42 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The name of the endpoint used to run the monitoring job.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 63),
+															},
 														},
 														"local_path": {
 															// Property: LocalPath
 															Description: "Path to the filesystem where the endpoint data is available to the container.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(0, 256),
+															},
 														},
 														"s3_data_distribution_type": {
 															// Property: S3DataDistributionType
 															Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"FullyReplicated",
+																	"ShardedByS3Key",
+																}),
+															},
 														},
 														"s3_input_mode": {
 															// Property: S3InputMode
 															Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
 															Type:        types.StringType,
 															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"Pipe",
+																	"File",
+																}),
+															},
 														},
 													},
 												),
@@ -732,6 +810,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 2048),
+												},
 											},
 											"monitoring_outputs": {
 												// Property: MonitoringOutputs
@@ -748,18 +829,30 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 																		Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 																		Type:        types.StringType,
 																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(0, 256),
+																		},
 																	},
 																	"s3_upload_mode": {
 																		// Property: S3UploadMode
 																		Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringInSlice([]string{
+																				"Continuous",
+																				"EndOfJob",
+																			}),
+																		},
 																	},
 																	"s3_uri": {
 																		// Property: S3Uri
 																		Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 																		Type:        types.StringType,
 																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(0, 512),
+																		},
 																	},
 																},
 															),
@@ -789,6 +882,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntBetween(1, 100),
+															},
 														},
 														"instance_type": {
 															// Property: InstanceType
@@ -807,6 +903,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
 															Type:        types.NumberType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.IntBetween(1, 16384),
+															},
 														},
 													},
 												),
@@ -843,12 +942,18 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 															Type:        types.ListType{ElemType: types.StringType},
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayLenBetween(1, 5),
+															},
 														},
 														"subnets": {
 															// Property: Subnets
 															Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 															Type:        types.ListType{ElemType: types.StringType},
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayLenBetween(1, 16),
+															},
 														},
 													},
 												),
@@ -863,6 +968,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(20, 2048),
+									},
 								},
 								"stopping_condition": {
 									// Property: StoppingCondition
@@ -874,6 +982,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Description: "The maximum runtime allowed in seconds.",
 												Type:        types.NumberType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntBetween(1, 86400),
+												},
 											},
 										},
 									),
@@ -888,12 +999,23 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "Name of the job definition",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 63),
+						},
 					},
 					"monitoring_type": {
 						// Property: MonitoringType
 						Description: "The type of monitoring job.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DataQuality",
+								"ModelQuality",
+								"ModelBias",
+								"ModelExplainability",
+							}),
+						},
 					},
 					"schedule_config": {
 						// Property: ScheduleConfig
@@ -905,6 +1027,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "A cron expression that describes details about the monitoring schedule.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 256),
+									},
 								},
 							},
 						),
@@ -926,6 +1051,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The name of the monitoring schedule.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 			// MonitoringScheduleName is a force-new attribute.
 		},
 		"monitoring_schedule_status": {
@@ -944,6 +1072,14 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The status of a schedule job.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Pending",
+					"Failed",
+					"Scheduled",
+					"Stopped",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -984,12 +1120,18 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

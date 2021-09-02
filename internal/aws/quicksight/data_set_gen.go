@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +46,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(12, 12),
+			},
 			// AwsAccountId is a force-new attribute.
 		},
 		"column_groups": {
@@ -107,17 +112,28 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Columns in this hierarchy.</p>",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 16),
+									},
 								},
 								"country_code": {
 									// Property: CountryCode
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"US",
+										}),
+									},
 								},
 								"name": {
 									// Property: Name
 									Description: "<p>A display name for the hierarchy.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
 								},
 							},
 						),
@@ -164,11 +180,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ColumnNames
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"principals": {
 						// Property: Principals
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 100),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -244,11 +266,17 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Columns
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 5000),
+						},
 					},
 					"description": {
 						// Property: Description
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 500),
+						},
 					},
 				},
 				tfsdk.MapNestedAttributesOptions{},
@@ -268,6 +296,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SPICE",
+					"DIRECT_QUERY",
+				}),
+			},
 		},
 		"ingestion_wait_policy": {
 			// Property: IngestionWaitPolicy
@@ -277,6 +311,8 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "IngestionWaitTimeInHours": {
 			//       "description": "\u003cp\u003eThe maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.\u003c/p\u003e",
+			//       "maximum": 36,
+			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "WaitForSpiceIngestion": {
@@ -294,6 +330,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(1.000000, 36.000000),
+						},
 					},
 					"wait_for_spice_ingestion": {
 						// Property: WaitForSpiceIngestion
@@ -615,6 +654,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>A display name for the logical table.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"data_transforms": {
 						// Property: DataTransforms
@@ -631,17 +673,31 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>Column name.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"format": {
 												// Property: Format
 												Description: "<p>When casting a column from string to datetime type, you can supply a string in a\n            format supported by Amazon QuickSight to denote the source data format.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 32),
+												},
 											},
 											"new_column_type": {
 												// Property: NewColumnType
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+													}),
+												},
 											},
 										},
 									),
@@ -662,18 +718,27 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "<p>A unique ID to identify a calculated column. During a dataset update, if the column ID\n            of a calculated column matches that of an existing calculated column, Amazon QuickSight\n            preserves the existing calculated column.</p>",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 64),
+															},
 														},
 														"column_name": {
 															// Property: ColumnName
 															Description: "<p>Column name.</p>",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 128),
+															},
 														},
 														"expression": {
 															// Property: Expression
 															Description: "<p>An expression that defines the calculated column.</p>",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 4096),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -697,6 +762,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>An expression that must evaluate to a Boolean value. Rows for which the expression\n            evaluates to true are kept in the dataset.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 4096),
+												},
 											},
 										},
 									),
@@ -712,6 +780,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>Projected columns.</p>",
 												Type:        types.ListType{ElemType: types.StringType},
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(1, 2000),
+												},
 											},
 										},
 									),
@@ -727,12 +798,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The name of the column to be renamed.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"new_column_name": {
 												// Property: NewColumnName
 												Description: "<p>The new name for the column.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 										},
 									),
@@ -748,6 +825,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The column that this operation acts on.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"tags": {
 												// Property: Tags
@@ -764,6 +844,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Description: "<p>The text of a description for a column.</p>",
 																		Type:        types.StringType,
 																		Optional:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringLenBetween(0, 500),
+																		},
 																	},
 																},
 															),
@@ -773,6 +856,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: ColumnGeographicRole
 															Type:     types.StringType,
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"COUNTRY",
+																	"STATE",
+																	"COUNTY",
+																	"CITY",
+																	"POSTCODE",
+																	"LONGITUDE",
+																	"LATITUDE",
+																	"POLITICAL1",
+																}),
+															},
 														},
 													},
 													tfsdk.ListNestedAttributesOptions{
@@ -822,12 +917,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>Left operand.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 64),
+												},
 											},
 											"on_clause": {
 												// Property: OnClause
 												Description: "<p>On Clause.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 512),
+												},
 											},
 											"right_join_key_properties": {
 												// Property: RightJoinKeyProperties
@@ -847,11 +948,22 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>Right operand.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 64),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INNER",
+														"OUTER",
+														"LEFT",
+														"RIGHT",
+													}),
+												},
 											},
 										},
 									),
@@ -862,6 +974,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Physical table ID.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
 								},
 							},
 						),
@@ -884,6 +999,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The display name for the dataset.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 		},
 		"output_columns": {
 			// Property: OutputColumns
@@ -927,17 +1045,31 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>A description for a column.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 500),
+						},
 					},
 					"name": {
 						// Property: Name
 						Description: "<p>A display name for the dataset.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"type": {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"STRING",
+								"INTEGER",
+								"DECIMAL",
+								"DATETIME",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -986,12 +1118,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 16),
+						},
 					},
 					"principal": {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -1204,6 +1342,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 },
 			//                 "StartFromRow": {
 			//                   "description": "\u003cp\u003eA row number to start reading data from.\u003c/p\u003e",
+			//                   "minimum": 1,
 			//                   "type": "number"
 			//                 },
 			//                 "TextQualifier": {
@@ -1247,11 +1386,25 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The name of this column in the underlying data source.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1272,12 +1425,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>A display name for the SQL query result.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 128),
+									},
 								},
 								"sql_query": {
 									// Property: SqlQuery
 									Description: "<p>The SQL query.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 65536),
+									},
 								},
 							},
 						),
@@ -1292,6 +1451,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Catalog
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"data_source_arn": {
 									// Property: DataSourceArn
@@ -1309,11 +1471,25 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The name of this column in the underlying data source.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1328,12 +1504,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The name of the relational table.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
 								},
 								"schema": {
 									// Property: Schema
 									Description: "<p>The schema name. This name applies to certain relational database engines.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 64),
+									},
 								},
 							},
 						),
@@ -1360,11 +1542,25 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The name of this column in the underlying data source.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 128),
+												},
 											},
 											"type": {
 												// Property: Type
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"STRING",
+														"INTEGER",
+														"DECIMAL",
+														"DATETIME",
+														"BIT",
+														"BOOLEAN",
+														"JSON",
+													}),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{
@@ -1390,22 +1586,44 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The delimiter between values in the file.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 1),
+												},
 											},
 											"format": {
 												// Property: Format
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"CSV",
+														"TSV",
+														"CLF",
+														"ELF",
+														"XLSX",
+														"JSON",
+													}),
+												},
 											},
 											"start_from_row": {
 												// Property: StartFromRow
 												Description: "<p>A row number to start reading data from.</p>",
 												Type:        types.NumberType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.FloatAtLeast(1.000000),
+												},
 											},
 											"text_qualifier": {
 												// Property: TextQualifier
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"DOUBLE_QUOTE",
+														"SINGLE_QUOTE",
+													}),
+												},
 											},
 										},
 									),
@@ -1471,17 +1689,32 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: FormatVersion
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"VERSION_1",
+								"VERSION_2",
+							}),
+						},
 					},
 					"namespace": {
 						// Property: Namespace
 						Description: "<p>The namespace associated with the row-level permissions dataset.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"permission_policy": {
 						// Property: PermissionPolicy
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"GRANT_ACCESS",
+								"DENY_ACCESS",
+							}),
+						},
 					},
 				},
 			),
@@ -1526,12 +1759,18 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{

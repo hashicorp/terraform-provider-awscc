@@ -58,9 +58,11 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// DomainNameServers is a force-new attribute.
 		},
 		"netbios_name_servers": {
@@ -76,9 +78,11 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The IPv4 addresses of up to four NetBIOS name servers.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 			// NetbiosNameServers is a force-new attribute.
 		},
 		"netbios_node_type": {
@@ -146,11 +150,17 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
