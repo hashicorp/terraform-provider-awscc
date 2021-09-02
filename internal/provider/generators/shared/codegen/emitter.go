@@ -36,19 +36,20 @@ type parent struct {
 	}
 }
 
-// EmitResourceSchemaRequiredAttributeValidator generates any resource schema-level required Attributes validators.
+// EmitResourceSchemaRequiredAttributesValidator generates any resource schema-level required Attributes validators.
 func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() {
 	e.printf(resourceRequiredAttributesValidator(e.CfResource))
 }
 
-// EmitRootSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
+// EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
-func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
+// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
+func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string, computedOnly bool) (Features, error) {
 	var features Features
 
 	cfResource := e.CfResource
-	features, err := e.emitSchema(attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
+	features, err := e.emitSchema(attributeNameMap, parent{reqd: cfResource}, cfResource.Properties, computedOnly)
 
 	if err != nil {
 		return 0, err
@@ -78,7 +79,8 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (F
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
+// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
+func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, computedOnly bool) (Features, error) {
 	var features Features
 	var validators []string
 
@@ -236,7 +238,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						path: path,
 						reqd: property.Items,
 					},
-					property.Items.Properties)
+					property.Items.Properties,
+					computedOnly)
 
 				if err != nil {
 					return 0, err
@@ -246,12 +249,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf(",\n")
 				e.printf("providertypes.SetNestedAttributesOptions{\n")
-				if property.MinItems != nil {
-					e.printf("MinItems:%d,\n", *property.MinItems)
+
+				if !computedOnly {
+					if property.MinItems != nil {
+						e.printf("MinItems:%d,\n", *property.MinItems)
+					}
+					if property.MaxItems != nil {
+						e.printf("MaxItems:%d,\n", *property.MaxItems)
+					}
 				}
-				if property.MaxItems != nil {
-					e.printf("MaxItems:%d,\n", *property.MaxItems)
-				}
+
 				e.printf("},\n")
 				e.printf("),\n")
 
@@ -295,7 +302,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						path: path,
 						reqd: property.Items,
 					},
-					property.Items.Properties)
+					property.Items.Properties,
+					computedOnly)
 
 				if err != nil {
 					return 0, err
@@ -305,12 +313,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf(",\n")
 				e.printf("tfsdk.ListNestedAttributesOptions{\n")
-				if property.MinItems != nil {
-					e.printf("MinItems:%d,\n", *property.MinItems)
+
+				if !computedOnly {
+					if property.MinItems != nil {
+						e.printf("MinItems:%d,\n", *property.MinItems)
+					}
+					if property.MaxItems != nil {
+						e.printf("MaxItems:%d,\n", *property.MaxItems)
+					}
 				}
-				if property.MaxItems != nil {
-					e.printf("MaxItems:%d,\n", *property.MaxItems)
-				}
+
 				e.printf("},\n")
 				e.printf("),\n")
 
@@ -435,7 +447,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						path: path,
 						reqd: property.Items,
 					},
-					patternProperty.Properties)
+					patternProperty.Properties,
+					computedOnly)
 
 				if err != nil {
 					return 0, err
@@ -445,12 +458,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf(",\n")
 				e.printf("tfsdk.MapNestedAttributesOptions{\n")
-				if patternProperty.MinItems != nil {
-					e.printf("MinItems:%d,\n", *patternProperty.MinItems)
+
+				if !computedOnly {
+					if patternProperty.MinItems != nil {
+						e.printf("MinItems:%d,\n", *patternProperty.MinItems)
+					}
+					if patternProperty.MaxItems != nil {
+						e.printf("MaxItems:%d,\n", *patternProperty.MaxItems)
+					}
 				}
-				if patternProperty.MaxItems != nil {
-					e.printf("MaxItems:%d,\n", *patternProperty.MaxItems)
-				}
+
 				e.printf("},\n")
 				e.printf("),\n")
 
@@ -482,7 +499,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				path: path,
 				reqd: property,
 			},
-			property.Properties)
+			property.Properties,
+			computedOnly)
 
 		if err != nil {
 			return 0, err
@@ -499,6 +517,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 	default:
 		return 0, unsupportedTypeError(path, propertyType)
+	}
+
+	// Return early as attribute validations are not required
+	// and additional configurations are not supported when an attribute is "Computed"
+	if computedOnly {
+		e.printf("Computed:true,\n")
+		e.printf("}")
+
+		return features, nil
 	}
 
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
@@ -559,7 +586,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
+// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
+func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property, computedOnly bool) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
 		names = append(names, name)
@@ -587,7 +615,8 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 			append(parent.path, name),
 			name,
 			properties[name],
-			parent.reqd.IsRequired(name))
+			parent.reqd.IsRequired(name),
+			computedOnly)
 
 		if err != nil {
 			return 0, err
