@@ -44,4 +44,4 @@ tools:
 	cd tools && go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 
 docs:
-	go generate main.go
+	@tfplugindocs generate
