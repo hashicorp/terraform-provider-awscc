@@ -8,8 +8,6 @@ description: |-
 
 # aws-cloudapi Provider
 
-
-
 ## Example Usage
 
 ```terraform

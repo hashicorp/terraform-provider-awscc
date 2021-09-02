@@ -34,10 +34,14 @@ test:
 testacc:
 	TF_ACC=1 go test ./$(PKG_NAME) -v -count $(TEST_COUNT) -parallel $(ACCTEST_PARALLELISM) $(TESTARGS) -timeout $(ACCTEST_TIMEOUT)
 
-lint: golangci-lint
+lint: golangci-lint importlint
 
 golangci-lint:
 	@golangci-lint run ./internal/...
 
+importlint:
+	@impi --local . --scheme stdThirdPartyLocal --ignore-generated=true ./...
+
 tools:
 	cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
+	cd tools && go install github.com/pavius/impi/cmd/impi
