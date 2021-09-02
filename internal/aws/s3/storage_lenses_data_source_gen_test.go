@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSS3StorageLensDataSource_basic(t *testing.T) {
+func TestAccAWSS3StorageLensesDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "AWS::S3::StorageLens", "awscc_s3_storage_lenses", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{

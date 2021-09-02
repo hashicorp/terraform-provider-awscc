@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/jinzhu/inflection"
 	"go/format"
 	"os"
 	"path"
@@ -98,7 +97,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	org, svc, res, err := naming.ParseCloudFormationTypeName(g.cfType)
 
-	ds := inflection.Plural(res)
+	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
 
 	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + "DataSourceType"
 
