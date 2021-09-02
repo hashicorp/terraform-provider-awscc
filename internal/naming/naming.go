@@ -1,6 +1,7 @@
 package naming
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/jinzhu/inflection"
@@ -75,28 +76,62 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 // Pluralize converts a name to its plural form.
 // The inflection package is used as a first attempt to pluralize names,
 // but exceptions to the rule are handled as follows:
-//  - 'es' is appended to a name ending in 's'
+//  - '_plural' is appended to a name ending in 's' e.g. 'windows'
 //  - 's' is appended to a name ending in a number
 func Pluralize(name string) string {
 	if name == "" {
 		return name
 	}
 
-	// Custom Rules
-	inflection.AddIrregular("lens", "lenses")          // "lens" => "lenses"
-	inflection.AddPlural("((e|n)f)s$", "${1}s_plural") // "efs" => "efs_plural" or "nfs" => "nfs_plural"
-	inflection.AddPlural("(tion)s$", "${1}s_plural")   // "associations" => "associations_plural"
-	inflection.AddPlural("(window)s$", "${1}s_plural") // "windows" => "windows_plural"
+	// Custom Rule
+	inflection.AddIrregular("lens", "lenses") // "lens" => "lenses"
 
 	pluralName := inflection.Plural(name)
 
-	if pluralName == name {
-		arr := []byte(pluralName)
-		lastChar := arr[len(arr)-1]
+	if pluralName != name {
+		return pluralName
+	}
 
-		if isNumeric(lastChar) {
-			pluralName += "s" // "s3" => "s3s"
-		}
+	if isCustomName(pluralName) {
+		return pluralName + "_plural"
+	}
+
+	arr := []byte(pluralName)
+	lastChar := arr[len(arr)-1]
+
+	if isNumeric(lastChar) {
+		pluralName += "s" // "s3" => "s3s"
+	}
+
+	return pluralName
+}
+
+// PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
+// with the exception that a suffix can be passed in as an argument to be used
+// only for names that are considered "custom" i.e. return true for isCustomName.
+func PluralizeWithCustomNameSuffix(name, suffix string) string {
+	if name == "" {
+		return name
+	}
+
+	// Custom Rule
+	inflection.AddIrregular("lens", "lenses") // "lens" => "lenses"
+
+	pluralName := inflection.Plural(name)
+
+	if pluralName != name {
+		return pluralName
+	}
+
+	if isCustomName(pluralName) {
+		return pluralName + suffix
+	}
+
+	arr := []byte(pluralName)
+	lastChar := arr[len(arr)-1]
+
+	if isNumeric(lastChar) {
+		pluralName += "s" // "s3" => "s3s"
 	}
 
 	return pluralName
@@ -104,6 +139,14 @@ func Pluralize(name string) string {
 
 func isCapitalLetter(ch byte) bool {
 	return ch >= 'A' && ch <= 'Z'
+}
+
+func isCustomName(name string) bool {
+	re1 := regexp.MustCompile(`((e|n)fs|(E|N)FS)$`)
+	re2 := regexp.MustCompile(`tions$`)
+	re3 := regexp.MustCompile(`windows$`)
+
+	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

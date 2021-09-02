@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_nfs_plural", locationNFSDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_nfs_plural", locationNFSPluralDataSourceType)
 }
 
-// locationNFSDataSourceType returns the Terraform awscc_datasync_location_nfs_plural data source type.
+// locationNFSPluralDataSourceType returns the Terraform awscc_datasync_location_nfs_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
-func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationNFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {

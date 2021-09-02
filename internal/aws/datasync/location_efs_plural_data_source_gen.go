@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_efs_plural", locationEFSDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_efs_plural", locationEFSPluralDataSourceType)
 }
 
-// locationEFSDataSourceType returns the Terraform awscc_datasync_location_efs_plural data source type.
+// locationEFSPluralDataSourceType returns the Terraform awscc_datasync_location_efs_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
-func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationEFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {

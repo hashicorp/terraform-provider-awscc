@@ -83,7 +83,7 @@ func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctes
 		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", p.cfType)
 	}
 
-	ds := naming.Pluralize(res)
+	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
 
 	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + DataSourceType
 

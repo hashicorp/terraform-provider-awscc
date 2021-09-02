@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSEC2DHCPOptionsDataSource_basic(t *testing.T) {
+func TestAccAWSEC2DHCPOptionsPluralDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "AWS::EC2::DHCPOptions", "awscc_ec2_dhcp_options_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
