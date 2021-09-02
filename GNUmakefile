@@ -6,7 +6,7 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
+.PHONY: all build data-sources default docs golangci-lint lint resources schemas test testacc tools
 
 all: schemas resources build
 
@@ -41,3 +41,7 @@ golangci-lint:
 
 tools:
 	cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
+	cd tools && go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+
+docs:
+	go generate main.go
