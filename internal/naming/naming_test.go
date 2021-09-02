@@ -165,13 +165,13 @@ func TestPluralizeWithCustomNameSuffix(t *testing.T) {
 			ExpectedValue: "aws_example_associations",
 		},
 		{
-			TestName:      "custom name ending in 'tions",
+			TestName:      "custom underscored name ending in 'tions'",
 			Name:          "aws_example_associations",
 			Suffix:        "_plural",
 			ExpectedValue: "aws_example_associations_plural",
 		},
 		{
-			TestName:      "custom name ending in 'tions",
+			TestName:      "custom name ending in 'tions'",
 			Name:          "Associations",
 			Suffix:        "Plural",
 			ExpectedValue: "AssociationsPlural",
