@@ -77,19 +77,34 @@ func TestPluralize(t *testing.T) {
 			ExpectedValue: "aws_cloudwatch_event_buses",
 		},
 		{
-			TestName:      "special name ending in s",
-			Value:         "awscc_ec2_network_insights_analysis",
-			ExpectedValue: "awscc_ec2_network_insights_analyses",
-		},
-		{
 			TestName:      "name ending in number",
 			Value:         "aws_datasync_location_s3",
 			ExpectedValue: "aws_datasync_location_s3s",
 		},
 		{
+			TestName:      "name ending in 'efs'",
+			Value:         "aws_example_efs",
+			ExpectedValue: "aws_example_efs_plural",
+		},
+		{
+			TestName:      "name ending in 'nfs'",
+			Value:         "aws_example_nfs",
+			ExpectedValue: "aws_example_nfs_plural",
+		},
+		{
+			TestName:      "name ending in 'tions'",
+			Value:         "aws_datasync_locations",
+			ExpectedValue: "aws_datasync_locations_plural",
+		},
+		{
 			TestName:      "singular name",
 			Value:         "aws_wafv2_web_acl",
 			ExpectedValue: "aws_wafv2_web_acls",
+		},
+		{
+			TestName:      "custom rule for lens",
+			Value:         "awscc_example_lens",
+			ExpectedValue: "awscc_example_lenses",
 		},
 	}
 

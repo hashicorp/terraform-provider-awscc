@@ -82,20 +82,21 @@ func Pluralize(name string) string {
 		return name
 	}
 
+	// Custom Rules
+	inflection.AddIrregular("lens", "lenses")          // "lens" => "lenses"
+	inflection.AddPlural("((e|n)f)s$", "${1}s_plural") // "efs" => "efs_plural" or "nfs" => "nfs_plural"
+	inflection.AddPlural("(tion)s$", "${1}s_plural")   // "associations" => "associations_plural"
+	inflection.AddPlural("(window)s$", "${1}s_plural") // "windows" => "windows_plural"
+
 	pluralName := inflection.Plural(name)
 
-	if pluralName != name {
-		return pluralName
-	}
+	if pluralName == name {
+		arr := []byte(pluralName)
+		lastChar := arr[len(arr)-1]
 
-	arr := []byte(pluralName)
-	lastChar := arr[len(arr)-1]
-
-	switch {
-	case lastChar == 's':
-		pluralName += "es"
-	case isNumeric(lastChar):
-		pluralName += "s"
+		if isNumeric(lastChar) {
+			pluralName += "s" // "s3" => "s3s"
+		}
 	}
 
 	return pluralName
