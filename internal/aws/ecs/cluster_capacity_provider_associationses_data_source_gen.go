@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ecs_cluster_capacity_provider_associationses", clusterCapacityProviderAssociationsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_ecs_cluster_capacity_provider_associationses", clusterCapacityProviderAssociationsesDataSourceType)
 }
 
-// clusterCapacityProviderAssociationsDataSourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associationses data source type.
+// clusterCapacityProviderAssociationsesDataSourceType returns the Terraform awscc_ecs_cluster_capacity_provider_associationses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource type.
-func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func clusterCapacityProviderAssociationsesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {

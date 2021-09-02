@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSDataSyncLocationFSxWindowsDataSource_basic(t *testing.T) {
+func TestAccAWSDataSyncLocationFSxWindowsesDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_fsx_windowses", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{

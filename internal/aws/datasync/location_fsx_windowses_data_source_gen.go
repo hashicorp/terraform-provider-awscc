@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windowses", locationFSxWindowsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windowses", locationFSxWindowsesDataSourceType)
 }
 
-// locationFSxWindowsDataSourceType returns the Terraform awscc_datasync_location_fsx_windowses data source type.
+// locationFSxWindowsesDataSourceType returns the Terraform awscc_datasync_location_fsx_windowses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
-func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationFSxWindowsesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
