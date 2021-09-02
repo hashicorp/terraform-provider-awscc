@@ -221,7 +221,7 @@ github.com/hashicorp/terraform-exec/tfexec
 github.com/hashicorp/terraform-exec/tfinstall
 # github.com/hashicorp/terraform-json v0.12.0
 github.com/hashicorp/terraform-json
-# github.com/hashicorp/terraform-plugin-framework v0.2.1-0.20210817164910-fad6afe33058 => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819181743-98573f653e5d
+# github.com/hashicorp/terraform-plugin-framework v0.2.1-0.20210817164910-fad6afe33058 => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902181543-57c53acf8fa2
 ## explicit
 github.com/hashicorp/terraform-plugin-framework/attr
 github.com/hashicorp/terraform-plugin-framework/internal/diagnostics
@@ -534,4 +534,4 @@ google.golang.org/protobuf/types/known/timestamppb
 google.golang.org/protobuf/types/pluginpb
 # github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 # github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
-# github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210819181743-98573f653e5d
+# github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902181543-57c53acf8fa2
