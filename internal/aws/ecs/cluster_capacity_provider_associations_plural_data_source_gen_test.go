@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSECSClusterCapacityProviderAssociationsDataSource_basic(t *testing.T) {
+func TestAccAWSECSClusterCapacityProviderAssociationsPluralDataSource_basic(t *testing.T) {
 	td := acctest.NewTestData(t, "AWS::ECS::ClusterCapacityProviderAssociations", "awscc_ecs_cluster_capacity_provider_associations_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{

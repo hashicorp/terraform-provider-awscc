@@ -106,6 +106,37 @@ func Pluralize(name string) string {
 	return pluralName
 }
 
+// PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
+// with the exception that a suffix can be passed in as an argument to be used
+// only for names that are considered "custom" i.e. return true for isCustomName.
+func PluralizeWithCustomNameSuffix(name, suffix string) string {
+	if name == "" {
+		return name
+	}
+
+	// Custom Rule
+	inflection.AddIrregular("lens", "lenses") // "lens" => "lenses"
+
+	pluralName := inflection.Plural(name)
+
+	if pluralName != name {
+		return pluralName
+	}
+
+	if isCustomName(pluralName) {
+		return pluralName + suffix
+	}
+
+	arr := []byte(pluralName)
+	lastChar := arr[len(arr)-1]
+
+	if isNumeric(lastChar) {
+		pluralName += "s" // "s3" => "s3s"
+	}
+
+	return pluralName
+}
+
 func isCapitalLetter(ch byte) bool {
 	return ch >= 'A' && ch <= 'Z'
 }

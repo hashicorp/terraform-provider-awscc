@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_dhcp_options_plural", dHCPOptionsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_ec2_dhcp_options_plural", dHCPOptionsPluralDataSourceType)
 }
 
-// dHCPOptionsDataSourceType returns the Terraform awscc_ec2_dhcp_options_plural data source type.
+// dHCPOptionsPluralDataSourceType returns the Terraform awscc_ec2_dhcp_options_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::DHCPOptions resource type.
-func dHCPOptionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func dHCPOptionsPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {

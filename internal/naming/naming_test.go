@@ -144,3 +144,47 @@ func TestPluralize(t *testing.T) {
 		})
 	}
 }
+
+func TestPluralizeWithCustomNameSuffix(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		Name          string
+		Suffix        string
+		ExpectedValue string
+	}{
+		{
+			TestName:      "empty string",
+			Name:          "",
+			Suffix:        "",
+			ExpectedValue: "",
+		},
+		{
+			TestName:      "non custom name with suffix",
+			Name:          "aws_example_association",
+			Suffix:        "_plural",
+			ExpectedValue: "aws_example_associations",
+		},
+		{
+			TestName:      "custom name ending in 'tions",
+			Name:          "aws_example_associations",
+			Suffix:        "_plural",
+			ExpectedValue: "aws_example_associations_plural",
+		},
+		{
+			TestName:      "custom name ending in 'tions",
+			Name:          "Associations",
+			Suffix:        "Plural",
+			ExpectedValue: "AssociationsPlural",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			got := naming.PluralizeWithCustomNameSuffix(testCase.Name, testCase.Suffix)
+
+			if got != testCase.ExpectedValue {
+				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
+			}
+		})
+	}
+}
