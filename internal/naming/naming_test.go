@@ -71,10 +71,16 @@ func TestPluralize(t *testing.T) {
 			Value:         "",
 			ExpectedValue: "",
 		},
+
 		{
 			TestName:      "name ending in s",
 			Value:         "aws_cloudwatch_event_bus",
 			ExpectedValue: "aws_cloudwatch_event_buses",
+		},
+		{
+			TestName:      "name ending in capital s",
+			Value:         "locationNFS",
+			ExpectedValue: "locationNFS_plural",
 		},
 		{
 			TestName:      "name ending in number",
@@ -92,9 +98,29 @@ func TestPluralize(t *testing.T) {
 			ExpectedValue: "aws_example_nfs_plural",
 		},
 		{
+			TestName:      "name ending in 'xfs'",
+			Value:         "aws_example_xfs",
+			ExpectedValue: "aws_example_xfs",
+		},
+		{
+			TestName:      "name ending in 'tion'",
+			Value:         "aws_datasync_location",
+			ExpectedValue: "aws_datasync_locations",
+		},
+		{
 			TestName:      "name ending in 'tions'",
 			Value:         "aws_datasync_locations",
 			ExpectedValue: "aws_datasync_locations_plural",
+		},
+		{
+			TestName:      "name ending in 'window'",
+			Value:         "aws_datasync_window",
+			ExpectedValue: "aws_datasync_windows",
+		},
+		{
+			TestName:      "name ending in 'windows'",
+			Value:         "aws_datasync_windows",
+			ExpectedValue: "aws_datasync_windows_plural",
 		},
 		{
 			TestName:      "singular name",
