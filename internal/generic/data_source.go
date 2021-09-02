@@ -15,6 +15,10 @@ type DataSourceType struct {
 	tfTypeName    string            // Terraform type name for data source type
 }
 
+// FromCloudFormationAndTerraform is a helper function to construct functional options
+// that set a data source type's CloudFormation type name, Terraform type name, and Terraform schema.
+// If multiple FromCloudFormationAndTerraform calls are made, the last call overrides
+// the previous calls' values.
 func FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.Schema) DataSourceTypeOptionsFunc {
 	return func(o *DataSourceType) error {
 		o.cfTypeName = cfTypeName
@@ -24,6 +28,10 @@ func FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.
 	}
 }
 
+// FromCloudFormationAndTerraform is a helper function to construct functional options
+// that set a data source type's CloudFormation type name, Terraform type name, and Terraform schema
+// and append that function to the current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
 func (opts DataSourceTypeOptions) FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.Schema) DataSourceTypeOptions {
 	return append(opts, FromCloudFormationAndTerraform(cfTypeName, tfTypeName, schema))
 }

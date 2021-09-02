@@ -15,6 +15,7 @@ import (
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 )
 
+// PluralDataSourceType is a type alias for a data source type.
 type PluralDataSourceType DataSourceType
 
 // NewPluralDataSourceType returns a new PluralDataSourceType from the specified variadic list of functional options.

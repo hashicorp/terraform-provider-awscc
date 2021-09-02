@@ -16,8 +16,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
+// SingularDataSourceType is a type alias for a data source type.
 type SingularDataSourceType DataSourceType
 
+// DataSourceWithAttributeNameMap is a helper function to construct functional options
+// that set a data source type's attribute name maps.
+// If multiple DataSourceWithAttributeNameMap calls are made, the last call overrides
+// the previous calls' values.
 func DataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFunc {
 	return func(o *DataSourceType) error {
 		if _, ok := v["id"]; !ok {
@@ -41,6 +46,10 @@ func DataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFu
 	}
 }
 
+// WithAttributeNameMap is a helper function to construct functional options
+// that set a data source type's attribute name map, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
 func (opts DataSourceTypeOptions) WithAttributeNameMap(v map[string]string) DataSourceTypeOptions {
 	return append(opts, DataSourceWithAttributeNameMap(v))
 }
@@ -124,7 +133,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	description, err := sd.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
-		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundWarningDiag(err))
+		response.Diagnostics = append(response.Diagnostics, DataSourceNotFoundDiag(err))
 
 		return
 	}
@@ -167,10 +176,12 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	tflog.Debug(ctx, "DataSource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
+// describe returns the live state of the specified resource.
 func (sd *singularDataSource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
 	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
 }
 
+// getId returns the data source's primary identifier value from Config.
 func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (string, error) {
 	val, diags := config.GetAttribute(ctx, idAttributePath)
 
@@ -185,7 +196,7 @@ func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (
 	return "", fmt.Errorf("invalid identifier type %T", val)
 }
 
-// setId sets the resource's primary identifier value in State.
+// setId sets the data source's primary identifier value in State.
 func (sd *singularDataSource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
