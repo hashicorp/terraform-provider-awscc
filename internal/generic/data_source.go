@@ -9,9 +9,10 @@ type DataSourceTypeOptions []DataSourceTypeOptionsFunc
 
 // DataSourceType implements tfsdk.DataSourceType
 type DataSourceType struct {
-	cfTypeName string       // CloudFormation type name for the resource type
-	tfSchema   tfsdk.Schema // Terraform schema for the data source type
-	tfTypeName string       // Terraform type name for data source type
+	cfToTfNameMap map[string]string // Map of CloudFormation property name to Terraform attribute name
+	cfTypeName    string            // CloudFormation type name for the resource type
+	tfSchema      tfsdk.Schema      // Terraform schema for the data source type
+	tfTypeName    string            // Terraform type name for data source type
 }
 
 func FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.Schema) DataSourceTypeOptionsFunc {

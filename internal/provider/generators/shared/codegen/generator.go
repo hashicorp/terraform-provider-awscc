@@ -39,6 +39,12 @@ type ResourceGenerator struct {
 	Generator
 }
 
+type SingularDataSourceGenerator struct {
+	cfTypeSchemaFile string
+	tfDataSourceType string
+	Generator
+}
+
 func NewPluralDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfType, tfDataSourceType string) *PluralDataSourceGenerator {
 	return &PluralDataSourceGenerator{
 		cfType:           cfType,
@@ -55,6 +61,18 @@ func NewResourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplate
 	return &ResourceGenerator{
 		cfTypeSchemaFile: cfTypeSchemaFile,
 		tfResourceType:   tfResourceType,
+		Generator: Generator{
+			acceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
+			schemaTemplateBody:          schemaTemplateBody,
+			ui:                          ui,
+		},
+	}
+}
+
+func NewSingularDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfDataSourceType string) *SingularDataSourceGenerator {
+	return &SingularDataSourceGenerator{
+		cfTypeSchemaFile: cfTypeSchemaFile,
+		tfDataSourceType: tfDataSourceType,
 		Generator: Generator{
 			acceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
 			schemaTemplateBody:          schemaTemplateBody,
@@ -143,6 +161,41 @@ func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilena
 	}
 
 	err = r.applyAndWriteTemplate(acctestsFilename, r.acceptanceTestsTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Generate generates the singular data source's type factory into the specified file.
+func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	s.infof("generating Terraform data source code for %[1]q from %[2]q into %[3]q and %[4]q", s.tfDataSourceType, s.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, DirPerm)
+
+		if err != nil {
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
+		}
+	}
+
+	templateData, err := s.generateTemplateData(s.cfTypeSchemaFile, DataSourceType, s.tfDataSourceType, packageName)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.applyAndWriteTemplate(schemaFilename, s.schemaTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.applyAndWriteTemplate(acctestsFilename, s.acceptanceTestsTemplateBody, templateData)
 
 	if err != nil {
 		return err
@@ -241,15 +294,21 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
-		HasRequiredAttribute:         true,
-		HasUpdateMethod:              true,
 		PackageName:                  packageName,
-		RequiredAttributesValidator:  requiredAttributesValidator,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
-		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
 	}
+
+	if resType == DataSourceType {
+		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
+		return templateData, nil
+	}
+
+	templateData.HasRequiredAttribute = true
+	templateData.HasUpdateMethod = true
+	templateData.RequiredAttributesValidator = requiredAttributesValidator
+	templateData.SyntheticIDAttribute = true
 
 	if codeFeatures&HasRequiredRootProperty == 0 {
 		templateData.HasRequiredAttribute = false
@@ -267,9 +326,7 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		templateData.SyntheticIDAttribute = false
 	}
 
-	if resType == DataSourceType {
-		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
-	} else if description := resource.CfResource.Description; description != nil {
+	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
 	}
 
