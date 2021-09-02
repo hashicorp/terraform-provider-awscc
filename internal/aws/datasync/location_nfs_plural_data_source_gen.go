@@ -15,10 +15,10 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_nfses", locationNFSDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_nfs_plural", locationNFSDataSourceType)
 }
 
-// locationNFSDataSourceType returns the Terraform awscc_datasync_location_nfses data source type.
+// locationNFSDataSourceType returns the Terraform awscc_datasync_location_nfs_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationNFS resource type.
 func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
@@ -43,7 +43,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationNFS", "awscc_datasync_location_nfses", schema)
+	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationNFS", "awscc_datasync_location_nfs_plural", schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
@@ -51,7 +51,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_nfses", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_nfs_plural", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }
