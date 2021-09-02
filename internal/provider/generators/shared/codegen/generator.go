@@ -241,21 +241,15 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
+		HasRequiredAttribute:         true,
+		HasUpdateMethod:              true,
 		PackageName:                  packageName,
+		RequiredAttributesValidator:  requiredAttributesValidator,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
+		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
 	}
-
-	if resType == DataSourceType {
-		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
-		return templateData, nil
-	}
-
-	templateData.HasRequiredAttribute = true
-	templateData.HasUpdateMethod = true
-	templateData.RequiredAttributesValidator = requiredAttributesValidator
-	templateData.SyntheticIDAttribute = true
 
 	if codeFeatures&HasRequiredRootProperty == 0 {
 		templateData.HasRequiredAttribute = false
@@ -273,7 +267,9 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		templateData.SyntheticIDAttribute = false
 	}
 
-	if description := resource.CfResource.Description; description != nil {
+	if resType == DataSourceType {
+		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
+	} else if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
 	}
 
