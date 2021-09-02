@@ -25,6 +25,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_origin_request_policies -cftype AWS::CloudFront::OriginRequestPolicy -package cloudfront ../aws/cloudfront/origin_request_policies_data_source_gen.go ../aws/cloudfront/origin_request_policies_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_public_keys -cftype AWS::CloudFront::PublicKey -package cloudfront ../aws/cloudfront/public_keys_data_source_gen.go ../aws/cloudfront/public_keys_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudfront_realtime_log_configs -cftype AWS::CloudFront::RealtimeLogConfig -package cloudfront ../aws/cloudfront/realtime_log_configs_data_source_gen.go ../aws/cloudfront/realtime_log_configs_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudtrail_trails -cftype AWS::CloudTrail::Trail -package cloudtrail ../aws/cloudtrail/trails_data_source_gen.go ../aws/cloudtrail/trails_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudwatch_composite_alarms -cftype AWS::CloudWatch::CompositeAlarm -package cloudwatch ../aws/cloudwatch/composite_alarms_data_source_gen.go ../aws/cloudwatch/composite_alarms_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudwatch_metric_streams -cftype AWS::CloudWatch::MetricStream -package cloudwatch ../aws/cloudwatch/metric_streams_data_source_gen.go ../aws/cloudwatch/metric_streams_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeartifact_domains -cftype AWS::CodeArtifact::Domain -package codeartifact ../aws/codeartifact/domains_data_source_gen.go ../aws/codeartifact/domains_data_source_gen_test.go
@@ -43,7 +44,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_schedules -cftype AWS::DataBrew::Schedule -package databrew ../aws/databrew/schedules_data_source_gen.go ../aws/databrew/schedules_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_agents -cftype AWS::DataSync::Agent -package datasync ../aws/datasync/agents_data_source_gen.go ../aws/datasync/agents_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_efses -cftype AWS::DataSync::LocationEFS -package datasync ../aws/datasync/location_efses_data_source_gen.go ../aws/datasync/location_efses_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_f_sx_windowses -cftype AWS::DataSync::LocationFSxWindows -package datasync ../aws/datasync/location_f_sx_windowses_data_source_gen.go ../aws/datasync/location_f_sx_windowses_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_fsx_windowses -cftype AWS::DataSync::LocationFSxWindows -package datasync ../aws/datasync/location_fsx_windowses_data_source_gen.go ../aws/datasync/location_fsx_windowses_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_nfses -cftype AWS::DataSync::LocationNFS -package datasync ../aws/datasync/location_nfses_data_source_gen.go ../aws/datasync/location_nfses_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_object_storages -cftype AWS::DataSync::LocationObjectStorage -package datasync ../aws/datasync/location_object_storages_data_source_gen.go ../aws/datasync/location_object_storages_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_s3s -cftype AWS::DataSync::LocationS3 -package datasync ../aws/datasync/location_s3s_data_source_gen.go ../aws/datasync/location_s3s_data_source_gen_test.go
@@ -60,7 +61,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_flow_logs -cftype AWS::EC2::FlowLog -package ec2 ../aws/ec2/flow_logs_data_source_gen.go ../aws/ec2/flow_logs_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_local_gateway_routes -cftype AWS::EC2::LocalGatewayRoute -package ec2 ../aws/ec2/local_gateway_routes_data_source_gen.go ../aws/ec2/local_gateway_routes_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_local_gateway_route_table_vpc_associations -cftype AWS::EC2::LocalGatewayRouteTableVPCAssociation -package ec2 ../aws/ec2/local_gateway_route_table_vpc_associations_data_source_gen.go ../aws/ec2/local_gateway_route_table_vpc_associations_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_network_insights_analysises -cftype AWS::EC2::NetworkInsightsAnalysis -package ec2 ../aws/ec2/network_insights_analysises_data_source_gen.go ../aws/ec2/network_insights_analysises_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_network_insights_analyses -cftype AWS::EC2::NetworkInsightsAnalysis -package ec2 ../aws/ec2/network_insights_analyses_data_source_gen.go ../aws/ec2/network_insights_analyses_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_network_insights_paths -cftype AWS::EC2::NetworkInsightsPath -package ec2 ../aws/ec2/network_insights_paths_data_source_gen.go ../aws/ec2/network_insights_paths_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_prefix_lists -cftype AWS::EC2::PrefixList -package ec2 ../aws/ec2/prefix_lists_data_source_gen.go ../aws/ec2/prefix_lists_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_spot_fleets -cftype AWS::EC2::SpotFleet -package ec2 ../aws/ec2/spot_fleets_data_source_gen.go ../aws/ec2/spot_fleets_data_source_gen_test.go
@@ -100,6 +101,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_registries -cftype AWS::Glue::Registry -package glue ../aws/glue/registries_data_source_gen.go ../aws/glue/registries_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_glue_schemas -cftype AWS::Glue::Schema -package glue ../aws/glue/schemas_data_source_gen.go ../aws/glue/schemas_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_greengrassv2_component_versions -cftype AWS::GreengrassV2::ComponentVersion -package greengrassv2 ../aws/greengrassv2/component_versions_data_source_gen.go ../aws/greengrassv2/component_versions_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_configs -cftype AWS::GroundStation::Config -package groundstation ../aws/groundstation/configs_data_source_gen.go ../aws/groundstation/configs_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_dataflow_endpoint_groups -cftype AWS::GroundStation::DataflowEndpointGroup -package groundstation ../aws/groundstation/dataflow_endpoint_groups_data_source_gen.go ../aws/groundstation/dataflow_endpoint_groups_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_mission_profiles -cftype AWS::GroundStation::MissionProfile -package groundstation ../aws/groundstation/mission_profiles_data_source_gen.go ../aws/groundstation/mission_profiles_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_oidc_providers -cftype AWS::IAM::OIDCProvider -package iam ../aws/iam/oidc_providers_data_source_gen.go ../aws/iam/oidc_providers_data_source_gen_test.go
@@ -140,7 +142,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_devices -cftype AWS::IoTWireless::WirelessDevice -package iotwireless ../aws/iotwireless/wireless_devices_data_source_gen.go ../aws/iotwireless/wireless_devices_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_gateways -cftype AWS::IoTWireless::WirelessGateway -package iotwireless ../aws/iotwireless/wireless_gateways_data_source_gen.go ../aws/iotwireless/wireless_gateways_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_aliases -cftype AWS::KMS::Alias -package kms ../aws/kms/aliases_data_source_gen.go ../aws/kms/aliases_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_replica_keys -cftype AWS::KMS::ReplicaKey -package kms ../aws/kms/replica_keys_data_source_gen.go ../aws/kms/replica_keys_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kendra_indices -cftype AWS::Kendra::Index -package kendra ../aws/kendra/indices_data_source_gen.go ../aws/kendra/indices_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesis_streams -cftype AWS::Kinesis::Stream -package kinesis ../aws/kinesis/streams_data_source_gen.go ../aws/kinesis/streams_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisfirehose_delivery_streams -cftype AWS::KinesisFirehose::DeliveryStream -package kinesisfirehose ../aws/kinesisfirehose/delivery_streams_data_source_gen.go ../aws/kinesisfirehose/delivery_streams_data_source_gen_test.go
@@ -169,9 +170,11 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkfirewall_rule_groups -cftype AWS::NetworkFirewall::RuleGroup -package networkfirewall ../aws/networkfirewall/rule_groups_data_source_gen.go ../aws/networkfirewall/rule_groups_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_global_networks -cftype AWS::NetworkManager::GlobalNetwork -package networkmanager ../aws/networkmanager/global_networks_data_source_gen.go ../aws/networkmanager/global_networks_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studios_data_source_gen.go ../aws/nimblestudio/studios_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opsworkscm_servers -cftype AWS::OpsWorksCM::Server -package opsworkscm ../aws/opsworkscm/servers_data_source_gen.go ../aws/opsworkscm/servers_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxies -cftype AWS::RDS::DBProxy -package rds ../aws/rds/db_proxies_data_source_gen.go ../aws/rds/db_proxies_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxy_endpoints -cftype AWS::RDS::DBProxyEndpoint -package rds ../aws/rds/db_proxy_endpoints_data_source_gen.go ../aws/rds/db_proxy_endpoints_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_global_clusters -cftype AWS::RDS::GlobalCluster -package rds ../aws/rds/global_clusters_data_source_gen.go ../aws/rds/global_clusters_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_redshift_clusters -cftype AWS::Redshift::Cluster -package redshift ../aws/redshift/clusters_data_source_gen.go ../aws/redshift/clusters_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_resourcegroups_groups -cftype AWS::ResourceGroups::Group -package resourcegroups ../aws/resourcegroups/groups_data_source_gen.go ../aws/resourcegroups/groups_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53_health_checks -cftype AWS::Route53::HealthCheck -package route53 ../aws/route53/health_checks_data_source_gen.go ../aws/route53/health_checks_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53_hosted_zones -cftype AWS::Route53::HostedZone -package route53 ../aws/route53/hosted_zones_data_source_gen.go ../aws/route53/hosted_zones_data_source_gen_test.go
@@ -186,6 +189,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3_access_points -cftype AWS::S3::AccessPoint -package s3 ../aws/s3/access_points_data_source_gen.go ../aws/s3/access_points_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3_storage_lenses -cftype AWS::S3::StorageLens -package s3 ../aws/s3/storage_lenses_data_source_gen.go ../aws/s3/storage_lenses_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3objectlambda_access_points -cftype AWS::S3ObjectLambda::AccessPoint -package s3objectlambda ../aws/s3objectlambda/access_points_data_source_gen.go ../aws/s3objectlambda/access_points_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_s3outposts_endpoints -cftype AWS::S3Outposts::Endpoint -package s3outposts ../aws/s3outposts/endpoints_data_source_gen.go ../aws/s3outposts/endpoints_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ses_configuration_sets -cftype AWS::SES::ConfigurationSet -package ses ../aws/ses/configuration_sets_data_source_gen.go ../aws/ses/configuration_sets_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ses_contact_lists -cftype AWS::SES::ContactList -package ses ../aws/ses/contact_lists_data_source_gen.go ../aws/ses/contact_lists_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_data_syncs -cftype AWS::SSM::ResourceDataSync -package ssm ../aws/ssm/resource_data_syncs_data_source_gen.go ../aws/ssm/resource_data_syncs_data_source_gen_test.go
@@ -203,6 +207,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sagemaker_user_profiles -cftype AWS::SageMaker::UserProfile -package sagemaker ../aws/sagemaker/user_profiles_data_source_gen.go ../aws/sagemaker/user_profiles_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalog_service_actions -cftype AWS::ServiceCatalog::ServiceAction -package servicecatalog ../aws/servicecatalog/service_actions_data_source_gen.go ../aws/servicecatalog/service_actions_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_signer_signing_profiles -cftype AWS::Signer::SigningProfile -package signer ../aws/signer/signing_profiles_data_source_gen.go ../aws/signer/signing_profiles_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_synthetics_canaries -cftype AWS::Synthetics::Canary -package synthetics ../aws/synthetics/canaries_data_source_gen.go ../aws/synthetics/canaries_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_databases -cftype AWS::Timestream::Database -package timestream ../aws/timestream/databases_data_source_gen.go ../aws/timestream/databases_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/tables_data_source_gen.go ../aws/timestream/tables_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wafv2_logging_configurations -cftype AWS::WAFv2::LoggingConfiguration -package wafv2 ../aws/wafv2/logging_configurations_data_source_gen.go ../aws/wafv2/logging_configurations_data_source_gen_test.go
@@ -222,6 +227,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudformation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudfront"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudwatch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
@@ -272,7 +278,9 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opsworkscm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
@@ -280,12 +288,14 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53resolver"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3objectlambda"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3outposts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sagemaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/servicecatalog"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ses"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/signer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/synthetics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 )

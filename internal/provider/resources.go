@@ -50,6 +50,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_origin_request_policy -cfschema ../service/cloudformation/schemas/AWS_CloudFront_OriginRequestPolicy.json -package cloudfront -- ../aws/cloudfront/origin_request_policy_gen.go ../aws/cloudfront/origin_request_policy_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_public_key -cfschema ../service/cloudformation/schemas/AWS_CloudFront_PublicKey.json -package cloudfront -- ../aws/cloudfront/public_key_gen.go ../aws/cloudfront/public_key_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudfront_realtime_log_config -cfschema ../service/cloudformation/schemas/AWS_CloudFront_RealtimeLogConfig.json -package cloudfront -- ../aws/cloudfront/realtime_log_config_gen.go ../aws/cloudfront/realtime_log_config_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_cloudtrail_trail -cfschema ../service/cloudformation/schemas/AWS_CloudTrail_Trail.json -package cloudtrail -- ../aws/cloudtrail/trail_gen.go ../aws/cloudtrail/trail_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudwatch_composite_alarm -cfschema ../service/cloudformation/schemas/AWS_CloudWatch_CompositeAlarm.json -package cloudwatch -- ../aws/cloudwatch/composite_alarm_gen.go ../aws/cloudwatch/composite_alarm_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudwatch_metric_stream -cfschema ../service/cloudformation/schemas/AWS_CloudWatch_MetricStream.json -package cloudwatch -- ../aws/cloudwatch/metric_stream_gen.go ../aws/cloudwatch/metric_stream_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_codeartifact_domain -cfschema ../service/cloudformation/schemas/AWS_CodeArtifact_Domain.json -package codeartifact -- ../aws/codeartifact/domain_gen.go ../aws/codeartifact/domain_gen_test.go
@@ -259,6 +260,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_target_group -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyTargetGroup.json -package rds -- ../aws/rds/db_proxy_target_group_gen.go ../aws/rds/db_proxy_target_group_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_global_cluster -cfschema ../service/cloudformation/schemas/AWS_RDS_GlobalCluster.json -package rds -- ../aws/rds/global_cluster_gen.go ../aws/rds/global_cluster_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_resourcegroups_group -cfschema ../service/cloudformation/schemas/AWS_ResourceGroups_Group.json -package resourcegroups -- ../aws/resourcegroups/group_gen.go ../aws/resourcegroups/group_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_robomaker_simulation_application_version -cfschema ../service/cloudformation/schemas/AWS_RoboMaker_SimulationApplicationVersion.json -package robomaker -- ../aws/robomaker/simulation_application_version_gen.go ../aws/robomaker/simulation_application_version_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_dnssec -cfschema ../service/cloudformation/schemas/AWS_Route53_DNSSEC.json -package route53 -- ../aws/route53/dnssec_gen.go ../aws/route53/dnssec_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_health_check -cfschema ../service/cloudformation/schemas/AWS_Route53_HealthCheck.json -package route53 -- ../aws/route53/health_check_gen.go ../aws/route53/health_check_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_route53_hosted_zone -cfschema ../service/cloudformation/schemas/AWS_Route53_HostedZone.json -package route53 -- ../aws/route53/hosted_zone_gen.go ../aws/route53/hosted_zone_gen_test.go
@@ -354,6 +356,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudformation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudfront"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudwatch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
@@ -417,6 +420,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/quicksight"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoveryreadiness"

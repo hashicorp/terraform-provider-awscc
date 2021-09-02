@@ -1,0 +1,64 @@
+{
+    "typeName": "AWS::RoboMaker::SimulationApplicationVersion",
+    "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+    "definitions": {
+        "Arn": {
+            "type": "string",
+            "pattern": ""
+        }
+    },
+    "properties": {
+        "Application": {
+            "$ref": "#/definitions/Arn"
+        },
+        "CurrentRevisionId" : {
+            "description": "The revision ID of robot application.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": ""
+        },
+        "ApplicationVersion": {
+            "type": "string"
+        },
+        "Arn": {
+            "$ref": "#/definitions/Arn"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "Application"
+    ],
+    "readOnlyProperties": [
+        "/properties/ApplicationVersion",
+        "/properties/Arn"
+    ],
+    "primaryIdentifier": [
+        "/properties/Arn"
+    ],
+    "createOnlyProperties": [
+        "/properties/Application",
+        "/properties/CurrentRevisionId"
+    ],
+    "taggable": false,
+    "handlers": {
+        "create": {
+            "permissions": [
+                "robomaker:CreateSimulationApplicationVersion",
+                "s3:GetObject"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "robomaker:DeleteSimulationApplication",
+                "robomaker:DescribeSimulationApplication"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "robomaker:DescribeSimulationApplication"
+            ]
+        }
+    }
+}
