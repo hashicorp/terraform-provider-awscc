@@ -33,8 +33,6 @@ jobs:
           github_token: ${{ secrets.HC_RELEASES_TOKEN }}
       - uses: hashicorp/setup-signore@v1
         with:
-          client-id: ${{ secrets.SIGNORE_CLIENT_ID }}
-          client-secret: ${{ secrets.SIGNORE_CLIENT_SECRET }}
           github-token: ${{ secrets.SETUP_SIGNORE_GITHUB_TOKEN }}
           signer: interim_signing_subkey_768B676
       - name: Release Notes
@@ -63,6 +61,8 @@ jobs:
           args: release --release-notes /tmp/RELEASE-NOTES.md --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SIGNORE_CLIENT_ID: ${{ secrets.SIGNORE_CLIENT_ID }}
+          SIGNORE_CLIENT_SECRET: ${{ secrets.SIGNORE_CLIENT_SECRET }}
           PROTOCOL_VERSION: ${{ env.PROTOCOL_VERSION }}
           PROTOCOL_VERSIONS: ${{ env.PROTOCOL_VERSIONS }}
       - name: hc-releases publish

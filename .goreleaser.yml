@@ -41,11 +41,13 @@ publishers:
     env:
       - AWS_ACCESS_KEY_ID={{ .Env.AWS_ACCESS_KEY_ID }}
       - AWS_SECRET_ACCESS_KEY={{ .Env.AWS_SECRET_ACCESS_KEY }}
+      - AWS_SESSION_TOKEN={{ .Env.AWS_SESSION_TOKEN }}
 release:
   ids:
     - none
 signs:
-  - args: ["-u", "{{ .Env.GPG_USER_ID }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
+  - args: ["sign", "--dearmor", "--file", "${artifact}", "--out", "${signature}"]
     artifacts: checksum
+    cmd: signore
 snapshot:
   name_template: "{{ .Tag }}-next"
