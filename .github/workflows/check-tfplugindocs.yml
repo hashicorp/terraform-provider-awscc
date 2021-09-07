@@ -5,10 +5,10 @@ on:
     branches:
       - main
       - "release/**"
-    pull_request:
-      paths:
-        - internal/**
-        - docs/**
+  pull_request:
+    #paths:
+    #  - internal/**
+    #  - docs/**
 
 jobs:
   tfplugindocs_check:
