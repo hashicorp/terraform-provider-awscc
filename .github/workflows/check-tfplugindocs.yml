@@ -6,7 +6,9 @@ on:
       - main
       - "release/**"
     pull_request:
-      - docs/**
+      paths:
+        - internal/**
+        - docs/**
 
 jobs:
   tfplugindocs_check:
