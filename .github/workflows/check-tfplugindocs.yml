@@ -1,21 +1,21 @@
 name: Check if tfplugindocs result matches docs
 
-on: [push, pull_request]
-  #push:
-  #  branches:
-  #    - main
-  #    - "release/**"
-  #pull_request:
-  #  paths:
-  #    - .github/workflows/check-tfplugindocs.yml
-  #    - .go-version
-  #    - .golangci.yml
-  #    - go.sum
-  #    - GNUmakefile
-  #    - internal/**
-  #    - main.go
-  #    - tools/**
-  #    - docs/**
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/check-tfplugindocs.yml
+      - .go-version
+      - .golangci.yml
+      - go.sum
+      - GNUmakefile
+      - internal/**
+      - main.go
+      - tools/**
+      - docs/**
 
 jobs:
   tfplugindocs_check:
