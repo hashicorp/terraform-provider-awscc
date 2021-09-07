@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_s3_storage_lenses", storageLensDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_s3_storage_lenses", storageLensesDataSourceType)
 }
 
-// storageLensDataSourceType returns the Terraform awscc_s3_storage_lenses data source type.
+// storageLensesDataSourceType returns the Terraform awscc_s3_storage_lenses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
-func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func storageLensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {

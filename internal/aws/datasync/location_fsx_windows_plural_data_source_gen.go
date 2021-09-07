@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_efses", locationEFSDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windows_plural", locationFSxWindowsDataSourceType)
 }
 
-// locationEFSDataSourceType returns the Terraform awscc_datasync_location_efses data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
-func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+// locationFSxWindowsDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
+// This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
+func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
@@ -36,14 +36,14 @@ func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	}
 
 	schema := tfsdk.Schema{
-		Description: "Plural Data Source schema for AWS::DataSync::LocationEFS",
+		Description: "Plural Data Source schema for AWS::DataSync::LocationFSxWindows",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationEFS", "awscc_datasync_location_efses", schema)
+	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_fsx_windows_plural", schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
@@ -51,7 +51,7 @@ func locationEFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		return nil, err
 	}
 
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_efses", "schema", hclog.Fmt("%v", schema))
+	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_fsx_windows_plural", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }

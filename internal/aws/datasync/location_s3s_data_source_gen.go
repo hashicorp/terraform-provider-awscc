@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_s3s", locationS3DataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_s3s", locationS3sDataSourceType)
 }
 
-// locationS3DataSourceType returns the Terraform awscc_datasync_location_s3s data source type.
+// locationS3sDataSourceType returns the Terraform awscc_datasync_location_s3s data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
-func locationS3DataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationS3sDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
