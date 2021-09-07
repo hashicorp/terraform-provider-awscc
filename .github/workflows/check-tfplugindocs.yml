@@ -1,14 +1,21 @@
 name: Check if tfplugindocs result matches docs
 
 on: [push, pull_request]
-  #push:
-  #  branches:
-  #    - main
-  #    - "release/**"
-  #pull_request:
-  #  #paths:
-  #  #  - internal/**
-  #  #  - docs/**
+  push:
+    branches:
+      - main
+      - "release/**"
+  pull_request:
+    paths:
+      - .github/workflows/linters.yml
+      - .go-version
+      - .golangci.yml
+      - go.sum
+      - GNUmakefile
+      - internal/**
+      - main.go
+      - tools/**
+      - docs/**
 
 jobs:
   tfplugindocs_check:
@@ -49,5 +56,6 @@ jobs:
           key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
 
       - run: |
+          make tools
           make docs
           git diff
