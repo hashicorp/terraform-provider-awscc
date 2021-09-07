@@ -1,14 +1,14 @@
 name: Check if tfplugindocs result matches docs
 
-on:
-  push:
-    branches:
-      - main
-      - "release/**"
-  pull_request:
-    #paths:
-    #  - internal/**
-    #  - docs/**
+on: [push, pull_request]
+  #push:
+  #  branches:
+  #    - main
+  #    - "release/**"
+  #pull_request:
+  #  #paths:
+  #  #  - internal/**
+  #  #  - docs/**
 
 jobs:
   tfplugindocs_check:
