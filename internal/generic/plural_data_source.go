@@ -8,8 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
@@ -51,11 +51,11 @@ func (pdt *PluralDataSourceType) New(dst *DataSourceType) *PluralDataSourceType 
 	}
 }
 
-func (pdt *PluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (pdt *PluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return pdt.tfSchema, nil
 }
 
-func (pdt *PluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, []*tfprotov6.Diagnostic) {
+func (pdt *PluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
 	return newGenericPluralDataSource(provider, pdt), nil
 }
 
@@ -85,7 +85,7 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 	descriptions, err := pd.list(ctx, conn)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
 
 		return
 	}

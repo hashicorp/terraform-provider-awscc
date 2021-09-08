@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
 // stringLenBetweenValidator validates that a string Attribute's length is in a range.
@@ -17,26 +16,26 @@ type stringLenBetweenValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v stringLenBetweenValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("string length must be between %d and %d", v.minLength, v.maxLength)
+func (validator stringLenBetweenValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("string length must be between %d and %d", validator.minLength, validator.maxLength)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v stringLenBetweenValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator stringLenBetweenValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	var l int
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -47,12 +46,12 @@ func (v stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.V
 
 	l = len(s.Value)
 
-	if l < v.minLength || l > v.maxLength {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected length of %s to be in the range [%d, %d], got %d", request.AttributePath, v.minLength, v.maxLength, l),
-		})
+	if l < validator.minLength || l > validator.maxLength {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid length",
+			fmt.Sprintf("expected length to be in the range [%d, %d], got %d", validator.minLength, validator.maxLength, l),
+		)
 
 		return
 	}
@@ -78,26 +77,26 @@ type stringLenAtLeastValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v stringLenAtLeastValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("string length must be at least %d", v.minLength)
+func (validator stringLenAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("string length must be at least %d", validator.minLength)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v stringLenAtLeastValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator stringLenAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	var l int
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -108,12 +107,12 @@ func (v stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.V
 
 	l = len(s.Value)
 
-	if l < v.minLength {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected length of %s to be at least %d, got %d", request.AttributePath, v.minLength, l),
-		})
+	if l < validator.minLength {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid length",
+			fmt.Sprintf("expected length to be at least %d, got %d", validator.minLength, l),
+		)
 
 		return
 	}
@@ -138,25 +137,25 @@ type stringInSliceValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v stringInSliceValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be one of %v", v.valid)
+func (validator stringInSliceValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be one of %v", validator.valid)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v stringInSliceValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator stringInSliceValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -165,17 +164,17 @@ func (v stringInSliceValidator) Validate(ctx context.Context, request tfsdk.Vali
 		return
 	}
 
-	for _, val := range v.valid {
+	for _, val := range validator.valid {
 		if s.Value == val {
 			return
 		}
 	}
 
-	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "Invalid value",
-		Detail:   fmt.Sprintf("expected %s to be one of %v, got %s", request.AttributePath, v.valid, s.Value),
-	})
+	response.Diagnostics.AddAttributeError(
+		request.AttributePath,
+		"Invalid value",
+		fmt.Sprintf("expected value to be one of %v, got %s", validator.valid, s.Value),
+	)
 }
 
 // StringLenAtLeast returns a new string in slice validator.

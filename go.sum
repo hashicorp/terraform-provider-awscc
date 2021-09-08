@@ -117,6 +117,10 @@ github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902181543-57c53acf
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902181543-57c53acf8fa2/go.mod h1:JcYLIMJDUnOrPRSdbjRsNaJcOExNuPdZ6MS+OIBHjyE=
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902190237-e20bf3555d0c h1:HhE2mW8Ao+XRk7BCGhKF80dEB3r+YxMoaVLKI0IJr1Q=
 github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902190237-e20bf3555d0c/go.mod h1:JcYLIMJDUnOrPRSdbjRsNaJcOExNuPdZ6MS+OIBHjyE=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908121805-ccf7ab658548 h1:XUFwM1ZpRawpDcEWKFE+tnNwHOoria0Hiq/e7SAum+Y=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908121805-ccf7ab658548/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77 h1:EqGVXBO/5nVzp5OqTHUDn86isb8kXiRRxSPSRIg/3tc=
+github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
 github.com/fatih/color v1.7.0 h1:DkWD4oS2D8LGGgTQ6IvwJJXSL5Vp2ffcQg58nFV38Ys=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568/go.mod h1:xEzjJPgXI435gkrCt3MPfRiAkVrwSbHsst4LCFVfpJc=
