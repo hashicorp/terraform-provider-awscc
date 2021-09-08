@@ -2,7 +2,7 @@ package reflect
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -22,11 +22,12 @@ func Primitive(ctx context.Context, typ attr.Type, val tftypes.Value, target ref
 		var b bool
 		err := val.As(&b)
 		if err != nil {
-			diags.AddAttributeError(
-				path,
-				"Value Conversion Error",
-				"An unexpected error was encountered trying to convert to boolean. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
-			)
+			diags.Append(DiagIntoIncompatibleType{
+				Val:        val,
+				TargetType: target.Type(),
+				AttrPath:   path,
+				Err:        err,
+			})
 			return target, diags
 		}
 		return reflect.ValueOf(b).Convert(target.Type()), nil
@@ -34,28 +35,29 @@ func Primitive(ctx context.Context, typ attr.Type, val tftypes.Value, target ref
 		var s string
 		err := val.As(&s)
 		if err != nil {
-			diags.AddAttributeError(
-				path,
-				"Value Conversion Error",
-				"An unexpected error was encountered trying to convert to string. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
-			)
+			diags.Append(DiagIntoIncompatibleType{
+				Val:        val,
+				TargetType: target.Type(),
+				AttrPath:   path,
+				Err:        err,
+			})
 			return target, diags
 		}
 		return reflect.ValueOf(s).Convert(target.Type()), nil
 	default:
-		err := fmt.Errorf("unrecognized type: %s", target.Kind())
-		diags.AddAttributeError(
-			path,
-			"Value Conversion Error",
-			"An unexpected error was encountered trying to convert to primitive. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
-		)
+		diags.Append(DiagIntoIncompatibleType{
+			Val:        val,
+			TargetType: target.Type(),
+			AttrPath:   path,
+			Err:        errors.New("unknown type"),
+		})
 		return target, diags
 	}
 }
 
 // FromString returns an attr.Value as produced by `typ` from a string.
 //
-// It is meant to be called through OutOf, not directly.
+// It is meant to be called through FromValue, not directly.
 func FromString(ctx context.Context, typ attr.Type, val string, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	err := tftypes.ValidateValue(tftypes.String, val)
@@ -82,7 +84,7 @@ func FromString(ctx context.Context, typ attr.Type, val string, path *tftypes.At
 
 // FromBool returns an attr.Value as produced by `typ` from a bool.
 //
-// It is meant to be called through OutOf, not directly.
+// It is meant to be called through FromValue, not directly.
 func FromBool(ctx context.Context, typ attr.Type, val bool, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	err := tftypes.ValidateValue(tftypes.Bool, val)

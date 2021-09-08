@@ -62,7 +62,7 @@ func NewUnknownable(ctx context.Context, typ attr.Type, val tftypes.Value, targe
 
 // FromUnknownable creates an attr.Value from the data in an Unknownable.
 //
-// It is meant to be called through OutOf, not directly.
+// It is meant to be called through FromValue, not directly.
 func FromUnknownable(ctx context.Context, typ attr.Type, val Unknownable, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
@@ -156,7 +156,7 @@ func NewNullable(ctx context.Context, typ attr.Type, val tftypes.Value, target r
 
 // FromNullable creates an attr.Value from the data in a Nullable.
 //
-// It is meant to be called through OutOf, not directly.
+// It is meant to be called through FromValue, not directly.
 func FromNullable(ctx context.Context, typ attr.Type, val Nullable, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
@@ -242,7 +242,7 @@ func NewValueConverter(ctx context.Context, typ attr.Type, val tftypes.Value, ta
 // tftypes.ValueCreator, calling its ToTerraform5Value method and converting
 // the result to an attr.Value using `typ`.
 //
-// It is meant to be called from OutOf, not directly.
+// It is meant to be called from FromValue, not directly.
 func FromValueCreator(ctx context.Context, typ attr.Type, val tftypes.ValueCreator, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	raw, err := val.ToTerraform5Value()
@@ -291,12 +291,12 @@ func NewAttributeValue(ctx context.Context, typ attr.Type, val tftypes.Value, ta
 		return target, append(diags, valueFromTerraformErrorDiag(err, path))
 	}
 	if reflect.TypeOf(res) != target.Type() {
-		err := fmt.Errorf("Cannot use attr.Value %s, only %s is supported because %T is the type in the schema", target.Type(), reflect.TypeOf(res), typ)
-		diags.AddAttributeError(
-			path,
-			"Value Conversion Error",
-			"An unexpected error was encountered trying to convert into a Terraform value. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
-		)
+		diags.Append(DiagNewAttributeValueIntoWrongType{
+			ValType:    reflect.TypeOf(res),
+			TargetType: target.Type(),
+			SchemaType: typ,
+			AttrPath:   path,
+		})
 		return target, diags
 	}
 	return reflect.ValueOf(res), diags
@@ -307,7 +307,7 @@ func NewAttributeValue(ctx context.Context, typ attr.Type, val tftypes.Value, ta
 // validation on that attr.Value to make sure it matches the type produced by
 // `typ`.
 //
-// It is meant to be called through OutOf, not directly.
+// It is meant to be called through FromValue, not directly.
 func FromAttributeValue(ctx context.Context, typ attr.Type, val attr.Value, path *tftypes.AttributePath) (attr.Value, diag.Diagnostics) {
 	var diags diag.Diagnostics
 
