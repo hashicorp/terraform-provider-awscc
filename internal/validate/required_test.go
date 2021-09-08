@@ -50,11 +50,11 @@ func TestRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := Required(test.required...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -99,11 +99,11 @@ func TestAllOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := AllOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -152,11 +152,11 @@ func TestAnyOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := AnyOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -210,11 +210,11 @@ func TestOneOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := OneOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -353,11 +353,11 @@ func TestRequiredAttributesValidator_Object(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -515,11 +515,11 @@ func TestRequiredAttributesValidator_List(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -676,11 +676,11 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -795,11 +795,11 @@ func TestResourceConfigRequiredAttributesValidator(t *testing.T) {
 			response := tfsdk.ValidateResourceConfigResponse{}
 			ResourceConfigRequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})

@@ -65,11 +65,11 @@ func TestIsRFC3339TimeValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			IsRFC3339Time().Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
