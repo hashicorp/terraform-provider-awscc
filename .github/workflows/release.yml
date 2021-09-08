@@ -10,6 +10,7 @@ env:
   GOPROXY: https://proxy.golang.org/
   PROTOCOL_VERSION: "6.0"
   PROTOCOL_VERSIONS: "6.0"
+  SIGNER: interim_signing_subkey_7685B676
 
 jobs:
   Release:
@@ -30,7 +31,8 @@ jobs:
           go-version: ${{ steps.go-version.outputs.content }}
       - uses: hashicorp/setup-hc-releases@v1
         with:
-          github_token: ${{ secrets.HC_RELEASES_TOKEN }}
+          github-token: ${{ secrets.HC_RELEASES_TOKEN }}
+          signer: ${{ env.SIGNER }}
       - uses: hashicorp/setup-signore@v1
         with:
           github-token: ${{ secrets.SETUP_SIGNORE_GITHUB_TOKEN }}
@@ -53,8 +55,10 @@ jobs:
           aws-access-key-id: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TF_PROVIDER_RELEASE_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
+          role-duration-seconds: 900
           role-to-assume: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ROLE_ARN }}
           role-session-name: ${{ github.run_id }}
+          role-skip-session-tagging: true
       - name: goreleaser release
         uses: goreleaser/goreleaser-action@v2
         with:
@@ -66,7 +70,7 @@ jobs:
           PROTOCOL_VERSION: ${{ env.PROTOCOL_VERSION }}
           PROTOCOL_VERSIONS: ${{ env.PROTOCOL_VERSIONS }}
       - name: hc-releases publish
-        run: hc-releases publish -product=${{ github.event.repository.name }}
+        run: hc-releases publish -bucket=my-other-bb-bucket -regon=us-east-1 -product=${{ github.event.repository.name }}
         env:
           FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
           TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
