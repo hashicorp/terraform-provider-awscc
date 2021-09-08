@@ -1090,9 +1090,9 @@ resource_schema "aws_networkmanager_global_network" {
 }
 
 resource_schema "aws_networkmanager_link" {
-  cloudformation_type_name    = "AWS::NetworkManager::Link"
-  suppress_plural_data_source = true
-  suppress_resource           = true
+  cloudformation_type_name     = "AWS::NetworkManager::Link"
+  suppress_plural_data_source  = true
+  suppress_resource_generation = true
 }
 
 resource_schema "aws_networkmanager_link_association" {
