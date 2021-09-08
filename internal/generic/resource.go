@@ -11,9 +11,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
@@ -333,11 +333,11 @@ func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsd
 	return resourceType, nil
 }
 
-func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return rt.tfSchema, nil
 }
 
-func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
+func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, diag.Diagnostics) {
 	return newGenericResource(provider, rt), nil
 }
 
@@ -487,11 +487,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -499,11 +498,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -554,11 +552,10 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -574,11 +571,10 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		err = CopyValueAtPath(ctx, &response.State, &request.State, path)
 
 		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Terraform State Value Not Set",
-				Detail:   fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
-			})
+			response.Diagnostics.AddError(
+				"Terraform State Value Not Set",
+				fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
+			)
 
 			return
 		}
@@ -639,11 +635,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of JSON Patch Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of JSON Patch Unsuccessful",
+			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -741,7 +736,7 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id
 func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
 	val, diags := state.GetAttribute(ctx, idAttributePath)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
@@ -756,7 +751,7 @@ func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error
 func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return tfresource.DiagsError(diags)
 	}
 
