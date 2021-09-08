@@ -8,9 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
@@ -89,11 +89,11 @@ func (sdt *SingularDataSourceType) New(dst *DataSourceType) *SingularDataSourceT
 	}
 }
 
-func (sdt *SingularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (sdt *SingularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return sdt.tfSchema, nil
 }
 
-func (sdt *SingularDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, []*tfprotov6.Diagnostic) {
+func (sdt *SingularDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
 	return newGenericSingularDataSource(provider, sdt), nil
 }
 
@@ -149,11 +149,10 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -185,7 +184,7 @@ func (sd *singularDataSource) describe(ctx context.Context, conn *cloudformation
 func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (string, error) {
 	val, diags := config.GetAttribute(ctx, idAttributePath)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
@@ -200,7 +199,7 @@ func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (
 func (sd *singularDataSource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return tfresource.DiagsError(diags)
 	}
 
