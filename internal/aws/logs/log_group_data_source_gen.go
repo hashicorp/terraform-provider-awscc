@@ -91,6 +91,12 @@ func logGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		},
 	}
 
+	attributes["id"] = tfsdk.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Required:    true,
+	}
+
 	schema := tfsdk.Schema{
 		Description: "Data Source schema for AWS::Logs::LogGroup",
 		Version:     1,

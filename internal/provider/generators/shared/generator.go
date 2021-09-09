@@ -118,27 +118,29 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		PackageName:                  packageName,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
+		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
+	}
+
+	if codeFeatures&codegen.UsesInternalTypes > 0 {
+		templateData.ImportInternalTypes = true
 	}
 
 	if resType == DataSourceType {
 		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
+
 		return templateData, nil
 	}
 
 	templateData.HasRequiredAttribute = true
 	templateData.HasUpdateMethod = true
 	templateData.RequiredAttributesValidator = requiredAttributesValidator
-	templateData.SyntheticIDAttribute = true
 
 	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
 		templateData.HasRequiredAttribute = false
 	}
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
-	}
-	if codeFeatures&codegen.UsesInternalTypes > 0 {
-		templateData.ImportInternalTypes = true
 	}
 	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
 		templateData.ImportValidate = true
