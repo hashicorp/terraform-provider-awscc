@@ -50,7 +50,13 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := NewSingularDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfTypeSchemaFile, *tfDataSourceType)
+	generator := &SingularDataSourceGenerator{
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfDataSourceType: *tfDataSourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
@@ -62,18 +68,6 @@ type SingularDataSourceGenerator struct {
 	cfTypeSchemaFile string
 	tfDataSourceType string
 	shared.Generator
-}
-
-func NewSingularDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfDataSourceType string) *SingularDataSourceGenerator {
-	return &SingularDataSourceGenerator{
-		cfTypeSchemaFile: cfTypeSchemaFile,
-		tfDataSourceType: tfDataSourceType,
-		Generator: shared.Generator{
-			AcceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
-			SchemaTemplateBody:          schemaTemplateBody,
-			UI:                          ui,
-		},
-	}
 }
 
 // Generate generates the singular data source's type factory into the specified file.
@@ -96,13 +90,13 @@ func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acct
 		return err
 	}
 
-	err = s.ApplyAndWriteTemplate(schemaFilename, s.SchemaTemplateBody, templateData)
+	err = s.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, templateData)
 
 	if err != nil {
 		return err
 	}
 
-	err = s.ApplyAndWriteTemplate(acctestsFilename, s.AcceptanceTestsTemplateBody, templateData)
+	err = s.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
 
 	if err != nil {
 		return err

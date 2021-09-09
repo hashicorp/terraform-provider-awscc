@@ -50,7 +50,13 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
+	generator := &ResourceGenerator{
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfResourceType:   *tfResourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
@@ -62,18 +68,6 @@ type ResourceGenerator struct {
 	cfTypeSchemaFile string
 	tfResourceType   string
 	shared.Generator
-}
-
-func NewResourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfResourceType string) *ResourceGenerator {
-	return &ResourceGenerator{
-		cfTypeSchemaFile: cfTypeSchemaFile,
-		tfResourceType:   tfResourceType,
-		Generator: shared.Generator{
-			AcceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
-			SchemaTemplateBody:          schemaTemplateBody,
-			UI:                          ui,
-		},
-	}
 }
 
 // Generate generates the resource's type factory into the specified file.
@@ -96,13 +90,13 @@ func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilena
 		return err
 	}
 
-	err = r.ApplyAndWriteTemplate(schemaFilename, r.SchemaTemplateBody, templateData)
+	err = r.ApplyAndWriteTemplate(schemaFilename, schemaTemplateBody, templateData)
 
 	if err != nil {
 		return err
 	}
 
-	err = r.ApplyAndWriteTemplate(acctestsFilename, r.AcceptanceTestsTemplateBody, templateData)
+	err = r.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
 
 	if err != nil {
 		return err

@@ -52,7 +52,13 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := NewPluralDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfType, *tfDataSourceType)
+	generator := &PluralDataSourceGenerator{
+		cfType:           *cfType,
+		tfDataSourceType: *tfDataSourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
@@ -64,18 +70,6 @@ type PluralDataSourceGenerator struct {
 	cfType           string
 	tfDataSourceType string
 	shared.Generator
-}
-
-func NewPluralDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfType, tfDataSourceType string) *PluralDataSourceGenerator {
-	return &PluralDataSourceGenerator{
-		cfType:           cfType,
-		tfDataSourceType: tfDataSourceType,
-		Generator: shared.Generator{
-			AcceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
-			SchemaTemplateBody:          schemaTemplateBody,
-			UI:                          ui,
-		},
-	}
 }
 
 // Generate generates the plural data source type's factory into the specified file.
@@ -116,13 +110,13 @@ func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctes
 		TerraformTypeName:            p.tfDataSourceType,
 	}
 
-	err = p.ApplyAndWriteTemplate(schemaFilename, p.SchemaTemplateBody, &templateData)
+	err = p.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, &templateData)
 
 	if err != nil {
 		return err
 	}
 
-	err = p.ApplyAndWriteTemplate(acctestsFilename, p.AcceptanceTestsTemplateBody, &templateData)
+	err = p.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
 
 	if err != nil {
 		return err

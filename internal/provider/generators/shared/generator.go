@@ -22,9 +22,7 @@ const (
 )
 
 type Generator struct {
-	AcceptanceTestsTemplateBody string
-	SchemaTemplateBody          string
-	UI                          cli.Ui
+	UI cli.Ui
 }
 
 // ApplyAndWriteTemplate applies the template body to the specified data and writes it to file.
