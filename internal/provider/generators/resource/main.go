@@ -90,7 +90,7 @@ func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilena
 		return err
 	}
 
-	err = r.ApplyAndWriteTemplate(schemaFilename, schemaTemplateBody, templateData)
+	err = r.ApplyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, templateData)
 
 	if err != nil {
 		return err
