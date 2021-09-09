@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -49,7 +49,7 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := codegen.NewSingularDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfTypeSchemaFile, *tfDataSourceType)
+	generator := shared.NewSingularDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfTypeSchemaFile, *tfDataSourceType)
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
@@ -86,7 +86,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 	
 {{ if .SyntheticIDAttribute }}
 	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the data source.",
+		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Required:    true,
 	}

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -49,7 +49,7 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := codegen.NewPluralDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfType, *tfDataSourceType)
+	generator := shared.NewPluralDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfType, *tfDataSourceType)
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))

@@ -11,7 +11,6 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -549,12 +548,6 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
-	}
-
-	attributes["id"] = tfsdk.Attribute{
-		Description: "Uniquely identifies the data source.",
-		Type:        types.StringType,
-		Required:    true,
 	}
 
 	schema := tfsdk.Schema{

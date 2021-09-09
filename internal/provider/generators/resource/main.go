@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -49,7 +49,7 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := codegen.NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
+	generator := shared.NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))

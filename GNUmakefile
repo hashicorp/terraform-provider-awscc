@@ -6,17 +6,23 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
+.PHONY: all build default golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources build
+all: schemas resources singular-data-sources plural-data-sources build
 
 build:
 	go install
 
-data-sources:
+plural-data-sources:
 	rm -f internal/*/*/*_data_source_gen.go
 	rm -f internal/*/*/*_data_source_gen_test.go
 	go generate internal/provider/plural_data_sources.go
+
+singular-data-sources:
+	rm -f internal/aws/lambda/function_data_source_gen.go
+	rm -f internal/aws/lambda/function_data_source_gen_test.go
+	rm -f internal/aws/logs/log_group_data_source_gen.go
+	rm -f internal/aws/logs/log_group_data_source_gen_test.go
 	go generate internal/provider/singular_data_sources.go
 
 resources:
