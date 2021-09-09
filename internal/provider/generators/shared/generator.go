@@ -115,6 +115,7 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
+		HasRequiredAttribute:         true,
 		PackageName:                  packageName,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
@@ -122,6 +123,9 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		TerraformTypeName:            resource.TfType,
 	}
 
+	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
+		templateData.HasRequiredAttribute = false
+	}
 	if codeFeatures&codegen.UsesInternalTypes > 0 {
 		templateData.ImportInternalTypes = true
 	}
@@ -132,13 +136,9 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		return templateData, nil
 	}
 
-	templateData.HasRequiredAttribute = true
 	templateData.HasUpdateMethod = true
 	templateData.RequiredAttributesValidator = requiredAttributesValidator
 
-	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
-		templateData.HasRequiredAttribute = false
-	}
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
 	}
