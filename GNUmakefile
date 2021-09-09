@@ -20,8 +20,8 @@ data-sources:
 	# TODO: Generate Singular Data Sources
 
 resources:
-	rm -f internal/*/*/*_gen.go
-	rm -f internal/*/*/*_gen_test.go
+	rm -f internal/*/*/*_resource_gen.go
+	rm -f internal/*/*/*_resource_gen_test.go
 	go generate internal/provider/resources.go
 
 schemas:

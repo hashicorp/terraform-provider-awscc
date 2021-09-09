@@ -289,8 +289,8 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:    res + "_gen_test",              // e.g. "log_group_gen_test"
-			GeneratedCodeFileName:        res + "_gen",                   // e.g. "log_group_gen"
+			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
+			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
