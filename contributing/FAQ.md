@@ -16,9 +16,9 @@ The HashiCorp Terraform AWS provider team is :
 * Simon Davis, Engineering Manager - GitHub [@breathingdust](https://github.com/breathingdust)
 * Kerim Satirli,  Developer Advocate - GitHub [@ksatirli](https://github.com/ksatirli)
 
-### How is this provider different than the existing AWS provider?
+### How is this provider different from the existing AWS provider?
 
-The Cloud Control provider is wholly generated from AWS CloudFormation schema. This means no manual work is required to add new features or services to the provider, and practitioners can expect to use AWS services within days of the AWS's launch rather than potentially wait for community support to prioritize that feature for inclusion. The standard [AWS Provider](https://github.com/hashicorp/terraform-provider-aws) is manually written and is the work of thousands of contributors and years of work.
+The Cloud Control provider is wholly generated from AWS CloudFormation schema. This means no manual work is required to add new features or services to the provider, and practitioners can expect to use AWS services within days of the AWS's launch rather than potentially wait for community support to prioritize that feature for inclusion. The standard [AWS Provider](https://github.com/hashicorp/terraform-provider-aws) is manually written and is the product of thousands of contributors and years of work.
 
 ### CloudFormation seems to support the resource I want to use, but I don’t see it in the provider?
 
@@ -42,7 +42,7 @@ It's possible that as AWS release new services, the code which generates the pro
 
 ### What is your release schedule?
 
-We release weekly on Thursday rolling up the preceding weeks CloudFormation additions/enhancements. For this reason there may be a delay of up to a week before a feature available in AWS can be usable in the provider. We do plan to narrow this gap as the provider reaches GA status.
+We release weekly on Thursday rolling up the preceding week's CloudFormation additions/enhancements. For this reason there may be a delay of up to a week before a feature available in AWS can be usable in the provider. We do plan to narrow this gap as the provider reaches GA status.
 
 ### Cloudformation doesn’t support the service or resource I want to use, how do I request coverage? 
 
