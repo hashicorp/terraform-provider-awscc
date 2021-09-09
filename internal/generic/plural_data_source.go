@@ -15,13 +15,13 @@ import (
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 )
 
-// PluralDataSourceType is a type alias for a data source type.
-type PluralDataSourceType DataSourceType
+// pluralDataSourceType is a type alias for a data source type.
+type pluralDataSourceType dataSourceType
 
 // NewPluralDataSourceType returns a new PluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &DataSourceType{}
+	dataSourceType := &dataSourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
@@ -39,34 +39,34 @@ func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsF
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	var pdt *PluralDataSourceType
+	var pdt *pluralDataSourceType
 
 	return pdt.New(dataSourceType), nil
 }
 
-func (pdt *PluralDataSourceType) New(dst *DataSourceType) *PluralDataSourceType {
-	return &PluralDataSourceType{
+func (pdt *pluralDataSourceType) New(dst *dataSourceType) *pluralDataSourceType {
+	return &pluralDataSourceType{
 		cfTypeName: dst.cfTypeName,
 		tfSchema:   dst.tfSchema,
 		tfTypeName: dst.tfTypeName,
 	}
 }
 
-func (pdt *PluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (pdt *pluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return pdt.tfSchema, nil
 }
 
-func (pdt *PluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
+func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
 	return newGenericPluralDataSource(provider, pdt), nil
 }
 
 // Implements tfsdk.DataSource
 type pluralDataSource struct {
 	provider       tfcloudformation.Provider
-	dataSourceType *PluralDataSourceType
+	dataSourceType *pluralDataSourceType
 }
 
-func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *PluralDataSourceType) tfsdk.DataSource {
+func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *pluralDataSourceType) tfsdk.DataSource {
 	return &pluralDataSource{
 		provider:       provider.(tfcloudformation.Provider),
 		dataSourceType: pluralDataSourceType,

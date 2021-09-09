@@ -16,15 +16,15 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-// SingularDataSourceType is a type alias for a data source type.
-type SingularDataSourceType DataSourceType
+// singularDataSourceType is a type alias for a data source type.
+type singularDataSourceType dataSourceType
 
 // DataSourceWithAttributeNameMap is a helper function to construct functional options
 // that set a data source type's attribute name maps.
 // If multiple DataSourceWithAttributeNameMap calls are made, the last call overrides
 // the previous calls' values.
 func DataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFunc {
-	return func(o *DataSourceType) error {
+	return func(o *dataSourceType) error {
 		if _, ok := v["id"]; !ok {
 			// Synthesize a mapping for the reserved top-level "id" attribute.
 			v["id"] = "ID"
@@ -57,7 +57,7 @@ func (opts DataSourceTypeOptions) WithAttributeNameMap(v map[string]string) Data
 // NewSingularDataSourceType returns a new SingularDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &DataSourceType{}
+	dataSourceType := &dataSourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
@@ -75,13 +75,13 @@ func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOption
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	var sdt *SingularDataSourceType
+	var sdt *singularDataSourceType
 
 	return sdt.New(dataSourceType), nil
 }
 
-func (sdt *SingularDataSourceType) New(dst *DataSourceType) *SingularDataSourceType {
-	return &SingularDataSourceType{
+func (sdt *singularDataSourceType) New(dst *dataSourceType) *singularDataSourceType {
+	return &singularDataSourceType{
 		cfToTfNameMap: dst.cfToTfNameMap,
 		cfTypeName:    dst.cfTypeName,
 		tfSchema:      dst.tfSchema,
@@ -89,21 +89,21 @@ func (sdt *SingularDataSourceType) New(dst *DataSourceType) *SingularDataSourceT
 	}
 }
 
-func (sdt *SingularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (sdt *singularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return sdt.tfSchema, nil
 }
 
-func (sdt *SingularDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
+func (sdt *singularDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
 	return newGenericSingularDataSource(provider, sdt), nil
 }
 
 // Implements tfsdk.DataSource
 type singularDataSource struct {
 	provider       tfcloudformation.Provider
-	dataSourceType *SingularDataSourceType
+	dataSourceType *singularDataSourceType
 }
 
-func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceType *SingularDataSourceType) tfsdk.DataSource {
+func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceType *singularDataSourceType) tfsdk.DataSource {
 	return &singularDataSource{
 		provider:       provider.(tfcloudformation.Provider),
 		dataSourceType: singularDataSourceType,

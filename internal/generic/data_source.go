@@ -2,13 +2,13 @@ package generic
 
 import "github.com/hashicorp/terraform-plugin-framework/tfsdk"
 
-// DataSourceTypeOptionsFunc is a type alias for a DataSource type functional option.
-type DataSourceTypeOptionsFunc func(*DataSourceType) error
+// DataSourceTypeOptionsFunc is a type alias for a data source type functional option.
+type DataSourceTypeOptionsFunc func(*dataSourceType) error
 
 type DataSourceTypeOptions []DataSourceTypeOptionsFunc
 
-// DataSourceType implements tfsdk.DataSourceType
-type DataSourceType struct {
+// dataSourceType implements tfsdk.DataSourceType
+type dataSourceType struct {
 	cfToTfNameMap map[string]string // Map of CloudFormation property name to Terraform attribute name
 	cfTypeName    string            // CloudFormation type name for the resource type
 	tfSchema      tfsdk.Schema      // Terraform schema for the data source type
@@ -20,7 +20,7 @@ type DataSourceType struct {
 // If multiple FromCloudFormationAndTerraform calls are made, the last call overrides
 // the previous calls' values.
 func FromCloudFormationAndTerraform(cfTypeName, tfTypeName string, schema tfsdk.Schema) DataSourceTypeOptionsFunc {
-	return func(o *DataSourceType) error {
+	return func(o *dataSourceType) error {
 		o.cfTypeName = cfTypeName
 		o.tfTypeName = tfTypeName
 		o.tfSchema = schema
