@@ -270,13 +270,12 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 		if schema.SuppressPluralDataSource {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform plural data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
-			pluralResource := naming.Pluralize(res)
 			pluralTfResourceTypeName := naming.Pluralize(tfResourceTypeName)
 
 			pluralDataSources = append(pluralDataSources, &DataSourceData{
 				CloudFormationType:        cfResourceTypeName,
-				GeneratedAccTestsFileName: pluralResource + "_data_source_gen_test",
-				GeneratedCodeFileName:     pluralResource + "_data_source_gen",
+				GeneratedAccTestsFileName: res + "_plural_data_source_gen_test",
+				GeneratedCodeFileName:     res + "_plural_data_source_gen",
 				GeneratedCodePackageName:  svc,
 				GeneratedCodePathSuffix:   fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:     pluralTfResourceTypeName,
@@ -290,8 +289,8 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:    res + "_gen_test",              // e.g. "log_group_gen_test"
-			GeneratedCodeFileName:        res + "_gen",                   // e.g. "log_group_gen"
+			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
+			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
