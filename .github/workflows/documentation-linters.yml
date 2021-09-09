@@ -10,7 +10,7 @@ on:
       - .github/workflows/documentation-linters.yml
       - .github/**/*.md
       - .markdownlint.yml
-      - docs/**
+      - contributing/**
       # - website/**
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           use-quiet-mode: "yes"
           use-verbose-mode: "yes"
           config-file: ".markdownlinkcheck.json"
-          folder-path: "docs,.github"
+          folder-path: "contributing,.github"
           file-extension: ".md"
 
   markdown-lint:
@@ -35,7 +35,7 @@ jobs:
       - uses: avto-dev/markdown-lint@v1
         with:
           config: ".markdownlint.yml"
-          args: "docs .github/"
+          args: "contributing .github/"
 
   misspell:
     runs-on: ubuntu-latest
@@ -63,4 +63,4 @@ jobs:
 
       - run: cd tools && go install github.com/client9/misspell/cmd/misspell
 
-      - run: misspell -error -source text -locale US docs/ .github/
+      - run: misspell -error -source text -locale US contributing/ .github/
