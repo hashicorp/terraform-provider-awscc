@@ -61,4 +61,4 @@ Not at this time. There are no plans to deprecate the existing provider at this 
 
 ### How can I help?
 
-Contributing to this provider will be very different from the prior AWS provider, but we will accept PR’s to help with any aspects of code generation, runtime and documentation. We will not accept any PR’s which alter or modify the behavior of generated resources at this time.
+Contributing to this provider will be very different from the prior AWS provider but we will accept PR’s to help with any aspects of code generation, runtime and documentation. We will not accept any PR’s which alter or modify the behavior of generated resources at this time, but would love to hear where you think this is necessary.

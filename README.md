@@ -17,12 +17,12 @@ This provider is maintained internally by the HashiCorp AWS Provider team.
 
 ### AWS CloudFormation Cloud Control API
 
-The [Cloud Control API](TODO LINK TO AWS DOCS) is a lighweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
+The [Cloud Control API](TODO LINK TO AWS DOCS) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
 The Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
 
 #### Coverage
 
-At launch a subset of AWS resources which can be managed by CloudFormation are supported, some services use an older CloudFormation schema and cannot be used with Cloud Control. AWS are updating all of the older CloudFormation schema’s to conform to the new standard, and are actively pursuing full coverage for CloudFormation. For the latest coverage information please refer to their public (roadmap)[https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1]
+At launch a subset of AWS resources which can be managed by CloudFormation are supported, some services use an older CloudFormation schema and cannot be used with Cloud Control. AWS are updating all of the older CloudFormation schemas to conform to the new standard, and are actively pursuing full coverage for CloudFormation. For the latest coverage information please refer to the AWS Cloudformation public (roadmap)[https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1]
 
 To see the list of supported resources within this provider please refer to the registry.
 
@@ -41,8 +41,8 @@ All CRUDL operations also accept a `RoleArn` parameter which represents the [AWS
 
 ## Quick Starts
 
-- Using the provider
-- [Provider development](docs/DEVELOPMENT.md)
+- Using the provider TODO
+- [Provider development](contributing/DEVELOPMENT.md)
 
 ## Documentation
 
@@ -50,10 +50,10 @@ Full, comprehensive documentation is available on the [Terraform Registry](https
 
 ## Frequently Asked Questions
 
-Responses to our most frequently asked questions can be found in our [FAQ](docs/FAQ.md )
+Responses to our most frequently asked questions can be found in our [FAQ](contributing/FAQ.md )
 
 ## Contributing
 
 The Terraform Provider for AWS CloudFormation Cloud Control API is the work of a handful of contributors. We appreciate your help!
 
-To contribute, please read the contribution guidelines: [Contributing to Terraform - AWS Cloud Control Provider](docs/CONTRIBUTING.md)
+To contribute, please read the contribution guidelines: [Contributing to Terraform - AWS Cloud Control Provider](contributing/CONTRIBUTING.md)
