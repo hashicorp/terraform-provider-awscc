@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -83,11 +85,17 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: LambdaArn
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"role_arn": {
 									// Property: RoleArn
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 							},
 						),
@@ -102,11 +110,17 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: RoleArn
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+									},
 								},
 							},
 						),
@@ -130,6 +144,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 			// AlertDescription is a force-new attribute.
 		},
 		"alert_name": {
@@ -146,6 +163,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// AlertName is a force-new attribute.
 		},
 		"alert_sensitivity_threshold": {
@@ -153,11 +173,16 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
+			//   "maximum": 100,
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
 			Type:        types.NumberType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 100),
+			},
 			// AlertSensitivityThreshold is a force-new attribute.
 		},
 		"anomaly_detector_arn": {
@@ -172,6 +197,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 			// AnomalyDetectorArn is a force-new attribute.
 		},
 		"arn": {

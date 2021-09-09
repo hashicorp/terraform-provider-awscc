@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -53,6 +54,17 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"SUN",
+					"MON",
+					"TUE",
+					"WED",
+					"THU",
+					"FRI",
+					"SAT",
+				}),
+			},
 		},
 		"frequency": {
 			// Property: Frequency
@@ -70,6 +82,14 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DAILY",
+					"WEEKLY",
+					"BIWEEKLY",
+					"MONTHLY",
+				}),
+			},
 		},
 		"scheduled_audit_arn": {
 			// Property: ScheduledAuditArn
@@ -98,6 +118,9 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// ScheduledAuditName is a force-new attribute.
 		},
 		"tags": {
@@ -141,12 +164,18 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The tag's key.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

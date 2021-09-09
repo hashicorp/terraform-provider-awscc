@@ -28,11 +28,16 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The maximum number of items to retrieve in a single batch.",
+			//   "maximum": 10000,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 10000),
+			},
 		},
 		"bisect_batch_on_function_error": {
 			// Property: BisectBatchOnFunctionError
@@ -82,6 +87,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "The Amazon Resource Name (ARN) of the destination resource.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(12, 1024),
+									},
 								},
 							},
 						),
@@ -116,6 +124,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(12, 1024),
+			},
 			// EventSourceArn is a force-new attribute.
 		},
 		"function_name": {
@@ -131,6 +142,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The name of the Lambda function.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 140),
+			},
 		},
 		"function_response_types": {
 			// Property: FunctionResponseTypes
@@ -150,8 +164,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Streams) A list of response types supported by the function.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -172,44 +188,64 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
+			//   "maximum": 300,
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 300),
+			},
 		},
 		"maximum_record_age_in_seconds": {
 			// Property: MaximumRecordAgeInSeconds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
+			//   "maximum": 604800,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 604800),
+			},
 		},
 		"maximum_retry_attempts": {
 			// Property: MaximumRetryAttempts
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The maximum number of times to retry when the function returns an error.",
+			//   "maximum": 10000,
+			//   "minimum": -1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(-1, 10000),
+			},
 		},
 		"parallelization_factor": {
 			// Property: ParallelizationFactor
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) The number of batches to process from each shard concurrently.",
+			//   "maximum": 10,
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(1, 10),
+			},
 		},
 		"queues": {
 			// Property: Queues
@@ -229,8 +265,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(ActiveMQ) A list of ActiveMQ queues.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 1),
+				validate.UniqueItems(),
+			},
 		},
 		"self_managed_event_source": {
 			// Property: SelfManagedEventSource
@@ -275,8 +314,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									// Property: KafkaBootstrapServers
 									Description: "A list of Kafka server endpoints.",
 									Type:        types.ListType{ElemType: types.StringType},
-									Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 10),
+										validate.UniqueItems(),
+									},
 								},
 							},
 						),
@@ -332,12 +374,25 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The type of source access configuration.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"BASIC_AUTH",
+								"VPC_SUBNET",
+								"VPC_SECURITY_GROUP",
+								"SASL_SCRAM_512_AUTH",
+								"SASL_SCRAM_256_AUTH",
+								"VIRTUAL_HOST",
+							}),
+						},
 					},
 					"uri": {
 						// Property: URI
 						Description: "The URI for the source access configuration resource.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 200),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -345,8 +400,10 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					MaxItems: 22,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"starting_position": {
 			// Property: StartingPosition
@@ -362,6 +419,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(6, 12),
+			},
 			// StartingPosition is a force-new attribute.
 		},
 		"starting_position_timestamp": {
@@ -393,19 +453,27 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Description: "(Kafka) A list of Kafka topics.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 1),
+				validate.UniqueItems(),
+			},
 		},
 		"tumbling_window_in_seconds": {
 			// Property: TumblingWindowInSeconds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
+			//   "maximum": 900,
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(0, 900),
+			},
 		},
 	}
 

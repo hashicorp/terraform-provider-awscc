@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -57,11 +59,17 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						// Property: ParameterName
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 					"parameter_value": {
 						// Property: ParameterValue
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 4096),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -83,6 +91,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "AWS Config stores intermediate files while processing conformance pack template.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 63),
+			},
 		},
 		"delivery_s3_key_prefix": {
 			// Property: DeliveryS3KeyPrefix
@@ -96,6 +107,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "The prefix for the delivery S3 bucket.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 1024),
+			},
 		},
 		"excluded_accounts": {
 			// Property: ExcludedAccounts
@@ -112,6 +126,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 1000),
+			},
 		},
 		"organization_conformance_pack_name": {
 			// Property: OrganizationConformancePackName
@@ -126,6 +143,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "The name of the organization conformance pack.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// OrganizationConformancePackName is a force-new attribute.
 		},
 		"template_body": {
@@ -140,6 +160,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "A string containing full conformance pack template body.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 51200),
+			},
 			// TemplateBody is a write-only attribute.
 		},
 		"template_s3_uri": {
@@ -155,6 +178,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "Location of file containing the template body.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// TemplateS3Uri is a write-only attribute.
 		},
 	}

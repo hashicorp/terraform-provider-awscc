@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// Alias is a force-new attribute.
 		},
 		"arn": {
@@ -60,6 +65,9 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 		},
 		"plan": {
 			// Property: Plan
@@ -79,6 +87,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+			//           "oneOf": [
+			//             {
+			//               "required": [
+			//                 "ChannelTargetInfo"
+			//               ]
+			//             },
+			//             {
+			//               "required": [
+			//                 "ContactTargetInfo"
+			//               ]
+			//             }
+			//           ],
 			//           "properties": {
 			//             "ChannelTargetInfo": {
 			//               "additionalProperties": false,
@@ -191,6 +211,18 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.RequiredAttributes(
+								validate.OneOfRequired(
+									validate.Required(
+										"channel_target_info",
+									),
+									validate.Required(
+										"contact_target_info",
+									),
+								),
+							),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -214,6 +246,14 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"PERSONAL",
+					"CUSTOM",
+					"SERVICE",
+					"ESCALATION",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

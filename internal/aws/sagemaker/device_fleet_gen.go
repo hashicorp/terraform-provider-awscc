@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Description for the edge device fleet",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 800),
+			},
 		},
 		"device_fleet_name": {
 			// Property: DeviceFleetName
@@ -48,6 +53,9 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the edge device fleet",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 63),
+			},
 			// DeviceFleetName is a force-new attribute.
 		},
 		"output_config": {
@@ -82,12 +90,18 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The KMS key id used for encryption on the S3 bucket",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 					"s3_output_location": {
 						// Property: S3OutputLocation
 						Description: "The Amazon Simple Storage (S3) bucket URI",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 1024),
+						},
 					},
 				},
 			),
@@ -106,6 +120,9 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Role associated with the device fleet",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -147,12 +164,18 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

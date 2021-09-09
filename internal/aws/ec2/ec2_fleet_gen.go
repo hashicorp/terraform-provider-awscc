@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -42,6 +44,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"termination",
+					"no-termination",
+				}),
+			},
 		},
 		"fleet_id": {
 			// Property: FleetId
@@ -157,6 +165,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: LaunchTemplateName
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 128),
+									},
 								},
 								"version": {
 									// Property: Version
@@ -313,6 +324,11 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: UsageStrategy
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"use-capacity-reservations-first",
+										}),
+									},
 								},
 							},
 						),
@@ -401,11 +417,25 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AllocationStrategy
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"lowestPrice",
+								"diversified",
+								"capacityOptimized",
+							}),
+						},
 					},
 					"instance_interruption_behavior": {
 						// Property: InstanceInterruptionBehavior
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"hibernate",
+								"stop",
+								"terminate",
+							}),
+						},
 					},
 					"instance_pools_to_use_count": {
 						// Property: InstancePoolsToUseCount
@@ -529,6 +559,57 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ResourceType
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"client-vpn-endpoint",
+								"customer-gateway",
+								"dedicated-host",
+								"dhcp-options",
+								"egress-only-internet-gateway",
+								"elastic-gpu",
+								"elastic-ip",
+								"export-image-task",
+								"export-instance-task",
+								"fleet",
+								"fpga-image",
+								"host-reservation",
+								"image",
+								"import-image-task",
+								"import-snapshot-task",
+								"instance",
+								"internet-gateway",
+								"key-pair",
+								"launch-template",
+								"local-gateway-route-table-vpc-association",
+								"natgateway",
+								"network-acl",
+								"network-insights-analysis",
+								"network-insights-path",
+								"network-interface",
+								"placement-group",
+								"reserved-instances",
+								"route-table",
+								"security-group",
+								"snapshot",
+								"spot-fleet-request",
+								"spot-instances-request",
+								"subnet",
+								"traffic-mirror-filter",
+								"traffic-mirror-session",
+								"traffic-mirror-target",
+								"transit-gateway",
+								"transit-gateway-attachment",
+								"transit-gateway-connect-peer",
+								"transit-gateway-multicast-domain",
+								"transit-gateway-route-table",
+								"volume",
+								"vpc",
+								"vpc-flow-log",
+								"vpc-peering-connection",
+								"vpn-connection",
+								"vpn-gateway",
+							}),
+						},
 					},
 					"tags": {
 						// Property: Tags
@@ -590,6 +671,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DefaultTargetCapacityType
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"on-demand",
+								"spot",
+							}),
+						},
 					},
 					"on_demand_target_capacity": {
 						// Property: OnDemandTargetCapacity
@@ -635,6 +722,13 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"maintain",
+					"request",
+					"instant",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 		"valid_from": {

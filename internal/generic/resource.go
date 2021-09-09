@@ -11,13 +11,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
 
@@ -190,6 +191,18 @@ func WithDeleteTimeoutInMinutes(v int) ResourceTypeOptionsFunc {
 	}
 }
 
+// WithRequiredAttributesValidators is a helper function to construct functional options
+// that set a resource type's required attributes validators.
+// If multiple WithDeleteTimeoutInMinutes calls are made, the last call overrides
+// the previous calls' values.
+func WithRequiredAttributesValidators(fs ...validate.RequiredAttributesFunc) ResourceTypeOptionsFunc {
+	return func(o *resourceType) error {
+		o.requiredAttributesValidators = fs
+
+		return nil
+	}
+}
+
 // ResourceTypeOptions is a type alias for a slice of resource type functional options.
 type ResourceTypeOptions []ResourceTypeOptionsFunc
 
@@ -273,19 +286,28 @@ func (opts ResourceTypeOptions) WithDeleteTimeoutInMinutes(v int) ResourceTypeOp
 	return append(opts, WithDeleteTimeoutInMinutes(v))
 }
 
+// WithRequiredAttributesValidator is a helper function to construct functional options
+// that set a resource type's required attribyte validator, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceTypeOptions) WithRequiredAttributesValidators(v ...validate.RequiredAttributesFunc) ResourceTypeOptions {
+	return append(opts, WithRequiredAttributesValidators(v...))
+}
+
 // resourceType implements tfsdk.ResourceType.
 type resourceType struct {
-	cfTypeName              string                   // CloudFormation type name for the resource type
-	tfSchema                tfsdk.Schema             // Terraform schema for the resource type
-	tfTypeName              string                   // Terraform type name for resource type
-	tfToCfNameMap           map[string]string        // Map of Terraform attribute name to CloudFormation property name
-	cfToTfNameMap           map[string]string        // Map of CloudFormation property name to Terraform attribute name
-	isImmutableType         bool                     // Resources cannot be updated and must be recreated
-	syntheticIDAttribute    bool                     // Resource type has a synthetic ID attribute
-	writeOnlyAttributePaths []*tftypes.AttributePath // Paths to any write-only attributes
-	createTimeout           time.Duration            // Maximum wait time for resource creation
-	updateTimeout           time.Duration            // Maximum wait time for resource update
-	deleteTimeout           time.Duration            // Maximum wait time for resource deletion
+	cfTypeName                   string                            // CloudFormation type name for the resource type
+	tfSchema                     tfsdk.Schema                      // Terraform schema for the resource type
+	tfTypeName                   string                            // Terraform type name for resource type
+	tfToCfNameMap                map[string]string                 // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap                map[string]string                 // Map of CloudFormation property name to Terraform attribute name
+	isImmutableType              bool                              // Resources cannot be updated and must be recreated
+	syntheticIDAttribute         bool                              // Resource type has a synthetic ID attribute
+	writeOnlyAttributePaths      []*tftypes.AttributePath          // Paths to any write-only attributes
+	createTimeout                time.Duration                     // Maximum wait time for resource creation
+	updateTimeout                time.Duration                     // Maximum wait time for resource update
+	deleteTimeout                time.Duration                     // Maximum wait time for resource deletion
+	requiredAttributesValidators []validate.RequiredAttributesFunc // Required attributes validators
 }
 
 // NewResourceType returns a new ResourceType from the specified varidaic list of functional options.
@@ -311,11 +333,11 @@ func NewResourceType(_ context.Context, optFns ...ResourceTypeOptionsFunc) (tfsd
 	return resourceType, nil
 }
 
-func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (rt *resourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return rt.tfSchema, nil
 }
 
-func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, []*tfprotov6.Diagnostic) {
+func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider) (tfsdk.Resource, diag.Diagnostics) {
 	return newGenericResource(provider, rt), nil
 }
 
@@ -465,11 +487,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -477,11 +498,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -532,11 +552,10 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of Terraform State Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -552,11 +571,10 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		err = CopyValueAtPath(ctx, &response.State, &request.State, path)
 
 		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Terraform State Value Not Set",
-				Detail:   fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
-			})
+			response.Diagnostics.AddError(
+				"Terraform State Value Not Set",
+				fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
+			)
 
 			return
 		}
@@ -617,11 +635,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Creation Of JSON Patch Unsuccessful",
-			Detail:   fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		})
+		response.Diagnostics.AddError(
+			"Creation Of JSON Patch Unsuccessful",
+			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
 
 		return
 	}
@@ -699,6 +716,17 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
+// ConfigValidators returns a list of functions which will all be performed during validation.
+func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValidator {
+	validators := make([]tfsdk.ResourceConfigValidator, 0)
+
+	if len(r.resourceType.requiredAttributesValidators) > 0 {
+		validators = append(validators, validate.ResourceConfigRequiredAttributes(r.resourceType.requiredAttributesValidators...))
+	}
+
+	return validators
+}
+
 // describe returns the live state of the specified resource.
 func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
 	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
@@ -708,7 +736,7 @@ func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id
 func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
 	val, diags := state.GetAttribute(ctx, idAttributePath)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
@@ -723,7 +751,7 @@ func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error
 func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return tfresource.DiagsError(diags)
 	}
 

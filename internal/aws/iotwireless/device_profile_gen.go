@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -52,9 +53,13 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ClassBTimeout": {
+			//       "maximum": 1000,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "ClassCTimeout": {
+			//       "maximum": 1000,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "MacVersion": {
@@ -62,18 +67,28 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       "type": "string"
 			//     },
 			//     "MaxDutyCycle": {
+			//       "maximum": 100,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "MaxEirp": {
+			//       "maximum": 15,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "PingSlotDr": {
+			//       "maximum": 15,
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "PingSlotFreq": {
+			//       "maximum": 16700000,
+			//       "minimum": 1000000,
 			//       "type": "integer"
 			//     },
 			//     "PingSlotPeriod": {
+			//       "maximum": 4096,
+			//       "minimum": 128,
 			//       "type": "integer"
 			//     },
 			//     "RegParamsRevision": {
@@ -105,51 +120,81 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: ClassBTimeout
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 1000),
+						},
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 1000),
+						},
 					},
 					"mac_version": {
 						// Property: MacVersion
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 100),
+						},
 					},
 					"max_eirp": {
 						// Property: MaxEirp
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 15),
+						},
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1000000, 16700000),
+						},
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
 						Type:     types.NumberType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(128, 4096),
+						},
 					},
 					"reg_params_revision": {
 						// Property: RegParamsRevision
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"rf_region": {
 						// Property: RfRegion
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 					"supports_32_bit_f_cnt": {
 						// Property: Supports32BitFCnt
@@ -186,6 +231,9 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Name of service profile",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -220,11 +268,17 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

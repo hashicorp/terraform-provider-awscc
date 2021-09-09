@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -58,6 +60,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 16000),
+			},
 			// Data is a force-new attribute.
 			// Data is a write-only attribute.
 		},
@@ -124,6 +129,12 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The platform of the component.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Windows",
+					"Linux",
+				}),
+			},
 			// Platform is a force-new attribute.
 			// Platform is a write-only attribute.
 		},

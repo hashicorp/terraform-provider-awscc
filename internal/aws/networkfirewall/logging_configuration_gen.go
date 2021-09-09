@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// FirewallArn is a force-new attribute.
 		},
 		"firewall_name": {
@@ -48,6 +53,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// FirewallName is a force-new attribute.
 		},
 		"logging_configuration": {
@@ -123,11 +131,24 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									// Property: LogDestinationType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"S3",
+											"CloudWatchLogs",
+											"KinesisDataFirehose",
+										}),
+									},
 								},
 								"log_type": {
 									// Property: LogType
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ALERT",
+											"FLOW",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{

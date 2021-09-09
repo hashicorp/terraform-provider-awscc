@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +45,9 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Destination description",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
 		},
 		"expression": {
 			// Property: Expression
@@ -70,6 +74,12 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Must be RuleName",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"RuleName",
+					"MqttTopic",
+				}),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -83,6 +93,9 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique name of destination",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"role_arn": {
@@ -97,6 +110,9 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "AWS role ARN that grants access",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(20, 2048),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -131,11 +147,17 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

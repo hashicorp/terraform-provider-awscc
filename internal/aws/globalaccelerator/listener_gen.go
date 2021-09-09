@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -47,6 +49,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"NONE",
+					"SOURCE_IP",
+				}),
+			},
 		},
 		"listener_arn": {
 			// Property: ListenerArn
@@ -68,10 +76,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "properties": {
 			//       "FromPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       },
 			//       "ToPort": {
 			//         "description": "A network port number",
+			//         "maximum": 65535,
+			//         "minimum": 0,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -90,12 +102,18 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
 					},
 					"to_port": {
 						// Property: ToPort
 						Description: "A network port number",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(0, 65535),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -116,6 +134,12 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TCP",
+					"UDP",
+				}),
+			},
 		},
 	}
 

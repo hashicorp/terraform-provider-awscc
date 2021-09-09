@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -68,6 +70,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 50),
+			},
 		},
 		"calendar_names": {
 			// Property: CalendarNames
@@ -105,6 +110,15 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CRITICAL",
+					"HIGH",
+					"MEDIUM",
+					"LOW",
+					"UNSPECIFIED",
+				}),
+			},
 		},
 		"document_version": {
 			// Property: DocumentVersion
@@ -221,16 +235,25 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: OutputS3BucketName
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 63),
+									},
 								},
 								"output_s3_key_prefix": {
 									// Property: OutputS3KeyPrefix
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1024),
+									},
 								},
 								"output_s3_region": {
 									// Property: OutputS3Region
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 20),
+									},
 								},
 							},
 						),
@@ -279,6 +302,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A Cron or Rate expression that specifies when the association is applied to the target.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"sync_compliance": {
 			// Property: SyncCompliance
@@ -292,6 +318,12 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AUTO",
+					"MANUAL",
+				}),
+			},
 		},
 		"targets": {
 			// Property: Targets
@@ -336,6 +368,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Values
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 50),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -349,10 +384,15 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: WaitForSuccessTimeoutSeconds
 			// CloudFormation resource type schema:
 			// {
+			//   "maximum": 172800,
+			//   "minimum": 15,
 			//   "type": "integer"
 			// }
 			Type:     types.NumberType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntBetween(15, 172800),
+			},
 		},
 	}
 

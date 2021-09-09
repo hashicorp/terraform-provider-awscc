@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -44,6 +45,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Description of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 2048),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -101,6 +105,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: RfRegion
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 64),
+						},
 					},
 				},
 			),
@@ -117,6 +124,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Name of Wireless Gateway.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -151,11 +161,17 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

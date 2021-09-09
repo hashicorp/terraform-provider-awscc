@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -43,6 +45,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(12, 12),
+			},
 			// AwsAccountId is a force-new attribute.
 		},
 		"created_time": {
@@ -69,6 +74,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 			// DashboardId is a force-new attribute.
 		},
 		"dashboard_publish_options": {
@@ -135,6 +143,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ENABLED",
+											"DISABLED",
+										}),
+									},
 								},
 							},
 						),
@@ -149,6 +163,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AvailabilityStatus
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ENABLED",
+											"DISABLED",
+										}),
+									},
 								},
 							},
 						),
@@ -163,6 +183,12 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: VisibilityState
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"EXPANDED",
+											"COLLAPSED",
+										}),
+									},
 								},
 							},
 						),
@@ -211,6 +237,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The display name of the dashboard.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
 		},
 		"parameters": {
 			// Property: Parameters
@@ -489,12 +518,18 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 16),
+						},
 					},
 					"principal": {
 						// Property: Principal
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -641,12 +676,18 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Tag key.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "<p>Tag value.</p>",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -778,6 +819,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "VersionNumber": {
 			//       "description": "\u003cp\u003eVersion number for this version of the dashboard.\u003c/p\u003e",
+			//       "minimum": 1,
 			//       "type": "number"
 			//     }
 			//   },
@@ -803,12 +845,18 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 					"description": {
 						// Property: Description
 						Description: "<p>Description.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 512),
+						},
 					},
 					"errors": {
 						// Property: Errors
@@ -825,6 +873,20 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ACCESS_DENIED",
+											"SOURCE_NOT_FOUND",
+											"DATA_SET_NOT_FOUND",
+											"INTERNAL_FAILURE",
+											"PARAMETER_VALUE_INCOMPATIBLE",
+											"PARAMETER_TYPE_INVALID",
+											"PARAMETER_NOT_FOUND",
+											"COLUMN_TYPE_MISMATCH",
+											"COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
+											"COLUMN_REPLACEMENT_MISSING",
+										}),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -849,6 +911,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The unique identifier associated with a sheet.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 2048),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -868,6 +933,17 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Status
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CREATION_IN_PROGRESS",
+								"CREATION_SUCCESSFUL",
+								"CREATION_FAILED",
+								"UPDATE_IN_PROGRESS",
+								"UPDATE_SUCCESSFUL",
+								"UPDATE_FAILED",
+								"DELETED",
+							}),
+						},
 					},
 					"theme_arn": {
 						// Property: ThemeArn
@@ -880,6 +956,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Version number for this version of the dashboard.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatAtLeast(1.000000),
+						},
 					},
 				},
 			),
@@ -898,6 +977,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>A description for the first version of the dashboard being created.</p>",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 512),
+			},
 			// VersionDescription is a write-only attribute.
 		},
 	}

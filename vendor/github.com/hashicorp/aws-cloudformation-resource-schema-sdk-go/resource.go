@@ -7,12 +7,15 @@ import (
 type Resource struct {
 	AdditionalIdentifiers           []PropertyJsonPointers `json:"additionalIdentifiers,omitempty"`
 	AdditionalProperties            *bool                  `json:"additionalProperties,omitempty"`
+	AllOf                           []*PropertySubschema   `json:"allOf,omitempty"`
+	AnyOf                           []*PropertySubschema   `json:"anyOf,omitempty"`
 	ConditionalCreateOnlyProperties PropertyJsonPointers   `json:"conditionalCreateOnlyProperties,omitempty"`
 	CreateOnlyProperties            PropertyJsonPointers   `json:"createOnlyProperties,omitempty"`
 	Definitions                     map[string]*Property   `json:"definitions,omitempty"`
 	DeprecatedProperties            PropertyJsonPointers   `json:"deprecatedProperties,omitempty"`
 	Description                     *string                `json:"description,omitempty"`
 	Handlers                        map[string]*Handler    `json:"handlers,omitempty"`
+	OneOf                           []*PropertySubschema   `json:"oneOf,omitempty"`
 	PrimaryIdentifier               PropertyJsonPointers   `json:"primaryIdentifier,omitempty"`
 	Properties                      map[string]*Property   `json:"properties,omitempty"`
 	ReadOnlyProperties              PropertyJsonPointers   `json:"readOnlyProperties,omitempty"`

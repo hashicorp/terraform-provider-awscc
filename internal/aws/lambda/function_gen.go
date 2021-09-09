@@ -83,18 +83,27 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(3, 63),
+						},
 					},
 					"s3_key": {
 						// Property: S3Key
 						Description: "The Amazon S3 key of the deployment package.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
 					},
 					"s3_object_version": {
 						// Property: S3ObjectVersion
 						Description: "For versioned objects, the version of the deployment package object to use.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1024),
+						},
 					},
 					"zip_file": {
 						// Property: ZipFile
@@ -158,6 +167,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A description of the function.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"environment": {
 			// Property: Environment
@@ -231,12 +243,18 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 200),
+						},
 					},
 					"local_mount_path": {
 						// Property: LocalMountPath
 						Description: "The path where the function can access the file system, starting with /mnt/.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 160),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -257,6 +275,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 			// FunctionName is a force-new attribute.
 		},
 		"handler": {
@@ -271,6 +292,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"image_config": {
 			// Property: ImageConfig
@@ -309,15 +333,21 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Command
 						Description: "Command.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 1500),
+							validate.UniqueItems(),
+						},
 					},
 					"entry_point": {
 						// Property: EntryPoint
 						Description: "EntryPoint.",
 						Type:        types.ListType{ElemType: types.StringType},
-						Validators:  []tfsdk.AttributeValidator{validate.UniqueItems()},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 1500),
+							validate.UniqueItems(),
+						},
 					},
 					"working_directory": {
 						// Property: WorkingDirectory
@@ -381,17 +411,27 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "PackageType.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"Image",
+					"Zip",
+				}),
+			},
 		},
 		"reserved_concurrent_executions": {
 			// Property: ReservedConcurrentExecutions
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The number of simultaneous executions to reserve for the function.",
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "The number of simultaneous executions to reserve for the function.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
 		},
 		"role": {
 			// Property: Role
@@ -454,12 +494,18 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{},
@@ -471,11 +517,15 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"tracing_config": {
 			// Property: TracingConfig
@@ -503,6 +553,12 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The tracing mode.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"Active",
+								"PassThrough",
+							}),
+						},
 					},
 				},
 			),
@@ -544,12 +600,18 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of VPC security groups IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 5),
+						},
 					},
 					"subnet_ids": {
 						// Property: SubnetIds
 						Description: "A list of VPC subnet IDs.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 16),
+						},
 					},
 				},
 			),

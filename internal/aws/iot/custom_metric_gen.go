@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -33,6 +34,9 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 		},
 		"metric_arn": {
 			// Property: MetricArn
@@ -61,6 +65,9 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// MetricName is a force-new attribute.
 		},
 		"metric_type": {
@@ -79,6 +86,14 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of the custom metric. Types include string-list, ip-address-list, number-list, and number.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"string-list",
+					"ip-address-list",
+					"number-list",
+					"number",
+				}),
+			},
 			// MetricType is a force-new attribute.
 		},
 		"tags": {
@@ -122,12 +137,18 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The tag's key.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

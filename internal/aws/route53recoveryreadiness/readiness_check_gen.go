@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -46,6 +48,9 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Name of the ReadinessCheck to create.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// ReadinessCheckName is a force-new attribute.
 		},
 		"resource_set_name": {
@@ -61,6 +66,9 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The name of the resource set to check.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 		"tags": {
 			// Property: Tags

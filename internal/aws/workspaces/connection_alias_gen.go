@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -83,16 +85,31 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: AssociationStatus
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"NOT_ASSOCIATED",
+								"PENDING_ASSOCIATION",
+								"ASSOCIATED_WITH_OWNER_ACCOUNT",
+								"ASSOCIATED_WITH_SHARED_ACCOUNT",
+								"PENDING_DISASSOCIATION",
+							}),
+						},
 					},
 					"connection_identifier": {
 						// Property: ConnectionIdentifier
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 20),
+						},
 					},
 					"resource_id": {
 						// Property: ResourceId
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1000),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -124,6 +141,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 255),
+			},
 			// ConnectionString is a force-new attribute.
 		},
 		"tags": {

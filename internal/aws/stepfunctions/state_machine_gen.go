@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -94,6 +96,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1048576),
+			},
 		},
 		"definition_substitutions": {
 			// Property: DefinitionSubstitutions
@@ -167,6 +172,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: LogGroupArn
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 256),
+												},
 											},
 										},
 									),
@@ -188,6 +196,14 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Level
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ALL",
+								"ERROR",
+								"FATAL",
+								"OFF",
+							}),
+						},
 					},
 				},
 			),
@@ -214,6 +230,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"state_machine_name": {
 			// Property: StateMachineName
@@ -226,6 +245,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 80),
+			},
 			// StateMachineName is a force-new attribute.
 		},
 		"state_machine_type": {
@@ -240,6 +262,12 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"STANDARD",
+					"EXPRESS",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -274,11 +302,17 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

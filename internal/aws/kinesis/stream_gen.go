@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -46,6 +48,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"retention_period_hours": {
@@ -53,22 +58,30 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The number of hours for the data records that are stored in shards to remain accessible.",
+			//   "minimum": 24,
 			//   "type": "integer"
 			// }
 			Description: "The number of hours for the data records that are stored in shards to remain accessible.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(24),
+			},
 		},
 		"shard_count": {
 			// Property: ShardCount
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The number of shards that the stream uses.",
+			//   "minimum": 1,
 			//   "type": "integer"
 			// }
 			Description: "The number of shards that the stream uses.",
 			Type:        types.NumberType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(1),
+			},
 		},
 		"stream_encryption": {
 			// Property: StreamEncryption
@@ -105,12 +118,20 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The encryption type to use. The only valid value is KMS. ",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"KMS",
+							}),
+						},
 					},
 					"key_id": {
 						// Property: KeyId
 						Description: "The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 2048),
+						},
 					},
 				},
 			),
@@ -156,12 +177,18 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -99,10 +99,29 @@ func main() {
 
 		tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
 
-		block := fmt.Sprintf(`
+		// Determine Plural Data Source (if supported)
+		input := &cloudformation.ListResourcesInput{
+			TypeName: aws.String(cfTypeName),
+		}
+
+		var suppressPluralDataSource bool
+		if _, err = client.ListResources(ctx, input); err != nil {
+			suppressPluralDataSource = true
+		}
+
+		var block string
+		if suppressPluralDataSource {
+			block = fmt.Sprintf(`
+resource_schema %[1]q {
+  cloudformation_type_name    = %[2]q
+  suppress_plural_data_source = %[3]t
+}`, tfTypeName, cfTypeName, suppressPluralDataSource)
+		} else {
+			block = fmt.Sprintf(`
 resource_schema %[1]q {
   cloudformation_type_name = %[2]q
 }`, tfTypeName, cfTypeName)
+		}
 		ui.Output(block)
 	}
 }

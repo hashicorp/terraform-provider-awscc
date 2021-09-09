@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -68,6 +70,12 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "IP Address type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"IPV4",
+					"IPV6",
+				}),
+			},
 		},
 		"ip_addresses": {
 			// Property: IpAddresses
@@ -98,6 +106,9 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of accelerator.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -134,12 +145,18 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Key of the tag. Value can be 1 to 127 characters.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 127),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "Value for the tag. Value can be 1 to 255 characters.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

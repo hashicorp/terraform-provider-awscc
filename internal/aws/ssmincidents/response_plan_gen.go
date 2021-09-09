@@ -123,12 +123,18 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The document name to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
 								},
 								"document_version": {
 									// Property: DocumentVersion
 									Description: "The version of the document to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 128),
+									},
 								},
 								"parameters": {
 									// Property: Parameters
@@ -139,12 +145,18 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Key
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(1, 50),
+												},
 											},
 											"values": {
 												// Property: Values
-												Type:       types.ListType{ElemType: types.StringType},
-												Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-												Required:   true,
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(1, 10),
+													validate.UniqueItems(),
+												},
 											},
 										},
 										providertypes.SetNestedAttributesOptions{
@@ -158,12 +170,21 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The role ARN to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000),
+									},
 								},
 								"target_account": {
 									// Property: TargetAccount
 									Description: "The account type to use when starting the SSM automation document.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"IMPACTED_ACCOUNT",
+											"RESPONSE_PLAN_OWNER_ACCOUNT",
+										}),
+									},
 								},
 							},
 						),
@@ -174,8 +195,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					MaxItems: 1,
 				},
 			),
-			Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-			Optional:   true,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -216,9 +239,11 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"chatbot_sns": {
 						// Property: ChatbotSns
-						Type:       types.ListType{ElemType: types.StringType},
-						Validators: []tfsdk.AttributeValidator{validate.UniqueItems()},
-						Optional:   true,
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 				},
 			),
@@ -236,6 +261,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The display name of the response plan.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 200),
+			},
 		},
 		"engagements": {
 			// Property: Engagements
@@ -273,6 +301,8 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Impact": {
 			//       "description": "The impact value.",
+			//       "maximum": 5,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "NotificationTargets": {
@@ -319,12 +349,18 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The deduplication string.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 1000),
+						},
 					},
 					"impact": {
 						// Property: Impact
 						Description: "The impact value.",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 5),
+						},
 					},
 					"notification_targets": {
 						// Property: NotificationTargets
@@ -336,6 +372,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The ARN of the Chatbot SNS topic.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 1000),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -349,12 +388,18 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The summary string.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 4000),
+						},
 					},
 					"title": {
 						// Property: Title
 						Description: "The title string.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 200),
+						},
 					},
 				},
 			),
@@ -373,6 +418,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the response plan.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 200),
+			},
 			// Name is a force-new attribute.
 		},
 		"tags": {
@@ -415,11 +463,17 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Key
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

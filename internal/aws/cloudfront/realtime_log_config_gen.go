@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -112,6 +114,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -127,10 +132,15 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// Property: SamplingRate
 			// CloudFormation resource type schema:
 			// {
+			//   "maximum": 100,
+			//   "minimum": 1,
 			//   "type": "number"
 			// }
 			Type:     types.NumberType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.FloatBetween(1.000000, 100.000000),
+			},
 		},
 	}
 

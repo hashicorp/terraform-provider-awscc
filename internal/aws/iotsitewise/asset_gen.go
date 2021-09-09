@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -74,6 +76,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -162,12 +167,21 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Customer provided ID for property.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 					"notification_state": {
 						// Property: NotificationState
 						Description: "The MQTT notification state (ENABLED or DISABLED) for this asset property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ENABLED",
+								"DISABLED",
+							}),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

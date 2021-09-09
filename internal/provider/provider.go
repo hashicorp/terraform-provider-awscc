@@ -8,12 +8,11 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func New() tfsdk.Provider {
@@ -22,10 +21,11 @@ func New() tfsdk.Provider {
 
 type AwsCloudControlProvider struct {
 	cfClient *cloudformation.Client
+	region   string
 	roleARN  string
 }
 
-func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -163,7 +163,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 
 	diags := request.Config.Get(ctx, &config)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return
@@ -223,35 +223,34 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 		return
 	}
 
-	cfClient, err := newCloudFormationClient(ctx, &config)
+	cfClient, region, err := newCloudFormationClient(ctx, &config)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error configuring AWS CloudFormation client",
-			Detail:   fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
-		})
+		response.Diagnostics.AddError(
+			"Error configuring AWS CloudFormation client",
+			fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
+		)
 
 		return
 	}
 
 	p.cfClient = cfClient
+	p.region = region
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	var diags []*tfprotov6.Diagnostic
+func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	resources := make(map[string]tfsdk.ResourceType)
 
 	for name, factory := range registry.ResourceFactories() {
 		resourceType, err := factory(ctx)
 
 		if err != nil {
-			diags = append(diags, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error getting Resource",
-				Detail:   fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
-			})
+			diags.AddError(
+				"Error getting Resource",
+				fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
+			)
 
 			continue
 		}
@@ -262,20 +261,42 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	return nil, nil
+func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
+	dataSources := make(map[string]tfsdk.DataSourceType)
+
+	for name, factory := range registry.DataSourceFactories() {
+		dataSourceType, err := factory(ctx)
+
+		if err != nil {
+			diags.AddError(
+				"Error getting Data Source",
+				fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
+			)
+
+			continue
+		}
+
+		dataSources[name] = dataSourceType
+	}
+
+	return dataSources, diags
 }
 
 func (p *AwsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
 	return p.cfClient
 }
 
+func (p *AwsCloudControlProvider) Region(_ context.Context) string {
+	return p.region
+}
+
 func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
-// newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client.
-func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, error) {
+// newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client with the configured region.
+func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
 		AccessKey:            pd.AccessKey.Value,
@@ -308,8 +329,8 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)
 
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
-	return cloudformation.NewFromConfig(cfg), nil
+	return cloudformation.NewFromConfig(cfg), cfg.Region, nil
 }

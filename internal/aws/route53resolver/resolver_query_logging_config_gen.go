@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -84,6 +86,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 600),
+			},
 			// DestinationArn is a force-new attribute.
 		},
 		"id": {
@@ -113,6 +118,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 			// Name is a force-new attribute.
 		},
 		"owner_id": {

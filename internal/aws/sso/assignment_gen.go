@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The sso instance that the permission set is owned.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(10, 1224),
+			},
 			// InstanceArn is a force-new attribute.
 		},
 		"permission_set_arn": {
@@ -49,6 +54,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The permission set that the assignemt will be assigned",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(10, 1224),
+			},
 			// PermissionSetArn is a force-new attribute.
 		},
 		"principal_id": {
@@ -64,6 +72,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The assignee's identifier, user id/group id",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 47),
+			},
 			// PrincipalId is a force-new attribute.
 		},
 		"principal_type": {
@@ -80,6 +91,12 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The assignee's type, user/group",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"USER",
+					"GROUP",
+				}),
+			},
 			// PrincipalType is a force-new attribute.
 		},
 		"target_id": {
@@ -108,6 +125,11 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of resource to be provsioned to, only aws account now",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"AWS_ACCOUNT",
+				}),
+			},
 			// TargetType is a force-new attribute.
 		},
 	}

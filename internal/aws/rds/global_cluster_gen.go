@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -48,6 +50,13 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"aurora",
+					"aurora-mysql",
+					"aurora-postgresql",
+				}),
+			},
 			// Engine is a force-new attribute.
 		},
 		"engine_version": {
@@ -82,6 +91,10 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
+			//   "oneOf": [
+			//     {},
+			//     {}
+			//   ],
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
@@ -134,6 +147,16 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"source_db_cluster_identifier",
+		),
+		validate.Required(
+			"engine",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

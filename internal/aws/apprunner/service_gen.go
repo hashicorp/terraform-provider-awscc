@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Autoscaling configuration ARN",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1011),
+			},
 			// AutoScalingConfigurationArn is a write-only attribute.
 		},
 		"encryption_configuration": {
@@ -64,6 +69,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The KMS Key",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 			),
@@ -80,6 +88,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "HealthyThreshold": {
 			//       "description": "Health check Healthy Threshold",
+			//       "maximum": 20,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "Interval": {
@@ -100,10 +110,14 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Timeout": {
 			//       "description": "Health check Timeout",
+			//       "maximum": 20,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "UnhealthyThreshold": {
 			//       "description": "Health check Unhealthy Threshold",
+			//       "maximum": 20,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -117,6 +131,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Health check Healthy Threshold",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
 					},
 					"interval": {
 						// Property: Interval
@@ -135,18 +152,30 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Health Check Protocol",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TCP",
+								"HTTP",
+							}),
+						},
 					},
 					"timeout": {
 						// Property: Timeout
 						Description: "Health check Timeout",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
 					},
 					"unhealthy_threshold": {
 						// Property: UnhealthyThreshold
 						Description: "Health check Unhealthy Threshold",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 20),
+						},
 					},
 				},
 			),
@@ -190,17 +219,26 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "CPU",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(4, 6),
+						},
 					},
 					"instance_role_arn": {
 						// Property: InstanceRoleArn
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(29, 102),
+						},
 					},
 					"memory": {
 						// Property: Memory
 						Description: "Memory",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(4, 4),
+						},
 					},
 				},
 			),
@@ -247,6 +285,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(4, 40),
+			},
 			// ServiceName is a force-new attribute.
 		},
 		"service_url": {
@@ -462,12 +503,18 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AccessRoleArn
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(29, 102),
+									},
 								},
 								"connection_arn": {
 									// Property: ConnectionArn
 									Description: "Connection Arn",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1011),
+									},
 								},
 							},
 						),
@@ -511,6 +558,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "Runtime",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringInSlice([]string{
+																	"PYTHON_3",
+																	"NODEJS_12",
+																}),
+															},
 														},
 														"runtime_environment_variables": {
 															// Property: RuntimeEnvironmentVariables
@@ -546,6 +599,12 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Configuration Source",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"REPOSITORY",
+														"API",
+													}),
+												},
 											},
 										},
 									),
@@ -567,6 +626,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "Source Code Version Type",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"BRANCH",
+													}),
+												},
 											},
 											"value": {
 												// Property: Value
@@ -632,12 +696,21 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Image Identifier",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 								"image_repository_type": {
 									// Property: ImageRepositoryType
 									Description: "Image Repository Type",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"ECR",
+											"ECR_PUBLIC",
+										}),
+									},
 								},
 							},
 						),

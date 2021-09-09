@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -105,6 +107,9 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The description of the resource group",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 512),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -117,6 +122,9 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the resource group",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 128),
+			},
 			// Name is a force-new attribute.
 		},
 		"resource_query": {
@@ -208,6 +216,12 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Type
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TAG_FILTERS_1_0",
+								"CLOUDFORMATION_STACK_1_0",
+							}),
+						},
 					},
 				},
 			),

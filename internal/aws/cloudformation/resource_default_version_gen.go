@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -98,6 +100,17 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"type_version_arn",
+		),
+		validate.Required(
+			"type_name",
+			"version_id",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

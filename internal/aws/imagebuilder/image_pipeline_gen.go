@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -100,6 +102,8 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     },
 			//     "TimeoutMinutes": {
 			//       "description": "The maximum time in minutes that tests are permitted to run.",
+			//       "maximum": 1440,
+			//       "minimum": 60,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -119,6 +123,9 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The maximum time in minutes that tests are permitted to run.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(60, 1440),
+						},
 					},
 				},
 			),
@@ -178,6 +185,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The condition configures when the pipeline should trigger a new image build.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"EXPRESSION_MATCH_ONLY",
+								"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE",
+							}),
+						},
 					},
 					"schedule_expression": {
 						// Property: ScheduleExpression
@@ -203,6 +216,12 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The status of the image pipeline.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"DISABLED",
+					"ENABLED",
+				}),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -263,6 +282,20 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
+		validate.Required(
+			"name",
+			"container_recipe_arn",
+			"infrastructure_configuration_arn",
+		),
+		validate.Required(
+			"name",
+			"image_recipe_arn",
+			"infrastructure_configuration_arn",
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

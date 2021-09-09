@@ -12,6 +12,7 @@ import (
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -36,6 +37,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// ActionName is a force-new attribute.
 		},
 		"action_params": {
@@ -200,12 +204,23 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Description: " Specifies which types of information are logged.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEBUG",
+											"INFO",
+											"ERROR",
+											"WARN",
+										}),
+									},
 								},
 								"role_arn_for_logging": {
 									// Property: RoleArnForLogging
 									Description: " The ARN of the IAM role used for logging.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(20, 2048),
+									},
 								},
 							},
 						),
@@ -221,6 +236,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Description: "The ARN of the topic to which you want to publish the findings.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(20, 2048),
+									},
 								},
 							},
 						),
@@ -235,6 +253,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: TemplateName
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"BLANK_POLICY",
+										}),
+									},
 								},
 							},
 						),
@@ -249,6 +272,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Action
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEACTIVATE",
+										}),
+									},
 								},
 							},
 						),
@@ -263,6 +291,11 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									// Property: Action
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEACTIVATE",
+										}),
+									},
 								},
 							},
 						),
@@ -340,12 +373,18 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Description: "The tag's key.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The tag's value.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 256),
+						},
 					},
 				},
 				providertypes.SetNestedAttributesOptions{

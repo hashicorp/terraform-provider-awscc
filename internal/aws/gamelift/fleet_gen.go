@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -64,6 +66,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: CertificateType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"DISABLED",
+								"GENERATED",
+							}),
+						},
 					},
 				},
 			),
@@ -84,6 +92,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A human-readable description of a fleet.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"desired_ec2_instances": {
 			// Property: DesiredEC2Instances
@@ -91,11 +102,15 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
 		},
 		"ec2_inbound_permissions": {
 			// Property: EC2InboundPermissions
@@ -110,6 +125,8 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "FromPort": {
 			//         "additionalProperties": false,
 			//         "description": "A starting value for a range of allowed port numbers.",
+			//         "maximum": 60000,
+			//         "minimum": 1,
 			//         "type": "integer"
 			//       },
 			//       "IpRange": {
@@ -130,6 +147,8 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "ToPort": {
 			//         "additionalProperties": false,
 			//         "description": "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
+			//         "maximum": 60000,
+			//         "minimum": 1,
 			//         "type": "integer"
 			//       }
 			//     },
@@ -152,6 +171,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A starting value for a range of allowed port numbers.",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 60000),
+						},
 					},
 					"ip_range": {
 						// Property: IpRange
@@ -164,12 +186,21 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The network communication protocol used by the fleet.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"TCP",
+								"UDP",
+							}),
+						},
 					},
 					"to_port": {
 						// Property: ToPort
 						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
 						Type:        types.NumberType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 60000),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -222,6 +253,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"ON_DEMAND",
+					"SPOT",
+				}),
+			},
 			// FleetType is a force-new attribute.
 		},
 		"instance_role_arn": {
@@ -238,6 +275,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenAtLeast(1),
+			},
 			// InstanceRoleARN is a force-new attribute.
 		},
 		"locations": {
@@ -263,16 +303,19 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "DesiredEC2Instances": {
 			//             "additionalProperties": false,
 			//             "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+			//             "minimum": 0,
 			//             "type": "integer"
 			//           },
 			//           "MaxSize": {
 			//             "additionalProperties": false,
 			//             "description": "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
+			//             "minimum": 0,
 			//             "type": "integer"
 			//           },
 			//           "MinSize": {
 			//             "additionalProperties": false,
 			//             "description": "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
+			//             "minimum": 0,
 			//             "type": "integer"
 			//           }
 			//         },
@@ -299,6 +342,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Location
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 64),
+						},
 					},
 					"location_capacity": {
 						// Property: LocationCapacity
@@ -310,18 +356,27 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
 								},
 								"max_size": {
 									// Property: MaxSize
 									Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
 								},
 								"min_size": {
 									// Property: MinSize
 									Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(0),
+									},
 								},
 							},
 						),
@@ -358,11 +413,15 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
 		},
 		"metric_groups": {
 			// Property: MetricGroups
@@ -379,6 +438,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 1),
+			},
 		},
 		"min_size": {
 			// Property: MinSize
@@ -386,11 +448,15 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
+			//   "minimum": 0,
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.IntAtLeast(0),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -405,6 +471,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A descriptive label that is associated with a fleet. Fleet names do not need to be unique.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"new_game_session_protection_policy": {
 			// Property: NewGameSessionProtectionPolicy
@@ -421,6 +490,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"FullProtection",
+					"NoProtection",
+				}),
+			},
 		},
 		"peer_vpc_aws_account_id": {
 			// Property: PeerVpcAwsAccountId
@@ -437,6 +512,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// PeerVpcAwsAccountId is a force-new attribute.
 		},
 		"peer_vpc_id": {
@@ -454,6 +532,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// PeerVpcId is a force-new attribute.
 		},
 		"resource_creation_limit_policy": {
@@ -466,11 +547,13 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "NewGameSessionsPerCreator": {
 			//       "additionalProperties": false,
 			//       "description": "The maximum number of game sessions that an individual can create during the policy period.",
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     },
 			//     "PolicyPeriodInMinutes": {
 			//       "additionalProperties": false,
 			//       "description": "The time span used in evaluating the resource creation limit policy.",
+			//       "minimum": 0,
 			//       "type": "integer"
 			//     }
 			//   },
@@ -484,12 +567,18 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The maximum number of game sessions that an individual can create during the policy period.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 					"policy_period_in_minutes": {
 						// Property: PolicyPeriodInMinutes
 						Description: "The time span used in evaluating the resource creation limit policy.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(0),
+						},
 					},
 				},
 			),
@@ -505,11 +594,15 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "GameSessionActivationTimeoutSeconds": {
 			//       "additionalProperties": false,
 			//       "description": "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
+			//       "maximum": 600,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "MaxConcurrentGameSessionActivations": {
 			//       "additionalProperties": false,
 			//       "description": "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
+			//       "maximum": 2147483647,
+			//       "minimum": 1,
 			//       "type": "integer"
 			//     },
 			//     "ServerProcesses": {
@@ -522,6 +615,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "ConcurrentExecutions": {
 			//             "additionalProperties": false,
 			//             "description": "The number of server processes that use this configuration to run concurrently on an instance.",
+			//             "minimum": 1,
 			//             "type": "integer"
 			//           },
 			//           "LaunchPath": {
@@ -560,12 +654,18 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 600),
+						},
 					},
 					"max_concurrent_game_session_activations": {
 						// Property: MaxConcurrentGameSessionActivations
 						Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 2147483647),
+						},
 					},
 					"server_processes": {
 						// Property: ServerProcesses
@@ -577,18 +677,27 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The number of server processes that use this configuration to run concurrently on an instance.",
 									Type:        types.NumberType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.IntAtLeast(1),
+									},
 								},
 								"launch_path": {
 									// Property: LaunchPath
 									Description: "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 								"parameters": {
 									// Property: Parameters
 									Description: "An optional list of parameters to pass to the server executable or Realtime script on launch.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -630,6 +739,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// ServerLaunchParameters is a force-new attribute.
 		},
 		"server_launch_path": {
@@ -646,6 +758,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 			// ServerLaunchPath is a force-new attribute.
 		},
 	}
@@ -711,6 +826,31 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
+
+	opts = opts.WithRequiredAttributesValidators(validate.AllOfRequired(
+		validate.Required(
+			"ec2_instance_type",
+			"name",
+		),
+		validate.OneOfRequired(
+			validate.Required(
+				"build_id",
+			),
+			validate.Required(
+				"script_id",
+			),
+		),
+		validate.OneOfRequired(
+			validate.Required(
+				"runtime_configuration",
+			),
+			validate.Required(
+				"server_launch_parameters",
+				"server_launch_path",
+			),
+		),
+	),
+	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

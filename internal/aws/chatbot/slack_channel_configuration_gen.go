@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -46,6 +48,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The name of the configuration",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 128),
+			},
 			// ConfigurationName is a force-new attribute.
 		},
 		"iam_role_arn": {
@@ -85,6 +90,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The id of the Slack channel",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 		},
 		"slack_workspace_id": {
 			// Property: SlackWorkspaceId
@@ -98,6 +106,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The id of the Slack workspace",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 256),
+			},
 			// SlackWorkspaceId is a force-new attribute.
 		},
 		"sns_topic_arns": {

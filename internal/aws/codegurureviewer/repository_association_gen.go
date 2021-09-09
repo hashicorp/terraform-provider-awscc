@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -49,6 +51,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(3, 63),
+			},
 			// BucketName is a force-new attribute.
 		},
 		"connection_arn": {
@@ -65,6 +70,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 			// ConnectionArn is a force-new attribute.
 		},
 		"name": {
@@ -80,6 +88,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "Name of the repository to be associated.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// Name is a force-new attribute.
 		},
 		"owner": {
@@ -96,6 +107,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 100),
+			},
 			// Owner is a force-new attribute.
 		},
 		"tags": {
@@ -138,12 +152,18 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
 					},
 					"value": {
 						// Property: Value
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 256),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -170,6 +190,14 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The type of repository to be associated.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"CodeCommit",
+					"Bitbucket",
+					"GitHubEnterpriseServer",
+					"S3Bucket",
+				}),
+			},
 			// Type is a force-new attribute.
 		},
 	}

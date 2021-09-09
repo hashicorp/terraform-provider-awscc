@@ -11,6 +11,8 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -34,6 +36,9 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 		"sns_topic_arn": {
 			// Property: SnsTopicArn
@@ -48,6 +53,9 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 1024),
+			},
 		},
 	}
 
