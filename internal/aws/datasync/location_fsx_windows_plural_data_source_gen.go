@@ -15,12 +15,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windows_plural", locationFSxWindowsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windows_plural", locationFSxWindowsPluralDataSourceType)
 }
 
-// locationFSxWindowsDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
+// locationFSxWindowsPluralDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
-func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+func locationFSxWindowsPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
