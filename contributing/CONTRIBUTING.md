@@ -17,4 +17,4 @@ ability to merge PRs and respond to issues.
 
 This documentation also contains reference material specific to certain functionality:
 
-- [Provider Design](provider-design.md) TODO
+- [Provider Design](provider-design.md) TODO <!-- markdown-link-check-disable-line -->
