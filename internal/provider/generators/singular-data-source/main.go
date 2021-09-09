@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
@@ -49,12 +50,65 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := shared.NewSingularDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfTypeSchemaFile, *tfDataSourceType)
+	generator := NewSingularDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfTypeSchemaFile, *tfDataSourceType)
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
 		os.Exit(1)
 	}
+}
+
+type SingularDataSourceGenerator struct {
+	cfTypeSchemaFile string
+	tfDataSourceType string
+	shared.Generator
+}
+
+func NewSingularDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfDataSourceType string) *SingularDataSourceGenerator {
+	return &SingularDataSourceGenerator{
+		cfTypeSchemaFile: cfTypeSchemaFile,
+		tfDataSourceType: tfDataSourceType,
+		Generator: shared.Generator{
+			AcceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
+			SchemaTemplateBody:          schemaTemplateBody,
+			UI:                          ui,
+		},
+	}
+}
+
+// Generate generates the singular data source's type factory into the specified file.
+func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	s.Infof("generating Terraform data source code for %[1]q from %[2]q into %[3]q and %[4]q", s.tfDataSourceType, s.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, shared.DirPerm)
+
+		if err != nil {
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
+		}
+	}
+
+	templateData, err := s.GenerateTemplateData(s.cfTypeSchemaFile, shared.DataSourceType, s.tfDataSourceType, packageName)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.ApplyAndWriteTemplate(schemaFilename, s.SchemaTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = s.ApplyAndWriteTemplate(acctestsFilename, s.AcceptanceTestsTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Terraform data source schema definition.

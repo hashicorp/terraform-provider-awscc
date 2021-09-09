@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
@@ -49,12 +50,65 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := shared.NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
+	generator := NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
 		os.Exit(1)
 	}
+}
+
+type ResourceGenerator struct {
+	cfTypeSchemaFile string
+	tfResourceType   string
+	shared.Generator
+}
+
+func NewResourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfResourceType string) *ResourceGenerator {
+	return &ResourceGenerator{
+		cfTypeSchemaFile: cfTypeSchemaFile,
+		tfResourceType:   tfResourceType,
+		Generator: shared.Generator{
+			AcceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
+			SchemaTemplateBody:          schemaTemplateBody,
+			UI:                          ui,
+		},
+	}
+}
+
+// Generate generates the resource's type factory into the specified file.
+func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	r.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", r.tfResourceType, r.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, shared.DirPerm)
+
+		if err != nil {
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
+		}
+	}
+
+	templateData, err := r.GenerateTemplateData(r.cfTypeSchemaFile, shared.ResourceType, r.tfResourceType, packageName)
+
+	if err != nil {
+		return err
+	}
+
+	err = r.ApplyAndWriteTemplate(schemaFilename, r.SchemaTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = r.ApplyAndWriteTemplate(acctestsFilename, r.AcceptanceTestsTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Terraform resource schema definition.

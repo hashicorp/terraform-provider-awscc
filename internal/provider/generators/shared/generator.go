@@ -22,13 +22,13 @@ const (
 )
 
 type Generator struct {
-	acceptanceTestsTemplateBody string
-	schemaTemplateBody          string
-	ui                          cli.Ui
+	AcceptanceTestsTemplateBody string
+	SchemaTemplateBody          string
+	UI                          cli.Ui
 }
 
-// applyAndWriteTemplate applies the template body to the specified data and writes it to file.
-func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
+// ApplyAndWriteTemplate applies the template body to the specified data and writes it to file.
+func (g *Generator) ApplyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
 	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
@@ -45,7 +45,7 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		g.infof("%s", buffer.String())
+		g.Infof("%s", buffer.String())
 		return fmt.Errorf("formatting generated source code: %w", err)
 	}
 
@@ -66,10 +66,10 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	return nil
 }
 
-// generateTemplateData generates the template body from the Resource
+// GenerateTemplateData generates the template body from the Resource
 // constructed from a CloudFormation type's Schema file.
 // This method can be applied to both singular data source and resource types.
-func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceType, packageName string) (*TemplateData, error) {
+func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceType, packageName string) (*TemplateData, error) {
 	resource, err := NewResource(tfResourceType, cfTypeSchemaFile)
 
 	if err != nil {
@@ -92,7 +92,7 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	sb := strings.Builder{}
 	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
-		Ui:         g.ui,
+		Ui:         g.UI,
 		Writer:     &sb,
 	}
 
@@ -170,8 +170,8 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	return templateData, nil
 }
 
-func (g *Generator) infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
+func (g *Generator) Infof(format string, a ...interface{}) {
+	g.UI.Info(fmt.Sprintf(format, a...))
 }
 
 type TemplateData struct {
