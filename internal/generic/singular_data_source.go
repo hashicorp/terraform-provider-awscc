@@ -19,42 +19,7 @@ import (
 // singularDataSourceType is a type alias for a data source type.
 type singularDataSourceType dataSourceType
 
-// DataSourceWithAttributeNameMap is a helper function to construct functional options
-// that set a data source type's attribute name maps.
-// If multiple DataSourceWithAttributeNameMap calls are made, the last call overrides
-// the previous calls' values.
-func DataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFunc {
-	return func(o *dataSourceType) error {
-		if _, ok := v["id"]; !ok {
-			// Synthesize a mapping for the reserved top-level "id" attribute.
-			v["id"] = "ID"
-		}
-
-		cfToTfNameMap := make(map[string]string, len(v))
-
-		for tfName, cfName := range v {
-			_, ok := cfToTfNameMap[cfName]
-			if ok {
-				return fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
-			}
-			cfToTfNameMap[cfName] = tfName
-		}
-
-		o.cfToTfNameMap = cfToTfNameMap
-
-		return nil
-	}
-}
-
-// WithAttributeNameMap is a helper function to construct functional options
-// that set a data source type's attribute name map, append that function to the
-// current slice of functional options and return the new slice of options.
-// It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts DataSourceTypeOptions) WithAttributeNameMap(v map[string]string) DataSourceTypeOptions {
-	return append(opts, DataSourceWithAttributeNameMap(v))
-}
-
-// NewSingularDataSourceType returns a new SingularDataSourceType from the specified variadic list of functional options.
+// NewSingularDataSourceType returns a new singularDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
 	dataSourceType := &dataSourceType{}
@@ -75,18 +40,9 @@ func NewSingularDataSourceType(_ context.Context, optFns ...DataSourceTypeOption
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	var sdt *singularDataSourceType
+	singularDataSourceType := singularDataSourceType(*dataSourceType)
 
-	return sdt.New(dataSourceType), nil
-}
-
-func (sdt *singularDataSourceType) New(dst *dataSourceType) *singularDataSourceType {
-	return &singularDataSourceType{
-		cfToTfNameMap: dst.cfToTfNameMap,
-		cfTypeName:    dst.cfTypeName,
-		tfSchema:      dst.tfSchema,
-		tfTypeName:    dst.tfTypeName,
-	}
+	return &singularDataSourceType, nil
 }
 
 func (sdt *singularDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {

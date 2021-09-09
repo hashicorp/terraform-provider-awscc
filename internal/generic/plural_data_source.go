@@ -18,7 +18,7 @@ import (
 // pluralDataSourceType is a type alias for a data source type.
 type pluralDataSourceType dataSourceType
 
-// NewPluralDataSourceType returns a new PluralDataSourceType from the specified variadic list of functional options.
+// NewPluralDataSourceType returns a new pluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
 	dataSourceType := &dataSourceType{}
@@ -39,17 +39,9 @@ func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsF
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	var pdt *pluralDataSourceType
+	pluralDataSourceType := pluralDataSourceType(*dataSourceType)
 
-	return pdt.New(dataSourceType), nil
-}
-
-func (pdt *pluralDataSourceType) New(dst *dataSourceType) *pluralDataSourceType {
-	return &pluralDataSourceType{
-		cfTypeName: dst.cfTypeName,
-		tfSchema:   dst.tfSchema,
-		tfTypeName: dst.tfTypeName,
-	}
+	return &pluralDataSourceType, nil
 }
 
 func (pdt *pluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
