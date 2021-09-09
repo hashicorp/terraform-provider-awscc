@@ -1,4 +1,4 @@
-ISSUE TEMPLATE
+#ISSUE TEMPLATE
 
 ---
 name: 🐛 Bug Report
