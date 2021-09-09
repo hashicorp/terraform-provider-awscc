@@ -259,8 +259,8 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 		} else {
 			singularDataSources = append(singularDataSources, &DataSourceData{
 				CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-				GeneratedAccTestsFileName:    res + "_data_source_gen_test",
-				GeneratedCodeFileName:        res + "_data_source_gen",
+				GeneratedAccTestsFileName:    res + "_singular_data_source_gen_test",
+				GeneratedCodeFileName:        res + "_singular_data_source_gen",
 				GeneratedCodePackageName:     svc,
 				GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:        tfResourceTypeName,

@@ -19,10 +19,8 @@ plural-data-sources:
 	go generate internal/provider/plural_data_sources.go
 
 singular-data-sources:
-	rm -f internal/aws/lambda/function_data_source_gen.go
-	rm -f internal/aws/lambda/function_data_source_gen_test.go
-	rm -f internal/aws/logs/log_group_data_source_gen.go
-	rm -f internal/aws/logs/log_group_data_source_gen_test.go
+	rm -f internal/*/*/*_singular_data_source_gen.go
+	rm -f internal/*/*/*_singular_data_source_gen_test.go
 	go generate internal/provider/singular_data_sources.go
 
 resources:
