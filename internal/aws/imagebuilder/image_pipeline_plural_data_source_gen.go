@@ -21,7 +21,6 @@ func init() {
 // imagePipelinesDataSourceType returns the Terraform awscc_imagebuilder_image_pipelines data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::ImagePipeline resource type.
 func imagePipelinesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func imagePipelinesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ImageBuilder::ImagePipeline", "awscc_imagebuilder_image_pipelines", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImagePipeline").WithTerraformTypeName("awscc_imagebuilder_image_pipelines")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

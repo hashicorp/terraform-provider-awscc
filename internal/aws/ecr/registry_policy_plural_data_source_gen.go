@@ -21,7 +21,6 @@ func init() {
 // registryPoliciesDataSourceType returns the Terraform awscc_ecr_registry_policies data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECR::RegistryPolicy resource type.
 func registryPoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func registryPoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ECR::RegistryPolicy", "awscc_ecr_registry_policies", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECR::RegistryPolicy").WithTerraformTypeName("awscc_ecr_registry_policies")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

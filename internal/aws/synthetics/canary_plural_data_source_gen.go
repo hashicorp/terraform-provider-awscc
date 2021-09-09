@@ -21,7 +21,6 @@ func init() {
 // canariesDataSourceType returns the Terraform awscc_synthetics_canaries data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Synthetics::Canary resource type.
 func canariesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func canariesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Synthetics::Canary", "awscc_synthetics_canaries", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Synthetics::Canary").WithTerraformTypeName("awscc_synthetics_canaries")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

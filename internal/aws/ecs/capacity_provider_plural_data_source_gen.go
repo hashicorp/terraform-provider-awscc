@@ -21,7 +21,6 @@ func init() {
 // capacityProvidersDataSourceType returns the Terraform awscc_ecs_capacity_providers data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECS::CapacityProvider resource type.
 func capacityProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func capacityProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ECS::CapacityProvider", "awscc_ecs_capacity_providers", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("awscc_ecs_capacity_providers")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

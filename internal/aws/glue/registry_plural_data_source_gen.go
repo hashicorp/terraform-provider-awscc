@@ -21,7 +21,6 @@ func init() {
 // registriesDataSourceType returns the Terraform awscc_glue_registries data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Glue::Registry resource type.
 func registriesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func registriesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Glue::Registry", "awscc_glue_registries", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Glue::Registry").WithTerraformTypeName("awscc_glue_registries")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

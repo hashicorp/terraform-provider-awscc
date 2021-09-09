@@ -21,7 +21,6 @@ func init() {
 // appImageConfigsDataSourceType returns the Terraform awscc_sagemaker_app_image_configs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::AppImageConfig resource type.
 func appImageConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func appImageConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SageMaker::AppImageConfig", "awscc_sagemaker_app_image_configs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::AppImageConfig").WithTerraformTypeName("awscc_sagemaker_app_image_configs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

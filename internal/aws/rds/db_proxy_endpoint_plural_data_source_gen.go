@@ -21,7 +21,6 @@ func init() {
 // dBProxyEndpointsDataSourceType returns the Terraform awscc_rds_db_proxy_endpoints data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RDS::DBProxyEndpoint resource type.
 func dBProxyEndpointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func dBProxyEndpointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::RDS::DBProxyEndpoint", "awscc_rds_db_proxy_endpoints", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxyEndpoint").WithTerraformTypeName("awscc_rds_db_proxy_endpoints")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // compositeAlarmsDataSourceType returns the Terraform awscc_cloudwatch_composite_alarms data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource type.
 func compositeAlarmsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func compositeAlarmsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudWatch::CompositeAlarm", "awscc_cloudwatch_composite_alarms", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarms")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

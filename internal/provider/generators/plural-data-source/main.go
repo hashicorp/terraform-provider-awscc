@@ -150,7 +150,6 @@ func init() {
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source type.
 // This Terraform data source type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute {
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -172,7 +171,8 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 
     var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", schema)
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
+	opts = opts.WithTerraformSchema(schema)
 	
     pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

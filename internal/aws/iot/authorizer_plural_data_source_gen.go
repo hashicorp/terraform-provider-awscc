@@ -21,7 +21,6 @@ func init() {
 // authorizersDataSourceType returns the Terraform awscc_iot_authorizers data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::Authorizer resource type.
 func authorizersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func authorizersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoT::Authorizer", "awscc_iot_authorizers", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::Authorizer").WithTerraformTypeName("awscc_iot_authorizers")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

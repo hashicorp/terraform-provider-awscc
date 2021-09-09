@@ -21,7 +21,6 @@ func init() {
 // sAMLProvidersDataSourceType returns the Terraform awscc_iam_saml_providers data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IAM::SAMLProvider resource type.
 func sAMLProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func sAMLProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IAM::SAMLProvider", "awscc_iam_saml_providers", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::SAMLProvider").WithTerraformTypeName("awscc_iam_saml_providers")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

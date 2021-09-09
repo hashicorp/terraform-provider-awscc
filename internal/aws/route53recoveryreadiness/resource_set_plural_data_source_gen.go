@@ -21,7 +21,6 @@ func init() {
 // resourceSetsDataSourceType returns the Terraform awscc_route53recoveryreadiness_resource_sets data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::ResourceSet resource type.
 func resourceSetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func resourceSetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Route53RecoveryReadiness::ResourceSet", "awscc_route53recoveryreadiness_resource_sets", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::ResourceSet").WithTerraformTypeName("awscc_route53recoveryreadiness_resource_sets")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // datasetsDataSourceType returns the Terraform awscc_databrew_datasets data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataBrew::Dataset resource type.
 func datasetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func datasetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataBrew::Dataset", "awscc_databrew_datasets", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Dataset").WithTerraformTypeName("awscc_databrew_datasets")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

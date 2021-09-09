@@ -21,7 +21,6 @@ func init() {
 // codeSigningConfigsDataSourceType returns the Terraform awscc_lambda_code_signing_configs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource type.
 func codeSigningConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func codeSigningConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Lambda::CodeSigningConfig", "awscc_lambda_code_signing_configs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("awscc_lambda_code_signing_configs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

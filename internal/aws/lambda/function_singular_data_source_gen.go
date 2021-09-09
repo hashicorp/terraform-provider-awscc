@@ -565,7 +565,8 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Lambda::Function", "awscc_lambda_function", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("awscc_lambda_function")
+	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                            "Arn",
 		"code":                           "Code",

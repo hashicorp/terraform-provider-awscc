@@ -21,7 +21,6 @@ func init() {
 // wirelessDevicesDataSourceType returns the Terraform awscc_iotwireless_wireless_devices data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::WirelessDevice resource type.
 func wirelessDevicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func wirelessDevicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTWireless::WirelessDevice", "awscc_iotwireless_wireless_devices", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_devices")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

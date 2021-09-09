@@ -21,7 +21,6 @@ func init() {
 // metricStreamsDataSourceType returns the Terraform awscc_cloudwatch_metric_streams data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource type.
 func metricStreamsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func metricStreamsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudWatch::MetricStream", "awscc_cloudwatch_metric_streams", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_streams")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

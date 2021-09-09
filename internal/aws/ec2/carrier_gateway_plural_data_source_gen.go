@@ -21,7 +21,6 @@ func init() {
 // carrierGatewaysDataSourceType returns the Terraform awscc_ec2_carrier_gateways data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::CarrierGateway resource type.
 func carrierGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func carrierGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::CarrierGateway", "awscc_ec2_carrier_gateways", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::CarrierGateway").WithTerraformTypeName("awscc_ec2_carrier_gateways")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

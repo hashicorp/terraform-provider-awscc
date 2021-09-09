@@ -21,7 +21,6 @@ func init() {
 // configurationSetsDataSourceType returns the Terraform awscc_ses_configuration_sets data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SES::ConfigurationSet resource type.
 func configurationSetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func configurationSetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SES::ConfigurationSet", "awscc_ses_configuration_sets", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_sets")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // componentVersionsDataSourceType returns the Terraform awscc_greengrassv2_component_versions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource type.
 func componentVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func componentVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::GreengrassV2::ComponentVersion", "awscc_greengrassv2_component_versions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_versions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

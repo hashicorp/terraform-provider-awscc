@@ -21,7 +21,6 @@ func init() {
 // trailsDataSourceType returns the Terraform awscc_cloudtrail_trails data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudTrail::Trail resource type.
 func trailsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func trailsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudTrail::Trail", "awscc_cloudtrail_trails", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudTrail::Trail").WithTerraformTypeName("awscc_cloudtrail_trails")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

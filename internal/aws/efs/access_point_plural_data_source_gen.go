@@ -21,7 +21,6 @@ func init() {
 // accessPointsDataSourceType returns the Terraform awscc_efs_access_points data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EFS::AccessPoint resource type.
 func accessPointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func accessPointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EFS::AccessPoint", "awscc_efs_access_points", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EFS::AccessPoint").WithTerraformTypeName("awscc_efs_access_points")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

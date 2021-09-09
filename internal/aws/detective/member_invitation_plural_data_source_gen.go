@@ -21,7 +21,6 @@ func init() {
 // memberInvitationsDataSourceType returns the Terraform awscc_detective_member_invitations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Detective::MemberInvitation resource type.
 func memberInvitationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func memberInvitationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Detective::MemberInvitation", "awscc_detective_member_invitations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Detective::MemberInvitation").WithTerraformTypeName("awscc_detective_member_invitations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

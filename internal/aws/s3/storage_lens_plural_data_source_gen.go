@@ -21,7 +21,6 @@ func init() {
 // storageLensesDataSourceType returns the Terraform awscc_s3_storage_lenses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::S3::StorageLens resource type.
 func storageLensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func storageLensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::S3::StorageLens", "awscc_s3_storage_lenses", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lenses")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

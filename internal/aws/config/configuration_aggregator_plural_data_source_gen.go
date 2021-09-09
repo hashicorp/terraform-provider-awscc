@@ -21,7 +21,6 @@ func init() {
 // configurationAggregatorsDataSourceType returns the Terraform awscc_config_configuration_aggregators data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Config::ConfigurationAggregator resource type.
 func configurationAggregatorsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func configurationAggregatorsDataSourceType(ctx context.Context) (tfsdk.DataSour
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Config::ConfigurationAggregator", "awscc_config_configuration_aggregators", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("awscc_config_configuration_aggregators")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

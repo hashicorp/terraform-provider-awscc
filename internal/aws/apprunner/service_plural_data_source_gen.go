@@ -21,7 +21,6 @@ func init() {
 // servicesDataSourceType returns the Terraform awscc_apprunner_services data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppRunner::Service resource type.
 func servicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func servicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::AppRunner::Service", "awscc_apprunner_services", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_services")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

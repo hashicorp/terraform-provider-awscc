@@ -21,7 +21,6 @@ func init() {
 // transitGatewayPeeringAttachmentsDataSourceType returns the Terraform awscc_ec2_transit_gateway_peering_attachments data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::TransitGatewayPeeringAttachment resource type.
 func transitGatewayPeeringAttachmentsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func transitGatewayPeeringAttachmentsDataSourceType(ctx context.Context) (tfsdk.
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::TransitGatewayPeeringAttachment", "awscc_ec2_transit_gateway_peering_attachments", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayPeeringAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_peering_attachments")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

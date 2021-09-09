@@ -21,7 +21,6 @@ func init() {
 // responsePlansDataSourceType returns the Terraform awscc_ssmincidents_response_plans data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SSMIncidents::ResponsePlan resource type.
 func responsePlansDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func responsePlansDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SSMIncidents::ResponsePlan", "awscc_ssmincidents_response_plans", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plans")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

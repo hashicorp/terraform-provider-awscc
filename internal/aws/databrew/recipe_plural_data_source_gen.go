@@ -21,7 +21,6 @@ func init() {
 // recipesDataSourceType returns the Terraform awscc_databrew_recipes data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataBrew::Recipe resource type.
 func recipesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func recipesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataBrew::Recipe", "awscc_databrew_recipes", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Recipe").WithTerraformTypeName("awscc_databrew_recipes")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // localGatewayRouteTableVPCAssociationsDataSourceType returns the Terraform awscc_ec2_local_gateway_route_table_vpc_associations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::LocalGatewayRouteTableVPCAssociation resource type.
 func localGatewayRouteTableVPCAssociationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func localGatewayRouteTableVPCAssociationsDataSourceType(ctx context.Context) (t
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::LocalGatewayRouteTableVPCAssociation", "awscc_ec2_local_gateway_route_table_vpc_associations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRouteTableVPCAssociation").WithTerraformTypeName("awscc_ec2_local_gateway_route_table_vpc_associations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

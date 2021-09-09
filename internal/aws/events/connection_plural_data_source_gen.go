@@ -21,7 +21,6 @@ func init() {
 // connectionsDataSourceType returns the Terraform awscc_events_connections data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Events::Connection resource type.
 func connectionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func connectionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Events::Connection", "awscc_events_connections", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Events::Connection").WithTerraformTypeName("awscc_events_connections")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

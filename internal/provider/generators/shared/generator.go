@@ -119,7 +119,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		PackageName:                  packageName,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
-		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
 	}
 
@@ -138,6 +137,7 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 
 	templateData.HasUpdateMethod = true
 	templateData.RequiredAttributesValidator = requiredAttributesValidator
+	templateData.SyntheticIDAttribute = true
 
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false

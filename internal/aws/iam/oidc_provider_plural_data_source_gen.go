@@ -21,7 +21,6 @@ func init() {
 // oIDCProvidersDataSourceType returns the Terraform awscc_iam_oidc_providers data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IAM::OIDCProvider resource type.
 func oIDCProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func oIDCProvidersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IAM::OIDCProvider", "awscc_iam_oidc_providers", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::OIDCProvider").WithTerraformTypeName("awscc_iam_oidc_providers")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

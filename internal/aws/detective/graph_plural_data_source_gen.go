@@ -21,7 +21,6 @@ func init() {
 // graphsDataSourceType returns the Terraform awscc_detective_graphs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Detective::Graph resource type.
 func graphsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func graphsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Detective::Graph", "awscc_detective_graphs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Detective::Graph").WithTerraformTypeName("awscc_detective_graphs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

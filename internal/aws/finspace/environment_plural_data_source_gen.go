@@ -21,7 +21,6 @@ func init() {
 // environmentsDataSourceType returns the Terraform awscc_finspace_environments data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FinSpace::Environment resource type.
 func environmentsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func environmentsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::FinSpace::Environment", "awscc_finspace_environments", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FinSpace::Environment").WithTerraformTypeName("awscc_finspace_environments")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

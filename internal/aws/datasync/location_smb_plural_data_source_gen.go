@@ -21,7 +21,6 @@ func init() {
 // locationSMBSDataSourceType returns the Terraform awscc_datasync_location_smbs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationSMB resource type.
 func locationSMBSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func locationSMBSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationSMB", "awscc_datasync_location_smbs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationSMB").WithTerraformTypeName("awscc_datasync_location_smbs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

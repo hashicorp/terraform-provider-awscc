@@ -21,7 +21,6 @@ func init() {
 // inputsDataSourceType returns the Terraform awscc_iotevents_inputs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTEvents::Input resource type.
 func inputsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func inputsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTEvents::Input", "awscc_iotevents_inputs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::Input").WithTerraformTypeName("awscc_iotevents_inputs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

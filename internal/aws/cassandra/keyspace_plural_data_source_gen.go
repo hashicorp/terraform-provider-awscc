@@ -21,7 +21,6 @@ func init() {
 // keyspacesDataSourceType returns the Terraform awscc_cassandra_keyspaces data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Cassandra::Keyspace resource type.
 func keyspacesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func keyspacesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Cassandra::Keyspace", "awscc_cassandra_keyspaces", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("awscc_cassandra_keyspaces")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

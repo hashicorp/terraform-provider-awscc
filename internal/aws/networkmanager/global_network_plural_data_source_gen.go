@@ -21,7 +21,6 @@ func init() {
 // globalNetworksDataSourceType returns the Terraform awscc_networkmanager_global_networks data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::NetworkManager::GlobalNetwork resource type.
 func globalNetworksDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func globalNetworksDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::NetworkManager::GlobalNetwork", "awscc_networkmanager_global_networks", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_networks")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // monitoringSchedulesDataSourceType returns the Terraform awscc_sagemaker_monitoring_schedules data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::MonitoringSchedule resource type.
 func monitoringSchedulesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func monitoringSchedulesDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SageMaker::MonitoringSchedule", "awscc_sagemaker_monitoring_schedules", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::MonitoringSchedule").WithTerraformTypeName("awscc_sagemaker_monitoring_schedules")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

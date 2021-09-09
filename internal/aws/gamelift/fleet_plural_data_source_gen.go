@@ -21,7 +21,6 @@ func init() {
 // fleetsDataSourceType returns the Terraform awscc_gamelift_fleets data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::GameLift::Fleet resource type.
 func fleetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func fleetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::GameLift::Fleet", "awscc_gamelift_fleets", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleets")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

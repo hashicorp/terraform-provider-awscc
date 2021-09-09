@@ -21,7 +21,6 @@ func init() {
 // resolverDNSSECConfigsDataSourceType returns the Terraform awscc_route53resolver_resolver_dnssec_configs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::ResolverDNSSECConfig resource type.
 func resolverDNSSECConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func resolverDNSSECConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Route53Resolver::ResolverDNSSECConfig", "awscc_route53resolver_resolver_dnssec_configs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("awscc_route53resolver_resolver_dnssec_configs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

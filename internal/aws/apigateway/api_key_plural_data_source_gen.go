@@ -21,7 +21,6 @@ func init() {
 // apiKeysDataSourceType returns the Terraform awscc_apigateway_api_keys data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ApiGateway::ApiKey resource type.
 func apiKeysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func apiKeysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ApiGateway::ApiKey", "awscc_apigateway_api_keys", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::ApiKey").WithTerraformTypeName("awscc_apigateway_api_keys")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

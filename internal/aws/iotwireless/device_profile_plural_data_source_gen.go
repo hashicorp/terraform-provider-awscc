@@ -21,7 +21,6 @@ func init() {
 // deviceProfilesDataSourceType returns the Terraform awscc_iotwireless_device_profiles data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::DeviceProfile resource type.
 func deviceProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func deviceProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTWireless::DeviceProfile", "awscc_iotwireless_device_profiles", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::DeviceProfile").WithTerraformTypeName("awscc_iotwireless_device_profiles")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

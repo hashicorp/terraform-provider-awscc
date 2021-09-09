@@ -21,7 +21,6 @@ func init() {
 // functionsDataSourceType returns the Terraform awscc_cloudfront_functions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::Function resource type.
 func functionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func functionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::Function", "awscc_cloudfront_functions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Function").WithTerraformTypeName("awscc_cloudfront_functions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

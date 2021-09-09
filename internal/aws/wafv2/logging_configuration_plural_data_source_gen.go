@@ -21,7 +21,6 @@ func init() {
 // loggingConfigurationsDataSourceType returns the Terraform awscc_wafv2_logging_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::WAFv2::LoggingConfiguration resource type.
 func loggingConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func loggingConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::WAFv2::LoggingConfiguration", "awscc_wafv2_logging_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("awscc_wafv2_logging_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

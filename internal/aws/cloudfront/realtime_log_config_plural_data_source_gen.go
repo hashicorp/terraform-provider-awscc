@@ -21,7 +21,6 @@ func init() {
 // realtimeLogConfigsDataSourceType returns the Terraform awscc_cloudfront_realtime_log_configs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource type.
 func realtimeLogConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func realtimeLogConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::RealtimeLogConfig", "awscc_cloudfront_realtime_log_configs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_configs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

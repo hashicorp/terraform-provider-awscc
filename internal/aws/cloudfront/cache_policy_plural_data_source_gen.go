@@ -21,7 +21,6 @@ func init() {
 // cachePoliciesDataSourceType returns the Terraform awscc_cloudfront_cache_policies data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource type.
 func cachePoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func cachePoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::CachePolicy", "awscc_cloudfront_cache_policies", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policies")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

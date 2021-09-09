@@ -21,7 +21,6 @@ func init() {
 // portalsDataSourceType returns the Terraform awscc_iotsitewise_portals data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTSiteWise::Portal resource type.
 func portalsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func portalsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTSiteWise::Portal", "awscc_iotsitewise_portals", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Portal").WithTerraformTypeName("awscc_iotsitewise_portals")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

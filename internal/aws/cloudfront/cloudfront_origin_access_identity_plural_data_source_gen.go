@@ -21,7 +21,6 @@ func init() {
 // cloudFrontOriginAccessIdentitiesDataSourceType returns the Terraform awscc_cloudfront_cloudfront_origin_access_identities data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
 func cloudFrontOriginAccessIdentitiesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func cloudFrontOriginAccessIdentitiesDataSourceType(ctx context.Context) (tfsdk.
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::CloudFrontOriginAccessIdentity", "awscc_cloudfront_cloudfront_origin_access_identities", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloudfront_origin_access_identities")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

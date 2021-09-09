@@ -21,7 +21,6 @@ func init() {
 // globalReplicationGroupsDataSourceType returns the Terraform awscc_elasticache_global_replication_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ElastiCache::GlobalReplicationGroup resource type.
 func globalReplicationGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func globalReplicationGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourc
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ElastiCache::GlobalReplicationGroup", "awscc_elasticache_global_replication_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

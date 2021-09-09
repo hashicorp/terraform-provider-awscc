@@ -21,7 +21,6 @@ func init() {
 // topicRulesDataSourceType returns the Terraform awscc_iot_topic_rules data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::TopicRule resource type.
 func topicRulesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func topicRulesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoT::TopicRule", "awscc_iot_topic_rules", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRule").WithTerraformTypeName("awscc_iot_topic_rules")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

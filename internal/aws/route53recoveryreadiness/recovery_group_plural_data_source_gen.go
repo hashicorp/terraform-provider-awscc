@@ -21,7 +21,6 @@ func init() {
 // recoveryGroupsDataSourceType returns the Terraform awscc_route53recoveryreadiness_recovery_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53RecoveryReadiness::RecoveryGroup resource type.
 func recoveryGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func recoveryGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Route53RecoveryReadiness::RecoveryGroup", "awscc_route53recoveryreadiness_recovery_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::RecoveryGroup").WithTerraformTypeName("awscc_route53recoveryreadiness_recovery_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

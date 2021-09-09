@@ -21,7 +21,6 @@ func init() {
 // moduleVersionsDataSourceType returns the Terraform awscc_cloudformation_module_versions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::ModuleVersion resource type.
 func moduleVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func moduleVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFormation::ModuleVersion", "awscc_cloudformation_module_versions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ModuleVersion").WithTerraformTypeName("awscc_cloudformation_module_versions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

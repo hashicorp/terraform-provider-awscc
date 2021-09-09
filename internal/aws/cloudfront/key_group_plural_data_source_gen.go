@@ -21,7 +21,6 @@ func init() {
 // keyGroupsDataSourceType returns the Terraform awscc_cloudfront_key_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::KeyGroup resource type.
 func keyGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func keyGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::KeyGroup", "awscc_cloudfront_key_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::KeyGroup").WithTerraformTypeName("awscc_cloudfront_key_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

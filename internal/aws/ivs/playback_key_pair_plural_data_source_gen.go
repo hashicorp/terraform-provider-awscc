@@ -21,7 +21,6 @@ func init() {
 // playbackKeyPairsDataSourceType returns the Terraform awscc_ivs_playback_key_pairs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IVS::PlaybackKeyPair resource type.
 func playbackKeyPairsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func playbackKeyPairsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IVS::PlaybackKeyPair", "awscc_ivs_playback_key_pairs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IVS::PlaybackKeyPair").WithTerraformTypeName("awscc_ivs_playback_key_pairs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

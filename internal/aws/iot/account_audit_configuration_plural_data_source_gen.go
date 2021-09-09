@@ -21,7 +21,6 @@ func init() {
 // accountAuditConfigurationsDataSourceType returns the Terraform awscc_iot_account_audit_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::AccountAuditConfiguration resource type.
 func accountAuditConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func accountAuditConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSo
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoT::AccountAuditConfiguration", "awscc_iot_account_audit_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::AccountAuditConfiguration").WithTerraformTypeName("awscc_iot_account_audit_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

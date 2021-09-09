@@ -21,7 +21,6 @@ func init() {
 // globalClustersDataSourceType returns the Terraform awscc_rds_global_clusters data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::RDS::GlobalCluster resource type.
 func globalClustersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func globalClustersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::RDS::GlobalCluster", "awscc_rds_global_clusters", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::RDS::GlobalCluster").WithTerraformTypeName("awscc_rds_global_clusters")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // flowsDataSourceType returns the Terraform awscc_appflow_flows data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppFlow::Flow resource type.
 func flowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func flowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::AppFlow::Flow", "awscc_appflow_flows", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flows")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // locationS3sDataSourceType returns the Terraform awscc_datasync_location_s3s data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationS3 resource type.
 func locationS3sDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func locationS3sDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationS3", "awscc_datasync_location_s3s", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3s")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

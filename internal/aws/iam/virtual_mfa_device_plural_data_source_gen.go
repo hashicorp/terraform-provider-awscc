@@ -21,7 +21,6 @@ func init() {
 // virtualMFADevicesDataSourceType returns the Terraform awscc_iam_virtual_mfa_devices data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IAM::VirtualMFADevice resource type.
 func virtualMFADevicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func virtualMFADevicesDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IAM::VirtualMFADevice", "awscc_iam_virtual_mfa_devices", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IAM::VirtualMFADevice").WithTerraformTypeName("awscc_iam_virtual_mfa_devices")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

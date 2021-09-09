@@ -21,7 +21,6 @@ func init() {
 // egressOnlyInternetGatewaysDataSourceType returns the Terraform awscc_ec2_egress_only_internet_gateways data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::EgressOnlyInternetGateway resource type.
 func egressOnlyInternetGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func egressOnlyInternetGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSo
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::EgressOnlyInternetGateway", "awscc_ec2_egress_only_internet_gateways", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateways")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

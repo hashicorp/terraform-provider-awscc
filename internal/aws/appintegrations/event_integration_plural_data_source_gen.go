@@ -21,7 +21,6 @@ func init() {
 // eventIntegrationsDataSourceType returns the Terraform awscc_appintegrations_event_integrations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource type.
 func eventIntegrationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func eventIntegrationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::AppIntegrations::EventIntegration", "awscc_appintegrations_event_integrations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integrations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

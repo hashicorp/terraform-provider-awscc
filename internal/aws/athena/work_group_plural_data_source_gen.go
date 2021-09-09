@@ -21,7 +21,6 @@ func init() {
 // workGroupsDataSourceType returns the Terraform awscc_athena_work_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Athena::WorkGroup resource type.
 func workGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func workGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Athena::WorkGroup", "awscc_athena_work_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Athena::WorkGroup").WithTerraformTypeName("awscc_athena_work_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
