@@ -8,7 +8,7 @@ default: build
 
 .PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
 
-all: schemas resources build
+all: schemas resources data-sources build
 
 build:
 	go install
