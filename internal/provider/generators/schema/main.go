@@ -270,13 +270,12 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 		if schema.SuppressPluralDataSource {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform plural data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
-			pluralResource := naming.Pluralize(res)
 			pluralTfResourceTypeName := naming.Pluralize(tfResourceTypeName)
 
 			pluralDataSources = append(pluralDataSources, &DataSourceData{
 				CloudFormationType:        cfResourceTypeName,
-				GeneratedAccTestsFileName: pluralResource + "_data_source_gen_test",
-				GeneratedCodeFileName:     pluralResource + "_data_source_gen",
+				GeneratedAccTestsFileName: res + "_plural_data_source_gen_test",
+				GeneratedCodeFileName:     res + "_plural_data_source_gen",
 				GeneratedCodePackageName:  svc,
 				GeneratedCodePathSuffix:   fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:     pluralTfResourceTypeName,
