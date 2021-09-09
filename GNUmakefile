@@ -14,8 +14,8 @@ build:
 	go install
 
 plural-data-sources:
-	rm -f internal/*/*/*_data_source_gen.go
-	rm -f internal/*/*/*_data_source_gen_test.go
+	rm -f internal/*/*/*_plural_data_source_gen.go
+	rm -f internal/*/*/*_plural_data_source_gen_test.go
 	go generate internal/provider/plural_data_sources.go
 
 singular-data-sources:
@@ -26,8 +26,8 @@ singular-data-sources:
 	go generate internal/provider/singular_data_sources.go
 
 resources:
-	rm -f internal/*/*/*_gen.go
-	rm -f internal/*/*/*_gen_test.go
+	rm -f internal/*/*/*_resource_gen.go
+	rm -f internal/*/*/*_resource_gen_test.go
 	go generate internal/provider/resources.go
 
 schemas:

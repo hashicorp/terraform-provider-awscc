@@ -23,6 +23,16 @@ const (
 	HasIDRootProperty                            // Has a root property named "id"
 )
 
+var (
+	tfMetaArguments = []string{
+		"count",
+		"depends_on",
+		"for_each",
+		"lifecycle",
+		"provider",
+	}
+)
+
 type Emitter struct {
 	CfResource *cfschema.Resource
 	Ui         cli.Ui
@@ -67,6 +77,12 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string, co
 			}
 
 			features |= HasIDRootProperty
+		}
+
+		for _, tfMetaArgument := range tfMetaArguments {
+			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
+				return 0, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
+			}
 		}
 
 		if cfResource.IsRequired(name) {
