@@ -8,7 +8,7 @@ on:
   pull_request:
     paths:
       - .github/workflows/documentation-linters.yml
-      - .github/**.md
+      - .github/**/*.md
       - .markdownlint.yml
       - docs/**
       # - website/**
