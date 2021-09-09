@@ -113,8 +113,8 @@ func main() {
 		if suppressPluralDataSource {
 			block = fmt.Sprintf(`
 resource_schema %[1]q {
-  cloudformation_type_name    = %[2]q
-  suppress_plural_data_source = %[3]t
+  cloudformation_type_name               = %[2]q
+  suppress_plural_data_source_generation = %[3]t
 }`, tfTypeName, cfTypeName, suppressPluralDataSource)
 		} else {
 			block = fmt.Sprintf(`
