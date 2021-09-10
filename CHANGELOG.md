@@ -1,5 +1,9 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.7](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.7) (September 9, 2021)
+
+Singular data sources added.
+
 ## [0.0.6](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.6) (September 7, 2021)
 
 Plural data sources added.
