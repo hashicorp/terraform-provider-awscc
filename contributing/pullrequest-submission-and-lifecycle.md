@@ -10,10 +10,10 @@
 We appreciate direct contributions to the provider codebase. Here's what to
 expect:
 
-* For pull requests that follow the guidelines, we will proceed to reviewing
+- For pull requests that follow the guidelines, we will proceed to reviewing
   and merging, following the provider team's review schedule. There may be some
   internal or community discussion needed before we can complete this.
-* Pull requests that don't follow the guidelines will be commented with what
+- Pull requests that don't follow the guidelines will be commented with what
   they're missing. The person who submits the pull request or another community
   member will need to address those requests before they move forward.
 
