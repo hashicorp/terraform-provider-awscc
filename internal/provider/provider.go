@@ -8,12 +8,11 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func New() tfsdk.Provider {
@@ -26,7 +25,7 @@ type AwsCloudControlProvider struct {
 	roleARN  string
 }
 
-func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -164,7 +163,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 
 	diags := request.Config.Get(ctx, &config)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return
@@ -227,11 +226,10 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	cfClient, region, err := newCloudFormationClient(ctx, &config)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error configuring AWS CloudFormation client",
-			Detail:   fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
-		})
+		response.Diagnostics.AddError(
+			"Error configuring AWS CloudFormation client",
+			fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
+		)
 
 		return
 	}
@@ -241,19 +239,18 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	var diags []*tfprotov6.Diagnostic
+func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	resources := make(map[string]tfsdk.ResourceType)
 
 	for name, factory := range registry.ResourceFactories() {
 		resourceType, err := factory(ctx)
 
 		if err != nil {
-			diags = append(diags, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error getting Resource",
-				Detail:   fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
-			})
+			diags.AddError(
+				"Error getting Resource",
+				fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
+			)
 
 			continue
 		}
@@ -264,19 +261,18 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	var diags []*tfprotov6.Diagnostic
+func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	dataSources := make(map[string]tfsdk.DataSourceType)
 
 	for name, factory := range registry.DataSourceFactories() {
 		dataSourceType, err := factory(ctx)
 
 		if err != nil {
-			diags = append(diags, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error getting Data Source",
-				Detail:   fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
-			})
+			diags.AddError(
+				"Error getting Data Source",
+				fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
+			)
 
 			continue
 		}

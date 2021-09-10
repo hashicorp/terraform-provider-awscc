@@ -172,3 +172,8 @@ func (s Set) Equal(o attr.Value) bool {
 	}
 	return true
 }
+
+// Type returns the Type that created the Value.
+func (s Set) Type(ctx context.Context) attr.Type {
+	return SetType{ElemType: s.ElemType}
+}

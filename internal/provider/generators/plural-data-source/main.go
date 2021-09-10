@@ -6,13 +6,11 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/jinzhu/inflection"
-	"go/format"
 	"os"
 	"path"
-	"text/template"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -54,7 +52,13 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := NewGenerator(ui, *tfDataSourceType, *cfType)
+	generator := &PluralDataSourceGenerator{
+		cfType:           *cfType,
+		tfDataSourceType: *tfDataSourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
@@ -62,127 +66,63 @@ func main() {
 	}
 }
 
-type Generator struct {
+type PluralDataSourceGenerator struct {
 	cfType           string
 	tfDataSourceType string
-	ui               cli.Ui
+	shared.Generator
 }
 
-func NewGenerator(ui cli.Ui, tfDataSourceType, cfType string) *Generator {
-	return &Generator{
-		cfType:           cfType,
-		tfDataSourceType: tfDataSourceType,
-		ui: &cli.BasicUi{
-			Reader:      os.Stdin,
-			Writer:      os.Stdout,
-			ErrorWriter: os.Stderr,
-		},
-	}
-}
-
-// Generate generates the data source's type factory into the specified file.
-func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	g.infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", g.tfDataSourceType, schemaFilename, acctestsFilename)
+// Generate generates the plural data source type's factory into the specified file.
+func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	p.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", p.tfDataSourceType, schemaFilename, acctestsFilename)
 
 	// Create target directories.
 	for _, filename := range []string{schemaFilename, acctestsFilename} {
 		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, 0755)
+		err := os.MkdirAll(dirname, shared.DirPerm)
 
 		if err != nil {
 			return fmt.Errorf("creating target directory %s: %w", dirname, err)
 		}
 	}
 
-	dataSource, err := NewDataSource(g.tfDataSourceType)
+	org, svc, res, err := naming.ParseCloudFormationTypeName(p.cfType)
 
-	org, svc, res, err := naming.ParseCloudFormationTypeName(g.cfType)
+	if err != nil {
+		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", p.cfType)
+	}
 
-	ds := inflection.Plural(res)
+	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
 
-	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + "DataSourceType"
+	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + shared.DataSourceType
 
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, ds)
 
-	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", g.cfType)
+	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", p.cfType)
 
-	templateData := TemplateData{
+	templateData := shared.TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
-		CloudFormationTypeName:       g.cfType,
+		CloudFormationTypeName:       p.cfType,
 		FactoryFunctionName:          factoryFunctionName,
 		PackageName:                  packageName,
 		SchemaDescription:            schemaDescription,
 		SchemaVersion:                1,
-		TerraformTypeName:            dataSource.TfType,
+		TerraformTypeName:            p.tfDataSourceType,
 	}
 
-	err = g.applyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, &templateData)
+	err = p.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, &templateData)
 
 	if err != nil {
 		return err
 	}
 
-	err = g.applyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
+	err = p.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
 
 	if err != nil {
 		return err
 	}
 
 	return nil
-}
-
-// applyAndWriteTemplate applies the template body to the specified data and writes it to file.
-func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
-	tmpl, err := template.New("function").Parse(templateBody)
-
-	if err != nil {
-		return fmt.Errorf("parsing function template: %w", err)
-	}
-
-	var buffer bytes.Buffer
-	err = tmpl.Execute(&buffer, templateData)
-
-	if err != nil {
-		return fmt.Errorf("executing template: %w", err)
-	}
-
-	generatedFileContents, err := format.Source(buffer.Bytes())
-
-	if err != nil {
-		g.infof("%s", buffer.String())
-		return fmt.Errorf("formatting generated source code: %w", err)
-	}
-
-	f, err := os.Create(filename)
-
-	if err != nil {
-		return fmt.Errorf("creating file (%s): %w", filename, err)
-	}
-
-	defer f.Close()
-
-	_, err = f.Write(generatedFileContents)
-
-	if err != nil {
-		return fmt.Errorf("writing to file (%s): %w", filename, err)
-	}
-
-	return nil
-}
-
-func (g *Generator) infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
-}
-
-type TemplateData struct {
-	AcceptanceTestFunctionPrefix string
-	CloudFormationTypeName       string
-	FactoryFunctionName          string
-	PackageName                  string
-	RootPropertiesSchema         string
-	SchemaDescription            string
-	SchemaVersion                int
-	TerraformTypeName            string
 }
 
 // Terraform resource schema definition.
@@ -210,7 +150,6 @@ func init() {
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source type.
 // This Terraform data source type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute {
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -232,7 +171,8 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 
     var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", schema)
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
+	opts = opts.WithTerraformSchema(schema)
 	
     pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
@@ -273,13 +213,3 @@ func {{ .AcceptanceTestFunctionPrefix }}DataSource_basic(t *testing.T) {
 	})
 }
 `
-
-type DataSource struct {
-	TfType string
-}
-
-func NewDataSource(dataSourceType string) (*DataSource, error) {
-	return &DataSource{
-		TfType: dataSourceType,
-	}, nil
-}

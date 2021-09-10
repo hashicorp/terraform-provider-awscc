@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
@@ -46,21 +45,21 @@ func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request 
 		l = len(v.Elems)
 
 	default:
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", v, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", v),
+		)
 
 		return
 	}
 
 	if l < validator.minItems || l > validator.maxItems {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected length of %s to be in the range [%d, %d], got %d", request.AttributePath, validator.minItems, validator.maxItems, l),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid length",
+			fmt.Sprintf("expected length to be in the range [%d, %d], got %d", validator.minItems, validator.maxItems, l),
+		)
 
 		return
 	}
@@ -114,21 +113,21 @@ func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request 
 		l = len(v.Elems)
 
 	default:
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", v, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", v),
+		)
 
 		return
 	}
 
 	if l < validator.minItems {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected length of %s to be at least %d, got %d", request.AttributePath, validator.minItems, l),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid length",
+			fmt.Sprintf("expected length to be at least %d, got %d", validator.minItems, l),
+		)
 
 		return
 	}

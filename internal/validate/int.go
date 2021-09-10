@@ -7,7 +7,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
 // intBetweenValidator validates that an integer Attribute's value is in a range.
@@ -18,25 +17,25 @@ type intBetweenValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v intBetweenValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be between %d and %d", v.min, v.max)
+func (validator intBetweenValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be between %d and %d", validator.min, validator.max)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v intBetweenValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator intBetweenValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v intBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -48,11 +47,11 @@ func (v intBetweenValidator) Validate(ctx context.Context, request tfsdk.Validat
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value",
-			Detail:   fmt.Sprintf("invalid value (%s) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			"Not an integer",
+		)
 
 		return
 	}
@@ -60,12 +59,12 @@ func (v intBetweenValidator) Validate(ctx context.Context, request tfsdk.Validat
 	var i big.Int
 	_, _ = val.Int(&i)
 
-	if i := i.Int64(); i < int64(v.min) || i > int64(v.max) {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected %s to be in the range [%d, %d], got %d", request.AttributePath, v.min, v.max, i),
-		})
+	if i := i.Int64(); i < int64(validator.min) || i > int64(validator.max) {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
+		)
 
 		return
 	}
@@ -91,25 +90,25 @@ type intAtLeastValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v intAtLeastValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be at least %d", v.min)
+func (validator intAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be at least %d", validator.min)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v intAtLeastValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator intAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v intAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -121,11 +120,11 @@ func (v intAtLeastValidator) Validate(ctx context.Context, request tfsdk.Validat
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value",
-			Detail:   fmt.Sprintf("invalid value (%s) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			"Not an integer",
+		)
 
 		return
 	}
@@ -133,12 +132,12 @@ func (v intAtLeastValidator) Validate(ctx context.Context, request tfsdk.Validat
 	var i big.Int
 	_, _ = val.Int(&i)
 
-	if i := i.Int64(); i < int64(v.min) {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected %s to be at least %d, got %d", request.AttributePath, v.min, i),
-		})
+	if i := i.Int64(); i < int64(validator.min) {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
+		)
 
 		return
 	}
@@ -159,25 +158,25 @@ type intInSliceValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v intInSliceValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be one of %v", v.valid)
+func (validator intInSliceValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be one of %v", validator.valid)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v intInSliceValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator intInSliceValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v intInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -189,11 +188,11 @@ func (v intInSliceValidator) Validate(ctx context.Context, request tfsdk.Validat
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value",
-			Detail:   fmt.Sprintf("invalid value (%s) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			"Not an integer",
+		)
 
 		return
 	}
@@ -201,17 +200,17 @@ func (v intInSliceValidator) Validate(ctx context.Context, request tfsdk.Validat
 	var i big.Int
 	_, _ = val.Int(&i)
 
-	for _, val := range v.valid {
+	for _, val := range validator.valid {
 		if i.Int64() == int64(val) {
 			return
 		}
 	}
 
-	response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-		Severity: tfprotov6.DiagnosticSeverityError,
-		Summary:  "Invalid value",
-		Detail:   fmt.Sprintf("expected %s to be one of %v, got %d", request.AttributePath, v.valid, i.Int64()),
-	})
+	response.Diagnostics.AddAttributeError(
+		request.AttributePath,
+		"Invalid value",
+		fmt.Sprintf("expected value to be one of %v, got %d", validator.valid, i.Int64()),
+	)
 }
 
 // IntInSlice returns a new integer in slicde validator.

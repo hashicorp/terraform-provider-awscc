@@ -71,15 +71,16 @@ func TestPluralize(t *testing.T) {
 			Value:         "",
 			ExpectedValue: "",
 		},
+
 		{
 			TestName:      "name ending in s",
 			Value:         "aws_cloudwatch_event_bus",
 			ExpectedValue: "aws_cloudwatch_event_buses",
 		},
 		{
-			TestName:      "special name ending in s",
-			Value:         "awscc_ec2_network_insights_analysis",
-			ExpectedValue: "awscc_ec2_network_insights_analyses",
+			TestName:      "name ending in capital s",
+			Value:         "locationNFS",
+			ExpectedValue: "locationNFS_plural",
 		},
 		{
 			TestName:      "name ending in number",
@@ -87,15 +88,99 @@ func TestPluralize(t *testing.T) {
 			ExpectedValue: "aws_datasync_location_s3s",
 		},
 		{
+			TestName:      "name ending in 'efs'",
+			Value:         "aws_example_efs",
+			ExpectedValue: "aws_example_efs_plural",
+		},
+		{
+			TestName:      "name ending in 'nfs'",
+			Value:         "aws_example_nfs",
+			ExpectedValue: "aws_example_nfs_plural",
+		},
+		{
+			TestName:      "name ending in 'xfs'",
+			Value:         "aws_example_xfs",
+			ExpectedValue: "aws_example_xfs",
+		},
+		{
+			TestName:      "name ending in 'tion'",
+			Value:         "aws_datasync_location",
+			ExpectedValue: "aws_datasync_locations",
+		},
+		{
+			TestName:      "name ending in 'tions'",
+			Value:         "aws_datasync_locations",
+			ExpectedValue: "aws_datasync_locations_plural",
+		},
+		{
+			TestName:      "name ending in 'window'",
+			Value:         "aws_datasync_window",
+			ExpectedValue: "aws_datasync_windows",
+		},
+		{
+			TestName:      "name ending in 'windows'",
+			Value:         "aws_datasync_windows",
+			ExpectedValue: "aws_datasync_windows_plural",
+		},
+		{
 			TestName:      "singular name",
 			Value:         "aws_wafv2_web_acl",
 			ExpectedValue: "aws_wafv2_web_acls",
+		},
+		{
+			TestName:      "custom rule for lens",
+			Value:         "awscc_example_lens",
+			ExpectedValue: "awscc_example_lenses",
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			got := naming.Pluralize(testCase.Value)
+
+			if got != testCase.ExpectedValue {
+				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)
+			}
+		})
+	}
+}
+
+func TestPluralizeWithCustomNameSuffix(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		Name          string
+		Suffix        string
+		ExpectedValue string
+	}{
+		{
+			TestName:      "empty string",
+			Name:          "",
+			Suffix:        "",
+			ExpectedValue: "",
+		},
+		{
+			TestName:      "non custom name with suffix",
+			Name:          "aws_example_association",
+			Suffix:        "_plural",
+			ExpectedValue: "aws_example_associations",
+		},
+		{
+			TestName:      "custom underscored name ending in 'tions'",
+			Name:          "aws_example_associations",
+			Suffix:        "_plural",
+			ExpectedValue: "aws_example_associations_plural",
+		},
+		{
+			TestName:      "custom name ending in 'tions'",
+			Name:          "Associations",
+			Suffix:        "Plural",
+			ExpectedValue: "AssociationsPlural",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			got := naming.PluralizeWithCustomNameSuffix(testCase.Name, testCase.Suffix)
 
 			if got != testCase.ExpectedValue {
 				t.Errorf("expected: %s, got: %s", testCase.ExpectedValue, got)

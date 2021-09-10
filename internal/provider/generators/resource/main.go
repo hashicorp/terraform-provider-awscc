@@ -3,18 +3,12 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
-	"go/format"
 	"os"
 	"path"
-	"strings"
-	"text/template"
 
-	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
-	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/resource/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -56,7 +50,13 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := NewGenerator(ui, *tfResourceType, *cfTypeSchemaFile)
+	generator := &ResourceGenerator{
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfResourceType:   *tfResourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
@@ -64,206 +64,45 @@ func main() {
 	}
 }
 
-type Generator struct {
+type ResourceGenerator struct {
 	cfTypeSchemaFile string
 	tfResourceType   string
-	ui               cli.Ui
-}
-
-func NewGenerator(ui cli.Ui, tfResourceType, cfTypeSchemaFile string) *Generator {
-	return &Generator{
-		cfTypeSchemaFile: cfTypeSchemaFile,
-		tfResourceType:   tfResourceType,
-		ui: &cli.BasicUi{
-			Reader:      os.Stdin,
-			Writer:      os.Stdout,
-			ErrorWriter: os.Stderr,
-		},
-	}
+	shared.Generator
 }
 
 // Generate generates the resource's type factory into the specified file.
-func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	g.infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	r.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", r.tfResourceType, r.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	// Create target directories.
 	for _, filename := range []string{schemaFilename, acctestsFilename} {
 		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, 0755)
+		err := os.MkdirAll(dirname, shared.DirPerm)
 
 		if err != nil {
 			return fmt.Errorf("creating target directory %s: %w", dirname, err)
 		}
 	}
 
-	resource, err := NewResource(g.tfResourceType, g.cfTypeSchemaFile)
-
-	if err != nil {
-		return fmt.Errorf("reading CloudFormation resource schema for %s: %w", g.tfResourceType, err)
-	}
-
-	cfTypeName := *resource.CfResource.TypeName
-	org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
-
-	if err != nil {
-		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfTypeName)
-	}
-
-	// e.g. "logGroupResourceType"
-	factoryFunctionName := string(bytes.ToLower([]byte(res[:1]))) + res[1:] + "ResourceType"
-
-	// e.g. "TestAccAWSLogsLogGroup"
-	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, res)
-
-	sb := strings.Builder{}
-	codeEmitter := codegen.Emitter{
-		CfResource: resource.CfResource,
-		Ui:         g.ui,
-		Writer:     &sb,
-	}
-
-	// Generate code for the CloudFormation root properties schema.
-	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap)
-
-	if err != nil {
-		return fmt.Errorf("emitting schema code: %w", err)
-	}
-
-	rootPropertiesSchema := sb.String()
-	sb.Reset()
-
-	codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
-	requiredAttributesValidator := sb.String()
-	sb.Reset()
-
-	templateData := TemplateData{
-		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
-		AttributeNameMap:             attributeNameMap,
-		CloudFormationTypeName:       cfTypeName,
-		FactoryFunctionName:          factoryFunctionName,
-		HasRequiredAttribute:         true,
-		HasUpdateMethod:              true,
-		PackageName:                  packageName,
-		RequiredAttributesValidator:  requiredAttributesValidator,
-		RootPropertiesSchema:         rootPropertiesSchema,
-		SchemaVersion:                1,
-		SyntheticIDAttribute:         true,
-		TerraformTypeName:            resource.TfType,
-	}
-
-	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
-		templateData.HasRequiredAttribute = false
-	}
-	if codeFeatures&codegen.HasUpdatableProperty == 0 {
-		templateData.HasUpdateMethod = false
-	}
-	if codeFeatures&codegen.UsesInternalTypes > 0 {
-		templateData.ImportInternalTypes = true
-	}
-	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
-		templateData.ImportValidate = true
-	}
-	if codeFeatures&codegen.HasIDRootProperty > 0 {
-		templateData.SyntheticIDAttribute = false
-	}
-
-	if description := resource.CfResource.Description; description != nil {
-		templateData.SchemaDescription = *description
-	}
-
-	for _, path := range resource.CfResource.WriteOnlyProperties {
-		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
-	}
-
-	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
-		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
-	}
-	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeUpdate]; ok {
-		templateData.UpdateTimeoutInMinutes = v.TimeoutInMinutes
-	}
-	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeDelete]; ok {
-		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
-	}
-
-	err = g.applyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, &templateData)
+	templateData, err := r.GenerateTemplateData(r.cfTypeSchemaFile, shared.ResourceType, r.tfResourceType, packageName)
 
 	if err != nil {
 		return err
 	}
 
-	err = g.applyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
+	err = r.ApplyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = r.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
 
 	if err != nil {
 		return err
 	}
 
 	return nil
-}
-
-// applyAndWriteTemplate applies the template body to the specified data and writes it to file.
-func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
-	tmpl, err := template.New("function").Parse(templateBody)
-
-	if err != nil {
-		return fmt.Errorf("parsing function template: %w", err)
-	}
-
-	var buffer bytes.Buffer
-	err = tmpl.Execute(&buffer, templateData)
-
-	if err != nil {
-		return fmt.Errorf("executing template: %w", err)
-	}
-
-	generatedFileContents, err := format.Source(buffer.Bytes())
-
-	if err != nil {
-		g.infof("%s", buffer.String())
-		return fmt.Errorf("formatting generated source code: %w", err)
-	}
-
-	f, err := os.Create(filename)
-
-	if err != nil {
-		return fmt.Errorf("creating file (%s): %w", filename, err)
-	}
-
-	defer f.Close()
-
-	_, err = f.Write(generatedFileContents)
-
-	if err != nil {
-		return fmt.Errorf("writing to file (%s): %w", filename, err)
-	}
-
-	return nil
-}
-
-func (g *Generator) infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
-}
-
-type TemplateData struct {
-	AcceptanceTestFunctionPrefix string
-	AttributeNameMap             map[string]string
-	CloudFormationTypeName       string
-	CreateTimeoutInMinutes       int
-	DeleteTimeoutInMinutes       int
-	FactoryFunctionName          string
-	HasRequiredAttribute         bool
-	HasUpdateMethod              bool
-	ImportInternalTypes          bool
-	ImportValidate               bool
-	PackageName                  string
-	RequiredAttributesValidator  string
-	RootPropertiesSchema         string
-	SchemaDescription            string
-	SchemaVersion                int64
-	SyntheticIDAttribute         bool
-	TerraformTypeName            string
-	UpdateTimeoutInMinutes       int
-	WriteOnlyPropertyPaths       []string
 }
 
 // Terraform resource schema definition.
@@ -403,31 +242,3 @@ func {{ .AcceptanceTestFunctionPrefix }}_disappears(t *testing.T) {
 }
 {{- end }}
 `
-
-type Resource struct {
-	CfResource *cfschema.Resource
-	TfType     string
-}
-
-func NewResource(resourceType, cfTypeSchemaFile string) (*Resource, error) {
-	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(cfTypeSchemaFile)
-
-	if err != nil {
-		return nil, fmt.Errorf("reading CloudFormation Resource Type Schema: %w", err)
-	}
-
-	resource, err := resourceSchema.Resource()
-
-	if err != nil {
-		return nil, fmt.Errorf("parsing CloudFormation Resource Type Schema: %w", err)
-	}
-
-	if err := resource.Expand(); err != nil {
-		return nil, fmt.Errorf("expanding JSON Pointer references: %w", err)
-	}
-
-	return &Resource{
-		CfResource: resource,
-		TfType:     resourceType,
-	}, nil
-}

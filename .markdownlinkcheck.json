@@ -1,0 +1,8 @@
+{
+    "ignorePatterns": [
+        {
+            "pattern": "^https://github.com/[^/]+/[^/]+/(issues|labels|pull)"
+        }
+    ],
+    "replacementPatterns": []
+}
