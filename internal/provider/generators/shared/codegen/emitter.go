@@ -545,6 +545,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		return features, nil
 	}
 
+	// Handle any default value.
+	if planModifier, err := defaultValueAttributePlanModifier(property); err != nil {
+		return 0, err
+	} else if planModifier != "" {
+		planModifiers = append(planModifiers, planModifier)
+	}
+
 	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
 	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
 	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
@@ -583,6 +590,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if createOnly {
+		// ForceNew.
 		planModifiers = append(planModifiers, "tfsdk.RequiresReplace()")
 	}
 
@@ -714,6 +722,11 @@ func aggregateType(property *cfschema.Property) aggregate {
 
 func unsupportedTypeError(path []string, typ string) error {
 	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
+}
+
+// defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
+func defaultValueAttributePlanModifier(property *cfschema.Property) (string, error) {
+	return "", nil
 }
 
 func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {
