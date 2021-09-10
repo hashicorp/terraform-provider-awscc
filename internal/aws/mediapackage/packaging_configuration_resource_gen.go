@@ -873,7 +873,7 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Id is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"mss_package": {

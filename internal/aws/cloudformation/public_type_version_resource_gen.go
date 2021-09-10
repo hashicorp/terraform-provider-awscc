@@ -36,7 +36,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Arn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"log_delivery_bucket": {
@@ -51,7 +51,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogDeliveryBucket is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"public_type_arn": {
@@ -84,7 +84,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(5, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PublicVersionNumber is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"publisher_id": {
@@ -123,7 +123,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type_name": {
@@ -139,7 +139,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type_version_arn": {

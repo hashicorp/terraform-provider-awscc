@@ -62,7 +62,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"default_capacity_provider_strategy": {

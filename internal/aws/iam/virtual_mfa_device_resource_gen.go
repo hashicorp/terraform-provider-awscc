@@ -39,7 +39,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Path is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"serial_number": {
@@ -138,7 +138,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 226),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VirtualMfaDeviceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -49,7 +49,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DocumentationVersion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"rest_api_id": {
@@ -67,7 +67,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

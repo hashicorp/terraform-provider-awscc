@@ -35,7 +35,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AvailabilityZone is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"flow_arn": {
@@ -71,7 +71,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source": {
@@ -103,6 +103,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "KeyType": {
+			//           "default": "static-key",
 			//           "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//           "enum": [
 			//             "speke",
@@ -158,6 +159,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "integer"
 			//     },
 			//     "MaxLatency": {
+			//       "default": 2000,
 			//       "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			//       "type": "integer"
 			//     },
@@ -316,7 +318,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Name is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"protocol": {

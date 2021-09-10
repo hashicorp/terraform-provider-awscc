@@ -79,7 +79,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// BucketName is a write-only property.
 		},
@@ -143,7 +143,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},

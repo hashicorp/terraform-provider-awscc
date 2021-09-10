@@ -64,7 +64,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(0, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // JobDefinitionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"job_resources": {
@@ -160,7 +160,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // JobResources is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_bias_app_specification": {
@@ -238,7 +238,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelBiasAppSpecification is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_bias_baseline_config": {
@@ -306,7 +306,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelBiasBaselineConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_bias_job_input": {
@@ -537,7 +537,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelBiasJobInput is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_bias_job_output_config": {
@@ -671,7 +671,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelBiasJobOutputConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_config": {
@@ -772,7 +772,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -792,7 +792,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"stopping_condition": {
@@ -831,7 +831,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StoppingCondition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -895,7 +895,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

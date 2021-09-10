@@ -1757,7 +1757,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

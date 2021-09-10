@@ -32,7 +32,7 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"service": {
@@ -46,7 +46,7 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Service is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"task_set_id": {

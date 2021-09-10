@@ -112,7 +112,7 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PrimaryKeyArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

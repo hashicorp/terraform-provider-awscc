@@ -34,7 +34,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // IdentityName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"identity_type": {
@@ -58,7 +58,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // IdentityType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"session_policy_arn": {
@@ -88,7 +88,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(4, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StudioId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

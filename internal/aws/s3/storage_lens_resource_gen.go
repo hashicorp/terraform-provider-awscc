@@ -470,7 +470,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 64),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Id is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"include": {

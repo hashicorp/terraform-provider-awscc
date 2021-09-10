@@ -65,7 +65,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 156),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3BucketArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// S3BucketArn is a write-only property.
 		},
@@ -104,13 +104,14 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3Config is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"s3_storage_class": {
 			// Property: S3StorageClass
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "STANDARD",
 			//   "description": "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
 			//   "enum": [
 			//     "STANDARD",
@@ -137,7 +138,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3StorageClass is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -157,7 +158,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},

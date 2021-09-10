@@ -32,6 +32,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     "description": "The configuration for a given endpoint",
 			//     "properties": {
 			//       "ClientIPPreservationEnabled": {
+			//         "default": true,
 			//         "description": "true if client ip should be preserved",
 			//         "type": "boolean"
 			//       },
@@ -40,6 +41,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//         "type": "string"
 			//       },
 			//       "Weight": {
+			//         "default": 100,
 			//         "description": "The weight for the endpoint.",
 			//         "maximum": 255,
 			//         "minimum": 0,
@@ -104,13 +106,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EndpointGroupRegion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"health_check_interval_seconds": {
 			// Property: HealthCheckIntervalSeconds
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 30,
 			//   "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			//   "type": "integer"
 			// }
@@ -122,6 +125,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: HealthCheckPath
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "/",
 			//   "description": "",
 			//   "type": "string"
 			// }
@@ -133,6 +137,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: HealthCheckPort
 			// CloudFormation resource type schema:
 			// {
+			//   "default": -1,
 			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "maximum": 65535,
 			//   "minimum": -1,
@@ -149,6 +154,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: HealthCheckProtocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "enum": [
 			//     "TCP",
@@ -180,7 +186,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ListenerArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"port_overrides": {
@@ -240,6 +246,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: ThresholdCount
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 3,
 			//   "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			//   "type": "integer"
 			// }
@@ -251,6 +258,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: TrafficDialPercentage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 100,
 			//   "description": "The percentage of traffic to sent to an AWS Region",
 			//   "maximum": 100,
 			//   "minimum": 0,

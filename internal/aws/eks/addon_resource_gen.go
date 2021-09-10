@@ -38,7 +38,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AddonName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"addon_version": {
@@ -82,7 +82,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resolve_conflicts": {

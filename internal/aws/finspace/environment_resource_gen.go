@@ -220,7 +220,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {

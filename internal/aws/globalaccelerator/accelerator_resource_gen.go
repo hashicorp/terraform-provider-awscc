@@ -49,6 +49,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Enabled
 			// CloudFormation resource type schema:
 			// {
+			//   "default": true,
 			//   "description": "Indicates whether an accelerator is enabled. The value is true or false.",
 			//   "type": "boolean"
 			// }
@@ -60,6 +61,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: IpAddressType
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "IPV4",
 			//   "description": "IP Address type.",
 			//   "enum": [
 			//     "IPV4",

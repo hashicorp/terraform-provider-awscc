@@ -32,7 +32,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.BoolType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AcceptTermsAndConditions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connection_arn": {
@@ -48,7 +48,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectionArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"identity_provider": {

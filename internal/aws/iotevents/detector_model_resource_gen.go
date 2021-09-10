@@ -4773,7 +4773,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DetectorModelName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"evaluation_method": {
@@ -4815,7 +4815,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Key is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role_arn": {

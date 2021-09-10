@@ -80,7 +80,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Ec2Config is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"efs_filesystem_arn": {
@@ -99,7 +99,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EfsFilesystemArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// EfsFilesystemArn is a write-only property.
 		},
@@ -146,7 +146,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},

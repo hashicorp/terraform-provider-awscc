@@ -30,6 +30,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "Mode": {
+			//       "default": "ON_DEMAND",
 			//       "description": "Capacity mode for the specified table",
 			//       "enum": [
 			//         "PROVISIONED",
@@ -132,6 +133,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "object"
 			//       },
 			//       "OrderBy": {
+			//         "default": "ASC",
 			//         "enum": [
 			//           "ASC",
 			//           "DESC"
@@ -188,7 +190,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusteringKeyColumns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"encryption_specification": {
@@ -199,6 +201,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Represents the settings used to enable server-side encryption",
 			//   "properties": {
 			//     "EncryptionType": {
+			//       "default": "AWS_OWNED_KMS_KEY",
 			//       "description": "Server-side encryption type",
 			//       "enum": [
 			//         "AWS_OWNED_KMS_KEY",
@@ -253,7 +256,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyspaceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"partition_key_columns": {
@@ -306,7 +309,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PartitionKeyColumns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"point_in_time_recovery_enabled": {
@@ -377,7 +380,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TableName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

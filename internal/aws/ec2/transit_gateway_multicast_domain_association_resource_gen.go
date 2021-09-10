@@ -65,7 +65,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SubnetId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"transit_gateway_attachment_id": {
@@ -79,7 +79,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayAttachmentId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"transit_gateway_multicast_domain_id": {
@@ -93,7 +93,7 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayMulticastDomainId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

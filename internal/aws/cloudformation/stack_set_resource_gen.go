@@ -316,7 +316,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PermissionModel is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"stack_instances_group": {
@@ -487,7 +487,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StackSetName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

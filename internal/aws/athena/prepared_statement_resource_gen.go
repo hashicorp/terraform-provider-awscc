@@ -71,7 +71,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StatementName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"work_group": {
@@ -90,7 +90,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // WorkGroup is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

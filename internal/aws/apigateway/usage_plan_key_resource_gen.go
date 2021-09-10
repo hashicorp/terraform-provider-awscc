@@ -45,7 +45,7 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"key_type": {
@@ -67,7 +67,7 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"usage_plan_id": {
@@ -81,7 +81,7 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UsagePlanId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

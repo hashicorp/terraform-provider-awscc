@@ -103,30 +103,39 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Structure that contains X.509 KeyUsage information.",
 			//           "properties": {
 			//             "CRLSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DataEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DecipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DigitalSignature": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "EncipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyAgreement": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyCertSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "NonRepudiation": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             }
 			//           },
@@ -671,7 +680,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ApiPassthrough is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ApiPassthrough is a write-only property.
 		},
@@ -704,7 +713,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_signing_request": {
@@ -722,7 +731,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateSigningRequest is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// CertificateSigningRequest is a write-only property.
 		},
@@ -737,7 +746,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"template_arn": {
@@ -750,7 +759,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TemplateArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"validity": {
@@ -790,7 +799,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Validity is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"validity_not_before": {
@@ -831,7 +840,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ValidityNotBefore is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

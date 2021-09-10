@@ -160,7 +160,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccount is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"creation_time": {
@@ -395,7 +395,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(32, 36),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FrameworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {

@@ -60,7 +60,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CalculatorName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"create_time": {
@@ -84,7 +84,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DataSource is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -102,7 +102,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pricing_plan": {
@@ -124,7 +124,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"update_time": {

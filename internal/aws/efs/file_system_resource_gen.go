@@ -42,7 +42,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AvailabilityZoneName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"backup_policy": {
@@ -93,7 +93,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Encrypted is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"file_system_id": {
@@ -167,7 +167,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"lifecycle_policies": {
@@ -214,7 +214,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PerformanceMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"provisioned_throughput_in_mibps": {

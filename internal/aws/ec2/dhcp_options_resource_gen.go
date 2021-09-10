@@ -44,7 +44,7 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"domain_name_servers": {
@@ -66,7 +66,7 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainNameServers is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"netbios_name_servers": {
@@ -88,7 +88,7 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetbiosNameServers is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"netbios_node_type": {
@@ -103,7 +103,7 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetbiosNodeType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"ntp_servers": {
@@ -122,7 +122,7 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NtpServers is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

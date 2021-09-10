@@ -48,6 +48,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
+			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
 			//         "speke",
@@ -226,6 +227,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: MaxLatency
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 2000,
 			//   "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			//   "type": "integer"
 			// }
@@ -244,7 +246,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"protocol": {

@@ -98,7 +98,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeliveryStreamName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"delivery_stream_type": {
@@ -121,7 +121,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeliveryStreamType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"elasticsearch_destination_configuration": {
@@ -738,7 +738,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // VpcConfiguration is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -2337,7 +2337,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KinesisStreamSourceConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"redshift_destination_configuration": {

@@ -50,7 +50,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlatformId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"profile_name": {
@@ -128,7 +128,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SignatureValidityPeriod is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

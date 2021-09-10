@@ -65,7 +65,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"location": {

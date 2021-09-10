@@ -54,7 +54,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AppImageConfigName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kernel_gateway_image_config": {
@@ -255,7 +255,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},

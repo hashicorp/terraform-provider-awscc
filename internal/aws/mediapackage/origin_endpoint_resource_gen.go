@@ -1254,7 +1254,7 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Id is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"manifest_name": {

@@ -69,7 +69,7 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MetricName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"metric_type": {
@@ -97,7 +97,7 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MetricType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

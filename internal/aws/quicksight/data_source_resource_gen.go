@@ -1024,7 +1024,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"created_time": {
@@ -2099,7 +2099,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DataSourceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"data_source_parameters": {
@@ -3379,7 +3379,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"vpc_connection_properties": {

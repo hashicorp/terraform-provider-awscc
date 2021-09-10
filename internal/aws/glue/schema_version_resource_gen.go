@@ -81,7 +81,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Schema is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"schema_definition": {
@@ -100,7 +100,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 170000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchemaDefinition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version_id": {

@@ -99,6 +99,7 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string, co
 func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, computedOnly bool) (Features, error) {
 	var features Features
 	var validators []string
+	var planModifiers []string
 
 	e.printf("{\n")
 	e.printf("// Property: %s\n", name)
@@ -582,8 +583,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if createOnly {
+		planModifiers = append(planModifiers, "tfsdk.RequiresReplace()")
+	}
+
+	if len(planModifiers) > 0 {
 		e.printf("PlanModifiers:[]tfsdk.AttributePlanModifier{\n")
-		e.printf("tfsdk.RequiresReplace(),// %s is a force-new property.\n", name)
+		for _, planModifier := range planModifiers {
+			e.printf("%s,\n", planModifier)
+		}
 		e.printf("},\n")
 	}
 

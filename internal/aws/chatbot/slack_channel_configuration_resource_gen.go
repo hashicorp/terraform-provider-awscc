@@ -52,7 +52,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConfigurationName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"iam_role_arn": {
@@ -71,6 +71,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// Property: LoggingLevel
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "NONE",
 			//   "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
 			//   "pattern": "",
 			//   "type": "string"
@@ -112,7 +113,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SlackWorkspaceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"sns_topic_arns": {

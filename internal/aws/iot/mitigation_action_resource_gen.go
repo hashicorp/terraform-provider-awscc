@@ -41,7 +41,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ActionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"action_params": {

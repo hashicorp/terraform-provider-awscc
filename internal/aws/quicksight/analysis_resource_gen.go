@@ -38,7 +38,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AnalysisId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -67,7 +67,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"created_time": {

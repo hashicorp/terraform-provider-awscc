@@ -32,7 +32,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ParentId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"path_part": {
@@ -46,7 +46,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PathPart is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -71,7 +71,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -100,7 +100,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FirewallName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"firewall_policy_arn": {
@@ -241,7 +241,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -57,7 +57,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Options is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -145,7 +145,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransportTransitGatewayAttachmentId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

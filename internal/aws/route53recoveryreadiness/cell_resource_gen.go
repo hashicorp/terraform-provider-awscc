@@ -51,7 +51,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CellName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"cells": {

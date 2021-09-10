@@ -92,7 +92,7 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PortalAuthMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"portal_client_id": {

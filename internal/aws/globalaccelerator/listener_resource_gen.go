@@ -34,13 +34,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AcceleratorArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"client_affinity": {
 			// Property: ClientAffinity
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "NONE",
 			//   "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
 			//   "enum": [
 			//     "NONE",
@@ -126,6 +127,7 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Protocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol for the listener.",
 			//   "enum": [
 			//     "TCP",

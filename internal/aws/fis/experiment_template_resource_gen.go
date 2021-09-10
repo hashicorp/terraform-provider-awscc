@@ -235,7 +235,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.MapType{ElemType: types.StringType},
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"targets": {

@@ -279,7 +279,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FunctionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"handler": {

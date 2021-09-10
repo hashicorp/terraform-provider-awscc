@@ -40,7 +40,7 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Bucket is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"policy_document": {

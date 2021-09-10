@@ -397,7 +397,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeySchema is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_secondary_indexes": {
@@ -526,7 +526,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalSecondaryIndexes is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"replicas": {
@@ -1103,7 +1103,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TableName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"time_to_live_specification": {

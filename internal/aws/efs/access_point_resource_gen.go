@@ -100,7 +100,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClientToken is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"file_system_id": {
@@ -114,7 +114,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FileSystemId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"posix_user": {
@@ -153,7 +153,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Gid is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"secondary_gids": {
@@ -163,7 +163,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // SecondaryGids is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"uid": {
@@ -172,7 +172,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Uid is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -180,7 +180,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PosixUser is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"root_directory": {
@@ -251,7 +251,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // CreationInfo is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"path": {
@@ -264,7 +264,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 100),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Path is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -272,7 +272,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RootDirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

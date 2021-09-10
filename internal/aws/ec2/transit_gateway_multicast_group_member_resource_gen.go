@@ -32,7 +32,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GroupIpAddress is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"group_member": {
@@ -79,7 +79,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkInterfaceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -148,7 +148,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayMulticastDomainId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

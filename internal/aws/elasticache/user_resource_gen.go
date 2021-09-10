@@ -65,7 +65,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Engine is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"no_password_required": {
@@ -123,7 +123,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"user_name": {
@@ -137,7 +137,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -37,7 +37,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 1600),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConsumerArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tracker_name": {
@@ -55,7 +55,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TrackerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

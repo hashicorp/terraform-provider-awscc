@@ -94,6 +94,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: KeySpec
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "SYMMETRIC_DEFAULT",
 			//   "description": "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			//   "enum": [
 			//     "SYMMETRIC_DEFAULT",
@@ -127,6 +128,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: KeyUsage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "ENCRYPT_DECRYPT",
 			//   "description": "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			//   "enum": [
 			//     "ENCRYPT_DECRYPT",
@@ -148,6 +150,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: MultiRegion
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
 			//   "type": "boolean"
 			// }

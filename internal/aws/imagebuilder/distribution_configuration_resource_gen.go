@@ -357,7 +357,7 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

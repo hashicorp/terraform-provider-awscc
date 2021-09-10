@@ -113,7 +113,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DetectorId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"detector_version_id": {

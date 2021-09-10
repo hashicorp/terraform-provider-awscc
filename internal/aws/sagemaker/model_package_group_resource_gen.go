@@ -65,7 +65,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelPackageGroupDescription is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_package_group_name": {
@@ -84,7 +84,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(0, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelPackageGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_package_group_policy": {

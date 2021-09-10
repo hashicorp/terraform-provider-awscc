@@ -27,6 +27,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			//   "type": "boolean"
 			// }
@@ -46,7 +47,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GraphArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"member_email_address": {
@@ -73,7 +74,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MemberId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"message": {

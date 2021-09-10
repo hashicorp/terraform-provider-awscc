@@ -46,6 +46,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "AllowedMethods": {
+			//             "default": [
+			//               "GET",
+			//               "HEAD"
+			//             ],
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -56,6 +60,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "CachedMethods": {
+			//             "default": [
+			//               "GET",
+			//               "HEAD"
+			//             ],
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -63,12 +71,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "Compress": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "DefaultTTL": {
+			//             "default": 86400,
 			//             "type": "number"
 			//           },
 			//           "FieldLevelEncryptionId": {
+			//             "default": "",
 			//             "type": "string"
 			//           },
 			//           "ForwardedValues": {
@@ -152,9 +163,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "MaxTTL": {
+			//             "default": 31536000,
 			//             "type": "number"
 			//           },
 			//           "MinTTL": {
+			//             "default": 0,
 			//             "type": "number"
 			//           },
 			//           "OriginRequestPolicyId": {
@@ -167,6 +180,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "SmoothStreaming": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "TargetOriginId": {
@@ -201,6 +215,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "uniqueItems": false
 			//     },
 			//     "Comment": {
+			//       "default": "",
 			//       "type": "string"
 			//     },
 			//     "CustomErrorResponses": {
@@ -208,6 +223,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "ErrorCachingMinTTL": {
+			//             "default": 300,
 			//             "type": "number"
 			//           },
 			//           "ErrorCode": {
@@ -235,9 +251,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "HTTPPort": {
+			//           "default": 80,
 			//           "type": "integer"
 			//         },
 			//         "HTTPSPort": {
+			//           "default": 443,
 			//           "type": "integer"
 			//         },
 			//         "OriginProtocolPolicy": {
@@ -262,6 +280,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AllowedMethods": {
+			//           "default": [
+			//             "GET",
+			//             "HEAD"
+			//           ],
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -269,9 +291,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "CachePolicyId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "CachedMethods": {
+			//           "default": [
+			//             "GET",
+			//             "HEAD"
+			//           ],
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -279,12 +306,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "Compress": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DefaultTTL": {
+			//           "default": 86400,
 			//           "type": "number"
 			//         },
 			//         "FieldLevelEncryptionId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "ForwardedValues": {
@@ -368,18 +398,23 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "MaxTTL": {
+			//           "default": 31536000,
 			//           "type": "number"
 			//         },
 			//         "MinTTL": {
+			//           "default": 0,
 			//           "type": "number"
 			//         },
 			//         "OriginRequestPolicyId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "RealtimeLogConfigArn": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "SmoothStreaming": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "TargetOriginId": {
@@ -410,12 +445,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "DefaultRootObject": {
+			//       "default": "",
 			//       "type": "string"
 			//     },
 			//     "Enabled": {
 			//       "type": "boolean"
 			//     },
 			//     "HttpVersion": {
+			//       "default": "http1.1",
 			//       "type": "string"
 			//     },
 			//     "IPV6Enabled": {
@@ -428,9 +465,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "IncludeCookies": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "Prefix": {
+			//           "default": "",
 			//           "type": "string"
 			//         }
 			//       },
@@ -541,21 +580,29 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "HTTPPort": {
+			//                 "default": 80,
 			//                 "type": "integer"
 			//               },
 			//               "HTTPSPort": {
+			//                 "default": 443,
 			//                 "type": "integer"
 			//               },
 			//               "OriginKeepaliveTimeout": {
+			//                 "default": 5,
 			//                 "type": "integer"
 			//               },
 			//               "OriginProtocolPolicy": {
 			//                 "type": "string"
 			//               },
 			//               "OriginReadTimeout": {
+			//                 "default": 30,
 			//                 "type": "integer"
 			//               },
 			//               "OriginSSLProtocols": {
+			//                 "default": [
+			//                   "TLSv1",
+			//                   "SSLv3"
+			//                 ],
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -595,6 +642,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "OriginPath": {
+			//             "default": "",
 			//             "type": "string"
 			//           },
 			//           "OriginShield": {
@@ -613,6 +661,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "OriginAccessIdentity": {
+			//                 "default": "",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -629,6 +678,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "uniqueItems": false
 			//     },
 			//     "PriceClass": {
+			//       "default": "PriceClass_All",
 			//       "type": "string"
 			//     },
 			//     "Restrictions": {
@@ -666,6 +716,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "OriginAccessIdentity": {
+			//           "default": "",
 			//           "type": "string"
 			//         }
 			//       },
@@ -696,6 +747,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "WebACLId": {
+			//       "default": "",
 			//       "type": "string"
 			//     }
 			//   },

@@ -39,7 +39,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"audit_check_configurations": {

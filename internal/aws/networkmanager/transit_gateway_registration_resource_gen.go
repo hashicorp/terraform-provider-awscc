@@ -32,7 +32,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"transit_gateway_arn": {
@@ -46,7 +46,7 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

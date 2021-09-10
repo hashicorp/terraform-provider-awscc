@@ -40,7 +40,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(3, 45),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ObjectLambdaAccessPoint is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"policy_document": {

@@ -55,7 +55,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationLocationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"destination_network_interface_arns": {
@@ -533,7 +533,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SourceLocationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source_network_interface_arns": {

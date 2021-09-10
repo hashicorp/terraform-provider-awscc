@@ -27,6 +27,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Actions
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of actions.",
 			//   "insertionOrder": true,
 			//   "items": {
@@ -269,6 +270,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Engagements
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of engagements to use.",
 			//   "insertionOrder": false,
 			//   "items": {
@@ -422,13 +424,14 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The tags to apply to the response plan.",
 			//   "insertionOrder": false,
 			//   "items": {

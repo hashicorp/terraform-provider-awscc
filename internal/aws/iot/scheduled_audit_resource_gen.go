@@ -122,7 +122,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ScheduledAuditName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

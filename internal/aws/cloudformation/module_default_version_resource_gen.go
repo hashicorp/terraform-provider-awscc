@@ -36,7 +36,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Arn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"module_name": {
@@ -52,7 +52,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModuleName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ModuleName is a write-only property.
 		},
@@ -69,7 +69,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VersionId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// VersionId is a write-only property.
 		},

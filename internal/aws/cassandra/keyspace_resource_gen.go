@@ -36,7 +36,7 @@ func keyspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyspaceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

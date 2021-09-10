@@ -112,6 +112,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: RecordingConfigurationArn
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "",
 			//   "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			//   "maxLength": 128,
 			//   "minLength": 0,

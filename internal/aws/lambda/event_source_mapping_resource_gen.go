@@ -128,7 +128,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(12, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EventSourceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"function_name": {
@@ -331,7 +331,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SelfManagedEventSource is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source_access_configurations": {
@@ -427,7 +427,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(6, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StartingPosition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"starting_position_timestamp": {

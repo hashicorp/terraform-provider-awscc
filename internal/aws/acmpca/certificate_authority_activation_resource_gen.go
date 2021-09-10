@@ -44,7 +44,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_chain": {

@@ -32,7 +32,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CustomerGatewayArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"device_id": {
@@ -46,7 +46,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeviceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"global_network_id": {
@@ -60,7 +60,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"link_id": {
@@ -75,7 +75,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LinkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

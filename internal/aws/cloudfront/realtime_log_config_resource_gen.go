@@ -127,7 +127,7 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"sampling_rate": {

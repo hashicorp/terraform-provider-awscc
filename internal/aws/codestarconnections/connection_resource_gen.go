@@ -53,7 +53,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 32),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connection_status": {
@@ -85,7 +85,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // HostArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"owner_account_id": {
@@ -114,7 +114,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProviderType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

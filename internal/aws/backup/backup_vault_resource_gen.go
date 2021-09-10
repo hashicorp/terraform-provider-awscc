@@ -49,7 +49,7 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BackupVaultName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"backup_vault_tags": {
@@ -78,7 +78,7 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EncryptionKeyArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"notifications": {

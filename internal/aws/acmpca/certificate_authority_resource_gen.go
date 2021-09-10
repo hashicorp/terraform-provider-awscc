@@ -53,30 +53,39 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//       "description": "Structure that contains X.509 KeyUsage information.",
 			//       "properties": {
 			//         "CRLSign": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DataEncipherment": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DecipherOnly": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DigitalSignature": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "EncipherOnly": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyAgreement": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyCertSign": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyEncipherment": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "NonRepudiation": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         }
 			//       },
@@ -476,7 +485,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CsrExtensions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"key_algorithm": {
@@ -490,7 +499,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"key_storage_security_standard": {
@@ -505,7 +514,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyStorageSecurityStandard is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"revocation_configuration": {
@@ -592,7 +601,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subject": {
@@ -724,7 +733,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subject is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subject is a write-only property.
 		},
@@ -774,7 +783,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

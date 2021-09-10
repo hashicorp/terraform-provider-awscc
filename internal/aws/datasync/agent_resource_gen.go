@@ -39,7 +39,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 29),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ActivationKey is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ActivationKey is a write-only property.
 		},
@@ -107,7 +107,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SecurityGroupArns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subnet_arns": {
@@ -128,7 +128,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SubnetArns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -207,7 +207,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcEndpointId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

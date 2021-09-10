@@ -30,7 +30,7 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ArchiveName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -78,7 +78,7 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SourceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

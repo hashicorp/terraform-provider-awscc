@@ -47,7 +47,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"fargate_profile_name": {
@@ -66,7 +66,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FargateProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pod_execution_role_arn": {
@@ -84,7 +84,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PodExecutionRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"selectors": {
@@ -177,7 +177,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Selectors is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subnets": {
@@ -193,7 +193,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subnets is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

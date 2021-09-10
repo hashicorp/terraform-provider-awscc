@@ -40,7 +40,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FirewallArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"firewall_name": {
@@ -59,7 +59,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FirewallName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"logging_configuration": {

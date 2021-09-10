@@ -57,7 +57,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeviceFleetName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"output_config": {

@@ -100,7 +100,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConformancePackName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"delivery_s3_bucket": {

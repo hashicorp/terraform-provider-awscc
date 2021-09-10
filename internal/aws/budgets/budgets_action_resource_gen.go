@@ -98,7 +98,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ActionType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"approval_model": {
@@ -129,7 +129,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BudgetName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"definition": {

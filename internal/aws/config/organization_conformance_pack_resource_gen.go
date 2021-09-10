@@ -147,7 +147,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // OrganizationConformancePackName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"template_body": {

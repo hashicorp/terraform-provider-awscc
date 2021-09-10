@@ -1438,7 +1438,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectorProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connector_type": {
@@ -1486,7 +1486,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectorType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"credentials_arn": {
@@ -1520,7 +1520,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KMSArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

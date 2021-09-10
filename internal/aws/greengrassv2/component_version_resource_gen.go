@@ -60,7 +60,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InlineRecipe is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// InlineRecipe is a write-only property.
 		},
@@ -518,7 +518,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LambdaFunction is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// LambdaFunction is a write-only property.
 		},

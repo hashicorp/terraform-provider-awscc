@@ -135,7 +135,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ComputePlatform is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"profiling_group_name": {
@@ -155,7 +155,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProfilingGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

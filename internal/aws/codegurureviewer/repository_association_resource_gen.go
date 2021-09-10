@@ -55,7 +55,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connection_arn": {
@@ -76,7 +76,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectionArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -96,7 +96,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"owner": {
@@ -117,7 +117,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Owner is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -181,7 +181,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -209,7 +209,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

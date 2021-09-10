@@ -80,7 +80,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ControlPanelArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"gating_rule": {
@@ -219,7 +219,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RuleConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"safety_rule_arn": {

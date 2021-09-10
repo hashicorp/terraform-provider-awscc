@@ -78,7 +78,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Type:     types.StringType,
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // AutoScalingGroupArn is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"managed_scaling": {
@@ -146,7 +146,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

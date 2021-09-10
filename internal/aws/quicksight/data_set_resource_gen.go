@@ -50,7 +50,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"column_groups": {
@@ -234,7 +234,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DataSetId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"field_folders": {
@@ -314,12 +314,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "\u003cp\u003eWait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.\u003c/p\u003e",
 			//   "properties": {
 			//     "IngestionWaitTimeInHours": {
+			//       "default": 36,
 			//       "description": "\u003cp\u003eThe maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.\u003c/p\u003e",
 			//       "maximum": 36,
 			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "WaitForSpiceIngestion": {
+			//       "default": true,
 			//       "description": "\u003cp\u003eWait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.\u003c/p\u003e",
 			//       "type": "boolean"
 			//     }

@@ -50,7 +50,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProjectName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

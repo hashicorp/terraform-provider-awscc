@@ -60,6 +60,7 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Enabled
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Indicates whether the API key can be used by clients.",
 			//   "type": "boolean"
 			// }
@@ -79,7 +80,7 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GenerateDistinctId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// GenerateDistinctId is a write-only property.
 		},
@@ -95,7 +96,7 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"stage_keys": {
@@ -210,7 +211,7 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Value is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

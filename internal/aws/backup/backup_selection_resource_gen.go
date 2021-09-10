@@ -30,7 +30,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BackupPlanId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"backup_selection": {
@@ -128,7 +128,7 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BackupSelection is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"id": {

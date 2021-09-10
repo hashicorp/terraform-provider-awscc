@@ -66,7 +66,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"public_key_material": {
@@ -80,7 +80,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PublicKeyMaterial is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

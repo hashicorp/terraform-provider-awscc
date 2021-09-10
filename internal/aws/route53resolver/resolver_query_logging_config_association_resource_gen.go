@@ -93,7 +93,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResolverQueryLogConfigId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -113,7 +113,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"status": {

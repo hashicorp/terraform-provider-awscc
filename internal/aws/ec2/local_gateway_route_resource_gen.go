@@ -32,7 +32,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationCidrBlock is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_gateway_route_table_id": {
@@ -46,7 +46,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalGatewayRouteTableId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_gateway_virtual_interface_group_id": {
@@ -60,7 +60,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalGatewayVirtualInterfaceGroupId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state": {

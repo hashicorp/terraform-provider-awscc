@@ -47,7 +47,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"is_default_version": {
@@ -108,7 +108,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LoggingConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"provisioning_type": {
@@ -138,7 +138,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchemaHandlerPackage is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// SchemaHandlerPackage is a write-only property.
 		},
@@ -166,7 +166,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version_id": {

@@ -47,7 +47,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceSetName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_set_type": {
@@ -61,7 +61,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceSetType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resources": {

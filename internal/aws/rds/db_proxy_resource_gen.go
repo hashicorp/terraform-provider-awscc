@@ -143,7 +143,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DBProxyName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"debug_logging": {
@@ -189,7 +189,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EngineFamily is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"idle_client_timeout": {
@@ -322,7 +322,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcSubnetIds is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

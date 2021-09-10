@@ -1364,7 +1364,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FilterInArns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"forward_path_components": {
@@ -2057,7 +2057,7 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkInsightsPathId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_path_found": {

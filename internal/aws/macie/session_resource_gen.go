@@ -38,6 +38,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: FindingPublishingFrequency
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "SIX_HOURS",
 			//   "description": "A enumeration value that specifies how frequently finding updates are published.",
 			//   "enum": [
 			//     "FIFTEEN_MINUTES",
@@ -72,6 +73,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Status
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "ENABLED",
 			//   "description": "A enumeration value that specifies the status of the Macie Session.",
 			//   "enum": [
 			//     "ENABLED",

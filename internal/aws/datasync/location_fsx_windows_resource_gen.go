@@ -40,7 +40,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Domain is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"fsx_filesystem_arn": {
@@ -59,7 +59,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FsxFilesystemArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// FsxFilesystemArn is a write-only property.
 		},
@@ -105,7 +105,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 104),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Password is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Password is a write-only property.
 		},
@@ -126,7 +126,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SecurityGroupArns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -146,7 +146,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -229,7 +229,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 104),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // User is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

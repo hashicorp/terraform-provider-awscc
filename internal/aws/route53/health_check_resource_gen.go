@@ -240,7 +240,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // MeasureLatency is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"port": {
@@ -268,7 +268,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.IntBetween(10, 30),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // RequestInterval is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"resource_path": {
@@ -312,7 +312,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Type is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},

@@ -143,7 +143,7 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GatewayPlatform is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

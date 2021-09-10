@@ -57,7 +57,7 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PolicyName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -96,6 +96,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "Policies to control how to act if a signature is invalid",
 			//   "properties": {
 			//     "UntrustedArtifactOnDeployment": {
+			//       "default": "Warn",
 			//       "description": "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
 			//       "enum": [
 			//         "Warn",

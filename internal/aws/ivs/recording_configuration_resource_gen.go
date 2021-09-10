@@ -82,21 +82,21 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 										validate.StringLenBetween(3, 63),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.RequiresReplace(), // BucketName is a force-new property.
+										tfsdk.RequiresReplace(),
 									},
 								},
 							},
 						),
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // S3 is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -117,7 +117,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state": {

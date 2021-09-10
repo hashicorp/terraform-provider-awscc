@@ -54,7 +54,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AuthMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"default_s3_location": {
@@ -107,7 +107,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(4, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EngineSecurityGroupId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -137,7 +137,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceRole is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"studio_id": {
@@ -255,7 +255,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserRole is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"vpc_id": {
@@ -270,7 +270,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"workspace_security_group_id": {
@@ -285,7 +285,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // WorkspaceSecurityGroupId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

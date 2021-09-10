@@ -451,7 +451,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

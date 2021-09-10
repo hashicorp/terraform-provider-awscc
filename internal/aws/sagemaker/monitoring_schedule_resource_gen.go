@@ -1055,7 +1055,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MonitoringScheduleName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"monitoring_schedule_status": {

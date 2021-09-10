@@ -57,7 +57,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DistributionConfigurationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"enhanced_image_metadata_enabled": {
@@ -72,7 +72,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EnhancedImageMetadataEnabled is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_id": {
@@ -98,7 +98,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageRecipeArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_tests_configuration": {
@@ -143,7 +143,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageTestsConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"infrastructure_configuration_arn": {
@@ -158,7 +158,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InfrastructureConfigurationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -190,7 +190,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

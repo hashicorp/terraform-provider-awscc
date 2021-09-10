@@ -58,7 +58,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Engine is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"engine_version": {
@@ -73,7 +73,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EngineVersion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"global_cluster_identifier": {
@@ -89,7 +89,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GlobalClusterIdentifier is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source_db_cluster_identifier": {
@@ -108,7 +108,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SourceDBClusterIdentifier is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"storage_encrypted": {
@@ -123,7 +123,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StorageEncrypted is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

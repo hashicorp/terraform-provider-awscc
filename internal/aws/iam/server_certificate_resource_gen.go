@@ -52,7 +52,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateBody is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_chain": {
@@ -71,7 +71,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 2097152),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateChain is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"path": {
@@ -105,7 +105,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PrivateKey is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"server_certificate_name": {
@@ -124,7 +124,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerCertificateName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {

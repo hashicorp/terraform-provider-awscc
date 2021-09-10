@@ -54,7 +54,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AppName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"app_type": {
@@ -78,7 +78,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AppType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"domain_id": {
@@ -97,7 +97,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_spec": {
@@ -285,7 +285,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -306,7 +306,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}

@@ -86,7 +86,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ChannelType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"contact_id": {
@@ -107,7 +107,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ContactId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"defer_activation": {
