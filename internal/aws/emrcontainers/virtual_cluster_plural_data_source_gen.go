@@ -21,7 +21,6 @@ func init() {
 // virtualClustersDataSourceType returns the Terraform awscc_emrcontainers_virtual_clusters data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource type.
 func virtualClustersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func virtualClustersDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EMRContainers::VirtualCluster", "awscc_emrcontainers_virtual_clusters", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_clusters")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -43,12 +43,12 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	CloudFormationSchemaPath   string `hcl:"cloudformation_schema_path,optional"`
-	CloudFormationTypeName     string `hcl:"cloudformation_type_name"`
-	ResourceTypeName           string `hcl:"resource_type_name,label"`
-	SuppressSingularDataSource bool   `hcl:"suppress_singular_data_source,optional"`
-	SuppressPluralDataSource   bool   `hcl:"suppress_plural_data_source,optional"`
-	SuppressResourceGeneration bool   `hcl:"suppress_resource_generation,optional"`
+	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	ResourceTypeName                     string `hcl:"resource_type_name,label"`
+	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
+	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
+	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
 }
 
 var (
@@ -254,20 +254,20 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
 		}
 
-		if schema.SuppressSingularDataSource {
+		if schema.SuppressSingularDataSourceGeneration {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform singular data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
 			singularDataSources = append(singularDataSources, &DataSourceData{
 				CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-				GeneratedAccTestsFileName:    res + "_data_source_gen_test",
-				GeneratedCodeFileName:        res + "_data_source_gen",
+				GeneratedAccTestsFileName:    res + "_singular_data_source_gen_test",
+				GeneratedCodeFileName:        res + "_singular_data_source_gen",
 				GeneratedCodePackageName:     svc,
 				GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:        tfResourceTypeName,
 			})
 		}
 
-		if schema.SuppressPluralDataSource {
+		if schema.SuppressPluralDataSourceGeneration {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform plural data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
 			pluralTfResourceTypeName := naming.Pluralize(tfResourceTypeName)

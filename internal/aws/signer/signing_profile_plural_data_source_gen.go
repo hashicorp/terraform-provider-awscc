@@ -21,7 +21,6 @@ func init() {
 // signingProfilesDataSourceType returns the Terraform awscc_signer_signing_profiles data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Signer::SigningProfile resource type.
 func signingProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func signingProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Signer::SigningProfile", "awscc_signer_signing_profiles", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Signer::SigningProfile").WithTerraformTypeName("awscc_signer_signing_profiles")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

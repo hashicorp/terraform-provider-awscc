@@ -21,7 +21,6 @@ func init() {
 // networkInsightsAnalysesDataSourceType returns the Terraform awscc_ec2_network_insights_analyses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::NetworkInsightsAnalysis resource type.
 func networkInsightsAnalysesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func networkInsightsAnalysesDataSourceType(ctx context.Context) (tfsdk.DataSourc
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::NetworkInsightsAnalysis", "awscc_ec2_network_insights_analyses", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAnalysis").WithTerraformTypeName("awscc_ec2_network_insights_analyses")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

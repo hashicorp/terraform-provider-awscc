@@ -21,7 +21,6 @@ func init() {
 // geofenceCollectionsDataSourceType returns the Terraform awscc_location_geofence_collections data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Location::GeofenceCollection resource type.
 func geofenceCollectionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func geofenceCollectionsDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Location::GeofenceCollection", "awscc_location_geofence_collections", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::GeofenceCollection").WithTerraformTypeName("awscc_location_geofence_collections")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

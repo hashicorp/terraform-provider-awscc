@@ -21,7 +21,6 @@ func init() {
 // imageRecipesDataSourceType returns the Terraform awscc_imagebuilder_image_recipes data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::ImageRecipe resource type.
 func imageRecipesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func imageRecipesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ImageBuilder::ImageRecipe", "awscc_imagebuilder_image_recipes", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::ImageRecipe").WithTerraformTypeName("awscc_imagebuilder_image_recipes")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

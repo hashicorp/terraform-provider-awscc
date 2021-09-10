@@ -21,7 +21,6 @@ func init() {
 // globalTablesDataSourceType returns the Terraform awscc_dynamodb_global_tables data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DynamoDB::GlobalTable resource type.
 func globalTablesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func globalTablesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DynamoDB::GlobalTable", "awscc_dynamodb_global_tables", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_tables")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // experimentTemplatesDataSourceType returns the Terraform awscc_fis_experiment_templates data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FIS::ExperimentTemplate resource type.
 func experimentTemplatesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func experimentTemplatesDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::FIS::ExperimentTemplate", "awscc_fis_experiment_templates", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_templates")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

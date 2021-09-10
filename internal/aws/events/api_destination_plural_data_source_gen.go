@@ -21,7 +21,6 @@ func init() {
 // apiDestinationsDataSourceType returns the Terraform awscc_events_api_destinations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Events::ApiDestination resource type.
 func apiDestinationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func apiDestinationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Events::ApiDestination", "awscc_events_api_destinations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destinations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

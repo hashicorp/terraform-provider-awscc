@@ -21,7 +21,6 @@ func init() {
 // publicKeysDataSourceType returns the Terraform awscc_cloudfront_public_keys data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::PublicKey resource type.
 func publicKeysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func publicKeysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::PublicKey", "awscc_cloudfront_public_keys", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::PublicKey").WithTerraformTypeName("awscc_cloudfront_public_keys")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // outcomesDataSourceType returns the Terraform awscc_frauddetector_outcomes data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FraudDetector::Outcome resource type.
 func outcomesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func outcomesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::FraudDetector::Outcome", "awscc_frauddetector_outcomes", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Outcome").WithTerraformTypeName("awscc_frauddetector_outcomes")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

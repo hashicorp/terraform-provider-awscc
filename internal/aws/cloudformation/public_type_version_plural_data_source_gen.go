@@ -21,7 +21,6 @@ func init() {
 // publicTypeVersionsDataSourceType returns the Terraform awscc_cloudformation_public_type_versions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource type.
 func publicTypeVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func publicTypeVersionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFormation::PublicTypeVersion", "awscc_cloudformation_public_type_versions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_versions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

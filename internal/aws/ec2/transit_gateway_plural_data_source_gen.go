@@ -21,7 +21,6 @@ func init() {
 // transitGatewaysDataSourceType returns the Terraform awscc_ec2_transit_gateways data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::TransitGateway resource type.
 func transitGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func transitGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::TransitGateway", "awscc_ec2_transit_gateways", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGateway").WithTerraformTypeName("awscc_ec2_transit_gateways")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

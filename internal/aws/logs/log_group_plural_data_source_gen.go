@@ -21,7 +21,6 @@ func init() {
 // logGroupsDataSourceType returns the Terraform awscc_logs_log_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Logs::LogGroup resource type.
 func logGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func logGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Logs::LogGroup", "awscc_logs_log_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogGroup").WithTerraformTypeName("awscc_logs_log_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

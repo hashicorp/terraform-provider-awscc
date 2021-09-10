@@ -21,7 +21,6 @@ func init() {
 // slackChannelConfigurationsDataSourceType returns the Terraform awscc_chatbot_slack_channel_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Chatbot::SlackChannelConfiguration resource type.
 func slackChannelConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func slackChannelConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSo
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Chatbot::SlackChannelConfiguration", "awscc_chatbot_slack_channel_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

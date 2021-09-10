@@ -21,7 +21,6 @@ func init() {
 // securityProfilesDataSourceType returns the Terraform awscc_iot_security_profiles data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoT::SecurityProfile resource type.
 func securityProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func securityProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoT::SecurityProfile", "awscc_iot_security_profiles", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoT::SecurityProfile").WithTerraformTypeName("awscc_iot_security_profiles")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

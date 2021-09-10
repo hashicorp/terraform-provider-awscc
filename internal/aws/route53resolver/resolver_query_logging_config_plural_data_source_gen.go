@@ -21,7 +21,6 @@ func init() {
 // resolverQueryLoggingConfigsDataSourceType returns the Terraform awscc_route53resolver_resolver_query_logging_configs data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfig resource type.
 func resolverQueryLoggingConfigsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func resolverQueryLoggingConfigsDataSourceType(ctx context.Context) (tfsdk.DataS
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Route53Resolver::ResolverQueryLoggingConfig", "awscc_route53resolver_resolver_query_logging_configs", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_configs")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

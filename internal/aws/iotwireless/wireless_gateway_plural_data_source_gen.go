@@ -21,7 +21,6 @@ func init() {
 // wirelessGatewaysDataSourceType returns the Terraform awscc_iotwireless_wireless_gateways data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTWireless::WirelessGateway resource type.
 func wirelessGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func wirelessGatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTWireless::WirelessGateway", "awscc_iotwireless_wireless_gateways", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessGateway").WithTerraformTypeName("awscc_iotwireless_wireless_gateways")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

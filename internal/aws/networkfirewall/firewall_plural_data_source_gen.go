@@ -21,7 +21,6 @@ func init() {
 // firewallsDataSourceType returns the Terraform awscc_networkfirewall_firewalls data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::NetworkFirewall::Firewall resource type.
 func firewallsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func firewallsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::NetworkFirewall::Firewall", "awscc_networkfirewall_firewalls", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("awscc_networkfirewall_firewalls")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

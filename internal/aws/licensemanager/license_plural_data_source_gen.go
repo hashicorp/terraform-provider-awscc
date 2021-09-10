@@ -21,7 +21,6 @@ func init() {
 // licensesDataSourceType returns the Terraform awscc_licensemanager_licenses data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::LicenseManager::License resource type.
 func licensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func licensesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::LicenseManager::License", "awscc_licensemanager_licenses", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::License").WithTerraformTypeName("awscc_licensemanager_licenses")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

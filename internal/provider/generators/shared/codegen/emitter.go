@@ -536,7 +536,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	// Return early as attribute validations are not required
-	// and additional configurations are not supported when an attribute is "Computed"
+	// and additional configurations are not supported when an attribute is Computed-only.
 	if computedOnly {
 		e.printf("Computed:true,\n")
 		e.printf("}")

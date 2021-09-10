@@ -21,7 +21,6 @@ func init() {
 // infrastructureConfigurationsDataSourceType returns the Terraform awscc_imagebuilder_infrastructure_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::InfrastructureConfiguration resource type.
 func infrastructureConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func infrastructureConfigurationsDataSourceType(ctx context.Context) (tfsdk.Data
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ImageBuilder::InfrastructureConfiguration", "awscc_imagebuilder_infrastructure_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::InfrastructureConfiguration").WithTerraformTypeName("awscc_imagebuilder_infrastructure_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -21,7 +21,6 @@ func init() {
 // distributionConfigurationsDataSourceType returns the Terraform awscc_imagebuilder_distribution_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ImageBuilder::DistributionConfiguration resource type.
 func distributionConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func distributionConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSo
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ImageBuilder::DistributionConfiguration", "awscc_imagebuilder_distribution_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

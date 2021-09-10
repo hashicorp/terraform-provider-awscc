@@ -21,7 +21,6 @@ func init() {
 // originRequestPoliciesDataSourceType returns the Terraform awscc_cloudfront_origin_request_policies data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource type.
 func originRequestPoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func originRequestPoliciesDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::CloudFront::OriginRequestPolicy", "awscc_cloudfront_origin_request_policies", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policies")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

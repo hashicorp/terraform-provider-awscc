@@ -6,6 +6,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 )
 
+func DataSourceNotFoundDiag(err error) diag.Diagnostic {
+	return diag.NewErrorDiagnostic(
+		"AWS Data Source Not Found",
+		fmt.Sprintf("After attempting to read the data source, the API returned a resource not found error for the id provided. Original Error: %s", err.Error()),
+	)
+}
+
 func DesiredStateErrorDiag(source string, err error) diag.Diagnostic {
 	return diag.NewErrorDiagnostic(
 		"Creation Of CloudFormation Desired State Unsuccessful",

@@ -21,7 +21,6 @@ func init() {
 // contactListsDataSourceType returns the Terraform awscc_ses_contact_lists data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SES::ContactList resource type.
 func contactListsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func contactListsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SES::ContactList", "awscc_ses_contact_lists", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SES::ContactList").WithTerraformTypeName("awscc_ses_contact_lists")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

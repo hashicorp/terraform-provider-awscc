@@ -21,7 +21,6 @@ func init() {
 // detectorModelsDataSourceType returns the Terraform awscc_iotevents_detector_models data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTEvents::DetectorModel resource type.
 func detectorModelsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func detectorModelsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTEvents::DetectorModel", "awscc_iotevents_detector_models", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTEvents::DetectorModel").WithTerraformTypeName("awscc_iotevents_detector_models")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

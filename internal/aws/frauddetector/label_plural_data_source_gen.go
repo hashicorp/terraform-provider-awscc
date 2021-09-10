@@ -21,7 +21,6 @@ func init() {
 // labelsDataSourceType returns the Terraform awscc_frauddetector_labels data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::FraudDetector::Label resource type.
 func labelsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func labelsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::FraudDetector::Label", "awscc_frauddetector_labels", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::FraudDetector::Label").WithTerraformTypeName("awscc_frauddetector_labels")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

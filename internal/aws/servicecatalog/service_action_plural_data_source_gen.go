@@ -21,7 +21,6 @@ func init() {
 // serviceActionsDataSourceType returns the Terraform awscc_servicecatalog_service_actions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ServiceCatalog::ServiceAction resource type.
 func serviceActionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func serviceActionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ServiceCatalog::ServiceAction", "awscc_servicecatalog_service_actions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceAction").WithTerraformTypeName("awscc_servicecatalog_service_actions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

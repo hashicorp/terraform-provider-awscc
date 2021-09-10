@@ -21,7 +21,6 @@ func init() {
 // storedQueriesDataSourceType returns the Terraform awscc_config_stored_queries data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Config::StoredQuery resource type.
 func storedQueriesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func storedQueriesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Config::StoredQuery", "awscc_config_stored_queries", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Config::StoredQuery").WithTerraformTypeName("awscc_config_stored_queries")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

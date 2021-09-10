@@ -21,7 +21,6 @@ func init() {
 // taskDefinitionsDataSourceType returns the Terraform awscc_ecs_task_definitions data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::ECS::TaskDefinition resource type.
 func taskDefinitionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func taskDefinitionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::ECS::TaskDefinition", "awscc_ecs_task_definitions", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("awscc_ecs_task_definitions")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

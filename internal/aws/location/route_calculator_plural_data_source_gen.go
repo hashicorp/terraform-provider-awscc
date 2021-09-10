@@ -21,7 +21,6 @@ func init() {
 // routeCalculatorsDataSourceType returns the Terraform awscc_location_route_calculators data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::Location::RouteCalculator resource type.
 func routeCalculatorsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func routeCalculatorsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::Location::RouteCalculator", "awscc_location_route_calculators", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::Location::RouteCalculator").WithTerraformTypeName("awscc_location_route_calculators")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

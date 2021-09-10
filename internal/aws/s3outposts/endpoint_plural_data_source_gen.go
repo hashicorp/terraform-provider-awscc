@@ -21,7 +21,6 @@ func init() {
 // endpointsDataSourceType returns the Terraform awscc_s3outposts_endpoints data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::S3Outposts::Endpoint resource type.
 func endpointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func endpointsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::S3Outposts::Endpoint", "awscc_s3outposts_endpoints", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Endpoint").WithTerraformTypeName("awscc_s3outposts_endpoints")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

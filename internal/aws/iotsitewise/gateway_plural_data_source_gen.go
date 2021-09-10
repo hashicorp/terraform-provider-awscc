@@ -21,7 +21,6 @@ func init() {
 // gatewaysDataSourceType returns the Terraform awscc_iotsitewise_gateways data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTSiteWise::Gateway resource type.
 func gatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func gatewaysDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IoTSiteWise::Gateway", "awscc_iotsitewise_gateways", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("awscc_iotsitewise_gateways")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

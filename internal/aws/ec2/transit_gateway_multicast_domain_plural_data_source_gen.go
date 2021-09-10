@@ -21,7 +21,6 @@ func init() {
 // transitGatewayMulticastDomainsDataSourceType returns the Terraform awscc_ec2_transit_gateway_multicast_domains data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomain resource type.
 func transitGatewayMulticastDomainsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func transitGatewayMulticastDomainsDataSourceType(ctx context.Context) (tfsdk.Da
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EC2::TransitGatewayMulticastDomain", "awscc_ec2_transit_gateway_multicast_domains", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomain").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domains")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

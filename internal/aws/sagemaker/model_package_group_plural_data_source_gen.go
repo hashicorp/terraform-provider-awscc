@@ -21,7 +21,6 @@ func init() {
 // modelPackageGroupsDataSourceType returns the Terraform awscc_sagemaker_model_package_groups data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::SageMaker::ModelPackageGroup resource type.
 func modelPackageGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func modelPackageGroupsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::SageMaker::ModelPackageGroup", "awscc_sagemaker_model_package_groups", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackageGroup").WithTerraformTypeName("awscc_sagemaker_model_package_groups")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

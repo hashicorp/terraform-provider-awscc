@@ -21,7 +21,6 @@ func init() {
 // missionProfilesDataSourceType returns the Terraform awscc_groundstation_mission_profiles data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::GroundStation::MissionProfile resource type.
 func missionProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func missionProfilesDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::GroundStation::MissionProfile", "awscc_groundstation_mission_profiles", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("awscc_groundstation_mission_profiles")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

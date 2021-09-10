@@ -21,7 +21,6 @@ func init() {
 // studioSessionMappingsDataSourceType returns the Terraform awscc_emr_studio_session_mappings data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource type.
 func studioSessionMappingsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func studioSessionMappingsDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::EMR::StudioSessionMapping", "awscc_emr_studio_session_mappings", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mappings")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

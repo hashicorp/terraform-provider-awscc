@@ -21,7 +21,6 @@ func init() {
 // recordingConfigurationsDataSourceType returns the Terraform awscc_ivs_recording_configurations data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::IVS::RecordingConfiguration resource type.
 func recordingConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func recordingConfigurationsDataSourceType(ctx context.Context) (tfsdk.DataSourc
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::IVS::RecordingConfiguration", "awscc_ivs_recording_configurations", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("awscc_ivs_recording_configurations")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

@@ -1,16 +1,16 @@
-package codegen
+package shared
 
 import (
 	"bytes"
 	"fmt"
 	"go/format"
 	"os"
-	"path"
 	"strings"
 	"text/template"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
 	"github.com/mitchellh/cli"
 )
 
@@ -22,137 +22,11 @@ const (
 )
 
 type Generator struct {
-	acceptanceTestsTemplateBody string
-	schemaTemplateBody          string
-	ui                          cli.Ui
+	UI cli.Ui
 }
 
-type PluralDataSourceGenerator struct {
-	cfType           string
-	tfDataSourceType string
-	Generator
-}
-
-type ResourceGenerator struct {
-	cfTypeSchemaFile string
-	tfResourceType   string
-	Generator
-}
-
-func NewPluralDataSourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfType, tfDataSourceType string) *PluralDataSourceGenerator {
-	return &PluralDataSourceGenerator{
-		cfType:           cfType,
-		tfDataSourceType: tfDataSourceType,
-		Generator: Generator{
-			acceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
-			schemaTemplateBody:          schemaTemplateBody,
-			ui:                          ui,
-		},
-	}
-}
-
-func NewResourceGenerator(ui cli.Ui, acceptanceTestsTemplateBody, schemaTemplateBody, cfTypeSchemaFile, tfResourceType string) *ResourceGenerator {
-	return &ResourceGenerator{
-		cfTypeSchemaFile: cfTypeSchemaFile,
-		tfResourceType:   tfResourceType,
-		Generator: Generator{
-			acceptanceTestsTemplateBody: acceptanceTestsTemplateBody,
-			schemaTemplateBody:          schemaTemplateBody,
-			ui:                          ui,
-		},
-	}
-}
-
-// Generate generates the plural data source type's factory into the specified file.
-func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	p.infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", p.tfDataSourceType, schemaFilename, acctestsFilename)
-
-	// Create target directories.
-	for _, filename := range []string{schemaFilename, acctestsFilename} {
-		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, DirPerm)
-
-		if err != nil {
-			return fmt.Errorf("creating target directory %s: %w", dirname, err)
-		}
-	}
-
-	org, svc, res, err := naming.ParseCloudFormationTypeName(p.cfType)
-
-	if err != nil {
-		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", p.cfType)
-	}
-
-	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
-
-	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + DataSourceType
-
-	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, ds)
-
-	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", p.cfType)
-
-	templateData := TemplateData{
-		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
-		CloudFormationTypeName:       p.cfType,
-		FactoryFunctionName:          factoryFunctionName,
-		PackageName:                  packageName,
-		SchemaDescription:            schemaDescription,
-		SchemaVersion:                1,
-		TerraformTypeName:            p.tfDataSourceType,
-	}
-
-	err = p.applyAndWriteTemplate(schemaFilename, p.schemaTemplateBody, &templateData)
-
-	if err != nil {
-		return err
-	}
-
-	err = p.applyAndWriteTemplate(acctestsFilename, p.acceptanceTestsTemplateBody, &templateData)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// Generate generates the resource's type factory into the specified file.
-func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	r.infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", r.tfResourceType, r.cfTypeSchemaFile, schemaFilename, acctestsFilename)
-
-	// Create target directories.
-	for _, filename := range []string{schemaFilename, acctestsFilename} {
-		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, DirPerm)
-
-		if err != nil {
-			return fmt.Errorf("creating target directory %s: %w", dirname, err)
-		}
-	}
-
-	templateData, err := r.generateTemplateData(r.cfTypeSchemaFile, ResourceType, r.tfResourceType, packageName)
-
-	if err != nil {
-		return err
-	}
-
-	err = r.applyAndWriteTemplate(schemaFilename, r.schemaTemplateBody, templateData)
-
-	if err != nil {
-		return err
-	}
-
-	err = r.applyAndWriteTemplate(acctestsFilename, r.acceptanceTestsTemplateBody, templateData)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// applyAndWriteTemplate applies the template body to the specified data and writes it to file.
-func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
+// ApplyAndWriteTemplate applies the template body to the specified data and writes it to file.
+func (g *Generator) ApplyAndWriteTemplate(filename, templateBody string, templateData *TemplateData) error {
 	tmpl, err := template.New("function").Parse(templateBody)
 
 	if err != nil {
@@ -169,7 +43,7 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		g.infof("%s", buffer.String())
+		g.Infof("%s", buffer.String())
 		return fmt.Errorf("formatting generated source code: %w", err)
 	}
 
@@ -190,10 +64,10 @@ func (g *Generator) applyAndWriteTemplate(filename, templateBody string, templat
 	return nil
 }
 
-// generateTemplateData generates the template body from the Resource
+// GenerateTemplateData generates the template body from the Resource
 // constructed from a CloudFormation type's Schema file.
 // This method can be applied to both singular data source and resource types.
-func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceType, packageName string) (*TemplateData, error) {
+func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceType, packageName string) (*TemplateData, error) {
 	resource, err := NewResource(tfResourceType, cfTypeSchemaFile)
 
 	if err != nil {
@@ -214,9 +88,9 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, res)
 
 	sb := strings.Builder{}
-	codeEmitter := Emitter{
+	codeEmitter := codegen.Emitter{
 		CfResource: resource.CfResource,
-		Ui:         g.ui,
+		Ui:         g.UI,
 		Writer:     &sb,
 	}
 
@@ -242,34 +116,40 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
 		HasRequiredAttribute:         true,
-		HasUpdateMethod:              true,
 		PackageName:                  packageName,
-		RequiredAttributesValidator:  requiredAttributesValidator,
 		RootPropertiesSchema:         rootPropertiesSchema,
 		SchemaVersion:                1,
-		SyntheticIDAttribute:         true,
 		TerraformTypeName:            resource.TfType,
 	}
 
-	if codeFeatures&HasRequiredRootProperty == 0 {
+	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
 		templateData.HasRequiredAttribute = false
 	}
-	if codeFeatures&HasUpdatableProperty == 0 {
-		templateData.HasUpdateMethod = false
-	}
-	if codeFeatures&UsesInternalTypes > 0 {
+	if codeFeatures&codegen.UsesInternalTypes > 0 {
 		templateData.ImportInternalTypes = true
-	}
-	if codeFeatures&UsesValidation > 0 || requiredAttributesValidator != "" {
-		templateData.ImportValidate = true
-	}
-	if codeFeatures&HasIDRootProperty > 0 {
-		templateData.SyntheticIDAttribute = false
 	}
 
 	if resType == DataSourceType {
 		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
-	} else if description := resource.CfResource.Description; description != nil {
+
+		return templateData, nil
+	}
+
+	templateData.HasUpdateMethod = true
+	templateData.RequiredAttributesValidator = requiredAttributesValidator
+	templateData.SyntheticIDAttribute = true
+
+	if codeFeatures&codegen.HasUpdatableProperty == 0 {
+		templateData.HasUpdateMethod = false
+	}
+	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
+		templateData.ImportValidate = true
+	}
+	if codeFeatures&codegen.HasIDRootProperty > 0 {
+		templateData.SyntheticIDAttribute = false
+	}
+
+	if description := resource.CfResource.Description; description != nil {
 		templateData.SchemaDescription = *description
 	}
 
@@ -290,8 +170,8 @@ func (g *Generator) generateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	return templateData, nil
 }
 
-func (g *Generator) infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
+func (g *Generator) Infof(format string, a ...interface{}) {
+	g.UI.Info(fmt.Sprintf(format, a...))
 }
 
 type TemplateData struct {

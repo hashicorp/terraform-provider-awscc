@@ -21,7 +21,6 @@ func init() {
 // notificationChannelsDataSourceType returns the Terraform awscc_devopsguru_notification_channels data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource type.
 func notificationChannelsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func notificationChannelsDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DevOpsGuru::NotificationChannel", "awscc_devopsguru_notification_channels", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channels")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
