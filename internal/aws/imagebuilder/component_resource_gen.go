@@ -45,7 +45,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ChangeDescription is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ChangeDescription is a force-new property.
+			},
 		},
 		"data": {
 			// Property: Data
@@ -63,8 +65,10 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 16000),
 			},
-			// Data is a force-new attribute.
-			// Data is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Data is a force-new property.
+			},
+			// Data is a write-only property.
 		},
 		"description": {
 			// Property: Description
@@ -77,7 +81,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"encrypted": {
 			// Property: Encrypted
@@ -101,7 +107,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// KmsKeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -113,7 +121,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the component.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"platform": {
 			// Property: Platform
@@ -135,8 +145,10 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"Linux",
 				}),
 			},
-			// Platform is a force-new attribute.
-			// Platform is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Platform is a force-new property.
+			},
+			// Platform is a write-only property.
 		},
 		"supported_os_versions": {
 			// Property: SupportedOsVersions
@@ -152,7 +164,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// SupportedOsVersions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SupportedOsVersions is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -172,7 +186,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"type": {
 			// Property: Type
@@ -200,8 +216,10 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Uri is a force-new attribute.
-			// Uri is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Uri is a force-new property.
+			},
+			// Uri is a write-only property.
 		},
 		"version": {
 			// Property: Version
@@ -213,7 +231,9 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The version of the component.",
 			Type:        types.StringType,
 			Required:    true,
-			// Version is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Version is a force-new property.
+			},
 		},
 	}
 

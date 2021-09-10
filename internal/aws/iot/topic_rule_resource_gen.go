@@ -41,7 +41,9 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// RuleName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RuleName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

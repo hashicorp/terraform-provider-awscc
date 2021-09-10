@@ -91,7 +91,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// PortalAuthMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PortalAuthMode is a force-new property.
+			},
 		},
 		"portal_client_id": {
 			// Property: PortalClientId
@@ -213,7 +215,7 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			// Tags is a write-only attribute.
+			// Tags is a write-only property.
 		},
 	}
 

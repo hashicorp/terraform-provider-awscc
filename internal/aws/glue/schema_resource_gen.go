@@ -130,7 +130,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"JSON",
 				}),
 			},
-			// DataFormat is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataFormat is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -175,7 +177,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"registry": {
 			// Property: Registry
@@ -220,7 +224,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Registry is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Registry is a force-new property.
+			},
 		},
 		"schema_definition": {
 			// Property: SchemaDefinition
@@ -237,8 +243,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 170000),
 			},
-			// SchemaDefinition is a force-new attribute.
-			// SchemaDefinition is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SchemaDefinition is a force-new property.
+			},
+			// SchemaDefinition is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -300,8 +308,10 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
-			// Tags is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
+			// Tags is a write-only property.
 		},
 	}
 

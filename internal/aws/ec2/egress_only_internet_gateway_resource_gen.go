@@ -42,7 +42,9 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The ID of the VPC for which to create the egress-only internet gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// VpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+			},
 		},
 	}
 

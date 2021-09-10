@@ -69,7 +69,9 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				},
 			),
 			Required: true,
-			// Config is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Config is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id

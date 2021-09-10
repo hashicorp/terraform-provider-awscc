@@ -187,7 +187,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// ClusteringKeyColumns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusteringKeyColumns is a force-new property.
+			},
 		},
 		"encryption_specification": {
 			// Property: EncryptionSpecification
@@ -250,7 +252,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name for Cassandra keyspace",
 			Type:        types.StringType,
 			Required:    true,
-			// KeyspaceName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyspaceName is a force-new property.
+			},
 		},
 		"partition_key_columns": {
 			// Property: PartitionKeyColumns
@@ -301,7 +305,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// PartitionKeyColumns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PartitionKeyColumns is a force-new property.
+			},
 		},
 		"point_in_time_recovery_enabled": {
 			// Property: PointInTimeRecoveryEnabled
@@ -370,7 +376,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// TableName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TableName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

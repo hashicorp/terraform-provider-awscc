@@ -38,7 +38,9 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			// Path is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Path is a force-new property.
+			},
 		},
 		"serial_number": {
 			// Property: SerialNumber
@@ -135,7 +137,9 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 226),
 			},
-			// VirtualMfaDeviceName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VirtualMfaDeviceName is a force-new property.
+			},
 		},
 	}
 

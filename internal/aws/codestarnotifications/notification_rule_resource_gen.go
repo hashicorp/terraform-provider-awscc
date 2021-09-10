@@ -91,7 +91,9 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Resource is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Resource is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status
@@ -121,7 +123,9 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"targets": {
 			// Property: Targets

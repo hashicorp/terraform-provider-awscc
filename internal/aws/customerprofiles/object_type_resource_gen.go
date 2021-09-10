@@ -77,7 +77,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"encryption_key": {
 			// Property: EncryptionKey
@@ -339,7 +341,9 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// ObjectTypeName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ObjectTypeName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

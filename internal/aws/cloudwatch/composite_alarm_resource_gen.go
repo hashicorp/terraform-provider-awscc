@@ -86,7 +86,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// AlarmName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AlarmName is a force-new property.
+			},
 		},
 		"alarm_rule": {
 			// Property: AlarmRule

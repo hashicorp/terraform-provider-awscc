@@ -271,7 +271,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// LaunchTemplateConfigs is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LaunchTemplateConfigs is a force-new property.
+			},
 		},
 		"on_demand_options": {
 			// Property: OnDemandOptions
@@ -358,7 +360,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// OnDemandOptions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // OnDemandOptions is a force-new property.
+			},
 		},
 		"replace_unhealthy_instances": {
 			// Property: ReplaceUnhealthyInstances
@@ -369,7 +373,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
-			// ReplaceUnhealthyInstances is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ReplaceUnhealthyInstances is a force-new property.
+			},
 		},
 		"spot_options": {
 			// Property: SpotOptions
@@ -466,7 +472,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// SpotOptions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SpotOptions is a force-new property.
+			},
 		},
 		"tag_specifications": {
 			// Property: TagSpecifications
@@ -635,7 +643,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// TagSpecifications is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TagSpecifications is a force-new property.
+			},
 		},
 		"target_capacity_specification": {
 			// Property: TargetCapacitySpecification
@@ -706,7 +716,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
-			// TerminateInstancesWithExpiration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TerminateInstancesWithExpiration is a force-new property.
+			},
 		},
 		"type": {
 			// Property: Type
@@ -729,7 +741,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"instant",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 		"valid_from": {
 			// Property: ValidFrom
@@ -740,7 +754,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ValidFrom is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ValidFrom is a force-new property.
+			},
 		},
 		"valid_until": {
 			// Property: ValidUntil
@@ -751,7 +767,9 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ValidUntil is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ValidUntil is a force-new property.
+			},
 		},
 	}
 

@@ -57,7 +57,9 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"endpoint_configuration": {
 			// Property: EndpointConfiguration

@@ -42,7 +42,9 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "The ID of the gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// GatewayId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GatewayId is a force-new property.
+			},
 		},
 		"route_table_id": {
 			// Property: RouteTableId

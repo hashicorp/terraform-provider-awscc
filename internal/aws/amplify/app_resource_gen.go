@@ -36,7 +36,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// AccessToken is a write-only attribute.
+			// AccessToken is a write-only property.
 		},
 		"app_id": {
 			// Property: AppId
@@ -280,7 +280,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// AutoBranchCreationConfig is a write-only attribute.
+			// AutoBranchCreationConfig is a write-only property.
 		},
 		"basic_auth_config": {
 			// Property: BasicAuthConfig
@@ -330,7 +330,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// BasicAuthConfig is a write-only attribute.
+			// BasicAuthConfig is a write-only property.
 		},
 		"build_spec": {
 			// Property: BuildSpec
@@ -569,7 +569,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// OauthToken is a write-only attribute.
+			// OauthToken is a write-only property.
 		},
 		"repository": {
 			// Property: Repository

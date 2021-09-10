@@ -50,7 +50,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			// DBProxyEndpointName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DBProxyEndpointName is a force-new property.
+			},
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName
@@ -67,7 +69,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			// DBProxyName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DBProxyName is a force-new property.
+			},
 		},
 		"endpoint": {
 			// Property: Endpoint
@@ -161,7 +165,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"READ_ONLY",
 				}),
 			},
-			// TargetRole is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetRole is a force-new property.
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId
@@ -211,7 +217,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(2),
 			},
-			// VpcSubnetIds is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcSubnetIds is a force-new property.
+			},
 		},
 	}
 

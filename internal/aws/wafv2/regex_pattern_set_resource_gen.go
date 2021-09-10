@@ -70,7 +70,9 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"regular_expression_list": {
 			// Property: RegularExpressionList
@@ -104,7 +106,9 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"REGIONAL",
 				}),
 			},
-			// Scope is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Scope is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

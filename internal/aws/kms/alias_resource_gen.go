@@ -39,7 +39,9 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// AliasName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AliasName is a force-new property.
+			},
 		},
 		"target_key_id": {
 			// Property: TargetKeyId

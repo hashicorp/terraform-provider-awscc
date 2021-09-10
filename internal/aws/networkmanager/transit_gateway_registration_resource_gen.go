@@ -31,7 +31,9 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
-			// GlobalNetworkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+			},
 		},
 		"transit_gateway_arn": {
 			// Property: TransitGatewayArn
@@ -43,7 +45,9 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The Amazon Resource Name (ARN) of the transit gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayArn is a force-new property.
+			},
 		},
 	}
 

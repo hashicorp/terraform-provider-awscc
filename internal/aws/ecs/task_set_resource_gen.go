@@ -33,7 +33,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
-			// Cluster is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+			},
 		},
 		"external_id": {
 			// Property: ExternalId
@@ -46,7 +48,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ExternalId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ExternalId is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -80,7 +84,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"FARGATE",
 				}),
 			},
-			// LaunchType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LaunchType is a force-new property.
+			},
 		},
 		"load_balancers": {
 			// Property: LoadBalancers
@@ -142,7 +148,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// LoadBalancers is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LoadBalancers is a force-new property.
+			},
 		},
 		"network_configuration": {
 			// Property: NetworkConfiguration
@@ -234,7 +242,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// NetworkConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkConfiguration is a force-new property.
+			},
 		},
 		"platform_version": {
 			// Property: PlatformVersion
@@ -247,7 +257,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// PlatformVersion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlatformVersion is a force-new property.
+			},
 		},
 		"scale": {
 			// Property: Scale
@@ -307,7 +319,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
-			// Service is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Service is a force-new property.
+			},
 		},
 		"service_registries": {
 			// Property: ServiceRegistries
@@ -370,7 +384,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// ServiceRegistries is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceRegistries is a force-new property.
+			},
 		},
 		"task_definition": {
 			// Property: TaskDefinition
@@ -382,7 +398,9 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.",
 			Type:        types.StringType,
 			Required:    true,
-			// TaskDefinition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TaskDefinition is a force-new property.
+			},
 		},
 	}
 

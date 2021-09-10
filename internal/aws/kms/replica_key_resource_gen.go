@@ -94,7 +94,7 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(7, 30),
 			},
-			// PendingWindowInDays is a write-only attribute.
+			// PendingWindowInDays is a write-only property.
 		},
 		"primary_key_arn": {
 			// Property: PrimaryKeyArn
@@ -111,7 +111,9 @@ func replicaKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// PrimaryKeyArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PrimaryKeyArn is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

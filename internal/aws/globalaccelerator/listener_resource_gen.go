@@ -33,7 +33,9 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Required:    true,
-			// AcceleratorArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AcceleratorArn is a force-new property.
+			},
 		},
 		"client_affinity": {
 			// Property: ClientAffinity

@@ -38,7 +38,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// Database is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Database is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -56,7 +58,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -74,7 +78,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"named_query_id": {
 			// Property: NamedQueryId
@@ -102,7 +108,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 262144),
 			},
-			// QueryString is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // QueryString is a force-new property.
+			},
 		},
 		"work_group": {
 			// Property: WorkGroup
@@ -120,7 +128,9 @@ func namedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// WorkGroup is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WorkGroup is a force-new property.
+			},
 		},
 	}
 

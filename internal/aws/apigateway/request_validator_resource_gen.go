@@ -32,7 +32,9 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"request_validator_id": {
 			// Property: RequestValidatorId
@@ -55,7 +57,9 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The identifier of the targeted API entity.",
 			Type:        types.StringType,
 			Required:    true,
-			// RestApiId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+			},
 		},
 		"validate_request_body": {
 			// Property: ValidateRequestBody

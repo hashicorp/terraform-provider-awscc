@@ -73,7 +73,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.ArrayLenBetween(0, 5),
 				validate.UniqueItems(),
 			},
-			// NotificationArns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NotificationArns is a force-new property.
+			},
 		},
 		"outputs": {
 			// Property: Outputs
@@ -174,7 +176,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// ProvisionedProductName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProvisionedProductName is a force-new property.
+			},
 		},
 		"provisioning_artifact_id": {
 			// Property: ProvisioningArtifactId

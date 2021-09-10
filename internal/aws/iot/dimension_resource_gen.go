@@ -51,7 +51,9 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"string_values": {
 			// Property: StringValues
@@ -152,7 +154,9 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"TOPIC_FILTER",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

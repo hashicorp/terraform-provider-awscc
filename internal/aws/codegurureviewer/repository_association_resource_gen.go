@@ -54,7 +54,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
 			},
-			// BucketName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+			},
 		},
 		"connection_arn": {
 			// Property: ConnectionArn
@@ -73,7 +75,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			// ConnectionArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConnectionArn is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -91,7 +95,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"owner": {
 			// Property: Owner
@@ -110,7 +116,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// Owner is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Owner is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -172,7 +180,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"type": {
 			// Property: Type
@@ -198,7 +208,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 					"S3Bucket",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

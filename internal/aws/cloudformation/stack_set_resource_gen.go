@@ -94,7 +94,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"DELEGATED_ADMIN",
 				}),
 			},
-			// CallAs is a write-only attribute.
+			// CallAs is a write-only property.
 		},
 		"capabilities": {
 			// Property: Capabilities
@@ -246,7 +246,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// OperationPreferences is a write-only attribute.
+			// OperationPreferences is a write-only property.
 		},
 		"parameters": {
 			// Property: Parameters
@@ -315,7 +315,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"SELF_MANAGED",
 				}),
 			},
-			// PermissionModel is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PermissionModel is a force-new property.
+			},
 		},
 		"stack_instances_group": {
 			// Property: StackInstancesGroup
@@ -484,7 +486,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			// StackSetName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StackSetName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -579,7 +583,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// TemplateURL is a write-only attribute.
+			// TemplateURL is a write-only property.
 		},
 	}
 

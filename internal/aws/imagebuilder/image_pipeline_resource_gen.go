@@ -153,7 +153,9 @@ func imagePipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"schedule": {
 			// Property: Schedule

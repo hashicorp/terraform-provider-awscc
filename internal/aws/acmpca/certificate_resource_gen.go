@@ -670,8 +670,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// ApiPassthrough is a force-new attribute.
-			// ApiPassthrough is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ApiPassthrough is a force-new property.
+			},
+			// ApiPassthrough is a write-only property.
 		},
 		"arn": {
 			// Property: Arn
@@ -701,7 +703,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// CertificateAuthorityArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+			},
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
@@ -717,8 +721,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// CertificateSigningRequest is a force-new attribute.
-			// CertificateSigningRequest is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateSigningRequest is a force-new property.
+			},
+			// CertificateSigningRequest is a write-only property.
 		},
 		"signing_algorithm": {
 			// Property: SigningAlgorithm
@@ -730,7 +736,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the algorithm that will be used to sign the Certificate.",
 			Type:        types.StringType,
 			Required:    true,
-			// SigningAlgorithm is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+			},
 		},
 		"template_arn": {
 			// Property: TemplateArn
@@ -741,7 +749,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// TemplateArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TemplateArn is a force-new property.
+			},
 		},
 		"validity": {
 			// Property: Validity
@@ -779,7 +789,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// Validity is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Validity is a force-new property.
+			},
 		},
 		"validity_not_before": {
 			// Property: ValidityNotBefore
@@ -818,7 +830,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// ValidityNotBefore is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ValidityNotBefore is a force-new property.
+			},
 		},
 	}
 

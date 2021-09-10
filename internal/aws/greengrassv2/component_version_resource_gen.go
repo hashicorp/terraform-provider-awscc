@@ -59,8 +59,10 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// InlineRecipe is a force-new attribute.
-			// InlineRecipe is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InlineRecipe is a force-new property.
+			},
+			// InlineRecipe is a write-only property.
 		},
 		"lambda_function": {
 			// Property: LambdaFunction
@@ -515,8 +517,10 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Optional: true,
 			Computed: true,
-			// LambdaFunction is a force-new attribute.
-			// LambdaFunction is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LambdaFunction is a force-new property.
+			},
+			// LambdaFunction is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

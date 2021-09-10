@@ -34,7 +34,9 @@ func controlPanelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ClusterArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusterArn is a force-new property.
+			},
 		},
 		"control_panel_arn": {
 			// Property: ControlPanelArn

@@ -114,7 +114,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// Code is a write-only attribute.
+			// Code is a write-only property.
 		},
 		"code_signing_config_arn": {
 			// Property: CodeSigningConfigArn
@@ -278,7 +278,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// FunctionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FunctionName is a force-new property.
+			},
 		},
 		"handler": {
 			// Property: Handler

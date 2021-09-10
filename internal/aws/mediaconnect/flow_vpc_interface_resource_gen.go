@@ -31,7 +31,9 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
 			Type:        types.StringType,
 			Required:    true,
-			// FlowArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FlowArn is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -43,7 +45,9 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"network_interface_ids": {
 			// Property: NetworkInterfaceIds

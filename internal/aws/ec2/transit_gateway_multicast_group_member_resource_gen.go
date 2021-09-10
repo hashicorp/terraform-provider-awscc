@@ -31,7 +31,9 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Description: "The IP address assigned to the transit gateway multicast group.",
 			Type:        types.StringType,
 			Required:    true,
-			// GroupIpAddress is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GroupIpAddress is a force-new property.
+			},
 		},
 		"group_member": {
 			// Property: GroupMember
@@ -76,7 +78,9 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Required:    true,
-			// NetworkInterfaceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkInterfaceId is a force-new property.
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId
@@ -143,7 +147,9 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayMulticastDomainId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayMulticastDomainId is a force-new property.
+			},
 		},
 	}
 

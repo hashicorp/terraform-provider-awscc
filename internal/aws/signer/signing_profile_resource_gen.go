@@ -49,7 +49,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"AWSLambda-SHA384-ECDSA",
 				}),
 			},
-			// PlatformId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlatformId is a force-new property.
+			},
 		},
 		"profile_name": {
 			// Property: ProfileName
@@ -125,7 +127,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Optional: true,
 			Computed: true,
-			// SignatureValidityPeriod is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SignatureValidityPeriod is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

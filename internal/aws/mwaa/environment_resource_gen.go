@@ -128,7 +128,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1224),
 			},
-			// KmsKey is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKey is a force-new property.
+			},
 		},
 		"logging_configuration": {
 			// Property: LoggingConfiguration
@@ -513,7 +515,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 80),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"network_configuration": {
 			// Property: NetworkConfiguration
@@ -571,7 +575,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(2, 2),
 						},
-						// SubnetIds is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // SubnetIds is a force-new property.
+						},
 					},
 				},
 			),

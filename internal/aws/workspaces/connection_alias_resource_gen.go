@@ -144,7 +144,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// ConnectionString is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConnectionString is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -186,7 +188,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

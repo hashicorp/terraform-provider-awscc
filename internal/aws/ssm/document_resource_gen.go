@@ -107,7 +107,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Attachments is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Attachments is a force-new property.
+			},
 		},
 		"content": {
 			// Property: Content
@@ -119,7 +121,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The content for the Systems Manager document in JSON, YAML or String format.",
 			Type:        types.StringType,
 			Required:    true,
-			// Content is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Content is a force-new property.
+			},
 		},
 		"document_format": {
 			// Property: DocumentFormat
@@ -144,7 +148,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"TEXT",
 				}),
 			},
-			// DocumentFormat is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DocumentFormat is a force-new property.
+			},
 		},
 		"document_type": {
 			// Property: DocumentType
@@ -189,7 +195,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"Session",
 				}),
 			},
-			// DocumentType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DocumentType is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -203,7 +211,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"requires": {
 			// Property: Requires
@@ -259,7 +269,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Requires is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Requires is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -329,7 +341,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// TargetType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetType is a force-new property.
+			},
 		},
 		"version_name": {
 			// Property: VersionName
@@ -343,7 +357,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// VersionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VersionName is a force-new property.
+			},
 		},
 	}
 

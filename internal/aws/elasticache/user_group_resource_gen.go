@@ -52,7 +52,9 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redis",
 				}),
 			},
-			// Engine is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Engine is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status
@@ -76,7 +78,9 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the user group.",
 			Type:        types.StringType,
 			Required:    true,
-			// UserGroupId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserGroupId is a force-new property.
+			},
 		},
 		"user_ids": {
 			// Property: UserIds

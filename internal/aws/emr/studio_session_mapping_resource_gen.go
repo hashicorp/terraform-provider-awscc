@@ -33,7 +33,9 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
 			Type:        types.StringType,
 			Required:    true,
-			// IdentityName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IdentityName is a force-new property.
+			},
 		},
 		"identity_type": {
 			// Property: IdentityType
@@ -55,7 +57,9 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"GROUP",
 				}),
 			},
-			// IdentityType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IdentityType is a force-new property.
+			},
 		},
 		"session_policy_arn": {
 			// Property: SessionPolicyArn
@@ -83,7 +87,9 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 256),
 			},
-			// StudioId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StudioId is a force-new property.
+			},
 		},
 	}
 

@@ -450,7 +450,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
 			Type:        types.StringType,
 			Required:    true,
-			// ResourceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceArn is a force-new property.
+			},
 		},
 	}
 

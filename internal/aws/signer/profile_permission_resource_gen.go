@@ -29,7 +29,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Action is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Action is a force-new property.
+			},
 		},
 		"principal": {
 			// Property: Principal
@@ -39,7 +41,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Principal is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Principal is a force-new property.
+			},
 		},
 		"profile_name": {
 			// Property: ProfileName
@@ -49,7 +53,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// ProfileName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProfileName is a force-new property.
+			},
 		},
 		"profile_version": {
 			// Property: ProfileVersion
@@ -61,7 +67,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ProfileVersion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProfileVersion is a force-new property.
+			},
 		},
 		"statement_id": {
 			// Property: StatementId
@@ -71,7 +79,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// StatementId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StatementId is a force-new property.
+			},
 		},
 	}
 

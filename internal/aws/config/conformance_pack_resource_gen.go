@@ -99,7 +99,9 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// ConformancePackName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConformancePackName is a force-new property.
+			},
 		},
 		"delivery_s3_bucket": {
 			// Property: DeliveryS3Bucket
@@ -148,7 +150,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 51200),
 			},
-			// TemplateBody is a write-only attribute.
+			// TemplateBody is a write-only property.
 		},
 		"template_s3_uri": {
 			// Property: TemplateS3Uri
@@ -166,7 +168,7 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// TemplateS3Uri is a write-only attribute.
+			// TemplateS3Uri is a write-only property.
 		},
 	}
 

@@ -89,7 +89,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// DomainFileUrl is a write-only attribute.
+			// DomainFileUrl is a write-only property.
 		},
 		"domains": {
 			// Property: Domains
@@ -111,7 +111,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// Domains is a write-only attribute.
+			// Domains is a write-only property.
 		},
 		"id": {
 			// Property: Id
@@ -169,7 +169,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status

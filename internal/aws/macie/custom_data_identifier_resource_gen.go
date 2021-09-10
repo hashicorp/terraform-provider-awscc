@@ -66,7 +66,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -93,7 +95,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// IgnoreWords is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IgnoreWords is a force-new property.
+			},
 		},
 		"keywords": {
 			// Property: Keywords
@@ -109,7 +113,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// Keywords is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Keywords is a force-new property.
+			},
 		},
 		"maximum_match_distance": {
 			// Property: MaximumMatchDistance
@@ -122,7 +128,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.NumberType,
 			Optional:    true,
 			Computed:    true,
-			// MaximumMatchDistance is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // MaximumMatchDistance is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -134,7 +142,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Name of custom data identifier.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"regex": {
 			// Property: Regex
@@ -146,7 +156,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Regular expression for custom data identifier.",
 			Type:        types.StringType,
 			Required:    true,
-			// Regex is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Regex is a force-new property.
+			},
 		},
 	}
 

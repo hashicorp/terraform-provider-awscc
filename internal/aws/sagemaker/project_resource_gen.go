@@ -64,7 +64,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			// ProjectDescription is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProjectDescription is a force-new property.
+			},
 		},
 		"project_id": {
 			// Property: ProjectId
@@ -95,7 +97,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
 			},
-			// ProjectName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProjectName is a force-new property.
+			},
 		},
 		"project_status": {
 			// Property: ProjectStatus
@@ -280,7 +284,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// ServiceCatalogProvisioningDetails is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceCatalogProvisioningDetails is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -342,7 +348,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

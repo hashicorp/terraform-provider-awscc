@@ -57,7 +57,9 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"aurora-postgresql",
 				}),
 			},
-			// Engine is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Engine is a force-new property.
+			},
 		},
 		"engine_version": {
 			// Property: EngineVersion
@@ -70,7 +72,9 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// EngineVersion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EngineVersion is a force-new property.
+			},
 		},
 		"global_cluster_identifier": {
 			// Property: GlobalClusterIdentifier
@@ -84,7 +88,9 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// GlobalClusterIdentifier is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GlobalClusterIdentifier is a force-new property.
+			},
 		},
 		"source_db_cluster_identifier": {
 			// Property: SourceDBClusterIdentifier
@@ -101,7 +107,9 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// SourceDBClusterIdentifier is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SourceDBClusterIdentifier is a force-new property.
+			},
 		},
 		"storage_encrypted": {
 			// Property: StorageEncrypted
@@ -114,7 +122,9 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			// StorageEncrypted is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StorageEncrypted is a force-new property.
+			},
 		},
 	}
 

@@ -34,7 +34,9 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The unique string (ID) used to identify a hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
-			// HostedZoneId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // HostedZoneId is a force-new property.
+			},
 		},
 		"key_management_service_arn": {
 			// Property: KeyManagementServiceArn
@@ -51,7 +53,9 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// KeyManagementServiceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyManagementServiceArn is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -64,7 +68,9 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status

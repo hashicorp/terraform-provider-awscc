@@ -146,7 +146,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"RETAIN",
 				}),
 			},
-			// DeleteOption is a write-only attribute.
+			// DeleteOption is a write-only property.
 		},
 		"game_server_group_arn": {
 			// Property: GameServerGroupArn

@@ -37,7 +37,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// BucketName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+			},
 		},
 		"bucket_prefix": {
 			// Property: BucketPrefix
@@ -53,7 +55,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			// BucketPrefix is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BucketPrefix is a force-new property.
+			},
 		},
 		"bucket_region": {
 			// Property: BucketRegion
@@ -69,7 +73,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// BucketRegion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BucketRegion is a force-new property.
+			},
 		},
 		"kms_key_arn": {
 			// Property: KMSKeyArn
@@ -85,7 +91,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 512),
 			},
-			// KMSKeyArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KMSKeyArn is a force-new property.
+			},
 		},
 		"s3_destination": {
 			// Property: S3Destination
@@ -172,7 +180,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Optional: true,
 			Computed: true,
-			// S3Destination is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // S3Destination is a force-new property.
+			},
 		},
 		"sync_format": {
 			// Property: SyncFormat
@@ -188,7 +198,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			// SyncFormat is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SyncFormat is a force-new property.
+			},
 		},
 		"sync_name": {
 			// Property: SyncName
@@ -203,7 +215,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// SyncName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SyncName is a force-new property.
+			},
 		},
 		"sync_source": {
 			// Property: SyncSource
@@ -313,7 +327,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// SyncType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SyncType is a force-new property.
+			},
 		},
 	}
 

@@ -59,7 +59,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// CalculatorName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CalculatorName is a force-new property.
+			},
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -81,7 +83,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// DataSource is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataSource is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -97,7 +101,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
@@ -117,7 +123,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"MobileAssetManagement",
 				}),
 			},
-			// PricingPlan is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

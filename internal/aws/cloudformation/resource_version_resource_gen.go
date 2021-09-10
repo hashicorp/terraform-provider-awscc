@@ -46,7 +46,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ExecutionRoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+			},
 		},
 		"is_default_version": {
 			// Property: IsDefaultVersion
@@ -105,7 +107,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Computed: true,
-			// LoggingConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LoggingConfig is a force-new property.
+			},
 		},
 		"provisioning_type": {
 			// Property: ProvisioningType
@@ -133,8 +137,10 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.\n\nFor information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.",
 			Type:        types.StringType,
 			Required:    true,
-			// SchemaHandlerPackage is a force-new attribute.
-			// SchemaHandlerPackage is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SchemaHandlerPackage is a force-new property.
+			},
+			// SchemaHandlerPackage is a write-only property.
 		},
 		"type_arn": {
 			// Property: TypeArn
@@ -159,7 +165,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Required:    true,
-			// TypeName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+			},
 		},
 		"version_id": {
 			// Property: VersionId

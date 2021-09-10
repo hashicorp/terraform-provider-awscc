@@ -45,7 +45,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
-			// DeleteAllPolicyResources is a write-only attribute.
+			// DeleteAllPolicyResources is a write-only property.
 		},
 		"exclude_map": {
 			// Property: ExcludeMap

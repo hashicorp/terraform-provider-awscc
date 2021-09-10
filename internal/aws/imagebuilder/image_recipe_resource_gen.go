@@ -251,7 +251,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// BlockDeviceMappings is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BlockDeviceMappings is a force-new property.
+			},
 		},
 		"components": {
 			// Property: Components
@@ -332,7 +334,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
-			// Components is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Components is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -345,7 +349,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -357,7 +363,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the image recipe.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"parent_image": {
 			// Property: ParentImage
@@ -369,7 +377,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The parent image of the image recipe.",
 			Type:        types.StringType,
 			Required:    true,
-			// ParentImage is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ParentImage is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -389,7 +399,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"version": {
 			// Property: Version
@@ -401,7 +413,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The version of the image recipe.",
 			Type:        types.StringType,
 			Required:    true,
-			// Version is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Version is a force-new property.
+			},
 		},
 		"working_directory": {
 			// Property: WorkingDirectory
@@ -414,7 +428,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// WorkingDirectory is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WorkingDirectory is a force-new property.
+			},
 		},
 	}
 

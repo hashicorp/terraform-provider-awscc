@@ -125,7 +125,9 @@ func inputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// InputName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InputName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

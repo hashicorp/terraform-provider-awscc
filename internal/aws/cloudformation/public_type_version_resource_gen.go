@@ -35,7 +35,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Arn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Arn is a force-new property.
+			},
 		},
 		"log_delivery_bucket": {
 			// Property: LogDeliveryBucket
@@ -48,7 +50,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// LogDeliveryBucket is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogDeliveryBucket is a force-new property.
+			},
 		},
 		"public_type_arn": {
 			// Property: PublicTypeArn
@@ -79,7 +83,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(5, 64),
 			},
-			// PublicVersionNumber is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PublicVersionNumber is a force-new property.
+			},
 		},
 		"publisher_id": {
 			// Property: PublisherId
@@ -116,7 +122,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"MODULE",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 		"type_name": {
 			// Property: TypeName
@@ -130,7 +138,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// TypeName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+			},
 		},
 		"type_version_arn": {
 			// Property: TypeVersionArn

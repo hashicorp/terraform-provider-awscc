@@ -75,7 +75,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// Cluster is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+			},
 		},
 		"deployment_configuration": {
 			// Property: DeploymentConfiguration
@@ -177,7 +179,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// DeploymentController is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DeploymentController is a force-new property.
+			},
 		},
 		"desired_count": {
 			// Property: DesiredCount
@@ -197,7 +201,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
-			// EnableECSManagedTags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EnableECSManagedTags is a force-new property.
+			},
 		},
 		"enable_execute_command": {
 			// Property: EnableExecuteCommand
@@ -238,7 +244,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"EXTERNAL",
 				}),
 			},
-			// LaunchType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LaunchType is a force-new property.
+			},
 		},
 		"load_balancers": {
 			// Property: LoadBalancers
@@ -291,7 +299,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// LoadBalancers is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LoadBalancers is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -419,7 +429,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// PlacementConstraints is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlacementConstraints is a force-new property.
+			},
 		},
 		"placement_strategies": {
 			// Property: PlacementStrategies
@@ -471,7 +483,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// PlacementStrategies is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlacementStrategies is a force-new property.
+			},
 		},
 		"platform_version": {
 			// Property: PlatformVersion
@@ -501,7 +515,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"TASK_DEFINITION",
 				}),
 			},
-			// PropagateTags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PropagateTags is a force-new property.
+			},
 		},
 		"role": {
 			// Property: Role
@@ -512,7 +528,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// Role is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Role is a force-new property.
+			},
 		},
 		"scheduling_strategy": {
 			// Property: SchedulingStrategy
@@ -533,7 +551,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"REPLICA",
 				}),
 			},
-			// SchedulingStrategy is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SchedulingStrategy is a force-new property.
+			},
 		},
 		"service_arn": {
 			// Property: ServiceArn
@@ -553,7 +573,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ServiceName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceName is a force-new property.
+			},
 		},
 		"service_registries": {
 			// Property: ServiceRegistries
@@ -606,7 +628,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// ServiceRegistries is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceRegistries is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

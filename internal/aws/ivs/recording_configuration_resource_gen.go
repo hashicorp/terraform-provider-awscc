@@ -81,17 +81,23 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
 									},
-									// BucketName is a force-new attribute.
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.RequiresReplace(), // BucketName is a force-new property.
+									},
 								},
 							},
 						),
 						Required: true,
-						// S3 is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // S3 is a force-new property.
+						},
 					},
 				},
 			),
 			Required: true,
-			// DestinationConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DestinationConfiguration is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -110,7 +116,9 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"state": {
 			// Property: State

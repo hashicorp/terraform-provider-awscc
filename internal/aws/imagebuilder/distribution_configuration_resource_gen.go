@@ -356,7 +356,9 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The name of the distribution configuration.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

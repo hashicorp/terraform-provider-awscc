@@ -80,7 +80,9 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The name of the module being registered.\n\nRecommended module naming pattern: company_or_organization::service::type::MODULE.",
 			Type:        types.StringType,
 			Required:    true,
-			// ModuleName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModuleName is a force-new property.
+			},
 		},
 		"module_package": {
 			// Property: ModulePackage
@@ -92,8 +94,10 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The url to the S3 bucket containing the schema and template fragment for the module you want to register.",
 			Type:        types.StringType,
 			Required:    true,
-			// ModulePackage is a force-new attribute.
-			// ModulePackage is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModulePackage is a force-new property.
+			},
+			// ModulePackage is a write-only property.
 		},
 		"schema": {
 			// Property: Schema

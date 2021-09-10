@@ -67,7 +67,9 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			// LogGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogGroupName is a force-new property.
+			},
 		},
 		"retention_in_days": {
 			// Property: RetentionInDays

@@ -142,7 +142,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			// DBProxyName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DBProxyName is a force-new property.
+			},
 		},
 		"debug_logging": {
 			// Property: DebugLogging
@@ -186,7 +188,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"POSTGRESQL",
 				}),
 			},
-			// EngineFamily is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EngineFamily is a force-new property.
+			},
 		},
 		"idle_client_timeout": {
 			// Property: IdleClientTimeout
@@ -317,7 +321,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(2),
 			},
-			// VpcSubnetIds is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcSubnetIds is a force-new property.
+			},
 		},
 	}
 

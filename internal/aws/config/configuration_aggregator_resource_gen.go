@@ -106,7 +106,9 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// ConfigurationAggregatorName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConfigurationAggregatorName is a force-new property.
+			},
 		},
 		"organization_aggregation_source": {
 			// Property: OrganizationAggregationSource

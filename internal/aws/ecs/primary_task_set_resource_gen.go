@@ -31,7 +31,9 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
-			// Cluster is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+			},
 		},
 		"service": {
 			// Property: Service
@@ -43,7 +45,9 @@ func primaryTaskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 			Type:        types.StringType,
 			Required:    true,
-			// Service is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Service is a force-new property.
+			},
 		},
 		"task_set_id": {
 			// Property: TaskSetId

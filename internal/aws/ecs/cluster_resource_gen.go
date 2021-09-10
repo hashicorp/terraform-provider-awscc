@@ -55,7 +55,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ClusterName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+			},
 		},
 		"cluster_settings": {
 			// Property: ClusterSettings

@@ -48,7 +48,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -61,7 +63,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that this dataset was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
-			// CreatedTime is a write-only attribute.
+			// CreatedTime is a write-only property.
 		},
 		"dashboard_id": {
 			// Property: DashboardId
@@ -77,7 +79,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// DashboardId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DashboardId is a force-new property.
+			},
 		},
 		"dashboard_publish_options": {
 			// Property: DashboardPublishOptions
@@ -197,7 +201,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// DashboardPublishOptions is a write-only attribute.
+			// DashboardPublishOptions is a write-only property.
 		},
 		"last_published_time": {
 			// Property: LastPublishedTime
@@ -222,7 +226,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The last time that this dataset was updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
-			// LastUpdatedTime is a write-only attribute.
+			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
 			// Property: Name
@@ -473,7 +477,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// Parameters is a write-only attribute.
+			// Parameters is a write-only property.
 		},
 		"permissions": {
 			// Property: Permissions
@@ -634,7 +638,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// SourceEntity is a write-only attribute.
+			// SourceEntity is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -707,7 +711,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.</p>",
 			Type:        types.StringType,
 			Optional:    true,
-			// ThemeArn is a write-only attribute.
+			// ThemeArn is a write-only property.
 		},
 		"version": {
 			// Property: Version
@@ -963,7 +967,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
-			// Version is a write-only attribute.
+			// Version is a write-only property.
 		},
 		"version_description": {
 			// Property: VersionDescription
@@ -980,7 +984,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			// VersionDescription is a write-only attribute.
+			// VersionDescription is a write-only property.
 		},
 	}
 

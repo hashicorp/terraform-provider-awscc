@@ -31,7 +31,9 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// CustomerGatewayArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CustomerGatewayArn is a force-new property.
+			},
 		},
 		"device_id": {
 			// Property: DeviceId
@@ -43,7 +45,9 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The ID of the device",
 			Type:        types.StringType,
 			Required:    true,
-			// DeviceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DeviceId is a force-new property.
+			},
 		},
 		"global_network_id": {
 			// Property: GlobalNetworkId
@@ -55,7 +59,9 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
-			// GlobalNetworkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+			},
 		},
 		"link_id": {
 			// Property: LinkId
@@ -68,7 +74,9 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// LinkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LinkId is a force-new property.
+			},
 		},
 	}
 

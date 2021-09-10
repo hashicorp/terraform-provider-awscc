@@ -39,7 +39,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// AnalyzerName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AnalyzerName is a force-new property.
+			},
 		},
 		"archive_rules": {
 			// Property: ArchiveRules
@@ -239,7 +241,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

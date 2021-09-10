@@ -1049,7 +1049,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// FlowName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FlowName is a force-new property.
+			},
 		},
 		"kms_arn": {
 			// Property: KMSArn
@@ -1068,7 +1070,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// KMSArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KMSArn is a force-new property.
+			},
 		},
 		"source_flow_config": {
 			// Property: SourceFlowConfig

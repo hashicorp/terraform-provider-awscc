@@ -388,7 +388,9 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 128),
 			},
-			// TrailName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TrailName is a force-new property.
+			},
 		},
 	}
 

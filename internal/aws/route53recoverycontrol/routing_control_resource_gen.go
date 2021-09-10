@@ -34,8 +34,10 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ClusterArn is a force-new attribute.
-			// ClusterArn is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusterArn is a force-new property.
+			},
+			// ClusterArn is a write-only property.
 		},
 		"control_panel_arn": {
 			// Property: ControlPanelArn
@@ -48,7 +50,9 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ControlPanelArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ControlPanelArn is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name

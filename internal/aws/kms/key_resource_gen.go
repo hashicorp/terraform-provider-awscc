@@ -170,7 +170,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(7, 30),
 			},
-			// PendingWindowInDays is a write-only attribute.
+			// PendingWindowInDays is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

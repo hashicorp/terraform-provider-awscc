@@ -32,7 +32,9 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Application is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Application is a force-new property.
+			},
 		},
 		"application_version": {
 			// Property: ApplicationVersion
@@ -70,7 +72,9 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
 			},
-			// CurrentRevisionId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CurrentRevisionId is a force-new property.
+			},
 		},
 	}
 

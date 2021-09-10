@@ -84,7 +84,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// DomainConfigurationName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainConfigurationName is a force-new property.
+			},
 		},
 		"domain_configuration_status": {
 			// Property: DomainConfigurationStatus
@@ -119,7 +121,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 253),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"domain_type": {
 			// Property: DomainType
@@ -155,8 +159,10 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1),
 			},
-			// ServerCertificateArns is a force-new attribute.
-			// ServerCertificateArns is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerCertificateArns is a force-new property.
+			},
+			// ServerCertificateArns is a write-only property.
 		},
 		"server_certificates": {
 			// Property: ServerCertificates
@@ -238,7 +244,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					"JOBS",
 				}),
 			},
-			// ServiceType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceType is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -289,7 +297,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ValidationCertificateArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ValidationCertificateArn is a force-new property.
+			},
 		},
 	}
 

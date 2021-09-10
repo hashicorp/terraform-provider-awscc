@@ -40,7 +40,9 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 	}
 

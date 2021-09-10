@@ -98,7 +98,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"last_updated_at": {
 			// Property: LastUpdatedAt

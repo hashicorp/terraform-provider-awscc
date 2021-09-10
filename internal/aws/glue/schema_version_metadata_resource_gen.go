@@ -38,7 +38,9 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// Key is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Key is a force-new property.
+			},
 		},
 		"schema_version_id": {
 			// Property: SchemaVersionId
@@ -51,7 +53,9 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "Represents the version ID associated with the schema version.",
 			Type:        types.StringType,
 			Required:    true,
-			// SchemaVersionId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SchemaVersionId is a force-new property.
+			},
 		},
 		"value": {
 			// Property: Value
@@ -68,7 +72,9 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// Value is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Value is a force-new property.
+			},
 		},
 	}
 

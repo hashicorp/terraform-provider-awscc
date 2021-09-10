@@ -92,7 +92,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// ResolverQueryLogConfigId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResolverQueryLogConfigId is a force-new property.
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId
@@ -110,7 +112,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// ResourceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status

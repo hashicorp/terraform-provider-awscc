@@ -42,7 +42,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ExclusiveEndTime is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ExclusiveEndTime is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -61,7 +63,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// InclusiveStartTime is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InclusiveStartTime is a force-new property.
+			},
 		},
 		"kinesis_configuration": {
 			// Property: KinesisConfiguration
@@ -94,7 +98,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// KinesisConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KinesisConfiguration is a force-new property.
+			},
 		},
 		"ledger_name": {
 			// Property: LedgerName
@@ -104,7 +110,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// LedgerName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LedgerName is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -115,7 +123,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"stream_name": {
 			// Property: StreamName
@@ -125,7 +135,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// StreamName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StreamName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

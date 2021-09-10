@@ -37,7 +37,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// ProductId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProductId is a force-new property.
+			},
 		},
 		"provisioning_artifact_id": {
 			// Property: ProvisioningArtifactId
@@ -53,7 +55,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// ProvisioningArtifactId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProvisioningArtifactId is a force-new property.
+			},
 		},
 		"service_action_id": {
 			// Property: ServiceActionId
@@ -69,7 +73,9 @@ func serviceActionAssociationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// ServiceActionId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceActionId is a force-new property.
+			},
 		},
 	}
 

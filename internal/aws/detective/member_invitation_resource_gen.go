@@ -45,7 +45,9 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The ARN of the graph to which the member account will be invited",
 			Type:        types.StringType,
 			Required:    true,
-			// GraphArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GraphArn is a force-new property.
+			},
 		},
 		"member_email_address": {
 			// Property: MemberEmailAddress
@@ -70,7 +72,9 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The AWS account ID to be invited to join the graph as a member",
 			Type:        types.StringType,
 			Required:    true,
-			// MemberId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // MemberId is a force-new property.
+			},
 		},
 		"message": {
 			// Property: Message

@@ -57,7 +57,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ExecutionRoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+			},
 		},
 		"logging_config": {
 			// Property: LoggingConfig
@@ -105,7 +107,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Optional: true,
 			Computed: true,
-			// LoggingConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LoggingConfig is a force-new property.
+			},
 		},
 		"major_version": {
 			// Property: MajorVersion
@@ -139,7 +143,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			// PublicTypeArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PublicTypeArn is a force-new property.
+			},
 		},
 		"publisher_id": {
 			// Property: PublisherId
@@ -158,7 +164,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
 			},
-			// PublisherId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PublisherId is a force-new property.
+			},
 		},
 		"type": {
 			// Property: Type
@@ -181,7 +189,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"MODULE",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 		"type_name": {
 			// Property: TypeName
@@ -195,7 +205,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// TypeName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+			},
 		},
 		"type_name_alias": {
 			// Property: TypeNameAlias
@@ -214,7 +226,9 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 204),
 			},
-			// TypeNameAlias is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TypeNameAlias is a force-new property.
+			},
 		},
 		"version_bump": {
 			// Property: VersionBump

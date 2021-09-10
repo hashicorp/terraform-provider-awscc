@@ -66,7 +66,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Computed: true,
-			// Components is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Components is a force-new property.
+			},
 		},
 		"container_type": {
 			// Property: ContainerType
@@ -87,7 +89,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"DOCKER",
 				}),
 			},
-			// ContainerType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContainerType is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -100,7 +104,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"dockerfile_template_data": {
 			// Property: DockerfileTemplateData
@@ -113,8 +119,10 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// DockerfileTemplateData is a force-new attribute.
-			// DockerfileTemplateData is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DockerfileTemplateData is a force-new property.
+			},
+			// DockerfileTemplateData is a write-only property.
 		},
 		"dockerfile_template_uri": {
 			// Property: DockerfileTemplateUri
@@ -127,8 +135,10 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// DockerfileTemplateUri is a force-new attribute.
-			// DockerfileTemplateUri is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DockerfileTemplateUri is a force-new property.
+			},
+			// DockerfileTemplateUri is a write-only property.
 		},
 		"image_os_version_override": {
 			// Property: ImageOsVersionOverride
@@ -141,7 +151,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ImageOsVersionOverride is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ImageOsVersionOverride is a force-new property.
+			},
 		},
 		"instance_configuration": {
 			// Property: InstanceConfiguration
@@ -327,7 +339,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Computed: true,
-			// InstanceConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InstanceConfiguration is a force-new property.
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -340,7 +354,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// KmsKeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -353,7 +369,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"parent_image": {
 			// Property: ParentImage
@@ -366,7 +384,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ParentImage is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ParentImage is a force-new property.
+			},
 		},
 		"platform_override": {
 			// Property: PlatformOverride
@@ -389,7 +409,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"Linux",
 				}),
 			},
-			// PlatformOverride is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlatformOverride is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -409,7 +431,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"target_repository": {
 			// Property: TargetRepository
@@ -456,7 +480,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Computed: true,
-			// TargetRepository is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetRepository is a force-new property.
+			},
 		},
 		"version": {
 			// Property: Version
@@ -469,7 +495,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Version is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Version is a force-new property.
+			},
 		},
 		"working_directory": {
 			// Property: WorkingDirectory
@@ -482,7 +510,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// WorkingDirectory is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WorkingDirectory is a force-new property.
+			},
 		},
 	}
 

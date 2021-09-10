@@ -57,7 +57,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Optional: true,
 			Computed: true,
-			// HttpUrlProperties is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // HttpUrlProperties is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status
@@ -152,7 +154,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Optional: true,
 			Computed: true,
-			// VpcProperties is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcProperties is a force-new property.
+			},
 		},
 	}
 

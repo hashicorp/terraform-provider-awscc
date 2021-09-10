@@ -36,7 +36,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// BuildId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BuildId is a force-new property.
+			},
 		},
 		"certificate_configuration": {
 			// Property: CertificateConfiguration
@@ -77,7 +79,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// CertificateConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateConfiguration is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -222,7 +226,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// EC2InstanceType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EC2InstanceType is a force-new property.
+			},
 		},
 		"fleet_id": {
 			// Property: FleetId
@@ -259,7 +265,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"SPOT",
 				}),
 			},
-			// FleetType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FleetType is a force-new property.
+			},
 		},
 		"instance_role_arn": {
 			// Property: InstanceRoleARN
@@ -278,7 +286,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// InstanceRoleARN is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InstanceRoleARN is a force-new property.
+			},
 		},
 		"locations": {
 			// Property: Locations
@@ -405,7 +415,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// LogPaths is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogPaths is a force-new property.
+			},
 		},
 		"max_size": {
 			// Property: MaxSize
@@ -515,7 +527,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// PeerVpcAwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PeerVpcAwsAccountId is a force-new property.
+			},
 		},
 		"peer_vpc_id": {
 			// Property: PeerVpcId
@@ -535,7 +549,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// PeerVpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PeerVpcId is a force-new property.
+			},
 		},
 		"resource_creation_limit_policy": {
 			// Property: ResourceCreationLimitPolicy
@@ -723,7 +739,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ScriptId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ScriptId is a force-new property.
+			},
 		},
 		"server_launch_parameters": {
 			// Property: ServerLaunchParameters
@@ -742,7 +760,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// ServerLaunchParameters is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerLaunchParameters is a force-new property.
+			},
 		},
 		"server_launch_path": {
 			// Property: ServerLaunchPath
@@ -761,7 +781,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// ServerLaunchPath is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerLaunchPath is a force-new property.
+			},
 		},
 	}
 

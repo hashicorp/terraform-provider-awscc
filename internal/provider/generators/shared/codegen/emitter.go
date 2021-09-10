@@ -582,11 +582,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if createOnly {
-		e.printf("// %s is a force-new attribute.\n", name)
+		e.printf("PlanModifiers:[]tfsdk.AttributePlanModifier{\n")
+		e.printf("tfsdk.RequiresReplace(),// %s is a force-new property.\n", name)
+		e.printf("},\n")
 	}
 
 	if writeOnly {
-		e.printf("// %s is a write-only attribute.\n", name)
+		e.printf("// %s is a write-only property.\n", name)
 	}
 
 	if !createOnly && !readOnly {

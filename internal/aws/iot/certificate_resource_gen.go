@@ -46,8 +46,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 65536),
 			},
-			// CACertificatePem is a force-new attribute.
-			// CACertificatePem is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CACertificatePem is a force-new property.
+			},
+			// CACertificatePem is a write-only property.
 		},
 		"certificate_mode": {
 			// Property: CertificateMode
@@ -68,7 +70,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"SNI_ONLY",
 				}),
 			},
-			// CertificateMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateMode is a force-new property.
+			},
 		},
 		"certificate_pem": {
 			// Property: CertificatePem
@@ -84,7 +88,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 65536),
 			},
-			// CertificatePem is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificatePem is a force-new property.
+			},
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
@@ -95,8 +101,10 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// CertificateSigningRequest is a force-new attribute.
-			// CertificateSigningRequest is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateSigningRequest is a force-new property.
+			},
+			// CertificateSigningRequest is a write-only property.
 		},
 		"id": {
 			// Property: Id

@@ -38,7 +38,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// DomainId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainId is a force-new property.
+			},
 		},
 		"single_sign_on_user_identifier": {
 			// Property: SingleSignOnUserIdentifier
@@ -52,7 +54,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// SingleSignOnUserIdentifier is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SingleSignOnUserIdentifier is a force-new property.
+			},
 		},
 		"single_sign_on_user_value": {
 			// Property: SingleSignOnUserValue
@@ -70,7 +74,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// SingleSignOnUserValue is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SingleSignOnUserValue is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -129,8 +135,10 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
-			// Tags is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
+			// Tags is a write-only property.
 		},
 		"user_profile_arn": {
 			// Property: UserProfileArn
@@ -160,7 +168,9 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// UserProfileName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserProfileName is a force-new property.
+			},
 		},
 		"user_settings": {
 			// Property: UserSettings

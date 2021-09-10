@@ -193,7 +193,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// EventBridgeBus is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EventBridgeBus is a force-new property.
+			},
 		},
 		"event_filter": {
 			// Property: EventFilter
@@ -228,7 +230,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				},
 			),
 			Required: true,
-			// EventFilter is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EventFilter is a force-new property.
+			},
 		},
 		"event_integration_arn": {
 			// Property: EventIntegrationArn
@@ -260,7 +264,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

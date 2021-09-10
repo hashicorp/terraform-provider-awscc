@@ -1084,7 +1084,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// ContainerDefinitions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContainerDefinitions is a force-new property.
+			},
 		},
 		"cpu": {
 			// Property: Cpu
@@ -1095,7 +1097,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// Cpu is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Cpu is a force-new property.
+			},
 		},
 		"ephemeral_storage": {
 			// Property: EphemeralStorage
@@ -1120,7 +1124,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Optional: true,
 			Computed: true,
-			// EphemeralStorage is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EphemeralStorage is a force-new property.
+			},
 		},
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
@@ -1131,7 +1137,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// ExecutionRoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+			},
 		},
 		"family": {
 			// Property: Family
@@ -1142,7 +1150,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// Family is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Family is a force-new property.
+			},
 		},
 		"inference_accelerators": {
 			// Property: InferenceAccelerators
@@ -1183,7 +1193,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// InferenceAccelerators is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InferenceAccelerators is a force-new property.
+			},
 		},
 		"ipc_mode": {
 			// Property: IpcMode
@@ -1194,7 +1206,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// IpcMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IpcMode is a force-new property.
+			},
 		},
 		"memory": {
 			// Property: Memory
@@ -1205,7 +1219,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// Memory is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Memory is a force-new property.
+			},
 		},
 		"network_mode": {
 			// Property: NetworkMode
@@ -1216,7 +1232,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// NetworkMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkMode is a force-new property.
+			},
 		},
 		"pid_mode": {
 			// Property: PidMode
@@ -1227,7 +1245,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// PidMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PidMode is a force-new property.
+			},
 		},
 		"placement_constraints": {
 			// Property: PlacementConstraints
@@ -1271,7 +1291,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// PlacementConstraints is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PlacementConstraints is a force-new property.
+			},
 		},
 		"proxy_configuration": {
 			// Property: ProxyConfiguration
@@ -1345,7 +1367,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Optional: true,
 			Computed: true,
-			// ProxyConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProxyConfiguration is a force-new property.
+			},
 		},
 		"requires_compatibilities": {
 			// Property: RequiresCompatibilities
@@ -1363,7 +1387,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// RequiresCompatibilities is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RequiresCompatibilities is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1420,7 +1446,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// TaskRoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TaskRoleArn is a force-new property.
+			},
 		},
 		"volumes": {
 			// Property: Volumes
@@ -1642,7 +1670,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// Volumes is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Volumes is a force-new property.
+			},
 		},
 	}
 

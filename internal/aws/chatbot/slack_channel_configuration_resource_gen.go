@@ -51,7 +51,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// ConfigurationName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConfigurationName is a force-new property.
+			},
 		},
 		"iam_role_arn": {
 			// Property: IamRoleArn
@@ -109,7 +111,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// SlackWorkspaceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SlackWorkspaceId is a force-new property.
+			},
 		},
 		"sns_topic_arns": {
 			// Property: SnsTopicArns

@@ -65,7 +65,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// Configuration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Configuration is a force-new property.
+			},
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -102,7 +104,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"map_arn": {
 			// Property: MapArn
@@ -129,7 +133,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// MapName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // MapName is a force-new property.
+			},
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
@@ -151,7 +157,9 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"MobileAssetManagement",
 				}),
 			},
-			// PricingPlan is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

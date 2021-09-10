@@ -78,8 +78,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
 			},
-			// BucketName is a force-new attribute.
-			// BucketName is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+			},
+			// BucketName is a write-only property.
 		},
 		"location_arn": {
 			// Property: LocationArn
@@ -123,7 +125,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 200),
 			},
-			// SecretKey is a write-only attribute.
+			// SecretKey is a write-only property.
 		},
 		"server_hostname": {
 			// Property: ServerHostname
@@ -140,8 +142,10 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			// ServerHostname is a force-new attribute.
-			// ServerHostname is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+			},
+			// ServerHostname is a write-only property.
 		},
 		"server_port": {
 			// Property: ServerPort
@@ -195,7 +199,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			// Subdirectory is a write-only attribute.
+			// Subdirectory is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

@@ -34,7 +34,9 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.NumberType,
 			Optional:    true,
 			Computed:    true,
-			// DataTransferSubscriberFeePercent is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataTransferSubscriberFeePercent is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -233,7 +235,9 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The name of the entitlement.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"subscribers": {
 			// Property: Subscribers

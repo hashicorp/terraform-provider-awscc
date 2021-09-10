@@ -38,7 +38,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"event_time_feature_name": {
 			// Property: EventTimeFeatureName
@@ -56,7 +58,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// EventTimeFeatureName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EventTimeFeatureName is a force-new property.
+			},
 		},
 		"feature_definitions": {
 			// Property: FeatureDefinitions
@@ -122,7 +126,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// FeatureDefinitions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FeatureDefinitions is a force-new property.
+			},
 		},
 		"feature_group_name": {
 			// Property: FeatureGroupName
@@ -140,7 +146,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// FeatureGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FeatureGroupName is a force-new property.
+			},
 		},
 		"offline_store_config": {
 			// Property: OfflineStoreConfig
@@ -271,7 +279,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// OfflineStoreConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // OfflineStoreConfig is a force-new property.
+			},
 		},
 		"online_store_config": {
 			// Property: OnlineStoreConfig
@@ -322,7 +332,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// OnlineStoreConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // OnlineStoreConfig is a force-new property.
+			},
 		},
 		"record_identifier_feature_name": {
 			// Property: RecordIdentifierFeatureName
@@ -340,7 +352,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// RecordIdentifierFeatureName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RecordIdentifierFeatureName is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -359,7 +373,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -407,7 +423,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

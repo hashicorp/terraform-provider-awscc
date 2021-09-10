@@ -51,7 +51,9 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// ReadinessCheckName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ReadinessCheckName is a force-new property.
+			},
 		},
 		"resource_set_name": {
 			// Property: ResourceSetName

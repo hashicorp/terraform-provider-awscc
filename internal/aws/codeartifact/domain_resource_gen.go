@@ -52,7 +52,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 50),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"encryption_key": {
 			// Property: EncryptionKey
@@ -64,7 +66,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			// EncryptionKey is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EncryptionKey is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name

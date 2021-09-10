@@ -65,7 +65,9 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// ResourceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+			},
 		},
 		"validation_status": {
 			// Property: ValidationStatus

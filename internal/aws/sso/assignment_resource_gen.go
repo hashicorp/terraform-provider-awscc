@@ -39,7 +39,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			// InstanceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InstanceArn is a force-new property.
+			},
 		},
 		"permission_set_arn": {
 			// Property: PermissionSetArn
@@ -57,7 +59,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			// PermissionSetArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PermissionSetArn is a force-new property.
+			},
 		},
 		"principal_id": {
 			// Property: PrincipalId
@@ -75,7 +79,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 47),
 			},
-			// PrincipalId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PrincipalId is a force-new property.
+			},
 		},
 		"principal_type": {
 			// Property: PrincipalType
@@ -97,7 +103,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"GROUP",
 				}),
 			},
-			// PrincipalType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PrincipalType is a force-new property.
+			},
 		},
 		"target_id": {
 			// Property: TargetId
@@ -110,7 +118,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The account id to be provisioned.",
 			Type:        types.StringType,
 			Required:    true,
-			// TargetId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetId is a force-new property.
+			},
 		},
 		"target_type": {
 			// Property: TargetType
@@ -130,7 +140,9 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"AWS_ACCOUNT",
 				}),
 			},
-			// TargetType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetType is a force-new property.
+			},
 		},
 	}
 

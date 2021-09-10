@@ -48,7 +48,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"base_theme_id": {
 			// Property: BaseThemeId
@@ -66,7 +68,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// BaseThemeId is a write-only attribute.
+			// BaseThemeId is a write-only property.
 		},
 		"configuration": {
 			// Property: Configuration
@@ -512,7 +514,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// Configuration is a write-only attribute.
+			// Configuration is a write-only property.
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -693,7 +695,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// ThemeId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ThemeId is a force-new property.
+			},
 		},
 		"type": {
 			// Property: Type
@@ -1330,7 +1334,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			// VersionDescription is a write-only attribute.
+			// VersionDescription is a write-only property.
 		},
 	}
 

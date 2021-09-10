@@ -38,8 +38,10 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 29),
 			},
-			// ActivationKey is a force-new attribute.
-			// ActivationKey is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ActivationKey is a force-new property.
+			},
+			// ActivationKey is a write-only property.
 		},
 		"agent_arn": {
 			// Property: AgentArn
@@ -104,7 +106,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// SecurityGroupArns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SecurityGroupArns is a force-new property.
+			},
 		},
 		"subnet_arns": {
 			// Property: SubnetArns
@@ -123,7 +127,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// SubnetArns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SubnetArns is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -200,7 +206,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// VpcEndpointId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcEndpointId is a force-new property.
+			},
 		},
 	}
 

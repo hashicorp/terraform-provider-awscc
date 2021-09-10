@@ -67,7 +67,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 50),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"domain_owner": {
 			// Property: DomainOwner
@@ -80,7 +82,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The 12-digit account ID of the AWS account that owns the domain.",
 			Type:        types.StringType,
 			Computed:    true,
-			// DomainOwner is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainOwner is a force-new property.
+			},
 		},
 		"external_connections": {
 			// Property: ExternalConnections
@@ -139,7 +143,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 100),
 			},
-			// RepositoryName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RepositoryName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

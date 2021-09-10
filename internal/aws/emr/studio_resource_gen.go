@@ -53,7 +53,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"IAM",
 				}),
 			},
-			// AuthMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AuthMode is a force-new property.
+			},
 		},
 		"default_s3_location": {
 			// Property: DefaultS3Location
@@ -104,7 +106,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 256),
 			},
-			// EngineSecurityGroupId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EngineSecurityGroupId is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -132,7 +136,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// ServiceRole is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceRole is a force-new property.
+			},
 		},
 		"studio_id": {
 			// Property: StudioId
@@ -248,7 +254,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// UserRole is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserRole is a force-new property.
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId
@@ -261,7 +269,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
 			Type:        types.StringType,
 			Required:    true,
-			// VpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+			},
 		},
 		"workspace_security_group_id": {
 			// Property: WorkspaceSecurityGroupId
@@ -274,7 +284,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
 			Required:    true,
-			// WorkspaceSecurityGroupId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WorkspaceSecurityGroupId is a force-new property.
+			},
 		},
 	}
 

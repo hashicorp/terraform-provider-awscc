@@ -48,7 +48,9 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel ARN for the stream.",
 			Type:        types.StringType,
 			Required:    true,
-			// ChannelArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ChannelArn is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

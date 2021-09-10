@@ -32,7 +32,9 @@ func dNSSECResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The unique string (ID) used to identify a hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
-			// HostedZoneId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // HostedZoneId is a force-new property.
+			},
 		},
 	}
 

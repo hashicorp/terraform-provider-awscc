@@ -146,7 +146,9 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// OrganizationConformancePackName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // OrganizationConformancePackName is a force-new property.
+			},
 		},
 		"template_body": {
 			// Property: TemplateBody
@@ -163,7 +165,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 51200),
 			},
-			// TemplateBody is a write-only attribute.
+			// TemplateBody is a write-only property.
 		},
 		"template_s3_uri": {
 			// Property: TemplateS3Uri
@@ -181,7 +183,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
 			},
-			// TemplateS3Uri is a write-only attribute.
+			// TemplateS3Uri is a write-only property.
 		},
 	}
 

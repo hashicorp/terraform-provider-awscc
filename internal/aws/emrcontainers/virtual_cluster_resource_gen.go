@@ -125,7 +125,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Required: true,
-			// ContainerProvider is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContainerProvider is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -156,7 +158,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
