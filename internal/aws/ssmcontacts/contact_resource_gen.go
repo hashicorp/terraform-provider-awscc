@@ -39,7 +39,9 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// Alias is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Alias is a force-new property.
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -228,7 +230,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
-			// Plan is a write-only attribute.
+			// Plan is a write-only property.
 		},
 		"type": {
 			// Property: Type
@@ -254,7 +256,9 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ESCALATION",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

@@ -142,7 +142,9 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "The name of the infrastructure configuration.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"resource_tags": {
 			// Property: ResourceTags

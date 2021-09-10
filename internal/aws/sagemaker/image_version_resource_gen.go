@@ -39,7 +39,9 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// BaseImage is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BaseImage is a force-new property.
+			},
 		},
 		"container_image": {
 			// Property: ContainerImage
@@ -85,7 +87,9 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// ImageName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ImageName is a force-new property.
+			},
 		},
 		"image_version_arn": {
 			// Property: ImageVersionArn

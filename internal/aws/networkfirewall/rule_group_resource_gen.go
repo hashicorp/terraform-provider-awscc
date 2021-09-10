@@ -31,7 +31,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.NumberType,
 			Required: true,
-			// Capacity is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Capacity is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -997,7 +999,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// RuleGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RuleGroupName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1070,7 +1074,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"STATEFUL",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

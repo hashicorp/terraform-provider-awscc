@@ -43,7 +43,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name for the database which the table to be created belongs to.",
 			Type:        types.StringType,
 			Required:    true,
-			// DatabaseName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DatabaseName is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -105,7 +107,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// TableName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TableName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

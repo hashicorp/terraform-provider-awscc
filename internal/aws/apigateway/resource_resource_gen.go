@@ -31,7 +31,9 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The parent resource's identifier.",
 			Type:        types.StringType,
 			Required:    true,
-			// ParentId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ParentId is a force-new property.
+			},
 		},
 		"path_part": {
 			// Property: PathPart
@@ -43,7 +45,9 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The last path segment for this resource.",
 			Type:        types.StringType,
 			Required:    true,
-			// PathPart is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PathPart is a force-new property.
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId
@@ -66,7 +70,9 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the RestApi resource in which you want to create this resource..",
 			Type:        types.StringType,
 			Required:    true,
-			// RestApiId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+			},
 		},
 	}
 

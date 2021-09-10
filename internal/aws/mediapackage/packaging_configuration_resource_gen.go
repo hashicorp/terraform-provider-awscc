@@ -872,7 +872,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The ID of the PackagingConfiguration.",
 			Type:        types.StringType,
 			Required:    true,
-			// Id is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Id is a force-new property.
+			},
 		},
 		"mss_package": {
 			// Property: MssPackage

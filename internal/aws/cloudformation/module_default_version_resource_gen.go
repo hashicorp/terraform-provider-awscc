@@ -35,7 +35,9 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Arn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Arn is a force-new property.
+			},
 		},
 		"module_name": {
 			// Property: ModuleName
@@ -49,8 +51,10 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ModuleName is a force-new attribute.
-			// ModuleName is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModuleName is a force-new property.
+			},
+			// ModuleName is a write-only property.
 		},
 		"version_id": {
 			// Property: VersionId
@@ -64,8 +68,10 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// VersionId is a force-new attribute.
-			// VersionId is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VersionId is a force-new property.
+			},
+			// VersionId is a write-only property.
 		},
 	}
 

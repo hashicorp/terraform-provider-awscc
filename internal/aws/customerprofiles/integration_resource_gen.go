@@ -50,7 +50,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"flow_definition": {
 			// Property: FlowDefinition
@@ -962,7 +964,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// FlowDefinition is a write-only attribute.
+			// FlowDefinition is a write-only property.
 		},
 		"last_updated_at": {
 			// Property: LastUpdatedAt
@@ -1065,7 +1067,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// Uri is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Uri is a force-new property.
+			},
 		},
 	}
 

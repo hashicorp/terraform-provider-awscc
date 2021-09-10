@@ -54,7 +54,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// DataSource is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataSource is a force-new property.
+			},
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -89,7 +91,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// DataSourceConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataSourceConfiguration is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -105,7 +109,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"index_arn": {
 			// Property: IndexArn
@@ -132,7 +138,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// IndexName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IndexName is a force-new property.
+			},
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
@@ -154,7 +162,9 @@ func placeIndexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"MobileAssetManagement",
 				}),
 			},
-			// PricingPlan is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

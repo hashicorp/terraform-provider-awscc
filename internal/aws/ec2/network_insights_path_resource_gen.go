@@ -40,7 +40,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Destination is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Destination is a force-new property.
+			},
 		},
 		"destination_ip": {
 			// Property: DestinationIp
@@ -51,7 +53,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// DestinationIp is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DestinationIp is a force-new property.
+			},
 		},
 		"destination_port": {
 			// Property: DestinationPort
@@ -62,7 +66,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.NumberType,
 			Optional: true,
 			Computed: true,
-			// DestinationPort is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DestinationPort is a force-new property.
+			},
 		},
 		"network_insights_path_arn": {
 			// Property: NetworkInsightsPathArn
@@ -100,7 +106,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					"udp",
 				}),
 			},
-			// Protocol is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Protocol is a force-new property.
+			},
 		},
 		"source": {
 			// Property: Source
@@ -110,7 +118,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Source is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Source is a force-new property.
+			},
 		},
 		"source_ip": {
 			// Property: SourceIp
@@ -121,7 +131,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// SourceIp is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SourceIp is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

@@ -49,7 +49,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"column_groups": {
 			// Property: ColumnGroups
@@ -231,7 +233,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// DataSetId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataSetId is a force-new property.
+			},
 		},
 		"field_folders": {
 			// Property: FieldFolders
@@ -282,7 +286,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.MapNestedAttributesOptions{},
 			),
 			Optional: true,
-			// FieldFolders is a write-only attribute.
+			// FieldFolders is a write-only property.
 		},
 		"import_mode": {
 			// Property: ImportMode
@@ -343,7 +347,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// IngestionWaitPolicy is a write-only attribute.
+			// IngestionWaitPolicy is a write-only property.
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime

@@ -78,8 +78,10 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			// GenerateDistinctId is a force-new attribute.
-			// GenerateDistinctId is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GenerateDistinctId is a force-new property.
+			},
+			// GenerateDistinctId is a write-only property.
 		},
 		"name": {
 			// Property: Name
@@ -92,7 +94,9 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"stage_keys": {
 			// Property: StageKeys
@@ -205,7 +209,9 @@ func apiKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Value is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Value is a force-new property.
+			},
 		},
 	}
 

@@ -1420,7 +1420,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				},
 			),
 			Optional: true,
-			// ConnectorProfileConfig is a write-only attribute.
+			// ConnectorProfileConfig is a write-only property.
 		},
 		"connector_profile_name": {
 			// Property: ConnectorProfileName
@@ -1437,7 +1437,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			// ConnectorProfileName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConnectorProfileName is a force-new property.
+			},
 		},
 		"connector_type": {
 			// Property: ConnectorType
@@ -1483,7 +1485,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"Veeva",
 				}),
 			},
-			// ConnectorType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConnectorType is a force-new property.
+			},
 		},
 		"credentials_arn": {
 			// Property: CredentialsArn
@@ -1515,7 +1519,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// KMSArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KMSArn is a force-new property.
+			},
 		},
 	}
 

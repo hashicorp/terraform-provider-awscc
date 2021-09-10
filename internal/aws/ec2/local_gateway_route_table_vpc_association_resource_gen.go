@@ -44,7 +44,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
 			Required:    true,
-			// LocalGatewayRouteTableId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LocalGatewayRouteTableId is a force-new property.
+			},
 		},
 		"local_gateway_route_table_vpc_association_id": {
 			// Property: LocalGatewayRouteTableVpcAssociationId
@@ -127,7 +129,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The ID of the VPC.",
 			Type:        types.StringType,
 			Required:    true,
-			// VpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+			},
 		},
 	}
 

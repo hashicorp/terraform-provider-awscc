@@ -106,7 +106,9 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// DeviceFleetName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DeviceFleetName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

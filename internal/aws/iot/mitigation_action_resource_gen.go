@@ -40,7 +40,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// ActionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ActionName is a force-new property.
+			},
 		},
 		"action_params": {
 			// Property: ActionParams

@@ -63,7 +63,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			// JobDefinitionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobDefinitionName is a force-new property.
+			},
 		},
 		"job_resources": {
 			// Property: JobResources
@@ -157,7 +159,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 			),
 			Required: true,
-			// JobResources is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobResources is a force-new property.
+			},
 		},
 		"model_bias_app_specification": {
 			// Property: ModelBiasAppSpecification
@@ -233,7 +237,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 			),
 			Required: true,
-			// ModelBiasAppSpecification is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelBiasAppSpecification is a force-new property.
+			},
 		},
 		"model_bias_baseline_config": {
 			// Property: ModelBiasBaselineConfig
@@ -299,7 +305,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Optional: true,
 			Computed: true,
-			// ModelBiasBaselineConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelBiasBaselineConfig is a force-new property.
+			},
 		},
 		"model_bias_job_input": {
 			// Property: ModelBiasJobInput
@@ -528,7 +536,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 			),
 			Required: true,
-			// ModelBiasJobInput is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelBiasJobInput is a force-new property.
+			},
 		},
 		"model_bias_job_output_config": {
 			// Property: ModelBiasJobOutputConfig
@@ -660,7 +670,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 				},
 			),
 			Required: true,
-			// ModelBiasJobOutputConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelBiasJobOutputConfig is a force-new property.
+			},
 		},
 		"network_config": {
 			// Property: NetworkConfig
@@ -759,7 +771,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Optional: true,
 			Computed: true,
-			// NetworkConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkConfig is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -777,7 +791,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"stopping_condition": {
 			// Property: StoppingCondition
@@ -814,7 +830,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Optional: true,
 			Computed: true,
-			// StoppingCondition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StoppingCondition is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -876,7 +894,9 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

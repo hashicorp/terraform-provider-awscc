@@ -208,7 +208,9 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			// InstanceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InstanceArn is a force-new property.
+			},
 		},
 	}
 

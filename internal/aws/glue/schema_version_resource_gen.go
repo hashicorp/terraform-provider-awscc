@@ -80,7 +80,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				},
 			),
 			Required: true,
-			// Schema is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Schema is a force-new property.
+			},
 		},
 		"schema_definition": {
 			// Property: SchemaDefinition
@@ -97,7 +99,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 170000),
 			},
-			// SchemaDefinition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SchemaDefinition is a force-new property.
+			},
 		},
 		"version_id": {
 			// Property: VersionId

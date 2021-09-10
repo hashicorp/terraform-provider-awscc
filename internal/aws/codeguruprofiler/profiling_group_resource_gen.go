@@ -134,7 +134,9 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"AWSLambda",
 				}),
 			},
-			// ComputePlatform is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ComputePlatform is a force-new property.
+			},
 		},
 		"profiling_group_name": {
 			// Property: ProfilingGroupName
@@ -152,7 +154,9 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// ProfilingGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProfilingGroupName is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

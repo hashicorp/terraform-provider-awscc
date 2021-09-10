@@ -97,7 +97,9 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"RUN_SSM_DOCUMENTS",
 				}),
 			},
-			// ActionType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ActionType is a force-new property.
+			},
 		},
 		"approval_model": {
 			// Property: ApprovalModel
@@ -126,7 +128,9 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// BudgetName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BudgetName is a force-new property.
+			},
 		},
 		"definition": {
 			// Property: Definition

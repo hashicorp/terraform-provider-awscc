@@ -32,7 +32,9 @@ func modelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ContentType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContentType is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description
@@ -56,7 +58,9 @@ func modelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId
@@ -68,7 +72,9 @@ func modelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of a REST API with which to associate this model.",
 			Type:        types.StringType,
 			Required:    true,
-			// RestApiId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+			},
 		},
 		"schema": {
 			// Property: Schema

@@ -64,7 +64,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
 			},
-			// ModelPackageGroupDescription is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelPackageGroupDescription is a force-new property.
+			},
 		},
 		"model_package_group_name": {
 			// Property: ModelPackageGroupName
@@ -81,7 +83,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			// ModelPackageGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelPackageGroupName is a force-new property.
+			},
 		},
 		"model_package_group_policy": {
 			// Property: ModelPackageGroupPolicy

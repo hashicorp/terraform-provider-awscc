@@ -77,7 +77,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// FirewallRuleGroupId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FirewallRuleGroupId is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -268,7 +270,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// VpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+			},
 		},
 	}
 

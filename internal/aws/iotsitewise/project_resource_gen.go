@@ -31,7 +31,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the portal in which to create the project.",
 			Type:        types.StringType,
 			Required:    true,
-			// PortalId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PortalId is a force-new property.
+			},
 		},
 		"project_arn": {
 			// Property: ProjectArn

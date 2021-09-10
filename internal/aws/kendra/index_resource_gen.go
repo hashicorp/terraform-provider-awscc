@@ -327,7 +327,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ENTERPRISE_EDITION",
 				}),
 			},
-			// Edition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Edition is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -403,7 +405,9 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// ServerSideEncryptionConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerSideEncryptionConfiguration is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

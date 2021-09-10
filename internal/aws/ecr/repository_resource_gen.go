@@ -73,7 +73,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"KMS",
 							}),
 						},
-						// EncryptionType is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // EncryptionType is a force-new property.
+						},
 					},
 					"kms_key": {
 						// Property: KmsKey
@@ -84,13 +86,17 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
 						},
-						// KmsKey is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // KmsKey is a force-new property.
+						},
 					},
 				},
 			),
 			Optional: true,
 			Computed: true,
-			// EncryptionConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EncryptionConfiguration is a force-new property.
+			},
 		},
 		"image_scanning_configuration": {
 			// Property: ImageScanningConfiguration
@@ -205,7 +211,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 256),
 			},
-			// RepositoryName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RepositoryName is a force-new property.
+			},
 		},
 		"repository_policy_text": {
 			// Property: RepositoryPolicyText

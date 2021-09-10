@@ -48,7 +48,9 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// DocumentationVersion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DocumentationVersion is a force-new property.
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId
@@ -64,7 +66,9 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// RestApiId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+			},
 		},
 	}
 

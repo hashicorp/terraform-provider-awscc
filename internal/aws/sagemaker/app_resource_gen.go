@@ -53,7 +53,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// AppName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AppName is a force-new property.
+			},
 		},
 		"app_type": {
 			// Property: AppType
@@ -75,7 +77,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"KernelGateway",
 				}),
 			},
-			// AppType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AppType is a force-new property.
+			},
 		},
 		"domain_id": {
 			// Property: DomainId
@@ -92,7 +96,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// DomainId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainId is a force-new property.
+			},
 		},
 		"resource_spec": {
 			// Property: ResourceSpec
@@ -278,8 +284,10 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
-			// Tags is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
+			// Tags is a write-only property.
 		},
 		"user_profile_name": {
 			// Property: UserProfileName
@@ -297,7 +305,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// UserProfileName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserProfileName is a force-new property.
+			},
 		},
 	}
 

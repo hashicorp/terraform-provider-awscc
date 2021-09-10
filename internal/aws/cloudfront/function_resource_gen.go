@@ -29,7 +29,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
-			// AutoPublish is a write-only attribute.
+			// AutoPublish is a write-only property.
 		},
 		"function_arn": {
 			// Property: FunctionARN
@@ -48,7 +48,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
-			// FunctionCode is a write-only attribute.
+			// FunctionCode is a write-only property.
 		},
 		"function_config": {
 			// Property: FunctionConfig

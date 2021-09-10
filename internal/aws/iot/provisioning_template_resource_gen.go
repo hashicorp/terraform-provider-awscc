@@ -156,7 +156,9 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 36),
 			},
-			// TemplateName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TemplateName is a force-new property.
+			},
 		},
 	}
 

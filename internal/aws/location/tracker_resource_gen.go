@@ -60,7 +60,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -76,7 +78,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// KmsKeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+			},
 		},
 		"pricing_plan": {
 			// Property: PricingPlan
@@ -98,7 +102,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"MobileAssetManagement",
 				}),
 			},
-			// PricingPlan is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+			},
 		},
 		"pricing_plan_data_source": {
 			// Property: PricingPlanDataSource
@@ -109,7 +115,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// PricingPlanDataSource is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlanDataSource is a force-new property.
+			},
 		},
 		"tracker_arn": {
 			// Property: TrackerArn
@@ -136,7 +144,9 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// TrackerName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TrackerName is a force-new property.
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

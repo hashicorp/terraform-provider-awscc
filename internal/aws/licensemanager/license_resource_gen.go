@@ -335,7 +335,7 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
-			// Status is a write-only attribute.
+			// Status is a write-only property.
 		},
 		"validity": {
 			// Property: Validity

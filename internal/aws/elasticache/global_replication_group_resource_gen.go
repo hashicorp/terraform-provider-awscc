@@ -33,7 +33,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "AutomaticFailoverEnabled",
 			Type:        types.BoolType,
 			Optional:    true,
-			// AutomaticFailoverEnabled is a write-only attribute.
+			// AutomaticFailoverEnabled is a write-only property.
 		},
 		"cache_node_type": {
 			// Property: CacheNodeType
@@ -45,7 +45,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The cache node type of the Global Datastore",
 			Type:        types.StringType,
 			Optional:    true,
-			// CacheNodeType is a write-only attribute.
+			// CacheNodeType is a write-only property.
 		},
 		"cache_parameter_group_name": {
 			// Property: CacheParameterGroupName
@@ -68,7 +68,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The engine version of the Global Datastore.",
 			Type:        types.StringType,
 			Optional:    true,
-			// EngineVersion is a write-only attribute.
+			// EngineVersion is a write-only property.
 		},
 		"global_node_group_count": {
 			// Property: GlobalNodeGroupCount
@@ -80,7 +80,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "Indicates the number of node groups in the Global Datastore.",
 			Type:        types.NumberType,
 			Optional:    true,
-			// GlobalNodeGroupCount is a write-only attribute.
+			// GlobalNodeGroupCount is a write-only property.
 		},
 		"global_replication_group_description": {
 			// Property: GlobalReplicationGroupDescription
@@ -92,7 +92,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The optional description of the Global Datastore",
 			Type:        types.StringType,
 			Optional:    true,
-			// GlobalReplicationGroupDescription is a write-only attribute.
+			// GlobalReplicationGroupDescription is a write-only property.
 		},
 		"global_replication_group_id": {
 			// Property: GlobalReplicationGroupId
@@ -115,7 +115,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. ",
 			Type:        types.StringType,
 			Optional:    true,
-			// GlobalReplicationGroupIdSuffix is a write-only attribute.
+			// GlobalReplicationGroupIdSuffix is a write-only property.
 		},
 		"members": {
 			// Property: Members
@@ -277,7 +277,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// RegionalConfigurations is a write-only attribute.
+			// RegionalConfigurations is a write-only property.
 		},
 		"status": {
 			// Property: Status

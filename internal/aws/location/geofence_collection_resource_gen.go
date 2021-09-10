@@ -48,7 +48,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// CollectionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CollectionName is a force-new property.
+			},
 		},
 		"create_time": {
 			// Property: CreateTime
@@ -76,7 +78,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -112,7 +116,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"MobileAssetManagement",
 				}),
 			},
-			// PricingPlan is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+			},
 		},
 		"pricing_plan_data_source": {
 			// Property: PricingPlanDataSource
@@ -123,7 +129,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// PricingPlanDataSource is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PricingPlanDataSource is a force-new property.
+			},
 		},
 		"update_time": {
 			// Property: UpdateTime

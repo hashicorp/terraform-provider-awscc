@@ -63,7 +63,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			// JobDefinitionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobDefinitionName is a force-new property.
+			},
 		},
 		"job_resources": {
 			// Property: JobResources
@@ -157,7 +159,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				},
 			),
 			Required: true,
-			// JobResources is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobResources is a force-new property.
+			},
 		},
 		"model_explainability_app_specification": {
 			// Property: ModelExplainabilityAppSpecification
@@ -233,7 +237,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				},
 			),
 			Required: true,
-			// ModelExplainabilityAppSpecification is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelExplainabilityAppSpecification is a force-new property.
+			},
 		},
 		"model_explainability_baseline_config": {
 			// Property: ModelExplainabilityBaselineConfig
@@ -299,7 +305,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Optional: true,
 			Computed: true,
-			// ModelExplainabilityBaselineConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelExplainabilityBaselineConfig is a force-new property.
+			},
 		},
 		"model_explainability_job_input": {
 			// Property: ModelExplainabilityJobInput
@@ -452,7 +460,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				},
 			),
 			Required: true,
-			// ModelExplainabilityJobInput is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelExplainabilityJobInput is a force-new property.
+			},
 		},
 		"model_explainability_job_output_config": {
 			// Property: ModelExplainabilityJobOutputConfig
@@ -584,7 +594,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				},
 			),
 			Required: true,
-			// ModelExplainabilityJobOutputConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelExplainabilityJobOutputConfig is a force-new property.
+			},
 		},
 		"network_config": {
 			// Property: NetworkConfig
@@ -683,7 +695,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Optional: true,
 			Computed: true,
-			// NetworkConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkConfig is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -701,7 +715,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"stopping_condition": {
 			// Property: StoppingCondition
@@ -738,7 +754,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Optional: true,
 			Computed: true,
-			// StoppingCondition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StoppingCondition is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -800,7 +818,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

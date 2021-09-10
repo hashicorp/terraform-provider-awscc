@@ -46,7 +46,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// ClusterName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+			},
 		},
 		"fargate_profile_name": {
 			// Property: FargateProfileName
@@ -63,7 +65,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// FargateProfileName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FargateProfileName is a force-new property.
+			},
 		},
 		"pod_execution_role_arn": {
 			// Property: PodExecutionRoleArn
@@ -79,7 +83,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// PodExecutionRoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PodExecutionRoleArn is a force-new property.
+			},
 		},
 		"selectors": {
 			// Property: Selectors
@@ -170,7 +176,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Required: true,
-			// Selectors is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Selectors is a force-new property.
+			},
 		},
 		"subnets": {
 			// Property: Subnets
@@ -184,7 +192,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Subnets is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Subnets is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

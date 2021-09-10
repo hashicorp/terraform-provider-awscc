@@ -44,7 +44,9 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the usage plan key.",
 			Type:        types.StringType,
 			Required:    true,
-			// KeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyId is a force-new property.
+			},
 		},
 		"key_type": {
 			// Property: KeyType
@@ -64,7 +66,9 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"API_KEY",
 				}),
 			},
-			// KeyType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyType is a force-new property.
+			},
 		},
 		"usage_plan_id": {
 			// Property: UsagePlanId
@@ -76,7 +80,9 @@ func usagePlanKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the usage plan.",
 			Type:        types.StringType,
 			Required:    true,
-			// UsagePlanId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UsagePlanId is a force-new property.
+			},
 		},
 	}
 

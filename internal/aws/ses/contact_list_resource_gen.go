@@ -35,7 +35,9 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ContactListName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContactListName is a force-new property.
+			},
 		},
 		"description": {
 			// Property: Description

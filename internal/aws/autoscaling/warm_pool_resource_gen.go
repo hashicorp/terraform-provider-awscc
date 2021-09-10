@@ -29,7 +29,9 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// AutoScalingGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AutoScalingGroupName is a force-new property.
+			},
 		},
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity

@@ -63,7 +63,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 255),
 			},
-			// Bucket is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Bucket is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -78,7 +80,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
 			Type:        types.StringType,
 			Computed:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"network_origin": {
 			// Property: NetworkOrigin
@@ -194,7 +198,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// PublicAccessBlockConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PublicAccessBlockConfiguration is a force-new property.
+			},
 		},
 		"vpc_configuration": {
 			// Property: VpcConfiguration
@@ -227,7 +233,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// VpcConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcConfiguration is a force-new property.
+			},
 		},
 	}
 

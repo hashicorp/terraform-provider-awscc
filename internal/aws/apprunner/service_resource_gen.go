@@ -39,7 +39,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1011),
 			},
-			// AutoScalingConfigurationArn is a write-only attribute.
+			// AutoScalingConfigurationArn is a write-only property.
 		},
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
@@ -77,7 +77,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// EncryptionConfiguration is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EncryptionConfiguration is a force-new property.
+			},
 		},
 		"health_check_configuration": {
 			// Property: HealthCheckConfiguration
@@ -288,7 +290,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 40),
 			},
-			// ServiceName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServiceName is a force-new property.
+			},
 		},
 		"service_url": {
 			// Property: ServiceUrl
@@ -766,8 +770,10 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
-			// Tags is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
+			// Tags is a write-only property.
 		},
 	}
 

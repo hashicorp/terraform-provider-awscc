@@ -30,7 +30,9 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.NumberType,
 			Optional: true,
 			Computed: true,
-			// AmazonSideAsn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AmazonSideAsn is a force-new property.
+			},
 		},
 		"association_default_route_table_id": {
 			// Property: AssociationDefaultRouteTableId
@@ -104,7 +106,9 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// MulticastSupport is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // MulticastSupport is a force-new property.
+			},
 		},
 		"propagation_default_route_table_id": {
 			// Property: PropagationDefaultRouteTableId

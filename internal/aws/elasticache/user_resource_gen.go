@@ -33,7 +33,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Access permissions string used for this user account.",
 			Type:        types.StringType,
 			Optional:    true,
-			// AccessString is a write-only attribute.
+			// AccessString is a write-only property.
 		},
 		"arn": {
 			// Property: Arn
@@ -64,7 +64,9 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"redis",
 				}),
 			},
-			// Engine is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Engine is a force-new property.
+			},
 		},
 		"no_password_required": {
 			// Property: NoPasswordRequired
@@ -76,7 +78,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Indicates a password is not required for this user account.",
 			Type:        types.BoolType,
 			Optional:    true,
-			// NoPasswordRequired is a write-only attribute.
+			// NoPasswordRequired is a write-only property.
 		},
 		"passwords": {
 			// Property: Passwords
@@ -96,7 +98,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// Passwords is a write-only attribute.
+			// Passwords is a write-only property.
 		},
 		"status": {
 			// Property: Status
@@ -120,7 +122,9 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the user.",
 			Type:        types.StringType,
 			Required:    true,
-			// UserId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserId is a force-new property.
+			},
 		},
 		"user_name": {
 			// Property: UserName
@@ -132,7 +136,9 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The username of the user.",
 			Type:        types.StringType,
 			Required:    true,
-			// UserName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // UserName is a force-new property.
+			},
 		},
 	}
 

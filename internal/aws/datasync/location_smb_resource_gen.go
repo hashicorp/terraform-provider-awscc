@@ -141,7 +141,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 104),
 			},
-			// Password is a write-only attribute.
+			// Password is a write-only property.
 		},
 		"server_hostname": {
 			// Property: ServerHostname
@@ -158,8 +158,10 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
 			},
-			// ServerHostname is a force-new attribute.
-			// ServerHostname is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+			},
+			// ServerHostname is a write-only property.
 		},
 		"subdirectory": {
 			// Property: Subdirectory
@@ -176,7 +178,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			// Subdirectory is a write-only attribute.
+			// Subdirectory is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

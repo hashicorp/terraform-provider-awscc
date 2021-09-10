@@ -63,7 +63,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			// JobDefinitionName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobDefinitionName is a force-new property.
+			},
 		},
 		"job_resources": {
 			// Property: JobResources
@@ -157,7 +159,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				},
 			),
 			Required: true,
-			// JobResources is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // JobResources is a force-new property.
+			},
 		},
 		"model_quality_app_specification": {
 			// Property: ModelQualityAppSpecification
@@ -308,7 +312,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				},
 			),
 			Required: true,
-			// ModelQualityAppSpecification is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelQualityAppSpecification is a force-new property.
+			},
 		},
 		"model_quality_baseline_config": {
 			// Property: ModelQualityBaselineConfig
@@ -374,7 +380,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Optional: true,
 			Computed: true,
-			// ModelQualityBaselineConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelQualityBaselineConfig is a force-new property.
+			},
 		},
 		"model_quality_job_input": {
 			// Property: ModelQualityJobInput
@@ -589,7 +597,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				},
 			),
 			Required: true,
-			// ModelQualityJobInput is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelQualityJobInput is a force-new property.
+			},
 		},
 		"model_quality_job_output_config": {
 			// Property: ModelQualityJobOutputConfig
@@ -721,7 +731,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				},
 			),
 			Required: true,
-			// ModelQualityJobOutputConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ModelQualityJobOutputConfig is a force-new property.
+			},
 		},
 		"network_config": {
 			// Property: NetworkConfig
@@ -820,7 +832,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Optional: true,
 			Computed: true,
-			// NetworkConfig is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkConfig is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -838,7 +852,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"stopping_condition": {
 			// Property: StoppingCondition
@@ -875,7 +891,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Optional: true,
 			Computed: true,
-			// StoppingCondition is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StoppingCondition is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -937,7 +955,9 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

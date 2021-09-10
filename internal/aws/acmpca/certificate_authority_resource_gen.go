@@ -475,7 +475,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Optional: true,
 			Computed: true,
-			// CsrExtensions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CsrExtensions is a force-new property.
+			},
 		},
 		"key_algorithm": {
 			// Property: KeyAlgorithm
@@ -487,7 +489,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
 			Type:        types.StringType,
 			Required:    true,
-			// KeyAlgorithm is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyAlgorithm is a force-new property.
+			},
 		},
 		"key_storage_security_standard": {
 			// Property: KeyStorageSecurityStandard
@@ -500,7 +504,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// KeyStorageSecurityStandard is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KeyStorageSecurityStandard is a force-new property.
+			},
 		},
 		"revocation_configuration": {
 			// Property: RevocationConfiguration
@@ -585,7 +591,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Algorithm your CA uses to sign certificate requests.",
 			Type:        types.StringType,
 			Required:    true,
-			// SigningAlgorithm is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+			},
 		},
 		"subject": {
 			// Property: Subject
@@ -715,8 +723,10 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				},
 			),
 			Required: true,
-			// Subject is a force-new attribute.
-			// Subject is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Subject is a force-new property.
+			},
+			// Subject is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -763,7 +773,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The type of the certificate authority.",
 			Type:        types.StringType,
 			Required:    true,
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

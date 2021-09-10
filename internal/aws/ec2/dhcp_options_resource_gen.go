@@ -43,7 +43,9 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"domain_name_servers": {
 			// Property: DomainNameServers
@@ -63,7 +65,9 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// DomainNameServers is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainNameServers is a force-new property.
+			},
 		},
 		"netbios_name_servers": {
 			// Property: NetbiosNameServers
@@ -83,7 +87,9 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// NetbiosNameServers is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetbiosNameServers is a force-new property.
+			},
 		},
 		"netbios_node_type": {
 			// Property: NetbiosNodeType
@@ -96,7 +102,9 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.NumberType,
 			Optional:    true,
 			Computed:    true,
-			// NetbiosNodeType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetbiosNodeType is a force-new property.
+			},
 		},
 		"ntp_servers": {
 			// Property: NtpServers
@@ -113,7 +121,9 @@ func dHCPOptionsResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			// NtpServers is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NtpServers is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

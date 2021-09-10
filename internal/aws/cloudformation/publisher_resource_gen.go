@@ -31,7 +31,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
 			Type:        types.BoolType,
 			Required:    true,
-			// AcceptTermsAndConditions is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AcceptTermsAndConditions is a force-new property.
+			},
 		},
 		"connection_arn": {
 			// Property: ConnectionArn
@@ -45,7 +47,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ConnectionArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ConnectionArn is a force-new property.
+			},
 		},
 		"identity_provider": {
 			// Property: IdentityProvider

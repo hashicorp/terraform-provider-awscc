@@ -44,7 +44,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"VpcOnly",
 				}),
 			},
-			// AppNetworkAccessType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AppNetworkAccessType is a force-new property.
+			},
 		},
 		"auth_mode": {
 			// Property: AuthMode
@@ -66,7 +68,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"IAM",
 				}),
 			},
-			// AuthMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AuthMode is a force-new property.
+			},
 		},
 		"default_user_settings": {
 			// Property: DefaultUserSettings
@@ -584,7 +588,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 63),
 			},
-			// DomainName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+			},
 		},
 		"home_efs_file_system_id": {
 			// Property: HomeEfsFileSystemId
@@ -614,7 +620,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
 			},
-			// KmsKeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+			},
 		},
 		"single_sign_on_managed_application_instance_id": {
 			// Property: SingleSignOnManagedApplicationInstanceId
@@ -649,7 +657,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 16),
 			},
-			// SubnetIds is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SubnetIds is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -708,8 +718,10 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
-			// Tags is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
+			// Tags is a write-only property.
 		},
 		"url": {
 			// Property: Url
@@ -738,7 +750,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 32),
 			},
-			// VpcId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+			},
 		},
 	}
 

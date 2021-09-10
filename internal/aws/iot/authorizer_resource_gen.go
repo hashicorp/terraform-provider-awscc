@@ -56,7 +56,9 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// AuthorizerName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AuthorizerName is a force-new property.
+			},
 		},
 		"signing_disabled": {
 			// Property: SigningDisabled
@@ -67,7 +69,9 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
-			// SigningDisabled is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SigningDisabled is a force-new property.
+			},
 		},
 		"status": {
 			// Property: Status

@@ -159,7 +159,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Computed: true,
-			// AwsAccount is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccount is a force-new property.
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -373,7 +375,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The description of the specified assessment.",
 			Type:        types.StringType,
 			Optional:    true,
-			// Description is a write-only attribute.
+			// Description is a write-only property.
 		},
 		"framework_id": {
 			// Property: FrameworkId
@@ -392,7 +394,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(32, 36),
 			},
-			// FrameworkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FrameworkId is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -410,7 +414,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
 			},
-			// Name is a write-only attribute.
+			// Name is a write-only property.
 		},
 		"roles": {
 			// Property: Roles

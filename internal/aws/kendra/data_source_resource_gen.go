@@ -3224,7 +3224,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"GOOGLEDRIVE",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 	}
 

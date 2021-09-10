@@ -49,7 +49,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
 			},
-			// Description is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Description is a force-new property.
+			},
 		},
 		"file_format": {
 			// Property: FileFormat
@@ -74,7 +76,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"JSON",
 				}),
 			},
-			// FileFormat is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FileFormat is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -104,7 +108,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(36, 36),
 			},
-			// IndexId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // IndexId is a force-new property.
+			},
 		},
 		"name": {
 			// Property: Name
@@ -119,7 +125,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -135,7 +143,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1284),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 		"s3_path": {
 			// Property: S3Path
@@ -182,7 +192,9 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// S3Path is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // S3Path is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

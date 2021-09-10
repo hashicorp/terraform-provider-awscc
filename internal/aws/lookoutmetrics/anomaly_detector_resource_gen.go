@@ -98,7 +98,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// AnomalyDetectorName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AnomalyDetectorName is a force-new property.
+			},
 		},
 		"arn": {
 			// Property: Arn

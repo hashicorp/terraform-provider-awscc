@@ -1023,7 +1023,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -2085,7 +2087,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// Credentials is a write-only attribute.
+			// Credentials is a write-only property.
 		},
 		"data_source_id": {
 			// Property: DataSourceId
@@ -2096,7 +2098,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// DataSourceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DataSourceId is a force-new property.
+			},
 		},
 		"data_source_parameters": {
 			// Property: DataSourceParameters
@@ -3374,7 +3378,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"TIMESTREAM",
 				}),
 			},
-			// Type is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Type is a force-new property.
+			},
 		},
 		"vpc_connection_properties": {
 			// Property: VpcConnectionProperties

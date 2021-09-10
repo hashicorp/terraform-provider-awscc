@@ -248,7 +248,9 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 80),
 			},
-			// StateMachineName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StateMachineName is a force-new property.
+			},
 		},
 		"state_machine_type": {
 			// Property: StateMachineType

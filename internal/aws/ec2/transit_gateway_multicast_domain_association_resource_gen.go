@@ -64,7 +64,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The IDs of the subnets to associate with the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Required:    true,
-			// SubnetId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SubnetId is a force-new property.
+			},
 		},
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
@@ -76,7 +78,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayAttachmentId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayAttachmentId is a force-new property.
+			},
 		},
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
@@ -88,7 +92,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayMulticastDomainId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayMulticastDomainId is a force-new property.
+			},
 		},
 	}
 

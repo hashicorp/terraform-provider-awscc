@@ -37,7 +37,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// AddonName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AddonName is a force-new property.
+			},
 		},
 		"addon_version": {
 			// Property: AddonVersion
@@ -79,7 +81,9 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
 			},
-			// ClusterName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+			},
 		},
 		"resolve_conflicts": {
 			// Property: ResolveConflicts
@@ -103,7 +107,7 @@ func addonResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"OVERWRITE",
 				}),
 			},
-			// ResolveConflicts is a write-only attribute.
+			// ResolveConflicts is a write-only property.
 		},
 		"service_account_role_arn": {
 			// Property: ServiceAccountRoleArn

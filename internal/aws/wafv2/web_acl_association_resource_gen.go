@@ -36,7 +36,9 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// ResourceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceArn is a force-new property.
+			},
 		},
 		"web_acl_arn": {
 			// Property: WebACLArn
@@ -51,7 +53,9 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
 			},
-			// WebACLArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WebACLArn is a force-new property.
+			},
 		},
 	}
 

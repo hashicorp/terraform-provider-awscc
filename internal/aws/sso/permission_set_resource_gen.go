@@ -67,7 +67,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
 			},
-			// InstanceArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // InstanceArn is a force-new property.
+			},
 		},
 		"managed_policies": {
 			// Property: ManagedPolicies
@@ -105,7 +107,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"permission_set_arn": {
 			// Property: PermissionSetArn

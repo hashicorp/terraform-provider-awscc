@@ -108,7 +108,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// StudioName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StudioName is a force-new property.
+			},
 		},
 		"studio_url": {
 			// Property: StudioUrl
@@ -135,7 +137,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 		"user_role_arn": {
 			// Property: UserRoleArn

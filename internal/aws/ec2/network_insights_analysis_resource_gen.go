@@ -1363,7 +1363,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// FilterInArns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FilterInArns is a force-new property.
+			},
 		},
 		"forward_path_components": {
 			// Property: ForwardPathComponents
@@ -2054,7 +2056,9 @@ func networkInsightsAnalysisResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// NetworkInsightsPathId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // NetworkInsightsPathId is a force-new property.
+			},
 		},
 		"network_path_found": {
 			// Property: NetworkPathFound

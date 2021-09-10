@@ -31,7 +31,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
 			Type:        types.StringType,
 			Required:    true,
-			// Certificate is a write-only attribute.
+			// Certificate is a write-only property.
 		},
 		"certificate_authority_arn": {
 			// Property: CertificateAuthorityArn
@@ -43,7 +43,9 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Description: "Arn of the Certificate Authority.",
 			Type:        types.StringType,
 			Required:    true,
-			// CertificateAuthorityArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+			},
 		},
 		"certificate_chain": {
 			// Property: CertificateChain
@@ -55,7 +57,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Description: "Certificate chain for the Certificate Authority certificate.",
 			Type:        types.StringType,
 			Optional:    true,
-			// CertificateChain is a write-only attribute.
+			// CertificateChain is a write-only property.
 		},
 		"complete_certificate_chain": {
 			// Property: CompleteCertificateChain

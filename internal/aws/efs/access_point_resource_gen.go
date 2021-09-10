@@ -99,7 +99,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ClientToken is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ClientToken is a force-new property.
+			},
 		},
 		"file_system_id": {
 			// Property: FileSystemId
@@ -111,7 +113,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the EFS file system that the access point provides access to.",
 			Type:        types.StringType,
 			Required:    true,
-			// FileSystemId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FileSystemId is a force-new property.
+			},
 		},
 		"posix_user": {
 			// Property: PosixUser
@@ -148,7 +152,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The POSIX group ID used for all file system operations using this access point.",
 						Type:        types.StringType,
 						Required:    true,
-						// Gid is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // Gid is a force-new property.
+						},
 					},
 					"secondary_gids": {
 						// Property: SecondaryGids
@@ -156,20 +162,26 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						// SecondaryGids is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // SecondaryGids is a force-new property.
+						},
 					},
 					"uid": {
 						// Property: Uid
 						Description: "The POSIX user ID used for all file system operations using this access point.",
 						Type:        types.StringType,
 						Required:    true,
-						// Uid is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // Uid is a force-new property.
+						},
 					},
 				},
 			),
 			Optional: true,
 			Computed: true,
-			// PosixUser is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PosixUser is a force-new property.
+			},
 		},
 		"root_directory": {
 			// Property: RootDirectory
@@ -238,7 +250,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Optional: true,
 						Computed: true,
-						// CreationInfo is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // CreationInfo is a force-new property.
+						},
 					},
 					"path": {
 						// Property: Path
@@ -249,13 +263,17 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
 						},
-						// Path is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // Path is a force-new property.
+						},
 					},
 				},
 			),
 			Optional: true,
 			Computed: true,
-			// RootDirectory is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RootDirectory is a force-new property.
+			},
 		},
 	}
 

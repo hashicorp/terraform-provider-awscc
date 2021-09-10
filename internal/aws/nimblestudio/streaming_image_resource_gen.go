@@ -38,7 +38,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// Ec2ImageId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Ec2ImageId is a force-new property.
+			},
 		},
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
@@ -130,7 +132,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// StudioId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StudioId is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -148,7 +152,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

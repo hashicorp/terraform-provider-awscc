@@ -129,7 +129,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// Action is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Action is a force-new property.
+			},
 		},
 		"alert_description": {
 			// Property: AlertDescription
@@ -147,7 +149,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			// AlertDescription is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AlertDescription is a force-new property.
+			},
 		},
 		"alert_name": {
 			// Property: AlertName
@@ -166,7 +170,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// AlertName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AlertName is a force-new property.
+			},
 		},
 		"alert_sensitivity_threshold": {
 			// Property: AlertSensitivityThreshold
@@ -183,7 +189,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 100),
 			},
-			// AlertSensitivityThreshold is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AlertSensitivityThreshold is a force-new property.
+			},
 		},
 		"anomaly_detector_arn": {
 			// Property: AnomalyDetectorArn
@@ -200,7 +208,9 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
 			},
-			// AnomalyDetectorArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AnomalyDetectorArn is a force-new property.
+			},
 		},
 		"arn": {
 			// Property: Arn

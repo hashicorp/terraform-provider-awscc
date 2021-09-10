@@ -31,7 +31,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The CIDR block used for destination matches.",
 			Type:        types.StringType,
 			Required:    true,
-			// DestinationCidrBlock is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DestinationCidrBlock is a force-new property.
+			},
 		},
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
@@ -43,7 +45,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The ID of the local gateway route table.",
 			Type:        types.StringType,
 			Required:    true,
-			// LocalGatewayRouteTableId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LocalGatewayRouteTableId is a force-new property.
+			},
 		},
 		"local_gateway_virtual_interface_group_id": {
 			// Property: LocalGatewayVirtualInterfaceGroupId
@@ -55,7 +59,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The ID of the virtual interface group.",
 			Type:        types.StringType,
 			Required:    true,
-			// LocalGatewayVirtualInterfaceGroupId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LocalGatewayVirtualInterfaceGroupId is a force-new property.
+			},
 		},
 		"state": {
 			// Property: State

@@ -39,7 +39,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 253),
 			},
-			// Domain is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Domain is a force-new property.
+			},
 		},
 		"fsx_filesystem_arn": {
 			// Property: FsxFilesystemArn
@@ -56,8 +58,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
 			},
-			// FsxFilesystemArn is a force-new attribute.
-			// FsxFilesystemArn is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // FsxFilesystemArn is a force-new property.
+			},
+			// FsxFilesystemArn is a write-only property.
 		},
 		"location_arn": {
 			// Property: LocationArn
@@ -100,8 +104,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 104),
 			},
-			// Password is a force-new attribute.
-			// Password is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Password is a force-new property.
+			},
+			// Password is a write-only property.
 		},
 		"security_group_arns": {
 			// Property: SecurityGroupArns
@@ -119,7 +125,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
-			// SecurityGroupArns is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // SecurityGroupArns is a force-new property.
+			},
 		},
 		"subdirectory": {
 			// Property: Subdirectory
@@ -137,8 +145,10 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			// Subdirectory is a force-new attribute.
-			// Subdirectory is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+			},
+			// Subdirectory is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -218,7 +228,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 104),
 			},
-			// User is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // User is a force-new property.
+			},
 		},
 	}
 

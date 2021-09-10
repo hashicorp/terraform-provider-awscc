@@ -87,7 +87,9 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
 			},
-			// ImageName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ImageName is a force-new property.
+			},
 		},
 		"image_role_arn": {
 			// Property: ImageRoleArn

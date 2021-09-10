@@ -143,7 +143,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 64),
 			},
-			// DBProxyName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DBProxyName is a force-new property.
+			},
 		},
 		"target_group_arn": {
 			// Property: TargetGroupArn
@@ -174,7 +176,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"default",
 				}),
 			},
-			// TargetGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TargetGroupName is a force-new property.
+			},
 		},
 	}
 

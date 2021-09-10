@@ -44,7 +44,9 @@ func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// DatabaseName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DatabaseName is a force-new property.
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId

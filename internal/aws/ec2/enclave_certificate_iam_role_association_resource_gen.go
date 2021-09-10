@@ -39,7 +39,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1283),
 			},
-			// CertificateArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // CertificateArn is a force-new property.
+			},
 		},
 		"certificate_s3_bucket_name": {
 			// Property: CertificateS3BucketName
@@ -90,7 +92,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1283),
 			},
-			// RoleArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+			},
 		},
 	}
 

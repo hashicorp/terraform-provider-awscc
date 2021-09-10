@@ -85,7 +85,9 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"EMAIL",
 				}),
 			},
-			// ChannelType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ChannelType is a force-new property.
+			},
 		},
 		"contact_id": {
 			// Property: ContactId
@@ -104,7 +106,9 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// ContactId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ContactId is a force-new property.
+			},
 		},
 		"defer_activation": {
 			// Property: DeferActivation

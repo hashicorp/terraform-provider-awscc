@@ -31,7 +31,9 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ID of the device",
 			Type:        types.StringType,
 			Required:    true,
-			// DeviceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DeviceId is a force-new property.
+			},
 		},
 		"global_network_id": {
 			// Property: GlobalNetworkId
@@ -43,7 +45,9 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
-			// GlobalNetworkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+			},
 		},
 		"link_id": {
 			// Property: LinkId
@@ -55,7 +59,9 @@ func linkAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ID of the link",
 			Type:        types.StringType,
 			Required:    true,
-			// LinkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LinkId is a force-new property.
+			},
 		},
 	}
 

@@ -64,7 +64,9 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Required:    true,
-			// GlobalNetworkId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+			},
 		},
 		"location": {
 			// Property: Location

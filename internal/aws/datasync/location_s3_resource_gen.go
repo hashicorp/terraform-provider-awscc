@@ -64,8 +64,10 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 156),
 			},
-			// S3BucketArn is a force-new attribute.
-			// S3BucketArn is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // S3BucketArn is a force-new property.
+			},
+			// S3BucketArn is a write-only property.
 		},
 		"s3_config": {
 			// Property: S3Config
@@ -101,7 +103,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			// S3Config is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // S3Config is a force-new property.
+			},
 		},
 		"s3_storage_class": {
 			// Property: S3StorageClass
@@ -132,7 +136,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"DEEP_ARCHIVE",
 				}),
 			},
-			// S3StorageClass is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // S3StorageClass is a force-new property.
+			},
 		},
 		"subdirectory": {
 			// Property: Subdirectory
@@ -150,8 +156,10 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 4096),
 			},
-			// Subdirectory is a force-new attribute.
-			// Subdirectory is a write-only attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+			},
+			// Subdirectory is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

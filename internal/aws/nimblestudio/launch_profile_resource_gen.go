@@ -41,7 +41,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
-			// Ec2SubnetIds is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Ec2SubnetIds is a force-new property.
+			},
 		},
 		"launch_profile_id": {
 			// Property: LaunchProfileId
@@ -151,7 +153,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Required: true,
-			// StudioId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StudioId is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -169,7 +173,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
 			Computed: true,
-			// Tags is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Tags is a force-new property.
+			},
 		},
 	}
 

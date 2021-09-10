@@ -41,7 +41,9 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// AvailabilityZoneName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AvailabilityZoneName is a force-new property.
+			},
 		},
 		"backup_policy": {
 			// Property: BackupPolicy
@@ -79,7 +81,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false",
 			Type:        types.BoolType,
 			Optional:    true,
-			// BypassPolicyLockoutSafetyCheck is a write-only attribute.
+			// BypassPolicyLockoutSafetyCheck is a write-only property.
 		},
 		"encrypted": {
 			// Property: Encrypted
@@ -90,7 +92,9 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.BoolType,
 			Optional: true,
 			Computed: true,
-			// Encrypted is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Encrypted is a force-new property.
+			},
 		},
 		"file_system_id": {
 			// Property: FileSystemId
@@ -162,7 +166,9 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// KmsKeyId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+			},
 		},
 		"lifecycle_policies": {
 			// Property: LifecyclePolicies
@@ -207,7 +213,9 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
-			// PerformanceMode is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PerformanceMode is a force-new property.
+			},
 		},
 		"provisioned_throughput_in_mibps": {
 			// Property: ProvisionedThroughputInMibps

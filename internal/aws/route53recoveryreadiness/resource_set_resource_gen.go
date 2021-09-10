@@ -46,7 +46,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the resource set to create.",
 			Type:        types.StringType,
 			Required:    true,
-			// ResourceSetName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceSetName is a force-new property.
+			},
 		},
 		"resource_set_type": {
 			// Property: ResourceSetType
@@ -58,7 +60,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
 			Type:        types.StringType,
 			Required:    true,
-			// ResourceSetType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceSetType is a force-new property.
+			},
 		},
 		"resources": {
 			// Property: Resources

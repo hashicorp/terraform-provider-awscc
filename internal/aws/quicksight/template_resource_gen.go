@@ -48,7 +48,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -61,7 +63,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>Time when this was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
-			// CreatedTime is a write-only attribute.
+			// CreatedTime is a write-only property.
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -74,7 +76,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>Time when this was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
-			// LastUpdatedTime is a write-only attribute.
+			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
 			// Property: Name
@@ -281,7 +283,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// SourceEntity is a write-only attribute.
+			// SourceEntity is a write-only property.
 		},
 		"tags": {
 			// Property: Tags
@@ -358,7 +360,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// TemplateId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TemplateId is a force-new property.
+			},
 		},
 		"version": {
 			// Property: Version
@@ -754,7 +758,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
-			// Version is a write-only attribute.
+			// Version is a write-only property.
 		},
 		"version_description": {
 			// Property: VersionDescription
@@ -771,7 +775,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
 			},
-			// VersionDescription is a write-only attribute.
+			// VersionDescription is a write-only property.
 		},
 	}
 

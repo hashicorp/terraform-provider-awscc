@@ -142,7 +142,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayId is a force-new property.
+			},
 		},
 		"transit_gateway_multicast_domain_arn": {
 			// Property: TransitGatewayMulticastDomainArn

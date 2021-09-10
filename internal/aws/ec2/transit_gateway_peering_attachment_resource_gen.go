@@ -43,7 +43,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The ID of the peer account",
 			Type:        types.StringType,
 			Required:    true,
-			// PeerAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PeerAccountId is a force-new property.
+			},
 		},
 		"peer_region": {
 			// Property: PeerRegion
@@ -55,7 +57,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "Peer Region",
 			Type:        types.StringType,
 			Required:    true,
-			// PeerRegion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PeerRegion is a force-new property.
+			},
 		},
 		"peer_transit_gateway_id": {
 			// Property: PeerTransitGatewayId
@@ -67,7 +71,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The ID of the peer transit gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// PeerTransitGatewayId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PeerTransitGatewayId is a force-new property.
+			},
 		},
 		"state": {
 			// Property: State
@@ -177,7 +183,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Required:    true,
-			// TransitGatewayId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TransitGatewayId is a force-new property.
+			},
 		},
 	}
 

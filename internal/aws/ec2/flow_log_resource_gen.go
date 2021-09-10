@@ -34,7 +34,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// DeliverLogsPermissionArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DeliverLogsPermissionArn is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -58,7 +60,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// LogDestination is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogDestination is a force-new property.
+			},
 		},
 		"log_destination_type": {
 			// Property: LogDestinationType
@@ -81,7 +85,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"s3",
 				}),
 			},
-			// LogDestinationType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogDestinationType is a force-new property.
+			},
 		},
 		"log_format": {
 			// Property: LogFormat
@@ -94,7 +100,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// LogFormat is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogFormat is a force-new property.
+			},
 		},
 		"log_group_name": {
 			// Property: LogGroupName
@@ -107,7 +115,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// LogGroupName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // LogGroupName is a force-new property.
+			},
 		},
 		"max_aggregation_interval": {
 			// Property: MaxAggregationInterval
@@ -120,7 +130,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.NumberType,
 			Optional:    true,
 			Computed:    true,
-			// MaxAggregationInterval is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // MaxAggregationInterval is a force-new property.
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId
@@ -132,7 +144,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the subnet, network interface, or VPC for which you want to create a flow log.",
 			Type:        types.StringType,
 			Required:    true,
-			// ResourceId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -156,7 +170,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"VPC",
 				}),
 			},
-			// ResourceType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ResourceType is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -222,7 +238,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"REJECT",
 				}),
 			},
-			// TrafficType is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // TrafficType is a force-new property.
+			},
 		},
 	}
 

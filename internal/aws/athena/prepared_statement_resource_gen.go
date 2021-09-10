@@ -70,7 +70,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// StatementName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // StatementName is a force-new property.
+			},
 		},
 		"work_group": {
 			// Property: WorkGroup
@@ -87,7 +89,9 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
 			},
-			// WorkGroup is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // WorkGroup is a force-new property.
+			},
 		},
 	}
 

@@ -38,7 +38,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// AllowedOperations is a write-only attribute.
+			// AllowedOperations is a write-only property.
 		},
 		"grant_arn": {
 			// Property: GrantArn
@@ -101,7 +101,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
 			},
-			// Principals is a write-only attribute.
+			// Principals is a write-only property.
 		},
 		"status": {
 			// Property: Status

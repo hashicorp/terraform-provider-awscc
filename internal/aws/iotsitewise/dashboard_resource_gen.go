@@ -87,7 +87,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// ProjectId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ProjectId is a force-new property.
+			},
 		},
 		"tags": {
 			// Property: Tags

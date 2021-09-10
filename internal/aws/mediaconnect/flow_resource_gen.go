@@ -34,7 +34,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			// AvailabilityZone is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AvailabilityZone is a force-new property.
+			},
 		},
 		"flow_arn": {
 			// Property: FlowArn
@@ -68,7 +70,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the flow.",
 			Type:        types.StringType,
 			Required:    true,
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"source": {
 			// Property: Source
@@ -311,7 +315,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						// Name is a force-new attribute.
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.RequiresReplace(), // Name is a force-new property.
+						},
 					},
 					"protocol": {
 						// Property: Protocol

@@ -37,7 +37,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
 			},
-			// AnalysisId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AnalysisId is a force-new property.
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -64,7 +66,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
 			},
-			// AwsAccountId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -175,7 +179,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that the analysis was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
-			// LastUpdatedTime is a write-only attribute.
+			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
 			// Property: Name
@@ -426,7 +430,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// Parameters is a write-only attribute.
+			// Parameters is a write-only property.
 		},
 		"permissions": {
 			// Property: Permissions
@@ -545,7 +549,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
-			// Sheets is a write-only attribute.
+			// Sheets is a write-only property.
 		},
 		"source_entity": {
 			// Property: SourceEntity
@@ -642,7 +646,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// SourceEntity is a write-only attribute.
+			// SourceEntity is a write-only property.
 		},
 		"status": {
 			// Property: Status
@@ -661,7 +665,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
-			// Status is a write-only attribute.
+			// Status is a write-only property.
 		},
 		"tags": {
 			// Property: Tags

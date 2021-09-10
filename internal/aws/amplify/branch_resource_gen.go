@@ -37,7 +37,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 20),
 			},
-			// AppId is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // AppId is a force-new property.
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -102,7 +104,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			// BasicAuthConfig is a write-only attribute.
+			// BasicAuthConfig is a write-only property.
 		},
 		"branch_name": {
 			// Property: BranchName
@@ -118,7 +120,9 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
-			// BranchName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // BranchName is a force-new property.
+			},
 		},
 		"build_spec": {
 			// Property: BuildSpec

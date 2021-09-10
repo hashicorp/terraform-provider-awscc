@@ -93,7 +93,9 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
 			},
-			// PipelineName is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // PipelineName is a force-new property.
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn

@@ -103,7 +103,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The name of the AWS Region where the endpoint group is located",
 			Type:        types.StringType,
 			Required:    true,
-			// EndpointGroupRegion is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // EndpointGroupRegion is a force-new property.
+			},
 		},
 		"health_check_interval_seconds": {
 			// Property: HealthCheckIntervalSeconds
@@ -177,7 +179,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The Amazon Resource Name (ARN) of the listener",
 			Type:        types.StringType,
 			Required:    true,
-			// ListenerArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // ListenerArn is a force-new property.
+			},
 		},
 		"port_overrides": {
 			// Property: PortOverrides

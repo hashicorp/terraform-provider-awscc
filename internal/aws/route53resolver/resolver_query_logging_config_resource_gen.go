@@ -89,7 +89,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 600),
 			},
-			// DestinationArn is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // DestinationArn is a force-new property.
+			},
 		},
 		"id": {
 			// Property: Id
@@ -121,7 +123,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},
-			// Name is a force-new attribute.
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(), // Name is a force-new property.
+			},
 		},
 		"owner_id": {
 			// Property: OwnerId
