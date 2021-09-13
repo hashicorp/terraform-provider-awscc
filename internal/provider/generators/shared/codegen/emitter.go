@@ -691,7 +691,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 
 // printf emits a formatted string to the underlying writer.
 func (e Emitter) printf(format string, a ...interface{}) (int, error) {
-	return wprintf(e.Writer, format, a...)
+	return fprintf(e.Writer, format, a...)
 }
 
 // warnf emits a formatted warning message to the UI.
@@ -699,8 +699,8 @@ func (e Emitter) warnf(format string, a ...interface{}) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 
-// wprintf writes a formatted string to a Writer.
-func wprintf(w io.Writer, format string, a ...interface{}) (int, error) {
+// fprintf writes a formatted string to a Writer.
+func fprintf(w io.Writer, format string, a ...interface{}) (int, error) {
 	return io.WriteString(w, fmt.Sprintf(format, a...))
 }
 
@@ -786,31 +786,31 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			features |= UsesFrameworkAttr
 
 			w := &strings.Builder{}
-			wprintf(w, "DefaultValue(providertypes.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
+			fprintf(w, "DefaultValue(providertypes.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					wprintf(w, "types.String{Value: %q},\n", v)
+					fprintf(w, "types.String{Value: %q},\n", v)
 				default:
 					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			wprintf(w, "}})")
+			fprintf(w, "}})")
 			return features, w.String(), nil
 		default:
 			features |= UsesFrameworkAttr
 
 			w := &strings.Builder{}
-			wprintf(w, "DefaultValue(types.List{ElemType:types.StringType, Elems: []attr.Value{\n")
+			fprintf(w, "DefaultValue(types.List{ElemType:types.StringType, Elems: []attr.Value{\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
-					wprintf(w, "types.String{Value: %q},\n", v)
+					fprintf(w, "types.String{Value: %q},\n", v)
 				default:
 					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
-			wprintf(w, "}})")
+			fprintf(w, "}})")
 			return features, w.String(), nil
 		}
 
@@ -818,66 +818,66 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		features |= UsesFrameworkAttr
 
 		w := &strings.Builder{}
-		wprintf(w, "DefaultValue(types.Object{\nAttrTypes: map[string]attr.Type{\n")
+		fprintf(w, "DefaultValue(types.Object{\nAttrTypes: map[string]attr.Type{\n")
 		for key1, v := range v {
 			switch v := v.(type) {
 			case bool:
-				wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
 			case string:
-				wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
 			case map[string]interface{}:
-				wprintf(w, "%q: types.ObjectType{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				fprintf(w, "%q: types.ObjectType{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
 				for key2, v := range v {
 					switch v := v.(type) {
 					case bool:
-						wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+						fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
 					case string:
-						wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+						fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
 					default:
 						return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1, key2), "/"), v)
 					}
 				}
-				wprintf(w, "},\n")
-				wprintf(w, "},\n")
+				fprintf(w, "},\n")
+				fprintf(w, "},\n")
 			default:
 				return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1), "/"), v)
 			}
 		}
-		wprintf(w, "},\n")
-		wprintf(w, "Attrs: map[string]attr.Value{\n")
+		fprintf(w, "},\n")
+		fprintf(w, "Attrs: map[string]attr.Value{\n")
 		for key1, v := range v {
 			switch v := v.(type) {
 			case bool:
-				wprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+				fprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
 			case string:
-				wprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+				fprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
 			case map[string]interface{}:
-				wprintf(w, "%q: types.Object{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				fprintf(w, "%q: types.Object{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
 				for key2, v := range v {
 					switch v.(type) {
 					case bool:
-						wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+						fprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
 					case string:
-						wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+						fprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
 					}
 				}
-				wprintf(w, "},\n")
-				wprintf(w, "Attrs: map[string]attr.Value{\n")
+				fprintf(w, "},\n")
+				fprintf(w, "Attrs: map[string]attr.Value{\n")
 				for key2, v := range v {
 					switch v := v.(type) {
 					case bool:
-						wprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+						fprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
 					case string:
-						wprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+						fprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
 					}
 				}
-				wprintf(w, "},\n")
-				wprintf(w, "},\n")
+				fprintf(w, "},\n")
+				fprintf(w, "},\n")
 			}
 		}
-		wprintf(w, "},\n")
-		wprintf(w, "},\n")
-		wprintf(w, ")")
+		fprintf(w, "},\n")
+		fprintf(w, "},\n")
+		fprintf(w, ")")
 		return features, w.String(), nil
 
 	default:
@@ -892,14 +892,14 @@ func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubsche
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.AllOfRequired(\n")
+		fprintf(w, "validate.AllOfRequired(\n")
 		for _, a := range p.AllOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
@@ -908,14 +908,14 @@ func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubsche
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.AnyOfRequired(\n")
+		fprintf(w, "validate.AnyOfRequired(\n")
 		for _, a := range p.AnyOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
@@ -924,25 +924,25 @@ func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubsche
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.OneOfRequired(\n")
+		fprintf(w, "validate.OneOfRequired(\n")
 		for _, a := range p.OneOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
 	}
 	if len(p.Required) > 0 {
-		wprintf(writer, "validate.Required(\n")
+		fprintf(writer, "validate.Required(\n")
 		for _, r := range p.Required {
-			wprintf(writer, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
+			fprintf(writer, "%q,\n", naming.CloudFormationPropertyToTerraformAttribute(r))
 			nRequired++
 		}
-		wprintf(writer, "),\n")
+		fprintf(writer, "),\n")
 	}
 
 	return nRequired
@@ -955,14 +955,14 @@ func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaCompositio
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.AllOfRequired(\n")
+		fprintf(w, "validate.AllOfRequired(\n")
 		for _, a := range allOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
@@ -971,14 +971,14 @@ func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaCompositio
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.AnyOfRequired(\n")
+		fprintf(w, "validate.AnyOfRequired(\n")
 		for _, a := range anyOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
@@ -987,14 +987,14 @@ func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaCompositio
 		var n int
 		w := &strings.Builder{}
 
-		wprintf(w, "validate.OneOfRequired(\n")
+		fprintf(w, "validate.OneOfRequired(\n")
 		for _, a := range oneOf {
 			n += addPropertyRequiredAttributes(w, a)
 		}
-		wprintf(w, "),\n")
+		fprintf(w, "),\n")
 
 		if n > 0 {
-			wprintf(writer, w.String())
+			fprintf(writer, w.String())
 		}
 
 		nRequired += n
@@ -1010,9 +1010,9 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 
 	writer := &strings.Builder{}
 
-	wprintf(writer, "validate.RequiredAttributes(\n")
+	fprintf(writer, "validate.RequiredAttributes(\n")
 	nRequired := addSchemaCompositionRequiredAttributes(writer, property(*p))
-	wprintf(writer, ")")
+	fprintf(writer, ")")
 
 	if nRequired == 0 {
 		return ""
