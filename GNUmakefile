@@ -6,7 +6,7 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build default golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
+.PHONY: all build default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
 all: schemas resources singular-data-sources plural-data-sources build
 
@@ -49,3 +49,7 @@ importlint:
 tools:
 	cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
 	cd tools && go install github.com/pavius/impi/cmd/impi
+	cd tools && go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+
+docs:
+	@tfplugindocs generate

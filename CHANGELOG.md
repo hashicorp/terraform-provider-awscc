@@ -1,5 +1,10 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.8](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.8) (September 10, 2021)
+
+Documentation generation.
+Support `ForceNew` attributes.
+
 ## [0.0.7](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.7) (September 9, 2021)
 
 Singular data sources added.
