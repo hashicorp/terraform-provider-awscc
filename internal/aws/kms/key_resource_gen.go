@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -111,6 +112,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SYMMETRIC_DEFAULT",
@@ -122,6 +124,9 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ECC_NIST_P521",
 					"ECC_SECG_P256K1",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "SYMMETRIC_DEFAULT"}),
 			},
 		},
 		"key_usage": {
@@ -139,11 +144,15 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENCRYPT_DECRYPT",
 					"SIGN_VERIFY",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "ENCRYPT_DECRYPT"}),
 			},
 		},
 		"multi_region": {
@@ -157,6 +166,10 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"pending_window_in_days": {
 			// Property: PendingWindowInDays

@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -52,11 +53,15 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"NONE",
 					"SOURCE_IP",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "NONE"}),
 			},
 		},
 		"listener_arn": {
@@ -137,12 +142,16 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"TCP",
 					"UDP",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "TCP"}),
 			},
 		},
 	}

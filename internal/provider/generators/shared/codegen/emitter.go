@@ -19,6 +19,8 @@ const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
 	UsesInternalTypes                            // Uses a type from the internal/types package.
 	HasRequiredRootProperty                      // At least one root property is required.
+	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
+	UsesMathBig                                  // Uses a type from the math/big package.
 	UsesValidation                               // Uses a type from the internal/validate package.
 	HasIDRootProperty                            // Has a root property named "id"
 )
@@ -546,9 +548,17 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	// Handle any default value.
-	if planModifier, err := defaultValueAttributePlanModifier(property); err != nil {
+	var hasDefaultValue bool
+
+	if f, planModifier, err := defaultValueAttributePlanModifier(path, property); err != nil {
 		return 0, err
 	} else if planModifier != "" {
+		if required {
+			e.warnf("%s is Required and has a default value. Emitting as Computed,Optional", strings.Join(path, "/"))
+		}
+
+		hasDefaultValue = true
+		features |= f
 		planModifiers = append(planModifiers, planModifier)
 	}
 
@@ -565,15 +575,30 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 	var optional, computed bool
 
-	if required {
-		e.printf("Required:true,\n")
-	} else if !readOnly {
+	if required && hasDefaultValue {
+		required = false
 		optional = true
-		e.printf("Optional:true,\n")
+	}
+
+	if !required && !readOnly {
+		optional = true
 	}
 
 	if (readOnly || createOnly) && !required {
 		computed = true
+	}
+
+	if hasDefaultValue && !computed {
+		computed = true
+	}
+
+	if required {
+		e.printf("Required:true,\n")
+	}
+	if optional {
+		e.printf("Optional:true,\n")
+	}
+	if computed {
 		e.printf("Computed:true,\n")
 	}
 
@@ -725,8 +750,73 @@ func unsupportedTypeError(path []string, typ string) error {
 }
 
 // defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
-func defaultValueAttributePlanModifier(property *cfschema.Property) (string, error) {
-	return "", nil
+func defaultValueAttributePlanModifier(path []string, property *cfschema.Property) (Features, string, error) {
+	var features Features
+
+	switch v := property.Default.(type) {
+	case nil:
+		return features, "", nil
+	//
+	// Primitive types.
+	//
+	case bool:
+		return features, fmt.Sprintf("DefaultValue(types.Bool{Value: %t})", v), nil
+	case float64:
+		features |= UsesMathBig
+		switch propertyType := property.Type.String(); propertyType {
+		case cfschema.PropertyTypeInteger:
+			return features, fmt.Sprintf("DefaultValue(types.Number{Value: big.NewFloat(%d)})", int64(v)), nil
+		case cfschema.PropertyTypeNumber:
+			return features, fmt.Sprintf("DefaultValue(types.Number{Value: big.NewFloat(%f)})", v), nil
+		default:
+			return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+		}
+	case string:
+		return features, fmt.Sprintf("DefaultValue(types.String{Value: %q})", v), nil
+
+	//
+	// Complex types.
+	//
+	case []interface{}:
+		switch arrayType := aggregateType(property); arrayType {
+		case aggregateNone:
+			return 0, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
+		case aggregateSet:
+			features |= UsesInternalTypes
+			features |= UsesFrameworkAttr
+
+			w := &strings.Builder{}
+			wprintf(w, "DefaultValue(providertypes.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
+			for _, elem := range v {
+				switch v := elem.(type) {
+				case string:
+					wprintf(w, "types.String{Value: %q},\n", v)
+				default:
+					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+				}
+			}
+			wprintf(w, "}})")
+			return features, w.String(), nil
+		default:
+			features |= UsesFrameworkAttr
+
+			w := &strings.Builder{}
+			wprintf(w, "DefaultValue(types.List{ElemType:types.StringType, Elems: []attr.Value{\n")
+			for _, elem := range v {
+				switch v := elem.(type) {
+				case string:
+					wprintf(w, "types.String{Value: %q},\n", v)
+				default:
+					return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+				}
+			}
+			wprintf(w, "}})")
+			return features, w.String(), nil
+		}
+
+	default:
+		return 0, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
+	}
 }
 
 func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {

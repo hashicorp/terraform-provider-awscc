@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -34,6 +35,10 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"graph_arn": {
 			// Property: GraphArn

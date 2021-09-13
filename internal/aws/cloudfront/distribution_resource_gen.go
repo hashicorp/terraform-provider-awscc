@@ -4,8 +4,10 @@ package cloudfront
 
 import (
 	"context"
+	"math/big"
 
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -776,6 +778,13 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
@@ -786,21 +795,40 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CachedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"compress": {
 									// Property: Compress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+									},
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
@@ -890,11 +918,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MaxTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+									},
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
@@ -915,6 +951,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SmoothStreaming
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
@@ -945,6 +985,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 					"custom_error_responses": {
 						// Property: CustomErrorResponses
@@ -954,6 +998,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ErrorCachingMinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(300.000000)}),
+									},
 								},
 								"error_code": {
 									// Property: ErrorCode
@@ -988,11 +1036,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: HTTPPort
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(80)}),
+									},
 								},
 								"https_port": {
 									// Property: HTTPSPort
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(443)}),
+									},
 								},
 								"origin_protocol_policy": {
 									// Property: OriginProtocolPolicy
@@ -1016,31 +1072,61 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"cached_methods": {
 									// Property: CachedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"compress": {
 									// Property: Compress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+									},
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
@@ -1130,26 +1216,46 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MaxTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+									},
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"realtime_log_config_arn": {
 									// Property: RealtimeLogConfigArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
@@ -1179,6 +1285,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DefaultRootObject
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 					"enabled": {
 						// Property: Enabled
@@ -1189,6 +1299,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: HttpVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "http1.1"}),
+						},
 					},
 					"ipv6_enabled": {
 						// Property: IPV6Enabled
@@ -1208,11 +1322,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: IncludeCookies
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 							},
 						),
@@ -1320,16 +1442,28 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: HTTPPort
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(80)}),
+												},
 											},
 											"https_port": {
 												// Property: HTTPSPort
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(443)}),
+												},
 											},
 											"origin_keepalive_timeout": {
 												// Property: OriginKeepaliveTimeout
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(5)}),
+												},
 											},
 											"origin_protocol_policy": {
 												// Property: OriginProtocolPolicy
@@ -1340,11 +1474,22 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OriginReadTimeout
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(30)}),
+												},
 											},
 											"origin_ssl_protocols": {
 												// Property: OriginSSLProtocols
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+														types.String{Value: "TLSv1"},
+														types.String{Value: "SSLv3"},
+													}}),
+												},
 											},
 										},
 									),
@@ -1383,6 +1528,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: OriginPath
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"origin_shield": {
 									// Property: OriginShield
@@ -1410,6 +1559,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OriginAccessIdentity
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.String{Value: ""}),
+												},
 											},
 										},
 									),
@@ -1424,6 +1577,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PriceClass
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "PriceClass_All"}),
+						},
 					},
 					"restrictions": {
 						// Property: Restrictions
@@ -1464,6 +1621,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: OriginAccessIdentity
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 							},
 						),
@@ -1506,6 +1667,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: WebACLId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 				},
 			),

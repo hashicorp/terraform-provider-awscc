@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -50,12 +51,16 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"FIFTEEN_MINUTES",
 					"ONE_HOUR",
 					"SIX_HOURS",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "SIX_HOURS"}),
 			},
 		},
 		"service_role": {
@@ -84,11 +89,15 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"PAUSED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "ENABLED"}),
 			},
 		},
 	}

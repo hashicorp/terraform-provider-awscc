@@ -4,8 +4,10 @@ package globalaccelerator
 
 import (
 	"context"
+	"math/big"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -63,6 +65,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "true if client ip should be preserved",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: true}),
+						},
 					},
 					"endpoint_id": {
 						// Property: EndpointId
@@ -75,8 +81,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(100)}),
 						},
 					},
 				},
@@ -120,6 +130,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(30)}),
+			},
 		},
 		"health_check_path": {
 			// Property: HealthCheckPath
@@ -132,6 +146,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "/"}),
+			},
 		},
 		"health_check_port": {
 			// Property: HealthCheckPort
@@ -146,8 +164,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 65535),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(-1)}),
 			},
 		},
 		"health_check_protocol": {
@@ -166,12 +188,16 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"TCP",
 					"HTTP",
 					"HTTPS",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "TCP"}),
 			},
 		},
 		"listener_arn": {
@@ -253,6 +279,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+			},
 		},
 		"traffic_dial_percentage": {
 			// Property: TrafficDialPercentage
@@ -267,8 +297,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatBetween(0.000000, 100.000000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(100.000000)}),
 			},
 		},
 	}

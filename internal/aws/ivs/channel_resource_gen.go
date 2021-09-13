@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -122,8 +123,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: ""}),
 			},
 		},
 		"tags": {

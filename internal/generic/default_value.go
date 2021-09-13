@@ -27,7 +27,8 @@ func (attributePlanModifier defaultValueAttributePlanModifier) MarkdownDescripti
 }
 
 func (attributePlanModifier defaultValueAttributePlanModifier) Modify(ctx context.Context, request tfsdk.ModifyAttributePlanRequest, response *tfsdk.ModifyAttributePlanResponse) {
-	// If the planned value is Null and the current value is the default then return the current value, else return the planned value.
+	// If the planned value is Null and there is a current value and the current value is the default
+	// then return the current value, else return the planned value.
 	if v, err := request.AttributePlan.ToTerraformValue(ctx); err != nil {
 		response.AddAttributeError(
 			request.AttributePath,
@@ -36,7 +37,7 @@ func (attributePlanModifier defaultValueAttributePlanModifier) Modify(ctx contex
 		)
 
 		return
-	} else if v == nil && request.AttributeState.Equal(attributePlanModifier.val) {
+	} else if v == nil && request.AttributeState != nil && request.AttributeState.Equal(attributePlanModifier.val) {
 		response.AttributePlan = request.AttributeState
 	} else {
 		response.AttributePlan = request.AttributePlan

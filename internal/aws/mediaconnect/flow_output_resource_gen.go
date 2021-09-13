@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -120,10 +121,14 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"static-key",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "static-key"}),
 						},
 					},
 					"role_arn": {

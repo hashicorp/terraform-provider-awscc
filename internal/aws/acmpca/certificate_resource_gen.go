@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -390,46 +391,82 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: CRLSign
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"data_encipherment": {
 												// Property: DataEncipherment
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"decipher_only": {
 												// Property: DecipherOnly
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"digital_signature": {
 												// Property: DigitalSignature
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"encipher_only": {
 												// Property: EncipherOnly
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_agreement": {
 												// Property: KeyAgreement
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_cert_sign": {
 												// Property: KeyCertSign
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_encipherment": {
 												// Property: KeyEncipherment
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"non_repudiation": {
 												// Property: NonRepudiation
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 										},
 									),

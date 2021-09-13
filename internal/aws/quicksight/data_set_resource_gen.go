@@ -4,8 +4,10 @@ package quicksight
 
 import (
 	"context"
+	"math/big"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -336,8 +338,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(1.000000, 36.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(36.000000)}),
 						},
 					},
 					"wait_for_spice_ingestion": {
@@ -345,6 +351,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.</p>",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: true}),
+						},
 					},
 				},
 			),

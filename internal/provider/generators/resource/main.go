@@ -113,8 +113,10 @@ package {{ .PackageName }}
 
 import (
 	"context"
+	{{ if .ImportMathBig }}"math/big"{{- end }}
 
 	hclog "github.com/hashicorp/go-hclog"
+	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"

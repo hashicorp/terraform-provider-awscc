@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -117,12 +118,16 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						// Property: UntrustedArtifactOnDeployment
 						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Warn",
 								"Enforce",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "Warn"}),
 						},
 					},
 				},

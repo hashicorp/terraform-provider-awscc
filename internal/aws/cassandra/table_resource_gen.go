@@ -6,6 +6,7 @@ import (
 	"context"
 
 	hclog "github.com/hashicorp/go-hclog"
+
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
@@ -69,12 +70,16 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Mode
 						Description: "Capacity mode for the specified table",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PROVISIONED",
 								"ON_DEMAND",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "ON_DEMAND"}),
 						},
 					},
 					"provisioned_throughput": {
@@ -174,11 +179,15 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: OrderBy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ASC",
 								"DESC",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "ASC"}),
 						},
 					},
 				},
@@ -226,12 +235,16 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: EncryptionType
 						Description: "Server-side encryption type",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AWS_OWNED_KMS_KEY",
 								"CUSTOMER_MANAGED_KMS_KEY",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "AWS_OWNED_KMS_KEY"}),
 						},
 					},
 					"kms_key_identifier": {
