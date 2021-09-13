@@ -196,7 +196,9 @@ func (r *Resource) ResolveProperty(property *Property) (bool, error) {
 		*property = *resolution
 
 		// Ensure that any default value is not lost.
-		property.Default = defaultValue
+		if defaultValue != nil {
+			property.Default = defaultValue
+		}
 
 		return true, nil
 	}
