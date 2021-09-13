@@ -15,7 +15,7 @@ To learn the basics of Terraform using this provider, follow the hands-on get st
 
 ## Example Usage
 
-Terraform 1.0.5 and later:
+Terraform 0.13 and later:
 
 ```terraform
 terraform {
