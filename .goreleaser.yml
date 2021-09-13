@@ -37,7 +37,7 @@ publishers:
   - name: hc-releases
     checksum: true
     signature: true
-    cmd: hc-releases upload-file -bucket=my-other-bb-bucket -region=us-east-1 -header="x-terraform-protocol-version={{ .Env.PROTOCOL_VERSION }}" -header="x-terraform-protocol-versions={{ .Env.PROTOCOL_VERSIONS }}" {{ abs .ArtifactPath }}
+    cmd: hc-releases upload-file -hidden -header="x-terraform-protocol-version={{ .Env.PROTOCOL_VERSION }}" -header="x-terraform-protocol-versions={{ .Env.PROTOCOL_VERSIONS }}" {{ abs .ArtifactPath }}
     env:
       - AWS_ACCESS_KEY_ID={{ .Env.AWS_ACCESS_KEY_ID }}
       - AWS_SECRET_ACCESS_KEY={{ .Env.AWS_SECRET_ACCESS_KEY }}

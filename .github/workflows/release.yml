@@ -69,8 +69,8 @@ jobs:
           SIGNORE_CLIENT_SECRET: ${{ secrets.SIGNORE_CLIENT_SECRET }}
           PROTOCOL_VERSION: ${{ env.PROTOCOL_VERSION }}
           PROTOCOL_VERSIONS: ${{ env.PROTOCOL_VERSIONS }}
-      - name: hc-releases publish
-        run: hc-releases publish -bucket=my-other-bb-bucket -regon=us-east-1 -product=${{ github.event.repository.name }}
-        env:
-          FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
-          TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
+#      - name: hc-releases publish
+#        run: hc-releases publish -product=${{ github.event.repository.name }}
+#        env:
+#          FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
+#          TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
