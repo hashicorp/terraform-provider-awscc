@@ -5,10 +5,8 @@ package globalaccelerator
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,6 +28,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//     "description": "The configuration for a given endpoint",
 			//     "properties": {
 			//       "ClientIPPreservationEnabled": {
+			//         "default": true,
 			//         "description": "true if client ip should be preserved",
 			//         "type": "boolean"
 			//       },
@@ -38,6 +37,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//         "type": "string"
 			//       },
 			//       "Weight": {
+			//         "default": 100,
 			//         "description": "The weight for the endpoint.",
 			//         "maximum": 255,
 			//         "minimum": 0,
@@ -103,6 +103,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: HealthCheckIntervalSeconds
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 30,
 			//   "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			//   "type": "integer"
 			// }
@@ -114,6 +115,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: HealthCheckPath
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "/",
 			//   "description": "",
 			//   "type": "string"
 			// }
@@ -125,6 +127,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: HealthCheckPort
 			// CloudFormation resource type schema:
 			// {
+			//   "default": -1,
 			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "maximum": 65535,
 			//   "minimum": -1,
@@ -138,6 +141,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: HealthCheckProtocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "enum": [
 			//     "TCP",
@@ -213,6 +217,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: ThresholdCount
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 3,
 			//   "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			//   "type": "integer"
 			// }
@@ -224,6 +229,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: TrafficDialPercentage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 100,
 			//   "description": "The percentage of traffic to sent to an AWS Region",
 			//   "maximum": 100,
 			//   "minimum": 0,
@@ -275,8 +281,6 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_globalaccelerator_endpoint_group", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

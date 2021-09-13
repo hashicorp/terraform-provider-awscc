@@ -5,11 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
-
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -133,8 +130,6 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_enclave_certificate_iam_role_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

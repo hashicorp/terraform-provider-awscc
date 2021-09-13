@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -131,6 +129,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//             "uniqueItems": true
 			//           },
 			//           "EbsOptimized": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "IamInstanceProfile": {
@@ -158,6 +157,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "Enabled": {
+			//                 "default": false,
 			//                 "type": "boolean"
 			//               }
 			//             },
@@ -1199,8 +1199,6 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_spot_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }
