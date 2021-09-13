@@ -814,6 +814,72 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, w.String(), nil
 		}
 
+	case map[string]interface{}:
+		features |= UsesFrameworkAttr
+
+		w := &strings.Builder{}
+		wprintf(w, "DefaultValue(types.Object{\nAttrTypes: map[string]attr.Type{\n")
+		for key1, v := range v {
+			switch v := v.(type) {
+			case bool:
+				wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+			case string:
+				wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+			case map[string]interface{}:
+				wprintf(w, "%q: types.ObjectType{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				for key2, v := range v {
+					switch v := v.(type) {
+					case bool:
+						wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+					case string:
+						wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+					default:
+						return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1, key2), "/"), v)
+					}
+				}
+				wprintf(w, "},\n")
+				wprintf(w, "},\n")
+			default:
+				return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(append(path, key1), "/"), v)
+			}
+		}
+		wprintf(w, "},\n")
+		wprintf(w, "Attrs: map[string]attr.Value{\n")
+		for key1, v := range v {
+			switch v := v.(type) {
+			case bool:
+				wprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+			case string:
+				wprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key1), v)
+			case map[string]interface{}:
+				wprintf(w, "%q: types.Object{\nAttrTypes: map[string]attr.Type{\n", naming.CloudFormationPropertyToTerraformAttribute(key1))
+				for key2, v := range v {
+					switch v.(type) {
+					case bool:
+						wprintf(w, "%q: types.BoolType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+					case string:
+						wprintf(w, "%q: types.StringType,\n", naming.CloudFormationPropertyToTerraformAttribute(key2))
+					}
+				}
+				wprintf(w, "},\n")
+				wprintf(w, "Attrs: map[string]attr.Value{\n")
+				for key2, v := range v {
+					switch v := v.(type) {
+					case bool:
+						wprintf(w, "%q: types.Bool{Value: %t},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+					case string:
+						wprintf(w, "%q: types.String{Value: %q},\n", naming.CloudFormationPropertyToTerraformAttribute(key2), v)
+					}
+				}
+				wprintf(w, "},\n")
+				wprintf(w, "},\n")
+			}
+		}
+		wprintf(w, "},\n")
+		wprintf(w, "},\n")
+		wprintf(w, ")")
+		return features, w.String(), nil
+
 	default:
 		return 0, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
 	}

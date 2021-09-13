@@ -89,6 +89,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "properties": {
 			//               "Cookies": {
 			//                 "additionalProperties": false,
+			//                 "default": {
+			//                   "Forward": "none"
+			//                 },
 			//                 "properties": {
 			//                   "Forward": {
 			//                     "type": "string"
@@ -324,6 +327,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "properties": {
 			//             "Cookies": {
 			//               "additionalProperties": false,
+			//               "default": {
+			//                 "Forward": "none"
+			//               },
 			//               "properties": {
 			//                 "Forward": {
 			//                   "type": "string"
@@ -685,6 +691,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Restrictions": {
 			//       "additionalProperties": false,
+			//       "default": {
+			//         "GeoRestriction": {
+			//           "RestrictionType": "none"
+			//         }
+			//       },
 			//       "properties": {
 			//         "GeoRestriction": {
 			//           "additionalProperties": false,
@@ -729,6 +740,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "ViewerCertificate": {
 			//       "additionalProperties": false,
+			//       "default": {
+			//         "CloudFrontDefaultCertificate": true
+			//       },
 			//       "properties": {
 			//         "AcmCertificateArn": {
 			//           "type": "string"
@@ -851,6 +865,18 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Object{
+														AttrTypes: map[string]attr.Type{
+															"forward": types.StringType,
+														},
+														Attrs: map[string]attr.Value{
+															"forward": types.String{Value: "none"},
+														},
+													},
+													),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -1149,6 +1175,18 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Object{
+														AttrTypes: map[string]attr.Type{
+															"forward": types.StringType,
+														},
+														Attrs: map[string]attr.Value{
+															"forward": types.String{Value: "none"},
+														},
+													},
+													),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -1607,6 +1645,29 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Object{
+								AttrTypes: map[string]attr.Type{
+									"geo_restriction": types.ObjectType{
+										AttrTypes: map[string]attr.Type{
+											"restriction_type": types.StringType,
+										},
+									},
+								},
+								Attrs: map[string]attr.Value{
+									"geo_restriction": types.Object{
+										AttrTypes: map[string]attr.Type{
+											"restriction_type": types.StringType,
+										},
+										Attrs: map[string]attr.Value{
+											"restriction_type": types.String{Value: "none"},
+										},
+									},
+								},
+							},
+							),
+						},
 					},
 					"s3_origin": {
 						// Property: S3Origin
@@ -1662,6 +1723,18 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Object{
+								AttrTypes: map[string]attr.Type{
+									"cloudfront_default_certificate": types.BoolType,
+								},
+								Attrs: map[string]attr.Value{
+									"cloudfront_default_certificate": types.Bool{Value: true},
+								},
+							},
+							),
+						},
 					},
 					"web_acl_id": {
 						// Property: WebACLId

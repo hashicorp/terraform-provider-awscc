@@ -41,12 +41,17 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: DeletionProtected
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Configures the ReplicationSet deletion protection.",
 			//   "type": "boolean"
 			// }
 			Description: "Configures the ReplicationSet deletion protection.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"regions": {
 			// Property: Regions

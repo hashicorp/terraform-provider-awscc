@@ -12,6 +12,7 @@ type defaultValueAttributePlanModifier struct {
 	val attr.Value
 }
 
+// DefaultValue return an AttributePlanModifier that sets the specified value if the planned value is Null and the current value is the default.
 func DefaultValue(val attr.Value) tfsdk.AttributePlanModifier {
 	return defaultValueAttributePlanModifier{
 		val: val,
