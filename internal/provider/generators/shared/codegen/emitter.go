@@ -23,6 +23,16 @@ const (
 	HasIDRootProperty                            // Has a root property named "id"
 )
 
+var (
+	tfMetaArguments = []string{
+		"count",
+		"depends_on",
+		"for_each",
+		"lifecycle",
+		"provider",
+	}
+)
+
 type Emitter struct {
 	CfResource *cfschema.Resource
 	Ui         cli.Ui
@@ -67,6 +77,12 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string, co
 			}
 
 			features |= HasIDRootProperty
+		}
+
+		for _, tfMetaArgument := range tfMetaArguments {
+			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
+				return 0, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
+			}
 		}
 
 		if cfResource.IsRequired(name) {
@@ -520,7 +536,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	// Return early as attribute validations are not required
-	// and additional configurations are not supported when an attribute is "Computed"
+	// and additional configurations are not supported when an attribute is Computed-only.
 	if computedOnly {
 		e.printf("Computed:true,\n")
 		e.printf("}")
@@ -566,11 +582,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	if createOnly {
-		e.printf("// %s is a force-new attribute.\n", name)
+		e.printf("PlanModifiers:[]tfsdk.AttributePlanModifier{\n")
+		e.printf("tfsdk.RequiresReplace(),// %s is a force-new property.\n", name)
+		e.printf("},\n")
 	}
 
 	if writeOnly {
-		e.printf("// %s is a write-only attribute.\n", name)
+		e.printf("// %s is a write-only property.\n", name)
 	}
 
 	if !createOnly && !readOnly {

@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -30,11 +29,11 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	list, ok := request.AttributeConfig.(types.List)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -46,11 +45,11 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	val, err := list.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "No Terraform value",
-			Detail:   fmt.Sprintf("unable to obtain Terraform value at path: %s", request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"No Terraform value",
+			"unable to obtain Terraform value:\n\n"+err.Error(),
+		)
 
 		return
 	}
@@ -71,11 +70,11 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 			}
 
 			if val1.Equal(val2) {
-				response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-					Severity: tfprotov6.DiagnosticSeverityError,
-					Summary:  "Duplicate value",
-					Detail:   fmt.Sprintf("duplicate values at path: %s", request.AttributePath),
-				})
+				response.Diagnostics.AddAttributeError(
+					request.AttributePath,
+					"Duplicate value",
+					"duplicate values",
+				)
 
 				return
 			}

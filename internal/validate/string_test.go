@@ -78,11 +78,11 @@ func TestStringLenBetweenValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			StringLenBetween(test.minLength, test.maxLength).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -144,11 +144,11 @@ func TestStringLenAtLeastValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			StringLenAtLeast(test.minLength).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -208,11 +208,11 @@ func TestStringinSliceValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			StringInSlice(test.valid).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})

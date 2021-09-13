@@ -141,11 +141,11 @@ func TestArrayLenBetweenValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			ArrayLenBetween(test.minItems, test.maxItems).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -262,11 +262,11 @@ func TestArrayLenAtLeastValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			ArrayLenAtLeast(test.minItems).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})

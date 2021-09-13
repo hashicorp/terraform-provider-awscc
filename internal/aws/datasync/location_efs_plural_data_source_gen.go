@@ -21,7 +21,6 @@ func init() {
 // locationEFSPluralDataSourceType returns the Terraform awscc_datasync_location_efs_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationEFS resource type.
 func locationEFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -43,7 +42,8 @@ func locationEFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationEFS", "awscc_datasync_location_efs_plural", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationEFS").WithTerraformTypeName("awscc_datasync_location_efs_plural")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 

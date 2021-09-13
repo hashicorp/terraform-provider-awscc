@@ -4,20 +4,19 @@ import (
 	"context"
 	"fmt"
 
+	tfdiag "github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
-type RequiredAttributesFunc func(names []string) []*tfprotov6.Diagnostic
+type RequiredAttributesFunc func(names []string) tfdiag.Diagnostics
 
 // Required returns a RequiredAttributesFunc that validates that all required attributes are specfied.
 func Required(required ...string) RequiredAttributesFunc {
-	return func(names []string) []*tfprotov6.Diagnostic {
-		diags := make([]*tfprotov6.Diagnostic, 0)
+	return func(names []string) tfdiag.Diagnostics {
+		var diags tfdiag.Diagnostics
 
 		for _, r := range required {
 			var specified bool
@@ -30,11 +29,10 @@ func Required(required ...string) RequiredAttributesFunc {
 			}
 
 			if !specified {
-				diags = append(diags, &tfprotov6.Diagnostic{
-					Severity: tfprotov6.DiagnosticSeverityError,
-					Summary:  "Attribute not specified",
-					Detail:   fmt.Sprintf("Required attribute (%s) not specified", r),
-				})
+				diags.Append(tfdiag.NewErrorDiagnostic(
+					"Attribute not specified",
+					fmt.Sprintf("Required attribute (%s) not specified", r),
+				))
 			}
 		}
 
@@ -45,11 +43,11 @@ func Required(required ...string) RequiredAttributesFunc {
 // AllOfRequired returns a RequiredAttributesFunc that validates that all of the specified validators pass.
 // "To validate against allOf, the given data must be valid against all of the given subschemas."
 func AllOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names []string) []*tfprotov6.Diagnostic {
-		output := make([]*tfprotov6.Diagnostic, 0)
+	return func(names []string) tfdiag.Diagnostics {
+		var output tfdiag.Diagnostics
 
 		for _, f := range fs {
-			output = append(output, f(names)...)
+			output.Append(f(names)...)
 		}
 
 		return output
@@ -59,13 +57,13 @@ func AllOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 // AnyOfRequired returns a RequiredAttributesFunc that validates that any of the specified validators pass.
 // "To validate against anyOf, the given data must be valid against any (one or more) of the given subschemas."
 func AnyOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names []string) []*tfprotov6.Diagnostic {
-		output := make([]*tfprotov6.Diagnostic, 0)
+	return func(names []string) tfdiag.Diagnostics {
+		var output tfdiag.Diagnostics
 
 		for _, f := range fs {
 			diags := f(names)
 
-			if tfresource.DiagsHasError(diags) {
+			if diags.HasError() {
 				output = append(output, diags...)
 			} else {
 				return nil
@@ -79,14 +77,14 @@ func AnyOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 // OneOfRequired returns a RequiredAttributesFunc that validates that exactly one of of the specified validators pass.
 // "To validate against oneOf, the given data must be valid against exactly one of the given subschemas."
 func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
-	return func(names []string) []*tfprotov6.Diagnostic {
-		output := make([]*tfprotov6.Diagnostic, 0)
+	return func(names []string) tfdiag.Diagnostics {
+		var output tfdiag.Diagnostics
 
 		var n int
 		for _, f := range fs {
 			diags := f(names)
 
-			if tfresource.DiagsHasError(diags) {
+			if diags.HasError() {
 				output = append(output, diags...)
 			} else {
 				n++
@@ -98,11 +96,10 @@ func OneOfRequired(fs ...RequiredAttributesFunc) RequiredAttributesFunc {
 		case 1:
 			return nil
 		default:
-			output = append(output, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Conflicting attributes",
-				Detail:   fmt.Sprintf("%d groups of required attributes match", n),
-			})
+			output.Append(tfdiag.NewErrorDiagnostic(
+				"Conflicting attributes",
+				fmt.Sprintf("%d groups of required attributes match", n),
+			))
 		}
 
 		return output
@@ -149,11 +146,11 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 		}
 
 	default:
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", v, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", v),
+		)
 
 		return
 	}
@@ -161,16 +158,16 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	val, err := request.AttributeConfig.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "No Terraform value",
-			Detail:   fmt.Sprintf("unable to obtain Terraform value at path: %s", request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"No Terraform value",
+			"unable to obtain Terraform value:\n\n"+err.Error(),
+		)
 
 		return
 	}
 
-	var diags []*tfprotov6.Diagnostic
+	var diags tfdiag.Diagnostics
 	switch v := val.(type) {
 	case map[string]tftypes.Value:
 		// Ensure that the object is fully known.
@@ -194,11 +191,10 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			// Each array element must be an Object.
 			var vals map[string]tftypes.Value
 			if err := val.As(&vals); err != nil {
-				response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-					Severity: tfprotov6.DiagnosticSeverityError,
-					Summary:  "Invalid value type",
-					Detail:   fmt.Sprintf("unable to convert value type: %s", err),
-				})
+				response.Diagnostics.AddError(
+					"Invalid value type",
+					"unable to convert value type:\n\n"+err.Error(),
+				)
 
 				return
 			}
@@ -206,7 +202,7 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			diags = evaluateRequiredAttributesFuncs(specifiedAttributes(vals), validator.fs...)
 
 			// Required attributes must be specified for every element.
-			if tfresource.DiagsHasError(diags) {
+			if diags.HasError() {
 				break
 			}
 		}
@@ -214,7 +210,7 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 
 	response.Diagnostics = append(response.Diagnostics, diags...)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return
 	}
 }
@@ -252,11 +248,10 @@ func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.
 	}
 
 	if typ := val.Type(); !typ.Is(tftypes.Object{}) {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%s)", typ),
-		})
+		response.Diagnostics.AddError(
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%s)", typ),
+		)
 
 		return
 	}
@@ -264,11 +259,10 @@ func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.
 	var vals map[string]tftypes.Value
 
 	if err := val.As(&vals); err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("unable to convert value type: %s", err),
-		})
+		response.Diagnostics.AddError(
+			"Invalid value type",
+			"unable to convert value type:\n\n"+err.Error(),
+		)
 
 		return
 	}
@@ -277,7 +271,7 @@ func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.
 
 	response.Diagnostics = append(response.Diagnostics, diags...)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return
 	}
 }
@@ -289,8 +283,8 @@ func ResourceConfigRequiredAttributes(fs ...RequiredAttributesFunc) tfsdk.Resour
 	}
 }
 
-func evaluateRequiredAttributesFuncs(names []string, fs ...RequiredAttributesFunc) []*tfprotov6.Diagnostic {
-	diags := make([]*tfprotov6.Diagnostic, 0)
+func evaluateRequiredAttributesFuncs(names []string, fs ...RequiredAttributesFunc) tfdiag.Diagnostics {
+	var diags tfdiag.Diagnostics
 
 	for _, f := range fs {
 		diags = append(diags, f(names)...)

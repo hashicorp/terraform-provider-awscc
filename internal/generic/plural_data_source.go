@@ -8,19 +8,20 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
 )
 
-type PluralDataSourceType DataSourceType
+// pluralDataSourceType is a type alias for a data source type.
+type pluralDataSourceType dataSourceType
 
-// NewPluralDataSourceType returns a new PluralDataSourceType from the specified variadic list of functional options.
+// NewPluralDataSourceType returns a new pluralDataSourceType from the specified variadic list of functional options.
 // It's public as it's called from generated code.
 func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsFunc) (tfsdk.DataSourceType, error) {
-	dataSourceType := &DataSourceType{}
+	dataSourceType := &dataSourceType{}
 
 	for _, optFn := range optFns {
 		err := optFn(dataSourceType)
@@ -38,34 +39,26 @@ func NewPluralDataSourceType(_ context.Context, optFns ...DataSourceTypeOptionsF
 		return nil, fmt.Errorf("no Terraform type name specified")
 	}
 
-	var pdt *PluralDataSourceType
+	pluralDataSourceType := pluralDataSourceType(*dataSourceType)
 
-	return pdt.New(dataSourceType), nil
+	return &pluralDataSourceType, nil
 }
 
-func (pdt *PluralDataSourceType) New(dst *DataSourceType) *PluralDataSourceType {
-	return &PluralDataSourceType{
-		cfTypeName: dst.cfTypeName,
-		tfSchema:   dst.tfSchema,
-		tfTypeName: dst.tfTypeName,
-	}
-}
-
-func (pdt *PluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (pdt *pluralDataSourceType) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return pdt.tfSchema, nil
 }
 
-func (pdt *PluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, []*tfprotov6.Diagnostic) {
+func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider tfsdk.Provider) (tfsdk.DataSource, diag.Diagnostics) {
 	return newGenericPluralDataSource(provider, pdt), nil
 }
 
 // Implements tfsdk.DataSource
 type pluralDataSource struct {
 	provider       tfcloudformation.Provider
-	dataSourceType *PluralDataSourceType
+	dataSourceType *pluralDataSourceType
 }
 
-func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *PluralDataSourceType) tfsdk.DataSource {
+func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *pluralDataSourceType) tfsdk.DataSource {
 	return &pluralDataSource{
 		provider:       provider.(tfcloudformation.Provider),
 		dataSourceType: pluralDataSourceType,
@@ -85,7 +78,7 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 	descriptions, err := pd.list(ctx, conn)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
 
 		return
 	}

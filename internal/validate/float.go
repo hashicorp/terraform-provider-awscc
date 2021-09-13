@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 )
 
 // floatBetweenValidator validates that an float Attribute's value is in a range.
@@ -17,25 +16,25 @@ type floatBetweenValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v floatBetweenValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be between %f and %f", v.min, v.max)
+func (validator floatBetweenValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be between %f and %f", validator.min, validator.max)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v floatBetweenValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator floatBetweenValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v floatBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator floatBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -46,12 +45,12 @@ func (v floatBetweenValidator) Validate(ctx context.Context, request tfsdk.Valid
 
 	f, _ := n.Value.Float64()
 
-	if f < v.min || f > v.max {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected %s to be in the range [%f, %f], got %f", request.AttributePath, v.min, v.max, f),
-		})
+	if f < validator.min || f > validator.max {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be in the range [%f, %f], got %f", validator.min, validator.max, f),
+		)
 
 		return
 	}
@@ -77,25 +76,25 @@ type floatAtLeastValidator struct {
 }
 
 // Description describes the validation in plain text formatting.
-func (v floatAtLeastValidator) Description(_ context.Context) string {
-	return fmt.Sprintf("value must be at least %f", v.min)
+func (validator floatAtLeastValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be at least %f", validator.min)
 }
 
 // MarkdownDescription describes the validation in Markdown formatting.
-func (v floatAtLeastValidator) MarkdownDescription(ctx context.Context) string {
-	return v.Description(ctx)
+func (validator floatAtLeastValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
 }
 
 // Validate performs the validation.
-func (v floatAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+func (validator floatAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid value type",
-			Detail:   fmt.Sprintf("received incorrect value type (%T) at path: %s", request.AttributeConfig, request.AttributePath),
-		})
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
 
 		return
 	}
@@ -106,12 +105,12 @@ func (v floatAtLeastValidator) Validate(ctx context.Context, request tfsdk.Valid
 
 	f, _ := n.Value.Float64()
 
-	if f < v.min {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Invalid length",
-			Detail:   fmt.Sprintf("expected %s to be at least %f, got %f", request.AttributePath, v.min, f),
-		})
+	if f < validator.min {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be at least %f, got %f", validator.min, f),
+		)
 
 		return
 	}

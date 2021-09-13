@@ -44,6 +44,25 @@ provider "awscc" {
 	return config
 }
 
+// DataSourceWithEmptyResourceConfig returns a Terraform configuration for the data source and its respective resource.
+func (td *TestData) DataSourceWithEmptyResourceConfig() string {
+	return td.EmptyConfig() + fmt.Sprintf(`
+data %[1]q %[2]q {
+  id = %[1]s.%[2]s.id
+}
+`, td.TerraformResourceType, td.ResourceLabel)
+}
+
+// DataSourceWithNonExistentIDConfig returns a Terraform configuration for the data source
+// with the id attribute set to a non-existent resource.
+func (td *TestData) DataSourceWithNonExistentIDConfig() string {
+	return fmt.Sprintf(`
+data %[1]q %[2]q {
+  id = "non-existent"
+}
+`, td.TerraformResourceType, td.ResourceLabel)
+}
+
 // EmptyDataSourceConfig returns an empty (no attributes) Terraform configuration for the data source.
 func (td *TestData) EmptyDataSourceConfig() string {
 	return fmt.Sprintf(`

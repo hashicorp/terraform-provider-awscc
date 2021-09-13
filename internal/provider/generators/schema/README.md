@@ -65,5 +65,15 @@ resource_schema "aws_ec2_instance" {
   # Optional.
   # The default value is false - A Terraform resource is generated.
   suppress_resource_generation = true
+
+  # Whether or not to suppress Terraform singular data source generation.
+  # Optional.
+  # The default value is false - A Terraform singular data source is generated.
+  suppress_singular_data_source_generation = true
+
+  # Whether or not to suppress Terraform plural data source generation.
+  # Optional.
+  # The default value is false - A Terraform plural data source is generated.
+  suppress_plural_data_source_generation = true
 }
 ```

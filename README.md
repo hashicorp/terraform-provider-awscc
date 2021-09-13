@@ -4,19 +4,32 @@
 
 # Terraform AWS Cloud Control Provider
 
-- Website: [terraform.io](https://terraform.io)
-- Tutorials: [learn.hashicorp.com](https://learn.hashicorp.com/terraform?track=getting-started#getting-started)
+*This provider is currently in technical preview. This means some aspects of its design and implementation are not yet considered stable. We are actively looking for community feedback in order to solidify its form.  *
+
+- Announcement: [HashiCorp Blog](TODO)
+- Terraform Website: [terraform.io](https://terraform.io)
+- Provider Documentation: [Terraform Registry](https://registry.terraform.io/providers/hashicorp/awscc/latest)
+- Tutorials: [learn.hashicorp.com](TODO Learn Content)
 - Forum: [discuss.hashicorp.com](https://discuss.hashicorp.com/c/terraform-providers/tf-aws/)
-- Chat: [gitter](https://gitter.im/hashicorp-terraform/Lobby)
-- Mailing List: [Google Groups](http://groups.google.com/group/terraform-tool)
 
 The Terraform AWS Cloud Control Provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources using the AWS CloudFormation Cloud Control API.
 This provider is maintained internally by the HashiCorp AWS Provider team.
 
 ### AWS CloudFormation Cloud Control API
 
-The Cloud Control API is a lighweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
+The [Cloud Control API](TODO LINK TO AWS DOCS) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
 The Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
+
+#### Coverage
+
+At launch a subset of AWS resources which can be managed by CloudFormation are supported, some services use an older CloudFormation schema and cannot be used with Cloud Control. AWS are updating all of the older CloudFormation schemas to conform to the new standard, and are actively pursuing full coverage for CloudFormation. For the latest coverage information please refer to the AWS Cloudformation public (roadmap)[https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1]
+
+To see the list of supported resources within this provider please refer to the registry.
+
+### Release Schedule
+
+This provider is generated from the latest CloudFormation schemas, and will release weekly containing all new services and enhancements added to Cloud Control.
+
 
 ### Credentials
 
@@ -28,23 +41,19 @@ All CRUDL operations also accept a `RoleArn` parameter which represents the [AWS
 
 ## Quick Starts
 
-- Using the provider
-- [Provider development](docs/DEVELOPMENT.md)
+- Using the provider TODO
+- [Provider development](contributing/DEVELOPMENT.md)
 
 ## Documentation
 
-Full, comprehensive documentation is available on the Terraform website:
-
-## Roadmap
-
-Our roadmap for expanding support in Terraform for AWS resources can be found in our [Roadmap](ROADMAP.md) which is published quarterly.
+Full, comprehensive documentation is available on the [Terraform Registry](https://registry.terraform.io/providers/hashicorp/awscc/latest)
 
 ## Frequently Asked Questions
 
-Responses to our most frequently asked questions can be found in our [FAQ](docs/FAQ.md )
+Responses to our most frequently asked questions can be found in our [FAQ](contributing/FAQ.md )
 
 ## Contributing
 
 The Terraform Provider for AWS CloudFormation Cloud Control API is the work of a handful of contributors. We appreciate your help!
 
-To contribute, please read the contribution guidelines: [Contributing to Terraform - AWS Cloud Control Provider](docs/CONTRIBUTING.md)
+To contribute, please read the contribution guidelines: [Contributing to Terraform - AWS Cloud Control Provider](contributing/CONTRIBUTING.md)
