@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestDefaultValue(t *testing.T) {
@@ -71,6 +72,189 @@ func TestDefaultValue(t *testing.T) {
 			currentValue:  types.Number{Value: big.NewFloat(-10)},
 			defaultValue:  types.Number{Value: big.NewFloat(-10)},
 			expectedValue: types.Number{Value: big.NewFloat(-10)},
+		},
+		"non-default string list": {
+			plannedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "POST"},
+			}},
+			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "PUT"},
+			}},
+			defaultValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "POST"},
+			}},
+		},
+		"non-default string list, current out of order": {
+			plannedValue: types.List{ElemType: types.StringType, Null: true},
+			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "HEAD"},
+				types.String{Value: "GET"},
+			}},
+			defaultValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: types.List{ElemType: types.StringType, Null: true},
+		},
+		"default string list": {
+			plannedValue: types.List{ElemType: types.StringType, Null: true},
+			currentValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			defaultValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: types.List{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+		},
+		"non-default string set": {
+			plannedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "POST"},
+			}},
+			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "PUT"},
+			}},
+			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "POST"},
+			}},
+		},
+		"default string set, current out of order": {
+			plannedValue: providertypes.Set{ElemType: types.StringType, Null: true},
+			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "HEAD"},
+				types.String{Value: "GET"},
+			}},
+			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "HEAD"},
+				types.String{Value: "GET"},
+			}},
+		},
+		"default string set": {
+			plannedValue: providertypes.Set{ElemType: types.StringType, Null: true},
+			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+				types.String{Value: "GET"},
+				types.String{Value: "HEAD"},
+			}},
+		},
+		"non-default object": {
+			plannedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "gamma"},
+				},
+			},
+			currentValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "beta"},
+				},
+			},
+			defaultValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "alpha"},
+				},
+			},
+			expectedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "gamma"},
+				},
+			},
+		},
+		"non-default object, different value": {
+			plannedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Null: true,
+			},
+			currentValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "beta"},
+				},
+			},
+			defaultValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "alpha"},
+				},
+			},
+			expectedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Null: true,
+			},
+		},
+		"default object": {
+			plannedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Null: true,
+			},
+			currentValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "alpha"},
+				},
+			},
+			defaultValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "alpha"},
+				},
+			},
+			expectedValue: types.Object{
+				AttrTypes: map[string]attr.Type{
+					"value": types.StringType,
+				},
+				Attrs: map[string]attr.Value{
+					"value": types.String{Value: "alpha"},
+				},
+			},
 		},
 	}
 
