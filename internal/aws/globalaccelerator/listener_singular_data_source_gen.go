@@ -5,10 +5,8 @@ package globalaccelerator
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -36,6 +34,7 @@ func listenerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ClientAffinity
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "NONE",
 			//   "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
 			//   "enum": [
 			//     "NONE",
@@ -109,6 +108,7 @@ func listenerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Protocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol for the listener.",
 			//   "enum": [
 			//     "TCP",
@@ -153,8 +153,6 @@ func listenerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_globalaccelerator_listener", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

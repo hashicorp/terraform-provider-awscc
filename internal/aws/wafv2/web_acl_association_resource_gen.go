@@ -5,10 +5,8 @@ package wafv2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -37,7 +35,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"web_acl_arn": {
@@ -54,7 +52,7 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // WebACLArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -90,8 +88,6 @@ func webACLAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_web_acl_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package ivs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -112,6 +110,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: RecordingConfigurationArn
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "",
 			//   "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			//   "maxLength": 128,
 			//   "minLength": 0,
@@ -121,8 +120,12 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: ""}),
 			},
 		},
 		"tags": {
@@ -244,8 +247,6 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ivs_channel", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

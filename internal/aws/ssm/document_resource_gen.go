@@ -5,10 +5,8 @@ package ssm
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -108,7 +106,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Attachments is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"content": {
@@ -122,13 +120,14 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Content is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"document_format": {
 			// Property: DocumentFormat
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "JSON",
 			//   "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
 			//   "enum": [
 			//     "YAML",
@@ -149,7 +148,8 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DocumentFormat is a force-new property.
+				DefaultValue(types.String{Value: "JSON"}),
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"document_type": {
@@ -196,7 +196,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DocumentType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -212,7 +212,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"requires": {
@@ -270,7 +270,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Requires is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -342,7 +342,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TargetType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version_name": {
@@ -358,7 +358,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VersionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -405,8 +405,6 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssm_document", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

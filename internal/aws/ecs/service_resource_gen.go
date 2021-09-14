@@ -5,10 +5,8 @@ package ecs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -76,7 +74,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"deployment_configuration": {
@@ -180,7 +178,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeploymentController is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"desired_count": {
@@ -202,7 +200,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EnableECSManagedTags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"enable_execute_command": {
@@ -245,7 +243,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LaunchType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"load_balancers": {
@@ -300,7 +298,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LoadBalancers is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -430,7 +428,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlacementConstraints is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"placement_strategies": {
@@ -484,17 +482,22 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlacementStrategies is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"platform_version": {
 			// Property: PlatformVersion
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "LATEST",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "LATEST"}),
+			},
 		},
 		"propagate_tags": {
 			// Property: PropagateTags
@@ -516,7 +519,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PropagateTags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role": {
@@ -529,7 +532,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Role is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"scheduling_strategy": {
@@ -552,7 +555,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchedulingStrategy is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"service_arn": {
@@ -574,7 +577,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"service_registries": {
@@ -629,7 +632,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceRegistries is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -753,8 +756,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_service", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

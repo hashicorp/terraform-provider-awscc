@@ -5,10 +5,8 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -80,7 +78,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Ec2Config is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"efs_filesystem_arn": {
@@ -99,7 +97,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EfsFilesystemArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// EfsFilesystemArn is a write-only property.
 		},
@@ -146,7 +144,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -258,8 +256,6 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_efs", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

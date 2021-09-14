@@ -5,10 +5,8 @@ package route53
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -240,7 +238,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // MeasureLatency is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"port": {
@@ -268,7 +266,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.IntBetween(10, 30),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // RequestInterval is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"resource_path": {
@@ -312,7 +310,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Type is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -439,8 +437,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_health_check", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

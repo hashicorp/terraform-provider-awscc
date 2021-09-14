@@ -5,10 +5,8 @@ package accessanalyzer
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -40,7 +38,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AnalyzerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"archive_rules": {
@@ -242,7 +240,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -290,8 +288,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_accessanalyzer_analyzer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package gamelift
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -37,7 +35,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BuildId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_configuration": {
@@ -80,7 +78,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -227,7 +225,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EC2InstanceType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"fleet_id": {
@@ -266,7 +264,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FleetType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"instance_role_arn": {
@@ -287,7 +285,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InstanceRoleARN is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"locations": {
@@ -416,7 +414,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogPaths is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"max_size": {
@@ -528,7 +526,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PeerVpcAwsAccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"peer_vpc_id": {
@@ -550,7 +548,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PeerVpcId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_creation_limit_policy": {
@@ -740,7 +738,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ScriptId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"server_launch_parameters": {
@@ -761,7 +759,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerLaunchParameters is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"server_launch_path": {
@@ -782,7 +780,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerLaunchPath is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -879,8 +877,6 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_gamelift_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

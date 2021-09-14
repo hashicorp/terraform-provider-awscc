@@ -5,10 +5,8 @@ package acmpca
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -101,30 +99,39 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           "description": "Structure that contains X.509 KeyUsage information.",
 			//           "properties": {
 			//             "CRLSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DataEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DecipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DigitalSignature": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "EncipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyAgreement": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyCertSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "NonRepudiation": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             }
 			//           },
@@ -887,8 +894,6 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_acmpca_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

@@ -5,10 +5,8 @@ package location
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -37,7 +35,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 1600),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConsumerArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tracker_name": {
@@ -55,7 +53,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TrackerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -91,8 +89,6 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_tracker_consumer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

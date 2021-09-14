@@ -5,10 +5,8 @@ package iam
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -52,7 +50,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateBody is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_chain": {
@@ -71,7 +69,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 2097152),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateChain is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"path": {
@@ -105,7 +103,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PrivateKey is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"server_certificate_name": {
@@ -124,7 +122,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerCertificateName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -222,8 +220,6 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iam_server_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

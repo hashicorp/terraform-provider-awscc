@@ -5,10 +5,8 @@ package lambda
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -128,7 +126,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(12, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EventSourceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"function_name": {
@@ -331,7 +329,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SelfManagedEventSource is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source_access_configurations": {
@@ -427,7 +425,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(6, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StartingPosition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"starting_position_timestamp": {
@@ -531,8 +529,6 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lambda_event_source_mapping", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

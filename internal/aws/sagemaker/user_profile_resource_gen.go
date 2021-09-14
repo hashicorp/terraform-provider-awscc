@@ -5,10 +5,8 @@ package sagemaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -39,7 +37,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"single_sign_on_user_identifier": {
@@ -55,7 +53,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SingleSignOnUserIdentifier is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"single_sign_on_user_value": {
@@ -75,7 +73,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SingleSignOnUserValue is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -136,7 +134,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -169,7 +167,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"user_settings": {
@@ -706,8 +704,6 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_user_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

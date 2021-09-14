@@ -5,10 +5,8 @@ package location
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -61,7 +59,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kms_key_id": {
@@ -79,7 +77,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pricing_plan": {
@@ -103,7 +101,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pricing_plan_data_source": {
@@ -116,7 +114,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PricingPlanDataSource is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tracker_arn": {
@@ -145,7 +143,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TrackerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"update_time": {
@@ -200,8 +198,6 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_tracker", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

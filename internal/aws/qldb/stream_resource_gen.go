@@ -5,10 +5,8 @@ package qldb
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -43,7 +41,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ExclusiveEndTime is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -64,7 +62,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InclusiveStartTime is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kinesis_configuration": {
@@ -99,7 +97,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KinesisConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"ledger_name": {
@@ -111,7 +109,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LedgerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -124,7 +122,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"stream_name": {
@@ -136,7 +134,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StreamName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -238,8 +236,6 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_qldb_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package ivs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -82,21 +80,21 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 										validate.StringLenBetween(3, 63),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										tfsdk.RequiresReplace(), // BucketName is a force-new property.
+										tfsdk.RequiresReplace(),
 									},
 								},
 							},
 						),
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // S3 is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -117,7 +115,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -232,8 +230,6 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ivs_recording_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

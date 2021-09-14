@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -272,7 +270,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LaunchTemplateConfigs is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"on_demand_options": {
@@ -361,7 +359,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // OnDemandOptions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"replace_unhealthy_instances": {
@@ -374,7 +372,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ReplaceUnhealthyInstances is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"spot_options": {
@@ -473,7 +471,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SpotOptions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tag_specifications": {
@@ -644,7 +642,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TagSpecifications is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"target_capacity_specification": {
@@ -717,7 +715,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TerminateInstancesWithExpiration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -742,7 +740,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"valid_from": {
@@ -755,7 +753,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ValidFrom is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"valid_until": {
@@ -768,7 +766,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ValidUntil is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -851,8 +849,6 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_ec2_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

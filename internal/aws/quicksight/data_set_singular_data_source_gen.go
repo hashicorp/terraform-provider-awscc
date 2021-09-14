@@ -5,10 +5,8 @@ package quicksight
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -266,12 +264,14 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "\u003cp\u003eWait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.\u003c/p\u003e",
 			//   "properties": {
 			//     "IngestionWaitTimeInHours": {
+			//       "default": 36,
 			//       "description": "\u003cp\u003eThe maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.\u003c/p\u003e",
 			//       "maximum": 36,
 			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "WaitForSpiceIngestion": {
+			//       "default": true,
 			//       "description": "\u003cp\u003eWait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.\u003c/p\u003e",
 			//       "type": "boolean"
 			//     }
@@ -1610,8 +1610,6 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_data_set", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

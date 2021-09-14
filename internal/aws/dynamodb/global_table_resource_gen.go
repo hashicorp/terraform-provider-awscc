@@ -5,10 +5,8 @@ package dynamodb
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -397,7 +395,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeySchema is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_secondary_indexes": {
@@ -526,7 +524,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalSecondaryIndexes is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"replicas": {
@@ -1103,7 +1101,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TableName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"time_to_live_specification": {
@@ -1344,8 +1342,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_dynamodb_global_table", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -58,7 +56,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // HttpUrlProperties is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -155,7 +153,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcProperties is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -199,8 +197,6 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_topic_rule_destination", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

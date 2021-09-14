@@ -5,10 +5,8 @@ package acmpca
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -53,30 +51,39 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//       "description": "Structure that contains X.509 KeyUsage information.",
 			//       "properties": {
 			//         "CRLSign": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DataEncipherment": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DecipherOnly": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DigitalSignature": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "EncipherOnly": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyAgreement": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyCertSign": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "KeyEncipherment": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "NonRepudiation": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         }
 			//       },
@@ -238,46 +245,82 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									// Property: CRLSign
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"data_encipherment": {
 									// Property: DataEncipherment
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"decipher_only": {
 									// Property: DecipherOnly
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"digital_signature": {
 									// Property: DigitalSignature
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"encipher_only": {
 									// Property: EncipherOnly
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"key_agreement": {
 									// Property: KeyAgreement
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"key_cert_sign": {
 									// Property: KeyCertSign
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"key_encipherment": {
 									// Property: KeyEncipherment
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"non_repudiation": {
 									// Property: NonRepudiation
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 							},
 						),
@@ -476,7 +519,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CsrExtensions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"key_algorithm": {
@@ -490,7 +533,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"key_storage_security_standard": {
@@ -505,7 +548,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyStorageSecurityStandard is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"revocation_configuration": {
@@ -592,7 +635,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subject": {
@@ -724,7 +767,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subject is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subject is a write-only property.
 		},
@@ -774,7 +817,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -869,8 +912,6 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_acmpca_certificate_authority", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

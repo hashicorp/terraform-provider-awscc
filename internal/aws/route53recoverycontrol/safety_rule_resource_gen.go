@@ -5,10 +5,8 @@ package route53recoverycontrol
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -80,7 +78,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ControlPanelArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"gating_rule": {
@@ -219,7 +217,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RuleConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"safety_rule_arn": {
@@ -310,8 +308,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_safety_rule", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

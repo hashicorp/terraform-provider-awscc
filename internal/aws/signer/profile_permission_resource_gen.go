@@ -5,10 +5,8 @@ package signer
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,7 +28,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Action is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"principal": {
@@ -42,7 +40,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Principal is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"profile_name": {
@@ -54,7 +52,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"profile_version": {
@@ -68,7 +66,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProfileVersion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"statement_id": {
@@ -80,7 +78,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StatementId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -119,8 +117,6 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_signer_profile_permission", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

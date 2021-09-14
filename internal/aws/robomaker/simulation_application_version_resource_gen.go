@@ -5,10 +5,8 @@ package robomaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -33,7 +31,7 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Application is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"application_version": {
@@ -73,7 +71,7 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 				validate.StringLenBetween(1, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CurrentRevisionId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -111,8 +109,6 @@ func simulationApplicationVersionResourceType(ctx context.Context) (tfsdk.Resour
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_robomaker_simulation_application_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package sso
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -68,7 +66,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(10, 1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InstanceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"managed_policies": {
@@ -108,7 +106,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 32),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"permission_set_arn": {
@@ -257,8 +255,6 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sso_permission_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

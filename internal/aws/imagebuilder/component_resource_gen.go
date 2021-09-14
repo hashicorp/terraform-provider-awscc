@@ -5,10 +5,8 @@ package imagebuilder
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -46,7 +44,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ChangeDescription is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"data": {
@@ -66,7 +64,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 16000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Data is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Data is a write-only property.
 		},
@@ -82,7 +80,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"encrypted": {
@@ -108,7 +106,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -122,7 +120,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"platform": {
@@ -146,7 +144,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Platform is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Platform is a write-only property.
 		},
@@ -165,7 +163,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SupportedOsVersions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -187,7 +185,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -217,7 +215,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Uri is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Uri is a write-only property.
 		},
@@ -232,7 +230,7 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Version is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -284,8 +282,6 @@ func componentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_component", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

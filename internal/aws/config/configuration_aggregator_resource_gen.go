@@ -5,10 +5,8 @@ package config
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -107,7 +105,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConfigurationAggregatorName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"organization_aggregation_source": {
@@ -261,8 +259,6 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_configuration_aggregator", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

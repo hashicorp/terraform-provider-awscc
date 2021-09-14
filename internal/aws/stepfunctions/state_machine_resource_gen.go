@@ -5,10 +5,8 @@ package stepfunctions
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -249,7 +247,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 80),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StateMachineName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state_machine_type": {
@@ -397,8 +395,6 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_stepfunctions_state_machine", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package ssm
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -38,7 +36,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"bucket_prefix": {
@@ -56,7 +54,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketPrefix is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"bucket_region": {
@@ -74,7 +72,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketRegion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kms_key_arn": {
@@ -92,7 +90,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KMSKeyArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"s3_destination": {
@@ -181,7 +179,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3Destination is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"sync_format": {
@@ -199,7 +197,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SyncFormat is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"sync_name": {
@@ -216,7 +214,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SyncName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"sync_source": {
@@ -328,7 +326,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SyncType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -377,8 +375,6 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssm_resource_data_sync", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

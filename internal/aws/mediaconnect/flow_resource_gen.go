@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
+	"math/big"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -35,7 +34,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AvailabilityZone is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"flow_arn": {
@@ -71,7 +70,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source": {
@@ -103,6 +102,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "KeyType": {
+			//           "default": "static-key",
 			//           "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//           "enum": [
 			//             "speke",
@@ -158,6 +158,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "integer"
 			//     },
 			//     "MaxLatency": {
+			//       "default": 2000,
 			//       "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			//       "type": "integer"
 			//     },
@@ -232,11 +233,15 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 									Type:        types.StringType,
 									Optional:    true,
+									Computed:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"speke",
 											"static-key",
 										}),
+									},
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: "static-key"}),
 									},
 								},
 								"region": {
@@ -308,6 +313,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -316,7 +325,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Name is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"protocol": {
@@ -466,8 +475,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

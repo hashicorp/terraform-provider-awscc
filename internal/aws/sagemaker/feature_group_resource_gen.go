@@ -5,10 +5,8 @@ package sagemaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -39,7 +37,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"event_time_feature_name": {
@@ -59,7 +57,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EventTimeFeatureName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"feature_definitions": {
@@ -127,7 +125,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FeatureDefinitions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"feature_group_name": {
@@ -147,7 +145,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FeatureGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"offline_store_config": {
@@ -280,7 +278,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // OfflineStoreConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"online_store_config": {
@@ -333,7 +331,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // OnlineStoreConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"record_identifier_feature_name": {
@@ -353,7 +351,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RecordIdentifierFeatureName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -374,7 +372,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -424,7 +422,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -481,8 +479,6 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_feature_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

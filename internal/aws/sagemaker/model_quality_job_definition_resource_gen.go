@@ -5,10 +5,8 @@ package sagemaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -64,7 +62,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(0, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // JobDefinitionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"job_resources": {
@@ -160,7 +158,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // JobResources is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_quality_app_specification": {
@@ -313,7 +311,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelQualityAppSpecification is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_quality_baseline_config": {
@@ -381,7 +379,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelQualityBaselineConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_quality_job_input": {
@@ -598,7 +596,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelQualityJobInput is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_quality_job_output_config": {
@@ -732,7 +730,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelQualityJobOutputConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_config": {
@@ -833,7 +831,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"role_arn": {
@@ -853,7 +851,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"stopping_condition": {
@@ -892,7 +890,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StoppingCondition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -956,7 +954,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -1040,8 +1038,6 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_model_quality_job_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package ssmincidents
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -26,6 +24,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Actions
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of actions.",
 			//   "insertionOrder": true,
 			//   "items": {
@@ -233,6 +232,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Engagements
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of engagements to use.",
 			//   "insertionOrder": false,
 			//   "items": {
@@ -370,6 +370,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The tags to apply to the response plan.",
 			//   "insertionOrder": false,
 			//   "items": {
@@ -467,8 +468,6 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssmincidents_response_plan", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

@@ -5,10 +5,8 @@ package efs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -42,7 +40,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AvailabilityZoneName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"backup_policy": {
@@ -93,7 +91,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Encrypted is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"file_system_id": {
@@ -167,7 +165,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"lifecycle_policies": {
@@ -214,7 +212,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PerformanceMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"provisioned_throughput_in_mibps": {
@@ -286,8 +284,6 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_efs_file_system", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

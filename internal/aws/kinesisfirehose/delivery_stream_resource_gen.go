@@ -5,10 +5,8 @@ package kinesisfirehose
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -98,7 +96,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeliveryStreamName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"delivery_stream_type": {
@@ -121,7 +119,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeliveryStreamType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"elasticsearch_destination_configuration": {
@@ -738,7 +736,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // VpcConfiguration is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -2337,7 +2335,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KinesisStreamSourceConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"redshift_destination_configuration": {
@@ -3973,8 +3971,6 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kinesisfirehose_delivery_stream", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

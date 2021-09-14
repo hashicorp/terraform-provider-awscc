@@ -5,10 +5,8 @@ package rds
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -51,7 +49,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DBProxyEndpointName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"db_proxy_name": {
@@ -70,7 +68,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DBProxyName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"endpoint": {
@@ -166,7 +164,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TargetRole is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"vpc_id": {
@@ -218,7 +216,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcSubnetIds is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -264,8 +262,6 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_rds_db_proxy_endpoint", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

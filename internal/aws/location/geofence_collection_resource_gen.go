@@ -5,10 +5,8 @@ package location
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -49,7 +47,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CollectionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"create_time": {
@@ -79,7 +77,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kms_key_id": {
@@ -117,7 +115,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PricingPlan is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pricing_plan_data_source": {
@@ -130,7 +128,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PricingPlanDataSource is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"update_time": {
@@ -184,8 +182,6 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_location_geofence_collection", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package elasticache
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -53,7 +51,7 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Engine is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -79,7 +77,7 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserGroupId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"user_ids": {
@@ -137,8 +135,6 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_elasticache_user_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

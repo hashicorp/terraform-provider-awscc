@@ -5,10 +5,8 @@ package imagebuilder
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -57,7 +55,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DistributionConfigurationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"enhanced_image_metadata_enabled": {
@@ -72,7 +70,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EnhancedImageMetadataEnabled is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_id": {
@@ -98,7 +96,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageRecipeArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_tests_configuration": {
@@ -143,7 +141,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageTestsConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"infrastructure_configuration_arn": {
@@ -158,7 +156,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InfrastructureConfigurationArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -190,7 +188,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -248,8 +246,6 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_image", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

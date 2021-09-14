@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -45,7 +43,7 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalGatewayRouteTableId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_gateway_route_table_vpc_association_id": {
@@ -130,7 +128,7 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -172,8 +170,6 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_local_gateway_route_table_vpc_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

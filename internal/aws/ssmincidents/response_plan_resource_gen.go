@@ -5,10 +5,9 @@ package ssmincidents
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -27,6 +26,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Actions
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of actions.",
 			//   "insertionOrder": true,
 			//   "items": {
@@ -196,8 +196,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
 			},
 		},
 		"arn": {
@@ -269,6 +273,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Engagements
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The list of engagements to use.",
 			//   "insertionOrder": false,
 			//   "items": {
@@ -285,6 +290,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The list of engagements to use.",
 			Type:        providertypes.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+			},
 		},
 		"incident_template": {
 			// Property: IncidentTemplate
@@ -422,13 +431,14 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "default": [],
 			//   "description": "The tags to apply to the response plan.",
 			//   "insertionOrder": false,
 			//   "items": {
@@ -484,6 +494,10 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+			},
 		},
 	}
 
@@ -540,8 +554,6 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssmincidents_response_plan", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package macie
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -38,6 +36,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: FindingPublishingFrequency
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "SIX_HOURS",
 			//   "description": "A enumeration value that specifies how frequently finding updates are published.",
 			//   "enum": [
 			//     "FIFTEEN_MINUTES",
@@ -49,12 +48,16 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"FIFTEEN_MINUTES",
 					"ONE_HOUR",
 					"SIX_HOURS",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "SIX_HOURS"}),
 			},
 		},
 		"service_role": {
@@ -72,6 +75,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Status
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "ENABLED",
 			//   "description": "A enumeration value that specifies the status of the Macie Session.",
 			//   "enum": [
 			//     "ENABLED",
@@ -82,11 +86,15 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
 					"PAUSED",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "ENABLED"}),
 			},
 		},
 	}
@@ -124,8 +132,6 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_macie_session", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

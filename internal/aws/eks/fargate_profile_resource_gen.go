@@ -5,10 +5,8 @@ package eks
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -47,7 +45,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusterName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"fargate_profile_name": {
@@ -66,7 +64,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FargateProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pod_execution_role_arn": {
@@ -84,7 +82,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PodExecutionRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"selectors": {
@@ -177,7 +175,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Selectors is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subnets": {
@@ -193,7 +191,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subnets is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -298,8 +296,6 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_eks_fargate_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

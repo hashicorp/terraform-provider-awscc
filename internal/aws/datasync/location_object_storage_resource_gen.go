@@ -5,10 +5,8 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -79,7 +77,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// BucketName is a write-only property.
 		},
@@ -143,7 +141,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -314,8 +312,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_object_storage", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

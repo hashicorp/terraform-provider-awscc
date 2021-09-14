@@ -5,10 +5,8 @@ package networkfirewall
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -40,7 +38,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FirewallArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"firewall_name": {
@@ -59,7 +57,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FirewallName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"logging_configuration": {
@@ -203,8 +201,6 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkfirewall_logging_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

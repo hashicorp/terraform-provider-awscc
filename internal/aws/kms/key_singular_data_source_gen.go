@@ -5,10 +5,8 @@ package kms
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -90,6 +88,7 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: KeySpec
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "SYMMETRIC_DEFAULT",
 			//   "description": "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			//   "enum": [
 			//     "SYMMETRIC_DEFAULT",
@@ -111,6 +110,7 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: KeyUsage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "ENCRYPT_DECRYPT",
 			//   "description": "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			//   "enum": [
 			//     "ENCRYPT_DECRYPT",
@@ -126,6 +126,7 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: MultiRegion
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
 			//   "type": "boolean"
 			// }
@@ -237,8 +238,6 @@ func keyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kms_key", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

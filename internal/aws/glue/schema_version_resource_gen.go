@@ -5,10 +5,8 @@ package glue
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -81,7 +79,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Schema is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"schema_definition": {
@@ -100,7 +98,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 170000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchemaDefinition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version_id": {
@@ -152,8 +150,6 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_schema_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

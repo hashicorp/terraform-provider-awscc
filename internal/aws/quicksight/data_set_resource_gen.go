@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
+	"math/big"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -50,7 +49,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccountId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"column_groups": {
@@ -234,7 +233,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DataSetId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"field_folders": {
@@ -314,12 +313,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "\u003cp\u003eWait policy to use when creating/updating dataset. Default is to wait for SPICE ingestion to finish with timeout of 36 hours.\u003c/p\u003e",
 			//   "properties": {
 			//     "IngestionWaitTimeInHours": {
+			//       "default": 36,
 			//       "description": "\u003cp\u003eThe maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.\u003c/p\u003e",
 			//       "maximum": 36,
 			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "WaitForSpiceIngestion": {
+			//       "default": true,
 			//       "description": "\u003cp\u003eWait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.\u003c/p\u003e",
 			//       "type": "boolean"
 			//     }
@@ -334,8 +335,12 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
 						Type:        types.NumberType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(1.000000, 36.000000),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(36.000000)}),
 						},
 					},
 					"wait_for_spice_ingestion": {
@@ -343,6 +348,10 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.</p>",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: true}),
+						},
 					},
 				},
 			),
@@ -1894,8 +1903,6 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_quicksight_data_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

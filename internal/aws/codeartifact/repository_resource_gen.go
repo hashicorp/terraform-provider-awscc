@@ -5,10 +5,8 @@ package codeartifact
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -68,7 +66,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"domain_owner": {
@@ -83,7 +81,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainOwner is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"external_connections": {
@@ -144,7 +142,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RepositoryName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -260,8 +258,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codeartifact_repository", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

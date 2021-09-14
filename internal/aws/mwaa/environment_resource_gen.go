@@ -5,10 +5,8 @@ package mwaa
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 
@@ -129,7 +127,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKey is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"logging_configuration": {
@@ -516,7 +514,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 80),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_configuration": {
@@ -576,7 +574,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayLenBetween(2, 2),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // SubnetIds is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -802,8 +800,6 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mwaa_environment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }
