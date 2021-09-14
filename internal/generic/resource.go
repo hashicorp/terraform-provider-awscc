@@ -716,6 +716,18 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
+func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
+	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
+
+	tflog.Trace(ctx, "Resource.ImportState enter", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+
+	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
+
+	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
+
+	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+}
+
 // ConfigValidators returns a list of functions which will all be performed during validation.
 func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValidator {
 	validators := make([]tfsdk.ResourceConfigValidator, 0)
