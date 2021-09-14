@@ -723,7 +723,21 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
-	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
+	m := map[string]tftypes.Value{
+		"id": tftypes.NewValue(tftypes.String, request.ID),
+	}
+
+	id := tftypes.NewValue(tftypes.Object{
+		AttributeTypes: map[string]tftypes.Type{
+			"id":  tftypes.String,
+		}}, m)
+
+	response.State = tfsdk.State{
+		Schema: r.resourceType.tfSchema,
+		Raw: id,
+	}
+
+	//tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 
 	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 }
