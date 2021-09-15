@@ -102,6 +102,8 @@ github.com/aws/aws-sdk-go-v2/feature/ec2/imds
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config
 # github.com/aws/aws-sdk-go-v2/internal/ini v1.2.0
 github.com/aws/aws-sdk-go-v2/internal/ini
+# github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.7.0 => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804
+## explicit
 # github.com/aws/aws-sdk-go-v2/service/cloudformation v1.7.0 => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 ## explicit
 github.com/aws/aws-sdk-go-v2/service/cloudformation
@@ -535,3 +537,4 @@ google.golang.org/protobuf/types/pluginpb
 # github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 # github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
 # github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77
+# github.com/aws/aws-sdk-go-v2/service/cloudcontrol => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804
