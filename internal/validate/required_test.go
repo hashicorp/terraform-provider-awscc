@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestRequired(t *testing.T) {
@@ -558,21 +557,21 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 				tftypes.Set{ElementType: objectElementType},
 				tftypes.UnknownValue,
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"null set": {
 			val: tftypes.NewValue(
 				tftypes.Set{ElementType: objectElementType},
 				nil,
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"empty set": {
 			val: tftypes.NewValue(
 				tftypes.Set{ElementType: objectElementType},
 				[]tftypes.Value{},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"not fully known object": {
 			val: tftypes.NewValue(
@@ -592,7 +591,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"none required": {
 			val: tftypes.NewValue(
@@ -612,7 +611,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"one required OK": {
 			val: tftypes.NewValue(
@@ -632,7 +631,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f:  providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f:  types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 			fs: []RequiredAttributesFunc{Required("alpha")},
 		},
 		"one required error": {
@@ -653,7 +652,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f:           providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 			fs:          []RequiredAttributesFunc{Required("beta")},
 			expectError: true,
 		},

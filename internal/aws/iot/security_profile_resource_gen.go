@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -73,7 +72,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "uniqueItems": true
 			// }
 			Description: "A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"metric": {
 						// Property: Metric
@@ -115,7 +114,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -376,7 +375,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "uniqueItems": true
 			// }
 			Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"criteria": {
 						// Property: Criteria
@@ -488,7 +487,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											"cidrs": {
 												// Property: Cidrs
 												Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
-												Type:        providertypes.SetType{ElemType: types.StringType},
+												Type:        types.SetType{ElemType: types.StringType},
 												Optional:    true,
 											},
 											"count": {
@@ -506,19 +505,19 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											"numbers": {
 												// Property: Numbers
 												Description: "The numeral values of a metric.",
-												Type:        providertypes.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.NumberType},
 												Optional:    true,
 											},
 											"ports": {
 												// Property: Ports
 												Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
-												Type:        providertypes.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.NumberType},
 												Optional:    true,
 											},
 											"strings": {
 												// Property: Strings
 												Description: "The string values of a metric.",
-												Type:        providertypes.SetType{ElemType: types.StringType},
+												Type:        types.SetType{ElemType: types.StringType},
 												Optional:    true,
 											},
 										},
@@ -584,7 +583,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -669,7 +668,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "uniqueItems": true
 			// }
 			Description: "Metadata that can be used to manage the security profile.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -690,7 +689,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -711,7 +710,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "uniqueItems": true
 			// }
 			Description: "A set of target ARNs that the security profile is attached to.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 		},
 	}

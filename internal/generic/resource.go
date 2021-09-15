@@ -716,6 +716,9 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
+func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
+}
+
 // ConfigValidators returns a list of functions which will all be performed during validation.
 func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValidator {
 	validators := make([]tfsdk.ResourceConfigValidator, 0)

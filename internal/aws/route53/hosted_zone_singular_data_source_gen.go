@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -77,7 +76,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -92,7 +91,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -188,7 +187,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"vpc_id": {
 						// Property: VPCId
@@ -203,7 +202,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -112,7 +111,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 		},
 		"description": {
@@ -274,7 +273,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The input parameters for the stack set template.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"parameter_key": {
 						// Property: ParameterKey
@@ -289,7 +288,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -402,7 +401,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A group of stack instances with parameters in some specific accounts and regions.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"deployment_targets": {
 						// Property: DeploymentTargets
@@ -412,13 +411,13 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"accounts": {
 									// Property: Accounts
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
 								},
 								"organizational_unit_ids": {
 									// Property: OrganizationalUnitIds
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
 								},
 							},
@@ -428,7 +427,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"parameter_overrides": {
 						// Property: ParameterOverrides
 						Description: "A list of stack set parameters whose values you want to override in the selected stack instances.",
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"parameter_key": {
 									// Property: ParameterKey
@@ -443,18 +442,18 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"regions": {
 						// Property: Regions
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
-						Type:        providertypes.SetType{ElemType: types.StringType},
+						Type:        types.SetType{ElemType: types.StringType},
 						Required:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -523,7 +522,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -544,7 +543,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),

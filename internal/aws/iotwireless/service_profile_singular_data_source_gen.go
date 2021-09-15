@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -249,7 +248,7 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "A list of key-value pairs that contain metadata for the service profile.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -262,7 +261,7 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

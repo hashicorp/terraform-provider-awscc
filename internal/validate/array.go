@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
@@ -37,7 +36,7 @@ func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request 
 
 		l = len(v.Elems)
 
-	case providertypes.Set:
+	case types.Set:
 		if v.Null || v.Unknown {
 			return
 		}
@@ -105,7 +104,7 @@ func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request 
 
 		l = len(v.Elems)
 
-	case providertypes.Set:
+	case types.Set:
 		if v.Null || v.Unknown {
 			return
 		}

@@ -69,8 +69,7 @@ type NestedAttributes interface {
 	GetMinItems() int64
 	GetMaxItems() int64
 	Equal(NestedAttributes) bool
-	// TODO Commented out:
-	//unimplementable()
+	unimplementable()
 }
 
 type nestedAttributes map[string]Attribute
@@ -79,8 +78,7 @@ func (n nestedAttributes) GetAttributes() map[string]Attribute {
 	return map[string]Attribute(n)
 }
 
-// TODO Commented out:
-//func (n nestedAttributes) unimplementable() {}
+func (n nestedAttributes) unimplementable() {}
 
 func (n nestedAttributes) ApplyTerraform5AttributePathStep(step tftypes.AttributePathStep) (interface{}, error) {
 	a, ok := step.(tftypes.AttributeName)
@@ -273,8 +271,9 @@ func (s setNestedAttributes) GetMaxItems() int64 {
 
 // AttributeType returns an attr.Type corresponding to the nested attributes.
 func (s setNestedAttributes) AttributeType() attr.Type {
-	// TODO fill in implementation when types.SetType is available
-	return nil
+	return types.SetType{
+		ElemType: s.nestedAttributes.AttributeType(),
+	}
 }
 
 func (s setNestedAttributes) ApplyTerraform5AttributePathStep(step tftypes.AttributePathStep) (interface{}, error) {
