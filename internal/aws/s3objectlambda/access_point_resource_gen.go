@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -127,7 +126,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"allowed_features": {
 						// Property: AllowedFeatures
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						Type:     types.SetType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"cloudwatch_metrics_enabled": {
@@ -145,11 +144,11 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"transformation_configurations": {
 						// Property: TransformationConfigurations
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"actions": {
 									// Property: Actions
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"content_transformation": {
@@ -158,7 +157,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Required: true,
 					},

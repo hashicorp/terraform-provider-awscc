@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -131,7 +130,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								"parameters": {
 									// Property: Parameters
 									Description: "The parameters to set when starting the SSM automation document.",
-									Attributes: providertypes.SetNestedAttributes(
+									Attributes: tfsdk.SetNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
@@ -144,7 +143,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 												Computed: true,
 											},
 										},
-										providertypes.SetNestedAttributesOptions{},
+										tfsdk.SetNestedAttributesOptions{},
 									),
 									Computed: true,
 								},
@@ -247,7 +246,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "uniqueItems": true
 			// }
 			Description: "The list of engagements to use.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 		},
 		"incident_template": {
@@ -401,7 +400,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "uniqueItems": true
 			// }
 			Description: "The tags to apply to the response plan.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -414,7 +413,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

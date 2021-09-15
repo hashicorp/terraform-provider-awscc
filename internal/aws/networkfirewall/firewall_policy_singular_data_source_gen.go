@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -169,7 +168,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 				map[string]tfsdk.Attribute{
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"resource_arn": {
 									// Property: ResourceArn
@@ -178,13 +177,13 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 									Computed:    true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
 					"stateless_custom_actions": {
 						// Property: StatelessCustomActions
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"action_definition": {
 									// Property: ActionDefinition
@@ -196,7 +195,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 													map[string]tfsdk.Attribute{
 														"dimensions": {
 															// Property: Dimensions
-															Attributes: providertypes.SetNestedAttributes(
+															Attributes: tfsdk.SetNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"value": {
 																		// Property: Value
@@ -204,7 +203,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																		Computed: true,
 																	},
 																},
-																providertypes.SetNestedAttributesOptions{},
+																tfsdk.SetNestedAttributesOptions{},
 															),
 															Computed: true,
 														},
@@ -222,23 +221,23 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 									Computed: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
 					"stateless_default_actions": {
 						// Property: StatelessDefaultActions
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						Type:     types.SetType{ElemType: types.StringType},
 						Computed: true,
 					},
 					"stateless_fragment_default_actions": {
 						// Property: StatelessFragmentDefaultActions
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						Type:     types.SetType{ElemType: types.StringType},
 						Computed: true,
 					},
 					"stateless_rule_group_references": {
 						// Property: StatelessRuleGroupReferences
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
@@ -252,7 +251,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 									Computed:    true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -328,7 +327,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -341,7 +340,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
