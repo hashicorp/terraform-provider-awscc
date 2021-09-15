@@ -7,7 +7,7 @@ on:
       - "release/**"
   pull_request:
     paths:
-      - .github/workflows/check-tfplugindocs.yml
+      - .github/workflows/tfplugindocs-check.yml
       - .go-version
       - .golangci.yml
       - go.sum
