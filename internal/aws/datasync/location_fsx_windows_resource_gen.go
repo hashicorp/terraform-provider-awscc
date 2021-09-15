@@ -124,6 +124,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},

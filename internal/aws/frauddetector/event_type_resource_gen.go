@@ -189,6 +189,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -196,6 +199,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"event_variables": {
 			// Property: EventVariables
@@ -411,6 +417,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"variable_type": {
 						// Property: VariableType
@@ -460,6 +469,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"labels": {
 			// Property: Labels
@@ -591,6 +603,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -598,6 +613,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -685,6 +703,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

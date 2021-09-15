@@ -345,8 +345,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("},\n")
 				e.printf("),\n")
 
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateOrderedSet:
 					validators = append(validators, "validate.UniqueItems()")
+				case aggregateMultiset:
+					planModifiers = append(planModifiers, "Multiset()")
 				}
 
 				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
@@ -371,8 +374,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems))
 				}
 
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateOrderedSet:
 					validators = append(validators, "validate.UniqueItems()")
+				case aggregateMultiset:
+					planModifiers = append(planModifiers, "Multiset()")
 				}
 			}
 		}

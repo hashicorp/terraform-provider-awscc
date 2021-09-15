@@ -268,6 +268,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"resource_arn": {
 						// Property: ResourceArn
@@ -282,6 +285,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -324,11 +330,17 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Value
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

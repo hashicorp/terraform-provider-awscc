@@ -41,6 +41,9 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 5),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"recovery_group_arn": {
 			// Property: RecoveryGroupArn
@@ -115,11 +118,17 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Value
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

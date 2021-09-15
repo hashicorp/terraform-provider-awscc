@@ -141,6 +141,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"target_role": {
 			// Property: TargetRole
@@ -196,6 +199,9 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -216,6 +222,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},
