@@ -9,7 +9,7 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -56,7 +56,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 			return fmt.Errorf("no ID is set")
 		}
 
-		provider, ok := td.provider.(tfcloudformation.Provider)
+		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
 			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
 		}
@@ -64,13 +64,13 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
+		return tfcloudcontrol.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 
 func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
-		provider, ok := td.provider.(tfcloudformation.Provider)
+		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
 			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
 		}
@@ -103,7 +103,7 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, 
 				return fmt.Errorf("no ID is set")
 			}
 
-			_, err := tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, roleARN, cfTypeName, id)
+			_, err := tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, roleARN, cfTypeName, id)
 
 			// TODO
 			// TODO Some resource can still be found but are logically deleted.

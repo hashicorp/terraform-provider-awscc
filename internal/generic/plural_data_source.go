@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
 // pluralDataSourceType is a type alias for a data source type.
@@ -54,13 +54,13 @@ func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider tfs
 
 // Implements tfsdk.DataSource
 type pluralDataSource struct {
-	provider       tfcloudformation.Provider
+	provider       tfcloudcontrol.Provider
 	dataSourceType *pluralDataSourceType
 }
 
 func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *pluralDataSourceType) tfsdk.DataSource {
 	return &pluralDataSource{
-		provider:       provider.(tfcloudformation.Provider),
+		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: pluralDataSourceType,
 	}
 }
@@ -97,7 +97,7 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 
 // list returns the ResourceDescriptions of the specified CloudFormation type.
 func (pd *pluralDataSource) list(ctx context.Context, conn *cloudformation.Client) ([]cftypes.ResourceDescription, error) {
-	return tfcloudformation.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
+	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
 }
 
 // GetCloudFormationResourceDescriptionsValue returns the Terraform Value for the specified CloudFormation ResourceDescriptions.

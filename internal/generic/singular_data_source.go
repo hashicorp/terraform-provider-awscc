@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -55,13 +55,13 @@ func (sdt *singularDataSourceType) NewDataSource(ctx context.Context, provider t
 
 // Implements tfsdk.DataSource
 type singularDataSource struct {
-	provider       tfcloudformation.Provider
+	provider       tfcloudcontrol.Provider
 	dataSourceType *singularDataSourceType
 }
 
 func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceType *singularDataSourceType) tfsdk.DataSource {
 	return &singularDataSource{
-		provider:       provider.(tfcloudformation.Provider),
+		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: singularDataSourceType,
 	}
 }
@@ -133,7 +133,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 
 // describe returns the live state of the specified resource.
 func (sd *singularDataSource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
-	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
+	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
 }
 
 // getId returns the data source's primary identifier value from Config.

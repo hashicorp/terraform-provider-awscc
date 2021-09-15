@@ -16,7 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
@@ -378,13 +378,13 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftyp
 
 // Implements tfsdk.Resource.
 type resource struct {
-	provider     tfcloudformation.Provider
+	provider     tfcloudcontrol.Provider
 	resourceType *resourceType
 }
 
 func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
 	return &resource{
-		provider:     provider.(tfcloudformation.Provider),
+		provider:     provider.(tfcloudcontrol.Provider),
 		resourceType: resourceType,
 	}
 }
@@ -442,7 +442,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	id, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
+	id, err := tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
@@ -670,7 +670,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
+	_, err = tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
@@ -703,7 +703,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
+	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
@@ -729,7 +729,7 @@ func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValid
 
 // describe returns the live state of the specified resource.
 func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
-	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
+	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
 }
 
 // getId returns the resource's primary identifier value from State.
