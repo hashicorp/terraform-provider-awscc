@@ -104,6 +104,9 @@ github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/config
 github.com/aws/aws-sdk-go-v2/internal/ini
 # github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.7.0 => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804
 ## explicit
+github.com/aws/aws-sdk-go-v2/service/cloudcontrol
+github.com/aws/aws-sdk-go-v2/service/cloudcontrol/internal/endpoints
+github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types
 # github.com/aws/aws-sdk-go-v2/service/cloudformation v1.7.0 => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 ## explicit
 github.com/aws/aws-sdk-go-v2/service/cloudformation
@@ -125,6 +128,7 @@ github.com/aws/smithy-go
 github.com/aws/smithy-go/document
 github.com/aws/smithy-go/encoding
 github.com/aws/smithy-go/encoding/httpbinding
+github.com/aws/smithy-go/encoding/json
 github.com/aws/smithy-go/encoding/xml
 github.com/aws/smithy-go/io
 github.com/aws/smithy-go/logging

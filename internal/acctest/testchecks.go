@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -58,13 +58,13 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 
 		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlProvider", td.provider)
 		}
 
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudcontrol.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
+		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 
@@ -80,7 +80,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 
 		return existsFunc(shouldExist)(
 			ctx,
-			provider.CloudFormationClient(ctx),
+			provider.CloudControlClient(ctx),
 			provider.RoleARN(ctx),
 			td.CloudFormationResourceType,
 			td.TerraformResourceType,
@@ -89,8 +89,8 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	}
 }
 
-func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, string, string, string, string) resource.TestCheckFunc {
-	return func(ctx context.Context, conn *cloudformation.Client, roleARN, cfTypeName, tfTypeName, resourceName string) resource.TestCheckFunc {
+func existsFunc(shouldExist bool) func(context.Context, *cloudcontrol.Client, string, string, string, string) resource.TestCheckFunc {
+	return func(ctx context.Context, conn *cloudcontrol.Client, roleARN, cfTypeName, tfTypeName, resourceName string) resource.TestCheckFunc {
 		return func(state *terraform.State) error {
 			rs, ok := state.RootModule().Resources[resourceName]
 			if !ok {

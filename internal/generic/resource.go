@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -403,7 +403,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
@@ -416,9 +416,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudFormation DesiredState", "value", desiredState)
+	tflog.Debug(ctx, "CloudControl DesiredState", "value", desiredState)
 
-	input := &cloudformation.CreateResourceInput{
+	input := &cloudcontrol.CreateResourceInput{
 		ClientToken:  aws.String(tfresource.UniqueId()),
 		DesiredState: aws.String(desiredState),
 		TypeName:     aws.String(cfTypeName),
@@ -495,7 +495,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
+	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -521,7 +521,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlClient(ctx)
 
 	currentState := &request.State
 	id, err := r.getId(ctx, currentState)
@@ -549,7 +549,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	translator := toTerraform{cfToTfNameMap: r.resourceType.cfToTfNameMap}
 	schema := &currentState.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -604,7 +604,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 
 	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlClient(ctx)
 
 	currentState := &request.State
 	id, err := r.getId(ctx, currentState)
@@ -643,9 +643,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudFormation PatchDocument", "value", patchDocument)
+	tflog.Debug(ctx, "Cloud Control PatchDocument", "value", patchDocument)
 
-	input := &cloudformation.UpdateResourceInput{
+	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(id),
 		PatchDocument: aws.String(patchDocument),
@@ -693,7 +693,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlClient(ctx)
 
 	id, err := r.getId(ctx, &request.State)
 
@@ -728,7 +728,7 @@ func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValid
 }
 
 // describe returns the live state of the specified resource.
-func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
+func (r *resource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
 }
 

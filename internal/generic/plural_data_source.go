@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -73,17 +73,17 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 
 	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := pd.provider.CloudFormationClient(ctx)
+	conn := pd.provider.CloudControlClient(ctx)
 
 	descriptions, err := pd.list(ctx, conn)
 
 	if err != nil {
-		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudControl", "ListResources", err))
 
 		return
 	}
 
-	val := GetCloudFormationResourceDescriptionsValue(pd.provider.Region(ctx), descriptions)
+	val := GetCloudControlResourceDescriptionsValue(pd.provider.Region(ctx), descriptions)
 
 	response.State = tfsdk.State{
 		Schema: pd.dataSourceType.tfSchema,
@@ -96,12 +96,12 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 }
 
 // list returns the ResourceDescriptions of the specified CloudFormation type.
-func (pd *pluralDataSource) list(ctx context.Context, conn *cloudformation.Client) ([]cftypes.ResourceDescription, error) {
+func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client) ([]cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
 }
 
-// GetCloudFormationResourceDescriptionsValue returns the Terraform Value for the specified CloudFormation ResourceDescriptions.
-func GetCloudFormationResourceDescriptionsValue(id string, descriptions []cftypes.ResourceDescription) tftypes.Value {
+// GetCloudControlResourceDescriptionsValue returns the Terraform Value for the specified Cloud Control ResourceDescriptions.
+func GetCloudControlResourceDescriptionsValue(id string, descriptions []cctypes.ResourceDescription) tftypes.Value {
 	m := map[string]tftypes.Value{
 		"id": tftypes.NewValue(tftypes.String, id),
 	}

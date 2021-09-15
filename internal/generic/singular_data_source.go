@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -74,7 +74,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 
 	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := sd.provider.CloudFormationClient(ctx)
+	conn := sd.provider.CloudControlClient(ctx)
 
 	currentConfig := &request.Config
 
@@ -102,7 +102,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 
 	translator := toTerraform{cfToTfNameMap: sd.dataSourceType.cfToTfNameMap}
 	schema := &currentConfig.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -132,7 +132,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 }
 
 // describe returns the live state of the specified resource.
-func (sd *singularDataSource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
+func (sd *singularDataSource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
 }
 
