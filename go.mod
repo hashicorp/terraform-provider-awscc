@@ -14,7 +14,7 @@ require (
 	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.10.0
-	github.com/hashicorp/terraform-plugin-framework v0.2.1-0.20210817164910-fad6afe33058
+	github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210915151717-8de1d13d8636
 	github.com/hashicorp/terraform-plugin-go v0.3.1
 	github.com/hashicorp/terraform-plugin-log v0.1.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.7.0
@@ -27,5 +27,3 @@ require (
 replace github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 
 replace github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
-
-replace github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77
