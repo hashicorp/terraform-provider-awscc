@@ -72,7 +72,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
 		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlProvider", td.provider)
 		}
 
 		ctx := context.TODO()

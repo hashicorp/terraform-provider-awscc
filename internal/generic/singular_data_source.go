@@ -95,7 +95,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "GetResource", err))
 
 		return
 	}
@@ -107,7 +107,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to create a Terraform State value from a Cloud Control Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return

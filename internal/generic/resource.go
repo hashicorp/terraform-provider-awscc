@@ -407,7 +407,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
-	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
@@ -431,13 +431,13 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "CreateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control", "CreateResource"))
 
 		return
 	}
@@ -445,7 +445,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	id, err := tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control", "CreateResource", err))
 
 		return
 	}
@@ -459,13 +459,13 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "GetResource", err))
 
 		return
 	}
 
 	if description == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "GetResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control", "GetResource"))
 
 		return
 	}
@@ -489,7 +489,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a Cloud Control Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -500,7 +500,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to set Terraform State Unknown values from a Cloud Control Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -542,7 +542,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "GetResource", err))
 
 		return
 	}
@@ -554,7 +554,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to create a Terraform State value from a Cloud Control Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -615,7 +615,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
 
 	if err != nil {
@@ -659,13 +659,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	output, err := conn.UpdateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "UpdateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "UpdateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "UpdateResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control", "UpdateResource"))
 
 		return
 	}
@@ -673,7 +673,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	_, err = tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control", "UpdateResource", err))
 
 		return
 	}
@@ -706,7 +706,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control", "DeleteResource", err))
 
 		return
 	}

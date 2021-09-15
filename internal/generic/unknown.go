@@ -12,10 +12,10 @@ import (
 )
 
 // unknownValuePath represents the path to an unknown (!val.IsKnown()) value.
-// It holds paths in both the Terraform State and CloudFormation ResourceModel (raw map[string]interface{}).
+// It holds paths in both the Terraform State and Cloud Control ResourceModel (raw map[string]interface{}).
 type unknownValuePath struct {
-	InTerraformState              *tftypes.AttributePath
-	InCloudFormationResourceModel *tftypes.AttributePath
+	InTerraformState            *tftypes.AttributePath
+	InCloudControlResourceModel *tftypes.AttributePath
 }
 
 type unknowns []unknownValuePath
@@ -32,12 +32,12 @@ func Unknowns(ctx context.Context, val tftypes.Value, tfToCfNameMap map[string]s
 }
 
 // unknownValuePaths returns all the unknownValuePaths for the specified Terraform Value.
-func unknownValuePaths(ctx context.Context, inTerraformState, inCloudFormationResourceModel *tftypes.AttributePath, val tftypes.Value, tfToCfNameMap map[string]string) ([]unknownValuePath, error) { //nolint:unparam
+func unknownValuePaths(ctx context.Context, inTerraformState, inCloudControlResourceModel *tftypes.AttributePath, val tftypes.Value, tfToCfNameMap map[string]string) ([]unknownValuePath, error) { //nolint:unparam
 	if !val.IsKnown() {
 		return []unknownValuePath{
 			{
-				InTerraformState:              inTerraformState,
-				InCloudFormationResourceModel: inCloudFormationResourceModel,
+				InTerraformState:            inTerraformState,
+				InCloudControlResourceModel: inCloudControlResourceModel,
 			},
 		}, nil
 	}
@@ -55,18 +55,18 @@ func unknownValuePaths(ctx context.Context, inTerraformState, inCloudFormationRe
 		for idx, val := range vals {
 			if typ.Is(tftypes.Set{}) {
 				inTerraformState = inTerraformState.WithElementKeyValue(val)
-				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyValue(val)
+				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyValue(val)
 			} else {
 				inTerraformState = inTerraformState.WithElementKeyInt(int64(idx))
-				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyInt(int64(idx))
+				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyInt(int64(idx))
 			}
-			paths, err := unknownValuePaths(ctx, inTerraformState, inCloudFormationResourceModel, val, tfToCfNameMap)
+			paths, err := unknownValuePaths(ctx, inTerraformState, inCloudControlResourceModel, val, tfToCfNameMap)
 			if err != nil {
 				return nil, err
 			}
 			unknowns = append(unknowns, paths...)
 			inTerraformState = inTerraformState.WithoutLastStep()
-			inCloudFormationResourceModel = inCloudFormationResourceModel.WithoutLastStep()
+			inCloudControlResourceModel = inCloudControlResourceModel.WithoutLastStep()
 		}
 
 	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
@@ -78,36 +78,36 @@ func unknownValuePaths(ctx context.Context, inTerraformState, inCloudFormationRe
 		for key, val := range vals {
 			if typ.Is(tftypes.Map{}) {
 				inTerraformState = inTerraformState.WithElementKeyString(key)
-				inCloudFormationResourceModel = inCloudFormationResourceModel.WithElementKeyString(key)
+				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyString(key)
 			} else if typ.Is(tftypes.Object{}) {
 				inTerraformState = inTerraformState.WithAttributeName(key)
 				propertyName, ok := tfToCfNameMap[key]
 				if !ok {
 					return nil, fmt.Errorf("attribute name mapping not found: %s", key)
 				}
-				inCloudFormationResourceModel = inCloudFormationResourceModel.WithAttributeName(propertyName)
+				inCloudControlResourceModel = inCloudControlResourceModel.WithAttributeName(propertyName)
 			}
-			paths, err := unknownValuePaths(ctx, inTerraformState, inCloudFormationResourceModel, val, tfToCfNameMap)
+			paths, err := unknownValuePaths(ctx, inTerraformState, inCloudControlResourceModel, val, tfToCfNameMap)
 			if err != nil {
 				return nil, err
 			}
 			unknowns = append(unknowns, paths...)
 			inTerraformState = inTerraformState.WithoutLastStep()
-			inCloudFormationResourceModel = inCloudFormationResourceModel.WithoutLastStep()
+			inCloudControlResourceModel = inCloudControlResourceModel.WithoutLastStep()
 		}
 	}
 
 	return unknowns, nil
 }
 
-// SetValuesFromRaw fills any unknown State values from a CloudFormation ResourceModel (raw map[string]interface{}).
+// SetValuesFromRaw fills any unknown State values from a Cloud Control ResourceModel (raw map[string]interface{}).
 func (u unknowns) SetValuesFromRaw(ctx context.Context, state *tfsdk.State, resourceModel map[string]interface{}) error {
 	for _, path := range u {
-		// Get the value from the CloudFormation ResourceModel.
-		val, _, err := tftypes.WalkAttributePath(resourceModel, path.InCloudFormationResourceModel)
+		// Get the value from the Cloud Control ResourceModel.
+		val, _, err := tftypes.WalkAttributePath(resourceModel, path.InCloudControlResourceModel)
 
 		if errors.Is(err, tftypes.ErrInvalidStep) {
-			// Value not found in CloudFormation ResourceModel. Set to Nil in State.
+			// Value not found in Cloud Control ResourceModel. Set to Nil in State.
 
 			// TODO
 			// TODO State.SetAttribute does not support passing `nil` to set a Null value.
@@ -135,7 +135,7 @@ func (u unknowns) SetValuesFromRaw(ctx context.Context, state *tfsdk.State, reso
 		}
 
 		if err != nil {
-			return fmt.Errorf("error getting value at %s: %w", path.InCloudFormationResourceModel, err)
+			return fmt.Errorf("error getting value at %s: %w", path.InCloudControlResourceModel, err)
 		}
 
 		// Set it in the Terraform State.
@@ -149,7 +149,7 @@ func (u unknowns) SetValuesFromRaw(ctx context.Context, state *tfsdk.State, reso
 	return nil
 }
 
-// SetValuesFromRaw fills any unknown State values from a CloudFormation ResourceModel (string).
+// SetValuesFromRaw fills any unknown State values from a Cloud Control ResourceModel (string).
 func (u unknowns) SetValuesFromString(ctx context.Context, state *tfsdk.State, resourceModel string) error {
 	var v interface{}
 
