@@ -112,11 +112,17 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Contains
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"eq": {
 									// Property: Eq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"exists": {
 									// Property: Exists
@@ -127,6 +133,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Neq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"property": {
 									// Property: Property
@@ -139,6 +148,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"rule_name": {
 						// Property: RuleName
@@ -150,6 +162,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"arn": {
 			// Property: Arn

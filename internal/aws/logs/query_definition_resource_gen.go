@@ -38,6 +38,9 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Optionally define specific log groups as part of your query definition",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"name": {
 			// Property: Name

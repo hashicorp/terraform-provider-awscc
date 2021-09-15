@@ -171,6 +171,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

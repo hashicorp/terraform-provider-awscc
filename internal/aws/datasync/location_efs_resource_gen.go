@@ -64,6 +64,9 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"subnet_arn": {
 						// Property: SubnetArn

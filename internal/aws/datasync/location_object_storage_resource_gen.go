@@ -59,6 +59,9 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"bucket_name": {
 			// Property: BucketName

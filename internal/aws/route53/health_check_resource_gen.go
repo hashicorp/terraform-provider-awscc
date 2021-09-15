@@ -177,6 +177,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 256),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"enable_sni": {
 						// Property: EnableSNI
@@ -255,6 +258,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 					"request_interval": {

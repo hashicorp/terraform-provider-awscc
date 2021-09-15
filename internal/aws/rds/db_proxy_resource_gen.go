@@ -113,6 +113,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"db_proxy_arn": {
 			// Property: DBProxyArn
@@ -270,6 +273,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId
@@ -300,6 +306,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
@@ -320,6 +329,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},

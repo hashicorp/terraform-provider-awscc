@@ -437,6 +437,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"resource_arn": {
 			// Property: ResourceArn

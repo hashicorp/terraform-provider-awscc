@@ -190,6 +190,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},
