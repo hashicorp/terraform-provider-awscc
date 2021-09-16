@@ -5,13 +5,10 @@ package route53
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -83,7 +80,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -104,7 +101,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -132,7 +129,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name_servers": {
@@ -206,7 +203,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A complex type that contains information about the VPCs that are associated with the specified hosted zone.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"vpc_id": {
 						// Property: VPCId
@@ -221,7 +218,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -263,8 +260,6 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_hosted_zone", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

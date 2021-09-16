@@ -5,13 +5,10 @@ package s3
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -449,12 +446,12 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"buckets": {
 									// Property: Buckets
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"regions": {
 									// Property: Regions
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 							},
@@ -470,7 +467,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 64),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Id is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"include": {
@@ -480,12 +477,12 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"buckets": {
 									// Property: Buckets
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"regions": {
 									// Property: Regions
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 							},
@@ -541,7 +538,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -560,7 +557,7 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -626,8 +623,6 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3_storage_lens", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

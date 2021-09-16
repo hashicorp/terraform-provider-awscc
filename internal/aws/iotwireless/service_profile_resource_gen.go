@@ -5,13 +5,10 @@ package iotwireless
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -255,7 +252,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "uniqueItems": true
 			// }
 			Description: "A list of key-value pairs that contain metadata for the service profile.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -274,7 +271,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -331,8 +328,6 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_service_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

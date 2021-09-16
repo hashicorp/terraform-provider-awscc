@@ -5,13 +5,10 @@ package amplify
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -38,7 +35,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 20),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AppId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -121,7 +118,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BranchName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"build_spec": {
@@ -375,8 +372,6 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_amplify_branch", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

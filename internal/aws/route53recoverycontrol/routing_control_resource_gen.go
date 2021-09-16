@@ -5,13 +5,10 @@ package route53recoverycontrol
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -35,7 +32,7 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusterArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ClusterArn is a write-only property.
 		},
@@ -51,7 +48,7 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ControlPanelArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -136,8 +133,6 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_routing_control", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

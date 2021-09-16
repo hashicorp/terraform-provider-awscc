@@ -5,13 +5,10 @@ package mediaconnect
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -76,6 +73,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
+			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
 			//         "static-key"
@@ -119,10 +117,14 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 						Type:        types.StringType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"static-key",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "static-key"}),
 						},
 					},
 					"role_arn": {
@@ -175,7 +177,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"output_arn": {
@@ -337,8 +339,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_output", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

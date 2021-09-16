@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,7 +30,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GroupIpAddress is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"group_member": {
@@ -79,7 +77,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkInterfaceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -148,7 +146,7 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayMulticastDomainId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -193,8 +191,6 @@ func transitGatewayMulticastGroupMemberResourceType(ctx context.Context) (tfsdk.
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_multicast_group_member", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

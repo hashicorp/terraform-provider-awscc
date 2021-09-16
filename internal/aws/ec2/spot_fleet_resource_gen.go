@@ -5,13 +5,10 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -133,6 +130,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": true
 			//           },
 			//           "EbsOptimized": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "IamInstanceProfile": {
@@ -160,6 +158,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "Enabled": {
+			//                 "default": false,
 			//                 "type": "boolean"
 			//               }
 			//             },
@@ -574,7 +573,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // AllocationStrategy is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"context": {
@@ -600,7 +599,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // IamFleetRole is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"instance_interruption_behavior": {
@@ -616,7 +615,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // InstanceInterruptionBehavior is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"instance_pools_to_use_count": {
@@ -625,7 +624,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // InstancePoolsToUseCount is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"launch_specifications": {
@@ -712,6 +711,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: EbsOptimized
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"iam_instance_profile": {
 									// Property: IamInstanceProfile
@@ -754,6 +757,10 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Enabled
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 										},
 									),
@@ -1026,7 +1033,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.UniqueItems(),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // LaunchSpecifications is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"launch_template_configs": {
@@ -1105,7 +1112,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.UniqueItems(),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // LaunchTemplateConfigs is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"load_balancers_config": {
@@ -1167,7 +1174,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // LoadBalancersConfig is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"on_demand_allocation_strategy": {
@@ -1176,7 +1183,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // OnDemandAllocationStrategy is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"on_demand_max_total_price": {
@@ -1185,7 +1192,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // OnDemandMaxTotalPrice is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"on_demand_target_capacity": {
@@ -1194,7 +1201,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // OnDemandTargetCapacity is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"replace_unhealthy_instances": {
@@ -1203,7 +1210,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // ReplaceUnhealthyInstances is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"spot_maintenance_strategies": {
@@ -1233,7 +1240,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // SpotMaintenanceStrategies is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"spot_max_total_price": {
@@ -1242,7 +1249,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // SpotMaxTotalPrice is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"spot_price": {
@@ -1251,7 +1258,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // SpotPrice is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"target_capacity": {
@@ -1265,7 +1272,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // TerminateInstancesWithExpiration is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"type": {
@@ -1280,7 +1287,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Type is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"valid_from": {
@@ -1289,7 +1296,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // ValidFrom is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"valid_until": {
@@ -1298,7 +1305,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // ValidUntil is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -1413,8 +1420,6 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_spot_fleet", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

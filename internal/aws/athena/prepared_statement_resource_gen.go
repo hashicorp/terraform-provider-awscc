@@ -5,13 +5,10 @@ package athena
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -71,7 +68,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StatementName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"work_group": {
@@ -90,7 +87,7 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // WorkGroup is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -128,8 +125,6 @@ func preparedStatementResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_athena_prepared_statement", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

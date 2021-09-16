@@ -5,13 +5,10 @@ package logs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,6 +37,9 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Optionally define specific log groups as part of your query definition",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -122,8 +122,6 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_logs_query_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

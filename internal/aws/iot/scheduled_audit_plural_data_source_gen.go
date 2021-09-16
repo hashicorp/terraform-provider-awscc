@@ -5,13 +5,10 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -29,7 +26,7 @@ func scheduledAuditsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 		},
 		"ids": {
 			Description: "Set of Resource Identifiers.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 		},
 	}
@@ -50,8 +47,6 @@ func scheduledAuditsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_scheduled_audits", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }

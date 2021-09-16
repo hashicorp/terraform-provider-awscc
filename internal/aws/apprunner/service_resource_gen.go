@@ -5,13 +5,10 @@ package apprunner
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -78,7 +75,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EncryptionConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"health_check_configuration": {
@@ -291,7 +288,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(4, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"service_url": {
@@ -771,7 +768,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -854,8 +851,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apprunner_service", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

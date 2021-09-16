@@ -5,13 +5,10 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -35,7 +32,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeliverLogsPermissionArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -61,7 +58,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogDestination is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"log_destination_type": {
@@ -86,7 +83,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogDestinationType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"log_format": {
@@ -101,7 +98,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogFormat is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"log_group_name": {
@@ -116,7 +113,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LogGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"max_aggregation_interval": {
@@ -131,7 +128,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MaxAggregationInterval is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -145,7 +142,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_type": {
@@ -171,7 +168,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -239,7 +236,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TrafficType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -280,8 +277,6 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_flow_log", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

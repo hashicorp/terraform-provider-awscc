@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 346 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 362 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -22,6 +22,15 @@ resource_schema "aws_acmpca_certificate_authority" {
 resource_schema "aws_acmpca_certificate_authority_activation" {
   cloudformation_type_name               = "AWS::ACMPCA::CertificateAuthorityActivation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_acmpca_permission" {
+  cloudformation_type_name               = "AWS::ACMPCA::Permission"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_aps_workspace" {
+  cloudformation_type_name = "AWS::APS::Workspace"
 }
 
 resource_schema "aws_accessanalyzer_analyzer" {
@@ -40,6 +49,11 @@ resource_schema "aws_amplify_branch" {
 
 resource_schema "aws_amplify_domain" {
   cloudformation_type_name               = "AWS::Amplify::Domain"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigateway_account" {
+  cloudformation_type_name               = "AWS::ApiGateway::Account"
   suppress_plural_data_source_generation = true
 }
 
@@ -73,6 +87,10 @@ resource_schema "aws_apigateway_request_validator" {
 resource_schema "aws_apigateway_resource" {
   cloudformation_type_name               = "AWS::ApiGateway::Resource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigateway_usage_plan" {
+  cloudformation_type_name = "AWS::ApiGateway::UsagePlan"
 }
 
 resource_schema "aws_apigateway_usage_plan_key" {
@@ -198,8 +216,7 @@ resource_schema "aws_cloudformation_resource_version" {
 }
 
 resource_schema "aws_cloudformation_stack_set" {
-  cloudformation_type_name               = "AWS::CloudFormation::StackSet"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::CloudFormation::StackSet"
 }
 
 resource_schema "aws_cloudformation_type_activation" {
@@ -274,6 +291,10 @@ resource_schema "aws_codestarconnections_connection" {
 resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name               = "AWS::CodeStarNotifications::NotificationRule"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_config_aggregation_authorization" {
+  cloudformation_type_name = "AWS::Config::AggregationAuthorization"
 }
 
 resource_schema "aws_config_configuration_aggregator" {
@@ -473,6 +494,10 @@ resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
 }
 
+resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayVpcAttachment"
+}
+
 resource_schema "aws_ecr_registry_policy" {
   cloudformation_type_name = "AWS::ECR::RegistryPolicy"
 }
@@ -521,6 +546,11 @@ resource_schema "aws_efs_access_point" {
 
 resource_schema "aws_efs_file_system" {
   cloudformation_type_name = "AWS::EFS::FileSystem"
+}
+
+resource_schema "aws_efs_mount_target" {
+  cloudformation_type_name               = "AWS::EFS::MountTarget"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_eks_addon" {
@@ -694,6 +724,7 @@ resource_schema "aws_groundstation_config" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -702,6 +733,10 @@ resource_schema "aws_groundstation_dataflow_endpoint_group" {
 
 resource_schema "aws_groundstation_mission_profile" {
   cloudformation_type_name = "AWS::GroundStation::MissionProfile"
+}
+
+resource_schema "aws_healthlake_fhir_datastore" {
+  cloudformation_type_name = "AWS::HealthLake::FHIRDatastore"
 }
 
 resource_schema "aws_iam_oidc_provider" {
@@ -788,6 +823,10 @@ resource_schema "aws_iot_dimension" {
 
 resource_schema "aws_iot_domain_configuration" {
   cloudformation_type_name = "AWS::IoT::DomainConfiguration"
+}
+
+resource_schema "aws_iot_fleet_metric" {
+  cloudformation_type_name = "AWS::IoT::FleetMetric"
 }
 
 resource_schema "aws_iot_mitigation_action" {
@@ -1132,12 +1171,22 @@ resource_schema "aws_nimblestudio_studio_component" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_opensearchservice_domain" {
+  cloudformation_type_name               = "AWS::OpenSearchService::Domain"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
 
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_qldb_stream" {
@@ -1198,10 +1247,28 @@ resource_schema "aws_redshift_cluster" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_resourcegroups_group" {
   cloudformation_type_name = "AWS::ResourceGroups::Group"
+}
+
+resource_schema "aws_robomaker_fleet" {
+  cloudformation_type_name = "AWS::RoboMaker::Fleet"
+}
+
+resource_schema "aws_robomaker_robot" {
+  cloudformation_type_name = "AWS::RoboMaker::Robot"
+}
+
+resource_schema "aws_robomaker_robot_application_version" {
+  cloudformation_type_name               = "AWS::RoboMaker::RobotApplicationVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_robomaker_simulation_application" {
+  cloudformation_type_name = "AWS::RoboMaker::SimulationApplication"
 }
 
 resource_schema "aws_robomaker_simulation_application_version" {
@@ -1293,6 +1360,15 @@ resource_schema "aws_s3_access_point" {
   cloudformation_type_name = "AWS::S3::AccessPoint"
 }
 
+resource_schema "aws_s3_multi_region_access_point" {
+  cloudformation_type_name = "AWS::S3::MultiRegionAccessPoint"
+}
+
+resource_schema "aws_s3_multi_region_access_point_policy" {
+  cloudformation_type_name               = "AWS::S3::MultiRegionAccessPointPolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_s3_storage_lens" {
   cloudformation_type_name = "AWS::S3::StorageLens"
 }
@@ -1331,6 +1407,7 @@ resource_schema "aws_s3outposts_endpoint" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -1517,6 +1594,7 @@ resource_schema "aws_synthetics_canary" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_timestream_database" {

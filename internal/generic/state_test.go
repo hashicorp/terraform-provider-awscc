@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 var testSimpleSchema = tfsdk.Schema{
@@ -106,7 +105,7 @@ var testComplexSchema = tfsdk.Schema{
 			Required: true,
 		},
 		"tags": {
-			Type: providertypes.SetType{
+			Type: types.SetType{
 				ElemType: types.StringType,
 			},
 			Required: true,
@@ -146,7 +145,7 @@ var testComplexSchema = tfsdk.Schema{
 			Optional: true,
 		},
 		"video_ports": {
-			Attributes: providertypes.SetNestedAttributes(map[string]tfsdk.Attribute{
+			Attributes: tfsdk.SetNestedAttributes(map[string]tfsdk.Attribute{
 				"id": {
 					Type:     types.NumberType,
 					Required: true,
@@ -157,7 +156,7 @@ var testComplexSchema = tfsdk.Schema{
 					},
 					Optional: true,
 				},
-			}, providertypes.SetNestedAttributesOptions{}),
+			}, tfsdk.SetNestedAttributesOptions{}),
 			Optional: true,
 		},
 		"identifier": {

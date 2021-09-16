@@ -5,13 +5,10 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -181,7 +178,7 @@ func mitigationActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 								"thing_group_names": {
 									// Property: ThingGroupNames
 									Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Computed:    true,
 								},
 							},
@@ -331,7 +328,7 @@ func mitigationActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -346,7 +343,7 @@ func mitigationActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -397,8 +394,6 @@ func mitigationActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_mitigation_action", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

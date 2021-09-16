@@ -5,13 +5,10 @@ package accessanalyzer
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,7 +37,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AnalyzerName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"archive_rules": {
@@ -114,11 +111,17 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Contains
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"eq": {
 									// Property: Eq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"exists": {
 									// Property: Exists
@@ -129,6 +132,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Neq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"property": {
 									// Property: Property
@@ -141,6 +147,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"rule_name": {
 						// Property: RuleName
@@ -152,6 +161,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -199,7 +211,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -220,7 +232,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -242,7 +254,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -290,8 +302,6 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_accessanalyzer_analyzer", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

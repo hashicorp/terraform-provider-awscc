@@ -5,13 +5,10 @@ package sso
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,7 +37,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(10, 1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InstanceArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"permission_set_arn": {
@@ -60,7 +57,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(10, 1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PermissionSetArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"principal_id": {
@@ -80,7 +77,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 47),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PrincipalId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"principal_type": {
@@ -104,7 +101,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PrincipalType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"target_id": {
@@ -119,7 +116,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TargetId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"target_type": {
@@ -141,7 +138,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TargetType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -181,8 +178,6 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sso_assignment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

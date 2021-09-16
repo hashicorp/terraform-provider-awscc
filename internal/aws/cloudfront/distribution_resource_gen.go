@@ -4,11 +4,11 @@ package cloudfront
 
 import (
 	"context"
+	"math/big"
 
-	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -46,6 +46,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "AllowedMethods": {
+			//             "default": [
+			//               "GET",
+			//               "HEAD"
+			//             ],
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -56,6 +60,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "CachedMethods": {
+			//             "default": [
+			//               "GET",
+			//               "HEAD"
+			//             ],
 			//             "items": {
 			//               "type": "string"
 			//             },
@@ -63,12 +71,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "Compress": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "DefaultTTL": {
+			//             "default": 86400,
 			//             "type": "number"
 			//           },
 			//           "FieldLevelEncryptionId": {
+			//             "default": "",
 			//             "type": "string"
 			//           },
 			//           "ForwardedValues": {
@@ -76,6 +87,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "properties": {
 			//               "Cookies": {
 			//                 "additionalProperties": false,
+			//                 "default": {
+			//                   "Forward": "none"
+			//                 },
 			//                 "properties": {
 			//                   "Forward": {
 			//                     "type": "string"
@@ -152,9 +166,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "MaxTTL": {
+			//             "default": 31536000,
 			//             "type": "number"
 			//           },
 			//           "MinTTL": {
+			//             "default": 0,
 			//             "type": "number"
 			//           },
 			//           "OriginRequestPolicyId": {
@@ -167,6 +183,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "SmoothStreaming": {
+			//             "default": false,
 			//             "type": "boolean"
 			//           },
 			//           "TargetOriginId": {
@@ -201,6 +218,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "uniqueItems": false
 			//     },
 			//     "Comment": {
+			//       "default": "",
 			//       "type": "string"
 			//     },
 			//     "CustomErrorResponses": {
@@ -208,6 +226,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "ErrorCachingMinTTL": {
+			//             "default": 300,
 			//             "type": "number"
 			//           },
 			//           "ErrorCode": {
@@ -235,9 +254,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "HTTPPort": {
+			//           "default": 80,
 			//           "type": "integer"
 			//         },
 			//         "HTTPSPort": {
+			//           "default": 443,
 			//           "type": "integer"
 			//         },
 			//         "OriginProtocolPolicy": {
@@ -262,6 +283,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AllowedMethods": {
+			//           "default": [
+			//             "GET",
+			//             "HEAD"
+			//           ],
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -269,9 +294,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "CachePolicyId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "CachedMethods": {
+			//           "default": [
+			//             "GET",
+			//             "HEAD"
+			//           ],
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -279,12 +309,15 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "Compress": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "DefaultTTL": {
+			//           "default": 86400,
 			//           "type": "number"
 			//         },
 			//         "FieldLevelEncryptionId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "ForwardedValues": {
@@ -292,6 +325,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "properties": {
 			//             "Cookies": {
 			//               "additionalProperties": false,
+			//               "default": {
+			//                 "Forward": "none"
+			//               },
 			//               "properties": {
 			//                 "Forward": {
 			//                   "type": "string"
@@ -368,18 +404,23 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "uniqueItems": false
 			//         },
 			//         "MaxTTL": {
+			//           "default": 31536000,
 			//           "type": "number"
 			//         },
 			//         "MinTTL": {
+			//           "default": 0,
 			//           "type": "number"
 			//         },
 			//         "OriginRequestPolicyId": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "RealtimeLogConfigArn": {
+			//           "default": "",
 			//           "type": "string"
 			//         },
 			//         "SmoothStreaming": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "TargetOriginId": {
@@ -410,12 +451,14 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "DefaultRootObject": {
+			//       "default": "",
 			//       "type": "string"
 			//     },
 			//     "Enabled": {
 			//       "type": "boolean"
 			//     },
 			//     "HttpVersion": {
+			//       "default": "http1.1",
 			//       "type": "string"
 			//     },
 			//     "IPV6Enabled": {
@@ -428,9 +471,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "IncludeCookies": {
+			//           "default": false,
 			//           "type": "boolean"
 			//         },
 			//         "Prefix": {
+			//           "default": "",
 			//           "type": "string"
 			//         }
 			//       },
@@ -541,21 +586,29 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "HTTPPort": {
+			//                 "default": 80,
 			//                 "type": "integer"
 			//               },
 			//               "HTTPSPort": {
+			//                 "default": 443,
 			//                 "type": "integer"
 			//               },
 			//               "OriginKeepaliveTimeout": {
+			//                 "default": 5,
 			//                 "type": "integer"
 			//               },
 			//               "OriginProtocolPolicy": {
 			//                 "type": "string"
 			//               },
 			//               "OriginReadTimeout": {
+			//                 "default": 30,
 			//                 "type": "integer"
 			//               },
 			//               "OriginSSLProtocols": {
+			//                 "default": [
+			//                   "TLSv1",
+			//                   "SSLv3"
+			//                 ],
 			//                 "items": {
 			//                   "type": "string"
 			//                 },
@@ -595,6 +648,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "uniqueItems": false
 			//           },
 			//           "OriginPath": {
+			//             "default": "",
 			//             "type": "string"
 			//           },
 			//           "OriginShield": {
@@ -613,6 +667,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "OriginAccessIdentity": {
+			//                 "default": "",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -629,10 +684,16 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "uniqueItems": false
 			//     },
 			//     "PriceClass": {
+			//       "default": "PriceClass_All",
 			//       "type": "string"
 			//     },
 			//     "Restrictions": {
 			//       "additionalProperties": false,
+			//       "default": {
+			//         "GeoRestriction": {
+			//           "RestrictionType": "none"
+			//         }
+			//       },
 			//       "properties": {
 			//         "GeoRestriction": {
 			//           "additionalProperties": false,
@@ -666,6 +727,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "OriginAccessIdentity": {
+			//           "default": "",
 			//           "type": "string"
 			//         }
 			//       },
@@ -676,6 +738,9 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "ViewerCertificate": {
 			//       "additionalProperties": false,
+			//       "default": {
+			//         "CloudFrontDefaultCertificate": true
+			//       },
 			//       "properties": {
 			//         "AcmCertificateArn": {
 			//           "type": "string"
@@ -696,6 +761,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "WebACLId": {
+			//       "default": "",
 			//       "type": "string"
 			//     }
 			//   },
@@ -724,6 +790,13 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
@@ -734,21 +807,40 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: CachedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"compress": {
 									// Property: Compress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+									},
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
@@ -771,6 +863,18 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Object{
+														AttrTypes: map[string]attr.Type{
+															"forward": types.StringType,
+														},
+														Attrs: map[string]attr.Value{
+															"forward": types.String{Value: "none"},
+														},
+													},
+													),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -838,11 +942,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MaxTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+									},
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
@@ -863,6 +975,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SmoothStreaming
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
@@ -893,6 +1009,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Comment
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 					"custom_error_responses": {
 						// Property: CustomErrorResponses
@@ -902,6 +1022,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ErrorCachingMinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(300.000000)}),
+									},
 								},
 								"error_code": {
 									// Property: ErrorCode
@@ -936,11 +1060,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: HTTPPort
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(80)}),
+									},
 								},
 								"https_port": {
 									// Property: HTTPSPort
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(443)}),
+									},
 								},
 								"origin_protocol_policy": {
 									// Property: OriginProtocolPolicy
@@ -964,31 +1096,61 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AllowedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"cache_policy_id": {
 									// Property: CachePolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"cached_methods": {
 									// Property: CachedMethods
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+											types.String{Value: "GET"},
+											types.String{Value: "HEAD"},
+										}}),
+									},
 								},
 								"compress": {
 									// Property: Compress
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+									},
 								},
 								"field_level_encryption_id": {
 									// Property: FieldLevelEncryptionId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"forwarded_values": {
 									// Property: ForwardedValues
@@ -1011,6 +1173,18 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 												),
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Object{
+														AttrTypes: map[string]attr.Type{
+															"forward": types.StringType,
+														},
+														Attrs: map[string]attr.Value{
+															"forward": types.String{Value: "none"},
+														},
+													},
+													),
+												},
 											},
 											"headers": {
 												// Property: Headers
@@ -1078,26 +1252,46 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: MaxTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
 									Type:     types.NumberType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+									},
 								},
 								"origin_request_policy_id": {
 									// Property: OriginRequestPolicyId
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"realtime_log_config_arn": {
 									// Property: RealtimeLogConfigArn
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"target_origin_id": {
 									// Property: TargetOriginId
@@ -1127,6 +1321,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: DefaultRootObject
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 					"enabled": {
 						// Property: Enabled
@@ -1137,6 +1335,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: HttpVersion
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "http1.1"}),
+						},
 					},
 					"ipv6_enabled": {
 						// Property: IPV6Enabled
@@ -1156,11 +1358,19 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: IncludeCookies
 									Type:     types.BoolType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.Bool{Value: false}),
+									},
 								},
 								"prefix": {
 									// Property: Prefix
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 							},
 						),
@@ -1268,16 +1478,28 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: HTTPPort
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(80)}),
+												},
 											},
 											"https_port": {
 												// Property: HTTPSPort
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(443)}),
+												},
 											},
 											"origin_keepalive_timeout": {
 												// Property: OriginKeepaliveTimeout
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(5)}),
+												},
 											},
 											"origin_protocol_policy": {
 												// Property: OriginProtocolPolicy
@@ -1288,11 +1510,22 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OriginReadTimeout
 												Type:     types.NumberType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Number{Value: big.NewFloat(30)}),
+												},
 											},
 											"origin_ssl_protocols": {
 												// Property: OriginSSLProtocols
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{
+														types.String{Value: "TLSv1"},
+														types.String{Value: "SSLv3"},
+													}}),
+												},
 											},
 										},
 									),
@@ -1331,6 +1564,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: OriginPath
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 								"origin_shield": {
 									// Property: OriginShield
@@ -1358,6 +1595,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OriginAccessIdentity
 												Type:     types.StringType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.String{Value: ""}),
+												},
 											},
 										},
 									),
@@ -1372,6 +1613,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: PriceClass
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "PriceClass_All"}),
+						},
 					},
 					"restrictions": {
 						// Property: Restrictions
@@ -1398,6 +1643,29 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Object{
+								AttrTypes: map[string]attr.Type{
+									"geo_restriction": types.ObjectType{
+										AttrTypes: map[string]attr.Type{
+											"restriction_type": types.StringType,
+										},
+									},
+								},
+								Attrs: map[string]attr.Value{
+									"geo_restriction": types.Object{
+										AttrTypes: map[string]attr.Type{
+											"restriction_type": types.StringType,
+										},
+										Attrs: map[string]attr.Value{
+											"restriction_type": types.String{Value: "none"},
+										},
+									},
+								},
+							},
+							),
+						},
 					},
 					"s3_origin": {
 						// Property: S3Origin
@@ -1412,6 +1680,10 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: OriginAccessIdentity
 									Type:     types.StringType,
 									Optional: true,
+									Computed: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: ""}),
+									},
 								},
 							},
 						),
@@ -1449,11 +1721,27 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Object{
+								AttrTypes: map[string]attr.Type{
+									"cloudfront_default_certificate": types.BoolType,
+								},
+								Attrs: map[string]attr.Value{
+									"cloudfront_default_certificate": types.Bool{Value: true},
+								},
+							},
+							),
+						},
 					},
 					"web_acl_id": {
 						// Property: WebACLId
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: ""}),
+						},
 					},
 				},
 			),
@@ -1635,8 +1923,6 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudfront_distribution", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

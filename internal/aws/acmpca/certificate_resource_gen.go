@@ -5,13 +5,10 @@ package acmpca
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -103,30 +100,39 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Structure that contains X.509 KeyUsage information.",
 			//           "properties": {
 			//             "CRLSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DataEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DecipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "DigitalSignature": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "EncipherOnly": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyAgreement": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyCertSign": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "KeyEncipherment": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             },
 			//             "NonRepudiation": {
+			//               "default": false,
 			//               "type": "boolean"
 			//             }
 			//           },
@@ -381,46 +387,82 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: CRLSign
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"data_encipherment": {
 												// Property: DataEncipherment
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"decipher_only": {
 												// Property: DecipherOnly
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"digital_signature": {
 												// Property: DigitalSignature
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"encipher_only": {
 												// Property: EncipherOnly
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_agreement": {
 												// Property: KeyAgreement
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_cert_sign": {
 												// Property: KeyCertSign
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"key_encipherment": {
 												// Property: KeyEncipherment
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 											"non_repudiation": {
 												// Property: NonRepudiation
 												Type:     types.BoolType,
 												Optional: true,
+												Computed: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													DefaultValue(types.Bool{Value: false}),
+												},
 											},
 										},
 									),
@@ -671,7 +713,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ApiPassthrough is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ApiPassthrough is a write-only property.
 		},
@@ -704,7 +746,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_signing_request": {
@@ -722,7 +764,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateSigningRequest is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// CertificateSigningRequest is a write-only property.
 		},
@@ -737,7 +779,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SigningAlgorithm is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"template_arn": {
@@ -750,7 +792,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TemplateArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"validity": {
@@ -790,7 +832,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Validity is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"validity_not_before": {
@@ -831,7 +873,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ValidityNotBefore is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -927,8 +969,6 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_acmpca_certificate", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

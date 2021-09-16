@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,7 +30,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationCidrBlock is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_gateway_route_table_id": {
@@ -46,7 +44,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalGatewayRouteTableId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_gateway_virtual_interface_group_id": {
@@ -60,7 +58,7 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalGatewayVirtualInterfaceGroupId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"state": {
@@ -121,8 +119,6 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_local_gateway_route", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

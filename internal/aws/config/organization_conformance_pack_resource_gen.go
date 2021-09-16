@@ -5,13 +5,10 @@ package config
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -147,7 +144,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // OrganizationConformancePackName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"template_body": {
@@ -229,8 +226,6 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_config_organization_conformance_pack", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,13 +5,10 @@ package ssmincidents
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,12 +37,17 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: DeletionProtected
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Configures the ReplicationSet deletion protection.",
 			//   "type": "boolean"
 			// }
 			Description: "Configures the ReplicationSet deletion protection.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"regions": {
 			// Property: Regions
@@ -85,7 +87,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"region_configuration": {
 						// Property: RegionConfiguration
@@ -115,7 +117,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 3,
 				},
@@ -159,8 +161,6 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ssmincidents_replication_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

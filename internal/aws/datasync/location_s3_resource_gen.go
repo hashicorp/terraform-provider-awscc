@@ -5,13 +5,10 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -65,7 +62,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 156),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3BucketArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// S3BucketArn is a write-only property.
 		},
@@ -104,13 +101,14 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3Config is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"s3_storage_class": {
 			// Property: S3StorageClass
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "STANDARD",
 			//   "description": "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
 			//   "enum": [
 			//     "STANDARD",
@@ -137,7 +135,8 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // S3StorageClass is a force-new property.
+				DefaultValue(types.String{Value: "STANDARD"}),
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -157,7 +156,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -197,7 +196,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -218,7 +217,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -269,8 +268,6 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_s3", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,13 +5,10 @@ package codeartifact
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -53,7 +50,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"encryption_key": {
@@ -67,7 +64,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EncryptionKey is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -205,8 +202,6 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codeartifact_domain", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

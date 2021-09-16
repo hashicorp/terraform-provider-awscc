@@ -5,13 +5,10 @@ package route53resolver
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -170,7 +167,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"status": {
@@ -236,7 +233,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "Tags",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -257,7 +254,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -305,8 +302,6 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_firewall_domain_list", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

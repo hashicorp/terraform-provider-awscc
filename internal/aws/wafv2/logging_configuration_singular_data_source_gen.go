@@ -5,10 +5,8 @@ package wafv2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -454,8 +452,6 @@ func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_wafv2_logging_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

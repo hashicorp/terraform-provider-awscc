@@ -5,13 +5,10 @@ package sagemaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -65,7 +62,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelPackageGroupDescription is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_package_group_name": {
@@ -84,7 +81,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(0, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ModelPackageGroupName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"model_package_group_policy": {
@@ -215,8 +212,6 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_model_package_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

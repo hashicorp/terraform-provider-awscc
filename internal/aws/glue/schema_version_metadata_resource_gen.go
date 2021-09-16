@@ -5,13 +5,10 @@ package glue
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -39,7 +36,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Key is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"schema_version_id": {
@@ -54,7 +51,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchemaVersionId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"value": {
@@ -73,7 +70,7 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Value is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -110,8 +107,6 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_schema_version_metadata", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

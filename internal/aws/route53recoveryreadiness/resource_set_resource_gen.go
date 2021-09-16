@@ -5,13 +5,10 @@ package route53recoveryreadiness
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -47,7 +44,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceSetName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_set_type": {
@@ -61,7 +58,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceSetType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resources": {
@@ -270,6 +267,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"resource_arn": {
 						// Property: ResourceArn
@@ -284,6 +284,9 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -326,11 +329,17 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Value
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
@@ -382,8 +391,6 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoveryreadiness_resource_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

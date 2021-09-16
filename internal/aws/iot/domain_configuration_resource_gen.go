@@ -5,13 +5,10 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -85,7 +82,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainConfigurationName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"domain_configuration_status": {
@@ -122,7 +119,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DomainName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"domain_type": {
@@ -160,7 +157,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.ArrayLenBetween(0, 1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerCertificateArns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerCertificateArns is a write-only property.
 		},
@@ -245,7 +242,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -298,7 +295,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ValidationCertificateArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -353,8 +350,6 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_domain_configuration", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

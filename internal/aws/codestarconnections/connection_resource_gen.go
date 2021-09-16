@@ -5,13 +5,10 @@ package codestarconnections
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -53,7 +50,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 32),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connection_status": {
@@ -85,7 +82,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // HostArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"owner_account_id": {
@@ -114,7 +111,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProviderType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -212,8 +209,6 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_codestarconnections_connection", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

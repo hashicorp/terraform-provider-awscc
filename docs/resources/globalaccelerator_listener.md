@@ -19,11 +19,11 @@ Resource Type definition for AWS::GlobalAccelerator::Listener
 
 - **accelerator_arn** (String) The Amazon Resource Name (ARN) of the accelerator.
 - **port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--port_ranges))
-- **protocol** (String) The protocol for the listener.
 
 ### Optional
 
 - **client_affinity** (String) Client affinity lets you direct all requests from a user to the same endpoint.
+- **protocol** (String) The protocol for the listener.
 
 ### Read-Only
 

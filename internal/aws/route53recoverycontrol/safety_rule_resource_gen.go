@@ -5,13 +5,10 @@ package route53recoverycontrol
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -57,6 +54,9 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three AWS Regions.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
@@ -80,7 +80,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ControlPanelArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"gating_rule": {
@@ -126,12 +126,18 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"target_controls": {
 						// Property: TargetControls
 						Description: "Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three AWS Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true. \nIn other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
@@ -219,7 +225,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RuleConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"safety_rule_arn": {
@@ -310,8 +316,6 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoverycontrol_safety_rule", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

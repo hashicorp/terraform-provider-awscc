@@ -5,13 +5,10 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -41,7 +38,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Destination is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"destination_ip": {
@@ -54,7 +51,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationIp is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"destination_port": {
@@ -67,7 +64,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DestinationPort is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_insights_path_arn": {
@@ -107,7 +104,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Protocol is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source": {
@@ -119,7 +116,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Type:     types.StringType,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Source is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"source_ip": {
@@ -132,7 +129,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SourceIp is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -173,6 +170,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
@@ -217,8 +217,6 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_network_insights_path", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

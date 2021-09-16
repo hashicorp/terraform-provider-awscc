@@ -5,13 +5,10 @@ package s3outposts
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,7 +37,7 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Bucket is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"policy_document": {
@@ -87,8 +84,6 @@ func bucketPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3outposts_bucket_policy", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

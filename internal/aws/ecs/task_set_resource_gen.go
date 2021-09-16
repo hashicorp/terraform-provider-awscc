@@ -5,13 +5,10 @@ package ecs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -34,7 +31,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"external_id": {
@@ -49,7 +46,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ExternalId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"id": {
@@ -85,7 +82,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LaunchType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"load_balancers": {
@@ -149,7 +146,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LoadBalancers is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_configuration": {
@@ -243,7 +240,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"platform_version": {
@@ -258,7 +255,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlatformVersion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"scale": {
@@ -320,7 +317,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Service is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"service_registries": {
@@ -385,7 +382,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServiceRegistries is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"task_definition": {
@@ -399,7 +396,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TaskDefinition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -450,8 +447,6 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_task_set", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

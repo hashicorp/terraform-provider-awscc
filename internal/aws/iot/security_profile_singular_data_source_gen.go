@@ -5,13 +5,10 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -74,7 +71,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "uniqueItems": true
 			// }
 			Description: "A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"metric": {
 						// Property: Metric
@@ -104,7 +101,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -359,7 +356,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "uniqueItems": true
 			// }
 			Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"criteria": {
 						// Property: Criteria
@@ -428,7 +425,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 											"cidrs": {
 												// Property: Cidrs
 												Description: "If the ComparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.",
-												Type:        providertypes.SetType{ElemType: types.StringType},
+												Type:        types.SetType{ElemType: types.StringType},
 												Computed:    true,
 											},
 											"count": {
@@ -446,19 +443,19 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 											"numbers": {
 												// Property: Numbers
 												Description: "The numeral values of a metric.",
-												Type:        providertypes.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.NumberType},
 												Computed:    true,
 											},
 											"ports": {
 												// Property: Ports
 												Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
-												Type:        providertypes.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.NumberType},
 												Computed:    true,
 											},
 											"strings": {
 												// Property: Strings
 												Description: "The string values of a metric.",
-												Type:        providertypes.SetType{ElemType: types.StringType},
+												Type:        types.SetType{ElemType: types.StringType},
 												Computed:    true,
 											},
 										},
@@ -509,7 +506,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -584,7 +581,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "uniqueItems": true
 			// }
 			Description: "Metadata that can be used to manage the security profile.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -599,7 +596,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -618,7 +615,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "uniqueItems": true
 			// }
 			Description: "A set of target ARNs that the security profile is attached to.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 		},
 	}
@@ -680,8 +677,6 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_security_profile", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

@@ -5,13 +5,10 @@ package auditmanager
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -160,7 +157,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AwsAccount is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"creation_time": {
@@ -395,7 +392,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(32, 36),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FrameworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -732,8 +729,6 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_auditmanager_assessment", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

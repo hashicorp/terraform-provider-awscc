@@ -5,13 +5,10 @@ package ecs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -1085,7 +1082,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ContainerDefinitions is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"cpu": {
@@ -1098,7 +1095,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cpu is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"ephemeral_storage": {
@@ -1125,7 +1122,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EphemeralStorage is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"execution_role_arn": {
@@ -1138,7 +1135,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"family": {
@@ -1151,7 +1148,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Family is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"inference_accelerators": {
@@ -1194,7 +1191,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InferenceAccelerators is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"ipc_mode": {
@@ -1207,7 +1204,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // IpcMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"memory": {
@@ -1220,7 +1217,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Memory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_mode": {
@@ -1233,7 +1230,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // NetworkMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"pid_mode": {
@@ -1246,7 +1243,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PidMode is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"placement_constraints": {
@@ -1292,7 +1289,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlacementConstraints is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"proxy_configuration": {
@@ -1368,7 +1365,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ProxyConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"requires_compatibilities": {
@@ -1388,7 +1385,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RequiresCompatibilities is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -1447,7 +1444,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TaskRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"volumes": {
@@ -1671,7 +1668,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Volumes is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -1818,8 +1815,6 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_task_definition", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -4,14 +4,12 @@ package globalaccelerator
 
 import (
 	"context"
+	"math/big"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -32,6 +30,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     "description": "The configuration for a given endpoint",
 			//     "properties": {
 			//       "ClientIPPreservationEnabled": {
+			//         "default": true,
 			//         "description": "true if client ip should be preserved",
 			//         "type": "boolean"
 			//       },
@@ -40,6 +39,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//         "type": "string"
 			//       },
 			//       "Weight": {
+			//         "default": 100,
 			//         "description": "The weight for the endpoint.",
 			//         "maximum": 255,
 			//         "minimum": 0,
@@ -61,6 +61,10 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "true if client ip should be preserved",
 						Type:        types.BoolType,
 						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Bool{Value: true}),
+						},
 					},
 					"endpoint_id": {
 						// Property: EndpointId
@@ -73,8 +77,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "The weight for the endpoint.",
 						Type:        types.NumberType,
 						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 255),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(100)}),
 						},
 					},
 				},
@@ -104,35 +112,46 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EndpointGroupRegion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"health_check_interval_seconds": {
 			// Property: HealthCheckIntervalSeconds
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 30,
 			//   "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			//   "type": "integer"
 			// }
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(30)}),
+			},
 		},
 		"health_check_path": {
 			// Property: HealthCheckPath
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "/",
 			//   "description": "",
 			//   "type": "string"
 			// }
 			Description: "",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "/"}),
+			},
 		},
 		"health_check_port": {
 			// Property: HealthCheckPort
 			// CloudFormation resource type schema:
 			// {
+			//   "default": -1,
 			//   "description": "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "maximum": 65535,
 			//   "minimum": -1,
@@ -141,14 +160,19 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 65535),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(-1)}),
 			},
 		},
 		"health_check_protocol": {
 			// Property: HealthCheckProtocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			//   "enum": [
 			//     "TCP",
@@ -160,12 +184,16 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"TCP",
 					"HTTP",
 					"HTTPS",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "TCP"}),
 			},
 		},
 		"listener_arn": {
@@ -180,7 +208,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ListenerArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"port_overrides": {
@@ -240,17 +268,23 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: ThresholdCount
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 3,
 			//   "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			//   "type": "integer"
 			// }
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+			},
 		},
 		"traffic_dial_percentage": {
 			// Property: TrafficDialPercentage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 100,
 			//   "description": "The percentage of traffic to sent to an AWS Region",
 			//   "maximum": 100,
 			//   "minimum": 0,
@@ -259,8 +293,12 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The percentage of traffic to sent to an AWS Region",
 			Type:        types.NumberType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatBetween(0.000000, 100.000000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Number{Value: big.NewFloat(100.000000)}),
 			},
 		},
 	}
@@ -310,8 +348,6 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_globalaccelerator_endpoint_group", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,13 +5,10 @@ package glue
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -131,7 +128,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DataFormat is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -178,7 +175,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"registry": {
@@ -225,7 +222,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Registry is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"schema_definition": {
@@ -244,7 +241,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 170000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SchemaDefinition is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// SchemaDefinition is a write-only property.
 		},
@@ -309,7 +306,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
 		},
@@ -362,8 +359,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_glue_schema", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

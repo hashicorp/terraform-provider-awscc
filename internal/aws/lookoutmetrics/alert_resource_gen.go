@@ -5,13 +5,10 @@ package lookoutmetrics
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -130,7 +127,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Action is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"alert_description": {
@@ -150,7 +147,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AlertDescription is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"alert_name": {
@@ -171,7 +168,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AlertName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"alert_sensitivity_threshold": {
@@ -190,7 +187,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.IntBetween(0, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AlertSensitivityThreshold is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"anomaly_detector_arn": {
@@ -209,7 +206,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AnomalyDetectorArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"arn": {
@@ -265,8 +262,6 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_lookoutmetrics_alert", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

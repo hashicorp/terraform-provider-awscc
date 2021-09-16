@@ -5,13 +5,10 @@ package ecs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -78,7 +75,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Type:     types.StringType,
 						Required: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // AutoScalingGroupArn is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"managed_scaling": {
@@ -146,7 +143,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -236,8 +233,6 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_capacity_provider", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

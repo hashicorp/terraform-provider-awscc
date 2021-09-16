@@ -5,13 +5,10 @@ package frauddetector
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -68,6 +65,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -113,7 +113,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DetectorId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"detector_version_id": {
@@ -544,6 +544,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -551,6 +554,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"event_variables": {
 						// Property: EventVariables
@@ -647,6 +653,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"variable_type": {
 									// Property: VariableType
@@ -696,6 +705,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"inline": {
 						// Property: Inline
@@ -769,6 +781,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -776,6 +791,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
@@ -819,6 +837,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 			),
@@ -1108,6 +1129,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -1115,6 +1139,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"rule_id": {
 						// Property: RuleId
@@ -1153,6 +1180,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -1160,6 +1190,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1216,6 +1249,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
@@ -1276,8 +1312,6 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_frauddetector_detector", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

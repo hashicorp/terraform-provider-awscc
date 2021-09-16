@@ -5,13 +5,10 @@ package detective
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -27,12 +24,17 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			//   "type": "boolean"
 			// }
 			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"graph_arn": {
 			// Property: GraphArn
@@ -46,7 +48,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GraphArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"member_email_address": {
@@ -73,7 +75,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // MemberId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"message": {
@@ -128,8 +130,6 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_detective_member_invitation", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -1,3 +1,7 @@
+## v0.9.0 (September 14, 2021)
+
+Add default field to Property.
+
 ## v0.8.0 (August 26, 2021)
 
 Correct `PropertyJsonPointer.EqualsPath`.

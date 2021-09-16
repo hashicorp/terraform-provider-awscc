@@ -125,8 +125,11 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.HasRequiredRootProperty == 0 {
 		templateData.HasRequiredAttribute = false
 	}
-	if codeFeatures&codegen.UsesInternalTypes > 0 {
-		templateData.ImportInternalTypes = true
+	if codeFeatures&codegen.UsesFrameworkAttr > 0 {
+		templateData.ImportFrameworkAttr = true
+	}
+	if codeFeatures&codegen.UsesMathBig > 0 {
+		templateData.ImportMathBig = true
 	}
 
 	if resType == DataSourceType {
@@ -183,7 +186,8 @@ type TemplateData struct {
 	FactoryFunctionName          string
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
-	ImportInternalTypes          bool
+	ImportFrameworkAttr          bool
+	ImportMathBig                bool
 	ImportValidate               bool
 	PackageName                  string
 	RequiredAttributesValidator  string

@@ -5,13 +5,10 @@ package kms
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -94,6 +91,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: KeySpec
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "SYMMETRIC_DEFAULT",
 			//   "description": "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			//   "enum": [
 			//     "SYMMETRIC_DEFAULT",
@@ -110,6 +108,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SYMMETRIC_DEFAULT",
@@ -122,11 +121,15 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ECC_SECG_P256K1",
 				}),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "SYMMETRIC_DEFAULT"}),
+			},
 		},
 		"key_usage": {
 			// Property: KeyUsage
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "ENCRYPT_DECRYPT",
 			//   "description": "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			//   "enum": [
 			//     "ENCRYPT_DECRYPT",
@@ -137,23 +140,32 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENCRYPT_DECRYPT",
 					"SIGN_VERIFY",
 				}),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "ENCRYPT_DECRYPT"}),
+			},
 		},
 		"multi_region": {
 			// Property: MultiRegion
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
 			//   "type": "boolean"
 			// }
 			Description: "Specifies whether the CMK should be Multi-Region. You can't change the MultiRegion value after the CMK is created.",
 			Type:        types.BoolType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Bool{Value: false}),
+			},
 		},
 		"pending_window_in_days": {
 			// Property: PendingWindowInDays
@@ -205,7 +217,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -226,7 +238,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -277,8 +289,6 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_kms_key", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

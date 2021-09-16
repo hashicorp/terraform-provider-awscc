@@ -5,13 +5,10 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,7 +37,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Domain is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"fsx_filesystem_arn": {
@@ -59,7 +56,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FsxFilesystemArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// FsxFilesystemArn is a write-only property.
 		},
@@ -105,7 +102,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 104),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Password is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Password is a write-only property.
 		},
@@ -126,7 +123,8 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // SecurityGroupArns is a force-new property.
+				Multiset(),
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"subdirectory": {
@@ -146,7 +144,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Subdirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -186,7 +184,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -207,7 +205,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -229,7 +227,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 104),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // User is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -279,8 +277,6 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_fsx_windows", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

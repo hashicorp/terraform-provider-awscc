@@ -5,13 +5,10 @@ package cassandra
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -29,6 +26,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "Mode": {
+			//       "default": "ON_DEMAND",
 			//       "description": "Capacity mode for the specified table",
 			//       "enum": [
 			//         "PROVISIONED",
@@ -119,6 +117,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "type": "object"
 			//       },
 			//       "OrderBy": {
+			//         "default": "ASC",
 			//         "enum": [
 			//           "ASC",
 			//           "DESC"
@@ -173,6 +172,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Represents the settings used to enable server-side encryption",
 			//   "properties": {
 			//     "EncryptionType": {
+			//       "default": "AWS_OWNED_KMS_KEY",
 			//       "description": "Server-side encryption type",
 			//       "enum": [
 			//         "AWS_OWNED_KMS_KEY",
@@ -304,7 +304,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Non-key columns of the table",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"column_name": {
 						// Property: ColumnName
@@ -317,7 +317,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -429,8 +429,6 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cassandra_table", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

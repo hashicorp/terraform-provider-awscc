@@ -5,13 +5,11 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -54,6 +52,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "default": {
+			//     "Version": "AUTOMATIC"
+			//   },
 			//   "description": "The NFS mount options that DataSync can use to mount your NFS share.",
 			//   "properties": {
 			//     "Version": {
@@ -89,6 +90,18 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Object{
+					AttrTypes: map[string]attr.Type{
+						"version": types.StringType,
+					},
+					Attrs: map[string]attr.Value{
+						"version": types.String{Value: "AUTOMATIC"},
+					},
+				},
+				),
+			},
 		},
 		"on_prem_config": {
 			// Property: OnPremConfig
@@ -126,6 +139,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 4),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 			),
@@ -147,7 +163,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -204,7 +220,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -225,7 +241,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -277,8 +293,6 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_nfs", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

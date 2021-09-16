@@ -5,13 +5,10 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -61,6 +58,9 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"bucket_name": {
 			// Property: BucketName
@@ -79,7 +79,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BucketName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// BucketName is a write-only property.
 		},
@@ -143,7 +143,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -237,7 +237,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -258,7 +258,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -314,8 +314,6 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_object_storage", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

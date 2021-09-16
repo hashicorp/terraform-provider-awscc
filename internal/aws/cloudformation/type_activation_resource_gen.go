@@ -5,13 +5,10 @@ package cloudformation
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -58,7 +55,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ExecutionRoleArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"logging_config": {
@@ -108,7 +105,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LoggingConfig is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"major_version": {
@@ -144,7 +141,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PublicTypeArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"publisher_id": {
@@ -165,7 +162,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PublisherId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type": {
@@ -190,7 +187,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Type is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type_name": {
@@ -206,7 +203,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TypeName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"type_name_alias": {
@@ -227,7 +224,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(10, 204),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TypeNameAlias is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version_bump": {
@@ -307,8 +304,6 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cloudformation_type_activation", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

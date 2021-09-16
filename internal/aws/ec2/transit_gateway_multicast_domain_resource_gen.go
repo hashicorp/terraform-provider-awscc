@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -143,7 +141,7 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TransitGatewayId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"transit_gateway_multicast_domain_arn": {
@@ -211,8 +209,6 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_transit_gateway_multicast_domain", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

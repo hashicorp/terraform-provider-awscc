@@ -5,13 +5,10 @@ package elasticache
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -65,7 +62,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Engine is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"no_password_required": {
@@ -123,7 +120,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"user_name": {
@@ -137,7 +134,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // UserName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -184,8 +181,6 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_elasticache_user", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

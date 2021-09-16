@@ -5,13 +5,10 @@ package dynamodb
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -59,7 +56,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
@@ -75,7 +72,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -209,7 +206,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -253,7 +250,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
@@ -340,7 +337,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -397,7 +394,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeySchema is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"local_secondary_indexes": {
@@ -465,7 +462,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -508,7 +505,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
@@ -521,12 +518,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LocalSecondaryIndexes is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"replicas": {
@@ -749,7 +746,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"contributor_insights_specification": {
 						// Property: ContributorInsightsSpecification
@@ -766,7 +763,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"contributor_insights_specification": {
 									// Property: ContributorInsightsSpecification
@@ -872,7 +869,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -991,7 +988,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tags": {
 						// Property: Tags
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
@@ -1004,12 +1001,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -1103,7 +1100,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TableName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"time_to_live_specification": {
@@ -1344,8 +1341,6 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_dynamodb_global_table", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

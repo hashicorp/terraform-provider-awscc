@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -43,7 +41,7 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GatewayId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"route_table_id": {
@@ -91,8 +89,6 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ec2_gateway_route_table_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

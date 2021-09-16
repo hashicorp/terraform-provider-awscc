@@ -5,13 +5,10 @@ package route53
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -179,6 +176,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 256),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"enable_sni": {
 						// Property: EnableSNI
@@ -240,7 +240,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // MeasureLatency is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"port": {
@@ -258,6 +258,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 64),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"request_interval": {
 						// Property: RequestInterval
@@ -268,7 +271,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.IntBetween(10, 30),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // RequestInterval is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"resource_path": {
@@ -312,7 +315,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // Type is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -359,7 +362,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -380,7 +383,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -439,8 +442,6 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53_health_check", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

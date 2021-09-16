@@ -5,13 +5,10 @@ package route53recoveryreadiness
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -51,7 +48,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CellName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"cells": {
@@ -72,6 +69,9 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 5),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"parent_readiness_scopes": {
 			// Property: ParentReadinessScopes
@@ -88,6 +88,9 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -130,11 +133,17 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Value
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
@@ -174,8 +183,6 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53recoveryreadiness_cell", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

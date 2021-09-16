@@ -5,13 +5,10 @@ package s3objectlambda
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -122,7 +119,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 				map[string]tfsdk.Attribute{
 					"allowed_features": {
 						// Property: AllowedFeatures
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						Type:     types.SetType{ElemType: types.StringType},
 						Computed: true,
 					},
 					"cloudwatch_metrics_enabled": {
@@ -137,11 +134,11 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"transformation_configurations": {
 						// Property: TransformationConfigurations
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"actions": {
 									// Property: Actions
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"content_transformation": {
@@ -150,7 +147,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 									Computed: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -283,8 +280,6 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3objectlambda_access_point", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

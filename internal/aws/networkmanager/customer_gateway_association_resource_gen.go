@@ -5,10 +5,8 @@ package networkmanager
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,7 +30,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CustomerGatewayArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"device_id": {
@@ -46,7 +44,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DeviceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"global_network_id": {
@@ -60,7 +58,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // GlobalNetworkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"link_id": {
@@ -75,7 +73,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // LinkId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -113,8 +111,6 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_networkmanager_customer_gateway_association", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

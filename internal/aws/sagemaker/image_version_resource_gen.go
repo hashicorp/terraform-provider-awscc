@@ -5,13 +5,10 @@ package sagemaker
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,7 +37,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // BaseImage is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"container_image": {
@@ -88,7 +85,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_version_arn": {
@@ -154,8 +151,6 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_sagemaker_image_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

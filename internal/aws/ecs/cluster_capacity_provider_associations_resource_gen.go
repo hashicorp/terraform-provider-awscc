@@ -5,13 +5,10 @@ package ecs
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -62,7 +59,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Cluster is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"default_capacity_provider_strategy": {
@@ -166,8 +163,6 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecs_cluster_capacity_provider_associations", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package acmpca
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -44,7 +42,7 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // CertificateAuthorityArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"certificate_chain": {
@@ -121,8 +119,6 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_acmpca_certificate_authority_activation", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package apigateway
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,7 +30,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ParentId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"path_part": {
@@ -46,7 +44,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PathPart is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"resource_id": {
@@ -71,7 +69,7 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -109,8 +107,6 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_resource", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

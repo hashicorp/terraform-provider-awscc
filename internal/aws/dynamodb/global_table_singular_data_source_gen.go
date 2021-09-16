@@ -5,13 +5,10 @@ package dynamodb
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -58,7 +55,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
@@ -71,7 +68,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -203,7 +200,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -235,7 +232,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"projection_type": {
@@ -307,7 +304,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -420,7 +417,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -452,7 +449,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"projection_type": {
@@ -465,7 +462,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -689,7 +686,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"contributor_insights_specification": {
 						// Property: ContributorInsightsSpecification
@@ -706,7 +703,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"contributor_insights_specification": {
 									// Property: ContributorInsightsSpecification
@@ -791,7 +788,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 									Computed: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -892,7 +889,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"tags": {
 						// Property: Tags
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
@@ -905,12 +902,12 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 									Computed: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -1219,8 +1216,6 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_dynamodb_global_table", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

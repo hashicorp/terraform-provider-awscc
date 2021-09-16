@@ -5,10 +5,8 @@ package detective
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -25,6 +23,7 @@ func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// Property: DisableEmailNotification
 			// CloudFormation resource type schema:
 			// {
+			//   "default": false,
 			//   "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 			//   "type": "boolean"
 			// }
@@ -112,8 +111,6 @@ func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_detective_member_invitation", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

@@ -40,6 +40,7 @@ type Property struct {
 	AllOf                []*PropertySubschema `json:"allOf,omitempty"`
 	AnyOf                []*PropertySubschema `json:"anyOf,omitempty"`
 	Comment              *string              `json:"$comment,omitempty"`
+	Default              interface{}          `json:"default,omitempty"`
 	Description          *string              `json:"description,omitempty"`
 	Enum                 []interface{}        `json:"enum,omitempty"`
 	Examples             []interface{}        `json:"examples,omitempty"`

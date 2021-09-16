@@ -5,13 +5,10 @@ package iotwireless
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -228,7 +225,7 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "uniqueItems": true
 			// }
 			Description: "A list of key-value pairs that contain metadata for the device profile.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -241,7 +238,7 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -292,8 +289,6 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iotwireless_device_profile", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

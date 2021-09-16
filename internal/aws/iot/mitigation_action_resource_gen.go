@@ -5,13 +5,10 @@ package iot
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -41,7 +38,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ActionName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"action_params": {
@@ -189,7 +186,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"thing_group_names": {
 									// Property: ThingGroupNames
 									Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Required:    true,
 								},
 							},
@@ -368,7 +365,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -389,7 +386,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -447,8 +444,6 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_iot_mitigation_action", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,13 +5,10 @@ package globalaccelerator
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -34,13 +31,14 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // AcceleratorArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"client_affinity": {
 			// Property: ClientAffinity
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "NONE",
 			//   "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
 			//   "enum": [
 			//     "NONE",
@@ -51,11 +49,15 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"NONE",
 					"SOURCE_IP",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "NONE"}),
 			},
 		},
 		"listener_arn": {
@@ -126,6 +128,7 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Protocol
 			// CloudFormation resource type schema:
 			// {
+			//   "default": "TCP",
 			//   "description": "The protocol for the listener.",
 			//   "enum": [
 			//     "TCP",
@@ -135,12 +138,16 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The protocol for the listener.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"TCP",
 					"UDP",
 				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.String{Value: "TCP"}),
 			},
 		},
 	}
@@ -181,8 +188,6 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_globalaccelerator_listener", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

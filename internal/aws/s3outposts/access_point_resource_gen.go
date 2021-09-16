@@ -5,13 +5,10 @@ package s3outposts
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -54,7 +51,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Bucket is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -74,7 +71,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(3, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"policy": {
@@ -118,7 +115,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // VpcConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -158,8 +155,6 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_s3outposts_access_point", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

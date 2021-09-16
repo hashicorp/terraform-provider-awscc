@@ -5,13 +5,10 @@ package emr
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -34,7 +31,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // IdentityName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"identity_type": {
@@ -58,7 +55,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // IdentityType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"session_policy_arn": {
@@ -88,7 +85,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(4, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // StudioId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -126,8 +123,6 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_emr_studio_session_mapping", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

@@ -5,10 +5,8 @@ package mediaconnect
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -32,7 +30,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // FlowArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -46,7 +44,7 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"network_interface_ids": {
@@ -136,8 +134,6 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_vpc_interface", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

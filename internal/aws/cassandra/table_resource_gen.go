@@ -5,13 +5,10 @@ package cassandra
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -30,6 +27,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "Mode": {
+			//       "default": "ON_DEMAND",
 			//       "description": "Capacity mode for the specified table",
 			//       "enum": [
 			//         "PROVISIONED",
@@ -68,12 +66,16 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Mode
 						Description: "Capacity mode for the specified table",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"PROVISIONED",
 								"ON_DEMAND",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "ON_DEMAND"}),
 						},
 					},
 					"provisioned_throughput": {
@@ -132,6 +134,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "object"
 			//       },
 			//       "OrderBy": {
+			//         "default": "ASC",
 			//         "enum": [
 			//           "ASC",
 			//           "DESC"
@@ -172,11 +175,15 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: OrderBy
 						Type:     types.StringType,
 						Optional: true,
+						Computed: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ASC",
 								"DESC",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "ASC"}),
 						},
 					},
 				},
@@ -188,7 +195,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ClusteringKeyColumns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"encryption_specification": {
@@ -199,6 +206,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Represents the settings used to enable server-side encryption",
 			//   "properties": {
 			//     "EncryptionType": {
+			//       "default": "AWS_OWNED_KMS_KEY",
 			//       "description": "Server-side encryption type",
 			//       "enum": [
 			//         "AWS_OWNED_KMS_KEY",
@@ -223,12 +231,16 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: EncryptionType
 						Description: "Server-side encryption type",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AWS_OWNED_KMS_KEY",
 								"CUSTOMER_MANAGED_KMS_KEY",
 							}),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.String{Value: "AWS_OWNED_KMS_KEY"}),
 						},
 					},
 					"kms_key_identifier": {
@@ -253,7 +265,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KeyspaceName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"partition_key_columns": {
@@ -306,7 +318,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PartitionKeyColumns is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"point_in_time_recovery_enabled": {
@@ -347,7 +359,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Non-key columns of the table",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"column_name": {
 						// Property: ColumnName
@@ -360,7 +372,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -377,7 +389,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TableName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -493,8 +505,6 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_cassandra_table", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

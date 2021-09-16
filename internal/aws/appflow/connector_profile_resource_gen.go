@@ -5,13 +5,10 @@ package appflow
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -1438,7 +1435,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectorProfileName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"connector_type": {
@@ -1486,7 +1483,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ConnectorType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"credentials_arn": {
@@ -1520,7 +1517,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KMSArn is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -1611,8 +1608,6 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_appflow_connector_profile", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

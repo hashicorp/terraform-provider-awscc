@@ -8,7 +8,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 type RequiredAttributesFunc func(names []string) tfdiag.Diagnostics
@@ -140,7 +139,7 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			return
 		}
 
-	case providertypes.Set:
+	case types.Set:
 		if v.Null || v.Unknown {
 			return
 		}

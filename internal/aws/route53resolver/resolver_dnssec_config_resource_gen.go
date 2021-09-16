@@ -5,13 +5,10 @@ package route53resolver
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -66,7 +63,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ResourceId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"validation_status": {
@@ -115,8 +112,6 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_route53resolver_resolver_dnssec_config", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

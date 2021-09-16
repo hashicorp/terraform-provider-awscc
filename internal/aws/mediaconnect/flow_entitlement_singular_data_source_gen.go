@@ -5,10 +5,8 @@ package mediaconnect
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -25,6 +23,7 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// Property: DataTransferSubscriberFeePercent
 			// CloudFormation resource type schema:
 			// {
+			//   "default": 0,
 			//   "description": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
 			//   "type": "integer"
 			// }
@@ -68,6 +67,7 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
+			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
 			//         "speke",
@@ -268,8 +268,6 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_entitlement", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

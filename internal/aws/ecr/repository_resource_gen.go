@@ -5,13 +5,10 @@ package ecr
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -74,7 +71,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // EncryptionType is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 					"kms_key": {
@@ -87,7 +84,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 2048),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(), // KmsKey is a force-new property.
+							tfsdk.RequiresReplace(),
 						},
 					},
 				},
@@ -95,7 +92,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // EncryptionConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"image_scanning_configuration": {
@@ -212,7 +209,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RepositoryName is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"repository_policy_text": {
@@ -269,7 +266,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -290,7 +287,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -343,8 +340,6 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_ecr_repository", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

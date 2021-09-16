@@ -5,13 +5,10 @@ package imagebuilder
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -67,7 +64,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Components is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"container_type": {
@@ -90,7 +87,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ContainerType is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"description": {
@@ -105,7 +102,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Description is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"dockerfile_template_data": {
@@ -120,7 +117,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DockerfileTemplateData is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// DockerfileTemplateData is a write-only property.
 		},
@@ -136,7 +133,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DockerfileTemplateUri is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// DockerfileTemplateUri is a write-only property.
 		},
@@ -152,7 +149,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ImageOsVersionOverride is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"instance_configuration": {
@@ -340,7 +337,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // InstanceConfiguration is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"kms_key_id": {
@@ -355,7 +352,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // KmsKeyId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"name": {
@@ -370,7 +367,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Name is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"parent_image": {
@@ -385,7 +382,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ParentImage is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"platform_override": {
@@ -410,7 +407,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // PlatformOverride is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"tags": {
@@ -432,7 +429,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Tags is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"target_repository": {
@@ -481,7 +478,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // TargetRepository is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"version": {
@@ -496,7 +493,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // Version is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"working_directory": {
@@ -511,7 +508,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // WorkingDirectory is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -602,8 +599,6 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_imagebuilder_container_recipe", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

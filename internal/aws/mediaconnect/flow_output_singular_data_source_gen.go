@@ -5,10 +5,8 @@ package mediaconnect
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -74,6 +72,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
+			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
 			//         "static-key"
@@ -305,8 +304,6 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_mediaconnect_flow_output", "schema", hclog.Fmt("%v", schema))
 
 	return singularDataSourceType, nil
 }

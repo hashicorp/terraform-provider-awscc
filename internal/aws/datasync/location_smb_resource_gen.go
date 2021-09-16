@@ -5,13 +5,11 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -43,6 +41,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"domain": {
@@ -92,6 +93,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "default": {
+			//     "Version": "AUTOMATIC"
+			//   },
 			//   "description": "The mount options used by DataSync to access the SMB server.",
 			//   "properties": {
 			//     "Version": {
@@ -125,6 +129,18 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Object{
+					AttrTypes: map[string]attr.Type{
+						"version": types.StringType,
+					},
+					Attrs: map[string]attr.Value{
+						"version": types.String{Value: "AUTOMATIC"},
+					},
+				},
+				),
+			},
 		},
 		"password": {
 			// Property: Password
@@ -159,7 +175,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // ServerHostname is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 			// ServerHostname is a write-only property.
 		},
@@ -216,7 +232,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -237,7 +253,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),
@@ -308,8 +324,6 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_smb", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

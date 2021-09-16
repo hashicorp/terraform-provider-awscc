@@ -5,13 +5,10 @@ package apigateway
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -49,7 +46,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // DocumentationVersion is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"rest_api_id": {
@@ -67,7 +64,7 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(), // RestApiId is a force-new property.
+				tfsdk.RequiresReplace(),
 			},
 		},
 	}
@@ -104,8 +101,6 @@ func documentationVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_apigateway_documentation_version", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }
