@@ -60,6 +60,26 @@ var testSimpleSchemaWithList = tfsdk.Schema{
 	},
 }
 
+var testSimpleSchemaWithUnsupportedType = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
+		"arn": {
+			Computed: true,
+		},
+		"identifier": {
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"name": {
+			Type:     types.StringType,
+			Required: true,
+		},
+		"number": {
+			Type:     types.NumberType,
+			Optional: true,
+		},
+	},
+}
+
 var simpleCfToTfNameMap = map[string]string{
 	"Arn":        "arn",
 	"Identifier": "identifier",

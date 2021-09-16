@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strings"
 	"time"
 
@@ -723,21 +724,24 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
-	m := map[string]tftypes.Value{
-		"id": tftypes.NewValue(tftypes.String, request.ID),
+	translator := toStruct{Schema: r.resourceType.tfSchema}
+	typ, err := translator.FromSchemaAttributes(ctx)
+	if err != nil {
+		response.Diagnostics.AddError(
+			"Import Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to create a Terraform State value from a tfsdk.Schema for import. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return
 	}
 
-	id := tftypes.NewValue(tftypes.Object{
-		AttributeTypes: map[string]tftypes.Type{
-			"id":  tftypes.String,
-		}}, m)
+	state := reflect.New(typ)
 
-	response.State = tfsdk.State{
-		Schema: r.resourceType.tfSchema,
-		Raw: id,
-	}
+	state.Elem().FieldByName("Id").SetString(request.ID)
 
-	//tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
+	diags := response.State.Set(ctx, state.Elem().Interface())
+
+	response.Diagnostics.Append(diags...)
 
 	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 }

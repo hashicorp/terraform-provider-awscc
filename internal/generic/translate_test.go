@@ -2,6 +2,7 @@ package generic
 
 import (
 	"context"
+	"reflect"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -391,4 +392,178 @@ func TestTranslateToTerraform(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestTranslateToStruct(t *testing.T) {
+	testCases := []struct {
+		TestName      string
+		Schema        tfsdk.Schema
+		ExpectedType  reflect.Type
+		ExpectedError bool
+	}{
+		{
+			TestName:      "simple struct with unsupported attribute",
+			Schema:        testSimpleSchemaWithUnsupportedType,
+			ExpectedError: true,
+		},
+		{
+			TestName: "simple Struct",
+			Schema:   testSimpleSchema,
+			ExpectedType: reflect.StructOf([]reflect.StructField{
+				{
+					Name: "Arn",
+					Tag:  `tfsdk:"arn"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Identifier",
+					Tag:  `tfsdk:"identifier"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Name",
+					Tag:  `tfsdk:"name"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Number",
+					Tag:  `tfsdk:"number"`,
+					Type: reflect.TypeOf(0.0),
+				},
+			}),
+		},
+		{
+			TestName: "simple struct with list",
+			Schema:   testSimpleSchemaWithList,
+			ExpectedType: reflect.StructOf([]reflect.StructField{
+				{
+					Name: "Arn",
+					Tag:  `tfsdk:"arn"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Identifier",
+					Tag:  `tfsdk:"identifier"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Name",
+					Tag:  `tfsdk:"name"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Number",
+					Tag:  `tfsdk:"number"`,
+					Type: reflect.TypeOf(0.0),
+				},
+				{
+					Name: "Ports",
+					Tag:  `tfsdk:"ports"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+			}),
+		},
+		{
+			TestName: "complex struct",
+			Schema:   testComplexSchema,
+			ExpectedType: reflect.StructOf([]reflect.StructField{
+				{
+					Name: "Name",
+					Tag:  `tfsdk:"name"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "MachineType",
+					Tag:  `tfsdk:"machine_type"`,
+					Type: reflect.TypeOf(""),
+				},
+				{
+					Name: "Ports",
+					Tag:  `tfsdk:"ports"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+				{
+					Name: "Tags",
+					Tag:  `tfsdk:"tags"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+				{
+					Name: "Disks",
+					Tag:  `tfsdk:"disks"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+				{
+					Name: "BootDisk",
+					Tag:  `tfsdk:"boot_disk"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+				{
+					Name: "ScratchDisk",
+					Tag:  `tfsdk:"scratch_disk"`,
+					Type: reflect.TypeOf(map[string]interface{}{}),
+				},
+				{
+					Name: "VideoPorts",
+					Tag:  `tfsdk:"video_ports"`,
+					Type: reflect.TypeOf([]interface{}{}),
+				},
+				{
+					Name: "Identifier",
+					Tag:  `tfsdk:"identifier"`,
+					Type: reflect.TypeOf(""),
+				},
+			}),
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			translator := toStruct{Schema: testCase.Schema}
+			got, err := translator.FromSchemaAttributes(context.TODO())
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error: %s", err)
+			}
+
+			if err == nil {
+				if !typesEqual(testCase.ExpectedType, got) {
+					t.Errorf("expected: %v, got: %v", testCase.ExpectedType, got)
+				}
+			}
+		})
+	}
+}
+
+func typesEqual(expected, got reflect.Type) bool {
+	if got.NumField() != expected.NumField() {
+		return false
+	}
+
+	for i := 0; i < expected.NumField(); i++ {
+		expectedField := expected.Field(i)
+
+		gotField, ok := got.FieldByName(expectedField.Name)
+
+		if !ok {
+			return false
+		}
+
+		if gotField.Name != expectedField.Name {
+			return false
+		}
+
+		if gotField.Tag != expectedField.Tag {
+			return false
+		}
+
+		if gotField.Type != expectedField.Type {
+			return false
+		}
+	}
+
+	return true
 }
