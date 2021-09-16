@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- [Terraform](https://www.terraform.io/downloads.html) 1.0.5+ (to run acceptance tests)
+- [Terraform](https://www.terraform.io/downloads.html) 1.0.7+ (to run acceptance tests)
 - [Go](https://golang.org/doc/install) 1.16 (to build the provider plugin)
 
 ## Quick Start
