@@ -724,6 +724,7 @@ resource_schema "aws_groundstation_config" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -1172,7 +1173,11 @@ resource_schema "aws_nimblestudio_studio_component" {
 
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name               = "AWS::OpenSearchService::Domain"
-  suppress_plural_data_source_generation = true
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opsworkscm_server" {
@@ -1181,6 +1186,7 @@ resource_schema "aws_opsworkscm_server" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_qldb_stream" {
@@ -1241,6 +1247,7 @@ resource_schema "aws_redshift_cluster" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_resourcegroups_group" {
@@ -1400,6 +1407,7 @@ resource_schema "aws_s3outposts_endpoint" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -1586,6 +1594,7 @@ resource_schema "aws_synthetics_canary" {
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_timestream_database" {

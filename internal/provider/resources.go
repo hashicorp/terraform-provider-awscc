@@ -256,7 +256,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_streaming_image -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json -package nimblestudio -- ../aws/nimblestudio/streaming_image_resource_gen.go ../aws/nimblestudio/streaming_image_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_Studio.json -package nimblestudio -- ../aws/nimblestudio/studio_resource_gen.go ../aws/nimblestudio/studio_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_nimblestudio_studio_component -cfschema ../service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json -package nimblestudio -- ../aws/nimblestudio/studio_component_resource_gen.go ../aws/nimblestudio/studio_component_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_opensearchservice_domain -cfschema ../service/cloudformation/schemas/AWS_OpenSearchService_Domain.json -package opensearchservice -- ../aws/opensearchservice/domain_resource_gen.go ../aws/opensearchservice/domain_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_qldb_stream -cfschema ../service/cloudformation/schemas/AWS_QLDB_Stream.json -package qldb -- ../aws/qldb/stream_resource_gen.go ../aws/qldb/stream_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_quicksight_analysis -cfschema ../service/cloudformation/schemas/AWS_QuickSight_Analysis.json -package quicksight -- ../aws/quicksight/analysis_resource_gen.go ../aws/quicksight/analysis_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_quicksight_dashboard -cfschema ../service/cloudformation/schemas/AWS_QuickSight_Dashboard.json -package quicksight -- ../aws/quicksight/dashboard_resource_gen.go ../aws/quicksight/dashboard_resource_gen_test.go
@@ -433,7 +432,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/qldb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/quicksight"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
