@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/smithy-go/logging"
-	awsbase "github.com/hashicorp/aws-sdk-go-base"
+	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -304,15 +304,15 @@ func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
 func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
-		AccessKey:            pd.AccessKey.Value,
-		CredsFilename:        pd.CredsFilename.Value,
-		DebugLogging:         strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
-		Insecure:             pd.Insecure.Value,
-		Profile:              pd.Profile.Value,
-		Region:               pd.Region.Value,
-		SecretKey:            pd.SecretKey.Value,
-		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
-		Token:                pd.Token.Value,
+		AccessKey:              pd.AccessKey.Value,
+		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		Insecure:               pd.Insecure.Value,
+		Profile:                pd.Profile.Value,
+		Region:                 pd.Region.Value,
+		SecretKey:              pd.SecretKey.Value,
+		SharedCredentialsFiles: []string{pd.CredsFilename.Value},
+		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
+		Token:                  pd.Token.Value,
 	}
 	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
 		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
