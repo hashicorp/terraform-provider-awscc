@@ -92,17 +92,23 @@ $ export AWS_DEFAULT_REGION="us-west-2"
 $ terraform plan
 ```
 
-### Shared Credentials File
+### Shared Configuration and Credentials Files
 
-You can use an [AWS credentials or configuration file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) to specify your credentials. The default location is `$HOME/.aws/credentials` on Linux and macOS, or `"%USERPROFILE%\.aws\credentials"` on Windows. You can optionally specify a different location in the Terraform configuration by providing the `shared_credentials_file` argument or using the `AWS_SHARED_CREDENTIALS_FILE` environment variable. This method also supports a `profile` configuration and matching `AWS_PROFILE` environment variable:
+You can use [AWS shared configuration or credentials files](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) to specify configuration and credentials.
+The default locations are `$HOME/.aws/config` and `$HOME/.aws/credentials` on Linux and macOS,
+or `"%USERPROFILE%\.aws\config"` and `"%USERPROFILE%\.aws\credentials"` on Windows.
+You can optionally specify a different location in the Terraform configuration by providing the `shared_config_files` and `shared_credentials_files` arguments
+or using the `AWS_SHARED_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
+This method also supports the `profile` configuration and corresponding `AWS_PROFILE` environment variable:
 
 Usage:
 
 ```terraform
 provider "aws" {
-  region                  = "us-west-2"
-  shared_credentials_file = "/Users/tf_user/.aws/creds"
-  profile                 = "customprofile"
+  region                   = "us-west-2"
+  shared_config_files      = ["/Users/tf_user/.aws/conf"]
+  shared_credentials_files = ["/Users/tf_user/.aws/creds"]
+  profile                  = "customprofile"
 }
 ```
 
@@ -163,9 +169,10 @@ provider "awscc" {
 - **assume_role** (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
 - **insecure** (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
 - **profile** (String) This is the AWS profile name as set in the shared credentials file.
-- **region** (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared credentials file if `profile` is specified.
+- **region** (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared config file.
 - **role_arn** (String) Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.
 - **secret_key** (String) This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.
+- **shared_config_files** (List of String) List of paths to shared config files. If not set this defaults to ~/.aws/config.
 - **shared_credentials_files** (List of String) List of paths to shared credentials files. If not set this defaults to ~/.aws/credentials.
 - **skip_medatadata_api_check** (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - **token** (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.

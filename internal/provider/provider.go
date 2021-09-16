@@ -53,7 +53,7 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 
 			"region": {
 				Type:        types.StringType,
-				Description: "This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared credentials file if `profile` is specified.",
+				Description: "This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared config file.",
 				Optional:    true,
 			},
 
@@ -66,6 +66,12 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 			"secret_key": {
 				Type:        types.StringType,
 				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
+				Optional:    true,
+			},
+
+			"shared_config_files": {
+				Type:        types.ListType{ElemType: types.StringType},
+				Description: "List of paths to shared config files. If not set this defaults to ~/.aws/config.",
 				Optional:    true,
 			},
 
@@ -150,6 +156,7 @@ type providerData struct {
 	Region                 types.String    `tfsdk:"region"`
 	RoleARN                types.String    `tfsdk:"role_arn"`
 	SecretKey              types.String    `tfsdk:"secret_key"`
+	SharedConfigFiles      types.List      `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles types.List      `tfsdk:"shared_credentials_files"`
 	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
 	Token                  types.String    `tfsdk:"token"`
@@ -181,6 +188,11 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 
 	if config.AccessKey.Unknown {
 		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("access_key"), "Unknown Value", "Attribute value is not yet known")
+		anyUnknownConfigValues = true
+	}
+
+	if config.SharedConfigFiles.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_config_files"), "Unknown Value", "Attribute value is not yet known")
 		anyUnknownConfigValues = true
 	}
 
@@ -312,6 +324,13 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 		SecretKey:            pd.SecretKey.Value,
 		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
 		Token:                pd.Token.Value,
+	}
+	if !pd.SharedConfigFiles.Null {
+		cf := make([]string, len(pd.SharedConfigFiles.Elems))
+		for i, v := range pd.SharedConfigFiles.Elems {
+			cf[i] = v.(types.String).Value
+		}
+		config.SharedConfigFiles = cf
 	}
 	if !pd.SharedCredentialsFiles.Null {
 		cf := make([]string, len(pd.SharedCredentialsFiles.Elems))
