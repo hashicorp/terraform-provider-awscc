@@ -69,9 +69,9 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 				Optional:    true,
 			},
 
-			"shared_credentials_file": {
-				Type:        types.StringType,
-				Description: "The path to the shared credentials file. If not set this defaults to ~/.aws/credentials.",
+			"shared_credentials_files": {
+				Type:        types.ListType{ElemType: types.StringType},
+				Description: "List of paths to shared credentials files. If not set this defaults to ~/.aws/credentials.",
 				Optional:    true,
 			},
 
@@ -144,16 +144,16 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 }
 
 type providerData struct {
-	AccessKey            types.String    `tfsdk:"access_key"`
-	CredsFilename        types.String    `tfsdk:"shared_credentials_file"`
-	Insecure             types.Bool      `tfsdk:"insecure"`
-	Profile              types.String    `tfsdk:"profile"`
-	Region               types.String    `tfsdk:"region"`
-	RoleARN              types.String    `tfsdk:"role_arn"`
-	SecretKey            types.String    `tfsdk:"secret_key"`
-	SkipMetadataApiCheck types.Bool      `tfsdk:"skip_medatadata_api_check"`
-	Token                types.String    `tfsdk:"token"`
-	AssumeRole           *assumeRoleData `tfsdk:"assume_role"`
+	AccessKey              types.String    `tfsdk:"access_key"`
+	Insecure               types.Bool      `tfsdk:"insecure"`
+	Profile                types.String    `tfsdk:"profile"`
+	Region                 types.String    `tfsdk:"region"`
+	RoleARN                types.String    `tfsdk:"role_arn"`
+	SecretKey              types.String    `tfsdk:"secret_key"`
+	SharedCredentialsFiles types.List      `tfsdk:"shared_credentials_files"`
+	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
+	Token                  types.String    `tfsdk:"token"`
+	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
 }
 
 type assumeRoleData struct {
@@ -184,8 +184,8 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 		anyUnknownConfigValues = true
 	}
 
-	if config.CredsFilename.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_credentials_file"), "Unknown Value", "Attribute value is not yet known")
+	if config.SharedCredentialsFiles.Unknown {
+		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_credentials_files"), "Unknown Value", "Attribute value is not yet known")
 		anyUnknownConfigValues = true
 	}
 
@@ -304,15 +304,21 @@ func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
 func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
-		AccessKey:              pd.AccessKey.Value,
-		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
-		Insecure:               pd.Insecure.Value,
-		Profile:                pd.Profile.Value,
-		Region:                 pd.Region.Value,
-		SecretKey:              pd.SecretKey.Value,
-		SharedCredentialsFiles: []string{pd.CredsFilename.Value},
-		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
-		Token:                  pd.Token.Value,
+		AccessKey:            pd.AccessKey.Value,
+		DebugLogging:         strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		Insecure:             pd.Insecure.Value,
+		Profile:              pd.Profile.Value,
+		Region:               pd.Region.Value,
+		SecretKey:            pd.SecretKey.Value,
+		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
+		Token:                pd.Token.Value,
+	}
+	if !pd.SharedCredentialsFiles.Null {
+		cf := make([]string, len(pd.SharedCredentialsFiles.Elems))
+		for i, v := range pd.SharedCredentialsFiles.Elems {
+			cf[i] = v.(types.String).Value
+		}
+		config.SharedCredentialsFiles = cf
 	}
 	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
 		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
