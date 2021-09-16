@@ -552,15 +552,7 @@ func typesEqual(expected, got reflect.Type) bool {
 			return false
 		}
 
-		if gotField.Name != expectedField.Name {
-			return false
-		}
-
-		if gotField.Tag != expectedField.Tag {
-			return false
-		}
-
-		if gotField.Type != expectedField.Type {
+		if gotField.Name != expectedField.Name || gotField.Tag != expectedField.Tag || gotField.Type != expectedField.Type {
 			return false
 		}
 	}
