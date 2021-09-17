@@ -71,13 +71,13 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 
 			"shared_config_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared config files. If not set this defaults to ~/.aws/config.",
+				Description: "List of paths to shared config files. If not set this defaults to `~/.aws/config`.",
 				Optional:    true,
 			},
 
 			"shared_credentials_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared credentials files. If not set this defaults to ~/.aws/credentials.",
+				Description: "List of paths to shared credentials files. If not set this defaults to `~/.aws/credentials`.",
 				Optional:    true,
 			},
 
