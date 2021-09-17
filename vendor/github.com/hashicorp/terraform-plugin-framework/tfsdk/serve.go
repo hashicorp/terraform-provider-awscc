@@ -4,9 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sort"
 	"sync"
 
-	"github.com/hashicorp/terraform-plugin-framework/internal/diagnostics"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/internal/proto6"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	tf6server "github.com/hashicorp/terraform-plugin-go/tfprotov6/server"
@@ -62,58 +63,81 @@ func (s *server) cancelRegisteredContexts(ctx context.Context) {
 	s.contextCancels = nil
 }
 
-func (s *server) getResourceType(ctx context.Context, typ string) (ResourceType, []*tfprotov6.Diagnostic) {
+func (s *server) getResourceType(ctx context.Context, typ string) (ResourceType, diag.Diagnostics) {
 	resourceTypes, diags := s.p.GetResources(ctx)
-	if diagnostics.DiagsHasErrors(diags) {
+	if diags.HasError() {
 		return nil, diags
 	}
 	resourceType, ok := resourceTypes[typ]
 	if !ok {
-		return nil, append(diags, &tfprotov6.Diagnostic{
-			Summary: "Resource not found",
-			Detail:  fmt.Sprintf("No resource named %q is configured on the provider", typ),
-		})
+		diags.AddError(
+			"Resource not found",
+			fmt.Sprintf("No resource named %q is configured on the provider", typ),
+		)
+		return nil, diags
 	}
-	return resourceType, nil
+	return resourceType, diags
 }
 
-func (s *server) getDataSourceType(ctx context.Context, typ string) (DataSourceType, []*tfprotov6.Diagnostic) {
+func (s *server) getDataSourceType(ctx context.Context, typ string) (DataSourceType, diag.Diagnostics) {
 	dataSourceTypes, diags := s.p.GetDataSources(ctx)
-	if diagnostics.DiagsHasErrors(diags) {
+	if diags.HasError() {
 		return nil, diags
 	}
 	dataSourceType, ok := dataSourceTypes[typ]
 	if !ok {
-		return nil, append(diags, &tfprotov6.Diagnostic{
-			Summary: "Data source not found",
-			Detail:  fmt.Sprintf("No data source named %q is configured on the provider", typ),
-		})
+		diags.AddError(
+			"Data source not found",
+			fmt.Sprintf("No data source named %q is configured on the provider", typ),
+		)
+		return nil, diags
 	}
-	return dataSourceType, nil
+	return dataSourceType, diags
+}
+
+// getProviderSchemaResponse is a thin abstraction to allow native Diagnostics usage
+type getProviderSchemaResponse struct {
+	Provider          *tfprotov6.Schema
+	ProviderMeta      *tfprotov6.Schema
+	ResourceSchemas   map[string]*tfprotov6.Schema
+	DataSourceSchemas map[string]*tfprotov6.Schema
+	Diagnostics       diag.Diagnostics
+}
+
+func (r getProviderSchemaResponse) toTfprotov6() *tfprotov6.GetProviderSchemaResponse {
+	return &tfprotov6.GetProviderSchemaResponse{
+		Provider:          r.Provider,
+		ProviderMeta:      r.ProviderMeta,
+		ResourceSchemas:   r.ResourceSchemas,
+		DataSourceSchemas: r.DataSourceSchemas,
+		Diagnostics:       r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
 }
 
 func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProviderSchemaRequest) (*tfprotov6.GetProviderSchemaResponse, error) {
 	ctx = s.registerContext(ctx)
+	resp := new(getProviderSchemaResponse)
 
-	resp := new(tfprotov6.GetProviderSchemaResponse)
+	s.getProviderSchema(ctx, resp)
 
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) getProviderSchema(ctx context.Context, resp *getProviderSchemaResponse) {
 	// get the provider schema
 	providerSchema, diags := s.p.GetSchema(ctx)
-	if diags != nil {
-		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-			return resp, nil
-		}
+	resp.Diagnostics.Append(diags...)
+	if diags.HasError() {
+		return
 	}
 	// convert the provider schema to a *tfprotov6.Schema
 	provider6Schema, err := providerSchema.tfprotov6Schema(ctx)
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error converting provider schema",
-			Detail:   "The provider schema couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error converting provider schema",
+			"The provider schema couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	// don't set the schema on the response yet, we want it to be able to
@@ -125,78 +149,67 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 	var providerMeta6Schema *tfprotov6.Schema
 	if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 		providerMetaSchema, diags := pm.GetMetaSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-				return resp, nil
-			}
+
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
+
 		pm6Schema, err := providerMetaSchema.tfprotov6Schema(ctx)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting provider_meta schema",
-				Detail:   "The provider_meta schema couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting provider_meta schema",
+				"The provider_meta schema couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		providerMeta6Schema = pm6Schema
 	}
 
 	// get our resource schemas
 	resourceSchemas, diags := s.p.GetResources(ctx)
-	if diags != nil {
-		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-			return resp, nil
-		}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	resource6Schemas := map[string]*tfprotov6.Schema{}
 	for k, v := range resourceSchemas {
 		schema, diags := v.GetSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-				return resp, nil
-			}
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
 		schema6, err := schema.tfprotov6Schema(ctx)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting resource schema",
-				Detail:   "The schema for the resource \"" + k + "\" couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting resource schema",
+				"The schema for the resource \""+k+"\" couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		resource6Schemas[k] = schema6
 	}
 
 	// get our data source schemas
 	dataSourceSchemas, diags := s.p.GetDataSources(ctx)
-	if diags != nil {
-		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-			return resp, nil
-		}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	dataSource6Schemas := map[string]*tfprotov6.Schema{}
 	for k, v := range dataSourceSchemas {
 		schema, diags := v.GetSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-				return resp, nil
-			}
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
 		schema6, err := schema.tfprotov6Schema(ctx)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting data sourceschema",
-				Detail:   "The schema for the data source \"" + k + "\" couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting data sourceschema",
+				"The schema for the data source \""+k+"\" couldn't be converted into a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		dataSource6Schemas[k] = schema6
 	}
@@ -207,12 +220,24 @@ func (s *server) GetProviderSchema(ctx context.Context, _ *tfprotov6.GetProvider
 	resp.ProviderMeta = providerMeta6Schema
 	resp.ResourceSchemas = resource6Schemas
 	resp.DataSourceSchemas = dataSource6Schemas
-	return resp, nil
+}
+
+// validateProviderConfigResponse is a thin abstraction to allow native Diagnostics usage
+type validateProviderConfigResponse struct {
+	PreparedConfig *tfprotov6.DynamicValue
+	Diagnostics    diag.Diagnostics
+}
+
+func (r validateProviderConfigResponse) toTfprotov6() *tfprotov6.ValidateProviderConfigResponse {
+	return &tfprotov6.ValidateProviderConfigResponse{
+		PreparedConfig: r.PreparedConfig,
+		Diagnostics:    r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
 }
 
 func (s *server) ValidateProviderConfig(ctx context.Context, req *tfprotov6.ValidateProviderConfigRequest) (*tfprotov6.ValidateProviderConfigResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ValidateProviderConfigResponse{
+	resp := &validateProviderConfigResponse{
 		// This RPC allows a modified configuration to be returned. This was
 		// previously used to allow a "required" provider attribute (as defined
 		// by a schema) to still be "optional" with a default value, typically
@@ -224,23 +249,28 @@ func (s *server) ValidateProviderConfig(ctx context.Context, req *tfprotov6.Vali
 		PreparedConfig: req.Config,
 	}
 
-	schema, diags := s.p.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	s.validateProviderConfig(ctx, req, resp)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) validateProviderConfig(ctx context.Context, req *tfprotov6.ValidateProviderConfigRequest, resp *validateProviderConfigResponse) {
+	schema, diags := s.p.GetSchema(ctx)
+	resp.Diagnostics.Append(diags...)
+
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	config, err := req.Config.Unmarshal(schema.TerraformType(ctx))
 
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing config",
-			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
-		})
+		resp.Diagnostics.AddError(
+			"Error parsing config",
+			"The provider had a problem parsing the config. Report this to the provider developer:\n\n"+err.Error(),
+		)
 
-		return resp, nil
+		return
 	}
 
 	vpcReq := ValidateProviderConfigRequest{
@@ -285,29 +315,41 @@ func (s *server) ValidateProviderConfig(ctx context.Context, req *tfprotov6.Vali
 	schema.validate(ctx, validateSchemaReq, &validateSchemaResp)
 
 	resp.Diagnostics = validateSchemaResp.Diagnostics
+}
 
-	return resp, nil
+// configureProviderResponse is a thin abstraction to allow native Diagnostics usage
+type configureProviderResponse struct {
+	Diagnostics diag.Diagnostics
+}
+
+func (r configureProviderResponse) toTfprotov6() *tfprotov6.ConfigureProviderResponse {
+	return &tfprotov6.ConfigureProviderResponse{
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
 }
 
 func (s *server) ConfigureProvider(ctx context.Context, req *tfprotov6.ConfigureProviderRequest) (*tfprotov6.ConfigureProviderResponse, error) {
 	ctx = s.registerContext(ctx)
+	resp := &configureProviderResponse{}
 
-	resp := &tfprotov6.ConfigureProviderResponse{}
+	s.configureProvider(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) configureProvider(ctx context.Context, req *tfprotov6.ConfigureProviderRequest, resp *configureProviderResponse) {
 	schema, diags := s.p.GetSchema(ctx)
-	if diags != nil {
-		resp.Diagnostics = append(resp.Diagnostics, diags...)
-		if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-			return resp, nil
-		}
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	config, err := req.Config.Unmarshal(schema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing config",
-			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing config",
+			"The provider had a problem parsing the config. Report this to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	r := ConfigureProviderRequest{
 		TerraformVersion: req.TerraformVersion,
@@ -318,8 +360,7 @@ func (s *server) ConfigureProvider(ctx context.Context, req *tfprotov6.Configure
 	}
 	res := &ConfigureProviderResponse{}
 	s.p.Configure(ctx, r, res)
-	resp.Diagnostics = append(resp.Diagnostics, res.Diagnostics...)
-	return resp, nil
+	resp.Diagnostics.Append(res.Diagnostics...)
 }
 
 func (s *server) StopProvider(ctx context.Context, _ *tfprotov6.StopProviderRequest) (*tfprotov6.StopProviderResponse, error) {
@@ -328,47 +369,63 @@ func (s *server) StopProvider(ctx context.Context, _ *tfprotov6.StopProviderRequ
 	return &tfprotov6.StopProviderResponse{}, nil
 }
 
+// validateResourceConfigResponse is a thin abstraction to allow native Diagnostics usage
+type validateResourceConfigResponse struct {
+	Diagnostics diag.Diagnostics
+}
+
+func (r validateResourceConfigResponse) toTfprotov6() *tfprotov6.ValidateResourceConfigResponse {
+	return &tfprotov6.ValidateResourceConfigResponse{
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
+}
+
 func (s *server) ValidateResourceConfig(ctx context.Context, req *tfprotov6.ValidateResourceConfigRequest) (*tfprotov6.ValidateResourceConfigResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ValidateResourceConfigResponse{}
+	resp := &validateResourceConfigResponse{}
 
+	s.validateResourceConfig(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) validateResourceConfig(ctx context.Context, req *tfprotov6.ValidateResourceConfigRequest, resp *validateResourceConfigResponse) {
 	// Get the type of resource, so we can get its schema and create an
 	// instance
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Get the schema from the resource type, so we can embed it in the
 	// config
 	resourceSchema, diags := resourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Create the resource instance, so we can call its methods and handle
 	// the request
 	resource, diags := resourceType.NewResource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	config, err := req.Config.Unmarshal(resourceSchema.TerraformType(ctx))
 
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing config",
-			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
-		})
+		resp.Diagnostics.AddError(
+			"Error parsing config",
+			"The provider had a problem parsing the config. Report this to the provider developer:\n\n"+err.Error(),
+		)
 
-		return resp, nil
+		return
 	}
 
 	vrcReq := ValidateResourceConfigRequest{
@@ -413,8 +470,6 @@ func (s *server) ValidateResourceConfig(ctx context.Context, req *tfprotov6.Vali
 	resourceSchema.validate(ctx, validateSchemaReq, &validateSchemaResp)
 
 	resp.Diagnostics = validateSchemaResp.Diagnostics
-
-	return resp, nil
 }
 
 func (s *server) UpgradeResourceState(ctx context.Context, req *tfprotov6.UpgradeResourceStateRequest) (*tfprotov6.UpgradeResourceStateResponse, error) {
@@ -429,33 +484,53 @@ func (s *server) UpgradeResourceState(ctx context.Context, req *tfprotov6.Upgrad
 	}, nil
 }
 
+// readResourceResponse is a thin abstraction to allow native Diagnostics usage
+type readResourceResponse struct {
+	NewState    *tfprotov6.DynamicValue
+	Diagnostics diag.Diagnostics
+	Private     []byte
+}
+
+func (r readResourceResponse) toTfprotov6() *tfprotov6.ReadResourceResponse {
+	return &tfprotov6.ReadResourceResponse{
+		NewState:    r.NewState,
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+		Private:     r.Private,
+	}
+}
+
 func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRequest) (*tfprotov6.ReadResourceResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ReadResourceResponse{}
+	resp := &readResourceResponse{}
 
+	s.readResource(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) readResource(ctx context.Context, req *tfprotov6.ReadResourceRequest, resp *readResourceResponse) {
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	resourceSchema, diags := resourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	resource, diags := resourceType.NewResource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	state, err := req.CurrentState.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing current state",
-			Detail:   "There was an error parsing the current state. Please report this to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing current state",
+			"There was an error parsing the current state. Please report this to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	readReq := ReadResourceRequest{
 		State: State{
@@ -465,11 +540,9 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 	}
 	if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 		pmSchema, diags := pm.GetMetaSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-				return resp, nil
-			}
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
 		readReq.ProviderMeta = Config{
 			Schema: pmSchema,
@@ -479,12 +552,11 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 		if req.ProviderMeta != nil {
 			pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 			if err != nil {
-				resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-					Severity: tfprotov6.DiagnosticSeverityError,
-					Summary:  "Error parsing provider_meta",
-					Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-				})
-				return resp, nil
+				resp.Diagnostics.AddError(
+					"Error parsing provider_meta",
+					"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+				)
+				return
 			}
 			readReq.ProviderMeta.Raw = pmValue
 		}
@@ -503,15 +575,13 @@ func (s *server) ReadResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 
 	newState, err := tfprotov6.NewDynamicValue(resourceSchema.TerraformType(ctx), readResp.State.Raw)
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error converting read response",
-			Detail:   "An unexpected error was encountered when converting the read response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error converting read response",
+			"An unexpected error was encountered when converting the read response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	resp.NewState = &newState
-	return resp, nil
 }
 
 func markComputedNilsAsUnknown(ctx context.Context, resourceSchema Schema) func(*tftypes.AttributePath, tftypes.Value) (tftypes.Value, error) {
@@ -534,70 +604,149 @@ func markComputedNilsAsUnknown(ctx context.Context, resourceSchema Schema) func(
 	}
 }
 
+// planResourceChangeResponse is a thin abstraction to allow native Diagnostics usage
+type planResourceChangeResponse struct {
+	PlannedState    *tfprotov6.DynamicValue
+	Diagnostics     diag.Diagnostics
+	RequiresReplace []*tftypes.AttributePath
+	PlannedPrivate  []byte
+}
+
+func (r planResourceChangeResponse) toTfprotov6() *tfprotov6.PlanResourceChangeResponse {
+	return &tfprotov6.PlanResourceChangeResponse{
+		PlannedState:    r.PlannedState,
+		Diagnostics:     r.Diagnostics.ToTfprotov6Diagnostics(),
+		RequiresReplace: r.RequiresReplace,
+		PlannedPrivate:  r.PlannedPrivate,
+	}
+}
+
 func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanResourceChangeRequest) (*tfprotov6.PlanResourceChangeResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.PlanResourceChangeResponse{}
+	resp := &planResourceChangeResponse{}
 
+	s.planResourceChange(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) planResourceChange(ctx context.Context, req *tfprotov6.PlanResourceChangeRequest, resp *planResourceChangeResponse) {
 	// get the type of resource, so we can get its schema and create an
 	// instance
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// get the schema from the resource type, so we can embed it in the
 	// config and plan
 	resourceSchema, diags := resourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	config, err := req.Config.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing configuration",
-			Detail:   "An unexpected error was encountered trying to parse the configuration. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing configuration",
+			"An unexpected error was encountered trying to parse the configuration. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	plan, err := req.ProposedNewState.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing plan",
-			Detail:   "There was an unexpected error parsing the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing plan",
+			"There was an unexpected error parsing the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	state, err := req.PriorState.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing prior state",
-			Detail:   "An unexpected error was encountered trying to parse the prior state. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing prior state",
+			"An unexpected error was encountered trying to parse the prior state. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
+
+	resp.PlannedState = req.ProposedNewState
 
 	if plan.IsNull() || !plan.IsKnown() {
 		// on null or unknown plans, just bail, we can't do anything
-		resp.PlannedState = req.ProposedNewState
-		return resp, nil
+		return
 	}
 
 	// create the resource instance, so we can call its methods and handle
 	// the request
 	resource, diags := resourceType.NewResource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
+	// first, execute any AttributePlanModifiers
+	modifySchemaPlanReq := ModifySchemaPlanRequest{
+		Config: Config{
+			Schema: resourceSchema,
+			Raw:    config,
+		},
+		State: State{
+			Schema: resourceSchema,
+			Raw:    state,
+		},
+		Plan: Plan{
+			Schema: resourceSchema,
+			Raw:    plan,
+		},
+	}
+	if pm, ok := s.p.(ProviderWithProviderMeta); ok {
+		pmSchema, diags := pm.GetMetaSchema(ctx)
+		if diags != nil {
+			resp.Diagnostics.Append(diags...)
+			if resp.Diagnostics.HasError() {
+				return
+			}
+		}
+		modifySchemaPlanReq.ProviderMeta = Config{
+			Schema: pmSchema,
+			Raw:    tftypes.NewValue(pmSchema.TerraformType(ctx), nil),
+		}
+
+		if req.ProviderMeta != nil {
+			pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
+			if err != nil {
+				resp.Diagnostics.AddError(
+					"Error parsing provider_meta",
+					"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+				)
+				return
+			}
+			modifySchemaPlanReq.ProviderMeta.Raw = pmValue
+		}
+	}
+
+	modifySchemaPlanResp := ModifySchemaPlanResponse{
+		Plan: Plan{
+			Schema: resourceSchema,
+			Raw:    plan,
+		},
+		Diagnostics: resp.Diagnostics,
+	}
+
+	resourceSchema.modifyAttributePlans(ctx, modifySchemaPlanReq, &modifySchemaPlanResp)
+	resp.RequiresReplace = modifySchemaPlanResp.RequiresReplace
+	plan = modifySchemaPlanResp.Plan.Raw
+	resp.Diagnostics = modifySchemaPlanResp.Diagnostics
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	// second, execute any ModifyPlan func
 	var modifyPlanResp ModifyResourcePlanResponse
 	if resource, ok := resource.(ResourceWithModifyPlan); ok {
 		modifyPlanReq := ModifyResourcePlanRequest{
@@ -616,11 +765,9 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 		}
 		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 			pmSchema, diags := pm.GetMetaSchema(ctx)
-			if diags != nil {
-				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-					return resp, nil
-				}
+			resp.Diagnostics.Append(diags...)
+			if resp.Diagnostics.HasError() {
+				return
 			}
 			modifyPlanReq.ProviderMeta = Config{
 				Schema: pmSchema,
@@ -630,12 +777,11 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 			if req.ProviderMeta != nil {
 				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 				if err != nil {
-					resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-						Severity: tfprotov6.DiagnosticSeverityError,
-						Summary:  "Error parsing provider_meta",
-						Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-					})
-					return resp, nil
+					resp.Diagnostics.AddError(
+						"Error parsing provider_meta",
+						"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+					)
+					return
 				}
 				modifyPlanReq.ProviderMeta.Raw = pmValue
 			}
@@ -650,124 +796,165 @@ func (s *server) PlanResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 			Diagnostics:     resp.Diagnostics,
 		}
 		resource.ModifyPlan(ctx, modifyPlanReq, &modifyPlanResp)
-		resp.Diagnostics = append(resp.Diagnostics, modifyPlanResp.Diagnostics...)
+		resp.Diagnostics = modifyPlanResp.Diagnostics
 		plan = modifyPlanResp.Plan.Raw
 	}
 
 	modifiedPlan, err := tftypes.Transform(plan, markComputedNilsAsUnknown(ctx, resourceSchema))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error modifying plan",
-			Detail:   "There was an unexpected error updating the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error modifying plan",
+			"There was an unexpected error updating the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	plannedState, err := tfprotov6.NewDynamicValue(modifiedPlan.Type(), modifiedPlan)
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error converting response",
-			Detail:   "There was an unexpected error converting the state in the response to a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error converting response",
+			"There was an unexpected error converting the state in the response to a usable type. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	resp.PlannedState = &plannedState
-	resp.RequiresReplace = modifyPlanResp.RequiresReplace
+	resp.RequiresReplace = append(resp.RequiresReplace, modifyPlanResp.RequiresReplace...)
 
-	return resp, nil
+	// ensure deterministic RequiresReplace by sorting and deduplicating
+	resp.RequiresReplace = normaliseRequiresReplace(resp.RequiresReplace)
+}
+
+// applyResourceChangeResponse is a thin abstraction to allow native Diagnostics usage
+type applyResourceChangeResponse struct {
+	NewState    *tfprotov6.DynamicValue
+	Private     []byte
+	Diagnostics diag.Diagnostics
+}
+
+func (r applyResourceChangeResponse) toTfprotov6() *tfprotov6.ApplyResourceChangeResponse {
+	return &tfprotov6.ApplyResourceChangeResponse{
+		NewState:    r.NewState,
+		Private:     r.Private,
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
+}
+
+// normaliseRequiresReplace sorts and deduplicates the slice of AttributePaths
+// used in the RequiresReplace response field.
+// Sorting is lexical based on the string representation of each AttributePath.
+func normaliseRequiresReplace(rs []*tftypes.AttributePath) []*tftypes.AttributePath {
+	if len(rs) < 2 {
+		return rs
+	}
+
+	sort.Slice(rs, func(i, j int) bool {
+		return rs[i].String() < rs[j].String()
+	})
+
+	ret := make([]*tftypes.AttributePath, len(rs))
+	ret[0] = rs[0]
+
+	// deduplicate
+	j := 1
+	for i := 1; i < len(rs); i++ {
+		if rs[i].Equal(ret[j-1]) {
+			continue
+		}
+		ret[j] = rs[i]
+		j++
+	}
+	return ret[:j]
 }
 
 func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyResourceChangeRequest) (*tfprotov6.ApplyResourceChangeResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ApplyResourceChangeResponse{
+	resp := &applyResourceChangeResponse{
 		// default to the prior state, so the state won't change unless
 		// we choose to change it
 		NewState: req.PriorState,
 	}
 
+	s.applyResourceChange(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) applyResourceChange(ctx context.Context, req *tfprotov6.ApplyResourceChangeRequest, resp *applyResourceChangeResponse) {
 	// get the type of resource, so we can get its schema and create an
 	// instance
 	resourceType, diags := s.getResourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// get the schema from the resource type, so we can embed it in the
 	// config and plan
 	resourceSchema, diags := resourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// create the resource instance, so we can call its methods and handle
 	// the request
 	resource, diags := resourceType.NewResource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	config, err := req.Config.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing configuration",
-			Detail:   "An unexpected error was encountered trying to parse the configuration. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing configuration",
+			"An unexpected error was encountered trying to parse the configuration. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	plan, err := req.PlannedState.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing plan",
-			Detail:   "An unexpected error was encountered trying to parse the plan. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing plan",
+			"An unexpected error was encountered trying to parse the plan. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	priorState, err := req.PriorState.Unmarshal(resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing prior state",
-			Detail:   "An unexpected error was encountered trying to parse the prior state. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing prior state",
+			"An unexpected error was encountered trying to parse the prior state. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	// figure out what kind of request we're serving
 	create, err := proto6.IsCreate(ctx, req, resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error understanding request",
-			Detail:   "An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error understanding request",
+			"An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	update, err := proto6.IsUpdate(ctx, req, resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error understanding request",
-			Detail:   "An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error understanding request",
+			"An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	destroy, err := proto6.IsDestroy(ctx, req, resourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error understanding request",
-			Detail:   "An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error understanding request",
+			"An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 
 	switch {
@@ -784,11 +971,9 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		}
 		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 			pmSchema, diags := pm.GetMetaSchema(ctx)
-			if diags != nil {
-				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-					return resp, nil
-				}
+			resp.Diagnostics.Append(diags...)
+			if resp.Diagnostics.HasError() {
+				return
 			}
 			createReq.ProviderMeta = Config{
 				Schema: pmSchema,
@@ -798,12 +983,11 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			if req.ProviderMeta != nil {
 				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 				if err != nil {
-					resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-						Severity: tfprotov6.DiagnosticSeverityError,
-						Summary:  "Error parsing provider_meta",
-						Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-					})
-					return resp, nil
+					resp.Diagnostics.AddError(
+						"Error parsing provider_meta",
+						"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+					)
+					return
 				}
 				createReq.ProviderMeta.Raw = pmValue
 			}
@@ -819,15 +1003,13 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		resp.Diagnostics = createResp.Diagnostics
 		newState, err := tfprotov6.NewDynamicValue(resourceSchema.TerraformType(ctx), createResp.State.Raw)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting create response",
-				Detail:   "An unexpected error was encountered when converting the create response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting create response",
+				"An unexpected error was encountered when converting the create response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		resp.NewState = &newState
-		return resp, nil
 	case !create && update && !destroy:
 		updateReq := UpdateResourceRequest{
 			Config: Config{
@@ -845,11 +1027,9 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		}
 		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 			pmSchema, diags := pm.GetMetaSchema(ctx)
-			if diags != nil {
-				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-					return resp, nil
-				}
+			resp.Diagnostics.Append(diags...)
+			if resp.Diagnostics.HasError() {
+				return
 			}
 			updateReq.ProviderMeta = Config{
 				Schema: pmSchema,
@@ -859,12 +1039,11 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			if req.ProviderMeta != nil {
 				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 				if err != nil {
-					resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-						Severity: tfprotov6.DiagnosticSeverityError,
-						Summary:  "Error parsing provider_meta",
-						Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-					})
-					return resp, nil
+					resp.Diagnostics.AddError(
+						"Error parsing provider_meta",
+						"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+					)
+					return
 				}
 				updateReq.ProviderMeta.Raw = pmValue
 			}
@@ -880,15 +1059,13 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		resp.Diagnostics = updateResp.Diagnostics
 		newState, err := tfprotov6.NewDynamicValue(resourceSchema.TerraformType(ctx), updateResp.State.Raw)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting update response",
-				Detail:   "An unexpected error was encountered when converting the update response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting update response",
+				"An unexpected error was encountered when converting the update response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		resp.NewState = &newState
-		return resp, nil
 	case !create && !update && destroy:
 		destroyReq := DeleteResourceRequest{
 			State: State{
@@ -898,11 +1075,9 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		}
 		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 			pmSchema, diags := pm.GetMetaSchema(ctx)
-			if diags != nil {
-				resp.Diagnostics = append(resp.Diagnostics, diags...)
-				if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-					return resp, nil
-				}
+			resp.Diagnostics.Append(diags...)
+			if resp.Diagnostics.HasError() {
+				return
 			}
 			destroyReq.ProviderMeta = Config{
 				Schema: pmSchema,
@@ -912,12 +1087,11 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 			if req.ProviderMeta != nil {
 				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 				if err != nil {
-					resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-						Severity: tfprotov6.DiagnosticSeverityError,
-						Summary:  "Error parsing provider_meta",
-						Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-					})
-					return resp, nil
+					resp.Diagnostics.AddError(
+						"Error parsing provider_meta",
+						"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+					)
+					return
 				}
 				destroyReq.ProviderMeta.Raw = pmValue
 			}
@@ -933,74 +1107,79 @@ func (s *server) ApplyResourceChange(ctx context.Context, req *tfprotov6.ApplyRe
 		resp.Diagnostics = destroyResp.Diagnostics
 		newState, err := tfprotov6.NewDynamicValue(resourceSchema.TerraformType(ctx), destroyResp.State.Raw)
 		if err != nil {
-			resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error converting delete response",
-				Detail:   "An unexpected error was encountered when converting the delete response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n" + err.Error(),
-			})
-			return resp, nil
+			resp.Diagnostics.AddError(
+				"Error converting delete response",
+				"An unexpected error was encountered when converting the delete response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n"+err.Error(),
+			)
+			return
 		}
 		resp.NewState = &newState
-		return resp, nil
 	default:
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error understanding request",
-			Detail:   fmt.Sprintf("An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\nRequest matched unexpected number of methods: (create: %v, update: %v, delete: %v)", create, update, destroy),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error understanding request",
+			fmt.Sprintf("An unexpected error was encountered trying to understand the type of request being made. This is always an error in the provider. Please report the following to the provider developer:\n\nRequest matched unexpected number of methods: (create: %v, update: %v, delete: %v)", create, update, destroy),
+		)
 	}
 }
 
-func (s *server) ImportResourceState(ctx context.Context, _ *tfprotov6.ImportResourceStateRequest) (*tfprotov6.ImportResourceStateResponse, error) {
-	// uncomment when we implement this function
-	//ctx = s.registerContext(ctx)
+// validateDataResourceConfigResponse is a thin abstraction to allow native Diagnostics usage
+type validateDataResourceConfigResponse struct {
+	Diagnostics diag.Diagnostics
+}
 
-	// TODO: support resource importing
-	return &tfprotov6.ImportResourceStateResponse{}, nil
+func (r validateDataResourceConfigResponse) toTfprotov6() *tfprotov6.ValidateDataResourceConfigResponse {
+	return &tfprotov6.ValidateDataResourceConfigResponse{
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
 }
 
 func (s *server) ValidateDataResourceConfig(ctx context.Context, req *tfprotov6.ValidateDataResourceConfigRequest) (*tfprotov6.ValidateDataResourceConfigResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ValidateDataResourceConfigResponse{}
+	resp := &validateDataResourceConfigResponse{}
+
+	s.validateDataResourceConfig(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) validateDataResourceConfig(ctx context.Context, req *tfprotov6.ValidateDataResourceConfigRequest, resp *validateDataResourceConfigResponse) {
 
 	// Get the type of data source, so we can get its schema and create an
 	// instance
 	dataSourceType, diags := s.getDataSourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Get the schema from the data source type, so we can embed it in the
 	// config
 	dataSourceSchema, diags := dataSourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	// Create the data source instance, so we can call its methods and handle
 	// the request
 	dataSource, diags := dataSourceType.NewDataSource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
+	resp.Diagnostics.Append(diags...)
 
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	if resp.Diagnostics.HasError() {
+		return
 	}
 
 	config, err := req.Config.Unmarshal(dataSourceSchema.TerraformType(ctx))
 
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing config",
-			Detail:   "The provider had a problem parsing the config. Report this to the provider developer:\n\n" + err.Error(),
-		})
+		resp.Diagnostics.AddError(
+			"Error parsing config",
+			"The provider had a problem parsing the config. Report this to the provider developer:\n\n"+err.Error(),
+		)
 
-		return resp, nil
+		return
 	}
 
 	vrcReq := ValidateDataSourceConfigRequest{
@@ -1045,37 +1224,53 @@ func (s *server) ValidateDataResourceConfig(ctx context.Context, req *tfprotov6.
 	dataSourceSchema.validate(ctx, validateSchemaReq, &validateSchemaResp)
 
 	resp.Diagnostics = validateSchemaResp.Diagnostics
+}
 
-	return resp, nil
+// readDataSourceResponse is a thin abstraction to allow native Diagnostics usage
+type readDataSourceResponse struct {
+	State       *tfprotov6.DynamicValue
+	Diagnostics diag.Diagnostics
+}
+
+func (r readDataSourceResponse) toTfprotov6() *tfprotov6.ReadDataSourceResponse {
+	return &tfprotov6.ReadDataSourceResponse{
+		State:       r.State,
+		Diagnostics: r.Diagnostics.ToTfprotov6Diagnostics(),
+	}
 }
 
 func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSourceRequest) (*tfprotov6.ReadDataSourceResponse, error) {
 	ctx = s.registerContext(ctx)
-	resp := &tfprotov6.ReadDataSourceResponse{}
+	resp := &readDataSourceResponse{}
 
+	s.readDataSource(ctx, req, resp)
+
+	return resp.toTfprotov6(), nil
+}
+
+func (s *server) readDataSource(ctx context.Context, req *tfprotov6.ReadDataSourceRequest, resp *readDataSourceResponse) {
 	dataSourceType, diags := s.getDataSourceType(ctx, req.TypeName)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	dataSourceSchema, diags := dataSourceType.GetSchema(ctx)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	dataSource, diags := dataSourceType.NewDataSource(ctx, s.p)
-	resp.Diagnostics = append(resp.Diagnostics, diags...)
-	if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-		return resp, nil
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
 	}
 	config, err := req.Config.Unmarshal(dataSourceSchema.TerraformType(ctx))
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error parsing current state",
-			Detail:   "There was an error parsing the current state. Please report this to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error parsing current state",
+			"There was an error parsing the current state. Please report this to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	readReq := ReadDataSourceRequest{
 		Config: Config{
@@ -1085,11 +1280,9 @@ func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSour
 	}
 	if pm, ok := s.p.(ProviderWithProviderMeta); ok {
 		pmSchema, diags := pm.GetMetaSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics = append(resp.Diagnostics, diags...)
-			if diagnostics.DiagsHasErrors(resp.Diagnostics) {
-				return resp, nil
-			}
+		resp.Diagnostics.Append(diags...)
+		if resp.Diagnostics.HasError() {
+			return
 		}
 		readReq.ProviderMeta = Config{
 			Schema: pmSchema,
@@ -1099,12 +1292,11 @@ func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSour
 		if req.ProviderMeta != nil {
 			pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
 			if err != nil {
-				resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-					Severity: tfprotov6.DiagnosticSeverityError,
-					Summary:  "Error parsing provider_meta",
-					Detail:   "There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n" + err.Error(),
-				})
-				return resp, nil
+				resp.Diagnostics.AddError(
+					"Error parsing provider_meta",
+					"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+				)
+				return
 			}
 			readReq.ProviderMeta.Raw = pmValue
 		}
@@ -1126,13 +1318,11 @@ func (s *server) ReadDataSource(ctx context.Context, req *tfprotov6.ReadDataSour
 
 	state, err := tfprotov6.NewDynamicValue(dataSourceSchema.TerraformType(ctx), readResp.State.Raw)
 	if err != nil {
-		resp.Diagnostics = append(resp.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error converting read response",
-			Detail:   "An unexpected error was encountered when converting the read response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n" + err.Error(),
-		})
-		return resp, nil
+		resp.Diagnostics.AddError(
+			"Error converting read response",
+			"An unexpected error was encountered when converting the read response to a usable type. This is always a problem with the provider. Please give the following information to the provider developer:\n\n"+err.Error(),
+		)
+		return
 	}
 	resp.State = &state
-	return resp, nil
 }

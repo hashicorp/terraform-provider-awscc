@@ -6,8 +6,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -49,12 +50,59 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := codegen.NewResourceGenerator(ui, acceptanceTestsTemplateBody, resourceSchemaTemplateBody, *cfTypeSchemaFile, *tfResourceType)
+	generator := &ResourceGenerator{
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfResourceType:   *tfResourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
 		os.Exit(1)
 	}
+}
+
+type ResourceGenerator struct {
+	cfTypeSchemaFile string
+	tfResourceType   string
+	shared.Generator
+}
+
+// Generate generates the resource's type factory into the specified file.
+func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	r.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", r.tfResourceType, r.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, shared.DirPerm)
+
+		if err != nil {
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
+		}
+	}
+
+	templateData, err := r.GenerateTemplateData(r.cfTypeSchemaFile, shared.ResourceType, r.tfResourceType, packageName)
+
+	if err != nil {
+		return err
+	}
+
+	err = r.ApplyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = r.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Terraform resource schema definition.
@@ -65,14 +113,13 @@ package {{ .PackageName }}
 
 import (
 	"context"
+	{{ if .ImportMathBig }}"math/big"{{- end }}
 
-	hclog "github.com/hashicorp/go-hclog"
+	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"{{- end }}
 	{{ if .ImportValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 
@@ -132,8 +179,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.ResourceType, error)
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "{{ .TerraformTypeName }}", "schema", hclog.Fmt("%v", schema))
 
 	return resourceType, nil
 }

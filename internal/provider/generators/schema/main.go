@@ -12,7 +12,6 @@ import (
 	"os"
 	"path"
 	"path/filepath"
-	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -43,12 +42,12 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	CloudFormationSchemaPath   string `hcl:"cloudformation_schema_path,optional"`
-	CloudFormationTypeName     string `hcl:"cloudformation_type_name"`
-	ResourceTypeName           string `hcl:"resource_type_name,label"`
-	SuppressSingularDataSource bool   `hcl:"suppress_singular_data_source,optional"`
-	SuppressPluralDataSource   bool   `hcl:"suppress_plural_data_source,optional"`
-	SuppressResourceGeneration bool   `hcl:"suppress_resource_generation,optional"`
+	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	ResourceTypeName                     string `hcl:"resource_type_name,label"`
+	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
+	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
+	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
 }
 
 var (
@@ -254,29 +253,28 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			tfResourceTypeName = naming.CreateTerraformTypeName(terraformTypeNamePrefix, svc, res)
 		}
 
-		if schema.SuppressSingularDataSource {
+		if schema.SuppressSingularDataSourceGeneration {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform singular data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
 			singularDataSources = append(singularDataSources, &DataSourceData{
 				CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-				GeneratedAccTestsFileName:    res + "_data_source_gen_test",
-				GeneratedCodeFileName:        res + "_data_source_gen",
+				GeneratedAccTestsFileName:    res + "_singular_data_source_gen_test",
+				GeneratedCodeFileName:        res + "_singular_data_source_gen",
 				GeneratedCodePackageName:     svc,
 				GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:        tfResourceTypeName,
 			})
 		}
 
-		if schema.SuppressPluralDataSource {
+		if schema.SuppressPluralDataSourceGeneration {
 			d.ui.Info(fmt.Sprintf("generation of a Terraform plural data source schema for %s has been suppressed", tfResourceTypeName))
 		} else {
-			pluralResource := naming.Pluralize(res)
 			pluralTfResourceTypeName := naming.Pluralize(tfResourceTypeName)
 
 			pluralDataSources = append(pluralDataSources, &DataSourceData{
 				CloudFormationType:        cfResourceTypeName,
-				GeneratedAccTestsFileName: pluralResource + "_data_source_gen_test",
-				GeneratedCodeFileName:     pluralResource + "_data_source_gen",
+				GeneratedAccTestsFileName: res + "_plural_data_source_gen_test",
+				GeneratedCodeFileName:     res + "_plural_data_source_gen",
 				GeneratedCodePackageName:  svc,
 				GeneratedCodePathSuffix:   fmt.Sprintf("%s/%s", org, svc),
 				TerraformResourceType:     pluralTfResourceTypeName,
@@ -290,8 +288,8 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 
 		resources = append(resources, &ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:    res + "_gen_test",              // e.g. "log_group_gen_test"
-			GeneratedCodeFileName:        res + "_gen",                   // e.g. "log_group_gen"
+			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
+			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
@@ -333,11 +331,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("error describing CloudFormation type: %w", err)
 		}
 
-		// Rewrite all pattern and patternProperty regexes to the empty string.
-		// This works around any problems with JSON Schema regex validation.
-		schema := aws.ToString(output.Schema)
-		schema = regexp.MustCompile(`(?m)^(\s+"pattern"\s*:\s*)".*"`).ReplaceAllString(schema, `$1""`)
-		schema = regexp.MustCompile(`(?m)^(\s+"patternProperties"\s*:\s*{\s*)".*?"`).ReplaceAllString(schema, `$1""`)
+		schema := cfschema.Sanitize(aws.ToString(output.Schema))
 
 		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 

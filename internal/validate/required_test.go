@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestRequired(t *testing.T) {
@@ -50,11 +49,11 @@ func TestRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := Required(test.required...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -99,11 +98,11 @@ func TestAllOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := AllOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -152,11 +151,11 @@ func TestAnyOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := AnyOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -210,11 +209,11 @@ func TestOneOfRequired(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			diags := OneOfRequired(test.fs...)(test.names)
 
-			if !tfresource.DiagsHasError(diags) && test.expectError {
+			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(diags) && !test.expectError {
+			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(diags))
 			}
 		})
@@ -353,11 +352,11 @@ func TestRequiredAttributesValidator_Object(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -515,11 +514,11 @@ func TestRequiredAttributesValidator_List(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -558,21 +557,21 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 				tftypes.Set{ElementType: objectElementType},
 				tftypes.UnknownValue,
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"null set": {
 			val: tftypes.NewValue(
 				tftypes.Set{ElementType: objectElementType},
 				nil,
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"empty set": {
 			val: tftypes.NewValue(
 				tftypes.Set{ElementType: objectElementType},
 				[]tftypes.Value{},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"not fully known object": {
 			val: tftypes.NewValue(
@@ -592,7 +591,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"none required": {
 			val: tftypes.NewValue(
@@ -612,7 +611,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f: providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f: types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 		},
 		"one required OK": {
 			val: tftypes.NewValue(
@@ -632,7 +631,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f:  providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f:  types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 			fs: []RequiredAttributesFunc{Required("alpha")},
 		},
 		"one required error": {
@@ -653,7 +652,7 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 					}),
 				},
 			),
-			f:           providertypes.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: objectElementAttrType}.ValueFromTerraform,
 			fs:          []RequiredAttributesFunc{Required("beta")},
 			expectError: true,
 		},
@@ -676,11 +675,11 @@ func TestRequiredAttributesValidator_Set(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			RequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
@@ -795,11 +794,11 @@ func TestResourceConfigRequiredAttributesValidator(t *testing.T) {
 			response := tfsdk.ValidateResourceConfigResponse{}
 			ResourceConfigRequiredAttributes(test.fs...).Validate(ctx, request, &response)
 
-			if !tfresource.DiagsHasError(response.Diagnostics) && test.expectError {
+			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
 			}
 
-			if tfresource.DiagsHasError(response.Diagnostics) && !test.expectError {
+			if response.Diagnostics.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})

@@ -3,7 +3,7 @@ package attr
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -26,6 +26,9 @@ type Type interface {
 	// Equal must return true if the Type is considered semantically equal
 	// to the Type passed as an argument.
 	Equal(Type) bool
+
+	// String should return a human-friendly version of the Type.
+	String() string
 
 	tftypes.AttributePathStepper
 }
@@ -80,9 +83,7 @@ type TypeWithValidate interface {
 	// being used to populate the Type. It is generally used to check the
 	// data format and ensure that it complies with the requirements of the
 	// Type.
-	//
-	// TODO: don't use tfprotov6.Diagnostic, use our type
-	Validate(context.Context, tftypes.Value) []*tfprotov6.Diagnostic
+	Validate(context.Context, tftypes.Value, *tftypes.AttributePath) diag.Diagnostics
 }
 
 // TypeWithPlaintextDescription extends the Type interface to include a

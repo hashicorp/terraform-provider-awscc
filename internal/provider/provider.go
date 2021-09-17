@@ -8,12 +8,11 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func New() tfsdk.Provider {
@@ -26,13 +25,13 @@ type AwsCloudControlProvider struct {
 	roleARN  string
 }
 
-func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, []*tfprotov6.Diagnostic) {
+func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
 			"access_key": {
 				Type:        types.StringType,
-				Description: "The access key for API operations.",
+				Description: "This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.",
 				Optional:    true,
 			},
 
@@ -44,13 +43,13 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 
 			"profile": {
 				Type:        types.StringType,
-				Description: "The profile for API operations. If not set, the default profile created with `aws configure` will be used.",
+				Description: "This is the AWS profile name as set in the shared credentials file.",
 				Optional:    true,
 			},
 
 			"region": {
 				Type:        types.StringType,
-				Description: "The region where AWS operations will take place.",
+				Description: "This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared credentials file if `profile` is specified.",
 				Optional:    true,
 			},
 
@@ -62,7 +61,7 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 
 			"secret_key": {
 				Type:        types.StringType,
-				Description: "The secret key for API operations.",
+				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
 				Optional:    true,
 			},
 
@@ -74,13 +73,13 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 
 			"skip_medatadata_api_check": {
 				Type:        types.BoolType,
-				Description: "Skip the AWS Metadata API check. Used for AWS API implementations that do not have a Metadata API endpoint.",
+				Description: "Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.",
 				Optional:    true,
 			},
 
 			"token": {
 				Type:        types.StringType,
-				Description: "Session token. A session token is only required if you are using temporary security credentials.",
+				Description: "Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.",
 				Optional:    true,
 			},
 
@@ -89,26 +88,26 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 					map[string]tfsdk.Attribute{
 						"role_arn": {
 							Type:        types.StringType,
-							Description: "Amazon Resource Name of the IAM role that your user assumes.",
+							Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 							Required:    true,
 						},
 						"duration_seconds": {
 							Type:        types.NumberType,
-							Description: "Duration role is assumed.",
+							Description: "Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.",
 							Optional:    true,
 						},
 						"external_id": {
 							Type:        types.StringType,
-							Description: "External ID to assign to role.",
+							Description: "External identifier to use when assuming the role.",
 							Optional:    true,
 						},
 						"session_name": {
 							Type:        types.StringType,
-							Description: "Name to assign to session.",
+							Description: "Session name to use when assuming the role.",
 							Optional:    true,
 						},
 						// "tags": {
-						// 	Description: "Tags to associate wit the session.",
+						// 	Description: "Map of assume role session tags.",
 						// 	Attributes: schema.SetNestedAttributes(
 						// 		map[string]schema.Attribute{
 						// 			"key": {
@@ -127,13 +126,14 @@ func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, 
 						// 	Optional: true,
 						// },
 						// "transitive_tag_keys": {
-						// 	Description: "Set of tag keys that can be passed to subsequent roles",
+						// 	Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
 						// 	Type:        providertypes.SetType{ElemType: types.StringType},
 						// 	Optional:    true,
 						// },
 					},
 				),
-				Optional: true,
+				Optional:    true,
+				Description: "An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration.",
 			},
 		},
 	}, nil
@@ -164,7 +164,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 
 	diags := request.Config.Get(ctx, &config)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return
@@ -227,11 +227,10 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	cfClient, region, err := newCloudFormationClient(ctx, &config)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, &tfprotov6.Diagnostic{
-			Severity: tfprotov6.DiagnosticSeverityError,
-			Summary:  "Error configuring AWS CloudFormation client",
-			Detail:   fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
-		})
+		response.Diagnostics.AddError(
+			"Error configuring AWS CloudFormation client",
+			fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
+		)
 
 		return
 	}
@@ -241,19 +240,18 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, []*tfprotov6.Diagnostic) {
-	var diags []*tfprotov6.Diagnostic
+func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	resources := make(map[string]tfsdk.ResourceType)
 
 	for name, factory := range registry.ResourceFactories() {
 		resourceType, err := factory(ctx)
 
 		if err != nil {
-			diags = append(diags, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error getting Resource",
-				Detail:   fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
-			})
+			diags.AddError(
+				"Error getting Resource",
+				fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
+			)
 
 			continue
 		}
@@ -264,19 +262,18 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, []*tfprotov6.Diagnostic) {
-	var diags []*tfprotov6.Diagnostic
+func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+	var diags diag.Diagnostics
 	dataSources := make(map[string]tfsdk.DataSourceType)
 
 	for name, factory := range registry.DataSourceFactories() {
 		dataSourceType, err := factory(ctx)
 
 		if err != nil {
-			diags = append(diags, &tfprotov6.Diagnostic{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Error getting Data Source",
-				Detail:   fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
-			})
+			diags.AddError(
+				"Error getting Data Source",
+				fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
+			)
 
 			continue
 		}

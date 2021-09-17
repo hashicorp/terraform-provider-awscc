@@ -12,13 +12,13 @@ import (
 func CopyValueAtPath(ctx context.Context, dst, src *tfsdk.State, path *tftypes.AttributePath) error {
 	val, diags := src.GetAttribute(ctx, path)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return tfresource.DiagsError(diags)
 	}
 
 	diags = dst.SetAttribute(ctx, path, val)
 
-	if tfresource.DiagsHasError(diags) {
+	if diags.HasError() {
 		return tfresource.DiagsError(diags)
 	}
 

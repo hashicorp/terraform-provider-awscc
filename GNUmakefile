@@ -6,22 +6,26 @@ ACCTEST_PARALLELISM?=20
 
 default: build
 
-.PHONY: all build data-sources default golangci-lint lint resources schemas test testacc tools
+.PHONY: all build default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources build
+all: schemas resources singular-data-sources plural-data-sources build
 
 build:
 	go install
 
-data-sources:
-	rm -f internal/*/*/*_data_source_gen.go
-	rm -f internal/*/*/*_data_source_gen_test.go
+plural-data-sources:
+	rm -f internal/*/*/*_plural_data_source_gen.go
+	rm -f internal/*/*/*_plural_data_source_gen_test.go
 	go generate internal/provider/plural_data_sources.go
-	# TODO: Generate Singular Data Sources
+
+singular-data-sources:
+	rm -f internal/*/*/*_singular_data_source_gen.go
+	rm -f internal/*/*/*_singular_data_source_gen_test.go
+	go generate internal/provider/singular_data_sources.go
 
 resources:
-	rm -f internal/*/*/*_gen.go
-	rm -f internal/*/*/*_gen_test.go
+	rm -f internal/*/*/*_resource_gen.go
+	rm -f internal/*/*/*_resource_gen_test.go
 	go generate internal/provider/resources.go
 
 schemas:
@@ -45,3 +49,7 @@ importlint:
 tools:
 	cd tools && go install github.com/golangci/golangci-lint/cmd/golangci-lint
 	cd tools && go install github.com/pavius/impi/cmd/impi
+	cd tools && go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
+
+docs:
+	@tfplugindocs generate

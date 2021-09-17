@@ -3,10 +3,12 @@ package types
 import (
 	"context"
 	"fmt"
+	"sort"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/internal/reflect"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -112,6 +114,26 @@ func (o ObjectType) ApplyTerraform5AttributePathStep(step tftypes.AttributePathS
 	return o.AttrTypes[string(step.(tftypes.AttributeName))], nil
 }
 
+// String returns a human-friendly description of the ObjectType.
+func (o ObjectType) String() string {
+	var res strings.Builder
+	res.WriteString("types.ObjectType[")
+	keys := make([]string, 0, len(o.AttrTypes))
+	for k := range o.AttrTypes {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for pos, key := range keys {
+		if pos != 0 {
+			res.WriteString(", ")
+		}
+		res.WriteString(`"` + key + `":`)
+		res.WriteString(o.AttrTypes[key].String())
+	}
+	res.WriteString("]")
+	return res.String()
+}
+
 // Object represents an object
 type Object struct {
 	// Unknown will be set to true if the entire object is an unknown value.
@@ -150,35 +172,38 @@ type ObjectAsOptions struct {
 
 // As populates `target` with the data in the Object, throwing an error if the
 // data cannot be stored in `target`.
-func (o Object) As(ctx context.Context, target interface{}, opts ObjectAsOptions) []*tfprotov6.Diagnostic {
+func (o Object) As(ctx context.Context, target interface{}, opts ObjectAsOptions) diag.Diagnostics {
 	// we need a tftypes.Value for this Object to be able to use it with
 	// our reflection code
 	obj := ObjectType{AttrTypes: o.AttrTypes}
 	typ := obj.TerraformType(ctx)
 	val, err := o.ToTerraformValue(ctx)
 	if err != nil {
-		return []*tfprotov6.Diagnostic{
-			{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Object Conversion Error",
-				Detail:   "An unexpected error was encountered trying to convert object. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-			},
+		return diag.Diagnostics{
+			diag.NewErrorDiagnostic(
+				"Object Conversion Error",
+				"An unexpected error was encountered trying to convert object. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			),
 		}
 	}
 	err = tftypes.ValidateValue(typ, val)
 	if err != nil {
-		return []*tfprotov6.Diagnostic{
-			{
-				Severity: tfprotov6.DiagnosticSeverityError,
-				Summary:  "Object Conversion Error",
-				Detail:   "An unexpected error was encountered trying to convert object. This is always an error in the provider. Please report the following to the provider developer:\n\n" + err.Error(),
-			},
+		return diag.Diagnostics{
+			diag.NewErrorDiagnostic(
+				"Object Conversion Error",
+				"An unexpected error was encountered trying to convert object. This is always an error in the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			),
 		}
 	}
 	return reflect.Into(ctx, obj, tftypes.NewValue(typ, val), target, reflect.Options{
 		UnhandledNullAsEmpty:    opts.UnhandledNullAsEmpty,
 		UnhandledUnknownAsEmpty: opts.UnhandledUnknownAsEmpty,
 	})
+}
+
+// Type returns an ObjectType with the same attribute types as `o`.
+func (o Object) Type(_ context.Context) attr.Type {
+	return ObjectType{AttrTypes: o.AttrTypes}
 }
 
 // ToTerraformValue returns the data contained in the AttributeValue as

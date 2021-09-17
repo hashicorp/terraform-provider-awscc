@@ -1,5 +1,24 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.9](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.9) (September 15, 2021)
+
+Support attribute default values.
+Support CloudFormation multisets.
+Use `terraform-plugin-framework` Set implementation.
+
+## [0.0.8](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.8) (September 10, 2021)
+
+Documentation generation.
+Support `ForceNew` attributes.
+
+## [0.0.7](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.7) (September 9, 2021)
+
+Singular data sources added.
+
+## [0.0.6](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.6) (September 7, 2021)
+
+Plural data sources added.
+
 ## [0.0.5](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.5) (August 31, 2021)
 
 Attribute validation support added.

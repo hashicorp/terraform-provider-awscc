@@ -3,11 +3,14 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"os"
+	"path"
 
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 	"github.com/mitchellh/cli"
 )
 
@@ -49,12 +52,77 @@ func main() {
 		ErrorWriter: os.Stderr,
 	}
 
-	generator := codegen.NewPluralDataSourceGenerator(ui, acceptanceTestsTemplateBody, dataSourceSchemaTemplateBody, *cfType, *tfDataSourceType)
+	generator := &PluralDataSourceGenerator{
+		cfType:           *cfType,
+		tfDataSourceType: *tfDataSourceType,
+		Generator: shared.Generator{
+			UI: ui,
+		},
+	}
 
 	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
 		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
 		os.Exit(1)
 	}
+}
+
+type PluralDataSourceGenerator struct {
+	cfType           string
+	tfDataSourceType string
+	shared.Generator
+}
+
+// Generate generates the plural data source type's factory into the specified file.
+func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	p.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", p.tfDataSourceType, schemaFilename, acctestsFilename)
+
+	// Create target directories.
+	for _, filename := range []string{schemaFilename, acctestsFilename} {
+		dirname := path.Dir(filename)
+		err := os.MkdirAll(dirname, shared.DirPerm)
+
+		if err != nil {
+			return fmt.Errorf("creating target directory %s: %w", dirname, err)
+		}
+	}
+
+	org, svc, res, err := naming.ParseCloudFormationTypeName(p.cfType)
+
+	if err != nil {
+		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", p.cfType)
+	}
+
+	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
+
+	factoryFunctionName := string(bytes.ToLower([]byte(ds[:1]))) + ds[1:] + shared.DataSourceType
+
+	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, ds)
+
+	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", p.cfType)
+
+	templateData := shared.TemplateData{
+		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
+		CloudFormationTypeName:       p.cfType,
+		FactoryFunctionName:          factoryFunctionName,
+		PackageName:                  packageName,
+		SchemaDescription:            schemaDescription,
+		SchemaVersion:                1,
+		TerraformTypeName:            p.tfDataSourceType,
+	}
+
+	err = p.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, &templateData)
+
+	if err != nil {
+		return err
+	}
+
+	err = p.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Terraform resource schema definition.
@@ -66,13 +134,10 @@ package {{ .PackageName }}
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -82,7 +147,6 @@ func init() {
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} data source type.
 // This Terraform data source type corresponds to the CloudFormation {{ .CloudFormationTypeName }} resource type.
 func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
 	attributes := map[string]tfsdk.Attribute {
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -91,7 +155,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 		},		
 		"ids": {
 		  Description: "Set of Resource Identifiers.",
-		  Type:        providertypes.SetType{ElemType:types.StringType},
+		  Type:        types.SetType{ElemType:types.StringType},
 		  Computed:    true,
     	},
 	}
@@ -104,15 +168,14 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (tfsdk.DataSourceType, erro
 
     var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("{{ .CloudFormationTypeName }}", "{{ .TerraformTypeName }}", schema)
+	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
+	opts = opts.WithTerraformSchema(schema)
 	
     pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "{{ .TerraformTypeName }}", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }

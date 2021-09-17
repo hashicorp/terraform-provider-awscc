@@ -167,7 +167,7 @@ github.com/google/go-cmp/cmp/internal/value
 github.com/google/uuid
 # github.com/googleapis/gax-go/v2 v2.0.5
 github.com/googleapis/gax-go/v2
-# github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.8.0
+# github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0
 ## explicit
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go
 # github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974
@@ -221,10 +221,10 @@ github.com/hashicorp/terraform-exec/tfexec
 github.com/hashicorp/terraform-exec/tfinstall
 # github.com/hashicorp/terraform-json v0.12.0
 github.com/hashicorp/terraform-json
-# github.com/hashicorp/terraform-plugin-framework v0.2.1-0.20210817164910-fad6afe33058 => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902190237-e20bf3555d0c
+# github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210915185916-84afb9afc9ce
 ## explicit
 github.com/hashicorp/terraform-plugin-framework/attr
-github.com/hashicorp/terraform-plugin-framework/internal/diagnostics
+github.com/hashicorp/terraform-plugin-framework/diag
 github.com/hashicorp/terraform-plugin-framework/internal/proto6
 github.com/hashicorp/terraform-plugin-framework/internal/reflect
 github.com/hashicorp/terraform-plugin-framework/tfsdk
@@ -534,4 +534,3 @@ google.golang.org/protobuf/types/known/timestamppb
 google.golang.org/protobuf/types/pluginpb
 # github.com/aws/aws-sdk-go-v2/service/cloudformation => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210723211334-303716fc7a60
 # github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
-# github.com/hashicorp/terraform-plugin-framework => github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210902190237-e20bf3555d0c

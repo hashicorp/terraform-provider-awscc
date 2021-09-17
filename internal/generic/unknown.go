@@ -141,7 +141,7 @@ func (u unknowns) SetValuesFromRaw(ctx context.Context, state *tfsdk.State, reso
 		// Set it in the Terraform State.
 		diags := state.SetAttribute(ctx, path.InTerraformState, val)
 
-		if tfresource.DiagsHasError(diags) {
+		if diags.HasError() {
 			return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, tfresource.DiagsError(diags))
 		}
 	}

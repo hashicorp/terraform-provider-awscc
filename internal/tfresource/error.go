@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	multierror "github.com/hashicorp/go-multierror"
-	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
+	tfdiag "github.com/hashicorp/terraform-plugin-framework/diag"
 )
 
 type NotFoundError struct {
@@ -32,21 +32,7 @@ func NotFound(err error) bool {
 	return errors.As(err, &e)
 }
 
-func DiagsHasError(diags []*tfprotov6.Diagnostic) bool {
-	for _, diag := range diags {
-		if diag == nil {
-			continue
-		}
-
-		if diag.Severity == tfprotov6.DiagnosticSeverityError {
-			return true
-		}
-	}
-
-	return false
-}
-
-func DiagsError(diags []*tfprotov6.Diagnostic) error {
+func DiagsError(diags tfdiag.Diagnostics) error {
 	var errs *multierror.Error
 
 	for _, diag := range diags {
@@ -54,8 +40,8 @@ func DiagsError(diags []*tfprotov6.Diagnostic) error {
 			continue
 		}
 
-		if diag.Severity == tfprotov6.DiagnosticSeverityError {
-			errs = multierror.Append(errs, errors.New(diag.Detail))
+		if diag.Severity() == tfdiag.SeverityError {
+			errs = multierror.Append(errs, errors.New(diag.Detail()))
 		}
 	}
 

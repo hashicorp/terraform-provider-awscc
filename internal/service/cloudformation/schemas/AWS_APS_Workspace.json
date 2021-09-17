@@ -1,0 +1,109 @@
+{
+    "typeName": "AWS::APS::Workspace",
+    "description": "Resource Type definition for AWS::APS::Workspace",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+    "definitions": {
+        "Tag": {
+            "description": "A key-value pair to associate with a resource.",
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+                    "minLength": 0,
+                    "maxLength": 256
+                }
+            },
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "properties": {
+        "WorkspaceId": {
+            "description": "Required to identify a specific APS Workspace.",
+            "type": "string",
+            "pattern": "",
+            "minLength": 1,
+            "maxLength": 100
+        },
+        "Alias": {
+            "description": "AMP Workspace alias.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 100
+        },
+        "Arn": {
+            "description": "Workspace arn.",
+            "type": "string",
+            "pattern": "",
+            "minLength": 1,
+            "maxLength": 128
+        },
+        "PrometheusEndpoint": {
+            "description": "AMP Workspace prometheus endpoint",
+            "type": "string"
+        },
+        "Tags": {
+            "description": "An array of key-value pairs to apply to this resource.",
+            "type": "array",
+            "uniqueItems": true,
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/Tag"
+            }
+        }
+    },
+    "additionalProperties": false,
+    "required": [],
+    "readOnlyProperties": [
+        "/properties/WorkspaceId",
+        "/properties/Arn",
+        "/properties/PrometheusEndpoint"
+    ],
+    "taggable": true,
+    "primaryIdentifier": [
+        "/properties/Arn"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "aps:CreateWorkspace",
+                "aps:TagResource"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "aps:DescribeWorkspace",
+                "aps:ListTagsForResource"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "aps:UpdateWorkspaceAlias",
+                "aps:TagResource",
+                "aps:UntagResource",
+                "aps:ListTagsForResource"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "aps:DeleteWorkspace"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "aps:ListWorkspaces",
+                "aps:ListTagsForResource"
+            ]
+        }
+    }
+}

@@ -5,23 +5,19 @@ package datasync
 import (
 	"context"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windows_plural", locationFSxWindowsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_fsx_windows_plural", locationFSxWindowsPluralDataSourceType)
 }
 
-// locationFSxWindowsDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
+// locationFSxWindowsPluralDataSourceType returns the Terraform awscc_datasync_location_fsx_windows_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource type.
-func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
-	// Required for acceptance testing.
+func locationFSxWindowsPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -30,7 +26,7 @@ func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 		},
 		"ids": {
 			Description: "Set of Resource Identifiers.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 		},
 	}
@@ -43,15 +39,14 @@ func locationFSxWindowsDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.FromCloudFormationAndTerraform("AWS::DataSync::LocationFSxWindows", "awscc_datasync_location_fsx_windows_plural", schema)
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_fsx_windows_plural")
+	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
 
 	if err != nil {
 		return nil, err
 	}
-
-	tflog.Debug(ctx, "Generated schema", "tfTypeName", "awscc_datasync_location_fsx_windows_plural", "schema", hclog.Fmt("%v", schema))
 
 	return pluralDataSourceType, nil
 }
