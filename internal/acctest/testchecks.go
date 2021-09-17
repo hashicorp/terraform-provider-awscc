@@ -58,13 +58,13 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 
 		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudControlProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
+		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlApiClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 
@@ -72,7 +72,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
 		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudControlProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
 		ctx := context.TODO()
@@ -80,7 +80,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 
 		return existsFunc(shouldExist)(
 			ctx,
-			provider.CloudControlClient(ctx),
+			provider.CloudControlApiClient(ctx),
 			provider.RoleARN(ctx),
 			td.CloudFormationResourceType,
 			td.TerraformResourceType,

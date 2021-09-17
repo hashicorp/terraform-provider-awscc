@@ -16,16 +16,16 @@ import (
 )
 
 func New() tfsdk.Provider {
-	return &AwsCloudControlProvider{}
+	return &AwsCloudControlApiProvider{}
 }
 
-type AwsCloudControlProvider struct {
+type AwsCloudControlApiProvider struct {
 	ccClient *cloudcontrol.Client
 	region   string
 	roleARN  string
 }
 
-func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -158,7 +158,7 @@ type assumeRoleData struct {
 	SessionName     types.String `tfsdk:"session_name"`
 }
 
-func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
+func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
 
 	diags := request.Config.Get(ctx, &config)
@@ -228,7 +228,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Error configuring AWS CloudControl client",
-			fmt.Sprintf("Error configuring the AWS Cloud Control client, this is an error in the provider.\n%s\n", err),
+			fmt.Sprintf("Error configuring the AWS Cloud Control API client, this is an error in the provider.\n%s\n", err),
 		)
 
 		return
@@ -239,7 +239,7 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	resources := make(map[string]tfsdk.ResourceType)
 
@@ -261,7 +261,7 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	dataSources := make(map[string]tfsdk.DataSourceType)
 
@@ -283,19 +283,19 @@ func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[strin
 	return dataSources, diags
 }
 
-func (p *AwsCloudControlProvider) CloudControlClient(_ context.Context) *cloudcontrol.Client {
+func (p *AwsCloudControlApiProvider) CloudControlApiClient(_ context.Context) *cloudcontrol.Client {
 	return p.ccClient
 }
 
-func (p *AwsCloudControlProvider) Region(_ context.Context) string {
+func (p *AwsCloudControlApiProvider) Region(_ context.Context) string {
 	return p.region
 }
 
-func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
+func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
-// newCloudControlClient configures and returns a fully initialized AWS Cloud Control client with the configured region.
+// newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{

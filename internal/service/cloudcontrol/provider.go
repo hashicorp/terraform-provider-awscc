@@ -6,14 +6,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 )
 
-// Provider is the interface implemented by AWS Cloud Control client providers.
+// Provider is the interface implemented by AWS Cloud Control API client providers.
 type Provider interface {
-	// CloudControlClient returns an AWS Cloud Control client.
-	CloudControlClient(context.Context) *cloudcontrol.Client
+	// CloudControlApiClient returns an AWS Cloud Control API client.
+	CloudControlApiClient(context.Context) *cloudcontrol.Client
 
-	// Region returns and AWS Cloud Control client's region
+	// Region returns and AWS Cloud Control API client's region
 	Region(ctx context.Context) string
 
-	// RoleARN returns an AWS Cloud Control service role ARN.
+	// RoleARN returns an AWS Cloud Control API service role ARN.
 	RoleARN(context.Context) string
 }

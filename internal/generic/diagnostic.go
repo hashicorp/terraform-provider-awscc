@@ -15,8 +15,8 @@ func DataSourceNotFoundDiag(err error) diag.Diagnostic {
 
 func DesiredStateErrorDiag(source string, err error) diag.Diagnostic {
 	return diag.NewErrorDiagnostic(
-		"Creation Of Cloud Control Desired State Unsuccessful",
-		fmt.Sprintf("Unable to create Cloud Control Desired State from Terraform %s. This is typically an error with the Terraform provider implementation. Original Error: %s", source, err.Error()),
+		"Creation Of Cloud Control API Desired State Unsuccessful",
+		fmt.Sprintf("Unable to create Cloud Control API Desired State from Terraform %s. This is typically an error with the Terraform provider implementation. Original Error: %s", source, err.Error()),
 	)
 }
 

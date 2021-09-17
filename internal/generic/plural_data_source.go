@@ -73,7 +73,7 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 
 	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := pd.provider.CloudControlClient(ctx)
+	conn := pd.provider.CloudControlApiClient(ctx)
 
 	descriptions, err := pd.list(ctx, conn)
 
@@ -100,7 +100,7 @@ func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client)
 	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
 }
 
-// GetCloudControlResourceDescriptionsValue returns the Terraform Value for the specified Cloud Control ResourceDescriptions.
+// GetCloudControlResourceDescriptionsValue returns the Terraform Value for the specified Cloud Control API ResourceDescriptions.
 func GetCloudControlResourceDescriptionsValue(id string, descriptions []cctypes.ResourceDescription) tftypes.Value {
 	m := map[string]tftypes.Value{
 		"id": tftypes.NewValue(tftypes.String, id),
