@@ -3,15 +3,19 @@ package provider
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -333,5 +337,27 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 		return nil, "", err
 	}
 
-	return cloudformation.NewFromConfig(cfg), cfg.Region, nil
+	return cloudformation.NewFromConfig(cfg, func(o *cloudformation.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
+}
+
+type awsSdkLogger struct{}
+type awsSdkContextLogger struct {
+	ctx context.Context
+}
+
+func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
+	log.Printf("[%s] [aws-sdk-go-v2] %s", classification, fmt.Sprintf(format, v...))
+}
+
+func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
+	return awsSdkContextLogger{ctx: ctx}
+}
+
+func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
+	switch classification {
+	case logging.Warn:
+		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+	default:
+		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+	}
 }
