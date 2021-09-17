@@ -55,25 +55,22 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.TEST_TF_PROVIDER_RELEASE_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TEST_TF_PROVIDER_RELEASE_AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.TEST_TF_PROVIDER_RELEASE_AWS_SESSION_TOKEN }} # remove when run in prod
           aws-region: us-west-2
           # TODO: uncomment below to run in prod
           #role-duration-seconds: 900
           #role-to-assume: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ROLE_ARN }}
           #role-session-name: ${{ github.run_id }}
           #role-skip-session-tagging: true
-      - name: run aws s3 ls
-        run: aws s3 ls
-#       - name: goreleaser release
-#         uses: goreleaser/goreleaser-action@v2
-#         with:
-#           args: release --release-notes /tmp/RELEASE-NOTES.md --rm-dist
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           SIGNORE_CLIENT_ID: ${{ secrets.SIGNORE_CLIENT_ID }}
-#           SIGNORE_CLIENT_SECRET: ${{ secrets.SIGNORE_CLIENT_SECRET }}
-#       - name: hc-releases publish
-#         run: hc-releases publish -bucket=${{ env.TEST_BUCKET }} -region=us-west-2 -product=${{ github.event.repository.name }}
-#         env:
-#           FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
-#           TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
+      - name: goreleaser release
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          args: release --release-notes /tmp/RELEASE-NOTES.md --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SIGNORE_CLIENT_ID: ${{ secrets.SIGNORE_CLIENT_ID }}
+          SIGNORE_CLIENT_SECRET: ${{ secrets.SIGNORE_CLIENT_SECRET }}
+      - name: hc-releases publish
+        run: hc-releases publish -bucket=${{ env.TEST_BUCKET }} -region=us-west-2 -product=${{ github.event.repository.name }}
+        env:
+          FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
+          TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
