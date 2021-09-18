@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestDefaultValue(t *testing.T) {
@@ -116,46 +115,46 @@ func TestDefaultValue(t *testing.T) {
 			}},
 		},
 		"non-default string set": {
-			plannedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			plannedValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "POST"},
 			}},
-			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			currentValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "PUT"},
 			}},
-			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			defaultValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "GET"},
 				types.String{Value: "HEAD"},
 			}},
-			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			expectedValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "POST"},
 			}},
 		},
 		"default string set, current out of order": {
-			plannedValue: providertypes.Set{ElemType: types.StringType, Null: true},
-			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			plannedValue: types.Set{ElemType: types.StringType, Null: true},
+			currentValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "HEAD"},
 				types.String{Value: "GET"},
 			}},
-			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			defaultValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "GET"},
 				types.String{Value: "HEAD"},
 			}},
-			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			expectedValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "HEAD"},
 				types.String{Value: "GET"},
 			}},
 		},
 		"default string set": {
-			plannedValue: providertypes.Set{ElemType: types.StringType, Null: true},
-			currentValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			plannedValue: types.Set{ElemType: types.StringType, Null: true},
+			currentValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "GET"},
 				types.String{Value: "HEAD"},
 			}},
-			defaultValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			defaultValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "GET"},
 				types.String{Value: "HEAD"},
 			}},
-			expectedValue: providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{
+			expectedValue: types.Set{ElemType: types.StringType, Elems: []attr.Value{
 				types.String{Value: "GET"},
 				types.String{Value: "HEAD"},
 			}},

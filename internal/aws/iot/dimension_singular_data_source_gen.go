@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -62,7 +61,7 @@ func dimensionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "uniqueItems": true
 			// }
 			Description: "Specifies the value or list of values for the dimension.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 		},
 		"tags": {
@@ -99,7 +98,7 @@ func dimensionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "uniqueItems": true
 			// }
 			Description: "Metadata that can be used to manage the dimension.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -114,7 +113,7 @@ func dimensionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -90,7 +89,7 @@ func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tf
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -103,7 +102,7 @@ func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tf
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

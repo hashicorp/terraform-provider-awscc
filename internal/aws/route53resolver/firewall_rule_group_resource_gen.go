@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -129,7 +128,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "uniqueItems": true
 			// }
 			Description: "FirewallRules",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"action": {
 						// Property: Action
@@ -202,7 +201,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -354,7 +353,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "uniqueItems": true
 			// }
 			Description: "Tags",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -375,7 +374,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

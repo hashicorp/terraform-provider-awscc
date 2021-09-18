@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -566,6 +565,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(0),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"metric_list": {
 						// Property: MetricList
@@ -607,6 +609,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 							},
 						),
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"metric_set_description": {
 						// Property: MetricSetDescription

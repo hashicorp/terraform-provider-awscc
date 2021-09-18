@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -187,7 +186,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"thing_group_names": {
 									// Property: ThingGroupNames
 									Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Required:    true,
 								},
 							},
@@ -366,7 +365,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -387,7 +386,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),

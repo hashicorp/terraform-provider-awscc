@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -120,7 +119,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 				map[string]tfsdk.Attribute{
 					"allowed_features": {
 						// Property: AllowedFeatures
-						Type:     providertypes.SetType{ElemType: types.StringType},
+						Type:     types.SetType{ElemType: types.StringType},
 						Computed: true,
 					},
 					"cloudwatch_metrics_enabled": {
@@ -135,11 +134,11 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"transformation_configurations": {
 						// Property: TransformationConfigurations
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"actions": {
 									// Property: Actions
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"content_transformation": {
@@ -148,7 +147,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 									Computed: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},

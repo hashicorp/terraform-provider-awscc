@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestArrayLenBetweenValidator(t *testing.T) {
@@ -77,25 +76,25 @@ func TestArrayLenBetweenValidator(t *testing.T) {
 		},
 		"unknown set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, tftypes.UnknownValue),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 			maxItems: 3,
 		},
 		"null set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, nil),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 			maxItems: 3,
 		},
 		"valid empty set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 			maxItems: 3,
 		},
 		"invalid empty set": {
 			val:         tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
-			f:           providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems:    1,
 			maxItems:    3,
 			expectError: true,
@@ -106,7 +105,7 @@ func TestArrayLenBetweenValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "beta"),
 				tftypes.NewValue(tftypes.String, "gamma"),
 			}),
-			f:        providertypes.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.StringType}.ValueFromTerraform,
 			minItems: 2,
 			maxItems: 3,
 		},
@@ -117,7 +116,7 @@ func TestArrayLenBetweenValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "gamma"),
 				tftypes.NewValue(tftypes.String, "delta"),
 			}),
-			f:           providertypes.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: types.StringType}.ValueFromTerraform,
 			minItems:    2,
 			maxItems:    3,
 			expectError: true,
@@ -207,22 +206,22 @@ func TestArrayLenAtLeastValidator(t *testing.T) {
 		},
 		"unknown set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, tftypes.UnknownValue),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 		},
 		"null set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, nil),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 		},
 		"valid empty set": {
 			val:      tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
-			f:        providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems: 0,
 		},
 		"invalid empty set": {
 			val:         tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
-			f:           providertypes.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
 			minItems:    1,
 			expectError: true,
 		},
@@ -232,14 +231,14 @@ func TestArrayLenAtLeastValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "beta"),
 				tftypes.NewValue(tftypes.String, "gamma"),
 			}),
-			f:        providertypes.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			f:        types.SetType{ElemType: types.StringType}.ValueFromTerraform,
 			minItems: 2,
 		},
 		"invalid set of string": {
 			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
 				tftypes.NewValue(tftypes.String, "alpha"),
 			}),
-			f:           providertypes.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			f:           types.SetType{ElemType: types.StringType}.ValueFromTerraform,
 			minItems:    2,
 			expectError: true,
 		},

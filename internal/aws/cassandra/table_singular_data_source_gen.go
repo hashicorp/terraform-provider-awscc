@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -305,7 +304,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Non-key columns of the table",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"column_name": {
 						// Property: ColumnName
@@ -318,7 +317,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

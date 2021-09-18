@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -438,7 +437,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "A list of tags to apply to the function.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -453,7 +452,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

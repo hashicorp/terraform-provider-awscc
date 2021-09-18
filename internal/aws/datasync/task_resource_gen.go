@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -72,6 +71,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"error_code": {
 			// Property: ErrorCode
@@ -156,6 +158,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -550,6 +555,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -605,7 +613,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -626,7 +634,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),

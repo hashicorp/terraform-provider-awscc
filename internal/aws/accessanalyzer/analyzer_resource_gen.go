@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -112,11 +111,17 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Contains
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"eq": {
 									// Property: Eq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"exists": {
 									// Property: Exists
@@ -127,6 +132,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Neq
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"property": {
 									// Property: Property
@@ -139,6 +147,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"rule_name": {
 						// Property: RuleName
@@ -150,6 +161,9 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -197,7 +211,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -218,7 +232,7 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),

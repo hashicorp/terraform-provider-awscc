@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -964,6 +963,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},

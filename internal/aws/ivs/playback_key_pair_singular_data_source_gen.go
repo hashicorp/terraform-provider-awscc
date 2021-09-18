@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -101,7 +100,7 @@ func playbackKeyPairDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "uniqueItems": true
 			// }
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -114,7 +113,7 @@ func playbackKeyPairDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 						Computed: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

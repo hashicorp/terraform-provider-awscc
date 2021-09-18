@@ -114,8 +114,6 @@ github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1m
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/evanphx/json-patch v0.5.2 h1:xVCHIVMUu1wtM/VkR9jVZ45N3FhZfYMMYGorLCR8P3k=
 github.com/evanphx/json-patch v0.5.2/go.mod h1:ZWS5hhDbVDyob71nXKNL0+PWn6ToqBHMikGIFbs31qQ=
-github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77 h1:EqGVXBO/5nVzp5OqTHUDn86isb8kXiRRxSPSRIg/3tc=
-github.com/ewbankkit/terraform-plugin-framework v0.2.1-0.20210908155737-cef60d646d77/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
 github.com/fatih/color v1.7.0 h1:DkWD4oS2D8LGGgTQ6IvwJJXSL5Vp2ffcQg58nFV38Ys=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568/go.mod h1:xEzjJPgXI435gkrCt3MPfRiAkVrwSbHsst4LCFVfpJc=
@@ -194,6 +192,8 @@ github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.9.0 h1:tmfUGbj6/nQxYZJWmUoY0NoGMLZBgDcyl+OlH9+vbcE=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.9.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0 h1:cClHI47voDkTrM7TpbXL0cTZBAseI0/1+j8pZ1sEzjA=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974 h1:nP8GUCBRDCgWQK/L08YdzAK9h8KBn8Y8LEoH4WLxCw4=
 github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974/go.mod h1:EnOBtiLoKJYce3L2SKwusJ52x9x4jtMmQYrmtqOWcfo=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804 h1:8jyhcSriYET3CiKPgycnfzzEzPBjoWuU5D3xBckQdEQ=
@@ -239,6 +239,8 @@ github.com/hashicorp/terraform-exec v0.14.0 h1:UQoUcxKTZZXhyyK68Cwn4mApT4mnFPmEX
 github.com/hashicorp/terraform-exec v0.14.0/go.mod h1:qrAASDq28KZiMPDnQ02sFS9udcqEkRly002EA2izXTA=
 github.com/hashicorp/terraform-json v0.12.0 h1:8czPgEEWWPROStjkWPUnTQDXmpmZPlkQAwYYLETaTvw=
 github.com/hashicorp/terraform-json v0.12.0/go.mod h1:pmbq9o4EuL43db5+0ogX10Yofv1nozM+wskr/bGFJpI=
+github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210915185916-84afb9afc9ce h1:frmReaSFmYiHH8dXEq0rMASuuAiXkBkYRUz8/HIMhtQ=
+github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210915185916-84afb9afc9ce/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
 github.com/hashicorp/terraform-plugin-go v0.3.0/go.mod h1:dFHsQMaTLpON2gWhVWT96fvtlc/MF1vSy3OdMhWBzdM=
 github.com/hashicorp/terraform-plugin-go v0.3.1 h1:ML+THFcqpdR049gqrbEFDFo99va2Wqw9g4XDPy51euU=
 github.com/hashicorp/terraform-plugin-go v0.3.1/go.mod h1:dFHsQMaTLpON2gWhVWT96fvtlc/MF1vSy3OdMhWBzdM=

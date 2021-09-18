@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -66,6 +65,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -542,6 +544,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -549,6 +554,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"event_variables": {
 						// Property: EventVariables
@@ -645,6 +653,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"variable_type": {
 									// Property: VariableType
@@ -694,6 +705,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"inline": {
 						// Property: Inline
@@ -767,6 +781,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -774,6 +791,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"last_updated_time": {
 						// Property: LastUpdatedTime
@@ -817,6 +837,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 			),
@@ -1106,6 +1129,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{
@@ -1113,6 +1139,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"rule_id": {
 						// Property: RuleId
@@ -1151,6 +1180,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{
@@ -1158,6 +1190,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1214,6 +1249,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

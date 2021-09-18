@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -131,11 +130,11 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"data_resources": {
 						// Property: DataResources
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"type": {
 									// Property: Type
@@ -146,18 +145,18 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"values": {
 									// Property: Values
 									Description: "An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.",
-									Type:        providertypes.SetType{ElemType: types.StringType},
+									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"exclude_management_event_sources": {
 						// Property: ExcludeManagementEventSources
 						Description: "An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing \"kms.amazonaws.com\". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.",
-						Type:        providertypes.SetType{ElemType: types.StringType},
+						Type:        types.SetType{ElemType: types.StringType},
 						Optional:    true,
 					},
 					"include_management_events": {
@@ -180,7 +179,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 5,
 				},
 			),
@@ -218,7 +217,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"insight_type": {
 						// Property: InsightType
@@ -227,7 +226,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -370,6 +369,9 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"trail_name": {
 			// Property: TrailName

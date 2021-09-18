@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -177,6 +176,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 256),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"enable_sni": {
 						// Property: EnableSNI
@@ -255,6 +257,9 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 64),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 					"request_interval": {
@@ -357,7 +362,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -378,7 +383,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},

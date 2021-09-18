@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -40,6 +39,9 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 5),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"recovery_group_arn": {
@@ -115,11 +117,17 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						// Property: Value
 						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -139,7 +138,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"parameters": {
 									// Property: Parameters
 									Description: "The parameters to set when starting the SSM automation document.",
-									Attributes: providertypes.SetNestedAttributes(
+									Attributes: tfsdk.SetNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"key": {
 												// Property: Key
@@ -159,7 +158,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										providertypes.SetNestedAttributesOptions{
+										tfsdk.SetNestedAttributesOptions{
 											MaxItems: 200,
 										},
 									),
@@ -288,11 +287,11 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The list of engagements to use.",
-			Type:        providertypes.SetType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 			},
 		},
 		"incident_template": {
@@ -469,7 +468,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "The tags to apply to the response plan.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -488,7 +487,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 					MaxItems: 50,
 				},
@@ -496,7 +495,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(providertypes.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 			},
 		},
 	}

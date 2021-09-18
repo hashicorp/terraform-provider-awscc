@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -95,6 +94,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 			),
@@ -112,6 +114,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"db_instance_identifiers": {
 			// Property: DBInstanceIdentifiers
@@ -125,6 +130,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName

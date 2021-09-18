@@ -17,7 +17,6 @@ type Features int
 
 const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
-	UsesInternalTypes                            // Uses a type from the internal/types package.
 	HasRequiredRootProperty                      // At least one root property is required.
 	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
 	UsesMathBig                                  // Uses a type from the math/big package.
@@ -226,18 +225,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			// Set.
 			//
 			switch itemType := property.Items.Type.String(); itemType {
-			// Sets of primitive types use provider-local Set type until tfsdk support is available.
 			case cfschema.PropertyTypeBoolean:
-				features |= UsesInternalTypes
-				e.printf("Type:providertypes.SetType{ElemType:types.BoolType},\n")
+				e.printf("Type:types.SetType{ElemType:types.BoolType},\n")
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				features |= UsesInternalTypes
-				e.printf("Type:providertypes.SetType{ElemType:types.NumberType},\n")
+				e.printf("Type:types.SetType{ElemType:types.NumberType},\n")
 
 			case cfschema.PropertyTypeString:
-				features |= UsesInternalTypes
-				e.printf("Type:providertypes.SetType{ElemType:types.StringType},\n")
+				e.printf("Type:types.SetType{ElemType:types.StringType},\n")
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -248,8 +243,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return 0, unsupportedTypeError(path, "set of undefined schema")
 				}
 
-				features |= UsesInternalTypes
-				e.printf("Attributes:providertypes.SetNestedAttributes(\n")
+				e.printf("Attributes:tfsdk.SetNestedAttributes(\n")
 
 				f, err := e.emitSchema(
 					attributeNameMap,
@@ -267,7 +261,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("providertypes.SetNestedAttributesOptions{\n")
+				e.printf("tfsdk.SetNestedAttributesOptions{\n")
 
 				if !computedOnly {
 					if property.MinItems != nil {
@@ -345,8 +339,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("},\n")
 				e.printf("),\n")
 
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateOrderedSet:
 					validators = append(validators, "validate.UniqueItems()")
+				case aggregateMultiset:
+					planModifiers = append(planModifiers, "Multiset()")
 				}
 
 				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
@@ -371,8 +368,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems))
 				}
 
-				if arrayType == aggregateOrderedSet {
+				switch arrayType {
+				case aggregateOrderedSet:
 					validators = append(validators, "validate.UniqueItems()")
+				case aggregateMultiset:
+					planModifiers = append(planModifiers, "Multiset()")
 				}
 			}
 		}
@@ -417,18 +417,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			case cfschema.PropertyTypeArray:
 				if aggregateType(patternProperty) == aggregateSet {
 					switch itemType := patternProperty.Items.Type.String(); itemType {
-					// Sets of primitive types use provider-local Set type until tfsdk support is available.
 					case cfschema.PropertyTypeBoolean:
-						features |= UsesInternalTypes
-						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.BoolType}},\n")
+						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
 
 					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-						features |= UsesInternalTypes
-						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.NumberType}},\n")
+						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.NumberType}},\n")
 
 					case cfschema.PropertyTypeString:
-						features |= UsesInternalTypes
-						e.printf("Type: types.MapType{ElemType:providertypes.SetType{ElemType:types.StringType}},\n")
+						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
 
 					default:
 						return 0, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
@@ -782,11 +778,10 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		case aggregateNone:
 			return 0, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
-			features |= UsesInternalTypes
 			features |= UsesFrameworkAttr
 
 			w := &strings.Builder{}
-			fprintf(w, "DefaultValue(providertypes.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
+			fprintf(w, "DefaultValue(types.Set{ElemType:types.StringType, Elems: []attr.Value{\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:

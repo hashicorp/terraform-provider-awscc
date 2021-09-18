@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -57,7 +56,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"attribute_name": {
 						// Property: AttributeName
@@ -73,7 +72,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),
@@ -207,7 +206,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -251,7 +250,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
@@ -338,7 +337,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 		},
@@ -463,7 +462,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"index_name": {
 						// Property: IndexName
@@ -506,7 +505,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"non_key_attributes": {
 									// Property: NonKeyAttributes
-									Type:     providertypes.SetType{ElemType: types.StringType},
+									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 								},
 								"projection_type": {
@@ -519,7 +518,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
@@ -747,7 +746,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"contributor_insights_specification": {
 						// Property: ContributorInsightsSpecification
@@ -764,7 +763,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"global_secondary_indexes": {
 						// Property: GlobalSecondaryIndexes
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"contributor_insights_specification": {
 									// Property: ContributorInsightsSpecification
@@ -870,7 +869,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
@@ -989,7 +988,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tags": {
 						// Property: Tags
-						Attributes: providertypes.SetNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
 									// Property: Key
@@ -1002,12 +1001,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							providertypes.SetNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MinItems: 1,
 				},
 			),

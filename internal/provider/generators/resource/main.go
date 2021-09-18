@@ -120,7 +120,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{ if .ImportInternalTypes }}providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"{{- end }}
 	{{ if .ImportValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 

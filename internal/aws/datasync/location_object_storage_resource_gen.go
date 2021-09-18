@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	providertypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -58,6 +57,9 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"bucket_name": {
@@ -235,7 +237,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "uniqueItems": true
 			// }
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: providertypes.SetNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -256,7 +258,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						},
 					},
 				},
-				providertypes.SetNestedAttributesOptions{
+				tfsdk.SetNestedAttributesOptions{
 					MaxItems: 50,
 				},
 			),

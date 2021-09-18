@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
@@ -388,6 +387,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"window": {
 															// Property: Window
@@ -472,6 +474,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 													},
 												),
@@ -504,6 +509,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"description": {
 						// Property: Description
@@ -527,6 +535,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"asset_model_description": {
 			// Property: AssetModelDescription
@@ -602,6 +613,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"asset_model_id": {
 			// Property: AssetModelId
@@ -948,6 +962,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 											"window": {
 												// Property: Window
@@ -1032,6 +1049,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 										},
 									),
@@ -1064,6 +1084,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -1106,6 +1129,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 
