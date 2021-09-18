@@ -5,14 +5,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -55,13 +55,13 @@ func (sdt *singularDataSourceType) NewDataSource(ctx context.Context, provider t
 
 // Implements tfsdk.DataSource
 type singularDataSource struct {
-	provider       tfcloudformation.Provider
+	provider       tfcloudcontrol.Provider
 	dataSourceType *singularDataSourceType
 }
 
 func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceType *singularDataSourceType) tfsdk.DataSource {
 	return &singularDataSource{
-		provider:       provider.(tfcloudformation.Provider),
+		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: singularDataSourceType,
 	}
 }
@@ -74,7 +74,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 
 	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := sd.provider.CloudFormationClient(ctx)
+	conn := sd.provider.CloudControlApiClient(ctx)
 
 	currentConfig := &request.Config
 
@@ -95,19 +95,19 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
 
 	translator := toTerraform{cfToTfNameMap: sd.dataSourceType.cfToTfNameMap}
 	schema := &currentConfig.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to create a Terraform State value from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -132,8 +132,8 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 }
 
 // describe returns the live state of the specified resource.
-func (sd *singularDataSource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
-	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
+func (sd *singularDataSource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
+	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, sd.provider.RoleARN(ctx), sd.dataSourceType.cfTypeName, id)
 }
 
 // getId returns the data source's primary identifier value from Config.

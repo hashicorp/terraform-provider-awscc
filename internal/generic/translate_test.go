@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-func TestTranslateToCloudFormation(t *testing.T) {
+func TestTranslateToCloudControl(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		Plan          tfsdk.Plan
@@ -66,7 +66,7 @@ func TestTranslateToCloudFormation(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			translator := toCloudFormation{tfToCfNameMap: testCase.TfToCfNameMap}
+			translator := toCloudControl{tfToCfNameMap: testCase.TfToCfNameMap}
 			got, err := translator.AsRaw(context.TODO(), testCase.Plan.Raw)
 
 			if err == nil && testCase.ExpectedError {

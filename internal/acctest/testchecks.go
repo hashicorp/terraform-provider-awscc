@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -56,23 +56,23 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 			return fmt.Errorf("no ID is set")
 		}
 
-		provider, ok := td.provider.(tfcloudformation.Provider)
+		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
 		ctx := context.TODO()
 		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
-		return tfcloudformation.DeleteResource(ctx, provider.CloudFormationClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
+		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlApiClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
 }
 
 func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	return func(state *terraform.State) error {
-		provider, ok := td.provider.(tfcloudformation.Provider)
+		provider, ok := td.provider.(tfcloudcontrol.Provider)
 		if !ok {
-			return fmt.Errorf("unable to convert %T to CloudFormationProvider", td.provider)
+			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
 		ctx := context.TODO()
@@ -80,7 +80,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 
 		return existsFunc(shouldExist)(
 			ctx,
-			provider.CloudFormationClient(ctx),
+			provider.CloudControlApiClient(ctx),
 			provider.RoleARN(ctx),
 			td.CloudFormationResourceType,
 			td.TerraformResourceType,
@@ -89,8 +89,8 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 	}
 }
 
-func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, string, string, string, string) resource.TestCheckFunc {
-	return func(ctx context.Context, conn *cloudformation.Client, roleARN, cfTypeName, tfTypeName, resourceName string) resource.TestCheckFunc {
+func existsFunc(shouldExist bool) func(context.Context, *cloudcontrol.Client, string, string, string, string) resource.TestCheckFunc {
+	return func(ctx context.Context, conn *cloudcontrol.Client, roleARN, cfTypeName, tfTypeName, resourceName string) resource.TestCheckFunc {
 		return func(state *terraform.State) error {
 			rs, ok := state.RootModule().Resources[resourceName]
 			if !ok {
@@ -103,7 +103,7 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudformation.Client, 
 				return fmt.Errorf("no ID is set")
 			}
 
-			_, err := tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, roleARN, cfTypeName, id)
+			_, err := tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, roleARN, cfTypeName, id)
 
 			// TODO
 			// TODO Some resource can still be found but are logically deleted.

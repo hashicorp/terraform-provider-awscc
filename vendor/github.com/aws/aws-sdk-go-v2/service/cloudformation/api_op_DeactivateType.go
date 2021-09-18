@@ -11,12 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deactivates a public extension that was previously activated in this account and
+// region. Once deactivated, an extension cannot be used in any CloudFormation
+// operation. This includes stack update operations where the stack template
+// includes the extension, even if no updates are being made to the extension. In
+// addition, deactivated extensions are not automatically updated if a new version
+// of the extension is released.
 func (c *Client) DeactivateType(ctx context.Context, params *DeactivateTypeInput, optFns ...func(*Options)) (*DeactivateTypeOutput, error) {
 	if params == nil {
 		params = &DeactivateTypeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeactivateType", params, optFns, addOperationDeactivateTypeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeactivateType", params, optFns, c.addOperationDeactivateTypeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -27,10 +33,18 @@ func (c *Client) DeactivateType(ctx context.Context, params *DeactivateTypeInput
 }
 
 type DeactivateTypeInput struct {
+
+	// The Amazon Resource Name (ARN) for the extension, in this account and region.
+	// Conditional: You must specify either Arn, or TypeName and Type.
 	Arn *string
 
+	// The extension type. Conditional: You must specify either Arn, or TypeName and
+	// Type.
 	Type types.ThirdPartyType
 
+	// The type name of the extension, in this account and region. If you specified a
+	// type name alias when enabling the extension, use the type name alias.
+	// Conditional: You must specify either Arn, or TypeName and Type.
 	TypeName *string
 }
 
@@ -39,7 +53,7 @@ type DeactivateTypeOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDeactivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeactivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDeactivateType{}, middleware.After)
 	if err != nil {
 		return err

@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base"
 	hclog "github.com/hashicorp/go-hclog"
@@ -20,16 +20,16 @@ import (
 )
 
 func New() tfsdk.Provider {
-	return &AwsCloudControlProvider{}
+	return &AwsCloudControlApiProvider{}
 }
 
-type AwsCloudControlProvider struct {
-	cfClient *cloudformation.Client
+type AwsCloudControlApiProvider struct {
+	ccClient *cloudcontrol.Client
 	region   string
 	roleARN  string
 }
 
-func (p *AwsCloudControlProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
 	return tfsdk.Schema{
 		Version: 1,
 		Attributes: map[string]tfsdk.Attribute{
@@ -163,7 +163,7 @@ type assumeRoleData struct {
 	SessionName     types.String `tfsdk:"session_name"`
 }
 
-func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
+func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
 
 	diags := request.Config.Get(ctx, &config)
@@ -228,23 +228,23 @@ func (p *AwsCloudControlProvider) Configure(ctx context.Context, request tfsdk.C
 		return
 	}
 
-	cfClient, region, err := newCloudFormationClient(ctx, &config)
+	ccClient, region, err := newCloudControlClient(ctx, &config)
 
 	if err != nil {
 		response.Diagnostics.AddError(
-			"Error configuring AWS CloudFormation client",
-			fmt.Sprintf("Error configuring the AWS CloudFormation client, this is an error in the provider.\n%s\n", err),
+			"Error configuring AWS CloudControl client",
+			fmt.Sprintf("Error configuring the AWS Cloud Control API client, this is an error in the provider.\n%s\n", err),
 		)
 
 		return
 	}
 
-	p.cfClient = cfClient
+	p.ccClient = ccClient
 	p.region = region
 	p.roleARN = config.RoleARN.Value
 }
 
-func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetResources(ctx context.Context) (map[string]tfsdk.ResourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	resources := make(map[string]tfsdk.ResourceType)
 
@@ -266,7 +266,7 @@ func (p *AwsCloudControlProvider) GetResources(ctx context.Context) (map[string]
 	return resources, diags
 }
 
-func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
+func (p *AwsCloudControlApiProvider) GetDataSources(ctx context.Context) (map[string]tfsdk.DataSourceType, diag.Diagnostics) {
 	var diags diag.Diagnostics
 	dataSources := make(map[string]tfsdk.DataSourceType)
 
@@ -288,20 +288,20 @@ func (p *AwsCloudControlProvider) GetDataSources(ctx context.Context) (map[strin
 	return dataSources, diags
 }
 
-func (p *AwsCloudControlProvider) CloudFormationClient(_ context.Context) *cloudformation.Client {
-	return p.cfClient
+func (p *AwsCloudControlApiProvider) CloudControlApiClient(_ context.Context) *cloudcontrol.Client {
+	return p.ccClient
 }
 
-func (p *AwsCloudControlProvider) Region(_ context.Context) string {
+func (p *AwsCloudControlApiProvider) Region(_ context.Context) string {
 	return p.region
 }
 
-func (p *AwsCloudControlProvider) RoleARN(_ context.Context) string {
+func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
-// newCloudFormationClient configures and returns a fully initialized AWS CloudFormation client with the configured region.
-func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudformation.Client, string, error) {
+// newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
+func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
 		AccessKey:            pd.AccessKey.Value,
@@ -337,7 +337,7 @@ func newCloudFormationClient(ctx context.Context, pd *providerData) (*cloudforma
 		return nil, "", err
 	}
 
-	return cloudformation.NewFromConfig(cfg, func(o *cloudformation.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
+	return cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
 }
 
 type awsSdkLogger struct{}
