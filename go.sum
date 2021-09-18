@@ -190,8 +190,6 @@ github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
 github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+Tv3SM=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
-github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.9.0 h1:tmfUGbj6/nQxYZJWmUoY0NoGMLZBgDcyl+OlH9+vbcE=
-github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.9.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0 h1:cClHI47voDkTrM7TpbXL0cTZBAseI0/1+j8pZ1sEzjA=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974 h1:nP8GUCBRDCgWQK/L08YdzAK9h8KBn8Y8LEoH4WLxCw4=
