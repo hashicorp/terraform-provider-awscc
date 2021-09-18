@@ -1,5 +1,9 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.10](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.10) (September 18, 2021)
+
+Migrate to `cloudcontrol` as the AWS service package.
+
 ## [0.0.9](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.9) (September 15, 2021)
 
 Support attribute default values.
