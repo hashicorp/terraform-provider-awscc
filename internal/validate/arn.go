@@ -3,6 +3,7 @@ package validate
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -56,4 +57,60 @@ func (validator arnValidator) Validate(ctx context.Context, request tfsdk.Valida
 // ARN returns a new ARN validator.
 func ARN() tfsdk.AttributeValidator {
 	return arnValidator{}
+}
+
+// iamPolicyARNValidator validates that a string is a valid IAM Policy ARN.
+type iamPolicyARNValidator struct {
+	tfsdk.AttributeValidator
+}
+
+func (validator iamPolicyARNValidator) Description(_ context.Context) string {
+	return "string must be an IAM Policy ARN"
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator iamPolicyARNValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
+
+		return
+	}
+
+	if s.Unknown || s.Null {
+		return
+	}
+
+	arn, err := arn.Parse(s.Value)
+	if err != nil {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid format",
+			"expected an IAM policy ARN",
+		)
+
+		return
+	}
+
+	if arn.Service != "iam" || !strings.HasPrefix(arn.Resource, "policy/") {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid format",
+			"expected an IAM policy ARN",
+		)
+	}
+}
+
+// IAMPolicyARN returns a new string is IAM policy ARN validator.
+func IAMPolicyARN() tfsdk.AttributeValidator {
+	return iamPolicyARNValidator{}
 }

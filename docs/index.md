@@ -184,6 +184,8 @@ Optional:
 
 - **duration_seconds** (Number) Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.
 - **external_id** (String) External identifier to use when assuming the role.
+- **policy** (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
+- **policy_arns** (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
 - **role_arn** (String) Amazon Resource Name (ARN) of the IAM Role to assume.
 - **session_name** (String) Session name to use when assuming the role.
 - **tags** (Attributes Set, Max: 50) Set of assume role session tags. (see [below for nested schema](#nestedatt--assume_role--tags))

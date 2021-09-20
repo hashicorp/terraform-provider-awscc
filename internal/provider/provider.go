@@ -117,6 +117,25 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Description: "External identifier to use when assuming the role.",
 							Optional:    true,
 						},
+						"policy": {
+							Type:        types.StringType,
+							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.StringLenAtMost(2048),
+								validate.StringIsJsonObject(),
+							},
+						},
+						"policy_arns": {
+							Type:        types.ListType{ElemType: types.StringType},
+							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.ArrayForEach(
+									validate.IAMPolicyARN(),
+								),
+							},
+						},
 						"session_name": {
 							Type:        types.StringType,
 							Description: "Session name to use when assuming the role.",
@@ -181,6 +200,8 @@ type assumeRoleData struct {
 	RoleARN           types.String `tfsdk:"role_arn"`
 	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
 	ExternalID        types.String `tfsdk:"external_id"`
+	Policy            types.String `tfsdk:"policy"`
+	PolicyARNs        types.List   `tfsdk:"policy_arns"`
 	SessionName       types.String `tfsdk:"session_name"`
 	Tags              []tag        `tfsdk:"tags"`
 	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
@@ -315,6 +336,18 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 
 		if !pd.AssumeRole.ExternalID.Null {
 			config.AssumeRoleExternalID = pd.AssumeRole.ExternalID.Value
+		}
+
+		if !pd.AssumeRole.Policy.Null {
+			config.AssumeRolePolicy = pd.AssumeRole.Policy.Value
+		}
+
+		if !pd.AssumeRole.PolicyARNs.Null {
+			arns := make([]string, len(pd.AssumeRole.PolicyARNs.Elems))
+			for i, v := range pd.AssumeRole.PolicyARNs.Elems {
+				arns[i] = v.(types.String).Value
+			}
+			config.AssumeRolePolicyARNs = arns
 		}
 
 		if !pd.AssumeRole.SessionName.Null {
