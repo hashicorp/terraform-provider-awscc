@@ -44,6 +44,7 @@ linters-settings:
           - return
         ignored-functions:
           - os.Exit
+          - validate.StringLenBetween
   unparam:
     check-exported: true
 

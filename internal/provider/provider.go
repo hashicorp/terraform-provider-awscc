@@ -144,7 +144,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 									},
 								},
 								tfsdk.SetNestedAttributesOptions{
-									MaxItems: 50,
+									MaxItems: 50, //nolint:gomnd
 								},
 							),
 							Optional: true,
