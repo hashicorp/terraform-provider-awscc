@@ -48,13 +48,13 @@ signs:
   - signature: ${artifact}.sig
     cmd: sh
     args:
-      - -c
-      - >-
-        signore
-        sign
-        --file ${artifact}
-        --signer {{ .Env.SIGNER }}
-        --out ${signature}
+    - -c
+    - >-
+      signore
+      sign
+      --file ${artifact}
+      --signer {{ .Env.SIGNER }}
+      --out ${signature}
     artifacts: checksum
 snapshot:
   name_template: "{{ .Tag }}-next"
