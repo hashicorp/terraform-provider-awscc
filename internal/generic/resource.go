@@ -723,16 +723,12 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
-	state := &response.State
+	err := r.setEmptyAttributes(ctx, &response.State)
 
-	for name, attr := range state.Schema.Attributes {
-		err := r.setEmptyAttribute(ctx, attr, name, state)
+	if err != nil {
+		response.Diagnostics = append(response.Diagnostics, ResourceAttributeNotSetInImportStateDiag(err))
 
-		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, ResourceAttributeNotSetDiag(err))
-
-			return
-		}
+		return
 	}
 
 	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
@@ -782,34 +778,36 @@ func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) er
 	return nil
 }
 
-func (r *resource) setEmptyAttribute(ctx context.Context, attr tfsdk.Attribute, name string, state *tfsdk.State) error {
-	path := tftypes.NewAttributePath().WithAttributeName(name)
+func (r *resource) setEmptyAttributes(ctx context.Context, state *tfsdk.State) error {
+	for name, attr := range r.resourceType.tfSchema.Attributes {
+		path := tftypes.NewAttributePath().WithAttributeName(name)
 
-	var diags diag.Diagnostics
+		var diags diag.Diagnostics
 
-	if t := attr.Type; t != nil {
-		if t.TerraformType(ctx).Is(tftypes.String) {
-			diags = state.SetAttribute(ctx, path, "")
-		} else if t.TerraformType(ctx).Is(tftypes.Number) {
-			diags = state.SetAttribute(ctx, path, float64(0))
-		} else if t.TerraformType(ctx).Is(tftypes.Bool) {
-			diags = state.SetAttribute(ctx, path, false)
-		} else if t.TerraformType(ctx).Is(tftypes.Set{}) || t.TerraformType(ctx).Is(tftypes.List{}) || t.TerraformType(ctx).Is(tftypes.Tuple{}) {
+		if t := attr.Type; t != nil {
+			if t.TerraformType(ctx).Is(tftypes.String) {
+				diags = state.SetAttribute(ctx, path, "")
+			} else if t.TerraformType(ctx).Is(tftypes.Number) {
+				diags = state.SetAttribute(ctx, path, float64(0))
+			} else if t.TerraformType(ctx).Is(tftypes.Bool) {
+				diags = state.SetAttribute(ctx, path, false)
+			} else if t.TerraformType(ctx).Is(tftypes.Set{}) || t.TerraformType(ctx).Is(tftypes.List{}) || t.TerraformType(ctx).Is(tftypes.Tuple{}) {
+				diags = state.SetAttribute(ctx, path, []interface{}{})
+			} else if t.TerraformType(ctx).Is(tftypes.Map{}) || t.TerraformType(ctx).Is(tftypes.Object{}) {
+				diags = state.SetAttribute(ctx, path, map[string]interface{}{})
+			}
+		} else if attr.Attributes != nil { // attribute is a not a "tftype" e.g. providertypes.SetNestedAttributes
 			diags = state.SetAttribute(ctx, path, []interface{}{})
-		} else if t.TerraformType(ctx).Is(tftypes.Map{}) || t.TerraformType(ctx).Is(tftypes.Object{}) {
-			diags = state.SetAttribute(ctx, path, map[string]interface{}{})
+		} else {
+			diags.Append(diag.NewErrorDiagnostic(
+				"Unknown Terraform Type for Attribute",
+				fmt.Sprintf("unknown terraform type for attribute (%s): %T", name, t),
+			))
 		}
-	} else if attr.Attributes != nil { // attribute is a not a "tftype" e.g. providertypes.SetNestedAttributes
-		diags = state.SetAttribute(ctx, path, []interface{}{})
-	} else {
-		diags.Append(diag.NewErrorDiagnostic(
-			"Unknown Terraform Type for Attribute",
-			fmt.Sprintf("unknown terraform type for attribute (%s): %T", name, t),
-		))
-	}
 
-	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		if diags.HasError() {
+			return tfresource.DiagsError(diags)
+		}
 	}
 
 	return nil
