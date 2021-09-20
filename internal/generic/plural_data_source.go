@@ -5,14 +5,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
 // pluralDataSourceType is a type alias for a data source type.
@@ -54,13 +54,13 @@ func (pdt *pluralDataSourceType) NewDataSource(ctx context.Context, provider tfs
 
 // Implements tfsdk.DataSource
 type pluralDataSource struct {
-	provider       tfcloudformation.Provider
+	provider       tfcloudcontrol.Provider
 	dataSourceType *pluralDataSourceType
 }
 
 func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *pluralDataSourceType) tfsdk.DataSource {
 	return &pluralDataSource{
-		provider:       provider.(tfcloudformation.Provider),
+		provider:       provider.(tfcloudcontrol.Provider),
 		dataSourceType: pluralDataSourceType,
 	}
 }
@@ -73,17 +73,17 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 
 	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := pd.provider.CloudFormationClient(ctx)
+	conn := pd.provider.CloudControlApiClient(ctx)
 
 	descriptions, err := pd.list(ctx, conn)
 
 	if err != nil {
-		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudFormation", "ListResources", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("CloudControl", "ListResources", err))
 
 		return
 	}
 
-	val := GetCloudFormationResourceDescriptionsValue(pd.provider.Region(ctx), descriptions)
+	val := GetCloudControlResourceDescriptionsValue(pd.provider.Region(ctx), descriptions)
 
 	response.State = tfsdk.State{
 		Schema: pd.dataSourceType.tfSchema,
@@ -96,12 +96,12 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 }
 
 // list returns the ResourceDescriptions of the specified CloudFormation type.
-func (pd *pluralDataSource) list(ctx context.Context, conn *cloudformation.Client) ([]cftypes.ResourceDescription, error) {
-	return tfcloudformation.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
+func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client) ([]cctypes.ResourceDescription, error) {
+	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
 }
 
-// GetCloudFormationResourceDescriptionsValue returns the Terraform Value for the specified CloudFormation ResourceDescriptions.
-func GetCloudFormationResourceDescriptionsValue(id string, descriptions []cftypes.ResourceDescription) tftypes.Value {
+// GetCloudControlResourceDescriptionsValue returns the Terraform Value for the specified Cloud Control API ResourceDescriptions.
+func GetCloudControlResourceDescriptionsValue(id string, descriptions []cctypes.ResourceDescription) tftypes.Value {
 	m := map[string]tftypes.Value{
 		"id": tftypes.NewValue(tftypes.String, id),
 	}

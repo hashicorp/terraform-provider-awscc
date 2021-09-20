@@ -11,12 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns configuration data for the specified CloudFormation extensions, from the
+// CloudFormation registry for the account and region. For more information, see
+// Configuring extensions at the account level
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// in the CloudFormation User Guide.
 func (c *Client) BatchDescribeTypeConfigurations(ctx context.Context, params *BatchDescribeTypeConfigurationsInput, optFns ...func(*Options)) (*BatchDescribeTypeConfigurationsOutput, error) {
 	if params == nil {
 		params = &BatchDescribeTypeConfigurationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeTypeConfigurations", params, optFns, addOperationBatchDescribeTypeConfigurationsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDescribeTypeConfigurations", params, optFns, c.addOperationBatchDescribeTypeConfigurationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -28,22 +33,31 @@ func (c *Client) BatchDescribeTypeConfigurations(ctx context.Context, params *Ba
 
 type BatchDescribeTypeConfigurationsInput struct {
 
+	// The list of identifiers for the desired extension configurations.
+	//
 	// This member is required.
 	TypeConfigurationIdentifiers []types.TypeConfigurationIdentifier
 }
 
 type BatchDescribeTypeConfigurationsOutput struct {
+
+	// A list of information concerning any errors generated during the setting of the
+	// specified configurations.
 	Errors []types.BatchDescribeTypeConfigurationsError
 
+	// A list of any of the specified extension configurations from the CloudFormation
+	// registry.
 	TypeConfigurations []types.TypeConfigurationDetails
 
+	// A list of any of the specified extension configurations that CloudFormation
+	// could not process for any reason.
 	UnprocessedTypeConfigurations []types.TypeConfigurationIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationBatchDescribeTypeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchDescribeTypeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpBatchDescribeTypeConfigurations{}, middleware.After)
 	if err != nil {
 		return err

@@ -11,12 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Specifies the configuration data for a registered CloudFormation extension, in
+// the given account and region. To view the current configuration data for an
+// extension, refer to the ConfigurationSchema element of DescribeType. For more
+// information, see Configuring extensions at the account level
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// in the CloudFormation User Guide. It is strongly recommended that you use
+// dynamic references to restrict sensitive configuration definitions, such as
+// third-party credentials. For more details on dynamic references, see Using
+// dynamic references to specify template values (https://docs.aws.amazon.com/) in
+// the AWS CloudFormation User Guide.
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SetTypeConfiguration", params, optFns, addOperationSetTypeConfigurationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SetTypeConfiguration", params, optFns, c.addOperationSetTypeConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -28,26 +38,52 @@ func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfig
 
 type SetTypeConfigurationInput struct {
 
+	// The configuration data for the extension, in this account and region. The
+	// configuration data must be formatted as JSON, and validate against the schema
+	// returned in the ConfigurationSchema response element of API_DescribeType. For
+	// more information, see Defining account-level configuration data for an extension
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
+	// in the CloudFormation CLI User Guide.
+	//
 	// This member is required.
 	Configuration *string
 
+	// An alias by which to refer to this extension configuration data. Conditional:
+	// Specifying a configuration alias is required when setting a configuration for a
+	// resource type extension.
 	ConfigurationAlias *string
 
+	// The type of extension. Conditional: You must specify ConfigurationArn, or Type
+	// and TypeName.
 	Type types.ThirdPartyType
 
+	// The Amazon Resource Name (ARN) for the extension, in this account and region.
+	// For public extensions, this will be the ARN assigned when you activate the type
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
+	// in this account and region. For private extensions, this will be the ARN
+	// assigned when you register the type
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
+	// in this account and region. Do not include the extension versions suffix at the
+	// end of the ARN. You can set the configuration for an extension, but not for a
+	// specific extension version.
 	TypeArn *string
 
+	// The name of the extension. Conditional: You must specify ConfigurationArn, or
+	// Type and TypeName.
 	TypeName *string
 }
 
 type SetTypeConfigurationOutput struct {
+
+	// The Amazon Resource Name (ARN) for the configuration data, in this account and
+	// region. Conditional: You must specify ConfigurationArn, or Type and TypeName.
 	ConfigurationArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationSetTypeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSetTypeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpSetTypeConfiguration{}, middleware.After)
 	if err != nil {
 		return err

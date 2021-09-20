@@ -24,12 +24,12 @@ func TestUnknowns(t *testing.T) {
 			TfToCfNameMap: simpleTfToCfNameMap,
 			ExpectedPaths: []unknownValuePath{
 				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("arn"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
+					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("arn"),
+					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
 				},
 				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
+					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("identifier"),
+					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
 				},
 			},
 		},
@@ -39,8 +39,8 @@ func TestUnknowns(t *testing.T) {
 			TfToCfNameMap: complexTfToCfNameMap,
 			ExpectedPaths: []unknownValuePath{
 				{
-					InTerraformState:              tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudFormationResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
+					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("identifier"),
+					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
 				},
 			},
 		},
@@ -48,7 +48,7 @@ func TestUnknowns(t *testing.T) {
 
 	opts := cmp.Options{
 		cmpopts.SortSlices(func(i, j unknownValuePath) bool {
-			return i.InCloudFormationResourceModel.String() < j.InCloudFormationResourceModel.String()
+			return i.InCloudControlResourceModel.String() < j.InCloudControlResourceModel.String()
 		}),
 	}
 

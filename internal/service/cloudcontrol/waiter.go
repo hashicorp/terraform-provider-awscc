@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -18,13 +18,13 @@ const (
 )
 
 // WaitForResourceRequestSuccess waits up to maxWaitTime for the specified reource request to succeed.
-func WaitForResourceRequestSuccess(ctx context.Context, client *cloudformation.Client, requestToken string, maxWaitTime time.Duration) (string, error) {
+func WaitForResourceRequestSuccess(ctx context.Context, client *cloudcontrol.Client, requestToken string, maxWaitTime time.Duration) (string, error) {
 	var progressEvent *types.ProgressEvent
 
 	waiter := NewResourceRequestStatusSuccessWaiter(client, func(o *ResourceRequestStatusSuccessWaiterOptions) {
 		o.MinDelay = waitForResourceRequestMinDelay
 
-		o.Retryable = func(ctx context.Context, input *cloudformation.GetResourceRequestStatusInput, output *cloudformation.GetResourceRequestStatusOutput, err error) (bool, error) {
+		o.Retryable = func(ctx context.Context, input *cloudcontrol.GetResourceRequestStatusInput, output *cloudcontrol.GetResourceRequestStatusOutput, err error) (bool, error) {
 			if err == nil {
 				progressEvent = output.ProgressEvent
 				switch value := progressEvent.OperationStatus; value {
@@ -43,7 +43,7 @@ func WaitForResourceRequestSuccess(ctx context.Context, client *cloudformation.C
 		}
 	})
 
-	err := waiter.Wait(ctx, &cloudformation.GetResourceRequestStatusInput{RequestToken: aws.String(requestToken)}, maxWaitTime)
+	err := waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: aws.String(requestToken)}, maxWaitTime)
 
 	if err != nil {
 		return "", err
@@ -60,10 +60,10 @@ func WaitForResourceRequestSuccess(ctx context.Context, client *cloudformation.C
 // GetResourceRequestStatusAPIClient is a client that implements the
 // GetResourceRequestStatus operation.
 type GetResourceRequestStatusAPIClient interface {
-	GetResourceRequestStatus(context.Context, *cloudformation.GetResourceRequestStatusInput, ...func(*cloudformation.Options)) (*cloudformation.GetResourceRequestStatusOutput, error)
+	GetResourceRequestStatus(context.Context, *cloudcontrol.GetResourceRequestStatusInput, ...func(*cloudcontrol.Options)) (*cloudcontrol.GetResourceRequestStatusOutput, error)
 }
 
-var _ GetResourceRequestStatusAPIClient = (*cloudformation.Client)(nil)
+var _ GetResourceRequestStatusAPIClient = (*cloudcontrol.Client)(nil)
 
 // ResourceRequestStatusSuccessWaiterOptions are waiter options for
 // ResourceRequestStatusSuccessWaiter
@@ -96,7 +96,7 @@ type ResourceRequestStatusSuccessWaiterOptions struct {
 	// state mutators.The function returns an error in case of a failure state. In case
 	// of retry state, this function returns a bool value of true and nil error, while
 	// in case of success it returns a bool value of false and nil error.
-	Retryable func(context.Context, *cloudformation.GetResourceRequestStatusInput, *cloudformation.GetResourceRequestStatusOutput, error) (bool, error)
+	Retryable func(context.Context, *cloudcontrol.GetResourceRequestStatusInput, *cloudcontrol.GetResourceRequestStatusOutput, error) (bool, error)
 }
 
 const (
@@ -116,7 +116,7 @@ func NewResourceRequestStatusSuccessWaiter(client GetResourceRequestStatusAPICli
 	options := ResourceRequestStatusSuccessWaiterOptions{
 		MinDelay: resourceRequestStatusSuccessWaiterDefaultMinDelay,
 		MaxDelay: resourceRequestStatusSuccessWaiterDefaultMaxDelay,
-		Retryable: func(context.Context, *cloudformation.GetResourceRequestStatusInput, *cloudformation.GetResourceRequestStatusOutput, error) (bool, error) {
+		Retryable: func(context.Context, *cloudcontrol.GetResourceRequestStatusInput, *cloudcontrol.GetResourceRequestStatusOutput, error) (bool, error) {
 			return false, fmt.Errorf("retryable not implemented")
 		},
 	}
@@ -133,7 +133,7 @@ func NewResourceRequestStatusSuccessWaiter(client GetResourceRequestStatusAPICli
 // Wait calls the waiter function for ResourceRequestStatusSuccess waiter. The
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
-func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *cloudformation.GetResourceRequestStatusInput, maxWaitDur time.Duration, optFns ...func(*ResourceRequestStatusSuccessWaiterOptions)) error {
+func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *cloudcontrol.GetResourceRequestStatusInput, maxWaitDur time.Duration, optFns ...func(*ResourceRequestStatusSuccessWaiterOptions)) error {
 	if maxWaitDur <= 0 {
 		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
@@ -170,7 +170,7 @@ func (w *ResourceRequestStatusSuccessWaiter) Wait(ctx context.Context, params *c
 			apiOptions = append(apiOptions, logger.AddLogger)
 		}
 
-		out, err := w.client.GetResourceRequestStatus(ctx, params, func(o *cloudformation.Options) {
+		out, err := w.client.GetResourceRequestStatus(ctx, params, func(o *cloudcontrol.Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
 		})
 
