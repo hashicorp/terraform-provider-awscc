@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
@@ -18,7 +19,7 @@ func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns .
 		params = &ListTypesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTypes", params, optFns, addOperationListTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListTypes", params, optFns, c.addOperationListTypesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -40,6 +41,9 @@ type ListTypesInput struct {
 	// and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
+	// Filter criteria to use in determining which extensions to return. If you specify
+	// a filter, CloudFormation ignores any specified Visibility value when returning
+	// the list of types.
 	Filters *types.TypeFilters
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -55,37 +59,47 @@ type ListTypesInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The provisioning behavior of the type. AWS CloudFormation determines the
-	// provisioning type during registration, based on the types of handlers in the
-	// schema handler package submitted. Valid values include:
+	// For resource types, the provisioning behavior of the resource type. AWS
+	// CloudFormation determines the provisioning type during registration, based on
+	// the types of handlers in the schema handler package submitted. Valid values
+	// include:
 	//
-	// * FULLY_MUTABLE: The
-	// extension includes an update handler to process updates to the extension during
-	// stack update operations.
+	// * FULLY_MUTABLE: The resource type includes an update handler to
+	// process updates to the type during stack update operations.
 	//
-	// * IMMUTABLE: The extension does not include an update
-	// handler, so the extension cannot be updated and must instead be replaced during
-	// stack update operations.
+	// * IMMUTABLE: The
+	// resource type does not include an update handler, so the type cannot be updated
+	// and must instead be replaced during stack update operations.
 	//
-	// * NON_PROVISIONABLE: The extension does not include
-	// create, read, and delete handlers, and therefore cannot actually be provisioned.
+	// *
+	// NON_PROVISIONABLE: The resource type does not include create, read, and delete
+	// handlers, and therefore cannot actually be provisioned.
+	//
+	// The default is
+	// FULLY_MUTABLE.
 	ProvisioningType types.ProvisioningType
 
 	// The type of extension.
 	Type types.RegistryType
 
-	// The scope at which the extension is visible and usable in CloudFormation
+	// The scope at which the extensions are visible and usable in CloudFormation
 	// operations. Valid values include:
 	//
-	// * PRIVATE: The extension is only visible and
-	// usable within the account in which it is registered. Currently, AWS
-	// CloudFormation marks any extension you create as PRIVATE.
+	// * PRIVATE: Extensions that are visible and
+	// usable within this account and region. This includes:
 	//
-	// * PUBLIC: The
-	// extension is publically visible and usable within any Amazon account.
+	// * Private extensions you
+	// have registered in this account and region.
 	//
-	// The
-	// default is PRIVATE.
+	// * Public extensions that you have
+	// activated in this account and region.
+	//
+	// * PUBLIC: Extensions that are publicly
+	// visible and available to be activated within any Amazon account. This includes
+	// extensions from Amazon, as well as third-party publishers.
+	//
+	// The default is
+	// PRIVATE.
 	Visibility types.Visibility
 }
 
@@ -105,7 +119,7 @@ type ListTypesOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationListTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpListTypes{}, middleware.After)
 	if err != nil {
 		return err
@@ -163,6 +177,94 @@ func addOperationListTypesMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListTypesAPIClient is a client that implements the ListTypes operation.
+type ListTypesAPIClient interface {
+	ListTypes(context.Context, *ListTypesInput, ...func(*Options)) (*ListTypesOutput, error)
+}
+
+var _ ListTypesAPIClient = (*Client)(nil)
+
+// ListTypesPaginatorOptions is the paginator options for ListTypes
+type ListTypesPaginatorOptions struct {
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTypesPaginator is a paginator for ListTypes
+type ListTypesPaginator struct {
+	options   ListTypesPaginatorOptions
+	client    ListTypesAPIClient
+	params    *ListTypesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTypesPaginator returns a new ListTypesPaginator
+func NewListTypesPaginator(client ListTypesAPIClient, params *ListTypesInput, optFns ...func(*ListTypesPaginatorOptions)) *ListTypesPaginator {
+	if params == nil {
+		params = &ListTypesInput{}
+	}
+
+	options := ListTypesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListTypesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTypesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListTypes page.
+func (p *ListTypesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTypesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListTypes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListTypes(region string) *awsmiddleware.RegisterServiceMetadata {

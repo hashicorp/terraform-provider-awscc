@@ -127,62 +127,6 @@ func (m *awsAwsquery_serializeOpBatchDescribeTypeConfigurations) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpCancelResourceRequest struct {
-}
-
-func (*awsAwsquery_serializeOpCancelResourceRequest) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpCancelResourceRequest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CancelResourceRequestInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("CancelResourceRequest")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentCancelResourceRequestInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpCancelUpdateStack struct {
 }
 
@@ -331,62 +275,6 @@ func (m *awsAwsquery_serializeOpCreateChangeSet) HandleSerialize(ctx context.Con
 	body.Key("Version").String("2010-05-15")
 
 	if err := awsAwsquery_serializeOpDocumentCreateChangeSetInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpCreateResource struct {
-}
-
-func (*awsAwsquery_serializeOpCreateResource) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpCreateResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateResourceInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("CreateResource")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentCreateResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -667,62 +555,6 @@ func (m *awsAwsquery_serializeOpDeleteChangeSet) HandleSerialize(ctx context.Con
 	body.Key("Version").String("2010-05-15")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteChangeSetInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpDeleteResource struct {
-}
-
-func (*awsAwsquery_serializeOpDeleteResource) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDeleteResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteResourceInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DeleteResource")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentDeleteResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2031,118 +1863,6 @@ func (m *awsAwsquery_serializeOpExecuteChangeSet) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpGetResource struct {
-}
-
-func (*awsAwsquery_serializeOpGetResource) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpGetResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GetResourceInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("GetResource")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentGetResourceInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpGetResourceRequestStatus struct {
-}
-
-func (*awsAwsquery_serializeOpGetResourceRequestStatus) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpGetResourceRequestStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GetResourceRequestStatusInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("GetResourceRequestStatus")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentGetResourceRequestStatusInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpGetStackPolicy struct {
 }
 
@@ -2459,118 +2179,6 @@ func (m *awsAwsquery_serializeOpListImports) HandleSerialize(ctx context.Context
 	body.Key("Version").String("2010-05-15")
 
 	if err := awsAwsquery_serializeOpDocumentListImportsInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpListResourceRequests struct {
-}
-
-func (*awsAwsquery_serializeOpListResourceRequests) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpListResourceRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ListResourceRequestsInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("ListResourceRequests")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentListResourceRequestsInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpListResources struct {
-}
-
-func (*awsAwsquery_serializeOpListResources) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpListResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ListResourcesInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("ListResources")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentListResourcesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3655,62 +3263,6 @@ func (m *awsAwsquery_serializeOpTestType) HandleSerialize(ctx context.Context, i
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpUpdateResource struct {
-}
-
-func (*awsAwsquery_serializeOpUpdateResource) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpUpdateResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*UpdateResourceInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("UpdateResource")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentUpdateResourceInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpUpdateStack struct {
 }
 
@@ -4102,32 +3654,6 @@ func awsAwsquery_serializeDocumentNotificationARNs(v []string, value query.Value
 	return nil
 }
 
-func awsAwsquery_serializeDocumentOperations(v []types.Operation, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
-	array := value.Array("member")
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
-func awsAwsquery_serializeDocumentOperationStatuses(v []types.OperationStatus, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
-	array := value.Array("member")
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
 func awsAwsquery_serializeDocumentOrganizationalUnitIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -4183,63 +3709,6 @@ func awsAwsquery_serializeDocumentParameters(v []types.Parameter, value query.Va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPatchOperation(v *types.PatchOperation, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.BooleanValue != nil {
-		objectKey := object.Key("booleanValue")
-		objectKey.Boolean(*v.BooleanValue)
-	}
-
-	if v.IntegerValue != nil {
-		objectKey := object.Key("integerValue")
-		objectKey.Integer(*v.IntegerValue)
-	}
-
-	if v.NumberValue != nil {
-		objectKey := object.Key("numberValue")
-		objectKey.Double(*v.NumberValue)
-	}
-
-	if v.ObjectValue != nil {
-		objectKey := object.Key("objectValue")
-		objectKey.String(*v.ObjectValue)
-	}
-
-	if len(v.Op) > 0 {
-		objectKey := object.Key("op")
-		objectKey.String(string(v.Op))
-	}
-
-	if v.Path != nil {
-		objectKey := object.Key("path")
-		objectKey.String(*v.Path)
-	}
-
-	if v.StringValue != nil {
-		objectKey := object.Key("stringValue")
-		objectKey.String(*v.StringValue)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentPatchOperations(v []types.PatchOperation, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
-	array := value.Array("member")
-
-	for i := range v {
-		av := array.Value()
-		if err := awsAwsquery_serializeDocumentPatchOperation(&v[i], av); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func awsAwsquery_serializeDocumentRegionList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -4250,27 +3719,6 @@ func awsAwsquery_serializeDocumentRegionList(v []string, value query.Value) erro
 		av := array.Value()
 		av.String(v[i])
 	}
-	return nil
-}
-
-func awsAwsquery_serializeDocumentRequestStatusFilter(v *types.RequestStatusFilter, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Operations != nil {
-		objectKey := object.Key("Operations")
-		if err := awsAwsquery_serializeDocumentOperations(v.Operations, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.OperationStatuses != nil {
-		objectKey := object.Key("OperationStatuses")
-		if err := awsAwsquery_serializeDocumentOperationStatuses(v.OperationStatuses, objectKey); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -4693,23 +4141,6 @@ func awsAwsquery_serializeOpDocumentBatchDescribeTypeConfigurationsInput(v *Batc
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentCancelResourceRequestInput(v *CancelResourceRequestInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.ClientToken != nil {
-		objectKey := object.Key("ClientToken")
-		objectKey.String(*v.ClientToken)
-	}
-
-	if v.RequestToken != nil {
-		objectKey := object.Key("RequestToken")
-		objectKey.String(*v.RequestToken)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentCancelUpdateStackInput(v *CancelUpdateStackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4857,38 +4288,6 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 	if v.UsePreviousTemplate != nil {
 		objectKey := object.Key("UsePreviousTemplate")
 		objectKey.Boolean(*v.UsePreviousTemplate)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentCreateResourceInput(v *CreateResourceInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.ClientToken != nil {
-		objectKey := object.Key("ClientToken")
-		objectKey.String(*v.ClientToken)
-	}
-
-	if v.DesiredState != nil {
-		objectKey := object.Key("DesiredState")
-		objectKey.String(*v.DesiredState)
-	}
-
-	if v.RoleArn != nil {
-		objectKey := object.Key("RoleArn")
-		objectKey.String(*v.RoleArn)
-	}
-
-	if v.TypeName != nil {
-		objectKey := object.Key("TypeName")
-		objectKey.String(*v.TypeName)
-	}
-
-	if v.TypeVersionId != nil {
-		objectKey := object.Key("TypeVersionId")
-		objectKey.String(*v.TypeVersionId)
 	}
 
 	return nil
@@ -5169,38 +4568,6 @@ func awsAwsquery_serializeOpDocumentDeleteChangeSetInput(v *DeleteChangeSetInput
 	if v.StackName != nil {
 		objectKey := object.Key("StackName")
 		objectKey.String(*v.StackName)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentDeleteResourceInput(v *DeleteResourceInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.ClientToken != nil {
-		objectKey := object.Key("ClientToken")
-		objectKey.String(*v.ClientToken)
-	}
-
-	if v.Identifier != nil {
-		objectKey := object.Key("Identifier")
-		objectKey.String(*v.Identifier)
-	}
-
-	if v.RoleArn != nil {
-		objectKey := object.Key("RoleArn")
-		objectKey.String(*v.RoleArn)
-	}
-
-	if v.TypeName != nil {
-		objectKey := object.Key("TypeName")
-		objectKey.String(*v.TypeName)
-	}
-
-	if v.TypeVersionId != nil {
-		objectKey := object.Key("TypeVersionId")
-		objectKey.String(*v.TypeVersionId)
 	}
 
 	return nil
@@ -5720,45 +5087,6 @@ func awsAwsquery_serializeOpDocumentExecuteChangeSetInput(v *ExecuteChangeSetInp
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentGetResourceInput(v *GetResourceInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Identifier != nil {
-		objectKey := object.Key("Identifier")
-		objectKey.String(*v.Identifier)
-	}
-
-	if v.RoleArn != nil {
-		objectKey := object.Key("RoleArn")
-		objectKey.String(*v.RoleArn)
-	}
-
-	if v.TypeName != nil {
-		objectKey := object.Key("TypeName")
-		objectKey.String(*v.TypeName)
-	}
-
-	if v.TypeVersionId != nil {
-		objectKey := object.Key("TypeVersionId")
-		objectKey.String(*v.TypeVersionId)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentGetResourceRequestStatusInput(v *GetResourceRequestStatusInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.RequestToken != nil {
-		objectKey := object.Key("RequestToken")
-		objectKey.String(*v.RequestToken)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentGetStackPolicyInput(v *GetStackPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5866,67 +5194,6 @@ func awsAwsquery_serializeOpDocumentListImportsInput(v *ListImportsInput, value 
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentListResourceRequestsInput(v *ListResourceRequestsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.MaxResults != nil {
-		objectKey := object.Key("MaxResults")
-		objectKey.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		objectKey := object.Key("NextToken")
-		objectKey.String(*v.NextToken)
-	}
-
-	if v.RequestStatusFilter != nil {
-		objectKey := object.Key("RequestStatusFilter")
-		if err := awsAwsquery_serializeDocumentRequestStatusFilter(v.RequestStatusFilter, objectKey); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentListResourcesInput(v *ListResourcesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.MaxResults != nil {
-		objectKey := object.Key("MaxResults")
-		objectKey.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		objectKey := object.Key("NextToken")
-		objectKey.String(*v.NextToken)
-	}
-
-	if v.ResourceModel != nil {
-		objectKey := object.Key("ResourceModel")
-		objectKey.String(*v.ResourceModel)
-	}
-
-	if v.RoleArn != nil {
-		objectKey := object.Key("RoleArn")
-		objectKey.String(*v.RoleArn)
-	}
-
-	if v.TypeName != nil {
-		objectKey := object.Key("TypeName")
-		objectKey.String(*v.TypeName)
-	}
-
-	if v.TypeVersionId != nil {
-		objectKey := object.Key("TypeVersionId")
-		objectKey.String(*v.TypeVersionId)
 	}
 
 	return nil
@@ -6503,50 +5770,6 @@ func awsAwsquery_serializeOpDocumentTestTypeInput(v *TestTypeInput, value query.
 	if v.VersionId != nil {
 		objectKey := object.Key("VersionId")
 		objectKey.String(*v.VersionId)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentUpdateResourceInput(v *UpdateResourceInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.ClientToken != nil {
-		objectKey := object.Key("ClientToken")
-		objectKey.String(*v.ClientToken)
-	}
-
-	if v.Identifier != nil {
-		objectKey := object.Key("Identifier")
-		objectKey.String(*v.Identifier)
-	}
-
-	if v.PatchDocument != nil {
-		objectKey := object.Key("PatchDocument")
-		objectKey.String(*v.PatchDocument)
-	}
-
-	if v.PatchOperations != nil {
-		objectKey := object.Key("PatchOperations")
-		if err := awsAwsquery_serializeDocumentPatchOperations(v.PatchOperations, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.RoleArn != nil {
-		objectKey := object.Key("RoleArn")
-		objectKey.String(*v.RoleArn)
-	}
-
-	if v.TypeName != nil {
-		objectKey := object.Key("TypeName")
-		objectKey.String(*v.TypeName)
-	}
-
-	if v.TypeVersionId != nil {
-		objectKey := object.Key("TypeVersionId")
-		objectKey.String(*v.TypeVersionId)
 	}
 
 	return nil

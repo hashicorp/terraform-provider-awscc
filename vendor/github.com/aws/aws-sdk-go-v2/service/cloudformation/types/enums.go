@@ -362,58 +362,14 @@ func (OnFailure) Values() []OnFailure {
 	}
 }
 
-type Op string
-
-// Enum values for Op
-const (
-	OpAdd     Op = "add"
-	OpRemove  Op = "remove"
-	OpReplace Op = "replace"
-	OpTest    Op = "test"
-)
-
-// Values returns all known values for Op. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
-func (Op) Values() []Op {
-	return []Op{
-		"add",
-		"remove",
-		"replace",
-		"test",
-	}
-}
-
-type Operation string
-
-// Enum values for Operation
-const (
-	OperationCreate Operation = "CREATE"
-	OperationUpdate Operation = "UPDATE"
-	OperationDelete Operation = "DELETE"
-)
-
-// Values returns all known values for Operation. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
-func (Operation) Values() []Operation {
-	return []Operation{
-		"CREATE",
-		"UPDATE",
-		"DELETE",
-	}
-}
-
 type OperationStatus string
 
 // Enum values for OperationStatus
 const (
-	OperationStatusPending          OperationStatus = "PENDING"
-	OperationStatusInProgress       OperationStatus = "IN_PROGRESS"
-	OperationStatusSuccess          OperationStatus = "SUCCESS"
-	OperationStatusFailed           OperationStatus = "FAILED"
-	OperationStatusCancelInProgress OperationStatus = "CANCEL_IN_PROGRESS"
-	OperationStatusCancelComplete   OperationStatus = "CANCEL_COMPLETE"
+	OperationStatusPending    OperationStatus = "PENDING"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusSuccess    OperationStatus = "SUCCESS"
+	OperationStatusFailed     OperationStatus = "FAILED"
 )
 
 // Values returns all known values for OperationStatus. Note that this can be
@@ -425,8 +381,6 @@ func (OperationStatus) Values() []OperationStatus {
 		"IN_PROGRESS",
 		"SUCCESS",
 		"FAILED",
-		"CANCEL_IN_PROGRESS",
-		"CANCEL_COMPLETE",
 	}
 }
 

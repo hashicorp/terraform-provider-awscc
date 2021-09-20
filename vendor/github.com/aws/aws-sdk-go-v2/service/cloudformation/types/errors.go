@@ -56,40 +56,8 @@ func (e *ChangeSetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ChangeSetNotFoundException) ErrorCode() string             { return "ChangeSetNotFoundException" }
+func (e *ChangeSetNotFoundException) ErrorCode() string             { return "ChangeSetNotFound" }
 func (e *ChangeSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type ClientTokenConflictException struct {
-	Message *string
-}
-
-func (e *ClientTokenConflictException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ClientTokenConflictException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ClientTokenConflictException) ErrorCode() string             { return "ClientTokenConflictException" }
-func (e *ClientTokenConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type ConcurrentOperationException struct {
-	Message *string
-}
-
-func (e *ConcurrentOperationException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ConcurrentOperationException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ConcurrentOperationException) ErrorCode() string             { return "ConcurrentOperationException" }
-func (e *ConcurrentOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource exists, but has been changed.
 type CreatedButModifiedException struct {
@@ -107,56 +75,6 @@ func (e *CreatedButModifiedException) ErrorMessage() string {
 }
 func (e *CreatedButModifiedException) ErrorCode() string             { return "CreatedButModifiedException" }
 func (e *CreatedButModifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type GeneralServiceException struct {
-	Message *string
-}
-
-func (e *GeneralServiceException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *GeneralServiceException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *GeneralServiceException) ErrorCode() string             { return "GeneralServiceException" }
-func (e *GeneralServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type HandlerFailureException struct {
-	Message *string
-}
-
-func (e *HandlerFailureException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *HandlerFailureException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *HandlerFailureException) ErrorCode() string             { return "HandlerFailureException" }
-func (e *HandlerFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-
-type HandlerInternalFailureException struct {
-	Message *string
-}
-
-func (e *HandlerInternalFailureException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *HandlerInternalFailureException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *HandlerInternalFailureException) ErrorCode() string {
-	return "HandlerInternalFailureException"
-}
-func (e *HandlerInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The template contains resources with capabilities that weren't specified in the
 // Capabilities parameter.
@@ -194,26 +112,8 @@ func (e *InvalidChangeSetStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidChangeSetStatusException) ErrorCode() string {
-	return "InvalidChangeSetStatusException"
-}
+func (e *InvalidChangeSetStatusException) ErrorCode() string             { return "InvalidChangeSetStatus" }
 func (e *InvalidChangeSetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type InvalidCredentialsException struct {
-	Message *string
-}
-
-func (e *InvalidCredentialsException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InvalidCredentialsException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InvalidCredentialsException) ErrorCode() string             { return "InvalidCredentialsException" }
-func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified operation isn't valid.
 type InvalidOperationException struct {
@@ -232,22 +132,6 @@ func (e *InvalidOperationException) ErrorMessage() string {
 func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-type InvalidRequestException struct {
-	Message *string
-}
-
-func (e *InvalidRequestException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InvalidRequestException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
-func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
 // Error reserved for use by the CloudFormation CLI
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
 // CloudFormation does not return this error to users.
@@ -264,9 +148,7 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateTransitionException) ErrorCode() string {
-	return "InvalidStateTransitionException"
-}
+func (e *InvalidStateTransitionException) ErrorCode() string             { return "InvalidStateTransition" }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the resource has already been reached. For information on resource
@@ -305,54 +187,6 @@ func (e *NameAlreadyExistsException) ErrorMessage() string {
 }
 func (e *NameAlreadyExistsException) ErrorCode() string             { return "NameAlreadyExistsException" }
 func (e *NameAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type NetworkFailureException struct {
-	Message *string
-}
-
-func (e *NetworkFailureException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *NetworkFailureException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *NetworkFailureException) ErrorCode() string             { return "NetworkFailureException" }
-func (e *NetworkFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-
-type NotStabilizedException struct {
-	Message *string
-}
-
-func (e *NotStabilizedException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *NotStabilizedException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *NotStabilizedException) ErrorCode() string             { return "NotStabilizedException" }
-func (e *NotStabilizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type NotUpdatableException struct {
-	Message *string
-}
-
-func (e *NotUpdatableException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *NotUpdatableException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *NotUpdatableException) ErrorCode() string             { return "NotUpdatableException" }
-func (e *NotUpdatableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified operation ID already exists.
 type OperationIdAlreadyExistsException struct {
@@ -424,108 +258,10 @@ func (e *OperationStatusCheckFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationStatusCheckFailedException) ErrorCode() string {
-	return "OperationStatusCheckFailedException"
-}
+func (e *OperationStatusCheckFailedException) ErrorCode() string { return "ConditionalCheckFailed" }
 func (e *OperationStatusCheckFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
-
-type PrivateTypeException struct {
-	Message *string
-}
-
-func (e *PrivateTypeException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *PrivateTypeException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *PrivateTypeException) ErrorCode() string             { return "PrivateTypeException" }
-func (e *PrivateTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type RequestTokenNotFoundException struct {
-	Message *string
-}
-
-func (e *RequestTokenNotFoundException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *RequestTokenNotFoundException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *RequestTokenNotFoundException) ErrorCode() string             { return "RequestTokenNotFoundException" }
-func (e *RequestTokenNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type ResourceConflictException struct {
-	Message *string
-}
-
-func (e *ResourceConflictException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ResourceConflictException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
-func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type ResourceNotFoundException struct {
-	Message *string
-}
-
-func (e *ResourceNotFoundException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ResourceNotFoundException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
-func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type ServiceInternalErrorException struct {
-	Message *string
-}
-
-func (e *ServiceInternalErrorException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ServiceInternalErrorException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ServiceInternalErrorException) ErrorCode() string             { return "ServiceInternalErrorException" }
-func (e *ServiceInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-
-type ServiceLimitExceededException struct {
-	Message *string
-}
-
-func (e *ServiceLimitExceededException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ServiceLimitExceededException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
-func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified stack instance doesn't exist.
 type StackInstanceNotFoundException struct {
@@ -615,6 +351,7 @@ func (e *TokenAlreadyExistsException) ErrorMessage() string {
 func (e *TokenAlreadyExistsException) ErrorCode() string             { return "TokenAlreadyExistsException" }
 func (e *TokenAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified extension configuration cannot be found.
 type TypeConfigurationNotFoundException struct {
 	Message *string
 }
@@ -635,7 +372,7 @@ func (e *TypeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The specified type does not exist in the CloudFormation registry.
+// The specified extension does not exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
 }
@@ -651,19 +388,3 @@ func (e *TypeNotFoundException) ErrorMessage() string {
 }
 func (e *TypeNotFoundException) ErrorCode() string             { return "TypeNotFoundException" }
 func (e *TypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-type UnsupportedActionException struct {
-	Message *string
-}
-
-func (e *UnsupportedActionException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *UnsupportedActionException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *UnsupportedActionException) ErrorCode() string             { return "UnsupportedActionException" }
-func (e *UnsupportedActionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -20,7 +20,7 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 		params = &GetTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetTemplate", params, optFns, addOperationGetTemplateMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetTemplate", params, optFns, c.addOperationGetTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -54,7 +54,7 @@ type GetTemplateInput struct {
 	// CloudFormation returns. To get the user-submitted template, specify Original. To
 	// get the template after AWS CloudFormation has processed all transforms, specify
 	// Processed. If the template doesn't include transforms, Original and Processed
-	// return the same template. By default, AWS CloudFormation specifies Original.
+	// return the same template. By default, AWS CloudFormation specifies Processed.
 	TemplateStage types.TemplateStage
 }
 
@@ -78,7 +78,7 @@ type GetTemplateOutput struct {
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpGetTemplate{}, middleware.After)
 	if err != nil {
 		return err

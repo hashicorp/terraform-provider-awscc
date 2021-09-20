@@ -1,3 +1,7 @@
+## v0.10.0 (September 17, 2021)
+
+Add `Sanitize` function.
+
 ## v0.9.0 (September 14, 2021)
 
 Add default field to Property.

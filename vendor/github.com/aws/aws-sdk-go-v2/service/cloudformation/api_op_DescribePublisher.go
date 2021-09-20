@@ -11,12 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns information about a CloudFormation extension publisher. If you do not
+// supply a PublisherId, and you have registered as an extension publisher,
+// DescribePublisher returns information about your own publisher account. For more
+// information on registering as a publisher, see:
+//
+// * RegisterPublisher
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html)
+//
+// *
+// Publishing extensions to make them available for public use
+// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
+// in the CloudFormation CLI User Guide
 func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublisherInput, optFns ...func(*Options)) (*DescribePublisherOutput, error) {
 	if params == nil {
 		params = &DescribePublisherInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribePublisher", params, optFns, addOperationDescribePublisherMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribePublisher", params, optFns, c.addOperationDescribePublisherMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -27,23 +39,34 @@ func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublishe
 }
 
 type DescribePublisherInput struct {
+
+	// The ID of the extension publisher. If you do not supply a PublisherId, and you
+	// have registered as an extension publisher, DescribePublisher returns information
+	// about your own publisher account.
 	PublisherId *string
 }
 
 type DescribePublisherOutput struct {
+
+	// The type of account used as the identity provider when registering this
+	// publisher with CloudFormation.
 	IdentityProvider types.IdentityProvider
 
+	// The ID of the extension publisher.
 	PublisherId *string
 
+	// The URL to the publisher's profile with the identity provider.
 	PublisherProfile *string
 
+	// Whether the publisher is verified. Currently, all registered publishers are
+	// verified.
 	PublisherStatus types.PublisherStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDescribePublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDescribePublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribePublisher{}, middleware.After)
 	if err != nil {
 		return err

@@ -9,15 +9,15 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	cftypes "github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	tfcloudformation "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudformation"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
@@ -379,13 +379,13 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftyp
 
 // Implements tfsdk.Resource.
 type resource struct {
-	provider     tfcloudformation.Provider
+	provider     tfcloudcontrol.Provider
 	resourceType *resourceType
 }
 
 func newGenericResource(provider tfsdk.Provider, resourceType *resourceType) tfsdk.Resource {
 	return &resource{
-		provider:     provider.(tfcloudformation.Provider),
+		provider:     provider.(tfcloudcontrol.Provider),
 		resourceType: resourceType,
 	}
 }
@@ -404,11 +404,11 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlApiClient(ctx)
 
 	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
-	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
 
 	if err != nil {
@@ -417,9 +417,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudFormation DesiredState", "value", desiredState)
+	tflog.Debug(ctx, "CloudControl DesiredState", "value", desiredState)
 
-	input := &cloudformation.CreateResourceInput{
+	input := &cloudcontrol.CreateResourceInput{
 		ClientToken:  aws.String(tfresource.UniqueId()),
 		DesiredState: aws.String(desiredState),
 		TypeName:     aws.String(cfTypeName),
@@ -432,21 +432,21 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "CreateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "CreateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "CreateResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "CreateResource"))
 
 		return
 	}
 
-	id, err := tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
+	id, err := tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.createTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "CreateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))
 
 		return
 	}
@@ -460,13 +460,13 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
 
 	if description == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "GetResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
 
 		return
 	}
@@ -490,18 +490,18 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
 	}
 
-	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.ResourceModel))
+	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -522,7 +522,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlApiClient(ctx)
 
 	currentState := &request.State
 	id, err := r.getId(ctx, currentState)
@@ -543,19 +543,19 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "GetResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
 
 	translator := toTerraform{cfToTfNameMap: r.resourceType.cfToTfNameMap}
 	schema := &currentState.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.ResourceModel))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 
 	if err != nil {
 		response.Diagnostics.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from a CloudFormation Resource Model. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to create a Terraform State value from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
 
 		return
@@ -605,7 +605,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 
 	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlApiClient(ctx)
 
 	currentState := &request.State
 	id, err := r.getId(ctx, currentState)
@@ -616,7 +616,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	translator := toCloudFormation{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
 
 	if err != nil {
@@ -644,9 +644,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudFormation PatchDocument", "value", patchDocument)
+	tflog.Debug(ctx, "Cloud Control API PatchDocument", "value", patchDocument)
 
-	input := &cloudformation.UpdateResourceInput{
+	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(id),
 		PatchDocument: aws.String(patchDocument),
@@ -660,21 +660,21 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	output, err := conn.UpdateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "UpdateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("CloudFormation", "UpdateResource"))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "UpdateResource"))
 
 		return
 	}
 
-	_, err = tfcloudformation.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
+	_, err = tfcloudcontrol.WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), r.resourceType.updateTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("CloudFormation", "UpdateResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "UpdateResource", err))
 
 		return
 	}
@@ -694,7 +694,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
-	conn := r.provider.CloudFormationClient(ctx)
+	conn := r.provider.CloudControlApiClient(ctx)
 
 	id, err := r.getId(ctx, &request.State)
 
@@ -704,10 +704,10 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudformation.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
+	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("CloudFormation", "DeleteResource", err))
+		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "DeleteResource", err))
 
 		return
 	}
@@ -758,8 +758,8 @@ func (r *resource) ConfigValidators(context.Context) []tfsdk.ResourceConfigValid
 }
 
 // describe returns the live state of the specified resource.
-func (r *resource) describe(ctx context.Context, conn *cloudformation.Client, id string) (*cftypes.ResourceDescription, error) {
-	return tfcloudformation.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
+func (r *resource) describe(ctx context.Context, conn *cloudcontrol.Client, id string) (*cctypes.ResourceDescription, error) {
+	return tfcloudcontrol.FindResourceByTypeNameAndID(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id)
 }
 
 // getId returns the resource's primary identifier value from State.

@@ -9,6 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
@@ -30,7 +31,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	client := cloudformation.NewFromConfig(cfg)
+	ccClient := cloudcontrol.NewFromConfig(cfg)
+	cfClient := cloudformation.NewFromConfig(cfg)
 
 	input := &cloudformation.ListTypesInput{
 		Filters: &types.TypeFilters{
@@ -41,7 +43,7 @@ func main() {
 	}
 	var typeSummaries []types.TypeSummary
 	for {
-		output, err := client.ListTypes(ctx, input)
+		output, err := cfClient.ListTypes(ctx, input)
 
 		if err != nil {
 			ui.Error(fmt.Sprintf("error listing fully-mutable CloudFormation types: %s", err))
@@ -65,7 +67,7 @@ func main() {
 		Visibility:       types.VisibilityPublic,
 	}
 	for {
-		output, err := client.ListTypes(ctx, input)
+		output, err := cfClient.ListTypes(ctx, input)
 
 		if err != nil {
 			ui.Error(fmt.Sprintf("error listing immutable CloudFormation types: %s", err))
@@ -100,12 +102,12 @@ func main() {
 		tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
 
 		// Determine Plural Data Source (if supported)
-		input := &cloudformation.ListResourcesInput{
+		input := &cloudcontrol.ListResourcesInput{
 			TypeName: aws.String(cfTypeName),
 		}
 
 		var suppressPluralDataSource bool
-		if _, err = client.ListResources(ctx, input); err != nil {
+		if _, err = ccClient.ListResources(ctx, input); err != nil {
 			suppressPluralDataSource = true
 		}
 
