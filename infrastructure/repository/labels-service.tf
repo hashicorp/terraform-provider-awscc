@@ -221,7 +221,7 @@ variable "service_labels" {
 resource "github_issue_label" "service" {
   for_each = var.service_labels
 
-  repository = "terraform-provider-aws"
+  repository = "terraform-provider-awscc"
   name       = "service/${each.value}"
   color      = "7b42bc" # color:terraform (logomark)
 }

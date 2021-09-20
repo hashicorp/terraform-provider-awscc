@@ -54,7 +54,7 @@ variable "workflow_labels" {
 resource "github_issue_label" "workflow" {
   for_each = var.workflow_labels
 
-  repository = "terraform-provider-aws"
+  repository = "terraform-provider-awscc"
   name       = each.key
   color      = each.value
 }

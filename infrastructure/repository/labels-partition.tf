@@ -12,7 +12,7 @@ variable "partition_labels" {
 resource "github_issue_label" "partition" {
   for_each = var.partition_labels
 
-  repository = "terraform-provider-aws"
+  repository = "terraform-provider-awscc"
   name       = "partition/${each.value}"
   color      = "844fba" # color:terraform (main)
 }
