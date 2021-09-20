@@ -5,12 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
-	"reflect"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
-	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
 // Translates a Terraform Value to Cloud Control DesiredState.
@@ -270,45 +268,4 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 	default:
 		return tftypes.Value{}, fmt.Errorf("unsupported raw type: %T", v)
 	}
-}
-
-type toStruct struct {
-	Schema tfsdk.Schema
-}
-
-// FromSchemaAttributes returns a reflect.Type representing the
-// specified (resource) schema's attributes.
-func (s toStruct) FromSchemaAttributes(ctx context.Context) (reflect.Type, error) {
-	var fields []reflect.StructField
-
-	for k, v := range s.Schema.Attributes {
-		name := naming.TerraformAttributeToPascalCase(k)
-
-		field := reflect.StructField{
-			Name: name,
-			Tag:  reflect.StructTag(fmt.Sprintf(`tfsdk:"%s"`, k)),
-		}
-
-		if v.Type != nil {
-			if v.Type.TerraformType(ctx).Is(tftypes.String) {
-				field.Type = reflect.TypeOf("")
-			} else if v.Type.TerraformType(ctx).Is(tftypes.Number) {
-				field.Type = reflect.TypeOf(float64(0))
-			} else if v.Type.TerraformType(ctx).Is(tftypes.Bool) {
-				field.Type = reflect.TypeOf(false)
-			} else if v.Type.TerraformType(ctx).Is(tftypes.Set{}) || v.Type.TerraformType(ctx).Is(tftypes.List{}) || v.Type.TerraformType(ctx).Is(tftypes.Tuple{}) {
-				field.Type = reflect.TypeOf([]interface{}{})
-			} else if v.Type.TerraformType(ctx).Is(tftypes.Map{}) || v.Type.TerraformType(ctx).Is(tftypes.Object{}) {
-				field.Type = reflect.TypeOf(map[string]interface{}{})
-			}
-		} else if v.Attributes != nil { // attribute is a not a "tftype" e.g. providertypes.SetNestedAttributes
-			field.Type = reflect.TypeOf([]interface{}{})
-		} else {
-			return nil, fmt.Errorf("unknown type for attribute: %T", v)
-		}
-
-		fields = append(fields, field)
-	}
-
-	return reflect.StructOf(fields), nil
 }

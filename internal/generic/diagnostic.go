@@ -20,6 +20,13 @@ func DesiredStateErrorDiag(source string, err error) diag.Diagnostic {
 	)
 }
 
+func ResourceAttributeNotSetDiag(err error) diag.Diagnostic {
+	return diag.NewErrorDiagnostic(
+		"Terraform Resource Attribute Not Set",
+		fmt.Sprintf("Terraform resource attribute not set in State. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+	)
+}
+
 func ResourceIdentifierNotFoundDiag(err error) diag.Diagnostic {
 	return diag.NewErrorDiagnostic(
 		"Terraform Resource Identifier Not Found",

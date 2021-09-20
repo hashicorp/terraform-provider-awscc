@@ -106,16 +106,6 @@ func Pluralize(name string) string {
 	return pluralName
 }
 
-// TerraformAttributeToPascalCase converts a Terraform Attribute name to PascalCase where applicable.
-// For example `global_replication_group_description` -> `GlobalReplicationGroupDescription`.
-func TerraformAttributeToPascalCase(name string) string {
-	if !strings.Contains(name, "_") {
-		return strings.Title(name)
-	}
-	n := strings.Replace(name, "_", " ", -1)
-	return strings.Replace(strings.Title(n), " ", "", -1)
-}
-
 // PluralizeWithCustomNameSuffix converts a name to its plural form similar to Pluralize,
 // with the exception that a suffix can be passed in as an argument to be used
 // only for names that are considered "custom" i.e. return true for isCustomName.

@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"reflect"
 	"strings"
 	"time"
 
@@ -724,24 +723,19 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
-	translator := toStruct{Schema: r.resourceType.tfSchema}
-	typ, err := translator.FromSchemaAttributes(ctx)
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Import Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from a tfsdk.Schema for import. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
+	state := &response.State
 
-		return
+	for name, attr := range state.Schema.Attributes {
+		err := r.setEmptyAttribute(ctx, attr, name, state)
+
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ResourceAttributeNotSetDiag(err))
+
+			return
+		}
 	}
 
-	state := reflect.New(typ)
-
-	state.Elem().FieldByName("Id").SetString(request.ID)
-
-	diags := response.State.Set(ctx, state.Elem().Interface())
-
-	response.Diagnostics.Append(diags...)
+	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 
 	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 }
@@ -780,6 +774,39 @@ func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error
 // setId sets the resource's primary identifier value in State.
 func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) error {
 	diags := state.SetAttribute(ctx, idAttributePath, val)
+
+	if diags.HasError() {
+		return tfresource.DiagsError(diags)
+	}
+
+	return nil
+}
+
+func (r *resource) setEmptyAttribute(ctx context.Context, attr tfsdk.Attribute, name string, state *tfsdk.State) error {
+	path := tftypes.NewAttributePath().WithAttributeName(name)
+
+	var diags diag.Diagnostics
+
+	if t := attr.Type; t != nil {
+		if t.TerraformType(ctx).Is(tftypes.String) {
+			diags = state.SetAttribute(ctx, path, "")
+		} else if t.TerraformType(ctx).Is(tftypes.Number) {
+			diags = state.SetAttribute(ctx, path, float64(0))
+		} else if t.TerraformType(ctx).Is(tftypes.Bool) {
+			diags = state.SetAttribute(ctx, path, false)
+		} else if t.TerraformType(ctx).Is(tftypes.Set{}) || t.TerraformType(ctx).Is(tftypes.List{}) || t.TerraformType(ctx).Is(tftypes.Tuple{}) {
+			diags = state.SetAttribute(ctx, path, []interface{}{})
+		} else if t.TerraformType(ctx).Is(tftypes.Map{}) || t.TerraformType(ctx).Is(tftypes.Object{}) {
+			diags = state.SetAttribute(ctx, path, map[string]interface{}{})
+		}
+	} else if attr.Attributes != nil { // attribute is a not a "tftype" e.g. providertypes.SetNestedAttributes
+		diags = state.SetAttribute(ctx, path, []interface{}{})
+	} else {
+		diags.Append(diag.NewErrorDiagnostic(
+			"Unknown Terraform Type for Attribute",
+			fmt.Sprintf("unknown terraform type for attribute (%s): %T", name, t),
+		))
+	}
 
 	if diags.HasError() {
 		return tfresource.DiagsError(diags)
