@@ -61,6 +61,9 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 				Type:        types.StringType,
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
+				Validators: []tfsdk.AttributeValidator{
+					validate.ARN(),
+				},
 			},
 
 			"secret_key": {
@@ -100,6 +103,9 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Type:        types.StringType,
 							Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 							Required:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.ARN(),
+							},
 						},
 						"duration_seconds": {
 							Type:        types.NumberType,
