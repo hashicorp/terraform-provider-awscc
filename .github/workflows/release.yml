@@ -39,7 +39,7 @@ jobs:
           github-token: ${{ secrets.SETUP_SIGNORE_GITHUB_TOKEN }}
           signer: interim_signing_subkey_768B676
       - name: Release Notes
-        run: sed -n -e "1{/# /d;}" -e "2{/^$/d;}" -e "/# $(git describe --abbrev=0 --exclude="$(git describe --abbrev=0 --match='v*.*.*' --tags)" --match='v*.*.*' --tags | tr -d v)/q;p" CHANGELOG.md > /tmp/RELEASE-NOTES.md
+        run: sed -n -e "1{/# /d;}" -e "2{/^$/d;}" -e "/# \[$(git describe --abbrev=0 --exclude="$(git describe --abbrev=0 --match='v*.*.*' --tags)" --match='v*.*.*' --tags | tr -d v)/q;p" CHANGELOG.md > /tmp/RELEASE-NOTES.md
       - name: Release Protocol Versions
         run: |
           manifestFile=${{ github.event.repository.name }}_manifest.json
