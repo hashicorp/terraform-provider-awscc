@@ -11,13 +11,13 @@ import (
 	tflog "github.com/hashicorp/terraform-plugin-log"
 )
 
-// Translates a Terraform Value to CloudFormation DesiredState.
-type toCloudFormation struct {
+// Translates a Terraform Value to Cloud Control DesiredState.
+type toCloudControl struct {
 	tfToCfNameMap map[string]string
 }
 
-// AsRaw returns the raw map[string]interface{} representing CloudFormation DesiredState from a Terraform Value.
-func (t toCloudFormation) AsRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
+// AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
+func (t toCloudControl) AsRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
 	v, err := t.rawFromValue(ctx, val)
 
 	if err != nil {
@@ -35,8 +35,8 @@ func (t toCloudFormation) AsRaw(ctx context.Context, val tftypes.Value) (map[str
 	return nil, fmt.Errorf("unexpected raw type: %T", v)
 }
 
-// AsString returns the string representing CloudFormation DesiredState from a Terraform Value.
-func (t toCloudFormation) AsString(ctx context.Context, val tftypes.Value) (string, error) {
+// AsString returns the string representing Cloud Control DesiredState from a Terraform Value.
+func (t toCloudControl) AsString(ctx context.Context, val tftypes.Value) (string, error) {
 	v, err := t.AsRaw(ctx, val)
 
 	if err != nil {
@@ -53,8 +53,8 @@ func (t toCloudFormation) AsString(ctx context.Context, val tftypes.Value) (stri
 }
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
-// Terraform attribute names are mapped to CloudFormation property names.
-func (t toCloudFormation) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
+// Terraform attribute names are mapped to Cloud Control property names.
+func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -139,17 +139,17 @@ func (t toCloudFormation) rawFromValue(ctx context.Context, val tftypes.Value) (
 	return nil, fmt.Errorf("unsupported value type: %s", typ)
 }
 
-// Translates a CloudFormation ResourceModel to Terraform Value.
+// Translates Cloud Control Properties to Terraform Value.
 type toTerraform struct {
 	cfToTfNameMap map[string]string
 }
 
-// FromRaw returns the Terraform Value for the specified CloudFormation ResourceModel (raw map[string]interface{}).
+// FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
 func (t toTerraform) FromRaw(ctx context.Context, schema *tfsdk.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
 	return t.valueFromRaw(ctx, schema, nil, resourceModel)
 }
 
-// FromString returns the Terraform Value for the specified CloudFormation ResourceModel (string).
+// FromString returns the Terraform Value for the specified Cloud Control Properties (string).
 func (t toTerraform) FromString(ctx context.Context, schema *tfsdk.Schema, resourceModel string) (tftypes.Value, error) {
 	var v interface{}
 

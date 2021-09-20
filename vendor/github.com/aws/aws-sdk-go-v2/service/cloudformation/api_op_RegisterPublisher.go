@@ -10,12 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Registers your account as a publisher of public extensions in the CloudFormation
+// registry. Public extensions are available for use by all CloudFormation users.
+// This publisher ID applies to your account in all AWS regions. For information on
+// requirements for registering as a public extension publisher, see Registering
+// your account to publish CloudFormation extensions
+// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs)
+// in the CloudFormation CLI User Guide.
 func (c *Client) RegisterPublisher(ctx context.Context, params *RegisterPublisherInput, optFns ...func(*Options)) (*RegisterPublisherOutput, error) {
 	if params == nil {
 		params = &RegisterPublisherInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RegisterPublisher", params, optFns, addOperationRegisterPublisherMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterPublisher", params, optFns, c.addOperationRegisterPublisherMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -26,19 +33,31 @@ func (c *Client) RegisterPublisher(ctx context.Context, params *RegisterPublishe
 }
 
 type RegisterPublisherInput struct {
+
+	// Whether you accept the terms and conditions for publishing extensions in the
+	// CloudFormation registry. You must accept the terms and conditions in order to
+	// register to publish public extensions to the CloudFormation registry. The
+	// default is false.
 	AcceptTermsAndConditions *bool
 
+	// If you are using a Bitbucket or GitHub account for identity verification, the
+	// Amazon Resource Name (ARN) for your connection to that account. For more
+	// information, see Registering your account to publish CloudFormation extensions
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs)
+	// in the CloudFormation CLI User Guide.
 	ConnectionArn *string
 }
 
 type RegisterPublisherOutput struct {
+
+	// The ID assigned this account by CloudFormation for publishing extensions.
 	PublisherId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationRegisterPublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRegisterPublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterPublisher{}, middleware.After)
 	if err != nil {
 		return err

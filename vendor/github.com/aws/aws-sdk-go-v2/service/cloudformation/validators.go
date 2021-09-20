@@ -50,26 +50,6 @@ func (m *validateOpBatchDescribeTypeConfigurations) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCancelResourceRequest struct {
-}
-
-func (*validateOpCancelResourceRequest) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCancelResourceRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CancelResourceRequestInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCancelResourceRequestInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCancelUpdateStack struct {
 }
 
@@ -125,26 +105,6 @@ func (m *validateOpCreateChangeSet) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateChangeSetInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpCreateResource struct {
-}
-
-func (*validateOpCreateResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,26 +185,6 @@ func (m *validateOpDeleteChangeSet) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteChangeSetInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteResource struct {
-}
-
-func (*validateOpDeleteResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,46 +490,6 @@ func (m *validateOpExecuteChangeSet) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetResource struct {
-}
-
-func (*validateOpGetResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpGetResourceRequestStatus struct {
-}
-
-func (*validateOpGetResourceRequestStatus) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetResourceRequestStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetResourceRequestStatusInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetResourceRequestStatusInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetStackPolicy struct {
 }
 
@@ -645,26 +545,6 @@ func (m *validateOpListImports) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListImportsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListResources struct {
-}
-
-func (*validateOpListResources) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListResourcesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,26 +750,6 @@ func (m *validateOpStopStackSetOperation) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateResource struct {
-}
-
-func (*validateOpUpdateResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUpdateStack struct {
 }
 
@@ -978,10 +838,6 @@ func addOpBatchDescribeTypeConfigurationsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpBatchDescribeTypeConfigurations{}, middleware.After)
 }
 
-func addOpCancelResourceRequestValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCancelResourceRequest{}, middleware.After)
-}
-
 func addOpCancelUpdateStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelUpdateStack{}, middleware.After)
 }
@@ -992,10 +848,6 @@ func addOpContinueUpdateRollbackValidationMiddleware(stack *middleware.Stack) er
 
 func addOpCreateChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChangeSet{}, middleware.After)
-}
-
-func addOpCreateResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateResource{}, middleware.After)
 }
 
 func addOpCreateStackValidationMiddleware(stack *middleware.Stack) error {
@@ -1012,10 +864,6 @@ func addOpCreateStackSetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChangeSet{}, middleware.After)
-}
-
-func addOpDeleteResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteResource{}, middleware.After)
 }
 
 func addOpDeleteStackValidationMiddleware(stack *middleware.Stack) error {
@@ -1078,14 +926,6 @@ func addOpExecuteChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExecuteChangeSet{}, middleware.After)
 }
 
-func addOpGetResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetResource{}, middleware.After)
-}
-
-func addOpGetResourceRequestStatusValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetResourceRequestStatus{}, middleware.After)
-}
-
 func addOpGetStackPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStackPolicy{}, middleware.After)
 }
@@ -1096,10 +936,6 @@ func addOpListChangeSetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListImportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImports{}, middleware.After)
-}
-
-func addOpListResourcesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListResources{}, middleware.After)
 }
 
 func addOpListStackInstancesValidationMiddleware(stack *middleware.Stack) error {
@@ -1142,10 +978,6 @@ func addOpStopStackSetOperationValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpStopStackSetOperation{}, middleware.After)
 }
 
-func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateResource{}, middleware.After)
-}
-
 func addOpUpdateStackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStack{}, middleware.After)
 }
@@ -1172,41 +1004,6 @@ func validateLoggingConfig(v *types.LoggingConfig) error {
 	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePatchOperation(v *types.PatchOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PatchOperation"}
-	if len(v.Op) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Op"))
-	}
-	if v.Path == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Path"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePatchOperations(v []types.PatchOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PatchOperations"}
-	for i := range v {
-		if err := validatePatchOperation(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1372,21 +1169,6 @@ func validateOpBatchDescribeTypeConfigurationsInput(v *BatchDescribeTypeConfigur
 	}
 }
 
-func validateOpCancelResourceRequestInput(v *CancelResourceRequestInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CancelResourceRequestInput"}
-	if v.RequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequestToken"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpCancelUpdateStackInput(v *CancelUpdateStackInput) error {
 	if v == nil {
 		return nil
@@ -1442,24 +1224,6 @@ func validateOpCreateChangeSetInput(v *CreateChangeSetInput) error {
 		if err := validateResourcesToImport(v.ResourcesToImport); err != nil {
 			invalidParams.AddNested("ResourcesToImport", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreateResourceInput(v *CreateResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
-	if v.DesiredState == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DesiredState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1538,24 +1302,6 @@ func validateOpDeleteChangeSetInput(v *DeleteChangeSetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteChangeSetInput"}
 	if v.ChangeSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteResourceInput(v *DeleteResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1807,39 +1553,6 @@ func validateOpExecuteChangeSetInput(v *ExecuteChangeSetInput) error {
 	}
 }
 
-func validateOpGetResourceInput(v *GetResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetResourceInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetResourceRequestStatusInput(v *GetResourceRequestStatusInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetResourceRequestStatusInput"}
-	if v.RequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequestToken"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetStackPolicyInput(v *GetStackPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1877,21 +1590,6 @@ func validateOpListImportsInput(v *ListImportsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImportsInput"}
 	if v.ExportName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListResourcesInput(v *ListResourcesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListResourcesInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2068,29 +1766,6 @@ func validateOpStopStackSetOperationInput(v *StopStackSetOperationInput) error {
 	}
 	if v.OperationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
-	}
-	if v.PatchOperations != nil {
-		if err := validatePatchOperations(v.PatchOperations); err != nil {
-			invalidParams.AddNested("PatchOperations", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

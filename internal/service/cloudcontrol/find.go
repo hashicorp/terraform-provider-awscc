@@ -6,16 +6,16 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudformation.Client, roleARN, typeName, id string) (*types.ResourceDescription, error) {
+func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string) (*types.ResourceDescription, error) {
 	tflog.Debug(ctx, "FindResourceByTypeNameAndID", "cfTypeName", typeName, "id", id)
 
-	input := &cloudformation.GetResourceInput{
+	input := &cloudcontrol.GetResourceInput{
 		Identifier: aws.String(id),
 		TypeName:   aws.String(typeName),
 	}
@@ -43,7 +43,7 @@ func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudformation.Clien
 		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
-	tflog.Debug(ctx, "ResourceDescription.ResourceModel", "value", aws.ToString(output.ResourceDescription.ResourceModel))
+	tflog.Debug(ctx, "ResourceDescription.ResourceModel", "value", aws.ToString(output.ResourceDescription.Properties))
 
 	return output.ResourceDescription, nil
 }
