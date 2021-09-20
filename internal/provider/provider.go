@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -116,30 +115,30 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Description: "Session name to use when assuming the role.",
 							Optional:    true,
 						},
-						// "tags": {
-						// 	Description: "Map of assume role session tags.",
-						// 	Attributes: schema.SetNestedAttributes(
-						// 		map[string]schema.Attribute{
-						// 			"key": {
-						// 				Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						// 				Type:        types.StringType,
-						// 				Required:    true,
-						// 			},
-						// 			"value": {
-						// 				Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						// 				Type:        types.StringType,
-						// 				Required:    true,
-						// 			},
-						// 		},
-						// 		schema.SetNestedAttributesOptions{},
-						// 	),
-						// 	Optional: true,
-						// },
-						// "transitive_tag_keys": {
-						// 	Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
-						// 	Type:        providertypes.SetType{ElemType: types.StringType},
-						// 	Optional:    true,
-						// },
+						"tags": {
+							Description: "Map of assume role session tags.",
+							Attributes: tfsdk.SetNestedAttributes(
+								map[string]tfsdk.Attribute{
+									"key": {
+										Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+										Type:        types.StringType,
+										Required:    true,
+									},
+									"value": {
+										Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+										Type:        types.StringType,
+										Required:    true,
+									},
+								},
+								tfsdk.SetNestedAttributesOptions{},
+							),
+							Optional: true,
+						},
+						"transitive_tag_keys": {
+							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
+							Type:        types.SetType{ElemType: types.StringType},
+							Optional:    true,
+						},
 					},
 				),
 				Optional:    true,
@@ -164,10 +163,17 @@ type providerData struct {
 }
 
 type assumeRoleData struct {
-	RoleARN         types.String `tfsdk:"role_arn"`
-	DurationSeconds types.Number `tfsdk:"duration_seconds"`
-	ExternalID      types.String `tfsdk:"external_id"`
-	SessionName     types.String `tfsdk:"session_name"`
+	RoleARN           types.String `tfsdk:"role_arn"`
+	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
+	ExternalID        types.String `tfsdk:"external_id"`
+	SessionName       types.String `tfsdk:"session_name"`
+	Tags              []tag        `tfsdk:"tags"`
+	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
+}
+
+type tag struct {
+	Key   types.String `tfsdk:"key"`
+	Value types.String `tfsdk:"value"`
 }
 
 func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
@@ -176,68 +182,13 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	diags := request.Config.Get(ctx, &config)
 
 	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
+		response.Diagnostics.Append(diags...)
 
 		return
 	}
 
-	// TODO
-	// TODO Is this the correct thing to do for any Unknown values?
-	// TODO
-	anyUnknownConfigValues := false
-
-	if config.AccessKey.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("access_key"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.SharedConfigFiles.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_config_files"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.SharedCredentialsFiles.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("shared_credentials_files"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.Insecure.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("insecure"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.Profile.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("profile"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.Region.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("region"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.RoleARN.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("role_arn"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.SecretKey.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("secret_key"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.SkipMetadataApiCheck.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("skip_medatadata_api_check"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if config.Token.Unknown {
-		response.AddAttributeError(tftypes.NewAttributePath().WithAttributeName("token"), "Unknown Value", "Attribute value is not yet known")
-		anyUnknownConfigValues = true
-	}
-
-	if anyUnknownConfigValues {
-		return
+	if !request.Config.Raw.IsFullyKnown() {
+		response.AddError("Unknown Value", "An attribute value is not yet known")
 	}
 
 	ccClient, region, err := newCloudControlClient(ctx, &config)
@@ -353,6 +304,24 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 
 		if !pd.AssumeRole.SessionName.Null {
 			config.AssumeRoleSessionName = pd.AssumeRole.SessionName.Value
+		}
+
+		if len(pd.AssumeRole.Tags) > 0 {
+			tags := make(map[string]string)
+			for _, tag := range pd.AssumeRole.Tags {
+				if !tag.Key.Null && !tag.Value.Null {
+					tags[tag.Key.Value] = tag.Value.Value
+				}
+			}
+			config.AssumeRoleTags = tags
+		}
+
+		if !pd.AssumeRole.TransitiveTagKeys.Null {
+			tagKeys := make([]string, len(pd.AssumeRole.TransitiveTagKeys.Elems))
+			for i, v := range pd.AssumeRole.TransitiveTagKeys.Elems {
+				tagKeys[i] = v.(types.String).Value
+			}
+			config.AssumeRoleTransitiveTagKeys = tagKeys
 		}
 	}
 
