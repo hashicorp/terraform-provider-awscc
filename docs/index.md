@@ -15,7 +15,7 @@ To learn the basics of Terraform using this provider, follow the hands-on get st
 
 ## Example Usage
 
-Terraform 0.13 and later:
+Terraform 1.0.7 and later:
 
 ```terraform
 terraform {
@@ -151,7 +151,7 @@ Usage:
 
 ```terraform
 provider "awscc" {
-  assume_role {
+  assume_role = {
     role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
     session_name = "SESSION_NAME"
     external_id  = "EXTERNAL_ID"
@@ -186,3 +186,13 @@ Optional:
 - **external_id** (String) External identifier to use when assuming the role.
 - **role_arn** (String) Amazon Resource Name (ARN) of the IAM Role to assume.
 - **session_name** (String) Session name to use when assuming the role.
+- **tags** (Attributes Set) Map of assume role session tags. (see [below for nested schema](#nestedatt--assume_role--tags))
+- **transitive_tag_keys** (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
+
+<a id="nestedatt--assume_role--tags"></a>
+### Nested Schema for `assume_role.tags`
+
+Optional:
+
+- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

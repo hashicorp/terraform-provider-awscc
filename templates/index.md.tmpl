@@ -15,7 +15,7 @@ To learn the basics of Terraform using this provider, follow the hands-on get st
 
 ## Example Usage
 
-Terraform 0.13 and later:
+Terraform 1.0.7 and later:
 
 ```terraform
 terraform {
@@ -151,7 +151,7 @@ Usage:
 
 ```terraform
 provider "awscc" {
-  assume_role {
+  assume_role = {
     role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
     session_name = "SESSION_NAME"
     external_id  = "EXTERNAL_ID"
