@@ -3,15 +3,15 @@ module github.com/hashicorp/terraform-provider-awscc
 go 1.16
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.8.0
-	github.com/aws/aws-sdk-go-v2/config v1.6.0
+	github.com/aws/aws-sdk-go-v2 v1.9.0
+	github.com/aws/aws-sdk-go-v2/config v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v0.0.0-00010101000000-000000000000
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.7.0
-	github.com/aws/smithy-go v1.7.0
+	github.com/aws/smithy-go v1.8.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0
-	github.com/hashicorp/aws-sdk-go-base v0.7.2-0.20210812222230-308b29e49974
+	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1
 	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.10.0
@@ -24,7 +24,5 @@ require (
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mitchellh/cli v1.1.2
 )
-
-replace github.com/aws/aws-sdk-go-v2/credentials => github.com/gdavison/aws-sdk-go-v2/credentials v1.2.2-0.20210811194025-146c1ad6c3b2
 
 replace github.com/aws/aws-sdk-go-v2/service/cloudcontrol => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804

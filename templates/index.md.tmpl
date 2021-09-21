@@ -15,7 +15,7 @@ To learn the basics of Terraform using this provider, follow the hands-on get st
 
 ## Example Usage
 
-Terraform 0.13 and later:
+Terraform 1.0.7 and later:
 
 ```terraform
 terraform {
@@ -92,17 +92,23 @@ $ export AWS_DEFAULT_REGION="us-west-2"
 $ terraform plan
 ```
 
-### Shared Credentials File
+### Shared Configuration and Credentials Files
 
-You can use an [AWS credentials or configuration file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) to specify your credentials. The default location is `$HOME/.aws/credentials` on Linux and macOS, or `"%USERPROFILE%\.aws\credentials"` on Windows. You can optionally specify a different location in the Terraform configuration by providing the `shared_credentials_file` argument or using the `AWS_SHARED_CREDENTIALS_FILE` environment variable. This method also supports a `profile` configuration and matching `AWS_PROFILE` environment variable:
+You can use [AWS shared configuration or credentials files](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) to specify configuration and credentials.
+The default locations are `$HOME/.aws/config` and `$HOME/.aws/credentials` on Linux and macOS,
+or `"%USERPROFILE%\.aws\config"` and `"%USERPROFILE%\.aws\credentials"` on Windows.
+You can optionally specify a different location in the Terraform configuration by providing the `shared_config_files` and `shared_credentials_files` arguments
+or using the `AWS_SHARED_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
+This method also supports the `profile` configuration and corresponding `AWS_PROFILE` environment variable:
 
 Usage:
 
 ```terraform
 provider "aws" {
-  region                  = "us-west-2"
-  shared_credentials_file = "/Users/tf_user/.aws/creds"
-  profile                 = "customprofile"
+  region                   = "us-west-2"
+  shared_config_files      = ["/Users/tf_user/.aws/conf"]
+  shared_credentials_files = ["/Users/tf_user/.aws/creds"]
+  profile                  = "customprofile"
 }
 ```
 
@@ -145,7 +151,7 @@ Usage:
 
 ```terraform
 provider "awscc" {
-  assume_role {
+  assume_role = {
     role_arn     = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
     session_name = "SESSION_NAME"
     external_id  = "EXTERNAL_ID"
