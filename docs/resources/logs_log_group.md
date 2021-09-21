@@ -26,4 +26,10 @@ Resource schema for AWS::Logs::LogGroup
 - **arn** (String) The CloudWatch log group ARN.
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_logs_log_group.example <resource ID>
+```
