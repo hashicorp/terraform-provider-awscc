@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_log_group.example <resource ID>
