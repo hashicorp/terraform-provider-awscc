@@ -17,7 +17,7 @@ Resource Type definition for AWS::EC2::EC2Fleet
 
 ### Required
 
-- **launch_template_configs** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--launch_template_configs))
+- **launch_template_configs** (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs))
 - **target_capacity_specification** (Attributes) (see [below for nested schema](#nestedatt--target_capacity_specification))
 
 ### Optional

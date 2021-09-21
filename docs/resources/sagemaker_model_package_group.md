@@ -23,7 +23,7 @@ Resource Type definition for AWS::SageMaker::ModelPackageGroup
 
 - **model_package_group_description** (String) The description of the model package group.
 - **model_package_group_policy** (String)
-- **tags** (Attributes List, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

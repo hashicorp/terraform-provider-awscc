@@ -28,7 +28,7 @@ An aggregated metric of certain devices in your fleet
 - **period** (Number) The period of metric emission in seconds
 - **query_string** (String) The Fleet Indexing query used by a fleet metric
 - **query_version** (String) The version of a Fleet Indexing query used by a fleet metric
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
 - **unit** (String) The unit of data points emitted by a fleet metric
 
 ### Read-Only

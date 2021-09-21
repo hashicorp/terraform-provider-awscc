@@ -17,15 +17,15 @@ A resource schema for an EventType in Amazon Fraud Detector.
 
 ### Required
 
-- **entity_types** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--entity_types))
-- **event_variables** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--event_variables))
-- **labels** (Attributes List, Min: 2) (see [below for nested schema](#nestedatt--labels))
+- **entity_types** (Attributes List) (see [below for nested schema](#nestedatt--entity_types))
+- **event_variables** (Attributes List) (see [below for nested schema](#nestedatt--event_variables))
+- **labels** (Attributes List) (see [below for nested schema](#nestedatt--labels))
 - **name** (String) The name for the event type
 
 ### Optional
 
 - **description** (String) The description of the event type.
-- **tags** (Attributes List, Max: 200) Tags associated with this event type. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -45,7 +45,7 @@ Required:
 - **inline** (Boolean)
 - **last_updated_time** (String) The time when the event type was last updated.
 - **name** (String)
-- **tags** (Attributes List, Max: 200) Tags associated with this event type. (see [below for nested schema](#nestedatt--entity_types--tags))
+- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--entity_types--tags))
 
 <a id="nestedatt--entity_types--tags"></a>
 ### Nested Schema for `entity_types.tags`
@@ -71,7 +71,7 @@ Required:
 - **inline** (Boolean)
 - **last_updated_time** (String) The time when the event type was last updated.
 - **name** (String)
-- **tags** (Attributes List, Max: 200) Tags associated with this event type. (see [below for nested schema](#nestedatt--event_variables--tags))
+- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--event_variables--tags))
 - **variable_type** (String)
 
 <a id="nestedatt--event_variables--tags"></a>
@@ -95,7 +95,7 @@ Required:
 - **inline** (Boolean)
 - **last_updated_time** (String) The time when the event type was last updated.
 - **name** (String)
-- **tags** (Attributes List, Max: 200) Tags associated with this event type. (see [below for nested schema](#nestedatt--labels--tags))
+- **tags** (Attributes List) Tags associated with this event type. (see [below for nested schema](#nestedatt--labels--tags))
 
 <a id="nestedatt--labels--tags"></a>
 ### Nested Schema for `labels.tags`

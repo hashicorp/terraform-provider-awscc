@@ -26,7 +26,7 @@ Resource schema for AWS::QLDB::Stream.
 ### Optional
 
 - **exclusive_end_time** (String)
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

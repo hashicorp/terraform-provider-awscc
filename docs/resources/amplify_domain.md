@@ -19,7 +19,7 @@ The AWS::Amplify::Domain resource allows you to connect a custom domain to your 
 
 - **app_id** (String)
 - **domain_name** (String)
-- **sub_domain_settings** (Attributes List, Max: 255) (see [below for nested schema](#nestedatt--sub_domain_settings))
+- **sub_domain_settings** (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
 
 ### Optional
 

@@ -22,7 +22,7 @@ A security profile defines a set of expected behaviors for devices in your accou
 - **behaviors** (Attributes Set) Specifies the behaviors that, when violated by a device (thing), cause an alert. (see [below for nested schema](#nestedatt--behaviors))
 - **security_profile_description** (String) A description of the security profile.
 - **security_profile_name** (String) A unique identifier for the security profile.
-- **tags** (Attributes Set, Max: 50) Metadata that can be used to manage the security profile. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) Metadata that can be used to manage the security profile. (see [below for nested schema](#nestedatt--tags))
 - **target_arns** (Set of String) A set of target ARNs that the security profile is attached to.
 
 ### Read-Only

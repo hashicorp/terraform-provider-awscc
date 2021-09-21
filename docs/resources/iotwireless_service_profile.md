@@ -19,7 +19,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 - **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan))
 - **name** (String) Name of service profile
-- **tags** (Attributes Set, Max: 50) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

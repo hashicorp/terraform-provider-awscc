@@ -17,7 +17,7 @@ The AWS::ElastiCache::GlobalReplicationGroup resource creates an Amazon ElastiCa
 
 ### Required
 
-- **members** (Attributes List, Min: 1) The replication groups that comprise the Global Datastore. (see [below for nested schema](#nestedatt--members))
+- **members** (Attributes List) The replication groups that comprise the Global Datastore. (see [below for nested schema](#nestedatt--members))
 
 ### Optional
 

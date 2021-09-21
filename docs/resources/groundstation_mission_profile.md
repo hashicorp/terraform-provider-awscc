@@ -17,7 +17,7 @@ AWS Ground Station Mission Profile resource type for CloudFormation.
 
 ### Required
 
-- **dataflow_edges** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--dataflow_edges))
+- **dataflow_edges** (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
 - **minimum_viable_contact_duration_seconds** (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
 - **name** (String) A name used to identify a mission profile.
 - **tracking_config_arn** (String)

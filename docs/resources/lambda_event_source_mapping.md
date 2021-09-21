@@ -33,7 +33,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 - **parallelization_factor** (Number) (Streams) The number of batches to process from each shard concurrently.
 - **queues** (List of String) (ActiveMQ) A list of ActiveMQ queues.
 - **self_managed_event_source** (Attributes) The configuration used by AWS Lambda to access a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source))
-- **source_access_configurations** (Attributes List, Min: 1, Max: 22) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
+- **source_access_configurations** (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
 - **starting_position** (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
 - **starting_position_timestamp** (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
 - **topics** (List of String) (Kafka) A list of Kafka topics.

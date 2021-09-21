@@ -24,7 +24,7 @@ Resource Type definition for AWS::AppIntegrations::EventIntegration
 ### Optional
 
 - **description** (String) The event integration description.
-- **tags** (Attributes List, Max: 200) The tags (keys and values) associated with the event integration. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags (keys and values) associated with the event integration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -25,7 +25,7 @@ This resource schema represents the RepositoryAssociation resource in the Amazon
 - **bucket_name** (String) The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.
 - **connection_arn** (String) The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
 - **owner** (String) The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.
-- **tags** (Attributes List, Max: 50) The tags associated with a repository association. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags associated with a repository association. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -22,7 +22,7 @@ An label for fraud detector.
 ### Optional
 
 - **description** (String) The label description.
-- **tags** (Attributes List, Max: 200) Tags associated with this label. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags associated with this label. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

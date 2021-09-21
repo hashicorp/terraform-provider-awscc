@@ -36,7 +36,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 Required:
 
 - **device_permission_role_arn** (String) The device permission role arn of the test suite.
-- **devices** (Attributes List, Max: 2) The devices being tested in the test suite (see [below for nested schema](#nestedatt--suite_definition_configuration--devices))
+- **devices** (Attributes List) The devices being tested in the test suite (see [below for nested schema](#nestedatt--suite_definition_configuration--devices))
 - **intended_for_qualification** (Boolean) Whether the tests are intended for qualification in a suite.
 - **root_group** (String) The root group of the test suite.
 - **suite_definition_name** (String) The Name of the suite definition.

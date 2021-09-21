@@ -18,7 +18,7 @@ Resource schema for AWS::Cassandra::Keyspace
 ### Optional
 
 - **keyspace_name** (String) Name for Cassandra keyspace
-- **tags** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

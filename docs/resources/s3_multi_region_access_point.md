@@ -17,7 +17,7 @@ AWS::S3::MultiRegionAccessPoint is an Amazon S3 resource type that dynamically r
 
 ### Required
 
-- **regions** (Attributes List, Min: 1) The list of buckets that you want to associate this Multi Region Access Point with. (see [below for nested schema](#nestedatt--regions))
+- **regions** (Attributes List) The list of buckets that you want to associate this Multi Region Access Point with. (see [below for nested schema](#nestedatt--regions))
 
 ### Optional
 

@@ -25,7 +25,7 @@ Resource Type definition for AWS::SageMaker::App
 ### Optional
 
 - **resource_spec** (Attributes) (see [below for nested schema](#nestedatt--resource_spec))
-- **tags** (Attributes List, Max: 50) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

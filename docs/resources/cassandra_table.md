@@ -18,7 +18,7 @@ Resource schema for AWS::Cassandra::Table
 ### Required
 
 - **keyspace_name** (String) Name for Cassandra keyspace
-- **partition_key_columns** (Attributes List, Min: 1) Partition key columns of the table (see [below for nested schema](#nestedatt--partition_key_columns))
+- **partition_key_columns** (Attributes List) Partition key columns of the table (see [below for nested schema](#nestedatt--partition_key_columns))
 
 ### Optional
 
@@ -28,7 +28,7 @@ Resource schema for AWS::Cassandra::Table
 - **point_in_time_recovery_enabled** (Boolean) Indicates whether point in time recovery is enabled (true) or disabled (false) on the table
 - **regular_columns** (Attributes Set) Non-key columns of the table (see [below for nested schema](#nestedatt--regular_columns))
 - **table_name** (String) Name for Cassandra table
-- **tags** (Attributes List, Max: 50) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -52,7 +52,7 @@ Optional:
 
 Optional:
 
-- **destinations** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--logging_configuration--destinations))
+- **destinations** (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--destinations))
 - **include_execution_data** (Boolean)
 - **level** (String)
 

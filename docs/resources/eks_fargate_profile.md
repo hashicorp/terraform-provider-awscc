@@ -19,7 +19,7 @@ Resource Schema for AWS::EKS::FargateProfile
 
 - **cluster_name** (String) Name of the Cluster
 - **pod_execution_role_arn** (String) The IAM policy arn for pods
-- **selectors** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--selectors))
+- **selectors** (Attributes List) (see [below for nested schema](#nestedatt--selectors))
 
 ### Optional
 

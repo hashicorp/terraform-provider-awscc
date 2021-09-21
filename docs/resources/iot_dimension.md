@@ -23,7 +23,7 @@ A dimension can be used to limit the scope of a metric used in a security profil
 ### Optional
 
 - **name** (String) A unique identifier for the dimension.
-- **tags** (Attributes Set, Max: 50) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) Metadata that can be used to manage the dimension. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

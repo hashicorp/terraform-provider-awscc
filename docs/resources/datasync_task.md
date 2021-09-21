@@ -23,11 +23,11 @@ Resource schema for AWS::DataSync::Task.
 ### Optional
 
 - **cloudwatch_log_group_arn** (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
-- **excludes** (Attributes List, Max: 1) (see [below for nested schema](#nestedatt--excludes))
+- **excludes** (Attributes List) (see [below for nested schema](#nestedatt--excludes))
 - **name** (String) The name of a task. This value is a text reference that is used to identify the task in the console.
 - **options** (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
 - **schedule** (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

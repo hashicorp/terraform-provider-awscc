@@ -21,7 +21,7 @@ Resource Type definition for SSO InstanceAccessControlAttributeConfiguration
 
 ### Optional
 
-- **access_control_attributes** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--access_control_attributes))
+- **access_control_attributes** (Attributes List) (see [below for nested schema](#nestedatt--access_control_attributes))
 - **instance_access_control_attribute_configuration** (Attributes) The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead. (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration))
 
 ### Read-Only
@@ -50,7 +50,7 @@ Optional:
 
 Optional:
 
-- **access_control_attributes** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes))
+- **access_control_attributes** (Attributes List) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes))
 
 <a id="nestedatt--instance_access_control_attribute_configuration--access_control_attributes"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration.access_control_attributes`

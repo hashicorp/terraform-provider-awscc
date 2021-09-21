@@ -19,7 +19,7 @@ Resource type definition for AWS::NetworkFirewall::Firewall
 
 - **firewall_name** (String)
 - **firewall_policy_arn** (String) A resource ARN.
-- **subnet_mappings** (Attributes Set, Min: 1) (see [below for nested schema](#nestedatt--subnet_mappings))
+- **subnet_mappings** (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
 - **vpc_id** (String)
 
 ### Optional

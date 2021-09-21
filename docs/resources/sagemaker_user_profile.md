@@ -24,7 +24,7 @@ Resource Type definition for AWS::SageMaker::UserProfile
 
 - **single_sign_on_user_identifier** (String) A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is "UserName". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.
 - **single_sign_on_user_value** (String) The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.
-- **tags** (Attributes List, Max: 50) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
 - **user_settings** (Attributes) A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called. (see [below for nested schema](#nestedatt--user_settings))
 
 ### Read-Only
@@ -75,7 +75,7 @@ Optional:
 
 Optional:
 
-- **custom_images** (Attributes List, Max: 30) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--custom_images))
+- **custom_images** (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--custom_images))
 - **default_resource_spec** (Attributes) (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--default_resource_spec))
 
 <a id="nestedatt--user_settings--kernel_gateway_app_settings--custom_images"></a>

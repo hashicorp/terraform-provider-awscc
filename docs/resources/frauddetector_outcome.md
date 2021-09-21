@@ -22,7 +22,7 @@ An outcome for rule evaluation.
 ### Optional
 
 - **description** (String) The outcome description.
-- **tags** (Attributes List, Max: 200) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

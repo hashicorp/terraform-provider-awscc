@@ -21,12 +21,12 @@ The AWS::SSM::Document resource is an SSM document in AWS Systems Manager that d
 
 ### Optional
 
-- **attachments** (Attributes List, Max: 20) A list of key and value pairs that describe attachments to a version of a document. (see [below for nested schema](#nestedatt--attachments))
+- **attachments** (Attributes List) A list of key and value pairs that describe attachments to a version of a document. (see [below for nested schema](#nestedatt--attachments))
 - **document_format** (String) Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
 - **document_type** (String) The type of document to create.
 - **name** (String) A name for the Systems Manager document.
-- **requires** (Attributes List, Min: 1) A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document. (see [below for nested schema](#nestedatt--requires))
-- **tags** (Attributes List, Max: 1000) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. (see [below for nested schema](#nestedatt--tags))
+- **requires** (Attributes List) A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document. (see [below for nested schema](#nestedatt--requires))
+- **tags** (Attributes List) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. (see [below for nested schema](#nestedatt--tags))
 - **target_type** (String) Specify a target type to define the kinds of resources the document can run on.
 - **version_name** (String) An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.
 

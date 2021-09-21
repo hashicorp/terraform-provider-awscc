@@ -181,16 +181,16 @@ Optional:
 
 Optional:
 
-- **column_statistics_configurations** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations))
+- **column_statistics_configurations** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations))
 - **dataset_statistics_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration))
-- **profile_columns** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--profile_configuration--profile_columns))
+- **profile_columns** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--profile_columns))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations`
 
 Optional:
 
-- **selectors** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--selectors))
+- **selectors** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--selectors))
 - **statistics** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--selectors"></a>
@@ -208,7 +208,7 @@ Optional:
 Optional:
 
 - **included_statistics** (List of String)
-- **overrides** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides))
+- **overrides** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations.statistics.overrides`
@@ -227,7 +227,7 @@ Optional:
 Optional:
 
 - **included_statistics** (List of String)
-- **overrides** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration--overrides))
+- **overrides** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration--overrides))
 
 <a id="nestedatt--profile_configuration--dataset_statistics_configuration--overrides"></a>
 ### Nested Schema for `profile_configuration.dataset_statistics_configuration.overrides`

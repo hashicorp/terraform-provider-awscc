@@ -22,7 +22,7 @@ This resource creates a Registry for authoring schemas as part of Glue Schema Re
 ### Optional
 
 - **description** (String) A description of the registry. If description is not provided, there will not be any default value for this.
-- **tags** (Attributes List, Max: 10) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

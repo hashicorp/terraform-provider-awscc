@@ -22,7 +22,7 @@ Resource Type definition for AWS::Config::AggregationAuthorization
 
 ### Optional
 
-- **tags** (Attributes List, Max: 50) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

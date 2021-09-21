@@ -24,7 +24,7 @@ Create and manage wireless gateways, including LoRa gateways.
 - **description** (String) Description of Wireless Gateway.
 - **last_uplink_received_at** (String) The date and time when the most recent uplink was received.
 - **name** (String) Name of Wireless Gateway.
-- **tags** (Attributes Set, Max: 50) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 - **thing_arn** (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.
 
 ### Read-Only

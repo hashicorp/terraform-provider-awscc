@@ -23,7 +23,7 @@ The AWS::AccessAnalyzer::Analyzer type specifies an analyzer of the user's accou
 
 - **analyzer_name** (String) Analyzer name
 - **archive_rules** (Attributes List) (see [below for nested schema](#nestedatt--archive_rules))
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -35,7 +35,7 @@ The AWS::AccessAnalyzer::Analyzer type specifies an analyzer of the user's accou
 
 Optional:
 
-- **filter** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--archive_rules--filter))
+- **filter** (Attributes List) (see [below for nested schema](#nestedatt--archive_rules--filter))
 - **rule_name** (String) The archive rule name
 
 <a id="nestedatt--archive_rules--filter"></a>
