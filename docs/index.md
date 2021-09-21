@@ -186,13 +186,5 @@ Optional:
 - **external_id** (String) External identifier to use when assuming the role.
 - **role_arn** (String) Amazon Resource Name (ARN) of the IAM Role to assume.
 - **session_name** (String) Session name to use when assuming the role.
-- **tags** (Attributes Set, Max: 50) Set of assume role session tags. (see [below for nested schema](#nestedatt--assume_role--tags))
+- **tags** (Map of String) Map of assume role session tags.
 - **transitive_tag_keys** (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
-
-<a id="nestedatt--assume_role--tags"></a>
-### Nested Schema for `assume_role.tags`
-
-Optional:
-
-- **key** (String) The key name of the tag.
-- **value** (String) The value for the tag.

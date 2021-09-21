@@ -123,31 +123,9 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Optional:    true,
 						},
 						"tags": {
-							Description: "Set of assume role session tags.",
-							Attributes: tfsdk.SetNestedAttributes(
-								map[string]tfsdk.Attribute{
-									"key": {
-										Description: "The key name of the tag.",
-										Type:        types.StringType,
-										Required:    true,
-										Validators: []tfsdk.AttributeValidator{
-											validate.StringLenBetween(1, 128),
-										},
-									},
-									"value": {
-										Description: "The value for the tag.",
-										Type:        types.StringType,
-										Required:    true,
-										Validators: []tfsdk.AttributeValidator{
-											validate.StringLenBetween(1, 256),
-										},
-									},
-								},
-								tfsdk.SetNestedAttributesOptions{
-									MaxItems: 50, //nolint:gomnd
-								},
-							),
-							Optional: true,
+							Description: "Map of assume role session tags.",
+							Type:        types.MapType{ElemType: types.StringType},
+							Optional:    true,
 						},
 						"transitive_tag_keys": {
 							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
@@ -182,13 +160,8 @@ type assumeRoleData struct {
 	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
 	ExternalID        types.String `tfsdk:"external_id"`
 	SessionName       types.String `tfsdk:"session_name"`
-	Tags              []tag        `tfsdk:"tags"`
+	Tags              types.Map    `tfsdk:"tags"`
 	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
-}
-
-type tag struct {
-	Key   types.String `tfsdk:"key"`
-	Value types.String `tfsdk:"value"`
 }
 
 func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
@@ -321,12 +294,10 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 			config.AssumeRoleSessionName = pd.AssumeRole.SessionName.Value
 		}
 
-		if len(pd.AssumeRole.Tags) > 0 {
+		if len(pd.AssumeRole.Tags.Elems) > 0 {
 			tags := make(map[string]string)
-			for _, tag := range pd.AssumeRole.Tags {
-				if !tag.Key.Null && !tag.Value.Null {
-					tags[tag.Key.Value] = tag.Value.Value
-				}
+			for key, value := range pd.AssumeRole.Tags.Elems {
+				tags[key] = value.(types.String).Value
 			}
 			config.AssumeRoleTags = tags
 		}
