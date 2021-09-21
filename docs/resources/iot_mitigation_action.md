@@ -23,7 +23,7 @@ Mitigation actions can be used to take actions to mitigate issues that were foun
 ### Optional
 
 - **action_name** (String) A unique identifier for the mitigation action.
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

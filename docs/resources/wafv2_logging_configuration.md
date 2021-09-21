@@ -36,7 +36,7 @@ A WAFv2 Logging Configuration Resource Provider
 Optional:
 
 - **default_behavior** (String) Default handling for logs that don't match any of the specified filtering conditions.
-- **filters** (Attributes List, Min: 1) The filters that you want to apply to the logs. (see [below for nested schema](#nestedatt--logging_filter--filters))
+- **filters** (Attributes List) The filters that you want to apply to the logs. (see [below for nested schema](#nestedatt--logging_filter--filters))
 
 <a id="nestedatt--logging_filter--filters"></a>
 ### Nested Schema for `logging_filter.filters`
@@ -44,7 +44,7 @@ Optional:
 Optional:
 
 - **behavior** (String) How to handle logs that satisfy the filter's conditions and requirement.
-- **conditions** (Attributes List, Min: 1) Match conditions for the filter. (see [below for nested schema](#nestedatt--logging_filter--filters--conditions))
+- **conditions** (Attributes List) Match conditions for the filter. (see [below for nested schema](#nestedatt--logging_filter--filters--conditions))
 - **requirement** (String) Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.
 
 <a id="nestedatt--logging_filter--filters--conditions"></a>

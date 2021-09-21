@@ -26,7 +26,7 @@ Resource schema for AWS::DataSync::LocationFSxWindows.
 
 - **domain** (String) The name of the Windows domain that the FSx for Windows server belongs to.
 - **subdirectory** (String) A subdirectory in the location's path.
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -183,21 +183,23 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 200,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 200),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},
@@ -411,11 +413,12 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 200,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 200),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
 						},
@@ -463,11 +466,12 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},
@@ -597,21 +601,23 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 200,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 200),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 2,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(2),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},
@@ -697,11 +703,12 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 200),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},

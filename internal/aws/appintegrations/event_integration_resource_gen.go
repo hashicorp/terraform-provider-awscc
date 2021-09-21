@@ -152,9 +152,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -319,12 +317,12 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 200),
+			},
 		},
 	}
 

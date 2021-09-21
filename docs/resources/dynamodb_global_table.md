@@ -17,9 +17,9 @@ Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable
 
 ### Required
 
-- **attribute_definitions** (Attributes Set, Min: 1) (see [below for nested schema](#nestedatt--attribute_definitions))
-- **key_schema** (Attributes List, Min: 1, Max: 2) (see [below for nested schema](#nestedatt--key_schema))
-- **replicas** (Attributes Set, Min: 1) (see [below for nested schema](#nestedatt--replicas))
+- **attribute_definitions** (Attributes Set) (see [below for nested schema](#nestedatt--attribute_definitions))
+- **key_schema** (Attributes List) (see [below for nested schema](#nestedatt--key_schema))
+- **replicas** (Attributes Set) (see [below for nested schema](#nestedatt--replicas))
 
 ### Optional
 
@@ -190,7 +190,7 @@ Required:
 Optional:
 
 - **index_name** (String)
-- **key_schema** (Attributes List, Min: 1, Max: 2) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
+- **key_schema** (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
 - **projection** (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
 - **write_provisioned_throughput_settings** (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings))
 
@@ -249,7 +249,7 @@ Optional:
 Optional:
 
 - **index_name** (String)
-- **key_schema** (Attributes List, Max: 2) (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
+- **key_schema** (Attributes List) (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
 - **projection** (Attributes) (see [below for nested schema](#nestedatt--local_secondary_indexes--projection))
 
 <a id="nestedatt--local_secondary_indexes--key_schema"></a>

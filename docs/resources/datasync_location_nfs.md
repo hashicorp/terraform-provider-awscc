@@ -24,7 +24,7 @@ Resource schema for AWS::DataSync::LocationNFS
 ### Optional
 
 - **mount_options** (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--mount_options))
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

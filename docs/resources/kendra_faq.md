@@ -26,7 +26,7 @@ A Kendra FAQ resource
 
 - **description** (String) Description of the FAQ
 - **file_format** (String) Format of the input file
-- **tags** (Attributes List, Max: 200) List of tags (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

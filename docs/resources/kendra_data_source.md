@@ -27,7 +27,7 @@ Kendra DataSource
 - **description** (String) Description of data source
 - **role_arn** (String) Role ARN
 - **schedule** (String) Schedule
-- **tags** (Attributes List, Max: 200) List of tags (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -69,7 +69,7 @@ Optional:
 
 Optional:
 
-- **attachment_field_mappings** (Attributes List, Min: 1, Max: 11) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--attachment_configuration--attachment_field_mappings))
+- **attachment_field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--attachment_configuration--attachment_field_mappings))
 - **crawl_attachments** (Boolean)
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--attachment_configuration--attachment_field_mappings"></a>
@@ -88,7 +88,7 @@ Optional:
 
 Optional:
 
-- **blog_field_mappings** (Attributes List, Min: 1, Max: 9) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--blog_configuration--blog_field_mappings))
+- **blog_field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--blog_configuration--blog_field_mappings))
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--blog_configuration--blog_field_mappings"></a>
 ### Nested Schema for `data_source_configuration.confluence_configuration.blog_configuration.blog_field_mappings`
@@ -106,7 +106,7 @@ Optional:
 
 Optional:
 
-- **page_field_mappings** (Attributes List, Min: 1, Max: 12) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--page_configuration--page_field_mappings))
+- **page_field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--page_configuration--page_field_mappings))
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--page_configuration--page_field_mappings"></a>
 ### Nested Schema for `data_source_configuration.confluence_configuration.page_configuration.page_field_mappings`
@@ -128,7 +128,7 @@ Optional:
 - **crawl_personal_spaces** (Boolean)
 - **exclude_spaces** (List of String)
 - **include_spaces** (List of String)
-- **space_field_mappings** (Attributes List, Min: 1, Max: 4) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--space_configuration--space_field_mappings))
+- **space_field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--space_configuration--space_field_mappings))
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--space_configuration--space_field_mappings"></a>
 ### Nested Schema for `data_source_configuration.confluence_configuration.space_configuration.space_field_mappings`
@@ -180,7 +180,7 @@ Optional:
 - **document_data_column_name** (String)
 - **document_id_column_name** (String)
 - **document_title_column_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--database_configuration--column_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--database_configuration--column_configuration--field_mappings))
 
 <a id="nestedatt--data_source_configuration--database_configuration--column_configuration--field_mappings"></a>
 ### Nested Schema for `data_source_configuration.database_configuration.column_configuration.field_mappings`
@@ -232,7 +232,7 @@ Optional:
 - **exclude_shared_drives** (List of String)
 - **exclude_user_accounts** (List of String)
 - **exclusion_patterns** (List of String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--google_drive_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--google_drive_configuration--field_mappings))
 - **inclusion_patterns** (List of String)
 - **secret_arn** (String)
 
@@ -254,7 +254,7 @@ Optional:
 
 - **disable_local_groups** (Boolean)
 - **exclusion_patterns** (List of String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--one_drive_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--one_drive_configuration--field_mappings))
 - **inclusion_patterns** (List of String)
 - **one_drive_users** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--one_drive_configuration--one_drive_users))
 - **secret_arn** (String)
@@ -331,7 +331,7 @@ Optional:
 - **secret_arn** (String)
 - **server_url** (String)
 - **standard_object_attachment_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_attachment_configuration))
-- **standard_object_configurations** (Attributes List, Min: 1, Max: 17) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations))
+- **standard_object_configurations** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations))
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration"></a>
 ### Nested Schema for `data_source_configuration.salesforce_configuration.chatter_feed_configuration`
@@ -340,7 +340,7 @@ Optional:
 
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration--field_mappings))
 - **include_filter_types** (List of String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration--field_mappings"></a>
@@ -359,7 +359,7 @@ Optional:
 
 Optional:
 
-- **custom_knowledge_article_type_configurations** (Attributes List, Min: 1, Max: 10) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations))
+- **custom_knowledge_article_type_configurations** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations))
 - **included_states** (List of String)
 - **standard_knowledge_article_type_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration))
 
@@ -370,7 +370,7 @@ Optional:
 
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
 - **name** (String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings"></a>
@@ -391,7 +391,7 @@ Optional:
 
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings"></a>
 ### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings`
@@ -411,7 +411,7 @@ Optional:
 Optional:
 
 - **document_title_field_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_attachment_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_attachment_configuration--field_mappings))
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--standard_object_attachment_configuration--field_mappings"></a>
 ### Nested Schema for `data_source_configuration.salesforce_configuration.standard_object_attachment_configuration.field_mappings`
@@ -431,7 +431,7 @@ Optional:
 
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations--field_mappings))
 - **name** (String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations--field_mappings"></a>
@@ -466,7 +466,7 @@ Optional:
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
 - **exclude_attachment_file_patterns** (List of String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings))
 - **include_attachment_file_patterns** (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings"></a>
@@ -489,7 +489,7 @@ Optional:
 - **document_data_field_name** (String)
 - **document_title_field_name** (String)
 - **exclude_attachment_file_patterns** (List of String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--service_catalog_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--service_catalog_configuration--field_mappings))
 - **include_attachment_file_patterns** (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--service_catalog_configuration--field_mappings"></a>
@@ -513,7 +513,7 @@ Optional:
 - **disable_local_groups** (Boolean)
 - **document_title_field_name** (String)
 - **exclusion_patterns** (List of String)
-- **field_mappings** (Attributes List, Max: 100) (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--field_mappings))
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--field_mappings))
 - **inclusion_patterns** (List of String)
 - **secret_arn** (String)
 - **share_point_version** (String)

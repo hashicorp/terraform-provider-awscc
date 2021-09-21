@@ -72,11 +72,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"billing_mode": {
 			// Property: BillingMode
@@ -234,13 +235,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-								MaxItems: 2,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 2),
 							validate.UniqueItems(),
 						},
 					},
@@ -384,13 +383,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 2,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 2),
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -490,12 +487,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 2,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 2),
 							validate.UniqueItems(),
 						},
 					},
@@ -1006,11 +1002,12 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"sse_specification": {
 			// Property: SSESpecification

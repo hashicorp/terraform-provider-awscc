@@ -604,11 +604,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
 						},
@@ -1021,12 +1022,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 1),
+			},
 		},
 	}
 

@@ -27,7 +27,7 @@ Resource schema for AWS::DataSync::LocationSMB.
 
 - **domain** (String) The name of the Windows domain that the SMB server belongs to.
 - **mount_options** (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--mount_options))
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -17,7 +17,7 @@ AWS Ground Station DataflowEndpointGroup schema for CloudFormation
 
 ### Required
 
-- **endpoint_details** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--endpoint_details))
+- **endpoint_details** (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
 
 ### Optional
 

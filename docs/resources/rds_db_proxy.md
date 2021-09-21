@@ -17,7 +17,7 @@ Resource schema for AWS::RDS::DBProxy
 
 ### Required
 
-- **auth** (Attributes List, Min: 1) The authorization mechanism that the proxy uses. (see [below for nested schema](#nestedatt--auth))
+- **auth** (Attributes List) The authorization mechanism that the proxy uses. (see [below for nested schema](#nestedatt--auth))
 - **db_proxy_name** (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
 - **engine_family** (String) The kinds of databases that the proxy can connect to.
 - **role_arn** (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.

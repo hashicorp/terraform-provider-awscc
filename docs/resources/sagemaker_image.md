@@ -24,7 +24,7 @@ Resource Type definition for AWS::SageMaker::Image
 
 - **image_description** (String) A description of the image.
 - **image_display_name** (String) The display name of the image.
-- **tags** (Attributes List, Min: 1, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

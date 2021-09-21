@@ -278,12 +278,12 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 4,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 4),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},

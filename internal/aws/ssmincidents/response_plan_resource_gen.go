@@ -158,11 +158,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{
-											MaxItems: 200,
-										},
+										tfsdk.SetNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 200),
+									},
 								},
 								"role_arn": {
 									// Property: RoleArn
@@ -190,13 +191,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 1),
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -385,11 +385,12 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 10,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 10),
+						},
 					},
 					"summary": {
 						// Property: Summary
@@ -487,13 +488,13 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 50,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 50),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 			},

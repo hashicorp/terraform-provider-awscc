@@ -178,11 +178,12 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"include_execution_data": {
 						// Property: IncludeExecutionData

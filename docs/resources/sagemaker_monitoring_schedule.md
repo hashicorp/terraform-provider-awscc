@@ -26,7 +26,7 @@ Resource Type definition for AWS::SageMaker::MonitoringSchedule
 - **failure_reason** (String) Contains the reason a monitoring job failed, if it failed.
 - **last_monitoring_execution_summary** (Attributes) Summary of information about monitoring job (see [below for nested schema](#nestedatt--last_monitoring_execution_summary))
 - **monitoring_schedule_status** (String) The status of a schedule job.
-- **tags** (Attributes List, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -53,7 +53,7 @@ Required:
 - **baseline_config** (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config))
 - **environment** (Map of String) Sets the environment variables in the Docker container
 - **monitoring_app_specification** (Attributes) Container image configuration object for the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_app_specification))
-- **monitoring_inputs** (Attributes List, Min: 1, Max: 1) The array of inputs for the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs))
+- **monitoring_inputs** (Attributes List) The array of inputs for the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs))
 - **monitoring_output_config** (Attributes) The output configuration for monitoring jobs. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config))
 - **monitoring_resources** (Attributes) Identifies the resources to deploy for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_resources))
 - **network_config** (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--network_config))

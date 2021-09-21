@@ -24,7 +24,7 @@ A domain defined for 3rd party data source in Profile Service
 - **dead_letter_queue_url** (String) The URL of the SQS dead letter queue
 - **default_encryption_key** (String) The default encryption key
 - **default_expiration_days** (Number) The default number of days until the data within the domain expires.
-- **tags** (Attributes List, Max: 50) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

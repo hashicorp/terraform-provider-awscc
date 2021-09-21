@@ -27,7 +27,7 @@ Resource Type definition for SSO PermissionSet
 - **managed_policies** (List of String)
 - **relay_state_type** (String) The relay state URL that redirect links to any service in the AWS Management Console.
 - **session_duration** (String) The length of time that a user can be signed in to an AWS account.
-- **tags** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

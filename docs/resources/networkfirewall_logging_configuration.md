@@ -33,7 +33,7 @@ Resource type definition for AWS::NetworkFirewall::LoggingConfiguration
 
 Required:
 
-- **log_destination_configs** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--logging_configuration--log_destination_configs))
+- **log_destination_configs** (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--log_destination_configs))
 
 <a id="nestedatt--logging_configuration--log_destination_configs"></a>
 ### Nested Schema for `logging_configuration.log_destination_configs`

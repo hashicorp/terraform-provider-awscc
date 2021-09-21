@@ -23,7 +23,7 @@ Resource schema for AWS::IoTFleetHub::Application
 ### Optional
 
 - **application_description** (String) Application Description, should be between 1 and 2048 characters.
-- **tags** (Attributes Set, Max: 50) A list of key-value pairs that contain metadata for the application. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the application. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

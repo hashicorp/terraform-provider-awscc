@@ -386,11 +386,12 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 	}
 

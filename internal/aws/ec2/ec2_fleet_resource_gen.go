@@ -263,11 +263,12 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

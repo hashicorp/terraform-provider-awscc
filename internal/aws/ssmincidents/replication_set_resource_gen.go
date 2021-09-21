@@ -117,12 +117,12 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 3,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 3),
+			},
 		},
 	}
 

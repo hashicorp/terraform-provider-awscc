@@ -166,11 +166,12 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"tags": {
 			// Property: Tags

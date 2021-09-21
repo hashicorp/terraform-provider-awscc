@@ -18,7 +18,7 @@ Resource Type definition for AWS::SageMaker::FeatureGroup
 ### Required
 
 - **event_time_feature_name** (String) The Event Time Feature Name.
-- **feature_definitions** (Attributes List, Min: 1, Max: 2500) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
+- **feature_definitions** (Attributes List) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
 - **feature_group_name** (String) The Name of the FeatureGroup.
 - **record_identifier_feature_name** (String) The Record Identifier Feature Name.
 
@@ -28,7 +28,7 @@ Resource Type definition for AWS::SageMaker::FeatureGroup
 - **offline_store_config** (Attributes) (see [below for nested schema](#nestedatt--offline_store_config))
 - **online_store_config** (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
 - **role_arn** (String) Role Arn
-- **tags** (Attributes List, Max: 50) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

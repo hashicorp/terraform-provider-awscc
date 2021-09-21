@@ -27,7 +27,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 ### Optional
 
 - **approval_model** (String)
-- **subscribers** (Attributes List, Min: 1, Max: 11) (see [below for nested schema](#nestedatt--subscribers))
+- **subscribers** (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 ### Read-Only
 

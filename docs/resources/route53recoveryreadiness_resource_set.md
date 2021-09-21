@@ -21,7 +21,7 @@ Schema for the AWS Route53 Recovery Readiness ResourceSet Resource and API.
 - **resource_set_type** (String) The resource type of the resources in the resource set. Enter one of the following values for resource type: 
 
 AWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource
-- **resources** (Attributes List, Min: 1, Max: 4) A list of resource objects in the resource set. (see [below for nested schema](#nestedatt--resources))
+- **resources** (Attributes List) A list of resource objects in the resource set. (see [below for nested schema](#nestedatt--resources))
 
 ### Optional
 

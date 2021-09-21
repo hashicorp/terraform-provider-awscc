@@ -21,7 +21,7 @@ Resource schema for AWS::Config::OrganizationConformancePack.
 
 ### Optional
 
-- **conformance_pack_input_parameters** (Attributes List, Max: 60) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
+- **conformance_pack_input_parameters** (Attributes List) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
 - **delivery_s3_bucket** (String) AWS Config stores intermediate files while processing conformance pack template.
 - **delivery_s3_key_prefix** (String) The prefix for the delivery S3 bucket.
 - **excluded_accounts** (List of String) A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.

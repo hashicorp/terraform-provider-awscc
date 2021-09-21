@@ -2014,12 +2014,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 1,
-														MaxItems: 128,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(1, 128),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn
@@ -2757,12 +2757,12 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 1,
-														MaxItems: 128,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(1, 128),
+												},
 											},
 											"role_arn": {
 												// Property: RoleArn

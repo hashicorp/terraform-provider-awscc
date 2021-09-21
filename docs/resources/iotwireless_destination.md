@@ -25,7 +25,7 @@ Destination's resource schema demonstrating some basic constructs and validation
 ### Optional
 
 - **description** (String) Destination description
-- **tags** (Attributes Set, Max: 50) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

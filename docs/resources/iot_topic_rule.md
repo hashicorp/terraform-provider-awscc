@@ -354,7 +354,7 @@ Required:
 
 - **batch_mode** (Boolean)
 - **database_name** (String)
-- **dimensions** (Attributes List, Min: 1, Max: 128) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--dimensions))
+- **dimensions** (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--dimensions))
 - **role_arn** (String)
 - **table_name** (String)
 - **timestamp** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--timestamp))
@@ -692,7 +692,7 @@ Required:
 
 - **batch_mode** (Boolean)
 - **database_name** (String)
-- **dimensions** (Attributes List, Min: 1, Max: 128) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--dimensions))
+- **dimensions** (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--dimensions))
 - **role_arn** (String)
 - **table_name** (String)
 - **timestamp** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--timestamp))

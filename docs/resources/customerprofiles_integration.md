@@ -23,7 +23,7 @@ The resource schema for creating an Amazon Connect Customer Profiles Integration
 ### Optional
 
 - **flow_definition** (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
-- **tags** (Attributes List, Max: 50) The tags (keys and values) associated with the integration (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags (keys and values) associated with the integration (see [below for nested schema](#nestedatt--tags))
 - **uri** (String) The URI of the S3 bucket or any other type of data source.
 
 ### Read-Only

@@ -142,11 +142,12 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
 						},
@@ -232,11 +233,12 @@ func analyzerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 		"type": {
 			// Property: Type

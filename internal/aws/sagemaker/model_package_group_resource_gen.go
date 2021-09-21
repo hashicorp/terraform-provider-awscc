@@ -166,11 +166,12 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 	}
 

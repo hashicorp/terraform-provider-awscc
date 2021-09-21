@@ -27,7 +27,7 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 - **redshift_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
 - **s3_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
 - **splunk_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
-- **tags** (Attributes List, Min: 1, Max: 50) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -493,7 +493,7 @@ Optional:
 
 Optional:
 
-- **common_attributes** (Attributes List, Max: 50) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes))
+- **common_attributes** (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes))
 - **content_encoding** (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes"></a>

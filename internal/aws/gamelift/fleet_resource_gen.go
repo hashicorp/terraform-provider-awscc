@@ -204,11 +204,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 		"ec2_instance_type": {
 			// Property: EC2InstanceType
@@ -390,12 +391,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 100,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 100),
+			},
 		},
 		"log_paths": {
 			// Property: LogPaths
@@ -713,11 +714,12 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 50,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 50),
+						},
 					},
 				},
 			),

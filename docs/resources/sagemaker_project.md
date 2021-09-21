@@ -23,7 +23,7 @@ Resource Type definition for AWS::SageMaker::Project
 ### Optional
 
 - **project_description** (String) The description of the project.
-- **tags** (Attributes List, Max: 40) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

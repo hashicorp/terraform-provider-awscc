@@ -29,9 +29,9 @@ Definition of the AWS::QuickSight::Theme Resource Type.
 - **configuration** (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--configuration))
 - **name** (String) <p>A display name for the theme.</p>
-- **permissions** (Attributes List, Min: 1, Max: 64) <p>A valid grouping of resource permissions to apply to the new theme.
+- **permissions** (Attributes List) <p>A valid grouping of resource permissions to apply to the new theme.
 			</p> (see [below for nested schema](#nestedatt--permissions))
-- **tags** (Attributes List, Min: 1, Max: 200) <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
+- **tags** (Attributes List) <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
 			resource.</p> (see [below for nested schema](#nestedatt--tags))
 - **version_description** (String) <p>A description of the first version of the theme that you're creating. Every time
 				<code>UpdateTheme</code> is called, a new version is created. Each version of the
@@ -130,7 +130,7 @@ Optional:
 
 Optional:
 
-- **font_families** (Attributes List, Max: 5) (see [below for nested schema](#nestedatt--configuration--typography--font_families))
+- **font_families** (Attributes List) (see [below for nested schema](#nestedatt--configuration--typography--font_families))
 
 <a id="nestedatt--configuration--typography--font_families"></a>
 ### Nested Schema for `configuration.typography.font_families`
@@ -219,7 +219,7 @@ Read-Only:
             a theme.</p> (see [below for nested schema](#nestedatt--version--configuration))
 - **created_time** (String) <p>The date and time that this theme version was created.</p>
 - **description** (String) <p>The description of the theme.</p>
-- **errors** (Attributes List, Min: 1) <p>Errors associated with the theme.</p> (see [below for nested schema](#nestedatt--version--errors))
+- **errors** (Attributes List) <p>Errors associated with the theme.</p> (see [below for nested schema](#nestedatt--version--errors))
 - **status** (String)
 - **version_number** (Number) <p>The version number of the theme.</p>
 
@@ -306,7 +306,7 @@ Read-Only:
 
 Read-Only:
 
-- **font_families** (Attributes List, Max: 5) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
+- **font_families** (Attributes List) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
 
 <a id="nestedatt--version--configuration--typography--font_families"></a>
 ### Nested Schema for `version.configuration.typography.font_families`

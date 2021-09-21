@@ -19,8 +19,8 @@ Resource schema for AWS::SES::ContactList.
 
 - **contact_list_name** (String) The name of the contact list.
 - **description** (String) The description of the contact list.
-- **tags** (Attributes List, Max: 50) The tags (keys and values) associated with the contact list. (see [below for nested schema](#nestedatt--tags))
-- **topics** (Attributes List, Max: 20) The topics associated with the contact list. (see [below for nested schema](#nestedatt--topics))
+- **tags** (Attributes List) The tags (keys and values) associated with the contact list. (see [below for nested schema](#nestedatt--tags))
+- **topics** (Attributes List) The topics associated with the contact list. (see [below for nested schema](#nestedatt--topics))
 
 ### Read-Only
 

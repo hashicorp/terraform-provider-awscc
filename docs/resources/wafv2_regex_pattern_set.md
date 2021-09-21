@@ -24,7 +24,7 @@ Contains a list of Regular expressions based on the provided inputs. RegexPatter
 
 - **description** (String) Description of the entity.
 - **name** (String) Name of the RegexPatternSet.
-- **tags** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

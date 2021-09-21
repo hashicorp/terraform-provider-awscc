@@ -25,11 +25,11 @@ A Kendra index
 
 - **capacity_units** (Attributes) (see [below for nested schema](#nestedatt--capacity_units))
 - **description** (String)
-- **document_metadata_configurations** (Attributes List, Max: 500) (see [below for nested schema](#nestedatt--document_metadata_configurations))
+- **document_metadata_configurations** (Attributes List) (see [below for nested schema](#nestedatt--document_metadata_configurations))
 - **server_side_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **tags** (Attributes List, Max: 200) List of tags (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
 - **user_context_policy** (String)
-- **user_token_configurations** (Attributes List, Max: 1) (see [below for nested schema](#nestedatt--user_token_configurations))
+- **user_token_configurations** (Attributes List) (see [below for nested schema](#nestedatt--user_token_configurations))
 
 ### Read-Only
 

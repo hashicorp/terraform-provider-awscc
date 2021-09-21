@@ -287,11 +287,12 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MaxItems: 200,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 200),
+			},
 		},
 	}
 

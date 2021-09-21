@@ -22,17 +22,17 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
 
 ### Optional
 
-- **errors** (Attributes List, Min: 1) <p>Errors associated with the analysis.</p> (see [below for nested schema](#nestedatt--errors))
+- **errors** (Attributes List) <p>Errors associated with the analysis.</p> (see [below for nested schema](#nestedatt--errors))
 - **name** (String) <p>The descriptive name of the analysis.</p>
 - **parameters** (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
-- **permissions** (Attributes List, Min: 1, Max: 64) <p>A structure that describes the principals and the resource-level permissions on an
+- **permissions** (Attributes List) <p>A structure that describes the principals and the resource-level permissions on an
             analysis. You can use the <code>Permissions</code> structure to grant permissions by
             providing a list of AWS Identity and Access Management (IAM) action information for each
             principal listed by Amazon Resource Name (ARN). </p>
 
         <p>To specify no permissions, omit <code>Permissions</code>.</p> (see [below for nested schema](#nestedatt--permissions))
 - **source_entity** (Attributes) <p>The source entity of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity))
-- **tags** (Attributes List, Min: 1, Max: 200) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             analysis.</p> (see [below for nested schema](#nestedatt--tags))
 - **theme_arn** (String) <p>The ARN of the theme of the analysis.</p>
 
@@ -43,7 +43,7 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
 - **data_set_arns** (List of String) <p>The ARNs of the datasets of the analysis.</p>
 - **id** (String) Uniquely identifies the resource.
 - **last_updated_time** (String) <p>The time that the analysis was last updated.</p>
-- **sheets** (Attributes List, Max: 20) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--sheets))
+- **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--sheets))
 - **status** (String)
 
 <a id="nestedatt--errors"></a>
@@ -60,10 +60,10 @@ Optional:
 
 Optional:
 
-- **date_time_parameters** (Attributes List, Max: 100) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
-- **decimal_parameters** (Attributes List, Max: 100) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
-- **integer_parameters** (Attributes List, Max: 100) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
-- **string_parameters** (Attributes List, Max: 100) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
+- **date_time_parameters** (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
+- **decimal_parameters** (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
+- **integer_parameters** (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
+- **string_parameters** (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
 
 <a id="nestedatt--parameters--date_time_parameters"></a>
 ### Nested Schema for `parameters.date_time_parameters`
@@ -138,7 +138,7 @@ Optional:
 Optional:
 
 - **arn** (String) <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
-- **data_set_references** (Attributes List, Min: 1) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+- **data_set_references** (Attributes List) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
 
 <a id="nestedatt--source_entity--source_template--data_set_references"></a>
 ### Nested Schema for `source_entity.source_template.data_set_references`

@@ -18,7 +18,7 @@ An Amazon Lookout for Metrics Detector
 ### Required
 
 - **anomaly_detector_config** (Attributes) (see [below for nested schema](#nestedatt--anomaly_detector_config))
-- **metric_set_list** (Attributes List, Min: 1, Max: 1) List of metric sets for anomaly detection (see [below for nested schema](#nestedatt--metric_set_list))
+- **metric_set_list** (Attributes List) List of metric sets for anomaly detection (see [below for nested schema](#nestedatt--metric_set_list))
 
 ### Optional
 
@@ -45,7 +45,7 @@ Required:
 Required:
 
 - **dimension_list** (List of String) Dimensions for this MetricSet.
-- **metric_list** (Attributes List, Min: 1) Metrics captured by this MetricSet. (see [below for nested schema](#nestedatt--metric_set_list--metric_list))
+- **metric_list** (Attributes List) Metrics captured by this MetricSet. (see [below for nested schema](#nestedatt--metric_set_list--metric_list))
 - **metric_set_description** (String) A description for the MetricSet.
 - **metric_set_frequency** (String) A frequency period to aggregate the data
 - **metric_set_name** (String) The name of the MetricSet.

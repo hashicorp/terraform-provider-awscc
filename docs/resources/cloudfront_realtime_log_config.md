@@ -17,7 +17,7 @@ Resource Type definition for AWS::CloudFront::RealtimeLogConfig
 
 ### Required
 
-- **end_points** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--end_points))
+- **end_points** (Attributes List) (see [below for nested schema](#nestedatt--end_points))
 - **fields** (List of String)
 - **name** (String)
 - **sampling_rate** (Number)

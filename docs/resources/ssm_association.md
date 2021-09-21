@@ -34,7 +34,7 @@ The AWS::SSM::Association resource associates an SSM document in AWS Systems Man
 - **parameters** (Map of List of String) Parameter values that the SSM document uses at runtime.
 - **schedule_expression** (String) A Cron or Rate expression that specifies when the association is applied to the target.
 - **sync_compliance** (String)
-- **targets** (Attributes List, Max: 5) The targets that the SSM document sends commands to. (see [below for nested schema](#nestedatt--targets))
+- **targets** (Attributes List) The targets that the SSM document sends commands to. (see [below for nested schema](#nestedatt--targets))
 - **wait_for_success_timeout_seconds** (Number)
 
 ### Read-Only

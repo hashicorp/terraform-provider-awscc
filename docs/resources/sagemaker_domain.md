@@ -27,7 +27,7 @@ Resource Type definition for AWS::SageMaker::Domain
 
 - **app_network_access_type** (String) Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.
 - **kms_key_id** (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
-- **tags** (Attributes List, Max: 50) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -72,7 +72,7 @@ Required:
 
 Required:
 
-- **custom_images** (Attributes List, Max: 30) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
+- **custom_images** (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
 - **default_resource_spec** (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
 
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images"></a>

@@ -21,7 +21,7 @@ The AWS::S3::StorageLens resource is an Amazon S3 resource type that you can use
 
 ### Optional
 
-- **tags** (Attributes Set, Max: 50) A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A set of tags (key-value pairs) for this Amazon S3 Storage Lens configuration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

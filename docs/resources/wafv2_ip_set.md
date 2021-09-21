@@ -25,7 +25,7 @@ Contains a list of IP addresses. This can be either IPV4 or IPV6. The list will 
 
 - **description** (String) Description of the entity.
 - **name** (String) Name of the IPSet.
-- **tags** (Attributes List, Min: 1) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

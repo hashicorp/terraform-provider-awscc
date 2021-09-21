@@ -25,13 +25,13 @@ Definition of the AWS::QuickSight::Dashboard Resource Type.
 - **dashboard_publish_options** (Attributes) <p>Dashboard publish options.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options))
 - **name** (String) <p>The display name of the dashboard.</p>
 - **parameters** (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
-- **permissions** (Attributes List, Min: 1, Max: 64) <p>A structure that contains the permissions of the dashboard. You can use this structure
+- **permissions** (Attributes List) <p>A structure that contains the permissions of the dashboard. You can use this structure
             for granting permissions by providing a list of IAM action information for each
             principal ARN. </p>
 
         <p>To specify no permissions, omit the permissions list.</p> (see [below for nested schema](#nestedatt--permissions))
 - **source_entity** (Attributes) <p>Dashboard source entity.</p> (see [below for nested schema](#nestedatt--source_entity))
-- **tags** (Attributes List, Min: 1, Max: 200) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             dashboard.</p> (see [below for nested schema](#nestedatt--tags))
 - **theme_arn** (String) <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
             you add a value for this field, it overrides the value that is used in the source
@@ -87,10 +87,10 @@ Optional:
 
 Optional:
 
-- **date_time_parameters** (Attributes List, Max: 100) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
-- **decimal_parameters** (Attributes List, Max: 100) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
-- **integer_parameters** (Attributes List, Max: 100) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
-- **string_parameters** (Attributes List, Max: 100) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
+- **date_time_parameters** (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
+- **decimal_parameters** (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
+- **integer_parameters** (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
+- **string_parameters** (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
 
 <a id="nestedatt--parameters--date_time_parameters"></a>
 ### Nested Schema for `parameters.date_time_parameters`
@@ -165,7 +165,7 @@ Optional:
 Optional:
 
 - **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **data_set_references** (Attributes List, Min: 1) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+- **data_set_references** (Attributes List) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
 
 <a id="nestedatt--source_entity--source_template--data_set_references"></a>
 ### Nested Schema for `source_entity.source_template.data_set_references`
@@ -197,8 +197,8 @@ Read-Only:
 - **data_set_arns** (List of String) <p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this
             version of the dashboard.</p>
 - **description** (String) <p>Description.</p>
-- **errors** (Attributes List, Min: 1) <p>Errors associated with this dashboard version.</p> (see [below for nested schema](#nestedatt--version--errors))
-- **sheets** (Attributes List, Max: 20) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
+- **errors** (Attributes List) <p>Errors associated with this dashboard version.</p> (see [below for nested schema](#nestedatt--version--errors))
+- **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
 - **source_entity_arn** (String) <p>Source entity ARN.</p>
 - **status** (String)
 - **theme_arn** (String) <p>The ARN of the theme associated with a version of the dashboard.</p>

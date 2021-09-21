@@ -897,11 +897,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 								"statistics": {
 									// Property: Statistics
@@ -934,22 +935,24 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 1,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenAtLeast(1),
+												},
 											},
 										},
 									),
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"dataset_statistics_configuration": {
 						// Property: DatasetStatisticsConfiguration
@@ -982,11 +985,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -1013,11 +1017,12 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 				},
 			),

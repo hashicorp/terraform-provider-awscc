@@ -17,7 +17,7 @@ Resource type definition for AWS::SSMIncidents::ReplicationSet
 
 ### Required
 
-- **regions** (Attributes Set, Min: 1, Max: 3) (see [below for nested schema](#nestedatt--regions))
+- **regions** (Attributes Set) (see [below for nested schema](#nestedatt--regions))
 
 ### Optional
 

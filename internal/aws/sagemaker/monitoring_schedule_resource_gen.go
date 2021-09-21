@@ -790,12 +790,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Required: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-											MaxItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 1),
+									},
 								},
 								"monitoring_output_config": {
 									// Property: MonitoringOutputConfig
@@ -1133,11 +1133,12 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 	}
 

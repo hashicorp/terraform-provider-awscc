@@ -24,7 +24,7 @@ Resource schema for AWS::DataSync::LocationS3
 
 - **s3_storage_class** (String) The Amazon S3 storage class you want to store your files in when this location is used as a task destination.
 - **subdirectory** (String) A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

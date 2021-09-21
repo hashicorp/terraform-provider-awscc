@@ -25,7 +25,7 @@ A resource schema for a Variable in Amazon Fraud Detector.
 ### Optional
 
 - **description** (String) The description.
-- **tags** (Attributes List, Max: 200) Tags associated with this variable. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags associated with this variable. (see [below for nested schema](#nestedatt--tags))
 - **variable_type** (String) The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
 
 ### Read-Only

@@ -21,7 +21,7 @@ A conformance pack is a collection of AWS Config rules and remediation actions t
 
 ### Optional
 
-- **conformance_pack_input_parameters** (Attributes List, Max: 60) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
+- **conformance_pack_input_parameters** (Attributes List) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
 - **delivery_s3_bucket** (String) AWS Config stores intermediate files while processing conformance pack template.
 - **delivery_s3_key_prefix** (String) The prefix for delivery S3 bucket.
 - **template_body** (String) A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.

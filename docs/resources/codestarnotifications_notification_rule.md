@@ -21,7 +21,7 @@ Resource Type definition for AWS::CodeStarNotifications::NotificationRule
 - **event_type_ids** (List of String)
 - **name** (String)
 - **resource** (String)
-- **targets** (Attributes List, Max: 10) (see [below for nested schema](#nestedatt--targets))
+- **targets** (Attributes List) (see [below for nested schema](#nestedatt--targets))
 
 ### Optional
 

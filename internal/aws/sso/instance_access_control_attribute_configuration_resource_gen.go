@@ -89,11 +89,12 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 		"instance_access_control_attribute_configuration": {
 			// Property: InstanceAccessControlAttributeConfiguration
@@ -179,11 +180,12 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Required: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MaxItems: 50,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 50),
+						},
 					},
 				},
 			),

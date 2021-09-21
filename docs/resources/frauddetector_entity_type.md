@@ -22,7 +22,7 @@ An entity type for fraud detector.
 ### Optional
 
 - **description** (String) The entity type description.
-- **tags** (Attributes List, Max: 200) Tags associated with this entity type. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags associated with this entity type. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

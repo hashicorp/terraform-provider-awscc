@@ -28,7 +28,7 @@ Resource schema for AWS::DataSync::LocationObjectStorage.
 - **server_port** (Number) The port that your self-managed server accepts inbound network traffic on.
 - **server_protocol** (String) The protocol that the object storage server uses to communicate.
 - **subdirectory** (String) The subdirectory in the self-managed object storage server that is used to read data from.
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

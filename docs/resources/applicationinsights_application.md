@@ -22,13 +22,13 @@ Resource schema for AWS::ApplicationInsights::Application
 ### Optional
 
 - **auto_configuration_enabled** (Boolean) If set to true, application will be configured with recommended monitoring configuration.
-- **component_monitoring_settings** (Attributes List, Min: 1) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
-- **custom_components** (Attributes List, Min: 1) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
+- **component_monitoring_settings** (Attributes List) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
+- **custom_components** (Attributes List) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
 - **cwe_monitor_enabled** (Boolean) Indicates whether Application Insights can listen to CloudWatch events for the application resources.
-- **log_pattern_sets** (Attributes List, Min: 1) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
+- **log_pattern_sets** (Attributes List) The log pattern sets. (see [below for nested schema](#nestedatt--log_pattern_sets))
 - **ops_center_enabled** (Boolean) When set to true, creates opsItems for any problems detected on an application.
 - **ops_item_sns_topic_arn** (String) The SNS topic provided to Application Insights that is associated to the created opsItem.
-- **tags** (Attributes List, Min: 1) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags of Application Insights application. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -53,7 +53,7 @@ Optional:
 Optional:
 
 - **configuration_details** (Attributes) The configuration settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details))
-- **sub_component_type_configurations** (Attributes List, Min: 1) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations))
+- **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details`
@@ -174,7 +174,7 @@ Optional:
 Optional:
 
 - **configuration_details** (Attributes) The configuration settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details))
-- **sub_component_type_configurations** (Attributes List, Min: 1) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations))
+- **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details`
@@ -304,7 +304,7 @@ Optional:
 
 Optional:
 
-- **log_patterns** (Attributes List, Min: 1) The log patterns of a set. (see [below for nested schema](#nestedatt--log_pattern_sets--log_patterns))
+- **log_patterns** (Attributes List) The log patterns of a set. (see [below for nested schema](#nestedatt--log_pattern_sets--log_patterns))
 - **pattern_set_name** (String) The name of the log pattern set.
 
 <a id="nestedatt--log_pattern_sets--log_patterns"></a>

@@ -21,7 +21,7 @@ Resource Type definition for AWS::IVS::StreamKey
 
 ### Optional
 
-- **tags** (Attributes Set, Max: 50) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

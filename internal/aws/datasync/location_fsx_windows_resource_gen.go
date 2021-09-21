@@ -205,11 +205,12 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 		},
 		"user": {
 			// Property: User

@@ -4727,11 +4727,12 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 				},
 			),

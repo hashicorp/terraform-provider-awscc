@@ -24,7 +24,7 @@ Resource Type definition for AWS::Connect::QuickConnect
 ### Optional
 
 - **description** (String) The description of the quick connect.
-- **tags** (Attributes Set, Max: 200) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

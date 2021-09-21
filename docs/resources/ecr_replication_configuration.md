@@ -29,14 +29,14 @@ The AWS::ECR::ReplicationConfiguration resource configures the replication desti
 
 Required:
 
-- **rules** (Attributes List, Max: 1) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations. (see [below for nested schema](#nestedatt--replication_configuration--rules))
+- **rules** (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations. (see [below for nested schema](#nestedatt--replication_configuration--rules))
 
 <a id="nestedatt--replication_configuration--rules"></a>
 ### Nested Schema for `replication_configuration.rules`
 
 Required:
 
-- **destinations** (Attributes List, Min: 1, Max: 25) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+- **destinations** (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
 ### Nested Schema for `replication_configuration.rules.destinations`

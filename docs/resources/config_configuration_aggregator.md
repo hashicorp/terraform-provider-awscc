@@ -20,7 +20,7 @@ Resource Type definition for AWS::Config::ConfigurationAggregator
 - **account_aggregation_sources** (Attributes List) (see [below for nested schema](#nestedatt--account_aggregation_sources))
 - **configuration_aggregator_name** (String) The name of the aggregator.
 - **organization_aggregation_source** (Attributes) (see [below for nested schema](#nestedatt--organization_aggregation_source))
-- **tags** (Attributes List, Max: 50) The tags for the configuration aggregator. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) The tags for the configuration aggregator. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

@@ -42,7 +42,7 @@ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/la
 Required:
 
 - **initial_state_name** (String) The state that is entered at the creation of each detector (instance).
-- **states** (Attributes List, Min: 1) Information about the states of the detector. (see [below for nested schema](#nestedatt--detector_model_definition--states))
+- **states** (Attributes List) Information about the states of the detector. (see [below for nested schema](#nestedatt--detector_model_definition--states))
 
 <a id="nestedatt--detector_model_definition--states"></a>
 ### Nested Schema for `detector_model_definition.states`

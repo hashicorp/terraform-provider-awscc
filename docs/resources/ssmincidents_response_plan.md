@@ -22,11 +22,11 @@ Resource type definition for AWS::SSMIncidents::ResponsePlan
 
 ### Optional
 
-- **actions** (Attributes List, Max: 1) The list of actions. (see [below for nested schema](#nestedatt--actions))
+- **actions** (Attributes List) The list of actions. (see [below for nested schema](#nestedatt--actions))
 - **chat_channel** (Attributes) The chat channel configuration. (see [below for nested schema](#nestedatt--chat_channel))
 - **display_name** (String) The display name of the response plan.
 - **engagements** (Set of String) The list of engagements to use.
-- **tags** (Attributes Set, Min: 1, Max: 50) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -40,7 +40,7 @@ Required:
 
 - **dedupe_string** (String) The deduplication string.
 - **impact** (Number) The impact value.
-- **notification_targets** (Attributes List, Max: 10) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
+- **notification_targets** (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
 - **summary** (String) The summary string.
 - **title** (String) The title string.
 
@@ -67,7 +67,7 @@ Optional:
 
 - **document_name** (String) The document name to use when starting the SSM automation document.
 - **document_version** (String) The version of the document to use when starting the SSM automation document.
-- **parameters** (Attributes Set, Max: 200) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
+- **parameters** (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
 - **role_arn** (String) The role ARN to use when starting the SSM automation document.
 - **target_account** (String) The account type to use when starting the SSM automation document.
 

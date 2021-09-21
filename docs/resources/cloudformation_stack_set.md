@@ -31,7 +31,7 @@ StackSet as a resource provides one-click experience for provisioning a StackSet
 - **operation_preferences** (Attributes) The user-specified preferences for how AWS CloudFormation performs a stack set operation. (see [below for nested schema](#nestedatt--operation_preferences))
 - **parameters** (Attributes Set) The input parameters for the stack set template. (see [below for nested schema](#nestedatt--parameters))
 - **stack_instances_group** (Attributes Set) A group of stack instances with parameters in some specific accounts and regions. (see [below for nested schema](#nestedatt--stack_instances_group))
-- **tags** (Attributes Set, Max: 50) The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified. (see [below for nested schema](#nestedatt--tags))
 - **template_body** (String) The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.
 - **template_url** (String) Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket.
 

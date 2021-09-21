@@ -22,7 +22,7 @@ Resource Type definition for AWS::SageMaker::AppImageConfig
 ### Optional
 
 - **kernel_gateway_image_config** (Attributes) The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
-- **tags** (Attributes List, Max: 50) A list of tags to apply to the AppImageConfig. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) A list of tags to apply to the AppImageConfig. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -35,7 +35,7 @@ Resource Type definition for AWS::SageMaker::AppImageConfig
 Optional:
 
 - **file_system_config** (Attributes) The Amazon Elastic File System (EFS) storage configuration for a SageMaker image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--file_system_config))
-- **kernel_specs** (Attributes List, Min: 1, Max: 1) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
+- **kernel_specs** (Attributes List) The specification of the Jupyter kernels in the image. (see [below for nested schema](#nestedatt--kernel_gateway_image_config--kernel_specs))
 
 <a id="nestedatt--kernel_gateway_image_config--file_system_config"></a>
 ### Nested Schema for `kernel_gateway_image_config.file_system_config`

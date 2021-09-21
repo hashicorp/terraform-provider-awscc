@@ -24,7 +24,7 @@ Resource schema for AWS::DataSync::Agent.
 - **agent_name** (String) The name configured for the agent. Text reference used to identify the agent in the console.
 - **security_group_arns** (List of String) The ARNs of the security group used to protect your data transfer task subnets.
 - **subnet_arns** (List of String) The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.
-- **tags** (Attributes Set, Max: 50) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - **vpc_endpoint_id** (String) The ID of the VPC endpoint that the agent has access to.
 
 ### Read-Only

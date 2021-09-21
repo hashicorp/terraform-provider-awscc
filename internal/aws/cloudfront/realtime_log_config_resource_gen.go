@@ -92,11 +92,12 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"fields": {
 			// Property: Fields

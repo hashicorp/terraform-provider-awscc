@@ -17,7 +17,7 @@ Definition of the AWS::QuickSight::DataSource Resource Type.
 
 ### Optional
 
-- **alternate_data_source_parameters** (Attributes List, Min: 1, Max: 50) <p>A set of alternate data source parameters that you want to share for the credentials
+- **alternate_data_source_parameters** (Attributes List) <p>A set of alternate data source parameters that you want to share for the credentials
             stored with this data source. The credentials are applied in tandem with the data source
             parameters when you copy a data source by using a create or update request. The API
             operation compares the <code>DataSourceParameters</code> structure that's in the request
@@ -35,10 +35,10 @@ Definition of the AWS::QuickSight::DataSource Resource Type.
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
 - **error_info** (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
 - **name** (String) <p>A display name for the data source.</p>
-- **permissions** (Attributes List, Min: 1, Max: 64) <p>A list of resource permissions on the data source.</p> (see [below for nested schema](#nestedatt--permissions))
+- **permissions** (Attributes List) <p>A list of resource permissions on the data source.</p> (see [below for nested schema](#nestedatt--permissions))
 - **ssl_properties** (Attributes) <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
             underlying data source.</p> (see [below for nested schema](#nestedatt--ssl_properties))
-- **tags** (Attributes List, Min: 1, Max: 200) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p> (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p> (see [below for nested schema](#nestedatt--tags))
 - **type** (String)
 - **vpc_connection_properties** (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--vpc_connection_properties))
 
@@ -254,7 +254,7 @@ Optional:
 
 Optional:
 
-- **alternate_data_source_parameters** (Attributes List, Min: 1, Max: 50) <p>A set of alternate data source parameters that you want to share for these
+- **alternate_data_source_parameters** (Attributes List) <p>A set of alternate data source parameters that you want to share for these
             credentials. The credentials are applied in tandem with the data source parameters when
             you copy a data source by using a create or update request. The API operation compares
             the <code>DataSourceParameters</code> structure that's in the request with the
