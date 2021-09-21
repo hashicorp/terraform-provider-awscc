@@ -69,12 +69,12 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 60,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 60),
+			},
 		},
 		"delivery_s3_bucket": {
 			// Property: DeliveryS3Bucket

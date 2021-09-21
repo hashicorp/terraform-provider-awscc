@@ -179,11 +179,12 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.SetNestedAttributesOptions{
-					MaxItems: 5,
-				},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
 		},
 		"include_global_service_events": {
 			// Property: IncludeGlobalServiceEvents

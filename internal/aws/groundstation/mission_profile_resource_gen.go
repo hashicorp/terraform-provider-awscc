@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -84,11 +85,12 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"id": {
 			// Property: Id

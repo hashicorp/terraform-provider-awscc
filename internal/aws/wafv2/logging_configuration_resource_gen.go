@@ -207,11 +207,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 								"requirement": {
 									// Property: Requirement
@@ -226,11 +227,12 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 				},
 			),

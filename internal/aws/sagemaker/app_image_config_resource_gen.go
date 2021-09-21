@@ -183,12 +183,12 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-								MaxItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 1),
+						},
 					},
 				},
 			),
@@ -244,13 +244,13 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

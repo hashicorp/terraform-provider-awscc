@@ -119,12 +119,11 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 50),
 				validate.UniqueItems(),
 			},
 		},

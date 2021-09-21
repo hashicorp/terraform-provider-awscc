@@ -392,12 +392,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 0,
-											MaxItems: 5,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 5),
+									},
 								},
 							},
 						),
@@ -610,12 +610,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 64,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 64),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -671,12 +671,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 200),
+			},
 		},
 		"theme_id": {
 			// Property: ThemeId
@@ -1124,12 +1124,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional: true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 0,
-														MaxItems: 5,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 5),
+												},
 											},
 										},
 									),
@@ -1281,11 +1281,12 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"status": {
 						// Property: Status

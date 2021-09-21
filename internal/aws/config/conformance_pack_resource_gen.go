@@ -73,12 +73,12 @@ func conformancePackResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 60,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 60),
+			},
 		},
 		"conformance_pack_name": {
 			// Property: ConformancePackName

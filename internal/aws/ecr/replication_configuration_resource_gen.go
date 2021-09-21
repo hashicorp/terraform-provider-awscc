@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -112,20 +113,20 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-											MaxItems: 25,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 25),
+									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 1),
+						},
 					},
 				},
 			),

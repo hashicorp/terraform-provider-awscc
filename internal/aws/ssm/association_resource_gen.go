@@ -370,12 +370,12 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 5,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 5),
+			},
 		},
 		"wait_for_success_timeout_seconds": {
 			// Property: WaitForSuccessTimeoutSeconds

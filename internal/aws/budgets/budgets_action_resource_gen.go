@@ -395,12 +395,12 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 11,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 11),
+			},
 		},
 	}
 

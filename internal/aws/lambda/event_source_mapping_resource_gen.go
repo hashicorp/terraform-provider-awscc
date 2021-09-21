@@ -396,13 +396,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 22,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 22),
 				validate.UniqueItems(),
 			},
 		},

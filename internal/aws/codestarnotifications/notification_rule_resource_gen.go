@@ -161,11 +161,12 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MaxItems: 10,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 10),
+			},
 		},
 	}
 

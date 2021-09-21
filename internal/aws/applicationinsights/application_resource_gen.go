@@ -1148,11 +1148,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -1494,11 +1495,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												},
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -1511,12 +1513,11 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
 				validate.RequiredAttributes(
 					validate.OneOfRequired(
 						validate.Required(
@@ -1588,11 +1589,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"log_pattern_sets": {
 			// Property: LogPatternSets
@@ -1687,11 +1689,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"pattern_set_name": {
 						// Property: PatternSetName
@@ -1703,11 +1706,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"ops_center_enabled": {
 			// Property: OpsCenterEnabled
@@ -1810,11 +1814,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 	}
 

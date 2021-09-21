@@ -987,12 +987,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 50,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 50),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -2052,12 +2052,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-											MaxItems: 50,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 50),
+									},
 								},
 								"password": {
 									// Property: Password
@@ -3203,12 +3203,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 64,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 64),
+			},
 		},
 		"ssl_properties": {
 			// Property: SslProperties
@@ -3307,12 +3307,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 200),
+			},
 		},
 		"type": {
 			// Property: Type

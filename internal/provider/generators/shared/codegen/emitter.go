@@ -261,19 +261,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("tfsdk.SetNestedAttributesOptions{\n")
+				e.printf("tfsdk.SetNestedAttributesOptions{},\n")
 
-				if !computedOnly {
-					if property.MinItems != nil {
-						e.printf("MinItems:%d,\n", *property.MinItems)
-					}
-					if property.MaxItems != nil {
-						e.printf("MaxItems:%d,\n", *property.MaxItems)
-					}
-				}
-
-				e.printf("},\n")
 				e.printf("),\n")
+
+				if validator := arrayLengthValidator(property); validator != "" {
+					validators = append(validators, validator)
+				}
 
 				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
 					validators = append(validators, validator)
@@ -325,19 +319,13 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("tfsdk.ListNestedAttributesOptions{\n")
+				e.printf("tfsdk.ListNestedAttributesOptions{},\n")
 
-				if !computedOnly {
-					if property.MinItems != nil {
-						e.printf("MinItems:%d,\n", *property.MinItems)
-					}
-					if property.MaxItems != nil {
-						e.printf("MaxItems:%d,\n", *property.MaxItems)
-					}
-				}
-
-				e.printf("},\n")
 				e.printf("),\n")
+
+				if validator := arrayLengthValidator(property); validator != "" {
+					validators = append(validators, validator)
+				}
 
 				switch arrayType {
 				case aggregateOrderedSet:
@@ -357,15 +345,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			if elementType != "" {
 				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
 
-				if property.MinItems != nil && property.MaxItems == nil {
-					validators = append(validators, fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems))
-				}
-				if property.MaxItems != nil {
-					minItems := 0
-					if property.MinItems != nil {
-						minItems = *property.MinItems
-					}
-					validators = append(validators, fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems))
+				if validator := arrayLengthValidator(property); validator != "" {
+					validators = append(validators, validator)
 				}
 
 				switch arrayType {
@@ -472,18 +453,17 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features |= f
 
 				e.printf(",\n")
-				e.printf("tfsdk.MapNestedAttributesOptions{\n")
+				e.printf("tfsdk.MapNestedAttributesOptions{},\n")
 
 				if !computedOnly {
 					if patternProperty.MinItems != nil {
-						e.printf("MinItems:%d,\n", *patternProperty.MinItems)
+						return 0, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
 					}
 					if patternProperty.MaxItems != nil {
-						e.printf("MaxItems:%d,\n", *patternProperty.MaxItems)
+						return 0, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
 					}
 				}
 
-				e.printf("},\n")
 				e.printf("),\n")
 
 			default:
@@ -743,6 +723,23 @@ func aggregateType(property *cfschema.Property) aggregate {
 
 func unsupportedTypeError(path []string, typ string) error {
 	return fmt.Errorf("%s is of unsupported type: %s", strings.Join(path, "/"), typ)
+}
+
+// arrayLengthValidator returns any array length AttributeValidator for the specified Property.
+func arrayLengthValidator(property *cfschema.Property) string {
+	if property.MinItems != nil && property.MaxItems == nil {
+		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems)
+	}
+
+	if property.MaxItems != nil {
+		minItems := 0
+		if property.MinItems != nil {
+			minItems = *property.MinItems
+		}
+		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems)
+	}
+
+	return ""
 }
 
 // defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.

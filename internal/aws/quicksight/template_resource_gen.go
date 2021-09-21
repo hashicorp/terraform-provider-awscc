@@ -149,12 +149,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 64,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 64),
+			},
 		},
 		"source_entity": {
 			// Property: SourceEntity
@@ -252,11 +252,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -336,12 +337,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 200),
+			},
 		},
 		"template_id": {
 			// Property: TemplateId
@@ -572,12 +573,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 0,
-														MaxItems: 500,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 500),
+												},
 											},
 											"name": {
 												// Property: Name
@@ -586,12 +587,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 0,
-											MaxItems: 500,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 500),
+									},
 								},
 								"data_set_schema": {
 									// Property: DataSetSchema
@@ -622,12 +623,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 														},
 													},
-													tfsdk.ListNestedAttributesOptions{
-														MinItems: 0,
-														MaxItems: 500,
-													},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenBetween(0, 500),
+												},
 											},
 										},
 									),
@@ -640,12 +641,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 30,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 30),
+						},
 					},
 					"description": {
 						// Property: Description
@@ -681,11 +682,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 1,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 					"sheets": {
 						// Property: Sheets
@@ -708,12 +710,12 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 20,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 20),
+						},
 					},
 					"source_entity_arn": {
 						// Property: SourceEntityArn

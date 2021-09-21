@@ -159,11 +159,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -342,12 +343,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 100,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 					"decimal_parameters": {
 						// Property: DecimalParameters
@@ -367,12 +368,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 100,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 					"integer_parameters": {
 						// Property: IntegerParameters
@@ -392,12 +393,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 100,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 					"string_parameters": {
 						// Property: StringParameters
@@ -417,12 +418,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 100,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 100),
+						},
 					},
 				},
 			),
@@ -486,12 +487,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 64,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 64),
+			},
 		},
 		"sheets": {
 			// Property: Sheets
@@ -540,10 +541,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 20,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
 			// Sheets is a write-only property.
@@ -630,11 +628,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 											},
 										},
-										tfsdk.ListNestedAttributesOptions{
-											MinItems: 1,
-										},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -718,12 +717,12 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 1,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 200),
+			},
 		},
 		"theme_arn": {
 			// Property: ThemeArn

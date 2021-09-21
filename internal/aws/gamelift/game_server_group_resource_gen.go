@@ -246,12 +246,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 2,
-					MaxItems: 20,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(2, 20),
+			},
 		},
 		"launch_template": {
 			// Property: LaunchTemplate
@@ -393,12 +393,12 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{
-					MinItems: 0,
-					MaxItems: 200,
-				},
+				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 200),
+			},
 		},
 		"vpc_subnets": {
 			// Property: VpcSubnets

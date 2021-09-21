@@ -123,12 +123,12 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									},
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{
-								MinItems: 0,
-								MaxItems: 2,
-							},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 2),
+						},
 					},
 					"intended_for_qualification": {
 						// Property: IntendedForQualification
