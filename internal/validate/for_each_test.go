@@ -99,11 +99,11 @@ func TestArrayForEachValidator(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !response.Diagnostics.Contains(test.expectedDiag) {
-				t.Fatalf(`expected diagnostics to contain "%s", got "%s"`, printDiagnostic(test.expectedDiag), printDiagnostics(response.Diagnostics))
+				t.Fatalf(`expected diagnostics to contain "%s", got %s`, printDiagnostic(test.expectedDiag), printDiagnostics(response.Diagnostics))
 			}
 
 			if response.Diagnostics.HasError() && test.expectedDiag == nil {
-				t.Fatalf(`got unexpected error diagnostics: "%s"`, printDiagnostics(response.Diagnostics))
+				t.Fatalf(`got unexpected error diagnostics: %s`, printDiagnostics(response.Diagnostics))
 			}
 		})
 	}
@@ -115,7 +115,7 @@ func printDiagnostics(ds diag.Diagnostics) string {
 		s[i] = printDiagnostic(d)
 	}
 
-	return strings.Join(s, ", ")
+	return "[" + strings.Join(s, ", ") + "]"
 }
 
 func printDiagnostic(d diag.Diagnostic) string {
