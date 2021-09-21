@@ -303,14 +303,16 @@ func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
-		AccessKey:            pd.AccessKey.Value,
-		DebugLogging:         strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
-		Insecure:             pd.Insecure.Value,
-		Profile:              pd.Profile.Value,
-		Region:               pd.Region.Value,
-		SecretKey:            pd.SecretKey.Value,
-		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
-		Token:                pd.Token.Value,
+		AccessKey:              pd.AccessKey.Value,
+		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
+		CallerName:             "Terraform AWS Cloud Control Provider",
+		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		Insecure:               pd.Insecure.Value,
+		Profile:                pd.Profile.Value,
+		Region:                 pd.Region.Value,
+		SecretKey:              pd.SecretKey.Value,
+		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
+		Token:                  pd.Token.Value,
 	}
 	if !pd.SharedConfigFiles.Null {
 		cf := make([]string, len(pd.SharedConfigFiles.Elems))
