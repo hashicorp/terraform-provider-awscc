@@ -1,6 +1,4 @@
-## 0.0.15 (Unreleased)
-
-Test Release Tooling
+## 0.1.0 (Unreleased)
 
 ## [0.0.10](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.10) (September 18, 2021)
 

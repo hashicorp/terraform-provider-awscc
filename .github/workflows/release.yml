@@ -11,7 +11,6 @@ env:
   PROTOCOL_VERSION: "6.0"
   PROTOCOL_VERSIONS: "6.0"
   SIGNER: interim_signing_subkey_7685B676
-  TEST_BUCKET: tf-provider-awscc-release-bucket
 
 jobs:
   Release:
@@ -53,14 +52,14 @@ jobs:
           fi
       - uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.TEST_TF_PROVIDER_RELEASE_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.TEST_TF_PROVIDER_RELEASE_AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
-          # TODO: uncomment below to run in prod
-          #role-duration-seconds: 900
-          #role-to-assume: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ROLE_ARN }}
-          #role-session-name: ${{ github.run_id }}
-          #role-skip-session-tagging: true
+          aws-access-key-id: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TF_PROVIDER_RELEASE_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.TF_PROVIDER_RELEASE_AWS_ROLE_ARN }}
+          role-duration-seconds: 3600
+          # TODO: allow session tagging once IAM permission changes addressed
+          # Reference: https://github.com/hashicorp/hc-releases/issues/124
+          role-skip-session-tagging: true
       - name: goreleaser release
         uses: goreleaser/goreleaser-action@v2
         with:
@@ -70,7 +69,7 @@ jobs:
           SIGNORE_CLIENT_ID: ${{ secrets.SIGNORE_CLIENT_ID }}
           SIGNORE_CLIENT_SECRET: ${{ secrets.SIGNORE_CLIENT_SECRET }}
       - name: hc-releases publish
-        run: hc-releases publish -bucket=${{ env.TEST_BUCKET }} -region=us-west-2 -product=${{ github.event.repository.name }}
+        run: hc-releases publish -product=${{ github.event.repository.name }}
         env:
           FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
           TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
