@@ -19,6 +19,11 @@ func TestAccAWSRoute53ResolverResolverQueryLoggingConfigAssociation_basic(t *tes
 				td.CheckExistsInAWS(),
 			),
 		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
 	})
 }
 

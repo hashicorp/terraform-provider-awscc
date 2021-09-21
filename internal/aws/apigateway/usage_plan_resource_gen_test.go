@@ -19,6 +19,11 @@ func TestAccAWSApiGatewayUsagePlan_basic(t *testing.T) {
 				td.CheckExistsInAWS(),
 			),
 		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
 	})
 }
 
