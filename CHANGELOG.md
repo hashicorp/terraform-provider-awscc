@@ -1,5 +1,10 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.11](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.11) (September 21, 2021)
+
+Add resource import support.
+Validate `NestedAttribute` array lengths.
+
 ## [0.0.10](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.10) (September 18, 2021)
 
 Migrate to `cloudcontrol` as the AWS service package.
