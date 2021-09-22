@@ -9,6 +9,55 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
+// intValidator validates that a value is an integer.
+type intValidator struct {
+	tfsdk.AttributeValidator
+}
+
+// Description describes the validation in plain text formatting.
+func (validator intValidator) Description(_ context.Context) string {
+	return "value must be an integer"
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator intValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+// Validate performs the validation.
+func (validator intValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
+
+		return
+	}
+
+	if n.Unknown || n.Null {
+		return
+	}
+
+	val := n.Value
+
+	if !val.IsInt() {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			"Not an integer",
+		)
+	}
+}
+
+// Int returns a new integer validator.
+func Int() tfsdk.AttributeValidator {
+	return intValidator{}
+}
+
 // intBetweenValidator validates that an integer Attribute's value is in a range.
 type intBetweenValidator struct {
 	tfsdk.AttributeValidator

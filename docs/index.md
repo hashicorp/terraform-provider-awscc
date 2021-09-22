@@ -167,13 +167,14 @@ provider "awscc" {
 
 - **access_key** (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
 - **assume_role** (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
-- **insecure** (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If omitted, default value is `false`.
+- **insecure** (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
+- **max_retries** (Number) The maximum number of times an AWS API request is retried on failure. If not set, defaults to 25.
 - **profile** (String) This is the AWS profile name as set in the shared credentials file.
 - **region** (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, or via a shared config file.
 - **role_arn** (String) Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.
 - **secret_key** (String) This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.
-- **shared_config_files** (List of String) List of paths to shared config files. If not set this defaults to `~/.aws/config`.
-- **shared_credentials_files** (List of String) List of paths to shared credentials files. If not set this defaults to `~/.aws/credentials`.
+- **shared_config_files** (List of String) List of paths to shared config files. If not set, defaults to `~/.aws/config`.
+- **shared_credentials_files** (List of String) List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.
 - **skip_medatadata_api_check** (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - **token** (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
 

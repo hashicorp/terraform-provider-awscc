@@ -19,6 +19,10 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
+const (
+	defaultMaxRetries = 25
+)
+
 func New() tfsdk.Provider {
 	return &AwsCloudControlApiProvider{}
 }
@@ -41,8 +45,17 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 			"insecure": {
 				Type:        types.BoolType,
-				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.",
+				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
 				Optional:    true,
+			},
+
+			"max_retries": {
+				Type:        types.NumberType,
+				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
+				Optional:    true,
+				Validators: []tfsdk.AttributeValidator{
+					validate.Int(),
+				},
 			},
 
 			"profile": {
@@ -74,13 +87,13 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 			"shared_config_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared config files. If not set this defaults to `~/.aws/config`.",
+				Description: "List of paths to shared config files. If not set, defaults to `~/.aws/config`.",
 				Optional:    true,
 			},
 
 			"shared_credentials_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared credentials files. If not set this defaults to `~/.aws/credentials`.",
+				Description: "List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.",
 				Optional:    true,
 			},
 
@@ -185,6 +198,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 type providerData struct {
 	AccessKey              types.String    `tfsdk:"access_key"`
 	Insecure               types.Bool      `tfsdk:"insecure"`
+	MaxRetries             types.Number    `tfsdk:"max_retries"`
 	Profile                types.String    `tfsdk:"profile"`
 	Region                 types.String    `tfsdk:"region"`
 	RoleARN                types.String    `tfsdk:"role_arn"`
@@ -313,6 +327,12 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		SecretKey:              pd.SecretKey.Value,
 		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
 		Token:                  pd.Token.Value,
+	}
+	if pd.MaxRetries.Null {
+		config.MaxRetries = defaultMaxRetries
+	} else {
+		i, _ := pd.MaxRetries.Value.Int64()
+		config.MaxRetries = int(i)
 	}
 	if !pd.SharedConfigFiles.Null {
 		cf := make([]string, len(pd.SharedConfigFiles.Elems))
