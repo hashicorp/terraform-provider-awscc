@@ -11,11 +11,6 @@ variable "workflow_labels" {
     "regression"                     = "ec585d", # color:boundary
     "waiting-response"               = "d3353f", # color:darker boundary
     "tests"                          = "60dea9", # color:nomad
-    "terraform-0.11"                 = "60dea9", # color:nomad
-    "terraform-0.12"                 = "60dea9", # color:nomad
-    "terraform-0.13"                 = "60dea9", # color:nomad
-    "terraform-0.14"                 = "60dea9", # color:nomad
-    "terraform-0.15"                 = "60dea9", # color:nomad
     "prerelease-tf-testing"          = "60dea9", # color:nomad
     "technical-debt"                 = "d1ebff", # color:terraform accent
     "proposal"                       = "d1ebff", # color:terraform accent
@@ -44,8 +39,6 @@ variable "workflow_labels" {
     "windows"                        = "828a90", # color:stale grey
     "reinvent"                       = "828a90", # color:stale grey
     "github_actions"                 = "828a90", # color:stale grey
-    "terraform-plugin-sdk-migration" = "828a90", # color:stale grey
-    "terraform-plugin-sdk-v1"        = "828a90", # color:stale grey
   }
   description = "Name-color mapping of workflow issues"
   type        = map(string)
