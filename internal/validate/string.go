@@ -5,8 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 // stringLenBetweenValidator validates that a string Attribute's length is in a range.
@@ -231,10 +234,17 @@ func (validator stringInSliceValidator) Validate(ctx context.Context, request tf
 		}
 	}
 
-	response.Diagnostics.AddAttributeError(
+	response.Diagnostics.Append(newStringNotInSliceError(
 		request.AttributePath,
-		"Invalid value",
-		fmt.Sprintf("expected value to be one of %v, got %s", validator.valid, s.Value),
+		validator.valid,
+		s.Value,
+	))
+}
+
+func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value string) diag.Diagnostic {
+	return diags.NewInvalidValueError(
+		path,
+		fmt.Sprintf("expected value to be one of %v, got %s", valid, value),
 	)
 }
 
@@ -280,11 +290,10 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 
 	// A JSON object starts with a '{'
 	if s.Value[:1] != "{" {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
-			"Invalid value",
 			"expected value to be a valid JSON object",
-		)
+		))
 		return
 	}
 
@@ -292,13 +301,11 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 	var i interface{}
 	err := json.Unmarshal([]byte(s.Value), &i)
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be valid JSON: %s", err),
-		)
+		))
 	}
-
 }
 
 // StringIsJsonObject returns a new string is JSON validator.

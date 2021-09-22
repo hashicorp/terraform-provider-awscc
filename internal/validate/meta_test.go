@@ -75,11 +75,12 @@ func TestAllValidator(t *testing.T) {
 					"Invalid length",
 					"expected length to be at most 4, got 5",
 				),
-				diag.NewAttributeErrorDiagnostic(
+				newStringNotInSliceError(
 					rootPath,
-					"Invalid value",
-					"expected value to be one of [alpha beta gamma], got delta",
-				)},
+					[]string{"alpha", "beta", "gamma"},
+					"delta",
+				),
+			},
 		},
 	}
 

@@ -69,10 +69,10 @@ func TestArrayForEachValidator(t *testing.T) {
 			}),
 			f:         types.ListType{ElemType: types.StringType}.ValueFromTerraform,
 			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: diag.NewAttributeErrorDiagnostic(
+			expectedDiag: newStringNotInSliceError(
 				rootPath.WithElementKeyInt(3),
-				"Invalid value",
-				"expected value to be one of [alpha beta gamma], got delta",
+				[]string{"alpha", "beta", "gamma"},
+				"delta",
 			),
 		},
 	}

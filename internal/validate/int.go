@@ -5,8 +5,11 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 // intBetweenValidator validates that an integer Attribute's value is in a range.
@@ -47,11 +50,9 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(newNotAnIntegerValueError(
 			request.AttributePath,
-			"Invalid value",
-			"Not an integer",
-		)
+		))
 
 		return
 	}
@@ -60,11 +61,10 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 	_, _ = val.Int(&i)
 
 	if i := i.Int64(); i < int64(validator.min) || i > int64(validator.max) {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
-		)
+		))
 
 		return
 	}
@@ -120,11 +120,9 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(newNotAnIntegerValueError(
 			request.AttributePath,
-			"Invalid value",
-			"Not an integer",
-		)
+		))
 
 		return
 	}
@@ -133,11 +131,10 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 	_, _ = val.Int(&i)
 
 	if i := i.Int64(); i < int64(validator.min) {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
-		)
+		))
 
 		return
 	}
@@ -256,11 +253,9 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 	val := n.Value
 
 	if !val.IsInt() {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(newNotAnIntegerValueError(
 			request.AttributePath,
-			"Invalid value",
-			"Not an integer",
-		)
+		))
 
 		return
 	}
@@ -274,10 +269,18 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 		}
 	}
 
-	response.Diagnostics.AddAttributeError(
+	response.Diagnostics.Append(newIntNotInSliceError(
 		request.AttributePath,
-		"Invalid value",
-		fmt.Sprintf("expected value to be one of %v, got %d", validator.valid, i.Int64()),
+		validator.valid,
+		i.Int64(),
+	))
+
+}
+
+func newIntNotInSliceError(path *tftypes.AttributePath, valid []int, value int64) diag.Diagnostic {
+	return diags.NewInvalidValueError(
+		path,
+		fmt.Sprintf("expected value to be one of %v, got %d", valid, value),
 	)
 }
 
@@ -286,4 +289,8 @@ func IntInSlice(valid []int) tfsdk.AttributeValidator {
 	return intInSliceValidator{
 		valid: valid,
 	}
+}
+
+func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
+	return diags.NewInvalidValueError(path, "Not an integer")
 }
