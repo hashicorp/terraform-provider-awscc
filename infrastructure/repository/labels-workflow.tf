@@ -27,17 +27,13 @@ locals {
     "size/XXL"                       = "008196", # color:lightest-darkest waypoint gradient
     "upstream-terraform"             = "1c7ada", # color:vagrant
     "upstream"                       = "1c7ada", # color:vagrant
-    "go"                             = "1c7ada", # color:vagrant
     "dependencies"                   = "1c7ada", # color:vagrant
     "good first issue"               = "63d0ff", # color:packer
     "help wanted"                    = "63d0ff", # color:packer
     "examples"                       = "63d0ff", # color:packer
-    "hacktoberfest"                  = "828a90", # color:stale grey
     "stale"                          = "828a90", # color:stale grey
-    "hashibot/ignore"                = "828a90", # color:stale grey
     "new"                            = "828a90", # color:stale grey
     "windows"                        = "828a90", # color:stale grey
-    "reinvent"                       = "828a90", # color:stale grey
     "github_actions"                 = "828a90", # color:stale grey
   }
 }
