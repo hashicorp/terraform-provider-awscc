@@ -1,16 +1,14 @@
-variable "partition_labels" {
-  default = [
+locals {
+  partition_labels = toset([
     "aws-cn",
     "aws-iso",
     "aws-iso-b",
     "aws-us-gov",
-  ]
-  description = "Set of AWS Partition labels"
-  type        = set(string)
+  ])
 }
 
 resource "github_issue_label" "partition" {
-  for_each = var.partition_labels
+  for_each = local.partition_labels
 
   repository = "terraform-provider-awscc"
   name       = "partition/${each.value}"

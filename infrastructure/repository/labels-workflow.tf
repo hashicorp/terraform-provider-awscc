@@ -1,5 +1,5 @@
-variable "workflow_labels" {
-  default = {
+locals {
+  workflow_labels = {
     "provider"                       = "844fba", # color:terraform (main)
     "needs-triage"                   = "dc477d", # color:consul
     "enhancement"                    = "844fba", # color:terraform (main)
@@ -40,12 +40,10 @@ variable "workflow_labels" {
     "reinvent"                       = "828a90", # color:stale grey
     "github_actions"                 = "828a90", # color:stale grey
   }
-  description = "Name-color mapping of workflow issues"
-  type        = map(string)
 }
 
 resource "github_issue_label" "workflow" {
-  for_each = var.workflow_labels
+  for_each = local.workflow_labels
 
   repository = "terraform-provider-awscc"
   name       = each.key

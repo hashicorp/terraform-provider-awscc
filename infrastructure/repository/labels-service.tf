@@ -3,8 +3,8 @@
 # via the AWS SDK service list.
 #
 
-variable "service_labels" {
-  default = [
+locals {
+  service_labels = toset([
     "accessanalyzer",
     "acm",
     "acmpca",
@@ -213,13 +213,11 @@ variable "service_labels" {
     "workmail",
     "workspaces",
     "xray",
-  ]
-  description = "Set of AWS Go SDK service labels"
-  type        = set(string)
+  ])
 }
 
 resource "github_issue_label" "service" {
-  for_each = var.service_labels
+  for_each = local.service_labels
 
   repository = "terraform-provider-awscc"
   name       = "service/${each.value}"
