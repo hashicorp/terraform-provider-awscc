@@ -768,8 +768,7 @@ resource_schema "aws_ivs_recording_configuration" {
 }
 
 resource_schema "aws_ivs_stream_key" {
-  cloudformation_type_name               = "AWS::IVS::StreamKey"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::IVS::StreamKey"
 }
 
 resource_schema "aws_imagebuilder_component" {
