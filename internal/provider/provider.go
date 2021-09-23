@@ -19,6 +19,10 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
+const (
+	defaultMaxRetries = 25
+)
+
 func New() tfsdk.Provider {
 	return &AwsCloudControlApiProvider{}
 }
@@ -41,8 +45,17 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 			"insecure": {
 				Type:        types.BoolType,
-				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If omitted, default value is `false`.",
+				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
 				Optional:    true,
+			},
+
+			"max_retries": {
+				Type:        types.NumberType,
+				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
+				Optional:    true,
+				Validators: []tfsdk.AttributeValidator{
+					validate.Int(),
+				},
 			},
 
 			"profile": {
@@ -74,13 +87,13 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 			"shared_config_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared config files. If not set this defaults to `~/.aws/config`.",
+				Description: "List of paths to shared config files. If not set, defaults to `~/.aws/config`.",
 				Optional:    true,
 			},
 
 			"shared_credentials_files": {
 				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared credentials files. If not set this defaults to `~/.aws/credentials`.",
+				Description: "List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.",
 				Optional:    true,
 			},
 
@@ -117,6 +130,25 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							Description: "External identifier to use when assuming the role.",
 							Optional:    true,
 						},
+						"policy": {
+							Type:        types.StringType,
+							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.StringLenAtMost(2048),
+								validate.StringIsJsonObject(),
+							},
+						},
+						"policy_arns": {
+							Type:        types.ListType{ElemType: types.StringType},
+							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+							Optional:    true,
+							Validators: []tfsdk.AttributeValidator{
+								validate.ArrayForEach(
+									validate.IAMPolicyARN(),
+								),
+							},
+						},
 						"session_name": {
 							Type:        types.StringType,
 							Description: "Session name to use when assuming the role.",
@@ -144,6 +176,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 type providerData struct {
 	AccessKey              types.String    `tfsdk:"access_key"`
 	Insecure               types.Bool      `tfsdk:"insecure"`
+	MaxRetries             types.Number    `tfsdk:"max_retries"`
 	Profile                types.String    `tfsdk:"profile"`
 	Region                 types.String    `tfsdk:"region"`
 	RoleARN                types.String    `tfsdk:"role_arn"`
@@ -159,6 +192,8 @@ type assumeRoleData struct {
 	RoleARN           types.String `tfsdk:"role_arn"`
 	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
 	ExternalID        types.String `tfsdk:"external_id"`
+	Policy            types.String `tfsdk:"policy"`
+	PolicyARNs        types.List   `tfsdk:"policy_arns"`
 	SessionName       types.String `tfsdk:"session_name"`
 	Tags              types.Map    `tfsdk:"tags"`
 	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
@@ -255,14 +290,22 @@ func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
 	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
-		AccessKey:            pd.AccessKey.Value,
-		DebugLogging:         strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
-		Insecure:             pd.Insecure.Value,
-		Profile:              pd.Profile.Value,
-		Region:               pd.Region.Value,
-		SecretKey:            pd.SecretKey.Value,
-		SkipMetadataApiCheck: pd.SkipMetadataApiCheck.Value,
-		Token:                pd.Token.Value,
+		AccessKey:              pd.AccessKey.Value,
+		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
+		CallerName:             "Terraform AWS Cloud Control Provider",
+		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		Insecure:               pd.Insecure.Value,
+		Profile:                pd.Profile.Value,
+		Region:                 pd.Region.Value,
+		SecretKey:              pd.SecretKey.Value,
+		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
+		Token:                  pd.Token.Value,
+	}
+	if pd.MaxRetries.Null {
+		config.MaxRetries = defaultMaxRetries
+	} else {
+		i, _ := pd.MaxRetries.Value.Int64()
+		config.MaxRetries = int(i)
 	}
 	if !pd.SharedConfigFiles.Null {
 		cf := make([]string, len(pd.SharedConfigFiles.Elems))
@@ -288,6 +331,18 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 
 		if !pd.AssumeRole.ExternalID.Null {
 			config.AssumeRoleExternalID = pd.AssumeRole.ExternalID.Value
+		}
+
+		if !pd.AssumeRole.Policy.Null {
+			config.AssumeRolePolicy = pd.AssumeRole.Policy.Value
+		}
+
+		if !pd.AssumeRole.PolicyARNs.Null {
+			arns := make([]string, len(pd.AssumeRole.PolicyARNs.Elems))
+			for i, v := range pd.AssumeRole.PolicyARNs.Elems {
+				arns[i] = v.(types.String).Value
+			}
+			config.AssumeRolePolicyARNs = arns
 		}
 
 		if !pd.AssumeRole.SessionName.Null {
