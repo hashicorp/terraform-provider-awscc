@@ -30,8 +30,6 @@ Macie CustomDataIdentifier resource schema
 ### Read-Only
 
 - **arn** (String) Custom data identifier ARN.
-- **created_at** (String) Date-time at which the custom data identifier was created.
-- **deleted** (Boolean) Whether the customer data identifier has been deleted.
 - **id** (String) Custom data identifier ID.
 
 

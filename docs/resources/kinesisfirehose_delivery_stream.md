@@ -188,6 +188,7 @@ Optional:
 - **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--cloudwatch_logging_options))
 - **compression_format** (String)
 - **data_format_conversion_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration))
+- **dynamic_partitioning_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration))
 - **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration))
 - **error_output_prefix** (String)
 - **prefix** (String)
@@ -318,6 +319,23 @@ Optional:
 - **role_arn** (String)
 - **table_name** (String)
 - **version_id** (String)
+
+
+
+<a id="nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration"></a>
+### Nested Schema for `extended_s3_destination_configuration.dynamic_partitioning_configuration`
+
+Optional:
+
+- **enabled** (Boolean)
+- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration--retry_options))
+
+<a id="nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration--retry_options"></a>
+### Nested Schema for `extended_s3_destination_configuration.dynamic_partitioning_configuration.retry_options`
+
+Optional:
+
+- **duration_in_seconds** (Number)
 
 
 

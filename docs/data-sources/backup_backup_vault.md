@@ -26,7 +26,18 @@ Data Source schema for AWS::Backup::BackupVault
 - **backup_vault_name** (String)
 - **backup_vault_tags** (Map of String)
 - **encryption_key_arn** (String)
+- **lock_configuration** (Attributes) (see [below for nested schema](#nestedatt--lock_configuration))
 - **notifications** (Attributes) (see [below for nested schema](#nestedatt--notifications))
+
+<a id="nestedatt--lock_configuration"></a>
+### Nested Schema for `lock_configuration`
+
+Read-Only:
+
+- **changeable_for_days** (Number)
+- **max_retention_days** (Number)
+- **min_retention_days** (Number)
+
 
 <a id="nestedatt--notifications"></a>
 ### Nested Schema for `notifications`

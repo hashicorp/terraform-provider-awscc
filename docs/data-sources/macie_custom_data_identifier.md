@@ -22,8 +22,6 @@ Data Source schema for AWS::Macie::CustomDataIdentifier
 ### Read-Only
 
 - **arn** (String) Custom data identifier ARN.
-- **created_at** (String) Date-time at which the custom data identifier was created.
-- **deleted** (Boolean) Whether the customer data identifier has been deleted.
 - **description** (String) Description of custom data identifier.
 - **ignore_words** (List of String) Words to be ignored.
 - **keywords** (List of String) Keywords to be matched against.

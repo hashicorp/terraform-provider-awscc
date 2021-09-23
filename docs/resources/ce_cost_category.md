@@ -24,6 +24,7 @@ Cost Category enables you to map your cost and usage into meaningful categories.
 ### Optional
 
 - **default_value** (String) The default value for the cost category
+- **split_charge_rules** (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
 
 ### Read-Only
 

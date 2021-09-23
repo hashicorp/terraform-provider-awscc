@@ -60,6 +60,7 @@ Required:
 - **kafka** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka))
 - **kinesis** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kinesis))
 - **lambda** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--lambda))
+- **open_search** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--open_search))
 - **republish** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish))
 - **s3** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--s3))
 - **sns** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--sns))
@@ -296,6 +297,18 @@ Required:
 - **function_arn** (String)
 
 
+<a id="nestedatt--topic_rule_payload--actions--open_search"></a>
+### Nested Schema for `topic_rule_payload.actions.open_search`
+
+Required:
+
+- **endpoint** (String)
+- **id** (String) The ID of this resource.
+- **index** (String)
+- **role_arn** (String)
+- **type** (String)
+
+
 <a id="nestedatt--topic_rule_payload--actions--republish"></a>
 ### Nested Schema for `topic_rule_payload.actions.republish`
 
@@ -398,6 +411,7 @@ Required:
 - **kafka** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka))
 - **kinesis** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kinesis))
 - **lambda** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--lambda))
+- **open_search** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--open_search))
 - **republish** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish))
 - **s3** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--s3))
 - **sns** (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--sns))
@@ -632,6 +646,18 @@ Required:
 Required:
 
 - **function_arn** (String)
+
+
+<a id="nestedatt--topic_rule_payload--error_action--open_search"></a>
+### Nested Schema for `topic_rule_payload.error_action.open_search`
+
+Required:
+
+- **endpoint** (String)
+- **id** (String) The ID of this resource.
+- **index** (String)
+- **role_arn** (String)
+- **type** (String)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--republish"></a>

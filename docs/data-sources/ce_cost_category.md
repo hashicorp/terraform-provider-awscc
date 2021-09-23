@@ -27,5 +27,6 @@ Data Source schema for AWS::CE::CostCategory
 - **name** (String)
 - **rule_version** (String)
 - **rules** (String) JSON array format of Expression in Billing and Cost Management API
+- **split_charge_rules** (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
 
 
