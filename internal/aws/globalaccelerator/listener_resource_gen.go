@@ -76,6 +76,7 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A port range to support for connections from  clients to your accelerator.",
 			//     "properties": {
 			//       "FromPort": {

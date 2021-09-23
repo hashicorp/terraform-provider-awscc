@@ -133,6 +133,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: OperationPreferences
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
 			//   "properties": {
 			//     "FailureToleranceCount": {
@@ -278,6 +279,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A group of stack instances with parameters in some specific accounts and regions.",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "Stack instances in some specific accounts and Regions.",
 			//     "properties": {
 			//       "DeploymentTargets": {

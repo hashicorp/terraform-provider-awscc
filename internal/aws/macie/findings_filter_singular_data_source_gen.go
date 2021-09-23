@@ -64,29 +64,29 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "patternProperties": {
 			//         "": {
 			//           "properties": {
-			//             "Eq": {
+			//             "eq": {
 			//               "items": {
 			//                 "type": "string"
 			//               },
 			//               "type": "array"
 			//             },
-			//             "Gt": {
+			//             "gt": {
 			//               "format": "int64",
 			//               "type": "integer"
 			//             },
-			//             "Gte": {
+			//             "gte": {
 			//               "format": "int64",
 			//               "type": "integer"
 			//             },
-			//             "Lt": {
+			//             "lt": {
 			//               "format": "int64",
 			//               "type": "integer"
 			//             },
-			//             "Lte": {
+			//             "lte": {
 			//               "format": "int64",
 			//               "type": "integer"
 			//             },
-			//             "Neq": {
+			//             "neq": {
 			//               "items": {
 			//                 "type": "string"
 			//               },
@@ -110,32 +110,32 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 						Attributes: tfsdk.MapNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"eq": {
-									// Property: Eq
+									// Property: eq
 									Type:     types.ListType{ElemType: types.StringType},
 									Computed: true,
 								},
 								"gt": {
-									// Property: Gt
+									// Property: gt
 									Type:     types.NumberType,
 									Computed: true,
 								},
 								"gte": {
-									// Property: Gte
+									// Property: gte
 									Type:     types.NumberType,
 									Computed: true,
 								},
 								"lt": {
-									// Property: Lt
+									// Property: lt
 									Type:     types.NumberType,
 									Computed: true,
 								},
 								"lte": {
-									// Property: Lte
+									// Property: lte
 									Type:     types.NumberType,
 									Computed: true,
 								},
 								"neq": {
-									// Property: Neq
+									// Property: neq
 									Type:     types.ListType{ElemType: types.StringType},
 									Computed: true,
 								},
@@ -241,16 +241,16 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"arn":                        "Arn",
 		"criterion":                  "Criterion",
 		"description":                "Description",
-		"eq":                         "Eq",
+		"eq":                         "eq",
 		"finding_criteria":           "FindingCriteria",
 		"findings_filter_list_items": "FindingsFilterListItems",
-		"gt":                         "Gt",
-		"gte":                        "Gte",
+		"gt":                         "gt",
+		"gte":                        "gte",
 		"id":                         "Id",
-		"lt":                         "Lt",
-		"lte":                        "Lte",
+		"lt":                         "lt",
+		"lte":                        "lte",
 		"name":                       "Name",
-		"neq":                        "Neq",
+		"neq":                        "neq",
 		"position":                   "Position",
 	})
 

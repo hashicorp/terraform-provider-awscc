@@ -1118,6 +1118,20 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "Veeva": {
 			//           "additionalProperties": false,
 			//           "properties": {
+			//             "DocumentType": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "IncludeAllVersions": {
+			//               "type": "boolean"
+			//             },
+			//             "IncludeRenditions": {
+			//               "type": "boolean"
+			//             },
+			//             "IncludeSourceFiles": {
+			//               "type": "boolean"
+			//             },
 			//             "Object": {
 			//               "maxLength": 512,
 			//               "pattern": "",
@@ -1362,6 +1376,26 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									// Property: Veeva
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"document_type": {
+												// Property: DocumentType
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"include_all_versions": {
+												// Property: IncludeAllVersions
+												Type:     types.BoolType,
+												Computed: true,
+											},
+											"include_renditions": {
+												// Property: IncludeRenditions
+												Type:     types.BoolType,
+												Computed: true,
+											},
+											"include_source_files": {
+												// Property: IncludeSourceFiles
+												Type:     types.BoolType,
+												Computed: true,
+											},
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -1954,6 +1988,11 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "minLength": 1,
 			//           "type": "string"
 			//         },
+			//         "ScheduleOffset": {
+			//           "maximum": 36000,
+			//           "minimum": 0,
+			//           "type": "number"
+			//         },
 			//         "ScheduleStartTime": {
 			//           "type": "number"
 			//         },
@@ -2002,6 +2041,11 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"schedule_expression": {
 									// Property: ScheduleExpression
 									Type:     types.StringType,
+									Computed: true,
+								},
+								"schedule_offset": {
+									// Property: ScheduleOffset
+									Type:     types.NumberType,
 									Computed: true,
 								},
 								"schedule_start_time": {
@@ -2061,6 +2105,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"destination_connector_properties": "DestinationConnectorProperties",
 		"destination_field":                "DestinationField",
 		"destination_flow_config_list":     "DestinationFlowConfigList",
+		"document_type":                    "DocumentType",
 		"dynatrace":                        "Dynatrace",
 		"enable_dynamic_field_update":      "EnableDynamicFieldUpdate",
 		"error_handling_config":            "ErrorHandlingConfig",
@@ -2071,7 +2116,10 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"flow_name":                        "FlowName",
 		"google_analytics":                 "GoogleAnalytics",
 		"id_field_names":                   "IdFieldNames",
+		"include_all_versions":             "IncludeAllVersions",
 		"include_deleted_records":          "IncludeDeletedRecords",
+		"include_renditions":               "IncludeRenditions",
+		"include_source_files":             "IncludeSourceFiles",
 		"incremental_pull_config":          "IncrementalPullConfig",
 		"infor_nexus":                      "InforNexus",
 		"intermediate_bucket_name":         "IntermediateBucketName",
@@ -2089,6 +2137,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"salesforce":                       "Salesforce",
 		"schedule_end_time":                "ScheduleEndTime",
 		"schedule_expression":              "ScheduleExpression",
+		"schedule_offset":                  "ScheduleOffset",
 		"schedule_start_time":              "ScheduleStartTime",
 		"service_now":                      "ServiceNow",
 		"singular":                         "Singular",

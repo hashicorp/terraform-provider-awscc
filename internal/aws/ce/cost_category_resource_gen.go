@@ -107,6 +107,17 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 		},
+		"split_charge_rules": {
+			// Property: SplitChargeRules
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			//   "type": "string"
+			// }
+			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			Type:        types.StringType,
+			Optional:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -127,12 +138,13 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"default_value":   "DefaultValue",
-		"effective_start": "EffectiveStart",
-		"name":            "Name",
-		"rule_version":    "RuleVersion",
-		"rules":           "Rules",
+		"arn":                "Arn",
+		"default_value":      "DefaultValue",
+		"effective_start":    "EffectiveStart",
+		"name":               "Name",
+		"rule_version":       "RuleVersion",
+		"rules":              "Rules",
+		"split_charge_rules": "SplitChargeRules",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

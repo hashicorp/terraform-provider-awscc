@@ -58,6 +58,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "The setting to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster. If this value is specified, it will override the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.",
 			//     "properties": {
 			//       "Name": {
@@ -92,15 +93,18 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Configuration
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "The configurations to be set at cluster level.",
 			//   "properties": {
 			//     "ExecuteCommandConfiguration": {
+			//       "additionalProperties": false,
 			//       "description": "The configuration for ExecuteCommand.",
 			//       "properties": {
 			//         "KmsKeyId": {
 			//           "type": "string"
 			//         },
 			//         "LogConfiguration": {
+			//           "additionalProperties": false,
 			//           "description": "The session logging configuration for ExecuteCommand.",
 			//           "properties": {
 			//             "CloudWatchEncryptionEnabled": {
@@ -195,6 +199,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A capacity provider strategy consists of one or more capacity providers along with the `base` and `weight` to assign to them. A capacity provider must be associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProviders API is used to associate a capacity provider with a cluster. Only capacity providers with an `ACTIVE` or `UPDATING` status can be used.",
 			//     "properties": {
 			//       "Base": {
@@ -238,6 +243,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.",
 			//     "properties": {
 			//       "Key": {

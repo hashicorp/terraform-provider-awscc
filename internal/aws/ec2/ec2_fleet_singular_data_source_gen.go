@@ -356,7 +356,8 @@ func eC2FleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "enum": [
 			//         "lowestPrice",
 			//         "diversified",
-			//         "capacityOptimized"
+			//         "capacityOptimized",
+			//         "capacityOptimizedPrioritized"
 			//       ],
 			//       "type": "string"
 			//     },

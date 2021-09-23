@@ -532,6 +532,19 @@ func certificateAuthorityDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "OcspConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "OcspCustomCname": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
 			//     }
 			//   },
 			//   "type": "object"
@@ -566,6 +579,25 @@ func certificateAuthorityDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 								},
 								"s3_object_acl": {
 									// Property: S3ObjectAcl
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"ocsp_configuration": {
+						// Property: OcspConfiguration
+						Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"ocsp_custom_cname": {
+									// Property: OcspCustomCname
 									Type:     types.StringType,
 									Computed: true,
 								},
@@ -818,6 +850,8 @@ func certificateAuthorityDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 		"locality":                      "Locality",
 		"name_assigner":                 "NameAssigner",
 		"non_repudiation":               "NonRepudiation",
+		"ocsp_configuration":            "OcspConfiguration",
+		"ocsp_custom_cname":             "OcspCustomCname",
 		"organization":                  "Organization",
 		"organizational_unit":           "OrganizationalUnit",
 		"other_name":                    "OtherName",

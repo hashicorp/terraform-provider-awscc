@@ -51,23 +51,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Format options for dataset",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "Json"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "Excel"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "Csv"
-			//       ]
-			//     }
-			//   ],
 			//   "properties": {
 			//     "Csv": {
 			//       "additionalProperties": false,
@@ -219,21 +202,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.RequiredAttributes(
-					validate.OneOfRequired(
-						validate.Required(
-							"json",
-						),
-						validate.Required(
-							"excel",
-						),
-						validate.Required(
-							"csv",
-						),
-					),
-				),
-			},
 		},
 		"input": {
 			// Property: Input
@@ -241,23 +209,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Input",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "S3InputDefinition"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "DataCatalogInputDefinition"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "DatabaseInputDefinition"
-			//       ]
-			//     }
-			//   ],
 			//   "properties": {
 			//     "DataCatalogInputDefinition": {
 			//       "additionalProperties": false,
@@ -451,21 +402,6 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.RequiredAttributes(
-					validate.OneOfRequired(
-						validate.Required(
-							"s3_input_definition",
-						),
-						validate.Required(
-							"data_catalog_input_definition",
-						),
-						validate.Required(
-							"database_input_definition",
-						),
-					),
-				),
-			},
 		},
 		"name": {
 			// Property: Name

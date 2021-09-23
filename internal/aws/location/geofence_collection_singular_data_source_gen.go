@@ -19,6 +19,17 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::Location::GeofenceCollection resource type.
 func geofenceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"arn": {
+			// Property: Arn
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 1600,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"collection_arn": {
 			// Property: CollectionArn
 			// CloudFormation resource type schema:
@@ -130,6 +141,7 @@ func geofenceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 	opts = opts.WithCloudFormationTypeName("AWS::Location::GeofenceCollection").WithTerraformTypeName("awscc_location_geofence_collection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"arn":                      "Arn",
 		"collection_arn":           "CollectionArn",
 		"collection_name":          "CollectionName",
 		"create_time":              "CreateTime",

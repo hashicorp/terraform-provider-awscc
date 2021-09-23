@@ -30,29 +30,6 @@ func customDataIdentifierDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			Type:        types.StringType,
 			Computed:    true,
 		},
-		"created_at": {
-			// Property: CreatedAt
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "Date-time at which the custom data identifier was created.",
-			//   "format": "date-time",
-			//   "type": "string"
-			// }
-			Description: "Date-time at which the custom data identifier was created.",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"deleted": {
-			// Property: Deleted
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "Whether the customer data identifier has been deleted.",
-			//   "type": "boolean"
-			// }
-			Description: "Whether the customer data identifier has been deleted.",
-			Type:        types.BoolType,
-			Computed:    true,
-		},
 		"description": {
 			// Property: Description
 			// CloudFormation resource type schema:
@@ -156,8 +133,6 @@ func customDataIdentifierDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
-		"created_at":             "CreatedAt",
-		"deleted":                "Deleted",
 		"description":            "Description",
 		"id":                     "Id",
 		"ignore_words":           "IgnoreWords",

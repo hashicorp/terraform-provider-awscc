@@ -517,6 +517,34 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//             },
 			//             "type": "object"
 			//           },
+			//           "OpenSearch": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Endpoint": {
+			//                 "type": "string"
+			//               },
+			//               "Id": {
+			//                 "type": "string"
+			//               },
+			//               "Index": {
+			//                 "type": "string"
+			//               },
+			//               "RoleArn": {
+			//                 "type": "string"
+			//               },
+			//               "Type": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Type",
+			//               "Endpoint",
+			//               "Index",
+			//               "Id",
+			//               "RoleArn"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "Republish": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -1130,6 +1158,34 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//               "type": "string"
 			//             }
 			//           },
+			//           "type": "object"
+			//         },
+			//         "OpenSearch": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Endpoint": {
+			//               "type": "string"
+			//             },
+			//             "Id": {
+			//               "type": "string"
+			//             },
+			//             "Index": {
+			//               "type": "string"
+			//             },
+			//             "RoleArn": {
+			//               "type": "string"
+			//             },
+			//             "Type": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Type",
+			//             "Endpoint",
+			//             "Index",
+			//             "Id",
+			//             "RoleArn"
+			//           ],
 			//           "type": "object"
 			//         },
 			//         "Republish": {
@@ -1832,6 +1888,39 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 										map[string]tfsdk.Attribute{
 											"function_arn": {
 												// Property: FunctionArn
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"open_search": {
+									// Property: OpenSearch
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"endpoint": {
+												// Property: Endpoint
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"id": {
+												// Property: Id
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"index": {
+												// Property: Index
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"role_arn": {
+												// Property: RoleArn
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"type": {
+												// Property: Type
 												Type:     types.StringType,
 												Computed: true,
 											},
@@ -2558,6 +2647,39 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 									),
 									Computed: true,
 								},
+								"open_search": {
+									// Property: OpenSearch
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"endpoint": {
+												// Property: Endpoint
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"id": {
+												// Property: Id
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"index": {
+												// Property: Index
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"role_arn": {
+												// Property: RoleArn
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"type": {
+												// Property: Type
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
 								"republish": {
 									// Property: Republish
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -2837,6 +2959,7 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 		"metric_value":                     "MetricValue",
 		"name":                             "Name",
 		"offset_in_nanos":                  "OffsetInNanos",
+		"open_search":                      "OpenSearch",
 		"partition":                        "Partition",
 		"partition_key":                    "PartitionKey",
 		"payload_field":                    "PayloadField",

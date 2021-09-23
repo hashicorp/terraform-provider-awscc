@@ -159,11 +159,11 @@ func fileSystemDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     "properties": {
 			//       "TransitionToIA": {
 			//         "type": "string"
+			//       },
+			//       "TransitionToPrimaryStorageClass": {
+			//         "type": "string"
 			//       }
 			//     },
-			//     "required": [
-			//       "TransitionToIA"
-			//     ],
 			//     "type": "object"
 			//   },
 			//   "type": "array",
@@ -173,6 +173,11 @@ func fileSystemDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 				map[string]tfsdk.Attribute{
 					"transition_to_ia": {
 						// Property: TransitionToIA
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"transition_to_primary_storage_class": {
+						// Property: TransitionToPrimaryStorageClass
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -227,23 +232,24 @@ func fileSystemDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                                "Arn",
-		"availability_zone_name":             "AvailabilityZoneName",
-		"backup_policy":                      "BackupPolicy",
-		"bypass_policy_lockout_safety_check": "BypassPolicyLockoutSafetyCheck",
-		"encrypted":                          "Encrypted",
-		"file_system_id":                     "FileSystemId",
-		"file_system_policy":                 "FileSystemPolicy",
-		"file_system_tags":                   "FileSystemTags",
-		"key":                                "Key",
-		"kms_key_id":                         "KmsKeyId",
-		"lifecycle_policies":                 "LifecyclePolicies",
-		"performance_mode":                   "PerformanceMode",
-		"provisioned_throughput_in_mibps":    "ProvisionedThroughputInMibps",
-		"status":                             "Status",
-		"throughput_mode":                    "ThroughputMode",
-		"transition_to_ia":                   "TransitionToIA",
-		"value":                              "Value",
+		"arn":                                 "Arn",
+		"availability_zone_name":              "AvailabilityZoneName",
+		"backup_policy":                       "BackupPolicy",
+		"bypass_policy_lockout_safety_check":  "BypassPolicyLockoutSafetyCheck",
+		"encrypted":                           "Encrypted",
+		"file_system_id":                      "FileSystemId",
+		"file_system_policy":                  "FileSystemPolicy",
+		"file_system_tags":                    "FileSystemTags",
+		"key":                                 "Key",
+		"kms_key_id":                          "KmsKeyId",
+		"lifecycle_policies":                  "LifecyclePolicies",
+		"performance_mode":                    "PerformanceMode",
+		"provisioned_throughput_in_mibps":     "ProvisionedThroughputInMibps",
+		"status":                              "Status",
+		"throughput_mode":                     "ThroughputMode",
+		"transition_to_ia":                    "TransitionToIA",
+		"transition_to_primary_storage_class": "TransitionToPrimaryStorageClass",
+		"value":                               "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

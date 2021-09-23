@@ -27,6 +27,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// {
 			//   "description": "The list of endpoint objects.",
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "The configuration for a given endpoint",
 			//     "properties": {
 			//       "ClientIPPreservationEnabled": {
@@ -201,7 +202,6 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the listener",
-			//   "pattern": "",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the listener",
@@ -216,6 +216,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "listener to endpoint port mapping.",
 			//     "properties": {
 			//       "EndpointPort": {

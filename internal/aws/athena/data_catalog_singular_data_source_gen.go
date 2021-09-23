@@ -49,6 +49,7 @@ func dataCatalogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Parameters
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
 			//   "patternProperties": {
 			//     "": {
@@ -67,6 +68,7 @@ func dataCatalogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
