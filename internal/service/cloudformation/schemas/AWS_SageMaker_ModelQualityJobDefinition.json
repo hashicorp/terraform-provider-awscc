@@ -84,22 +84,6 @@
       "pattern": "",
       "maxLength": 1024
     },
-    "Environment" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "description" : "Sets the environment variables in the Docker container",
-      "patternProperties" : {
-        "": {
-          "type": "string",
-          "minLength" : 1,
-          "maxLength" : 256
-        },
-        "[\\S\\s]*": {
-          "type": "string",
-          "maxLength" : 256
-        }
-      }
-    },
     "ModelQualityAppSpecification" : {
       "type" : "object",
       "additionalProperties" : false,
@@ -140,7 +124,20 @@
           "$ref": "#/definitions/S3Uri"
         },
         "Environment": {
-          "$ref": "#/definitions/Environment"
+          "type" : "object",
+          "additionalProperties" : false,
+          "description" : "Sets the environment variables in the Docker container",
+          "patternProperties" : {
+            "": {
+              "type": "string",
+              "minLength" : 1,
+              "maxLength" : 256
+            },
+            "[\\S\\s]*": {
+              "type": "string",
+              "maxLength" : 256
+            }
+          }
         },
         "ProblemType": {
           "$ref": "#/definitions/ProblemType"

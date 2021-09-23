@@ -205,7 +205,8 @@
     },
     "delete": {
       "permissions": [
-        "states:DeleteStateMachine"
+        "states:DeleteStateMachine",
+        "states:DescribeStateMachine"
       ]
     }
   }

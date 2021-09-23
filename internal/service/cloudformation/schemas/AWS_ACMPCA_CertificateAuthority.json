@@ -51,6 +51,15 @@
                 "S3ObjectAcl": { "type": "string" }
             }
         },
+        "OcspConfiguration": {
+            "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Enabled": { "type": "boolean" },
+                "OcspCustomCname": { "type": "string" }
+            }
+        },
         "RevocationConfiguration": {
             "description": "Certificate Authority revocation information.",
             "type": "object",
@@ -58,6 +67,9 @@
             "properties": {
                 "CrlConfiguration": {
                     "$ref": "#/definitions/CrlConfiguration"
+                },
+                "OcspConfiguration": {
+                    "$ref": "#/definitions/OcspConfiguration"
                 }
             }
         },

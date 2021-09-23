@@ -350,6 +350,11 @@
                 "TimeZone": {
                     "type": "string",
                     "maxLength": 256
+                },
+                "ScheduleOffset": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 36000
                 }
             },
             "required": [
@@ -375,6 +380,20 @@
         },
         "IncludeDeletedRecords": {
             "type": "boolean"
+        },
+        "IncludeAllVersions": {
+            "type": "boolean"
+        },
+        "IncludeRenditions": {
+            "type": "boolean"
+        },
+        "IncludeSourceFiles": {
+            "type": "boolean"
+        },
+        "DocumentType": {
+            "type": "string",
+            "maxLength": 512,
+            "pattern": ""
         },
         "BucketName": {
             "type": "string",
@@ -695,6 +714,18 @@
             "properties": {
                 "Object": {
                     "$ref": "#/definitions/Object"
+                },
+                "DocumentType" : {
+                    "$ref": "#/definitions/DocumentType"
+                },
+                "IncludeSourceFiles": {
+                    "$ref": "#/definitions/IncludeSourceFiles"
+                },
+                "IncludeRenditions": {
+                    "$ref": "#/definitions/IncludeRenditions"
+                },
+                "IncludeAllVersions": {
+                    "$ref": "#/definitions/IncludeAllVersions"
                 }
             },
             "required": [
@@ -1232,6 +1263,7 @@
                 "appflow:CreateFlow",
                 "appflow:TagResource",
                 "appflow:ListTagsForResource",
+                "appflow:UseConnectorProfile",
                 "iam:PassRole",
                 "s3:ListAllMyBuckets",
                 "s3:GetBucketLocation",
@@ -1240,7 +1272,9 @@
                 "kms:ListKeys",
                 "kms:DescribeKey",
                 "kms:ListAliases",
-                "kms:CreateGrant"
+                "kms:CreateGrant",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:PutResourcePolicy"
             ]
         },
         "read": {
@@ -1259,7 +1293,9 @@
                 "s3:ListAllMyBuckets",
                 "s3:GetBucketLocation",
                 "s3:GetBucketPolicy",
-                "kms:ListGrants"
+                "kms:ListGrants",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:PutResourcePolicy"
             ]
         },
         "delete": {

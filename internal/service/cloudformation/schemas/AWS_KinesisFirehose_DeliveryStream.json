@@ -254,6 +254,9 @@
         "DataFormatConversionConfiguration": {
           "$ref": "#/definitions/DataFormatConversionConfiguration"
         },
+        "DynamicPartitioningConfiguration": {
+          "$ref": "#/definitions/DynamicPartitioningConfiguration"
+        },
         "EncryptionConfiguration": {
           "$ref": "#/definitions/EncryptionConfiguration"
         },
@@ -559,6 +562,18 @@
         }
       }
     },
+    "DynamicPartitioningConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "RetryOptions": {
+          "$ref": "#/definitions/RetryOptions"
+        }
+      }
+    },
     "CopyCommand": {
       "type": "object",
       "additionalProperties": false,
@@ -648,7 +663,10 @@
         "Type": {
           "type": "string",
           "enum": [
-            "Lambda"
+            "RecordDeAggregation",
+            "Lambda",
+            "MetadataExtraction",
+            "AppendDelimiterToRecord"
           ]
         }
       },

@@ -35,7 +35,8 @@
             "items": {
                 "$ref": "#/definitions/Tag"
             },
-            "minItems": 1
+            "minItems": 1,
+            "insertionOrder":  true
         },
         "CustomComponents": {
             "description": "The custom grouped components.",
@@ -43,7 +44,8 @@
             "items": {
                 "$ref": "#/definitions/CustomComponent"
             },
-            "minItems": 1
+            "minItems": 1,
+            "insertionOrder":  true
         },
         "LogPatternSets": {
             "description": "The log pattern sets.",
@@ -51,7 +53,8 @@
             "items": {
                 "$ref": "#/definitions/LogPatternSet"
             },
-            "minItems": 1
+            "minItems": 1,
+            "insertionOrder":  true
         },
         "AutoConfigurationEnabled": {
             "description": "If set to true, application will be configured with recommended monitoring configuration.",
@@ -63,7 +66,8 @@
             "items": {
                 "$ref": "#/definitions/ComponentMonitoringSetting"
             },
-            "minItems": 1
+            "minItems": 1,
+            "insertionOrder":  true
         }
     },
     "definitions": {
@@ -110,7 +114,8 @@
                         "maxLength": 300,
                         "pattern": ""
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "insertionOrder": true
                 }
             },
             "required": [
@@ -136,7 +141,8 @@
                     "items": {
                         "$ref": "#/definitions/LogPattern"
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "insertionOrder": true
                 }
             },
             "required": [
@@ -247,7 +253,8 @@
                     "items": {
                         "$ref": "#/definitions/SubComponentTypeConfiguration"
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "insertionOrder": true
                 }
             },
             "additionalProperties": false
@@ -261,28 +268,32 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/AlarmMetric"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "Logs": {
                     "description": "A list of logs to monitor for the component.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Log"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "WindowsEvents": {
                     "description": "A list of Windows Events to log.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/WindowsEvent"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "Alarms": {
                     "description": "A list of alarms to monitor for the component.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Alarm"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "JMXPrometheusExporter": {
                     "description": "The JMX Prometheus Exporter settings.",
@@ -300,21 +311,24 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/AlarmMetric"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "Logs": {
                     "description": "A list of logs to monitor for the component.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Log"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "WindowsEvents": {
                     "description": "A list of Windows Events to log.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/WindowsEvent"
-                    }
+                    },
+                    "insertionOrder": true
                 }
             },
             "additionalProperties": false
@@ -421,7 +435,8 @@
                     "items": {
                         "$ref": "#/definitions/EventLevel"
                     },
-                    "minItems": 1
+                    "minItems": 1,
+                    "insertionOrder": true
                 },
                 "PatternSet": {
                     "description": "The name of the log pattern set.",
@@ -577,5 +592,6 @@
                 "applicationinsights:ListLogPatternSets"
             ]
         }
-    }
+    },
+    "taggable": true
 }

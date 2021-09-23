@@ -23,7 +23,8 @@
       "required": [
         "FromPort",
         "ToPort"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {

@@ -119,12 +119,14 @@
     "handlers": {
         "create": {
             "permissions": [
-                "cloudwatch:PutMetricStream"
+                "cloudwatch:PutMetricStream",
+                "iam:PassRole"
             ]
         },
         "update": {
             "permissions": [
-                "cloudwatch:PutMetricStream"
+                "cloudwatch:PutMetricStream",
+                "iam:PassRole"
             ]
         },
         "delete": {
@@ -164,16 +166,16 @@
                         "RoleArn",
                         "OutputFormat"
                     ]
+                }
+            ]
+        },
+        {
+            "oneOf": [
+                {
+                    "required": ["IncludeFilters"]
                 },
                 {
-                    "oneOf": [
-                        {
-                            "required": ["IncludeFilters"]
-                        },
-                        {
-                            "required": ["ExcludeFilters"]
-                        }
-                    ]
+                    "required": ["ExcludeFilters"]
                 }
             ]
         }

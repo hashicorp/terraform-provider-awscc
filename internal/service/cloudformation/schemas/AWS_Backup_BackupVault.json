@@ -23,6 +23,21 @@
         "BackupVaultEvents"
       ]
     },
+    "LockConfigurationType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minRetentionDays": {
+          "type": "number"
+        },
+        "maxRetentionDays": {
+          "type": "number"
+        },
+        "changeableForDays": {
+          "type": "number"
+        }
+      }
+    },
     "BackupVaultNamePattern": {
       "type": "string",
       "pattern": ""
@@ -53,6 +68,9 @@
     "Notifications": {
       "$ref": "#/definitions/NotificationObjectType"
     },
+    "LockConfiguration": {
+      "$ref": "#/definitions/LockConfigurationType"
+    },
     "BackupVaultArn": {
       "type": "string"
     }
@@ -78,6 +96,7 @@
         "backup:CreateBackupVault",
         "backup:PutBackupVaultAccessPolicy",
         "backup:PutBackupVaultNotifications",
+        "backup:PutBackupVaultLockConfiguration",
         "backup-storage:Mount",
         "backup-storage:MountCapsule",
         "kms:CreateGrant",
@@ -100,6 +119,7 @@
         "backup:DescribeBackupVault",
         "backup:DeleteBackupVaultAccessPolicy",
         "backup:DeleteBackupVaultNotifications",
+        "backup:DeleteBackupVaultLockConfiguration",
         "backup:ListTags",
         "backup:TagResource",
         "backup:UntagResource",

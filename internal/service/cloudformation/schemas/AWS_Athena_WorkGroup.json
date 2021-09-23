@@ -6,6 +6,7 @@
     "definitions": {
         "Tags": {
             "type": "array",
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/Tag"
             }
@@ -27,7 +28,8 @@
             "required": [
                 "Key",
                 "Value"
-            ]
+            ],
+            "additionalProperties": false
         },
         "SelectedEngineVersion": {
             "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
@@ -47,7 +49,8 @@
                 "EffectiveEngineVersion": {
                     "$ref": "#/definitions/EffectiveEngineVersion"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "BytesScannedCutoffPerQuery": {
             "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
@@ -101,7 +104,8 @@
             },
             "required": [
                 "EncryptionOption"
-            ]
+            ],
+            "additionalProperties": false
         },
         "RemoveEncryptionConfiguration": {
             "type": "boolean"
@@ -119,7 +123,8 @@
                 "OutputLocation": {
                     "$ref": "#/definitions/OutputLocation"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "ResultConfigurationUpdates": {
             "description": "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
@@ -137,7 +142,8 @@
                 "RemoveOutputLocation": {
                     "$ref": "#/definitions/RemoveOutputLocation"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "WorkGroupConfiguration": {
             "type": "object",
@@ -160,7 +166,8 @@
                 "EngineVersion": {
                     "$ref": "#/definitions/EngineVersion"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "WorkGroupConfigurationUpdates": {
             "type": "object",
@@ -187,16 +194,15 @@
                 "EngineVersion": {
                     "$ref": "#/definitions/EngineVersion"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     },
     "properties": {
         "Name": {
             "description": "The workGroup name.",
             "pattern": "",
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128
+            "type": "string"
         },
         "Description": {
             "description": "The workgroup description.",
@@ -245,7 +251,8 @@
         },
         "read": {
             "permissions": [
-                "athena:GetWorkGroup"
+                "athena:GetWorkGroup",
+                "athena:ListTagsForResource"
             ]
         },
         "list": {
@@ -278,5 +285,6 @@
     "primaryIdentifier": [
         "/properties/Name"
     ],
-    "additionalProperties": false
+    "additionalProperties": false,
+    "taggable": true
 }

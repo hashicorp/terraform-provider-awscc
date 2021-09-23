@@ -117,6 +117,12 @@
         "ecs:PutClusterCapacityProviders",
         "ecs:DescribeClusters"
       ]
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeClusters",
+        "ecs:ListClusters"
+      ]
     }
   }
 }

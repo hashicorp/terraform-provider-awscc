@@ -195,6 +195,82 @@
         },
         "Endpoint": {
             "$ref": "#/definitions/Endpoint"
+        },
+        "DestinationRegion": {
+            "description": "The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference",
+            "type": "string"
+        },
+        "SnapshotCopyRetentionPeriod": {
+            "description": "The number of days to retain automated snapshots in the destination region after they are copied from the source region. \n\n Default is 7. \n\n Constraints: Must be at least 1 and no more than 35.",
+            "type": "integer"
+        },
+        "SnapshotCopyGrantName": {
+            "description": "The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.",
+            "type": "string"
+        },
+        "ManualSnapshotRetentionPeriod": {
+            "description": "The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.\n\nThe value must be either -1 or an integer between 1 and 3,653.",
+            "type": "integer"
+        },
+        "SnapshotCopyManual": {
+            "description": "Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.",
+            "type": "boolean"
+        },
+        "AvailabilityZoneRelocation": {
+            "description": "The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.",
+            "type": "boolean"
+        },
+        "AvailabilityZoneRelocationStatus": {
+            "description": "The availability zone relocation status of the cluster",
+            "type": "string"
+        },
+        "AquaConfigurationStatus": {
+            "description": "The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.\n\nenabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.\ndisabled - Don't use AQUA.\nauto - Amazon Redshift determines whether to use AQUA.\n",
+            "type": "string"
+        },
+        "Classic": {
+            "description": "A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false , the resize type is elastic.",
+            "type": "boolean"
+        },
+        "EnhancedVpcRouting": {
+            "description": "An option that specifies whether to create the cluster with enhanced VPC routing enabled. To create a cluster that uses enhanced VPC routing, the cluster must be in a VPC. For more information, see Enhanced VPC Routing in the Amazon Redshift Cluster Management Guide.\n\nIf this option is true , enhanced VPC routing is enabled.\n\nDefault: false",
+            "type": "boolean"
+        },
+        "MaintenanceTrackName": {
+            "description": "The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.",
+            "type": "string"
+        },
+        "DeferMaintenance": {
+            "description": "A boolean indicating whether to enable the deferred maintenance window.",
+            "type": "boolean"
+        },
+        "DeferMaintenanceIdentifier": {
+            "description": "A unique identifier for the deferred maintenance window.",
+            "type": "string"
+        },
+        "DeferMaintenanceStartTime": {
+            "description": "A timestamp indicating the start time for the deferred maintenance window.",
+            "type": "string"
+        },
+        "DeferMaintenanceEndTime": {
+            "description": "A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.",
+            "type": "string"
+        },
+        "DeferMaintenanceDuration": {
+            "description": "An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.",
+            "type": "integer"
+        },
+        "RevisionTarget": {
+            "description": "The identifier of the database revision. You can retrieve this value from the response to the DescribeClusterDbRevisions request.",
+            "type": "string"
+        },
+        "ResourceAction": {
+            "description": "The Redshift operation to be performed. Resource Action supports pause-cluster, resume-cluster APIs",
+            "type": "string"
+        },
+        "RotateEncryptionKey": {
+            "description": "A boolean indicating if we want to rotate Encryption Keys.",
+            "type": "boolean"
         }
     },
     "additionalProperties": false,
@@ -210,21 +286,17 @@
     ],
     "readOnlyProperties": [
         "/properties/Id",
+        "/properties/DeferMaintenanceIdentifier",
         "/properties/Endpoint/Port",
         "/properties/Endpoint/Address"
     ],
     "createOnlyProperties": [
         "/properties/ClusterIdentifier",
-        "/properties/KmsKeyId",
         "/properties/OwnerAccount",
         "/properties/SnapshotIdentifier",
-        "/properties/Encrypted",
-        "/properties/Port",
         "/properties/DBName",
         "/properties/SnapshotClusterIdentifier",
-        "/properties/AvailabilityZone",
         "/properties/ClusterSubnetGroupName",
-        "/properties/ElasticIp",
         "/properties/MasterUsername"
     ],
     "writeOnlyProperties": [
@@ -243,7 +315,9 @@
         "read": {
             "permissions": [
                 "redshift:DescribeClusters",
-                "redshift:DescribeLoggingStatus"
+                "redshift:DescribeLoggingStatus",
+                "redshift:DescribeSnapshotCopyGrant",
+                "redshift:DescribeClusterDbRevisions"
             ]
         },
         "update": {
@@ -255,7 +329,18 @@
                 "redshift:CreateTags",
                 "redshift:DeleteTags",
                 "redshift:DisableLogging",
-                "redshift:RebootCluster"
+                "redshift:RebootCluster",
+                "redshift:EnableSnapshotCopy",
+                "redshift:DisableSnapshotCopy",
+                "redshift:ModifySnapshotCopyRetentionPeriod",
+                "redshift:ModifyAquaConfiguration",
+                "redshift:ResizeCluster",
+                "redshift:ModifyClusterMaintenance",
+                "redshift:DescribeClusterDbRevisions",
+                "redshift:ModifyClusterDbRevisions",
+                "redshift:PauseCluster",
+                "redshift:ResumeCluster",
+                "redshift:RotateEncryptionKey"
             ],
             "timeoutInMinutes": 2160
         },

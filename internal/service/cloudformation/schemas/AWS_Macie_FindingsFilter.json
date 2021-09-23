@@ -6,29 +6,29 @@
     "CriterionAdditionalProperties": {
       "type": "object",
       "properties": {
-        "Gt": {
+        "gt": {
           "type": "integer",
           "format": "int64"
         },
-        "Gte": {
+        "gte": {
           "type": "integer",
           "format": "int64"
         },
-        "Lt": {
+        "lt": {
           "type": "integer",
           "format": "int64"
         },
-        "Lte": {
+        "lte": {
           "type": "integer",
           "format": "int64"
         },
-        "Eq": {
+        "eq": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "Neq": {
+        "neq": {
           "type": "array",
           "items": {
             "type": "string"
