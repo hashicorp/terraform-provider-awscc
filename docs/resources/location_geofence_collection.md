@@ -28,6 +28,7 @@ Definition of AWS::Location::GeofenceCollection Resource Type
 
 ### Read-Only
 
+- **arn** (String)
 - **collection_arn** (String)
 - **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 - **id** (String) Uniquely identifies the resource.

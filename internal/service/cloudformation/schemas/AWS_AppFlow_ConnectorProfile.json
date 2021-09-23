@@ -800,7 +800,11 @@
                 "kms:DescribeKey",
                 "kms:ListAliases",
                 "kms:CreateGrant",
-                "kms:ListGrants"
+                "kms:ListGrants",
+                "iam:PassRole",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutResourcePolicy"
             ]
         },
         "delete": {
@@ -825,7 +829,11 @@
                 "kms:DescribeKey",
                 "kms:ListAliases",
                 "kms:CreateGrant",
-                "kms:ListGrants"
+                "kms:ListGrants",
+                "iam:PassRole",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutResourcePolicy"
             ]
         }
     }

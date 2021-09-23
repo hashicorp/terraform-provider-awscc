@@ -162,6 +162,71 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				Multiset(),
 			},
 		},
+		"includes": {
+			// Property: Includes
+			// CloudFormation resource type schema:
+			// {
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Specifies which files folders and objects to include or exclude when transferring files from source to destination.",
+			//     "properties": {
+			//       "FilterType": {
+			//         "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
+			//         "enum": [
+			//           "SIMPLE_PATTERN"
+			//         ],
+			//         "maxLength": 128,
+			//         "pattern": "",
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
+			//         "maxLength": 409600,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "type": "object"
+			//   },
+			//   "maxItems": 1,
+			//   "minItems": 0,
+			//   "type": "array"
+			// }
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"filter_type": {
+						// Property: FilterType
+						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 128),
+							validate.StringInSlice([]string{
+								"SIMPLE_PATTERN",
+							}),
+						},
+					},
+					"value": {
+						// Property: Value
+						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(0, 409600),
+						},
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 1),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -684,6 +749,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"excludes":                           "Excludes",
 		"filter_type":                        "FilterType",
 		"gid":                                "Gid",
+		"includes":                           "Includes",
 		"key":                                "Key",
 		"log_level":                          "LogLevel",
 		"mtime":                              "Mtime",

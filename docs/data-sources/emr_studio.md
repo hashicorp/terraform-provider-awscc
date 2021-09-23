@@ -26,6 +26,8 @@ Data Source schema for AWS::EMR::Studio
 - **default_s3_location** (String) The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
 - **description** (String) A detailed description of the Studio.
 - **engine_security_group_id** (String) The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.
+- **idp_auth_url** (String) Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
+- **idp_relay_state_parameter_name** (String) The name of relay state parameter for external Identity Provider.
 - **name** (String) A descriptive name for the Amazon EMR Studio.
 - **service_role** (String)
 - **studio_id** (String) The ID of the EMR Studio.

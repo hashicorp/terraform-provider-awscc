@@ -5,6 +5,7 @@
     "definitions": {
         "Tags": {
             "type": "array",
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/Tag"
             }
@@ -51,7 +52,8 @@
                     "type": "string",
                     "maxLength": 51200
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "Tags": {
             "description": "A list of comma separated tags to add to the data catalog that is created. ",
@@ -105,5 +107,9 @@
     "primaryIdentifier": [
         "/properties/Name"
     ],
-    "additionalProperties": false
+    "createOnlyProperties": [
+        "/properties/Name"
+    ],
+    "additionalProperties": false,
+    "taggable": true
 }

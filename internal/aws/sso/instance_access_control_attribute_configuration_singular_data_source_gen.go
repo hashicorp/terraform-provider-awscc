@@ -23,6 +23,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			// Property: AccessControlAttributes
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -36,6 +37,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "Source": {
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "maxLength": 256,
 			//               "minLength": 0,
@@ -94,6 +96,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//   "description": "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
 			//   "properties": {
 			//     "AccessControlAttributes": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -107,6 +110,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "Source": {
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "maxLength": 256,
 			//                   "minLength": 0,

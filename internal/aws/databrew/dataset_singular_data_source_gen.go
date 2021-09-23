@@ -42,23 +42,6 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Format options for dataset",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "Json"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "Excel"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "Csv"
-			//       ]
-			//     }
-			//   ],
 			//   "properties": {
 			//     "Csv": {
 			//       "additionalProperties": false,
@@ -196,23 +179,6 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "Input",
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "S3InputDefinition"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "DataCatalogInputDefinition"
-			//       ]
-			//     },
-			//     {
-			//       "required": [
-			//         "DatabaseInputDefinition"
-			//       ]
-			//     }
-			//   ],
 			//   "properties": {
 			//     "DataCatalogInputDefinition": {
 			//       "additionalProperties": false,

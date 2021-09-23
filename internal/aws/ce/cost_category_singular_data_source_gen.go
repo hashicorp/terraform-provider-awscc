@@ -92,6 +92,17 @@ func costCategoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"split_charge_rules": {
+			// Property: SplitChargeRules
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			//   "type": "string"
+			// }
+			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -111,12 +122,13 @@ func costCategoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 	opts = opts.WithCloudFormationTypeName("AWS::CE::CostCategory").WithTerraformTypeName("awscc_ce_cost_category")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"default_value":   "DefaultValue",
-		"effective_start": "EffectiveStart",
-		"name":            "Name",
-		"rule_version":    "RuleVersion",
-		"rules":           "Rules",
+		"arn":                "Arn",
+		"default_value":      "DefaultValue",
+		"effective_start":    "EffectiveStart",
+		"name":               "Name",
+		"rule_version":       "RuleVersion",
+		"rules":              "Rules",
+		"split_charge_rules": "SplitChargeRules",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

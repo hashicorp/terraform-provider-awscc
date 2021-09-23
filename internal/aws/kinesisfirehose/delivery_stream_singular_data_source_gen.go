@@ -186,7 +186,10 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -839,6 +842,24 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       },
 			//       "type": "object"
 			//     },
+			//     "DynamicPartitioningConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "RetryOptions": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "DurationInSeconds": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "EncryptionConfiguration": {
 			//       "additionalProperties": false,
 			//       "properties": {
@@ -905,7 +926,10 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -1303,6 +1327,32 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 						),
 						Computed: true,
 					},
+					"dynamic_partitioning_configuration": {
+						// Property: DynamicPartitioningConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"retry_options": {
+									// Property: RetryOptions
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"duration_in_seconds": {
+												// Property: DurationInSeconds
+												Type:     types.NumberType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -1588,7 +1638,10 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -2160,7 +2213,10 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -3005,7 +3061,10 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -3446,6 +3505,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
+		"dynamic_partitioning_configuration":             "DynamicPartitioningConfiguration",
 		"elasticsearch_destination_configuration":        "ElasticsearchDestinationConfiguration",
 		"enable_dictionary_compression":                  "EnableDictionaryCompression",
 		"enable_padding":                                 "EnablePadding",

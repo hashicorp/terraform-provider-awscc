@@ -35,6 +35,10 @@
       "type": "string",
       "description": "JSON array format of Expression in Billing and Cost Management API"
     },
+    "SplitChargeRules": {
+      "type": "string",
+      "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API"
+    },
     "DefaultValue": {
       "type": "string",
       "description": "The default value for the cost category",

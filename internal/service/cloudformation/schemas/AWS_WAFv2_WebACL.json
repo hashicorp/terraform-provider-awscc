@@ -254,6 +254,12 @@
         "VendorName": {
           "type": "string"
         },
+        "Version": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 64
+        },
         "ExcludedRules": {
           "type": "array",
           "items": {

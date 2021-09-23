@@ -111,17 +111,6 @@
           "$ref": "#/definitions/CsvOptions"
         }
       },
-      "oneOf": [
-        {
-          "required": ["Json"]
-        },
-        {
-          "required": ["Excel"]
-        },
-        {
-          "required": ["Csv"]
-        }
-      ],
       "additionalProperties": false
     },
     "Input": {
@@ -138,17 +127,6 @@
           "$ref": "#/definitions/DatabaseInputDefinition"
         }
       },
-      "oneOf": [
-        {
-          "required": ["S3InputDefinition"]
-        },
-        {
-          "required": ["DataCatalogInputDefinition"]
-        },
-        {
-          "required": ["DatabaseInputDefinition"]
-        }
-      ],
       "additionalProperties": false
     },
     "S3Location": {

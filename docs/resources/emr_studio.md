@@ -23,14 +23,16 @@ Resource schema for AWS::EMR::Studio
 - **name** (String) A descriptive name for the Amazon EMR Studio.
 - **service_role** (String)
 - **subnet_ids** (List of String) A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.
-- **user_role** (String)
 - **vpc_id** (String) The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.
 - **workspace_security_group_id** (String) The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.
 
 ### Optional
 
 - **description** (String) A detailed description of the Studio.
+- **idp_auth_url** (String) Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
+- **idp_relay_state_parameter_name** (String) The name of relay state parameter for external Identity Provider.
 - **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- **user_role** (String)
 
 ### Read-Only
 

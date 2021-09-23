@@ -21,6 +21,7 @@ Data Source schema for AWS::Location::GeofenceCollection
 
 ### Read-Only
 
+- **arn** (String)
 - **collection_arn** (String)
 - **collection_name** (String)
 - **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)

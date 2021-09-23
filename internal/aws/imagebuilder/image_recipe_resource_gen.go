@@ -32,13 +32,10 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Contains settings for the SSM agent on your build instance.",
 			//       "properties": {
 			//         "UninstallAfterBuild": {
-			//           "description": "This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.",
+			//           "description": "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
 			//           "type": "boolean"
 			//         }
 			//       },
-			//       "required": [
-			//         "UninstallAfterBuild"
-			//       ],
 			//       "type": "object"
 			//     },
 			//     "UserDataOverride": {
@@ -46,9 +43,6 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     }
 			//   },
-			//   "required": [
-			//     "UserDataOverride"
-			//   ],
 			//   "type": "object"
 			// }
 			Description: "Specify additional settings and launch scripts for your build instances.",
@@ -61,9 +55,9 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"uninstall_after_build": {
 									// Property: UninstallAfterBuild
-									Description: "This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.",
+									Description: "Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.",
 									Type:        types.BoolType,
-									Required:    true,
+									Optional:    true,
 								},
 							},
 						),
@@ -73,7 +67,7 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: UserDataOverride
 						Description: "Use this property to provide commands or a command script to run when you launch your build instance.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 					},
 				},
 			),

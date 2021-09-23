@@ -98,7 +98,19 @@
           "$ref": "#/definitions/BaselineConfig"
         },
         "Environment": {
-          "$ref": "#/definitions/Environment"
+          "type" : "object",
+          "description" : "Sets the environment variables in the Docker container",
+          "patternProperties" : {
+            "": {
+              "type": "string",
+              "minLength" : 1,
+              "maxLength" : 256
+            },
+            "[\\S\\s]*": {
+              "type": "string",
+              "maxLength" : 256
+            }
+          }
         },
         "MonitoringAppSpecification": {
           "$ref": "#/definitions/MonitoringAppSpecification"
@@ -168,21 +180,6 @@
       "description": "The Amazon S3 URI.",
       "pattern": "",
       "maxLength": 1024
-    },
-    "Environment" : {
-      "type" : "object",
-      "description" : "Sets the environment variables in the Docker container",
-      "patternProperties" : {
-        "": {
-          "type": "string",
-          "minLength" : 1,
-          "maxLength" : 256
-        },
-        "[\\S\\s]*": {
-          "type": "string",
-          "maxLength" : 256
-        }
-      }
     },
     "MonitoringAppSpecification" : {
       "type" : "object",

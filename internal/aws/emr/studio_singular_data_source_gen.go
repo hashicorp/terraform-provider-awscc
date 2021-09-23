@@ -85,6 +85,32 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"idp_auth_url": {
+			// Property: IdpAuthUrl
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
+			//   "maxLength": 4096,
+			//   "pattern": "",
+			//   "type": "string"
+			// }
+			Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+		"idp_relay_state_parameter_name": {
+			// Property: IdpRelayStateParameterName
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The name of relay state parameter for external Identity Provider.",
+			//   "maxLength": 256,
+			//   "minLength": 0,
+			//   "type": "string"
+			// }
+			Description: "The name of relay state parameter for external Identity Provider.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -258,22 +284,24 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                         "Arn",
-		"auth_mode":                   "AuthMode",
-		"default_s3_location":         "DefaultS3Location",
-		"description":                 "Description",
-		"engine_security_group_id":    "EngineSecurityGroupId",
-		"key":                         "Key",
-		"name":                        "Name",
-		"service_role":                "ServiceRole",
-		"studio_id":                   "StudioId",
-		"subnet_ids":                  "SubnetIds",
-		"tags":                        "Tags",
-		"url":                         "Url",
-		"user_role":                   "UserRole",
-		"value":                       "Value",
-		"vpc_id":                      "VpcId",
-		"workspace_security_group_id": "WorkspaceSecurityGroupId",
+		"arn":                            "Arn",
+		"auth_mode":                      "AuthMode",
+		"default_s3_location":            "DefaultS3Location",
+		"description":                    "Description",
+		"engine_security_group_id":       "EngineSecurityGroupId",
+		"idp_auth_url":                   "IdpAuthUrl",
+		"idp_relay_state_parameter_name": "IdpRelayStateParameterName",
+		"key":                            "Key",
+		"name":                           "Name",
+		"service_role":                   "ServiceRole",
+		"studio_id":                      "StudioId",
+		"subnet_ids":                     "SubnetIds",
+		"tags":                           "Tags",
+		"url":                            "Url",
+		"user_role":                      "UserRole",
+		"value":                          "Value",
+		"vpc_id":                         "VpcId",
+		"workspace_security_group_id":    "WorkspaceSecurityGroupId",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

@@ -22,6 +22,11 @@
             "maxLength": 1600,
             "pattern": ""
         },
+        "Arn": {
+            "type": "string",
+            "maxLength": 1600,
+            "pattern": ""
+        },
         "CollectionName": {
             "type": "string",
             "maxLength": 100,
@@ -53,6 +58,7 @@
     },
     "readOnlyProperties": [
         "/properties/CollectionArn",
+        "/properties/Arn",
         "/properties/CreateTime",
         "/properties/UpdateTime"
     ],

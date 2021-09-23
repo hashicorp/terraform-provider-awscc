@@ -23,7 +23,8 @@
       "required": [
         "Value",
         "Key"
-      ]
+      ],
+      "additionalProperties": false
     },
     "IpAddress": {
       "pattern": "",
@@ -50,6 +51,7 @@
     },
     "IpAddresses": {
       "description": "The IP addresses from BYOIP Prefix pool.",
+      "default": null,
       "type": "array",
       "items": {
         "$ref": "#/definitions/IpAddress"

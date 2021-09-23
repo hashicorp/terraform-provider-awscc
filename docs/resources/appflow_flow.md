@@ -386,6 +386,10 @@ Required:
 
 Required:
 
+- **document_type** (String)
+- **include_all_versions** (Boolean)
+- **include_renditions** (Boolean)
+- **include_source_files** (Boolean)
 - **object** (String)
 
 
@@ -457,6 +461,7 @@ Required:
 - **data_pull_mode** (String)
 - **schedule_end_time** (Number)
 - **schedule_expression** (String)
+- **schedule_offset** (Number)
 - **schedule_start_time** (Number)
 - **time_zone** (String)
 

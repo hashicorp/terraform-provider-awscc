@@ -26,7 +26,8 @@
       },
       "required": [
         "EndpointId"
-      ]
+      ],
+      "additionalProperties": false
     },
     "Port": {
       "description": "A network port number",
@@ -48,14 +49,14 @@
       "required": [
         "ListenerPort",
         "EndpointPort"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
     "ListenerArn": {
       "description": "The Amazon Resource Name (ARN) of the listener",
-      "type": "string",
-      "pattern": ""
+      "type": "string"
     },
     "EndpointGroupRegion": {
       "description": "The name of the AWS Region where the endpoint group is located",

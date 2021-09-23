@@ -24,6 +24,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			// Property: AccessControlAttributes
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -37,6 +38,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "Source": {
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "maxLength": 256,
 			//               "minLength": 0,
@@ -95,6 +97,9 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"instance_access_control_attribute_configuration": {
 			// Property: InstanceAccessControlAttributeConfiguration
@@ -104,6 +109,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//   "description": "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
 			//   "properties": {
 			//     "AccessControlAttributes": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -117,6 +123,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//             "additionalProperties": false,
 			//             "properties": {
 			//               "Source": {
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "maxLength": 256,
 			//                   "minLength": 0,
@@ -185,6 +192,9 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 				},

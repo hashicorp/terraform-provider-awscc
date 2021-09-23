@@ -503,7 +503,8 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "GLUEPARQUET",
 			//           "AVRO",
 			//           "ORC",
-			//           "XML"
+			//           "XML",
+			//           "TABLEAUHYPER"
 			//         ],
 			//         "type": "string"
 			//       },

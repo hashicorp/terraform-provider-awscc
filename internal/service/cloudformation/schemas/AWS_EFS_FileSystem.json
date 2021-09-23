@@ -22,9 +22,11 @@
             "properties" : {
                 "TransitionToIA" : {
                     "type" : "string"
+                },
+                "TransitionToPrimaryStorageClass" : {
+                    "type" : "string"
                 }
-            },
-            "required" : [ "TransitionToIA" ]
+            }
         },
         "BackupPolicy" : {
             "type" : "object",

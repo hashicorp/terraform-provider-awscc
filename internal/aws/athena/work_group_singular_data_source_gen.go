@@ -48,8 +48,6 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The workGroup name.",
-			//   "maxLength": 128,
-			//   "minLength": 1,
 			//   "pattern": "",
 			//   "type": "string"
 			// }
@@ -87,7 +85,9 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
@@ -129,6 +129,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: WorkGroupConfiguration
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "properties": {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
@@ -141,6 +142,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//       "type": "boolean"
 			//     },
 			//     "EngineVersion": {
+			//       "additionalProperties": false,
 			//       "description": "The Athena engine version for running queries.",
 			//       "properties": {
 			//         "EffectiveEngineVersion": {
@@ -163,9 +165,11 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//       "type": "boolean"
 			//     },
 			//     "ResultConfiguration": {
+			//       "additionalProperties": false,
 			//       "description": "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
 			//       "properties": {
 			//         "EncryptionConfiguration": {
+			//           "additionalProperties": false,
 			//           "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
 			//           "properties": {
 			//             "EncryptionOption": {
@@ -288,6 +292,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: WorkGroupConfigurationUpdates
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "The configuration information that will be updated for this workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup settings override the client-side settings, and the data usage limit for the amount of bytes scanned per query, if it is specified. ",
 			//   "properties": {
 			//     "BytesScannedCutoffPerQuery": {
@@ -301,6 +306,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//       "type": "boolean"
 			//     },
 			//     "EngineVersion": {
+			//       "additionalProperties": false,
 			//       "description": "The Athena engine version for running queries.",
 			//       "properties": {
 			//         "EffectiveEngineVersion": {
@@ -327,9 +333,11 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//       "type": "boolean"
 			//     },
 			//     "ResultConfigurationUpdates": {
+			//       "additionalProperties": false,
 			//       "description": "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
 			//       "properties": {
 			//         "EncryptionConfiguration": {
+			//           "additionalProperties": false,
 			//           "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
 			//           "properties": {
 			//             "EncryptionOption": {

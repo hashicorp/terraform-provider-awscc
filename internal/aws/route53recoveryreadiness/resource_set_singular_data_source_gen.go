@@ -152,7 +152,7 @@ func resourceSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 4,
+			//   "maxItems": 6,
 			//   "minItems": 1,
 			//   "type": "array"
 			// }

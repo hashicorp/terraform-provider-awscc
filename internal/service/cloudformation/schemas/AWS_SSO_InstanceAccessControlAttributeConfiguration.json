@@ -1,5 +1,6 @@
 {
   "typeName": "AWS::SSO::InstanceAccessControlAttributeConfiguration",
+  "taggable": false,
   "description": "Resource Type definition for SSO InstanceAccessControlAttributeConfiguration",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-sso/aws-sso-instanceaccesscontrolattributeconfiguration",
   "definitions": {
@@ -11,6 +12,7 @@
     },
     "AccessControlAttributeValueSourceList": {
       "type": "array",
+      "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/AccessControlAttributeValueSource"
       },
@@ -49,6 +51,7 @@
     },
     "AccessControlAttributeList": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/AccessControlAttribute"
       },

@@ -142,7 +142,7 @@
         "$ref": "#/definitions/Resource"
       },
       "minItems": 1,
-      "maxItems": 4,
+      "maxItems": 6,
       "insertionOrder": false
     },
     "ResourceSetArn": {

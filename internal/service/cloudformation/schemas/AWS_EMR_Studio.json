@@ -128,6 +128,18 @@
             "description": "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
             "type": "string",
             "pattern": ""
+        },
+        "IdpAuthUrl": {
+            "description": "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
+            "type": "string",
+            "pattern": "",
+            "maxLength": 4096
+        },
+        "IdpRelayStateParameterName": {
+            "description": "The name of relay state parameter for external Identity Provider.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
         }
     },
     "additionalProperties": false,
@@ -137,7 +149,6 @@
         "Name",
         "ServiceRole",
         "SubnetIds",
-        "UserRole",
         "VpcId",
         "WorkspaceSecurityGroupId",
         "DefaultS3Location"

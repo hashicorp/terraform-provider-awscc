@@ -159,7 +159,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 4,
+			//   "maxItems": 6,
 			//   "minItems": 1,
 			//   "type": "array"
 			// }
@@ -282,7 +282,7 @@ func resourceSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 4),
+				validate.ArrayLenBetween(1, 6),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),

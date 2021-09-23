@@ -84,6 +84,9 @@
         },
         "Kafka": {
           "$ref": "#/definitions/KafkaAction"
+        },
+        "OpenSearch": {
+          "$ref": "#/definitions/OpenSearchAction"
         }
       }
     },
@@ -701,6 +704,34 @@
         "DestinationArn",
         "Topic",
         "ClientProperties"
+      ]
+    },
+    "OpenSearchAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Index": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Endpoint": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type",
+        "Endpoint",
+        "Index",
+        "Id",
+        "RoleArn"
       ]
     },
     "CannedAccessControlList": {

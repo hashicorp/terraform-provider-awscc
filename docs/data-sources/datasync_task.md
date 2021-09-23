@@ -27,6 +27,7 @@ Data Source schema for AWS::DataSync::Task
 - **error_code** (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
 - **error_detail** (String) Detailed description of an error that was encountered during the task execution.
 - **excludes** (Attributes List) (see [below for nested schema](#nestedatt--excludes))
+- **includes** (Attributes List) (see [below for nested schema](#nestedatt--includes))
 - **name** (String) The name of a task. This value is a text reference that is used to identify the task in the console.
 - **options** (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
 - **schedule** (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
@@ -38,6 +39,15 @@ Data Source schema for AWS::DataSync::Task
 
 <a id="nestedatt--excludes"></a>
 ### Nested Schema for `excludes`
+
+Read-Only:
+
+- **filter_type** (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
+- **value** (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
+
+
+<a id="nestedatt--includes"></a>
+### Nested Schema for `includes`
 
 Read-Only:
 

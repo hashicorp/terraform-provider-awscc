@@ -79,6 +79,45 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"lock_configuration": {
+			// Property: LockConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "changeableForDays": {
+			//       "type": "number"
+			//     },
+			//     "maxRetentionDays": {
+			//       "type": "number"
+			//     },
+			//     "minRetentionDays": {
+			//       "type": "number"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"changeable_for_days": {
+						// Property: changeableForDays
+						Type:     types.NumberType,
+						Optional: true,
+					},
+					"max_retention_days": {
+						// Property: maxRetentionDays
+						Type:     types.NumberType,
+						Optional: true,
+					},
+					"min_retention_days": {
+						// Property: minRetentionDays
+						Type:     types.NumberType,
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"notifications": {
 			// Property: Notifications
 			// CloudFormation resource type schema:
@@ -143,7 +182,11 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"backup_vault_events": "BackupVaultEvents",
 		"backup_vault_name":   "BackupVaultName",
 		"backup_vault_tags":   "BackupVaultTags",
+		"changeable_for_days": "changeableForDays",
 		"encryption_key_arn":  "EncryptionKeyArn",
+		"lock_configuration":  "LockConfiguration",
+		"max_retention_days":  "maxRetentionDays",
+		"min_retention_days":  "minRetentionDays",
 		"notifications":       "Notifications",
 		"sns_topic_arn":       "SNSTopicArn",
 	})

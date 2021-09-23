@@ -98,7 +98,8 @@
           "enum": [
             "lowestPrice",
             "diversified",
-            "capacityOptimized"
+            "capacityOptimized",
+            "capacityOptimizedPrioritized"
           ]
         },
         "SingleInstanceType": {

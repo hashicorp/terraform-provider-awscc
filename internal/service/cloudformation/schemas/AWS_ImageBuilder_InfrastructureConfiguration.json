@@ -31,7 +31,6 @@
         },
         "Logging": {
             "description": "The logging configuration of the infrastructure configuration.",
-            "type": "object",
             "$ref": "#/definitions/Logging"
         },
         "SubnetId": {

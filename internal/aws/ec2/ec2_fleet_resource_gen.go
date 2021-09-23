@@ -385,7 +385,8 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "enum": [
 			//         "lowestPrice",
 			//         "diversified",
-			//         "capacityOptimized"
+			//         "capacityOptimized",
+			//         "capacityOptimizedPrioritized"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -426,6 +427,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"lowestPrice",
 								"diversified",
 								"capacityOptimized",
+								"capacityOptimizedPrioritized",
 							}),
 						},
 					},

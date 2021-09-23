@@ -57,6 +57,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The monitoring settings of the components.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "The monitoring setting of the component.",
@@ -106,6 +107,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "properties": {
 			//               "AlarmMetrics": {
 			//                 "description": "A list of metrics to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A metric to be monitored for the component.",
@@ -124,6 +126,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "Alarms": {
 			//                 "description": "A list of alarms to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A CloudWatch alarm to be monitored for the component.",
@@ -172,6 +175,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "Logs": {
 			//                 "description": "A list of logs to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A log to be monitored for the component.",
@@ -221,12 +225,14 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "WindowsEvents": {
 			//                 "description": "A list of Windows Events to log.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A Windows Event to be monitored for the component.",
 			//                   "properties": {
 			//                     "EventLevels": {
 			//                       "description": "The levels of event to log. ",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "description": "The level of event to log.",
 			//                         "enum": [
@@ -277,6 +283,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           },
 			//           "SubComponentTypeConfigurations": {
 			//             "description": "Sub component configurations of the component.",
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "additionalProperties": false,
 			//               "description": "One type sub component configurations for the component.",
@@ -287,6 +294,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                   "properties": {
 			//                     "AlarmMetrics": {
 			//                       "description": "A list of metrics to monitor for the component.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A metric to be monitored for the component.",
@@ -305,6 +313,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     },
 			//                     "Logs": {
 			//                       "description": "A list of logs to monitor for the component.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A log to be monitored for the component.",
@@ -354,12 +363,14 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     },
 			//                     "WindowsEvents": {
 			//                       "description": "A list of Windows Events to log.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A Windows Event to be monitored for the component.",
 			//                         "properties": {
 			//                           "EventLevels": {
 			//                             "description": "The levels of event to log. ",
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "description": "The level of event to log.",
 			//                               "enum": [
@@ -439,6 +450,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "properties": {
 			//               "AlarmMetrics": {
 			//                 "description": "A list of metrics to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A metric to be monitored for the component.",
@@ -457,6 +469,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "Alarms": {
 			//                 "description": "A list of alarms to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A CloudWatch alarm to be monitored for the component.",
@@ -505,6 +518,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "Logs": {
 			//                 "description": "A list of logs to monitor for the component.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A log to be monitored for the component.",
@@ -554,12 +568,14 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               },
 			//               "WindowsEvents": {
 			//                 "description": "A list of Windows Events to log.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "A Windows Event to be monitored for the component.",
 			//                   "properties": {
 			//                     "EventLevels": {
 			//                       "description": "The levels of event to log. ",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "description": "The level of event to log.",
 			//                         "enum": [
@@ -610,6 +626,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           },
 			//           "SubComponentTypeConfigurations": {
 			//             "description": "Sub component configurations of the component.",
+			//             "insertionOrder": true,
 			//             "items": {
 			//               "additionalProperties": false,
 			//               "description": "One type sub component configurations for the component.",
@@ -620,6 +637,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                   "properties": {
 			//                     "AlarmMetrics": {
 			//                       "description": "A list of metrics to monitor for the component.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A metric to be monitored for the component.",
@@ -638,6 +656,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     },
 			//                     "Logs": {
 			//                       "description": "A list of logs to monitor for the component.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A log to be monitored for the component.",
@@ -687,12 +706,14 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     },
 			//                     "WindowsEvents": {
 			//                       "description": "A list of Windows Events to log.",
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "A Windows Event to be monitored for the component.",
 			//                         "properties": {
 			//                           "EventLevels": {
 			//                             "description": "The levels of event to log. ",
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "description": "The level of event to log.",
 			//                               "enum": [
@@ -1358,6 +1379,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The custom grouped components.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "The custom grouped component.",
@@ -1371,6 +1393,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "ResourceList": {
 			//         "description": "The list of resource ARNs that belong to the component.",
+			//         "insertionOrder": true,
 			//         "items": {
 			//           "maxLength": 300,
 			//           "minLength": 20,
@@ -1415,12 +1438,14 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The log pattern sets.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "The log pattern set.",
 			//     "properties": {
 			//       "LogPatterns": {
 			//         "description": "The log patterns of a set.",
+			//         "insertionOrder": true,
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "description": "The log pattern.",
@@ -1556,6 +1581,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The tags of Application Insights application.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A key-value pair to associate with a resource.",

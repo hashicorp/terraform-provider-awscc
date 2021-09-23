@@ -40,15 +40,6 @@
     "Arn": {
       "description": "Custom data identifier ARN.",
       "type": "string"
-    },
-    "CreatedAt": {
-      "description": "Date-time at which the custom data identifier was created.",
-      "type": "string",
-      "format": "date-time"
-    },
-    "Deleted": {
-      "description": "Whether the customer data identifier has been deleted.",
-      "type": "boolean"
     }
   },
   "required": [
@@ -66,9 +57,7 @@
   ],
   "readOnlyProperties": [
     "/properties/Id",
-    "/properties/Arn",
-    "/properties/CreatedAt",
-    "/properties/Deleted"
+    "/properties/Arn"
   ],
   "primaryIdentifier": [
     "/properties/Id"

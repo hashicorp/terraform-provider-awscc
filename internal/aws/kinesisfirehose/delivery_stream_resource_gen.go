@@ -213,7 +213,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -518,7 +521,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
+														"RecordDeAggregation",
 														"Lambda",
+														"MetadataExtraction",
+														"AppendDelimiterToRecord",
 													}),
 												},
 											},
@@ -948,6 +954,24 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       },
 			//       "type": "object"
 			//     },
+			//     "DynamicPartitioningConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "RetryOptions": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "DurationInSeconds": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "EncryptionConfiguration": {
 			//       "additionalProperties": false,
 			//       "properties": {
@@ -1014,7 +1038,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -1433,6 +1460,32 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						),
 						Optional: true,
 					},
+					"dynamic_partitioning_configuration": {
+						// Property: DynamicPartitioningConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Optional: true,
+								},
+								"retry_options": {
+									// Property: RetryOptions
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"duration_in_seconds": {
+												// Property: DurationInSeconds
+												Type:     types.NumberType,
+												Optional: true,
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+						),
+						Optional: true,
+					},
 					"encryption_configuration": {
 						// Property: EncryptionConfiguration
 						Attributes: tfsdk.SingleNestedAttributes(
@@ -1521,7 +1574,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
+														"RecordDeAggregation",
 														"Lambda",
+														"MetadataExtraction",
+														"AppendDelimiterToRecord",
 													}),
 												},
 											},
@@ -1775,7 +1831,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -2064,7 +2123,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
+														"RecordDeAggregation",
 														"Lambda",
+														"MetadataExtraction",
+														"AppendDelimiterToRecord",
 													}),
 												},
 											},
@@ -2422,7 +2484,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -2776,7 +2841,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
+														"RecordDeAggregation",
 														"Lambda",
+														"MetadataExtraction",
+														"AppendDelimiterToRecord",
 													}),
 												},
 											},
@@ -3383,7 +3451,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//               },
 			//               "Type": {
 			//                 "enum": [
-			//                   "Lambda"
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
 			//                 ],
 			//                 "type": "string"
 			//               }
@@ -3614,7 +3685,10 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
+														"RecordDeAggregation",
 														"Lambda",
+														"MetadataExtraction",
+														"AppendDelimiterToRecord",
 													}),
 												},
 											},
@@ -3886,6 +3960,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
+		"dynamic_partitioning_configuration":             "DynamicPartitioningConfiguration",
 		"elasticsearch_destination_configuration":        "ElasticsearchDestinationConfiguration",
 		"enable_dictionary_compression":                  "EnableDictionaryCompression",
 		"enable_padding":                                 "EnablePadding",

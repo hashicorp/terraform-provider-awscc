@@ -554,7 +554,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "GLUEPARQUET",
 			//           "AVRO",
 			//           "ORC",
-			//           "XML"
+			//           "XML",
+			//           "TABLEAUHYPER"
 			//         ],
 			//         "type": "string"
 			//       },
@@ -645,6 +646,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"AVRO",
 								"ORC",
 								"XML",
+								"TABLEAUHYPER",
 							}),
 						},
 					},

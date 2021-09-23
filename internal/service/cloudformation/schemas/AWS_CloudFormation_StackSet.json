@@ -107,7 +107,8 @@
         "RegionConcurrencyType": {
           "$ref": "#/definitions/RegionConcurrencyType"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Parameter": {
       "type": "object",
@@ -184,7 +185,8 @@
       "required": [
         "DeploymentTargets",
         "Regions"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {

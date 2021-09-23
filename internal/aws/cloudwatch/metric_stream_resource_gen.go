@@ -347,13 +347,13 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				"role_arn",
 				"output_format",
 			),
-			validate.OneOfRequired(
-				validate.Required(
-					"include_filters",
-				),
-				validate.Required(
-					"exclude_filters",
-				),
+		),
+		validate.OneOfRequired(
+			validate.Required(
+				"include_filters",
+			),
+			validate.Required(
+				"exclude_filters",
 			),
 		),
 	),

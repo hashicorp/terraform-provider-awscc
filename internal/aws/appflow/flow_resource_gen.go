@@ -1305,6 +1305,20 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "Veeva": {
 			//           "additionalProperties": false,
 			//           "properties": {
+			//             "DocumentType": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "IncludeAllVersions": {
+			//               "type": "boolean"
+			//             },
+			//             "IncludeRenditions": {
+			//               "type": "boolean"
+			//             },
+			//             "IncludeSourceFiles": {
+			//               "type": "boolean"
+			//             },
 			//             "Object": {
 			//               "maxLength": 512,
 			//               "pattern": "",
@@ -1617,6 +1631,29 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Veeva
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"document_type": {
+												// Property: DocumentType
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(0, 512),
+												},
+											},
+											"include_all_versions": {
+												// Property: IncludeAllVersions
+												Type:     types.BoolType,
+												Optional: true,
+											},
+											"include_renditions": {
+												// Property: IncludeRenditions
+												Type:     types.BoolType,
+												Optional: true,
+											},
+											"include_source_files": {
+												// Property: IncludeSourceFiles
+												Type:     types.BoolType,
+												Optional: true,
+											},
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
@@ -2517,6 +2554,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "minLength": 1,
 			//           "type": "string"
 			//         },
+			//         "ScheduleOffset": {
+			//           "maximum": 36000,
+			//           "minimum": 0,
+			//           "type": "number"
+			//         },
 			//         "ScheduleStartTime": {
 			//           "type": "number"
 			//         },
@@ -2574,6 +2616,14 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
+									},
+								},
+								"schedule_offset": {
+									// Property: ScheduleOffset
+									Type:     types.NumberType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.FloatBetween(0.000000, 36000.000000),
 									},
 								},
 								"schedule_start_time": {
@@ -2644,6 +2694,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"destination_connector_properties": "DestinationConnectorProperties",
 		"destination_field":                "DestinationField",
 		"destination_flow_config_list":     "DestinationFlowConfigList",
+		"document_type":                    "DocumentType",
 		"dynatrace":                        "Dynatrace",
 		"enable_dynamic_field_update":      "EnableDynamicFieldUpdate",
 		"error_handling_config":            "ErrorHandlingConfig",
@@ -2654,7 +2705,10 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"flow_name":                        "FlowName",
 		"google_analytics":                 "GoogleAnalytics",
 		"id_field_names":                   "IdFieldNames",
+		"include_all_versions":             "IncludeAllVersions",
 		"include_deleted_records":          "IncludeDeletedRecords",
+		"include_renditions":               "IncludeRenditions",
+		"include_source_files":             "IncludeSourceFiles",
 		"incremental_pull_config":          "IncrementalPullConfig",
 		"infor_nexus":                      "InforNexus",
 		"intermediate_bucket_name":         "IntermediateBucketName",
@@ -2672,6 +2726,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"salesforce":                       "Salesforce",
 		"schedule_end_time":                "ScheduleEndTime",
 		"schedule_expression":              "ScheduleExpression",
+		"schedule_offset":                  "ScheduleOffset",
 		"schedule_start_time":              "ScheduleStartTime",
 		"service_now":                      "ServiceNow",
 		"singular":                         "Singular",

@@ -104,6 +104,7 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "Tag is a key-value pair associated with accelerator.",
 			//     "properties": {
 			//       "Key": {

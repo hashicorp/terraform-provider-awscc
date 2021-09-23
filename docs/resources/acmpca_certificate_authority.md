@@ -159,6 +159,7 @@ Optional:
 Optional:
 
 - **crl_configuration** (Attributes) Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked. (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration))
+- **ocsp_configuration** (Attributes) Helps to configure online certificate status protocol (OCSP) responder for your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--ocsp_configuration))
 
 <a id="nestedatt--revocation_configuration--crl_configuration"></a>
 ### Nested Schema for `revocation_configuration.crl_configuration`
@@ -170,6 +171,15 @@ Optional:
 - **expiration_in_days** (Number)
 - **s3_bucket_name** (String)
 - **s3_object_acl** (String)
+
+
+<a id="nestedatt--revocation_configuration--ocsp_configuration"></a>
+### Nested Schema for `revocation_configuration.ocsp_configuration`
+
+Optional:
+
+- **enabled** (Boolean)
+- **ocsp_custom_cname** (String)
 
 
 
