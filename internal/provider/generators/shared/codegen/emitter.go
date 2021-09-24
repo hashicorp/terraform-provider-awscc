@@ -169,16 +169,23 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			// Set.
 			//
 			var elementType string
+			var validatorsGenerator primitiveValidatorsGenerator
 
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
 				elementType = "types.BoolType"
 
-			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
+			case cfschema.PropertyTypeInteger:
 				elementType = "types.NumberType"
+				validatorsGenerator = integerValidators
+
+			case cfschema.PropertyTypeNumber:
+				elementType = "types.NumberType"
+				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
 				elementType = "types.StringType"
+				validatorsGenerator = stringValidators
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -234,6 +241,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return 0, err
 				} else if v != "" {
 					validators = append(validators, v)
+				}
+
+				if validatorsGenerator != nil {
+					if v, err := validatorsGenerator(path, property.Items); err != nil {
+						return 0, err
+					} else if len(v) > 0 {
+						for _, v := range v {
+							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
+						}
+					}
 				}
 			}
 		} else {
