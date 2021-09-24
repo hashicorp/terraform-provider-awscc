@@ -52,4 +52,5 @@ tools:
 	cd tools && go install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 
 docs:
+	cd internal/provider/generators/import-examples && go run .
 	@tfplugindocs generate
