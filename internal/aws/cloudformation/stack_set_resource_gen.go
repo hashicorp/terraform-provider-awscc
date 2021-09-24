@@ -415,12 +415,18 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 								"organizational_unit_ids": {
 									// Property: OrganizationalUnitIds
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -453,6 +459,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
 						Type:        types.SetType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 				},
 				tfsdk.SetNestedAttributesOptions{},

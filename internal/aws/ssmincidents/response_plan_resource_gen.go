@@ -290,6 +290,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 5),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
 			},

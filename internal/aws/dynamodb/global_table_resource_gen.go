@@ -251,6 +251,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: NonKeyAttributes
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 20),
+									},
 								},
 								"projection_type": {
 									// Property: ProjectionType
@@ -503,6 +506,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: NonKeyAttributes
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 20),
+									},
 								},
 								"projection_type": {
 									// Property: ProjectionType

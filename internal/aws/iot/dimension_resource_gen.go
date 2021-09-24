@@ -71,6 +71,9 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the value or list of values for the dimension.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 5),
+			},
 		},
 		"tags": {
 			// Property: Tags
