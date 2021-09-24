@@ -45,7 +45,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 64),
+				validate.StringLenAtMost(64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -67,7 +67,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),

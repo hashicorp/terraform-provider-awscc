@@ -59,7 +59,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -78,7 +78,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
+				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -162,7 +162,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -170,7 +170,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

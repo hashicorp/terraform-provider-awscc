@@ -81,7 +81,7 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 4096),
+							validate.StringLenAtMost(4096),
 						},
 					},
 				},
@@ -116,7 +116,7 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"id": {

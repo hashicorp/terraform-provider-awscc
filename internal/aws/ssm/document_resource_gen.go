@@ -249,7 +249,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 200),
+							validate.StringLenAtMost(200),
 						},
 					},
 					"version": {
@@ -258,7 +258,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 8),
+							validate.StringLenAtMost(8),
 						},
 					},
 				},
@@ -327,7 +327,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1000),
+				validate.ArrayLenAtMost(1000),
 			},
 		},
 		"target_type": {

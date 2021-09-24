@@ -83,7 +83,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"role_arn": {
@@ -91,7 +91,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 							},
@@ -108,7 +108,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"sns_topic_arn": {
@@ -116,7 +116,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 							},
@@ -144,7 +144,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -203,7 +203,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -59,7 +59,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 253),
+				validate.StringLenAtMost(253),
 			},
 		},
 		"location_arn": {
@@ -155,7 +155,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 104),
+				validate.StringLenAtMost(104),
 			},
 			// Password is a write-only property.
 		},
@@ -172,7 +172,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 255),
+				validate.StringLenAtMost(255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -192,7 +192,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4096),
+				validate.StringLenAtMost(4096),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -257,7 +257,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"user": {
@@ -273,7 +273,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 104),
+				validate.StringLenAtMost(104),
 			},
 		},
 	}

@@ -59,7 +59,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 156),
+				validate.StringLenAtMost(156),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -94,7 +94,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
+							validate.StringLenAtMost(2048),
 						},
 					},
 				},
@@ -153,7 +153,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4096),
+				validate.StringLenAtMost(4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -221,7 +221,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

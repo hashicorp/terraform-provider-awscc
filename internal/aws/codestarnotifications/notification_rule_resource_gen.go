@@ -165,7 +165,7 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 10),
+				validate.ArrayLenAtMost(10),
 			},
 		},
 	}

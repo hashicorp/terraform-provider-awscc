@@ -43,7 +43,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -88,7 +88,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 					"value": {
@@ -97,7 +97,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -126,7 +126,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

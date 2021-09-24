@@ -43,7 +43,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 2048),
+				validate.StringLenAtMost(2048),
 			},
 		},
 		"id": {
@@ -103,7 +103,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 				},
@@ -122,7 +122,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 		},
 		"tags": {
@@ -175,7 +175,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"thing_arn": {

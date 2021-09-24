@@ -291,7 +291,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

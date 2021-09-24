@@ -48,7 +48,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 500),
+				validate.StringLenAtMost(500),
 			},
 		},
 		"tags": {

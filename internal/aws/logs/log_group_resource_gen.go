@@ -44,7 +44,7 @@ func logGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 		},
 		"log_group_name": {

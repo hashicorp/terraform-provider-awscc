@@ -45,7 +45,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"domain_name": {

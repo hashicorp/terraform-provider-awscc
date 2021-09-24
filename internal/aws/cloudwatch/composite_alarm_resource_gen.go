@@ -49,7 +49,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 			},
 		},
 		"alarm_description": {
@@ -134,7 +134,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 			},
 		},
 		"ok_actions": {
@@ -155,7 +155,7 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 			},
 		},
 	}

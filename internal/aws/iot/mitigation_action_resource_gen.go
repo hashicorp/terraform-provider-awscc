@@ -393,7 +393,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

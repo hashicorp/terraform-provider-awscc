@@ -267,7 +267,7 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

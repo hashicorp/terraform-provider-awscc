@@ -478,7 +478,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
+							validate.StringLenAtMost(2048),
 						},
 					},
 					"flow_name": {
@@ -486,7 +486,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 					"kms_arn": {
@@ -506,7 +506,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"connector_type": {
@@ -532,7 +532,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -552,7 +552,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 													},
@@ -576,7 +576,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 													},
@@ -602,7 +602,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 													},
@@ -618,7 +618,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 													},
@@ -634,7 +634,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 													},
@@ -803,7 +803,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"source_fields": {
@@ -843,7 +843,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 2048),
+													validate.StringLenAtMost(2048),
 												},
 											},
 										},
@@ -910,7 +910,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 256),
+																validate.StringLenAtMost(256),
 															},
 														},
 														"schedule_offset": {
@@ -931,7 +931,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Type:     types.StringType,
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 256),
+																validate.StringLenAtMost(256),
 															},
 														},
 													},

@@ -123,7 +123,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
+										validate.StringLenAtMost(128),
 									},
 								},
 								"document_version": {
@@ -132,7 +132,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
+										validate.StringLenAtMost(128),
 									},
 								},
 								"parameters": {
@@ -162,7 +162,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									),
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 200),
+										validate.ArrayLenAtMost(200),
 									},
 								},
 								"role_arn": {
@@ -171,7 +171,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1000),
+										validate.StringLenAtMost(1000),
 									},
 								},
 								"target_account": {
@@ -196,7 +196,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1),
+				validate.ArrayLenAtMost(1),
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -384,7 +384,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1000),
+										validate.StringLenAtMost(1000),
 									},
 								},
 							},
@@ -392,7 +392,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 10),
+							validate.ArrayLenAtMost(10),
 						},
 					},
 					"summary": {
@@ -410,7 +410,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 200),
+							validate.StringLenAtMost(200),
 						},
 					},
 				},

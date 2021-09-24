@@ -160,7 +160,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
+							validate.StringLenAtMost(2048),
 						},
 					},
 					"role_arn": {
@@ -610,7 +610,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"security_profile_name": {
@@ -693,7 +693,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"target_arns": {

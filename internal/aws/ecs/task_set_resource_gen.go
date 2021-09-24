@@ -219,7 +219,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 5),
+										validate.ArrayLenAtMost(5),
 									},
 								},
 								"subnets": {
@@ -228,7 +228,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 16),
+										validate.ArrayLenAtMost(16),
 									},
 								},
 							},

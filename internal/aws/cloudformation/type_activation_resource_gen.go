@@ -138,7 +138,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

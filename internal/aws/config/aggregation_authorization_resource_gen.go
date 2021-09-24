@@ -123,7 +123,7 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 				validate.UniqueItems(),
 			},
 		},

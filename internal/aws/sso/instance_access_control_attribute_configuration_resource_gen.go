@@ -83,7 +83,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 1),
+										validate.ArrayLenAtMost(1),
 									},
 								},
 							},
@@ -95,7 +95,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -179,7 +179,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 1),
+													validate.ArrayLenAtMost(1),
 												},
 											},
 										},
@@ -191,7 +191,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 50),
+							validate.ArrayLenAtMost(50),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),

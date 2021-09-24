@@ -176,7 +176,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

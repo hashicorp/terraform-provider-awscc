@@ -87,7 +87,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1000),
+				validate.ArrayLenAtMost(1000),
 				validate.UniqueItems(),
 			},
 		},
@@ -149,7 +149,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1000),
+				validate.ArrayLenAtMost(1000),
 				validate.UniqueItems(),
 			},
 		},
@@ -287,7 +287,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 				validate.UniqueItems(),
 			},
 			// Tags is a write-only property.

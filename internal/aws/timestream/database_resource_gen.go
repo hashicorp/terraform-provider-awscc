@@ -110,7 +110,7 @@ func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 200),
+				validate.ArrayLenAtMost(200),
 			},
 		},
 	}

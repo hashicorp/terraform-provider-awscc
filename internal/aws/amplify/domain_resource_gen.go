@@ -76,7 +76,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"certificate_record": {
@@ -100,7 +100,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 255),
+				validate.StringLenAtMost(255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -178,7 +178,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 				},
@@ -186,7 +186,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 255),
+				validate.ArrayLenAtMost(255),
 			},
 		},
 	}

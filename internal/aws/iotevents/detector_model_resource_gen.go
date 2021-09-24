@@ -2809,7 +2809,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 														"event_name": {
@@ -2818,7 +2818,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 128),
+																validate.StringLenAtMost(128),
 															},
 														},
 													},
@@ -3438,7 +3438,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 														"event_name": {
@@ -3447,7 +3447,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 128),
+																validate.StringLenAtMost(128),
 															},
 														},
 													},
@@ -4067,7 +4067,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 														"event_name": {
@@ -4076,7 +4076,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 128),
+																validate.StringLenAtMost(128),
 															},
 														},
 													},
@@ -4687,7 +4687,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 512),
+																validate.StringLenAtMost(512),
 															},
 														},
 														"event_name": {
@@ -4750,7 +4750,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 		},
 		"detector_model_name": {

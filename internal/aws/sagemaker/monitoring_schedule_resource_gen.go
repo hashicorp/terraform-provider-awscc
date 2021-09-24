@@ -44,7 +44,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
+				validate.StringLenAtMost(63),
 			},
 		},
 		"failure_reason": {
@@ -153,7 +153,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 63),
+							validate.StringLenAtMost(63),
 						},
 					},
 					"failure_reason": {
@@ -162,7 +162,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 1024),
+							validate.StringLenAtMost(1024),
 						},
 					},
 					"last_modified_time": {
@@ -194,7 +194,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 63),
+							validate.StringLenAtMost(63),
 						},
 					},
 					"processing_job_arn": {
@@ -203,7 +203,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 					"scheduled_time": {
@@ -642,7 +642,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Type:        types.StringType,
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 1024),
+																validate.StringLenAtMost(1024),
 															},
 														},
 													},
@@ -660,7 +660,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Type:        types.StringType,
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 1024),
+																validate.StringLenAtMost(1024),
 															},
 														},
 													},
@@ -690,7 +690,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 50),
+													validate.ArrayLenAtMost(50),
 												},
 											},
 											"container_entrypoint": {
@@ -699,7 +699,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.ListType{ElemType: types.StringType},
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 100),
+													validate.ArrayLenAtMost(100),
 												},
 											},
 											"image_uri": {
@@ -708,7 +708,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 255),
+													validate.StringLenAtMost(255),
 												},
 											},
 											"post_analytics_processor_source_uri": {
@@ -717,7 +717,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 1024),
+													validate.StringLenAtMost(1024),
 												},
 											},
 											"record_preprocessor_source_uri": {
@@ -726,7 +726,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 1024),
+													validate.StringLenAtMost(1024),
 												},
 											},
 										},
@@ -749,7 +749,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 63),
+																validate.StringLenAtMost(63),
 															},
 														},
 														"local_path": {
@@ -758,7 +758,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 256),
+																validate.StringLenAtMost(256),
 															},
 														},
 														"s3_data_distribution_type": {
@@ -808,7 +808,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 2048),
+													validate.StringLenAtMost(2048),
 												},
 											},
 											"monitoring_outputs": {
@@ -827,7 +827,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 																		Type:        types.StringType,
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(0, 256),
+																			validate.StringLenAtMost(256),
 																		},
 																	},
 																	"s3_upload_mode": {
@@ -848,7 +848,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 																		Type:        types.StringType,
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(0, 512),
+																			validate.StringLenAtMost(512),
 																		},
 																	},
 																},
@@ -1049,7 +1049,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
+				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -1129,7 +1129,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -1137,7 +1137,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

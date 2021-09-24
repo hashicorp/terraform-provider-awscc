@@ -99,7 +99,7 @@ func deviceFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 1024),
+							validate.StringLenAtMost(1024),
 						},
 					},
 				},

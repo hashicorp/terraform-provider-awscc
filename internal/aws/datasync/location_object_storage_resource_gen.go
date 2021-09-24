@@ -140,7 +140,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 255),
+				validate.StringLenAtMost(255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -197,7 +197,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4096),
+				validate.StringLenAtMost(4096),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -262,7 +262,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

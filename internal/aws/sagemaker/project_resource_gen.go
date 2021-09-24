@@ -59,7 +59,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -147,7 +147,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 100),
+							validate.StringLenAtMost(100),
 						},
 					},
 					"provisioned_product_status_message": {
@@ -229,7 +229,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 100),
+							validate.StringLenAtMost(100),
 						},
 					},
 					"product_id": {
@@ -238,7 +238,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 100),
+							validate.StringLenAtMost(100),
 						},
 					},
 					"provisioning_artifact_id": {
@@ -247,7 +247,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 100),
+							validate.StringLenAtMost(100),
 						},
 					},
 					"provisioning_parameters": {
@@ -270,7 +270,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 4096),
+										validate.StringLenAtMost(4096),
 									},
 								},
 							},
@@ -335,7 +335,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -344,7 +344,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 40),
+				validate.ArrayLenAtMost(40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

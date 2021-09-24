@@ -79,7 +79,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 2048),
+				validate.StringLenAtMost(2048),
 			},
 		},
 		"principals": {

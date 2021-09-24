@@ -90,7 +90,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"description": {
@@ -99,7 +99,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 512),
+							validate.StringLenAtMost(512),
 						},
 					},
 					"parameters": {
@@ -139,7 +139,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
+				validate.StringLenAtMost(512),
 			},
 		},
 		"id": {
@@ -163,7 +163,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1224),
+				validate.StringLenAtMost(1224),
 			},
 		},
 		"stop_conditions": {
@@ -199,7 +199,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"value": {
@@ -326,7 +326,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"values": {
@@ -358,7 +358,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"selection_mode": {
@@ -367,7 +367,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 				},

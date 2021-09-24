@@ -33,7 +33,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 562),
+				validate.StringLenAtMost(562),
 			},
 		},
 		"destination_location_arn": {
@@ -49,7 +49,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -136,7 +136,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 							validate.StringInSlice([]string{
 								"SIMPLE_PATTERN",
 							}),
@@ -148,7 +148,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 409600),
+							validate.StringLenAtMost(409600),
 						},
 					},
 				},
@@ -201,7 +201,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 							validate.StringInSlice([]string{
 								"SIMPLE_PATTERN",
 							}),
@@ -213,7 +213,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 409600),
+							validate.StringLenAtMost(409600),
 						},
 					},
 				},
@@ -578,7 +578,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -598,7 +598,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -703,7 +703,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"task_arn": {

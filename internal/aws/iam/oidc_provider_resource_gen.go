@@ -118,7 +118,7 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 			},
 		},
 		"url": {

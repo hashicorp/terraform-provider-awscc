@@ -252,7 +252,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 20),
+										validate.ArrayLenAtMost(20),
 									},
 								},
 								"projection_type": {
@@ -494,7 +494,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 2),
+							validate.ArrayLenAtMost(2),
 							validate.UniqueItems(),
 						},
 					},
@@ -507,7 +507,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.SetType{ElemType: types.StringType},
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 20),
+										validate.ArrayLenAtMost(20),
 									},
 								},
 								"projection_type": {

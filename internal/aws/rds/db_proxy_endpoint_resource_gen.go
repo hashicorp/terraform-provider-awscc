@@ -45,7 +45,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 64),
+				validate.StringLenAtMost(64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -64,7 +64,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 64),
+				validate.StringLenAtMost(64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -125,7 +125,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 					"value": {
@@ -133,7 +133,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 				},

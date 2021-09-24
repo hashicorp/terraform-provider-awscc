@@ -134,7 +134,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"max_duty_cycle": {
@@ -182,7 +182,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"rf_region": {
@@ -190,7 +190,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"supports_32_bit_f_cnt": {
@@ -229,7 +229,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 		},
 		"tags": {
@@ -282,7 +282,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

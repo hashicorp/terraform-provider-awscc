@@ -479,7 +479,7 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 2048),
+										validate.StringLenAtMost(2048),
 									},
 								},
 							},
