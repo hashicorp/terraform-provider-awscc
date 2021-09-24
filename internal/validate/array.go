@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
@@ -190,11 +191,10 @@ func validateArray(request tfsdk.ValidateAttributeRequest, response *tfsdk.Valid
 		elems = v.Elems
 
 	default:
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", v),
-		)
+			v,
+		))
 
 		return elems, elemKeyer, false
 	}

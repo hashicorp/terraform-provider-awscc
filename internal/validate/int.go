@@ -36,7 +36,7 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 	}
 
 	if i < int64(validator.min) || i > int64(validator.max) {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
 		))
@@ -82,7 +82,7 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 	}
 
 	if i < int64(validator.min) {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
 		))
@@ -205,7 +205,7 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 }
 
 func newIntNotInSliceError(path *tftypes.AttributePath, valid []int, value int64) diag.Diagnostic {
-	return diags.NewInvalidValueError(
+	return diags.NewInvalidValueAttributeError(
 		path,
 		fmt.Sprintf("expected value to be one of %v, got %d", valid, value),
 	)
@@ -219,17 +219,16 @@ func IntInSlice(valid []int) tfsdk.AttributeValidator {
 }
 
 func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
-	return diags.NewInvalidValueError(path, "Not an integer")
+	return diags.NewInvalidValueAttributeError(path, "Not an integer")
 }
 
 func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics.Append(diag.NewAttributeErrorDiagnostic(
+		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+			request.AttributeConfig,
 		))
 
 		return 0, false

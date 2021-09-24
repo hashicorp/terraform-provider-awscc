@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
@@ -35,7 +34,7 @@ func (validator floatBetweenValidator) Validate(ctx context.Context, request tfs
 	}
 
 	if f < validator.min || f > validator.max {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be in the range [%f, %f], got %f", validator.min, validator.max, f),
 		))
@@ -81,7 +80,7 @@ func (validator floatAtLeastValidator) Validate(ctx context.Context, request tfs
 	}
 
 	if f < validator.min {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at least %f, got %f", validator.min, f),
 		))
@@ -142,7 +141,7 @@ func validateFloat(request tfsdk.ValidateAttributeRequest, response *tfsdk.Valid
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
 		))

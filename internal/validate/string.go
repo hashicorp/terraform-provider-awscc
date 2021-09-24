@@ -189,7 +189,7 @@ func (validator stringInSliceValidator) Validate(ctx context.Context, request tf
 }
 
 func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value string) diag.Diagnostic {
-	return diags.NewInvalidValueError(
+	return diags.NewInvalidValueAttributeError(
 		path,
 		fmt.Sprintf("expected value to be one of %v, got %s", valid, value),
 	)
@@ -226,7 +226,7 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 
 	// A JSON object starts with a '{'
 	if s[:1] != "{" {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			"expected value to be a valid JSON object",
 		))
@@ -237,7 +237,7 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 	var i interface{}
 	err := json.Unmarshal([]byte(s), &i)
 	if err != nil {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be valid JSON: %s", err),
 		))
@@ -253,10 +253,9 @@ func validateString(request tfsdk.ValidateAttributeRequest, response *tfsdk.Vali
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics.Append(diag.NewAttributeErrorDiagnostic(
+		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+			request.AttributeConfig,
 		))
 
 		return "", false

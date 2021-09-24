@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 func TestArrayForEachValidator(t *testing.T) {
@@ -29,10 +30,9 @@ func TestArrayForEachValidator(t *testing.T) {
 			val:       tftypes.NewValue(tftypes.Bool, true),
 			f:         types.BoolType.ValueFromTerraform,
 			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: diag.NewAttributeErrorDiagnostic(
+			expectedDiag: diags.NewIncorrectValueTypeAttributeError(
 				rootPath,
-				"Invalid value type",
-				"received incorrect value type (types.Bool)",
+				types.Bool{},
 			),
 		},
 
