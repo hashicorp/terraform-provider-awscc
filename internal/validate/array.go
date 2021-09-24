@@ -160,11 +160,7 @@ func listKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.V
 func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
 	val, err := v.ToTerraformValue(ctx)
 	if err != nil {
-		return nil, diag.NewAttributeErrorDiagnostic(
-			path,
-			"No Terraform value",
-			"unable to obtain Terraform value:\n\n"+err.Error(),
-		)
+		return nil, diags.NewUnableToObtainValueAttributeError(path, err)
 	}
 
 	return path.WithElementKeyValue(tftypes.NewValue(v.Type(ctx).TerraformType(ctx), val)), nil

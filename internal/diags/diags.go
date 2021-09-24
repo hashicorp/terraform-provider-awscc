@@ -11,6 +11,7 @@ import (
 const (
 	summaryInvalidValue     = "Invalid value"
 	summaryInvalidValueType = "Invalid value type"
+	summaryNoTerraformValue = "No Terraform value"
 )
 
 func NewInvalidValueAttributeError(path *tftypes.AttributePath, detail string) diag.Diagnostic {
@@ -48,5 +49,13 @@ func NewUnableToConvertValueTypeResourceConfigError(err error) diag.Diagnostic {
 	return diag.NewErrorDiagnostic(
 		summaryInvalidValueType,
 		fmt.Sprintf("unable to convert value type:\n\n%s", err),
+	)
+}
+
+func NewUnableToObtainValueAttributeError(path *tftypes.AttributePath, err error) diag.Diagnostic {
+	return diag.NewAttributeErrorDiagnostic(
+		path,
+		summaryNoTerraformValue,
+		fmt.Sprintf("unable to obtain Terraform value:\n\n%s", err),
 	)
 }

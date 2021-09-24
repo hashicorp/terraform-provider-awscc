@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 	ccdiags "github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
@@ -157,11 +158,10 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	val, err := request.AttributeConfig.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
-			"No Terraform value",
-			"unable to obtain Terraform value:\n\n"+err.Error(),
-		)
+			err,
+		))
 
 		return
 	}

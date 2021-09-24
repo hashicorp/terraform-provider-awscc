@@ -44,11 +44,10 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	val, err := list.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
-			"No Terraform value",
-			"unable to obtain Terraform value:\n\n"+err.Error(),
-		)
+			err,
+		))
 
 		return
 	}
