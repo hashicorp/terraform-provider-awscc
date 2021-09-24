@@ -75,6 +75,64 @@ func TestArrayForEachValidator(t *testing.T) {
 				"delta",
 			),
 		},
+		"list of string with unknown element": {
+			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.ListType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+
+		"unknown set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, tftypes.UnknownValue),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"null set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, nil),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"empty set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"valid set of string": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, "beta"),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"invalid set of string": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, "beta"),
+				tftypes.NewValue(tftypes.String, "gamma"),
+				tftypes.NewValue(tftypes.String, "delta"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+			expectedDiag: newStringNotInSliceError(
+				rootPath.WithElementKeyValue(tftypes.NewValue(tftypes.String, "delta")),
+				[]string{"alpha", "beta", "gamma"},
+				"delta",
+			),
+		},
+		"set of string with unknown element": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
 	}
 
 	for name, test := range tests {
