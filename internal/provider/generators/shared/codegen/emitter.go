@@ -697,14 +697,10 @@ func unsupportedTypeError(path []string, typ string) error {
 func arrayLengthValidator(path []string, property *cfschema.Property) (string, error) {
 	if property.MinItems != nil && property.MaxItems == nil {
 		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems), nil
-	}
-
-	if property.MaxItems != nil {
-		minItems := 0
-		if property.MinItems != nil {
-			minItems = *property.MinItems
-		}
-		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems), nil
+	} else if property.MinItems == nil && property.MaxItems != nil {
+		return fmt.Sprintf("validate.ArrayLenAtMost(%d)", *property.MaxItems), nil
+	} else if property.MinItems != nil && property.MaxItems != nil {
+		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", *property.MinItems, *property.MaxItems), nil
 	}
 
 	return "", nil
@@ -853,14 +849,11 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 
 	var validators []string
 
-	if property.Minimum == nil && property.Maximum != nil {
-		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
-	}
-
 	if property.Minimum != nil && property.Maximum == nil {
 		validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
-	}
-	if property.Minimum != nil && property.Maximum != nil {
+	} else if property.Minimum == nil && property.Maximum != nil {
+		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+	} else if property.Minimum != nil && property.Maximum != nil {
 		validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
 	}
 
@@ -892,14 +885,11 @@ func numberValidators(path []string, property *cfschema.Property) ([]string, err
 
 	var validators []string
 
-	if property.Minimum == nil && property.Maximum != nil {
-		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
-	}
-
 	if property.Minimum != nil && property.Maximum == nil {
 		validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
-	}
-	if property.Minimum != nil && property.Maximum != nil {
+	} else if property.Minimum == nil && property.Maximum != nil {
+		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+	} else if property.Minimum != nil && property.Maximum != nil {
 		validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
 	}
 
@@ -926,13 +916,10 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 
 	if property.MinLength != nil && property.MaxLength == nil {
 		validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
-	}
-	if property.MaxLength != nil {
-		minLength := 0
-		if property.MinLength != nil {
-			minLength = *property.MinLength
-		}
-		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
+	} else if property.MinItems == nil && property.MaxItems != nil {
+		validators = append(validators, fmt.Sprintf("validate.StringLenAtMost(%d)", *property.MaxItems))
+	} else if property.MinItems != nil && property.MaxItems != nil {
+		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", *property.MinLength, *property.MaxLength))
 	}
 
 	if property.Format != nil {
