@@ -8,11 +8,17 @@ import (
 	"text/template"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
+	"github.com/mitchellh/cli"
 )
 
-// TODO: Split up function
-// Code drawn from ../schema/main.go func GenerateDataSources
 func main() {
+	ui := &cli.BasicUi{
+		Reader:      os.Stdin,
+		Writer:      os.Stdout,
+		ErrorWriter: os.Stderr,
+	}
+
 	provider := provider.New()
 
 	resources, _ := provider.GetResources(context.Background())
@@ -25,28 +31,32 @@ func main() {
 
 		tmpl, err := template.New("function").Parse(importExampleTemplateBody)
 
-		// TODO: Actual error handling as opposed to just printing out
 		if err != nil {
-			fmt.Println(err)
-			fmt.Errorf("error parsing function template: %w", err)
+			ui.Error(fmt.Sprintf("error parsing function template: %w", err))
 		}
 
 		var buffer bytes.Buffer
 		err = tmpl.Execute(&buffer, templateData)
 
 		if err != nil {
-			fmt.Println(err)
-			fmt.Errorf("error executing template: %w", err)
+			ui.Error(fmt.Sprintf("error executing template: %w", err))
 		}
 
-		filename := fmt.Sprintf("%s.sh", resource)
+        examplesPath := "../../../../examples/resources"
 
-		// TODO: Write to /examples/resources/resourceType/import.sh instead of same directory
+        dirname := fmt.Sprintf("%s/%s", examplesPath, resource)
+        err = os.MkdirAll(dirname, shared.DirPerm)
+
+		if err != nil {
+			ui.Error(fmt.Sprintf("creating target directory %s: %w", dirname, err))
+		}
+
+		filename := fmt.Sprintf("%s/import.sh", dirname)
+
 		f, err := os.Create(filename)
 
 		if err != nil {
-			fmt.Println(err)
-			fmt.Errorf("error creating file (%s): %w", filename, err)
+			ui.Error(fmt.Sprintf("error creating file (%s): %w", filename, err))
 		}
 
 		defer f.Close()
@@ -54,8 +64,7 @@ func main() {
 		_, err = f.Write(buffer.Bytes())
 
 		if err != nil {
-			fmt.Println(err)
-			fmt.Errorf("error writing to file (%s): %w", filename, err)
+			ui.Error(fmt.Sprintf("error writing to file (%s): %w", filename, err))
 		}
 	}
 }
@@ -64,7 +73,4 @@ type TemplateData struct {
 	ResourceType string
 }
 
-// TODO: Template currently renders with an unwanted empty line at top
-var importExampleTemplateBody = `
-terraform import {{ .ResourceType }}.example <resource ID>
-`
+var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example <resource ID>`
