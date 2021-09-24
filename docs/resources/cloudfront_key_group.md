@@ -33,4 +33,10 @@ Required:
 - **items** (List of String)
 - **name** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudfront_key_group.example <resource ID>
+```

@@ -40,4 +40,10 @@ Optional:
 - **image_tests_enabled** (Boolean) ImageTestsEnabled
 - **timeout_minutes** (Number) TimeoutMinutes
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_image.example <resource ID>
+```

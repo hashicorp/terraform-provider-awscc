@@ -60,4 +60,10 @@ Optional:
 - **transition_to_ia** (String)
 - **transition_to_primary_storage_class** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_efs_file_system.example <resource ID>
+```

@@ -34,4 +34,10 @@ Required:
 - **encoded_key** (String)
 - **name** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudfront_public_key.example <resource ID>
+```

@@ -60,4 +60,10 @@ Optional:
 - **key** (String) A unique identifier for the tag.
 - **value** (String) An optional string, which you can use to describe or define the tag.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudwatch_metric_stream.example <resource ID>
+```

@@ -32,4 +32,10 @@ Macie CustomDataIdentifier resource schema
 - **arn** (String) Custom data identifier ARN.
 - **id** (String) Custom data identifier ID.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_macie_custom_data_identifier.example <resource ID>
+```

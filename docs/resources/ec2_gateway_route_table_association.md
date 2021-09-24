@@ -25,4 +25,10 @@ Associates a gateway with a route table. The gateway and route table must be in 
 - **association_id** (String) The route table association ID.
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_gateway_route_table_association.example <resource ID>
+```

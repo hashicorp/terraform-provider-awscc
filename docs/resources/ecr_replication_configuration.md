@@ -46,4 +46,10 @@ Required:
 - **region** (String) A Region to replicate to.
 - **registry_id** (String) The account ID of the destination registry to replicate to.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ecr_replication_configuration.example <resource ID>
+```

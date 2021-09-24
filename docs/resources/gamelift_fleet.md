@@ -122,4 +122,10 @@ Windows (for custom game builds only): C:\game. Example: "C:\game\MyGame\server.
 Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/MyRealtimeScript.js"
 - **parameters** (String) An optional list of parameters to pass to the server executable or Realtime script on launch.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_gamelift_fleet.example <resource ID>
+```

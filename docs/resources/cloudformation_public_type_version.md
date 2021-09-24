@@ -32,4 +32,10 @@ We recommend that type names adhere to the following pattern: company_or_organiz
 - **publisher_id** (String) The publisher id assigned by CloudFormation for publishing in this region.
 - **type_version_arn** (String) The Amazon Resource Number (ARN) of the extension with the versionId.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_public_type_version.example <resource ID>
+```

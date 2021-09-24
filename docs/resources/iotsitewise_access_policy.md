@@ -84,4 +84,10 @@ Required:
 
 - **id** (String) The ID of the project.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iotsitewise_access_policy.example <resource ID>
+```

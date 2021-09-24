@@ -26,4 +26,10 @@ Represents a key signing key (KSK) associated with a hosted zone. You can only h
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53_key_signing_key.example <resource ID>
+```

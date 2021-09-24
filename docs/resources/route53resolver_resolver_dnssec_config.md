@@ -25,4 +25,10 @@ Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.
 - **owner_id** (String) AccountId
 - **validation_status** (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53resolver_resolver_dnssec_config.example <resource ID>
+```

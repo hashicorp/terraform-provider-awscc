@@ -34,4 +34,10 @@ Definition of AWS::Location::Tracker Resource Type
 - **tracker_arn** (String)
 - **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_location_tracker.example <resource ID>
+```

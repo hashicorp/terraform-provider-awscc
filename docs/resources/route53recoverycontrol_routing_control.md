@@ -30,4 +30,10 @@ AWS Route53 Recovery Control Routing Control resource schema .
 - **routing_control_arn** (String) The Amazon Resource Name (ARN) of the routing control.
 - **status** (String) The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53recoverycontrol_routing_control.example <resource ID>
+```

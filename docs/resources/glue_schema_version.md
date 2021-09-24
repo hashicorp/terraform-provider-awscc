@@ -34,4 +34,10 @@ Required:
 - **schema_arn** (String) Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.
 - **schema_name** (String) Name of the schema. This parameter requires RegistryName to be provided.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_glue_schema_version.example <resource ID>
+```

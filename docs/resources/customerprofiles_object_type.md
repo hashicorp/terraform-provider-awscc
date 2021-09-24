@@ -82,4 +82,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_customerprofiles_object_type.example <resource ID>
+```

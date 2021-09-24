@@ -111,4 +111,10 @@ Optional:
 
 - **name** (String) The name of the query header to inspect.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_wafv2_logging_configuration.example <resource ID>
+```

@@ -33,4 +33,10 @@ The AWS::EC2::TransitGatewayMulticastGroupSource registers and deregisters membe
 - **subnet_id** (String) The ID of the subnet.
 - **transit_gateway_attachment_id** (String) The ID of the transit gateway attachment.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_transit_gateway_multicast_group_source.example <resource ID>
+```

@@ -38,4 +38,10 @@ Required:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_servicecatalog_service_action.example <resource ID>
+```

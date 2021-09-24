@@ -29,4 +29,10 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::Application
 - **arn** (String)
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_servicecatalogappregistry_application.example <resource ID>
+```

@@ -29,4 +29,10 @@ The resource schema for AWSLogs QueryDefinition
 - **id** (String) Uniquely identifies the resource.
 - **query_definition_id** (String) Unique identifier of a query definition
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_logs_query_definition.example <resource ID>
+```

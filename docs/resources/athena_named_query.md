@@ -31,4 +31,10 @@ Resource schema for AWS::Athena::NamedQuery
 - **id** (String) Uniquely identifies the resource.
 - **named_query_id** (String) The unique ID of the query.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_athena_named_query.example <resource ID>
+```

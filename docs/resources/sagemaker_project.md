@@ -71,4 +71,10 @@ Read-Only:
 - **provisioned_product_id** (String) The identifier of the provisioning artifact (also known as a version).
 - **provisioned_product_status_message** (String) Provisioned Product Status Message
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_sagemaker_project.example <resource ID>
+```

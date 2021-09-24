@@ -25,4 +25,10 @@ A pseudo-resource that manages which of your ECS task sets is primary.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ecs_primary_task_set.example <resource ID>
+```

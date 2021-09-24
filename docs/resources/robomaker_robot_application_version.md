@@ -29,4 +29,10 @@ An example resource schema demonstrating some basic constructs and validation ru
 - **arn** (String)
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_robomaker_robot_application_version.example <resource ID>
+```

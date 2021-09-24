@@ -33,4 +33,10 @@ Definition of AWS::Location::RouteCalculator Resource Type
 - **id** (String) Uniquely identifies the resource.
 - **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_location_route_calculator.example <resource ID>
+```

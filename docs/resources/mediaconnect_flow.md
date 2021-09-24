@@ -75,4 +75,10 @@ Optional:
 - **recovery_window** (Number) Search window time to look for dash-7 packets
 - **state** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_mediaconnect_flow.example <resource ID>
+```

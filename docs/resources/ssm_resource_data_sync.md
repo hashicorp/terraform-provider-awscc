@@ -64,4 +64,10 @@ Optional:
 - **organization_source_type** (String)
 - **organizational_units** (List of String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ssm_resource_data_sync.example <resource ID>
+```

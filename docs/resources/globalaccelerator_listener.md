@@ -38,4 +38,10 @@ Required:
 - **from_port** (Number) A network port number
 - **to_port** (Number) A network port number
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_globalaccelerator_listener.example <resource ID>
+```

@@ -24,4 +24,10 @@ The AWS::LookoutVision::Project type creates an Amazon Lookout for Vision projec
 - **arn** (String)
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lookoutvision_project.example <resource ID>
+```

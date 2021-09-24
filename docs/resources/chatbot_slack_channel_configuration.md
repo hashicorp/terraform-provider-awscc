@@ -32,4 +32,10 @@ Resource schema for AWS::Chatbot::SlackChannelConfiguration.
 - **arn** (String) Amazon Resource Name (ARN) of the configuration
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_chatbot_slack_channel_configuration.example <resource ID>
+```

@@ -29,4 +29,10 @@ Permission set on private certificate authority
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_acmpca_permission.example <resource ID>
+```

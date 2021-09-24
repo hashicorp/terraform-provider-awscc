@@ -271,4 +271,10 @@ Required:
 
 - **replacement_strategy** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_spot_fleet.example <resource ID>
+```

@@ -37,4 +37,10 @@ Optional:
 - **key** (String) A key to identify the tag.
 - **value** (String) Corresponding tag value for the key.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_glue_registry.example <resource ID>
+```

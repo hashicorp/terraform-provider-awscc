@@ -24,4 +24,10 @@ The AWS::ECR::RegistryPolicy is used to specify permissions for another AWS acco
 - **id** (String) Uniquely identifies the resource.
 - **registry_id** (String) The registry id.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ecr_registry_policy.example <resource ID>
+```

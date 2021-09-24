@@ -61,4 +61,10 @@ Optional:
 - **key** (String) The name of the tag.
 - **value** (String) The value of the tag.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ssm_document.example <resource ID>
+```

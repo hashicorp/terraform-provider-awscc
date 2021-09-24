@@ -31,4 +31,10 @@ AWS Route53 Recovery Control Control Panel resource schema .
 - **routing_control_count** (Number) Count of associated routing controls
 - **status** (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53recoverycontrol_control_panel.example <resource ID>
+```

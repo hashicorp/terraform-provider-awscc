@@ -28,4 +28,10 @@ Resource Type definition for AWS::EventSchemas::RegistryPolicy
 
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_eventschemas_registry_policy.example <resource ID>
+```

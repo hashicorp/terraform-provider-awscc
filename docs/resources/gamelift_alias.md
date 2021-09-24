@@ -38,4 +38,10 @@ Required:
 - **message** (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
 - **type** (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_gamelift_alias.example <resource ID>
+```

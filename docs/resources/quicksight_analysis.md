@@ -169,4 +169,10 @@ Read-Only:
             console.</p>
 - **sheet_id** (String) <p>The unique identifier associated with a sheet.</p>
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_quicksight_analysis.example <resource ID>
+```

@@ -68,4 +68,10 @@ Read-Only:
 - **key** (String) A key to identify the metadata.
 - **value** (String) Corresponding metadata value for the key.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_appintegrations_event_integration.example <resource ID>
+```

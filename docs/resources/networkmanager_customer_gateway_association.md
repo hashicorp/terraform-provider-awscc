@@ -29,4 +29,10 @@ The AWS::NetworkManager::CustomerGatewayAssociation type associates a customer g
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_networkmanager_customer_gateway_association.example <resource ID>
+```

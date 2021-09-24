@@ -57,4 +57,10 @@ Optional:
 - **key** (String) Key of the Tag.
 - **value** (String) Value of the Tag.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iotevents_input.example <resource ID>
+```

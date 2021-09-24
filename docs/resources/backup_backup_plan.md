@@ -89,4 +89,10 @@ Required:
 - **delete_after_days** (Number)
 - **move_to_cold_storage_after_days** (Number)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_backup_backup_plan.example <resource ID>
+```

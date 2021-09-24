@@ -31,4 +31,10 @@ Use the AWS::IoT::Certificate resource to declare an AWS IoT X.509 certificate.
 - **arn** (String)
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iot_certificate.example <resource ID>
+```

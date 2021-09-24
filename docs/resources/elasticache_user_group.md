@@ -30,4 +30,10 @@ Resource Type definition for AWS::ElastiCache::UserGroup
 - **id** (String) Uniquely identifies the resource.
 - **status** (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_elasticache_user_group.example <resource ID>
+```

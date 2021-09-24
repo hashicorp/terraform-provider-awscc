@@ -61,4 +61,10 @@ Read-Only:
 - **id** (String) The ID of this resource.
 - **name** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_macie_findings_filter.example <resource ID>
+```

@@ -24,4 +24,10 @@ The AWS::KMS::Alias resource specifies a display name for a customer master key 
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_kms_alias.example <resource ID>
+```

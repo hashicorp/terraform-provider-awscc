@@ -26,4 +26,10 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.
 - **attribute_group_arn** (String)
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_servicecatalogappregistry_attribute_group_association.example <resource ID>
+```

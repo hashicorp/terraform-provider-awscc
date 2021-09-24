@@ -28,4 +28,10 @@ A snapshot of the documentation of an API.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_apigateway_documentation_version.example <resource ID>
+```

@@ -50,4 +50,10 @@ Read-Only:
 - **packaging_configuration_id** (String) The ID of the PackagingConfiguration being applied to the Asset.
 - **url** (String) The URL of the parent manifest for the repackaged Asset.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_mediapackage_asset.example <resource ID>
+```

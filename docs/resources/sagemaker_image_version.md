@@ -28,4 +28,10 @@ Resource Type definition for AWS::SageMaker::ImageVersion
 - **image_version_arn** (String) The Amazon Resource Name (ARN) of the image version.
 - **version** (Number) The version number of the image version.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_sagemaker_image_version.example <resource ID>
+```

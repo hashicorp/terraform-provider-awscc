@@ -41,4 +41,10 @@ Optional:
 
 - **intended_use** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_location_place_index.example <resource ID>
+```

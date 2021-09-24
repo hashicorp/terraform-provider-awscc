@@ -24,4 +24,10 @@ Designates the IAM role and Amazon Simple Notification Service (SNS) topic that 
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_fms_notification_channel.example <resource ID>
+```

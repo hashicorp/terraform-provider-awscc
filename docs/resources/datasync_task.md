@@ -95,4 +95,10 @@ Optional:
 - **key** (String) The key for an AWS resource tag.
 - **value** (String) The value for an AWS resource tag.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_datasync_task.example <resource ID>
+```

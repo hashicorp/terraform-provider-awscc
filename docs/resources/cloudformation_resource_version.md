@@ -53,4 +53,10 @@ Optional:
 - **log_group_name** (String) The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
 - **log_role_arn** (String) The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_resource_version.example <resource ID>
+```

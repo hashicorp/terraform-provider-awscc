@@ -32,4 +32,10 @@ Resource Type definition for AWS::Events::ApiDestination.
 - **arn** (String) The arn of the api destination.
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_events_api_destination.example <resource ID>
+```

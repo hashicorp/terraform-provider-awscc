@@ -33,4 +33,10 @@ The AWS::CloudWatch::CompositeAlarm type specifies an alarm which aggregates the
 - **arn** (String) Amazon Resource Name (ARN) of the alarm
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudwatch_composite_alarm.example <resource ID>
+```

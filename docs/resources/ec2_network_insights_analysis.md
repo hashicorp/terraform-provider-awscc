@@ -798,4 +798,10 @@ Read-Only:
 - **arn** (String)
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_network_insights_analysis.example <resource ID>
+```

@@ -44,4 +44,10 @@ Required:
 - **max_session_length_in_minutes** (Number)
 - **streaming_image_ids** (List of String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_nimblestudio_launch_profile.example <resource ID>
+```

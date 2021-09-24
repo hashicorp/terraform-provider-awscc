@@ -26,4 +26,10 @@ Resource Type definition for AWS::ApiGateway::Resource
 - **id** (String) Uniquely identifies the resource.
 - **resource_id** (String) A unique primary identifier for a Resource
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_apigateway_resource.example <resource ID>
+```

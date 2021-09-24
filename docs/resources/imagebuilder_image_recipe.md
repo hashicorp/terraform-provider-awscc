@@ -93,4 +93,10 @@ Optional:
 - **volume_size** (Number) Use to override the device's volume size.
 - **volume_type** (String) Use to override the device's volume type.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_image_recipe.example <resource ID>
+```

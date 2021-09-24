@@ -89,4 +89,10 @@ Optional:
 
 - **enabled** (Boolean)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_stepfunctions_state_machine.example <resource ID>
+```

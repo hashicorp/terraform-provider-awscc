@@ -38,4 +38,10 @@ Optional:
 - **key** (String) The tag's key.
 - **value** (String) The tag's value.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iot_dimension.example <resource ID>
+```

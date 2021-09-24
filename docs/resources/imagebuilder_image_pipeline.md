@@ -51,4 +51,10 @@ Optional:
 - **pipeline_execution_start_condition** (String) The condition configures when the pipeline should trigger a new image build.
 - **schedule_expression** (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_image_pipeline.example <resource ID>
+```

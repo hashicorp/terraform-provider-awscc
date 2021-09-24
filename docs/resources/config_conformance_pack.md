@@ -39,4 +39,10 @@ Optional:
 - **parameter_name** (String) Key part of key-value pair with value being parameter value
 - **parameter_value** (String) Value part of key-value pair with key being parameter Name
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_config_conformance_pack.example <resource ID>
+```

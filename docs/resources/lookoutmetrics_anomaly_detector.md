@@ -191,4 +191,10 @@ Required:
 - **column_format** (String) A timestamp format for the timestamps in the dataset
 - **column_name** (String) Name of a column in the data.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lookoutmetrics_anomaly_detector.example <resource ID>
+```

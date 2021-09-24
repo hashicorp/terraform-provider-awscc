@@ -116,4 +116,10 @@ Read-Only:
 - **role_type** (String) The IAM role type.
 - **status** (String) The status of the delegation.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_auditmanager_assessment.example <resource ID>
+```

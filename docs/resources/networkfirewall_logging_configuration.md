@@ -44,4 +44,10 @@ Required:
 - **log_destination_type** (String)
 - **log_type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_networkfirewall_logging_configuration.example <resource ID>
+```

@@ -221,4 +221,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_databrew_dataset.example <resource ID>
+```

@@ -57,4 +57,10 @@ Optional:
 
 - **vpc_interface_name** (String) The name of the VPC interface to use for this output.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_mediaconnect_flow_output.example <resource ID>
+```

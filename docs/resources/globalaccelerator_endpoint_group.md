@@ -54,4 +54,10 @@ Optional:
 - **endpoint_port** (Number) A network port number
 - **listener_port** (Number) A network port number
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_globalaccelerator_endpoint_group.example <resource ID>
+```

@@ -31,4 +31,10 @@ AWS::RoboMaker::Robot resource creates an AWS RoboMaker fleet.
 - **arn** (String)
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_robomaker_robot.example <resource ID>
+```

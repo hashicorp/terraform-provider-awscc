@@ -56,4 +56,10 @@ Required:
 - **role_arn** (String)
 - **sns_topic_arn** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lookoutmetrics_alert.example <resource ID>
+```

@@ -29,4 +29,10 @@ Resource schema for AWS::Athena::PreparedStatement
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_athena_prepared_statement.example <resource ID>
+```

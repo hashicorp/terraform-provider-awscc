@@ -29,4 +29,10 @@ Resource Type definition for AWS::EFS::MountTarget
 
 - **id** (String) The ID of this resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_efs_mount_target.example <resource ID>
+```

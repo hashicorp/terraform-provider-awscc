@@ -23,4 +23,10 @@ Resource used to control (enable/disable) DNSSEC in a specific hosted zone.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53_dnssec.example <resource ID>
+```

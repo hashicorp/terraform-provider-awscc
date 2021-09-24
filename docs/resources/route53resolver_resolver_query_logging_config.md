@@ -31,4 +31,10 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.
 - **share_status** (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
 - **status** (String) ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53resolver_resolver_query_logging_config.example <resource ID>
+```

@@ -45,4 +45,10 @@ Optional:
 - **display_name** (String) The display name of the topic.
 - **topic_name** (String) The name of the topic.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ses_contact_list.example <resource ID>
+```
