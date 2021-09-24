@@ -37,11 +37,9 @@ func (validator stringLenBetweenValidator) Validate(ctx context.Context, request
 	}
 
 	if l := len(s); l < validator.minLength || l > validator.maxLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be in the range [%d, %d], got %d", validator.minLength, validator.maxLength, l),
-		)
+		response.Diagnostics.Append(diags.NewInvalidLengthBetweenAttributeError(
+			request.AttributePath, validator.minLength, validator.maxLength, l,
+		))
 
 		return
 	}
@@ -84,11 +82,9 @@ func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request
 	}
 
 	if l := len(s); l < validator.minLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be at least %d, got %d", validator.minLength, l),
-		)
+		response.Diagnostics.Append(diags.NewInvalidLengthAtLeastAttributeError(
+			request.AttributePath, validator.minLength, l,
+		))
 
 		return
 	}
@@ -130,11 +126,9 @@ func (validator stringLenAtMostValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(s); l > validator.maxLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be at most %d, got %d", validator.maxLength, l),
-		)
+		response.Diagnostics.Append(diags.NewInvalidLengthAtMostAttributeError(
+			request.AttributePath, validator.maxLength, l,
+		))
 
 		return
 	}

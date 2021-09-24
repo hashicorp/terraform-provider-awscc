@@ -12,6 +12,7 @@ const (
 	summaryInvalidValue     = "Invalid value"
 	summaryInvalidValueType = "Invalid value type"
 	summaryNoTerraformValue = "No Terraform value"
+	summaryInvalidLength    = "Invalid length"
 )
 
 func NewInvalidValueAttributeError(path *tftypes.AttributePath, detail string) diag.Diagnostic {
@@ -57,5 +58,29 @@ func NewUnableToObtainValueAttributeError(path *tftypes.AttributePath, err error
 		path,
 		summaryNoTerraformValue,
 		fmt.Sprintf("unable to obtain Terraform value:\n\n%s", err),
+	)
+}
+
+func NewInvalidLengthBetweenAttributeError(path *tftypes.AttributePath, min, max, len int) diag.Diagnostic {
+	return diag.NewAttributeErrorDiagnostic(
+		path,
+		summaryInvalidLength,
+		fmt.Sprintf("expected length to be in the range [%d, %d], got %d", min, max, len),
+	)
+}
+
+func NewInvalidLengthAtLeastAttributeError(path *tftypes.AttributePath, min, len int) diag.Diagnostic {
+	return diag.NewAttributeErrorDiagnostic(
+		path,
+		summaryInvalidLength,
+		fmt.Sprintf("expected length to be at least %d, got %d", min, len),
+	)
+}
+
+func NewInvalidLengthAtMostAttributeError(path *tftypes.AttributePath, max, len int) diag.Diagnostic {
+	return diag.NewAttributeErrorDiagnostic(
+		path,
+		summaryInvalidLength,
+		fmt.Sprintf("expected length to be at most %d, got %d", max, len),
 	)
 }

@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 func TestAllValidator(t *testing.T) {
@@ -55,11 +56,7 @@ func TestAllValidator(t *testing.T) {
 				StringLenAtMost(4),
 			},
 			expectedDiags: []diag.Diagnostic{
-				diag.NewAttributeErrorDiagnostic(
-					rootPath,
-					"Invalid length",
-					"expected length to be at most 4, got 5",
-				),
+				diags.NewInvalidLengthAtMostAttributeError(rootPath, 4, 5),
 			},
 		},
 		"invalid string multiple matches": {
@@ -70,11 +67,7 @@ func TestAllValidator(t *testing.T) {
 				StringLenAtMost(4),
 			},
 			expectedDiags: []diag.Diagnostic{
-				diag.NewAttributeErrorDiagnostic(
-					rootPath,
-					"Invalid length",
-					"expected length to be at most 4, got 5",
-				),
+				diags.NewInvalidLengthAtMostAttributeError(rootPath, 4, 5),
 				newStringNotInSliceError(
 					rootPath,
 					[]string{"alpha", "beta", "gamma"},

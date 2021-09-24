@@ -37,11 +37,9 @@ func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(elems); l < validator.minItems || l > validator.maxItems {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be in the range [%d, %d], got %d", validator.minItems, validator.maxItems, l),
-		)
+		response.Diagnostics.Append(diags.NewInvalidLengthBetweenAttributeError(
+			request.AttributePath, validator.minItems, validator.maxItems, l,
+		))
 
 		return
 	}
@@ -84,11 +82,9 @@ func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(elems); l < validator.minItems {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be at least %d, got %d", validator.minItems, l),
-		)
+		response.Diagnostics.Append(diags.NewInvalidLengthAtLeastAttributeError(
+			request.AttributePath, validator.minItems, l,
+		))
 
 		return
 	}
