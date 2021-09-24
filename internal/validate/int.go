@@ -3,7 +3,6 @@ package validate
 import (
 	"context"
 	"fmt"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -31,36 +30,12 @@ func (validator intBetweenValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	i, ok := validateInt(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if n.Unknown || n.Null {
-		return
-	}
-
-	val := n.Value
-
-	if !val.IsInt() {
-		response.Diagnostics.Append(newNotAnIntegerValueError(
-			request.AttributePath,
-		))
-
-		return
-	}
-
-	var i big.Int
-	_, _ = val.Int(&i)
-
-	if i := i.Int64(); i < int64(validator.min) || i > int64(validator.max) {
+	if i < int64(validator.min) || i > int64(validator.max) {
 		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
@@ -101,36 +76,12 @@ func (validator intAtLeastValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	i, ok := validateInt(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if n.Unknown || n.Null {
-		return
-	}
-
-	val := n.Value
-
-	if !val.IsInt() {
-		response.Diagnostics.Append(newNotAnIntegerValueError(
-			request.AttributePath,
-		))
-
-		return
-	}
-
-	var i big.Int
-	_, _ = val.Int(&i)
-
-	if i := i.Int64(); i < int64(validator.min) {
+	if i < int64(validator.min) {
 		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
@@ -234,37 +185,13 @@ func (validator intInSliceValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	i, ok := validateInt(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
-
-	if n.Unknown || n.Null {
-		return
-	}
-
-	val := n.Value
-
-	if !val.IsInt() {
-		response.Diagnostics.Append(newNotAnIntegerValueError(
-			request.AttributePath,
-		))
-
-		return
-	}
-
-	var i big.Int
-	_, _ = val.Int(&i)
 
 	for _, val := range validator.valid {
-		if i.Int64() == int64(val) {
+		if i == int64(val) {
 			return
 		}
 	}
@@ -272,7 +199,7 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 	response.Diagnostics.Append(newIntNotInSliceError(
 		request.AttributePath,
 		validator.valid,
-		i.Int64(),
+		i,
 	))
 
 }
@@ -293,4 +220,36 @@ func IntInSlice(valid []int) tfsdk.AttributeValidator {
 
 func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
 	return diags.NewInvalidValueError(path, "Not an integer")
+}
+
+func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics.Append(diag.NewAttributeErrorDiagnostic(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		))
+
+		return 0, false
+	}
+
+	if n.Unknown || n.Null {
+		return 0, false
+	}
+
+	val := n.Value
+
+	if !val.IsInt() {
+		response.Diagnostics.Append(newNotAnIntegerValueError(
+			request.AttributePath,
+		))
+
+		return 0, false
+	}
+
+	i, _ := val.Int64()
+
+	return i, true
 }
