@@ -113,6 +113,13 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringInSlice([]string{
+					"CAPABILITY_IAM",
+					"CAPABILITY_NAMED_IAM",
+					"CAPABILITY_AUTO_EXPAND",
+				})),
+			},
 		},
 		"description": {
 			// Property: Description

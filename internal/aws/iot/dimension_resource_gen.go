@@ -73,6 +73,7 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 5),
+				validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 			},
 		},
 		"tags": {

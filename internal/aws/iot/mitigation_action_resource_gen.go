@@ -190,6 +190,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 10),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 									},
 								},
 							},

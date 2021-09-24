@@ -556,6 +556,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Definition
 												Type:     types.SetType{ElemType: types.StringType},
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenAtLeast(1)),
+												},
 											},
 										},
 										tfsdk.MapNestedAttributesOptions{},
@@ -571,6 +574,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Definition
 												Type:     types.SetType{ElemType: types.StringType},
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenAtLeast(1)),
+												},
 											},
 										},
 										tfsdk.MapNestedAttributesOptions{},
@@ -604,6 +610,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: TargetTypes
 												Type:     types.SetType{ElemType: types.StringType},
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"TLS_SNI",
+														"HTTP_HOST",
+													})),
+												},
 											},
 											"targets": {
 												// Property: Targets
@@ -733,6 +745,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: Settings
 															Type:     types.SetType{ElemType: types.StringType},
 															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenBetween(1, 8192)),
+															},
 														},
 													},
 													tfsdk.SetNestedAttributesOptions{},
@@ -869,6 +884,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																					// Property: Protocols
 																					Type:     types.SetType{ElemType: types.NumberType},
 																					Optional: true,
+																					Validators: []tfsdk.AttributeValidator{
+																						validate.ArrayForEach(validate.IntBetween(0, 255)),
+																					},
 																				},
 																				"source_ports": {
 																					// Property: SourcePorts
@@ -920,11 +938,35 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								// Property: Flags
 																								Type:     types.SetType{ElemType: types.StringType},
 																								Required: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.ArrayForEach(validate.StringInSlice([]string{
+																										"FIN",
+																										"SYN",
+																										"RST",
+																										"PSH",
+																										"ACK",
+																										"URG",
+																										"ECE",
+																										"CWR",
+																									})),
+																								},
 																							},
 																							"masks": {
 																								// Property: Masks
 																								Type:     types.SetType{ElemType: types.StringType},
 																								Optional: true,
+																								Validators: []tfsdk.AttributeValidator{
+																									validate.ArrayForEach(validate.StringInSlice([]string{
+																										"FIN",
+																										"SYN",
+																										"RST",
+																										"PSH",
+																										"ACK",
+																										"URG",
+																										"ECE",
+																										"CWR",
+																									})),
+																								},
 																							},
 																						},
 																						tfsdk.SetNestedAttributesOptions{},
