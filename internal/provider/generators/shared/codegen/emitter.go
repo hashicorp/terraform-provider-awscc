@@ -694,7 +694,7 @@ func unsupportedTypeError(path []string, typ string) error {
 }
 
 // arrayLengthValidator returns any array length AttributeValidator for the specified Property.
-func arrayLengthValidator(path []string, property *cfschema.Property) (string, error) {
+func arrayLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
 	if property.MinItems != nil && property.MaxItems == nil {
 		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems), nil
 	} else if property.MinItems == nil && property.MaxItems != nil {
@@ -1065,7 +1065,7 @@ func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaCompositio
 	return nRequired
 }
 
-func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) {
+func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) { //nolint:unparam
 	if p == nil {
 		return "", nil
 	}
@@ -1082,7 +1082,7 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) {
 	return w.String(), nil
 }
 
-func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) {
+func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) { //nolint:unparam
 	if r == nil {
 		return "", nil
 	}
