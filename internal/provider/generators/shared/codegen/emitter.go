@@ -48,8 +48,16 @@ type parent struct {
 }
 
 // EmitResourceSchemaRequiredAttributesValidator generates any resource schema-level required Attributes validators.
-func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() {
-	e.printf(resourceRequiredAttributesValidator(e.CfResource))
+func (e Emitter) EmitResourceSchemaRequiredAttributesValidator() error {
+	v, err := resourceRequiredAttributesValidator(e.CfResource)
+
+	if err != nil {
+		return err
+	}
+
+	e.printf(v)
+
+	return nil
 }
 
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
@@ -126,92 +134,28 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	case cfschema.PropertyTypeInteger:
 		e.printf("Type:types.NumberType,\n")
 
-		if property.Minimum == nil && property.Maximum != nil {
-			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
-		}
-
-		if property.Minimum != nil && property.Maximum == nil {
-			validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
-		}
-		if property.Minimum != nil && property.Maximum != nil {
-			validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
-		}
-
-		if property.Format != nil {
-			if format := *property.Format; format != "int64" {
-				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
-			}
-		}
-
-		if len(property.Enum) > 0 {
-			sb := strings.Builder{}
-			sb.WriteString("validate.IntInSlice([]int{\n")
-			for _, enum := range property.Enum {
-				sb.WriteString(fmt.Sprintf("%d", int(enum.(float64))))
-				sb.WriteString(",\n")
-			}
-			sb.WriteString("})")
-			validators = append(validators, sb.String())
+		if v, err := integerValidators(path, property); err != nil {
+			return 0, err
+		} else if len(v) > 0 {
+			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.NumberType,\n")
 
-		if property.Minimum == nil && property.Maximum != nil {
-			return 0, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
-		}
-
-		if property.Minimum != nil && property.Maximum == nil {
-			validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
-		}
-		if property.Minimum != nil && property.Maximum != nil {
-			validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
-		}
-
-		if property.Format != nil {
-			if format := *property.Format; format != "double" {
-				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
-			}
-		}
-
-		if len(property.Enum) > 0 {
-			return 0, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
+		if v, err := numberValidators(path, property); err != nil {
+			return 0, err
+		} else if len(v) > 0 {
+			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
 
-		if property.MinLength != nil && property.MaxLength == nil {
-			validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
-		}
-		if property.MaxLength != nil {
-			minLength := 0
-			if property.MinLength != nil {
-				minLength = *property.MinLength
-			}
-			validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
-		}
-
-		if property.Format != nil {
-			switch format := *property.Format; format {
-			case "date-time":
-				validators = append(validators, "validate.IsRFC3339Time()")
-			case "string":
-			default:
-				return 0, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
-			}
-		}
-
-		if len(property.Enum) > 0 {
-			sb := strings.Builder{}
-			sb.WriteString("validate.StringInSlice([]string{\n")
-			for _, enum := range property.Enum {
-				sb.WriteString("\"")
-				sb.WriteString(enum.(string))
-				sb.WriteString("\",\n")
-			}
-			sb.WriteString("})")
-			validators = append(validators, sb.String())
+		if v, err := stringValidators(path, property); err != nil {
+			return 0, err
+		} else if len(v) > 0 {
+			validators = append(validators, v...)
 		}
 
 	//
@@ -887,6 +831,121 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	default:
 		return 0, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
 	}
+}
+
+// integerValidators returns any validators for the specified integer Property.
+func integerValidators(path []string, property *cfschema.Property) ([]string, error) {
+	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeInteger {
+		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+	}
+
+	var validators []string
+
+	if property.Minimum == nil && property.Maximum != nil {
+		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+	}
+
+	if property.Minimum != nil && property.Maximum == nil {
+		validators = append(validators, fmt.Sprintf("validate.IntAtLeast(%d)", *property.Minimum))
+	}
+	if property.Minimum != nil && property.Maximum != nil {
+		validators = append(validators, fmt.Sprintf("validate.IntBetween(%d,%d)", *property.Minimum, *property.Maximum))
+	}
+
+	if property.Format != nil {
+		if format := *property.Format; format != "int64" {
+			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+		}
+	}
+
+	if len(property.Enum) > 0 {
+		sb := strings.Builder{}
+		sb.WriteString("validate.IntInSlice([]int{\n")
+		for _, enum := range property.Enum {
+			sb.WriteString(fmt.Sprintf("%d", int(enum.(float64))))
+			sb.WriteString(",\n")
+		}
+		sb.WriteString("})")
+		validators = append(validators, sb.String())
+	}
+
+	return validators, nil
+}
+
+// numberValidators returns any validators for the specified integer Property.
+func numberValidators(path []string, property *cfschema.Property) ([]string, error) {
+	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeNumber {
+		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+	}
+
+	var validators []string
+
+	if property.Minimum == nil && property.Maximum != nil {
+		return nil, fmt.Errorf("%s has Maximum but no Minimum", strings.Join(path, "/"))
+	}
+
+	if property.Minimum != nil && property.Maximum == nil {
+		validators = append(validators, fmt.Sprintf("validate.FloatAtLeast(%f)", float64(*property.Minimum)))
+	}
+	if property.Minimum != nil && property.Maximum != nil {
+		validators = append(validators, fmt.Sprintf("validate.FloatBetween(%f,%f)", float64(*property.Minimum), float64(*property.Maximum)))
+	}
+
+	if property.Format != nil {
+		if format := *property.Format; format != "double" {
+			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+		}
+	}
+
+	if len(property.Enum) > 0 {
+		return nil, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
+	}
+
+	return validators, nil
+}
+
+// stringValidators returns any validators for the specified string Property.
+func stringValidators(path []string, property *cfschema.Property) ([]string, error) {
+	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
+		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+	}
+
+	var validators []string
+
+	if property.MinLength != nil && property.MaxLength == nil {
+		validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
+	}
+	if property.MaxLength != nil {
+		minLength := 0
+		if property.MinLength != nil {
+			minLength = *property.MinLength
+		}
+		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", minLength, *property.MaxLength))
+	}
+
+	if property.Format != nil {
+		switch format := *property.Format; format {
+		case "date-time":
+			validators = append(validators, "validate.IsRFC3339Time()")
+		case "string":
+		default:
+			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+		}
+	}
+
+	if len(property.Enum) > 0 {
+		sb := strings.Builder{}
+		sb.WriteString("validate.StringInSlice([]string{\n")
+		for _, enum := range property.Enum {
+			sb.WriteString("\"")
+			sb.WriteString(enum.(string))
+			sb.WriteString("\",\n")
+		}
+		sb.WriteString("})")
+		validators = append(validators, sb.String())
+	}
+
+	return validators, nil
 }
 
 func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {
