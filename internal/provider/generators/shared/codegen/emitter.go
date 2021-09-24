@@ -916,9 +916,9 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 
 	if property.MinLength != nil && property.MaxLength == nil {
 		validators = append(validators, fmt.Sprintf("validate.StringLenAtLeast(%d)", *property.MinLength))
-	} else if property.MinItems == nil && property.MaxItems != nil {
-		validators = append(validators, fmt.Sprintf("validate.StringLenAtMost(%d)", *property.MaxItems))
-	} else if property.MinItems != nil && property.MaxItems != nil {
+	} else if property.MinLength == nil && property.MaxLength != nil {
+		validators = append(validators, fmt.Sprintf("validate.StringLenAtMost(%d)", *property.MaxLength))
+	} else if property.MinLength != nil && property.MaxLength != nil {
 		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", *property.MinLength, *property.MaxLength))
 	}
 
