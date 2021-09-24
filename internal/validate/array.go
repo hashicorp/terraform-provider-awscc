@@ -142,3 +142,70 @@ func ArrayLenAtLeast(minItems int) tfsdk.AttributeValidator {
 		minItems: minItems,
 	}
 }
+
+// arrayLenAtMostValidator validates that an array (List/Set) Attribute's length is at most a certain value.
+type arrayLenAtMostValidator struct {
+	tfsdk.AttributeValidator
+
+	maxItems int
+}
+
+// Description describes the validation in plain text formatting.
+func (validator arrayLenAtMostValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("array length must be at most %d", validator.maxItems)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator arrayLenAtMostValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+// Validate performs the validation.
+func (validator arrayLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	var l int
+	switch v := request.AttributeConfig.(type) {
+	case types.List:
+		if v.Null || v.Unknown {
+			return
+		}
+
+		l = len(v.Elems)
+
+	case types.Set:
+		if v.Null || v.Unknown {
+			return
+		}
+
+		l = len(v.Elems)
+
+	default:
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", v),
+		)
+
+		return
+	}
+
+	if l > validator.maxItems {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid length",
+			fmt.Sprintf("expected length to be at most %d, got %d", validator.maxItems, l),
+		)
+
+		return
+	}
+}
+
+// ArrayLenAtMost returns a new array length at most validator.
+func ArrayLenAtMost(maxItems int) tfsdk.AttributeValidator {
+	if maxItems < 0 {
+		return nil
+	}
+
+	return arrayLenAtMostValidator{
+		maxItems: maxItems,
+	}
+}
