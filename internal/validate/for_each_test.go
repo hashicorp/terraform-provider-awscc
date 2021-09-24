@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 func TestArrayForEachValidator(t *testing.T) {
@@ -30,7 +30,7 @@ func TestArrayForEachValidator(t *testing.T) {
 			val:       tftypes.NewValue(tftypes.Bool, true),
 			f:         types.BoolType.ValueFromTerraform,
 			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: diags.NewIncorrectValueTypeAttributeError(
+			expectedDiag: ccdiag.NewIncorrectValueTypeAttributeError(
 				rootPath,
 				types.Bool{},
 			),

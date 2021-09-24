@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // stringLenBetweenValidator validates that a string Attribute's length is in a range.
@@ -37,7 +37,7 @@ func (validator stringLenBetweenValidator) Validate(ctx context.Context, request
 	}
 
 	if l := len(s); l < validator.minLength || l > validator.maxLength {
-		response.Diagnostics.Append(diags.NewInvalidLengthBetweenAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthBetweenAttributeError(
 			request.AttributePath, validator.minLength, validator.maxLength, l,
 		))
 
@@ -82,7 +82,7 @@ func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request
 	}
 
 	if l := len(s); l < validator.minLength {
-		response.Diagnostics.Append(diags.NewInvalidLengthAtLeastAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthAtLeastAttributeError(
 			request.AttributePath, validator.minLength, l,
 		))
 
@@ -126,7 +126,7 @@ func (validator stringLenAtMostValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(s); l > validator.maxLength {
-		response.Diagnostics.Append(diags.NewInvalidLengthAtMostAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthAtMostAttributeError(
 			request.AttributePath, validator.maxLength, l,
 		))
 
@@ -183,7 +183,7 @@ func (validator stringInSliceValidator) Validate(ctx context.Context, request tf
 }
 
 func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value string) diag.Diagnostic {
-	return diags.NewInvalidValueAttributeError(
+	return ccdiag.NewInvalidValueAttributeError(
 		path,
 		fmt.Sprintf("expected value to be one of %v, got %s", valid, value),
 	)
@@ -220,7 +220,7 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 
 	// A JSON object starts with a '{'
 	if s[:1] != "{" {
-		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			"expected value to be a valid JSON object",
 		))
@@ -231,7 +231,7 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 	var i interface{}
 	err := json.Unmarshal([]byte(s), &i)
 	if err != nil {
-		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be valid JSON: %s", err),
 		))
@@ -247,7 +247,7 @@ func validateString(request tfsdk.ValidateAttributeRequest, response *tfsdk.Vali
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
 		))

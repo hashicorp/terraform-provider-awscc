@@ -1,4 +1,4 @@
-package diags
+package diag
 
 import (
 	"fmt"

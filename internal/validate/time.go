@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // isRFC3339TimeValidator validates that a string Attribute's length is a valid RFC33349Time.
@@ -30,7 +30,7 @@ func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tf
 	s, ok := request.AttributeConfig.(types.String)
 
 	if !ok {
-		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
 		))
@@ -43,7 +43,7 @@ func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tf
 	}
 
 	if _, err := time.Parse(time.RFC3339, s.Value); err != nil {
-		response.Diagnostics.Append(diags.NewInvalidFormatAttributeError(
+		response.Diagnostics.Append(diag.NewInvalidFormatAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s.Value, err),
 		))

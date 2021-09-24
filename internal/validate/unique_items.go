@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // uniqueItemsValidator validates that an Attribute's list items have unique values.
@@ -29,7 +29,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	list, ok := request.AttributeConfig.(types.List)
 
 	if !ok {
-		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
 		))
@@ -44,7 +44,7 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	val, err := list.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics.Append(diags.NewUnableToObtainValueAttributeError(
+		response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
 			err,
 		))

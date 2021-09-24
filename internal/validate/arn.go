@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // arnValidator validates that a string is an Amazon Resource Name (ARN).
@@ -33,7 +33,7 @@ func (validator arnValidator) Validate(ctx context.Context, request tfsdk.Valida
 	}
 
 	if !arn.IsARN(s) {
-		response.Diagnostics.Append(diags.NewInvalidFormatAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidFormatAttributeError(
 			request.AttributePath,
 			"expected value to be an ARN",
 		))
@@ -62,7 +62,7 @@ func (validator iamPolicyARNValidator) MarkdownDescription(ctx context.Context) 
 }
 
 func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	errDiag := diags.NewInvalidFormatAttributeError(
+	errDiag := ccdiag.NewInvalidFormatAttributeError(
 		request.AttributePath,
 		"expected an IAM policy ARN",
 	)

@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
@@ -37,7 +37,7 @@ func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(elems); l < validator.minItems || l > validator.maxItems {
-		response.Diagnostics.Append(diags.NewInvalidLengthBetweenAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthBetweenAttributeError(
 			request.AttributePath, validator.minItems, validator.maxItems, l,
 		))
 
@@ -82,7 +82,7 @@ func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request 
 	}
 
 	if l := len(elems); l < validator.minItems {
-		response.Diagnostics.Append(diags.NewInvalidLengthAtLeastAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthAtLeastAttributeError(
 			request.AttributePath, validator.minItems, l,
 		))
 
@@ -156,7 +156,7 @@ func listKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.V
 func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
 	val, err := v.ToTerraformValue(ctx)
 	if err != nil {
-		return nil, diags.NewUnableToObtainValueAttributeError(path, err)
+		return nil, ccdiag.NewUnableToObtainValueAttributeError(path, err)
 	}
 
 	return path.WithElementKeyValue(tftypes.NewValue(v.Type(ctx).TerraformType(ctx), val)), nil
@@ -183,7 +183,7 @@ func validateArray(request tfsdk.ValidateAttributeRequest, response *tfsdk.Valid
 		elems = v.Elems
 
 	default:
-		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			v,
 		))

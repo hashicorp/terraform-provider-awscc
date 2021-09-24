@@ -5,7 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 type defaultValueAttributePlanModifier struct {
@@ -32,7 +32,7 @@ func (attributePlanModifier defaultValueAttributePlanModifier) Modify(ctx contex
 	// If the planned value is Null and there is a current value and the current value is the default
 	// then return the current value, else return the planned value.
 	if v, err := request.AttributePlan.ToTerraformValue(ctx); err != nil {
-		response.Diagnostics.Append(diags.NewUnableToObtainValueAttributeError(
+		response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
 			err,
 		))

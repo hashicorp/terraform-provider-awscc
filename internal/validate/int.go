@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // intBetweenValidator validates that an integer Attribute's value is in a range.
@@ -36,7 +36,7 @@ func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk
 	}
 
 	if i < int64(validator.min) || i > int64(validator.max) {
-		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be in the range [%d, %d], got %d", validator.min, validator.max, i),
 		))
@@ -82,7 +82,7 @@ func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk
 	}
 
 	if i < int64(validator.min) {
-		response.Diagnostics.Append(diags.NewInvalidValueAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at least %d, got %d", validator.min, i),
 		))
@@ -205,7 +205,7 @@ func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk
 }
 
 func newIntNotInSliceError(path *tftypes.AttributePath, valid []int, value int64) diag.Diagnostic {
-	return diags.NewInvalidValueAttributeError(
+	return ccdiag.NewInvalidValueAttributeError(
 		path,
 		fmt.Sprintf("expected value to be one of %v, got %d", valid, value),
 	)
@@ -219,14 +219,14 @@ func IntInSlice(valid []int) tfsdk.AttributeValidator {
 }
 
 func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
-	return diags.NewInvalidValueAttributeError(path, "Not an integer")
+	return ccdiag.NewInvalidValueAttributeError(path, "Not an integer")
 }
 
 func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
 	n, ok := request.AttributeConfig.(types.Number)
 
 	if !ok {
-		response.Diagnostics.Append(diags.NewIncorrectValueTypeAttributeError(
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
 		))
