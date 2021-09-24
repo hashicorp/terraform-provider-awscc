@@ -32,23 +32,23 @@ func main() {
 		tmpl, err := template.New("function").Parse(importExampleTemplateBody)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error parsing function template: %w", err))
+			ui.Error(fmt.Sprintf("error parsing function template: %s", err))
 		}
 
 		var buffer bytes.Buffer
 		err = tmpl.Execute(&buffer, templateData)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error executing template: %w", err))
+			ui.Error(fmt.Sprintf("error executing template: %s", err))
 		}
 
-        examplesPath := "../../../../examples/resources"
+		examplesPath := "../../../../examples/resources"
 
-        dirname := fmt.Sprintf("%s/%s", examplesPath, resource)
-        err = os.MkdirAll(dirname, shared.DirPerm)
+		dirname := fmt.Sprintf("%s/%s", examplesPath, resource)
+		err = os.MkdirAll(dirname, shared.DirPerm)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("creating target directory %s: %w", dirname, err))
+			ui.Error(fmt.Sprintf("creating target directory %s: %s", dirname, err))
 		}
 
 		filename := fmt.Sprintf("%s/import.sh", dirname)
@@ -56,7 +56,7 @@ func main() {
 		f, err := os.Create(filename)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error creating file (%s): %w", filename, err))
+			ui.Error(fmt.Sprintf("error creating file (%s): %s", filename, err))
 		}
 
 		defer f.Close()
@@ -64,7 +64,7 @@ func main() {
 		_, err = f.Write(buffer.Bytes())
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error writing to file (%s): %w", filename, err))
+			ui.Error(fmt.Sprintf("error writing to file (%s): %s", filename, err))
 		}
 	}
 }
