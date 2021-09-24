@@ -864,14 +864,14 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 	}
 
 	if len(property.Enum) > 0 {
-		sb := strings.Builder{}
-		sb.WriteString("validate.IntInSlice([]int{\n")
+		w := &strings.Builder{}
+		fprintf(w, "validate.IntInSlice([]int{\n")
 		for _, enum := range property.Enum {
-			sb.WriteString(fmt.Sprintf("%d", int(enum.(float64))))
-			sb.WriteString(",\n")
+			fprintf(w, "%d", int(enum.(float64)))
+			fprintf(w, ",\n")
 		}
-		sb.WriteString("})")
-		validators = append(validators, sb.String())
+		fprintf(w, "})")
+		validators = append(validators, w.String())
 	}
 
 	return validators, nil
@@ -933,15 +933,15 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 	}
 
 	if len(property.Enum) > 0 {
-		sb := strings.Builder{}
-		sb.WriteString("validate.StringInSlice([]string{\n")
+		w := &strings.Builder{}
+		fprintf(w, "validate.StringInSlice([]string{\n")
 		for _, enum := range property.Enum {
-			sb.WriteString("\"")
-			sb.WriteString(enum.(string))
-			sb.WriteString("\",\n")
+			fprintf(w, "\"")
+			fprintf(w, enum.(string))
+			fprintf(w, "\",\n")
 		}
-		sb.WriteString("})")
-		validators = append(validators, sb.String())
+		fprintf(w, "})")
+		validators = append(validators, w.String())
 	}
 
 	return validators, nil
@@ -1070,17 +1070,16 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) {
 		return "", nil
 	}
 
-	writer := &strings.Builder{}
-
-	fprintf(writer, "validate.RequiredAttributes(\n")
-	nRequired := addSchemaCompositionRequiredAttributes(writer, property(*p))
-	fprintf(writer, ")")
+	w := &strings.Builder{}
+	fprintf(w, "validate.RequiredAttributes(\n")
+	nRequired := addSchemaCompositionRequiredAttributes(w, property(*p))
+	fprintf(w, ")")
 
 	if nRequired == 0 {
 		return "", nil
 	}
 
-	return writer.String(), nil
+	return w.String(), nil
 }
 
 func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) {
@@ -1088,14 +1087,14 @@ func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) {
 		return "", nil
 	}
 
-	writer := &strings.Builder{}
-	nRequired := addSchemaCompositionRequiredAttributes(writer, resource(*r))
+	w := &strings.Builder{}
+	nRequired := addSchemaCompositionRequiredAttributes(w, resource(*r))
 
 	if nRequired == 0 {
 		return "", nil
 	}
 
-	return writer.String(), nil
+	return w.String(), nil
 }
 
 // The schemaComposition interface can be implemented by Property and Resource.
