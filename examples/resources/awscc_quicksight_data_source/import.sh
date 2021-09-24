@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_data_source.example <resource ID>

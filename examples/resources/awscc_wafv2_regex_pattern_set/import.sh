@@ -1,0 +1,1 @@
+$ terraform import awscc_wafv2_regex_pattern_set.example <resource ID>

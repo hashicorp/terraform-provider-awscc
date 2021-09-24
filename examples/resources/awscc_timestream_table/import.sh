@@ -1,0 +1,1 @@
+$ terraform import awscc_timestream_table.example <resource ID>

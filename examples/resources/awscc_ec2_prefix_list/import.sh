@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_prefix_list.example <resource ID>

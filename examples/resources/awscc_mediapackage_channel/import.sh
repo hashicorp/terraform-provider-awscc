@@ -1,0 +1,1 @@
+$ terraform import awscc_mediapackage_channel.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_dimension.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_iam_oidc_provider.example <resource ID>

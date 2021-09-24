@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_model_bias_job_definition.example <resource ID>

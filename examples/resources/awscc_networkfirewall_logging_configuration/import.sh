@@ -1,0 +1,1 @@
+$ terraform import awscc_networkfirewall_logging_configuration.example <resource ID>

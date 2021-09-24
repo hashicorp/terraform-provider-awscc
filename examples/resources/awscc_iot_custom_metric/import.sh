@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_custom_metric.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_mediapackage_asset.example <resource ID>

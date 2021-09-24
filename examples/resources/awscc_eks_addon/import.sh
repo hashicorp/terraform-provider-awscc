@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_addon.example <resource ID>

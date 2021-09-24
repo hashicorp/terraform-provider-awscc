@@ -1,0 +1,1 @@
+$ terraform import awscc_ssmcontacts_contact_channel.example <resource ID>

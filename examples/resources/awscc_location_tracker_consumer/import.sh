@@ -1,0 +1,1 @@
+$ terraform import awscc_location_tracker_consumer.example <resource ID>

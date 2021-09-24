@@ -1,0 +1,1 @@
+$ terraform import awscc_efs_access_point.example <resource ID>

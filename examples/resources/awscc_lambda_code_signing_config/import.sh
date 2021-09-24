@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_code_signing_config.example <resource ID>

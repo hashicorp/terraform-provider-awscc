@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_contact_list.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_s3_access_point.example <resource ID>

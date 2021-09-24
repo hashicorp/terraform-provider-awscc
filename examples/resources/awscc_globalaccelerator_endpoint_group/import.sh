@@ -1,0 +1,1 @@
+$ terraform import awscc_globalaccelerator_endpoint_group.example <resource ID>

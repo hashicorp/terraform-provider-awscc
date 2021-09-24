@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_fargate_profile.example <resource ID>

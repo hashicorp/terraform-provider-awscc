@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_provisioning_template.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_efs_mount_target.example <resource ID>

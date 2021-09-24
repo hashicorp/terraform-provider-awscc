@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_transit_gateway_registration.example <resource ID>

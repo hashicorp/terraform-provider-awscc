@@ -1,0 +1,1 @@
+$ terraform import awscc_ivs_playback_key_pair.example <resource ID>

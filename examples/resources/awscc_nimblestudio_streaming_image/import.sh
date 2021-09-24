@@ -1,0 +1,1 @@
+$ terraform import awscc_nimblestudio_streaming_image.example <resource ID>

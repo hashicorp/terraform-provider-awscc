@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_schema_version_metadata.example <resource ID>

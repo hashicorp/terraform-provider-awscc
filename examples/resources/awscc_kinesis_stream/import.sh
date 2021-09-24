@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesis_stream.example <resource ID>

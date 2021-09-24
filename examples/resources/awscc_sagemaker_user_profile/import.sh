@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_user_profile.example <resource ID>

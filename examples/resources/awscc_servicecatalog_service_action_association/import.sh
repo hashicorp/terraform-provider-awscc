@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_service_action_association.example <resource ID>

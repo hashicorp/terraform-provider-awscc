@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_device.example <resource ID>
