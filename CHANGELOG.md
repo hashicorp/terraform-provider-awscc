@@ -1,5 +1,10 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.12](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.12) (September 23, 2021)
+
+Refresh CloudFormation resource type schemas.
+Add `max_retries`, `assume_role.policy` and `assume_role.policy_arns` provider configuration options.
+
 ## [0.0.11](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.11) (September 21, 2021)
 
 Add resource import support.
