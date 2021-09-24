@@ -168,15 +168,17 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			//
 			// Set.
 			//
+			var elementType string
+
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
-				e.printf("Type:types.SetType{ElemType:types.BoolType},\n")
+				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type:types.SetType{ElemType:types.NumberType},\n")
+				elementType = "types.NumberType"
 
 			case cfschema.PropertyTypeString:
-				e.printf("Type:types.SetType{ElemType:types.StringType},\n")
+				elementType = "types.StringType"
 
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
@@ -209,10 +211,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf("),\n")
 
-				if validator, err := arrayLengthValidator(property); err != nil {
+				if v, err := arrayLengthValidator(path, property); err != nil {
 					return 0, err
-				} else if validator != "" {
-					validators = append(validators, validator)
+				} else if v != "" {
+					validators = append(validators, v)
 				}
 
 				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
@@ -223,6 +225,16 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 			default:
 				return 0, unsupportedTypeError(path, fmt.Sprintf("set of %s", itemType))
+			}
+
+			if elementType != "" {
+				e.printf("Type:types.SetType{ElemType:%s},\n", elementType)
+
+				if v, err := arrayLengthValidator(path, property); err != nil {
+					return 0, err
+				} else if v != "" {
+					validators = append(validators, v)
+				}
 			}
 		} else {
 			//
@@ -271,10 +283,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf("),\n")
 
-				if validator, err := arrayLengthValidator(property); err != nil {
+				if v, err := arrayLengthValidator(path, property); err != nil {
 					return 0, err
-				} else if validator != "" {
-					validators = append(validators, validator)
+				} else if v != "" {
+					validators = append(validators, v)
 				}
 
 				switch arrayType {
@@ -297,10 +309,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			if elementType != "" {
 				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
 
-				if validator, err := arrayLengthValidator(property); err != nil {
+				if v, err := arrayLengthValidator(path, property); err != nil {
 					return 0, err
-				} else if validator != "" {
-					validators = append(validators, validator)
+				} else if v != "" {
+					validators = append(validators, v)
 				}
 
 				switch arrayType {
@@ -682,7 +694,7 @@ func unsupportedTypeError(path []string, typ string) error {
 }
 
 // arrayLengthValidator returns any array length AttributeValidator for the specified Property.
-func arrayLengthValidator(property *cfschema.Property) (string, error) {
+func arrayLengthValidator(path []string, property *cfschema.Property) (string, error) {
 	if property.MinItems != nil && property.MaxItems == nil {
 		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems), nil
 	}
