@@ -5,7 +5,9 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diags"
 )
 
 // arnValidator validates that a string is an Amazon Resource Name (ARN).
@@ -31,11 +33,10 @@ func (validator arnValidator) Validate(ctx context.Context, request tfsdk.Valida
 	}
 
 	if !arn.IsARN(s) {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidFormatAttributeError(
 			request.AttributePath,
-			"Invalid format",
 			"expected value to be an ARN",
-		)
+		))
 
 		return
 	}
@@ -61,17 +62,18 @@ func (validator iamPolicyARNValidator) MarkdownDescription(ctx context.Context) 
 }
 
 func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	arn, ok := validateARN(request, response)
+	errDiag := diags.NewInvalidFormatAttributeError(
+		request.AttributePath,
+		"expected an IAM policy ARN",
+	)
+
+	arn, ok := validateARN(request, response, errDiag)
 	if !ok {
 		return
 	}
 
 	if arn.Service != "iam" || !strings.HasPrefix(arn.Resource, "policy/") {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid format",
-			"expected an IAM policy ARN",
-		)
+		response.Diagnostics.Append(errDiag)
 	}
 }
 
@@ -80,7 +82,7 @@ func IAMPolicyARN() tfsdk.AttributeValidator {
 	return iamPolicyARNValidator{}
 }
 
-func validateARN(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (arn.ARN, bool) {
+func validateARN(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
 	s, ok := validateString(request, response)
 	if !ok {
 		return arn.ARN{}, false
@@ -88,11 +90,7 @@ func validateARN(request tfsdk.ValidateAttributeRequest, response *tfsdk.Validat
 
 	arn, err := arn.Parse(s)
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid format",
-			"expected an IAM policy ARN",
-		)
+		response.Diagnostics.Append(errDiag)
 
 		return arn, false
 	}

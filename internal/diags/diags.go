@@ -84,3 +84,11 @@ func NewInvalidLengthAtMostAttributeError(path *tftypes.AttributePath, max, len 
 		fmt.Sprintf("expected length to be at most %d, got %d", max, len),
 	)
 }
+
+func NewInvalidFormatAttributeError(path *tftypes.AttributePath, detail string) diag.Diagnostic {
+	return diag.NewAttributeErrorDiagnostic(
+		path,
+		summaryInvalidLength,
+		detail,
+	)
+}

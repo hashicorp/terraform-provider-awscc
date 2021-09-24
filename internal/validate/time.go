@@ -43,11 +43,10 @@ func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tf
 	}
 
 	if _, err := time.Parse(time.RFC3339, s.Value); err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diags.NewInvalidFormatAttributeError(
 			request.AttributePath,
-			"Invalid format",
 			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s.Value, err),
-		)
+		))
 
 		return
 	}
