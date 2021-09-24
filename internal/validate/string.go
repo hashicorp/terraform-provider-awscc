@@ -31,26 +31,12 @@ func (validator stringLenBetweenValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l < validator.minLength || l > validator.maxLength {
+	if l := len(s); l < validator.minLength || l > validator.maxLength {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -92,26 +78,12 @@ func (validator stringLenAtLeastValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l < validator.minLength {
+	if l := len(s); l < validator.minLength {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -152,26 +124,12 @@ func (validator stringLenAtMostValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator stringLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l > validator.maxLength {
+	if l := len(s); l > validator.maxLength {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -212,24 +170,13 @@ func (validator stringInSliceValidator) MarkdownDescription(ctx context.Context)
 
 // Validate performs the validation.
 func (validator stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
-		return
-	}
-
-	if s.Unknown || s.Null {
 		return
 	}
 
 	for _, val := range validator.valid {
-		if s.Value == val {
+		if s == val {
 			return
 		}
 	}
@@ -237,7 +184,7 @@ func (validator stringInSliceValidator) Validate(ctx context.Context, request tf
 	response.Diagnostics.Append(newStringNotInSliceError(
 		request.AttributePath,
 		validator.valid,
-		s.Value,
+		s,
 	))
 }
 
@@ -272,24 +219,13 @@ func (validator stringIsJsonObjectValidator) MarkdownDescription(ctx context.Con
 
 // Validate performs the validation.
 func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
-		return
-	}
-
-	if s.Unknown || s.Null {
 		return
 	}
 
 	// A JSON object starts with a '{'
-	if s.Value[:1] != "{" {
+	if s[:1] != "{" {
 		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
 			"expected value to be a valid JSON object",
@@ -299,7 +235,7 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 
 	// Use json.Unmarshal() instead of just json.Valid() to get the parsing error
 	var i interface{}
-	err := json.Unmarshal([]byte(s.Value), &i)
+	err := json.Unmarshal([]byte(s), &i)
 	if err != nil {
 		response.Diagnostics.Append(diags.NewInvalidValueError(
 			request.AttributePath,
@@ -311,4 +247,24 @@ func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, reque
 // StringIsJsonObject returns a new string is JSON validator.
 func StringIsJsonObject() tfsdk.AttributeValidator {
 	return stringIsJsonObjectValidator{}
+}
+
+func validateString(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (string, bool) {
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics.Append(diag.NewAttributeErrorDiagnostic(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		))
+
+		return "", false
+	}
+
+	if s.Unknown || s.Null {
+		return "", false
+	}
+
+	return s.Value, true
 }
