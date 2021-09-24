@@ -122,6 +122,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenAtMost(128)),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 				tfsdk.RequiresReplace(),

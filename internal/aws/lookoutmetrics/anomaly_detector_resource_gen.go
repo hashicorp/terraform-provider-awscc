@@ -564,6 +564,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(0),
+							validate.ArrayForEach(validate.StringLenBetween(1, 63)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -758,11 +759,17 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															// Property: SecurityGroupIdList
 															Type:     types.ListType{ElemType: types.StringType},
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+															},
 														},
 														"subnet_id_list": {
 															// Property: SubnetIdList
 															Type:     types.ListType{ElemType: types.StringType},
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenAtMost(255)),
+															},
 														},
 													},
 												),
@@ -840,11 +847,17 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															// Property: SecurityGroupIdList
 															Type:     types.ListType{ElemType: types.StringType},
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+															},
 														},
 														"subnet_id_list": {
 															// Property: SubnetIdList
 															Type:     types.ListType{ElemType: types.StringType},
 															Required: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.ArrayForEach(validate.StringLenAtMost(255)),
+															},
 														},
 													},
 												),
@@ -902,6 +915,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		// Property: HeaderList
 																		Type:     types.ListType{ElemType: types.StringType},
 																		Optional: true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.ArrayForEach(validate.StringLenBetween(1, 63)),
+																		},
 																	},
 																	"quote_symbol": {
 																		// Property: QuoteSymbol
@@ -952,6 +968,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
+													validate.ArrayForEach(validate.StringLenAtMost(1024)),
 												},
 											},
 											"role_arn": {
@@ -968,6 +985,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
+													validate.ArrayForEach(validate.StringLenAtMost(1024)),
 												},
 											},
 										},

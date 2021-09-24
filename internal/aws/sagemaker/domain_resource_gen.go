@@ -499,6 +499,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
+							validate.ArrayForEach(validate.StringLenAtMost(32)),
 						},
 					},
 					"sharing_settings": {
@@ -653,6 +654,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 16),
+				validate.ArrayForEach(validate.StringLenAtMost(32)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

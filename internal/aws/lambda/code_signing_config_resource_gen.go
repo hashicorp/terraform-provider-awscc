@@ -55,6 +55,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 20),
+							validate.ArrayForEach(validate.StringLenBetween(12, 1024)),
 						},
 					},
 				},

@@ -62,6 +62,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
+							validate.ArrayForEach(validate.StringLenAtMost(128)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),

@@ -64,6 +64,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+			},
 		},
 		"auto_sub_domain_iam_role": {
 			// Property: AutoSubDomainIAMRole

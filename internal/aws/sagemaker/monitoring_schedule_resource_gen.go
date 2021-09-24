@@ -691,6 +691,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(50),
+													validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 												},
 											},
 											"container_entrypoint": {
@@ -700,6 +701,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+													validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 												},
 											},
 											"image_uri": {
@@ -941,6 +943,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenBetween(1, 5),
+																validate.ArrayForEach(validate.StringLenAtMost(32)),
 															},
 														},
 														"subnets": {
@@ -950,6 +953,7 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenBetween(1, 16),
+																validate.ArrayForEach(validate.StringLenAtMost(32)),
 															},
 														},
 													},

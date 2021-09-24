@@ -39,6 +39,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
+				validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),

@@ -356,6 +356,18 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringInSlice([]string{
+											"SPLICE_INSERT",
+											"BREAK",
+											"PROVIDER_ADVERTISEMENT",
+											"DISTRIBUTOR_ADVERTISEMENT",
+											"PROVIDER_PLACEMENT_OPPORTUNITY",
+											"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+											"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+											"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
+										})),
+									},
 								},
 								"ads_on_delivery_restrictions": {
 									// Property: AdsOnDeliveryRestrictions
@@ -662,6 +674,18 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringInSlice([]string{
+								"SPLICE_INSERT",
+								"BREAK",
+								"PROVIDER_ADVERTISEMENT",
+								"DISTRIBUTOR_ADVERTISEMENT",
+								"PROVIDER_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+								"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
+							})),
+						},
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions
@@ -766,6 +790,11 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringInSlice([]string{
+								"ADS",
+							})),
+						},
 					},
 					"profile": {
 						// Property: Profile
@@ -1060,6 +1089,18 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringInSlice([]string{
+								"SPLICE_INSERT",
+								"BREAK",
+								"PROVIDER_ADVERTISEMENT",
+								"DISTRIBUTOR_ADVERTISEMENT",
+								"PROVIDER_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+								"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
+							})),
+						},
 					},
 					"ads_on_delivery_restrictions": {
 						// Property: AdsOnDeliveryRestrictions

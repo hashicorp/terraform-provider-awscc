@@ -155,6 +155,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 10),
 													validate.UniqueItems(),
+													validate.ArrayForEach(validate.StringLenAtMost(10000)),
 												},
 											},
 										},
@@ -246,6 +247,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
+							validate.ArrayForEach(validate.StringLenAtMost(1000)),
 						},
 					},
 				},

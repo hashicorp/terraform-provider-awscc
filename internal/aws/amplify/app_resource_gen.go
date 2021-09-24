@@ -169,6 +169,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AutoBranchCreationPatterns
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+						},
 					},
 					"basic_auth_config": {
 						// Property: BasicAuthConfig

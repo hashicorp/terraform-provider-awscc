@@ -673,6 +673,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 								"subnets": {
@@ -682,6 +683,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 							},

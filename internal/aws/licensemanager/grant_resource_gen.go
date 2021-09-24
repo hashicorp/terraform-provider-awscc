@@ -97,6 +97,7 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringLenAtMost(2048)),
 			},
 			// Principals is a write-only property.
 		},

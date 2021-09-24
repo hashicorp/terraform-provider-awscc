@@ -103,6 +103,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenAtMost(128)),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 				tfsdk.RequiresReplace(),
@@ -125,6 +128,9 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenAtMost(128)),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 				tfsdk.RequiresReplace(),

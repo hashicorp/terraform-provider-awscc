@@ -1594,6 +1594,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"inclusion_patterns": {
@@ -1602,6 +1603,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"page_configuration": {
@@ -1697,6 +1699,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
+													validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 												},
 											},
 											"include_spaces": {
@@ -1705,6 +1708,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
+													validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 												},
 											},
 											"space_field_mappings": {
@@ -1773,6 +1777,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 											"subnet_ids": {
@@ -1781,6 +1786,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 										},
@@ -1821,6 +1827,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 5),
+													validate.ArrayForEach(validate.StringLenBetween(1, 100)),
 												},
 											},
 											"document_data_column_name": {
@@ -1977,6 +1984,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 											"subnet_ids": {
@@ -1985,6 +1993,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 										},
@@ -2003,16 +2012,25 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: ExcludeMimeTypes
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
 								},
 								"exclude_shared_drives": {
 									// Property: ExcludeSharedDrives
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
 								},
 								"exclude_user_accounts": {
 									// Property: ExcludeUserAccounts
 									Type:     types.ListType{ElemType: types.StringType},
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+									},
 								},
 								"exclusion_patterns": {
 									// Property: ExclusionPatterns
@@ -2020,6 +2038,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"field_mappings": {
@@ -2064,6 +2083,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"secret_arn": {
@@ -2093,6 +2113,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"field_mappings": {
@@ -2137,6 +2158,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"one_drive_users": {
@@ -2147,6 +2169,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: OneDriveUserList
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+												},
 											},
 											"one_drive_user_s3_path": {
 												// Property: OneDriveUserS3Path
@@ -2259,6 +2284,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"inclusion_patterns": {
@@ -2267,6 +2293,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"inclusion_prefixes": {
@@ -2275,6 +2302,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 							},
@@ -2345,6 +2373,12 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: IncludeFilterTypes
 												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"ACTIVE_USER",
+														"STANDARD_USER",
+													})),
+												},
 											},
 										},
 									),
@@ -2361,6 +2395,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"include_attachment_file_patterns": {
@@ -2369,6 +2404,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"knowledge_article_configuration": {
@@ -2453,6 +2489,11 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 3),
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"DRAFT",
+														"PUBLISHED",
+														"ARCHIVED",
+													})),
 												},
 											},
 											"standard_knowledge_article_type_configuration": {
@@ -2724,6 +2765,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 												},
 											},
 											"field_mappings": {
@@ -2768,6 +2810,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 												},
 											},
 										},
@@ -2813,6 +2856,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 												},
 											},
 											"field_mappings": {
@@ -2857,6 +2901,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(100),
+													validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 												},
 											},
 										},
@@ -2907,6 +2952,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"field_mappings": {
@@ -2951,6 +2997,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 50)),
 									},
 								},
 								"secret_arn": {
@@ -2977,6 +3024,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
+										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 									},
 								},
 								"use_change_log": {
@@ -2994,6 +3042,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 											"subnet_ids": {
@@ -3002,6 +3051,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
+													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
 												},
 											},
 										},

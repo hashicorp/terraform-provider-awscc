@@ -810,6 +810,9 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SourceFields
 									Type:     types.ListType{ElemType: types.StringType},
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenAtMost(2048)),
+									},
 								},
 								"task_properties": {
 									// Property: TaskProperties

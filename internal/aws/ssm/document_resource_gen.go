@@ -94,6 +94,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 1),
+							validate.ArrayForEach(validate.StringLenBetween(1, 100000)),
 						},
 					},
 				},

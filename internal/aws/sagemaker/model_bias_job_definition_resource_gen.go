@@ -749,6 +749,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 								"subnets": {
@@ -758,6 +759,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 							},

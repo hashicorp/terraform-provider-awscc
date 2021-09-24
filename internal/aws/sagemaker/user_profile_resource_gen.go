@@ -599,6 +599,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
+							validate.ArrayForEach(validate.StringLenAtMost(32)),
 						},
 					},
 					"sharing_settings": {

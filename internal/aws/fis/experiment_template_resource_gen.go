@@ -114,6 +114,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The names of the actions that must be completed before the current action starts.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenAtMost(64)),
+						},
 					},
 					"targets": {
 						// Property: Targets
@@ -334,6 +337,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "The attribute values for the filter.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenAtMost(128)),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -345,6 +351,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The Amazon Resource Names (ARNs) of the target resources.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(20, 2048)),
+						},
 					},
 					"resource_tags": {
 						// Property: ResourceTags

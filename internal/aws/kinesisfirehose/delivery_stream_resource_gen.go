@@ -725,6 +725,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
 										validate.UniqueItems(),
+										validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
 									},
 								},
 								"subnet_ids": {
@@ -734,6 +735,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
 										validate.UniqueItems(),
+										validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
 									},
 								},
 							},

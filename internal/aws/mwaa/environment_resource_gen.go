@@ -561,6 +561,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
+							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
 						},
 					},
 					"subnet_ids": {
@@ -571,6 +572,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(2, 2),
+							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.RequiresReplace(),

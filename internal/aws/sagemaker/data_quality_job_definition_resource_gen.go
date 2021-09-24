@@ -108,6 +108,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(50),
+							validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 						},
 					},
 					"container_entrypoint": {
@@ -117,6 +118,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(100),
+							validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 						},
 					},
 					"environment": {
@@ -714,6 +716,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 								"subnets": {
@@ -723,6 +726,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 							},

@@ -84,6 +84,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(1),
+										validate.ArrayForEach(validate.StringLenBetween(0, 256)),
 									},
 								},
 							},
@@ -180,6 +181,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(1),
+													validate.ArrayForEach(validate.StringLenBetween(0, 256)),
 												},
 											},
 										},
