@@ -265,11 +265,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf("),\n")
 
-				if validator := arrayLengthValidator(property); validator != "" {
+				if validator, err := arrayLengthValidator(property); err != nil {
+					return 0, err
+				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
-				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
+					return 0, err
+				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
@@ -323,7 +327,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 				e.printf("),\n")
 
-				if validator := arrayLengthValidator(property); validator != "" {
+				if validator, err := arrayLengthValidator(property); err != nil {
+					return 0, err
+				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
@@ -334,7 +340,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					planModifiers = append(planModifiers, "Multiset()")
 				}
 
-				if validator := propertyRequiredAttributesValidator(property.Items); validator != "" {
+				if validator, err := propertyRequiredAttributesValidator(property.Items); err != nil {
+					return 0, err
+				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
@@ -345,7 +353,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			if elementType != "" {
 				e.printf("Type:types.ListType{ElemType:%s},\n", elementType)
 
-				if validator := arrayLengthValidator(property); validator != "" {
+				if validator, err := arrayLengthValidator(property); err != nil {
+					return 0, err
+				} else if validator != "" {
 					validators = append(validators, validator)
 				}
 
@@ -506,7 +516,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		e.printf(",\n")
 		e.printf("),\n")
 
-		if validator := propertyRequiredAttributesValidator(property); validator != "" {
+		if validator, err := propertyRequiredAttributesValidator(property); err != nil {
+			return 0, err
+		} else if validator != "" {
 			validators = append(validators, validator)
 		}
 
@@ -726,9 +738,9 @@ func unsupportedTypeError(path []string, typ string) error {
 }
 
 // arrayLengthValidator returns any array length AttributeValidator for the specified Property.
-func arrayLengthValidator(property *cfschema.Property) string {
+func arrayLengthValidator(property *cfschema.Property) (string, error) {
 	if property.MinItems != nil && property.MaxItems == nil {
-		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems)
+		return fmt.Sprintf("validate.ArrayLenAtLeast(%d)", *property.MinItems), nil
 	}
 
 	if property.MaxItems != nil {
@@ -736,10 +748,10 @@ func arrayLengthValidator(property *cfschema.Property) string {
 		if property.MinItems != nil {
 			minItems = *property.MinItems
 		}
-		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems)
+		return fmt.Sprintf("validate.ArrayLenBetween(%d,%d)", minItems, *property.MaxItems), nil
 	}
 
-	return ""
+	return "", nil
 }
 
 // defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
@@ -995,9 +1007,9 @@ func addSchemaCompositionRequiredAttributes(writer io.Writer, r schemaCompositio
 	return nRequired
 }
 
-func propertyRequiredAttributesValidator(p *cfschema.Property) string {
+func propertyRequiredAttributesValidator(p *cfschema.Property) (string, error) {
 	if p == nil {
-		return ""
+		return "", nil
 	}
 
 	writer := &strings.Builder{}
@@ -1007,25 +1019,25 @@ func propertyRequiredAttributesValidator(p *cfschema.Property) string {
 	fprintf(writer, ")")
 
 	if nRequired == 0 {
-		return ""
+		return "", nil
 	}
 
-	return writer.String()
+	return writer.String(), nil
 }
 
-func resourceRequiredAttributesValidator(r *cfschema.Resource) string {
+func resourceRequiredAttributesValidator(r *cfschema.Resource) (string, error) {
 	if r == nil {
-		return ""
+		return "", nil
 	}
 
 	writer := &strings.Builder{}
 	nRequired := addSchemaCompositionRequiredAttributes(writer, resource(*r))
 
 	if nRequired == 0 {
-		return ""
+		return "", nil
 	}
 
-	return writer.String()
+	return writer.String(), nil
 }
 
 // The schemaComposition interface can be implemented by Property and Resource.
