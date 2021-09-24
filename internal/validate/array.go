@@ -4,8 +4,11 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
 // arrayLenBetweenValidator validates that an array (List/Set) Attribute's length is in a range.
@@ -27,33 +30,12 @@ func (validator arrayLenBetweenValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	switch v := request.AttributeConfig.(type) {
-	case types.List:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	case types.Set:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	default:
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", v),
-		)
-
+	elems, _, ok := validateArray(request, response)
+	if !ok {
 		return
 	}
 
-	if l < validator.minItems || l > validator.maxItems {
+	if l := len(elems); l < validator.minItems || l > validator.maxItems {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -95,33 +77,12 @@ func (validator arrayLenAtLeastValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	switch v := request.AttributeConfig.(type) {
-	case types.List:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	case types.Set:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	default:
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", v),
-		)
-
+	elems, _, ok := validateArray(request, response)
+	if !ok {
 		return
 	}
 
-	if l < validator.minItems {
+	if l := len(elems); l < validator.minItems {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -162,33 +123,12 @@ func (validator arrayLenAtMostValidator) MarkdownDescription(ctx context.Context
 
 // Validate performs the validation.
 func (validator arrayLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	switch v := request.AttributeConfig.(type) {
-	case types.List:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	case types.Set:
-		if v.Null || v.Unknown {
-			return
-		}
-
-		l = len(v.Elems)
-
-	default:
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", v),
-		)
-
+	elems, _, ok := validateArray(request, response)
+	if !ok {
 		return
 	}
 
-	if l > validator.maxItems {
+	if l := len(elems); l > validator.maxItems {
 		response.Diagnostics.AddAttributeError(
 			request.AttributePath,
 			"Invalid length",
@@ -208,4 +148,56 @@ func ArrayLenAtMost(maxItems int) tfsdk.AttributeValidator {
 	return arrayLenAtMostValidator{
 		maxItems: maxItems,
 	}
+}
+
+type arrayKeyer func(context.Context, *tftypes.AttributePath, int, attr.Value) (*tftypes.AttributePath, diag.Diagnostic)
+
+func listKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
+	return path.WithElementKeyInt(i), nil
+}
+
+func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Value) (*tftypes.AttributePath, diag.Diagnostic) {
+	val, err := v.ToTerraformValue(ctx)
+	if err != nil {
+		return nil, diag.NewAttributeErrorDiagnostic(
+			path,
+			"No Terraform value",
+			"unable to obtain Terraform value:\n\n"+err.Error(),
+		)
+	}
+
+	return path.WithElementKeyValue(tftypes.NewValue(v.Type(ctx).TerraformType(ctx), val)), nil
+}
+
+func validateArray(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) ([]attr.Value, arrayKeyer, bool) {
+	var elemKeyer arrayKeyer
+	var elems []attr.Value
+	switch v := request.AttributeConfig.(type) {
+	case types.List:
+		if v.Null || v.Unknown {
+			return elems, elemKeyer, false
+		}
+
+		elemKeyer = listKeyer
+		elems = v.Elems
+
+	case types.Set:
+		if v.Null || v.Unknown {
+			return elems, elemKeyer, false
+		}
+
+		elemKeyer = setKeyer
+		elems = v.Elems
+
+	default:
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", v),
+		)
+
+		return elems, elemKeyer, false
+	}
+
+	return elems, elemKeyer, true
 }
