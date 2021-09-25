@@ -138,6 +138,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 4),
+							validate.ArrayForEach(validate.StringLenAtMost(128)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -160,7 +161,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 255),
+				validate.StringLenAtMost(255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -180,7 +181,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 4096),
+				validate.StringLenAtMost(4096),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -245,7 +246,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

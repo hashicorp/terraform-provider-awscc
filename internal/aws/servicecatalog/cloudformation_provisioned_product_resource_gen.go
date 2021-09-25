@@ -67,7 +67,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 5),
+				validate.ArrayLenAtMost(5),
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -240,7 +240,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 4096),
+							validate.StringLenAtMost(4096),
 						},
 					},
 				},

@@ -208,7 +208,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"ec2_instance_type": {
@@ -449,7 +449,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1),
+				validate.ArrayLenAtMost(1),
 			},
 		},
 		"min_size": {
@@ -718,7 +718,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 50),
+							validate.ArrayLenAtMost(50),
 						},
 					},
 				},

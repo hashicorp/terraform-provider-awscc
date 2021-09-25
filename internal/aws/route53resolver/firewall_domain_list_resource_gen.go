@@ -107,6 +107,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 			},
 			// Domains is a write-only property.
 		},

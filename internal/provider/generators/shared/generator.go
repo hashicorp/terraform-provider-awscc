@@ -106,7 +106,12 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	rootPropertiesSchema := sb.String()
 	sb.Reset()
 
-	codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
+	err = codeEmitter.EmitResourceSchemaRequiredAttributesValidator()
+
+	if err != nil {
+		return nil, fmt.Errorf("emitting schema required attributes validator: %w", err)
+	}
+
 	requiredAttributesValidator := sb.String()
 	sb.Reset()
 

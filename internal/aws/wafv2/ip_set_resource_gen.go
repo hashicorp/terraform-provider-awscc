@@ -36,6 +36,9 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "List of IPAddresses.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenBetween(1, 50)),
+			},
 		},
 		"arn": {
 			// Property: Arn

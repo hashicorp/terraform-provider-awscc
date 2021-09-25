@@ -90,7 +90,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"description": {
@@ -99,7 +99,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 512),
+							validate.StringLenAtMost(512),
 						},
 					},
 					"parameters": {
@@ -114,6 +114,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The names of the actions that must be completed before the current action starts.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenAtMost(64)),
+						},
 					},
 					"targets": {
 						// Property: Targets
@@ -139,7 +142,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
+				validate.StringLenAtMost(512),
 			},
 		},
 		"id": {
@@ -163,7 +166,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1224),
+				validate.StringLenAtMost(1224),
 			},
 		},
 		"stop_conditions": {
@@ -199,7 +202,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"value": {
@@ -326,7 +329,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"values": {
@@ -334,6 +337,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "The attribute values for the filter.",
 									Type:        types.ListType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayForEach(validate.StringLenAtMost(128)),
+									},
 								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
@@ -345,6 +351,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "The Amazon Resource Names (ARNs) of the target resources.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(20, 2048)),
+						},
 					},
 					"resource_tags": {
 						// Property: ResourceTags
@@ -358,7 +367,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"selection_mode": {
@@ -367,7 +376,7 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 				},

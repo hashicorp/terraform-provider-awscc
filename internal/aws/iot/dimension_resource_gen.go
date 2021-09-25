@@ -71,6 +71,10 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Specifies the value or list of values for the dimension.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 5),
+				validate.ArrayForEach(validate.StringLenBetween(1, 256)),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -131,7 +135,7 @@ func dimensionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"type": {

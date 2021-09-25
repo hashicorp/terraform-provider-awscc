@@ -44,7 +44,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 32),
+				validate.StringLenAtMost(32),
 			},
 		},
 		"arn": {
@@ -74,7 +74,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"environment_class": {
@@ -106,7 +106,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1224),
+				validate.StringLenAtMost(1224),
 			},
 		},
 		"kms_key": {
@@ -123,7 +123,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1224),
+				validate.StringLenAtMost(1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -561,6 +561,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
+							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
 						},
 					},
 					"subnet_ids": {
@@ -571,6 +572,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(2, 2),
+							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.RequiresReplace(),
@@ -592,7 +594,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"plugins_s3_path": {
@@ -608,7 +610,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"requirements_s3_object_version": {
@@ -623,7 +625,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"requirements_s3_path": {
@@ -639,7 +641,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
+				validate.StringLenAtMost(1024),
 			},
 		},
 		"schedulers": {
@@ -733,7 +735,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 9),
+				validate.StringLenAtMost(9),
 			},
 		},
 	}

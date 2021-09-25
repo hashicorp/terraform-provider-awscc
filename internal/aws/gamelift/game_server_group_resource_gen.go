@@ -421,6 +421,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 20),
+				validate.ArrayForEach(validate.StringLenBetween(15, 24)),
 			},
 		},
 	}

@@ -107,7 +107,8 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 50),
+							validate.ArrayLenAtMost(50),
+							validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 						},
 					},
 					"container_entrypoint": {
@@ -116,7 +117,8 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 100),
+							validate.ArrayLenAtMost(100),
+							validate.ArrayForEach(validate.StringLenBetween(1, 256)),
 						},
 					},
 					"environment": {
@@ -133,7 +135,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 					"post_analytics_processor_source_uri": {
@@ -142,7 +144,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 1024),
+							validate.StringLenAtMost(1024),
 						},
 					},
 					"record_preprocessor_source_uri": {
@@ -151,7 +153,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 1024),
+							validate.StringLenAtMost(1024),
 						},
 					},
 				},
@@ -227,7 +229,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
+										validate.StringLenAtMost(1024),
 									},
 								},
 							},
@@ -245,7 +247,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
+										validate.StringLenAtMost(1024),
 									},
 								},
 							},
@@ -326,7 +328,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 63),
+										validate.StringLenAtMost(63),
 									},
 								},
 								"local_path": {
@@ -335,7 +337,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
+										validate.StringLenAtMost(256),
 									},
 								},
 								"s3_data_distribution_type": {
@@ -448,7 +450,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
+							validate.StringLenAtMost(2048),
 						},
 					},
 					"monitoring_outputs": {
@@ -467,7 +469,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"s3_upload_mode": {
@@ -488,7 +490,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -534,7 +536,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
+				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -714,6 +716,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 								"subnets": {
@@ -723,6 +726,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
+										validate.ArrayForEach(validate.StringLenAtMost(32)),
 									},
 								},
 							},
@@ -846,7 +850,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -855,7 +859,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

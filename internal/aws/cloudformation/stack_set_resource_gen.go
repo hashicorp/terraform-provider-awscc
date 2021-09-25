@@ -113,6 +113,13 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringInSlice([]string{
+					"CAPABILITY_IAM",
+					"CAPABILITY_NAMED_IAM",
+					"CAPABILITY_AUTO_EXPAND",
+				})),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -415,12 +422,18 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 								"organizational_unit_ids": {
 									// Property: OrganizationalUnitIds
 									Description: "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+									},
 								},
 							},
 						),
@@ -453,6 +466,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
 						Type:        types.SetType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenAtLeast(1),
+						},
 					},
 				},
 				tfsdk.SetNestedAttributesOptions{},
@@ -483,7 +499,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -549,7 +565,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"template_body": {

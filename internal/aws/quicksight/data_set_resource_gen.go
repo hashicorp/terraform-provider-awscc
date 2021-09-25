@@ -114,6 +114,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 									},
 								},
 								"country_code": {

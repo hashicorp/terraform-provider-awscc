@@ -165,7 +165,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 		},
 		"environment": {
@@ -241,7 +241,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 200),
+							validate.StringLenAtMost(200),
 						},
 					},
 					"local_mount_path": {
@@ -250,7 +250,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 160),
+							validate.StringLenAtMost(160),
 						},
 					},
 				},
@@ -258,7 +258,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1),
+				validate.ArrayLenAtMost(1),
 			},
 		},
 		"function_name": {
@@ -293,7 +293,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 		},
 		"image_config": {
@@ -335,7 +335,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 1500),
+							validate.ArrayLenAtMost(1500),
 							validate.UniqueItems(),
 						},
 					},
@@ -345,7 +345,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 1500),
+							validate.ArrayLenAtMost(1500),
 							validate.UniqueItems(),
 						},
 					},
@@ -601,7 +601,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 5),
+							validate.ArrayLenAtMost(5),
 						},
 					},
 					"subnet_ids": {
@@ -610,7 +610,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 16),
+							validate.ArrayLenAtMost(16),
 						},
 					},
 				},

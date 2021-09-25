@@ -153,7 +153,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 10),
+							validate.StringLenAtMost(10),
 						},
 					},
 					"host": {
@@ -162,7 +162,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"priority": {
@@ -189,7 +189,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 500),
+							validate.StringLenAtMost(500),
 						},
 					},
 					"rule_arn": {
@@ -213,7 +213,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"service_type": {
@@ -222,7 +222,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"url_path": {
@@ -231,7 +231,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 					"version": {
@@ -383,7 +383,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 10),
+										validate.StringLenAtMost(10),
 									},
 								},
 								"host": {
@@ -392,7 +392,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 64),
+										validate.StringLenAtMost(64),
 									},
 								},
 								"priority": {
@@ -419,7 +419,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 500),
+										validate.StringLenAtMost(500),
 									},
 								},
 								"rule_arn": {
@@ -443,7 +443,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 64),
+										validate.StringLenAtMost(64),
 									},
 								},
 								"service_type": {
@@ -452,7 +452,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 64),
+										validate.StringLenAtMost(64),
 									},
 								},
 								"url_path": {
@@ -461,7 +461,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
+										validate.StringLenAtMost(128),
 									},
 								},
 								"version": {
@@ -582,7 +582,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 10),
+							validate.StringLenAtMost(10),
 						},
 					},
 					"host": {
@@ -591,7 +591,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"priority": {
@@ -618,7 +618,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 500),
+							validate.StringLenAtMost(500),
 						},
 					},
 					"rule_arn": {
@@ -642,7 +642,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"service_type": {
@@ -651,7 +651,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 64),
+							validate.StringLenAtMost(64),
 						},
 					},
 					"url_path": {
@@ -660,7 +660,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 				},

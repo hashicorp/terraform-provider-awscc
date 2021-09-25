@@ -166,6 +166,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringInSlice([]string{
+					"ReportBatchItemFailures",
+				})),
 			},
 		},
 		"id": {
@@ -268,6 +271,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringLenBetween(1, 1000)),
 			},
 		},
 		"self_managed_event_source": {
@@ -317,6 +321,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 10),
 										validate.UniqueItems(),
+										validate.ArrayForEach(validate.StringLenBetween(1, 300)),
 									},
 								},
 							},
@@ -458,6 +463,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringLenBetween(1, 249)),
 			},
 		},
 		"tumbling_window_in_seconds": {

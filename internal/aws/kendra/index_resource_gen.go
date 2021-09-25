@@ -83,7 +83,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"document_metadata_configurations": {
@@ -302,7 +302,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 500),
+				validate.ArrayLenAtMost(500),
 			},
 		},
 		"edition": {
@@ -464,7 +464,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 200),
+				validate.ArrayLenAtMost(200),
 			},
 		},
 		"user_context_policy": {
@@ -667,7 +667,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 1),
+				validate.ArrayLenAtMost(1),
 			},
 		},
 	}

@@ -30,7 +30,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 500),
+				validate.StringLenAtMost(500),
 			},
 		},
 		"enabled": {

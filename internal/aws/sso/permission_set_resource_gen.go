@@ -85,7 +85,8 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 20),
+				validate.ArrayLenAtMost(20),
+				validate.ArrayForEach(validate.StringLenBetween(20, 2048)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -213,7 +214,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),

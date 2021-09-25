@@ -160,7 +160,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
+							validate.StringLenAtMost(2048),
 						},
 					},
 					"role_arn": {
@@ -513,6 +513,9 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
 												Type:        types.SetType{ElemType: types.NumberType},
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.IntBetween(0, 65535)),
+												},
 											},
 											"strings": {
 												// Property: Strings
@@ -610,7 +613,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:        types.StringType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"security_profile_name": {
@@ -693,7 +696,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 		"target_arns": {
@@ -713,6 +716,9 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A set of target ARNs that the security profile is attached to.",
 			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenAtMost(2048)),
+			},
 		},
 	}
 

@@ -33,7 +33,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 128),
+				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -257,7 +257,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 2048),
+										validate.StringLenAtMost(2048),
 									},
 								},
 								"s3_uri": {
@@ -265,7 +265,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
+										validate.StringLenAtMost(1024),
 									},
 								},
 							},
@@ -318,7 +318,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 2048),
+										validate.StringLenAtMost(2048),
 									},
 								},
 							},
@@ -419,7 +419,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -188,6 +188,10 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
 									Type:        types.SetType{ElemType: types.StringType},
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(1, 10),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+									},
 								},
 							},
 						),
@@ -390,7 +394,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
+				validate.ArrayLenAtMost(50),
 			},
 		},
 	}

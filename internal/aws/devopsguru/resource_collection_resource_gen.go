@@ -64,6 +64,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 200),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 									},
 								},
 							},

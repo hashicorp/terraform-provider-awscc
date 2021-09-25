@@ -31,7 +31,7 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
+				validate.StringLenAtMost(1600),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

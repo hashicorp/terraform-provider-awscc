@@ -986,6 +986,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenAtLeast(1),
+																validate.ArrayForEach(validate.StringInSlice([]string{
+																	"INFORMATION",
+																	"WARNING",
+																	"ERROR",
+																	"CRITICAL",
+																	"VERBOSE",
+																})),
 															},
 														},
 														"event_name": {
@@ -1118,6 +1125,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayLenAtLeast(1),
+																			validate.ArrayForEach(validate.StringInSlice([]string{
+																				"INFORMATION",
+																				"WARNING",
+																				"ERROR",
+																				"CRITICAL",
+																				"VERBOSE",
+																			})),
 																		},
 																	},
 																	"event_name": {
@@ -1333,6 +1347,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenAtLeast(1),
+																validate.ArrayForEach(validate.StringInSlice([]string{
+																	"INFORMATION",
+																	"WARNING",
+																	"ERROR",
+																	"CRITICAL",
+																	"VERBOSE",
+																})),
 															},
 														},
 														"event_name": {
@@ -1465,6 +1486,13 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayLenAtLeast(1),
+																			validate.ArrayForEach(validate.StringInSlice([]string{
+																				"INFORMATION",
+																				"WARNING",
+																				"ERROR",
+																				"CRITICAL",
+																				"VERBOSE",
+																			})),
 																		},
 																	},
 																	"event_name": {
@@ -1609,6 +1637,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+							validate.ArrayForEach(validate.StringLenBetween(20, 300)),
 						},
 					},
 				},

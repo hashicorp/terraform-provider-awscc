@@ -100,7 +100,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1000),
+										validate.StringLenAtMost(1000),
 									},
 								},
 							},
@@ -113,7 +113,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 20),
+							validate.StringLenAtMost(20),
 						},
 					},
 				},

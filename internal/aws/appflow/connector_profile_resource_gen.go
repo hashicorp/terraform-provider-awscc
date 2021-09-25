@@ -657,7 +657,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"secret_key": {
@@ -665,7 +665,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -681,7 +681,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"application_key": {
@@ -689,7 +689,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -705,7 +705,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -721,7 +721,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
@@ -729,7 +729,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
@@ -737,7 +737,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
@@ -765,7 +765,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -781,7 +781,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"datakey": {
@@ -789,7 +789,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"secret_access_key": {
@@ -797,7 +797,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"user_id": {
@@ -805,7 +805,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -821,7 +821,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
@@ -829,7 +829,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
@@ -837,7 +837,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
@@ -873,7 +873,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
@@ -881,7 +881,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -897,7 +897,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_credentials_arn": {
@@ -905,7 +905,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 2048),
+													validate.StringLenAtMost(2048),
 												},
 											},
 											"connector_o_auth_request": {
@@ -933,7 +933,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -949,7 +949,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
@@ -957,7 +957,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -973,7 +973,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -989,7 +989,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
@@ -997,7 +997,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
@@ -1005,7 +1005,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1041,7 +1041,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
@@ -1049,7 +1049,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -1065,7 +1065,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1081,7 +1081,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
@@ -1089,7 +1089,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -1105,7 +1105,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
@@ -1113,7 +1113,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
@@ -1121,7 +1121,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1166,7 +1166,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1182,7 +1182,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1198,7 +1198,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1214,7 +1214,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1238,7 +1238,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 128),
+													validate.StringLenAtMost(128),
 												},
 											},
 											"database_url": {
@@ -1246,7 +1246,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"role_arn": {
@@ -1254,7 +1254,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -1270,7 +1270,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"is_sandbox_environment": {
@@ -1291,7 +1291,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1307,7 +1307,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1323,7 +1323,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"bucket_name": {
@@ -1339,7 +1339,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 128),
+													validate.StringLenAtMost(128),
 												},
 											},
 											"private_link_service_name": {
@@ -1347,7 +1347,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 											"region": {
@@ -1355,7 +1355,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 64),
+													validate.StringLenAtMost(64),
 												},
 											},
 											"stage": {
@@ -1363,7 +1363,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 16),
+													validate.StringLenAtMost(16),
 												},
 											},
 											"warehouse": {
@@ -1371,7 +1371,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 512),
+													validate.StringLenAtMost(512),
 												},
 											},
 										},
@@ -1387,7 +1387,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1403,7 +1403,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Type:     types.StringType,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -1432,7 +1432,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
+				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -80,11 +80,17 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
+						},
 					},
 					"orgunit": {
 						// Property: ORGUNIT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
+						},
 					},
 				},
 			),
@@ -147,11 +153,17 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ACCOUNT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
+						},
 					},
 					"orgunit": {
 						// Property: ORGUNIT
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
+						},
 					},
 				},
 			),
@@ -221,7 +233,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},
@@ -261,6 +273,9 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+			},
 		},
 		"security_service_policy_data": {
 			// Property: SecurityServicePolicyData
@@ -364,7 +379,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},

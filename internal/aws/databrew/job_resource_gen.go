@@ -916,6 +916,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
+													validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 												},
 											},
 											"overrides": {
@@ -966,6 +967,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 									},
 								},
 								"overrides": {

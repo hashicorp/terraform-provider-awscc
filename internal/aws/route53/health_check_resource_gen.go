@@ -174,7 +174,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 256),
+							validate.ArrayLenAtMost(256),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -198,7 +198,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 					"health_threshold": {
@@ -214,7 +214,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 45),
+							validate.StringLenAtMost(45),
 						},
 					},
 					"insufficient_data_health_status": {
@@ -256,7 +256,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 64),
+							validate.ArrayLenAtMost(64),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -279,7 +279,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 					"routing_control_arn": {
@@ -295,7 +295,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 					"type": {
@@ -370,7 +370,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 128),
+							validate.StringLenAtMost(128),
 						},
 					},
 					"value": {
@@ -379,7 +379,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
+							validate.StringLenAtMost(256),
 						},
 					},
 				},

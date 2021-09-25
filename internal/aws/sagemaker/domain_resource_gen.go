@@ -355,7 +355,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -364,7 +364,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -391,7 +391,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 63),
+													validate.StringLenAtMost(63),
 												},
 											},
 											"image_name": {
@@ -400,7 +400,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 63),
+													validate.StringLenAtMost(63),
 												},
 											},
 											"image_version_number": {
@@ -472,7 +472,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -481,7 +481,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -499,6 +499,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
+							validate.ArrayForEach(validate.StringLenAtMost(32)),
 						},
 					},
 					"sharing_settings": {
@@ -524,7 +525,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 2048),
+										validate.StringLenAtMost(2048),
 									},
 								},
 								"s3_output_path": {
@@ -533,7 +534,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
+										validate.StringLenAtMost(1024),
 									},
 								},
 							},
@@ -583,7 +584,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 63),
+				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -615,7 +616,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 2048),
+				validate.StringLenAtMost(2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -653,6 +654,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 16),
+				validate.ArrayForEach(validate.StringLenAtMost(32)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -745,7 +747,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 32),
+				validate.StringLenAtMost(32),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

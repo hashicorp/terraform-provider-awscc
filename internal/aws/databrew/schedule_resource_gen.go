@@ -54,6 +54,7 @@ func scheduleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.UniqueItems(),
+				validate.ArrayForEach(validate.StringLenBetween(1, 255)),
 			},
 		},
 		"name": {

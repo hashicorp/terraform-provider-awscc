@@ -455,7 +455,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -464,7 +464,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -491,7 +491,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 63),
+													validate.StringLenAtMost(63),
 												},
 											},
 											"image_name": {
@@ -500,7 +500,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 63),
+													validate.StringLenAtMost(63),
 												},
 											},
 											"image_version_number": {
@@ -572,7 +572,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -581,7 +581,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:        types.StringType,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
+													validate.StringLenAtMost(256),
 												},
 											},
 										},
@@ -599,6 +599,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
+							validate.ArrayForEach(validate.StringLenAtMost(32)),
 						},
 					},
 					"sharing_settings": {
@@ -624,7 +625,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 2048),
+										validate.StringLenAtMost(2048),
 									},
 								},
 								"s3_output_path": {
@@ -633,7 +634,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
+										validate.StringLenAtMost(1024),
 									},
 								},
 							},

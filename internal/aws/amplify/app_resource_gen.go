@@ -169,6 +169,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: AutoBranchCreationPatterns
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+						},
 					},
 					"basic_auth_config": {
 						// Property: BasicAuthConfig
@@ -236,7 +239,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 255),
+										validate.StringLenAtMost(255),
 									},
 								},
 								"value": {
@@ -244,7 +247,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Type:     types.StringType,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 5500),
+										validate.StringLenAtMost(5500),
 									},
 								},
 							},
@@ -257,7 +260,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 20),
+							validate.StringLenAtMost(20),
 						},
 					},
 					"stage": {
@@ -461,7 +464,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 		},
 		"enable_branch_auto_deletion": {
@@ -507,7 +510,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
+							validate.StringLenAtMost(255),
 						},
 					},
 					"value": {
@@ -515,7 +518,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 5500),
+							validate.StringLenAtMost(5500),
 						},
 					},
 				},
@@ -564,7 +567,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1000),
+				validate.StringLenAtMost(1000),
 			},
 			// OauthToken is a write-only property.
 		},
