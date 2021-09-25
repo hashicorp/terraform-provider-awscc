@@ -1,5 +1,9 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.13](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.13) (September 24, 2021)
+
+Validate array entries in List/Set of primitive types.
+
 ## [0.0.12](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.12) (September 23, 2021)
 
 Refresh CloudFormation resource type schemas.
