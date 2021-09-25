@@ -194,8 +194,6 @@ github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0 h1:cClHI4
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1 h1:BGWdSwACeOgmrI/3qBnpVZGBqSh89qS5g7SzPxF2VFY=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1/go.mod h1:mt5V7NshmBoY+q96yicADdPd/Eu2AyNXVdzlO4LqFM8=
-github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804 h1:8jyhcSriYET3CiKPgycnfzzEzPBjoWuU5D3xBckQdEQ=
-github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804/go.mod h1:Jnr8cII2RmjIpP+z7qrqzsoSBGDVdwu3dB2QiI1XUJE=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210925204350-c4a6efdc9684 h1:hjVVNhAA1RqomobTPkVZE8W7VrOnx3Pp5stl6OW4XlQ=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210925204350-c4a6efdc9684/go.mod h1:ER8y4GRxfIj3GTwnVtQyo8xsLzcrjg06oyisQWR/dsE=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
@@ -239,8 +237,8 @@ github.com/hashicorp/terraform-exec v0.14.0 h1:UQoUcxKTZZXhyyK68Cwn4mApT4mnFPmEX
 github.com/hashicorp/terraform-exec v0.14.0/go.mod h1:qrAASDq28KZiMPDnQ02sFS9udcqEkRly002EA2izXTA=
 github.com/hashicorp/terraform-json v0.12.0 h1:8czPgEEWWPROStjkWPUnTQDXmpmZPlkQAwYYLETaTvw=
 github.com/hashicorp/terraform-json v0.12.0/go.mod h1:pmbq9o4EuL43db5+0ogX10Yofv1nozM+wskr/bGFJpI=
-github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210917150839-874c6036d962 h1:Td0rJc1qxpu/GwmVfSwHXZr+Ea5SPnENKrU4qi7yuNA=
-github.com/hashicorp/terraform-plugin-framework v0.3.1-0.20210917150839-874c6036d962/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
+github.com/hashicorp/terraform-plugin-framework v0.4.0 h1:LV4p9/RBYjgN4UgTrYBDxSgTn7Ug7M4Nsyimx81u7XY=
+github.com/hashicorp/terraform-plugin-framework v0.4.0/go.mod h1:9pDOoxcGdAKOjDWUpa+QOpj2npeJvgf4imnwYBTwIq8=
 github.com/hashicorp/terraform-plugin-go v0.3.0/go.mod h1:dFHsQMaTLpON2gWhVWT96fvtlc/MF1vSy3OdMhWBzdM=
 github.com/hashicorp/terraform-plugin-go v0.3.1 h1:ML+THFcqpdR049gqrbEFDFo99va2Wqw9g4XDPy51euU=
 github.com/hashicorp/terraform-plugin-go v0.3.1/go.mod h1:dFHsQMaTLpON2gWhVWT96fvtlc/MF1vSy3OdMhWBzdM=
