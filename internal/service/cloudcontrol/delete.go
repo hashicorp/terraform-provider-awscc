@@ -34,7 +34,9 @@ func DeleteResource(ctx context.Context, conn *cloudcontrol.Client, roleARN, typ
 		return fmt.Errorf("empty result")
 	}
 
-	_, err = WaitForResourceRequestSuccess(ctx, conn, aws.ToString(output.ProgressEvent.RequestToken), maxWaitTime)
+	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn)
+
+	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, maxWaitTime)
 
 	if err != nil {
 		return err
