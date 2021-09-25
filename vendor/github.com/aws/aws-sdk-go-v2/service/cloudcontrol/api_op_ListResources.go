@@ -12,6 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns information about the specified resources. For more information, see
+// Discovering resources in the Amazon Web Services Cloud Control API User Guide.
+// You can use this action to return information about existing resources in your
+// account and region, whether or not those resources were provisioned using the
+// Cloud Control API.
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
@@ -29,25 +34,60 @@ func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, 
 
 type ListResourcesInput struct {
 
+	// The name of the resource type.
+	//
 	// This member is required.
 	TypeName *string
 
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results. The default is 20.
 	MaxResults *int32
 
+	// If the previous paginated request didn't return all of the remaining results,
+	// the response object's NextToken parameter value is set to a token. To retrieve
+	// the next set of results, call this action again and assign that token to the
+	// request object's NextToken parameter. If there are no remaining results, the
+	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
+	// The resource model to use to select the resources to return.
 	ResourceModel *string
 
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for
+	// Cloud Control API to use when performing this resource operation. The role
+	// specified must have the permissions required for this operation. The necessary
+	// permissions for each event handler are defined in the handlers
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
+	// section of the resource type definition schema
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html).
+	// If you do not specify a role, Cloud Control API uses a temporary session created
+	// using your Amazon Web Services user credentials. For more information, see
+	// Specifying credentials
+	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
+	// For private resource types, the type version to use in this resource operation.
+	// If you do not specify a resource version, CloudFormation uses the default
+	// version.
 	TypeVersionId *string
 }
 
 type ListResourcesOutput struct {
+
+	// If the request doesn't return all of the remaining results, NextToken is set to
+	// a token. To retrieve the next set of results, call ListResources again and
+	// assign that token to the request object's NextToken parameter. If the request
+	// returns all results, NextToken is set to null.
 	NextToken *string
 
+	// Information on the specified resources, including primary identifier and
+	// resource model.
 	ResourceDescriptions []types.ResourceDescription
 
+	// The name of the resource type.
 	TypeName *string
 
 	// Metadata pertaining to the operation's result.
@@ -126,6 +166,10 @@ var _ ListResourcesAPIClient = (*Client)(nil)
 
 // ListResourcesPaginatorOptions is the paginator options for ListResources
 type ListResourcesPaginatorOptions struct {
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results. The default is 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
