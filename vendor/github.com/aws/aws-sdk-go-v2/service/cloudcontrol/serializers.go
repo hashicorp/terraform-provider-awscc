@@ -436,11 +436,6 @@ func awsAwsjson10_serializeOpDocumentCancelResourceRequestInput(v *CancelResourc
 	object := value.Object()
 	defer object.Close()
 
-	if v.ClientToken != nil {
-		ok := object.Key("ClientToken")
-		ok.String(*v.ClientToken)
-	}
-
 	if v.RequestToken != nil {
 		ok := object.Key("RequestToken")
 		ok.String(*v.RequestToken)

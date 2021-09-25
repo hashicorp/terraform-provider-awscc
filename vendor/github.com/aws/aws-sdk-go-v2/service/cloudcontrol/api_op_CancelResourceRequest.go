@@ -4,7 +4,6 @@ package cloudcontrol
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
@@ -12,6 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Cancels the specified resource operation request. For more information, see
+// Canceling resource operation requests
+// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
+// in the Amazon Web Services Cloud Control API User Guide. Only resource
+// operations requests with a status of PENDING or IN_PROGRESS can be cancelled.
 func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResourceRequestInput, optFns ...func(*Options)) (*CancelResourceRequestOutput, error) {
 	if params == nil {
 		params = &CancelResourceRequestInput{}
@@ -29,13 +33,19 @@ func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResour
 
 type CancelResourceRequestInput struct {
 
+	// The RequestToken of the ProgressEvent object returned by the resource operation
+	// request.
+	//
 	// This member is required.
 	RequestToken *string
-
-	ClientToken *string
 }
 
 type CancelResourceRequestOutput struct {
+
+	// Represents the current status of a resource operation request. For more
+	// information, see Managing resource operation requests
+	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
@@ -87,9 +97,6 @@ func addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCancelResourceRequestMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCancelResourceRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -106,39 +113,6 @@ func addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCancelResourceRequest struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCancelResourceRequest) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCancelResourceRequest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CancelResourceRequestInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CancelResourceRequestInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCancelResourceRequestMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelResourceRequest{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCancelResourceRequest(region string) *awsmiddleware.RegisterServiceMetadata {

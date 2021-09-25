@@ -25,4 +25,4 @@ require (
 	github.com/mitchellh/cli v1.1.2
 )
 
-replace github.com/aws/aws-sdk-go-v2/service/cloudcontrol => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804
+replace github.com/aws/aws-sdk-go-v2/service/cloudcontrol => github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210925204350-c4a6efdc9684

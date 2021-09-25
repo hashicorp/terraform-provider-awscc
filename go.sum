@@ -196,6 +196,8 @@ github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1 h1:BGWdSwACeOgmrI/3qBnpVZG
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1/go.mod h1:mt5V7NshmBoY+q96yicADdPd/Eu2AyNXVdzlO4LqFM8=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804 h1:8jyhcSriYET3CiKPgycnfzzEzPBjoWuU5D3xBckQdEQ=
 github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210915143019-d875f9b35804/go.mod h1:Jnr8cII2RmjIpP+z7qrqzsoSBGDVdwu3dB2QiI1XUJE=
+github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210925204350-c4a6efdc9684 h1:hjVVNhAA1RqomobTPkVZE8W7VrOnx3Pp5stl6OW4XlQ=
+github.com/hashicorp/aws-sdk-go-v2-service-cloudformation-private v0.0.0-20210925204350-c4a6efdc9684/go.mod h1:ER8y4GRxfIj3GTwnVtQyo8xsLzcrjg06oyisQWR/dsE=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/go-checkpoint v0.5.0 h1:MFYpPZCnQqQTE18jFwSII6eUQrD/oxMFp3mlgcqk5mU=
