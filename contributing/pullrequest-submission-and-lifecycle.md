@@ -108,7 +108,3 @@ For greater detail, the following Go language resources provide common coding pr
 
 - [Effective Go](https://golang.org/doc/effective_go.html)
 - [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
-
-## Changelog Process
-
-TODO
