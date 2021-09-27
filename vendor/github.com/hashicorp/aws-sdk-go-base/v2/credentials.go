@@ -15,8 +15,12 @@ import (
 )
 
 func getCredentialsProvider(ctx context.Context, c *Config) (aws.CredentialsProvider, error) {
-	loadOptions := append(
-		commonLoadOptions(c),
+	loadOptions, err := commonLoadOptions(c)
+	if err != nil {
+		return nil, err
+	}
+	loadOptions = append(
+		loadOptions,
 		config.WithSharedConfigProfile(c.Profile),
 		// Bypass retries when validating authentication
 		config.WithRetryer(func() aws.Retryer {
@@ -52,7 +56,7 @@ func getCredentialsProvider(ctx context.Context, c *Config) (aws.CredentialsProv
 		return nil, c.NewNoValidCredentialSourcesError(err)
 	}
 
-	if c.AssumeRoleARN == "" {
+	if c.AssumeRole == nil || c.AssumeRole.RoleARN == "" {
 		return cfg.Credentials, nil
 	}
 
@@ -60,28 +64,29 @@ func getCredentialsProvider(ctx context.Context, c *Config) (aws.CredentialsProv
 }
 
 func assumeRoleCredentialsProvider(ctx context.Context, awsConfig aws.Config, c *Config) (aws.CredentialsProvider, error) {
+	ar := c.AssumeRole
 	// When assuming a role, we need to first authenticate the base credentials above, then assume the desired role
 	log.Printf("[INFO] Attempting to AssumeRole %s (SessionName: %q, ExternalId: %q)",
-		c.AssumeRoleARN, c.AssumeRoleSessionName, c.AssumeRoleExternalID)
+		ar.RoleARN, ar.SessionName, ar.ExternalID)
 
 	client := sts.NewFromConfig(awsConfig)
 
-	appCreds := stscreds.NewAssumeRoleProvider(client, c.AssumeRoleARN, func(opts *stscreds.AssumeRoleOptions) {
-		opts.RoleSessionName = c.AssumeRoleSessionName
-		opts.Duration = time.Duration(c.AssumeRoleDurationSeconds) * time.Second
+	appCreds := stscreds.NewAssumeRoleProvider(client, ar.RoleARN, func(opts *stscreds.AssumeRoleOptions) {
+		opts.RoleSessionName = ar.SessionName
+		opts.Duration = time.Duration(ar.DurationSeconds) * time.Second
 
-		if c.AssumeRoleExternalID != "" {
-			opts.ExternalID = aws.String(c.AssumeRoleExternalID)
+		if ar.ExternalID != "" {
+			opts.ExternalID = aws.String(ar.ExternalID)
 		}
 
-		if c.AssumeRolePolicy != "" {
-			opts.Policy = aws.String(c.AssumeRolePolicy)
+		if ar.Policy != "" {
+			opts.Policy = aws.String(ar.Policy)
 		}
 
-		if len(c.AssumeRolePolicyARNs) > 0 {
+		if len(ar.PolicyARNs) > 0 {
 			var policyDescriptorTypes []types.PolicyDescriptorType
 
-			for _, policyARN := range c.AssumeRolePolicyARNs {
+			for _, policyARN := range ar.PolicyARNs {
 				policyDescriptorType := types.PolicyDescriptorType{
 					Arn: aws.String(policyARN),
 				}
@@ -91,9 +96,9 @@ func assumeRoleCredentialsProvider(ctx context.Context, awsConfig aws.Config, c 
 			opts.PolicyARNs = policyDescriptorTypes
 		}
 
-		if len(c.AssumeRoleTags) > 0 {
+		if len(ar.Tags) > 0 {
 			var tags []types.Tag
-			for k, v := range c.AssumeRoleTags {
+			for k, v := range ar.Tags {
 				tag := types.Tag{
 					Key:   aws.String(k),
 					Value: aws.String(v),
@@ -104,8 +109,8 @@ func assumeRoleCredentialsProvider(ctx context.Context, awsConfig aws.Config, c 
 			opts.Tags = tags
 		}
 
-		if len(c.AssumeRoleTransitiveTagKeys) > 0 {
-			opts.TransitiveTagKeys = c.AssumeRoleTransitiveTagKeys
+		if len(ar.TransitiveTagKeys) > 0 {
+			opts.TransitiveTagKeys = ar.TransitiveTagKeys
 		}
 	})
 	_, err := appCreds.Retrieve(ctx)

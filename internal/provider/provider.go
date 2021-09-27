@@ -121,7 +121,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							},
 						},
 						"duration_seconds": {
-							Type:        types.NumberType,
+							Type:        types.Int64Type,
 							Description: "Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.",
 							Optional:    true,
 						},
@@ -190,7 +190,7 @@ type providerData struct {
 
 type assumeRoleData struct {
 	RoleARN           types.String `tfsdk:"role_arn"`
-	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
+	DurationSeconds   types.Int64  `tfsdk:"duration_seconds"`
 	ExternalID        types.String `tfsdk:"external_id"`
 	Policy            types.String `tfsdk:"policy"`
 	PolicyARNs        types.List   `tfsdk:"policy_arns"`
@@ -198,6 +198,41 @@ type assumeRoleData struct {
 	Tags              types.Map    `tfsdk:"tags"`
 	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
 }
+
+func (a assumeRoleData) Config() *awsbase.AssumeRole {
+	assumeRole := &awsbase.AssumeRole{
+		RoleARN:         a.RoleARN.Value,
+		DurationSeconds: int(a.DurationSeconds.Value),
+		ExternalID:      a.ExternalID.Value,
+		Policy:          a.Policy.Value,
+		SessionName:     a.SessionName.Value,
+	}
+	if !a.PolicyARNs.Null {
+		arns := make([]string, len(a.PolicyARNs.Elems))
+		for i, v := range a.PolicyARNs.Elems {
+			arns[i] = v.(types.String).Value
+		}
+		assumeRole.PolicyARNs = arns
+	}
+	if !a.Tags.Null {
+		tags := make(map[string]string)
+		for key, value := range a.Tags.Elems {
+			tags[key] = value.(types.String).Value
+		}
+		assumeRole.Tags = tags
+	}
+	if !a.TransitiveTagKeys.Null {
+		tagKeys := make([]string, len(a.TransitiveTagKeys.Elems))
+		for i, v := range a.TransitiveTagKeys.Elems {
+			tagKeys[i] = v.(types.String).Value
+		}
+		assumeRole.TransitiveTagKeys = tagKeys
+	}
+
+	return assumeRole
+}
+
+// func intValueOrNull(i types.Int64)
 
 func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
@@ -321,49 +356,8 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		}
 		config.SharedCredentialsFiles = cf
 	}
-	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
-		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
-
-		if !pd.AssumeRole.DurationSeconds.Null {
-			v, _ := pd.AssumeRole.DurationSeconds.Value.Int64()
-			config.AssumeRoleDurationSeconds = int(v)
-		}
-
-		if !pd.AssumeRole.ExternalID.Null {
-			config.AssumeRoleExternalID = pd.AssumeRole.ExternalID.Value
-		}
-
-		if !pd.AssumeRole.Policy.Null {
-			config.AssumeRolePolicy = pd.AssumeRole.Policy.Value
-		}
-
-		if !pd.AssumeRole.PolicyARNs.Null {
-			arns := make([]string, len(pd.AssumeRole.PolicyARNs.Elems))
-			for i, v := range pd.AssumeRole.PolicyARNs.Elems {
-				arns[i] = v.(types.String).Value
-			}
-			config.AssumeRolePolicyARNs = arns
-		}
-
-		if !pd.AssumeRole.SessionName.Null {
-			config.AssumeRoleSessionName = pd.AssumeRole.SessionName.Value
-		}
-
-		if len(pd.AssumeRole.Tags.Elems) > 0 {
-			tags := make(map[string]string)
-			for key, value := range pd.AssumeRole.Tags.Elems {
-				tags[key] = value.(types.String).Value
-			}
-			config.AssumeRoleTags = tags
-		}
-
-		if !pd.AssumeRole.TransitiveTagKeys.Null {
-			tagKeys := make([]string, len(pd.AssumeRole.TransitiveTagKeys.Elems))
-			for i, v := range pd.AssumeRole.TransitiveTagKeys.Elems {
-				tagKeys[i] = v.(types.String).Value
-			}
-			config.AssumeRoleTransitiveTagKeys = tagKeys
-		}
+	if pd.AssumeRole != nil {
+		config.AssumeRole = pd.AssumeRole.Config()
 	}
 
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)

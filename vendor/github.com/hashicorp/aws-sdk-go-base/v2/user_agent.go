@@ -3,41 +3,24 @@ package awsbase
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func customUserAgentMiddleware(c *Config) middleware.BuildMiddleware {
-	return middleware.BuildMiddlewareFunc("CustomUserAgent",
+func apnUserAgentMiddleware(apn APNInfo) middleware.BuildMiddleware {
+	return middleware.BuildMiddlewareFunc("APNUserAgent",
 		func(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (middleware.BuildOutput, middleware.Metadata, error) {
 			request, ok := in.Request.(*smithyhttp.Request)
 			if !ok {
 				return middleware.BuildOutput{}, middleware.Metadata{}, fmt.Errorf("unknown request type %T", in.Request)
 			}
 
-			builder := smithyhttp.NewUserAgentBuilder()
-			for _, v := range c.UserAgentProducts {
-				builder.AddKey(userAgentProduct(v))
-			}
-			prependUserAgentHeader(request, builder.Build())
+			prependUserAgentHeader(request, apn.BuildUserAgentString())
 
 			return next.HandleBuild(ctx, in)
-		})
-}
-
-func userAgentProduct(product *UserAgentProduct) string {
-	var b strings.Builder
-	fmt.Fprint(&b, product.Name)
-	if product.Version != "" {
-		fmt.Fprintf(&b, "/%s", product.Version)
-	}
-	if len(product.Extra) > 0 {
-		fmt.Fprintf(&b, " (%s)", strings.Join(product.Extra, "; "))
-	}
-
-	return b.String()
+		},
+	)
 }
 
 // Because the default User-Agent middleware prepends itself to the contents of the User-Agent header,
