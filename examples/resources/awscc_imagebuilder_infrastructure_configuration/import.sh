@@ -1,0 +1,1 @@
+$ terraform import awscc_imagebuilder_infrastructure_configuration.example <resource ID>

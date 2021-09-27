@@ -1,0 +1,1 @@
+$ terraform import awscc_wafv2_logging_configuration.example <resource ID>

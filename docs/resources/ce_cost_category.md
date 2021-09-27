@@ -32,4 +32,10 @@ Cost Category enables you to map your cost and usage into meaningful categories.
 - **effective_start** (String) ISO 8601 date time with offset format
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ce_cost_category.example <resource ID>
+```

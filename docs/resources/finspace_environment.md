@@ -49,4 +49,10 @@ Optional:
 - **saml_metadata_document** (String) SAML metadata document to link the federation provider to the Environment
 - **saml_metadata_url** (String) SAML metadata URL to link with the Environment
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_finspace_environment.example <resource ID>
+```

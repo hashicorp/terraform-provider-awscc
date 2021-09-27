@@ -23,4 +23,10 @@ Resource Type definition for AWS::EC2::EgressOnlyInternetGateway
 
 - **id** (String) Service Generated ID of the EgressOnlyInternetGateway
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_egress_only_internet_gateway.example <resource ID>
+```

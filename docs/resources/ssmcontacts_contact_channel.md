@@ -28,4 +28,10 @@ Resource Type definition for AWS::SSMContacts::ContactChannel
 - **arn** (String) The Amazon Resource Name (ARN) of the engagement to a contact channel.
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ssmcontacts_contact_channel.example <resource ID>
+```

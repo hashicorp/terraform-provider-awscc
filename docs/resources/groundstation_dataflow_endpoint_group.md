@@ -74,4 +74,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_groundstation_dataflow_endpoint_group.example <resource ID>
+```

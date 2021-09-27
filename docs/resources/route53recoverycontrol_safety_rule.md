@@ -58,4 +58,10 @@ Optional:
 - **threshold** (Number) The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.
 - **type** (String) A rule can be one of the following: ATLEAST, AND, or OR.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53recoverycontrol_safety_rule.example <resource ID>
+```

@@ -73,4 +73,10 @@ Read-Only:
 - **url** (String) The ingest URL to which the source stream should be sent.
 - **username** (String) The system generated username for ingest authentication.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_mediapackage_channel.example <resource ID>
+```

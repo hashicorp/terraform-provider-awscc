@@ -32,4 +32,10 @@ Read-Only:
 
 - **is_public** (String) Specifies whether the policy is public or not.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_s3_multi_region_access_point_policy.example <resource ID>
+```

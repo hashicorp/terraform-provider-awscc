@@ -28,4 +28,10 @@ We recommend that type names adhere to the following pattern: company_or_organiz
 - **arn** (String) The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_resource_default_version.example <resource ID>
+```

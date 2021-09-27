@@ -23,4 +23,10 @@ Resource schema for AWS::SES::ConfigurationSet.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ses_configuration_set.example <resource ID>
+```

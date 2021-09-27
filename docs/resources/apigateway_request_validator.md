@@ -30,4 +30,10 @@ Resource Type definition for AWS::ApiGateway::RequestValidator
 - **id** (String) Uniquely identifies the resource.
 - **request_validator_id** (String) ID of the request validator.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_apigateway_request_validator.example <resource ID>
+```

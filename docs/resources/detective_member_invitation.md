@@ -30,4 +30,10 @@ Resource schema for AWS::Detective::MemberInvitation
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_detective_member_invitation.example <resource ID>
+```

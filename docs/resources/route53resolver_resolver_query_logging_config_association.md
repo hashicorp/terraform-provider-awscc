@@ -28,4 +28,10 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation.
 - **id** (String) Id
 - **status** (String) ResolverQueryLogConfigAssociationStatus
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53resolver_resolver_query_logging_config_association.example <resource ID>
+```

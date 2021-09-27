@@ -359,4 +359,10 @@ Read-Only:
 - **message** (String) <p>The error message.</p>
 - **type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_quicksight_theme.example <resource ID>
+```

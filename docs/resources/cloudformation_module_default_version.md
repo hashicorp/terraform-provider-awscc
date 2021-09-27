@@ -25,4 +25,10 @@ A module that has been registered in the CloudFormation registry as the default 
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_module_default_version.example <resource ID>
+```

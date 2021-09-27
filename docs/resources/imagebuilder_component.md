@@ -38,4 +38,10 @@ Resource schema for AWS::ImageBuilder::Component
 - **id** (String) Uniquely identifies the resource.
 - **type** (String) The type of the component denotes whether the component is used to build the image or only to test it.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_component.example <resource ID>
+```

@@ -91,4 +91,10 @@ Required:
 - **launch_template_id** (String) Identifies the EC2 launch template to use.
 - **set_default_version** (Boolean) Set the specified EC2 launch template as the default launch template for the specified account.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_distribution_configuration.example <resource ID>
+```

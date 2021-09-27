@@ -88,4 +88,10 @@ Optional:
 - **repository_name** (String) The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
 - **service** (String) Specifies the service in which this image was registered.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_container_recipe.example <resource ID>
+```

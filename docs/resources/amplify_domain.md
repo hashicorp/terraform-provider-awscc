@@ -43,4 +43,10 @@ Required:
 - **branch_name** (String)
 - **prefix** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_amplify_domain.example <resource ID>
+```

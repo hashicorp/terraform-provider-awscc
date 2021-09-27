@@ -45,4 +45,10 @@ Optional:
 
 - **untrusted_artifact_on_deployment** (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lambda_code_signing_config.example <resource ID>
+```

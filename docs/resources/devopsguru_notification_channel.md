@@ -37,4 +37,10 @@ Required:
 
 - **topic_arn** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_devopsguru_notification_channel.example <resource ID>
+```

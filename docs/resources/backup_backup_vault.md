@@ -50,4 +50,10 @@ Optional:
 - **backup_vault_events** (List of String)
 - **sns_topic_arn** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_backup_backup_vault.example <resource ID>
+```

@@ -23,4 +23,10 @@ Resource Type definition for AWS::ApiGateway::Account
 
 - **id** (String) Primary identifier which is manually generated.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_apigateway_account.example <resource ID>
+```

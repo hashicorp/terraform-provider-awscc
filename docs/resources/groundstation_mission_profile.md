@@ -51,4 +51,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_groundstation_mission_profile.example <resource ID>
+```

@@ -27,4 +27,10 @@ Describes a route for a local gateway route table.
 - **state** (String) The state of the route.
 - **type** (String) The route type.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_local_gateway_route.example <resource ID>
+```

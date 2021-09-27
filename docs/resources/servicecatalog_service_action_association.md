@@ -25,4 +25,10 @@ Resource Schema for AWS::ServiceCatalog::ServiceActionAssociation
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_servicecatalog_service_action_association.example <resource ID>
+```

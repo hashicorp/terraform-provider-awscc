@@ -324,4 +324,10 @@ Optional:
 - **scale_out_cooldown** (Number)
 - **target_value** (Number)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_dynamodb_global_table.example <resource ID>
+```

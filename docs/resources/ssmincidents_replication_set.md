@@ -43,4 +43,10 @@ Required:
 
 - **sse_kms_key_id** (String) The ARN of the ReplicationSet.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ssmincidents_replication_set.example <resource ID>
+```

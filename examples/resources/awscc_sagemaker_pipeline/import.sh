@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_pipeline.example <resource ID>

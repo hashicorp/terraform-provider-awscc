@@ -25,4 +25,10 @@ This resource adds Key-Value metadata to a Schema version of Glue Schema Registr
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_glue_schema_version_metadata.example <resource ID>
+```

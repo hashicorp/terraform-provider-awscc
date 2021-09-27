@@ -60,4 +60,10 @@ Read-Only:
 - **server_certificate_status** (String)
 - **server_certificate_status_detail** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iot_domain_configuration.example <resource ID>
+```

@@ -1,0 +1,1 @@
+$ terraform import awscc_imagebuilder_component.example <resource ID>

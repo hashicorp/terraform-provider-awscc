@@ -69,4 +69,10 @@ Optional:
 - **key** (String) The key name of the tag.
 - **value** (String) The value for the tag.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53_health_check.example <resource ID>
+```

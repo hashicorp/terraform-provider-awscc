@@ -1,0 +1,1 @@
+$ terraform import awscc_lookoutmetrics_alert.example <resource ID>

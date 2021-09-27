@@ -197,4 +197,10 @@ Optional:
 - **type** (String)
 - **value** (Number)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_acmpca_certificate.example <resource ID>
+```

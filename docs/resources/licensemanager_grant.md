@@ -30,4 +30,10 @@ An example resource schema demonstrating some basic constructs and validation ru
 - **id** (String) Uniquely identifies the resource.
 - **version** (String) The version of the grant.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_licensemanager_grant.example <resource ID>
+```

@@ -24,4 +24,10 @@ Associates WebACL to Application Load Balancer, CloudFront or API Gateway.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_wafv2_web_acl_association.example <resource ID>
+```

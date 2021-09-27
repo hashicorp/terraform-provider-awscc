@@ -70,4 +70,10 @@ Optional:
 - **s3_bucket** (String) The Amazon S3 bucket name.
 - **s3_key** (String) The s3 object key.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_robomaker_simulation_application.example <resource ID>
+```

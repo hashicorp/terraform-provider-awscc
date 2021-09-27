@@ -40,4 +40,10 @@ Optional:
 - **parameter_name** (String)
 - **parameter_value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_config_organization_conformance_pack.example <resource ID>
+```

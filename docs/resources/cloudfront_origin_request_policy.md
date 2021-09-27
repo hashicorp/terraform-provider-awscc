@@ -61,4 +61,10 @@ Required:
 - **query_string_behavior** (String)
 - **query_strings** (List of String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudfront_origin_request_policy.example <resource ID>
+```

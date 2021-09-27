@@ -41,4 +41,10 @@ Required:
 - **target_address** (String)
 - **target_type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_codestarnotifications_notification_rule.example <resource ID>
+```

@@ -83,4 +83,10 @@ Optional:
 - **type** (String) The type of source access configuration.
 - **uri** (String) The URI for the source access configuration resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lambda_event_source_mapping.example <resource ID>
+```

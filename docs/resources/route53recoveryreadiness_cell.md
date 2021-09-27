@@ -38,4 +38,10 @@ Optional:
 - **key** (String)
 - **value** (List of String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53recoveryreadiness_cell.example <resource ID>
+```

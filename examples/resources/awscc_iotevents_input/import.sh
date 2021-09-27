@@ -1,0 +1,1 @@
+$ terraform import awscc_iotevents_input.example <resource ID>

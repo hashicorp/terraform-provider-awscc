@@ -77,4 +77,10 @@ Read-Only:
 - **nanos** (Number) Nanoseconds.
 - **seconds** (String) Seconds since epoch.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_healthlake_fhir_datastore.example <resource ID>
+```

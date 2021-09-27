@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_customer_gateway_association.example <resource ID>

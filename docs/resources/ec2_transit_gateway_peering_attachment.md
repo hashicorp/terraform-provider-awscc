@@ -51,4 +51,10 @@ Read-Only:
 - **code** (String) The status code.
 - **message** (String) The status message, if applicable.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_transit_gateway_peering_attachment.example <resource ID>
+```

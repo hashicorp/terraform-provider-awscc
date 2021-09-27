@@ -27,4 +27,10 @@ Associates an AWS Identity and Access Management (IAM) role with an AWS Certific
 - **encryption_kms_key_id** (String) The ID of the AWS KMS CMK used to encrypt the private key of the certificate.
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_enclave_certificate_iam_role_association.example <resource ID>
+```

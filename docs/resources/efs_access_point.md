@@ -68,4 +68,10 @@ Optional:
 - **owner_uid** (String) Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).
 - **permissions** (String) Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_efs_access_point.example <resource ID>
+```

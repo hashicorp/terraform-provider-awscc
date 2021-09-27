@@ -1,0 +1,1 @@
+$ terraform import awscc_wafv2_web_acl_association.example <resource ID>

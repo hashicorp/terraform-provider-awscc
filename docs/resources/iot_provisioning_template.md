@@ -50,4 +50,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iot_provisioning_template.example <resource ID>
+```

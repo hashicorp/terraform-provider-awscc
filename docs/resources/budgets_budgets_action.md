@@ -91,4 +91,10 @@ Optional:
 - **address** (String)
 - **type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_budgets_budgets_action.example <resource ID>
+```

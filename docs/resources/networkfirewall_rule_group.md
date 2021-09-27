@@ -244,4 +244,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_networkfirewall_rule_group.example <resource ID>
+```

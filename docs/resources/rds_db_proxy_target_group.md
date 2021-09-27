@@ -42,4 +42,10 @@ Optional:
 - **max_idle_connections_percent** (Number) Controls how actively the proxy closes idle database connections in the connection pool.
 - **session_pinning_filters** (List of String) Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_rds_db_proxy_target_group.example <resource ID>
+```

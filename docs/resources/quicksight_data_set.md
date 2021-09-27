@@ -373,4 +373,10 @@ Read-Only:
 - **name** (String) <p>A display name for the dataset.</p>
 - **type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_quicksight_data_set.example <resource ID>
+```

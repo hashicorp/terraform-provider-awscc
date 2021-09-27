@@ -135,4 +135,10 @@ Optional:
 - **url** (String)
 - **user_name_attribute_field** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_kendra_index.example <resource ID>
+```

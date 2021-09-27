@@ -24,4 +24,10 @@ Resource Type Definition for AWS::S3Outposts::BucketPolicy
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_s3outposts_bucket_policy.example <resource ID>
+```

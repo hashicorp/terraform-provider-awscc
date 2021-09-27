@@ -34,4 +34,10 @@ Required:
 - **capacity_provider** (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
 - **weight** (Number)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ecs_cluster_capacity_provider_associations.example <resource ID>
+```

@@ -43,4 +43,10 @@ Optional:
 - **key_arn** (String)
 - **key_type** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_nimblestudio_studio.example <resource ID>
+```

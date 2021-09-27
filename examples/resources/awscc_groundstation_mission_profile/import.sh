@@ -1,0 +1,1 @@
+$ terraform import awscc_groundstation_mission_profile.example <resource ID>

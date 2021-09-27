@@ -1,0 +1,1 @@
+$ terraform import awscc_signer_profile_permission.example <resource ID>

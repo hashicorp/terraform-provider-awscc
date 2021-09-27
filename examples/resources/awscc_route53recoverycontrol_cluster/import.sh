@@ -1,0 +1,1 @@
+$ terraform import awscc_route53recoverycontrol_cluster.example <resource ID>

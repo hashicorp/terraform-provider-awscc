@@ -28,4 +28,10 @@ Resource schema for AWS::MediaConnect::FlowVpcInterface
 - **id** (String) Uniquely identifies the resource.
 - **network_interface_ids** (List of String) IDs of the network interfaces created in customer's account by MediaConnect.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_mediaconnect_flow_vpc_interface.example <resource ID>
+```

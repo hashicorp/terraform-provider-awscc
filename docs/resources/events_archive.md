@@ -31,4 +31,10 @@ Resource Type definition for AWS::Events::Archive
 - **arn** (String)
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_events_archive.example <resource ID>
+```

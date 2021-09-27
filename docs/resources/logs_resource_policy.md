@@ -24,4 +24,10 @@ The resource schema for AWSLogs ResourcePolicy
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_logs_resource_policy.example <resource ID>
+```

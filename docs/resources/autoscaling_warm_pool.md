@@ -29,4 +29,10 @@ Resource schema for AWS::AutoScaling::WarmPool.
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_autoscaling_warm_pool.example <resource ID>
+```

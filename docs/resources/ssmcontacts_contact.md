@@ -60,4 +60,10 @@ Required:
 - **contact_id** (String) The Amazon Resource Name (ARN) of the contact.
 - **is_essential** (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ssmcontacts_contact.example <resource ID>
+```

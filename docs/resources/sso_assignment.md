@@ -28,4 +28,10 @@ Resource Type definition for SSO assignmet
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_sso_assignment.example <resource ID>
+```

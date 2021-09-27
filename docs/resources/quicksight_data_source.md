@@ -700,4 +700,10 @@ Optional:
 
 - **vpc_connection_arn** (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_quicksight_data_source.example <resource ID>
+```

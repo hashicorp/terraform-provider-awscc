@@ -72,4 +72,10 @@ Optional:
 - **start_after** (List of String) The names of the actions that must be completed before the current action starts.
 - **targets** (Map of String) One or more targets for the action.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_fis_experiment_template.example <resource ID>
+```

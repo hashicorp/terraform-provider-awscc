@@ -24,4 +24,10 @@ Definition of AWS::Location::TrackerConsumer Resource Type
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_location_tracker_consumer.example <resource ID>
+```

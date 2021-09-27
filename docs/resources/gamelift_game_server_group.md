@@ -83,4 +83,10 @@ Optional:
 - **key** (String) The key for a developer-defined key:value pair for tagging an AWS resource.
 - **value** (String) The value for a developer-defined key:value pair for tagging an AWS resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_gamelift_game_server_group.example <resource ID>
+```

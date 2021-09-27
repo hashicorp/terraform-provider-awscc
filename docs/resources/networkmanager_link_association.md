@@ -25,4 +25,10 @@ The AWS::NetworkManager::LinkAssociation type associates a link to a device. The
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_networkmanager_link_association.example <resource ID>
+```

@@ -1,0 +1,1 @@
+$ terraform import awscc_mwaa_environment.example <resource ID>

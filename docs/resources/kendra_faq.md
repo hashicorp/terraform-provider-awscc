@@ -50,4 +50,10 @@ Optional:
 - **key** (String) A string used to identify this tag
 - **value** (String) A string containing the value for the tag
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_kendra_faq.example <resource ID>
+```

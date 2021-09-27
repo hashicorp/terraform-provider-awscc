@@ -1,0 +1,1 @@
+$ terraform import awscc_nimblestudio_launch_profile.example <resource ID>

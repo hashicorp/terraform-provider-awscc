@@ -1,0 +1,1 @@
+$ terraform import awscc_route53recoveryreadiness_readiness_check.example <resource ID>

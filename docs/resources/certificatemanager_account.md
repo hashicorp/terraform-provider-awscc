@@ -31,4 +31,10 @@ Required:
 
 - **days_before_expiry** (Number)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_certificatemanager_account.example <resource ID>
+```

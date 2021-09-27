@@ -28,4 +28,10 @@ The AWS::EC2::TransitGatewayMulticastDomainAssociation type
 - **resource_type** (String) The type of resource, for example a VPC attachment.
 - **state** (String) The state of the subnet association.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_transit_gateway_multicast_domain_association.example <resource ID>
+```

@@ -30,4 +30,10 @@ Resource Type definition for AWS::ApiGateway::Model
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_apigateway_model.example <resource ID>
+```

@@ -53,4 +53,10 @@ Optional:
 - **s3_bucket_name** (String) S3BucketName
 - **s3_key_prefix** (String) S3KeyPrefix
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_imagebuilder_infrastructure_configuration.example <resource ID>
+```

@@ -38,4 +38,10 @@ Required:
 
 - **stack_names** (List of String) An array of CloudFormation stack names.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_devopsguru_resource_collection.example <resource ID>
+```

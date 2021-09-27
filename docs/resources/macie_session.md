@@ -26,4 +26,10 @@ The AWS::Macie::Session resource specifies a new Amazon Macie session. A session
 - **id** (String) Uniquely identifies the resource.
 - **service_role** (String) Service role used by Macie
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_macie_session.example <resource ID>
+```

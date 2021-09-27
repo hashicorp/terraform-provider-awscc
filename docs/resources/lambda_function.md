@@ -118,4 +118,10 @@ Optional:
 - **security_group_ids** (List of String) A list of VPC security groups IDs.
 - **subnet_ids** (List of String) A list of VPC subnet IDs.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_lambda_function.example <resource ID>
+```

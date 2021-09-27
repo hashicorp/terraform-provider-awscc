@@ -108,4 +108,10 @@ Optional:
 - **package_version** (String)
 - **station** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iotwireless_task_definition.example <resource ID>
+```

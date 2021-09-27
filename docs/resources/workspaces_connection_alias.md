@@ -49,4 +49,10 @@ Read-Only:
 - **connection_identifier** (String)
 - **resource_id** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_workspaces_connection_alias.example <resource ID>
+```

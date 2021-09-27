@@ -37,4 +37,10 @@ Required:
 
 - **vpc_id** (String) Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_s3outposts_access_point.example <resource ID>
+```

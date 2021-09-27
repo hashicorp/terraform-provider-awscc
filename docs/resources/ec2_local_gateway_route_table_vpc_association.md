@@ -39,4 +39,10 @@ Optional:
 - **key** (String)
 - **value** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_ec2_local_gateway_route_table_vpc_association.example <resource ID>
+```

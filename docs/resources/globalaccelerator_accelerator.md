@@ -40,4 +40,10 @@ Optional:
 - **key** (String) Key of the tag. Value can be 1 to 127 characters.
 - **value** (String) Value for the tag. Value can be 1 to 255 characters.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_globalaccelerator_accelerator.example <resource ID>
+```

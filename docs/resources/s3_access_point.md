@@ -65,4 +65,10 @@ Optional:
 
 - **vpc_id** (String) If this field is specified, this access point will only allow connections from the specified VPC ID.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_s3_access_point.example <resource ID>
+```

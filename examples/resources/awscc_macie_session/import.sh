@@ -1,0 +1,1 @@
+$ terraform import awscc_macie_session.example <resource ID>

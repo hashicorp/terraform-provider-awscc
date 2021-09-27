@@ -24,4 +24,10 @@ AWS::S3ObjectLambda::AccessPointPolicy resource is an Amazon S3ObjectLambda poli
 
 - **id** (String) Uniquely identifies the resource.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_s3objectlambda_access_point_policy.example <resource ID>
+```

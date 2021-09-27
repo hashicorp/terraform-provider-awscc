@@ -43,4 +43,10 @@ Required:
 - **role_arn** (String)
 - **stream_arn** (String)
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudfront_realtime_log_config.example <resource ID>
+```

@@ -38,4 +38,10 @@ The only allowed value at present is:
 
 PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_module_version.example <resource ID>
+```

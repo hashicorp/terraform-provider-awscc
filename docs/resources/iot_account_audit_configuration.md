@@ -178,4 +178,10 @@ Optional:
 - **role_arn** (String) The ARN of the role that grants permission to send notifications to the target.
 - **target_arn** (String) The ARN of the target (SNS topic) to which audit notifications are sent.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_iot_account_audit_configuration.example <resource ID>
+```

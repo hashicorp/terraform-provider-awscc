@@ -33,4 +33,10 @@ Resource Type definition for AWS::ElastiCache::User
 - **id** (String) Uniquely identifies the resource.
 - **status** (String) Indicates the user status. Can be "active", "modifying" or "deleting".
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_elasticache_user.example <resource ID>
+```

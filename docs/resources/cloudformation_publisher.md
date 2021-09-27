@@ -31,4 +31,10 @@ Register as a publisher in the CloudFormation Registry.
 - **publisher_profile** (String) The URL to the publisher's profile with the identity provider.
 - **publisher_status** (String) Whether the publisher is verified.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_cloudformation_publisher.example <resource ID>
+```
