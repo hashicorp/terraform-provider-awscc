@@ -200,6 +200,7 @@ type providerData struct {
 	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
 	Token                  types.String    `tfsdk:"token"`
 	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
+	TerraformVersion       string
 }
 
 type assumeRoleData struct {
@@ -262,6 +263,8 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	if !request.Config.Raw.IsFullyKnown() {
 		response.AddError("Unknown Value", "An attribute value is not yet known")
 	}
+
+	config.TerraformVersion = request.TerraformVersion
 
 	ccClient, region, err := newCloudControlClient(ctx, &config)
 
@@ -350,6 +353,13 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		SecretKey:              pd.SecretKey.Value,
 		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
 		Token:                  pd.Token.Value,
+		APNInfo: &awsbase.APNInfo{
+			PartnerName: "HashiCorp",
+			Products: []awsbase.APNProduct{
+				{Name: "Terraform", Version: pd.TerraformVersion, Comment: "+https://www.terraform.io"},
+				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
+			},
+		},
 	}
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
