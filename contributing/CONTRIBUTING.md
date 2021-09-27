@@ -14,7 +14,3 @@ ability to merge PRs and respond to issues.
 - [Development Environment Setup](DEVELOPMENT.md)
 - [Issue Reporting and Lifecycle](issue-reporting-and-lifecycle.md)
 - [Pull Request Submission and Lifecycle](pullrequest-submission-and-lifecycle.md)
-
-This documentation also contains reference material specific to certain functionality:
-
-- [Provider Design](provider-design.md) TODO <!-- markdown-link-check-disable-line -->

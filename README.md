@@ -6,19 +6,18 @@
 
 *This provider is currently in technical preview. This means some aspects of its design and implementation are not yet considered stable. We are actively looking for community feedback in order to solidify its form.  *
 
-- Announcement: [HashiCorp Blog](TODO)
+- Announcement: [HashiCorp Blog](https://www.hashicorp.com/blog/announcing-terraform-aws-cloud-control-provider-tech-preview)
 - Terraform Website: [terraform.io](https://terraform.io)
 - Provider Documentation: [Terraform Registry](https://registry.terraform.io/providers/hashicorp/awscc/latest)
-- Tutorials: [learn.hashicorp.com](TODO Learn Content)
 - Forum: [discuss.hashicorp.com](https://discuss.hashicorp.com/c/terraform-providers/tf-aws/)
 
 The Terraform AWS Cloud Control Provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources using the AWS CloudFormation Cloud Control API.
 This provider is maintained internally by the HashiCorp AWS Provider team.
 
-### AWS CloudFormation Cloud Control API
+### AWS Cloud Control API
 
-The [Cloud Control API](TODO LINK TO AWS DOCS) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
-The Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
+The [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
+The AWS Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any AWS resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
 
 #### Coverage
 
@@ -30,7 +29,6 @@ To see the list of supported resources within this provider please refer to the 
 
 This provider is generated from the latest CloudFormation schemas, and will release weekly containing all new services and enhancements added to Cloud Control.
 
-
 ### Credentials
 
 When performing CRUDL operations the Cloud Control API make calls to downstream AWS services on your behalf. By default, the Cloud Control API will create a temporary session using the AWS credentials of the user making the Cloud Control API call. This session lasts up to a maximum of 24 hours.
@@ -41,7 +39,6 @@ All CRUDL operations also accept a `RoleArn` parameter which represents the [AWS
 
 ## Quick Starts
 
-- Using the provider TODO
 - [Provider development](contributing/DEVELOPMENT.md)
 
 ## Documentation
