@@ -57,7 +57,7 @@ CloudFormation takes a different approach to the existing Terraform AWS Provider
 
 While this provider is under Technical Preview, we do not recommend using it for your production setup. While we expect the functionality to be stable, its possible the interface will not so if you choose to use it please expect and plan for changes. 
 
-When the provider is annouced as Generally Aviailable the choice of provider will depend on which resources you need to configure. Until CloudFormation achieves 100% coverage there is likely to be gaps in both providers, so in the case where a single provider can’t manage your infrastructure we would recommend using both. Once this provider is GA, we recommend using it for any resource that is supported including ones that may be available in the “classic” provider.
+When the provider is annouced as Generally Available the choice of provider will depend on which resources you need to configure. Until CloudFormation achieves 100% coverage there is likely to be gaps in both providers, so in the case where a single provider can’t manage your infrastructure we would recommend using both. Once this provider is GA, we recommend using it for any resource that is supported including ones that may be available in the “classic” provider.
 
 ### Is there a way to migrate my existing resources to the new provider?
 
