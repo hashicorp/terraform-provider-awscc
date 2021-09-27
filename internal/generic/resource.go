@@ -442,7 +442,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn)
+	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus
+	})
 
 	statusInput := &cloudcontrol.GetResourceRequestStatusInput{
 		RequestToken: output.ProgressEvent.RequestToken,
@@ -692,7 +694,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn)
+	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus
+	})
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.resourceType.updateTimeout)
 
