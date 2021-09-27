@@ -42,7 +42,7 @@ func main() {
 			ui.Error(fmt.Sprintf("error executing template: %s", err))
 		}
 
-		examplesPath := "../../../../examples/resources"
+		examplesPath := "./examples/resources"
 
 		dirname := fmt.Sprintf("%s/%s", examplesPath, resource)
 		err = os.MkdirAll(dirname, shared.DirPerm)
