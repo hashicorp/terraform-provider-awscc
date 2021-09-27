@@ -1,4 +1,4 @@
-package cloudformation
+package cloudcontrol
 
 import (
 	"context"
