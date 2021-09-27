@@ -16,8 +16,8 @@ This provider is maintained internally by the HashiCorp AWS Provider team.
 
 ### AWS CloudFormation Cloud Control API
 
-The [Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
-The Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any AWS resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
+The [AWS Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi) is a lightweight proxy API to discover, provision and manage cloud resources through a simple, uniform and predictable control plane.
+The AWS Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete and **L**ist (CRUDL) operations on any AWS resource that is registered in the [AWS CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
 
 #### Coverage
 

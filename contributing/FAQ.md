@@ -29,7 +29,7 @@ At present we plan to release the provider weekly, rolling up any additions from
 
 #### CloudFormation Schema Version
 
-The Cloud Control API is only compatible with the latest version of the CloudFormation schema. While many CloudFormation resource schemas are now updated to use this latest version (and all new services will use it at launch), there will be a period where some AWS services still use the older one. AWS are updating all services using the older schema to use the newer one. To see which services are supported you can refer to the provider documentation or use the following AWS CLI command:
+The Cloud Control API is only compatible with the latest version of the CloudFormation schema. While many CloudFormation resource schemas are now updated to use this latest version (and all new services will use it at launch), there will be a period where some AWS services still use the prior version. AWS are updating all services using the older schema to use the newer one. To see which services are supported you can refer to the provider documentation or use the following AWS CLI command:
 
 ```console
 $ aws cloudformation list-types --type RESOURCE --visibility PUBLIC --provisioning-type FULLY_MUTABLE --filters Category=AWS_TYPES
@@ -55,7 +55,7 @@ CloudFormation takes a different approach to the existing Terraform AWS Provider
 
 ### Which provider should I use?
 
-While this provider is under Technical Preview, we do not recommend using it for your production setup. While we expect the functionality to be stable, its possible the interface will not so if you choose to use it please expect and plan for changes.
+While this provider is under Technical Preview, we do not recommend using it for your production setup. While we expect the functionality to be stable, it's possible the interface will not be. As a result, if you choose to use it, please expect and plan for changes.
 
 When the provider is announced as Generally Available the choice of provider will depend on which resources you need to configure. Until CloudFormation achieves 100% coverage there is likely to be gaps in both providers, so in the case where a single provider can’t manage your infrastructure we would recommend using both. Once this provider is GA, we recommend using it for any resource that is supported including ones that may be available in the “classic” provider.
 
