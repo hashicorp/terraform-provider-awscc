@@ -442,12 +442,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn)
+	var progressEvent *cctypes.ProgressEvent
+	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(&progressEvent)
+	})
 
-	statusInput := &cloudcontrol.GetResourceRequestStatusInput{
-		RequestToken: output.ProgressEvent.RequestToken,
-	}
-	err = waiter.Wait(ctx, statusInput, r.resourceType.createTimeout)
+	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.resourceType.createTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))
@@ -455,22 +455,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	// Need to call GetResourceRequestStatus one more time to get the resource Identifier.
-	statusOutput, err := conn.GetResourceRequestStatus(ctx, statusInput)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResourceRequestStatus", err))
-
-		return
-	}
-
-	if statusOutput == nil || statusOutput.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "CreateResource"))
-
-		return
-	}
-
-	id := aws.ToString(statusOutput.ProgressEvent.Identifier)
+	id := aws.ToString(progressEvent.Identifier)
 
 	description, err := r.describe(ctx, conn, id)
 
@@ -692,7 +677,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn)
+	waiter := cloudcontrol.NewResourceRequestSuccessWaiter(conn, func(o *cloudcontrol.ResourceRequestSuccessWaiterOptions) {
+		o.Retryable = tfcloudcontrol.RetryGetResourceRequestStatus(nil)
+	})
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.resourceType.updateTimeout)
 
