@@ -43,6 +43,12 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 				Optional:    true,
 			},
 
+			"http_proxy": {
+				Type:        types.StringType,
+				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
+				Optional:    true,
+			},
+
 			"insecure": {
 				Type:        types.BoolType,
 				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
@@ -120,16 +126,19 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								validate.ARN(),
 							},
 						},
+
 						"duration_seconds": {
 							Type:        types.Int64Type,
 							Description: "Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.",
 							Optional:    true,
 						},
+
 						"external_id": {
 							Type:        types.StringType,
 							Description: "External identifier to use when assuming the role.",
 							Optional:    true,
 						},
+
 						"policy": {
 							Type:        types.StringType,
 							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
@@ -139,6 +148,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								validate.StringIsJsonObject(),
 							},
 						},
+
 						"policy_arns": {
 							Type:        types.ListType{ElemType: types.StringType},
 							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
@@ -149,16 +159,19 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								),
 							},
 						},
+
 						"session_name": {
 							Type:        types.StringType,
 							Description: "Session name to use when assuming the role.",
 							Optional:    true,
 						},
+
 						"tags": {
 							Description: "Map of assume role session tags.",
 							Type:        types.MapType{ElemType: types.StringType},
 							Optional:    true,
 						},
+
 						"transitive_tag_keys": {
 							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
 							Type:        types.SetType{ElemType: types.StringType},
@@ -175,6 +188,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 type providerData struct {
 	AccessKey              types.String    `tfsdk:"access_key"`
+	HTTPProxy              types.String    `tfsdk:"http_proxy"`
 	Insecure               types.Bool      `tfsdk:"insecure"`
 	MaxRetries             types.Number    `tfsdk:"max_retries"`
 	Profile                types.String    `tfsdk:"profile"`
@@ -329,6 +343,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
 		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		HTTPProxy:              pd.HTTPProxy.Value,
 		Insecure:               pd.Insecure.Value,
 		Profile:                pd.Profile.Value,
 		Region:                 pd.Region.Value,
