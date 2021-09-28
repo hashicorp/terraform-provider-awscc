@@ -3,8 +3,8 @@ package cfschema
 import "strings"
 
 const (
-	propertyJsonPointerPrefix    = "/properties"
-	propertyJsonPointerSeparator = "/"
+	PropertyJsonPointerPrefix    = "/properties"
+	PropertyJsonPointerSeparator = "/"
 )
 
 // PropertyJsonPointer is a simplistic RFC 6901 handler for properties JSON Pointers.
@@ -41,7 +41,7 @@ func (p *PropertyJsonPointer) EqualsStringPath(path string) bool {
 		return false
 	}
 
-	trimmedPath := strings.TrimPrefix(string(*p), propertyJsonPointerPrefix)
+	trimmedPath := strings.TrimPrefix(string(*p), PropertyJsonPointerPrefix)
 
 	return trimmedPath == path
 }
@@ -54,7 +54,7 @@ func (p *PropertyJsonPointer) Path() []string {
 		return nil
 	}
 
-	pathParts := strings.Split(strings.TrimPrefix(string(*p), propertyJsonPointerPrefix+propertyJsonPointerSeparator), propertyJsonPointerSeparator)
+	pathParts := strings.Split(strings.TrimPrefix(string(*p), PropertyJsonPointerPrefix+PropertyJsonPointerSeparator), PropertyJsonPointerSeparator)
 
 	return pathParts
 }

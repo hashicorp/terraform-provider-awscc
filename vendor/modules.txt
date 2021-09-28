@@ -172,7 +172,7 @@ github.com/google/go-cmp/cmp/internal/value
 github.com/google/uuid
 # github.com/googleapis/gax-go/v2 v2.0.5
 github.com/googleapis/gax-go/v2
-# github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0
+# github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.11.0
 ## explicit
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go
 # github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.2

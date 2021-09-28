@@ -41,7 +41,7 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 		if resolved {
 			// For example:
 			// "Configuration": {
-			// 	  "$ref": "#/definitions/ClusterConfiguration"
+			//   "$ref": "#/definitions/ClusterConfiguration"
 			// },
 			continue
 		}
@@ -53,7 +53,7 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 			//   "type": "array",
 			//   "items": {
 			//     "$ref": "#/definitions/CapacityProviderStrategyItem"
-			// 	 }
+			//   }
 			// },
 			_, err = r.ResolveProperty(property.Items)
 
@@ -72,11 +72,11 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 					// For example:
 					// "ClusterConfiguration": {
 					//   "type": "object",
-					// 	 "properties": {
-					// 	   "ExecuteCommandConfiguration": {
-					// 	     "$ref": "#/definitions/ExecuteCommandConfiguration"
-					// 	   }
-					// 	 }
+					//   "properties": {
+					//     "ExecuteCommandConfiguration": {
+					//       "$ref": "#/definitions/ExecuteCommandConfiguration"
+					//     }
+					//   }
 					// },
 					continue
 				}
@@ -86,14 +86,14 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 					// For example:
 					// "LambdaContainerParams": {
 					//   "type": "object",
-					// 	 "properties": {
-					// 	   "Volumes": {
-					// 		 "type": "array",
-					// 		 "items": {
-					// 		   "$ref": "#/definitions/LambdaVolumeMount"
-					// 		 }
-					// 	   }
-					// 	 }
+					//   "properties": {
+					//     "Volumes": {
+					//       "type": "array",
+					//       "items": {
+					//         "$ref": "#/definitions/LambdaVolumeMount"
+					//       }
+					//     }
+					//   }
 					// },
 					_, err = r.ResolveProperty(objProperty.Items)
 
@@ -114,16 +114,16 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 						// For example:
 						// "LambdaFunctionRecipeSource": {
 						//   "type": "object",
-						// 	 "properties": {
-						// 	   "ComponentDependencies": {
-						// 		 "type": "object",
-						// 		 "patternProperties": {
-						// 		   "": {
-						// 			 "$ref": "#/definitions/ComponentDependencyRequirement"
-						// 		   }
-						// 		 }
-						// 	   }
-						// 	 }
+						//   "properties": {
+						//     "ComponentDependencies": {
+						//       "type": "object",
+						//       "patternProperties": {
+						//         "": {
+						//           "$ref": "#/definitions/ComponentDependencyRequirement"
+						//         }
+						//       }
+						//     }
+						//   }
 						// },
 						_, err = r.ResolveProperty(patternProperty)
 
@@ -144,12 +144,12 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 				if resolved {
 					// For example:
 					// "Tags": {
-					// 	 "type": "object",
-					// 	 "patternProperties": {
-					// 	   "": {
-					// 		 "$ref": "#/definitions/TagValue"
-					// 	   }
-					// 	 }
+					//   "type": "object",
+					//   "patternProperties": {
+					//     "": {
+					//       "$ref": "#/definitions/TagValue"
+					//     }
+					//   }
 					// },
 					continue
 				}
@@ -158,15 +158,15 @@ func (r *Resource) ResolveProperties(properties map[string]*Property) error {
 				case PropertyTypeArray:
 					// For example:
 					// "Tags": {
-					// 	 "type": "object",
-					// 	 "patternProperties": {
-					// 	   "": {
-					// 		 "type": "array",
-					// 		 "items": {
-					// 		   "$ref": "#/definitions/TagValue"
-					// 		 }
-					// 	   }
-					// 	 }
+					//   "type": "object",
+					//   "patternProperties": {
+					//     "": {
+					//       "type": "array",
+					//       "items": {
+					//         "$ref": "#/definitions/TagValue"
+					//       }
+					//     }
+					//   }
 					// },
 					_, err = r.ResolveProperty(objProperty.Items)
 
