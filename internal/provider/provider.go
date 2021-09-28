@@ -56,12 +56,9 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 			},
 
 			"max_retries": {
-				Type:        types.NumberType,
+				Type:        types.Int64Type,
 				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
 				Optional:    true,
-				Validators: []tfsdk.AttributeValidator{
-					validate.Int(),
-				},
 			},
 
 			"profile": {
