@@ -187,7 +187,7 @@ type providerData struct {
 	AccessKey              types.String    `tfsdk:"access_key"`
 	HTTPProxy              types.String    `tfsdk:"http_proxy"`
 	Insecure               types.Bool      `tfsdk:"insecure"`
-	MaxRetries             types.Number    `tfsdk:"max_retries"`
+	MaxRetries             types.Int64     `tfsdk:"max_retries"`
 	Profile                types.String    `tfsdk:"profile"`
 	Region                 types.String    `tfsdk:"region"`
 	RoleARN                types.String    `tfsdk:"role_arn"`
@@ -197,7 +197,7 @@ type providerData struct {
 	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
 	Token                  types.String    `tfsdk:"token"`
 	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
-	TerraformVersion       string
+	terraformVersion       string
 }
 
 type assumeRoleData struct {
@@ -261,7 +261,7 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 		response.AddError("Unknown Value", "An attribute value is not yet known")
 	}
 
-	config.TerraformVersion = request.TerraformVersion
+	config.terraformVersion = request.TerraformVersion
 
 	ccClient, region, err := newCloudControlClient(ctx, &config)
 
@@ -353,7 +353,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.APNProduct{
-				{Name: "Terraform", Version: pd.TerraformVersion, Comment: "+https://www.terraform.io"},
+				{Name: "Terraform", Version: pd.terraformVersion, Comment: "+https://www.terraform.io"},
 				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
 			},
 		},
@@ -361,8 +361,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
-		i, _ := pd.MaxRetries.Value.Int64()
-		config.MaxRetries = int(i)
+		config.MaxRetries = int(pd.MaxRetries.Value)
 	}
 	if !pd.SharedConfigFiles.Null {
 		cf := make([]string, len(pd.SharedConfigFiles.Elems))
