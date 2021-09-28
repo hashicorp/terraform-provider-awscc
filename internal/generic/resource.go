@@ -457,26 +457,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	id := aws.ToString(progressEvent.Identifier)
 
-	description, err := r.describe(ctx, conn, id)
-
-	if tfresource.NotFound(err) {
-		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
-
-		return
-	}
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
-
-		return
-	}
-
-	if description == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
-
-		return
-	}
-
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
@@ -502,15 +482,37 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.Properties))
+	if len(unknowns) > 0 {
+		description, err := r.describe(ctx, conn, id)
 
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
+		if tfresource.NotFound(err) {
+			response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
 
-		return
+			return
+		}
+
+		if err != nil {
+			response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+
+			return
+		}
+
+		if description == nil {
+			response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
+
+			return
+		}
+
+		err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.Properties))
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Creation Of Terraform State Unsuccessful",
+				fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
