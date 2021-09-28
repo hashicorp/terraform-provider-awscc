@@ -41,10 +41,10 @@ func ResourceIdentifierNotSetDiag(err error) diag.Diagnostic {
 	)
 }
 
-func ResourceNotFoundAfterCreationDiag(err error) diag.Diagnostic {
+func ResourceNotFoundAfterWriteDiag(err error) diag.Diagnostic {
 	return diag.NewErrorDiagnostic(
-		"AWS Resource Not Found After Creation",
-		fmt.Sprintf("After creating the AWS resource and attempting to read the resource, the API returned a resource not found error. This is typically an error with the Terraform resource implementation. Original Error: %s", err.Error()),
+		"AWS Resource Not Found After Creation or Update",
+		fmt.Sprintf("After creating or updating the AWS resource and attempting to read the resource, the API returned a resource not found error. This is typically an error with the Terraform resource implementation. Original Error: %s", err.Error()),
 	)
 }
 
