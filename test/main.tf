@@ -14,24 +14,24 @@ terraform {
 provider "aws" {}
 provider "awscc" {}
 
-resource "awscc_kms_key" "test" {
-  key_policy = jsonencode({
-    Id = "kms-tf-1"
-    Statement = [
-      {
-        Action = "kms:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
+# resource "awscc_kms_key" "test" {
+#   key_policy = jsonencode({
+#     Id = "kms-tf-1"
+#     Statement = [
+#       {
+#         Action = "kms:*"
+#         Effect = "Allow"
+#         Principal = {
+#           AWS = "*"
+#         }
 
-        Resource = "*"
-        Sid      = "Enable IAM User Permissions"
-      },
-    ]
-    Version = "2012-10-17"
-  })
-}
+#         Resource = "*"
+#         Sid      = "Enable IAM User Permissions"
+#       },
+#     ]
+#     Version = "2012-10-17"
+#   })
+# }
 
 # resource "awscc_ec2_dhcp_options" "test" {
 #   domain_name          = "service.tf"
@@ -192,4 +192,30 @@ resource "awscc_kms_key" "test" {
 #       uri  = "subnet:${aws_subnet.test.1.id}"
 #     },
 #   ]
+# }
+
+# resource "aws_iam_role" "lambda_service_role" {
+#   assume_role_policy = "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
+#   managed_policy_arns = [
+#     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+#   ]
+# }
+
+# resource "awscc_lambda_function" "test" {
+#   code = {
+#     zip_file = "def main(event, context):\n    print(\"I'm running!\")"
+#   }
+#   handler = "index.main"
+#   role    = aws_iam_role.lambda_service_role.arn
+#   runtime = "python3.6"
+#   timeout = 300
+
+#   memory_size  = 128
+#   package_type = "Zip"
+#   tracing_config = {
+#     mode = "PassThrough"
+#   }
+
+#   file_system_configs = []
+#   description = ""
 # }
