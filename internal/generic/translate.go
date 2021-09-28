@@ -18,7 +18,7 @@ type toCloudControl struct {
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
 func (t toCloudControl) AsRaw(ctx context.Context, val tftypes.Value) (map[string]interface{}, error) {
-	v, err := t.rawFromValue(ctx, val)
+	v, err := t.RawFromValue(ctx, val)
 
 	if err != nil {
 		return nil, err
@@ -52,9 +52,9 @@ func (t toCloudControl) AsString(ctx context.Context, val tftypes.Value) (string
 	return string(desiredState), nil
 }
 
-// rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
+// RawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
+func (t toCloudControl) RawFromValue(ctx context.Context, val tftypes.Value) (interface{}, error) { //nolint:unparam
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -96,7 +96,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 		}
 		vs := make([]interface{}, 0)
 		for _, val := range vals {
-			v, err := t.rawFromValue(ctx, val)
+			v, err := t.RawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}
@@ -117,7 +117,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 		}
 		vs := make(map[string]interface{})
 		for name, val := range vals {
-			v, err := t.rawFromValue(ctx, val)
+			v, err := t.RawFromValue(ctx, val)
 			if err != nil {
 				return nil, err
 			}
@@ -146,7 +146,7 @@ type toTerraform struct {
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
 func (t toTerraform) FromRaw(ctx context.Context, schema *tfsdk.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
-	return t.valueFromRaw(ctx, schema, nil, resourceModel)
+	return t.ValueFromRaw(ctx, schema, nil, resourceModel)
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
@@ -164,7 +164,7 @@ func (t toTerraform) FromString(ctx context.Context, schema *tfsdk.Schema, resou
 	return tftypes.Value{}, fmt.Errorf("unexpected raw type: %T", v)
 }
 
-func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+func (t toTerraform) ValueFromRaw(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
 	var typ tftypes.Type
 
 	if len(path.Steps()) == 0 {
@@ -204,7 +204,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 			} else {
 				path = path.WithElementKeyInt(int64(idx))
 			}
-			val, err := t.valueFromRaw(ctx, schema, path, v)
+			val, err := t.ValueFromRaw(ctx, schema, path, v)
 			if err != nil {
 				return tftypes.Value{}, err
 			}
@@ -238,7 +238,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 			} else {
 				path = path.WithElementKeyString(key)
 			}
-			val, err := t.valueFromRaw(ctx, schema, path, v)
+			val, err := t.ValueFromRaw(ctx, schema, path, v)
 			if err != nil {
 				if isObject {
 					tflog.Info(ctx, "not found in Terraform schema", "key", key, "path", path, "error", err.Error())
