@@ -175,11 +175,13 @@ github.com/googleapis/gax-go/v2
 # github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.10.0
 ## explicit
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go
-# github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.1
+# github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.2
 ## explicit
 github.com/hashicorp/aws-sdk-go-base/v2
+github.com/hashicorp/aws-sdk-go-base/v2/internal/config
 github.com/hashicorp/aws-sdk-go-base/v2/internal/constants
 github.com/hashicorp/aws-sdk-go-base/v2/internal/endpoints
+github.com/hashicorp/aws-sdk-go-base/v2/internal/httpclient
 # github.com/hashicorp/errwrap v1.0.0
 github.com/hashicorp/errwrap
 # github.com/hashicorp/go-checkpoint v0.5.0

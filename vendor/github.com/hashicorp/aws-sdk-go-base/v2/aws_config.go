@@ -2,12 +2,10 @@ package awsbase
 
 import (
 	"context"
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"log"
 	"net"
-	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -22,7 +20,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/hashicorp/aws-sdk-go-base/v2/internal/constants"
 	"github.com/hashicorp/aws-sdk-go-base/v2/internal/endpoints"
-	"github.com/hashicorp/go-cleanhttp"
+	"github.com/hashicorp/aws-sdk-go-base/v2/internal/httpclient"
 )
 
 func GetAwsConfig(ctx context.Context, c *Config) (aws.Config, error) {
@@ -40,8 +38,12 @@ func GetAwsConfig(ctx context.Context, c *Config) (aws.Config, error) {
 		Retryer: retryer,
 	}
 
-	loadOptions := append(
-		commonLoadOptions(c),
+	loadOptions, err := commonLoadOptions(c)
+	if err != nil {
+		return aws.Config{}, err
+	}
+	loadOptions = append(
+		loadOptions,
 		config.WithCredentialsProvider(credentialsProvider),
 		config.WithRetryer(func() aws.Retryer {
 			return retryer
@@ -119,21 +121,18 @@ func GetAwsAccountIDAndPartition(ctx context.Context, awsConfig aws.Config, skip
 	return "", endpoints.PartitionForRegion(awsConfig.Region), nil
 }
 
-func commonLoadOptions(c *Config) []func(*config.LoadOptions) error {
-	httpClient := cleanhttp.DefaultClient()
-	if c.Insecure {
-		transport := httpClient.Transport.(*http.Transport)
-		transport.TLSClientConfig = &tls.Config{
-			InsecureSkipVerify: true,
-		}
+func commonLoadOptions(c *Config) ([]func(*config.LoadOptions) error, error) {
+	httpClient, err := httpclient.DefaultHttpClient(c)
+	if err != nil {
+		return nil, err
 	}
 
 	apiOptions := make([]func(*middleware.Stack) error, 0)
-	if len(c.UserAgentProducts) > 0 {
+	if c.APNInfo != nil {
 		apiOptions = append(apiOptions, func(stack *middleware.Stack) error {
 			// Because the default User-Agent middleware prepends itself to the contents of the User-Agent header,
 			// we have to run after it and also prepend our custom User-Agent
-			return stack.Build.Add(customUserAgentMiddleware(c), middleware.After)
+			return stack.Build.Add(apnUserAgentMiddleware(*c.APNInfo), middleware.After)
 		})
 	}
 	if v := os.Getenv(constants.AppendUserAgentEnvVar); v != "" {
@@ -171,5 +170,5 @@ func commonLoadOptions(c *Config) []func(*config.LoadOptions) error {
 		os.Setenv("AWS_EC2_METADATA_DISABLED", "true")
 	}
 
-	return loadOptions
+	return loadOptions, nil
 }

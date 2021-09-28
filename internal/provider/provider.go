@@ -43,6 +43,12 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 				Optional:    true,
 			},
 
+			"http_proxy": {
+				Type:        types.StringType,
+				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
+				Optional:    true,
+			},
+
 			"insecure": {
 				Type:        types.BoolType,
 				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
@@ -50,12 +56,9 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 			},
 
 			"max_retries": {
-				Type:        types.NumberType,
+				Type:        types.Int64Type,
 				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
 				Optional:    true,
-				Validators: []tfsdk.AttributeValidator{
-					validate.Int(),
-				},
 			},
 
 			"profile": {
@@ -120,16 +123,19 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								validate.ARN(),
 							},
 						},
+
 						"duration_seconds": {
-							Type:        types.NumberType,
+							Type:        types.Int64Type,
 							Description: "Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.",
 							Optional:    true,
 						},
+
 						"external_id": {
 							Type:        types.StringType,
 							Description: "External identifier to use when assuming the role.",
 							Optional:    true,
 						},
+
 						"policy": {
 							Type:        types.StringType,
 							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
@@ -139,6 +145,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								validate.StringIsJsonObject(),
 							},
 						},
+
 						"policy_arns": {
 							Type:        types.ListType{ElemType: types.StringType},
 							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
@@ -149,16 +156,19 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 								),
 							},
 						},
+
 						"session_name": {
 							Type:        types.StringType,
 							Description: "Session name to use when assuming the role.",
 							Optional:    true,
 						},
+
 						"tags": {
 							Description: "Map of assume role session tags.",
 							Type:        types.MapType{ElemType: types.StringType},
 							Optional:    true,
 						},
+
 						"transitive_tag_keys": {
 							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
 							Type:        types.SetType{ElemType: types.StringType},
@@ -175,6 +185,7 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 
 type providerData struct {
 	AccessKey              types.String    `tfsdk:"access_key"`
+	HTTPProxy              types.String    `tfsdk:"http_proxy"`
 	Insecure               types.Bool      `tfsdk:"insecure"`
 	MaxRetries             types.Number    `tfsdk:"max_retries"`
 	Profile                types.String    `tfsdk:"profile"`
@@ -186,11 +197,12 @@ type providerData struct {
 	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
 	Token                  types.String    `tfsdk:"token"`
 	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
+	TerraformVersion       string
 }
 
 type assumeRoleData struct {
 	RoleARN           types.String `tfsdk:"role_arn"`
-	DurationSeconds   types.Number `tfsdk:"duration_seconds"`
+	DurationSeconds   types.Int64  `tfsdk:"duration_seconds"`
 	ExternalID        types.String `tfsdk:"external_id"`
 	Policy            types.String `tfsdk:"policy"`
 	PolicyARNs        types.List   `tfsdk:"policy_arns"`
@@ -198,6 +210,41 @@ type assumeRoleData struct {
 	Tags              types.Map    `tfsdk:"tags"`
 	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
 }
+
+func (a assumeRoleData) Config() *awsbase.AssumeRole {
+	assumeRole := &awsbase.AssumeRole{
+		RoleARN:         a.RoleARN.Value,
+		DurationSeconds: int(a.DurationSeconds.Value),
+		ExternalID:      a.ExternalID.Value,
+		Policy:          a.Policy.Value,
+		SessionName:     a.SessionName.Value,
+	}
+	if !a.PolicyARNs.Null {
+		arns := make([]string, len(a.PolicyARNs.Elems))
+		for i, v := range a.PolicyARNs.Elems {
+			arns[i] = v.(types.String).Value
+		}
+		assumeRole.PolicyARNs = arns
+	}
+	if !a.Tags.Null {
+		tags := make(map[string]string)
+		for key, value := range a.Tags.Elems {
+			tags[key] = value.(types.String).Value
+		}
+		assumeRole.Tags = tags
+	}
+	if !a.TransitiveTagKeys.Null {
+		tagKeys := make([]string, len(a.TransitiveTagKeys.Elems))
+		for i, v := range a.TransitiveTagKeys.Elems {
+			tagKeys[i] = v.(types.String).Value
+		}
+		assumeRole.TransitiveTagKeys = tagKeys
+	}
+
+	return assumeRole
+}
+
+// func intValueOrNull(i types.Int64)
 
 func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
@@ -213,6 +260,8 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	if !request.Config.Raw.IsFullyKnown() {
 		response.AddError("Unknown Value", "An attribute value is not yet known")
 	}
+
+	config.TerraformVersion = request.TerraformVersion
 
 	ccClient, region, err := newCloudControlClient(ctx, &config)
 
@@ -294,12 +343,20 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
 		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
+		HTTPProxy:              pd.HTTPProxy.Value,
 		Insecure:               pd.Insecure.Value,
 		Profile:                pd.Profile.Value,
 		Region:                 pd.Region.Value,
 		SecretKey:              pd.SecretKey.Value,
 		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
 		Token:                  pd.Token.Value,
+		APNInfo: &awsbase.APNInfo{
+			PartnerName: "HashiCorp",
+			Products: []awsbase.APNProduct{
+				{Name: "Terraform", Version: pd.TerraformVersion, Comment: "+https://www.terraform.io"},
+				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
+			},
+		},
 	}
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
@@ -321,49 +378,8 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		}
 		config.SharedCredentialsFiles = cf
 	}
-	if pd.AssumeRole != nil && !pd.AssumeRole.RoleARN.Null {
-		config.AssumeRoleARN = pd.AssumeRole.RoleARN.Value
-
-		if !pd.AssumeRole.DurationSeconds.Null {
-			v, _ := pd.AssumeRole.DurationSeconds.Value.Int64()
-			config.AssumeRoleDurationSeconds = int(v)
-		}
-
-		if !pd.AssumeRole.ExternalID.Null {
-			config.AssumeRoleExternalID = pd.AssumeRole.ExternalID.Value
-		}
-
-		if !pd.AssumeRole.Policy.Null {
-			config.AssumeRolePolicy = pd.AssumeRole.Policy.Value
-		}
-
-		if !pd.AssumeRole.PolicyARNs.Null {
-			arns := make([]string, len(pd.AssumeRole.PolicyARNs.Elems))
-			for i, v := range pd.AssumeRole.PolicyARNs.Elems {
-				arns[i] = v.(types.String).Value
-			}
-			config.AssumeRolePolicyARNs = arns
-		}
-
-		if !pd.AssumeRole.SessionName.Null {
-			config.AssumeRoleSessionName = pd.AssumeRole.SessionName.Value
-		}
-
-		if len(pd.AssumeRole.Tags.Elems) > 0 {
-			tags := make(map[string]string)
-			for key, value := range pd.AssumeRole.Tags.Elems {
-				tags[key] = value.(types.String).Value
-			}
-			config.AssumeRoleTags = tags
-		}
-
-		if !pd.AssumeRole.TransitiveTagKeys.Null {
-			tagKeys := make([]string, len(pd.AssumeRole.TransitiveTagKeys.Elems))
-			for i, v := range pd.AssumeRole.TransitiveTagKeys.Elems {
-				tagKeys[i] = v.(types.String).Value
-			}
-			config.AssumeRoleTransitiveTagKeys = tagKeys
-		}
+	if pd.AssumeRole != nil {
+		config.AssumeRole = pd.AssumeRole.Config()
 	}
 
 	cfg, err := awsbase.GetAwsConfig(ctx, &config)

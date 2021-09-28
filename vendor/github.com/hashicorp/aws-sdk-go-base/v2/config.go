@@ -1,35 +1,16 @@
 package awsbase
 
-type Config struct {
-	AccessKey                   string
-	AssumeRoleARN               string
-	AssumeRoleDurationSeconds   int
-	AssumeRoleExternalID        string
-	AssumeRolePolicy            string
-	AssumeRolePolicyARNs        []string
-	AssumeRoleSessionName       string
-	AssumeRoleTags              map[string]string
-	AssumeRoleTransitiveTagKeys []string
-	CallerDocumentationURL      string
-	CallerName                  string
-	DebugLogging                bool
-	IamEndpoint                 string
-	Insecure                    bool
-	MaxRetries                  int
-	Profile                     string
-	Region                      string
-	SecretKey                   string
-	SharedCredentialsFiles      []string
-	SharedConfigFiles           []string
-	SkipCredsValidation         bool
-	SkipMetadataApiCheck        bool
-	StsEndpoint                 string
-	Token                       string
-	UserAgentProducts           []*UserAgentProduct
-}
+import (
+	"github.com/hashicorp/aws-sdk-go-base/v2/internal/config"
+)
 
-type UserAgentProduct struct {
-	Extra   []string
-	Name    string
-	Version string
-}
+// Config, APNInfo, APNProduct, and AssumeRole are aliased to an internal package to break a dependency cycle
+// in internal/httpclient.
+
+type Config = config.Config
+
+type APNInfo = config.APNInfo
+
+type APNProduct = config.APNProduct
+
+type AssumeRole = config.AssumeRole

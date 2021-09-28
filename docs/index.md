@@ -167,6 +167,7 @@ provider "awscc" {
 
 - **access_key** (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
 - **assume_role** (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
+- **http_proxy** (String) The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.
 - **insecure** (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
 - **max_retries** (Number) The maximum number of times an AWS API request is retried on failure. If not set, defaults to 25.
 - **profile** (String) This is the AWS profile name as set in the shared credentials file.
