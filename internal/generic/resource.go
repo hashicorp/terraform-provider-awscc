@@ -455,14 +455,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	id := aws.ToString(progressEvent.Identifier)
-
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
 	// Set the synthetic "id" attribute.
 	if r.resourceType.syntheticIDAttribute {
-		err = r.setId(ctx, id, &response.State)
+		err = r.setId(ctx, aws.ToString(progressEvent.Identifier), &response.State)
 
 		if err != nil {
 			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
@@ -471,48 +469,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		}
 	}
 
-	unknowns, err := Unknowns(ctx, response.State.Raw, r.resourceType.tfToCfNameMap)
+	diags := r.populateUnknownValues(ctx, &response.State)
 
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
+	if diags.HasError() {
+		response.Diagnostics.Append(diags...)
 
 		return
-	}
-
-	if len(unknowns) > 0 {
-		description, err := r.describe(ctx, conn, id)
-
-		if tfresource.NotFound(err) {
-			response.Diagnostics = append(response.Diagnostics, ResourceNotFoundAfterCreationDiag(err))
-
-			return
-		}
-
-		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
-
-			return
-		}
-
-		if description == nil {
-			response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
-
-			return
-		}
-
-		err = unknowns.SetValuesFromString(ctx, &response.State, aws.ToString(description.Properties))
-
-		if err != nil {
-			response.Diagnostics.AddError(
-				"Creation Of Terraform State Unsuccessful",
-				fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-			)
-
-			return
-		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
@@ -821,6 +783,67 @@ func (r *resource) setEmptyAttributes(ctx context.Context, state *tfsdk.State) e
 		if diags.HasError() {
 			return tfresource.DiagsError(diags)
 		}
+	}
+
+	return nil
+}
+
+// populateUnknownValues populates and unknown values in State with values from the current resource description.
+func (r *resource) populateUnknownValues(ctx context.Context, state *tfsdk.State) diag.Diagnostics {
+	var diags diag.Diagnostics
+
+	unknowns, err := Unknowns(ctx, state.Raw, r.resourceType.tfToCfNameMap)
+
+	if err != nil {
+		diags.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return diags
+	}
+
+	if len(unknowns) == 0 {
+		return nil
+	}
+
+	id, err := r.getId(ctx, state)
+
+	if err != nil {
+		diags.Append(ResourceIdentifierNotFoundDiag(err))
+
+		return diags
+	}
+
+	description, err := r.describe(ctx, r.provider.CloudControlApiClient(ctx), id)
+
+	if tfresource.NotFound(err) {
+		diags.Append(ResourceNotFoundAfterCreationDiag(err))
+
+		return diags
+	}
+
+	if err != nil {
+		diags.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+
+		return diags
+	}
+
+	if description == nil {
+		diags.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
+
+		return diags
+	}
+
+	err = unknowns.SetValuesFromString(ctx, state, aws.ToString(description.Properties))
+
+	if err != nil {
+		diags.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return diags
 	}
 
 	return nil
