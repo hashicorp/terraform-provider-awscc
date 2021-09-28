@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/smithy-go/logging"
@@ -16,11 +17,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 const (
-	defaultMaxRetries = 25
+	defaultMaxRetries         = 25
+	defaultAssumeRoleDuration = 1 * time.Hour
 )
 
 func New() tfsdk.Provider {
@@ -127,10 +130,12 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 							},
 						},
 
-						"duration_seconds": {
-							Type:        types.Int64Type,
-							Description: "Number of seconds to restrict the assume role session duration. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.",
-							Optional:    true,
+						"duration": {
+							Type: cctypes.DurationType,
+							Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
+								cctypes.DurationType.Description() +
+								fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
+							Optional: true,
 						},
 
 						"external_id": {
@@ -204,20 +209,20 @@ type providerData struct {
 }
 
 type assumeRoleData struct {
-	RoleARN           types.String `tfsdk:"role_arn"`
-	DurationSeconds   types.Int64  `tfsdk:"duration_seconds"`
-	ExternalID        types.String `tfsdk:"external_id"`
-	Policy            types.String `tfsdk:"policy"`
-	PolicyARNs        types.List   `tfsdk:"policy_arns"`
-	SessionName       types.String `tfsdk:"session_name"`
-	Tags              types.Map    `tfsdk:"tags"`
-	TransitiveTagKeys types.Set    `tfsdk:"transitive_tag_keys"`
+	RoleARN           types.String     `tfsdk:"role_arn"`
+	Duration          cctypes.Duration `tfsdk:"duration"`
+	ExternalID        types.String     `tfsdk:"external_id"`
+	Policy            types.String     `tfsdk:"policy"`
+	PolicyARNs        types.List       `tfsdk:"policy_arns"`
+	SessionName       types.String     `tfsdk:"session_name"`
+	Tags              types.Map        `tfsdk:"tags"`
+	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
 }
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
 		RoleARN:         a.RoleARN.Value,
-		DurationSeconds: int(a.DurationSeconds.Value),
+		DurationSeconds: int(a.Duration.Value.Seconds()),
 		ExternalID:      a.ExternalID.Value,
 		Policy:          a.Policy.Value,
 		SessionName:     a.SessionName.Value,
@@ -246,8 +251,6 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 
 	return assumeRole
 }
-
-// func intValueOrNull(i types.Int64)
 
 func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsdk.ConfigureProviderRequest, response *tfsdk.ConfigureProviderResponse) {
 	var config providerData
