@@ -654,8 +654,15 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	}
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
-	// On Update there should be nothing unknown in the planned state...
 	response.State.Raw = request.Plan.Raw
+
+	diags := r.populateUnknownValues(ctx, &response.State)
+
+	if diags.HasError() {
+		response.Diagnostics.Append(diags...)
+
+		return
+	}
 
 	tflog.Trace(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
@@ -818,7 +825,7 @@ func (r *resource) populateUnknownValues(ctx context.Context, state *tfsdk.State
 	description, err := r.describe(ctx, r.provider.CloudControlApiClient(ctx), id)
 
 	if tfresource.NotFound(err) {
-		diags.Append(ResourceNotFoundAfterCreationDiag(err))
+		diags.Append(ResourceNotFoundAfterWriteDiag(err))
 
 		return diags
 	}
