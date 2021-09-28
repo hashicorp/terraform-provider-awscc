@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -21,6 +22,11 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"github.com/mattbaird/jsonpatch"
 )
+
+type writeOnlyPath struct {
+	InTerraformSchema      *tftypes.AttributePath
+	InCloudFormationSchema string // Property path
+}
 
 // ResourceTypeOptionsFunc is a type alias for a resource type functional option.
 type ResourceTypeOptionsFunc func(*resourceType) error
@@ -119,7 +125,7 @@ func resourceWithSyntheticIDAttribute(v bool) ResourceTypeOptionsFunc {
 // the previous calls' values.
 func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 	return func(o *resourceType) error {
-		writeOnlyAttributePaths := make([]*tftypes.AttributePath, 0)
+		writeOnlyAttributePaths := make([]writeOnlyPath, 0)
 
 		for _, writeOnlyPropertyPath := range v {
 			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
@@ -128,7 +134,10 @@ func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 				return fmt.Errorf("error creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
 			}
 
-			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
+			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyPath{
+				InTerraformSchema:      writeOnlyAttributePath,
+				InCloudFormationSchema: writeOnlyPropertyPath,
+			})
 		}
 
 		o.writeOnlyAttributePaths = writeOnlyAttributePaths
@@ -303,7 +312,7 @@ type resourceType struct {
 	cfToTfNameMap                map[string]string                 // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType              bool                              // Resources cannot be updated and must be recreated
 	syntheticIDAttribute         bool                              // Resource type has a synthetic ID attribute
-	writeOnlyAttributePaths      []*tftypes.AttributePath          // Paths to any write-only attributes
+	writeOnlyAttributePaths      []writeOnlyPath                   // Paths to any write-only attributes
 	createTimeout                time.Duration                     // Maximum wait time for resource creation
 	updateTimeout                time.Duration                     // Maximum wait time for resource update
 	deleteTimeout                time.Duration                     // Maximum wait time for resource deletion
@@ -539,7 +548,7 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 	// Copy over any write-only values.
 	// They can only be in the current state.
 	for _, path := range r.resourceType.writeOnlyAttributePaths {
-		err = CopyValueAtPath(ctx, &response.State, &request.State, path)
+		err = CopyValueAtPath(ctx, &response.State, &request.State, path.InTerraformSchema)
 
 		if err != nil {
 			response.Diagnostics.AddError(
@@ -586,30 +595,10 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
-	currentDesiredState, err := translator.AsString(ctx, currentState.Raw)
+	patchDocument, diags := r.patchDocument(ctx, currentState, request.Plan)
 
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
-
-		return
-	}
-
-	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Raw)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
-
-		return
-	}
-
-	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
-
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Creation Of JSON Patch Unsuccessful",
-			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
+	if diags.HasError() {
+		response.Diagnostics.Append(diags...)
 
 		return
 	}
@@ -656,7 +645,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	diags := r.populateUnknownValues(ctx, &response.State)
+	diags = r.populateUnknownValues(ctx, &response.State)
 
 	if diags.HasError() {
 		response.Diagnostics.Append(diags...)
@@ -856,18 +845,101 @@ func (r *resource) populateUnknownValues(ctx context.Context, state *tfsdk.State
 	return nil
 }
 
-// patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
-func patchDocument(old, new string) (string, error) {
-	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
+// patchDocument returns a JSON Patch document describing the difference between `current` and `planned`.
+func (r *resource) patchDocument(ctx context.Context, current *tfsdk.State, planned tfsdk.Plan) (string, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
+	currentDesiredState, err := translator.AsString(ctx, current.Raw)
 
 	if err != nil {
-		return "", err
+		diags.Append(DesiredStateErrorDiag("Prior State", err))
+
+		return "", diags
+	}
+
+	plannedDesiredState, err := translator.AsString(ctx, planned.Raw)
+
+	if err != nil {
+		diags.Append(DesiredStateErrorDiag("Plan", err))
+
+		return "", diags
+	}
+
+	patch, err := jsonpatch.CreatePatch([]byte(currentDesiredState), []byte(plannedDesiredState))
+
+	if err != nil {
+		diags.AddError(
+			"Creation Of JSON Patch Unsuccessful",
+			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return "", diags
+	}
+
+	// Write-only, required values must be set in the patch document.
+	for _, path := range r.resourceType.writeOnlyAttributePaths {
+		attr, err := r.resourceType.tfSchema.AttributeAtPath(path.InTerraformSchema)
+
+		if err != nil {
+			diags.AddAttributeError(
+				path.InTerraformSchema,
+				"AttributeAtPath Unsuccessful",
+				fmt.Sprintf("Unable to obtain attribute at path. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+		}
+
+		if !attr.Required {
+			continue
+		}
+
+		valueInPatch := false
+		for _, operation := range patch {
+			if operation.Path == path.InCloudFormationSchema {
+				valueInPatch = true
+
+				break
+			}
+		}
+
+		if valueInPatch {
+			continue
+		}
+
+		attrValue, ds := planned.GetAttribute(ctx, path.InTerraformSchema)
+
+		if ds.HasError() {
+			diags.Append(ds...)
+
+			return "", diags
+		}
+
+		v, err := attrValue.ToTerraformValue(ctx)
+
+		if err != nil {
+			diags.AddAttributeError(
+				path.InTerraformSchema,
+				"ToTerraformValue Unsuccessful",
+				fmt.Sprintf("Unable to obtain value at path. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+		}
+
+		patch = append(patch, jsonpatch.NewPatch(
+			"replace",
+			strings.TrimPrefix(path.InCloudFormationSchema, cfschema.PropertyJsonPointerPrefix),
+			v,
+		))
 	}
 
 	b, err := json.Marshal(patch)
 
 	if err != nil {
-		return "", err
+		diags.AddError(
+			"Creation Of JSON Patch Unsuccessful",
+			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return "", diags
 	}
 
 	return string(b), nil
