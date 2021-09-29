@@ -136,7 +136,7 @@ func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 
 			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyPath{
 				InTerraformSchema:      writeOnlyAttributePath,
-				InCloudFormationSchema: writeOnlyPropertyPath,
+				InCloudFormationSchema: strings.TrimPrefix(writeOnlyPropertyPath, cfschema.PropertiesJsonPointerPrefix),
 			})
 		}
 
@@ -352,7 +352,7 @@ func (rt *resourceType) NewResource(ctx context.Context, provider tfsdk.Provider
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
 func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftypes.AttributePath, error) {
-	segments := strings.Split(propertyPath, "/")
+	segments := strings.Split(propertyPath, cfschema.JsonPointerReferenceTokenSeparator)
 
 	if got, expected := len(segments), 3; got < expected {
 		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
@@ -362,7 +362,7 @@ func (rt *resourceType) propertyPathToAttributePath(propertyPath string) (*tftyp
 		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
 	}
 
-	if got, expected := segments[1], "properties"; got != expected {
+	if got, expected := segments[1], cfschema.PropertiesJsonPointerReferenceToken; got != expected {
 		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
 	}
 
@@ -926,7 +926,7 @@ func (r *resource) patchDocument(ctx context.Context, current *tfsdk.State, plan
 
 		patch = append(patch, jsonpatch.NewPatch(
 			"replace",
-			strings.TrimPrefix(path.InCloudFormationSchema, cfschema.PropertyJsonPointerPrefix),
+			path.InCloudFormationSchema,
 			v,
 		))
 	}
