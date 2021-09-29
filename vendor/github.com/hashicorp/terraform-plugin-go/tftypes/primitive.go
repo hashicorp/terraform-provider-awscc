@@ -37,27 +37,20 @@ type primitive struct {
 	_ []struct{}
 }
 
-func (p primitive) Equal(o Type) bool {
-	v, ok := o.(primitive)
-	if !ok {
-		return false
-	}
-	return p.name == v.name
+func (p primitive) Equal(o primitive) bool {
+	return p.equals(o, true)
 }
 
 func (p primitive) Is(t Type) bool {
-	return p.Equal(t)
+	return p.equals(t, false)
 }
 
-func (p primitive) UsableAs(t Type) bool {
+func (p primitive) equals(t Type, exact bool) bool {
 	v, ok := t.(primitive)
 	if !ok {
 		return false
 	}
-	if v.name == DynamicPseudoType.name {
-		return true
-	}
-	return v.name == p.name
+	return p.name == v.name
 }
 
 func (p primitive) String() string {
@@ -102,9 +95,28 @@ func (p primitive) supportedGoTypes() []string {
 	case Bool.name:
 		return []string{"bool", "*bool"}
 	case DynamicPseudoType.name:
-		return []string{"nil", "UnknownValue"}
+		possibleTypes := []Type{
+			String, Bool, Number,
+			Tuple{}, Object{},
+		}
+		results := []string{}
+		for _, t := range possibleTypes {
+			results = append(results, t.supportedGoTypes()...)
+		}
+		return results
 	}
 	panic(fmt.Sprintf("unknown primitive type %q", p.name))
+}
+
+func valueCanBeString(val interface{}) bool {
+	switch val.(type) {
+	case string:
+		return true
+	case *string:
+		return true
+	default:
+		return false
+	}
 }
 
 func valueFromString(in interface{}) (Value, error) {
@@ -130,6 +142,17 @@ func valueFromString(in interface{}) (Value, error) {
 	}
 }
 
+func valueCanBeBool(val interface{}) bool {
+	switch val.(type) {
+	case bool:
+		return true
+	case *bool:
+		return true
+	default:
+		return false
+	}
+}
+
 func valueFromBool(in interface{}) (Value, error) {
 	switch value := in.(type) {
 	case *bool:
@@ -150,6 +173,25 @@ func valueFromBool(in interface{}) (Value, error) {
 		}, nil
 	default:
 		return Value{}, fmt.Errorf("tftypes.NewValue can't use %T as a tftypes.Bool; expected types are: %s", in, formattedSupportedGoTypes(Bool))
+	}
+}
+
+func valueCanBeNumber(val interface{}) bool {
+	switch val.(type) {
+	case uint, uint8, uint16, uint32, uint64:
+		return true
+	case *uint, *uint8, *uint16, *uint32, *uint64:
+		return true
+	case int, int8, int16, int32, int64:
+		return true
+	case *int, *int8, *int16, *int32, *int64:
+		return true
+	case float64, *float64:
+		return true
+	case *big.Float:
+		return true
+	default:
+		return false
 	}
 }
 
@@ -338,5 +380,47 @@ func valueFromNumber(in interface{}) (Value, error) {
 		}, nil
 	default:
 		return Value{}, fmt.Errorf("tftypes.NewValue can't use %T as a tftypes.Number; expected types are: %s", in, formattedSupportedGoTypes(Number))
+	}
+}
+
+func valueFromDynamicPseudoType(val interface{}) (Value, error) {
+	switch {
+	case valueCanBeString(val):
+		v, err := valueFromString(val)
+		if err != nil {
+			return Value{}, err
+		}
+		v.typ = DynamicPseudoType
+		return v, nil
+	case valueCanBeNumber(val):
+		v, err := valueFromNumber(val)
+		if err != nil {
+			return Value{}, err
+		}
+		v.typ = DynamicPseudoType
+		return v, nil
+	case valueCanBeBool(val):
+		v, err := valueFromBool(val)
+		if err != nil {
+			return Value{}, err
+		}
+		v.typ = DynamicPseudoType
+		return v, nil
+	case valueCanBeObject(val):
+		v, err := valueFromObject(nil, nil, val)
+		if err != nil {
+			return Value{}, err
+		}
+		v.typ = DynamicPseudoType
+		return v, nil
+	case valueCanBeTuple(val):
+		v, err := valueFromTuple(nil, val)
+		if err != nil {
+			return Value{}, err
+		}
+		v.typ = DynamicPseudoType
+		return v, nil
+	default:
+		return Value{}, fmt.Errorf("tftypes.NewValue can't use %T as a tftypes.DynamicPseudoType; expected types are: %s", val, formattedSupportedGoTypes(DynamicPseudoType))
 	}
 }

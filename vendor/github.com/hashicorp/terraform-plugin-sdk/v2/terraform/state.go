@@ -1343,10 +1343,6 @@ type InstanceState struct {
 
 	ProviderMeta cty.Value
 
-	RawConfig cty.Value
-	RawState  cty.Value
-	RawPlan   cty.Value
-
 	// Tainted is used to mark a resource for recreation.
 	Tainted bool `json:"tainted"`
 

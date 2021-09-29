@@ -67,7 +67,7 @@ func walk(path *AttributePath, val Value, cb func(*AttributePath, Value) (bool, 
 			if ty.Is(Set{}) {
 				path = path.WithElementKeyValue(el)
 			} else {
-				path = path.WithElementKeyInt(pos)
+				path = path.WithElementKeyInt(int64(pos))
 			}
 			err = walk(path, el, cb)
 			if err != nil {
@@ -116,10 +116,6 @@ func transform(path *AttributePath, val Value, cb func(*AttributePath, Value) (V
 	var newVal Value
 	ty := val.Type()
 
-	if ty == nil {
-		return val, path.NewError(errors.New("invalid transform: value missing type"))
-	}
-
 	switch {
 	case val.IsNull() || !val.IsKnown():
 		newVal = val
@@ -137,7 +133,7 @@ func transform(path *AttributePath, val Value, cb func(*AttributePath, Value) (V
 				if ty.Is(Set{}) {
 					path = path.WithElementKeyValue(el)
 				} else {
-					path = path.WithElementKeyInt(pos)
+					path = path.WithElementKeyInt(int64(pos))
 				}
 				newEl, err := transform(path, el, cb)
 				if err != nil {
@@ -146,10 +142,7 @@ func transform(path *AttributePath, val Value, cb func(*AttributePath, Value) (V
 				elems = append(elems, newEl)
 				path = path.WithoutLastStep()
 			}
-			newVal, err = newValue(ty, elems)
-			if err != nil {
-				return val, path.NewError(err)
-			}
+			newVal = NewValue(ty, elems)
 		}
 	case ty.Is(Map{}), ty.Is(Object{}):
 		v := map[string]Value{}
@@ -174,10 +167,7 @@ func transform(path *AttributePath, val Value, cb func(*AttributePath, Value) (V
 				elems[k] = newEl
 				path = path.WithoutLastStep()
 			}
-			newVal, err = newValue(ty, elems)
-			if err != nil {
-				return val, path.NewError(err)
-			}
+			newVal = NewValue(ty, elems)
 		}
 	default:
 		newVal = val
@@ -186,11 +176,7 @@ func transform(path *AttributePath, val Value, cb func(*AttributePath, Value) (V
 	if err != nil {
 		return res, path.NewError(err)
 	}
-	newTy := newVal.Type()
-	if newTy == nil {
-		return val, path.NewError(errors.New("invalid transform: new value missing type"))
-	}
-	if !newTy.UsableAs(ty) {
+	if !newVal.Type().Is(ty) {
 		return val, path.NewError(errors.New("invalid transform: value changed type"))
 	}
 	return res, err

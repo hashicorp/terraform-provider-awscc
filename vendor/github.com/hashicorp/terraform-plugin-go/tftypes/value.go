@@ -2,7 +2,6 @@ package tftypes
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"math/big"
 	"sort"
@@ -214,7 +213,7 @@ func (val Value) Equal(o Value) bool {
 	if o.Type() == nil {
 		return false
 	}
-	if !val.Type().Equal(o.Type()) {
+	if !val.Type().Is(o.Type()) {
 		return false
 	}
 	diff, err := val.Diff(o)
@@ -295,11 +294,6 @@ func newValue(t Type, val interface{}) (Value, error) {
 			value: val,
 		}, nil
 	}
-
-	if t.Is(DynamicPseudoType) {
-		return Value{}, errors.New("cannot have DynamicPseudoType with known value, DynamicPseudoType can only contain null or unknown values")
-	}
-
 	if creator, ok := val.(ValueCreator); ok {
 		var err error
 		val, err = creator.ToTerraform5Value()
@@ -309,6 +303,12 @@ func newValue(t Type, val interface{}) (Value, error) {
 	}
 
 	switch {
+	case t.Is(DynamicPseudoType):
+		v, err := valueFromDynamicPseudoType(val)
+		if err != nil {
+			return Value{}, err
+		}
+		return v, nil
 	case t.Is(String):
 		v, err := valueFromString(val)
 		if err != nil {
@@ -328,7 +328,7 @@ func newValue(t Type, val interface{}) (Value, error) {
 		}
 		return v, nil
 	case t.Is(Map{}):
-		v, err := valueFromMap(t.(Map).ElementType, val)
+		v, err := valueFromMap(t.(Map).AttributeType, val)
 		if err != nil {
 			return Value{}, err
 		}

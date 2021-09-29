@@ -40,7 +40,7 @@ func (validator arrayForEachValidator) Validate(ctx context.Context, request tfs
 	}
 
 	for i, e := range l.Elems {
-		elemPath := request.AttributePath.WithElementKeyInt(i)
+		elemPath := request.AttributePath.WithElementKeyInt(int64(i))
 
 		elemRequest := tfsdk.ValidateAttributeRequest{
 			AttributePath:   elemPath,
