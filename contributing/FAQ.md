@@ -4,16 +4,17 @@
 <!-- markdownlint-disable-next-line heading-increment -->
 ### Who are the maintainers?
 
-The HashiCorp Terraform AWS provider team is :
+The HashiCorp Terraform AWS provider team is:
 
-* Mary Cutrali, Product Manager - GitHub [@maryelizbeth](https://github.com/maryelizbeth) Twitter [@marycutrali](https://twitter.com/marycutrali)
+* Mary Cutrali, Product Manager - GitHub [@maryelizbeth](https://github.com/maryelizbeth), Twitter [@marycutrali](https://twitter.com/marycutrali)
 * Kit Ewbank, Engineer - GitHub [@ewbankkit](https://github.com/ewbankkit)
 * Graham Davison, Engineer - GitHub [@gdavison](https://github.com/gdavison)
 * Angie Pinilla, Engineer - GitHub [@angie44](https://github.com/angie44)
 * Dirk Avery (Federal), Engineer - GitHub [@YakDriver](https://github.com/yakdriver)
 * Zoe Helding, Engineer - GitHub [@zhelding](https://github.com/zhelding)
 * Simon Davis, Engineering Manager - GitHub [@breathingdust](https://github.com/breathingdust)
-* Kerim Satirli,  Developer Advocate - GitHub [@ksatirli](https://github.com/ksatirli)
+* Kerim Satirli, Developer Advocate - GitHub [@ksatirli](https://github.com/ksatirli)
+* Justin Retzolk, Technical Community Manager - GitHub [@justinretzolk](https://github.com/justinretzolk)
 
 ### How is this provider different from the existing AWS provider?
 
@@ -25,7 +26,7 @@ There are a few reasons why this might happen:
 
 #### Launch Schedule
 
-At present we plan to release the provider weekly, rolling up any additions from AWS collecting over the preceding week. This means you could wait up to a week to see the service in the provider. We do plan to narrow this gap as the provider reaches GA status.
+At present, we plan to release the provider weekly, rolling up any additions from AWS collecting over the preceding week. This means you could wait up to a week to see the service in the provider. We do plan to narrow this gap as the provider reaches GA status.
 
 #### CloudFormation Schema Version
 
@@ -45,11 +46,11 @@ It's possible that as AWS release new services, the code which generates the pro
 
 We release weekly on Thursday rolling up the preceding week's CloudFormation additions/enhancements. For this reason there may be a delay of up to a week before a feature available in AWS can be usable in the provider. We do plan to narrow this gap as the provider reaches GA status.
 
-### Cloudformation doesn’t support the service or resource I want to use, how do I request coverage?
+### Cloudformation doesn't support the service or resource I want to use, how do I request coverage?
 
 AWS are aiming for 100% coverage of their AWS service area in CloudFormation. New services will nearly always launch with CloudFormation support, and older services will be updated in time. Please refer to the [CloudFormation](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1) Open Coverage roadmap for more details or to upvote the service you would like to see coverage for.
 
-### The CloudFormation schema doesn’t cover all API actions, and I can’t do what I used to do with the classic provider?
+### The CloudFormation schema doesn't cover all API actions, and I can’t do what I used to do with the classic provider?
 
 CloudFormation takes a different approach to the existing Terraform AWS Provider and typically does not model more operational concerns in its schema focusing exclusively on configuration. At this time we do not intend to customize the generated resources to add this functionality, but this is under active consideration. We expect this to be a rare occurrence, but do want to hear from you if you feel this is impeding your usage.
 
