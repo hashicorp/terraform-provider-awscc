@@ -887,6 +887,8 @@ func (r *resource) patchDocument(ctx context.Context, current *tfsdk.State, plan
 				"AttributeAtPath Unsuccessful",
 				fmt.Sprintf("Unable to obtain attribute at path. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 			)
+
+			return "", diags
 		}
 
 		if !attr.Required {
@@ -906,22 +908,29 @@ func (r *resource) patchDocument(ctx context.Context, current *tfsdk.State, plan
 			continue
 		}
 
-		attrValue, ds := planned.GetAttribute(ctx, path.InTerraformSchema)
-
-		if ds.HasError() {
-			diags.Append(ds...)
-
-			return "", diags
-		}
-
-		v, err := attrValue.ToTerraformValue(ctx)
+		tfValue, _, err := tftypes.WalkAttributePath(planned.Raw, path.InTerraformSchema)
 
 		if err != nil {
 			diags.AddAttributeError(
 				path.InTerraformSchema,
-				"ToTerraformValue Unsuccessful",
+				"WalkAttributePath Unsuccessful",
 				fmt.Sprintf("Unable to obtain value at path. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 			)
+
+			return "", diags
+		}
+
+		val, _ := tfValue.(tftypes.Value)
+		v, err := translator.RawFromValue(ctx, val)
+
+		if err != nil {
+			diags.AddAttributeError(
+				path.InTerraformSchema,
+				"RawFromValue Unsuccessful",
+				fmt.Sprintf("Unable to obtain value at path. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+
+			return "", diags
 		}
 
 		patch = append(patch, jsonpatch.NewPatch(
