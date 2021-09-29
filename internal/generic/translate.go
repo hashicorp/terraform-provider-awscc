@@ -202,7 +202,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 				// No need to worry about a specific value here.
 				path = path.WithElementKeyValue(tftypes.NewValue(typ.(tftypes.Set).ElementType, nil))
 			} else {
-				path = path.WithElementKeyInt(int64(idx))
+				path = path.WithElementKeyInt(idx)
 			}
 			val, err := t.valueFromRaw(ctx, schema, path, v)
 			if err != nil {
