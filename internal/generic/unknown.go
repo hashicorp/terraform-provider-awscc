@@ -57,8 +57,8 @@ func unknownValuePaths(ctx context.Context, inTerraformState, inCloudControlReso
 				inTerraformState = inTerraformState.WithElementKeyValue(val)
 				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyValue(val)
 			} else {
-				inTerraformState = inTerraformState.WithElementKeyInt(int64(idx))
-				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyInt(int64(idx))
+				inTerraformState = inTerraformState.WithElementKeyInt(idx)
+				inCloudControlResourceModel = inCloudControlResourceModel.WithElementKeyInt(idx)
 			}
 			paths, err := unknownValuePaths(ctx, inTerraformState, inCloudControlResourceModel, val, tfToCfNameMap)
 			if err != nil {
