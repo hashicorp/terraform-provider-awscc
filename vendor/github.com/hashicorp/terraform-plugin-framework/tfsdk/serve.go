@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/internal/proto6"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
-	tf6server "github.com/hashicorp/terraform-plugin-go/tfprotov6/server"
+	"github.com/hashicorp/terraform-plugin-go/tfprotov6/tf6server"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
@@ -584,9 +584,16 @@ func (s *server) readResource(ctx context.Context, req *tfprotov6.ReadResourceRe
 	resp.NewState = &newState
 }
 
-func markComputedNilsAsUnknown(ctx context.Context, resourceSchema Schema) func(*tftypes.AttributePath, tftypes.Value) (tftypes.Value, error) {
+func markComputedNilsAsUnknown(ctx context.Context, config tftypes.Value, resourceSchema Schema) func(*tftypes.AttributePath, tftypes.Value) (tftypes.Value, error) {
 	return func(path *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
-		if !val.IsNull() {
+		// we are only modifying attributes, not the entire resource
+		if len(path.Steps()) < 1 {
+			return val, nil
+		}
+		configVal, _, err := tftypes.WalkAttributePath(config, path)
+		if err != tftypes.ErrInvalidStep && err != nil {
+			return val, err
+		} else if err != tftypes.ErrInvalidStep && !configVal.(tftypes.Value).IsNull() {
 			return val, nil
 		}
 		attribute, err := resourceSchema.AttributeAtPath(path)
@@ -676,11 +683,6 @@ func (s *server) planResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 
 	resp.PlannedState = req.ProposedNewState
 
-	if plan.IsNull() || !plan.IsKnown() {
-		// on null or unknown plans, just bail, we can't do anything
-		return
-	}
-
 	// create the resource instance, so we can call its methods and handle
 	// the request
 	resource, diags := resourceType.NewResource(ctx, s.p)
@@ -689,64 +691,139 @@ func (s *server) planResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 		return
 	}
 
-	// first, execute any AttributePlanModifiers
-	modifySchemaPlanReq := ModifySchemaPlanRequest{
-		Config: Config{
-			Schema: resourceSchema,
-			Raw:    config,
-		},
-		State: State{
-			Schema: resourceSchema,
-			Raw:    state,
-		},
-		Plan: Plan{
-			Schema: resourceSchema,
-			Raw:    plan,
-		},
+	// Execute any AttributePlanModifiers.
+	//
+	// This pass is before any Computed-only attributes are marked as unknown
+	// to ensure any plan changes will trigger that behavior. These plan
+	// modifiers are run again after that marking to allow setting values
+	// and preventing extraneous plan differences.
+	//
+	// We only do this if there's a plan to modify; otherwise, it
+	// represents a resource being deleted and there's no point.
+	//
+	// TODO: Enabling this pass will generate the following test error:
+	//
+	//     --- FAIL: TestServerPlanResourceChange/two_modifyplan_add_list_elem (0.00s)
+	// serve_test.go:3303: An unexpected error was encountered trying to read an attribute from the configuration. This is always an error in the provider. Please report the following to the provider developer:
+	//
+	// ElementKeyInt(1).AttributeName("name") still remains in the path: step cannot be applied to this value
+	//
+	// To fix this, (Config).GetAttribute() should return nil instead of the error.
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/183
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/150
+	// See also: https://github.com/hashicorp/terraform-plugin-framework/pull/167
+
+	// Execute any resource-level ModifyPlan method.
+	//
+	// This pass is before any Computed-only attributes are marked as unknown
+	// to ensure any plan changes will trigger that behavior. These plan
+	// modifiers be run again after that marking to allow setting values and
+	// preventing extraneous plan differences.
+	//
+	// TODO: Enabling this pass will generate the following test error:
+	//
+	//     --- FAIL: TestServerPlanResourceChange/two_modifyplan_add_list_elem (0.00s)
+	// serve_test.go:3303: An unexpected error was encountered trying to read an attribute from the configuration. This is always an error in the provider. Please report the following to the provider developer:
+	//
+	// ElementKeyInt(1).AttributeName("name") still remains in the path: step cannot be applied to this value
+	//
+	// To fix this, (Config).GetAttribute() should return nil instead of the error.
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/183
+	// Reference: https://github.com/hashicorp/terraform-plugin-framework/issues/150
+	// See also: https://github.com/hashicorp/terraform-plugin-framework/pull/167
+
+	// After ensuring there are proposed changes, mark any computed attributes
+	// that are null in the config as unknown in the plan, so providers have
+	// the choice to update them.
+	//
+	// Later attribute and resource plan modifier passes can override the
+	// unknown with a known value using any plan modifiers.
+	//
+	// We only do this if there's a plan to modify; otherwise, it
+	// represents a resource being deleted and there's no point.
+	if !plan.IsNull() && !plan.Equal(state) {
+		modifiedPlan, err := tftypes.Transform(plan, markComputedNilsAsUnknown(ctx, config, resourceSchema))
+		if err != nil {
+			resp.Diagnostics.AddError(
+				"Error modifying plan",
+				"There was an unexpected error updating the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
+			)
+			return
+		}
+		plan = modifiedPlan
 	}
-	if pm, ok := s.p.(ProviderWithProviderMeta); ok {
-		pmSchema, diags := pm.GetMetaSchema(ctx)
-		if diags != nil {
-			resp.Diagnostics.Append(diags...)
-			if resp.Diagnostics.HasError() {
-				return
+
+	// Execute any AttributePlanModifiers again. This allows overwriting
+	// any unknown values.
+	//
+	// We only do this if there's a plan to modify; otherwise, it
+	// represents a resource being deleted and there's no point.
+	if !plan.IsNull() {
+		modifySchemaPlanReq := ModifySchemaPlanRequest{
+			Config: Config{
+				Schema: resourceSchema,
+				Raw:    config,
+			},
+			State: State{
+				Schema: resourceSchema,
+				Raw:    state,
+			},
+			Plan: Plan{
+				Schema: resourceSchema,
+				Raw:    plan,
+			},
+		}
+		if pm, ok := s.p.(ProviderWithProviderMeta); ok {
+			pmSchema, diags := pm.GetMetaSchema(ctx)
+			if diags != nil {
+				resp.Diagnostics.Append(diags...)
+				if resp.Diagnostics.HasError() {
+					return
+				}
+			}
+			modifySchemaPlanReq.ProviderMeta = Config{
+				Schema: pmSchema,
+				Raw:    tftypes.NewValue(pmSchema.TerraformType(ctx), nil),
+			}
+
+			if req.ProviderMeta != nil {
+				pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
+				if err != nil {
+					resp.Diagnostics.AddError(
+						"Error parsing provider_meta",
+						"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
+					)
+					return
+				}
+				modifySchemaPlanReq.ProviderMeta.Raw = pmValue
 			}
 		}
-		modifySchemaPlanReq.ProviderMeta = Config{
-			Schema: pmSchema,
-			Raw:    tftypes.NewValue(pmSchema.TerraformType(ctx), nil),
+
+		modifySchemaPlanResp := ModifySchemaPlanResponse{
+			Plan: Plan{
+				Schema: resourceSchema,
+				Raw:    plan,
+			},
+			Diagnostics: resp.Diagnostics,
 		}
 
-		if req.ProviderMeta != nil {
-			pmValue, err := req.ProviderMeta.Unmarshal(pmSchema.TerraformType(ctx))
-			if err != nil {
-				resp.Diagnostics.AddError(
-					"Error parsing provider_meta",
-					"There was an error parsing the provider_meta block. Please report this to the provider developer:\n\n"+err.Error(),
-				)
-				return
-			}
-			modifySchemaPlanReq.ProviderMeta.Raw = pmValue
+		resourceSchema.modifyAttributePlans(ctx, modifySchemaPlanReq, &modifySchemaPlanResp)
+		resp.RequiresReplace = append(resp.RequiresReplace, modifySchemaPlanResp.RequiresReplace...)
+		plan = modifySchemaPlanResp.Plan.Raw
+		resp.Diagnostics = modifySchemaPlanResp.Diagnostics
+		if resp.Diagnostics.HasError() {
+			return
 		}
 	}
 
-	modifySchemaPlanResp := ModifySchemaPlanResponse{
-		Plan: Plan{
-			Schema: resourceSchema,
-			Raw:    plan,
-		},
-		Diagnostics: resp.Diagnostics,
-	}
-
-	resourceSchema.modifyAttributePlans(ctx, modifySchemaPlanReq, &modifySchemaPlanResp)
-	resp.RequiresReplace = modifySchemaPlanResp.RequiresReplace
-	plan = modifySchemaPlanResp.Plan.Raw
-	resp.Diagnostics = modifySchemaPlanResp.Diagnostics
-	if resp.Diagnostics.HasError() {
-		return
-	}
-
-	// second, execute any ModifyPlan func
+	// Execute any resource-level ModifyPlan method again. This allows
+	// overwriting any unknown values.
+	//
+	// We do this regardless of whether the plan is null or not, because we
+	// want resources to be able to return diagnostics when planning to
+	// delete resources, e.g. to inform practitioners that the resource
+	// _can't_ be deleted in the API and will just be removed from
+	// Terraform's state
 	var modifyPlanResp ModifyResourcePlanResponse
 	if resource, ok := resource.(ResourceWithModifyPlan); ok {
 		modifyPlanReq := ModifyResourcePlanRequest{
@@ -800,16 +877,7 @@ func (s *server) planResourceChange(ctx context.Context, req *tfprotov6.PlanReso
 		plan = modifyPlanResp.Plan.Raw
 	}
 
-	modifiedPlan, err := tftypes.Transform(plan, markComputedNilsAsUnknown(ctx, resourceSchema))
-	if err != nil {
-		resp.Diagnostics.AddError(
-			"Error modifying plan",
-			"There was an unexpected error updating the plan. This is always a problem with the provider. Please report the following to the provider developer:\n\n"+err.Error(),
-		)
-		return
-	}
-
-	plannedState, err := tfprotov6.NewDynamicValue(modifiedPlan.Type(), modifiedPlan)
+	plannedState, err := tfprotov6.NewDynamicValue(plan.Type(), plan)
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Error converting response",
