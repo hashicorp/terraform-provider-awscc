@@ -1,5 +1,10 @@
 ## 0.1.0 (Unreleased)
 
+## [0.0.14](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.14) (September 29, 2021)
+
+Populate any Unknown values after resource update.
+Set APN HTTP User-Agent header value.
+
 ## [0.0.13](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.13) (September 24, 2021)
 
 Validate array entries in List/Set of primitive types.
