@@ -194,28 +194,28 @@ provider "awscc" {}
 #   ]
 # }
 
-# resource "aws_iam_role" "lambda_service_role" {
-#   assume_role_policy = "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
-#   managed_policy_arns = [
-#     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-#   ]
-# }
+resource "aws_iam_role" "lambda_service_role" {
+  assume_role_policy = "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}"
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  ]
+}
 
-# resource "awscc_lambda_function" "test" {
-#   code = {
-#     zip_file = "def main(event, context):\n    print(\"I'm running!\")"
-#   }
-#   handler = "index.main"
-#   role    = aws_iam_role.lambda_service_role.arn
-#   runtime = "python3.6"
-#   timeout = 300
+resource "awscc_lambda_function" "test" {
+  code = {
+    zip_file = "def main(event, context):\n    print(\"I'm running!\")"
+  }
+  handler = "index.main"
+  role    = aws_iam_role.lambda_service_role.arn
+  runtime = "python3.6"
+  timeout = 300
 
-#   memory_size  = 128
-#   package_type = "Zip"
-#   tracing_config = {
-#     mode = "PassThrough"
-#   }
+  memory_size  = 128
+  package_type = "Zip"
+  tracing_config = {
+    mode = "PassThrough"
+  }
 
-#   file_system_configs = []
-#   description = ""
-# }
+  file_system_configs = []
+  description = "changed"
+}
