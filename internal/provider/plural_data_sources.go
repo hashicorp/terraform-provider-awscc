@@ -84,6 +84,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ecs_task_definitions -cftype AWS::ECS::TaskDefinition -package ecs ../aws/ecs/task_definition_plural_data_source_gen.go ../aws/ecs/task_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_efs_access_points -cftype AWS::EFS::AccessPoint -package efs ../aws/efs/access_point_plural_data_source_gen.go ../aws/efs/access_point_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_efs_file_systems -cftype AWS::EFS::FileSystem -package efs ../aws/efs/file_system_plural_data_source_gen.go ../aws/efs/file_system_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_eks_clusters -cftype AWS::EKS::Cluster -package eks ../aws/eks/cluster_plural_data_source_gen.go ../aws/eks/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studios -cftype AWS::EMR::Studio -package emr ../aws/emr/studio_plural_data_source_gen.go ../aws/emr/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studio_session_mappings -cftype AWS::EMR::StudioSessionMapping -package emr ../aws/emr/studio_session_mapping_plural_data_source_gen.go ../aws/emr/studio_session_mapping_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emrcontainers_virtual_clusters -cftype AWS::EMRContainers::VirtualCluster -package emrcontainers ../aws/emrcontainers/virtual_cluster_plural_data_source_gen.go ../aws/emrcontainers/virtual_cluster_plural_data_source_gen_test.go
@@ -149,6 +150,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_devices -cftype AWS::IoTWireless::WirelessDevice -package iotwireless ../aws/iotwireless/wireless_device_plural_data_source_gen.go ../aws/iotwireless/wireless_device_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_gateways -cftype AWS::IoTWireless::WirelessGateway -package iotwireless ../aws/iotwireless/wireless_gateway_plural_data_source_gen.go ../aws/iotwireless/wireless_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_aliases -cftype AWS::KMS::Alias -package kms ../aws/kms/alias_plural_data_source_gen.go ../aws/kms/alias_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_replica_keys -cftype AWS::KMS::ReplicaKey -package kms ../aws/kms/replica_key_plural_data_source_gen.go ../aws/kms/replica_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kendra_indices -cftype AWS::Kendra::Index -package kendra ../aws/kendra/index_plural_data_source_gen.go ../aws/kendra/index_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesis_streams -cftype AWS::Kinesis::Stream -package kinesis ../aws/kinesis/stream_plural_data_source_gen.go ../aws/kinesis/stream_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisfirehose_delivery_streams -cftype AWS::KinesisFirehose::DeliveryStream -package kinesisfirehose ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen.go ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen_test.go
@@ -251,6 +253,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/efs"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"

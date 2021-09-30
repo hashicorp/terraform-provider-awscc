@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 362 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 364 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -26,6 +26,11 @@ resource_schema "aws_acmpca_certificate_authority_activation" {
 
 resource_schema "aws_acmpca_permission" {
   cloudformation_type_name               = "AWS::ACMPCA::Permission"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_aps_rule_groups_namespace" {
+  cloudformation_type_name               = "AWS::APS::RuleGroupsNamespace"
   suppress_plural_data_source_generation = true
 }
 
@@ -558,6 +563,10 @@ resource_schema "aws_eks_addon" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_eks_cluster" {
+  cloudformation_type_name = "AWS::EKS::Cluster"
+}
+
 resource_schema "aws_eks_fargate_profile" {
   cloudformation_type_name               = "AWS::EKS::FargateProfile"
   suppress_plural_data_source_generation = true
@@ -935,8 +944,7 @@ resource_schema "aws_kms_key" {
 }
 
 resource_schema "aws_kms_replica_key" {
-  cloudformation_type_name               = "AWS::KMS::ReplicaKey"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::KMS::ReplicaKey"
 }
 
 resource_schema "aws_kendra_data_source" {
