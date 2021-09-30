@@ -1,5 +1,7 @@
 ## 0.1.0 (Unreleased)
 
+Public Technical Preview
+
 ## [0.0.15](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.15) (September 30, 2021)
 
 11 additional CloudFormation resource schemas.
