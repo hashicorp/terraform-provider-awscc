@@ -104,7 +104,7 @@ This method also supports the `profile` configuration and corresponding `AWS_PRO
 Usage:
 
 ```terraform
-provider "aws" {
+provider "awscc" {
   region                   = "us-west-2"
   shared_config_files      = ["/Users/tf_user/.aws/conf"]
   shared_credentials_files = ["/Users/tf_user/.aws/creds"]
