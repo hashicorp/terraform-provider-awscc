@@ -192,3 +192,4 @@ Optional:
 - **session_name** (String) Session name to use when assuming the role.
 - **tags** (Map of String) Map of assume role session tags.
 - **transitive_tag_keys** (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
+```
