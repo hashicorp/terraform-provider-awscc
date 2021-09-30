@@ -525,6 +525,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "SecurityGroupIds": {
 			//       "description": "A list of security groups to use for the environment.",
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "",
 			//         "maxLength": 1024,
@@ -538,6 +539,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "SubnetIds": {
 			//       "description": "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "",
 			//         "maxLength": 1024,
