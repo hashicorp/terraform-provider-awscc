@@ -475,10 +475,6 @@ resource_schema "aws_ec2_network_acl" {
   cloudformation_type_name = "AWS::EC2::NetworkAcl"
 }
 
-resource_schema "aws_ec2_network_acl_entry" {
-  cloudformation_type_name = "AWS::EC2::NetworkAclEntry"
-}
-
 resource_schema "aws_ec2_network_insights_analysis" {
   cloudformation_type_name = "AWS::EC2::NetworkInsightsAnalysis"
 }
