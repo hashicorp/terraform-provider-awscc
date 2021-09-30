@@ -190,6 +190,7 @@
       "properties": {
         "SubnetIds": {
           "type": "array",
+          "insertionOrder": true,
           "description": "A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.",
           "minItems": 2,
           "maxItems": 2,
@@ -199,6 +200,7 @@
         },
         "SecurityGroupIds": {
           "type": "array",
+          "insertionOrder": true,
           "description": "A list of security groups to use for the environment.",
           "minItems": 1,
           "maxItems": 5,
@@ -415,6 +417,7 @@
     "/properties/LoggingConfiguration/WorkerLogs/CloudWatchLogGroupArn",
     "/properties/LoggingConfiguration/TaskLogs/CloudWatchLogGroupArn"
   ],
+  "taggable": true,
   "primaryIdentifier": [
     "/properties/Name"
   ],

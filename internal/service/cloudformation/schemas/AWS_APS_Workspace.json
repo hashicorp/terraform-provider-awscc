@@ -48,6 +48,10 @@
             "minLength": 1,
             "maxLength": 128
         },
+        "AlertManagerDefinition":  {
+            "description": "The AMP Workspace alert manager definition data",
+            "type": "string"
+        },
         "PrometheusEndpoint": {
             "description": "AMP Workspace prometheus endpoint",
             "type": "string"
@@ -77,13 +81,15 @@
         "create": {
             "permissions": [
                 "aps:CreateWorkspace",
-                "aps:TagResource"
+                "aps:TagResource",
+                "aps:CreateAlertManagerDefinition"
             ]
         },
         "read": {
             "permissions": [
                 "aps:DescribeWorkspace",
-                "aps:ListTagsForResource"
+                "aps:ListTagsForResource",
+                "aps:DescribeAlertManagerDefinition"
             ]
         },
         "update": {
@@ -91,12 +97,14 @@
                 "aps:UpdateWorkspaceAlias",
                 "aps:TagResource",
                 "aps:UntagResource",
-                "aps:ListTagsForResource"
+                "aps:ListTagsForResource",
+                "aps:PutAlertManagerDefinition"
             ]
         },
         "delete": {
             "permissions": [
-                "aps:DeleteWorkspace"
+                "aps:DeleteWorkspace",
+                "aps:DeleteAlertManagerDefinition"
             ]
         },
         "list": {

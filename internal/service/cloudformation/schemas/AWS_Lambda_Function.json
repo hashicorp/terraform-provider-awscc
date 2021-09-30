@@ -43,6 +43,18 @@
             "maxLength" : 128,
             "pattern" : ""
         },
+        "Architectures" : {
+            "type" : "array",
+            "uniqueItems" : true,
+            "minItems" : 1,
+            "items" : {
+                "type" : "string",
+                "enum" : [
+                    "x86_64",
+                    "arm64"
+                ]
+            }
+        },
         "KmsKeyArn" : {
             "description" : "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
             "type" : "string",

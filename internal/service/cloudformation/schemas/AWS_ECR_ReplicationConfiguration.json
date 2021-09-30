@@ -9,12 +9,12 @@
                 "Rules": {
                     "type": "array",
                     "minItems": 0,
-                    "maxItems": 1,
+                    "maxItems": 10,
                     "items": {
                         "$ref": "#/definitions/ReplicationRule"
                     },
-                    "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations."
-                }
+                    "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules."
+		}
             },
             "description": "An object representing the replication configuration for a registry.",
             "required": [
@@ -25,6 +25,15 @@
         "ReplicationRule": {
             "type": "object",
             "properties": {
+                "RepositoryFilters": {
+                    "type": "array",
+                    "minItems": 0,
+                    "maxItems": 100,
+                    "items": {
+                        "$ref": "#/definitions/RepositoryFilter"
+                    },
+                    "description": "An array of objects representing the details of a repository filter."
+                },
                 "Destinations": {
                     "type": "array",
                     "minItems": 1,
@@ -40,6 +49,33 @@
                 "Destinations"
             ],
             "additionalProperties": false
+        },
+        "RepositoryFilter": {
+            "type": "object",
+            "properties": {
+                "Filter": {
+                    "$ref": "#/definitions/Filter"
+                },
+                "FilterType": {
+                    "$ref": "#/definitions/FilterType"
+                }
+            },
+            "description": "An array of objects representing the details of a repository filter.",
+            "required": [
+                "Filter",
+                "FilterType"
+            ],
+            "additionalProperties": false
+        },
+        "Filter": {
+            "type": "string",
+            "description": "The repository filter to be applied for replication.",
+            "pattern": ""
+        },
+        "FilterType": {
+            "description": "Type of repository filter",
+            "type": "string",
+            "enum": ["PREFIX_MATCH"]
         },
         "ReplicationDestination": {
             "type": "object",
