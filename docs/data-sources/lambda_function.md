@@ -21,6 +21,7 @@ Data Source schema for AWS::Lambda::Function
 
 ### Read-Only
 
+- **architectures** (List of String)
 - **arn** (String) Unique identifier for function resources
 - **code** (Attributes) (see [below for nested schema](#nestedatt--code))
 - **code_signing_config_arn** (String) A unique Arn for CodeSigningConfig resource

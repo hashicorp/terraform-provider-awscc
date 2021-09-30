@@ -22,6 +22,7 @@ Resource Type definition for AWS::Lambda::Function
 
 ### Optional
 
+- **architectures** (List of String)
 - **code_signing_config_arn** (String) A unique Arn for CodeSigningConfig resource
 - **dead_letter_config** (Attributes) The dead-letter queue for failed asynchronous invocations. (see [below for nested schema](#nestedatt--dead_letter_config))
 - **description** (String) A description of the function.

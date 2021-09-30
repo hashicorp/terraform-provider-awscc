@@ -21,6 +21,7 @@ Data Source schema for AWS::APS::Workspace
 
 ### Read-Only
 
+- **alert_manager_definition** (String) The AMP Workspace alert manager definition data
 - **alias** (String) AMP Workspace alias.
 - **arn** (String) Workspace arn.
 - **prometheus_endpoint** (String) AMP Workspace prometheus endpoint
