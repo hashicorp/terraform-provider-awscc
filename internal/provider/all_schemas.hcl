@@ -67,8 +67,12 @@ resource_schema "aws_apigateway_api_key" {
 }
 
 resource_schema "aws_apigateway_base_path_mapping" {
-  cloudformation_type_name               = "AWS::ApiGateway::BasePathMapping"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::ApiGateway::BasePathMapping"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigateway_client_certificate" {
