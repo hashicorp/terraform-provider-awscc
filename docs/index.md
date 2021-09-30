@@ -11,7 +11,7 @@ Use the Amazon Web Services (AWS) Cloud Control provider to interact with the ma
 
 Use the navigation to the left to read about the available resources.
 
-To learn the basics of Terraform using this provider, follow the hands-on get started tutorials on HashiCorp's Learn platform. 
+To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control?in=terraform/aws) on HashiCorp's Learn platform.
 
 ## Example Usage
 
@@ -29,7 +29,7 @@ terraform {
 
 # Configure the AWS Provider
 provider "awscc" {
-  region = "us-east-1"
+  region = "us-west-2"
 }
 
 # Create a Log Group
@@ -64,8 +64,8 @@ Usage:
 ```terraform
 provider "awscc" {
   region     = "us-west-2"
-  access_key = "my-access-key"
-  secret_key = "my-secret-key"
+  access_key = "AKIAIOSFODNN7EXAMPLE"
+  secret_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
 ```
 
@@ -86,8 +86,8 @@ provider "awscc" {}
 Usage:
 
 ```sh
-$ export AWS_ACCESS_KEY_ID="anaccesskey"
-$ export AWS_SECRET_ACCESS_KEY="asecretkey"
+$ export AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE"
+$ export AWS_SECRET_ACCESS_KEY="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 $ export AWS_DEFAULT_REGION="us-west-2"
 $ terraform plan
 ```
