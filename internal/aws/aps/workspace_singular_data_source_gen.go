@@ -19,6 +19,17 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::APS::Workspace resource type.
 func workspaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"alert_manager_definition": {
+			// Property: AlertManagerDefinition
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The AMP Workspace alert manager definition data",
+			//   "type": "string"
+			// }
+			Description: "The AMP Workspace alert manager definition data",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"alias": {
 			// Property: Alias
 			// CloudFormation resource type schema:
@@ -142,13 +153,14 @@ func workspaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::APS::Workspace").WithTerraformTypeName("awscc_aps_workspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alias":               "Alias",
-		"arn":                 "Arn",
-		"key":                 "Key",
-		"prometheus_endpoint": "PrometheusEndpoint",
-		"tags":                "Tags",
-		"value":               "Value",
-		"workspace_id":        "WorkspaceId",
+		"alert_manager_definition": "AlertManagerDefinition",
+		"alias":                    "Alias",
+		"arn":                      "Arn",
+		"key":                      "Key",
+		"prometheus_endpoint":      "PrometheusEndpoint",
+		"tags":                     "Tags",
+		"value":                    "Value",
+		"workspace_id":             "WorkspaceId",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

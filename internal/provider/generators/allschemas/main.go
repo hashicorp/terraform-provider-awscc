@@ -46,7 +46,7 @@ func main() {
 		output, err := cfClient.ListTypes(ctx, input)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error listing fully-mutable CloudFormation types: %s", err))
+			ui.Error(fmt.Sprintf("error listing fully-mutable, public CloudFormation types: %s", err))
 			os.Exit(1)
 		}
 
@@ -70,7 +70,7 @@ func main() {
 		output, err := cfClient.ListTypes(ctx, input)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error listing immutable CloudFormation types: %s", err))
+			ui.Error(fmt.Sprintf("error listing immutable, public CloudFormation types: %s", err))
 			os.Exit(1)
 		}
 
@@ -82,6 +82,56 @@ func main() {
 
 		input.NextToken = output.NextToken
 	}
+
+	/*
+		input = &cloudformation.ListTypesInput{
+			Filters: &types.TypeFilters{
+				Category: types.CategoryAwsTypes,
+			},
+			ProvisioningType: types.ProvisioningTypeFullyMutable,
+			Visibility:       types.VisibilityPrivate,
+		}
+		for {
+			output, err := cfClient.ListTypes(ctx, input)
+
+			if err != nil {
+				ui.Error(fmt.Sprintf("error listing fully-mutable, private CloudFormation types: %s", err))
+				os.Exit(1)
+			}
+
+			typeSummaries = append(typeSummaries, output.TypeSummaries...)
+
+			if output.NextToken == nil {
+				break
+			}
+
+			input.NextToken = output.NextToken
+		}
+
+		input = &cloudformation.ListTypesInput{
+			Filters: &types.TypeFilters{
+				Category: types.CategoryAwsTypes,
+			},
+			ProvisioningType: types.ProvisioningTypeImmutable,
+			Visibility:       types.VisibilityPrivate,
+		}
+		for {
+			output, err := cfClient.ListTypes(ctx, input)
+
+			if err != nil {
+				ui.Error(fmt.Sprintf("error listing immutable, private CloudFormation types: %s", err))
+				os.Exit(1)
+			}
+
+			typeSummaries = append(typeSummaries, output.TypeSummaries...)
+
+			if output.NextToken == nil {
+				break
+			}
+
+			input.NextToken = output.NextToken
+		}
+	*/
 
 	var cfTypeNames []string
 	for _, typeSummary := range typeSummaries {

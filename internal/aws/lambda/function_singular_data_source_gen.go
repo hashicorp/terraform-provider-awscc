@@ -19,6 +19,24 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::Lambda::Function resource type.
 func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"architectures": {
+			// Property: Architectures
+			// CloudFormation resource type schema:
+			// {
+			//   "items": {
+			//     "enum": [
+			//       "x86_64",
+			//       "arm64"
+			//     ],
+			//     "type": "string"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Type:     types.ListType{ElemType: types.StringType},
+			Computed: true,
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -565,6 +583,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("awscc_lambda_function")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"architectures":                  "Architectures",
 		"arn":                            "Arn",
 		"code":                           "Code",
 		"code_signing_config_arn":        "CodeSigningConfigArn",

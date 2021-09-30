@@ -318,6 +318,9 @@
         "Arn": {
             "type": "string"
         },
+        "DomainArn": {
+            "type": "string"
+        },
         "EncryptionAtRestOptions": {
             "$ref": "#/definitions/EncryptionAtRestOptions"
         },
@@ -341,6 +344,7 @@
     "readOnlyProperties": [
         "/properties/Id",
         "/properties/Arn",
+        "/properties/DomainArn",
         "/properties/DomainEndpoint",
         "/properties/DomainEndpoints",
         "/properties/ServiceSoftwareOptions"

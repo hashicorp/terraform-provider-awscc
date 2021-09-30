@@ -895,7 +895,7 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 
 	if property.Format != nil {
 		if format := *property.Format; format != "int64" {
-			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 
@@ -931,7 +931,7 @@ func numberValidators(path []string, property *cfschema.Property) ([]string, err
 
 	if property.Format != nil {
 		if format := *property.Format; format != "double" {
-			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 
@@ -963,8 +963,10 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 		case "date-time":
 			validators = append(validators, "validate.IsRFC3339Time()")
 		case "string":
+		case "uri":
+			// TODO
 		default:
-			return nil, fmt.Errorf("%s has unsupported format :%s", strings.Join(path, "/"), format)
+			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 

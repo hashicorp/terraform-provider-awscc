@@ -25,6 +25,9 @@
     "ElasticsearchDestinationConfiguration": {
       "$ref": "#/definitions/ElasticsearchDestinationConfiguration"
     },
+    "AmazonopensearchserviceDestinationConfiguration": {
+      "$ref": "#/definitions/AmazonopensearchserviceDestinationConfiguration"
+    },
     "ExtendedS3DestinationConfiguration": {
       "$ref": "#/definitions/ExtendedS3DestinationConfiguration"
     },
@@ -480,6 +483,80 @@
         "RoleARN"
       ]
     },
+    "AmazonopensearchserviceDestinationConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BufferingHints": {
+          "$ref": "#/definitions/AmazonopensearchserviceBufferingHints"
+        },
+        "CloudWatchLoggingOptions": {
+          "$ref": "#/definitions/CloudWatchLoggingOptions"
+        },
+        "DomainARN": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": ""
+        },
+        "IndexName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "IndexRotationPeriod": {
+          "type": "string",
+          "enum": [
+            "NoRotation",
+            "OneHour",
+            "OneDay",
+            "OneWeek",
+            "OneMonth"
+          ]
+        },
+        "ProcessingConfiguration": {
+          "$ref": "#/definitions/ProcessingConfiguration"
+        },
+        "RetryOptions": {
+          "$ref": "#/definitions/AmazonopensearchserviceRetryOptions"
+        },
+        "RoleARN": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": ""
+        },
+        "S3BackupMode": {
+          "type": "string",
+          "enum": [
+            "FailedDocumentsOnly",
+            "AllDocuments"
+          ]
+        },
+        "S3Configuration": {
+          "$ref": "#/definitions/S3DestinationConfiguration"
+        },
+        "ClusterEndpoint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": ""
+        },
+        "TypeName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100
+        },
+        "VpcConfiguration": {
+          "$ref": "#/definitions/VpcConfiguration"
+        }
+      },
+      "required": [
+        "IndexName",
+        "S3Configuration",
+        "RoleARN"
+      ]
+    },
     "BufferingHints": {
       "type": "object",
       "additionalProperties": false,
@@ -518,6 +595,15 @@
       }
     },
     "ElasticsearchRetryOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DurationInSeconds": {
+          "type": "integer"
+        }
+      }
+    },
+     "AmazonopensearchserviceRetryOptions": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -614,6 +700,18 @@
       }
     },
     "ElasticsearchBufferingHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IntervalInSeconds": {
+          "type": "integer"
+        },
+        "SizeInMBs": {
+          "type": "integer"
+        }
+      }
+    },
+    "AmazonopensearchserviceBufferingHints": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -998,6 +1096,7 @@
     "/properties/DeliveryStreamName",
     "/properties/DeliveryStreamType",
     "/properties/ElasticsearchDestinationConfiguration/VpcConfiguration",
+    "/properties/AmazonopensearchserviceDestinationConfiguration/VpcConfiguration",
     "/properties/KinesisStreamSourceConfiguration"
   ],
   "primaryIdentifier": [

@@ -29,7 +29,7 @@ Data Source schema for AWS::ECR::ReplicationConfiguration
 
 Read-Only:
 
-- **rules** (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations. (see [below for nested schema](#nestedatt--replication_configuration--rules))
+- **rules** (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules. (see [below for nested schema](#nestedatt--replication_configuration--rules))
 
 <a id="nestedatt--replication_configuration--rules"></a>
 ### Nested Schema for `replication_configuration.rules`
@@ -37,6 +37,7 @@ Read-Only:
 Read-Only:
 
 - **destinations** (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+- **repository_filters** (Attributes List) An array of objects representing the details of a repository filter. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
 ### Nested Schema for `replication_configuration.rules.destinations`
@@ -45,5 +46,14 @@ Read-Only:
 
 - **region** (String) A Region to replicate to.
 - **registry_id** (String) The account ID of the destination registry to replicate to.
+
+
+<a id="nestedatt--replication_configuration--rules--repository_filters"></a>
+### Nested Schema for `replication_configuration.rules.repository_filters`
+
+Read-Only:
+
+- **filter** (String) The repository filter to be applied for replication.
+- **filter_type** (String) Type of repository filter
 
 

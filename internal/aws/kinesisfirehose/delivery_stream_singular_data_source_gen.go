@@ -19,6 +19,548 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::KinesisFirehose::DeliveryStream resource type.
 func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"amazonopensearchservice_destination_configuration": {
+			// Property: AmazonopensearchserviceDestinationConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "BufferingHints": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "IntervalInSeconds": {
+			//           "type": "integer"
+			//         },
+			//         "SizeInMBs": {
+			//           "type": "integer"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "CloudWatchLoggingOptions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "LogGroupName": {
+			//           "type": "string"
+			//         },
+			//         "LogStreamName": {
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "ClusterEndpoint": {
+			//       "maxLength": 512,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "DomainARN": {
+			//       "maxLength": 512,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "IndexName": {
+			//       "maxLength": 80,
+			//       "minLength": 1,
+			//       "type": "string"
+			//     },
+			//     "IndexRotationPeriod": {
+			//       "enum": [
+			//         "NoRotation",
+			//         "OneHour",
+			//         "OneDay",
+			//         "OneWeek",
+			//         "OneMonth"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "ProcessingConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Enabled": {
+			//           "type": "boolean"
+			//         },
+			//         "Processors": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "Parameters": {
+			//                 "items": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "ParameterName": {
+			//                       "type": "string"
+			//                     },
+			//                     "ParameterValue": {
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "required": [
+			//                     "ParameterValue",
+			//                     "ParameterName"
+			//                   ],
+			//                   "type": "object"
+			//                 },
+			//                 "type": "array",
+			//                 "uniqueItems": true
+			//               },
+			//               "Type": {
+			//                 "enum": [
+			//                   "RecordDeAggregation",
+			//                   "Lambda",
+			//                   "MetadataExtraction",
+			//                   "AppendDelimiterToRecord"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Type"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": true
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "RetryOptions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "DurationInSeconds": {
+			//           "type": "integer"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
+			//     "RoleARN": {
+			//       "maxLength": 512,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "S3BackupMode": {
+			//       "enum": [
+			//         "FailedDocumentsOnly",
+			//         "AllDocuments"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "S3Configuration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "BucketARN": {
+			//           "maxLength": 2048,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "BufferingHints": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "IntervalInSeconds": {
+			//               "type": "integer"
+			//             },
+			//             "SizeInMBs": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "CloudWatchLoggingOptions": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Enabled": {
+			//               "type": "boolean"
+			//             },
+			//             "LogGroupName": {
+			//               "type": "string"
+			//             },
+			//             "LogStreamName": {
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "CompressionFormat": {
+			//           "enum": [
+			//             "UNCOMPRESSED",
+			//             "GZIP",
+			//             "ZIP",
+			//             "Snappy",
+			//             "HADOOP_SNAPPY"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "EncryptionConfiguration": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "KMSEncryptionConfig": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "AWSKMSKeyARN": {
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "AWSKMSKeyARN"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "NoEncryptionConfig": {
+			//               "enum": [
+			//                 "NoEncryption"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "ErrorOutputPrefix": {
+			//           "maxLength": 1024,
+			//           "minLength": 0,
+			//           "type": "string"
+			//         },
+			//         "Prefix": {
+			//           "maxLength": 1024,
+			//           "minLength": 0,
+			//           "type": "string"
+			//         },
+			//         "RoleARN": {
+			//           "maxLength": 512,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "BucketARN",
+			//         "RoleARN"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "TypeName": {
+			//       "maxLength": 100,
+			//       "minLength": 0,
+			//       "type": "string"
+			//     },
+			//     "VpcConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "RoleARN": {
+			//           "maxLength": 512,
+			//           "minLength": 1,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "SecurityGroupIds": {
+			//           "items": {
+			//             "maxLength": 1024,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 5,
+			//           "minItems": 1,
+			//           "type": "array",
+			//           "uniqueItems": true
+			//         },
+			//         "SubnetIds": {
+			//           "items": {
+			//             "maxLength": 1024,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 16,
+			//           "minItems": 1,
+			//           "type": "array",
+			//           "uniqueItems": true
+			//         }
+			//       },
+			//       "required": [
+			//         "RoleARN",
+			//         "SubnetIds",
+			//         "SecurityGroupIds"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "IndexName",
+			//     "S3Configuration",
+			//     "RoleARN"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"buffering_hints": {
+						// Property: BufferingHints
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"interval_in_seconds": {
+									// Property: IntervalInSeconds
+									Type:     types.NumberType,
+									Computed: true,
+								},
+								"size_in_m_bs": {
+									// Property: SizeInMBs
+									Type:     types.NumberType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"cloudwatch_logging_options": {
+						// Property: CloudWatchLoggingOptions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"log_group_name": {
+									// Property: LogGroupName
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"log_stream_name": {
+									// Property: LogStreamName
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"cluster_endpoint": {
+						// Property: ClusterEndpoint
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"domain_arn": {
+						// Property: DomainARN
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"index_name": {
+						// Property: IndexName
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"index_rotation_period": {
+						// Property: IndexRotationPeriod
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"processing_configuration": {
+						// Property: ProcessingConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"enabled": {
+									// Property: Enabled
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"processors": {
+									// Property: Processors
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"parameters": {
+												// Property: Parameters
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"parameter_name": {
+															// Property: ParameterName
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"parameter_value": {
+															// Property: ParameterValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+													tfsdk.ListNestedAttributesOptions{},
+												),
+												Computed: true,
+											},
+											"type": {
+												// Property: Type
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"retry_options": {
+						// Property: RetryOptions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"duration_in_seconds": {
+									// Property: DurationInSeconds
+									Type:     types.NumberType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"role_arn": {
+						// Property: RoleARN
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"s3_backup_mode": {
+						// Property: S3BackupMode
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"s3_configuration": {
+						// Property: S3Configuration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"bucket_arn": {
+									// Property: BucketARN
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"buffering_hints": {
+									// Property: BufferingHints
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"interval_in_seconds": {
+												// Property: IntervalInSeconds
+												Type:     types.NumberType,
+												Computed: true,
+											},
+											"size_in_m_bs": {
+												// Property: SizeInMBs
+												Type:     types.NumberType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"cloudwatch_logging_options": {
+									// Property: CloudWatchLoggingOptions
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"enabled": {
+												// Property: Enabled
+												Type:     types.BoolType,
+												Computed: true,
+											},
+											"log_group_name": {
+												// Property: LogGroupName
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"log_stream_name": {
+												// Property: LogStreamName
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"compression_format": {
+									// Property: CompressionFormat
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"encryption_configuration": {
+									// Property: EncryptionConfiguration
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"kms_encryption_config": {
+												// Property: KMSEncryptionConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"awskms_key_arn": {
+															// Property: AWSKMSKeyARN
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"no_encryption_config": {
+												// Property: NoEncryptionConfig
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"error_output_prefix": {
+									// Property: ErrorOutputPrefix
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"prefix": {
+									// Property: Prefix
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"role_arn": {
+									// Property: RoleARN
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"type_name": {
+						// Property: TypeName
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"vpc_configuration": {
+						// Property: VpcConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"role_arn": {
+									// Property: RoleARN
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"security_group_ids": {
+									// Property: SecurityGroupIds
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"subnet_ids": {
+									// Property: SubnetIds
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"arn": {
 			// Property: Arn
 			// CloudFormation resource type schema:
@@ -3471,7 +4013,8 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_key":           "AccessKey",
+		"access_key": "AccessKey",
+		"amazonopensearchservice_destination_configuration": "AmazonopensearchserviceDestinationConfiguration",
 		"arn":                  "Arn",
 		"attribute_name":       "AttributeName",
 		"attribute_value":      "AttributeValue",

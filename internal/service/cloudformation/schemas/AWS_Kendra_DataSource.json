@@ -215,7 +215,9 @@
         "SharePointVersion": {
           "type": "string",
           "enum": [
-            "SHAREPOINT_ONLINE"
+            "SHAREPOINT_ONLINE",
+            "SHAREPOINT_2013",
+            "SHAREPOINT_2016"
           ]
         },
         "Urls": {
@@ -251,6 +253,9 @@
         },
         "DisableLocalGroups": {
           "$ref": "#/definitions/DisableLocalGroups"
+        },
+        "SslCertificateS3Path": {
+          "$ref": "#/definitions/S3Path"
         }
       },
       "additionalProperties": false,
@@ -459,8 +464,8 @@
     },
     "SalesforceChatterFeedIncludeFilterTypes": {
       "type": "array",
-      "minLength": 1,
-      "maxLength": 2,
+      "minItems": 1,
+      "maxItems": 2,
       "items": {
         "$ref": "#/definitions/SalesforceChatterFeedIncludeFilterType"
       }
@@ -701,8 +706,8 @@
     },
     "OneDriveUserList": {
       "type": "array",
-      "minLength": 1,
-      "maxLength": 100,
+      "minItems": 1,
+      "maxItems": 100,
       "items": {
         "$ref": "#/definitions/OneDriveUser"
       }
@@ -725,6 +730,9 @@
         "ServiceNowBuildVersion": {
           "$ref": "#/definitions/ServiceNowBuildVersionType"
         },
+        "AuthenticationType": {
+          "$ref": "#/definitions/ServiceNowAuthenticationType"
+        },
         "KnowledgeArticleConfiguration": {
           "$ref": "#/definitions/ServiceNowKnowledgeArticleConfiguration"
         },
@@ -744,6 +752,13 @@
       "enum": [
         "LONDON",
         "OTHERS"
+      ]
+    },
+    "ServiceNowAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "HTTP_BASIC",
+        "OAUTH2"
       ]
     },
     "ServiceNowServiceCatalogConfiguration": {
@@ -799,12 +814,20 @@
         },
         "FieldMappings": {
           "$ref": "#/definitions/DataSourceToIndexFieldMappingList"
+        },
+        "FilterQuery": {
+          "$ref": "#/definitions/ServiceNowKnowledgeArticleFilterQuery"
         }
       },
       "additionalProperties": false,
       "required": [
         "DocumentDataFieldName"
       ]
+    },
+    "ServiceNowKnowledgeArticleFilterQuery": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
     },
     "ConfluenceConfiguration": {
       "type": "object",
@@ -1090,14 +1113,15 @@
           "$ref": "#/definitions/ExcludeSharedDrivesList"
         }
       },
+      "additionalProperties": false,
       "required": [
         "SecretArn"
       ]
     },
     "ExcludeMimeTypesList": {
       "type": "array",
-      "minLength": 0,
-      "maxLength": 30,
+      "minItems": 0,
+      "maxItems": 30,
       "items": {
         "$ref": "#/definitions/MimeType"
       }
@@ -1109,8 +1133,8 @@
     },
     "ExcludeUserAccountsList": {
       "type": "array",
-      "minLength": 0,
-      "maxLength": 100,
+      "minItems": 0,
+      "maxItems": 100,
       "items": {
         "$ref": "#/definitions/UserAccount"
       }
@@ -1122,8 +1146,8 @@
     },
     "ExcludeSharedDrivesList": {
       "type": "array",
-      "minLength": 0,
-      "maxLength": 100,
+      "minItems": 0,
+      "maxItems": 100,
       "items": {
         "$ref": "#/definitions/SharedDriveId"
       }
@@ -1147,6 +1171,217 @@
         "SPACE_NAME",
         "URL",
         "VERSION"
+      ]
+    },
+    "WebCrawlerSiteMap": {
+      "type": "string",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "WebCrawlerSiteMaps": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/definitions/WebCrawlerSiteMap"
+      }
+    },
+    "WebCrawlerSiteMapsConfiguration": {
+      "type": "object",
+      "properties": {
+        "SiteMaps": {
+          "$ref": "#/definitions/WebCrawlerSiteMaps"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "SiteMaps"
+      ]
+    },
+    "WebCrawlerSeedUrl": {
+      "type": "string",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "WebCrawlerSeedUrlList": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/definitions/WebCrawlerSeedUrl"
+      }
+    },
+    "WebCrawlerSeedUrlConfiguration": {
+      "type": "object",
+      "properties": {
+        "SeedUrls": {
+          "$ref": "#/definitions/WebCrawlerSeedUrlList"
+        },
+        "WebCrawlerMode": {
+          "type": "string",
+          "enum": [
+            "HOST_ONLY",
+            "SUBDOMAINS",
+            "EVERYTHING"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "SeedUrls"
+      ]
+    },
+    "WebCrawlerUrls": {
+      "type": "object",
+      "properties": {
+        "SeedUrlConfiguration": {
+          "$ref": "#/definitions/WebCrawlerSeedUrlConfiguration"
+        },
+        "SiteMapsConfiguration": {
+          "$ref": "#/definitions/WebCrawlerSiteMapsConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProxyConfiguration": {
+      "type": "object",
+      "properties": {
+        "Host": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 253
+        },
+        "Port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "Credentials":{
+          "$ref": "#/definitions/SecretArn"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Host",
+        "Port"
+      ]
+    },
+    "WebCrawlerBasicAuthentication": {
+      "type": "object",
+      "properties": {
+        "Host": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 253
+        },
+        "Port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "Credentials":{
+          "$ref": "#/definitions/SecretArn"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Host",
+        "Port",
+        "Credentials"
+      ]
+    },
+    "WebCrawlerBasicAuthenticationList": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/WebCrawlerBasicAuthentication"
+      }
+    },
+    "WebCrawlerAuthenticationConfiguration": {
+      "type": "object",
+      "properties": {
+        "BasicAuthentication": {
+          "$ref": "#/definitions/WebCrawlerBasicAuthenticationList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WebCrawlerConfiguration": {
+      "type": "object",
+      "properties": {
+        "Urls": {
+          "$ref": "#/definitions/WebCrawlerUrls"
+        },
+        "CrawlDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "MaxLinksPerPage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "MaxContentSizePerPageInMegaBytes": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "MaxUrlsPerMinuteCrawlRate": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 300
+        },
+        "UrlInclusionPatterns": {
+          "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings"
+        },
+        "UrlExclusionPatterns": {
+          "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings"
+        },
+        "ProxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration"
+        },
+        "AuthenticationConfiguration": {
+          "$ref": "#/definitions/WebCrawlerAuthenticationConfiguration"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Urls"
+      ]
+    },
+    "WorkDocsConfiguration": {
+      "type": "object",
+      "properties": {
+        "OrganizationId": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 12,
+          "pattern": ""
+        },
+        "CrawlComments": {
+          "type": "boolean"
+        },
+        "UseChangeLog": {
+          "type": "boolean"
+        },
+        "InclusionPatterns": {
+          "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings"
+        },
+        "ExclusionPatterns": {
+          "$ref": "#/definitions/DataSourceInclusionsExclusionsStrings"
+        },
+        "FieldMappings": {
+          "$ref": "#/definitions/DataSourceToIndexFieldMappingList"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "OrganizationId"
       ]
     },
     "DataSourceConfiguration": {
@@ -1175,6 +1410,12 @@
         },
         "GoogleDriveConfiguration": {
           "$ref": "#/definitions/GoogleDriveConfiguration"
+        },
+        "WebCrawlerConfiguration": {
+          "$ref": "#/definitions/WebCrawlerConfiguration"
+        },
+        "WorkDocsConfiguration": {
+          "$ref": "#/definitions/WorkDocsConfiguration"
         }
       },
       "additionalProperties": false,
@@ -1218,6 +1459,16 @@
           "required": [
             "GoogleDriveConfiguration"
           ]
+        },
+        {
+          "required": [
+            "WebCrawlerConfiguration"
+          ]
+        },
+        {
+          "required": [
+            "WorkDocsConfiguration"
+          ]
         }
       ]
     },
@@ -1239,7 +1490,9 @@
         "DATABASE",
         "CUSTOM",
         "CONFLUENCE",
-        "GOOGLEDRIVE"
+        "GOOGLEDRIVE",
+        "WEBCRAWLER",
+        "WORKDOCS"
       ]
     },
     "Description": {

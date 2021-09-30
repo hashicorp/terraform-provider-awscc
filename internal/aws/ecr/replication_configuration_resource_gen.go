@@ -39,7 +39,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "description": "An object representing the replication configuration for a registry.",
 			//   "properties": {
 			//     "Rules": {
-			//       "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.",
+			//       "description": "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "An array of objects representing the details of a replication destination.",
@@ -70,6 +70,35 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//             "maxItems": 25,
 			//             "minItems": 1,
 			//             "type": "array"
+			//           },
+			//           "RepositoryFilters": {
+			//             "description": "An array of objects representing the details of a repository filter.",
+			//             "items": {
+			//               "additionalProperties": false,
+			//               "description": "An array of objects representing the details of a repository filter.",
+			//               "properties": {
+			//                 "Filter": {
+			//                   "description": "The repository filter to be applied for replication.",
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "FilterType": {
+			//                   "description": "Type of repository filter",
+			//                   "enum": [
+			//                     "PREFIX_MATCH"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "Filter",
+			//                 "FilterType"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "maxItems": 100,
+			//             "minItems": 0,
+			//             "type": "array"
 			//           }
 			//         },
 			//         "required": [
@@ -77,7 +106,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//         ],
 			//         "type": "object"
 			//       },
-			//       "maxItems": 1,
+			//       "maxItems": 10,
 			//       "minItems": 0,
 			//       "type": "array"
 			//     }
@@ -92,7 +121,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 				map[string]tfsdk.Attribute{
 					"rules": {
 						// Property: Rules
-						Description: "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.",
+						Description: "An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules.",
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"destinations": {
@@ -120,12 +149,42 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 										validate.ArrayLenBetween(1, 25),
 									},
 								},
+								"repository_filters": {
+									// Property: RepositoryFilters
+									Description: "An array of objects representing the details of a repository filter.",
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"filter": {
+												// Property: Filter
+												Description: "The repository filter to be applied for replication.",
+												Type:        types.StringType,
+												Required:    true,
+											},
+											"filter_type": {
+												// Property: FilterType
+												Description: "Type of repository filter",
+												Type:        types.StringType,
+												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"PREFIX_MATCH",
+													}),
+												},
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenBetween(0, 100),
+									},
+								},
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 1),
+							validate.ArrayLenBetween(0, 10),
 						},
 					},
 				},
@@ -153,9 +212,12 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destinations":              "Destinations",
+		"filter":                    "Filter",
+		"filter_type":               "FilterType",
 		"region":                    "Region",
 		"registry_id":               "RegistryId",
 		"replication_configuration": "ReplicationConfiguration",
+		"repository_filters":        "RepositoryFilters",
 		"rules":                     "Rules",
 	})
 

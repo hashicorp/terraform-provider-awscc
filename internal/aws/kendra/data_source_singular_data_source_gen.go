@@ -74,6 +74,16 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "required": [
 			//         "GoogleDriveConfiguration"
 			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "WebCrawlerConfiguration"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "WorkDocsConfiguration"
+			//       ]
 			//     }
 			//   ],
 			//   "properties": {
@@ -544,6 +554,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "type": "object"
 			//     },
 			//     "GoogleDriveConfiguration": {
+			//       "additionalProperties": false,
 			//       "properties": {
 			//         "ExcludeMimeTypes": {
 			//           "items": {
@@ -551,8 +562,8 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "minLength": 1,
 			//             "type": "string"
 			//           },
-			//           "maxLength": 30,
-			//           "minLength": 0,
+			//           "maxItems": 30,
+			//           "minItems": 0,
 			//           "type": "array"
 			//         },
 			//         "ExcludeSharedDrives": {
@@ -561,8 +572,8 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "minLength": 1,
 			//             "type": "string"
 			//           },
-			//           "maxLength": 100,
-			//           "minLength": 0,
+			//           "maxItems": 100,
+			//           "minItems": 0,
 			//           "type": "array"
 			//         },
 			//         "ExcludeUserAccounts": {
@@ -571,8 +582,8 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "minLength": 1,
 			//             "type": "string"
 			//           },
-			//           "maxLength": 100,
-			//           "minLength": 0,
+			//           "maxItems": 100,
+			//           "minItems": 0,
 			//           "type": "array"
 			//         },
 			//         "ExclusionPatterns": {
@@ -709,8 +720,8 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 "pattern": "",
 			//                 "type": "string"
 			//               },
-			//               "maxLength": 100,
-			//               "minLength": 1,
+			//               "maxItems": 100,
+			//               "minItems": 1,
 			//               "type": "array"
 			//             },
 			//             "OneDriveUserS3Path": {
@@ -875,8 +886,8 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 ],
 			//                 "type": "string"
 			//               },
-			//               "maxLength": 2,
-			//               "minLength": 1,
+			//               "maxItems": 2,
+			//               "minItems": 1,
 			//               "type": "array"
 			//             }
 			//           },
@@ -1173,6 +1184,13 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     "ServiceNowConfiguration": {
 			//       "additionalProperties": false,
 			//       "properties": {
+			//         "AuthenticationType": {
+			//           "enum": [
+			//             "HTTP_BASIC",
+			//             "OAUTH2"
+			//           ],
+			//           "type": "string"
+			//         },
 			//         "HostUrl": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
@@ -1232,6 +1250,11 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               },
 			//               "maxItems": 100,
 			//               "type": "array"
+			//             },
+			//             "FilterQuery": {
+			//               "maxLength": 2048,
+			//               "minLength": 1,
+			//               "type": "string"
 			//             },
 			//             "IncludeAttachmentFilePatterns": {
 			//               "items": {
@@ -1408,9 +1431,32 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         },
 			//         "SharePointVersion": {
 			//           "enum": [
-			//             "SHAREPOINT_ONLINE"
+			//             "SHAREPOINT_ONLINE",
+			//             "SHAREPOINT_2013",
+			//             "SHAREPOINT_2016"
 			//           ],
 			//           "type": "string"
+			//         },
+			//         "SslCertificateS3Path": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Bucket": {
+			//               "maxLength": 63,
+			//               "minLength": 3,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "Key": {
+			//               "maxLength": 1024,
+			//               "minLength": 1,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "Bucket",
+			//             "Key"
+			//           ],
+			//           "type": "object"
 			//         },
 			//         "Urls": {
 			//           "items": {
@@ -1460,6 +1506,240 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "Urls",
 			//         "SecretArn",
 			//         "SharePointVersion"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "WebCrawlerConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AuthenticationConfiguration": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "BasicAuthentication": {
+			//               "items": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "Credentials": {
+			//                     "maxLength": 1284,
+			//                     "minLength": 1,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "Host": {
+			//                     "maxLength": 253,
+			//                     "minLength": 1,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "Port": {
+			//                     "maximum": 65535,
+			//                     "minimum": 1,
+			//                     "type": "integer"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Host",
+			//                   "Port",
+			//                   "Credentials"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "maxItems": 10,
+			//               "type": "array"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
+			//         "CrawlDepth": {
+			//           "maximum": 10,
+			//           "minimum": 1,
+			//           "type": "integer"
+			//         },
+			//         "MaxContentSizePerPageInMegaBytes": {
+			//           "maximum": 50,
+			//           "minimum": 0,
+			//           "type": "number"
+			//         },
+			//         "MaxLinksPerPage": {
+			//           "maximum": 1000,
+			//           "minimum": 1,
+			//           "type": "integer"
+			//         },
+			//         "MaxUrlsPerMinuteCrawlRate": {
+			//           "maximum": 300,
+			//           "minimum": 1,
+			//           "type": "integer"
+			//         },
+			//         "ProxyConfiguration": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Credentials": {
+			//               "maxLength": 1284,
+			//               "minLength": 1,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "Host": {
+			//               "maxLength": 253,
+			//               "minLength": 1,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "Port": {
+			//               "maximum": 65535,
+			//               "minimum": 1,
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "required": [
+			//             "Host",
+			//             "Port"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "UrlExclusionPatterns": {
+			//           "items": {
+			//             "maxLength": 50,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 100,
+			//           "type": "array"
+			//         },
+			//         "UrlInclusionPatterns": {
+			//           "items": {
+			//             "maxLength": 50,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 100,
+			//           "type": "array"
+			//         },
+			//         "Urls": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "SeedUrlConfiguration": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "SeedUrls": {
+			//                   "items": {
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "maxItems": 100,
+			//                   "minItems": 0,
+			//                   "type": "array"
+			//                 },
+			//                 "WebCrawlerMode": {
+			//                   "enum": [
+			//                     "HOST_ONLY",
+			//                     "SUBDOMAINS",
+			//                     "EVERYTHING"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "SeedUrls"
+			//               ],
+			//               "type": "object"
+			//             },
+			//             "SiteMapsConfiguration": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "SiteMaps": {
+			//                   "items": {
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "maxItems": 3,
+			//                   "minItems": 0,
+			//                   "type": "array"
+			//                 }
+			//               },
+			//               "required": [
+			//                 "SiteMaps"
+			//               ],
+			//               "type": "object"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "Urls"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "WorkDocsConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "CrawlComments": {
+			//           "type": "boolean"
+			//         },
+			//         "ExclusionPatterns": {
+			//           "items": {
+			//             "maxLength": 50,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 100,
+			//           "type": "array"
+			//         },
+			//         "FieldMappings": {
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "DataSourceFieldName": {
+			//                 "maxLength": 100,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               },
+			//               "DateFieldFormat": {
+			//                 "maxLength": 40,
+			//                 "minLength": 4,
+			//                 "type": "string"
+			//               },
+			//               "IndexFieldName": {
+			//                 "maxLength": 30,
+			//                 "minLength": 1,
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "DataSourceFieldName",
+			//               "IndexFieldName"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "maxItems": 100,
+			//           "type": "array"
+			//         },
+			//         "InclusionPatterns": {
+			//           "items": {
+			//             "maxLength": 50,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           },
+			//           "maxItems": 100,
+			//           "type": "array"
+			//         },
+			//         "OrganizationId": {
+			//           "maxLength": 12,
+			//           "minLength": 12,
+			//           "pattern": "",
+			//           "type": "string"
+			//         },
+			//         "UseChangeLog": {
+			//           "type": "boolean"
+			//         }
+			//       },
+			//       "required": [
+			//         "OrganizationId"
 			//       ],
 			//       "type": "object"
 			//     }
@@ -2291,6 +2571,11 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 						// Property: ServiceNowConfiguration
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"authentication_type": {
+									// Property: AuthenticationType
+									Type:     types.StringType,
+									Computed: true,
+								},
 								"host_url": {
 									// Property: HostUrl
 									Type:     types.StringType,
@@ -2342,6 +2627,11 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
+												Computed: true,
+											},
+											"filter_query": {
+												// Property: FilterQuery
+												Type:     types.StringType,
 												Computed: true,
 											},
 											"include_attachment_file_patterns": {
@@ -2488,6 +2778,24 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 									Type:     types.StringType,
 									Computed: true,
 								},
+								"ssl_certificate_s3_path": {
+									// Property: SslCertificateS3Path
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"bucket": {
+												// Property: Bucket
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"key": {
+												// Property: Key
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
 								"urls": {
 									// Property: Urls
 									Type:     types.ListType{ElemType: types.StringType},
@@ -2514,6 +2822,195 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 											},
 										},
 									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"web_crawler_configuration": {
+						// Property: WebCrawlerConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"authentication_configuration": {
+									// Property: AuthenticationConfiguration
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"basic_authentication": {
+												// Property: BasicAuthentication
+												Attributes: tfsdk.ListNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"credentials": {
+															// Property: Credentials
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"host": {
+															// Property: Host
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"port": {
+															// Property: Port
+															Type:     types.NumberType,
+															Computed: true,
+														},
+													},
+													tfsdk.ListNestedAttributesOptions{},
+												),
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"crawl_depth": {
+									// Property: CrawlDepth
+									Type:     types.NumberType,
+									Computed: true,
+								},
+								"max_content_size_per_page_in_mega_bytes": {
+									// Property: MaxContentSizePerPageInMegaBytes
+									Type:     types.NumberType,
+									Computed: true,
+								},
+								"max_links_per_page": {
+									// Property: MaxLinksPerPage
+									Type:     types.NumberType,
+									Computed: true,
+								},
+								"max_urls_per_minute_crawl_rate": {
+									// Property: MaxUrlsPerMinuteCrawlRate
+									Type:     types.NumberType,
+									Computed: true,
+								},
+								"proxy_configuration": {
+									// Property: ProxyConfiguration
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"credentials": {
+												// Property: Credentials
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"host": {
+												// Property: Host
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"port": {
+												// Property: Port
+												Type:     types.NumberType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"url_exclusion_patterns": {
+									// Property: UrlExclusionPatterns
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"url_inclusion_patterns": {
+									// Property: UrlInclusionPatterns
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"urls": {
+									// Property: Urls
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"seed_url_configuration": {
+												// Property: SeedUrlConfiguration
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"seed_urls": {
+															// Property: SeedUrls
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+														"web_crawler_mode": {
+															// Property: WebCrawlerMode
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"site_maps_configuration": {
+												// Property: SiteMapsConfiguration
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"site_maps": {
+															// Property: SiteMaps
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"work_docs_configuration": {
+						// Property: WorkDocsConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"crawl_comments": {
+									// Property: CrawlComments
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"exclusion_patterns": {
+									// Property: ExclusionPatterns
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"field_mappings": {
+									// Property: FieldMappings
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"data_source_field_name": {
+												// Property: DataSourceFieldName
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"date_field_format": {
+												// Property: DateFieldFormat
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"index_field_name": {
+												// Property: IndexFieldName
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+								"inclusion_patterns": {
+									// Property: InclusionPatterns
+									Type:     types.ListType{ElemType: types.StringType},
+									Computed: true,
+								},
+								"organization_id": {
+									// Property: OrganizationId
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"use_change_log": {
+									// Property: UseChangeLog
+									Type:     types.BoolType,
 									Computed: true,
 								},
 							},
@@ -2667,7 +3164,9 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     "DATABASE",
 			//     "CUSTOM",
 			//     "CONFLUENCE",
-			//     "GOOGLEDRIVE"
+			//     "GOOGLEDRIVE",
+			//     "WEBCRAWLER",
+			//     "WORKDOCS"
 			//   ],
 			//   "type": "string"
 			// }
@@ -2700,6 +3199,9 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"arn":                                           "Arn",
 		"attachment_configuration":                      "AttachmentConfiguration",
 		"attachment_field_mappings":                     "AttachmentFieldMappings",
+		"authentication_configuration":                  "AuthenticationConfiguration",
+		"authentication_type":                           "AuthenticationType",
+		"basic_authentication":                          "BasicAuthentication",
 		"blog_configuration":                            "BlogConfiguration",
 		"blog_field_mappings":                           "BlogFieldMappings",
 		"bucket":                                        "Bucket",
@@ -2711,7 +3213,10 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"connection_configuration":                      "ConnectionConfiguration",
 		"crawl_archived_spaces":                         "CrawlArchivedSpaces",
 		"crawl_attachments":                             "CrawlAttachments",
+		"crawl_comments":                                "CrawlComments",
+		"crawl_depth":                                   "CrawlDepth",
 		"crawl_personal_spaces":                         "CrawlPersonalSpaces",
+		"credentials":                                   "Credentials",
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
@@ -2736,7 +3241,9 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"exclude_user_accounts":                         "ExcludeUserAccounts",
 		"exclusion_patterns":                            "ExclusionPatterns",
 		"field_mappings":                                "FieldMappings",
+		"filter_query":                                  "FilterQuery",
 		"google_drive_configuration":                    "GoogleDriveConfiguration",
+		"host":                                          "Host",
 		"host_url":                                      "HostUrl",
 		"id":                                            "Id",
 		"include_attachment_file_patterns":              "IncludeAttachmentFilePatterns",
@@ -2750,13 +3257,19 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"key":                                           "Key",
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
+		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
+		"max_links_per_page":                            "MaxLinksPerPage",
+		"max_urls_per_minute_crawl_rate":                "MaxUrlsPerMinuteCrawlRate",
 		"name":                                          "Name",
 		"one_drive_configuration":                       "OneDriveConfiguration",
 		"one_drive_user_list":                           "OneDriveUserList",
 		"one_drive_user_s3_path":                        "OneDriveUserS3Path",
 		"one_drive_users":                               "OneDriveUsers",
+		"organization_id":                               "OrganizationId",
 		"page_configuration":                            "PageConfiguration",
 		"page_field_mappings":                           "PageFieldMappings",
+		"port":                                          "Port",
+		"proxy_configuration":                           "ProxyConfiguration",
 		"query_identifiers_enclosing_option":            "QueryIdentifiersEnclosingOption",
 		"role_arn":                                      "RoleArn",
 		"s3_configuration":                              "S3Configuration",
@@ -2765,15 +3278,20 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"schedule":                                      "Schedule",
 		"secret_arn":                                    "SecretArn",
 		"security_group_ids":                            "SecurityGroupIds",
+		"seed_url_configuration":                        "SeedUrlConfiguration",
+		"seed_urls":                                     "SeedUrls",
 		"server_url":                                    "ServerUrl",
 		"service_catalog_configuration":                 "ServiceCatalogConfiguration",
 		"service_now_build_version":                     "ServiceNowBuildVersion",
 		"service_now_configuration":                     "ServiceNowConfiguration",
 		"share_point_configuration":                     "SharePointConfiguration",
 		"share_point_version":                           "SharePointVersion",
+		"site_maps":                                     "SiteMaps",
+		"site_maps_configuration":                       "SiteMapsConfiguration",
 		"space_configuration":                           "SpaceConfiguration",
 		"space_field_mappings":                          "SpaceFieldMappings",
 		"sql_configuration":                             "SqlConfiguration",
+		"ssl_certificate_s3_path":                       "SslCertificateS3Path",
 		"standard_knowledge_article_type_configuration": "StandardKnowledgeArticleTypeConfiguration",
 		"standard_object_attachment_configuration":      "StandardObjectAttachmentConfiguration",
 		"standard_object_configurations":                "StandardObjectConfigurations",
@@ -2782,11 +3300,16 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"tags":                                          "Tags",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
+		"url_exclusion_patterns":                        "UrlExclusionPatterns",
+		"url_inclusion_patterns":                        "UrlInclusionPatterns",
 		"urls":                                          "Urls",
 		"use_change_log":                                "UseChangeLog",
 		"value":                                         "Value",
 		"version":                                       "Version",
 		"vpc_configuration":                             "VpcConfiguration",
+		"web_crawler_configuration":                     "WebCrawlerConfiguration",
+		"web_crawler_mode":                              "WebCrawlerMode",
+		"work_docs_configuration":                       "WorkDocsConfiguration",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

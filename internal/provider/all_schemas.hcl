@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 362 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 364 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -26,6 +26,11 @@ resource_schema "aws_acmpca_certificate_authority_activation" {
 
 resource_schema "aws_acmpca_permission" {
   cloudformation_type_name               = "AWS::ACMPCA::Permission"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_aps_rule_groups_namespace" {
+  cloudformation_type_name               = "AWS::APS::RuleGroupsNamespace"
   suppress_plural_data_source_generation = true
 }
 
@@ -61,6 +66,15 @@ resource_schema "aws_apigateway_api_key" {
   cloudformation_type_name = "AWS::ApiGateway::ApiKey"
 }
 
+resource_schema "aws_apigateway_base_path_mapping" {
+  cloudformation_type_name = "AWS::ApiGateway::BasePathMapping"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_apigateway_client_certificate" {
   cloudformation_type_name = "AWS::ApiGateway::ClientCertificate"
 }
@@ -72,6 +86,11 @@ resource_schema "aws_apigateway_documentation_version" {
 
 resource_schema "aws_apigateway_domain_name" {
   cloudformation_type_name = "AWS::ApiGateway::DomainName"
+}
+
+resource_schema "aws_apigateway_method" {
+  cloudformation_type_name               = "AWS::ApiGateway::Method"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_model" {
@@ -86,6 +105,11 @@ resource_schema "aws_apigateway_request_validator" {
 
 resource_schema "aws_apigateway_resource" {
   cloudformation_type_name               = "AWS::ApiGateway::Resource"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigateway_stage" {
+  cloudformation_type_name               = "AWS::ApiGateway::Stage"
   suppress_plural_data_source_generation = true
 }
 
@@ -447,6 +471,10 @@ resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVPCAssociation"
 }
 
+resource_schema "aws_ec2_network_acl" {
+  cloudformation_type_name = "AWS::EC2::NetworkAcl"
+}
+
 resource_schema "aws_ec2_network_insights_analysis" {
   cloudformation_type_name = "AWS::EC2::NetworkInsightsAnalysis"
 }
@@ -459,8 +487,20 @@ resource_schema "aws_ec2_prefix_list" {
   cloudformation_type_name = "AWS::EC2::PrefixList"
 }
 
+resource_schema "aws_ec2_route_table" {
+  cloudformation_type_name = "AWS::EC2::RouteTable"
+}
+
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
+}
+
+resource_schema "aws_ec2_subnet" {
+  cloudformation_type_name = "AWS::EC2::Subnet"
+}
+
+resource_schema "aws_ec2_subnet_route_table_association" {
+  cloudformation_type_name = "AWS::EC2::SubnetRouteTableAssociation"
 }
 
 resource_schema "aws_ec2_transit_gateway" {
@@ -496,6 +536,10 @@ resource_schema "aws_ec2_transit_gateway_peering_attachment" {
 
 resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayVpcAttachment"
+}
+
+resource_schema "aws_ec2_vpc" {
+  cloudformation_type_name = "AWS::EC2::VPC"
 }
 
 resource_schema "aws_ecr_registry_policy" {
@@ -556,6 +600,10 @@ resource_schema "aws_efs_mount_target" {
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eks_cluster" {
+  cloudformation_type_name = "AWS::EKS::Cluster"
 }
 
 resource_schema "aws_eks_fargate_profile" {
@@ -935,8 +983,7 @@ resource_schema "aws_kms_key" {
 }
 
 resource_schema "aws_kms_replica_key" {
-  cloudformation_type_name               = "AWS::KMS::ReplicaKey"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::KMS::ReplicaKey"
 }
 
 resource_schema "aws_kendra_data_source" {
@@ -1171,7 +1218,7 @@ resource_schema "aws_nimblestudio_studio_component" {
 }
 
 resource_schema "aws_opensearchservice_domain" {
-  cloudformation_type_name               = "AWS::OpenSearchService::Domain"
+  cloudformation_type_name = "AWS::OpenSearchService::Domain"
 
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
@@ -1357,6 +1404,10 @@ resource_schema "aws_route53resolver_resolver_query_logging_config_association" 
 
 resource_schema "aws_s3_access_point" {
   cloudformation_type_name = "AWS::S3::AccessPoint"
+}
+
+resource_schema "aws_s3_bucket" {
+  cloudformation_type_name = "AWS::S3::Bucket"
 }
 
 resource_schema "aws_s3_multi_region_access_point" {
@@ -1580,6 +1631,11 @@ resource_schema "aws_signer_profile_permission" {
 
 resource_schema "aws_signer_signing_profile" {
   cloudformation_type_name = "AWS::Signer::SigningProfile"
+}
+
+resource_schema "aws_stepfunctions_activity" {
+  cloudformation_type_name               = "AWS::StepFunctions::Activity"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_stepfunctions_state_machine" {

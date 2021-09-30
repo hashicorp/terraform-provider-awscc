@@ -47,6 +47,8 @@ Optional:
 - **salesforce_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
 - **service_now_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration))
 - **share_point_configuration** (Attributes) SharePoint configuration (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
+- **web_crawler_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration))
+- **work_docs_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--work_docs_configuration))
 
 <a id="nestedatt--data_source_configuration--confluence_configuration"></a>
 ### Nested Schema for `data_source_configuration.confluence_configuration`
@@ -451,6 +453,7 @@ Optional:
 
 Optional:
 
+- **authentication_type** (String)
 - **host_url** (String)
 - **knowledge_article_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration))
 - **secret_arn** (String)
@@ -467,6 +470,7 @@ Optional:
 - **document_title_field_name** (String)
 - **exclude_attachment_file_patterns** (List of String)
 - **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings))
+- **filter_query** (String)
 - **include_attachment_file_patterns** (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings"></a>
@@ -517,6 +521,7 @@ Optional:
 - **inclusion_patterns** (List of String)
 - **secret_arn** (String)
 - **share_point_version** (String)
+- **ssl_certificate_s3_path** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--ssl_certificate_s3_path))
 - **urls** (List of String)
 - **use_change_log** (Boolean)
 - **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--vpc_configuration))
@@ -531,6 +536,15 @@ Optional:
 - **index_field_name** (String)
 
 
+<a id="nestedatt--data_source_configuration--share_point_configuration--ssl_certificate_s3_path"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.ssl_certificate_s3_path`
+
+Optional:
+
+- **bucket** (String)
+- **key** (String)
+
+
 <a id="nestedatt--data_source_configuration--share_point_configuration--vpc_configuration"></a>
 ### Nested Schema for `data_source_configuration.share_point_configuration.vpc_configuration`
 
@@ -538,6 +552,99 @@ Optional:
 
 - **security_group_ids** (List of String)
 - **subnet_ids** (List of String)
+
+
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration`
+
+Optional:
+
+- **authentication_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--authentication_configuration))
+- **crawl_depth** (Number)
+- **max_content_size_per_page_in_mega_bytes** (Number)
+- **max_links_per_page** (Number)
+- **max_urls_per_minute_crawl_rate** (Number)
+- **proxy_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--proxy_configuration))
+- **url_exclusion_patterns** (List of String)
+- **url_inclusion_patterns** (List of String)
+- **urls** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--urls))
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--authentication_configuration"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.authentication_configuration`
+
+Optional:
+
+- **basic_authentication** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--authentication_configuration--basic_authentication))
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--authentication_configuration--basic_authentication"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.authentication_configuration.basic_authentication`
+
+Optional:
+
+- **credentials** (String)
+- **host** (String)
+- **port** (Number)
+
+
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--proxy_configuration"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.proxy_configuration`
+
+Optional:
+
+- **credentials** (String)
+- **host** (String)
+- **port** (Number)
+
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--urls"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.urls`
+
+Optional:
+
+- **seed_url_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--urls--seed_url_configuration))
+- **site_maps_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--urls--site_maps_configuration))
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--urls--seed_url_configuration"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.site_maps_configuration`
+
+Optional:
+
+- **seed_urls** (List of String)
+- **web_crawler_mode** (String)
+
+
+<a id="nestedatt--data_source_configuration--web_crawler_configuration--urls--site_maps_configuration"></a>
+### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.site_maps_configuration`
+
+Optional:
+
+- **site_maps** (List of String)
+
+
+
+
+<a id="nestedatt--data_source_configuration--work_docs_configuration"></a>
+### Nested Schema for `data_source_configuration.work_docs_configuration`
+
+Optional:
+
+- **crawl_comments** (Boolean)
+- **exclusion_patterns** (List of String)
+- **field_mappings** (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--work_docs_configuration--field_mappings))
+- **inclusion_patterns** (List of String)
+- **organization_id** (String)
+- **use_change_log** (Boolean)
+
+<a id="nestedatt--data_source_configuration--work_docs_configuration--field_mappings"></a>
+### Nested Schema for `data_source_configuration.work_docs_configuration.field_mappings`
+
+Optional:
+
+- **data_source_field_name** (String)
+- **date_field_format** (String)
+- **index_field_name** (String)
 
 
 
