@@ -48,7 +48,7 @@ release:
   ids:
     - none
 signs:
-  - signature: ${artifact}.sig
+  - signature: ${artifact}.72D7468F.sig
     cmd: sh
     args:
     - -c
