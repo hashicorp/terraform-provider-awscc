@@ -1,3 +1,7 @@
+## v0.11.0 (September 28, 2021)
+
+Make JSON Pointer prefix and separator constants public.
+
 ## v0.10.0 (September 17, 2021)
 
 Add `Sanitize` function.
