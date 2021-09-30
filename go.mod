@@ -14,7 +14,7 @@ require (
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.2
 	github.com/hashicorp/go-hclog v0.16.1
 	github.com/hashicorp/go-multierror v1.1.1
-	github.com/hashicorp/hcl/v2 v2.10.0
+	github.com/hashicorp/hcl/v2 v2.10.1
 	github.com/hashicorp/terraform-plugin-framework v0.4.1
 	github.com/hashicorp/terraform-plugin-go v0.4.0
 	github.com/hashicorp/terraform-plugin-log v0.1.0
