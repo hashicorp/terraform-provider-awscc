@@ -1,7 +1,0 @@
-project_name: terraform-plugin-log
-build:
-  skip: true
-release:
-  github:
-changelog:
-  skip: true
