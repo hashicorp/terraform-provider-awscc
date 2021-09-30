@@ -15,7 +15,7 @@ import (
 // Returns existing resource operation requests. This includes requests of all
 // status types. For more information, see Listing active resource operation
 // requests
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list)
 // in the Amazon Web Services Cloud Control API User Guide. Resource operation
 // requests expire after seven days.
 func (c *Client) ListResourceRequests(ctx context.Context, params *ListResourceRequestsInput, optFns ...func(*Options)) (*ListResourceRequestsOutput, error) {
@@ -23,7 +23,7 @@ func (c *Client) ListResourceRequests(ctx context.Context, params *ListResourceR
 		params = &ListResourceRequestsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResourceRequests", params, optFns, addOperationListResourceRequestsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResourceRequests", params, optFns, c.addOperationListResourceRequestsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -50,6 +50,8 @@ type ListResourceRequestsInput struct {
 
 	// The filter criteria to apply to the requests returned.
 	ResourceRequestStatusFilter *types.ResourceRequestStatusFilter
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceRequestsOutput struct {
@@ -65,9 +67,11 @@ type ListResourceRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationListResourceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResourceRequests{}, middleware.After)
 	if err != nil {
 		return err

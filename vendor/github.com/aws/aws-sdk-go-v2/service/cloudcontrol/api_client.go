@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -156,6 +157,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	return result, metadata, err
 }
 
+type noSmithyDocumentSerde = smithydocument.NoSerde
+
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
 		return
@@ -211,7 +214,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "cloudcontrol", goModuleVersion)(stack)
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {

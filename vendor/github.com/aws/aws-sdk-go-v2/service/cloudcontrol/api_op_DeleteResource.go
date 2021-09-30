@@ -13,18 +13,18 @@ import (
 )
 
 // Deletes the specified resource. For details, see Deleting a resource
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-delete.html)
-// in the Amazon Web Services Cloud Control API User Guide. Once you have initiated
-// a resource deletion request, you can monitor the progress of your request by
-// calling GetResourceRequestStatus
-// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-delete.html)
+// in the Amazon Web Services Cloud Control API User Guide. After you have
+// initiated a resource deletion request, you can monitor the progress of your
+// request by calling GetResourceRequestStatus
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 // using the RequestToken of the ProgressEvent returned by DeleteResource.
 func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput, optFns ...func(*Options)) (*DeleteResourceOutput, error) {
 	if params == nil {
 		params = &DeleteResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteResource", params, optFns, addOperationDeleteResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResource", params, optFns, c.addOperationDeleteResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -44,8 +44,8 @@ type DeleteResourceInput struct {
 	// strung together), to specify the primary identifier as a string, list the
 	// property values in the order they are specified in the primary identifier
 	// definition, separated by |. For more information, see Identifying resources
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-identifier.html) in
-	// the Amazon Web Services Cloud Control API User Guide.
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	//
 	// This member is required.
 	Identifier *string
@@ -64,7 +64,7 @@ type DeleteResourceInput struct {
 	// If you do not specify a client token, one is generated for inclusion in the
 	// request. For more information, see Ensuring resource operation requests are
 	// unique
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
@@ -78,7 +78,7 @@ type DeleteResourceInput struct {
 	// If you do not specify a role, Cloud Control API uses a temporary session created
 	// using your Amazon Web Services user credentials. For more information, see
 	// Specifying credentials
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -86,22 +86,26 @@ type DeleteResourceInput struct {
 	// If you do not specify a resource version, CloudFormation uses the default
 	// version.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourceOutput struct {
 
-	// Represents the current status of the resource deletion request. Once you have
+	// Represents the current status of the resource deletion request. After you have
 	// initiated a resource deletion request, you can monitor the progress of your
 	// request by calling GetResourceRequestStatus
-	// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 	// using the RequestToken of the ProgressEvent returned by DeleteResource.
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationDeleteResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteResource{}, middleware.After)
 	if err != nil {
 		return err

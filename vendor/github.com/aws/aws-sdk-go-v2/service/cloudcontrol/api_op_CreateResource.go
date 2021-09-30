@@ -13,18 +13,18 @@ import (
 )
 
 // Creates the specified resource. For more information, see Creating a resource
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-create.html)
-// in the Amazon Web Services Cloud Control API User Guide. Once you have initiated
-// a resource creation request, you can monitor the progress of your request by
-// calling GetResourceRequestStatus
-// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html)
+// in the Amazon Web Services Cloud Control API User Guide. After you have
+// initiated a resource creation request, you can monitor the progress of your
+// request by calling GetResourceRequestStatus
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 // using the RequestToken of the ProgressEvent type returned by CreateResource.
 func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput, optFns ...func(*Options)) (*CreateResourceOutput, error) {
 	if params == nil {
 		params = &CreateResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateResource", params, optFns, addOperationCreateResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateResource", params, optFns, c.addOperationCreateResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -41,19 +41,19 @@ type CreateResourceInput struct {
 	// API currently supports JSON as a structured data format. Specify the desired
 	// state as one of the following:
 	//
-	// * A JSON blob.
+	// * A JSON blob
 	//
 	// * A local path containing the
-	// desired state in JSON data format.
+	// desired state in JSON data format
 	//
 	// For more information, see Composing the
 	// desired state of the resource
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate)
-	// in the Amazon Web Services Cloud Control API User Guide. For more information on
-	// the properties of a specific resource, refer to the reference topic for the
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate)
+	// in the Amazon Web Services Cloud Control API User Guide. For more information
+	// about the properties of a specific resource, refer to the related topic for the
 	// resource in the Resource and property types reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// in the CloudFormation Users Guide.
+	// in the Amazon Web Services CloudFormation Users Guide.
 	//
 	// This member is required.
 	DesiredState *string
@@ -72,7 +72,7 @@ type CreateResourceInput struct {
 	// If you do not specify a client token, one is generated for inclusion in the
 	// request. For more information, see Ensuring resource operation requests are
 	// unique
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
@@ -86,7 +86,7 @@ type CreateResourceInput struct {
 	// If you do not specify a role, Cloud Control API uses a temporary session created
 	// using your Amazon Web Services user credentials. For more information, see
 	// Specifying credentials
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -94,22 +94,26 @@ type CreateResourceInput struct {
 	// If you do not specify a resource version, CloudFormation uses the default
 	// version.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceOutput struct {
 
-	// Represents the current status of the resource creation request. Once you have
+	// Represents the current status of the resource creation request. After you have
 	// initiated a resource creation request, you can monitor the progress of your
 	// request by calling GetResourceRequestStatus
-	// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 	// using the RequestToken of the ProgressEvent returned by CreateResource.
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateResource{}, middleware.After)
 	if err != nil {
 		return err

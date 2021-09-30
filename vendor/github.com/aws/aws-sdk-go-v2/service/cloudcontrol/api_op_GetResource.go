@@ -11,18 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the current state of the specified resource. for
+// Returns information about the current state of the specified resource. For
 // details, see Reading a resource's current state
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-list-read.html#resource-operations-read).
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html).
 // You can use this action to return information about an existing resource in your
-// account and region, whether or not those resources were provisioned using the
-// Cloud Control API.
+// account and Amazon Web Services Region, whether or not those resources were
+// provisioned using Cloud Control API.
 func (c *Client) GetResource(ctx context.Context, params *GetResourceInput, optFns ...func(*Options)) (*GetResourceOutput, error) {
 	if params == nil {
 		params = &GetResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResource", params, optFns, addOperationGetResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResource", params, optFns, c.addOperationGetResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -42,8 +42,8 @@ type GetResourceInput struct {
 	// strung together), to specify the primary identifier as a string, list the
 	// property values in the order they are specified in the primary identifier
 	// definition, separated by |. For more information, see Identifying resources
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-identifier.html) in
-	// the Amazon Web Services Cloud Control API User Guide.
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	//
 	// This member is required.
 	Identifier *string
@@ -63,7 +63,7 @@ type GetResourceInput struct {
 	// If you do not specify a role, Cloud Control API uses a temporary session created
 	// using your Amazon Web Services user credentials. For more information, see
 	// Specifying credentials
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -71,6 +71,8 @@ type GetResourceInput struct {
 	// If you do not specify a resource version, CloudFormation uses the default
 	// version.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceOutput struct {
@@ -83,9 +85,11 @@ type GetResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationGetResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResource{}, middleware.After)
 	if err != nil {
 		return err

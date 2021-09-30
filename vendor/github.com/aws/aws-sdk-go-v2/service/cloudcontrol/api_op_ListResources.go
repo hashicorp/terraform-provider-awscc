@@ -15,14 +15,14 @@ import (
 // Returns information about the specified resources. For more information, see
 // Discovering resources in the Amazon Web Services Cloud Control API User Guide.
 // You can use this action to return information about existing resources in your
-// account and region, whether or not those resources were provisioned using the
-// Cloud Control API.
+// account and Amazon Web Services Region, whether or not those resources were
+// provisioned using Cloud Control API.
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListResources", params, optFns, addOperationListResourcesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListResources", params, optFns, c.addOperationListResourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +65,7 @@ type ListResourcesInput struct {
 	// If you do not specify a role, Cloud Control API uses a temporary session created
 	// using your Amazon Web Services user credentials. For more information, see
 	// Specifying credentials
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -73,6 +73,8 @@ type ListResourcesInput struct {
 	// If you do not specify a resource version, CloudFormation uses the default
 	// version.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourcesOutput struct {
@@ -83,7 +85,7 @@ type ListResourcesOutput struct {
 	// returns all results, NextToken is set to null.
 	NextToken *string
 
-	// Information on the specified resources, including primary identifier and
+	// Information about the specified resources, including primary identifier and
 	// resource model.
 	ResourceDescriptions []types.ResourceDescription
 
@@ -92,9 +94,11 @@ type ListResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResources{}, middleware.After)
 	if err != nil {
 		return err

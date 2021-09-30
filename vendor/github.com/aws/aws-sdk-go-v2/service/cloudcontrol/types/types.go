@@ -3,12 +3,13 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
 // Represents the current status of a resource operation request. For more
 // information, see Managing resource operation requests
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html)
 // in the Amazon Web Services Cloud Control API User Guide.
 type ProgressEvent struct {
 
@@ -52,7 +53,7 @@ type ProgressEvent struct {
 
 	// The unique token representing this resource operation request. Use the
 	// RequestToken with GetResourceRequestStatus
-	// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 	// to return the current status of a resource operation request.
 	RequestToken *string
 
@@ -68,6 +69,8 @@ type ProgressEvent struct {
 
 	// The name of the resource type used in the operation.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a provisioned resource.
@@ -75,12 +78,14 @@ type ResourceDescription struct {
 
 	// The primary identifier for the resource. For more information, see Identifying
 	// resources
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-identifier.html) in
-	// the Amazon Web Services Cloud Control API User Guide.
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	Identifier *string
 
 	// A list of the resource properties and their current values.
 	Properties *string
+
+	noSmithyDocumentSerde
 }
 
 // The filter criteria to use in determining the requests returned.
@@ -108,4 +113,8 @@ type ResourceRequestStatusFilter struct {
 
 	// The operation types to include in the filter.
 	Operations []Operation
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

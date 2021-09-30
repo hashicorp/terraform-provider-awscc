@@ -10,6 +10,8 @@ import (
 // The resource with the name requested already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -29,6 +31,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // request. However, client token expire after 36 hours.
 type ClientTokenConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientTokenConflictException) Error() string {
@@ -46,6 +50,8 @@ func (e *ClientTokenConflictException) ErrorFault() smithy.ErrorFault { return s
 // The resource is currently being modified by another operation.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -65,6 +71,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // Another resource operation is currently being performed on this resource.
 type ConcurrentOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentOperationException) Error() string {
@@ -83,6 +91,8 @@ func (e *ConcurrentOperationException) ErrorFault() smithy.ErrorFault { return s
 // that does not map to any other handler error code.
 type GeneralServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GeneralServiceException) Error() string {
@@ -101,6 +111,8 @@ func (e *GeneralServiceException) ErrorFault() smithy.ErrorFault { return smithy
 // This can include timeouts.
 type HandlerFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HandlerFailureException) Error() string {
@@ -119,6 +131,8 @@ func (e *HandlerFailureException) ErrorFault() smithy.ErrorFault { return smithy
 // resource handler.
 type HandlerInternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HandlerInternalFailureException) Error() string {
@@ -139,6 +153,8 @@ func (e *HandlerInternalFailureException) ErrorFault() smithy.ErrorFault { retur
 // invalid.
 type InvalidCredentialsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCredentialsException) Error() string {
@@ -157,6 +173,8 @@ func (e *InvalidCredentialsException) ErrorFault() smithy.ErrorFault { return sm
 // a generic exception.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -175,6 +193,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // networking issues, such as a failure to receive a response from the server.
 type NetworkFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NetworkFailureException) Error() string {
@@ -193,6 +213,8 @@ func (e *NetworkFailureException) ErrorFault() smithy.ErrorFault { return smithy
 // complete all of its ready-state checks.
 type NotStabilizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotStabilizedException) Error() string {
@@ -211,6 +233,8 @@ func (e *NotStabilizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // create-only, and therefore cannot be updated.
 type NotUpdatableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotUpdatableException) Error() string {
@@ -230,6 +254,8 @@ func (e *NotUpdatableException) ErrorFault() smithy.ErrorFault { return smithy.F
 // returning an invalid response, or timing out.
 type PrivateTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PrivateTypeException) Error() string {
@@ -247,6 +273,8 @@ func (e *PrivateTypeException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // A resource operation with the specified request token cannot be found.
 type RequestTokenNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestTokenNotFoundException) Error() string {
@@ -266,6 +294,8 @@ func (e *RequestTokenNotFoundException) ErrorFault() smithy.ErrorFault { return 
 // that operation is finished.
 type ResourceConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -283,6 +313,8 @@ func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smit
 // A resource with the specified identifier cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -301,6 +333,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // internal error, typically with a 5XX HTTP status code.
 type ServiceInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceInternalErrorException) Error() string {
@@ -319,6 +353,8 @@ func (e *ServiceInternalErrorException) ErrorFault() smithy.ErrorFault { return 
 // reached on the service side.
 type ServiceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLimitExceededException) Error() string {
@@ -336,6 +372,8 @@ func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -353,6 +391,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified extension does not exist in the CloudFormation registry.
 type TypeNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TypeNotFoundException) Error() string {
@@ -370,6 +410,8 @@ func (e *TypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified resource does not support this resource operation.
 type UnsupportedActionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedActionException) Error() string {

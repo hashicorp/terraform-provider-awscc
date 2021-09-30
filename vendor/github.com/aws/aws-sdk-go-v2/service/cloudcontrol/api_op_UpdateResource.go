@@ -17,22 +17,22 @@ import (
 // document that adheres to the  RFC 6902 - JavaScript Object Notation (JSON) Patch
 // (https://datatracker.ietf.org/doc/html/rfc6902) standard. For details on how
 // Cloud Control API performs resource update operations, see Updating a resource
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-update.html)
-// in the Amazon Web Services Cloud Control API User Guide. Once you have initiated
-// a resource update request, you can monitor the progress of your request by
-// calling GetResourceRequestStatus
-// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html)
+// in the Amazon Web Services Cloud Control API User Guide. After you have
+// initiated a resource update request, you can monitor the progress of your
+// request by calling GetResourceRequestStatus
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 // using the RequestToken of the ProgressEvent returned by UpdateResource. For more
-// information on the properties of a specific resource, refer to the reference
+// information about the properties of a specific resource, refer to the related
 // topic for the resource in the Resource and property types reference
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-// in the CloudFormation Users Guide.
+// in the Amazon Web Services CloudFormation Users Guide.
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateResource", params, optFns, addOperationUpdateResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateResource", params, optFns, c.addOperationUpdateResourceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -52,8 +52,8 @@ type UpdateResourceInput struct {
 	// strung together), to specify the primary identifier as a string, list the
 	// property values in the order they are specified in the primary identifier
 	// definition, separated by |. For more information, see Identifying resources
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-identifier.html) in
-	// the Amazon Web Services Cloud Control API User Guide.
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
+	// in the Amazon Web Services Cloud Control API User Guide.
 	//
 	// This member is required.
 	Identifier *string
@@ -61,7 +61,7 @@ type UpdateResourceInput struct {
 	// A JavaScript Object Notation (JSON) document listing the patch operations that
 	// represent the updates to apply to the current resource properties. For details,
 	// see Composing the patch document
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	//
 	// This member is required.
@@ -81,7 +81,7 @@ type UpdateResourceInput struct {
 	// If you do not specify a client token, one is generated for inclusion in the
 	// request. For more information, see Ensuring resource operation requests are
 	// unique
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ClientToken *string
 
@@ -95,7 +95,7 @@ type UpdateResourceInput struct {
 	// If you do not specify a role, Cloud Control API uses a temporary session created
 	// using your Amazon Web Services user credentials. For more information, see
 	// Specifying credentials
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations.html#resource-operations-permissions)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	RoleArn *string
 
@@ -103,21 +103,25 @@ type UpdateResourceInput struct {
 	// If you do not specify a resource version, CloudFormation uses the default
 	// version.
 	TypeVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourceOutput struct {
 
 	// Represents the current status of the resource update request. Use the
 	// RequestToken of the ProgressEvent with GetResourceRequestStatus
-	// (https://docs.aws.amazon.com/ccapi/latest/APIReference/API_GetResourceRequestStatus.html)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
 	// to return the current status of a resource operation request.
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateResource{}, middleware.After)
 	if err != nil {
 		return err

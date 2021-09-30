@@ -18,14 +18,14 @@ import (
 
 // Returns the current status of a resource operation request. For more
 // information, see Tracking the progress of resource operation requests
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track)
 // in the Amazon Web Services Cloud Control API User Guide.
 func (c *Client) GetResourceRequestStatus(ctx context.Context, params *GetResourceRequestStatusInput, optFns ...func(*Options)) (*GetResourceRequestStatusOutput, error) {
 	if params == nil {
 		params = &GetResourceRequestStatusInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetResourceRequestStatus", params, optFns, addOperationGetResourceRequestStatusMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetResourceRequestStatus", params, optFns, c.addOperationGetResourceRequestStatusMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -43,6 +43,8 @@ type GetResourceRequestStatusInput struct {
 	//
 	// This member is required.
 	RequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceRequestStatusOutput struct {
@@ -52,9 +54,11 @@ type GetResourceRequestStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationGetResourceRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetResourceRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourceRequestStatus{}, middleware.After)
 	if err != nil {
 		return err

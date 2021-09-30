@@ -13,7 +13,7 @@ import (
 
 // Cancels the specified resource operation request. For more information, see
 // Canceling resource operation requests
-// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
+// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
 // in the Amazon Web Services Cloud Control API User Guide. Only resource
 // operations requests with a status of PENDING or IN_PROGRESS can be cancelled.
 func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResourceRequestInput, optFns ...func(*Options)) (*CancelResourceRequestOutput, error) {
@@ -21,7 +21,7 @@ func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResour
 		params = &CancelResourceRequestInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CancelResourceRequest", params, optFns, addOperationCancelResourceRequestMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelResourceRequest", params, optFns, c.addOperationCancelResourceRequestMiddlewares)
 	if err != nil {
 		return nil, err
 	}
@@ -38,21 +38,25 @@ type CancelResourceRequestInput struct {
 	//
 	// This member is required.
 	RequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelResourceRequestOutput struct {
 
 	// Represents the current status of a resource operation request. For more
 	// information, see Managing resource operation requests
-	// (https://docs.aws.amazon.com/ccapi/latest/userguide/resource-operations-manage-requests.html)
+	// (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html)
 	// in the Amazon Web Services Cloud Control API User Guide.
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
-func addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelResourceRequest{}, middleware.After)
 	if err != nil {
 		return err
