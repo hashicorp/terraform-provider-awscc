@@ -8,7 +8,7 @@ default: build
 
 .PHONY: all build default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources singular-data-sources plural-data-sources build
+all: schemas resources singular-data-sources plural-data-sources build docs
 
 build:
 	go install
