@@ -20,7 +20,7 @@ Terraform 1.0.7 and later:
 ```terraform
 terraform {
   required_providers {
-    aws = {
+    awscc = {
       source  = "hashicorp/awscc"
       version = "~> 0.1"
     }
@@ -157,6 +157,7 @@ provider "awscc" {
     external_id  = "EXTERNAL_ID"
   }
 }
+```
 
 > **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://learn.hashicorp.com/tutorials/terraform/aws-assumerole) tutorial on HashiCorp Learn.
 
