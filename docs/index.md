@@ -20,7 +20,7 @@ Terraform 1.0.7 and later:
 ```terraform
 terraform {
   required_providers {
-    aws = {
+    awscc = {
       source  = "hashicorp/awscc"
       version = "~> 0.1"
     }
