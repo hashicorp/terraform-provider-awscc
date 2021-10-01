@@ -73,7 +73,7 @@
     },
     "properties": {
         "$schema": {
-            "$ref": "base.definition.schema.v1.json#/properties/$schema"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/$schema"
         },
         "type": {
             "$comment": "Resource Type",
@@ -87,31 +87,31 @@
                 "AWS::EC2::Instance",
                 "Initech::TPS::Report"
             ],
-            "$ref": "base.definition.schema.v1.json#/properties/typeName"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/typeName"
         },
         "$comment": {
-            "$ref": "base.definition.schema.v1.json#/properties/$comment"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/$comment"
         },
         "title": {
-            "$ref": "base.definition.schema.v1.json#/properties/title"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/title"
         },
         "description": {
             "$comment": "A short description of the resource provider. This will be shown in the AWS CloudFormation console.",
-            "$ref": "base.definition.schema.v1.json#/properties/description"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/description"
         },
         "sourceUrl": {
             "$comment": "The location of the source code for this resource provider, to help interested parties submit issues or improvements.",
             "examples": [
                 "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-s3"
             ],
-            "$ref": "base.definition.schema.v1.json#/properties/sourceUrl"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/sourceUrl"
         },
         "documentationUrl": {
             "$comment": "A page with supplemental documentation. The property documentation in schemas should be able to stand alone, but this is an opportunity for e.g. rich examples or more guided documents.",
             "examples": [
                 "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/CHAP_Using.html"
             ],
-            "$ref": "base.definition.schema.v1.json#/definitions/httpsUrl"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/httpsUrl"
         },
         "taggable": {
             "description": "(Deprecated, please use new metadata attribute tagging) A boolean flag indicating whether this resource type supports tagging.",
@@ -158,13 +158,13 @@
         },
         "additionalProperties": {
             "$comment": "All properties of a resource must be expressed in the schema - arbitrary inputs are not allowed",
-            "$ref": "base.definition.schema.v1.json#/properties/additionalProperties"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/additionalProperties"
         },
         "properties": {
-            "$ref": "base.definition.schema.v1.json#/properties/properties"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/properties"
         },
         "definitions": {
-            "$ref": "base.definition.schema.v1.json#/properties/definitions"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/definitions"
         },
         "handlers": {
             "description": "Defines the provisioning operations which can be performed on this resource type",
@@ -190,51 +190,51 @@
         },
         "remote": {
             "description": "Reserved for CloudFormation use. A namespace to inline remote schemas.",
-            "$ref": "base.definition.schema.v1.json#/properties/remote"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/remote"
         },
         "readOnlyProperties": {
             "description": "A list of JSON pointers to properties that are able to be found in a Read request but unable to be specified by the customer",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "writeOnlyProperties": {
             "description": "A list of JSON pointers to properties (typically sensitive) that are able to be specified by the customer but unable to be returned in a Read request",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "conditionalCreateOnlyProperties": {
             "description": "A list of JSON pointers for properties that can only be updated under certain conditions. For example, you can upgrade the engine version of an RDS DBInstance but you cannot downgrade it.  When updating this property for a resource in a CloudFormation stack, the resource will be replaced if it cannot be updated.",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "createOnlyProperties": {
             "description": "A list of JSON pointers to properties that are only able to be specified by the customer when creating a resource. Conversely, any property *not* in this list can be applied to an Update request.",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "deprecatedProperties": {
             "description": "A list of JSON pointers to properties that have been deprecated by the underlying service provider. These properties are still accepted in create & update operations, however they may be ignored, or converted to a consistent model on application. Deprecated properties are not guaranteed to be present in read paths.",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "primaryIdentifier": {
             "description": "A required identifier which uniquely identifies an instance of this resource type. An identifier is a non-zero-length list of JSON pointers to properties that form a single key. An identifier can be a single or multiple properties to support composite-key identifiers.",
-            "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
         },
         "additionalIdentifiers": {
             "description": "An optional list of supplementary identifiers, each of which uniquely identifies an instance of this resource type. An identifier is a non-zero-length list of JSON pointers to properties that form a single key. An identifier can be a single or multiple properties to support composite-key identifiers.",
             "type": "array",
             "minItems": 1,
             "items": {
-                "$ref": "base.definition.schema.v1.json#/definitions/jsonPointerArray"
+                "$ref": "file://./base.definition.schema.v1.json#/definitions/jsonPointerArray"
             }
         },
         "required": {
-            "$ref": "base.definition.schema.v1.json#/properties/required"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/required"
         },
         "allOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "anyOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "oneOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "resourceLink": {
             "description": "A template-able link to a resource instance. AWS-internal service links must be relative to the AWS console domain. External service links must be absolute, HTTPS URIs.",
@@ -251,7 +251,7 @@
         },
         "typeConfiguration": {
             "description": "TypeConfiguration to set the configuration data for registry types. This configuration data is not passed through the resource properties in template. One of the possible use cases is configuring auth keys for 3P resource providers.",
-            "$ref": "provider.configuration.definition.schema.v1.json"
+            "$ref": "file://./provider.configuration.definition.schema.v1.json"
         }
     },
     "required": [

@@ -11,30 +11,30 @@
             "const": false
         },
         "deprecatedProperties": {
-            "$ref": "base.definition.schema.v1.json#/properties/deprecatedProperties"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/deprecatedProperties"
         },
         "allOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "anyOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "oneOf": {
-            "$ref": "base.definition.schema.v1.json#/definitions/schemaArray"
+            "$ref": "file://./base.definition.schema.v1.json#/definitions/schemaArray"
         },
         "required": {
-            "$ref": "base.definition.schema.v1.json#/properties/required"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/required"
         },
         "description": {
             "$comment": "A short description of the type configuration. This will be shown in the AWS CloudFormation console.",
-            "$ref": "base.definition.schema.v1.json#/properties/description"
+            "$ref": "file://./base.definition.schema.v1.json#/properties/description"
         },
         "properties": {
             "type": "object",
             "patternProperties": {
                 "": {
                     "$comment": "TypeConfiguration properties starting with `CloudFormation` are reserved for CloudFormation use",
-                    "$ref": "base.definition.schema.v1.json#/definitions/properties"
+                    "$ref": "file://./base.definition.schema.v1.json#/definitions/properties"
                 }
             },
             "minProperties": 1,
