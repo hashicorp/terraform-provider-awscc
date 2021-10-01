@@ -55,6 +55,7 @@ signs:
     - >-
       signore
       sign
+      --dearmor
       --file ${artifact}
       --signer {{ .Env.SIGNER }}
       --out ${signature}
