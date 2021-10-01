@@ -32,7 +32,7 @@
         "properties": {
             "type": "object",
             "patternProperties": {
-                "(?!CloudFormation)^[A-Za-z0-9]{1,64}$": {
+                "": {
                     "$comment": "TypeConfiguration properties starting with `CloudFormation` are reserved for CloudFormation use",
                     "$ref": "base.definition.schema.v1.json#/definitions/properties"
                 }
