@@ -157,6 +157,7 @@ provider "awscc" {
     external_id  = "EXTERNAL_ID"
   }
 }
+```
 
 > **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://learn.hashicorp.com/tutorials/terraform/aws-assumerole) tutorial on HashiCorp Learn.
 
