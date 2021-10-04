@@ -15,6 +15,7 @@ FEATURES:
 * **New Data Source:** `awscc_backup_report_plans`
 * **New Data Source:** `awscc_ec2_host`
 * **New Data Source:** `awscc_ec2_hosts`
+* **New Data Source:** `awscc_ec2_route_table`
 * **New Data Source:** `awscc_lightsail_disk`
 * **New Data Source:** `awscc_lightsail_disks`
 * **New Resource:** `awscc_backup_report_plan`
