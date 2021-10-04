@@ -455,12 +455,14 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
+	id := aws.ToString(progressEvent.Identifier)
+
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
 	// Set the synthetic "id" attribute.
 	if r.resourceType.syntheticIDAttribute {
-		err = r.setId(ctx, aws.ToString(progressEvent.Identifier), &response.State)
+		err = r.setId(ctx, id, &response.State)
 
 		if err != nil {
 			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
@@ -469,7 +471,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		}
 	}
 
-	diags := r.populateUnknownValues(ctx, &response.State)
+	diags := r.populateUnknownValues(ctx, id, &response.State)
 
 	if diags.HasError() {
 		response.Diagnostics.Append(diags...)
@@ -656,7 +658,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	diags := r.populateUnknownValues(ctx, &response.State)
+	diags := r.populateUnknownValues(ctx, id, &response.State)
 
 	if diags.HasError() {
 		response.Diagnostics.Append(diags...)
@@ -796,7 +798,7 @@ func (r *resource) setEmptyAttributes(ctx context.Context, state *tfsdk.State) e
 }
 
 // populateUnknownValues populates and unknown values in State with values from the current resource description.
-func (r *resource) populateUnknownValues(ctx context.Context, state *tfsdk.State) diag.Diagnostics {
+func (r *resource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
 	var diags diag.Diagnostics
 
 	unknowns, err := Unknowns(ctx, state.Raw, r.resourceType.tfToCfNameMap)
@@ -812,14 +814,6 @@ func (r *resource) populateUnknownValues(ctx context.Context, state *tfsdk.State
 
 	if len(unknowns) == 0 {
 		return nil
-	}
-
-	id, err := r.getId(ctx, state)
-
-	if err != nil {
-		diags.Append(ResourceIdentifierNotFoundDiag(err))
-
-		return diags
 	}
 
 	description, err := r.describe(ctx, r.provider.CloudControlApiClient(ctx), id)
