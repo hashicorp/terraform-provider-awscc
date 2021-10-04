@@ -12,12 +12,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_ec2_subnets", subnetsDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_ec2_hosts", hostsDataSourceType)
 }
 
-// subnetsDataSourceType returns the Terraform awscc_ec2_subnets data source type.
-// This Terraform data source type corresponds to the CloudFormation AWS::EC2::Subnet resource type.
-func subnetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
+// hostsDataSourceType returns the Terraform awscc_ec2_hosts data source type.
+// This Terraform data source type corresponds to the CloudFormation AWS::EC2::Host resource type.
+func hostsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
 		"id": {
 			Description: "Uniquely identifies the data source.",
@@ -32,14 +32,14 @@ func subnetsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	}
 
 	schema := tfsdk.Schema{
-		Description: "Plural Data Source schema for AWS::EC2::Subnet",
+		Description: "Plural Data Source schema for AWS::EC2::Host",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::Subnet").WithTerraformTypeName("awscc_ec2_subnets")
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::Host").WithTerraformTypeName("awscc_ec2_hosts")
 	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
