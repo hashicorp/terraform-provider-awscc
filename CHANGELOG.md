@@ -1,3 +1,9 @@
+## 0.2.0 (Unreleased)
+
+BUG FIXES:
+
+* Correctly create resource with CloudFormation schema defined top-level `id` attribute ([#229](https://github.com/hashicorp/terraform-provider-awscc/issues/229))
+
 ## [0.1.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.1.0) (September 30, 2021)
 
 Public Technical Preview
