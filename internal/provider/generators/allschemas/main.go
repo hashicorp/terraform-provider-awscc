@@ -35,9 +35,6 @@ func main() {
 	cfClient := cloudformation.NewFromConfig(cfg)
 
 	input := &cloudformation.ListTypesInput{
-		Filters: &types.TypeFilters{
-			Category: types.CategoryAwsTypes,
-		},
 		ProvisioningType: types.ProvisioningTypeFullyMutable,
 		Visibility:       types.VisibilityPublic,
 	}
@@ -60,9 +57,6 @@ func main() {
 	}
 
 	input = &cloudformation.ListTypesInput{
-		Filters: &types.TypeFilters{
-			Category: types.CategoryAwsTypes,
-		},
 		ProvisioningType: types.ProvisioningTypeImmutable,
 		Visibility:       types.VisibilityPublic,
 	}
@@ -83,59 +77,16 @@ func main() {
 		input.NextToken = output.NextToken
 	}
 
-	/*
-		input = &cloudformation.ListTypesInput{
-			Filters: &types.TypeFilters{
-				Category: types.CategoryAwsTypes,
-			},
-			ProvisioningType: types.ProvisioningTypeFullyMutable,
-			Visibility:       types.VisibilityPrivate,
-		}
-		for {
-			output, err := cfClient.ListTypes(ctx, input)
-
-			if err != nil {
-				ui.Error(fmt.Sprintf("error listing fully-mutable, private CloudFormation types: %s", err))
-				os.Exit(1)
-			}
-
-			typeSummaries = append(typeSummaries, output.TypeSummaries...)
-
-			if output.NextToken == nil {
-				break
-			}
-
-			input.NextToken = output.NextToken
-		}
-
-		input = &cloudformation.ListTypesInput{
-			Filters: &types.TypeFilters{
-				Category: types.CategoryAwsTypes,
-			},
-			ProvisioningType: types.ProvisioningTypeImmutable,
-			Visibility:       types.VisibilityPrivate,
-		}
-		for {
-			output, err := cfClient.ListTypes(ctx, input)
-
-			if err != nil {
-				ui.Error(fmt.Sprintf("error listing immutable, private CloudFormation types: %s", err))
-				os.Exit(1)
-			}
-
-			typeSummaries = append(typeSummaries, output.TypeSummaries...)
-
-			if output.NextToken == nil {
-				break
-			}
-
-			input.NextToken = output.NextToken
-		}
-	*/
-
 	var cfTypeNames []string
 	for _, typeSummary := range typeSummaries {
-		cfTypeNames = append(cfTypeNames, aws.ToString(typeSummary.TypeName))
+		typeName := aws.ToString(typeSummary.TypeName)
+		org, _, _, err := naming.ParseCloudFormationTypeName(typeName)
+
+		if err == nil && org != naming.OrganizationNameAWS {
+			continue
+		}
+
+		cfTypeNames = append(cfTypeNames, typeName)
 	}
 	sort.Strings(cfTypeNames)
 

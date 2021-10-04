@@ -6,6 +6,10 @@ import (
 	"strings"
 )
 
+const (
+	OrganizationNameAWS = "AWS"
+)
+
 var cloudFormationTypeNameRegexp = regexp.MustCompile(`^([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})::([a-zA-Z0-9]{2,64})$`)
 
 // ParseCloudFormationTypeName parses a CloudFormation resource type name into 3 parts - Organization, Service and Resource.
