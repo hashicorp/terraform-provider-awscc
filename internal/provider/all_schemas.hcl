@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 364 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 377 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -183,6 +183,14 @@ resource_schema "aws_backup_backup_selection" {
 resource_schema "aws_backup_backup_vault" {
   cloudformation_type_name               = "AWS::Backup::BackupVault"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_backup_framework" {
+  cloudformation_type_name = "AWS::Backup::Framework"
+}
+
+resource_schema "aws_backup_report_plan" {
+  cloudformation_type_name = "AWS::Backup::ReportPlan"
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -463,6 +471,10 @@ resource_schema "aws_ec2_gateway_route_table_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_ec2_host" {
+  cloudformation_type_name = "AWS::EC2::Host"
+}
+
 resource_schema "aws_ec2_local_gateway_route" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
 }
@@ -493,10 +505,6 @@ resource_schema "aws_ec2_route_table" {
 
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
-}
-
-resource_schema "aws_ec2_subnet" {
-  cloudformation_type_name = "AWS::EC2::Subnet"
 }
 
 resource_schema "aws_ec2_subnet_route_table_association" {
@@ -600,10 +608,6 @@ resource_schema "aws_efs_mount_target" {
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
   suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_eks_cluster" {
-  cloudformation_type_name = "AWS::EKS::Cluster"
 }
 
 resource_schema "aws_eks_fargate_profile" {
@@ -1027,6 +1031,14 @@ resource_schema "aws_licensemanager_grant" {
 
 resource_schema "aws_licensemanager_license" {
   cloudformation_type_name = "AWS::LicenseManager::License"
+}
+
+resource_schema "aws_lightsail_disk" {
+  cloudformation_type_name = "AWS::Lightsail::Disk"
+}
+
+resource_schema "aws_lightsail_instance" {
+  cloudformation_type_name = "AWS::Lightsail::Instance"
 }
 
 resource_schema "aws_location_geofence_collection" {
