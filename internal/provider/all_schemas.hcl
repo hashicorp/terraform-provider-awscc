@@ -187,6 +187,11 @@ resource_schema "aws_backup_backup_vault" {
 
 resource_schema "aws_backup_framework" {
   cloudformation_type_name = "AWS::Backup::Framework"
+
+  # FrameworkControls/ControlScope/Tags is too deeply nested for expansion.
+  suppress_plural_data_source_generation   = true
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_backup_report_plan" {
