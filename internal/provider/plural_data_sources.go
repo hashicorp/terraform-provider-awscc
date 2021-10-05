@@ -12,6 +12,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationinsights_applications -cftype AWS::ApplicationInsights::Application -package applicationinsights ../aws/applicationinsights/application_plural_data_source_gen.go ../aws/applicationinsights/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_named_queries -cftype AWS::Athena::NamedQuery -package athena ../aws/athena/named_query_plural_data_source_gen.go ../aws/athena/named_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_work_groups -cftype AWS::Athena::WorkGroup -package athena ../aws/athena/work_group_plural_data_source_gen.go ../aws/athena/work_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_report_plans -cftype AWS::Backup::ReportPlan -package backup ../aws/backup/report_plan_plural_data_source_gen.go ../aws/backup/report_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_budgets_budgets_actions -cftype AWS::Budgets::BudgetsAction -package budgets ../aws/budgets/budgets_action_plural_data_source_gen.go ../aws/budgets/budgets_action_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_keyspaces -cftype AWS::Cassandra::Keyspace -package cassandra ../aws/cassandra/keyspace_plural_data_source_gen.go ../aws/cassandra/keyspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_tables -cftype AWS::Cassandra::Table -package cassandra ../aws/cassandra/table_plural_data_source_gen.go ../aws/cassandra/table_plural_data_source_gen_test.go
@@ -63,6 +64,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_ec2_fleets -cftype AWS::EC2::EC2Fleet -package ec2 ../aws/ec2/ec2_fleet_plural_data_source_gen.go ../aws/ec2/ec2_fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_egress_only_internet_gateways -cftype AWS::EC2::EgressOnlyInternetGateway -package ec2 ../aws/ec2/egress_only_internet_gateway_plural_data_source_gen.go ../aws/ec2/egress_only_internet_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_flow_logs -cftype AWS::EC2::FlowLog -package ec2 ../aws/ec2/flow_log_plural_data_source_gen.go ../aws/ec2/flow_log_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_hosts -cftype AWS::EC2::Host -package ec2 ../aws/ec2/host_plural_data_source_gen.go ../aws/ec2/host_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_local_gateway_routes -cftype AWS::EC2::LocalGatewayRoute -package ec2 ../aws/ec2/local_gateway_route_plural_data_source_gen.go ../aws/ec2/local_gateway_route_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_local_gateway_route_table_vpc_associations -cftype AWS::EC2::LocalGatewayRouteTableVPCAssociation -package ec2 ../aws/ec2/local_gateway_route_table_vpc_association_plural_data_source_gen.go ../aws/ec2/local_gateway_route_table_vpc_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_network_acls -cftype AWS::EC2::NetworkAcl -package ec2 ../aws/ec2/network_acl_plural_data_source_gen.go ../aws/ec2/network_acl_plural_data_source_gen_test.go
@@ -71,7 +73,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_prefix_lists -cftype AWS::EC2::PrefixList -package ec2 ../aws/ec2/prefix_list_plural_data_source_gen.go ../aws/ec2/prefix_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_route_tables -cftype AWS::EC2::RouteTable -package ec2 ../aws/ec2/route_table_plural_data_source_gen.go ../aws/ec2/route_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_spot_fleets -cftype AWS::EC2::SpotFleet -package ec2 ../aws/ec2/spot_fleet_plural_data_source_gen.go ../aws/ec2/spot_fleet_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnets -cftype AWS::EC2::Subnet -package ec2 ../aws/ec2/subnet_plural_data_source_gen.go ../aws/ec2/subnet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnet_route_table_associations -cftype AWS::EC2::SubnetRouteTableAssociation -package ec2 ../aws/ec2/subnet_route_table_association_plural_data_source_gen.go ../aws/ec2/subnet_route_table_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateways -cftype AWS::EC2::TransitGateway -package ec2 ../aws/ec2/transit_gateway_plural_data_source_gen.go ../aws/ec2/transit_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_connects -cftype AWS::EC2::TransitGatewayConnect -package ec2 ../aws/ec2/transit_gateway_connect_plural_data_source_gen.go ../aws/ec2/transit_gateway_connect_plural_data_source_gen_test.go
@@ -89,7 +90,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ecs_task_definitions -cftype AWS::ECS::TaskDefinition -package ecs ../aws/ecs/task_definition_plural_data_source_gen.go ../aws/ecs/task_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_efs_access_points -cftype AWS::EFS::AccessPoint -package efs ../aws/efs/access_point_plural_data_source_gen.go ../aws/efs/access_point_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_efs_file_systems -cftype AWS::EFS::FileSystem -package efs ../aws/efs/file_system_plural_data_source_gen.go ../aws/efs/file_system_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_eks_clusters -cftype AWS::EKS::Cluster -package eks ../aws/eks/cluster_plural_data_source_gen.go ../aws/eks/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studios -cftype AWS::EMR::Studio -package emr ../aws/emr/studio_plural_data_source_gen.go ../aws/emr/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studio_session_mappings -cftype AWS::EMR::StudioSessionMapping -package emr ../aws/emr/studio_session_mapping_plural_data_source_gen.go ../aws/emr/studio_session_mapping_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emrcontainers_virtual_clusters -cftype AWS::EMRContainers::VirtualCluster -package emrcontainers ../aws/emrcontainers/virtual_cluster_plural_data_source_gen.go ../aws/emrcontainers/virtual_cluster_plural_data_source_gen_test.go
@@ -163,6 +163,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_functions -cftype AWS::Lambda::Function -package lambda ../aws/lambda/function_plural_data_source_gen.go ../aws/lambda/function_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_grants -cftype AWS::LicenseManager::Grant -package licensemanager ../aws/licensemanager/grant_plural_data_source_gen.go ../aws/licensemanager/grant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_licenses -cftype AWS::LicenseManager::License -package licensemanager ../aws/licensemanager/license_plural_data_source_gen.go ../aws/licensemanager/license_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_lightsail_disks -cftype AWS::Lightsail::Disk -package lightsail ../aws/lightsail/disk_plural_data_source_gen.go ../aws/lightsail/disk_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_location_geofence_collections -cftype AWS::Location::GeofenceCollection -package location ../aws/location/geofence_collection_plural_data_source_gen.go ../aws/location/geofence_collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_location_maps -cftype AWS::Location::Map -package location ../aws/location/map_plural_data_source_gen.go ../aws/location/map_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_location_place_indices -cftype AWS::Location::PlaceIndex -package location ../aws/location/place_index_plural_data_source_gen.go ../aws/location/place_index_plural_data_source_gen_test.go
@@ -238,6 +239,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apprunner"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
@@ -259,7 +261,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/efs"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eks"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticache"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
@@ -286,6 +287,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lambda"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/licensemanager"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lightsail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/location"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/logs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutmetrics"

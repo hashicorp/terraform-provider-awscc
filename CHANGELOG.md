@@ -1,12 +1,34 @@
 ## 0.2.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_ec2_subnet: Temporarily removed
+* data-source/awscc_ec2_subnets: Temporarily removed
+* data-source/aws_eks_cluster: Temporarily removed
+* data-source/aws_eks_clusters: Temporarily removed
+* resource/awscc_ec2_subnet: Temporarily removed
+* resource/aws_eks_cluster: Temporarily removed
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_report_plan`
+* **New Data Source:** `awscc_backup_report_plans`
+* **New Data Source:** `awscc_ec2_host`
+* **New Data Source:** `awscc_ec2_hosts`
+* **New Data Source:** `awscc_ec2_route_table`
+* **New Data Source:** `awscc_lightsail_disk`
+* **New Data Source:** `awscc_lightsail_disks`
+* **New Resource:** `awscc_backup_report_plan`
+* **New Resource:** `awscc_ec2_host`
+* **New Resource:** `awscc_lightsail_disk`
+
 BUG FIXES:
 
 * Correctly create resource with CloudFormation schema defined top-level `id` attribute ([#229](https://github.com/hashicorp/terraform-provider-awscc/issues/229))
 
 ## [0.1.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.1.0) (September 30, 2021)
 
-Public Technical Preview
+Public Technical Preview.
 
 ## [0.0.15](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.0.15) (September 30, 2021)
 
