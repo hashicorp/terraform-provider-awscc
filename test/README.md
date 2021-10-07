@@ -1,1 +1,0 @@
-# Cloud Control API Generated Resource Tests
