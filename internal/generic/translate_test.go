@@ -62,6 +62,18 @@ func TestTranslateToCloudControl(t *testing.T) {
 				},
 			},
 		},
+		{
+			TestName:      "maps Plan",
+			Plan:          makeMapsTestPlan(),
+			TfToCfNameMap: mapsTfToCfNameMap,
+			ExpectedState: map[string]interface{}{
+				"Name": "testing",
+				"SimpleMap": map[string]interface{}{
+					"one": "eno",
+					"two": "owt",
+				},
+			},
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -367,6 +379,32 @@ func TestTranslateToTerraform(t *testing.T) {
 					}),
 				}),
 				"identifier": tftypes.NewValue(tftypes.String, nil),
+			}),
+		},
+		{
+			TestName:      "maps State",
+			Schema:        testMapsSchema,
+			CfToTfNameMap: mapsCfToTfNameMap,
+			ResourceModel: map[string]interface{}{
+				"Name": "testing",
+				"SimpleMap": map[string]interface{}{
+					"one": "eno",
+					"two": "owt",
+				},
+			},
+			ExpectedValue: tftypes.NewValue(tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"name":       tftypes.String,
+					"simple_map": tftypes.Map{ElementType: tftypes.String},
+				},
+			}, map[string]tftypes.Value{
+				"name": tftypes.NewValue(tftypes.String, "testing"),
+				"simple_map": tftypes.NewValue(tftypes.Map{
+					ElementType: tftypes.String,
+				}, map[string]tftypes.Value{
+					"one": tftypes.NewValue(tftypes.String, "eno"),
+					"two": tftypes.NewValue(tftypes.String, "owt"),
+				}),
 			}),
 		},
 	}

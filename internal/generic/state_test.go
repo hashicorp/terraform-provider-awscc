@@ -590,3 +590,48 @@ var complexTfToCfNameMap = map[string]string{
 	"scratch_disk":         "ScratchDisk",
 	"tags":                 "Tags",
 }
+
+var testMapsSchema = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
+		"name": {
+			Type:     types.StringType,
+			Required: true,
+		},
+		"simple_map": {
+			Type: types.MapType{
+				ElemType: types.StringType,
+			},
+			Optional: true,
+		},
+	},
+}
+
+var mapsCfToTfNameMap = map[string]string{
+	"Name":      "name",
+	"SimpleMap": "simple_map",
+}
+
+func makeMapsTestPlan() tfsdk.Plan {
+	return tfsdk.Plan{
+		Raw: tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"name":       tftypes.String,
+				"simple_map": tftypes.Map{ElementType: tftypes.String},
+			},
+		}, map[string]tftypes.Value{
+			"name": tftypes.NewValue(tftypes.String, "testing"),
+			"simple_map": tftypes.NewValue(tftypes.Map{
+				ElementType: tftypes.String,
+			}, map[string]tftypes.Value{
+				"one": tftypes.NewValue(tftypes.String, "eno"),
+				"two": tftypes.NewValue(tftypes.String, "owt"),
+			}),
+		}),
+		Schema: testMapsSchema,
+	}
+}
+
+var mapsTfToCfNameMap = map[string]string{
+	"name":       "Name",
+	"simple_map": "SimpleMap",
+}
