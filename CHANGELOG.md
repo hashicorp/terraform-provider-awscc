@@ -11,15 +11,26 @@ BREAKING CHANGES:
 
 FEATURES:
 
+* **New Data Source:** `awscc_apigateway_authorizer`
+* **New Data Source:** `awscc_autoscaling_launch_configuration`
+* **New Data Source:** `awscc_autoscaling_launch_configurations`
 * **New Data Source:** `awscc_backup_report_plan`
 * **New Data Source:** `awscc_backup_report_plans`
 * **New Data Source:** `awscc_ec2_host`
 * **New Data Source:** `awscc_ec2_hosts`
 * **New Data Source:** `awscc_ec2_route_table`
+* **New Data Source:** `awscc_ec2_subnet_network_acl_association`
+* **New Data Source:** `awscc_ec2_subnet_network_acl_associations`
+* **New Data Source:** `awscc_iam_role`
+* **New Data Source:** `awscc_iam_roles`
 * **New Data Source:** `awscc_lightsail_disk`
 * **New Data Source:** `awscc_lightsail_disks`
+* **New Resource:** `awscc_apigateway_authorizer`
+* **New Resource:** `awscc_autoscaling_launch_configuration`
 * **New Resource:** `awscc_backup_report_plan`
 * **New Resource:** `awscc_ec2_host`
+* **New Resource:** `awscc_ec2_subnet_network_acl_association`
+* **New Resource:** `awscc_iam_role`
 * **New Resource:** `awscc_lightsail_disk`
 
 BUG FIXES:

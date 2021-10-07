@@ -1,0 +1,1 @@
+$ terraform import awscc_iam_role.example <resource ID>

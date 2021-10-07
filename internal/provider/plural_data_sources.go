@@ -12,6 +12,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationinsights_applications -cftype AWS::ApplicationInsights::Application -package applicationinsights ../aws/applicationinsights/application_plural_data_source_gen.go ../aws/applicationinsights/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_named_queries -cftype AWS::Athena::NamedQuery -package athena ../aws/athena/named_query_plural_data_source_gen.go ../aws/athena/named_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_work_groups -cftype AWS::Athena::WorkGroup -package athena ../aws/athena/work_group_plural_data_source_gen.go ../aws/athena/work_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_autoscaling_launch_configurations -cftype AWS::AutoScaling::LaunchConfiguration -package autoscaling ../aws/autoscaling/launch_configuration_plural_data_source_gen.go ../aws/autoscaling/launch_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_report_plans -cftype AWS::Backup::ReportPlan -package backup ../aws/backup/report_plan_plural_data_source_gen.go ../aws/backup/report_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_budgets_budgets_actions -cftype AWS::Budgets::BudgetsAction -package budgets ../aws/budgets/budgets_action_plural_data_source_gen.go ../aws/budgets/budgets_action_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_keyspaces -cftype AWS::Cassandra::Keyspace -package cassandra ../aws/cassandra/keyspace_plural_data_source_gen.go ../aws/cassandra/keyspace_plural_data_source_gen_test.go
@@ -73,6 +74,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_prefix_lists -cftype AWS::EC2::PrefixList -package ec2 ../aws/ec2/prefix_list_plural_data_source_gen.go ../aws/ec2/prefix_list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_route_tables -cftype AWS::EC2::RouteTable -package ec2 ../aws/ec2/route_table_plural_data_source_gen.go ../aws/ec2/route_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_spot_fleets -cftype AWS::EC2::SpotFleet -package ec2 ../aws/ec2/spot_fleet_plural_data_source_gen.go ../aws/ec2/spot_fleet_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnet_network_acl_associations -cftype AWS::EC2::SubnetNetworkAclAssociation -package ec2 ../aws/ec2/subnet_network_acl_association_plural_data_source_gen.go ../aws/ec2/subnet_network_acl_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_subnet_route_table_associations -cftype AWS::EC2::SubnetRouteTableAssociation -package ec2 ../aws/ec2/subnet_route_table_association_plural_data_source_gen.go ../aws/ec2/subnet_route_table_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateways -cftype AWS::EC2::TransitGateway -package ec2 ../aws/ec2/transit_gateway_plural_data_source_gen.go ../aws/ec2/transit_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_transit_gateway_connects -cftype AWS::EC2::TransitGatewayConnect -package ec2 ../aws/ec2/transit_gateway_connect_plural_data_source_gen.go ../aws/ec2/transit_gateway_connect_plural_data_source_gen_test.go
@@ -116,6 +118,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_groundstation_mission_profiles -cftype AWS::GroundStation::MissionProfile -package groundstation ../aws/groundstation/mission_profile_plural_data_source_gen.go ../aws/groundstation/mission_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_healthlake_fhir_datastores -cftype AWS::HealthLake::FHIRDatastore -package healthlake ../aws/healthlake/fhir_datastore_plural_data_source_gen.go ../aws/healthlake/fhir_datastore_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_oidc_providers -cftype AWS::IAM::OIDCProvider -package iam ../aws/iam/oidc_provider_plural_data_source_gen.go ../aws/iam/oidc_provider_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_roles -cftype AWS::IAM::Role -package iam ../aws/iam/role_plural_data_source_gen.go ../aws/iam/role_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_saml_providers -cftype AWS::IAM::SAMLProvider -package iam ../aws/iam/saml_provider_plural_data_source_gen.go ../aws/iam/saml_provider_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_server_certificates -cftype AWS::IAM::ServerCertificate -package iam ../aws/iam/server_certificate_plural_data_source_gen.go ../aws/iam/server_certificate_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iam_virtual_mfa_devices -cftype AWS::IAM::VirtualMFADevice -package iam ../aws/iam/virtual_mfa_device_plural_data_source_gen.go ../aws/iam/virtual_mfa_device_plural_data_source_gen_test.go
@@ -239,6 +242,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apprunner"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/autoscaling"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
