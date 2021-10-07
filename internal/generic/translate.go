@@ -124,11 +124,15 @@ func (t toCloudControl) rawFromValue(ctx context.Context, val tftypes.Value) (in
 			if v == nil {
 				continue
 			}
-			propertyName, ok := t.tfToCfNameMap[name]
-			if !ok {
-				return nil, fmt.Errorf("attribute name mapping not found: %s", name)
+			if typ.Is(tftypes.Object{}) {
+				propertyName, ok := t.tfToCfNameMap[name]
+				if !ok {
+					return nil, fmt.Errorf("attribute name mapping not found: %s", name)
+				}
+				vs[propertyName] = v
+			} else {
+				vs[name] = v
 			}
-			vs[propertyName] = v
 		}
 		if len(vs) == 0 {
 			return nil, nil

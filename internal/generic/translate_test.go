@@ -62,6 +62,28 @@ func TestTranslateToCloudControl(t *testing.T) {
 				},
 			},
 		},
+		{
+			TestName:      "maps Plan",
+			Plan:          makeMapsTestPlan(),
+			TfToCfNameMap: mapsTfToCfNameMap,
+			ExpectedState: map[string]interface{}{
+				"Name": "testing",
+				"SimpleMap": map[string]interface{}{
+					"one": "eno",
+					"two": "owt",
+				},
+				"ComplexMap": map[string]interface{}{
+					"x": map[string]interface{}{
+						"Id":    float64(1),
+						"Flags": []interface{}{true, false},
+					},
+					"y": map[string]interface{}{
+						"Id":    float64(-1),
+						"Flags": []interface{}{false, true, true},
+					},
+				},
+			},
+		},
 	}
 
 	for _, testCase := range testCases {
@@ -367,6 +389,67 @@ func TestTranslateToTerraform(t *testing.T) {
 					}),
 				}),
 				"identifier": tftypes.NewValue(tftypes.String, nil),
+			}),
+		},
+		{
+			TestName:      "maps State",
+			Schema:        testMapsSchema,
+			CfToTfNameMap: mapsCfToTfNameMap,
+			ResourceModel: map[string]interface{}{
+				"Name": "testing",
+				"SimpleMap": map[string]interface{}{
+					"one": "eno",
+					"two": "owt",
+				},
+				"ComplexMap": map[string]interface{}{
+					"x": map[string]interface{}{
+						"Id":    float64(1),
+						"Flags": []interface{}{true, false},
+					},
+					"y": map[string]interface{}{
+						"Id":    float64(-1),
+						"Flags": []interface{}{false, true, true},
+					},
+				},
+			},
+			ExpectedValue: tftypes.NewValue(tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"name":        tftypes.String,
+					"simple_map":  tftypes.Map{ElementType: tftypes.String},
+					"complex_map": tftypes.Map{ElementType: videoPortElementType},
+				},
+			}, map[string]tftypes.Value{
+				"name": tftypes.NewValue(tftypes.String, "testing"),
+				"simple_map": tftypes.NewValue(tftypes.Map{
+					ElementType: tftypes.String,
+				}, map[string]tftypes.Value{
+					"one": tftypes.NewValue(tftypes.String, "eno"),
+					"two": tftypes.NewValue(tftypes.String, "owt"),
+				}),
+
+				"complex_map": tftypes.NewValue(tftypes.Map{
+					ElementType: videoPortElementType,
+				}, map[string]tftypes.Value{
+					"x": tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+						"id": tftypes.NewValue(tftypes.Number, 1),
+						"flags": tftypes.NewValue(tftypes.List{
+							ElementType: tftypes.Bool,
+						}, []tftypes.Value{
+							tftypes.NewValue(tftypes.Bool, true),
+							tftypes.NewValue(tftypes.Bool, false),
+						}),
+					}),
+					"y": tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+						"id": tftypes.NewValue(tftypes.Number, -1),
+						"flags": tftypes.NewValue(tftypes.List{
+							ElementType: tftypes.Bool,
+						}, []tftypes.Value{
+							tftypes.NewValue(tftypes.Bool, false),
+							tftypes.NewValue(tftypes.Bool, true),
+							tftypes.NewValue(tftypes.Bool, true),
+						}),
+					}),
+				}),
 			}),
 		},
 	}

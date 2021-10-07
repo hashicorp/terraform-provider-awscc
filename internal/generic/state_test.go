@@ -590,3 +590,95 @@ var complexTfToCfNameMap = map[string]string{
 	"scratch_disk":         "ScratchDisk",
 	"tags":                 "Tags",
 }
+
+var testMapsSchema = tfsdk.Schema{
+	Attributes: map[string]tfsdk.Attribute{
+		"name": {
+			Type:     types.StringType,
+			Required: true,
+		},
+		"simple_map": {
+			Type: types.MapType{
+				ElemType: types.StringType,
+			},
+			Optional: true,
+		},
+		"complex_map": {
+			Attributes: tfsdk.MapNestedAttributes(map[string]tfsdk.Attribute{
+				"id": {
+					Type:     types.NumberType,
+					Required: true,
+				},
+				"flags": {
+					Type: types.ListType{
+						ElemType: types.BoolType,
+					},
+					Optional: true,
+				},
+			}, tfsdk.MapNestedAttributesOptions{}),
+			Optional: true,
+		},
+	},
+}
+
+var mapsCfToTfNameMap = map[string]string{
+	"Flags":      "flags",
+	"Id":         "id",
+	"Name":       "name",
+	"SimpleMap":  "simple_map",
+	"ComplexMap": "complex_map",
+}
+
+func makeMapsTestPlan() tfsdk.Plan {
+	return tfsdk.Plan{
+		Raw: tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"name":       tftypes.String,
+				"simple_map": tftypes.Map{ElementType: tftypes.String},
+				"complex_map": tftypes.Map{
+					ElementType: videoPortElementType,
+				},
+			},
+		}, map[string]tftypes.Value{
+			"name": tftypes.NewValue(tftypes.String, "testing"),
+			"simple_map": tftypes.NewValue(tftypes.Map{
+				ElementType: tftypes.String,
+			}, map[string]tftypes.Value{
+				"one": tftypes.NewValue(tftypes.String, "eno"),
+				"two": tftypes.NewValue(tftypes.String, "owt"),
+			}),
+			"complex_map": tftypes.NewValue(tftypes.Map{
+				ElementType: videoPortElementType,
+			}, map[string]tftypes.Value{
+				"x": tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+					"id": tftypes.NewValue(tftypes.Number, 1),
+					"flags": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Bool,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.Bool, true),
+						tftypes.NewValue(tftypes.Bool, false),
+					}),
+				}),
+				"y": tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+					"id": tftypes.NewValue(tftypes.Number, -1),
+					"flags": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Bool,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.Bool, false),
+						tftypes.NewValue(tftypes.Bool, true),
+						tftypes.NewValue(tftypes.Bool, true),
+					}),
+				}),
+			}),
+		}),
+		Schema: testMapsSchema,
+	}
+}
+
+var mapsTfToCfNameMap = map[string]string{
+	"flags":       "Flags",
+	"id":          "Id",
+	"name":        "Name",
+	"simple_map":  "SimpleMap",
+	"complex_map": "ComplexMap",
+}
