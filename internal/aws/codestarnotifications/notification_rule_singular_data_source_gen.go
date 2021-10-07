@@ -29,6 +29,17 @@ func notificationRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"created_by": {
+			// Property: CreatedBy
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"detail_type": {
 			// Property: DetailType
 			// CloudFormation resource type schema:
@@ -37,6 +48,17 @@ func notificationRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//     "BASIC",
 			//     "FULL"
 			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"event_type_id": {
+			// Property: EventTypeId
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -101,6 +123,17 @@ func notificationRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
 		},
+		"target_address": {
+			// Property: TargetAddress
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"targets": {
 			// Property: Targets
 			// CloudFormation resource type schema:
@@ -162,7 +195,9 @@ func notificationRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":            "Arn",
+		"created_by":     "CreatedBy",
 		"detail_type":    "DetailType",
+		"event_type_id":  "EventTypeId",
 		"event_type_ids": "EventTypeIds",
 		"name":           "Name",
 		"resource":       "Resource",

@@ -22,12 +22,15 @@ Data Source schema for AWS::CodeStarNotifications::NotificationRule
 ### Read-Only
 
 - **arn** (String)
+- **created_by** (String)
 - **detail_type** (String)
+- **event_type_id** (String)
 - **event_type_ids** (List of String)
 - **name** (String)
 - **resource** (String)
 - **status** (String)
 - **tags** (Map of String)
+- **target_address** (String)
 - **targets** (Attributes List) (see [below for nested schema](#nestedatt--targets))
 
 <a id="nestedatt--targets"></a>

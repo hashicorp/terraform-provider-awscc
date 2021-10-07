@@ -78,32 +78,35 @@ func backupVaultDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
-			//     "changeableForDays": {
+			//     "ChangeableForDays": {
 			//       "type": "number"
 			//     },
-			//     "maxRetentionDays": {
+			//     "MaxRetentionDays": {
 			//       "type": "number"
 			//     },
-			//     "minRetentionDays": {
+			//     "MinRetentionDays": {
 			//       "type": "number"
 			//     }
 			//   },
+			//   "required": [
+			//     "MinRetentionDays"
+			//   ],
 			//   "type": "object"
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
-						// Property: changeableForDays
+						// Property: ChangeableForDays
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"max_retention_days": {
-						// Property: maxRetentionDays
+						// Property: MaxRetentionDays
 						Type:     types.NumberType,
 						Computed: true,
 					},
 					"min_retention_days": {
-						// Property: minRetentionDays
+						// Property: MinRetentionDays
 						Type:     types.NumberType,
 						Computed: true,
 					},
@@ -118,6 +121,7 @@ func backupVaultDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "BackupVaultEvents": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -174,11 +178,11 @@ func backupVaultDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"backup_vault_events": "BackupVaultEvents",
 		"backup_vault_name":   "BackupVaultName",
 		"backup_vault_tags":   "BackupVaultTags",
-		"changeable_for_days": "changeableForDays",
+		"changeable_for_days": "ChangeableForDays",
 		"encryption_key_arn":  "EncryptionKeyArn",
 		"lock_configuration":  "LockConfiguration",
-		"max_retention_days":  "maxRetentionDays",
-		"min_retention_days":  "minRetentionDays",
+		"max_retention_days":  "MaxRetentionDays",
+		"min_retention_days":  "MinRetentionDays",
 		"notifications":       "Notifications",
 		"sns_topic_arn":       "SNSTopicArn",
 	})

@@ -96,7 +96,8 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//           "enum": [
 			//             "speke",
-			//             "static-key"
+			//             "static-key",
+			//             "srt-password"
 			//           ],
 			//           "type": "string"
 			//         },
@@ -122,7 +123,6 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         }
 			//       },
 			//       "required": [
-			//         "Algorithm",
 			//         "RoleArn"
 			//       ],
 			//       "type": "object"
@@ -152,6 +152,11 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			//       "type": "integer"
 			//     },
+			//     "MinLatency": {
+			//       "default": 2000,
+			//       "description": "The minimum latency in milliseconds.",
+			//       "type": "integer"
+			//     },
 			//     "Name": {
 			//       "description": "The name of the source.",
 			//       "type": "string"
@@ -162,12 +167,17 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "zixi-push",
 			//         "rtp-fec",
 			//         "rtp",
-			//         "rist"
+			//         "rist",
+			//         "srt-listener"
 			//       ],
 			//       "type": "string"
 			//     },
 			//     "SourceArn": {
 			//       "description": "The ARN of the source.",
+			//       "type": "string"
+			//     },
+			//     "SourceIngestPort": {
+			//       "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
 			//       "type": "string"
 			//     },
 			//     "StreamId": {
@@ -287,6 +297,12 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Type:        types.NumberType,
 						Computed:    true,
 					},
+					"min_latency": {
+						// Property: MinLatency
+						Description: "The minimum latency in milliseconds.",
+						Type:        types.NumberType,
+						Computed:    true,
+					},
 					"name": {
 						// Property: Name
 						Description: "The name of the source.",
@@ -302,6 +318,12 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"source_arn": {
 						// Property: SourceArn
 						Description: "The ARN of the source.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"source_ingest_port": {
+						// Property: SourceIngestPort
+						Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -399,6 +421,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"key_type":                       "KeyType",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
+		"min_latency":                    "MinLatency",
 		"name":                           "Name",
 		"protocol":                       "Protocol",
 		"recovery_window":                "RecoveryWindow",
@@ -409,6 +432,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"source":                         "Source",
 		"source_arn":                     "SourceArn",
 		"source_failover_config":         "SourceFailoverConfig",
+		"source_ingest_port":             "SourceIngestPort",
 		"state":                          "State",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",

@@ -75,7 +75,8 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
-			//         "static-key"
+			//         "static-key",
+			//         "srt-password"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -89,7 +90,6 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     }
 			//   },
 			//   "required": [
-			//     "Algorithm",
 			//     "RoleArn",
 			//     "SecretArn"
 			//   ],
@@ -148,6 +148,17 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:        types.NumberType,
 			Computed:    true,
 		},
+		"min_latency": {
+			// Property: MinLatency
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The minimum latency in milliseconds.",
+			//   "type": "integer"
+			// }
+			Description: "The minimum latency in milliseconds.",
+			Type:        types.NumberType,
+			Computed:    true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -191,7 +202,8 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     "rtp-fec",
 			//     "rtp",
 			//     "zixi-pull",
-			//     "rist"
+			//     "rist",
+			//     "srt-listener"
 			//   ],
 			//   "type": "string"
 			// }
@@ -286,6 +298,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"flow_arn":                 "FlowArn",
 		"key_type":                 "KeyType",
 		"max_latency":              "MaxLatency",
+		"min_latency":              "MinLatency",
 		"name":                     "Name",
 		"output_arn":               "OutputArn",
 		"port":                     "Port",

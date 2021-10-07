@@ -105,6 +105,11 @@
         "globalaccelerator:UpdateAccelerator",
         "globalaccelerator:DeleteAccelerator"
       ]
+    },
+    "list": {
+      "permissions": [
+        "globalaccelerator:ListAccelerators"
+      ]
     }
   },
   "readOnlyProperties": [

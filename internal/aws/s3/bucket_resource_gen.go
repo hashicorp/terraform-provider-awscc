@@ -330,12 +330,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "Specifies the default server-side encryption configuration.",
 			//         "properties": {
 			//           "BucketKeyEnabled": {
-			//             "description": "",
+			//             "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
 			//             "type": "boolean"
 			//           },
 			//           "ServerSideEncryptionByDefault": {
 			//             "additionalProperties": false,
-			//             "description": "Describes the default server-side encryption to apply to new objects in the bucket.",
+			//             "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 			//             "properties": {
 			//               "KMSMasterKeyID": {
 			//                 "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
@@ -376,13 +376,13 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"bucket_key_enabled": {
 									// Property: BucketKeyEnabled
-									Description: "",
+									Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
 									Type:        types.BoolType,
 									Optional:    true,
 								},
 								"server_side_encryption_by_default": {
 									// Property: ServerSideEncryptionByDefault
-									Description: "Describes the default server-side encryption to apply to new objects in the bucket.",
+									Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"kms_master_key_id": {
@@ -637,15 +637,15 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Id": {
-			//         "description": "",
+			//         "description": "The ID used to identify the S3 Intelligent-Tiering configuration.",
 			//         "type": "string"
 			//       },
 			//       "Prefix": {
-			//         "description": "",
+			//         "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
 			//         "type": "string"
 			//       },
 			//       "Status": {
-			//         "description": "",
+			//         "description": "Specifies the status of the configuration.",
 			//         "enum": [
 			//           "Disabled",
 			//           "Enabled"
@@ -653,6 +653,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "TagFilters": {
+			//         "description": "A container for a key-value pair.",
 			//         "insertionOrder": true,
 			//         "items": {
 			//           "additionalProperties": false,
@@ -675,12 +676,13 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "uniqueItems": true
 			//       },
 			//       "Tierings": {
+			//         "description": "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
 			//         "insertionOrder": true,
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "AccessTier": {
-			//               "description": "",
+			//               "description": "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
 			//               "enum": [
 			//                 "ARCHIVE_ACCESS",
 			//                 "DEEP_ARCHIVE_ACCESS"
@@ -688,7 +690,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "type": "string"
 			//             },
 			//             "Days": {
-			//               "description": "",
+			//               "description": "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
 			//               "type": "integer"
 			//             }
 			//           },
@@ -717,19 +719,19 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"id": {
 						// Property: Id
-						Description: "",
+						Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
 						Type:        types.StringType,
 						Required:    true,
 					},
 					"prefix": {
 						// Property: Prefix
-						Description: "",
+						Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
 						Type:        types.StringType,
 						Optional:    true,
 					},
 					"status": {
 						// Property: Status
-						Description: "",
+						Description: "Specifies the status of the configuration.",
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -741,6 +743,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tag_filters": {
 						// Property: TagFilters
+						Description: "A container for a key-value pair.",
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"key": {
@@ -763,11 +766,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"tierings": {
 						// Property: Tierings
+						Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
 						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"access_tier": {
 									// Property: AccessTier
-									Description: "",
+									Description: "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -779,7 +783,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"days": {
 									// Property: Days
-									Description: "",
+									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
 									Type:        types.NumberType,
 									Required:    true,
 								},
@@ -1031,56 +1035,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
-			//         "anyOf": [
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "AbortIncompleteMultipartUpload"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "ExpirationDate"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "ExpirationInDays"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "NoncurrentVersionExpirationInDays"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "NoncurrentVersionTransition"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "NoncurrentVersionTransitions"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "Transition"
-			//             ]
-			//           },
-			//           {
-			//             "required": [
-			//               "Status",
-			//               "Transitions"
-			//             ]
-			//           }
-			//         ],
 			//         "description": "You must specify at least one of the following properties: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays, NoncurrentVersionExpirationInDays, NoncurrentVersionTransition, NoncurrentVersionTransitions, Transition, or Transitions.",
 			//         "properties": {
 			//           "AbortIncompleteMultipartUpload": {
@@ -1125,6 +1079,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "enum": [
 			//                   "DEEP_ARCHIVE",
 			//                   "GLACIER",
+			//                   "Glacier",
 			//                   "INTELLIGENT_TIERING",
 			//                   "ONEZONE_IA",
 			//                   "STANDARD_IA"
@@ -1153,6 +1108,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "enum": [
 			//                     "DEEP_ARCHIVE",
 			//                     "GLACIER",
+			//                     "Glacier",
 			//                     "INTELLIGENT_TIERING",
 			//                     "ONEZONE_IA",
 			//                     "STANDARD_IA"
@@ -1207,26 +1163,13 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           },
 			//           "Transition": {
 			//             "additionalProperties": false,
-			//             "anyOf": [
-			//               {
-			//                 "required": [
-			//                   "StorageClass",
-			//                   "TransitionDate"
-			//                 ]
-			//               },
-			//               {
-			//                 "required": [
-			//                   "StorageClass",
-			//                   "TransitionInDays"
-			//                 ]
-			//               }
-			//             ],
 			//             "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
 			//             "properties": {
 			//               "StorageClass": {
 			//                 "enum": [
 			//                   "DEEP_ARCHIVE",
 			//                   "GLACIER",
+			//                   "Glacier",
 			//                   "INTELLIGENT_TIERING",
 			//                   "ONEZONE_IA",
 			//                   "STANDARD_IA"
@@ -1242,32 +1185,22 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "integer"
 			//               }
 			//             },
+			//             "required": [
+			//               "StorageClass"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Transitions": {
 			//             "insertionOrder": true,
 			//             "items": {
 			//               "additionalProperties": false,
-			//               "anyOf": [
-			//                 {
-			//                   "required": [
-			//                     "StorageClass",
-			//                     "TransitionDate"
-			//                   ]
-			//                 },
-			//                 {
-			//                   "required": [
-			//                     "StorageClass",
-			//                     "TransitionInDays"
-			//                   ]
-			//                 }
-			//               ],
 			//               "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
 			//               "properties": {
 			//                 "StorageClass": {
 			//                   "enum": [
 			//                     "DEEP_ARCHIVE",
 			//                     "GLACIER",
+			//                     "Glacier",
 			//                     "INTELLIGENT_TIERING",
 			//                     "ONEZONE_IA",
 			//                     "STANDARD_IA"
@@ -1283,12 +1216,18 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "type": "integer"
 			//                 }
 			//               },
+			//               "required": [
+			//                 "StorageClass"
+			//               ],
 			//               "type": "object"
 			//             },
 			//             "type": "array",
 			//             "uniqueItems": true
 			//           }
 			//         },
+			//         "required": [
+			//           "Status"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "type": "array",
@@ -1368,6 +1307,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													validate.StringInSlice([]string{
 														"DEEP_ARCHIVE",
 														"GLACIER",
+														"Glacier",
 														"INTELLIGENT_TIERING",
 														"ONEZONE_IA",
 														"STANDARD_IA",
@@ -1397,6 +1337,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													validate.StringInSlice([]string{
 														"DEEP_ARCHIVE",
 														"GLACIER",
+														"Glacier",
 														"INTELLIGENT_TIERING",
 														"ONEZONE_IA",
 														"STANDARD_IA",
@@ -1425,7 +1366,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"status": {
 									// Property: Status
 									Type:     types.StringType,
-									Optional: true,
+									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"Enabled",
@@ -1463,11 +1404,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"storage_class": {
 												// Property: StorageClass
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DEEP_ARCHIVE",
 														"GLACIER",
+														"Glacier",
 														"INTELLIGENT_TIERING",
 														"ONEZONE_IA",
 														"STANDARD_IA",
@@ -1488,20 +1430,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.RequiredAttributes(
-											validate.AnyOfRequired(
-												validate.Required(
-													"storage_class",
-													"transition_date",
-												),
-												validate.Required(
-													"storage_class",
-													"transition_in_days",
-												),
-											),
-										),
-									},
 								},
 								"transitions": {
 									// Property: Transitions
@@ -1510,11 +1438,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"storage_class": {
 												// Property: StorageClass
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringInSlice([]string{
 														"DEEP_ARCHIVE",
 														"GLACIER",
+														"Glacier",
 														"INTELLIGENT_TIERING",
 														"ONEZONE_IA",
 														"STANDARD_IA",
@@ -1538,18 +1467,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
-										validate.RequiredAttributes(
-											validate.AnyOfRequired(
-												validate.Required(
-													"storage_class",
-													"transition_date",
-												),
-												validate.Required(
-													"storage_class",
-													"transition_in_days",
-												),
-											),
-										),
 									},
 								},
 							},
@@ -1558,42 +1475,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
-							validate.RequiredAttributes(
-								validate.AnyOfRequired(
-									validate.Required(
-										"status",
-										"abort_incomplete_multipart_upload",
-									),
-									validate.Required(
-										"status",
-										"expiration_date",
-									),
-									validate.Required(
-										"status",
-										"expiration_in_days",
-									),
-									validate.Required(
-										"status",
-										"noncurrent_version_expiration_in_days",
-									),
-									validate.Required(
-										"status",
-										"noncurrent_version_transition",
-									),
-									validate.Required(
-										"status",
-										"noncurrent_version_transitions",
-									),
-									validate.Required(
-										"status",
-										"transition",
-									),
-									validate.Required(
-										"status",
-										"transitions",
-									),
-								),
-							),
 						},
 					},
 				},
@@ -2165,18 +2046,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "DefaultRetention": {
 			//           "additionalProperties": false,
 			//           "description": "The default retention period that you want to apply to new objects placed in the specified bucket.",
-			//           "oneOf": [
-			//             {
-			//               "required": [
-			//                 "Days"
-			//               ]
-			//             },
-			//             {
-			//               "required": [
-			//                 "Years"
-			//               ]
-			//             }
-			//           ],
 			//           "properties": {
 			//             "Days": {
 			//               "type": "integer"
@@ -2241,18 +2110,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Optional: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.RequiredAttributes(
-											validate.OneOfRequired(
-												validate.Required(
-													"days",
-												),
-												validate.Required(
-													"years",
-												),
-											),
-										),
-									},
 								},
 							},
 						),
@@ -2289,7 +2146,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "ObjectOwnership": {
-			//             "description": "",
+			//             "description": "Specifies an object ownership rule.",
 			//             "enum": [
 			//               "ObjectWriter",
 			//               "BucketOwnerPreferred"
@@ -2316,7 +2173,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"object_ownership": {
 									// Property: ObjectOwnership
-									Description: "",
+									Description: "Specifies an object ownership rule.",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -2442,20 +2299,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           },
 			//           "Destination": {
 			//             "additionalProperties": false,
-			//             "anyOf": [
-			//               {
-			//                 "required": [
-			//                   "AccessControlTranslation",
-			//                   "Account",
-			//                   "Bucket"
-			//                 ]
-			//               },
-			//               {
-			//                 "required": [
-			//                   "Bucket"
-			//                 ]
-			//               }
-			//             ],
 			//             "description": "Specifies which Amazon S3 bucket to store replicated objects in and their storage class.",
 			//             "properties": {
 			//               "AccessControlTranslation": {
@@ -2562,6 +2405,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "string"
 			//               }
 			//             },
+			//             "required": [
+			//               "Bucket"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Filter": {
@@ -2640,10 +2486,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "properties": {
 			//               "ReplicaModifications": {
 			//                 "additionalProperties": false,
-			//                 "description": "",
 			//                 "properties": {
 			//                   "Status": {
-			//                     "description": "",
+			//                     "description": "Specifies whether Amazon S3 replicates modifications on replicas.",
 			//                     "enum": [
 			//                       "Enabled",
 			//                       "Disabled"
@@ -2762,7 +2607,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"bucket": {
 												// Property: Bucket
 												Type:     types.StringType,
-												Optional: true,
+												Required: true,
 											},
 											"encryption_configuration": {
 												// Property: EncryptionConfiguration
@@ -2863,20 +2708,6 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										},
 									),
 									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.RequiredAttributes(
-											validate.AnyOfRequired(
-												validate.Required(
-													"access_control_translation",
-													"account",
-													"bucket",
-												),
-												validate.Required(
-													"bucket",
-												),
-											),
-										),
-									},
 								},
 								"filter": {
 									// Property: Filter
@@ -2975,12 +2806,11 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"replica_modifications": {
 												// Property: ReplicaModifications
-												Description: "",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"status": {
 															// Property: Status
-															Description: "",
+															Description: "Specifies whether Amazon S3 replicates modifications on replicas.",
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
@@ -3149,20 +2979,222 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: WebsiteConfiguration
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "Specifies website configuration parameters for an Amazon S3 bucket.",
-			//   "oneOf": [
-			//     {},
-			//     {
+			//   "properties": {
+			//     "ErrorDocument": {
+			//       "description": "The name of the error document for the website.",
+			//       "type": "string"
+			//     },
+			//     "IndexDocument": {
+			//       "description": "The name of the index document for the website.",
+			//       "type": "string"
+			//     },
+			//     "RedirectAllRequestsTo": {
+			//       "additionalProperties": false,
+			//       "description": "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
+			//       "properties": {
+			//         "HostName": {
+			//           "description": "Name of the host where requests are redirected.",
+			//           "type": "string"
+			//         },
+			//         "Protocol": {
+			//           "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+			//           "enum": [
+			//             "http",
+			//             "https"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
 			//       "required": [
-			//         "RedirectAllRequestsTo"
-			//       ]
+			//         "HostName"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "RoutingRules": {
+			//       "insertionOrder": true,
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Specifies the redirect behavior and when a redirect is applied.",
+			//         "properties": {
+			//           "RedirectRule": {
+			//             "additionalProperties": false,
+			//             "description": "Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.",
+			//             "properties": {
+			//               "HostName": {
+			//                 "description": "The host name to use in the redirect request.",
+			//                 "type": "string"
+			//               },
+			//               "HttpRedirectCode": {
+			//                 "description": "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+			//                 "type": "string"
+			//               },
+			//               "Protocol": {
+			//                 "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+			//                 "enum": [
+			//                   "http",
+			//                   "https"
+			//                 ],
+			//                 "type": "string"
+			//               },
+			//               "ReplaceKeyPrefixWith": {
+			//                 "description": "The object key prefix to use in the redirect request.",
+			//                 "type": "string"
+			//               },
+			//               "ReplaceKeyWith": {
+			//                 "description": "The specific object key to use in the redirect request.d",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "RoutingRuleCondition": {
+			//             "additionalProperties": false,
+			//             "description": "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
+			//             "properties": {
+			//               "HttpErrorCodeReturnedEquals": {
+			//                 "description": "The HTTP error code when the redirect is applied. ",
+			//                 "type": "string"
+			//               },
+			//               "KeyPrefixEquals": {
+			//                 "description": "The object key name prefix when the redirect is applied.",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           }
+			//         },
+			//         "required": [
+			//           "RedirectRule"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array"
 			//     }
-			//   ],
+			//   },
 			//   "type": "object"
 			// }
 			Description: "Specifies website configuration parameters for an Amazon S3 bucket.",
-			Type:        types.MapType{ElemType: types.StringType},
-			Optional:    true,
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"error_document": {
+						// Property: ErrorDocument
+						Description: "The name of the error document for the website.",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"index_document": {
+						// Property: IndexDocument
+						Description: "The name of the index document for the website.",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"redirect_all_requests_to": {
+						// Property: RedirectAllRequestsTo
+						Description: "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"host_name": {
+									// Property: HostName
+									Description: "Name of the host where requests are redirected.",
+									Type:        types.StringType,
+									Required:    true,
+								},
+								"protocol": {
+									// Property: Protocol
+									Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"http",
+											"https",
+										}),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"routing_rules": {
+						// Property: RoutingRules
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"redirect_rule": {
+									// Property: RedirectRule
+									Description: "Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"host_name": {
+												// Property: HostName
+												Description: "The host name to use in the redirect request.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"http_redirect_code": {
+												// Property: HttpRedirectCode
+												Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"protocol": {
+												// Property: Protocol
+												Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+												Type:        types.StringType,
+												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"http",
+														"https",
+													}),
+												},
+											},
+											"replace_key_prefix_with": {
+												// Property: ReplaceKeyPrefixWith
+												Description: "The object key prefix to use in the redirect request.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"replace_key_with": {
+												// Property: ReplaceKeyWith
+												Description: "The specific object key to use in the redirect request.d",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+										},
+									),
+									Required: true,
+								},
+								"routing_rule_condition": {
+									// Property: RoutingRuleCondition
+									Description: "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"http_error_code_returned_equals": {
+												// Property: HttpErrorCodeReturnedEquals
+												Description: "The HTTP error code when the redirect is applied. ",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+											"key_prefix_equals": {
+												// Property: KeyPrefixEquals
+												Description: "The object key name prefix when the redirect is applied.",
+												Type:        types.StringType,
+												Optional:    true,
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
 		},
 		"website_url": {
 			// Property: WebsiteURL
@@ -3235,6 +3267,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"dual_stack_domain_name":                "DualStackDomainName",
 		"enabled":                               "Enabled",
 		"encryption_configuration":              "EncryptionConfiguration",
+		"error_document":                        "ErrorDocument",
 		"event":                                 "Event",
 		"event_threshold":                       "EventThreshold",
 		"expiration_date":                       "ExpirationDate",
@@ -3244,12 +3277,17 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"filter":                                "Filter",
 		"format":                                "Format",
 		"function":                              "Function",
+		"host_name":                             "HostName",
+		"http_error_code_returned_equals":       "HttpErrorCodeReturnedEquals",
+		"http_redirect_code":                    "HttpRedirectCode",
 		"id":                                    "Id",
 		"ignore_public_acls":                    "IgnorePublicAcls",
 		"included_object_versions":              "IncludedObjectVersions",
+		"index_document":                        "IndexDocument",
 		"intelligent_tiering_configurations":    "IntelligentTieringConfigurations",
 		"inventory_configurations":              "InventoryConfigurations",
 		"key":                                   "Key",
+		"key_prefix_equals":                     "KeyPrefixEquals",
 		"kms_master_key_id":                     "KMSMasterKeyID",
 		"lambda_configurations":                 "LambdaConfigurations",
 		"lifecycle_configuration":               "LifecycleConfiguration",
@@ -3274,16 +3312,23 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"ownership_controls":                    "OwnershipControls",
 		"prefix":                                "Prefix",
 		"priority":                              "Priority",
+		"protocol":                              "Protocol",
 		"public_access_block_configuration":     "PublicAccessBlockConfiguration",
 		"queue":                                 "Queue",
 		"queue_configurations":                  "QueueConfigurations",
+		"redirect_all_requests_to":              "RedirectAllRequestsTo",
+		"redirect_rule":                         "RedirectRule",
 		"regional_domain_name":                  "RegionalDomainName",
+		"replace_key_prefix_with":               "ReplaceKeyPrefixWith",
+		"replace_key_with":                      "ReplaceKeyWith",
 		"replica_kms_key_id":                    "ReplicaKmsKeyID",
 		"replica_modifications":                 "ReplicaModifications",
 		"replication_configuration":             "ReplicationConfiguration",
 		"replication_time":                      "ReplicationTime",
 		"restrict_public_buckets":               "RestrictPublicBuckets",
 		"role":                                  "Role",
+		"routing_rule_condition":                "RoutingRuleCondition",
+		"routing_rules":                         "RoutingRules",
 		"rule":                                  "Rule",
 		"rules":                                 "Rules",
 		"s3_key":                                "S3Key",

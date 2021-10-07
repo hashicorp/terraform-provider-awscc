@@ -19,7 +19,8 @@
                 "KeyType": {
                     "type": "string",
                     "enum": [
-                        "static-key"
+                        "static-key",
+                        "srt-password"
                     ],
                     "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
                     "default": "static-key"
@@ -35,7 +36,6 @@
             },
             "additionalProperties": false,
             "required": [
-                "Algorithm",
                 "RoleArn",
                 "SecretArn"
             ]
@@ -68,6 +68,10 @@
                 "type": "string"
             }
         },
+        "Encryption": {
+            "$ref": "#/definitions/Encryption",
+            "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key)."
+        },
         "Description": {
             "type": "string",
             "description": "A description of the output."
@@ -76,13 +80,13 @@
             "type": "string",
             "description": "The address where you want to send the output."
         },
-        "Encryption": {
-            "$ref": "#/definitions/Encryption",
-            "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key)."
-        },
         "MaxLatency": {
             "type": "integer",
             "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+        },
+        "MinLatency": {
+            "type": "integer",
+            "description": "The minimum latency in milliseconds."
         },
         "Name": {
             "type": "string",
@@ -99,7 +103,8 @@
                 "rtp-fec",
                 "rtp",
                 "zixi-pull",
-                "rist"
+                "rist",
+                "srt-listener"
             ],
             "description": "The protocol that is used by the source or output."
         },

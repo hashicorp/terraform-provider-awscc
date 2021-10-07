@@ -3,6 +3,21 @@
     "description": "Resource Type definition for AWS::CodeStarNotifications::NotificationRule",
     "additionalProperties": false,
     "properties": {
+        "EventTypeId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "CreatedBy": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "TargetAddress": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
         "EventTypeIds": {
             "type": "array",
             "uniqueItems": false,
@@ -91,6 +106,11 @@
         "create": {
             "permissions": [
                 "codestar-notifications:createNotificationRule"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "codestar-notifications:listNotificationRules"
             ]
         },
         "read": {

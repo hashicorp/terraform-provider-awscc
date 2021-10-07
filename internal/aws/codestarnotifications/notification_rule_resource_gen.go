@@ -30,6 +30,20 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"created_by": {
+			// Property: CreatedBy
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+		},
 		"detail_type": {
 			// Property: DetailType
 			// CloudFormation resource type schema:
@@ -47,6 +61,20 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"BASIC",
 					"FULL",
 				}),
+			},
+		},
+		"event_type_id": {
+			// Property: EventTypeId
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
 			},
 		},
 		"event_type_ids": {
@@ -127,6 +155,20 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"target_address": {
+			// Property: TargetAddress
+			// CloudFormation resource type schema:
+			// {
+			//   "maxLength": 2048,
+			//   "minLength": 1,
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 2048),
+			},
+		},
 		"targets": {
 			// Property: Targets
 			// CloudFormation resource type schema:
@@ -192,7 +234,9 @@ func notificationRuleResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":            "Arn",
+		"created_by":     "CreatedBy",
 		"detail_type":    "DetailType",
+		"event_type_id":  "EventTypeId",
 		"event_type_ids": "EventTypeIds",
 		"name":           "Name",
 		"resource":       "Resource",

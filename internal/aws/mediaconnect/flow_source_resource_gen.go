@@ -291,6 +291,17 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"source_ingest_port": {
+			// Property: SourceIngestPort
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
+			//   "type": "string"
+			// }
+			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 		"stream_id": {
 			// Property: StreamId
 			// CloudFormation resource type schema:
@@ -363,6 +374,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"role_arn":                       "RoleArn",
 		"secret_arn":                     "SecretArn",
 		"source_arn":                     "SourceArn",
+		"source_ingest_port":             "SourceIngestPort",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",
 		"vpc_interface_name":             "VpcInterfaceName",

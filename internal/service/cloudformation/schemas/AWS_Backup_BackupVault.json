@@ -9,6 +9,7 @@
       "properties": {
         "BackupVaultEvents": {
           "type": "array",
+          "insertionOrder": false,
           "uniqueItems": false,
           "items": {
             "type": "string"
@@ -27,16 +28,19 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "minRetentionDays": {
+        "MinRetentionDays": {
           "type": "number"
         },
-        "maxRetentionDays": {
+        "MaxRetentionDays": {
           "type": "number"
         },
-        "changeableForDays": {
+        "ChangeableForDays": {
           "type": "number"
         }
-      }
+      },
+      "required": [
+        "MinRetentionDays"
+      ]
     },
     "BackupVaultNamePattern": {
       "type": "string",
@@ -76,6 +80,7 @@
     }
   },
   "additionalProperties": false,
+  "taggable": true,
   "required": [
     "BackupVaultName"
   ],
@@ -84,7 +89,6 @@
     "/properties/EncryptionKeyArn"
   ],
   "readOnlyProperties": [
-    "/properties/BackupVaultName",
     "/properties/BackupVaultArn"
   ],
   "primaryIdentifier": [
@@ -124,7 +128,8 @@
         "backup:TagResource",
         "backup:UntagResource",
         "backup:PutBackupVaultAccessPolicy",
-        "backup:PutBackupVaultNotifications"
+        "backup:PutBackupVaultNotifications",
+        "backup:PutBackupVaultLockConfiguration"
       ]
     },
     "delete": {

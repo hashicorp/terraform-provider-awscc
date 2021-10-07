@@ -38,6 +38,7 @@ Resource schema for AWS::MediaConnect::FlowSource
 - **id** (String) Uniquely identifies the resource.
 - **ingest_ip** (String) The IP address that the flow will be listening on for incoming content.
 - **source_arn** (String) The ARN of the source.
+- **source_ingest_port** (String) The port that the flow will be listening on for incoming content.(ReadOnly)
 
 <a id="nestedatt--decryption"></a>
 ### Nested Schema for `decryption`
