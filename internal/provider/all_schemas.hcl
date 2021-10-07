@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 377 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 382 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -64,6 +64,11 @@ resource_schema "aws_apigateway_account" {
 
 resource_schema "aws_apigateway_api_key" {
   cloudformation_type_name = "AWS::ApiGateway::ApiKey"
+}
+
+resource_schema "aws_apigateway_authorizer" {
+  cloudformation_type_name               = "AWS::ApiGateway::Authorizer"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_base_path_mapping" {
@@ -163,6 +168,10 @@ resource_schema "aws_athena_work_group" {
 resource_schema "aws_auditmanager_assessment" {
   cloudformation_type_name               = "AWS::AuditManager::Assessment"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_autoscaling_launch_configuration" {
+  cloudformation_type_name = "AWS::AutoScaling::LaunchConfiguration"
 }
 
 resource_schema "aws_autoscaling_warm_pool" {
@@ -512,6 +521,10 @@ resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
 }
 
+resource_schema "aws_ec2_subnet_network_acl_association" {
+  cloudformation_type_name = "AWS::EC2::SubnetNetworkAclAssociation"
+}
+
 resource_schema "aws_ec2_subnet_route_table_association" {
   cloudformation_type_name = "AWS::EC2::SubnetRouteTableAssociation"
 }
@@ -800,6 +813,10 @@ resource_schema "aws_iam_oidc_provider" {
   cloudformation_type_name = "AWS::IAM::OIDCProvider"
 }
 
+resource_schema "aws_iam_role" {
+  cloudformation_type_name = "AWS::IAM::Role"
+}
+
 resource_schema "aws_iam_saml_provider" {
   cloudformation_type_name = "AWS::IAM::SAMLProvider"
 }
@@ -883,6 +900,15 @@ resource_schema "aws_iot_domain_configuration" {
 
 resource_schema "aws_iot_fleet_metric" {
   cloudformation_type_name = "AWS::IoT::FleetMetric"
+}
+
+resource_schema "aws_iot_job_template" {
+  cloudformation_type_name = "AWS::IoT::JobTemplate"
+
+  # AbortConfig/CriteriaList/ThresholdPercentage has Maximum but no Minimum
+  suppress_plural_data_source_generation   = true
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_iot_mitigation_action" {

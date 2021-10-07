@@ -44,7 +44,7 @@ Data Source schema for AWS::S3::Bucket
 - **replication_configuration** (Attributes) A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB. (see [below for nested schema](#nestedatt--replication_configuration))
 - **tags** (Attributes List) An arbitrary set of tags (key-value pairs) for this S3 bucket. (see [below for nested schema](#nestedatt--tags))
 - **versioning_configuration** (Attributes) Describes the versioning state of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--versioning_configuration))
-- **website_configuration** (Map of String) Specifies website configuration parameters for an Amazon S3 bucket.
+- **website_configuration** (Attributes) Specifies website configuration parameters for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--website_configuration))
 - **website_url** (String) The Amazon S3 website endpoint for the specified bucket.
 
 <a id="nestedatt--accelerate_configuration"></a>
@@ -115,8 +115,8 @@ Read-Only:
 
 Read-Only:
 
-- **bucket_key_enabled** (Boolean)
-- **server_side_encryption_by_default** (Attributes) Describes the default server-side encryption to apply to new objects in the bucket. (see [below for nested schema](#nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default))
+- **bucket_key_enabled** (Boolean) Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.
+- **server_side_encryption_by_default** (Attributes) Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied. (see [below for nested schema](#nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default))
 
 <a id="nestedatt--bucket_encryption--server_side_encryption_configuration--server_side_encryption_by_default"></a>
 ### Nested Schema for `bucket_encryption.server_side_encryption_configuration.server_side_encryption_by_default`
@@ -155,11 +155,11 @@ Read-Only:
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-- **prefix** (String)
-- **status** (String)
-- **tag_filters** (Attributes List) (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tag_filters))
-- **tierings** (Attributes List) (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tierings))
+- **id** (String) The ID used to identify the S3 Intelligent-Tiering configuration.
+- **prefix** (String) An object key name prefix that identifies the subset of objects to which the rule applies.
+- **status** (String) Specifies the status of the configuration.
+- **tag_filters** (Attributes List) A container for a key-value pair. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tag_filters))
+- **tierings** (Attributes List) Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations--tierings))
 
 <a id="nestedatt--intelligent_tiering_configurations--tag_filters"></a>
 ### Nested Schema for `intelligent_tiering_configurations.tag_filters`
@@ -175,8 +175,8 @@ Read-Only:
 
 Read-Only:
 
-- **access_tier** (String)
-- **days** (Number)
+- **access_tier** (String) S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.
+- **days** (Number) The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).
 
 
 
@@ -471,7 +471,7 @@ Read-Only:
 
 Read-Only:
 
-- **object_ownership** (String)
+- **object_ownership** (String) Specifies an object ownership rule.
 
 
 
@@ -636,7 +636,7 @@ Read-Only:
 
 Read-Only:
 
-- **status** (String)
+- **status** (String) Specifies whether Amazon S3 replicates modifications on replicas.
 
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects"></a>
@@ -665,5 +665,53 @@ Read-Only:
 Read-Only:
 
 - **status** (String) The versioning state of the bucket.
+
+
+<a id="nestedatt--website_configuration"></a>
+### Nested Schema for `website_configuration`
+
+Read-Only:
+
+- **error_document** (String) The name of the error document for the website.
+- **index_document** (String) The name of the index document for the website.
+- **redirect_all_requests_to** (Attributes) Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--website_configuration--redirect_all_requests_to))
+- **routing_rules** (Attributes List) (see [below for nested schema](#nestedatt--website_configuration--routing_rules))
+
+<a id="nestedatt--website_configuration--redirect_all_requests_to"></a>
+### Nested Schema for `website_configuration.redirect_all_requests_to`
+
+Read-Only:
+
+- **host_name** (String) Name of the host where requests are redirected.
+- **protocol** (String) Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
+
+
+<a id="nestedatt--website_configuration--routing_rules"></a>
+### Nested Schema for `website_configuration.routing_rules`
+
+Read-Only:
+
+- **redirect_rule** (Attributes) Specifies how requests are redirected. In the event of an error, you can specify a different error code to return. (see [below for nested schema](#nestedatt--website_configuration--routing_rules--redirect_rule))
+- **routing_rule_condition** (Attributes) A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals (see [below for nested schema](#nestedatt--website_configuration--routing_rules--routing_rule_condition))
+
+<a id="nestedatt--website_configuration--routing_rules--redirect_rule"></a>
+### Nested Schema for `website_configuration.routing_rules.redirect_rule`
+
+Read-Only:
+
+- **host_name** (String) The host name to use in the redirect request.
+- **http_redirect_code** (String) The HTTP redirect code to use on the response. Not required if one of the siblings is present.
+- **protocol** (String) Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
+- **replace_key_prefix_with** (String) The object key prefix to use in the redirect request.
+- **replace_key_with** (String) The specific object key to use in the redirect request.d
+
+
+<a id="nestedatt--website_configuration--routing_rules--routing_rule_condition"></a>
+### Nested Schema for `website_configuration.routing_rules.routing_rule_condition`
+
+Read-Only:
+
+- **http_error_code_returned_equals** (String) The HTTP error code when the redirect is applied.
+- **key_prefix_equals** (String) The object key name prefix when the redirect is applied.
 
 

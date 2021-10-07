@@ -76,7 +76,8 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "default": "static-key",
 			//       "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//       "enum": [
-			//         "static-key"
+			//         "static-key",
+			//         "srt-password"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -90,7 +91,6 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "Algorithm",
 			//     "RoleArn",
 			//     "SecretArn"
 			//   ],
@@ -103,7 +103,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Algorithm
 						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"aes128",
@@ -121,6 +121,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"static-key",
+								"srt-password",
 							}),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -162,6 +163,17 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+			Type:        types.NumberType,
+			Optional:    true,
+		},
+		"min_latency": {
+			// Property: MinLatency
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The minimum latency in milliseconds.",
+			//   "type": "integer"
+			// }
+			Description: "The minimum latency in milliseconds.",
 			Type:        types.NumberType,
 			Optional:    true,
 		},
@@ -212,7 +224,8 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "rtp-fec",
 			//     "rtp",
 			//     "zixi-pull",
-			//     "rist"
+			//     "rist",
+			//     "srt-listener"
 			//   ],
 			//   "type": "string"
 			// }
@@ -226,6 +239,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rtp",
 					"zixi-pull",
 					"rist",
+					"srt-listener",
 				}),
 			},
 		},
@@ -317,6 +331,7 @@ func flowOutputResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"flow_arn":                 "FlowArn",
 		"key_type":                 "KeyType",
 		"max_latency":              "MaxLatency",
+		"min_latency":              "MinLatency",
 		"name":                     "Name",
 		"output_arn":               "OutputArn",
 		"port":                     "Port",

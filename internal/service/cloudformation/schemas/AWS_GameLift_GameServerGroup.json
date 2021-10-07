@@ -21,8 +21,7 @@
     },
     "EstimatedInstanceWarmup": {
       "type": "number",
-      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-      "additionalProperties": false
+      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ."
     },
     "TargetTrackingConfiguration": {
       "type": "object",
@@ -39,8 +38,7 @@
     },
     "TargetValue": {
       "type": "number",
-      "description": "Desired value to use with a game server group target-based scaling policy.",
-      "additionalProperties": false
+      "description": "Desired value to use with a game server group target-based scaling policy."
     },
     "BalancingStrategy": {
       "type": "string",
@@ -49,8 +47,7 @@
         "SPOT_ONLY",
         "SPOT_PREFERRED",
         "ON_DEMAND_ONLY"
-      ],
-      "additionalProperties": false
+      ]
     },
     "DeleteOption": {
       "description": "The type of delete to perform.",
@@ -59,16 +56,14 @@
         "SAFE_DELETE",
         "FORCE_DELETE",
         "RETAIN"
-      ],
-      "additionalProperties": false
+      ]
     },
     "GameServerGroupName": {
       "type": "string",
       "description": "An identifier for the new game server group.",
       "pattern": "",
       "minLength": 1,
-      "maxLength": 128,
-      "additionalProperties": false
+      "maxLength": 128
     },
     "GameServerProtectionPolicy": {
       "type": "string",
@@ -76,16 +71,14 @@
       "enum": [
         "NO_PROTECTION",
         "FULL_PROTECTION"
-      ],
-      "additionalProperties": false
+      ]
     },
     "GameServerGroupArn": {
       "description": "A generated unique ID for the game server group.",
       "type": "string",
       "pattern": "",
       "minLength": 1,
-      "maxLength": 256,
-      "additionalProperties": false
+      "maxLength": 256
     },
     "InstanceDefinitions": {
       "type": "array",
@@ -95,7 +88,7 @@
       },
       "maxItems": 20,
       "minItems": 2,
-      "additionalProperties": false
+      "insertionOrder": false
     },
     "InstanceDefinition": {
       "type": "object",
@@ -115,13 +108,12 @@
     },
     "InstanceType": {
       "type": "string",
-      "description": "An EC2 instance type designation.",
-      "additionalProperties": false
+      "description": "An EC2 instance type designation."
     },
     "WeightedCapacity": {
       "type": "string",
       "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-      "additionalProperties": false
+      "pattern": ""
     },
     "LaunchTemplate": {
       "type": "object",
@@ -141,38 +133,32 @@
     },
     "LaunchTemplateId": {
       "type": "string",
-      "description": "A unique identifier for an existing EC2 launch template.",
-      "additionalProperties": false
+      "description": "A unique identifier for an existing EC2 launch template."
     },
     "LaunchTemplateName": {
       "type": "string",
-      "description": "A readable identifier for an existing EC2 launch template.",
-      "additionalProperties": false
+      "description": "A readable identifier for an existing EC2 launch template."
     },
     "Version": {
       "type": "string",
-      "description": "The version of the EC2 launch template to use.",
-      "additionalProperties": false
+      "description": "The version of the EC2 launch template to use."
     },
     "MaxSize": {
       "type": "number",
       "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-      "minimum": 1,
-      "additionalProperties": false
+      "minimum": 1
     },
     "MinSize": {
       "type": "number",
       "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-      "minimum": 0,
-      "additionalProperties": false
+      "minimum": 0
     },
     "RoleArn": {
       "type": "string",
       "description": "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
       "pattern": "",
       "minLength": 1,
-      "maxLength": 256,
-      "additionalProperties": false
+      "maxLength": 256
     },
     "Tags": {
       "type": "array",
@@ -182,7 +168,7 @@
       },
       "minItems": 0,
       "maxItems": 200,
-      "additionalProperties": false
+      "insertionOrder": false
     },
     "Tag": {
       "type": "object",
@@ -209,7 +195,7 @@
       },
       "minItems": 1,
       "maxItems": 20,
-      "additionalProperties": false
+      "insertionOrder": false
     },
     "GameServerGroup": {
       "type": "object",
@@ -251,25 +237,23 @@
         "SuspendedActions": {
           "$ref": "#/definitions/SuspendedActions"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AutoScalingGroupArn": {
       "type": "string",
       "description": "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
       "minLength": 0,
       "maxLength": 256,
-      "pattern": "",
-      "additionalProperties": false
+      "pattern": ""
     },
     "CreationTime": {
       "type": "string",
-      "description": "A timestamp that indicates when this data object was created.",
-      "additionalProperties": false
+      "description": "A timestamp that indicates when this data object was created."
     },
     "LastUpdatedTime": {
       "type": "string",
-      "description": "A timestamp that indicates when this game server group was last updated.",
-      "additionalProperties": false
+      "description": "A timestamp that indicates when this game server group was last updated."
     },
     "Status": {
       "type": "string",
@@ -282,15 +266,13 @@
         "DELETING",
         "DELETED",
         "ERROR"
-      ],
-      "additionalProperties": false
+      ]
     },
     "StatusReason": {
       "type": "string",
       "description": "Additional information about the current game server group status.",
       "minLength": 1,
-      "maxLength": 1024,
-      "additionalProperties": false
+      "maxLength": 1024
     },
     "SuspendedActions": {
       "type": "array",
@@ -299,8 +281,7 @@
         "enum": [
           "REPLACE_INSTANCE_TYPES"
         ]
-      },
-      "additionalProperties": false
+      }
     }
   },
   "properties": {
@@ -404,5 +385,6 @@
         "gamelift:ListGameServerGroups"
       ]
     }
-  }
+  },
+  "taggable": true
 }

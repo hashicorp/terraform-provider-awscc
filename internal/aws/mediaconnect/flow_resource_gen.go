@@ -105,7 +105,8 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//           "enum": [
 			//             "speke",
-			//             "static-key"
+			//             "static-key",
+			//             "srt-password"
 			//           ],
 			//           "type": "string"
 			//         },
@@ -131,7 +132,6 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         }
 			//       },
 			//       "required": [
-			//         "Algorithm",
 			//         "RoleArn"
 			//       ],
 			//       "type": "object"
@@ -161,6 +161,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			//       "type": "integer"
 			//     },
+			//     "MinLatency": {
+			//       "default": 2000,
+			//       "description": "The minimum latency in milliseconds.",
+			//       "type": "integer"
+			//     },
 			//     "Name": {
 			//       "description": "The name of the source.",
 			//       "type": "string"
@@ -171,12 +176,17 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "zixi-push",
 			//         "rtp-fec",
 			//         "rtp",
-			//         "rist"
+			//         "rist",
+			//         "srt-listener"
 			//       ],
 			//       "type": "string"
 			//     },
 			//     "SourceArn": {
 			//       "description": "The ARN of the source.",
+			//       "type": "string"
+			//     },
+			//     "SourceIngestPort": {
+			//       "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
 			//       "type": "string"
 			//     },
 			//     "StreamId": {
@@ -206,7 +216,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Algorithm
 									Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
 									Type:        types.StringType,
-									Required:    true,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"aes128",
@@ -237,6 +247,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										validate.StringInSlice([]string{
 											"speke",
 											"static-key",
+											"srt-password",
 										}),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
@@ -317,6 +328,16 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							DefaultValue(types.Number{Value: big.NewFloat(2000)}),
 						},
 					},
+					"min_latency": {
+						// Property: MinLatency
+						Description: "The minimum latency in milliseconds.",
+						Type:        types.NumberType,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+						},
+					},
 					"name": {
 						// Property: Name
 						Description: "The name of the source.",
@@ -338,12 +359,19 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"rtp-fec",
 								"rtp",
 								"rist",
+								"srt-listener",
 							}),
 						},
 					},
 					"source_arn": {
 						// Property: SourceArn
 						Description: "The ARN of the source.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"source_ingest_port": {
+						// Property: SourceIngestPort
+						Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -448,6 +476,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"key_type":                       "KeyType",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
+		"min_latency":                    "MinLatency",
 		"name":                           "Name",
 		"protocol":                       "Protocol",
 		"recovery_window":                "RecoveryWindow",
@@ -458,6 +487,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"source":                         "Source",
 		"source_arn":                     "SourceArn",
 		"source_failover_config":         "SourceFailoverConfig",
+		"source_ingest_port":             "SourceIngestPort",
 		"state":                          "State",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",

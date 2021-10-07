@@ -25,6 +25,10 @@
             "type": "string",
             "pattern": ""
         },
+        "ArtifactConfig": {
+            "description": "Provide artifact configuration",
+            "$ref" : "#/definitions/ArtifactConfig"
+        },
         "Schedule": {
             "description": "Frequency to run your canaries",
             "$ref" : "#/definitions/Schedule"
@@ -104,7 +108,7 @@
                 }
             },
             "required": [
-              "Handler"
+                "Handler"
             ],
             "oneOf":[
                 {
@@ -235,6 +239,31 @@
             "required" : [
                 "ScreenshotName"
             ]
+        },
+        "ArtifactConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "S3Encryption": {
+                    "type": "object",
+                    "$ref" : "#/definitions/S3Encryption",
+                    "description": "Encryption configuration for uploading artifacts to S3"
+                }
+            }
+        },
+        "S3Encryption": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "EncryptionMode": {
+                    "type": "string",
+                    "description": "Encryption mode for encrypting artifacts when uploading to S3. Valid values: SSE_S3 and SSE_KMS."
+                },
+                "KmsKeyArn": {
+                    "type": "string",
+                    "description": "KMS key Arn for encrypting artifacts when uploading to S3. You must specify KMS key Arn for SSE_KMS encryption mode only."
+                }
+            }
         }
     },
     "required": [

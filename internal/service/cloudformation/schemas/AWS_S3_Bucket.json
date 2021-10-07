@@ -309,7 +309,7 @@
             "additionalProperties": false,
             "properties": {
                 "BucketKeyEnabled": {
-                    "description": "",
+                    "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
                     "type": "boolean"
                 },
                 "ServerSideEncryptionByDefault": {
@@ -318,7 +318,7 @@
             }
         },
         "ServerSideEncryptionByDefault": {
-            "description": "Describes the default server-side encryption to apply to new objects in the bucket.",
+            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
             "type": "object",
             "properties": {
                 "KMSMasterKeyID": {
@@ -427,15 +427,15 @@
             "additionalProperties": false,
             "properties": {
                 "Id": {
-                    "description": "",
+                    "description": "The ID used to identify the S3 Intelligent-Tiering configuration.",
                     "type": "string"
                 },
                 "Prefix": {
-                    "description": "",
+                    "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
                     "type": "string"
                 },
                 "Status": {
-                    "description": "",
+                    "description": "Specifies the status of the configuration.",
                     "type": "string",
                     "enum": [
                         "Disabled",
@@ -443,6 +443,7 @@
                     ]
                 },
                 "TagFilters": {
+                    "description": "A container for a key-value pair.",
                     "type": "array",
                     "uniqueItems": true,
                     "insertionOrder": true,
@@ -451,7 +452,8 @@
                     }
                 },
                 "Tierings": {
-                   "type": "array",
+                    "description": "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
+                    "type": "array",
                     "uniqueItems": true,
                     "insertionOrder": true,
                     "items": {
@@ -470,7 +472,7 @@
             "additionalProperties": false,
             "properties": {
                 "AccessTier": {
-                    "description": "",
+                    "description": "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
                     "type": "string",
                     "enum": [
                         "ARCHIVE_ACCESS",
@@ -478,7 +480,7 @@
                     ]
                 },
                 "Days": {
-                    "description": "",
+                    "description": "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
                     "type": "integer"
                 }
             },
@@ -639,55 +641,8 @@
                     }
                 }
             },
-            "anyOf": [
-                {
-                    "required": [
-                        "Status",
-                        "AbortIncompleteMultipartUpload"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "ExpirationDate"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "ExpirationInDays"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "NoncurrentVersionExpirationInDays"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "NoncurrentVersionTransition"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "NoncurrentVersionTransitions"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "Transition"
-                    ]
-                },
-                {
-                    "required": [
-                        "Status",
-                        "Transitions"
-                    ]
-                }
+            "required": [
+                "Status"
             ]
         },
         "AbortIncompleteMultipartUpload": {
@@ -721,6 +676,7 @@
                     "enum": [
                         "DEEP_ARCHIVE",
                         "GLACIER",
+                        "Glacier",
                         "INTELLIGENT_TIERING",
                         "ONEZONE_IA",
                         "STANDARD_IA"
@@ -744,6 +700,7 @@
                     "enum": [
                         "DEEP_ARCHIVE",
                         "GLACIER",
+                        "Glacier",
                         "INTELLIGENT_TIERING",
                         "ONEZONE_IA",
                         "STANDARD_IA"
@@ -758,19 +715,8 @@
             },
             "additionalProperties": false,
             "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
-            "anyOf": [
-                {
-                    "required": [
-                        "StorageClass",
-                        "TransitionDate"
-                    ]
-                },
-                {
-                    "required": [
-                        "StorageClass",
-                        "TransitionInDays"
-                    ]
-                }
+            "required": [
+                "StorageClass"
             ]
         },
 
@@ -1006,19 +952,7 @@
                         "GOVERNANCE"
                     ]
                 }
-            },
-            "oneOf": [
-                {
-                    "required": [
-                        "Days"
-                    ]
-                },
-                {
-                    "required": [
-                        "Years"
-                    ]
-                }
-            ]
+            }
         },
 
         "OwnershipControls": {
@@ -1043,7 +977,7 @@
             "additionalProperties": false,
             "properties": {
                 "ObjectOwnership": {
-                    "description": "",
+                    "description": "Specifies an object ownership rule.",
                     "type": "string",
                     "enum": [
                         "ObjectWriter",
@@ -1197,19 +1131,8 @@
                     ]
                 }
             },
-            "anyOf": [
-                {
-                    "required": [
-                        "AccessControlTranslation",
-                        "Account",
-                        "Bucket"
-                    ]
-                },
-                {
-                    "required": [
-                        "Bucket"
-                    ]
-                }
+            "required": [
+                "Bucket"
             ]
         },
         "AccessControlTranslation": {
@@ -1329,7 +1252,7 @@
             "additionalProperties": false,
             "properties": {
                 "ReplicaModifications": {
-                    "description": "",
+                    "description": "A filter that you can specify for selection for modifications on replicas.",
                     "$ref": "#/definitions/ReplicaModifications"
                 },
                 "SseKmsEncryptedObjects": {
@@ -1340,11 +1263,10 @@
         },
         "ReplicaModifications": {
             "type": "object",
-            "description": "",
             "additionalProperties": false,
             "properties": {
                 "Status": {
-                    "description": "",
+                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.",
                     "type": "string",
                     "enum": [
                         "Enabled",
@@ -1421,39 +1343,27 @@
         "WebsiteConfiguration": {
             "type": "object",
             "description": "Specifies website configuration parameters for an Amazon S3 bucket.",
-            "oneOf": [
-                {
-                    "additionalProperties": false,
-                    "properties": {
-                        "ErrorDocument": {
-                            "description": "The name of the error document for the website.",
-                            "type": "string"
-                        },
-                        "IndexDocument": {
-                            "description": "The name of the index document for the website.",
-                            "type": "string"
-                        },
-                        "RoutingRules": {
-                            "type": "array",
-                            "insertionOrder": true,
-                            "items": {
-                                "$ref": "#/definitions/RoutingRule"
-                            }
-                        }
+            "additionalProperties": false,
+            "properties": {
+                "ErrorDocument": {
+                    "description": "The name of the error document for the website.",
+                    "type": "string"
+                },
+                "IndexDocument": {
+                    "description": "The name of the index document for the website.",
+                    "type": "string"
+                },
+                "RoutingRules": {
+                    "type": "array",
+                    "insertionOrder": true,
+                    "items": {
+                        "$ref": "#/definitions/RoutingRule"
                     }
                 },
-                {
-                    "additionalProperties": false,
-                    "properties": {
-                        "RedirectAllRequestsTo": {
-                            "$ref": "#/definitions/RedirectAllRequestsTo"
-                        }
-                    },
-                    "required": [
-                        "RedirectAllRequestsTo"
-                    ]
+                "RedirectAllRequestsTo": {
+                    "$ref": "#/definitions/RedirectAllRequestsTo"
                 }
-            ]
+            }
         },
         "RoutingRule": {
             "description": "Specifies the redirect behavior and when a redirect is applied.",
@@ -1501,19 +1411,7 @@
                     "description": "The specific object key to use in the redirect request.d",
                     "type": "string"
                 }
-            },
-            "anyOf": [
-                {
-                    "required": [
-                        "ReplaceKeyPrefixWith"
-                    ]
-                },
-                {
-                    "required": [
-                        "ReplaceKeyWith"
-                    ]
-                }
-            ]
+            }
         },
         "RoutingRuleCondition": {
             "description": "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",

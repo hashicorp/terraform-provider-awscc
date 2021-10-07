@@ -27,6 +27,7 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - **destination** (String) The address where you want to send the output.
 - **encryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--encryption))
 - **max_latency** (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- **min_latency** (Number) The minimum latency in milliseconds.
 - **name** (String) The name of the output. This value must be unique within the current flow.
 - **port** (Number) The port to use when content is distributed to this output.
 - **remote_id** (String) The remote ID for the Zixi-pull stream.

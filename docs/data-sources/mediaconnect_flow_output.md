@@ -27,6 +27,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - **encryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--encryption))
 - **flow_arn** (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - **max_latency** (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- **min_latency** (Number) The minimum latency in milliseconds.
 - **name** (String) The name of the output. This value must be unique within the current flow.
 - **output_arn** (String) The ARN of the output.
 - **port** (Number) The port to use when content is distributed to this output.
