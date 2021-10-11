@@ -182,3 +182,79 @@ func TestFloatAtLeastValidator(t *testing.T) {
 		})
 	}
 }
+
+func TestFloatAtMostValidator(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		val         tftypes.Value
+		f           func(context.Context, tftypes.Value) (attr.Value, error)
+		max         float64
+		expectError bool
+	}
+	tests := map[string]testCase{
+		"not a number": {
+			val:         tftypes.NewValue(tftypes.Bool, true),
+			f:           types.BoolType.ValueFromTerraform,
+			expectError: true,
+		},
+		"unknown number": {
+			val: tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2.00,
+		},
+		"null number": {
+			val: tftypes.NewValue(tftypes.Number, nil),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2.00,
+		},
+		"valid integer": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2.00,
+		},
+		"valid float": {
+			val: tftypes.NewValue(tftypes.Number, 1.1),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2.00,
+		},
+		"valid float max": {
+			val: tftypes.NewValue(tftypes.Number, 2.00),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2.00,
+		},
+		"too large float": {
+			val:         tftypes.NewValue(tftypes.Number, 3.00),
+			f:           types.NumberType.ValueFromTerraform,
+			max:         2.00,
+			expectError: true,
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			ctx := context.TODO()
+			val, err := test.f(ctx, test.val)
+
+			if err != nil {
+				t.Fatalf("got unexpected error: %s", err)
+			}
+
+			request := tfsdk.ValidateAttributeRequest{
+				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributeConfig: val,
+			}
+			response := tfsdk.ValidateAttributeResponse{}
+			FloatAtMost(test.max).Validate(ctx, request, &response)
+
+			if !response.Diagnostics.HasError() && test.expectError {
+				t.Fatal("expected error, got no error")
+			}
+
+			if response.Diagnostics.HasError() && !test.expectError {
+				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
+			}
+		})
+	}
+}
