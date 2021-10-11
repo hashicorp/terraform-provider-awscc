@@ -358,6 +358,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 		}
 
+	case "":
+		//
+		// If the property has no specified type but has properties then assume it's an object.
+		//
+		if len(property.PatternProperties) > 0 || len(property.Properties) == 0 {
+			return 0, unsupportedTypeError(path, propertyType)
+		}
+		fallthrough
+
 	case cfschema.PropertyTypeObject:
 		if patternProperties := property.PatternProperties; len(patternProperties) > 0 {
 			//
