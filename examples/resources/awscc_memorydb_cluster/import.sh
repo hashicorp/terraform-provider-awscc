@@ -1,0 +1,1 @@
+$ terraform import awscc_memorydb_cluster.example <resource ID>

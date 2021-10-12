@@ -1,16 +1,62 @@
 ## 0.3.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_ec2_host: Temporarily removed
+* data-source/awscc_ec2_hosts: Temporarily removed
+* resource/awscc_ec2_host: Temporarily removed
+
 FEATURES:
 
+* **New Data Source:** `awscc_acmpca_certificate_authorities`
 * **New Data Source:** `awscc_backup_framework`
 * **New Data Source:** `awscc_backup_frameworks`
+* **New Data Source:** `awscc_ce_anomaly_monitor`
+* **New Data Source:** `awscc_ce_anomaly_monitors`
+* **New Data Source:** `awscc_ce_anomaly_subscription`
+* **New Data Source:** `awscc_ce_anomaly_subscriptions`
+* **New Data Source:** `awscc_codestarnotifications_notification_rules`
+* **New Data Source:** `awscc_cur_report_definition`
+* **New Data Source:** `awscc_cur_report_definitions`
+* **New Data Source:** `awscc_ec2_subnet`
+* **New Data Source:** `awscc_ecr_public_repository`
+* **New Data Source:** `awscc_ecr_public_repositories`
+* **New Data Source:** `awscc_globalaccelerator_accelerators`
 * **New Data Source:** `awscc_iot_job_template`
 * **New Data Source:** `awscc_iot_job_templates`
+* **New Data Source:** `awscc_iotwireless_partner_account`
+* **New Data Source:** `awscc_iotwireless_partner_accounts`
+* **New Data Source:** `awscc_kms_keys`
+* **New Data Source:** `awscc_lambda_event_source_mappings`
 * **New Data Source:** `awscc_lightsail_instance`
 * **New Data Source:** `awscc_lightsail_instances`
+* **New Data Source:** `awscc_lookoutequipment_inference_scheduler`
+* **New Data Source:** `awscc_lookoutequipment_inference_schedulers`
+* **New Data Source:** `awscc_memorydb_acl`
+* **New Data Source:** `awscc_memorydb_acls`
+* **New Data Source:** `awscc_memorydb_cluster`
+* **New Data Source:** `awscc_memorydb_clusters`
+* **New Data Source:** `awscc_memorydb_parameter_group`
+* **New Data Source:** `awscc_memorydb_parameter_groups`
+* **New Data Source:** `awscc_memorydb_subnet_group`
+* **New Data Source:** `awscc_memorydb_subnet_groups`
+* **New Data Source:** `awscc_memorydb_user`
+* **New Data Source:** `awscc_memorydb_users`
 * **New Resource:** `awscc_backup_framework`
+* **New Resource:** `awscc_ce_anomaly_monitor`
+* **New Resource:** `awscc_ce_anomaly_subscription`
+* **New Resource:** `awscc_cur_report_definition`
+* **New Resource:** `awscc_ec2_subnet`
+* **New Resource:** `awscc_ecr_public_repository`
 * **New Resource:** `awscc_iot_job_template`
+* **New Resource:** `awscc_iotwireless_partner_account`
 * **New Resource:** `awscc_lightsail_instance`
+* **New Resource:** `awscc_lookoutequipment_inference_scheduler`
+* **New Resource:** `awscc_memorydb_acl`
+* **New Resource:** `awscc_memorydb_cluster`
+* **New Resource:** `awscc_memorydb_parameter_group`
+* **New Resource:** `awscc_memorydb_subnet_group`
+* **New Resource:** `awscc_memorydb_user`
 
 ## [0.2.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.2.0) (October 7, 2021)
 
@@ -18,10 +64,10 @@ BREAKING CHANGES:
 
 * data-source/awscc_ec2_subnet: Temporarily removed
 * data-source/awscc_ec2_subnets: Temporarily removed
-* data-source/aws_eks_cluster: Temporarily removed
-* data-source/aws_eks_clusters: Temporarily removed
+* data-source/awscc_eks_cluster: Temporarily removed
+* data-source/awscc_eks_clusters: Temporarily removed
 * resource/awscc_ec2_subnet: Temporarily removed
-* resource/aws_eks_cluster: Temporarily removed
+* resource/awscc_eks_cluster: Temporarily removed
 
 FEATURES:
 
