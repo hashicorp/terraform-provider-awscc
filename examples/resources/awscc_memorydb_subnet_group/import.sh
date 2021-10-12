@@ -1,0 +1,1 @@
+$ terraform import awscc_memorydb_subnet_group.example <resource ID>
