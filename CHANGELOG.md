@@ -1,5 +1,11 @@
 ## 0.3.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_backup_framework`
+* **New Data Source:** `awscc_backup_frameworks`
+* **New Resource:** `awscc_backup_framework`
+
 ## [0.2.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.2.0) (October 7, 2021)
 
 BREAKING CHANGES:
