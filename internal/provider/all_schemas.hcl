@@ -1065,11 +1065,6 @@ resource_schema "aws_lightsail_disk" {
 
 resource_schema "aws_lightsail_instance" {
   cloudformation_type_name = "AWS::Lightsail::Instance"
-
-  # Networking/MonthlyTransfer is too deeply nested for expansion.
-  suppress_plural_data_source_generation   = true
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_location_geofence_collection" {
