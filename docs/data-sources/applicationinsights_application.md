@@ -40,8 +40,8 @@ Read-Only:
 - **component_arn** (String) The ARN of the compnonent.
 - **component_configuration_mode** (String) The component monitoring configuration mode.
 - **component_name** (String) The name of the component.
-- **custom_component_configuration** (Attributes) The configuration settings of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration))
-- **default_overwrite_component_configuration** (Attributes) The configuration settings of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration))
+- **custom_component_configuration** (Attributes) The monitoring configuration of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration))
+- **default_overwrite_component_configuration** (Attributes) The overwritten settings on default component monitoring configuration. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration))
 - **tier** (String) The tier of the application component.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration"></a>
@@ -49,7 +49,7 @@ Read-Only:
 
 Read-Only:
 
-- **configuration_details** (Attributes) The configuration settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details))
+- **configuration_details** (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details))
 - **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details"></a>
@@ -170,7 +170,7 @@ Read-Only:
 
 Read-Only:
 
-- **configuration_details** (Attributes) The configuration settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details))
+- **configuration_details** (Attributes) The configuration settings (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details))
 - **sub_component_type_configurations** (Attributes List) Sub component configurations of the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details"></a>

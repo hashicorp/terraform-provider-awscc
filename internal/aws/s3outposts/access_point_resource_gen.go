@@ -90,6 +90,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint.",
 			//   "properties": {
 			//     "VpcId": {
 			//       "description": "Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.",
@@ -100,6 +101,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"vpc_id": {

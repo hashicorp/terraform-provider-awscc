@@ -18,7 +18,7 @@ Resource Type definition for AWS::AppIntegrations::EventIntegration
 ### Required
 
 - **event_bridge_bus** (String) The Amazon Eventbridge bus for the event integration.
-- **event_filter** (Attributes) (see [below for nested schema](#nestedatt--event_filter))
+- **event_filter** (Attributes) The EventFilter (source) associated with the event integration. (see [below for nested schema](#nestedatt--event_filter))
 - **name** (String) The name of the event integration.
 
 ### Optional

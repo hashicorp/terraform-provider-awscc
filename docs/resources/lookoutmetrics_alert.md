@@ -17,7 +17,7 @@ Resource Type definition for AWS::LookoutMetrics::Alert
 
 ### Required
 
-- **action** (Attributes) (see [below for nested schema](#nestedatt--action))
+- **action** (Attributes) The action to be taken by the alert when an anomaly is detected. (see [below for nested schema](#nestedatt--action))
 - **alert_sensitivity_threshold** (Number) A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.
 - **anomaly_detector_arn** (String) The Amazon resource name (ARN) of the Anomaly Detector to alert.
 
@@ -28,7 +28,7 @@ Resource Type definition for AWS::LookoutMetrics::Alert
 
 ### Read-Only
 
-- **arn** (String)
+- **arn** (String) ARN assigned to the alert.
 - **id** (String) Uniquely identifies the resource.
 
 <a id="nestedatt--action"></a>
@@ -44,8 +44,8 @@ Required:
 
 Required:
 
-- **lambda_arn** (String)
-- **role_arn** (String)
+- **lambda_arn** (String) ARN of a Lambda to send alert notifications to.
+- **role_arn** (String) ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.
 
 
 <a id="nestedatt--action--sns_configuration"></a>
@@ -53,8 +53,8 @@ Required:
 
 Required:
 
-- **role_arn** (String)
-- **sns_topic_arn** (String)
+- **role_arn** (String) ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.
+- **sns_topic_arn** (String) ARN of an SNS topic to send alert notifications to.
 
 ## Import
 

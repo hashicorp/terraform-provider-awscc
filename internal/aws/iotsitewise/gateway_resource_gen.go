@@ -96,11 +96,11 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Contains a gateway's platform information.",
+			//   "description": "The gateway's platform. You can only specify one platform in a gateway.",
 			//   "properties": {
 			//     "Greengrass": {
 			//       "additionalProperties": false,
-			//       "description": "Contains the ARN of AWS IoT Greengrass Group that the gateway runs on.",
+			//       "description": "A gateway that runs on AWS IoT Greengrass.",
 			//       "properties": {
 			//         "GroupArn": {
 			//           "description": "The ARN of the Greengrass group.",
@@ -118,12 +118,12 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Contains a gateway's platform information.",
+			Description: "The gateway's platform. You can only specify one platform in a gateway.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"greengrass": {
 						// Property: Greengrass
-						Description: "Contains the ARN of AWS IoT Greengrass Group that the gateway runs on.",
+						Description: "A gateway that runs on AWS IoT Greengrass.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"group_arn": {

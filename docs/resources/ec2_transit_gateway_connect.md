@@ -17,7 +17,7 @@ The AWS::EC2::TransitGatewayConnect type
 
 ### Required
 
-- **options** (Attributes) (see [below for nested schema](#nestedatt--options))
+- **options** (Attributes) The Connect attachment options. (see [below for nested schema](#nestedatt--options))
 - **transport_transit_gateway_attachment_id** (String) The ID of the attachment from which the Connect attachment was created.
 
 ### Optional

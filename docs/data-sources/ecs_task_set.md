@@ -27,7 +27,7 @@ Data Source schema for AWS::ECS::TaskSet
 - **load_balancers** (Attributes List) (see [below for nested schema](#nestedatt--load_balancers))
 - **network_configuration** (Attributes) An object representing the network configuration for a task or service. (see [below for nested schema](#nestedatt--network_configuration))
 - **platform_version** (String) The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.
-- **scale** (Attributes) (see [below for nested schema](#nestedatt--scale))
+- **scale** (Attributes) A floating-point percentage of the desired number of tasks to place and keep running in the task set. (see [below for nested schema](#nestedatt--scale))
 - **service** (String) The short name or full Amazon Resource Name (ARN) of the service to create the task set in.
 - **service_registries** (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
 - **task_definition** (String) The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.

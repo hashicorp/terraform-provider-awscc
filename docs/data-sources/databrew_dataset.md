@@ -25,7 +25,7 @@ Data Source schema for AWS::DataBrew::Dataset
 - **format_options** (Attributes) Format options for dataset (see [below for nested schema](#nestedatt--format_options))
 - **input** (Attributes) Input (see [below for nested schema](#nestedatt--input))
 - **name** (String) Dataset name
-- **path_options** (Attributes) Path options for dataset (see [below for nested schema](#nestedatt--path_options))
+- **path_options** (Attributes) PathOptions (see [below for nested schema](#nestedatt--path_options))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--format_options"></a>

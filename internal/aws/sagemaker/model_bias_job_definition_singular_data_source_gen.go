@@ -231,7 +231,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//       "description": "The baseline constraints resource for a monitoring job.",
 			//       "properties": {
 			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI.",
+			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
 			//           "pattern": "",
 			//           "type": "string"
@@ -258,7 +258,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 							map[string]tfsdk.Attribute{
 								"s3_uri": {
 									// Property: S3Uri
-									Description: "The Amazon S3 URI.",
+									Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -282,7 +282,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//       "description": "The endpoint for a monitoring job.",
 			//       "properties": {
 			//         "EndTimeOffset": {
-			//           "description": "The time offsets in ISO duration format",
+			//           "description": "Monitoring end time offset, e.g. PT0H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
 			//           "pattern": "",
@@ -336,7 +336,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//           "type": "string"
 			//         },
 			//         "StartTimeOffset": {
-			//           "description": "The time offsets in ISO duration format",
+			//           "description": "Monitoring start time offset, e.g. -PT1H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
 			//           "pattern": "",
@@ -382,7 +382,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 							map[string]tfsdk.Attribute{
 								"end_time_offset": {
 									// Property: EndTimeOffset
-									Description: "The time offsets in ISO duration format",
+									Description: "Monitoring end time offset, e.g. PT0H",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -435,7 +435,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 								},
 								"start_time_offset": {
 									// Property: StartTimeOffset
-									Description: "The time offsets in ISO duration format",
+									Description: "Monitoring start time offset, e.g. -PT1H",
 									Type:        types.StringType,
 									Computed:    true,
 								},

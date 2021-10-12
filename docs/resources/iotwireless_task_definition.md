@@ -21,11 +21,11 @@ Creates a gateway task definition.
 
 ### Optional
 
-- **lo_ra_wan_update_gateway_task_entry** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
+- **lo_ra_wan_update_gateway_task_entry** (Attributes) The list of task definitions. (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
 - **name** (String) The name of the new resource.
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 - **task_definition_type** (String) A filter to list only the wireless gateway task definitions that use this task definition type
-- **update** (Attributes) (see [below for nested schema](#nestedatt--update))
+- **update** (Attributes) Information about the gateways to update. (see [below for nested schema](#nestedatt--update))
 
 ### Read-Only
 

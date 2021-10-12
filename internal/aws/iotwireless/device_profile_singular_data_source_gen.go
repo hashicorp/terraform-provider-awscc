@@ -47,6 +47,7 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
 			//   "properties": {
 			//     "ClassBTimeout": {
 			//       "maximum": 1000,
@@ -110,6 +111,7 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   },
 			//   "type": "object"
 			// }
+			Description: "LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"class_b_timeout": {

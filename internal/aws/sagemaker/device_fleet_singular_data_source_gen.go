@@ -52,6 +52,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
 			//   "properties": {
 			//     "KmsKeyId": {
 			//       "description": "The KMS key id used for encryption on the S3 bucket",
@@ -72,6 +73,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "S3 bucket and an ecryption key id (if available) to store outputs for the fleet",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"kms_key_id": {

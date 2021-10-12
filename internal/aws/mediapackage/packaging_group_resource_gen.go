@@ -36,6 +36,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "CDN Authorization",
 			//   "properties": {
 			//     "CdnIdentifierSecret": {
 			//       "description": "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
@@ -52,6 +53,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "CDN Authorization",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cdn_identifier_secret": {
@@ -86,6 +88,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The configuration parameters for egress access logging.",
 			//   "properties": {
 			//     "LogGroupName": {
 			//       "description": "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
@@ -97,6 +100,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"log_group_name": {

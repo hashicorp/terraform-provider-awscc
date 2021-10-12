@@ -27,7 +27,7 @@ We recommend that type names adhere to the following pattern: company_or_organiz
 ### Optional
 
 - **execution_role_arn** (String) The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
-- **logging_config** (Attributes) (see [below for nested schema](#nestedatt--logging_config))
+- **logging_config** (Attributes) Specifies logging configuration information for a type. (see [below for nested schema](#nestedatt--logging_config))
 
 ### Read-Only
 

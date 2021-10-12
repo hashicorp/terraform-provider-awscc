@@ -42,12 +42,13 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "description": "Configurations of destination connector.",
 			//     "properties": {
 			//       "ConnectorProfileName": {
-			//         "description": "Name of connector profile",
+			//         "description": "Name of destination connector profile",
 			//         "maxLength": 256,
 			//         "pattern": "",
 			//         "type": "string"
 			//       },
 			//       "ConnectorType": {
+			//         "description": "Destination connector type",
 			//         "enum": [
 			//           "Salesforce",
 			//           "Singular",
@@ -461,14 +462,15 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						Description: "Name of connector profile",
+						Description: "Name of destination connector profile",
 						Type:        types.StringType,
 						Computed:    true,
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Destination connector type",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 					"destination_connector_properties": {
 						// Property: DestinationConnectorProperties
@@ -892,12 +894,13 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Configurations of Source connector of the flow.",
 			//   "properties": {
 			//     "ConnectorProfileName": {
-			//       "description": "Name of connector profile",
+			//       "description": "Name of source connector profile",
 			//       "maxLength": 256,
 			//       "pattern": "",
 			//       "type": "string"
 			//     },
 			//     "ConnectorType": {
+			//       "description": "Type of source connector",
 			//       "enum": [
 			//         "Salesforce",
 			//         "Singular",
@@ -1172,14 +1175,15 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						Description: "Name of connector profile",
+						Description: "Name of source connector profile",
 						Type:        types.StringType,
 						Computed:    true,
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Type of source connector",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 					"incremental_pull_config": {
 						// Property: IncrementalPullConfig
@@ -1817,6 +1821,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "type": "array"
 			//       },
 			//       "TaskType": {
+			//         "description": "Type of task",
 			//         "enum": [
 			//           "Arithmetic",
 			//           "Filter",
@@ -1954,8 +1959,9 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"task_type": {
 						// Property: TaskType
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Type of task",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -1971,7 +1977,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "TriggerProperties": {
 			//       "additionalProperties": false,
-			//       "description": "Details required for scheduled trigger type",
+			//       "description": "Details required based on the type of trigger",
 			//       "properties": {
 			//         "DataPullMode": {
 			//           "enum": [
@@ -2007,6 +2013,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "TriggerType": {
+			//       "description": "Trigger type of the flow",
 			//       "enum": [
 			//         "Scheduled",
 			//         "Event",
@@ -2025,7 +2032,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"trigger_properties": {
 						// Property: TriggerProperties
-						Description: "Details required for scheduled trigger type",
+						Description: "Details required based on the type of trigger",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"data_pull_mode": {
@@ -2064,8 +2071,9 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"trigger_type": {
 						// Property: TriggerType
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Trigger type of the flow",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 				},
 			),

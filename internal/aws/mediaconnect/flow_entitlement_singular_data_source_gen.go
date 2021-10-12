@@ -47,7 +47,7 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Information about the encryption of the flow.",
+			//   "description": "The type of encryption that will be used on the output that is associated with this entitlement.",
 			//   "properties": {
 			//     "Algorithm": {
 			//       "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -102,7 +102,7 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Information about the encryption of the flow.",
+			Description: "The type of encryption that will be used on the output that is associated with this entitlement.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"algorithm": {

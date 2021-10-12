@@ -18,7 +18,7 @@ The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameL
 ### Required
 
 - **name** (String) A descriptive label that is associated with an alias. Alias names do not need to be unique.
-- **routing_strategy** (Attributes) (see [below for nested schema](#nestedatt--routing_strategy))
+- **routing_strategy** (Attributes) A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message. (see [below for nested schema](#nestedatt--routing_strategy))
 
 ### Optional
 

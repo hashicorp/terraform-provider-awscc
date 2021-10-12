@@ -34,6 +34,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Container provider of the virtual cluster.",
 			//   "properties": {
 			//     "Id": {
 			//       "description": "The ID of the container cluster",
@@ -78,6 +79,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Container provider of the virtual cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"id": {

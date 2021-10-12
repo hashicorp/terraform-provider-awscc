@@ -58,6 +58,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Specifies logging configuration information for a type.",
 			//   "properties": {
 			//     "LogGroupName": {
 			//       "description": "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
@@ -75,6 +76,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Specifies logging configuration information for a type.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"log_group_name": {

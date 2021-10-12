@@ -17,16 +17,16 @@ A Kendra FAQ resource
 
 ### Required
 
-- **index_id** (String) Unique ID of Index
-- **name** (String)
-- **role_arn** (String)
-- **s3_path** (Attributes) (see [below for nested schema](#nestedatt--s3_path))
+- **index_id** (String) Index ID
+- **name** (String) FAQ name
+- **role_arn** (String) FAQ role ARN
+- **s3_path** (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))
 
 ### Optional
 
-- **description** (String) Description of the FAQ
-- **file_format** (String) Format of the input file
-- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
+- **description** (String) FAQ description
+- **file_format** (String) FAQ file format
+- **tags** (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

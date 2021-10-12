@@ -24,23 +24,27 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"platform_id": {
 			// Property: PlatformId
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The ID of the target signing platform.",
 			//   "enum": [
 			//     "AWSLambda-SHA384-ECDSA"
 			//   ],
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Description: "The ID of the target signing platform.",
+			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"AWSLambda-SHA384-ECDSA",
@@ -65,27 +69,32 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"profile_version_arn": {
 			// Property: ProfileVersionArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile version.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"signature_validity_period": {
 			// Property: SignatureValidityPeriod
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Signature validity period of the profile.",
 			//   "properties": {
 			//     "Type": {
 			//       "enum": [
@@ -101,6 +110,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Signature validity period of the profile.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {

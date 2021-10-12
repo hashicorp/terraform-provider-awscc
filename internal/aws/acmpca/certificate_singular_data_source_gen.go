@@ -24,7 +24,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Structure that specifies fields to be overridden in a certificate at the time of issuance. These requires an API Passthrough template be used or they will be ignored.",
+			//   "description": "These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored.",
 			//   "properties": {
 			//     "Extensions": {
 			//       "additionalProperties": false,
@@ -306,7 +306,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Structure that specifies fields to be overridden in a certificate at the time of issuance. These requires an API Passthrough template be used or they will be ignored.",
+			Description: "These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"extensions": {
@@ -679,10 +679,12 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The ARN of the issued certificate.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The ARN of the issued certificate.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"certificate": {
 			// Property: Certificate
@@ -699,10 +701,12 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: CertificateAuthorityArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) for the private CA to issue the certificate.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) for the private CA to issue the certificate.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
@@ -731,17 +735,19 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: TemplateArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"validity": {
 			// Property: Validity
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Validity for a certificate.",
+			//   "description": "The time before which the Certificate will be valid.",
 			//   "properties": {
 			//     "Type": {
 			//       "type": "string"
@@ -756,7 +762,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Validity for a certificate.",
+			Description: "The time before which the Certificate will be valid.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {
@@ -778,7 +784,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Validity for a certificate.",
+			//   "description": "The time after which the Certificate will be valid.",
 			//   "properties": {
 			//     "Type": {
 			//       "type": "string"
@@ -793,7 +799,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Validity for a certificate.",
+			Description: "The time after which the Certificate will be valid.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"type": {

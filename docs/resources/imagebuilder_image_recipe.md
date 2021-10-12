@@ -76,7 +76,7 @@ Optional:
 Optional:
 
 - **device_name** (String) The device to which these mappings apply.
-- **ebs** (Attributes) Amazon EBS-specific block device mapping specifications. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
+- **ebs** (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
 - **no_device** (String) Use to remove a mapping from the parent image.
 - **virtual_name** (String) Use to manage instance ephemeral devices.
 

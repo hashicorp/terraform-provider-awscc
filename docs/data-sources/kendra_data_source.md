@@ -28,7 +28,7 @@ Data Source schema for AWS::Kendra::DataSource
 - **name** (String) Name of data source
 - **role_arn** (String) Role ARN
 - **schedule** (String) Schedule
-- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags for labeling the data source (see [below for nested schema](#nestedatt--tags))
 - **type** (String) Data source type
 
 <a id="nestedatt--data_source_configuration"></a>

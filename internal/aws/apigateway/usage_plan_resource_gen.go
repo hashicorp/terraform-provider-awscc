@@ -144,6 +144,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Configures the number of requests that users can make within a given interval.",
 			//   "properties": {
 			//     "Limit": {
 			//       "description": "The maximum number of requests that users can make within the specified time period.",
@@ -162,6 +163,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Configures the number of requests that users can make within a given interval.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"limit": {
@@ -257,6 +259,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Configures the overall request rate (average requests per second) and burst capacity.",
 			//   "properties": {
 			//     "BurstLimit": {
 			//       "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
@@ -271,6 +274,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Configures the overall request rate (average requests per second) and burst capacity.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"burst_limit": {

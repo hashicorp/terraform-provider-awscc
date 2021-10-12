@@ -23,7 +23,7 @@ Data Source schema for AWS::MediaConnect::FlowEntitlement
 
 - **data_transfer_subscriber_fee_percent** (Number) Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 - **description** (String) A description of the entitlement.
-- **encryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--encryption))
+- **encryption** (Attributes) The type of encryption that will be used on the output that is associated with this entitlement. (see [below for nested schema](#nestedatt--encryption))
 - **entitlement_arn** (String) The ARN of the entitlement.
 - **entitlement_status** (String) An indication of whether the entitlement is enabled.
 - **flow_arn** (String) The ARN of the flow.

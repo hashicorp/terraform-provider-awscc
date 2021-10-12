@@ -88,6 +88,7 @@ func methodDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The backend system that the method calls when it receives a request.",
 			//   "properties": {
 			//     "CacheKeyParameters": {
 			//       "description": "A list of request parameters whose values API Gateway caches.",
@@ -235,6 +236,7 @@ func methodDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "The backend system that the method calls when it receives a request.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cache_key_parameters": {

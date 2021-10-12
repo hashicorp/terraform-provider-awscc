@@ -34,7 +34,7 @@ Data Source schema for AWS::AutoScaling::LaunchConfiguration
 - **kernel_id** (String) Provides the ID of the kernel associated with the EC2 AMI.
 - **key_name** (String) Provides the name of the EC2 key pair.
 - **launch_configuration_name** (String) The name of the launch configuration. This name must be unique per Region per account.
-- **metadata_options** (Attributes) MetadataOptions is a property of AWS::AutoScaling::LaunchConfiguration that describes metadata options for the instances. (see [below for nested schema](#nestedatt--metadata_options))
+- **metadata_options** (Attributes) The metadata options for the instances. (see [below for nested schema](#nestedatt--metadata_options))
 - **placement_tenancy** (String) The tenancy of the instance, either default or dedicated.
 - **ram_disk_id** (String) The ID of the RAM disk to select.
 - **security_groups** (Set of String) A list that contains the security groups to assign to the instances in the Auto Scaling group.
@@ -47,7 +47,7 @@ Data Source schema for AWS::AutoScaling::LaunchConfiguration
 Read-Only:
 
 - **device_name** (String) The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh).
-- **ebs** (Attributes) BlockDevice is a subproperty of BlockDeviceMapping that describes an Amazon EBS volume. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
+- **ebs** (Attributes) Parameters used to automatically set up EBS volumes when an instance is launched. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
 - **no_device** (Boolean) Setting this value to true suppresses the specified device included in the block device mapping of the AMI.
 - **virtual_name** (String) The name of the virtual device.
 

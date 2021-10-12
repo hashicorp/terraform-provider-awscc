@@ -23,11 +23,11 @@ A Kendra index
 
 ### Optional
 
-- **capacity_units** (Attributes) (see [below for nested schema](#nestedatt--capacity_units))
-- **description** (String)
-- **document_metadata_configurations** (Attributes List) (see [below for nested schema](#nestedatt--document_metadata_configurations))
-- **server_side_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
+- **capacity_units** (Attributes) Capacity units (see [below for nested schema](#nestedatt--capacity_units))
+- **description** (String) A description for the index
+- **document_metadata_configurations** (Attributes List) Document metadata configurations (see [below for nested schema](#nestedatt--document_metadata_configurations))
+- **server_side_encryption_configuration** (Attributes) Server side encryption configuration (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
+- **tags** (Attributes List) Tags for labeling the index (see [below for nested schema](#nestedatt--tags))
 - **user_context_policy** (String)
 - **user_token_configurations** (Attributes List) (see [below for nested schema](#nestedatt--user_token_configurations))
 

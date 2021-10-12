@@ -24,9 +24,9 @@ Data Source schema for AWS::S3ObjectLambda::AccessPoint
 - **arn** (String)
 - **creation_date** (String) The date and time when the Object lambda Access Point was created.
 - **name** (String) The name you want to assign to this Object lambda Access Point.
-- **object_lambda_configuration** (Attributes) Configuration to be applied to this Object lambda Access Point. It specifies Supporting Access Point, Transformation Configurations. Customers can also set if they like to enable Cloudwatch metrics for accesses to this Object lambda Access Point. Default setting for Cloudwatch metrics is disable. (see [below for nested schema](#nestedatt--object_lambda_configuration))
+- **object_lambda_configuration** (Attributes) The Object lambda Access Point Configuration that configures transformations to be applied on the objects on specified S3 Actions (see [below for nested schema](#nestedatt--object_lambda_configuration))
 - **policy_status** (Attributes) (see [below for nested schema](#nestedatt--policy_status))
-- **public_access_block_configuration** (Attributes) The Public Access Block Configuration is used to block policies that would allow public access to this Object lambda Access Point. All public access to Object lambda Access Points are blocked by default, and any policy that would give public access to them will be also blocked. This behavior cannot be changed for Object lambda Access Points. (see [below for nested schema](#nestedatt--public_access_block_configuration))
+- **public_access_block_configuration** (Attributes) The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide. (see [below for nested schema](#nestedatt--public_access_block_configuration))
 
 <a id="nestedatt--object_lambda_configuration"></a>
 ### Nested Schema for `object_lambda_configuration`

@@ -17,7 +17,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
-- **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan))
+- **lo_ra_wan** (Attributes) LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
 - **name** (String) Name of service profile
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
 

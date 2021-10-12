@@ -23,7 +23,7 @@ Data Source schema for AWS::CodeGuruProfiler::ProfilingGroup
 
 - **agent_permissions** (Attributes) The agent permissions attached to this profiling group. (see [below for nested schema](#nestedatt--agent_permissions))
 - **anomaly_detection_notification_configuration** (Attributes List) Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency (see [below for nested schema](#nestedatt--anomaly_detection_notification_configuration))
-- **arn** (String)
+- **arn** (String) The Amazon Resource Name (ARN) of the specified profiling group.
 - **compute_platform** (String) The compute platform of the profiling group.
 - **profiling_group_name** (String) The name of the profiling group.
 - **tags** (Attributes List) The tags associated with a profiling group. (see [below for nested schema](#nestedatt--tags))

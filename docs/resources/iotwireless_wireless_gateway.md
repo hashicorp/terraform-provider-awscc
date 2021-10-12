@@ -17,7 +17,7 @@ Create and manage wireless gateways, including LoRa gateways.
 
 ### Required
 
-- **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan))
+- **lo_ra_wan** (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway. (see [below for nested schema](#nestedatt--lo_ra_wan))
 
 ### Optional
 

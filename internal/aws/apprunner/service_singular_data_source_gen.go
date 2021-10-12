@@ -168,6 +168,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "InstanceRoleArn": {
+			//       "description": "Instance Role Arn",
 			//       "maxLength": 102,
 			//       "minLength": 29,
 			//       "pattern": "",
@@ -194,8 +195,9 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"instance_role_arn": {
 						// Property: InstanceRoleArn
-						Type:     types.StringType,
-						Computed: true,
+						Description: "Instance Role Arn",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 					"memory": {
 						// Property: Memory
@@ -271,6 +273,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "Authentication Configuration",
 			//       "properties": {
 			//         "AccessRoleArn": {
+			//           "description": "Access Role Arn",
 			//           "maxLength": 102,
 			//           "minLength": 29,
 			//           "pattern": "",
@@ -459,8 +462,9 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"access_role_arn": {
 									// Property: AccessRoleArn
-									Type:     types.StringType,
-									Computed: true,
+									Description: "Access Role Arn",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 								"connection_arn": {
 									// Property: ConnectionArn

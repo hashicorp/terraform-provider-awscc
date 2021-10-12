@@ -22,7 +22,7 @@ Describes an association between a local gateway route table and a VPC.
 
 ### Optional
 
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) The tags for the association. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

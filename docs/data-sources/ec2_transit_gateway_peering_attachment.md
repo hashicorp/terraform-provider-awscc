@@ -26,7 +26,7 @@ Data Source schema for AWS::EC2::TransitGatewayPeeringAttachment
 - **peer_region** (String) Peer Region
 - **peer_transit_gateway_id** (String) The ID of the peer transit gateway.
 - **state** (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
-- **status** (Attributes) (see [below for nested schema](#nestedatt--status))
+- **status** (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
 - **tags** (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
 - **transit_gateway_attachment_id** (String) The ID of the transit gateway peering attachment.
 - **transit_gateway_id** (String) The ID of the transit gateway.

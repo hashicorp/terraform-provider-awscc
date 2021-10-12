@@ -18,7 +18,7 @@ A resource schema for a Detector in Amazon Fraud Detector.
 ### Required
 
 - **detector_id** (String) The ID of the detector
-- **event_type** (Attributes) (see [below for nested schema](#nestedatt--event_type))
+- **event_type** (Attributes) The event type to associate this detector with. (see [below for nested schema](#nestedatt--event_type))
 - **rules** (Attributes List) (see [below for nested schema](#nestedatt--rules))
 
 ### Optional

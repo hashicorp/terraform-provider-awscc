@@ -21,12 +21,12 @@ Data Source schema for AWS::ACMPCA::CertificateAuthority
 
 ### Read-Only
 
-- **arn** (String)
+- **arn** (String) The Amazon Resource Name (ARN) of the certificate authority.
 - **certificate_signing_request** (String) The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.
-- **csr_extensions** (Attributes) Structure that contains CSR pass though extensions information. (see [below for nested schema](#nestedatt--csr_extensions))
+- **csr_extensions** (Attributes) Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action. (see [below for nested schema](#nestedatt--csr_extensions))
 - **key_algorithm** (String) Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.
 - **key_storage_security_standard** (String) KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.
-- **revocation_configuration** (Attributes) Certificate Authority revocation information. (see [below for nested schema](#nestedatt--revocation_configuration))
+- **revocation_configuration** (Attributes) Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions. (see [below for nested schema](#nestedatt--revocation_configuration))
 - **signing_algorithm** (String) Algorithm your CA uses to sign certificate requests.
 - **subject** (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--subject))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))

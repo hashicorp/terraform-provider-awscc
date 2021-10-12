@@ -231,7 +231,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 			//       "description": "The baseline constraints resource for a monitoring job.",
 			//       "properties": {
 			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI.",
+			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
 			//           "pattern": "",
 			//           "type": "string"
@@ -258,7 +258,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 							map[string]tfsdk.Attribute{
 								"s3_uri": {
 									// Property: S3Uri
-									Description: "The Amazon S3 URI.",
+									Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 									Type:        types.StringType,
 									Computed:    true,
 								},

@@ -17,7 +17,7 @@ Resource schema for AWS::IoTSiteWise::AccessPolicy
 
 ### Required
 
-- **access_policy_identity** (Attributes) The identity for this access policy. Choose either an SSO user or group or an IAM user or role. (see [below for nested schema](#nestedatt--access_policy_identity))
+- **access_policy_identity** (Attributes) The identity for this access policy. Choose either a user or a group but not both. (see [below for nested schema](#nestedatt--access_policy_identity))
 - **access_policy_permission** (String) The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.
 - **access_policy_resource** (Attributes) The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both. (see [below for nested schema](#nestedatt--access_policy_resource))
 

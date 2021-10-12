@@ -22,7 +22,7 @@ The AWS::NetworkManager::Site type describes a site.
 ### Optional
 
 - **description** (String) The description of the site.
-- **location** (Attributes) The location of the site (see [below for nested schema](#nestedatt--location))
+- **location** (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
 - **tags** (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

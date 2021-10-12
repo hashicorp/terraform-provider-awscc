@@ -103,11 +103,13 @@ func profilingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) of the specified profiling group.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"compute_platform": {
 			// Property: ComputePlatform

@@ -52,7 +52,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "properties": {
 			//     "OnFailure": {
 			//       "additionalProperties": false,
-			//       "description": "A destination for events that failed processing.",
+			//       "description": "The destination configuration for failed invocations.",
 			//       "properties": {
 			//         "Destination": {
 			//           "description": "The Amazon Resource Name (ARN) of the destination resource.",
@@ -72,7 +72,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 				map[string]tfsdk.Attribute{
 					"on_failure": {
 						// Property: OnFailure
-						Description: "A destination for events that failed processing.",
+						Description: "The destination configuration for failed invocations.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"destination": {
@@ -239,11 +239,11 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The configuration used by AWS Lambda to access a self-managed event source.",
+			//   "description": "Self-managed event source endpoints.",
 			//   "properties": {
 			//     "Endpoints": {
 			//       "additionalProperties": false,
-			//       "description": "The endpoints used by AWS Lambda to access a self-managed event source.",
+			//       "description": "The endpoints for a self-managed event source.",
 			//       "properties": {
 			//         "KafkaBootstrapServers": {
 			//           "description": "A list of Kafka server endpoints.",
@@ -265,12 +265,12 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The configuration used by AWS Lambda to access a self-managed event source.",
+			Description: "Self-managed event source endpoints.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"endpoints": {
 						// Property: Endpoints
-						Description: "The endpoints used by AWS Lambda to access a self-managed event source.",
+						Description: "The endpoints for a self-managed event source.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"kafka_bootstrap_servers": {

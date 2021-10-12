@@ -58,6 +58,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The list of task definitions.",
 			//   "properties": {
 			//     "CurrentVersion": {
 			//       "additionalProperties": false,
@@ -104,6 +105,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The list of task definitions.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"current_version": {
@@ -232,6 +234,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Information about the gateways to update.",
 			//   "properties": {
 			//     "LoRaWAN": {
 			//       "additionalProperties": false,
@@ -303,6 +306,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Information about the gateways to update.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"lo_ra_wan": {

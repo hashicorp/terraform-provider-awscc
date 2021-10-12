@@ -25,15 +25,15 @@ Data Source schema for AWS::MediaConnect::Flow
 - **flow_arn** (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - **flow_availability_zone** (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)
 - **name** (String) The name of the flow.
-- **source** (Attributes) The settings for the source of the flow. (see [below for nested schema](#nestedatt--source))
-- **source_failover_config** (Attributes) The settings for source failover (see [below for nested schema](#nestedatt--source_failover_config))
+- **source** (Attributes) The source of the flow. (see [below for nested schema](#nestedatt--source))
+- **source_failover_config** (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
 
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`
 
 Read-Only:
 
-- **decryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--source--decryption))
+- **decryption** (Attributes) The type of decryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--source--decryption))
 - **description** (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
 - **entitlement_arn** (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
 - **ingest_ip** (String) The IP address that the flow will be listening on for incoming content.

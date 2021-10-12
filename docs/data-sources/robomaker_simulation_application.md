@@ -25,9 +25,9 @@ Data Source schema for AWS::RoboMaker::SimulationApplication
 - **current_revision_id** (String) The current revision id.
 - **environment** (String) The URI of the Docker image for the robot application.
 - **name** (String) The name of the simulation application.
-- **rendering_engine** (Attributes) Information about a rendering engine. (see [below for nested schema](#nestedatt--rendering_engine))
-- **robot_software_suite** (Attributes) Information about a robot software suite (ROS distribution). (see [below for nested schema](#nestedatt--robot_software_suite))
-- **simulation_software_suite** (Attributes) Information about a simulation software suite. (see [below for nested schema](#nestedatt--simulation_software_suite))
+- **rendering_engine** (Attributes) The rendering engine for the simulation application. (see [below for nested schema](#nestedatt--rendering_engine))
+- **robot_software_suite** (Attributes) The robot software suite (ROS distribution) used by the simulation application. (see [below for nested schema](#nestedatt--robot_software_suite))
+- **simulation_software_suite** (Attributes) The simulation software suite used by the simulation application. (see [below for nested schema](#nestedatt--simulation_software_suite))
 - **sources** (Attributes List) The sources of the simulation application. (see [below for nested schema](#nestedatt--sources))
 - **tags** (Map of String) A key-value pair to associate with a resource.
 

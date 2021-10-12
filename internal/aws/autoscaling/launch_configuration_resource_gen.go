@@ -51,7 +51,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//       },
 			//       "Ebs": {
 			//         "additionalProperties": false,
-			//         "description": "BlockDevice is a subproperty of BlockDeviceMapping that describes an Amazon EBS volume.",
+			//         "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
 			//         "properties": {
 			//           "DeleteOnTermination": {
 			//             "description": "Indicates whether the volume is deleted on instance termination. ",
@@ -112,7 +112,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 					},
 					"ebs": {
 						// Property: Ebs
-						Description: "BlockDevice is a subproperty of BlockDeviceMapping that describes an Amazon EBS volume.",
+						Description: "Parameters used to automatically set up EBS volumes when an instance is launched.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"delete_on_termination": {
@@ -360,7 +360,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "MetadataOptions is a property of AWS::AutoScaling::LaunchConfiguration that describes metadata options for the instances.",
+			//   "description": "The metadata options for the instances.",
 			//   "properties": {
 			//     "HttpEndpoint": {
 			//       "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
@@ -377,7 +377,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   },
 			//   "type": "object"
 			// }
-			Description: "MetadataOptions is a property of AWS::AutoScaling::LaunchConfiguration that describes metadata options for the instances.",
+			Description: "The metadata options for the instances.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"http_endpoint": {

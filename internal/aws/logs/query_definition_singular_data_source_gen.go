@@ -26,6 +26,7 @@ func queryDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "Optionally define specific log groups as part of your query definition",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "description": "LogGroup name",
 			//     "maxLength": 512,
 			//     "minLength": 1,
 			//     "pattern": "",

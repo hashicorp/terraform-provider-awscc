@@ -47,6 +47,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The configuration parameters for egress access logging.",
 			//   "properties": {
 			//     "LogGroupName": {
 			//       "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
@@ -58,6 +59,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"log_group_name": {
@@ -78,7 +80,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "An HTTP Live Streaming (HLS) ingest resource configuration.",
+			//   "description": "A short text description of the Channel.",
 			//   "properties": {
 			//     "ingestEndpoints": {
 			//       "description": "A list of endpoints to which the source stream should be sent.",
@@ -110,7 +112,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "An HTTP Live Streaming (HLS) ingest resource configuration.",
+			Description: "A short text description of the Channel.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"ingest_endpoints": {
@@ -176,6 +178,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The configuration parameters for egress access logging.",
 			//   "properties": {
 			//     "LogGroupName": {
 			//       "description": "Sets a custom AWS CloudWatch log group name for access logs. If a log group name isn't specified, the defaults are used: /aws/MediaPackage/EgressAccessLogs for egress access logs and /aws/MediaPackage/IngressAccessLogs for ingress access logs.",
@@ -187,6 +190,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The configuration parameters for egress access logging.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"log_group_name": {

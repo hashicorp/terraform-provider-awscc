@@ -81,13 +81,13 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//       "type": "string"
 			//     },
 			//     "PostAnalyticsProcessorSourceUri": {
-			//       "description": "The Amazon S3 URI.",
+			//       "description": "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
 			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
 			//     },
 			//     "RecordPreprocessorSourceUri": {
-			//       "description": "The Amazon S3 URI.",
+			//       "description": "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
 			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
@@ -140,7 +140,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 					},
 					"post_analytics_processor_source_uri": {
 						// Property: PostAnalyticsProcessorSourceUri
-						Description: "The Amazon S3 URI.",
+						Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -149,7 +149,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 					},
 					"record_preprocessor_source_uri": {
 						// Property: RecordPreprocessorSourceUri
-						Description: "The Amazon S3 URI.",
+						Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -182,7 +182,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//       "description": "The baseline constraints resource for a monitoring job.",
 			//       "properties": {
 			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI.",
+			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
 			//           "pattern": "",
 			//           "type": "string"
@@ -195,7 +195,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//       "description": "The baseline statistics resource for a monitoring job.",
 			//       "properties": {
 			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI.",
+			//           "description": "The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.",
 			//           "maxLength": 1024,
 			//           "pattern": "",
 			//           "type": "string"
@@ -225,7 +225,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 							map[string]tfsdk.Attribute{
 								"s3_uri": {
 									// Property: S3Uri
-									Description: "The Amazon S3 URI.",
+									Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -243,7 +243,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 							map[string]tfsdk.Attribute{
 								"s3_uri": {
 									// Property: S3Uri
-									Description: "The Amazon S3 URI.",
+									Description: "The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{

@@ -45,11 +45,11 @@ Read-Only:
 
 Read-Only:
 
-- **data_type** (String)
-- **data_type_spec** (String)
+- **data_type** (String) The data type of the asset model property.
+- **data_type_spec** (String) The data type of the structure for this property.
 - **logical_id** (String) Customer provided ID for property.
 - **name** (String) The name of the asset model property.
-- **type** (Attributes) Contains a property type, which can be one of attribute, measurement, metric, or transform. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type))
+- **type** (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type))
 - **unit** (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type"></a>
@@ -77,7 +77,7 @@ Read-Only:
 
 - **expression** (String) The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.
 - **variables** (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables))
-- **window** (Attributes) Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on). (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window))
+- **window** (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--window))
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables`
@@ -85,7 +85,7 @@ Read-Only:
 Read-Only:
 
 - **name** (String) The friendly name of the variable to be used in the expression.
-- **value** (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
+- **value** (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables.value`
@@ -129,7 +129,7 @@ Read-Only:
 Read-Only:
 
 - **name** (String) The friendly name of the variable to be used in the expression.
-- **value** (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
+- **value** (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value))
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--type_name--variables--value"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name.variables.value`
@@ -160,11 +160,11 @@ Read-Only:
 
 Read-Only:
 
-- **data_type** (String)
-- **data_type_spec** (String)
+- **data_type** (String) The data type of the asset model property.
+- **data_type_spec** (String) The data type of the structure for this property.
 - **logical_id** (String) Customer provided ID for property.
 - **name** (String) The name of the asset model property.
-- **type** (Attributes) Contains a property type, which can be one of attribute, measurement, metric, or transform. (see [below for nested schema](#nestedatt--asset_model_properties--type))
+- **type** (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_properties--type))
 - **unit** (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_properties--type"></a>
@@ -192,7 +192,7 @@ Read-Only:
 
 - **expression** (String) The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.
 - **variables** (Attributes List) The list of variables used in the expression. (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--variables))
-- **window** (Attributes) Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on). (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window))
+- **window** (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window))
 
 <a id="nestedatt--asset_model_properties--type--metric--variables"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window`
@@ -200,7 +200,7 @@ Read-Only:
 Read-Only:
 
 - **name** (String) The friendly name of the variable to be used in the expression.
-- **value** (Attributes) (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window--value))
+- **value** (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window--value))
 
 <a id="nestedatt--asset_model_properties--type--metric--window--value"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window.value`
@@ -244,7 +244,7 @@ Read-Only:
 Read-Only:
 
 - **name** (String) The friendly name of the variable to be used in the expression.
-- **value** (Attributes) (see [below for nested schema](#nestedatt--asset_model_properties--type--transform--variables--value))
+- **value** (Attributes) The variable that identifies an asset property from which to use values. (see [below for nested schema](#nestedatt--asset_model_properties--type--transform--variables--value))
 
 <a id="nestedatt--asset_model_properties--type--transform--variables--value"></a>
 ### Nested Schema for `asset_model_properties.type.transform.variables.value`

@@ -24,7 +24,7 @@ Resource schema for AWS::DataBrew::Project.
 
 ### Optional
 
-- **sample** (Attributes) (see [below for nested schema](#nestedatt--sample))
+- **sample** (Attributes) Sample (see [below for nested schema](#nestedatt--sample))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

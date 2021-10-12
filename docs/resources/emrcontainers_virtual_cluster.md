@@ -17,7 +17,7 @@ Resource Schema of AWS::EMRContainers::VirtualCluster Type
 
 ### Required
 
-- **container_provider** (Attributes) (see [below for nested schema](#nestedatt--container_provider))
+- **container_provider** (Attributes) Container provider of the virtual cluster. (see [below for nested schema](#nestedatt--container_provider))
 - **name** (String) Name of the virtual cluster.
 
 ### Optional

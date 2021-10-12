@@ -60,7 +60,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Information about the encryption of the flow.",
+			//   "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			//   "properties": {
 			//     "Algorithm": {
 			//       "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -95,7 +95,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Information about the encryption of the flow.",
+			Description: "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"algorithm": {
@@ -249,7 +249,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The settings for attaching a VPC interface to an output.",
+			//   "description": "The name of the VPC interface attachment to use for this output.",
 			//   "properties": {
 			//     "VpcInterfaceName": {
 			//       "description": "The name of the VPC interface to use for this output.",
@@ -258,7 +258,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The settings for attaching a VPC interface to an output.",
+			Description: "The name of the VPC interface attachment to use for this output.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"vpc_interface_name": {

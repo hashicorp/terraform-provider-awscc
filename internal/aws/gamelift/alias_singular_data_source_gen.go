@@ -74,6 +74,7 @@ func aliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       ]
 			//     }
 			//   ],
+			//   "description": "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
 			//   "properties": {
 			//     "FleetId": {
 			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
@@ -98,6 +99,7 @@ func aliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"fleet_id": {

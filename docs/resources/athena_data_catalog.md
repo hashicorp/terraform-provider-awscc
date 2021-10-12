@@ -24,7 +24,7 @@ Resource schema for AWS::Athena::DataCatalog
 
 - **description** (String) A description of the data catalog to be created.
 - **parameters** (Map of String) Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) A list of comma separated tags to add to the data catalog that is created. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

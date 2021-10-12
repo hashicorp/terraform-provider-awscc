@@ -24,7 +24,7 @@ Data Source schema for AWS::IoTSiteWise::Gateway
 - **gateway_capability_summaries** (Attributes List) A list of gateway capability summaries that each contain a namespace and status. (see [below for nested schema](#nestedatt--gateway_capability_summaries))
 - **gateway_id** (String) The ID of the gateway device.
 - **gateway_name** (String) A unique, friendly name for the gateway.
-- **gateway_platform** (Attributes) Contains a gateway's platform information. (see [below for nested schema](#nestedatt--gateway_platform))
+- **gateway_platform** (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
 - **tags** (Attributes List) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--gateway_capability_summaries"></a>
@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- **greengrass** (Attributes) Contains the ARN of AWS IoT Greengrass Group that the gateway runs on. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`

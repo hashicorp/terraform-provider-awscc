@@ -79,7 +79,7 @@ Required:
 
 Required:
 
-- **end_time_offset** (String) The time offsets in ISO duration format
+- **end_time_offset** (String) Monitoring end time offset, e.g. PT0H
 - **endpoint_name** (String) The name of the endpoint used to run the monitoring job.
 - **features_attribute** (String) JSONpath to locate features in JSONlines dataset
 - **inference_attribute** (String) Index or JSONpath to locate predicted label(s)
@@ -88,7 +88,7 @@ Required:
 - **probability_threshold_attribute** (Number)
 - **s3_data_distribution_type** (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - **s3_input_mode** (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
-- **start_time_offset** (String) The time offsets in ISO duration format
+- **start_time_offset** (String) Monitoring start time offset, e.g. -PT1H
 
 
 <a id="nestedatt--model_bias_job_input--ground_truth_s3_input"></a>
@@ -140,7 +140,7 @@ Optional:
 
 Optional:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
 
 
 

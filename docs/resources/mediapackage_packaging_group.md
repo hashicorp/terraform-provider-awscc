@@ -21,8 +21,8 @@ Resource schema for AWS::MediaPackage::PackagingGroup
 
 ### Optional
 
-- **authorization** (Attributes) (see [below for nested schema](#nestedatt--authorization))
-- **egress_access_logs** (Attributes) (see [below for nested schema](#nestedatt--egress_access_logs))
+- **authorization** (Attributes) CDN Authorization (see [below for nested schema](#nestedatt--authorization))
+- **egress_access_logs** (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--egress_access_logs))
 - **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

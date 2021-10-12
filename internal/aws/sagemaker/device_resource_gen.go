@@ -25,7 +25,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Edge device you want to create",
+			//   "description": "The Edge Device you want to register against a device fleet",
 			//   "properties": {
 			//     "Description": {
 			//       "description": "Description of the device",
@@ -53,7 +53,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Edge device you want to create",
+			Description: "The Edge Device you want to register against a device fleet",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"description": {

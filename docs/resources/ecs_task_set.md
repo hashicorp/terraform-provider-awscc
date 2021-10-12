@@ -28,7 +28,7 @@ Create a task set in the specified cluster and service. This is used when a serv
 - **load_balancers** (Attributes List) (see [below for nested schema](#nestedatt--load_balancers))
 - **network_configuration** (Attributes) An object representing the network configuration for a task or service. (see [below for nested schema](#nestedatt--network_configuration))
 - **platform_version** (String) The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.
-- **scale** (Attributes) (see [below for nested schema](#nestedatt--scale))
+- **scale** (Attributes) A floating-point percentage of the desired number of tasks to place and keep running in the task set. (see [below for nested schema](#nestedatt--scale))
 - **service_registries** (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
 
 ### Read-Only

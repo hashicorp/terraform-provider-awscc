@@ -66,6 +66,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Amplitude": {
 			//           "properties": {
 			//             "ApiKey": {
+			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -85,11 +86,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Datadog": {
 			//           "properties": {
 			//             "ApiKey": {
+			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ApplicationKey": {
+			//               "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -104,6 +107,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Dynatrace": {
 			//           "properties": {
 			//             "ApiToken": {
+			//               "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -117,21 +121,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "GoogleAnalytics": {
 			//           "properties": {
 			//             "AccessToken": {
+			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
+			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
+			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
+			//               "description": "The oauth needed to request security tokens from the connector endpoint.",
 			//               "properties": {
 			//                 "AuthCode": {
 			//                   "description": "The code provided by the connector when it has been authenticated via the connected app.",
@@ -145,6 +153,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "type": "object"
 			//             },
 			//             "RefreshToken": {
+			//               "description": "The credentials used to acquire new access tokens.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -159,21 +168,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "InforNexus": {
 			//           "properties": {
 			//             "AccessKeyId": {
+			//               "description": "The Access Key portion of the credentials.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Datakey": {
+			//               "description": "The encryption keys used to encrypt data.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "SecretAccessKey": {
+			//               "description": "The secret key used to sign requests.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "UserId": {
+			//               "description": "The identi?er for the user.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -190,21 +203,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Marketo": {
 			//           "properties": {
 			//             "AccessToken": {
+			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
+			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
+			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
+			//               "description": "The oauth needed to request security tokens from the connector endpoint.",
 			//               "properties": {
 			//                 "AuthCode": {
 			//                   "description": "The code provided by the connector when it has been authenticated via the connected app.",
@@ -227,11 +244,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Redshift": {
 			//           "properties": {
 			//             "Password": {
+			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Username": {
+			//               "description": "The name of the user.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -246,16 +265,19 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Salesforce": {
 			//           "properties": {
 			//             "AccessToken": {
+			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientCredentialsArn": {
+			//               "description": "The client credentials to fetch access token and refresh token.",
 			//               "maxLength": 2048,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
+			//               "description": "The oauth needed to request security tokens from the connector endpoint.",
 			//               "properties": {
 			//                 "AuthCode": {
 			//                   "description": "The code provided by the connector when it has been authenticated via the connected app.",
@@ -269,6 +291,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "type": "object"
 			//             },
 			//             "RefreshToken": {
+			//               "description": "The credentials used to acquire new access tokens.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -279,11 +302,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "ServiceNow": {
 			//           "properties": {
 			//             "Password": {
+			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Username": {
+			//               "description": "The name of the user.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -298,6 +323,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Singular": {
 			//           "properties": {
 			//             "ApiKey": {
+			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -311,21 +337,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Slack": {
 			//           "properties": {
 			//             "AccessToken": {
+			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
+			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
+			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
+			//               "description": "The oauth needed to request security tokens from the connector endpoint.",
 			//               "properties": {
 			//                 "AuthCode": {
 			//                   "description": "The code provided by the connector when it has been authenticated via the connected app.",
@@ -348,11 +378,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Snowflake": {
 			//           "properties": {
 			//             "Password": {
+			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Username": {
+			//               "description": "The name of the user.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -367,6 +399,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Trendmicro": {
 			//           "properties": {
 			//             "ApiSecretKey": {
+			//               "description": "The Secret Access Key portion of the credentials.",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -380,11 +413,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Veeva": {
 			//           "properties": {
 			//             "Password": {
+			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Username": {
+			//               "description": "The name of the user.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -399,21 +434,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Zendesk": {
 			//           "properties": {
 			//             "AccessToken": {
+			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
+			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
+			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
+			//               "description": "The oauth needed to request security tokens from the connector endpoint.",
 			//               "properties": {
 			//                 "AuthCode": {
 			//                   "description": "The code provided by the connector when it has been authenticated via the connected app.",
@@ -442,6 +481,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Datadog": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Datadog resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -455,6 +495,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Dynatrace": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Dynatrace resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -468,6 +509,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "InforNexus": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the InforNexus resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -481,6 +523,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Marketo": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Marketo resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -494,21 +537,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Redshift": {
 			//           "properties": {
 			//             "BucketName": {
+			//               "description": "The name of the Amazon S3 bucket associated with Redshift.",
 			//               "maxLength": 63,
 			//               "minLength": 3,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "BucketPrefix": {
+			//               "description": "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
 			//               "maxLength": 128,
 			//               "type": "string"
 			//             },
 			//             "DatabaseUrl": {
+			//               "description": "The JDBC URL of the Amazon Redshift cluster.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "RoleArn": {
+			//               "description": "The Amazon Resource Name (ARN) of the IAM role.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -524,6 +571,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Salesforce": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Salesforce resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -537,6 +585,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "ServiceNow": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the ServiceNow resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -550,6 +599,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Slack": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Slack resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -563,36 +613,43 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Snowflake": {
 			//           "properties": {
 			//             "AccountName": {
+			//               "description": "The name of the account.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "BucketName": {
+			//               "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
 			//               "maxLength": 63,
 			//               "minLength": 3,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "BucketPrefix": {
+			//               "description": "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
 			//               "maxLength": 128,
 			//               "type": "string"
 			//             },
 			//             "PrivateLinkServiceName": {
+			//               "description": "The Snow?ake Private Link service name to be used for private data transfers.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Region": {
+			//               "description": "The region of the Snow?ake account.",
 			//               "maxLength": 64,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Stage": {
+			//               "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
 			//               "maxLength": 16,
 			//               "pattern": "",
 			//               "type": "string"
 			//             },
 			//             "Warehouse": {
+			//               "description": "The name of the Snow?ake warehouse.",
 			//               "maxLength": 512,
 			//               "pattern": "",
 			//               "type": "string"
@@ -608,6 +665,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Veeva": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Veeva resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -621,6 +679,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "Zendesk": {
 			//           "properties": {
 			//             "InstanceUrl": {
+			//               "description": "The location of the Zendesk resource",
 			//               "maxLength": 256,
 			//               "pattern": "",
 			//               "type": "string"
@@ -654,8 +713,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -678,16 +738,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
 											},
 											"application_key": {
 												// Property: ApplicationKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -702,8 +764,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"api_token": {
 												// Property: ApiToken
-												Type:     types.StringType,
-												Required: true,
+												Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -718,30 +781,34 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to access protected resources.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
 												// Property: ClientId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The identi?er for the desired client.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												Type:     types.StringType,
-												Required: true,
+												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
+												Description: "The oauth needed to request security tokens from the connector endpoint.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"auth_code": {
@@ -762,8 +829,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"refresh_token": {
 												// Property: RefreshToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to acquire new access tokens.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -778,32 +846,36 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_key_id": {
 												// Property: AccessKeyId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The Access Key portion of the credentials.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
 											},
 											"datakey": {
 												// Property: Datakey
-												Type:     types.StringType,
-												Required: true,
+												Description: "The encryption keys used to encrypt data.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"secret_access_key": {
 												// Property: SecretAccessKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "The secret key used to sign requests.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"user_id": {
 												// Property: UserId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The identi?er for the user.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -818,30 +890,34 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to access protected resources.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
 												// Property: ClientId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The identi?er for the desired client.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												Type:     types.StringType,
-												Required: true,
+												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
+												Description: "The oauth needed to request security tokens from the connector endpoint.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"auth_code": {
@@ -870,16 +946,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
-												Type:     types.StringType,
-												Required: true,
+												Description: "The password that corresponds to the username.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
 												// Property: Username
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the user.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -894,22 +972,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to access protected resources.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_credentials_arn": {
 												// Property: ClientCredentialsArn
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The client credentials to fetch access token and refresh token.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(2048),
 												},
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
+												Description: "The oauth needed to request security tokens from the connector endpoint.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"auth_code": {
@@ -930,8 +1011,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"refresh_token": {
 												// Property: RefreshToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to acquire new access tokens.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -946,16 +1028,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
-												Type:     types.StringType,
-												Required: true,
+												Description: "The password that corresponds to the username.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
 												// Property: Username
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the user.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -970,8 +1054,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"api_key": {
 												// Property: ApiKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -986,30 +1071,34 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to access protected resources.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
 												// Property: ClientId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The identi?er for the desired client.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												Type:     types.StringType,
-												Required: true,
+												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
+												Description: "The oauth needed to request security tokens from the connector endpoint.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"auth_code": {
@@ -1038,16 +1127,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
-												Type:     types.StringType,
-												Required: true,
+												Description: "The password that corresponds to the username.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
 												// Property: Username
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the user.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -1062,8 +1153,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"api_secret_key": {
 												// Property: ApiSecretKey
-												Type:     types.StringType,
-												Required: true,
+												Description: "The Secret Access Key portion of the credentials.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1078,16 +1170,18 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"password": {
 												// Property: Password
-												Type:     types.StringType,
-												Required: true,
+												Description: "The password that corresponds to the username.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"username": {
 												// Property: Username
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the user.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -1102,30 +1196,34 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"access_token": {
 												// Property: AccessToken
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The credentials used to access protected resources.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_id": {
 												// Property: ClientId
-												Type:     types.StringType,
-												Required: true,
+												Description: "The identi?er for the desired client.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"client_secret": {
 												// Property: ClientSecret
-												Type:     types.StringType,
-												Required: true,
+												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"connector_o_auth_request": {
 												// Property: ConnectorOAuthRequest
+												Description: "The oauth needed to request security tokens from the connector endpoint.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"auth_code": {
@@ -1163,8 +1261,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Datadog resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1179,8 +1278,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Dynatrace resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1195,8 +1295,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the InforNexus resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1211,8 +1312,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Marketo resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1227,32 +1329,36 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"bucket_name": {
 												// Property: BucketName
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the Amazon S3 bucket associated with Redshift.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 63),
 												},
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(128),
 												},
 											},
 											"database_url": {
 												// Property: DatabaseUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The JDBC URL of the Amazon Redshift cluster.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"role_arn": {
 												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
+												Description: "The Amazon Resource Name (ARN) of the IAM role.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -1267,8 +1373,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The location of the Salesforce resource",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1288,8 +1395,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the ServiceNow resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1304,8 +1412,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Slack resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1320,56 +1429,63 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"account_name": {
 												// Property: AccountName
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The name of the account.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"bucket_name": {
 												// Property: BucketName
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 63),
 												},
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(128),
 												},
 											},
 											"private_link_service_name": {
 												// Property: PrivateLinkServiceName
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The Snow?ake Private Link service name to be used for private data transfers.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
 											},
 											"region": {
 												// Property: Region
-												Type:     types.StringType,
-												Optional: true,
+												Description: "The region of the Snow?ake account.",
+												Type:        types.StringType,
+												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(64),
 												},
 											},
 											"stage": {
 												// Property: Stage
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(16),
 												},
 											},
 											"warehouse": {
 												// Property: Warehouse
-												Type:     types.StringType,
-												Required: true,
+												Description: "The name of the Snow?ake warehouse.",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
@@ -1384,8 +1500,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Veeva resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1400,8 +1517,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										map[string]tfsdk.Attribute{
 											"instance_url": {
 												// Property: InstanceUrl
-												Type:     types.StringType,
-												Required: true,
+												Description: "The location of the Zendesk resource",
+												Type:        types.StringType,
+												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
 												},
@@ -1442,6 +1560,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// Property: ConnectorType
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "List of Saas providers that need connector profile to be created",
 			//   "enum": [
 			//     "Salesforce",
 			//     "Singular",
@@ -1461,8 +1580,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Description: "List of Saas providers that need connector profile to be created",
+			Type:        types.StringType,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"Salesforce",

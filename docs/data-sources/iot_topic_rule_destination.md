@@ -22,10 +22,10 @@ Data Source schema for AWS::IoT::TopicRuleDestination
 ### Read-Only
 
 - **arn** (String) Amazon Resource Name (ARN).
-- **http_url_properties** (Attributes) (see [below for nested schema](#nestedatt--http_url_properties))
-- **status** (String)
+- **http_url_properties** (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
+- **status** (String) The status of the TopicRuleDestination.
 - **status_reason** (String) The reasoning for the current status of the TopicRuleDestination.
-- **vpc_properties** (Attributes) (see [below for nested schema](#nestedatt--vpc_properties))
+- **vpc_properties** (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
 
 <a id="nestedatt--http_url_properties"></a>
 ### Nested Schema for `http_url_properties`
