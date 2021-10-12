@@ -122,3 +122,58 @@ func FloatAtLeast(min float64) tfsdk.AttributeValidator {
 		min: min,
 	}
 }
+
+// floatAtMostValidator validates that an float Attribute's value is at most a certain value.
+type floatAtMostValidator struct {
+	tfsdk.AttributeValidator
+
+	max float64
+}
+
+// Description describes the validation in plain text formatting.
+func (validator floatAtMostValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be at most %f", validator.max)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator floatAtMostValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+// Validate performs the validation.
+func (validator floatAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
+
+		return
+	}
+
+	if n.Unknown || n.Null {
+		return
+	}
+
+	f, _ := n.Value.Float64()
+
+	if f > validator.max {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be at most %f, got %f", validator.max, f),
+		)
+
+		return
+	}
+}
+
+// FloatAtMost returns a new float value at nost validator.
+func FloatAtMost(max float64) tfsdk.AttributeValidator {
+	return floatAtMostValidator{
+		max: max,
+	}
+}

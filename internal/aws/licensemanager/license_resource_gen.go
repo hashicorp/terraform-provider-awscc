@@ -237,11 +237,13 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: LicenseArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Amazon Resource Name is a unique name for each resource.",
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Amazon Resource Name is a unique name for each resource.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"license_metadata": {
 			// Property: LicenseMetadata

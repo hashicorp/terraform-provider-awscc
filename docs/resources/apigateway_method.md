@@ -27,7 +27,7 @@ Resource Type definition for AWS::ApiGateway::Method
 - **authorization_scopes** (List of String) A list of authorization scopes configured on the method.
 - **authorization_type** (String) The method's authorization type.
 - **authorizer_id** (String) The identifier of the authorizer to use on this method.
-- **integration** (Attributes) (see [below for nested schema](#nestedatt--integration))
+- **integration** (Attributes) The backend system that the method calls when it receives a request. (see [below for nested schema](#nestedatt--integration))
 - **method_responses** (Attributes List) The responses that can be sent to the client who calls the method. (see [below for nested schema](#nestedatt--method_responses))
 - **operation_name** (String) A friendly operation name for the method.
 - **request_models** (Map of String) The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.

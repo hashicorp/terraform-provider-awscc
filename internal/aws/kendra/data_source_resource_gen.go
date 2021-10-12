@@ -3797,7 +3797,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "List of tags",
+			//   "description": "Tags for labeling the data source",
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A label for tagging Kendra resources",
@@ -3824,7 +3824,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxItems": 200,
 			//   "type": "array"
 			// }
-			Description: "List of tags",
+			Description: "Tags for labeling the data source",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

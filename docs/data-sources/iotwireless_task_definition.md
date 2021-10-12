@@ -23,11 +23,11 @@ Data Source schema for AWS::IoTWireless::TaskDefinition
 
 - **arn** (String) TaskDefinition arn. Returned after successful create.
 - **auto_create_tasks** (Boolean) Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.
-- **lo_ra_wan_update_gateway_task_entry** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
+- **lo_ra_wan_update_gateway_task_entry** (Attributes) The list of task definitions. (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
 - **name** (String) The name of the new resource.
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 - **task_definition_type** (String) A filter to list only the wireless gateway task definitions that use this task definition type
-- **update** (Attributes) (see [below for nested schema](#nestedatt--update))
+- **update** (Attributes) Information about the gateways to update. (see [below for nested schema](#nestedatt--update))
 
 <a id="nestedatt--lo_ra_wan_update_gateway_task_entry"></a>
 ### Nested Schema for `lo_ra_wan_update_gateway_task_entry`

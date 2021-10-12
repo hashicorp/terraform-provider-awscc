@@ -57,6 +57,7 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The tags for the carrier gateway.",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
@@ -79,6 +80,7 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
+			Description: "The tags for the carrier gateway.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

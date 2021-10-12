@@ -22,7 +22,7 @@ Resource schema for AWS::MediaConnect::FlowSource
 
 ### Optional
 
-- **decryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--decryption))
+- **decryption** (Attributes) The type of encryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--decryption))
 - **entitlement_arn** (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
 - **flow_arn** (String) The ARN of the flow.
 - **ingest_port** (Number) The port that the flow will be listening on for incoming content.

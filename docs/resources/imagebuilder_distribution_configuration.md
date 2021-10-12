@@ -70,7 +70,7 @@ Required:
 
 - **container_tags** (List of String) Tags that are attached to the container distribution configuration.
 - **description** (String) The description of the container distribution configuration.
-- **target_repository** (Attributes) The destination repository for the container image. (see [below for nested schema](#nestedatt--distributions--container_distribution_configuration--target_repository))
+- **target_repository** (Attributes) The destination repository for the container distribution configuration. (see [below for nested schema](#nestedatt--distributions--container_distribution_configuration--target_repository))
 
 <a id="nestedatt--distributions--container_distribution_configuration--target_repository"></a>
 ### Nested Schema for `distributions.container_distribution_configuration.target_repository`

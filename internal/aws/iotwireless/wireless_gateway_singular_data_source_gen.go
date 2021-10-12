@@ -71,6 +71,7 @@ func wirelessGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
 			//   "properties": {
 			//     "GatewayEui": {
 			//       "pattern": "",
@@ -87,6 +88,7 @@ func wirelessGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"gateway_eui": {

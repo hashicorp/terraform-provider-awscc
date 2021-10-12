@@ -35,6 +35,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Capacity units",
 			//   "properties": {
 			//     "QueryCapacityUnits": {
 			//       "minimum": 0,
@@ -51,6 +52,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Capacity units",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
@@ -77,11 +79,13 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A description for the index",
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Description: "A description for the index",
+			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
 			},
@@ -90,6 +94,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: DocumentMetadataConfigurations
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Document metadata configurations",
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -181,6 +186,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxItems": 500,
 			//   "type": "array"
 			// }
+			Description: "Document metadata configurations",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -380,6 +386,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Server side encryption configuration",
 			//   "properties": {
 			//     "KmsKeyId": {
 			//       "maxLength": 2048,
@@ -389,6 +396,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Server side encryption configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"kms_key_id": {
@@ -411,7 +419,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "List of tags",
+			//   "description": "Tags for labeling the index",
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A label for tagging Kendra resources",
@@ -438,7 +446,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "maxItems": 200,
 			//   "type": "array"
 			// }
-			Description: "List of tags",
+			Description: "Tags for labeling the index",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -132,6 +132,7 @@ func detectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The event type to associate this detector with.",
 			//   "properties": {
 			//     "Arn": {
 			//       "description": "The ARN of the event type.",
@@ -433,6 +434,7 @@ func detectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The event type to associate this detector with.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"arn": {

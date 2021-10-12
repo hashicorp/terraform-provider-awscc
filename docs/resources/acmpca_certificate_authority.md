@@ -24,14 +24,14 @@ Private certificate authority.
 
 ### Optional
 
-- **csr_extensions** (Attributes) Structure that contains CSR pass though extensions information. (see [below for nested schema](#nestedatt--csr_extensions))
+- **csr_extensions** (Attributes) Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action. (see [below for nested schema](#nestedatt--csr_extensions))
 - **key_storage_security_standard** (String) KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.
-- **revocation_configuration** (Attributes) Certificate Authority revocation information. (see [below for nested schema](#nestedatt--revocation_configuration))
+- **revocation_configuration** (Attributes) Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions. (see [below for nested schema](#nestedatt--revocation_configuration))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
+- **arn** (String) The Amazon Resource Name (ARN) of the certificate authority.
 - **certificate_signing_request** (String) The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.
 - **id** (String) Uniquely identifies the resource.
 

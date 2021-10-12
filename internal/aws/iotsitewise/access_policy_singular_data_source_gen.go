@@ -46,7 +46,7 @@ func accessPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The identity for this access policy. Choose either an SSO user or group or an IAM user or role.",
+			//   "description": "The identity for this access policy. Choose either a user or a group but not both.",
 			//   "properties": {
 			//     "IamRole": {
 			//       "additionalProperties": false,
@@ -84,7 +84,7 @@ func accessPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The identity for this access policy. Choose either an SSO user or group or an IAM user or role.",
+			Description: "The identity for this access policy. Choose either a user or a group but not both.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"iam_role": {

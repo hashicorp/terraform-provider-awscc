@@ -18,7 +18,7 @@ Resource Type definition for AWS::SageMaker::Domain
 ### Required
 
 - **auth_mode** (String) The mode of authentication that members use to access the domain.
-- **default_user_settings** (Attributes) A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called. (see [below for nested schema](#nestedatt--default_user_settings))
+- **default_user_settings** (Attributes) The default user settings. (see [below for nested schema](#nestedatt--default_user_settings))
 - **domain_name** (String) A name for the domain.
 - **subnet_ids** (List of String) The VPC subnets that Studio uses for communication.
 - **vpc_id** (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
@@ -44,10 +44,10 @@ Resource Type definition for AWS::SageMaker::Domain
 Required:
 
 - **execution_role** (String) The user profile Amazon Resource Name (ARN).
-- **jupyter_server_app_settings** (Attributes) The JupyterServer app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
+- **jupyter_server_app_settings** (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
 - **kernel_gateway_app_settings** (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
 - **security_groups** (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
-- **sharing_settings** (Attributes) Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
+- **sharing_settings** (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
 
 <a id="nestedatt--default_user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `default_user_settings.jupyter_server_app_settings`
@@ -73,7 +73,7 @@ Required:
 Required:
 
 - **custom_images** (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images))
-- **default_resource_spec** (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
+- **default_resource_spec** (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings--default_resource_spec))
 
 <a id="nestedatt--default_user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.kernel_gateway_app_settings.custom_images`

@@ -21,7 +21,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) The tags for the carrier gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

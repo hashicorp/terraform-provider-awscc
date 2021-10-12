@@ -74,6 +74,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Sample",
 			//   "properties": {
 			//     "Size": {
 			//       "description": "Sample size",
@@ -95,6 +96,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Sample",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"size": {

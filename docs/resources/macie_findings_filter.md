@@ -17,12 +17,12 @@ Macie FindingsFilter resource schema.
 
 ### Required
 
-- **finding_criteria** (Attributes) (see [below for nested schema](#nestedatt--finding_criteria))
+- **finding_criteria** (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
 - **name** (String) Findings filter name
 
 ### Optional
 
-- **action** (String)
+- **action** (String) Findings filter action.
 - **description** (String) Findings filter description
 - **position** (Number) Findings filter position.
 

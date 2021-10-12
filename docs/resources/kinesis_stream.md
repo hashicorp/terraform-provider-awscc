@@ -23,7 +23,7 @@ Resource Type definition for AWS::Kinesis::Stream
 
 - **name** (String) The name of the Kinesis stream.
 - **retention_period_hours** (Number) The number of hours for the data records that are stored in shards to remain accessible.
-- **stream_encryption** (Attributes) When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. Removing this property from your stack template and updating your stack disables encryption. (see [below for nested schema](#nestedatt--stream_encryption))
+- **stream_encryption** (Attributes) When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. (see [below for nested schema](#nestedatt--stream_encryption))
 - **tags** (Attributes List) An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -51,7 +51,7 @@ Required:
 
 Required:
 
-- **access_role_arn** (String)
+- **access_role_arn** (String) Access Role Arn
 - **connection_arn** (String) Connection Arn
 
 
@@ -161,7 +161,7 @@ Optional:
 Optional:
 
 - **cpu** (String) CPU
-- **instance_role_arn** (String)
+- **instance_role_arn** (String) Instance Role Arn
 - **memory** (String) Memory
 
 

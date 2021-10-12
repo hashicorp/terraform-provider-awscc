@@ -24,6 +24,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Configuration for the transfer acceleration state.",
 			//   "properties": {
 			//     "AccelerationStatus": {
 			//       "description": "Configures the transfer acceleration state for an Amazon S3 bucket.",
@@ -39,6 +40,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Configuration for the transfer acceleration state.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"acceleration_status": {
@@ -276,10 +278,10 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "the Amazon Resource Name (ARN) of the specified bucket.",
+			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
 			//   "type": "string"
 			// }
-			Description: "the Amazon Resource Name (ARN) of the specified bucket.",
+			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -396,6 +398,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Rules that define cross-origin resource sharing of objects in this bucket.",
 			//   "properties": {
 			//     "CorsRules": {
 			//       "insertionOrder": true,
@@ -472,6 +475,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Rules that define cross-origin resource sharing of objects in this bucket.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"cors_rules": {
@@ -893,6 +897,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Rules that define how Amazon S3 manages objects during their lifetime.",
 			//   "properties": {
 			//     "Rules": {
 			//       "description": "A lifecycle rule for individual objects in an Amazon S3 bucket.",
@@ -1103,6 +1108,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Rules that define how Amazon S3 manages objects during their lifetime.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"rules": {
@@ -1286,6 +1292,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Settings that define where logs are stored.",
 			//   "properties": {
 			//     "DestinationBucketName": {
 			//       "description": "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
@@ -1297,6 +1304,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Settings that define where logs are stored.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"destination_bucket_name": {
@@ -1410,7 +1418,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Describes the notification configuration for an Amazon S3 bucket.",
+			//   "description": "Configuration that defines how Amazon S3 handles bucket notifications.",
 			//   "properties": {
 			//     "LambdaConfigurations": {
 			//       "insertionOrder": true,
@@ -1424,7 +1432,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "Filter": {
 			//             "additionalProperties": false,
-			//             "description": "Specifies object key name filtering rules.",
+			//             "description": "The filtering rules that determine which objects invoke the AWS Lambda function.",
 			//             "properties": {
 			//               "S3Key": {
 			//                 "additionalProperties": false,
@@ -1491,7 +1499,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "Filter": {
 			//             "additionalProperties": false,
-			//             "description": "Specifies object key name filtering rules.",
+			//             "description": "The filtering rules that determine which objects trigger notifications.",
 			//             "properties": {
 			//               "S3Key": {
 			//                 "additionalProperties": false,
@@ -1558,7 +1566,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "Filter": {
 			//             "additionalProperties": false,
-			//             "description": "Specifies object key name filtering rules.",
+			//             "description": "The filtering rules that determine for which objects to send notifications.",
 			//             "properties": {
 			//               "S3Key": {
 			//                 "additionalProperties": false,
@@ -1616,7 +1624,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Describes the notification configuration for an Amazon S3 bucket.",
+			Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"lambda_configurations": {
@@ -1631,7 +1639,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"filter": {
 									// Property: Filter
-									Description: "Specifies object key name filtering rules.",
+									Description: "The filtering rules that determine which objects invoke the AWS Lambda function.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"s3_key": {
@@ -1689,7 +1697,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"filter": {
 									// Property: Filter
-									Description: "Specifies object key name filtering rules.",
+									Description: "The filtering rules that determine which objects trigger notifications.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"s3_key": {
@@ -1747,7 +1755,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"filter": {
 									// Property: Filter
-									Description: "Specifies object key name filtering rules.",
+									Description: "The filtering rules that determine for which objects to send notifications.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"s3_key": {
@@ -1802,6 +1810,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Places an Object Lock configuration on the specified bucket.",
 			//   "properties": {
 			//     "ObjectLockEnabled": {
 			//       "type": "string"
@@ -1836,6 +1845,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Places an Object Lock configuration on the specified bucket.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"object_lock_enabled": {
@@ -1896,6 +1906,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Specifies the container element for object ownership rules.",
 			//   "properties": {
 			//     "Rules": {
 			//       "insertionOrder": true,
@@ -1922,6 +1933,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Specifies the container element for object ownership rules.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"rules": {
@@ -2019,7 +2031,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB.",
+			//   "description": "Configuration for replicating objects in an S3 bucket.",
 			//   "properties": {
 			//     "Role": {
 			//       "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.",
@@ -2234,6 +2246,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "properties": {
 			//               "ReplicaModifications": {
 			//                 "additionalProperties": false,
+			//                 "description": "A filter that you can specify for selection for modifications on replicas.",
 			//                 "properties": {
 			//                   "Status": {
 			//                     "description": "Specifies whether Amazon S3 replicates modifications on replicas.",
@@ -2251,7 +2264,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               },
 			//               "SseKmsEncryptedObjects": {
 			//                 "additionalProperties": false,
-			//                 "description": "A container for filter information for the selection of S3 objects encrypted with AWS KMS.",
+			//                 "description": "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
 			//                 "properties": {
 			//                   "Status": {
 			//                     "description": "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.",
@@ -2295,7 +2308,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB.",
+			Description: "Configuration for replicating objects in an S3 bucket.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"role": {
@@ -2516,6 +2529,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 										map[string]tfsdk.Attribute{
 											"replica_modifications": {
 												// Property: ReplicaModifications
+												Description: "A filter that you can specify for selection for modifications on replicas.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"status": {
@@ -2530,7 +2544,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											},
 											"sse_kms_encrypted_objects": {
 												// Property: SseKmsEncryptedObjects
-												Description: "A container for filter information for the selection of S3 objects encrypted with AWS KMS.",
+												Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"status": {
@@ -2690,7 +2704,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "properties": {
 			//           "RedirectRule": {
 			//             "additionalProperties": false,
-			//             "description": "Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.",
+			//             "description": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
 			//             "properties": {
 			//               "HostName": {
 			//                 "description": "The host name to use in the redirect request.",
@@ -2787,7 +2801,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"redirect_rule": {
 									// Property: RedirectRule
-									Description: "Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.",
+									Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"host_name": {

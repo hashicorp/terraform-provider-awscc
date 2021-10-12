@@ -24,7 +24,7 @@ Resource Type definition for AWS::SageMaker::App
 
 ### Optional
 
-- **resource_spec** (Attributes) (see [below for nested schema](#nestedatt--resource_spec))
+- **resource_spec** (Attributes) The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. (see [below for nested schema](#nestedatt--resource_spec))
 - **tags** (Attributes List) A list of tags to apply to the app. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

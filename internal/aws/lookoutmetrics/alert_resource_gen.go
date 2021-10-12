@@ -25,17 +25,20 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The action to be taken by the alert when an anomaly is detected.",
 			//   "properties": {
 			//     "LambdaConfiguration": {
 			//       "additionalProperties": false,
 			//       "description": "Configuration options for a Lambda alert action.",
 			//       "properties": {
 			//         "LambdaArn": {
+			//           "description": "ARN of a Lambda to send alert notifications to.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
 			//         "RoleArn": {
+			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
@@ -52,11 +55,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Configuration options for an SNS alert action.",
 			//       "properties": {
 			//         "RoleArn": {
+			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
 			//         "SnsTopicArn": {
+			//           "description": "ARN of an SNS topic to send alert notifications to.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
@@ -71,6 +76,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The action to be taken by the alert when an anomaly is detected.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"lambda_configuration": {
@@ -80,16 +86,18 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
-									Type:     types.StringType,
-									Required: true,
+									Description: "ARN of a Lambda to send alert notifications to.",
+									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 									},
 								},
 								"role_arn": {
 									// Property: RoleArn
-									Type:     types.StringType,
-									Required: true,
+									Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
+									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 									},
@@ -105,16 +113,18 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									Type:     types.StringType,
-									Required: true,
+									Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
+									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 									},
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									Type:     types.StringType,
-									Required: true,
+									Description: "ARN of an SNS topic to send alert notifications to.",
+									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
 									},
@@ -213,12 +223,14 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "ARN assigned to the alert.",
 			//   "maxLength": 256,
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "ARN assigned to the alert.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 	}
 

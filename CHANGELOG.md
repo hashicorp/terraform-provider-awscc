@@ -1,5 +1,17 @@
 ## 0.3.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_backup_framework`
+* **New Data Source:** `awscc_backup_frameworks`
+* **New Data Source:** `awscc_iot_job_template`
+* **New Data Source:** `awscc_iot_job_templates`
+* **New Data Source:** `awscc_lightsail_instance`
+* **New Data Source:** `awscc_lightsail_instances`
+* **New Resource:** `awscc_backup_framework`
+* **New Resource:** `awscc_iot_job_template`
+* **New Resource:** `awscc_lightsail_instance`
+
 ## [0.2.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.2.0) (October 7, 2021)
 
 BREAKING CHANGES:

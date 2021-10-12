@@ -23,9 +23,9 @@ Data Source schema for AWS::ApiGateway::UsagePlan
 
 - **api_stages** (Attributes List) The API stages to associate with this usage plan. (see [below for nested schema](#nestedatt--api_stages))
 - **description** (String) A description of the usage plan.
-- **quota** (Attributes) (see [below for nested schema](#nestedatt--quota))
+- **quota** (Attributes) Configures the number of requests that users can make within a given interval. (see [below for nested schema](#nestedatt--quota))
 - **tags** (Attributes List) An array of arbitrary tags (key-value pairs) to associate with the usage plan. (see [below for nested schema](#nestedatt--tags))
-- **throttle** (Attributes) (see [below for nested schema](#nestedatt--throttle))
+- **throttle** (Attributes) Configures the overall request rate (average requests per second) and burst capacity. (see [below for nested schema](#nestedatt--throttle))
 - **usage_plan_name** (String) A name for the usage plan.
 
 <a id="nestedatt--api_stages"></a>

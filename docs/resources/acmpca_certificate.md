@@ -17,20 +17,20 @@ A certificate issued via a private certificate authority
 
 ### Required
 
-- **certificate_authority_arn** (String)
+- **certificate_authority_arn** (String) The Amazon Resource Name (ARN) for the private CA to issue the certificate.
 - **certificate_signing_request** (String) The certificate signing request (CSR) for the Certificate.
 - **signing_algorithm** (String) The name of the algorithm that will be used to sign the Certificate.
-- **validity** (Attributes) Validity for a certificate. (see [below for nested schema](#nestedatt--validity))
+- **validity** (Attributes) The time before which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity))
 
 ### Optional
 
-- **api_passthrough** (Attributes) Structure that specifies fields to be overridden in a certificate at the time of issuance. These requires an API Passthrough template be used or they will be ignored. (see [below for nested schema](#nestedatt--api_passthrough))
-- **template_arn** (String)
-- **validity_not_before** (Attributes) Validity for a certificate. (see [below for nested schema](#nestedatt--validity_not_before))
+- **api_passthrough** (Attributes) These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored. (see [below for nested schema](#nestedatt--api_passthrough))
+- **template_arn** (String) Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.
+- **validity_not_before** (Attributes) The time after which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity_not_before))
 
 ### Read-Only
 
-- **arn** (String)
+- **arn** (String) The ARN of the issued certificate.
 - **certificate** (String) The issued certificate in base 64 PEM-encoded format.
 - **id** (String) Uniquely identifies the resource.
 

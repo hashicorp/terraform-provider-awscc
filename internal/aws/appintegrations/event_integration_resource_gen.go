@@ -197,6 +197,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The EventFilter (source) associated with the event integration.",
 			//   "properties": {
 			//     "Source": {
 			//       "description": "The source of the events.",
@@ -211,6 +212,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "The EventFilter (source) associated with the event integration.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"source": {

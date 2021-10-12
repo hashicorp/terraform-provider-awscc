@@ -22,7 +22,7 @@ Resource schema for AWS::ImageBuilder::ImagePipeline
 - **distribution_configuration_arn** (String) The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.
 - **enhanced_image_metadata_enabled** (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
 - **image_recipe_arn** (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
-- **image_tests_configuration** (Attributes) Image tests configuration. (see [below for nested schema](#nestedatt--image_tests_configuration))
+- **image_tests_configuration** (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - **infrastructure_configuration_arn** (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
 - **name** (String) The name of the image pipeline.
 - **schedule** (Attributes) The schedule of the image pipeline. (see [below for nested schema](#nestedatt--schedule))

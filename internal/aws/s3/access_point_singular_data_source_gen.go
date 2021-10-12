@@ -37,10 +37,10 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "the Amazon Resource Name (ARN) of the specified accesspoint.",
+			//   "description": "The Amazon Resource Name (ARN) of the specified accesspoint.",
 			//   "type": "string"
 			// }
-			Description: "the Amazon Resource Name (ARN) of the specified accesspoint.",
+			Description: "The Amazon Resource Name (ARN) of the specified accesspoint.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -129,6 +129,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: PublicAccessBlockConfiguration
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			//   "properties": {
 			//     "BlockPublicAcls": {
 			//       "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
@@ -149,6 +150,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"block_public_acls": {
@@ -183,7 +185,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: VpcConfiguration
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The Virtual Private Cloud (VPC) configuration for a bucket access point.",
+			//   "description": "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
 			//   "properties": {
 			//     "VpcId": {
 			//       "description": "If this field is specified, this access point will only allow connections from the specified VPC ID.",
@@ -194,7 +196,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The Virtual Private Cloud (VPC) configuration for a bucket access point.",
+			Description: "If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC).",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"vpc_id": {

@@ -32,7 +32,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 - **maximum_retry_attempts** (Number) (Streams) The maximum number of times to retry when the function returns an error.
 - **parallelization_factor** (Number) (Streams) The number of batches to process from each shard concurrently.
 - **queues** (List of String) (ActiveMQ) A list of ActiveMQ queues.
-- **self_managed_event_source** (Attributes) The configuration used by AWS Lambda to access a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source))
+- **self_managed_event_source** (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
 - **source_access_configurations** (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
 - **starting_position** (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
 - **starting_position_timestamp** (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
@@ -48,7 +48,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 
 Optional:
 
-- **on_failure** (Attributes) A destination for events that failed processing. (see [below for nested schema](#nestedatt--destination_config--on_failure))
+- **on_failure** (Attributes) The destination configuration for failed invocations. (see [below for nested schema](#nestedatt--destination_config--on_failure))
 
 <a id="nestedatt--destination_config--on_failure"></a>
 ### Nested Schema for `destination_config.on_failure`
@@ -64,7 +64,7 @@ Optional:
 
 Optional:
 
-- **endpoints** (Attributes) The endpoints used by AWS Lambda to access a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
+- **endpoints** (Attributes) The endpoints for a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
 
 <a id="nestedatt--self_managed_event_source--endpoints"></a>
 ### Nested Schema for `self_managed_event_source.endpoints`

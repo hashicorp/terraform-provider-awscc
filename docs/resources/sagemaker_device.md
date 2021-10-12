@@ -21,7 +21,7 @@ Resource schema for AWS::SageMaker::Device
 
 ### Optional
 
-- **device** (Attributes) Edge device you want to create (see [below for nested schema](#nestedatt--device))
+- **device** (Attributes) The Edge Device you want to register against a device fleet (see [below for nested schema](#nestedatt--device))
 - **tags** (Attributes List) Associate tags with the resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

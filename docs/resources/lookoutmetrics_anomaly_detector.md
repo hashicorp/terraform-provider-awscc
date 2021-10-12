@@ -17,7 +17,7 @@ An Amazon Lookout for Metrics Detector
 
 ### Required
 
-- **anomaly_detector_config** (Attributes) (see [below for nested schema](#nestedatt--anomaly_detector_config))
+- **anomaly_detector_config** (Attributes) Configuration options for the AnomalyDetector (see [below for nested schema](#nestedatt--anomaly_detector_config))
 - **metric_set_list** (Attributes List) List of metric sets for anomaly detection (see [below for nested schema](#nestedatt--metric_set_list))
 
 ### Optional

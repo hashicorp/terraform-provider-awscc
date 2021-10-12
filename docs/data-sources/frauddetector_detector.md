@@ -28,7 +28,7 @@ Data Source schema for AWS::FraudDetector::Detector
 - **detector_id** (String) The ID of the detector
 - **detector_version_id** (String) The active version ID of the detector
 - **detector_version_status** (String) The desired detector version status for the detector
-- **event_type** (Attributes) (see [below for nested schema](#nestedatt--event_type))
+- **event_type** (Attributes) The event type to associate this detector with. (see [below for nested schema](#nestedatt--event_type))
 - **last_updated_time** (String) The time when the detector was last updated.
 - **rule_execution_mode** (String)
 - **rules** (Attributes List) (see [below for nested schema](#nestedatt--rules))

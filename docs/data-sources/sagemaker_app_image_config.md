@@ -23,7 +23,7 @@ Data Source schema for AWS::SageMaker::AppImageConfig
 
 - **app_image_config_arn** (String) The Amazon Resource Name (ARN) of the AppImageConfig.
 - **app_image_config_name** (String) The Name of the AppImageConfig.
-- **kernel_gateway_image_config** (Attributes) The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
+- **kernel_gateway_image_config** (Attributes) The KernelGatewayImageConfig. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
 - **tags** (Attributes List) A list of tags to apply to the AppImageConfig. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--kernel_gateway_image_config"></a>

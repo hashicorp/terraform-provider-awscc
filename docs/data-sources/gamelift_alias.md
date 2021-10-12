@@ -24,7 +24,7 @@ Data Source schema for AWS::GameLift::Alias
 - **alias_id** (String) Unique alias ID
 - **description** (String) A human-readable description of the alias.
 - **name** (String) A descriptive label that is associated with an alias. Alias names do not need to be unique.
-- **routing_strategy** (Attributes) (see [below for nested schema](#nestedatt--routing_strategy))
+- **routing_strategy** (Attributes) A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message. (see [below for nested schema](#nestedatt--routing_strategy))
 
 <a id="nestedatt--routing_strategy"></a>
 ### Nested Schema for `routing_strategy`

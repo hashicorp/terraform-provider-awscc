@@ -70,7 +70,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Information about a rendering engine.",
+			//   "description": "The rendering engine for the simulation application.",
 			//   "properties": {
 			//     "Name": {
 			//       "description": "The name of the rendering engine.",
@@ -91,7 +91,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Information about a rendering engine.",
+			Description: "The rendering engine for the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -115,7 +115,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Information about a robot software suite (ROS distribution).",
+			//   "description": "The robot software suite (ROS distribution) used by the simulation application.",
 			//   "properties": {
 			//     "Name": {
 			//       "description": "The name of the robot software suite (ROS distribution).",
@@ -142,7 +142,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Information about a robot software suite (ROS distribution).",
+			Description: "The robot software suite (ROS distribution) used by the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -166,7 +166,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Information about a simulation software suite.",
+			//   "description": "The simulation software suite used by the simulation application.",
 			//   "properties": {
 			//     "Name": {
 			//       "description": "The name of the simulation software suite.",
@@ -196,7 +196,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Information about a simulation software suite.",
+			Description: "The simulation software suite used by the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {

@@ -62,9 +62,9 @@ Read-Only:
 - **container_entrypoint** (List of String) Specifies the entrypoint for a container used to run the monitoring job.
 - **environment** (Map of String) Sets the environment variables in the Docker container
 - **image_uri** (String) The container image to be run by the monitoring job.
-- **post_analytics_processor_source_uri** (String) The Amazon S3 URI.
+- **post_analytics_processor_source_uri** (String) An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
 - **problem_type** (String) The status of the monitoring job.
-- **record_preprocessor_source_uri** (String) The Amazon S3 URI.
+- **record_preprocessor_source_uri** (String) An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers
 
 
 <a id="nestedatt--model_quality_baseline_config"></a>
@@ -80,7 +80,7 @@ Read-Only:
 
 Read-Only:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
 
 
 
@@ -97,7 +97,7 @@ Read-Only:
 
 Read-Only:
 
-- **end_time_offset** (String) The time offsets in ISO duration format
+- **end_time_offset** (String) Monitoring end time offset, e.g. PT0H
 - **endpoint_name** (String) The name of the endpoint used to run the monitoring job.
 - **inference_attribute** (String) Index or JSONpath to locate predicted label(s)
 - **local_path** (String) Path to the filesystem where the endpoint data is available to the container.
@@ -105,7 +105,7 @@ Read-Only:
 - **probability_threshold_attribute** (Number)
 - **s3_data_distribution_type** (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - **s3_input_mode** (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
-- **start_time_offset** (String) The time offsets in ISO duration format
+- **start_time_offset** (String) Monitoring start time offset, e.g. -PT1H
 
 
 <a id="nestedatt--model_quality_job_input--ground_truth_s3_input"></a>

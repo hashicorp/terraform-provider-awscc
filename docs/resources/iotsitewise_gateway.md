@@ -18,7 +18,7 @@ Resource schema for AWS::IoTSiteWise::Gateway
 ### Required
 
 - **gateway_name** (String) A unique, friendly name for the gateway.
-- **gateway_platform** (Attributes) Contains a gateway's platform information. (see [below for nested schema](#nestedatt--gateway_platform))
+- **gateway_platform** (Attributes) The gateway's platform. You can only specify one platform in a gateway. (see [below for nested schema](#nestedatt--gateway_platform))
 
 ### Optional
 
@@ -35,7 +35,7 @@ Resource schema for AWS::IoTSiteWise::Gateway
 
 Required:
 
-- **greengrass** (Attributes) Contains the ARN of AWS IoT Greengrass Group that the gateway runs on. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`

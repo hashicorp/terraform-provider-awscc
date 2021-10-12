@@ -18,7 +18,7 @@ Resource schema for AWS::SageMaker::DeviceFleet
 ### Required
 
 - **device_fleet_name** (String) The name of the edge device fleet
-- **output_config** (Attributes) (see [below for nested schema](#nestedatt--output_config))
+- **output_config** (Attributes) S3 bucket and an ecryption key id (if available) to store outputs for the fleet (see [below for nested schema](#nestedatt--output_config))
 - **role_arn** (String) Role associated with the device fleet
 
 ### Optional

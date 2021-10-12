@@ -25,7 +25,7 @@ Resource Type definition for AWS::SageMaker::UserProfile
 - **single_sign_on_user_identifier** (String) A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is "UserName". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.
 - **single_sign_on_user_value** (String) The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.
 - **tags** (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
-- **user_settings** (Attributes) A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called. (see [below for nested schema](#nestedatt--user_settings))
+- **user_settings** (Attributes) A collection of settings. (see [below for nested schema](#nestedatt--user_settings))
 
 ### Read-Only
 
@@ -47,10 +47,10 @@ Optional:
 Optional:
 
 - **execution_role** (String) The user profile Amazon Resource Name (ARN).
-- **jupyter_server_app_settings** (Attributes) The JupyterServer app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings))
+- **jupyter_server_app_settings** (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings))
 - **kernel_gateway_app_settings** (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings))
 - **security_groups** (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
-- **sharing_settings** (Attributes) Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called. (see [below for nested schema](#nestedatt--user_settings--sharing_settings))
+- **sharing_settings** (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--user_settings--sharing_settings))
 
 <a id="nestedatt--user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `user_settings.jupyter_server_app_settings`
@@ -76,7 +76,7 @@ Optional:
 Optional:
 
 - **custom_images** (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--custom_images))
-- **default_resource_spec** (Attributes) (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--default_resource_spec))
+- **default_resource_spec** (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--default_resource_spec))
 
 <a id="nestedatt--user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.kernel_gateway_app_settings.custom_images`

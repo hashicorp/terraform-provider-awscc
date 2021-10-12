@@ -26,8 +26,8 @@ Data Source schema for AWS::EFS::AccessPoint
 - **arn** (String)
 - **client_token** (String) (optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
 - **file_system_id** (String) The ID of the EFS file system that the access point provides access to.
-- **posix_user** (Attributes) (see [below for nested schema](#nestedatt--posix_user))
-- **root_directory** (Attributes) (see [below for nested schema](#nestedatt--root_directory))
+- **posix_user** (Attributes) The operating system user and group applied to all file system requests made using the access point. (see [below for nested schema](#nestedatt--posix_user))
+- **root_directory** (Attributes) Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory>Path specified does not exist, EFS creates it and applies the CreationInfo settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationInfo is optional. (see [below for nested schema](#nestedatt--root_directory))
 
 <a id="nestedatt--access_point_tags"></a>
 ### Nested Schema for `access_point_tags`
@@ -53,7 +53,7 @@ Read-Only:
 
 Read-Only:
 
-- **creation_info** (Attributes) (see [below for nested schema](#nestedatt--root_directory--creation_info))
+- **creation_info** (Attributes) (Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory>Path specified does not exist, EFS creates the root directory using the CreationInfo settings when a client connects to an access point. When specifying the CreationInfo, you must provide values for all properties.   If you do not provide CreationInfo and the specified RootDirectory>Path does not exist, attempts to mount the file system using the access point will fail. (see [below for nested schema](#nestedatt--root_directory--creation_info))
 - **path** (String) Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationInfo.
 
 <a id="nestedatt--root_directory--creation_info"></a>

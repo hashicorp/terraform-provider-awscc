@@ -68,6 +68,7 @@ func dataCatalogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A list of comma separated tags to add to the data catalog that is created. ",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
@@ -91,6 +92,7 @@ func dataCatalogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   },
 			//   "type": "array"
 			// }
+			Description: "A list of comma separated tags to add to the data catalog that is created. ",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

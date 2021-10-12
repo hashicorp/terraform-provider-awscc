@@ -174,7 +174,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
+			//   "description": "A collection of settings.",
 			//   "properties": {
 			//     "ExecutionRole": {
 			//       "description": "The user profile Amazon Resource Name (ARN).",
@@ -185,7 +185,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "JupyterServerAppSettings": {
 			//       "additionalProperties": false,
-			//       "description": "The JupyterServer app settings.",
+			//       "description": "The Jupyter server's app settings.",
 			//       "properties": {
 			//         "DefaultResourceSpec": {
 			//           "additionalProperties": false,
@@ -287,6 +287,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "DefaultResourceSpec": {
 			//           "additionalProperties": false,
+			//           "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
 			//           "properties": {
 			//             "InstanceType": {
 			//               "description": "The instance type that the image version runs on.",
@@ -358,7 +359,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "SharingSettings": {
 			//       "additionalProperties": false,
-			//       "description": "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
+			//       "description": "The sharing settings.",
 			//       "properties": {
 			//         "NotebookOutputOption": {
 			//           "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
@@ -386,7 +387,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "A collection of settings that apply to users of Amazon SageMaker Studio. These settings are specified when the CreateUserProfile API is called, and as DefaultUserSettings when the CreateDomain API is called.",
+			Description: "A collection of settings.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"execution_role": {
@@ -400,7 +401,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"jupyter_server_app_settings": {
 						// Property: JupyterServerAppSettings
-						Description: "The JupyterServer app settings.",
+						Description: "The Jupyter server's app settings.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"default_resource_spec": {
@@ -522,6 +523,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"default_resource_spec": {
 									// Property: DefaultResourceSpec
+									Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"instance_type": {
@@ -604,7 +606,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"sharing_settings": {
 						// Property: SharingSettings
-						Description: "Specifies options when sharing an Amazon SageMaker Studio notebook. These settings are specified as part of DefaultUserSettings when the CreateDomain API is called, and as part of UserSettings when the CreateUserProfile API is called.",
+						Description: "The sharing settings.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"notebook_output_option": {

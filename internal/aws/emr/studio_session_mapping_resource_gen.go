@@ -62,11 +62,13 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: SessionPolicyArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
+			Type:        types.StringType,
+			Required:    true,
 		},
 		"studio_id": {
 			// Property: StudioId

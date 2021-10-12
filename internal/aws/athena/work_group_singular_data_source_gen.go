@@ -85,6 +85,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
@@ -108,6 +109,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   },
 			//   "type": "array"
 			// }
+			Description: "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -130,6 +132,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The workgroup configuration",
 			//   "properties": {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
@@ -201,6 +204,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The workgroup configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"bytes_scanned_cutoff_per_query": {
@@ -293,7 +297,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The configuration information that will be updated for this workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup settings override the client-side settings, and the data usage limit for the amount of bytes scanned per query, if it is specified. ",
+			//   "description": "The workgroup configuration update object",
 			//   "properties": {
 			//     "BytesScannedCutoffPerQuery": {
 			//       "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
@@ -375,7 +379,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The configuration information that will be updated for this workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup settings override the client-side settings, and the data usage limit for the amount of bytes scanned per query, if it is specified. ",
+			Description: "The workgroup configuration update object",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"bytes_scanned_cutoff_per_query": {

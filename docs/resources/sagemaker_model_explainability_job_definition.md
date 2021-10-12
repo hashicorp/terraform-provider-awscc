@@ -128,7 +128,7 @@ Optional:
 
 Optional:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
 
 
 

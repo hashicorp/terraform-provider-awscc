@@ -46,12 +46,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "description": "Configurations of destination connector.",
 			//     "properties": {
 			//       "ConnectorProfileName": {
-			//         "description": "Name of connector profile",
+			//         "description": "Name of destination connector profile",
 			//         "maxLength": 256,
 			//         "pattern": "",
 			//         "type": "string"
 			//       },
 			//       "ConnectorType": {
+			//         "description": "Destination connector type",
 			//         "enum": [
 			//           "Salesforce",
 			//           "Singular",
@@ -465,7 +466,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						Description: "Name of connector profile",
+						Description: "Name of destination connector profile",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -474,8 +475,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						Type:     types.StringType,
-						Required: true,
+						Description: "Destination connector type",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Salesforce",
@@ -1079,12 +1081,13 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Configurations of Source connector of the flow.",
 			//   "properties": {
 			//     "ConnectorProfileName": {
-			//       "description": "Name of connector profile",
+			//       "description": "Name of source connector profile",
 			//       "maxLength": 256,
 			//       "pattern": "",
 			//       "type": "string"
 			//     },
 			//     "ConnectorType": {
+			//       "description": "Type of source connector",
 			//       "enum": [
 			//         "Salesforce",
 			//         "Singular",
@@ -1359,7 +1362,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"connector_profile_name": {
 						// Property: ConnectorProfileName
-						Description: "Name of connector profile",
+						Description: "Name of source connector profile",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -1368,8 +1371,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"connector_type": {
 						// Property: ConnectorType
-						Type:     types.StringType,
-						Required: true,
+						Description: "Type of source connector",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Salesforce",
@@ -2087,6 +2091,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "array"
 			//       },
 			//       "TaskType": {
+			//         "description": "Type of task",
 			//         "enum": [
 			//           "Arithmetic",
 			//           "Filter",
@@ -2508,8 +2513,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"task_type": {
 						// Property: TaskType
-						Type:     types.StringType,
-						Required: true,
+						Description: "Type of task",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Arithmetic",
@@ -2537,7 +2543,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "TriggerProperties": {
 			//       "additionalProperties": false,
-			//       "description": "Details required for scheduled trigger type",
+			//       "description": "Details required based on the type of trigger",
 			//       "properties": {
 			//         "DataPullMode": {
 			//           "enum": [
@@ -2573,6 +2579,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "object"
 			//     },
 			//     "TriggerType": {
+			//       "description": "Trigger type of the flow",
 			//       "enum": [
 			//         "Scheduled",
 			//         "Event",
@@ -2591,7 +2598,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"trigger_properties": {
 						// Property: TriggerProperties
-						Description: "Details required for scheduled trigger type",
+						Description: "Details required based on the type of trigger",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"data_pull_mode": {
@@ -2645,8 +2652,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"trigger_type": {
 						// Property: TriggerType
-						Type:     types.StringType,
-						Required: true,
+						Description: "Trigger type of the flow",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Scheduled",

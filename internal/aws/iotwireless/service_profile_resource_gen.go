@@ -48,6 +48,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
 			//   "properties": {
 			//     "AddGwMetadata": {
 			//       "type": "boolean"
@@ -109,6 +110,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
+			Description: "LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"add_gw_metadata": {

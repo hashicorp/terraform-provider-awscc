@@ -124,7 +124,7 @@ func distributionConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			//           },
 			//           "TargetRepository": {
 			//             "additionalProperties": false,
-			//             "description": "The destination repository for the container image.",
+			//             "description": "The destination repository for the container distribution configuration.",
 			//             "properties": {
 			//               "RepositoryName": {
 			//                 "description": "The repository name of target container repository.",
@@ -269,7 +269,7 @@ func distributionConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 								},
 								"target_repository": {
 									// Property: TargetRepository
-									Description: "The destination repository for the container image.",
+									Description: "The destination repository for the container distribution configuration.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"repository_name": {

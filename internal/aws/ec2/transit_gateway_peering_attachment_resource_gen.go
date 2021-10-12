@@ -89,6 +89,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The status of the transit gateway peering attachment.",
 			//   "properties": {
 			//     "Code": {
 			//       "description": "The status code.",
@@ -101,6 +102,7 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The status of the transit gateway peering attachment.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"code": {

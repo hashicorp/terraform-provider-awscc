@@ -77,11 +77,11 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The settings for the source of the flow.",
+			//   "description": "The source of the flow.",
 			//   "properties": {
 			//     "Decryption": {
 			//       "additionalProperties": false,
-			//       "description": "Information about the encryption of the flow.",
+			//       "description": "The type of decryption that is used on the content ingested from this source.",
 			//       "properties": {
 			//         "Algorithm": {
 			//           "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
@@ -204,12 +204,12 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The settings for the source of the flow.",
+			Description: "The source of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"decryption": {
 						// Property: Decryption
-						Description: "Information about the encryption of the flow.",
+						Description: "The type of decryption that is used on the content ingested from this source.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"algorithm": {
@@ -402,7 +402,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The settings for source failover",
+			//   "description": "The source failover config of the flow.",
 			//   "properties": {
 			//     "RecoveryWindow": {
 			//       "description": "Search window time to look for dash-7 packets",
@@ -418,7 +418,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The settings for source failover",
+			Description: "The source failover config of the flow.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"recovery_window": {

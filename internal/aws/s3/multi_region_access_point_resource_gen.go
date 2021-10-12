@@ -68,6 +68,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			//   "properties": {
 			//     "BlockPublicAcls": {
 			//       "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
@@ -88,6 +89,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"block_public_acls": {
@@ -129,6 +131,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "description": "The list of buckets that you want to associate this Multi Region Access Point with.",
 			//   "items": {
 			//     "additionalProperties": false,
+			//     "description": "The name of the bucket that represents of the region belonging to this Multi Region Access Point.",
 			//     "properties": {
 			//       "Bucket": {
 			//         "maxLength": 63,

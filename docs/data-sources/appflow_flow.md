@@ -36,8 +36,8 @@ Data Source schema for AWS::AppFlow::Flow
 
 Read-Only:
 
-- **connector_profile_name** (String) Name of connector profile
-- **connector_type** (String)
+- **connector_profile_name** (String) Name of destination connector profile
+- **connector_type** (String) Destination connector type
 - **destination_connector_properties** (Attributes) Destination connector details (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties))
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties"></a>
@@ -246,8 +246,8 @@ Read-Only:
 
 Read-Only:
 
-- **connector_profile_name** (String) Name of connector profile
-- **connector_type** (String)
+- **connector_profile_name** (String) Name of source connector profile
+- **connector_type** (String) Type of source connector
 - **incremental_pull_config** (Attributes) Configuration for scheduled incremental data pull (see [below for nested schema](#nestedatt--source_flow_config--incremental_pull_config))
 - **source_connector_properties** (Attributes) Source connector details required to query a connector (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties))
 
@@ -418,7 +418,7 @@ Read-Only:
 - **destination_field** (String) A field value on which source field should be validated
 - **source_fields** (List of String) Source fields on which particular task will be applied
 - **task_properties** (Attributes List) A Map used to store task related info (see [below for nested schema](#nestedatt--tasks--task_properties))
-- **task_type** (String)
+- **task_type** (String) Type of task
 
 <a id="nestedatt--tasks--connector_operator"></a>
 ### Nested Schema for `tasks.connector_operator`
@@ -456,8 +456,8 @@ Read-Only:
 
 Read-Only:
 
-- **trigger_properties** (Attributes) Details required for scheduled trigger type (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
-- **trigger_type** (String)
+- **trigger_properties** (Attributes) Details required based on the type of trigger (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
+- **trigger_type** (String) Trigger type of the flow
 
 <a id="nestedatt--trigger_config--trigger_properties"></a>
 ### Nested Schema for `trigger_config.trigger_properties`

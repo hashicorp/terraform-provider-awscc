@@ -90,7 +90,7 @@ func imagePipelineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Image tests configuration.",
+			//   "description": "The image tests configuration of the image pipeline.",
 			//   "properties": {
 			//     "ImageTestsEnabled": {
 			//       "description": "Defines if tests should be executed when building this image.",
@@ -105,7 +105,7 @@ func imagePipelineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Image tests configuration.",
+			Description: "The image tests configuration of the image pipeline.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"image_tests_enabled": {

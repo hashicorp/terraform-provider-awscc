@@ -21,7 +21,7 @@ Data Source schema for AWS::LookoutMetrics::AnomalyDetector
 
 ### Read-Only
 
-- **anomaly_detector_config** (Attributes) (see [below for nested schema](#nestedatt--anomaly_detector_config))
+- **anomaly_detector_config** (Attributes) Configuration options for the AnomalyDetector (see [below for nested schema](#nestedatt--anomaly_detector_config))
 - **anomaly_detector_description** (String) A description for the AnomalyDetector.
 - **anomaly_detector_name** (String) Name for the Amazon Lookout for Metrics Anomaly Detector
 - **arn** (String)

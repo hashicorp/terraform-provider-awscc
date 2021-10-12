@@ -23,15 +23,15 @@ Data Source schema for AWS::Lambda::Function
 
 - **architectures** (List of String)
 - **arn** (String) Unique identifier for function resources
-- **code** (Attributes) (see [below for nested schema](#nestedatt--code))
+- **code** (Attributes) The code for the function. (see [below for nested schema](#nestedatt--code))
 - **code_signing_config_arn** (String) A unique Arn for CodeSigningConfig resource
-- **dead_letter_config** (Attributes) The dead-letter queue for failed asynchronous invocations. (see [below for nested schema](#nestedatt--dead_letter_config))
+- **dead_letter_config** (Attributes) A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. (see [below for nested schema](#nestedatt--dead_letter_config))
 - **description** (String) A description of the function.
-- **environment** (Attributes) A function's environment variable settings. (see [below for nested schema](#nestedatt--environment))
+- **environment** (Attributes) Environment variables that are accessible from function code during execution. (see [below for nested schema](#nestedatt--environment))
 - **file_system_configs** (Attributes List) Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an AWS::EFS::MountTarget resource, you must also specify a DependsOn attribute to ensure that the mount target is created or updated before the function. (see [below for nested schema](#nestedatt--file_system_configs))
 - **function_name** (String) The name of the Lambda function, up to 64 characters in length. If you don't specify a name, AWS CloudFormation generates one.
 - **handler** (String) The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime
-- **image_config** (Attributes) (see [below for nested schema](#nestedatt--image_config))
+- **image_config** (Attributes) ImageConfig (see [below for nested schema](#nestedatt--image_config))
 - **kms_key_arn** (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
 - **layers** (List of String) A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
 - **memory_size** (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
@@ -41,8 +41,8 @@ Data Source schema for AWS::Lambda::Function
 - **runtime** (String) The identifier of the function's runtime.
 - **tags** (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
 - **timeout** (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-- **tracing_config** (Attributes) The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set Mode to Active. (see [below for nested schema](#nestedatt--tracing_config))
-- **vpc_config** (Attributes) The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC. (see [below for nested schema](#nestedatt--vpc_config))
+- **tracing_config** (Attributes) Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray. (see [below for nested schema](#nestedatt--tracing_config))
+- **vpc_config** (Attributes) For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. (see [below for nested schema](#nestedatt--vpc_config))
 
 <a id="nestedatt--code"></a>
 ### Nested Schema for `code`

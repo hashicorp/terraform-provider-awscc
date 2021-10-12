@@ -27,6 +27,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "Optionally define specific log groups as part of your query definition",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "description": "LogGroup name",
 			//     "maxLength": 512,
 			//     "minLength": 1,
 			//     "pattern": "",

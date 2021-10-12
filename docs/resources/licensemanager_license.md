@@ -35,7 +35,7 @@ Resource Type definition for AWS::LicenseManager::License
 ### Read-Only
 
 - **id** (String) Uniquely identifies the resource.
-- **license_arn** (String)
+- **license_arn** (String) Amazon Resource Name is a unique name for each resource.
 - **version** (String) The version of the license.
 
 <a id="nestedatt--consumption_configuration"></a>

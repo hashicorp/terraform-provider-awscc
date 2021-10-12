@@ -27,7 +27,7 @@ Kendra DataSource
 - **description** (String) Description of data source
 - **role_arn** (String) Role ARN
 - **schedule** (String) Schedule
-- **tags** (Attributes List) List of tags (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes List) Tags for labeling the data source (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
