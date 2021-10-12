@@ -899,11 +899,6 @@ resource_schema "aws_iot_fleet_metric" {
 
 resource_schema "aws_iot_job_template" {
   cloudformation_type_name = "AWS::IoT::JobTemplate"
-
-  # AbortConfig/CriteriaList/ThresholdPercentage has Maximum but no Minimum
-  suppress_plural_data_source_generation   = true
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_iot_mitigation_action" {

@@ -150,7 +150,75 @@ func IntAtLeast(min int) tfsdk.AttributeValidator {
 	}
 }
 
-// intAtLeastValidator validates that an integer Attribute's value matches the value of an element in the valid slice.
+// intAtMostValidator validates that an integer Attribute's value is at most a certain value.
+type intAtMostValidator struct {
+	tfsdk.AttributeValidator
+
+	max int
+}
+
+// Description describes the validation in plain text formatting.
+func (validator intAtMostValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must be at most %d", validator.max)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator intAtMostValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+// Validate performs the validation.
+func (validator intAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value type",
+			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
+		)
+
+		return
+	}
+
+	if n.Unknown || n.Null {
+		return
+	}
+
+	val := n.Value
+
+	if !val.IsInt() {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			"Not an integer",
+		)
+
+		return
+	}
+
+	var i big.Int
+	_, _ = val.Int(&i)
+
+	if i := i.Int64(); i > int64(validator.max) {
+		response.Diagnostics.AddAttributeError(
+			request.AttributePath,
+			"Invalid value",
+			fmt.Sprintf("expected value to be at most %d, got %d", validator.max, i),
+		)
+
+		return
+	}
+}
+
+// IntAtMost returns a new integer value at most validator.
+func IntAtMost(max int) tfsdk.AttributeValidator {
+	return intAtMostValidator{
+		max: max,
+	}
+}
+
+// intInSliceValidator validates that an integer Attribute's value matches the value of an element in the valid slice.
 type intInSliceValidator struct {
 	tfsdk.AttributeValidator
 

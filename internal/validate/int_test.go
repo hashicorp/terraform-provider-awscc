@@ -185,6 +185,83 @@ func TestIntAtLeastValidator(t *testing.T) {
 	}
 }
 
+func TestIntAtMostValidator(t *testing.T) {
+	t.Parallel()
+
+	type testCase struct {
+		val         tftypes.Value
+		f           func(context.Context, tftypes.Value) (attr.Value, error)
+		max         int
+		expectError bool
+	}
+	tests := map[string]testCase{
+		"not a number": {
+			val:         tftypes.NewValue(tftypes.Bool, true),
+			f:           types.BoolType.ValueFromTerraform,
+			expectError: true,
+		},
+		"unknown number": {
+			val: tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2,
+		},
+		"null number": {
+			val: tftypes.NewValue(tftypes.Number, nil),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2,
+		},
+		"not an integer": {
+			val:         tftypes.NewValue(tftypes.Number, 1.34),
+			f:           types.NumberType.ValueFromTerraform,
+			max:         2,
+			expectError: true,
+		},
+		"valid integer": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2,
+		},
+		"valid integer min": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.NumberType.ValueFromTerraform,
+			max: 2,
+		},
+		"too large integer": {
+			val:         tftypes.NewValue(tftypes.Number, 4),
+			f:           types.NumberType.ValueFromTerraform,
+			max:         2,
+			expectError: true,
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			ctx := context.TODO()
+			val, err := test.f(ctx, test.val)
+
+			if err != nil {
+				t.Fatalf("got unexpected error: %s", err)
+			}
+
+			request := tfsdk.ValidateAttributeRequest{
+				AttributePath:   tftypes.NewAttributePath().WithAttributeName("test"),
+				AttributeConfig: val,
+			}
+			response := tfsdk.ValidateAttributeResponse{}
+			IntAtMost(test.max).Validate(ctx, request, &response)
+
+			if !response.Diagnostics.HasError() && test.expectError {
+				t.Fatal("expected error, got no error")
+			}
+
+			if response.Diagnostics.HasError() && !test.expectError {
+				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
+			}
+		})
+	}
+}
+
 func TestIntInSliceValidator(t *testing.T) {
 	t.Parallel()
 
