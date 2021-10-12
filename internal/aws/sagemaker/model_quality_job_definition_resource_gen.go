@@ -210,7 +210,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       "type": "string"
 			//     },
 			//     "PostAnalyticsProcessorSourceUri": {
-			//       "description": "The Amazon S3 URI.",
+			//       "description": "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
 			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
@@ -225,7 +225,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       "type": "string"
 			//     },
 			//     "RecordPreprocessorSourceUri": {
-			//       "description": "The Amazon S3 URI.",
+			//       "description": "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
 			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
@@ -279,7 +279,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"post_analytics_processor_source_uri": {
 						// Property: PostAnalyticsProcessorSourceUri
-						Description: "The Amazon S3 URI.",
+						Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -301,7 +301,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 					},
 					"record_preprocessor_source_uri": {
 						// Property: RecordPreprocessorSourceUri
-						Description: "The Amazon S3 URI.",
+						Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
 						Type:        types.StringType,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
@@ -334,7 +334,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       "description": "The baseline constraints resource for a monitoring job.",
 			//       "properties": {
 			//         "S3Uri": {
-			//           "description": "The Amazon S3 URI.",
+			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
 			//           "pattern": "",
 			//           "type": "string"
@@ -364,7 +364,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 							map[string]tfsdk.Attribute{
 								"s3_uri": {
 									// Property: S3Uri
-									Description: "The Amazon S3 URI.",
+									Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -395,7 +395,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//       "description": "The endpoint for a monitoring job.",
 			//       "properties": {
 			//         "EndTimeOffset": {
-			//           "description": "The time offsets in ISO duration format",
+			//           "description": "Monitoring end time offset, e.g. PT0H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
 			//           "pattern": "",
@@ -444,7 +444,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			//           "type": "string"
 			//         },
 			//         "StartTimeOffset": {
-			//           "description": "The time offsets in ISO duration format",
+			//           "description": "Monitoring start time offset, e.g. -PT1H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
 			//           "pattern": "",
@@ -490,7 +490,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 							map[string]tfsdk.Attribute{
 								"end_time_offset": {
 									// Property: EndTimeOffset
-									Description: "The time offsets in ISO duration format",
+									Description: "Monitoring end time offset, e.g. PT0H",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -564,7 +564,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 								},
 								"start_time_offset": {
 									// Property: StartTimeOffset
-									Description: "The time offsets in ISO duration format",
+									Description: "Monitoring start time offset, e.g. -PT1H",
 									Type:        types.StringType,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{

@@ -24,7 +24,7 @@ Data Source schema for AWS::CloudFormation::TypeActivation
 - **arn** (String) The Amazon Resource Name (ARN) of the extension.
 - **auto_update** (Boolean) Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated.
 - **execution_role_arn** (String) The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
-- **logging_config** (Attributes) (see [below for nested schema](#nestedatt--logging_config))
+- **logging_config** (Attributes) Specifies logging configuration information for a type. (see [below for nested schema](#nestedatt--logging_config))
 - **major_version** (String) The Major Version of the type you want to enable
 - **public_type_arn** (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
 - **publisher_id** (String) The publisher id assigned by CloudFormation for publishing in this region.

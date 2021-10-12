@@ -23,10 +23,12 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The Amazon Resource Name (ARN) of the certificate authority.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the certificate authority.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
@@ -44,7 +46,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Structure that contains CSR pass though extensions information.",
+			//   "description": "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
 			//   "properties": {
 			//     "KeyUsage": {
 			//       "additionalProperties": false,
@@ -233,7 +235,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Structure that contains CSR pass though extensions information.",
+			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key_usage": {
@@ -556,7 +558,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Certificate Authority revocation information.",
+			//   "description": "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
 			//   "properties": {
 			//     "CrlConfiguration": {
 			//       "additionalProperties": false,
@@ -596,7 +598,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Certificate Authority revocation information.",
+			Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"crl_configuration": {

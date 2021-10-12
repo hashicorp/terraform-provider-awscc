@@ -36,11 +36,13 @@ func grantDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: GrantArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Arn of the grant.",
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Arn of the grant.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"grant_name": {
 			// Property: GrantName
@@ -68,11 +70,13 @@ func grantDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: LicenseArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "License Arn for the grant.",
 			//   "maxLength": 2048,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "License Arn for the grant.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"principals": {
 			// Property: Principals

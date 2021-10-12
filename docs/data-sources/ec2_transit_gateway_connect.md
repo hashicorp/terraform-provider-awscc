@@ -22,7 +22,7 @@ Data Source schema for AWS::EC2::TransitGatewayConnect
 ### Read-Only
 
 - **creation_time** (String) The creation time.
-- **options** (Attributes) (see [below for nested schema](#nestedatt--options))
+- **options** (Attributes) The Connect attachment options. (see [below for nested schema](#nestedatt--options))
 - **state** (String) The state of the attachment.
 - **tags** (Attributes List) The tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - **transit_gateway_attachment_id** (String) The ID of the Connect attachment.

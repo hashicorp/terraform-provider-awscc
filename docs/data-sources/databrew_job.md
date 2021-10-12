@@ -33,7 +33,7 @@ Data Source schema for AWS::DataBrew::Job
 - **name** (String) Job name
 - **output_location** (Attributes) Output location (see [below for nested schema](#nestedatt--output_location))
 - **outputs** (Attributes List) (see [below for nested schema](#nestedatt--outputs))
-- **profile_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration))
+- **profile_configuration** (Attributes) Profile Job configuration (see [below for nested schema](#nestedatt--profile_configuration))
 - **project_name** (String) Project name
 - **recipe** (Attributes) (see [below for nested schema](#nestedatt--recipe))
 - **role_arn** (String) Role arn

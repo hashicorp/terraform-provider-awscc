@@ -28,7 +28,7 @@ This resource schema represents the Profiling Group resource in the Amazon CodeG
 
 ### Read-Only
 
-- **arn** (String)
+- **arn** (String) The Amazon Resource Name (ARN) of the specified profiling group.
 - **id** (String) Uniquely identifies the resource.
 
 <a id="nestedatt--agent_permissions"></a>

@@ -24,7 +24,7 @@ Data Source schema for AWS::IoTWireless::WirelessGateway
 - **arn** (String) Arn for Wireless Gateway. Returned upon successful create.
 - **description** (String) Description of Wireless Gateway.
 - **last_uplink_received_at** (String) The date and time when the most recent uplink was received.
-- **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan))
+- **lo_ra_wan** (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway. (see [below for nested schema](#nestedatt--lo_ra_wan))
 - **name** (String) Name of Wireless Gateway.
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 - **thing_arn** (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.

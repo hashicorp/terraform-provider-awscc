@@ -636,6 +636,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Profile Job configuration",
 			//   "properties": {
 			//     "ColumnStatisticsConfigurations": {
 			//       "insertionOrder": true,
@@ -790,6 +791,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Profile Job configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"column_statistics_configurations": {

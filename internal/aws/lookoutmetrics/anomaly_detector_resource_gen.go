@@ -25,6 +25,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Configuration options for the AnomalyDetector",
 			//   "properties": {
 			//     "AnomalyDetectorFrequency": {
 			//       "description": "Frequency of anomaly detection",
@@ -42,6 +43,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Configuration options for the AnomalyDetector",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"anomaly_detector_frequency": {

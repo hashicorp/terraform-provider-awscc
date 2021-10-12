@@ -23,7 +23,7 @@ StackSet as a resource provides one-click experience for provisioning a StackSet
 ### Optional
 
 - **administration_role_arn** (String) The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.
-- **auto_deployment** (Attributes) (see [below for nested schema](#nestedatt--auto_deployment))
+- **auto_deployment** (Attributes) Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED. (see [below for nested schema](#nestedatt--auto_deployment))
 - **call_as** (String) Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN.
 - **capabilities** (Set of String) In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.
 - **description** (String) A description of the stack set. You can use the description to identify the stack set's purpose or other important information.

@@ -53,6 +53,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The code for the function.",
 			//   "properties": {
 			//     "ImageUri": {
 			//       "description": "ImageUri.",
@@ -84,6 +85,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The code for the function.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"image_uri": {
@@ -137,7 +139,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The dead-letter queue for failed asynchronous invocations.",
+			//   "description": "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.",
 			//   "properties": {
 			//     "TargetArn": {
 			//       "description": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
@@ -147,7 +149,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The dead-letter queue for failed asynchronous invocations.",
+			Description: "A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"target_arn": {
@@ -177,7 +179,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "A function's environment variable settings.",
+			//   "description": "Environment variables that are accessible from function code during execution.",
 			//   "properties": {
 			//     "Variables": {
 			//       "additionalProperties": false,
@@ -192,7 +194,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "A function's environment variable settings.",
+			Description: "Environment variables that are accessible from function code during execution.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"variables": {
@@ -286,6 +288,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "ImageConfig",
 			//   "properties": {
 			//     "Command": {
 			//       "description": "Command.",
@@ -312,6 +315,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "ImageConfig",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"command": {
@@ -491,7 +495,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set Mode to Active.",
+			//   "description": "Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray.",
 			//   "properties": {
 			//     "Mode": {
 			//       "description": "The tracing mode.",
@@ -504,7 +508,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set Mode to Active.",
+			Description: "Set Mode to Active to sample and trace a subset of incoming requests with AWS X-Ray.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"mode": {
@@ -522,7 +526,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC.",
+			//   "description": "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.",
 			//   "properties": {
 			//     "SecurityGroupIds": {
 			//       "description": "A list of VPC security groups IDs.",
@@ -545,7 +549,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The VPC security groups and subnets that are attached to a Lambda function. When you connect a function to a VPC, Lambda creates an elastic network interface for each combination of security group and subnet in the function's VPC configuration. The function can only access resources and the internet through that VPC.",
+			Description: "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"security_group_ids": {

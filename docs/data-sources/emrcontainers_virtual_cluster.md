@@ -22,7 +22,7 @@ Data Source schema for AWS::EMRContainers::VirtualCluster
 ### Read-Only
 
 - **arn** (String)
-- **container_provider** (Attributes) (see [below for nested schema](#nestedatt--container_provider))
+- **container_provider** (Attributes) Container provider of the virtual cluster. (see [below for nested schema](#nestedatt--container_provider))
 - **name** (String) Name of the virtual cluster.
 - **tags** (Attributes Set) An array of key-value pairs to apply to this virtual cluster. (see [below for nested schema](#nestedatt--tags))
 

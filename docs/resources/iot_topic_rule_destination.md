@@ -17,9 +17,9 @@ Resource Type definition for AWS::IoT::TopicRuleDestination
 
 ### Optional
 
-- **http_url_properties** (Attributes) (see [below for nested schema](#nestedatt--http_url_properties))
-- **status** (String)
-- **vpc_properties** (Attributes) (see [below for nested schema](#nestedatt--vpc_properties))
+- **http_url_properties** (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
+- **status** (String) The status of the TopicRuleDestination.
+- **vpc_properties** (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
 
 ### Read-Only
 

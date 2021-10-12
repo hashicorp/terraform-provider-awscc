@@ -21,10 +21,10 @@ Data Source schema for AWS::Macie::FindingsFilter
 
 ### Read-Only
 
-- **action** (String)
+- **action** (String) Findings filter action.
 - **arn** (String) Findings filter ARN.
 - **description** (String) Findings filter description
-- **finding_criteria** (Attributes) (see [below for nested schema](#nestedatt--finding_criteria))
+- **finding_criteria** (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
 - **findings_filter_list_items** (Attributes List) Findings filters list. (see [below for nested schema](#nestedatt--findings_filter_list_items))
 - **name** (String) Findings filter name
 - **position** (Number) Findings filter position.

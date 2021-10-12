@@ -43,8 +43,8 @@ Read-Only:
 - **container_entrypoint** (List of String) Specifies the entrypoint for a container used to run the monitoring job.
 - **environment** (Map of String) Sets the environment variables in the Docker container
 - **image_uri** (String) The container image to be run by the monitoring job.
-- **post_analytics_processor_source_uri** (String) The Amazon S3 URI.
-- **record_preprocessor_source_uri** (String) The Amazon S3 URI.
+- **post_analytics_processor_source_uri** (String) An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+- **record_preprocessor_source_uri** (String) An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers
 
 
 <a id="nestedatt--data_quality_baseline_config"></a>
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
 
 
 <a id="nestedatt--data_quality_baseline_config--statistics_resource"></a>
@@ -69,7 +69,7 @@ Read-Only:
 
 Read-Only:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.
 
 
 

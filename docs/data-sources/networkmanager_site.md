@@ -23,7 +23,7 @@ Data Source schema for AWS::NetworkManager::Site
 
 - **description** (String) The description of the site.
 - **global_network_id** (String) The ID of the global network.
-- **location** (Attributes) The location of the site (see [below for nested schema](#nestedatt--location))
+- **location** (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
 - **site_arn** (String) The Amazon Resource Name (ARN) of the site.
 - **site_id** (String) The ID of the site.
 - **tags** (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))

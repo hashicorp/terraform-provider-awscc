@@ -34,6 +34,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Capacity units",
 			//   "properties": {
 			//     "QueryCapacityUnits": {
 			//       "minimum": 0,
@@ -50,6 +51,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "Capacity units",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
@@ -70,16 +72,19 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A description for the index",
 			//   "maxLength": 1000,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "A description for the index",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"document_metadata_configurations": {
 			// Property: DocumentMetadataConfigurations
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Document metadata configurations",
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -171,6 +176,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "maxItems": 500,
 			//   "type": "array"
 			// }
+			Description: "Document metadata configurations",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
@@ -323,6 +329,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "Server side encryption configuration",
 			//   "properties": {
 			//     "KmsKeyId": {
 			//       "maxLength": 2048,
@@ -332,6 +339,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Server side encryption configuration",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"kms_key_id": {
@@ -347,7 +355,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "List of tags",
+			//   "description": "Tags for labeling the index",
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "A label for tagging Kendra resources",
@@ -374,7 +382,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "maxItems": 200,
 			//   "type": "array"
 			// }
-			Description: "List of tags",
+			Description: "Tags for labeling the index",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

@@ -67,6 +67,7 @@ func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tf
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The tags for the association.",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
@@ -89,6 +90,7 @@ func localGatewayRouteTableVPCAssociationDataSourceType(ctx context.Context) (tf
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
+			Description: "The tags for the association.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

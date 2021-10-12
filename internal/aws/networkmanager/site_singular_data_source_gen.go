@@ -46,7 +46,7 @@ func siteDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The location of the site",
+			//   "description": "The location of the site.",
 			//   "properties": {
 			//     "Address": {
 			//       "description": "The physical address.",
@@ -63,7 +63,7 @@ func siteDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The location of the site",
+			Description: "The location of the site.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"address": {

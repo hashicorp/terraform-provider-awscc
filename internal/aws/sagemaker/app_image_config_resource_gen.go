@@ -59,7 +59,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
+			//   "description": "The KernelGatewayImageConfig.",
 			//   "properties": {
 			//     "FileSystemConfig": {
 			//       "additionalProperties": false,
@@ -120,7 +120,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app.",
+			Description: "The KernelGatewayImageConfig.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"file_system_config": {

@@ -36,6 +36,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "HTTP URL destination properties.",
 			//   "properties": {
 			//     "ConfirmationUrl": {
 			//       "type": "string"
@@ -43,6 +44,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
+			Description: "HTTP URL destination properties.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"confirmation_url": {
@@ -62,6 +64,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: Status
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The status of the TopicRuleDestination.",
 			//   "enum": [
 			//     "ENABLED",
 			//     "IN_PROGRESS",
@@ -69,8 +72,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   ],
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Description: "The status of the TopicRuleDestination.",
+			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ENABLED",
@@ -95,6 +99,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "VPC destination properties.",
 			//   "properties": {
 			//     "RoleArn": {
 			//       "type": "string"
@@ -119,6 +124,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   },
 			//   "type": "object"
 			// }
+			Description: "VPC destination properties.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"role_arn": {

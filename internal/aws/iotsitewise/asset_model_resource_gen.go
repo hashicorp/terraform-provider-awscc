@@ -49,6 +49,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Contains information about an asset model property.",
 			//           "properties": {
 			//             "DataType": {
+			//               "description": "The data type of the asset model property.",
 			//               "enum": [
 			//                 "STRING",
 			//                 "INTEGER",
@@ -59,6 +60,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "type": "string"
 			//             },
 			//             "DataTypeSpec": {
+			//               "description": "The data type of the structure for this property.",
 			//               "enum": [
 			//                 "AWS/ALARM_STATE"
 			//               ],
@@ -77,7 +79,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "Type": {
 			//               "additionalProperties": false,
-			//               "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+			//               "description": "The property type",
 			//               "properties": {
 			//                 "Attribute": {
 			//                   "additionalProperties": false,
@@ -107,6 +109,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           },
 			//                           "Value": {
 			//                             "additionalProperties": false,
+			//                             "description": "The variable that identifies an asset property from which to use values.",
 			//                             "properties": {
 			//                               "HierarchyLogicalId": {
 			//                                 "maxLength": 256,
@@ -137,7 +140,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     },
 			//                     "Window": {
 			//                       "additionalProperties": false,
-			//                       "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+			//                       "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
 			//                       "properties": {
 			//                         "Tumbling": {
 			//                           "additionalProperties": false,
@@ -187,6 +190,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           },
 			//                           "Value": {
 			//                             "additionalProperties": false,
+			//                             "description": "The variable that identifies an asset property from which to use values.",
 			//                             "properties": {
 			//                               "HierarchyLogicalId": {
 			//                                 "maxLength": 256,
@@ -283,8 +287,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"data_type": {
 									// Property: DataType
-									Type:     types.StringType,
-									Required: true,
+									Description: "The data type of the asset model property.",
+									Type:        types.StringType,
+									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"STRING",
@@ -297,8 +302,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"data_type_spec": {
 									// Property: DataTypeSpec
-									Type:     types.StringType,
-									Optional: true,
+									Description: "The data type of the structure for this property.",
+									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringInSlice([]string{
 											"AWS/ALARM_STATE",
@@ -322,7 +328,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"type": {
 									// Property: Type
-									Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+									Description: "The property type",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"attribute": {
@@ -361,6 +367,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
+																		Description: "The variable that identifies an asset property from which to use values.",
 																		Attributes: tfsdk.SingleNestedAttributes(
 																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
@@ -393,7 +400,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"window": {
 															// Property: Window
-															Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+															Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
 															Attributes: tfsdk.SingleNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"tumbling": {
@@ -448,6 +455,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																	},
 																	"value": {
 																		// Property: Value
+																		Description: "The variable that identifies an asset property from which to use values.",
 																		Attributes: tfsdk.SingleNestedAttributes(
 																			map[string]tfsdk.Attribute{
 																				"hierarchy_logical_id": {
@@ -650,6 +658,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "description": "Contains information about an asset model property.",
 			//     "properties": {
 			//       "DataType": {
+			//         "description": "The data type of the asset model property.",
 			//         "enum": [
 			//           "STRING",
 			//           "INTEGER",
@@ -660,6 +669,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "DataTypeSpec": {
+			//         "description": "The data type of the structure for this property.",
 			//         "enum": [
 			//           "AWS/ALARM_STATE"
 			//         ],
@@ -678,7 +688,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "Type": {
 			//         "additionalProperties": false,
-			//         "description": "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+			//         "description": "The property type",
 			//         "properties": {
 			//           "Attribute": {
 			//             "additionalProperties": false,
@@ -708,6 +718,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     },
 			//                     "Value": {
 			//                       "additionalProperties": false,
+			//                       "description": "The variable that identifies an asset property from which to use values.",
 			//                       "properties": {
 			//                         "HierarchyLogicalId": {
 			//                           "maxLength": 256,
@@ -738,7 +749,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "Window": {
 			//                 "additionalProperties": false,
-			//                 "description": "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+			//                 "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
 			//                 "properties": {
 			//                   "Tumbling": {
 			//                     "additionalProperties": false,
@@ -788,6 +799,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     },
 			//                     "Value": {
 			//                       "additionalProperties": false,
+			//                       "description": "The variable that identifies an asset property from which to use values.",
 			//                       "properties": {
 			//                         "HierarchyLogicalId": {
 			//                           "maxLength": 256,
@@ -858,8 +870,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"data_type": {
 						// Property: DataType
-						Type:     types.StringType,
-						Required: true,
+						Description: "The data type of the asset model property.",
+						Type:        types.StringType,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"STRING",
@@ -872,8 +885,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"data_type_spec": {
 						// Property: DataTypeSpec
-						Type:     types.StringType,
-						Optional: true,
+						Description: "The data type of the structure for this property.",
+						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"AWS/ALARM_STATE",
@@ -897,7 +911,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"type": {
 						// Property: Type
-						Description: "Contains a property type, which can be one of attribute, measurement, metric, or transform.",
+						Description: "The property type",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"attribute": {
@@ -936,6 +950,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"value": {
 															// Property: Value
+															Description: "The variable that identifies an asset property from which to use values.",
 															Attributes: tfsdk.SingleNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {
@@ -968,7 +983,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"window": {
 												// Property: Window
-												Description: "Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).",
+												Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
 												Attributes: tfsdk.SingleNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"tumbling": {
@@ -1023,6 +1038,7 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"value": {
 															// Property: Value
+															Description: "The variable that identifies an asset property from which to use values.",
 															Attributes: tfsdk.SingleNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"hierarchy_logical_id": {

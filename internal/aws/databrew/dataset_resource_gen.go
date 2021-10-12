@@ -427,7 +427,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Path options for dataset",
+			//   "description": "PathOptions",
 			//   "properties": {
 			//     "FilesLimit": {
 			//       "additionalProperties": false,
@@ -627,7 +627,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
-			Description: "Path options for dataset",
+			Description: "PathOptions",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"files_limit": {

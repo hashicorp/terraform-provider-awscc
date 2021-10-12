@@ -23,14 +23,16 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: Action
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Findings filter action.",
 			//   "enum": [
 			//     "ARCHIVE",
 			//     "NOOP"
 			//   ],
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Findings filter action.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"arn": {
 			// Property: Arn
@@ -58,6 +60,7 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: FindingCriteria
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Findings filter criteria.",
 			//   "properties": {
 			//     "Criterion": {
 			//       "description": "Map of filter criteria.",
@@ -101,6 +104,7 @@ func findingsFilterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Findings filter criteria.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"criterion": {

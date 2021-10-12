@@ -31,7 +31,7 @@ The AWS::EC2::TransitGatewayPeeringAttachment type
 - **creation_time** (String) The time the transit gateway peering attachment was created.
 - **id** (String) Uniquely identifies the resource.
 - **state** (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
-- **status** (Attributes) (see [below for nested schema](#nestedatt--status))
+- **status** (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
 - **transit_gateway_attachment_id** (String) The ID of the transit gateway peering attachment.
 
 <a id="nestedatt--tags"></a>

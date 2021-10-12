@@ -17,30 +17,30 @@ Resource Type definition for AWS::S3::Bucket
 
 ### Optional
 
-- **accelerate_configuration** (Attributes) (see [below for nested schema](#nestedatt--accelerate_configuration))
+- **accelerate_configuration** (Attributes) Configuration for the transfer acceleration state. (see [below for nested schema](#nestedatt--accelerate_configuration))
 - **access_control** (String) A canned access control list (ACL) that grants predefined permissions to the bucket.
 - **analytics_configurations** (Attributes List) The configuration and any analyses for the analytics filter of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--analytics_configurations))
 - **bucket_encryption** (Attributes) Specifies default encryption for a bucket using server-side encryption with either Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS). (see [below for nested schema](#nestedatt--bucket_encryption))
 - **bucket_name** (String) A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
-- **cors_configuration** (Attributes) (see [below for nested schema](#nestedatt--cors_configuration))
+- **cors_configuration** (Attributes) Rules that define cross-origin resource sharing of objects in this bucket. (see [below for nested schema](#nestedatt--cors_configuration))
 - **intelligent_tiering_configurations** (Attributes List) Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations))
 - **inventory_configurations** (Attributes List) The inventory configuration for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--inventory_configurations))
-- **lifecycle_configuration** (Attributes) (see [below for nested schema](#nestedatt--lifecycle_configuration))
-- **logging_configuration** (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
+- **lifecycle_configuration** (Attributes) Rules that define how Amazon S3 manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
+- **logging_configuration** (Attributes) Settings that define where logs are stored. (see [below for nested schema](#nestedatt--logging_configuration))
 - **metrics_configurations** (Attributes List) Settings that define a metrics configuration for the CloudWatch request metrics from the bucket. (see [below for nested schema](#nestedatt--metrics_configurations))
-- **notification_configuration** (Attributes) Describes the notification configuration for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--notification_configuration))
-- **object_lock_configuration** (Attributes) (see [below for nested schema](#nestedatt--object_lock_configuration))
+- **notification_configuration** (Attributes) Configuration that defines how Amazon S3 handles bucket notifications. (see [below for nested schema](#nestedatt--notification_configuration))
+- **object_lock_configuration** (Attributes) Places an Object Lock configuration on the specified bucket. (see [below for nested schema](#nestedatt--object_lock_configuration))
 - **object_lock_enabled** (Boolean) Indicates whether this bucket has an Object Lock configuration enabled.
-- **ownership_controls** (Attributes) (see [below for nested schema](#nestedatt--ownership_controls))
+- **ownership_controls** (Attributes) Specifies the container element for object ownership rules. (see [below for nested schema](#nestedatt--ownership_controls))
 - **public_access_block_configuration** (Attributes) Configuration that defines how Amazon S3 handles public access. (see [below for nested schema](#nestedatt--public_access_block_configuration))
-- **replication_configuration** (Attributes) A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication configuration is 2 MB. (see [below for nested schema](#nestedatt--replication_configuration))
+- **replication_configuration** (Attributes) Configuration for replicating objects in an S3 bucket. (see [below for nested schema](#nestedatt--replication_configuration))
 - **tags** (Attributes List) An arbitrary set of tags (key-value pairs) for this S3 bucket. (see [below for nested schema](#nestedatt--tags))
 - **versioning_configuration** (Attributes) Describes the versioning state of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--versioning_configuration))
 - **website_configuration** (Attributes) Specifies website configuration parameters for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--website_configuration))
 
 ### Read-Only
 
-- **arn** (String) the Amazon Resource Name (ARN) of the specified bucket.
+- **arn** (String) The Amazon Resource Name (ARN) of the specified bucket.
 - **domain_name** (String) The IPv4 DNS name of the specified bucket.
 - **dual_stack_domain_name** (String) The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).
 - **id** (String) Uniquely identifies the resource.
@@ -332,7 +332,7 @@ Optional:
 Optional:
 
 - **event** (String) The Amazon S3 bucket event for which to invoke the AWS Lambda function.
-- **filter** (Attributes) Specifies object key name filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter))
+- **filter** (Attributes) The filtering rules that determine which objects invoke the AWS Lambda function. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter))
 - **function** (String) The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter"></a>
@@ -367,7 +367,7 @@ Optional:
 Optional:
 
 - **event** (String) The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.
-- **filter** (Attributes) Specifies object key name filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter))
+- **filter** (Attributes) The filtering rules that determine which objects trigger notifications. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter))
 - **queue** (String) The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter"></a>
@@ -402,7 +402,7 @@ Optional:
 Optional:
 
 - **event** (String) The Amazon S3 bucket event about which to send notifications.
-- **filter** (Attributes) Specifies object key name filtering rules. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter))
+- **filter** (Attributes) The filtering rules that determine for which objects to send notifications. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter))
 - **topic** (String) The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter"></a>
@@ -628,8 +628,8 @@ Optional:
 
 Optional:
 
-- **replica_modifications** (Attributes) (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications))
-- **sse_kms_encrypted_objects** (Attributes) A container for filter information for the selection of S3 objects encrypted with AWS KMS. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects))
+- **replica_modifications** (Attributes) A filter that you can specify for selection for modifications on replicas. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications))
+- **sse_kms_encrypted_objects** (Attributes) A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects))
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications"></a>
 ### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
@@ -691,7 +691,7 @@ Optional:
 
 Optional:
 
-- **redirect_rule** (Attributes) Specifies how requests are redirected. In the event of an error, you can specify a different error code to return. (see [below for nested schema](#nestedatt--website_configuration--routing_rules--redirect_rule))
+- **redirect_rule** (Attributes) Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return. (see [below for nested schema](#nestedatt--website_configuration--routing_rules--redirect_rule))
 - **routing_rule_condition** (Attributes) A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals (see [below for nested schema](#nestedatt--website_configuration--routing_rules--routing_rule_condition))
 
 <a id="nestedatt--website_configuration--routing_rules--redirect_rule"></a>

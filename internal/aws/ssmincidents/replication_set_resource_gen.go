@@ -53,6 +53,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: Regions
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The ReplicationSet configuration.",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
@@ -87,6 +88,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
+			Description: "The ReplicationSet configuration.",
 			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"region_configuration": {

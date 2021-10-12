@@ -24,7 +24,7 @@ Data Source schema for AWS::AppIntegrations::EventIntegration
 - **associations** (Attributes List) The associations with the event integration. (see [below for nested schema](#nestedatt--associations))
 - **description** (String) The event integration description.
 - **event_bridge_bus** (String) The Amazon Eventbridge bus for the event integration.
-- **event_filter** (Attributes) (see [below for nested schema](#nestedatt--event_filter))
+- **event_filter** (Attributes) The EventFilter (source) associated with the event integration. (see [below for nested schema](#nestedatt--event_filter))
 - **event_integration_arn** (String) The Amazon Resource Name (ARN) of the event integration.
 - **name** (String) The name of the event integration.
 - **tags** (Attributes List) The tags (keys and values) associated with the event integration. (see [below for nested schema](#nestedatt--tags))

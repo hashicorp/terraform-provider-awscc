@@ -21,7 +21,7 @@ Resource Type definition for AWS::SageMaker::AppImageConfig
 
 ### Optional
 
-- **kernel_gateway_image_config** (Attributes) The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
+- **kernel_gateway_image_config** (Attributes) The KernelGatewayImageConfig. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
 - **tags** (Attributes List) A list of tags to apply to the AppImageConfig. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

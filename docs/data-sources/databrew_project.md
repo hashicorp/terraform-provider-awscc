@@ -25,7 +25,7 @@ Data Source schema for AWS::DataBrew::Project
 - **name** (String) Project name
 - **recipe_name** (String) Recipe name
 - **role_arn** (String) Role arn
-- **sample** (Attributes) (see [below for nested schema](#nestedatt--sample))
+- **sample** (Attributes) Sample (see [below for nested schema](#nestedatt--sample))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--sample"></a>

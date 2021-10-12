@@ -24,14 +24,16 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: Action
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Findings filter action.",
 			//   "enum": [
 			//     "ARCHIVE",
 			//     "NOOP"
 			//   ],
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Description: "Findings filter action.",
+			Type:        types.StringType,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"ARCHIVE",
@@ -65,6 +67,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// Property: FindingCriteria
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Findings filter criteria.",
 			//   "properties": {
 			//     "Criterion": {
 			//       "description": "Map of filter criteria.",
@@ -108,6 +111,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
+			Description: "Findings filter criteria.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"criterion": {

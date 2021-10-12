@@ -24,17 +24,20 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The action to be taken by the alert when an anomaly is detected.",
 			//   "properties": {
 			//     "LambdaConfiguration": {
 			//       "additionalProperties": false,
 			//       "description": "Configuration options for a Lambda alert action.",
 			//       "properties": {
 			//         "LambdaArn": {
+			//           "description": "ARN of a Lambda to send alert notifications to.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
 			//         "RoleArn": {
+			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
@@ -51,11 +54,13 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "Configuration options for an SNS alert action.",
 			//       "properties": {
 			//         "RoleArn": {
+			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
 			//         "SnsTopicArn": {
+			//           "description": "ARN of an SNS topic to send alert notifications to.",
 			//           "maxLength": 256,
 			//           "pattern": "",
 			//           "type": "string"
@@ -70,6 +75,7 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The action to be taken by the alert when an anomaly is detected.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"lambda_configuration": {
@@ -79,13 +85,15 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"lambda_arn": {
 									// Property: LambdaArn
-									Type:     types.StringType,
-									Computed: true,
+									Description: "ARN of a Lambda to send alert notifications to.",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 								"role_arn": {
 									// Property: RoleArn
-									Type:     types.StringType,
-									Computed: true,
+									Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 							},
 						),
@@ -98,13 +106,15 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"role_arn": {
 									// Property: RoleArn
-									Type:     types.StringType,
-									Computed: true,
+									Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 								"sns_topic_arn": {
 									// Property: SnsTopicArn
-									Type:     types.StringType,
-									Computed: true,
+									Description: "ARN of an SNS topic to send alert notifications to.",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 							},
 						),
@@ -171,12 +181,14 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "ARN assigned to the alert.",
 			//   "maxLength": 256,
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "ARN assigned to the alert.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 	}
 

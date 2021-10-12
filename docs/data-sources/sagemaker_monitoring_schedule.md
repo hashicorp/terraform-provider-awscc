@@ -25,7 +25,7 @@ Data Source schema for AWS::SageMaker::MonitoringSchedule
 - **endpoint_name** (String) The name of the endpoint used to run the monitoring job.
 - **failure_reason** (String) Contains the reason a monitoring job failed, if it failed.
 - **last_modified_time** (String) A timestamp that indicates the last time the monitoring job was modified.
-- **last_monitoring_execution_summary** (Attributes) Summary of information about monitoring job (see [below for nested schema](#nestedatt--last_monitoring_execution_summary))
+- **last_monitoring_execution_summary** (Attributes) Describes metadata on the last execution to run, if there was one. (see [below for nested schema](#nestedatt--last_monitoring_execution_summary))
 - **monitoring_schedule_arn** (String) The Amazon Resource Name (ARN) of the monitoring schedule.
 - **monitoring_schedule_config** (Attributes) The configuration object that specifies the monitoring schedule and defines the monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config))
 - **monitoring_schedule_name** (String) The name of the monitoring schedule.
@@ -85,7 +85,7 @@ Read-Only:
 
 Read-Only:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.
 
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource"></a>
@@ -93,7 +93,7 @@ Read-Only:
 
 Read-Only:
 
-- **s3_uri** (String) The Amazon S3 URI.
+- **s3_uri** (String) The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.
 
 
 
@@ -105,8 +105,8 @@ Read-Only:
 - **container_arguments** (List of String) An array of arguments for the container used to run the monitoring job.
 - **container_entrypoint** (List of String) Specifies the entrypoint for a container used to run the monitoring job.
 - **image_uri** (String) The container image to be run by the monitoring job.
-- **post_analytics_processor_source_uri** (String) The Amazon S3 URI.
-- **record_preprocessor_source_uri** (String) The Amazon S3 URI.
+- **post_analytics_processor_source_uri** (String) An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+- **record_preprocessor_source_uri** (String) An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers
 
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs"></a>

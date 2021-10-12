@@ -263,6 +263,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "A floating-point percentage of the desired number of tasks to place and keep running in the task set.",
 			//   "properties": {
 			//     "Unit": {
 			//       "description": "The unit of measure for the scale value.",
@@ -280,6 +281,7 @@ func taskSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "A floating-point percentage of the desired number of tasks to place and keep running in the task set.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"unit": {

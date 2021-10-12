@@ -34,7 +34,7 @@ Resource schema for AWS::DataBrew::Job.
 - **max_retries** (Number) Max retries
 - **output_location** (Attributes) Output location (see [below for nested schema](#nestedatt--output_location))
 - **outputs** (Attributes List) (see [below for nested schema](#nestedatt--outputs))
-- **profile_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration))
+- **profile_configuration** (Attributes) Profile Job configuration (see [below for nested schema](#nestedatt--profile_configuration))
 - **project_name** (String) Project name
 - **recipe** (Attributes) (see [below for nested schema](#nestedatt--recipe))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))

@@ -26,7 +26,7 @@ Data Source schema for AWS::LicenseManager::License
 - **entitlements** (Attributes List) (see [below for nested schema](#nestedatt--entitlements))
 - **home_region** (String) Home region for the created license.
 - **issuer** (Attributes) (see [below for nested schema](#nestedatt--issuer))
-- **license_arn** (String)
+- **license_arn** (String) Amazon Resource Name is a unique name for each resource.
 - **license_metadata** (Attributes List) (see [below for nested schema](#nestedatt--license_metadata))
 - **license_name** (String) Name for the created license.
 - **product_name** (String) Product name for the created license.

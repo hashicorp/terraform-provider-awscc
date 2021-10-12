@@ -195,6 +195,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "string"
 			//     },
 			//     "InstanceRoleArn": {
+			//       "description": "Instance Role Arn",
 			//       "maxLength": 102,
 			//       "minLength": 29,
 			//       "pattern": "",
@@ -224,8 +225,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"instance_role_arn": {
 						// Property: InstanceRoleArn
-						Type:     types.StringType,
-						Optional: true,
+						Description: "Instance Role Arn",
+						Type:        types.StringType,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(29, 102),
 						},
@@ -314,6 +316,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Authentication Configuration",
 			//       "properties": {
 			//         "AccessRoleArn": {
+			//           "description": "Access Role Arn",
 			//           "maxLength": 102,
 			//           "minLength": 29,
 			//           "pattern": "",
@@ -502,8 +505,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"access_role_arn": {
 									// Property: AccessRoleArn
-									Type:     types.StringType,
-									Optional: true,
+									Description: "Access Role Arn",
+									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(29, 102),
 									},

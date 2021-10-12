@@ -24,7 +24,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - **cidr_allow_list** (List of String) The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 - **description** (String) A description of the output.
 - **destination** (String) The address where you want to send the output.
-- **encryption** (Attributes) Information about the encryption of the flow. (see [below for nested schema](#nestedatt--encryption))
+- **encryption** (Attributes) The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). (see [below for nested schema](#nestedatt--encryption))
 - **flow_arn** (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - **max_latency** (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
 - **min_latency** (Number) The minimum latency in milliseconds.
@@ -35,7 +35,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - **remote_id** (String) The remote ID for the Zixi-pull stream.
 - **smoothing_latency** (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 - **stream_id** (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
-- **vpc_interface_attachment** (Attributes) The settings for attaching a VPC interface to an output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
+- **vpc_interface_attachment** (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
 
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`

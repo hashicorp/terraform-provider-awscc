@@ -99,7 +99,7 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "Ebs": {
 			//         "additionalProperties": false,
-			//         "description": "Amazon EBS-specific block device mapping specifications. ",
+			//         "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
 			//         "properties": {
 			//           "DeleteOnTermination": {
 			//             "description": "Use to configure delete on termination of the associated device.",
@@ -165,7 +165,7 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"ebs": {
 						// Property: Ebs
-						Description: "Amazon EBS-specific block device mapping specifications. ",
+						Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"delete_on_termination": {

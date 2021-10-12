@@ -17,7 +17,7 @@ Device Profile's resource schema demonstrating some basic constructs and validat
 
 ### Optional
 
-- **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan))
+- **lo_ra_wan** (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
 - **name** (String) Name of service profile
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
 

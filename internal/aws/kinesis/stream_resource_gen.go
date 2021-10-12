@@ -87,7 +87,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. Removing this property from your stack template and updating your stack disables encryption.",
+			//   "description": "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream.",
 			//   "properties": {
 			//     "EncryptionType": {
 			//       "description": "The encryption type to use. The only valid value is KMS. ",
@@ -109,7 +109,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. Removing this property from your stack template and updating your stack disables encryption.",
+			Description: "When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"encryption_type": {

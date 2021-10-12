@@ -19,7 +19,7 @@ Resource Type Definition for AWS::S3Outposts::AccessPoint
 
 - **bucket** (String) The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.
 - **name** (String) A name for the AccessPoint.
-- **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--vpc_configuration))
+- **vpc_configuration** (Attributes) Virtual Private Cloud (VPC) from which requests can be made to the AccessPoint. (see [below for nested schema](#nestedatt--vpc_configuration))
 
 ### Optional
 

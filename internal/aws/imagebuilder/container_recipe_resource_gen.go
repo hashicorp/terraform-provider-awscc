@@ -171,7 +171,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           },
 			//           "Ebs": {
 			//             "additionalProperties": false,
-			//             "description": "Amazon EBS-specific block device mapping specifications. ",
+			//             "description": "Use to manage Amazon EBS-specific configuration for this mapping.",
 			//             "properties": {
 			//               "DeleteOnTermination": {
 			//                 "description": "Use to configure delete on termination of the associated device.",
@@ -249,7 +249,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"ebs": {
 									// Property: Ebs
-									Description: "Amazon EBS-specific block device mapping specifications. ",
+									Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"delete_on_termination": {
@@ -437,7 +437,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The container repository where the output container image is stored.",
+			//   "description": "The destination repository for the container image.",
 			//   "properties": {
 			//     "RepositoryName": {
 			//       "description": "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
@@ -453,7 +453,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   },
 			//   "type": "object"
 			// }
-			Description: "The container repository where the output container image is stored.",
+			Description: "The destination repository for the container image.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"repository_name": {

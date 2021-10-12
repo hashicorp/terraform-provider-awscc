@@ -102,6 +102,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
 			//   "properties": {
 			//     "InstanceType": {
 			//       "description": "The instance type that the image version runs on.",
@@ -158,6 +159,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"instance_type": {

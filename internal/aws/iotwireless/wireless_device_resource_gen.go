@@ -90,6 +90,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
 			//   "oneOf": [
 			//     {
 			//       "required": [
@@ -243,6 +244,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"abp_v10_x": {

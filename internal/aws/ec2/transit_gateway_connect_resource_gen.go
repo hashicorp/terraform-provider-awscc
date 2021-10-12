@@ -35,6 +35,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "The Connect attachment options.",
 			//   "properties": {
 			//     "Protocol": {
 			//       "description": "The tunnel protocol.",
@@ -43,6 +44,7 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   },
 			//   "type": "object"
 			// }
+			Description: "The Connect attachment options.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"protocol": {

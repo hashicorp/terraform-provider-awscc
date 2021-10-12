@@ -24,7 +24,7 @@ Data Source schema for AWS::CloudFormation::ResourceVersion
 - **arn** (String) The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource
 - **execution_role_arn** (String) The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
 - **is_default_version** (Boolean) Indicates if this type version is the current default version
-- **logging_config** (Attributes) (see [below for nested schema](#nestedatt--logging_config))
+- **logging_config** (Attributes) Specifies logging configuration information for a type. (see [below for nested schema](#nestedatt--logging_config))
 - **provisioning_type** (String) The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.
 - **schema_handler_package** (String) A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.
 

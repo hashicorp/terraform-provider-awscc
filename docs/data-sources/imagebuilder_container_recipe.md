@@ -34,7 +34,7 @@ Data Source schema for AWS::ImageBuilder::ContainerRecipe
 - **parent_image** (String) The source image for the container recipe.
 - **platform_override** (String) Specifies the operating system platform when you use a custom source image.
 - **tags** (Map of String) Tags that are attached to the container recipe.
-- **target_repository** (Attributes) The container repository where the output container image is stored. (see [below for nested schema](#nestedatt--target_repository))
+- **target_repository** (Attributes) The destination repository for the container image. (see [below for nested schema](#nestedatt--target_repository))
 - **version** (String) The semantic version of the container recipe (<major>.<minor>.<patch>).
 - **working_directory** (String) The working directory to be used during build and test workflows.
 
@@ -60,7 +60,7 @@ Read-Only:
 Read-Only:
 
 - **device_name** (String) The device to which these mappings apply.
-- **ebs** (Attributes) Amazon EBS-specific block device mapping specifications. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings--ebs))
+- **ebs** (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--instance_configuration--block_device_mappings--ebs))
 - **no_device** (String) Use to remove a mapping from the parent image.
 - **virtual_name** (String) Use to manage instance ephemeral devices.
 

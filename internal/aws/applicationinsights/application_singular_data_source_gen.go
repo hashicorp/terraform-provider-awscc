@@ -99,11 +99,11 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "CustomComponentConfiguration": {
 			//         "additionalProperties": false,
-			//         "description": "The configuration settings of the component.",
+			//         "description": "The monitoring configuration of the component.",
 			//         "properties": {
 			//           "ConfigurationDetails": {
 			//             "additionalProperties": false,
-			//             "description": "The configuration settings.",
+			//             "description": "The configuration settings",
 			//             "properties": {
 			//               "AlarmMetrics": {
 			//                 "description": "A list of metrics to monitor for the component.",
@@ -442,11 +442,11 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "DefaultOverwriteComponentConfiguration": {
 			//         "additionalProperties": false,
-			//         "description": "The configuration settings of the component.",
+			//         "description": "The overwritten settings on default component monitoring configuration.",
 			//         "properties": {
 			//           "ConfigurationDetails": {
 			//             "additionalProperties": false,
-			//             "description": "The configuration settings.",
+			//             "description": "The configuration settings",
 			//             "properties": {
 			//               "AlarmMetrics": {
 			//                 "description": "A list of metrics to monitor for the component.",
@@ -821,12 +821,12 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"custom_component_configuration": {
 						// Property: CustomComponentConfiguration
-						Description: "The configuration settings of the component.",
+						Description: "The monitoring configuration of the component.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"configuration_details": {
 									// Property: ConfigurationDetails
-									Description: "The configuration settings.",
+									Description: "The configuration settings",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"alarm_metrics": {
@@ -1093,12 +1093,12 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"default_overwrite_component_configuration": {
 						// Property: DefaultOverwriteComponentConfiguration
-						Description: "The configuration settings of the component.",
+						Description: "The overwritten settings on default component monitoring configuration.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"configuration_details": {
 									// Property: ConfigurationDetails
-									Description: "The configuration settings.",
+									Description: "The configuration settings",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"alarm_metrics": {
