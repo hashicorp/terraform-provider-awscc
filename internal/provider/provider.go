@@ -26,6 +26,11 @@ const (
 	defaultAssumeRoleDuration = 1 * time.Hour
 )
 
+var (
+	defaultUserAgentVersion = "undefined"
+	defaultUserAgentComment = ""
+)
+
 func New() tfsdk.Provider {
 	return &AwsCloudControlApiProvider{}
 }
@@ -112,6 +117,32 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 			"token": {
 				Type:        types.StringType,
 				Description: "Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.",
+				Optional:    true,
+			},
+
+			"user_agent": {
+				Attributes: tfsdk.ListNestedAttributes(
+					map[string]tfsdk.Attribute{
+						"name": {
+							Type:        types.StringType,
+							Description: "Product name.",
+							Required:    true,
+						},
+						"version": {
+							Type:        types.StringType,
+							Attributes:  nil,
+							Description: "Optional product version.",
+							Optional:    true,
+						},
+						"comment": {
+							Type:        types.StringType,
+							Description: "Optional product comment.",
+							Optional:    true,
+						},
+					},
+					tfsdk.ListNestedAttributesOptions{},
+				),
+				Description: "Product details to append to User-Agent string in all AWS API calls.",
 				Optional:    true,
 			},
 
@@ -202,7 +233,14 @@ type providerData struct {
 	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
 	Token                  types.String    `tfsdk:"token"`
 	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
+	UserAgent              []*apnProduct   `tfsdk:"user_agent"`
 	terraformVersion       string
+}
+
+type apnProduct struct {
+	Name    *string `tfsdk:"name"`
+	Version *string `tfsdk:"version"`
+	Comment *string `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -361,6 +399,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 			},
 		},
 	}
+	config.APNInfo.Products = appendProducts(config.APNInfo.Products, pd.UserAgent)
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
@@ -413,4 +452,21 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 	default:
 		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
 	}
+}
+
+func appendProducts(products []awsbase.APNProduct, addProducts []*apnProduct) []awsbase.APNProduct {
+	for _, p := range addProducts {
+		if p.Version == nil {
+			p.Version = &defaultUserAgentVersion
+		}
+		if p.Comment == nil {
+			p.Comment = &defaultUserAgentComment
+		}
+		products = append(products, awsbase.APNProduct{
+			Name:    *p.Name,
+			Version: *p.Version,
+			Comment: *p.Comment,
+		})
+	}
+	return products
 }
