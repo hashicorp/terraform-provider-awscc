@@ -30,6 +30,7 @@ Resource Schema describing various properties for ECS TaskDefinition
 - **placement_constraints** (Attributes List) (see [below for nested schema](#nestedatt--placement_constraints))
 - **proxy_configuration** (Attributes) (see [below for nested schema](#nestedatt--proxy_configuration))
 - **requires_compatibilities** (List of String)
+- **runtime_platform** (Attributes) (see [below for nested schema](#nestedatt--runtime_platform))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - **task_role_arn** (String)
 - **volumes** (Attributes List) (see [below for nested schema](#nestedatt--volumes))
@@ -321,6 +322,15 @@ Optional:
 - **name** (String)
 - **value** (String)
 
+
+
+<a id="nestedatt--runtime_platform"></a>
+### Nested Schema for `runtime_platform`
+
+Optional:
+
+- **cpu_architecture** (String)
+- **operating_system_family** (String)
 
 
 <a id="nestedatt--tags"></a>

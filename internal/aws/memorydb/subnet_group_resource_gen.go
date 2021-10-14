@@ -71,7 +71,7 @@ func subnetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A list of VPC subnet IDs for the subnet group.",
 			Type:        types.SetType{ElemType: types.StringType},
-			Optional:    true,
+			Required:    true,
 		},
 		"tags": {
 			// Property: Tags

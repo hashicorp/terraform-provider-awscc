@@ -56,6 +56,7 @@ Data Source schema for AWS::QuickSight::DataSource
 Read-Only:
 
 - **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_open_search_parameters))
 - **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
 - **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
 - **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
@@ -80,6 +81,14 @@ Read-Only:
 Read-Only:
 
 - **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--amazon_open_search_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.amazon_open_search_parameters`
+
+Read-Only:
+
+- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--athena_parameters"></a>
@@ -272,6 +281,7 @@ Read-Only:
 Read-Only:
 
 - **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters))
 - **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
 - **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
 - **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
@@ -296,6 +306,14 @@ Read-Only:
 Read-Only:
 
 - **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+
+Read-Only:
+
+- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters"></a>
@@ -462,6 +480,7 @@ Read-Only:
 Read-Only:
 
 - **amazon_elasticsearch_parameters** (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_elasticsearch_parameters))
+- **amazon_open_search_parameters** (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_open_search_parameters))
 - **athena_parameters** (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
 - **aurora_parameters** (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
 - **aurora_postgre_sql_parameters** (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
@@ -486,6 +505,14 @@ Read-Only:
 Read-Only:
 
 - **domain** (String) <p>The Amazon Elasticsearch Service domain.</p>
+
+
+<a id="nestedatt--data_source_parameters--amazon_open_search_parameters"></a>
+### Nested Schema for `data_source_parameters.amazon_open_search_parameters`
+
+Read-Only:
+
+- **domain** (String) <p>The Amazon OpenSearch Service domain.</p>
 
 
 <a id="nestedatt--data_source_parameters--athena_parameters"></a>

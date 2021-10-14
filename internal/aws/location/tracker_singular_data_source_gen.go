@@ -64,6 +64,19 @@ func trackerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"position_filtering": {
+			// Property: PositionFiltering
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "TimeBased",
+			//     "DistanceBased"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
@@ -145,6 +158,7 @@ func trackerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"create_time":              "CreateTime",
 		"description":              "Description",
 		"kms_key_id":               "KmsKeyId",
+		"position_filtering":       "PositionFiltering",
 		"pricing_plan":             "PricingPlan",
 		"pricing_plan_data_source": "PricingPlanDataSource",
 		"tracker_arn":              "TrackerArn",

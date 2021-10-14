@@ -30,7 +30,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the Access Control List to associate with the cluster.",
 			Type:        types.StringType,
-			Optional:    true,
+			Required:    true,
 		},
 		"arn": {
 			// Property: ARN
@@ -174,7 +174,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The compute and memory capacity of the nodes in the cluster.",
 			Type:        types.StringType,
-			Optional:    true,
+			Required:    true,
 		},
 		"num_replicas_per_shard": {
 			// Property: NumReplicasPerShard

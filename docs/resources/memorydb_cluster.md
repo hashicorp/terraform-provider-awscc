@@ -17,11 +17,12 @@ The AWS::MemoryDB::Cluster resource creates an Amazon MemoryDB Cluster.
 
 ### Required
 
+- **acl_name** (String) The name of the Access Control List to associate with the cluster.
 - **cluster_name** (String) The name of the cluster. This value must be unique as it also serves as the cluster identifier.
+- **node_type** (String) The compute and memory capacity of the nodes in the cluster.
 
 ### Optional
 
-- **acl_name** (String) The name of the Access Control List to associate with the cluster.
 - **auto_minor_version_upgrade** (Boolean) A flag that enables automatic minor version upgrade when set to true.
 
 You cannot modify the value of AutoMinorVersionUpgrade after the cluster is created. To enable AutoMinorVersionUpgrade on a cluster you must set AutoMinorVersionUpgrade to true when you create a cluster.
@@ -31,7 +32,6 @@ You cannot modify the value of AutoMinorVersionUpgrade after the cluster is crea
 - **final_snapshot_name** (String) The user-supplied name of a final cluster snapshot. This is the unique name that identifies the snapshot. MemoryDB creates the snapshot, and then deletes the cluster immediately afterward.
 - **kms_key_id** (String) The ID of the KMS key used to encrypt the cluster.
 - **maintenance_window** (String) Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
-- **node_type** (String) The compute and memory capacity of the nodes in the cluster.
 - **num_replicas_per_shard** (Number) The number of replicas to apply to each shard. The limit is 5.
 - **num_shards** (Number) The number of shards the cluster will contain.
 - **parameter_group_name** (String) The name of the parameter group associated with the cluster.

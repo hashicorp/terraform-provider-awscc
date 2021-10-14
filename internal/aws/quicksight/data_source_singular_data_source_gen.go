@@ -42,6 +42,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         ],
 			//         "type": "object"
 			//       },
+			//       "AmazonOpenSearchParameters": {
+			//         "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Domain": {
+			//             "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+			//             "maxLength": 64,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Domain"
+			//         ],
+			//         "type": "object"
+			//       },
 			//       "AthenaParameters": {
 			//         "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 			//         "properties": {
@@ -466,6 +481,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"amazon_open_search_parameters": {
+						// Property: AmazonOpenSearchParameters
+						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"domain": {
+									// Property: Domain
+									Description: "<p>The Amazon OpenSearch Service domain.</p>",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -923,6 +953,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 "properties": {
 			//                   "Domain": {
 			//                     "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+			//                     "maxLength": 64,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Domain"
+			//                 ],
+			//                 "type": "object"
+			//               },
+			//               "AmazonOpenSearchParameters": {
+			//                 "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Domain": {
+			//                     "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
 			//                     "maxLength": 64,
 			//                     "minLength": 1,
 			//                     "type": "string"
@@ -1402,6 +1447,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 												),
 												Computed: true,
 											},
+											"amazon_open_search_parameters": {
+												// Property: AmazonOpenSearchParameters
+												Description: "<p>Amazon OpenSearch Service parameters.</p>",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"domain": {
+															// Property: Domain
+															Description: "<p>The Amazon OpenSearch Service domain.</p>",
+															Type:        types.StringType,
+															Computed:    true,
+														},
+													},
+												),
+												Computed: true,
+											},
 											"athena_parameters": {
 												// Property: AthenaParameters
 												Description: "<p>Amazon Athena parameters.</p>",
@@ -1843,6 +1903,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       ],
 			//       "type": "object"
 			//     },
+			//     "AmazonOpenSearchParameters": {
+			//       "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Domain": {
+			//           "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Domain"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "AthenaParameters": {
 			//       "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 			//       "properties": {
@@ -2263,6 +2338,21 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"amazon_open_search_parameters": {
+						// Property: AmazonOpenSearchParameters
+						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"domain": {
+									// Property: Domain
+									Description: "<p>The Amazon OpenSearch Service domain.</p>",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -2885,6 +2975,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "enum": [
 			//     "ADOBE_ANALYTICS",
 			//     "AMAZON_ELASTICSEARCH",
+			//     "AMAZON_OPENSEARCH",
 			//     "ATHENA",
 			//     "AURORA",
 			//     "AURORA_POSTGRESQL",
@@ -2963,6 +3054,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"actions":                          "Actions",
 		"alternate_data_source_parameters": "AlternateDataSourceParameters",
 		"amazon_elasticsearch_parameters":  "AmazonElasticsearchParameters",
+		"amazon_open_search_parameters":    "AmazonOpenSearchParameters",
 		"arn":                              "Arn",
 		"athena_parameters":                "AthenaParameters",
 		"aurora_parameters":                "AuroraParameters",

@@ -25,6 +25,7 @@ Data Source schema for AWS::Location::Tracker
 - **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 - **description** (String)
 - **kms_key_id** (String)
+- **position_filtering** (String)
 - **pricing_plan** (String)
 - **pricing_plan_data_source** (String)
 - **tracker_arn** (String)

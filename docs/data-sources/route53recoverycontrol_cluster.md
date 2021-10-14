@@ -25,6 +25,7 @@ Data Source schema for AWS::Route53RecoveryControl::Cluster
 - **cluster_endpoints** (Attributes List) Endpoints for the cluster. (see [below for nested schema](#nestedatt--cluster_endpoints))
 - **name** (String) Name of a Cluster. You can use any non-white space character in the name
 - **status** (String) Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--cluster_endpoints"></a>
 ### Nested Schema for `cluster_endpoints`
@@ -33,5 +34,14 @@ Read-Only:
 
 - **endpoint** (String)
 - **region** (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- **key** (String)
+- **value** (String)
 
 

@@ -306,7 +306,7 @@ Read-Only:
 
 Read-Only:
 
-- **catalog** (String)
+- **catalog** (String) <p>The catalog associated with a table.</p>
 - **data_source_arn** (String) <p>The Amazon Resource Name (ARN) for the data source.</p>
 - **input_columns** (Attributes List) <p>The column schema of the table.</p> (see [below for nested schema](#nestedatt--physical_table_map--relational_table--input_columns))
 - **name** (String) <p>The name of the relational table.</p>
