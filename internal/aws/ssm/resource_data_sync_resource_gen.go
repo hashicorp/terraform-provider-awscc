@@ -35,7 +35,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"bucket_prefix": {
@@ -53,7 +53,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"bucket_region": {
@@ -71,7 +71,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"kms_key_arn": {
@@ -89,7 +89,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"s3_destination": {
@@ -178,7 +178,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"sync_format": {
@@ -196,7 +196,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"sync_name": {
@@ -325,7 +325,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

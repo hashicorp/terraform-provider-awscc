@@ -66,7 +66,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"statement_id": {

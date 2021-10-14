@@ -390,7 +390,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(3, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

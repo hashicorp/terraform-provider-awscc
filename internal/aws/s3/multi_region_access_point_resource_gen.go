@@ -60,7 +60,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(3, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"public_access_block_configuration": {
@@ -121,7 +121,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"regions": {

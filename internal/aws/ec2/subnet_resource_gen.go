@@ -38,7 +38,7 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"cidr_block": {
@@ -103,7 +103,7 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"subnet_id": {

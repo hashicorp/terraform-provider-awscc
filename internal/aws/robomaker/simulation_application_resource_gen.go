@@ -70,7 +70,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"rendering_engine": {

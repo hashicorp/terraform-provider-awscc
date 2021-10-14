@@ -55,7 +55,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"engine_version": {
@@ -70,7 +70,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"global_cluster_identifier": {
@@ -86,7 +86,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"source_db_cluster_identifier": {
@@ -105,7 +105,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"storage_encrypted": {
@@ -120,7 +120,7 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

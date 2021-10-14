@@ -114,7 +114,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"state": {

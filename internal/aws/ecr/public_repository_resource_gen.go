@@ -152,7 +152,7 @@ func publicRepositoryResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(2, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"repository_policy_text": {

@@ -60,7 +60,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {

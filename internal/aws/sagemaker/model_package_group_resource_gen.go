@@ -62,7 +62,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"model_package_group_name": {

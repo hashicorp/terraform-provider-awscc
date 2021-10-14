@@ -182,7 +182,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

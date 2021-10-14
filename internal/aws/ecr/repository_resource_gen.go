@@ -84,7 +84,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 2048),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 				},
@@ -92,7 +92,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"image_scanning_configuration": {
@@ -209,7 +209,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"repository_policy_text": {

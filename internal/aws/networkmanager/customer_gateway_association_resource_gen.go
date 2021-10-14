@@ -73,7 +73,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

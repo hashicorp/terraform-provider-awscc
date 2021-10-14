@@ -49,7 +49,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"certificate_chain": {
@@ -68,7 +68,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 2097152),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"path": {
@@ -102,7 +102,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"server_certificate_name": {
@@ -121,7 +121,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {

@@ -52,7 +52,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"connection_arn": {
@@ -73,7 +73,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"name": {
@@ -114,7 +114,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {
@@ -179,7 +179,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"type": {

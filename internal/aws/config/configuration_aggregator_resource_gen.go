@@ -104,7 +104,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"organization_aggregation_source": {

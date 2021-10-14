@@ -61,7 +61,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"job_resources": {
@@ -380,7 +380,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"model_quality_job_input": {
@@ -834,7 +834,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"role_arn": {
@@ -893,7 +893,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {
@@ -958,7 +958,7 @@ func modelQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceT
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

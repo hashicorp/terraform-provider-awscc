@@ -56,7 +56,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"logging_configuration": {

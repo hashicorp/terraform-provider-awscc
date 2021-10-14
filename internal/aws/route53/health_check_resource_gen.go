@@ -240,7 +240,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 					"port": {
@@ -271,7 +271,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.IntBetween(10, 30),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 					"resource_path": {

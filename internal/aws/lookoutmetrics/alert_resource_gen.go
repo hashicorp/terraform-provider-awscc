@@ -157,7 +157,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"alert_name": {
@@ -178,7 +178,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"alert_sensitivity_threshold": {

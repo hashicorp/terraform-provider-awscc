@@ -126,7 +126,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"logging_configuration": {
@@ -577,7 +577,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 				},

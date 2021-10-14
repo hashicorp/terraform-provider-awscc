@@ -297,7 +297,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"model_name": {
@@ -355,7 +355,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {

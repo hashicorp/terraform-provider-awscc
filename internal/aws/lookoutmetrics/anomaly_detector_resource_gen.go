@@ -98,7 +98,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"arn": {

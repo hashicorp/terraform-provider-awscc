@@ -136,7 +136,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "STANDARD"}),
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"subdirectory": {
@@ -156,7 +156,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 			// Subdirectory is a write-only property.
 		},

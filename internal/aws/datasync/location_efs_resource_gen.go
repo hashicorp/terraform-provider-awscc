@@ -147,7 +147,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 			// Subdirectory is a write-only property.
 		},

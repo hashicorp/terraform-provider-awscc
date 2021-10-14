@@ -1070,7 +1070,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"source_flow_config": {

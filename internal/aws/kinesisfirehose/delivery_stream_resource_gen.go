@@ -642,7 +642,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 				},
@@ -724,7 +724,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"delivery_stream_type": {
@@ -747,7 +747,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"elasticsearch_destination_configuration": {
@@ -1372,7 +1372,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							tfsdk.RequiresReplace(),
+							ComputedOptionalForceNew(),
 						},
 					},
 				},
@@ -3025,7 +3025,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"redshift_destination_configuration": {

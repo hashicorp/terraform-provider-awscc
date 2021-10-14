@@ -154,7 +154,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 36),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

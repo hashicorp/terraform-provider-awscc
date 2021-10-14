@@ -252,7 +252,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.ArrayLenBetween(0, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 			// Tags is a write-only property.
 		},

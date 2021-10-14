@@ -125,7 +125,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(12, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"function_name": {
@@ -333,7 +333,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"source_access_configurations": {
@@ -427,7 +427,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(6, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"starting_position_timestamp": {

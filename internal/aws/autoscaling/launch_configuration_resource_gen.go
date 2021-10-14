@@ -32,7 +32,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"block_device_mappings": {
@@ -179,7 +179,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"classic_link_vpc_id": {
@@ -194,7 +194,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"classic_link_vpc_security_groups": {
@@ -214,7 +214,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"ebs_optimized": {
@@ -229,7 +229,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"iam_instance_profile": {
@@ -244,7 +244,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"image_id": {
@@ -273,7 +273,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"instance_monitoring": {
@@ -288,7 +288,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"instance_type": {
@@ -317,7 +317,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"key_name": {
@@ -332,7 +332,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"launch_configuration_name": {
@@ -352,7 +352,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"metadata_options": {
@@ -403,7 +403,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"placement_tenancy": {
@@ -418,7 +418,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"ram_disk_id": {
@@ -433,7 +433,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"security_groups": {
@@ -453,7 +453,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"spot_price": {
@@ -468,7 +468,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"user_data": {
@@ -487,7 +487,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenAtMost(21847),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

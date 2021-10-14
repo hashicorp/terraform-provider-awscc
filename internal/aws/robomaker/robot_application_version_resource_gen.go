@@ -70,7 +70,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringLenBetween(1, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

@@ -79,7 +79,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"billing_view_arn": {
@@ -100,7 +100,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"compression": {

@@ -71,7 +71,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"outputs": {
@@ -174,7 +174,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"provisioning_artifact_id": {

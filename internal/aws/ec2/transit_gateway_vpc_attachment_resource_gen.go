@@ -125,7 +125,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"tags": {
@@ -182,7 +182,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"vpc_id": {
@@ -195,7 +195,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}

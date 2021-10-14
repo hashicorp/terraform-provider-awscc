@@ -33,7 +33,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"log_delivery_bucket": {
@@ -48,7 +48,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"public_type_arn": {
@@ -81,7 +81,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(5, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"publisher_id": {
@@ -120,7 +120,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"type_name": {
@@ -136,7 +136,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"type_version_arn": {

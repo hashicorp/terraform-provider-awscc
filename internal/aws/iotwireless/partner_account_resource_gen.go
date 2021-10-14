@@ -70,7 +70,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 		"partner_type": {

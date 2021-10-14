@@ -1637,7 +1637,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
+				ComputedOptionalForceNew(),
 			},
 		},
 	}
