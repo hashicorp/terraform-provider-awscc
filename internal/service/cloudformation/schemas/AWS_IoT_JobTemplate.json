@@ -234,6 +234,7 @@
       "additionalProperties": false
     },
     "PresignedUrlConfig": {
+      "type": "object",
       "description": "Configuration for pre-signed S3 URLs.",
       "properties": {
         "RoleArn": {

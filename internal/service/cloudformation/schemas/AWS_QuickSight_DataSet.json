@@ -513,6 +513,7 @@
         },
         "Catalog": {
           "type": "string",
+          "description": "<p>The catalog associated with a table.</p>",
           "maxLength": 256,
           "minLength": 0
         },

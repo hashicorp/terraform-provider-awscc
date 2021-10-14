@@ -180,7 +180,9 @@
         "/properties/ParameterGroupStatus"
     ],
     "required": [
-        "ClusterName"
+        "ClusterName",
+        "NodeType",
+        "ACLName"
     ],
     "createOnlyProperties": [
         "/properties/ClusterName",

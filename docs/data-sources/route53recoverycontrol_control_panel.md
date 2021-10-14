@@ -27,5 +27,14 @@ Data Source schema for AWS::Route53RecoveryControl::ControlPanel
 - **name** (String) The name of the control panel. You can use any non-white space character in the name.
 - **routing_control_count** (Number) Count of associated routing controls
 - **status** (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- **key** (String)
+- **value** (String)
 
 

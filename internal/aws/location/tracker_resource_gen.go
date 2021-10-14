@@ -79,6 +79,29 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"position_filtering": {
+			// Property: PositionFiltering
+			// CloudFormation resource type schema:
+			// {
+			//   "enum": [
+			//     "TimeBased",
+			//     "DistanceBased"
+			//   ],
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringInSlice([]string{
+					"TimeBased",
+					"DistanceBased",
+				}),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"pricing_plan": {
 			// Property: PricingPlan
 			// CloudFormation resource type schema:
@@ -181,6 +204,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"create_time":              "CreateTime",
 		"description":              "Description",
 		"kms_key_id":               "KmsKeyId",
+		"position_filtering":       "PositionFiltering",
 		"pricing_plan":             "PricingPlan",
 		"pricing_plan_data_source": "PricingPlanDataSource",
 		"tracker_arn":              "TrackerArn",

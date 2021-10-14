@@ -2,8 +2,28 @@
     "typeName": "AWS::Route53RecoveryControl::ControlPanel",
     "description": "AWS Route53 Recovery Control Control Panel resource schema .",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53-recovery-control.git",
-    "taggable": false,
-    "definitions": {},
+    "taggable": true,
+    "definitions": {
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "maxLength": 256
+                }
+            },
+            "required": [
+                "Value",
+                "Key"
+            ],
+            "additionalProperties": false
+        }
+    },
     "properties": {
         "ClusterArn": {
             "description": "Cluster to associate with the Control Panel",
@@ -35,6 +55,15 @@
         "RoutingControlCount": {
             "description": "Count of associated routing controls",
             "type": "integer"
+        },
+        "Tags": {
+            "description": "A collection of tags associated with a resource",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Tag",
+                "maxItems": 20
+            },
+            "insertionOrder": false
         }
     },
     "required": [
@@ -42,7 +71,11 @@
     ],
     "additionalProperties": false,
     "createOnlyProperties": [
-        "/properties/ClusterArn"
+        "/properties/ClusterArn",
+        "/properties/Tags"
+    ],
+    "writeOnlyProperties": [
+        "/properties/Tags"
     ],
     "primaryIdentifier": [
         "/properties/ControlPanelArn"

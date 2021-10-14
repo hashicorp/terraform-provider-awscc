@@ -65,7 +65,8 @@
     },
     "additionalProperties": false,
     "required": [
-        "SubnetGroupName"
+        "SubnetGroupName",
+        "SubnetIds"
     ],
     "primaryIdentifier": [
         "/properties/SubnetGroupName"

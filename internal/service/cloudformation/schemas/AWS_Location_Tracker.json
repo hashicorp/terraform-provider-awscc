@@ -14,6 +14,13 @@
             "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
             "type": "string",
             "pattern": ""
+        },
+        "PositionFiltering": {
+            "type": "string",
+            "enum": [
+                "TimeBased",
+                "DistanceBased"
+            ]
         }
     },
     "properties": {
@@ -35,6 +42,9 @@
         },
         "PricingPlanDataSource": {
             "type": "string"
+        },
+        "PositionFiltering": {
+            "$ref": "#/definitions/PositionFiltering"
         },
         "TrackerArn": {
             "type": "string",
@@ -67,7 +77,8 @@
         "/properties/PricingPlanDataSource",
         "/properties/TrackerName",
         "/properties/PricingPlan",
-        "/properties/Description"
+        "/properties/Description",
+        "/properties/PositionFiltering"
     ],
     "required" : [
         "PricingPlan",

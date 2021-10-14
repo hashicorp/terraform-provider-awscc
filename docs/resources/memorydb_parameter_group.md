@@ -17,12 +17,12 @@ The AWS::MemoryDB::ParameterGroup resource creates an Amazon MemoryDB ParameterG
 
 ### Required
 
+- **family** (String) The name of the parameter group family that this parameter group is compatible with.
 - **parameter_group_name** (String) The name of the parameter group.
 
 ### Optional
 
 - **description** (String) A description of the parameter group.
-- **family** (String) The name of the parameter group family that this parameter group is compatible with.
 - **parameters** (Map of String) An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.
 - **tags** (Attributes Set) An array of key-value pairs to apply to this parameter group. (see [below for nested schema](#nestedatt--tags))
 

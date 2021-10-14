@@ -34,6 +34,7 @@ Data Source schema for AWS::ECS::TaskDefinition
 - **placement_constraints** (Attributes List) (see [below for nested schema](#nestedatt--placement_constraints))
 - **proxy_configuration** (Attributes) (see [below for nested schema](#nestedatt--proxy_configuration))
 - **requires_compatibilities** (List of String)
+- **runtime_platform** (Attributes) (see [below for nested schema](#nestedatt--runtime_platform))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - **task_definition_arn** (String) The Amazon Resource Name (ARN) of the Amazon ECS task definition
 - **task_role_arn** (String)
@@ -321,6 +322,15 @@ Read-Only:
 - **name** (String)
 - **value** (String)
 
+
+
+<a id="nestedatt--runtime_platform"></a>
+### Nested Schema for `runtime_platform`
+
+Read-Only:
+
+- **cpu_architecture** (String)
+- **operating_system_family** (String)
 
 
 <a id="nestedatt--tags"></a>

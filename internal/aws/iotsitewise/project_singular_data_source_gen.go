@@ -79,6 +79,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of key-value pairs that contain metadata for the project.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",

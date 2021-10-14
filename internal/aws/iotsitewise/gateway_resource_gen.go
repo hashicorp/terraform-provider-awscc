@@ -25,6 +25,7 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of gateway capability summaries that each contain a namespace and status.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Contains a summary of a gateway capability configuration.",
@@ -148,6 +149,7 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of key-value pairs that contain metadata for the gateway.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
@@ -185,6 +187,9 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

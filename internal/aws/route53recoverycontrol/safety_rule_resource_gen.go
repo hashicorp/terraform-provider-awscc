@@ -255,6 +255,63 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A collection of tags associated with a resource",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "A collection of tags associated with a resource",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenAtMost(256),
+						},
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+				tfsdk.RequiresReplace(),
+			},
+			// Tags is a write-only property.
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -281,16 +338,22 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"gating_controls":   "GatingControls",
 		"gating_rule":       "GatingRule",
 		"inverted":          "Inverted",
+		"key":               "Key",
 		"name":              "Name",
 		"rule_config":       "RuleConfig",
 		"safety_rule_arn":   "SafetyRuleArn",
 		"status":            "Status",
+		"tags":              "Tags",
 		"target_controls":   "TargetControls",
 		"threshold":         "Threshold",
 		"type":              "Type",
+		"value":             "Value",
 		"wait_period_ms":    "WaitPeriodMs",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Tags",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -55,8 +55,7 @@ func parameterGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Description: "The name of the parameter group family that this parameter group is compatible with.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

@@ -42,6 +42,11 @@ FEATURES:
 * **New Data Source:** `awscc_memorydb_subnet_groups`
 * **New Data Source:** `awscc_memorydb_user`
 * **New Data Source:** `awscc_memorydb_users`
+* **New Data Source:** `awscc_wisdom_assistant`
+* **New Data Source:** `awscc_wisdom_assistants`
+* **New Data Source:** `awscc_wisdom_assistant_association`
+* **New Data Source:** `awscc_wisdom_knowledge_base`
+* **New Data Source:** `awscc_wisdom_knowledge_bases`
 * **New Resource:** `awscc_backup_framework`
 * **New Resource:** `awscc_ce_anomaly_monitor`
 * **New Resource:** `awscc_ce_anomaly_subscription`
@@ -57,6 +62,9 @@ FEATURES:
 * **New Resource:** `awscc_memorydb_parameter_group`
 * **New Resource:** `awscc_memorydb_subnet_group`
 * **New Resource:** `awscc_memorydb_user`
+* **New Resource:** `awscc_wisdom_assistant`
+* **New Resource:** `awscc_wisdom_assistant_association`
+* **New Resource:** `awscc_wisdom_knowledge_base`
 
 ## [0.2.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.2.0) (October 7, 2021)
 

@@ -28,6 +28,7 @@ Data Source schema for AWS::Route53RecoveryControl::SafetyRule
 - **rule_config** (Attributes) The rule configuration for an assertion rule or gating rule. This is the criteria that you set for specific assertion controls (routing controls) or gating controls. This configuration specifies how many controls must be enabled after a transaction completes. (see [below for nested schema](#nestedatt--rule_config))
 - **safety_rule_arn** (String) The Amazon Resource Name (ARN) of the safety rule.
 - **status** (String) The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--assertion_rule"></a>
 ### Nested Schema for `assertion_rule`
@@ -57,5 +58,14 @@ Read-Only:
 - **inverted** (Boolean) Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.
 - **threshold** (Number) The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.
 - **type** (String) A rule can be one of the following: ATLEAST, AND, or OR.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- **key** (String)
+- **value** (String)
 
 

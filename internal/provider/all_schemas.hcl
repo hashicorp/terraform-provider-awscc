@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 393 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 396 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1768,6 +1768,19 @@ resource_schema "aws_wafv2_web_acl" {
 resource_schema "aws_wafv2_web_acl_association" {
   cloudformation_type_name               = "AWS::WAFv2::WebACLAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_assistant" {
+  cloudformation_type_name = "AWS::Wisdom::Assistant"
+}
+
+resource_schema "aws_wisdom_assistant_association" {
+  cloudformation_type_name               = "AWS::Wisdom::AssistantAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_knowledge_base" {
+  cloudformation_type_name = "AWS::Wisdom::KnowledgeBase"
 }
 
 resource_schema "aws_workspaces_connection_alias" {

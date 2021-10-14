@@ -1388,6 +1388,41 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"runtime_platform": {
+			// Property: RuntimePlatform
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CpuArchitecture": {
+			//       "type": "string"
+			//     },
+			//     "OperatingSystemFamily": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cpu_architecture": {
+						// Property: CpuArchitecture
+						Type:     types.StringType,
+						Optional: true,
+					},
+					"operating_system_family": {
+						// Property: OperatingSystemFamily
+						Type:     types.StringType,
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -1703,6 +1738,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"container_path":                 "ContainerPath",
 		"container_port":                 "ContainerPort",
 		"cpu":                            "Cpu",
+		"cpu_architecture":               "CpuArchitecture",
 		"credentials_parameter":          "CredentialsParameter",
 		"depends_on":                     "DependsOn",
 		"device_name":                    "DeviceName",
@@ -1757,6 +1793,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"network_mode":                   "NetworkMode",
+		"operating_system_family":        "OperatingSystemFamily",
 		"options":                        "Options",
 		"permissions":                    "Permissions",
 		"pid_mode":                       "PidMode",
@@ -1774,6 +1811,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		"resource_requirements":          "ResourceRequirements",
 		"retries":                        "Retries",
 		"root_directory":                 "RootDirectory",
+		"runtime_platform":               "RuntimePlatform",
 		"scope":                          "Scope",
 		"secret_options":                 "SecretOptions",
 		"secrets":                        "Secrets",

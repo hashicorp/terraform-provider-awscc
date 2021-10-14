@@ -57,6 +57,7 @@
         }
     },
     "additionalProperties": false,
+    "taggable": true,
     "required": [
         "DashboardDefinition",
         "DashboardDescription",

@@ -22,6 +22,7 @@ AWS Route53 Recovery Control Control Panel resource schema .
 ### Optional
 
 - **cluster_arn** (String) Cluster to associate with the Control Panel
+- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -30,6 +31,14 @@ AWS Route53 Recovery Control Control Panel resource schema .
 - **id** (String) Uniquely identifies the resource.
 - **routing_control_count** (Number) Count of associated routing controls
 - **status** (String) The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- **key** (String)
+- **value** (String)
 
 ## Import
 
