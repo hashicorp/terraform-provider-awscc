@@ -374,6 +374,9 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_wafv2_logging_configuration -cfschema ../service/cloudformation/schemas/AWS_WAFv2_LoggingConfiguration.json -package wafv2 ../aws/wafv2/logging_configuration_singular_data_source_gen.go ../aws/wafv2/logging_configuration_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_wafv2_regex_pattern_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_RegexPatternSet.json -package wafv2 ../aws/wafv2/regex_pattern_set_singular_data_source_gen.go ../aws/wafv2/regex_pattern_set_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_wafv2_web_acl_association -cfschema ../service/cloudformation/schemas/AWS_WAFv2_WebACLAssociation.json -package wafv2 ../aws/wafv2/web_acl_association_singular_data_source_gen.go ../aws/wafv2/web_acl_association_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_wisdom_assistant -cfschema ../service/cloudformation/schemas/AWS_Wisdom_Assistant.json -package wisdom ../aws/wisdom/assistant_singular_data_source_gen.go ../aws/wisdom/assistant_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_wisdom_assistant_association -cfschema ../service/cloudformation/schemas/AWS_Wisdom_AssistantAssociation.json -package wisdom ../aws/wisdom/assistant_association_singular_data_source_gen.go ../aws/wisdom/assistant_association_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_wisdom_knowledge_base -cfschema ../service/cloudformation/schemas/AWS_Wisdom_KnowledgeBase.json -package wisdom ../aws/wisdom/knowledge_base_singular_data_source_gen.go ../aws/wisdom/knowledge_base_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_workspaces_connection_alias -cfschema ../service/cloudformation/schemas/AWS_WorkSpaces_ConnectionAlias.json -package workspaces ../aws/workspaces/connection_alias_singular_data_source_gen.go ../aws/workspaces/connection_alias_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_xray_group -cfschema ../service/cloudformation/schemas/AWS_XRay_Group.json -package xray ../aws/xray/group_singular_data_source_gen.go ../aws/xray/group_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_xray_sampling_rule -cfschema ../service/cloudformation/schemas/AWS_XRay_SamplingRule.json -package xray ../aws/xray/sampling_rule_singular_data_source_gen.go ../aws/xray/sampling_rule_singular_data_source_gen_test.go
@@ -490,6 +493,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspaces"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/xray"
 )
