@@ -17,6 +17,21 @@
         "Domain"
       ]
     },
+    "AmazonOpenSearchParameters": {
+      "type": "object",
+      "description": "<p>Amazon OpenSearch Service parameters.</p>",
+      "properties": {
+        "Domain": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "description": "<p>The Amazon OpenSearch Service domain.</p>"
+        }
+      },
+      "required": [
+        "Domain"
+      ]
+    },
     "AthenaParameters": {
       "type": "object",
       "description": "<p>Amazon Athena parameters.</p>",
@@ -216,6 +231,9 @@
         "AmazonElasticsearchParameters": {
           "$ref": "#/definitions/AmazonElasticsearchParameters"
         },
+        "AmazonOpenSearchParameters": {
+          "$ref": "#/definitions/AmazonOpenSearchParameters"
+        },
         "PostgreSqlParameters": {
           "$ref": "#/definitions/PostgreSqlParameters"
         },
@@ -232,6 +250,7 @@
       "enum": [
         "ADOBE_ANALYTICS",
         "AMAZON_ELASTICSEARCH",
+        "AMAZON_OPENSEARCH",
         "ATHENA",
         "AURORA",
         "AURORA_POSTGRESQL",

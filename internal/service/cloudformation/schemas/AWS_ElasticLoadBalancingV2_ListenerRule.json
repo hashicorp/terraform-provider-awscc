@@ -395,6 +395,7 @@
     "/properties/Actions/*/ForwardConfig",
     "/properties/Actions/*/TargetGroupArn"
   ],
+  "taggable": false,
   "handlers": {
     "create": {
       "permissions": [

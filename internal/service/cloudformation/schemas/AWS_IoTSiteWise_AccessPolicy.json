@@ -111,6 +111,7 @@
         }
     },
     "additionalProperties":false,
+    "taggable":false,
     "required":[
         "AccessPolicyIdentity",
         "AccessPolicyPermission",
