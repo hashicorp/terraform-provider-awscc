@@ -1,3 +1,9 @@
+## 0.4.0 (Unreleased)
+
+BUG FIXES:
+
+* Persist any resource `id` to state if Create fails while waiting for async operation completion ([#252](https://github.com/hashicorp/terraform-provider-awscc/issues/252))
+
 ## [0.3.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.3.0) (October 14, 2021)
 
 BREAKING CHANGES:
