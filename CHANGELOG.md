@@ -1,3 +1,19 @@
+## 0.4.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_s3outposts_bucket`
+* **New Resource:** `awscc_s3outposts_bucket`
+
+BUG FIXES:
+
+data-source/awscc_s3_storagelens: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+data-source/awscc_s3objectlambda_access_point: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+data-source/awscc_sagemaker_pipeline: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+resource/awscc_s3_storagelens: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+resource/awscc_s3objectlambda_access_point: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+resource/awscc_sagemaker_pipeline: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+
 ## [0.3.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.3.0) (October 14, 2021)
 
 BREAKING CHANGES:
