@@ -1513,10 +1513,6 @@ resource_schema "aws_s3outposts_access_point" {
 resource_schema "aws_s3outposts_bucket" {
   cloudformation_type_name               = "AWS::S3Outposts::Bucket"
   suppress_plural_data_source_generation = true
-
-  # AndOperator property is 'oneOf', which we cannot yet handle.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_s3outposts_bucket_policy" {

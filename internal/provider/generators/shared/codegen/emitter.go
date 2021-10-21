@@ -491,6 +491,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		//
 		if len(property.Properties) == 0 {
 			// Schemaless object => key-value map of string.
+			e.warnf("%s is of type %s but has no schema", strings.Join(path, "/"), propertyType)
 			e.printf("Type:types.MapType{ElemType:types.StringType},\n")
 
 			break

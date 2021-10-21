@@ -1,0 +1,1 @@
+$ terraform import awscc_s3outposts_bucket.example <resource ID>

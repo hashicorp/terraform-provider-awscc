@@ -24,21 +24,82 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: PipelineDefinition
 			// CloudFormation resource type schema:
 			// {
-			//   "oneOf": [
-			//     {
-			//       "required": [
-			//         "PipelineDefinitionBody"
-			//       ]
+			//   "properties": {
+			//     "PipelineDefinitionBody": {
+			//       "description": "A specification that defines the pipeline in JSON format.",
+			//       "type": "string"
 			//     },
-			//     {
+			//     "PipelineDefinitionS3Location": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "Bucket": {
+			//           "description": "The name of the S3 bucket where the PipelineDefinition file is stored.",
+			//           "type": "string"
+			//         },
+			//         "ETag": {
+			//           "description": "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
+			//           "type": "string"
+			//         },
+			//         "Key": {
+			//           "description": "The file name of the PipelineDefinition file (Amazon S3 object name).",
+			//           "type": "string"
+			//         },
+			//         "Version": {
+			//           "description": "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
+			//           "type": "string"
+			//         }
+			//       },
 			//       "required": [
-			//         "PipelineDefinitionS3Location"
-			//       ]
+			//         "Bucket",
+			//         "Key"
+			//       ],
+			//       "type": "object"
 			//     }
-			//   ],
+			//   },
 			//   "type": "object"
 			// }
-			Type:     types.MapType{ElemType: types.StringType},
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"pipeline_definition_body": {
+						// Property: PipelineDefinitionBody
+						Description: "A specification that defines the pipeline in JSON format.",
+						Type:        types.StringType,
+						Optional:    true,
+					},
+					"pipeline_definition_s3_location": {
+						// Property: PipelineDefinitionS3Location
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"bucket": {
+									// Property: Bucket
+									Description: "The name of the S3 bucket where the PipelineDefinition file is stored.",
+									Type:        types.StringType,
+									Required:    true,
+								},
+								"e_tag": {
+									// Property: ETag
+									Description: "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
+									Type:        types.StringType,
+									Optional:    true,
+								},
+								"key": {
+									// Property: Key
+									Description: "The file name of the PipelineDefinition file (Amazon S3 object name).",
+									Type:        types.StringType,
+									Required:    true,
+								},
+								"version": {
+									// Property: Version
+									Description: "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
+									Type:        types.StringType,
+									Optional:    true,
+								},
+							},
+						),
+						Optional: true,
+					},
+				},
+			),
 			Required: true,
 		},
 		"pipeline_description": {
@@ -171,14 +232,19 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":                   "Key",
-		"pipeline_definition":   "PipelineDefinition",
-		"pipeline_description":  "PipelineDescription",
-		"pipeline_display_name": "PipelineDisplayName",
-		"pipeline_name":         "PipelineName",
-		"role_arn":              "RoleArn",
-		"tags":                  "Tags",
-		"value":                 "Value",
+		"bucket":                          "Bucket",
+		"e_tag":                           "ETag",
+		"key":                             "Key",
+		"pipeline_definition":             "PipelineDefinition",
+		"pipeline_definition_body":        "PipelineDefinitionBody",
+		"pipeline_definition_s3_location": "PipelineDefinitionS3Location",
+		"pipeline_description":            "PipelineDescription",
+		"pipeline_display_name":           "PipelineDisplayName",
+		"pipeline_name":                   "PipelineName",
+		"role_arn":                        "RoleArn",
+		"tags":                            "Tags",
+		"value":                           "Value",
+		"version":                         "Version",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

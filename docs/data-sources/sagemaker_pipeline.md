@@ -21,12 +21,32 @@ Data Source schema for AWS::SageMaker::Pipeline
 
 ### Read-Only
 
-- **pipeline_definition** (Map of String)
+- **pipeline_definition** (Attributes) (see [below for nested schema](#nestedatt--pipeline_definition))
 - **pipeline_description** (String) The description of the Pipeline.
 - **pipeline_display_name** (String) The display name of the Pipeline.
 - **pipeline_name** (String) The name of the Pipeline.
 - **role_arn** (String) Role Arn
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--pipeline_definition"></a>
+### Nested Schema for `pipeline_definition`
+
+Read-Only:
+
+- **pipeline_definition_body** (String) A specification that defines the pipeline in JSON format.
+- **pipeline_definition_s3_location** (Attributes) (see [below for nested schema](#nestedatt--pipeline_definition--pipeline_definition_s3_location))
+
+<a id="nestedatt--pipeline_definition--pipeline_definition_s3_location"></a>
+### Nested Schema for `pipeline_definition.pipeline_definition_s3_location`
+
+Read-Only:
+
+- **bucket** (String) The name of the S3 bucket where the PipelineDefinition file is stored.
+- **e_tag** (String) The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.
+- **key** (String) The file name of the PipelineDefinition file (Amazon S3 object name).
+- **version** (String) For versioning-enabled buckets, a specific version of the PipelineDefinition file.
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
