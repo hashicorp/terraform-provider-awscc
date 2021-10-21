@@ -15,13 +15,16 @@
     "NetworkAclAssociationId": {
       "type": "string"
     },
+    "OutpostArn": {
+      "type": "string"
+    },
     "AvailabilityZone": {
       "type": "string"
     },
     "CidrBlock": {
       "type": "string"
     },
-    "SubnetId": {
+    "Id": {
       "type": "string"
     },
     "Ipv6CidrBlocks": {
@@ -32,9 +35,6 @@
       }
     },
     "Ipv6CidrBlock": {
-      "type": "string"
-    },
-    "OutpostArn": {
       "type": "string"
     },
     "Tags": {
@@ -68,49 +68,17 @@
     "CidrBlock"
   ],
   "createOnlyProperties": [
+    "/properties/OutpostArn",
     "/properties/VpcId",
     "/properties/AvailabilityZone",
-    "/properties/CidrBlock",
-    "/properties/OutpostArn"
+    "/properties/CidrBlock"
   ],
   "primaryIdentifier": [
-    "/properties/SubnetId"
+    "/properties/Id"
   ],
   "readOnlyProperties": [
     "/properties/NetworkAclAssociationId",
-    "/properties/SubnetId",
+    "/properties/Id",
     "/properties/Ipv6CidrBlocks"
-  ],
-  "handlers": {
-    "create": {
-      "permissions": [
-        "ec2:DescribeSubnets",
-        "ec2:CreateSubnet",
-        "ec2:CreateTags",
-        "ec2:ModifySubnetAttribute"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "ec2:DescribeSubnets",
-        "ec2:DescribeNetworkAcls"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "ec2:DescribeSubnets",
-        "ec2:ModifySubnetAttribute",
-        "ec2:CreateTags",
-        "ec2:DeleteTags",
-        "ec2:AssociateSubnetCidrBlock",
-        "ec2:DisassociateSubnetCidrBlock"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "ec2:DescribeSubnets",
-        "ec2:DeleteSubnet"
-      ]
-    }
-  }
+  ]
 }

@@ -58,7 +58,7 @@
     "Subdirectory": {
       "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
       "type": "string",
-      "maxLength": 4096,
+      "maxLength": 1024,
       "pattern": ""
     },
     "S3StorageClass": {

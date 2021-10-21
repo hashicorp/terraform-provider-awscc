@@ -393,10 +393,12 @@
   },
   "required": [
     "AwsAccountId",
-    "TemplateId"
+    "TemplateId",
+    "SourceEntity"
   ],
   "additionalProperties": false,
   "readOnlyProperties": [
+    "/properties/TemplateError",
     "/properties/CreatedTime",
     "/properties/Version",
     "/properties/LastUpdatedTime",

@@ -55,11 +55,7 @@
     }
   },
   "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/Tags"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
+    "/properties/Name"
   ],
   "readOnlyProperties": [
     "/properties/Arn"
@@ -75,12 +71,14 @@
     "create": {
       "permissions": [
         "glue:CreateRegistry",
-        "glue:GetRegistry"
+        "glue:GetRegistry",
+        "glue:GetTags"
       ]
     },
     "read": {
       "permissions": [
-        "glue:GetRegistry"
+        "glue:GetRegistry",
+        "glue:GetTags"
       ]
     },
     "delete": {
@@ -91,7 +89,10 @@
     "update": {
       "permissions": [
         "glue:UpdateRegistry",
-        "glue:GetRegistry"
+        "glue:GetRegistry",
+        "glue:TagResource",
+        "glue:UntagResource",
+        "glue:GetTags"
       ]
     },
     "list": {

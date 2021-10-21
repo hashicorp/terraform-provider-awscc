@@ -199,7 +199,8 @@
     "ActionType",
     "ActionThreshold",
     "ExecutionRoleArn",
-    "Definition"
+    "Definition",
+    "Subscribers"
   ],
   "readOnlyProperties": [
     "/properties/ActionId"

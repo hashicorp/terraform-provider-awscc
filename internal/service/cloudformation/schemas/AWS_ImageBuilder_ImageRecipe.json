@@ -123,6 +123,10 @@
                     "description": "The snapshot that defines the device contents.",
                     "type": "string"
                 },
+                "Throughput": {
+                    "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+                    "type": "integer"
+                },
                 "VolumeSize": {
                     "description": "Use to override the device's volume size.",
                     "type": "integer"
