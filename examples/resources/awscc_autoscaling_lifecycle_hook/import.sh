@@ -1,0 +1,1 @@
+$ terraform import awscc_autoscaling_lifecycle_hook.example <resource ID>
