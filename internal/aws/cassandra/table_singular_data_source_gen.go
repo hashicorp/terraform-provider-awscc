@@ -164,6 +164,18 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
+		"default_time_to_live": {
+			// Property: DefaultTimeToLive
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+			//   "minimum": 0,
+			//   "type": "integer"
+			// }
+			Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+			Type:        types.NumberType,
+			Computed:    true,
+		},
 		"encryption_specification": {
 			// Property: EncryptionSpecification
 			// CloudFormation resource type schema:
@@ -406,6 +418,7 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"column":                         "Column",
 		"column_name":                    "ColumnName",
 		"column_type":                    "ColumnType",
+		"default_time_to_live":           "DefaultTimeToLive",
 		"encryption_specification":       "EncryptionSpecification",
 		"encryption_type":                "EncryptionType",
 		"key":                            "Key",

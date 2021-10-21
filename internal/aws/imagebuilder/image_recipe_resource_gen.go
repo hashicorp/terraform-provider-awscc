@@ -121,6 +121,10 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The snapshot that defines the device contents.",
 			//             "type": "string"
 			//           },
+			//           "Throughput": {
+			//             "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+			//             "type": "integer"
+			//           },
 			//           "VolumeSize": {
 			//             "description": "Use to override the device's volume size.",
 			//             "type": "integer"
@@ -196,6 +200,12 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: SnapshotId
 									Description: "The snapshot that defines the device contents.",
 									Type:        types.StringType,
+									Optional:    true,
+								},
+								"throughput": {
+									// Property: Throughput
+									Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+									Type:        types.NumberType,
 									Optional:    true,
 								},
 								"volume_size": {
@@ -462,6 +472,7 @@ func imageRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"snapshot_id":                       "SnapshotId",
 		"systems_manager_agent":             "SystemsManagerAgent",
 		"tags":                              "Tags",
+		"throughput":                        "Throughput",
 		"uninstall_after_build":             "UninstallAfterBuild",
 		"user_data_override":                "UserDataOverride",
 		"value":                             "Value",

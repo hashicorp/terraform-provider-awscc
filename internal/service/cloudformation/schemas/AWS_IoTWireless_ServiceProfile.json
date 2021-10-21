@@ -97,7 +97,7 @@
       "description": "A list of key-value pairs that contain metadata for the service profile.",
       "type": "array",
       "uniqueItems": true,
-      "maxItems": 50,
+      "maxItems": 200,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"

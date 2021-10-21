@@ -162,6 +162,9 @@
         "DeleteAllPolicyResources": {
             "type": "boolean"
         },
+        "ResourcesCleanUp": {
+            "type": "boolean"
+        },
         "Tags": {
             "type": "array",
             "items": {

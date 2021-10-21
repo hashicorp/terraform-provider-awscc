@@ -19,6 +19,7 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
 
 - **analysis_id** (String)
 - **aws_account_id** (String)
+- **source_entity** (Attributes) <p>The source entity of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity))
 
 ### Optional
 
@@ -31,7 +32,6 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
             principal listed by Amazon Resource Name (ARN). </p>
 
         <p>To specify no permissions, omit <code>Permissions</code>.</p> (see [below for nested schema](#nestedatt--permissions))
-- **source_entity** (Attributes) <p>The source entity of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity))
 - **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             analysis.</p> (see [below for nested schema](#nestedatt--tags))
 - **theme_arn** (String) <p>The ARN of the theme of the analysis.</p>
@@ -45,6 +45,32 @@ Definition of the AWS::QuickSight::Analysis Resource Type.
 - **last_updated_time** (String) <p>The time that the analysis was last updated.</p>
 - **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--sheets))
 - **status** (String)
+
+<a id="nestedatt--source_entity"></a>
+### Nested Schema for `source_entity`
+
+Required:
+
+- **source_template** (Attributes) <p>The source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+
+<a id="nestedatt--source_entity--source_template"></a>
+### Nested Schema for `source_entity.source_template`
+
+Required:
+
+- **arn** (String) <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
+- **data_set_references** (Attributes List) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+
+<a id="nestedatt--source_entity--source_template--data_set_references"></a>
+### Nested Schema for `source_entity.source_template.data_set_references`
+
+Required:
+
+- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+
+
+
 
 <a id="nestedatt--errors"></a>
 ### Nested Schema for `errors`
@@ -123,32 +149,6 @@ Optional:
                     (This is less common.) </p>
             </li>
          </ul>
-
-
-<a id="nestedatt--source_entity"></a>
-### Nested Schema for `source_entity`
-
-Optional:
-
-- **source_template** (Attributes) <p>The source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
-
-<a id="nestedatt--source_entity--source_template"></a>
-### Nested Schema for `source_entity.source_template`
-
-Optional:
-
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
-- **data_set_references** (Attributes List) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
-
-<a id="nestedatt--source_entity--source_template--data_set_references"></a>
-### Nested Schema for `source_entity.source_template.data_set_references`
-
-Optional:
-
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
-
-
 
 
 <a id="nestedatt--tags"></a>

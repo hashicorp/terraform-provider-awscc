@@ -21,15 +21,15 @@ Data Source schema for AWS::NimbleStudio::StreamingImage
 
 ### Read-Only
 
-- **description** (String)
-- **ec_2_image_id** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
-- **eula_ids** (List of String)
-- **name** (String)
-- **owner** (String)
-- **platform** (String)
+- **description** (String) <p>A human-readable description of the streaming image.</p>
+- **ec_2_image_id** (String) <p>The ID of an EC2 machine image with which to create this streaming image.</p>
+- **encryption_configuration** (Attributes) <p>TODO</p> (see [below for nested schema](#nestedatt--encryption_configuration))
+- **eula_ids** (List of String) <p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>
+- **name** (String) <p>A friendly name for a streaming image resource.</p>
+- **owner** (String) <p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>
+- **platform** (String) <p>The platform of the streaming image, either WINDOWS or LINUX.</p>
 - **streaming_image_id** (String)
-- **studio_id** (String)
+- **studio_id** (String) <p>The studioId. </p>
 - **tags** (Map of String)
 
 <a id="nestedatt--encryption_configuration"></a>
@@ -37,7 +37,7 @@ Data Source schema for AWS::NimbleStudio::StreamingImage
 
 Read-Only:
 
-- **key_arn** (String)
-- **key_type** (String)
+- **key_arn** (String) <p>The ARN for a KMS key that is used to encrypt studio data.</p>
+- **key_type** (String) <p/>
 
 

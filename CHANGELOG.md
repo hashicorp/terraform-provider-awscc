@@ -1,8 +1,32 @@
 ## 0.4.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_ec2_subnet: Temporarily removed
+* resource/awscc_ec2_subnet: Temporarily removed
+
 FEATURES:
 
+* **New Data Source:** `awscc_autoscaling_lifecycle_hook`
+* **New Data Source:** `awscc_connect_hours_of_operation`
+* **New Data Source:** `awscc_connect_user`
+* **New Data Source:** `awscc_connect_user_hierarchy_group`
+* **New Data Source:** `awscc_panorama_application_instance`
+* **New Data Source:** `awscc_panorama_application_instances`
+* **New Data Source:** `awscc_panorama_package`
+* **New Data Source:** `awscc_panorama_packages`
+* **New Data Source:** `awscc_panorama_package_version`
+* **New Data Source:** `awscc_rekognition_project`
+* **New Data Source:** `awscc_rekognition_projects`
 * **New Data Source:** `awscc_s3outposts_bucket`
+* **New Resource:** `awscc_autoscaling_lifecycle_hook`
+* **New Resource:** `awscc_connect_hours_of_operation`
+* **New Resource:** `awscc_connect_user`
+* **New Resource:** `awscc_connect_user_hierarchy_group`
+* **New Resource:** `awscc_panorama_application_instance`
+* **New Resource:** `awscc_panorama_package`
+* **New Resource:** `awscc_panorama_package_version`
+* **New Resource:** `awscc_rekognition_project`
 * **New Resource:** `awscc_s3outposts_bucket`
 
 BUG FIXES:

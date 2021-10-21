@@ -29,7 +29,6 @@
   ],
   "readOnlyProperties": [
     "/properties/SelectionId",
-    "/properties/BackupPlanId",
     "/properties/Id"
   ],
   "additionalProperties": false,
@@ -44,6 +43,7 @@
         "ListOfTags": {
           "type": "array",
           "uniqueItems": false,
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/ConditionResourceType"
           }
@@ -51,18 +51,77 @@
         "Resources": {
           "type": "array",
           "uniqueItems": false,
+          "insertionOrder": false,
           "items": {
             "type": "string"
           }
         },
         "SelectionName": {
           "type": "string"
+        },
+        "NotResources": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "Conditions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "StringEquals": {
+              "type": "array",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/ConditionParameter"
+              }
+            },
+            "StringNotEquals": {
+              "type": "array",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/ConditionParameter"
+              }
+            },
+            "StringLike": {
+              "type": "array",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/ConditionParameter"
+              }
+            },
+            "StringNotLike": {
+              "type": "array",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/ConditionParameter"
+              }
+            }
+          }
         }
       },
       "required": [
         "SelectionName",
         "IamRoleArn"
       ]
+    },
+    "ConditionParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ConditionKey": {
+          "type": "string"
+        },
+        "ConditionValue": {
+          "type": "string"
+        }
+      }
     },
     "ConditionResourceType": {
       "type": "object",
@@ -102,7 +161,8 @@
       "permissions": [
         "backup:CreateBackupSelection",
         "iam:GetRole",
-        "iam:PassRole"
+        "iam:PassRole",
+        "iam:CreateServiceLinkedRole"
       ]
     }
   }

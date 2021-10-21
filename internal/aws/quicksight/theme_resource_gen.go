@@ -162,6 +162,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "Typography": {
 			//       "additionalProperties": false,
+			//       "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
 			//       "properties": {
 			//         "FontFamilies": {
 			//           "items": {
@@ -380,6 +381,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"typography": {
 						// Property: Typography
+						Description: "<p>The typeface for the theme.</p>",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"font_families": {
@@ -820,6 +822,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "Typography": {
 			//           "additionalProperties": false,
+			//           "description": "\u003cp\u003eThe typeface for the theme.\u003c/p\u003e",
 			//           "properties": {
 			//             "FontFamilies": {
 			//               "items": {
@@ -1112,6 +1115,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"typography": {
 									// Property: Typography
+									Description: "<p>The typeface for the theme.</p>",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"font_families": {

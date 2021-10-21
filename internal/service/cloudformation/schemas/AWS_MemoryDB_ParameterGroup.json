@@ -2,6 +2,7 @@
     "typeName": "AWS::MemoryDB::ParameterGroup",
     "description": "The AWS::MemoryDB::ParameterGroup resource creates an Amazon MemoryDB ParameterGroup.",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-memorydb",
+    "taggable": true,
     "definitions": {
         "Tag": {
             "description": "A key-value pair to associate with a resource.",

@@ -19,6 +19,7 @@ Definition of the AWS::QuickSight::Dashboard Resource Type.
 
 - **aws_account_id** (String)
 - **dashboard_id** (String)
+- **source_entity** (Attributes) <p>Dashboard source entity.</p> (see [below for nested schema](#nestedatt--source_entity))
 
 ### Optional
 
@@ -30,7 +31,6 @@ Definition of the AWS::QuickSight::Dashboard Resource Type.
             principal ARN. </p>
 
         <p>To specify no permissions, omit the permissions list.</p> (see [below for nested schema](#nestedatt--permissions))
-- **source_entity** (Attributes) <p>Dashboard source entity.</p> (see [below for nested schema](#nestedatt--source_entity))
 - **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             dashboard.</p> (see [below for nested schema](#nestedatt--tags))
 - **theme_arn** (String) <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
@@ -47,6 +47,32 @@ Definition of the AWS::QuickSight::Dashboard Resource Type.
 - **last_published_time** (String) <p>The last time that this dataset was published.</p>
 - **last_updated_time** (String) <p>The last time that this dataset was updated.</p>
 - **version** (Attributes) <p>Dashboard version.</p> (see [below for nested schema](#nestedatt--version))
+
+<a id="nestedatt--source_entity"></a>
+### Nested Schema for `source_entity`
+
+Required:
+
+- **source_template** (Attributes) <p>Dashboard source template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+
+<a id="nestedatt--source_entity--source_template"></a>
+### Nested Schema for `source_entity.source_template`
+
+Required:
+
+- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- **data_set_references** (Attributes List) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+
+<a id="nestedatt--source_entity--source_template--data_set_references"></a>
+### Nested Schema for `source_entity.source_template.data_set_references`
+
+Required:
+
+- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+
+
+
 
 <a id="nestedatt--dashboard_publish_options"></a>
 ### Nested Schema for `dashboard_publish_options`
@@ -150,32 +176,6 @@ Optional:
                     (This is less common.) </p>
             </li>
          </ul>
-
-
-<a id="nestedatt--source_entity"></a>
-### Nested Schema for `source_entity`
-
-Optional:
-
-- **source_template** (Attributes) <p>Dashboard source template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
-
-<a id="nestedatt--source_entity--source_template"></a>
-### Nested Schema for `source_entity.source_template`
-
-Optional:
-
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **data_set_references** (Attributes List) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
-
-<a id="nestedatt--source_entity--source_template--data_set_references"></a>
-### Nested Schema for `source_entity.source_template.data_set_references`
-
-Optional:
-
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
-
-
 
 
 <a id="nestedatt--tags"></a>

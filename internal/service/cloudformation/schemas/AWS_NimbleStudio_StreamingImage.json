@@ -1,116 +1,159 @@
 {
-  "typeName": "AWS::NimbleStudio::StreamingImage",
-  "description": "Resource schema for AWS::NimbleStudio::StreamingImage.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
-  "definitions": {
-    "StreamingImageEncryptionConfiguration": {
-      "type": "object",
-      "properties": {
-        "KeyArn": {
-          "type": "string"
+    "typeName": "AWS::NimbleStudio::StreamingImage",
+    "description": "Represents a streaming session machine image that can be used to launch a streaming session",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
+    "definitions": {
+        "StreamingImageEncryptionConfiguration": {
+            "type": "object",
+            "description": "<p>TODO</p>",
+            "properties": {
+                "KeyType": {
+                    "$ref": "#/definitions/StreamingImageEncryptionConfigurationKeyType"
+                },
+                "KeyArn": {
+                    "type": "string",
+                    "minLength": 4,
+                    "pattern": "",
+                    "description": "<p>The ARN for a KMS key that is used to encrypt studio data.</p>"
+                }
+            },
+            "required": [
+                "KeyType"
+            ],
+            "additionalProperties": false
         },
-        "KeyType": {
-          "type": "string"
+        "StreamingImageEncryptionConfigurationKeyType": {
+            "type": "string",
+            "description": "<p/>",
+            "enum": [
+                "CUSTOMER_MANAGED_KEY"
+            ]
+        },
+        "Tags": {
+            "type": "object",
+            "description": "",
+            "patternProperties": {
+                "": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
         }
-      },
-      "required": ["KeyType"],
-      "additionalProperties": false
-    }
-  },
-  "properties": {
-    "StudioId": {
-      "type": "string"
     },
-    "StreamingImageId": {
-      "type": "string"
-    },
-    "Ec2ImageId": {
-      "type": "string"
-    },
-    "Name": {
-      "type": "string"
-    },
-    "Description": {
-      "type": "string"
-    },
-    "Owner": {
-      "type": "string"
-    },
-    "EncryptionConfiguration": {
-      "$ref": "#/definitions/StreamingImageEncryptionConfiguration"
-    },
-    "EulaIds": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "Platform": {
-      "type": "string"
-    },
-    "Tags": {
-      "type": "object",
-      "patternProperties": {
-        "": {
-          "type": "string"
+    "properties": {
+        "Description": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 0,
+            "description": "<p>A human-readable description of the streaming image.</p>"
+        },
+        "Ec2ImageId": {
+            "type": "string",
+            "pattern": "",
+            "description": "<p>The ID of an EC2 machine image with which to create this streaming image.</p>"
+        },
+        "EncryptionConfiguration": {
+            "$ref": "#/definitions/StreamingImageEncryptionConfiguration"
+        },
+        "EulaIds": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "<p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>"
+        },
+        "Name": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 0,
+            "description": "<p>A friendly name for a streaming image resource.</p>"
+        },
+        "Owner": {
+            "type": "string",
+            "description": "<p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>"
+        },
+        "Platform": {
+            "type": "string",
+            "pattern": "",
+            "description": "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>"
+        },
+        "StreamingImageId": {
+            "type": "string"
+        },
+        "StudioId": {
+            "type": "string",
+            "description": "<p>The studioId. </p>"
+        },
+        "Tags": {
+            "$ref": "#/definitions/Tags"
         }
-      },
-      "additionalProperties": false
-    }
-  },
-  "additionalProperties": false,
-  "createOnlyProperties": [
-    "/properties/StudioId",
-    "/properties/Ec2ImageId",
-    "/properties/Tags"
-  ],
-  "readOnlyProperties": [
-    "/properties/StreamingImageId",
-    "/properties/Owner",
-    "/properties/EncryptionConfiguration",
-    "/properties/EulaIds",
-    "/properties/Platform"
-  ],
-  "primaryIdentifier": ["/properties/StudioId", "/properties/StreamingImageId"],
-  "required": ["StudioId", "Ec2ImageId", "Name"],
-  "handlers": {
-    "create": {
-      "permissions": [
-        "nimble:CreateStreamingImage",
-        "nimble:TagResource",
-        "ec2:DescribeImages",
-        "ec2:DescribeSnapshots",
-        "ec2:ModifyInstanceAttribute",
-        "ec2:ModifySnapshotAttribute",
-        "ec2:ModifyImageAttribute",
-        "ec2:RegisterImage",
-        "kms:Encrypt",
-        "kms:Decrypt",
-        "kms:CreateGrant",
-        "kms:ListGrants",
-        "kms:GenerateDataKey"
-      ]
     },
-    "read": {
-      "permissions": ["nimble:GetStreamingImage"]
+    "readOnlyProperties": [
+        "/properties/EncryptionConfiguration",
+        "/properties/EulaIds",
+        "/properties/Owner",
+        "/properties/Platform",
+        "/properties/StreamingImageId"
+    ],
+    "createOnlyProperties": [
+        "/properties/Ec2ImageId",
+        "/properties/StudioId",
+        "/properties/Tags"
+    ],
+    "primaryIdentifier": [
+        "/properties/StudioId",
+        "/properties/StreamingImageId"
+    ],
+    "required": [
+        "StudioId",
+        "Ec2ImageId",
+        "Name"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "nimble:CreateStreamingImage",
+                "nimble:TagResource",
+                "ec2:DescribeImages",
+                "ec2:DescribeSnapshots",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifySnapshotAttribute",
+                "ec2:ModifyImageAttribute",
+                "ec2:RegisterImage",
+                "kms:Encrypt",
+                "kms:Decrypt",
+                "kms:CreateGrant",
+                "kms:ListGrants",
+                "kms:GenerateDataKey"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "nimble:GetStreamingImage"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "nimble:UpdateStreamingImage"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "nimble:DeleteStreamingImage",
+                "nimble:UntagResource",
+                "ec2:ModifyInstanceAttribute",
+                "ec2:ModifySnapshotAttribute",
+                "ec2:DeregisterImage",
+                "ec2:DeleteSnapshot",
+                "kms:ListGrants",
+                "kms:RetireGrant"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "nimble:ListStreamingImages"
+            ]
+        }
     },
-    "update": {
-      "permissions": ["nimble:UpdateStreamingImage"]
-    },
-    "delete": {
-      "permissions": [
-        "nimble:DeleteStreamingImage",
-        "nimble:UntagResource",
-        "ec2:ModifyInstanceAttribute",
-        "ec2:ModifySnapshotAttribute",
-        "ec2:DeregisterImage",
-        "ec2:DeleteSnapshot",
-        "kms:ListGrants",
-        "kms:RetireGrant"
-      ]
-    },
-    "list": {
-      "permissions": ["nimble:ListStreamingImages"]
-    }
-  }
+    "additionalProperties": false
 }

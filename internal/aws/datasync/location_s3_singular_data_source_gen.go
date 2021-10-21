@@ -115,7 +115,7 @@ func locationS3DataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
-			//   "maxLength": 4096,
+			//   "maxLength": 1024,
 			//   "pattern": "",
 			//   "type": "string"
 			// }

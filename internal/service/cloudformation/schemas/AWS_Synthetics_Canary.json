@@ -245,7 +245,6 @@
             "additionalProperties": false,
             "properties": {
                 "S3Encryption": {
-                    "type": "object",
                     "$ref" : "#/definitions/S3Encryption",
                     "description": "Encryption configuration for uploading artifacts to S3"
                 }

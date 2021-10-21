@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 396 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 403 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -171,6 +171,11 @@ resource_schema "aws_auditmanager_assessment" {
 
 resource_schema "aws_autoscaling_launch_configuration" {
   cloudformation_type_name = "AWS::AutoScaling::LaunchConfiguration"
+}
+
+resource_schema "aws_autoscaling_lifecycle_hook" {
+  cloudformation_type_name               = "AWS::AutoScaling::LifecycleHook"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_autoscaling_warm_pool" {
@@ -360,8 +365,23 @@ resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
 }
 
+resource_schema "aws_connect_hours_of_operation" {
+  cloudformation_type_name               = "AWS::Connect::HoursOfOperation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_quick_connect" {
   cloudformation_type_name               = "AWS::Connect::QuickConnect"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_user" {
+  cloudformation_type_name               = "AWS::Connect::User"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_user_hierarchy_group" {
+  cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
   suppress_plural_data_source_generation = true
 }
 
@@ -520,11 +540,6 @@ resource_schema "aws_ec2_route_table" {
 
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
-}
-
-resource_schema "aws_ec2_subnet" {
-  cloudformation_type_name               = "AWS::EC2::Subnet"
-  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_subnet_network_acl_association" {
@@ -1308,6 +1323,19 @@ resource_schema "aws_opsworkscm_server" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_panorama_application_instance" {
+  cloudformation_type_name = "AWS::Panorama::ApplicationInstance"
+}
+
+resource_schema "aws_panorama_package" {
+  cloudformation_type_name = "AWS::Panorama::Package"
+}
+
+resource_schema "aws_panorama_package_version" {
+  cloudformation_type_name               = "AWS::Panorama::PackageVersion"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_qldb_stream" {
   cloudformation_type_name               = "AWS::QLDB::Stream"
   suppress_plural_data_source_generation = true
@@ -1367,6 +1395,10 @@ resource_schema "aws_redshift_cluster" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_rekognition_project" {
+  cloudformation_type_name = "AWS::Rekognition::Project"
 }
 
 resource_schema "aws_resourcegroups_group" {

@@ -271,6 +271,7 @@
     },
     "Typography": {
       "type": "object",
+      "description": "<p>The typeface for the theme.</p>",
       "properties": {
         "FontFamilies": {
           "type": "array",
@@ -451,6 +452,7 @@
   ],
   "additionalProperties": false,
   "readOnlyProperties": [
+    "/properties/ThemeError",
     "/properties/CreatedTime",
     "/properties/Version",
     "/properties/LastUpdatedTime",
