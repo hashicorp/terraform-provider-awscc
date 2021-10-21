@@ -28,8 +28,6 @@ builds:
     ldflags:
       - -s -w -X internal/provider.Version={{.Version}}
     mod_timestamp: '{{ .CommitTimestamp }}'
-changelog:
-  skip: true
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_SHA256SUMS'
   algorithm: sha256
