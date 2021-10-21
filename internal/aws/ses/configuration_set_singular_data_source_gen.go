@@ -24,8 +24,6 @@ func configurationSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the configuration set.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
 			//   "pattern": "",
 			//   "type": "string"
 			// }

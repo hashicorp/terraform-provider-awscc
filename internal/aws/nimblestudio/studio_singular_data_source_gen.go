@@ -23,48 +23,70 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: AdminRoleArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"display_name": {
 			// Property: DisplayName
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eA friendly name for the studio.\u003c/p\u003e",
+			//   "maxLength": 64,
+			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>A friendly name for the studio.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"home_region": {
 			// Property: HomeRegion
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
+			//   "maxLength": 50,
+			//   "minLength": 0,
+			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"sso_client_id": {
 			// Property: SsoClientId
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.\u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"studio_encryption_configuration": {
 			// Property: StudioEncryptionConfiguration
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "\u003cp\u003eConfiguration of the encryption method that is used for the studio.\u003c/p\u003e",
 			//   "properties": {
 			//     "KeyArn": {
+			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
+			//       "minLength": 4,
+			//       "pattern": "",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
+			//       "description": "\u003cp\u003eThe type of KMS key that is used to encrypt studio data.\u003c/p\u003e",
+			//       "enum": [
+			//         "AWS_OWNED_KEY",
+			//         "CUSTOMER_MANAGED_KEY"
+			//       ],
 			//       "type": "string"
 			//     }
 			//   },
@@ -73,17 +95,20 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "<p>Configuration of the encryption method that is used for the studio.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key_arn": {
 						// Property: KeyArn
-						Type:     types.StringType,
-						Computed: true,
+						Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 					"key_type": {
 						// Property: KeyType
-						Type:     types.StringType,
-						Computed: true,
+						Description: "<p>The type of KMS key that is used to encrypt studio data.</p>",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 				},
 			),
@@ -102,25 +127,33 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: StudioName
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
+			//   "maxLength": 64,
+			//   "minLength": 3,
+			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"studio_url": {
 			// Property: StudioUrl
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe address of the web page for the studio.\u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The address of the web page for the studio.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "",
 			//   "patternProperties": {
 			//     "": {
 			//       "type": "string"
@@ -128,6 +161,7 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   },
 			//   "type": "object"
 			// }
+			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
@@ -136,10 +170,12 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: UserRoleArn
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe IAM role that Studio Users will assume when logging in to the Nimble Studio portal.\u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 	}
 

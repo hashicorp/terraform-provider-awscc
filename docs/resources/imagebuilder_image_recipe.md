@@ -90,6 +90,7 @@ Optional:
 - **iops** (Number) Use to configure device IOPS.
 - **kms_key_id** (String) Use to configure the KMS key to use when encrypting the device.
 - **snapshot_id** (String) The snapshot that defines the device contents.
+- **throughput** (Number) For GP3 volumes only ? The throughput in MiB/s that the volume supports.
 - **volume_size** (Number) Use to override the device's volume size.
 - **volume_type** (String) Use to override the device's volume type.
 

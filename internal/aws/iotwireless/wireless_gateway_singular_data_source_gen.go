@@ -139,7 +139,7 @@ func wirelessGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

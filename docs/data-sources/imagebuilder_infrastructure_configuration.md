@@ -23,6 +23,7 @@ Data Source schema for AWS::ImageBuilder::InfrastructureConfiguration
 
 - **arn** (String) The Amazon Resource Name (ARN) of the infrastructure configuration.
 - **description** (String) The description of the infrastructure configuration.
+- **instance_metadata_options** (Attributes) The instance metadata option settings for the infrastructure configuration. (see [below for nested schema](#nestedatt--instance_metadata_options))
 - **instance_profile_name** (String) The instance profile of the infrastructure configuration.
 - **instance_types** (List of String) The instance types of the infrastructure configuration.
 - **key_pair** (String) The EC2 key pair of the infrastructure configuration..
@@ -34,6 +35,15 @@ Data Source schema for AWS::ImageBuilder::InfrastructureConfiguration
 - **subnet_id** (String) The subnet ID of the infrastructure configuration.
 - **tags** (Map of String) The tags associated with the component.
 - **terminate_instance_on_failure** (Boolean) The terminate instance on failure configuration of the infrastructure configuration.
+
+<a id="nestedatt--instance_metadata_options"></a>
+### Nested Schema for `instance_metadata_options`
+
+Read-Only:
+
+- **http_put_response_hop_limit** (Number) Limit the number of hops that an instance metadata request can traverse to reach its destination.
+- **http_tokens** (String) Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows:
+
 
 <a id="nestedatt--logging"></a>
 ### Nested Schema for `logging`

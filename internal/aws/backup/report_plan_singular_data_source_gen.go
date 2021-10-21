@@ -167,6 +167,15 @@ func reportPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "additionalProperties": false,
 			//   "description": "Identifies the report template for the report. Reports are built using a report template.",
 			//   "properties": {
+			//     "FrameworkArns": {
+			//       "description": "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
 			//     "ReportTemplate": {
 			//       "description": "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
 			//       "type": "string"
@@ -180,6 +189,12 @@ func reportPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Description: "Identifies the report template for the report. Reports are built using a report template.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"framework_arns": {
+						// Property: FrameworkArns
+						Description: "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+						Type:        types.SetType{ElemType: types.StringType},
+						Computed:    true,
+					},
 					"report_template": {
 						// Property: ReportTemplate
 						Description: "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
@@ -210,6 +225,7 @@ func reportPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"formats":                 "Formats",
+		"framework_arns":          "FrameworkArns",
 		"key":                     "Key",
 		"report_delivery_channel": "ReportDeliveryChannel",
 		"report_plan_arn":         "ReportPlanArn",

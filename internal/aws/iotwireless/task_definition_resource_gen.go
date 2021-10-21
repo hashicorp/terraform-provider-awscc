@@ -215,7 +215,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -243,7 +243,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
+				validate.ArrayLenAtMost(200),
 			},
 		},
 		"task_definition_type": {

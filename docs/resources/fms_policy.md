@@ -30,6 +30,7 @@ Creates an AWS Firewall Manager policy.
 - **include_map** (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--include_map))
 - **resource_tags** (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - **resource_type_list** (List of String)
+- **resources_clean_up** (Boolean)
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

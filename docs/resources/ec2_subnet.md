@@ -31,10 +31,9 @@ Resource Type definition for AWS::EC2::Subnet
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- **id** (String) The ID of this resource.
 - **ipv_6_cidr_blocks** (List of String)
 - **network_acl_association_id** (String)
-- **subnet_id** (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

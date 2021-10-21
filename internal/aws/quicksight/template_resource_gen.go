@@ -280,7 +280,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 			),
-			Optional: true,
+			Required: true,
 			// SourceEntity is a write-only property.
 		},
 		"tags": {

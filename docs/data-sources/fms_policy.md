@@ -31,6 +31,7 @@ Data Source schema for AWS::FMS::Policy
 - **resource_tags** (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - **resource_type** (String) An AWS resource type
 - **resource_type_list** (List of String)
+- **resources_clean_up** (Boolean)
 - **security_service_policy_data** (Attributes) (see [below for nested schema](#nestedatt--security_service_policy_data))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

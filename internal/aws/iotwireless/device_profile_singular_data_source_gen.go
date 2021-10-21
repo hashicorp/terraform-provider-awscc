@@ -222,7 +222,7 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

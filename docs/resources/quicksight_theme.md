@@ -56,7 +56,7 @@ Optional:
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--configuration--data_color_palette))
 - **sheet** (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--configuration--sheet))
-- **typography** (Attributes) (see [below for nested schema](#nestedatt--configuration--typography))
+- **typography** (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--configuration--typography))
 - **ui_color_palette** (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
@@ -232,7 +232,7 @@ Read-Only:
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--version--configuration--data_color_palette))
 - **sheet** (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--version--configuration--sheet))
-- **typography** (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography))
+- **typography** (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--version--configuration--typography))
 - **ui_color_palette** (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User

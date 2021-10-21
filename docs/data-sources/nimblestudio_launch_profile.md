@@ -21,14 +21,14 @@ Data Source schema for AWS::NimbleStudio::LaunchProfile
 
 ### Read-Only
 
-- **description** (String)
-- **ec_2_subnet_ids** (List of String)
+- **description** (String) <p>The description.</p>
+- **ec_2_subnet_ids** (List of String) <p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. </p>
 - **launch_profile_id** (String)
-- **launch_profile_protocol_versions** (List of String)
-- **name** (String)
-- **stream_configuration** (Attributes) (see [below for nested schema](#nestedatt--stream_configuration))
-- **studio_component_ids** (List of String)
-- **studio_id** (String)
+- **launch_profile_protocol_versions** (List of String) <p>The version number of the protocol that is used by the launch profile. The only valid version is "2021-03-31".</p>
+- **name** (String) <p>The name for the launch profile.</p>
+- **stream_configuration** (Attributes) <p>A configuration for a streaming session.</p> (see [below for nested schema](#nestedatt--stream_configuration))
+- **studio_component_ids** (List of String) <p>Unique identifiers for a collection of studio components that can be used with this launch profile.</p>
+- **studio_id** (String) <p>The studioId. </p>
 - **tags** (Map of String)
 
 <a id="nestedatt--stream_configuration"></a>
@@ -37,8 +37,8 @@ Data Source schema for AWS::NimbleStudio::LaunchProfile
 Read-Only:
 
 - **clipboard_mode** (String)
-- **ec_2_instance_types** (List of String)
-- **max_session_length_in_minutes** (Number)
-- **streaming_image_ids** (List of String)
+- **ec_2_instance_types** (List of String) <p>The EC2 instance types that users can select from when launching a streaming session with this launch profile.</p>
+- **max_session_length_in_minutes** (Number) <p>The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.</p>
+- **streaming_image_ids** (List of String) <p>The streaming images that users can select from when launching a streaming session with this launch profile.</p>
 
 

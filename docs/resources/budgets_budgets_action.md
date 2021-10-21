@@ -23,11 +23,11 @@ An example resource schema demonstrating some basic constructs and validation ru
 - **definition** (Attributes) (see [below for nested schema](#nestedatt--definition))
 - **execution_role_arn** (String)
 - **notification_type** (String)
+- **subscribers** (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 ### Optional
 
 - **approval_model** (String)
-- **subscribers** (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 ### Read-Only
 
@@ -86,7 +86,7 @@ Required:
 <a id="nestedatt--subscribers"></a>
 ### Nested Schema for `subscribers`
 
-Optional:
+Required:
 
 - **address** (String)
 - **type** (String)

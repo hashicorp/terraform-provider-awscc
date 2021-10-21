@@ -34,10 +34,85 @@ func backupSelectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
+			//     "Conditions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "StringEquals": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringLike": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringNotEquals": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringNotLike": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "IamRoleArn": {
 			//       "type": "string"
 			//     },
 			//     "ListOfTags": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -61,7 +136,16 @@ func backupSelectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "type": "array",
 			//       "uniqueItems": false
 			//     },
+			//     "NotResources": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
 			//     "Resources": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -80,6 +164,90 @@ func backupSelectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"conditions": {
+						// Property: Conditions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"string_equals": {
+									// Property: StringEquals
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+								"string_like": {
+									// Property: StringLike
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+								"string_not_equals": {
+									// Property: StringNotEquals
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+								"string_not_like": {
+									// Property: StringNotLike
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"iam_role_arn": {
 						// Property: IamRoleArn
 						Type:     types.StringType,
@@ -107,6 +275,11 @@ func backupSelectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 							},
 							tfsdk.ListNestedAttributesOptions{},
 						),
+						Computed: true,
+					},
+					"not_resources": {
+						// Property: NotResources
+						Type:     types.ListType{ElemType: types.StringType},
 						Computed: true,
 					},
 					"resources": {
@@ -160,17 +333,23 @@ func backupSelectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupSelection").WithTerraformTypeName("awscc_backup_backup_selection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"backup_plan_id":   "BackupPlanId",
-		"backup_selection": "BackupSelection",
-		"condition_key":    "ConditionKey",
-		"condition_type":   "ConditionType",
-		"condition_value":  "ConditionValue",
-		"iam_role_arn":     "IamRoleArn",
-		"id":               "Id",
-		"list_of_tags":     "ListOfTags",
-		"resources":        "Resources",
-		"selection_id":     "SelectionId",
-		"selection_name":   "SelectionName",
+		"backup_plan_id":    "BackupPlanId",
+		"backup_selection":  "BackupSelection",
+		"condition_key":     "ConditionKey",
+		"condition_type":    "ConditionType",
+		"condition_value":   "ConditionValue",
+		"conditions":        "Conditions",
+		"iam_role_arn":      "IamRoleArn",
+		"id":                "Id",
+		"list_of_tags":      "ListOfTags",
+		"not_resources":     "NotResources",
+		"resources":         "Resources",
+		"selection_id":      "SelectionId",
+		"selection_name":    "SelectionName",
+		"string_equals":     "StringEquals",
+		"string_like":       "StringLike",
+		"string_not_equals": "StringNotEquals",
+		"string_not_like":   "StringNotLike",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

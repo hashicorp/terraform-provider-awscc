@@ -46,6 +46,7 @@ Required:
 
 Required:
 
+- **framework_arns** (Set of String) The Amazon Resource Names (ARNs) of the frameworks a report covers.
 - **report_template** (String) Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
 
 

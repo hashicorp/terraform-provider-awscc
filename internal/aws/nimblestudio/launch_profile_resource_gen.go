@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -23,22 +24,37 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe description.\u003c/p\u003e",
+			//   "maxLength": 256,
+			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Optional: true,
+			Description: "<p>The description.</p>",
+			Type:        types.StringType,
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(0, 256),
+			},
 		},
 		"ec_2_subnet_ids": {
 			// Property: Ec2SubnetIds
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eSpecifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. \u003c/p\u003e",
 			//   "items": {
+			//     "description": "",
 			//     "type": "string"
 			//   },
+			//   "maxItems": 6,
+			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Description: "<p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. </p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(0, 6),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -56,76 +72,149 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: LaunchProfileProtocolVersions
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
 			//   "items": {
+			//     "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
+			//     "maxLength": 10,
+			//     "minLength": 0,
+			//     "pattern": "",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Description: "<p>The version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".</p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringLenBetween(0, 10)),
+			},
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe name for the launch profile.\u003c/p\u003e",
+			//   "maxLength": 64,
+			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Description: "<p>The name for the launch profile.</p>",
+			Type:        types.StringType,
+			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringLenBetween(1, 64),
+			},
 		},
 		"stream_configuration": {
 			// Property: StreamConfiguration
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "\u003cp\u003eA configuration for a streaming session.\u003c/p\u003e",
 			//   "properties": {
 			//     "ClipboardMode": {
+			//       "description": "",
+			//       "enum": [
+			//         "ENABLED",
+			//         "DISABLED"
+			//       ],
 			//       "type": "string"
 			//     },
 			//     "Ec2InstanceTypes": {
+			//       "description": "\u003cp\u003eThe EC2 instance types that users can select from when launching a streaming session with this launch profile.\u003c/p\u003e",
 			//       "items": {
+			//         "description": "",
+			//         "enum": [
+			//           "g4dn.xlarge",
+			//           "g4dn.2xlarge",
+			//           "g4dn.4xlarge",
+			//           "g4dn.8xlarge",
+			//           "g4dn.12xlarge",
+			//           "g4dn.16xlarge"
+			//         ],
 			//         "type": "string"
 			//       },
+			//       "maxItems": 30,
+			//       "minItems": 1,
 			//       "type": "array"
 			//     },
 			//     "MaxSessionLengthInMinutes": {
+			//       "description": "\u003cp\u003eThe length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.\u003c/p\u003e",
+			//       "maximum": 690,
+			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "StreamingImageIds": {
+			//       "description": "\u003cp\u003eThe streaming images that users can select from when launching a streaming session with this launch profile.\u003c/p\u003e",
 			//       "items": {
+			//         "description": "",
+			//         "maxLength": 22,
+			//         "minLength": 0,
+			//         "pattern": "",
 			//         "type": "string"
 			//       },
+			//       "maxItems": 20,
+			//       "minItems": 0,
 			//       "type": "array"
 			//     }
 			//   },
 			//   "required": [
+			//     "ClipboardMode",
 			//     "Ec2InstanceTypes",
-			//     "StreamingImageIds",
-			//     "ClipboardMode"
+			//     "StreamingImageIds"
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "<p>A configuration for a streaming session.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"clipboard_mode": {
 						// Property: ClipboardMode
-						Type:     types.StringType,
-						Required: true,
+						Description: "",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ENABLED",
+								"DISABLED",
+							}),
+						},
 					},
 					"ec_2_instance_types": {
 						// Property: Ec2InstanceTypes
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Description: "<p>The EC2 instance types that users can select from when launching a streaming session with this launch profile.</p>",
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 30),
+							validate.ArrayForEach(validate.StringInSlice([]string{
+								"g4dn.xlarge",
+								"g4dn.2xlarge",
+								"g4dn.4xlarge",
+								"g4dn.8xlarge",
+								"g4dn.12xlarge",
+								"g4dn.16xlarge",
+							})),
+						},
 					},
 					"max_session_length_in_minutes": {
 						// Property: MaxSessionLengthInMinutes
-						Type:     types.NumberType,
-						Optional: true,
+						Description: "<p>The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.</p>",
+						Type:        types.NumberType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.FloatBetween(1.000000, 690.000000),
+						},
 					},
 					"streaming_image_ids": {
 						// Property: StreamingImageIds
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
+						Description: "<p>The streaming images that users can select from when launching a streaming session with this launch profile.</p>",
+						Type:        types.ListType{ElemType: types.StringType},
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(0, 20),
+							validate.ArrayForEach(validate.StringLenBetween(0, 22)),
+						},
 					},
 				},
 			),
@@ -135,22 +224,31 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: StudioComponentIds
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eUnique identifiers for a collection of studio components that can be used with this launch profile.\u003c/p\u003e",
 			//   "items": {
 			//     "type": "string"
 			//   },
+			//   "maxItems": 100,
+			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Required: true,
+			Description: "<p>Unique identifiers for a collection of studio components that can be used with this launch profile.</p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenBetween(1, 100),
+			},
 		},
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Required: true,
+			Description: "<p>The studioId. </p>",
+			Type:        types.StringType,
+			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -160,6 +258,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "",
 			//   "patternProperties": {
 			//     "": {
 			//       "type": "string"
@@ -167,6 +266,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   },
 			//   "type": "object"
 			// }
+			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
@@ -184,7 +284,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 	}
 
 	schema := tfsdk.Schema{
-		Description: "Resource schema for AWS::NimbleStudio::LaunchProfile",
+		Description: "Represents a launch profile which delegates access to a collection of studio components to studio users",
 		Version:     1,
 		Attributes:  attributes,
 	}

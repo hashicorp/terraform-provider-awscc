@@ -248,6 +248,15 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
+		"resources_clean_up": {
+			// Property: ResourcesCleanUp
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Computed: true,
+		},
 		"security_service_policy_data": {
 			// Property: SecurityServicePolicyData
 			// CloudFormation resource type schema:
@@ -371,6 +380,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"resource_tags":                "ResourceTags",
 		"resource_type":                "ResourceType",
 		"resource_type_list":           "ResourceTypeList",
+		"resources_clean_up":           "ResourcesCleanUp",
 		"security_service_policy_data": "SecurityServicePolicyData",
 		"tags":                         "Tags",
 		"type":                         "Type",
