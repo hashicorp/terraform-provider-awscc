@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.10.0
-	github.com/aws/aws-sdk-go-v2/config v1.8.3
+	github.com/aws/aws-sdk-go-v2/config v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.1.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.11.0
 	github.com/aws/smithy-go v1.8.1
