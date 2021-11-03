@@ -1,4 +1,46 @@
-## 0.3.0 (Unreleased)
+## 0.5.0 (Unreleased)
+
+## [0.4.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.4.0) (October 21, 2021)
+
+BREAKING CHANGES:
+
+* data-source/awscc_ec2_subnet: Temporarily removed
+* resource/awscc_ec2_subnet: Temporarily removed
+
+FEATURES:
+
+* **New Data Source:** `awscc_autoscaling_lifecycle_hook`
+* **New Data Source:** `awscc_connect_hours_of_operation`
+* **New Data Source:** `awscc_connect_user`
+* **New Data Source:** `awscc_connect_user_hierarchy_group`
+* **New Data Source:** `awscc_panorama_application_instance`
+* **New Data Source:** `awscc_panorama_application_instances`
+* **New Data Source:** `awscc_panorama_package`
+* **New Data Source:** `awscc_panorama_packages`
+* **New Data Source:** `awscc_panorama_package_version`
+* **New Data Source:** `awscc_rekognition_project`
+* **New Data Source:** `awscc_rekognition_projects`
+* **New Data Source:** `awscc_s3outposts_bucket`
+* **New Resource:** `awscc_autoscaling_lifecycle_hook`
+* **New Resource:** `awscc_connect_hours_of_operation`
+* **New Resource:** `awscc_connect_user`
+* **New Resource:** `awscc_connect_user_hierarchy_group`
+* **New Resource:** `awscc_panorama_application_instance`
+* **New Resource:** `awscc_panorama_package`
+* **New Resource:** `awscc_panorama_package_version`
+* **New Resource:** `awscc_rekognition_project`
+* **New Resource:** `awscc_s3outposts_bucket`
+
+BUG FIXES:
+* Persist any resource `id` to state if Create fails while waiting for async operation completion ([#252](https://github.com/hashicorp/terraform-provider-awscc/issues/252))
+* data-source/awscc_s3_storagelens: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+* data-source/awscc_s3objectlambda_access_point: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+* data-source/awscc_sagemaker_pipeline: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+* resource/awscc_s3_storagelens: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+* resource/awscc_s3objectlambda_access_point: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+* resource/awscc_sagemaker_pipeline: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
+
+## [0.3.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.3.0) (October 14, 2021)
 
 BREAKING CHANGES:
 
@@ -42,6 +84,11 @@ FEATURES:
 * **New Data Source:** `awscc_memorydb_subnet_groups`
 * **New Data Source:** `awscc_memorydb_user`
 * **New Data Source:** `awscc_memorydb_users`
+* **New Data Source:** `awscc_wisdom_assistant`
+* **New Data Source:** `awscc_wisdom_assistants`
+* **New Data Source:** `awscc_wisdom_assistant_association`
+* **New Data Source:** `awscc_wisdom_knowledge_base`
+* **New Data Source:** `awscc_wisdom_knowledge_bases`
 * **New Resource:** `awscc_backup_framework`
 * **New Resource:** `awscc_ce_anomaly_monitor`
 * **New Resource:** `awscc_ce_anomaly_subscription`
@@ -57,6 +104,9 @@ FEATURES:
 * **New Resource:** `awscc_memorydb_parameter_group`
 * **New Resource:** `awscc_memorydb_subnet_group`
 * **New Resource:** `awscc_memorydb_user`
+* **New Resource:** `awscc_wisdom_assistant`
+* **New Resource:** `awscc_wisdom_assistant_association`
+* **New Resource:** `awscc_wisdom_knowledge_base`
 
 ## [0.2.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.2.0) (October 7, 2021)
 

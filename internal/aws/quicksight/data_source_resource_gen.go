@@ -43,6 +43,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         ],
 			//         "type": "object"
 			//       },
+			//       "AmazonOpenSearchParameters": {
+			//         "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//         "properties": {
+			//           "Domain": {
+			//             "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+			//             "maxLength": 64,
+			//             "minLength": 1,
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "Domain"
+			//         ],
+			//         "type": "object"
+			//       },
 			//       "AthenaParameters": {
 			//         "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 			//         "properties": {
@@ -467,6 +482,24 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"amazon_open_search_parameters": {
+						// Property: AmazonOpenSearchParameters
+						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"domain": {
+									// Property: Domain
+									Description: "<p>The Amazon OpenSearch Service domain.</p>",
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -1070,6 +1103,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 ],
 			//                 "type": "object"
 			//               },
+			//               "AmazonOpenSearchParameters": {
+			//                 "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//                 "properties": {
+			//                   "Domain": {
+			//                     "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+			//                     "maxLength": 64,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "required": [
+			//                   "Domain"
+			//                 ],
+			//                 "type": "object"
+			//               },
 			//               "AthenaParameters": {
 			//                 "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 			//                 "properties": {
@@ -1532,6 +1580,24 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														"domain": {
 															// Property: Domain
 															Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+															Type:        types.StringType,
+															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(1, 64),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"amazon_open_search_parameters": {
+												// Property: AmazonOpenSearchParameters
+												Description: "<p>Amazon OpenSearch Service parameters.</p>",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"domain": {
+															// Property: Domain
+															Description: "<p>The Amazon OpenSearch Service domain.</p>",
 															Type:        types.StringType,
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
@@ -2120,6 +2186,21 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       ],
 			//       "type": "object"
 			//     },
+			//     "AmazonOpenSearchParameters": {
+			//       "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+			//       "properties": {
+			//         "Domain": {
+			//           "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+			//           "maxLength": 64,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "Domain"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "AthenaParameters": {
 			//       "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 			//       "properties": {
@@ -2540,6 +2621,24 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"domain": {
 									// Property: Domain
 									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 64),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"amazon_open_search_parameters": {
+						// Property: AmazonOpenSearchParameters
+						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"domain": {
+									// Property: Domain
+									Description: "<p>The Amazon OpenSearch Service domain.</p>",
 									Type:        types.StringType,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
@@ -3321,6 +3420,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "enum": [
 			//     "ADOBE_ANALYTICS",
 			//     "AMAZON_ELASTICSEARCH",
+			//     "AMAZON_OPENSEARCH",
 			//     "ATHENA",
 			//     "AURORA",
 			//     "AURORA_POSTGRESQL",
@@ -3352,6 +3452,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringInSlice([]string{
 					"ADOBE_ANALYTICS",
 					"AMAZON_ELASTICSEARCH",
+					"AMAZON_OPENSEARCH",
 					"ATHENA",
 					"AURORA",
 					"AURORA_POSTGRESQL",
@@ -3431,6 +3532,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"actions":                          "Actions",
 		"alternate_data_source_parameters": "AlternateDataSourceParameters",
 		"amazon_elasticsearch_parameters":  "AmazonElasticsearchParameters",
+		"amazon_open_search_parameters":    "AmazonOpenSearchParameters",
 		"arn":                              "Arn",
 		"athena_parameters":                "AthenaParameters",
 		"aurora_parameters":                "AuroraParameters",

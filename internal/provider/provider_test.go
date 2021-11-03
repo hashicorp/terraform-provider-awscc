@@ -1,7 +1,6 @@
 package provider
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -54,7 +53,6 @@ func TestAppendProducts(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 			actual := appendProducts(testcase.products, testcase.addProducts)
-			fmt.Printf("got %q \n", actual)
 			if !cmp.Equal(testcase.expected, actual) {
 				t.Errorf("expected %q, got %q", testcase.expected, actual)
 			}

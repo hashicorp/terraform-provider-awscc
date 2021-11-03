@@ -1302,6 +1302,37 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
 		},
+		"runtime_platform": {
+			// Property: RuntimePlatform
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CpuArchitecture": {
+			//       "type": "string"
+			//     },
+			//     "OperatingSystemFamily": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cpu_architecture": {
+						// Property: CpuArchitecture
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"operating_system_family": {
+						// Property: OperatingSystemFamily
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -1593,6 +1624,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"container_path":                 "ContainerPath",
 		"container_port":                 "ContainerPort",
 		"cpu":                            "Cpu",
+		"cpu_architecture":               "CpuArchitecture",
 		"credentials_parameter":          "CredentialsParameter",
 		"depends_on":                     "DependsOn",
 		"device_name":                    "DeviceName",
@@ -1647,6 +1679,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"network_mode":                   "NetworkMode",
+		"operating_system_family":        "OperatingSystemFamily",
 		"options":                        "Options",
 		"permissions":                    "Permissions",
 		"pid_mode":                       "PidMode",
@@ -1664,6 +1697,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"resource_requirements":          "ResourceRequirements",
 		"retries":                        "Retries",
 		"root_directory":                 "RootDirectory",
+		"runtime_platform":               "RuntimePlatform",
 		"scope":                          "Scope",
 		"secret_options":                 "SecretOptions",
 		"secrets":                        "Secrets",

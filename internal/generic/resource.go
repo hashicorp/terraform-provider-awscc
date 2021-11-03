@@ -449,13 +449,31 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.resourceType.createTimeout)
 
+	id := aws.ToString(progressEvent.Identifier)
+
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))
 
+		// Save any ID to state so that the resource will be marked as tainted.
+		if id != "" {
+			err := r.setEmptyAttributes(ctx, &response.State)
+
+			if err == nil {
+				err = r.setId(ctx, id, &response.State)
+
+				if err != nil {
+					response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+				}
+			} else {
+				response.Diagnostics.AddError(
+					"Creation Of Terraform State Unsuccessful",
+					fmt.Sprintf("Unable to set Terraform State empty values. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+				)
+			}
+		}
+
 		return
 	}
-
-	id := aws.ToString(progressEvent.Identifier)
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw

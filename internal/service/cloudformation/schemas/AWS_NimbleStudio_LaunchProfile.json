@@ -1,158 +1,191 @@
 {
-  "typeName": "AWS::NimbleStudio::LaunchProfile",
-  "description": "Resource schema for AWS::NimbleStudio::LaunchProfile",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
-  "definitions": {
-    "LaunchProfileStudioComponentIdList": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "LaunchProfileProtocolVersion": {
-      "type": "string"
-    },
-    "LaunchProfileProtocolVersions": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/LaunchProfileProtocolVersion"
-      }
-    },
-    "StreamingImageId": {
-      "type": "string"
-    },
-    "StreamingImageIdList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/StreamingImageId"
-      }
-    },
-    "StreamingInstanceType": {
-      "type": "string"
-    },
-    "StreamingInstanceTypeList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/StreamingInstanceType"
-      }
-    },
-    "Ec2SubnetIdList": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "StreamConfiguration": {
-      "type": "object",
-      "properties": {
-        "ClipboardMode": {
-          "type": "string"
+    "typeName": "AWS::NimbleStudio::LaunchProfile",
+    "description": "Represents a launch profile which delegates access to a collection of studio components to studio users",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
+    "definitions": {
+        "StreamConfiguration": {
+            "type": "object",
+            "description": "<p>A configuration for a streaming session.</p>",
+            "properties": {
+                "MaxSessionLengthInMinutes": {
+                    "type": "number",
+                    "maximum": 690,
+                    "minimum": 1,
+                    "description": "<p>The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.</p>"
+                },
+                "ClipboardMode": {
+                    "$ref": "#/definitions/StreamingClipboardMode"
+                },
+                "StreamingImageIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "maxLength": 22,
+                        "minLength": 0,
+                        "pattern": "",
+                        "description": ""
+                    },
+                    "maxItems": 20,
+                    "minItems": 0,
+                    "description": "<p>The streaming images that users can select from when launching a streaming session with this launch profile.</p>"
+                },
+                "Ec2InstanceTypes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StreamingInstanceType"
+                    },
+                    "maxItems": 30,
+                    "minItems": 1,
+                    "description": "<p>The EC2 instance types that users can select from when launching a streaming session with this launch profile.</p>"
+                }
+            },
+            "required": [
+                "ClipboardMode",
+                "Ec2InstanceTypes",
+                "StreamingImageIds"
+            ],
+            "additionalProperties": false
         },
-        "StreamingImageIds": {
-          "$ref": "#/definitions/StreamingImageIdList"
+        "StreamingClipboardMode": {
+            "type": "string",
+            "description": "",
+            "enum": [
+                "ENABLED",
+                "DISABLED"
+            ]
         },
-        "Ec2InstanceTypes": {
-          "$ref": "#/definitions/StreamingInstanceTypeList"
+        "StreamingInstanceType": {
+            "type": "string",
+            "description": "",
+            "enum": [
+                "g4dn.xlarge",
+                "g4dn.2xlarge",
+                "g4dn.4xlarge",
+                "g4dn.8xlarge",
+                "g4dn.12xlarge",
+                "g4dn.16xlarge"
+            ]
         },
-        "MaxSessionLengthInMinutes": {
-          "type": "number"
+        "Tags": {
+            "type": "object",
+            "description": "",
+            "patternProperties": {
+                "": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
         }
-      },
-      "required": [
-        "Ec2InstanceTypes",
-        "StreamingImageIds",
-        "ClipboardMode"
-      ],
-      "additionalProperties": false
-    }
-  },
-  "properties": {
-    "Description": {
-      "type": "string"
     },
-    "LaunchProfileId": {
-      "type": "string"
-    },
-    "Name": {
-      "type": "string"
-    },
-    "Ec2SubnetIds": {
-      "$ref": "#/definitions/Ec2SubnetIdList"
-    },
-    "StreamConfiguration": {
-      "$ref": "#/definitions/StreamConfiguration"
-    },
-    "StudioComponentIds": {
-      "$ref": "#/definitions/LaunchProfileStudioComponentIdList"
-    },
-    "LaunchProfileProtocolVersions": {
-      "$ref": "#/definitions/LaunchProfileProtocolVersions"
-    },
-    "StudioId": {
-      "type": "string"
-    },
-    "Tags": {
-      "type": "object",
-      "patternProperties": {
-        "": {
-          "type": "string"
+    "properties": {
+        "Description": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 0,
+            "description": "<p>The description.</p>"
+        },
+        "Ec2SubnetIds": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "description": ""
+            },
+            "maxItems": 6,
+            "minItems": 0,
+            "description": "<p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. </p>"
+        },
+        "LaunchProfileId": {
+            "type": "string"
+        },
+        "LaunchProfileProtocolVersions": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "maxLength": 10,
+                "minLength": 0,
+                "pattern": "",
+                "description": "<p>The version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".</p>"
+            },
+            "description": "<p>The version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".</p>"
+        },
+        "Name": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "description": "<p>The name for the launch profile.</p>"
+        },
+        "StreamConfiguration": {
+            "$ref": "#/definitions/StreamConfiguration"
+        },
+        "StudioComponentIds": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "description": "<p>Unique identifiers for a collection of studio components that can be used with this launch profile.</p>"
+        },
+        "StudioId": {
+            "type": "string",
+            "description": "<p>The studioId. </p>"
+        },
+        "Tags": {
+            "$ref": "#/definitions/Tags"
         }
-      },
-      "additionalProperties": false
-    }
-  },
-  "additionalProperties": false,
-  "required": [
-    "StudioId",
-    "Name",
-    "StudioComponentIds",
-    "Ec2SubnetIds",
-    "StreamConfiguration",
-    "LaunchProfileProtocolVersions"
-  ],
-  "createOnlyProperties": [
-    "/properties/StudioId",
-    "/properties/Tags",
-    "/properties/Ec2SubnetIds"
-  ],
-  "readOnlyProperties": [
-    "/properties/LaunchProfileId"
-  ],
-  "primaryIdentifier": [
-    "/properties/LaunchProfileId",
-    "/properties/StudioId"
-  ],
-  "handlers": {
-    "create": {
-      "permissions": [
-        "nimble:CreateLaunchProfile",
-        "nimble:TagResource",
-        "ec2:CreateNetworkInterface",
-        "ec2:CreateNetworkInterfacePermission",
-        "ec2:RunInstances",
-        "ec2:DescribeSubnets"
-      ]
     },
-    "read": {
-      "permissions": [
-        "nimble:GetLaunchProfile"
-      ]
+    "readOnlyProperties": [
+        "/properties/LaunchProfileId"
+    ],
+    "createOnlyProperties": [
+        "/properties/Ec2SubnetIds",
+        "/properties/StudioId",
+        "/properties/Tags"
+    ],
+    "primaryIdentifier": [
+        "/properties/LaunchProfileId",
+        "/properties/StudioId"
+    ],
+    "required": [
+        "StudioId",
+        "Name",
+        "StudioComponentIds",
+        "Ec2SubnetIds",
+        "StreamConfiguration",
+        "LaunchProfileProtocolVersions"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "nimble:CreateLaunchProfile",
+                "nimble:TagResource",
+                "ec2:CreateNetworkInterface",
+                "ec2:CreateNetworkInterfacePermission",
+                "ec2:RunInstances",
+                "ec2:DescribeSubnets"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "nimble:GetLaunchProfile"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "nimble:UpdateLaunchProfile"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "nimble:DeleteLaunchProfile",
+                "nimble:UntagResource"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "nimble:ListLaunchProfiles"
+            ]
+        }
     },
-    "update": {
-      "permissions": [
-        "nimble:UpdateLaunchProfile"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "nimble:DeleteLaunchProfile",
-        "nimble:UntagResource"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "nimble:ListLaunchProfiles"
-      ]
-    }
-  }
+    "additionalProperties": false
 }

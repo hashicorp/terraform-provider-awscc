@@ -507,10 +507,12 @@
   },
   "required": [
     "AwsAccountId",
-    "DashboardId"
+    "DashboardId",
+    "SourceEntity"
   ],
   "additionalProperties": false,
   "readOnlyProperties": [
+    "/properties/DashboardError",
     "/properties/Arn",
     "/properties/CreatedTime",
     "/properties/LastPublishedTime",

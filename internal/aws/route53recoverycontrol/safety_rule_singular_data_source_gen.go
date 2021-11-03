@@ -230,6 +230,51 @@ func safetyRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A collection of tags associated with a resource",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "A collection of tags associated with a resource",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -255,13 +300,16 @@ func safetyRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"gating_controls":   "GatingControls",
 		"gating_rule":       "GatingRule",
 		"inverted":          "Inverted",
+		"key":               "Key",
 		"name":              "Name",
 		"rule_config":       "RuleConfig",
 		"safety_rule_arn":   "SafetyRuleArn",
 		"status":            "Status",
+		"tags":              "Tags",
 		"target_controls":   "TargetControls",
 		"threshold":         "Threshold",
 		"type":              "Type",
+		"value":             "Value",
 		"wait_period_ms":    "WaitPeriodMs",
 	})
 

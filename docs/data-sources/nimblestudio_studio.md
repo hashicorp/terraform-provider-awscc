@@ -21,23 +21,23 @@ Data Source schema for AWS::NimbleStudio::Studio
 
 ### Read-Only
 
-- **admin_role_arn** (String)
-- **display_name** (String)
-- **home_region** (String)
-- **sso_client_id** (String)
-- **studio_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--studio_encryption_configuration))
+- **admin_role_arn** (String) <p>The IAM role that Studio Admins will assume when logging in to the Nimble Studio portal.</p>
+- **display_name** (String) <p>A friendly name for the studio.</p>
+- **home_region** (String) <p>The Amazon Web Services Region where the studio resource is located.</p>
+- **sso_client_id** (String) <p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.</p>
+- **studio_encryption_configuration** (Attributes) <p>Configuration of the encryption method that is used for the studio.</p> (see [below for nested schema](#nestedatt--studio_encryption_configuration))
 - **studio_id** (String)
-- **studio_name** (String)
-- **studio_url** (String)
+- **studio_name** (String) <p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>
+- **studio_url** (String) <p>The address of the web page for the studio.</p>
 - **tags** (Map of String)
-- **user_role_arn** (String)
+- **user_role_arn** (String) <p>The IAM role that Studio Users will assume when logging in to the Nimble Studio portal.</p>
 
 <a id="nestedatt--studio_encryption_configuration"></a>
 ### Nested Schema for `studio_encryption_configuration`
 
 Read-Only:
 
-- **key_arn** (String)
-- **key_type** (String)
+- **key_arn** (String) <p>The ARN for a KMS key that is used to encrypt studio data.</p>
+- **key_type** (String) <p>The type of KMS key that is used to encrypt studio data.</p>
 
 

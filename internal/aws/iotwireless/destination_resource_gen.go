@@ -135,7 +135,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
@@ -163,7 +163,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
+				validate.ArrayLenAtMost(200),
 			},
 		},
 	}

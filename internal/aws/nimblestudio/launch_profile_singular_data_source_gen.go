@@ -23,22 +23,31 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe description.\u003c/p\u003e",
+			//   "maxLength": 256,
+			//   "minLength": 0,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The description.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"ec_2_subnet_ids": {
 			// Property: Ec2SubnetIds
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eSpecifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. \u003c/p\u003e",
 			//   "items": {
+			//     "description": "",
 			//     "type": "string"
 			//   },
+			//   "maxItems": 6,
+			//   "minItems": 0,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Description: "<p>Specifies the IDs of the EC2 subnets where streaming sessions will be accessible from. These subnets must support the specified instance types. </p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"launch_profile_id": {
 			// Property: LaunchProfileId
@@ -53,76 +62,119 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: LaunchProfileProtocolVersions
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
 			//   "items": {
+			//     "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
+			//     "maxLength": 10,
+			//     "minLength": 0,
+			//     "pattern": "",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Description: "<p>The version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".</p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe name for the launch profile.\u003c/p\u003e",
+			//   "maxLength": 64,
+			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The name for the launch profile.</p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"stream_configuration": {
 			// Property: StreamConfiguration
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "\u003cp\u003eA configuration for a streaming session.\u003c/p\u003e",
 			//   "properties": {
 			//     "ClipboardMode": {
+			//       "description": "",
+			//       "enum": [
+			//         "ENABLED",
+			//         "DISABLED"
+			//       ],
 			//       "type": "string"
 			//     },
 			//     "Ec2InstanceTypes": {
+			//       "description": "\u003cp\u003eThe EC2 instance types that users can select from when launching a streaming session with this launch profile.\u003c/p\u003e",
 			//       "items": {
+			//         "description": "",
+			//         "enum": [
+			//           "g4dn.xlarge",
+			//           "g4dn.2xlarge",
+			//           "g4dn.4xlarge",
+			//           "g4dn.8xlarge",
+			//           "g4dn.12xlarge",
+			//           "g4dn.16xlarge"
+			//         ],
 			//         "type": "string"
 			//       },
+			//       "maxItems": 30,
+			//       "minItems": 1,
 			//       "type": "array"
 			//     },
 			//     "MaxSessionLengthInMinutes": {
+			//       "description": "\u003cp\u003eThe length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.\u003c/p\u003e",
+			//       "maximum": 690,
+			//       "minimum": 1,
 			//       "type": "number"
 			//     },
 			//     "StreamingImageIds": {
+			//       "description": "\u003cp\u003eThe streaming images that users can select from when launching a streaming session with this launch profile.\u003c/p\u003e",
 			//       "items": {
+			//         "description": "",
+			//         "maxLength": 22,
+			//         "minLength": 0,
+			//         "pattern": "",
 			//         "type": "string"
 			//       },
+			//       "maxItems": 20,
+			//       "minItems": 0,
 			//       "type": "array"
 			//     }
 			//   },
 			//   "required": [
+			//     "ClipboardMode",
 			//     "Ec2InstanceTypes",
-			//     "StreamingImageIds",
-			//     "ClipboardMode"
+			//     "StreamingImageIds"
 			//   ],
 			//   "type": "object"
 			// }
+			Description: "<p>A configuration for a streaming session.</p>",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"clipboard_mode": {
 						// Property: ClipboardMode
-						Type:     types.StringType,
-						Computed: true,
+						Description: "",
+						Type:        types.StringType,
+						Computed:    true,
 					},
 					"ec_2_instance_types": {
 						// Property: Ec2InstanceTypes
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
+						Description: "<p>The EC2 instance types that users can select from when launching a streaming session with this launch profile.</p>",
+						Type:        types.ListType{ElemType: types.StringType},
+						Computed:    true,
 					},
 					"max_session_length_in_minutes": {
 						// Property: MaxSessionLengthInMinutes
-						Type:     types.NumberType,
-						Computed: true,
+						Description: "<p>The length of time, in minutes, that a streaming session can run. After this point, Nimble Studio automatically terminates the session.</p>",
+						Type:        types.NumberType,
+						Computed:    true,
 					},
 					"streaming_image_ids": {
 						// Property: StreamingImageIds
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
+						Description: "<p>The streaming images that users can select from when launching a streaming session with this launch profile.</p>",
+						Type:        types.ListType{ElemType: types.StringType},
+						Computed:    true,
 					},
 				},
 			),
@@ -132,28 +184,35 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: StudioComponentIds
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eUnique identifiers for a collection of studio components that can be used with this launch profile.\u003c/p\u003e",
 			//   "items": {
 			//     "type": "string"
 			//   },
+			//   "maxItems": 100,
+			//   "minItems": 1,
 			//   "type": "array"
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Description: "<p>Unique identifiers for a collection of studio components that can be used with this launch profile.</p>",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"studio_id": {
 			// Property: StudioId
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "\u003cp\u003eThe studioId. \u003c/p\u003e",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "<p>The studioId. </p>",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
+			//   "description": "",
 			//   "patternProperties": {
 			//     "": {
 			//       "type": "string"
@@ -161,6 +220,7 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   },
 			//   "type": "object"
 			// }
+			Description: "",
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,

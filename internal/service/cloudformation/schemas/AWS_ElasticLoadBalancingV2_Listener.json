@@ -279,6 +279,7 @@
     "/properties/DefaultActions/*/ForwardConfig",
     "/properties/DefaultActions/*/TargetGroupArn"
   ],
+  "taggable": false,
   "handlers": {
     "create": {
       "permissions": [

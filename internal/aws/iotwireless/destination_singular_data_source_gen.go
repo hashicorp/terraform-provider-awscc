@@ -116,7 +116,7 @@ func destinationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

@@ -18,13 +18,13 @@ Definition of the AWS::QuickSight::Template Resource Type.
 ### Required
 
 - **aws_account_id** (String)
+- **source_entity** (Attributes) <p>The source entity of the template.</p> (see [below for nested schema](#nestedatt--source_entity))
 - **template_id** (String)
 
 ### Optional
 
 - **name** (String) <p>A display name for the template.</p>
 - **permissions** (Attributes List) <p>A list of resource permissions to be set on the template. </p> (see [below for nested schema](#nestedatt--permissions))
-- **source_entity** (Attributes) <p>The source entity of the template.</p> (see [below for nested schema](#nestedatt--source_entity))
 - **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p> (see [below for nested schema](#nestedatt--tags))
 - **version_description** (String) <p>A description of the current template version being created. This API operation creates the
 			first version of the template. Every time <code>UpdateTemplate</code> is called, a new
@@ -38,6 +38,42 @@ Definition of the AWS::QuickSight::Template Resource Type.
 - **id** (String) Uniquely identifies the resource.
 - **last_updated_time** (String) <p>Time when this was last updated.</p>
 - **version** (Attributes) <p>A version of a template.</p> (see [below for nested schema](#nestedatt--version))
+
+<a id="nestedatt--source_entity"></a>
+### Nested Schema for `source_entity`
+
+Required:
+
+- **source_analysis** (Attributes) <p>The source analysis of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis))
+- **source_template** (Attributes) <p>The source template of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+
+<a id="nestedatt--source_entity--source_analysis"></a>
+### Nested Schema for `source_entity.source_analysis`
+
+Required:
+
+- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- **data_set_references** (Attributes List) <p>A structure containing information about the dataset references used as placeholders
+            in the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis--data_set_references))
+
+<a id="nestedatt--source_entity--source_analysis--data_set_references"></a>
+### Nested Schema for `source_entity.source_analysis.data_set_references`
+
+Required:
+
+- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+
+
+
+<a id="nestedatt--source_entity--source_template"></a>
+### Nested Schema for `source_entity.source_template`
+
+Required:
+
+- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+
+
 
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
@@ -60,42 +96,6 @@ Optional:
                     (This is less common.) </p>
             </li>
          </ul>
-
-
-<a id="nestedatt--source_entity"></a>
-### Nested Schema for `source_entity`
-
-Optional:
-
-- **source_analysis** (Attributes) <p>The source analysis of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis))
-- **source_template** (Attributes) <p>The source template of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
-
-<a id="nestedatt--source_entity--source_analysis"></a>
-### Nested Schema for `source_entity.source_analysis`
-
-Optional:
-
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **data_set_references** (Attributes List) <p>A structure containing information about the dataset references used as placeholders
-            in the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis--data_set_references))
-
-<a id="nestedatt--source_entity--source_analysis--data_set_references"></a>
-### Nested Schema for `source_entity.source_analysis.data_set_references`
-
-Optional:
-
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
-
-
-
-<a id="nestedatt--source_entity--source_template"></a>
-### Nested Schema for `source_entity.source_template`
-
-Optional:
-
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-
 
 
 <a id="nestedatt--tags"></a>

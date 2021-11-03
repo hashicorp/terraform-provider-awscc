@@ -49,6 +49,10 @@
             "description": "The instance profile of the infrastructure configuration.",
             "type": "string"
         },
+        "InstanceMetadataOptions": {
+            "description": "The instance metadata option settings for the infrastructure configuration.",
+            "$ref": "#/definitions/InstanceMetadataOptions"
+        },
         "SnsTopicArn": {
             "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
             "type": "string"
@@ -101,6 +105,25 @@
             "properties": {
                 "S3Logs": {
                     "$ref": "#/definitions/S3Logs"
+                }
+            }
+        },
+        "InstanceMetadataOptions": {
+            "description": "The instance metadata option settings for the infrastructure configuration.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "HttpPutResponseHopLimit": {
+                    "description": "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+                    "type": "integer"
+                },
+                "HttpTokens": {
+                    "description": "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+                    "type": "string",
+                    "enum": [
+                        "required",
+                        "optional"
+                    ]
                 }
             }
         },

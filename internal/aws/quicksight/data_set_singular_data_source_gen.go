@@ -1054,6 +1054,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "\u003cp\u003eA physical table type for relational data sources.\u003c/p\u003e",
 			//           "properties": {
 			//             "Catalog": {
+			//               "description": "\u003cp\u003eThe catalog associated with a table.\u003c/p\u003e",
 			//               "maxLength": 256,
 			//               "minLength": 0,
 			//               "type": "string"
@@ -1267,8 +1268,9 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
-									Type:     types.StringType,
-									Computed: true,
+									Description: "<p>The catalog associated with a table.</p>",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 								"data_source_arn": {
 									// Property: DataSourceArn

@@ -395,7 +395,8 @@
   },
   "required": [
     "AwsAccountId",
-    "AnalysisId"
+    "AnalysisId",
+    "SourceEntity"
   ],
   "additionalProperties": false,
   "writeOnlyProperties": [
@@ -410,6 +411,7 @@
     "/properties/AwsAccountId"
   ],
   "readOnlyProperties": [
+    "/properties/AnalysisError",
     "/properties/CreatedTime",
     "/properties/LastUpdatedTime",
     "/properties/Status",

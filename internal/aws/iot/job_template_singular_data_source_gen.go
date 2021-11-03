@@ -315,7 +315,8 @@ func jobTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   },
 			//   "required": [
 			//     "RoleArn"
-			//   ]
+			//   ],
+			//   "type": "object"
 			// }
 			Description: "Configuration for pre-signed S3 URLs.",
 			Attributes: tfsdk.SingleNestedAttributes(

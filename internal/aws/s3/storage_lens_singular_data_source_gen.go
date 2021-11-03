@@ -136,18 +136,27 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             },
 			//             "Encryption": {
 			//               "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-			//               "oneOf": [
-			//                 {
+			//               "properties": {
+			//                 "SSEKMS": {
+			//                   "additionalProperties": false,
+			//                   "description": "AWS KMS server-side encryption.",
+			//                   "properties": {
+			//                     "KeyId": {
+			//                       "description": "The ARN of the KMS key to use for encryption.",
+			//                       "type": "string"
+			//                     }
+			//                   },
 			//                   "required": [
-			//                     "SSES3"
-			//                   ]
+			//                     "KeyId"
+			//                   ],
+			//                   "type": "object"
 			//                 },
-			//                 {
-			//                   "required": [
-			//                     "SSEKMS"
-			//                   ]
+			//                 "SSES3": {
+			//                   "additionalProperties": false,
+			//                   "description": "S3 default server-side encryption.",
+			//                   "type": "object"
 			//                 }
-			//               ],
+			//               },
 			//               "type": "object"
 			//             },
 			//             "Format": {
@@ -398,8 +407,32 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 											"encryption": {
 												// Property: Encryption
 												Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
-												Type:        types.MapType{ElemType: types.StringType},
-												Computed:    true,
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"ssekms": {
+															// Property: SSEKMS
+															Description: "AWS KMS server-side encryption.",
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"key_id": {
+																		// Property: KeyId
+																		Description: "The ARN of the KMS key to use for encryption.",
+																		Type:        types.StringType,
+																		Computed:    true,
+																	},
+																},
+															),
+															Computed: true,
+														},
+														"sses3": {
+															// Property: SSES3
+															Description: "S3 default server-side encryption.",
+															Type:        types.MapType{ElemType: types.StringType},
+															Computed:    true,
+														},
+													},
+												),
+												Computed: true,
 											},
 											"format": {
 												// Property: Format
@@ -572,6 +605,7 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"include":                      "Include",
 		"is_enabled":                   "IsEnabled",
 		"key":                          "Key",
+		"key_id":                       "KeyId",
 		"max_depth":                    "MaxDepth",
 		"min_storage_bytes_percentage": "MinStorageBytesPercentage",
 		"output_schema_version":        "OutputSchemaVersion",
@@ -580,6 +614,8 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"regions":                      "Regions",
 		"s3_bucket_destination":        "S3BucketDestination",
 		"selection_criteria":           "SelectionCriteria",
+		"ssekms":                       "SSEKMS",
+		"sses3":                        "SSES3",
 		"storage_lens_arn":             "StorageLensArn",
 		"storage_lens_configuration":   "StorageLensConfiguration",
 		"storage_metrics":              "StorageMetrics",

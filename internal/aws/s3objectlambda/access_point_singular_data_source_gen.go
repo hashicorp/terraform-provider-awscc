@@ -92,13 +92,25 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "uniqueItems": true
 			//           },
 			//           "ContentTransformation": {
-			//             "oneOf": [
-			//               {
+			//             "properties": {
+			//               "AwsLambda": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "FunctionArn": {
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   },
+			//                   "FunctionPayload": {
+			//                     "type": "string"
+			//                   }
+			//                 },
 			//                 "required": [
-			//                   "AwsLambda"
-			//                 ]
+			//                   "FunctionArn"
+			//                 ],
+			//                 "type": "object"
 			//               }
-			//             ],
+			//             },
 			//             "type": "object"
 			//           }
 			//         },
@@ -143,7 +155,28 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								},
 								"content_transformation": {
 									// Property: ContentTransformation
-									Type:     types.MapType{ElemType: types.StringType},
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"aws_lambda": {
+												// Property: AwsLambda
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"function_arn": {
+															// Property: FunctionArn
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"function_payload": {
+															// Property: FunctionPayload
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+										},
+									),
 									Computed: true,
 								},
 							},
@@ -259,11 +292,14 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"actions":                           "Actions",
 		"allowed_features":                  "AllowedFeatures",
 		"arn":                               "Arn",
+		"aws_lambda":                        "AwsLambda",
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",
 		"cloudwatch_metrics_enabled":        "CloudWatchMetricsEnabled",
 		"content_transformation":            "ContentTransformation",
 		"creation_date":                     "CreationDate",
+		"function_arn":                      "FunctionArn",
+		"function_payload":                  "FunctionPayload",
 		"ignore_public_acls":                "IgnorePublicAcls",
 		"is_public":                         "IsPublic",
 		"name":                              "Name",

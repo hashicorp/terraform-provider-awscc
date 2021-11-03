@@ -161,6 +161,10 @@ func containerRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                 "description": "The snapshot that defines the device contents.",
 			//                 "type": "string"
 			//               },
+			//               "Throughput": {
+			//                 "description": "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+			//                 "type": "integer"
+			//               },
 			//               "VolumeSize": {
 			//                 "description": "Use to override the device's volume size.",
 			//                 "type": "integer"
@@ -248,6 +252,12 @@ func containerRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 												// Property: SnapshotId
 												Description: "The snapshot that defines the device contents.",
 												Type:        types.StringType,
+												Computed:    true,
+											},
+											"throughput": {
+												// Property: Throughput
+												Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
+												Type:        types.NumberType,
 												Computed:    true,
 											},
 											"volume_size": {
@@ -466,6 +476,7 @@ func containerRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 		"snapshot_id":               "SnapshotId",
 		"tags":                      "Tags",
 		"target_repository":         "TargetRepository",
+		"throughput":                "Throughput",
 		"version":                   "Version",
 		"virtual_name":              "VirtualName",
 		"volume_size":               "VolumeSize",

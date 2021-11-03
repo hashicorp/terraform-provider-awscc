@@ -184,6 +184,11 @@
       "minItems": 0,
       "maxItems": 50
     },
+    "DefaultTimeToLive": {
+      "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+      "type": "integer",
+      "minimum": 0
+    },
     "EncryptionSpecification": {
         "$ref": "#/definitions/EncryptionSpecification"
     }

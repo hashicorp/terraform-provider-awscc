@@ -205,7 +205,7 @@ func partnerAccountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     },
 			//     "type": "object"
 			//   },
-			//   "maxItems": 50,
+			//   "maxItems": 200,
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }

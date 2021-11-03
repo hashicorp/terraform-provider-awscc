@@ -24,6 +24,7 @@ Resource schema for AWS::Cassandra::Table
 
 - **billing_mode** (Attributes) (see [below for nested schema](#nestedatt--billing_mode))
 - **clustering_key_columns** (Attributes List) Clustering key columns of the table (see [below for nested schema](#nestedatt--clustering_key_columns))
+- **default_time_to_live** (Number) Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.
 - **encryption_specification** (Attributes) Represents the settings used to enable server-side encryption (see [below for nested schema](#nestedatt--encryption_specification))
 - **point_in_time_recovery_enabled** (Boolean) Indicates whether point in time recovery is enabled (true) or disabled (false) on the table
 - **regular_columns** (Attributes Set) Non-key columns of the table (see [below for nested schema](#nestedatt--regular_columns))

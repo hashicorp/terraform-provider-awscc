@@ -92,6 +92,51 @@ func controlPanelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "A collection of tags associated with a resource",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 256,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Value",
+			//       "Key"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "A collection of tags associated with a resource",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -114,9 +159,12 @@ func controlPanelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"cluster_arn":           "ClusterArn",
 		"control_panel_arn":     "ControlPanelArn",
 		"default_control_panel": "DefaultControlPanel",
+		"key":                   "Key",
 		"name":                  "Name",
 		"routing_control_count": "RoutingControlCount",
 		"status":                "Status",
+		"tags":                  "Tags",
+		"value":                 "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

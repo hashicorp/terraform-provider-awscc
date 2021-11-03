@@ -585,6 +585,18 @@
       },
       "additionalProperties": false
     },
+    "RuntimePlatform": {
+      "type": "object",
+      "properties": {
+        "CpuArchitecture": {
+            "type": "string"
+        },
+        "OperatingSystemFamily": {
+            "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "Secret": {
       "type": "object",
       "required": [
@@ -768,6 +780,9 @@
     "PidMode": {
       "type": "string"
     },
+    "RuntimePlatform": {
+      "$ref": "#/definitions/RuntimePlatform"
+    },
     "IpcMode": {
       "type": "string"
     },
@@ -789,6 +804,7 @@
     "/properties/PlacementConstraints",
     "/properties/ProxyConfiguration",
     "/properties/RequiresCompatibilities",
+    "/properties/RuntimePlatform",
     "/properties/TaskRoleArn",
     "/properties/Volumes",
     "/properties/PidMode",

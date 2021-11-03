@@ -41,6 +41,47 @@ func infrastructureConfigurationDataSourceType(ctx context.Context) (tfsdk.DataS
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"instance_metadata_options": {
+			// Property: InstanceMetadataOptions
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The instance metadata option settings for the infrastructure configuration.",
+			//   "properties": {
+			//     "HttpPutResponseHopLimit": {
+			//       "description": "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+			//       "type": "integer"
+			//     },
+			//     "HttpTokens": {
+			//       "description": "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+			//       "enum": [
+			//         "required",
+			//         "optional"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The instance metadata option settings for the infrastructure configuration.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"http_put_response_hop_limit": {
+						// Property: HttpPutResponseHopLimit
+						Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+						Type:        types.NumberType,
+						Computed:    true,
+					},
+					"http_tokens": {
+						// Property: HttpTokens
+						Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"instance_profile_name": {
 			// Property: InstanceProfileName
 			// CloudFormation resource type schema:
@@ -245,6 +286,9 @@ func infrastructureConfigurationDataSourceType(ctx context.Context) (tfsdk.DataS
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                           "Arn",
 		"description":                   "Description",
+		"http_put_response_hop_limit":   "HttpPutResponseHopLimit",
+		"http_tokens":                   "HttpTokens",
+		"instance_metadata_options":     "InstanceMetadataOptions",
 		"instance_profile_name":         "InstanceProfileName",
 		"instance_types":                "InstanceTypes",
 		"key_pair":                      "KeyPair",

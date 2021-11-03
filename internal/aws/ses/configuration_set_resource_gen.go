@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -25,8 +24,6 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the configuration set.",
-			//   "maxLength": 64,
-			//   "minLength": 1,
 			//   "pattern": "",
 			//   "type": "string"
 			// }
@@ -34,9 +31,6 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

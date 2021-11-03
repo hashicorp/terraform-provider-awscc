@@ -301,14 +301,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 10),
 			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.RequiresReplace(),
-			},
-			// Tags is a write-only property.
 		},
 	}
 
@@ -347,7 +342,6 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
 		"/properties/SchemaDefinition",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

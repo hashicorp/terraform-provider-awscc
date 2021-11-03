@@ -2,7 +2,7 @@
     "typeName": "AWS::Route53RecoveryControl::Cluster",
     "description": "AWS Route53 Recovery Control Cluster resource schema",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53-recovery-control.git",
-    "taggable": false,
+    "taggable": true,
     "definitions": {
         "ClusterEndpoint": {
             "type": "object",
@@ -18,6 +18,25 @@
                     "maxLength": 32
                 }
             },
+            "additionalProperties": false
+        },
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "maxLength": 256
+                }
+            },
+            "required": [
+                "Value",
+                "Key"
+            ],
             "additionalProperties": false
         }
     },
@@ -50,11 +69,24 @@
                 "$ref": "#/definitions/ClusterEndpoint"
             },
             "insertionOrder": false
+        },
+        "Tags": {
+            "description": "A collection of tags associated with a resource",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Tag",
+                "maxItems": 20
+            },
+            "insertionOrder": false
         }
     },
     "additionalProperties": false,
     "createOnlyProperties": [
-        "/properties/Name"
+        "/properties/Name",
+        "/properties/Tags"
+    ],
+    "writeOnlyProperties": [
+        "/properties/Tags"
     ],
     "readOnlyProperties": [
         "/properties/Status",

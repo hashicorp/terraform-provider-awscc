@@ -206,9 +206,12 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkfirewall_rule_groups -cftype AWS::NetworkFirewall::RuleGroup -package networkfirewall ../aws/networkfirewall/rule_group_plural_data_source_gen.go ../aws/networkfirewall/rule_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkmanager_global_networks -cftype AWS::NetworkManager::GlobalNetwork -package networkmanager ../aws/networkmanager/global_network_plural_data_source_gen.go ../aws/networkmanager/global_network_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxies -cftype AWS::RDS::DBProxy -package rds ../aws/rds/db_proxy_plural_data_source_gen.go ../aws/rds/db_proxy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxy_endpoints -cftype AWS::RDS::DBProxyEndpoint -package rds ../aws/rds/db_proxy_endpoint_plural_data_source_gen.go ../aws/rds/db_proxy_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_global_clusters -cftype AWS::RDS::GlobalCluster -package rds ../aws/rds/global_cluster_plural_data_source_gen.go ../aws/rds/global_cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_rekognition_projects -cftype AWS::Rekognition::Project -package rekognition ../aws/rekognition/project_plural_data_source_gen.go ../aws/rekognition/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_resourcegroups_groups -cftype AWS::ResourceGroups::Group -package resourcegroups ../aws/resourcegroups/group_plural_data_source_gen.go ../aws/resourcegroups/group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_fleets -cftype AWS::RoboMaker::Fleet -package robomaker ../aws/robomaker/fleet_plural_data_source_gen.go ../aws/robomaker/fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_robomaker_robots -cftype AWS::RoboMaker::Robot -package robomaker ../aws/robomaker/robot_plural_data_source_gen.go ../aws/robomaker/robot_plural_data_source_gen_test.go
@@ -248,6 +251,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_databases -cftype AWS::Timestream::Database -package timestream ../aws/timestream/database_plural_data_source_gen.go ../aws/timestream/database_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_timestream_tables -cftype AWS::Timestream::Table -package timestream ../aws/timestream/table_plural_data_source_gen.go ../aws/timestream/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wafv2_logging_configurations -cftype AWS::WAFv2::LoggingConfiguration -package wafv2 ../aws/wafv2/logging_configuration_plural_data_source_gen.go ../aws/wafv2/logging_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_assistants -cftype AWS::Wisdom::Assistant -package wisdom ../aws/wisdom/assistant_plural_data_source_gen.go ../aws/wisdom/assistant_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_knowledge_bases -cftype AWS::Wisdom::KnowledgeBase -package wisdom ../aws/wisdom/knowledge_base_plural_data_source_gen.go ../aws/wisdom/knowledge_base_plural_data_source_gen_test.go
 
 package provider
 
@@ -327,7 +332,9 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rekognition"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
@@ -344,4 +351,5 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
 )

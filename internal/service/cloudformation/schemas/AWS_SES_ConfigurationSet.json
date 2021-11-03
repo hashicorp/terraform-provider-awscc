@@ -6,9 +6,7 @@
         "Name": {
             "description": "The name of the configuration set.",
             "type": "string",
-            "pattern": "",
-            "maxLength": 64,
-            "minLength": 1
+            "pattern": ""
         }
     },
     "createOnlyProperties": [

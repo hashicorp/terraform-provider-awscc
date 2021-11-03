@@ -2,7 +2,7 @@
     "typeName": "AWS::Route53RecoveryControl::SafetyRule",
     "description": "Resource schema for AWS Route53 Recovery Control basic constructs and validation rules.",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53-recovery-control.git",
-    "taggable": false,
+    "taggable": true,
     "definitions": {
         "SafetyRuleName": {
             "description": "The name for the safety rule.",
@@ -94,6 +94,25 @@
                 "WaitPeriodMs"
             ],
             "additionalProperties": false
+        },
+        "Tag":{
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 128
+                },
+                "Value": {
+                    "type": "string",
+                    "maxLength": 256
+                }
+            },
+            "required": [
+                "Value",
+                "Key"
+            ],
+            "additionalProperties": false
         }
     },
     "properties": {
@@ -125,6 +144,15 @@
         },
         "RuleConfig": {
             "$ref": "#/definitions/RuleConfig"
+        },
+        "Tags": {
+            "description": "A collection of tags associated with a resource",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Tag",
+                "maxItems": 20
+            },
+            "insertionOrder": false
         }
     },
     "oneOf": [
@@ -152,7 +180,11 @@
     "createOnlyProperties": [
         "/properties/ControlPanelArn",
         "/properties/RuleConfig",
-        "/properties/ControlPanelArn"
+        "/properties/ControlPanelArn",
+        "/properties/Tags"
+    ],
+    "writeOnlyProperties": [
+        "/properties/Tags"
     ],
     "readOnlyProperties": [
         "/properties/SafetyRuleArn",

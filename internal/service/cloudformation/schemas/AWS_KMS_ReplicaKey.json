@@ -91,6 +91,7 @@
   "writeOnlyProperties": [
     "/properties/PendingWindowInDays"
   ],
+  "taggable": true,
   "handlers": {
     "create": {
       "permissions": [

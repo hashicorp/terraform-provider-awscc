@@ -37,10 +37,85 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
+			//     "Conditions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "StringEquals": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringLike": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringNotEquals": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         },
+			//         "StringNotLike": {
+			//           "insertionOrder": false,
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionKey": {
+			//                 "type": "string"
+			//               },
+			//               "ConditionValue": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "type": "object"
+			//           },
+			//           "type": "array",
+			//           "uniqueItems": false
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "IamRoleArn": {
 			//       "type": "string"
 			//     },
 			//     "ListOfTags": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -64,7 +139,16 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       "type": "array",
 			//       "uniqueItems": false
 			//     },
+			//     "NotResources": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": false
+			//     },
 			//     "Resources": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -83,6 +167,102 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"conditions": {
+						// Property: Conditions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"string_equals": {
+									// Property: StringEquals
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Optional: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Optional: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
+								},
+								"string_like": {
+									// Property: StringLike
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Optional: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Optional: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
+								},
+								"string_not_equals": {
+									// Property: StringNotEquals
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Optional: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Optional: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
+								},
+								"string_not_like": {
+									// Property: StringNotLike
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_key": {
+												// Property: ConditionKey
+												Type:     types.StringType,
+												Optional: true,
+											},
+											"condition_value": {
+												// Property: ConditionValue
+												Type:     types.StringType,
+												Optional: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
 					"iam_role_arn": {
 						// Property: IamRoleArn
 						Type:     types.StringType,
@@ -111,11 +291,25 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
+					},
+					"not_resources": {
+						// Property: NotResources
+						Type:     types.ListType{ElemType: types.StringType},
+						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"resources": {
 						// Property: Resources
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"selection_name": {
 						// Property: SelectionName
@@ -161,17 +355,23 @@ func backupSelectionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"backup_plan_id":   "BackupPlanId",
-		"backup_selection": "BackupSelection",
-		"condition_key":    "ConditionKey",
-		"condition_type":   "ConditionType",
-		"condition_value":  "ConditionValue",
-		"iam_role_arn":     "IamRoleArn",
-		"id":               "Id",
-		"list_of_tags":     "ListOfTags",
-		"resources":        "Resources",
-		"selection_id":     "SelectionId",
-		"selection_name":   "SelectionName",
+		"backup_plan_id":    "BackupPlanId",
+		"backup_selection":  "BackupSelection",
+		"condition_key":     "ConditionKey",
+		"condition_type":    "ConditionType",
+		"condition_value":   "ConditionValue",
+		"conditions":        "Conditions",
+		"iam_role_arn":      "IamRoleArn",
+		"id":                "Id",
+		"list_of_tags":      "ListOfTags",
+		"not_resources":     "NotResources",
+		"resources":         "Resources",
+		"selection_id":      "SelectionId",
+		"selection_name":    "SelectionName",
+		"string_equals":     "StringEquals",
+		"string_like":       "StringLike",
+		"string_not_equals": "StringNotEquals",
+		"string_not_like":   "StringNotLike",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

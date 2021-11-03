@@ -347,6 +347,7 @@
         }
     },
     "additionalProperties": false,
+    "taggable": true,
     "required": [
         "AssetModelName"
     ],

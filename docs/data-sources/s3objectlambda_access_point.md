@@ -44,7 +44,24 @@ Read-Only:
 Read-Only:
 
 - **actions** (Set of String)
-- **content_transformation** (Map of String)
+- **content_transformation** (Attributes) (see [below for nested schema](#nestedatt--object_lambda_configuration--transformation_configurations--content_transformation))
+
+<a id="nestedatt--object_lambda_configuration--transformation_configurations--content_transformation"></a>
+### Nested Schema for `object_lambda_configuration.transformation_configurations.content_transformation`
+
+Read-Only:
+
+- **aws_lambda** (Attributes) (see [below for nested schema](#nestedatt--object_lambda_configuration--transformation_configurations--content_transformation--aws_lambda))
+
+<a id="nestedatt--object_lambda_configuration--transformation_configurations--content_transformation--aws_lambda"></a>
+### Nested Schema for `object_lambda_configuration.transformation_configurations.content_transformation.aws_lambda`
+
+Read-Only:
+
+- **function_arn** (String)
+- **function_payload** (String)
+
+
 
 
 

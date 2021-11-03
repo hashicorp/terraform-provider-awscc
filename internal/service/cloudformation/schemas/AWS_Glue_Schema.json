@@ -131,11 +131,9 @@
         "/properties/Registry",
         "/properties/Name",
         "/properties/DataFormat",
-        "/properties/SchemaDefinition",
-        "/properties/Tags"
+        "/properties/SchemaDefinition"
     ],
     "writeOnlyProperties": [
-        "/properties/Tags",
         "/properties/SchemaDefinition"
     ],
     "primaryIdentifier": [
@@ -150,7 +148,8 @@
         "read": {
             "permissions": [
                 "glue:GetSchemaVersion",
-                "glue:GetSchema"
+                "glue:GetSchema",
+                "glue:GetTags"
             ]
         },
         "delete": {
@@ -163,7 +162,10 @@
             "permissions": [
                 "glue:UpdateSchema",
                 "glue:GetSchemaVersion",
-                "glue:GetSchema"
+                "glue:GetSchema",
+                "glue:GetTags",
+                "glue:TagResource",
+                "glue:UntagResource"
             ]
         },
         "list": {

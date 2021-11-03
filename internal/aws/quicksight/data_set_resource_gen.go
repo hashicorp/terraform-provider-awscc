@@ -1227,6 +1227,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "\u003cp\u003eA physical table type for relational data sources.\u003c/p\u003e",
 			//           "properties": {
 			//             "Catalog": {
+			//               "description": "\u003cp\u003eThe catalog associated with a table.\u003c/p\u003e",
 			//               "maxLength": 256,
 			//               "minLength": 0,
 			//               "type": "string"
@@ -1463,8 +1464,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"catalog": {
 									// Property: Catalog
-									Type:     types.StringType,
-									Optional: true,
+									Description: "<p>The catalog associated with a table.</p>",
+									Type:        types.StringType,
+									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 256),
 									},

@@ -397,7 +397,7 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 11),
 			},
