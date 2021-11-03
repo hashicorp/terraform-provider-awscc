@@ -104,7 +104,7 @@ This method also supports the `profile` configuration and corresponding `AWS_PRO
 Usage:
 
 ```terraform
-provider "aws" {
+provider "awscc" {
   region                   = "us-west-2"
   shared_config_files      = ["/Users/tf_user/.aws/conf"]
   shared_credentials_files = ["/Users/tf_user/.aws/creds"]
@@ -122,7 +122,28 @@ If you're running Terraform on EKS and have configured [IAM Roles for Service Ac
 
 ### Custom User-Agent Information
 
-By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions. To provide additional information in the User-Agent headers, the `TF_APPEND_USER_AGENT` environment variable can be set and its value will be directly added to HTTP requests. e.g.
+By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
+To provide additional information in the User-Agent headers, set the User-Agent product or comment information using the `user_agent` argument.
+For example,
+
+```terraform
+provider "awscc" {
+  user_agent = [
+    {
+      product_name    = "example-module"
+      product_version = "1.0"
+    }
+    {
+      product_name    = "BuildID"
+      product_version = "1234"
+    }
+  ]
+}
+```
+
+will append `example-module/1.0 BuildID/1234` to the User-Agent.
+
+In addition, the `TF_APPEND_USER_AGENT` environment variable can be set and its value will be directly added to HTTP requests. e.g.
 
 ```sh
 $ export TF_APPEND_USER_AGENT="JenkinsAgent/i-12345678 BuildID/1234 (Optional Extra Information)"
@@ -179,6 +200,7 @@ provider "awscc" {
 - **shared_credentials_files** (List of String) List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.
 - **skip_medatadata_api_check** (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - **token** (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
+- **user_agent** (Attributes List) Product details to append to User-Agent string in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
 
 <a id="nestedatt--assume_role"></a>
 ### Nested Schema for `assume_role`
@@ -193,3 +215,13 @@ Optional:
 - **session_name** (String) Session name to use when assuming the role.
 - **tags** (Map of String) Map of assume role session tags.
 - **transitive_tag_keys** (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
+
+
+<a id="nestedatt--user_agent"></a>
+### Nested Schema for `user_agent`
+
+Optional:
+
+- **comment** (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
+- **product_name** (String) Product name. At least one of `product_name` or `comment` must be set.
+- **product_version** (String) Product version. Optional, and should only be set when `product_name` is set.

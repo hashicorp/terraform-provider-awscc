@@ -115,6 +115,31 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 				Optional:    true,
 			},
 
+			"user_agent": {
+				Attributes: tfsdk.ListNestedAttributes(
+					map[string]tfsdk.Attribute{
+						"product_name": {
+							Type:        types.StringType,
+							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+							Required:    true,
+						},
+						"product_version": {
+							Type:        types.StringType,
+							Description: "Product version. Optional, and should only be set when `product_name` is set.",
+							Optional:    true,
+						},
+						"comment": {
+							Type:        types.StringType,
+							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Optional:    true,
+						},
+					},
+					tfsdk.ListNestedAttributesOptions{},
+				),
+				Description: "Product details to append to User-Agent string in all AWS API calls.",
+				Optional:    true,
+			},
+
 			"assume_role": {
 				Attributes: tfsdk.SingleNestedAttributes(
 					map[string]tfsdk.Attribute{
@@ -189,20 +214,27 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 }
 
 type providerData struct {
-	AccessKey              types.String    `tfsdk:"access_key"`
-	HTTPProxy              types.String    `tfsdk:"http_proxy"`
-	Insecure               types.Bool      `tfsdk:"insecure"`
-	MaxRetries             types.Int64     `tfsdk:"max_retries"`
-	Profile                types.String    `tfsdk:"profile"`
-	Region                 types.String    `tfsdk:"region"`
-	RoleARN                types.String    `tfsdk:"role_arn"`
-	SecretKey              types.String    `tfsdk:"secret_key"`
-	SharedConfigFiles      types.List      `tfsdk:"shared_config_files"`
-	SharedCredentialsFiles types.List      `tfsdk:"shared_credentials_files"`
-	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
-	Token                  types.String    `tfsdk:"token"`
-	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
+	AccessKey              types.String       `tfsdk:"access_key"`
+	HTTPProxy              types.String       `tfsdk:"http_proxy"`
+	Insecure               types.Bool         `tfsdk:"insecure"`
+	MaxRetries             types.Int64        `tfsdk:"max_retries"`
+	Profile                types.String       `tfsdk:"profile"`
+	Region                 types.String       `tfsdk:"region"`
+	RoleARN                types.String       `tfsdk:"role_arn"`
+	SecretKey              types.String       `tfsdk:"secret_key"`
+	SharedConfigFiles      types.List         `tfsdk:"shared_config_files"`
+	SharedCredentialsFiles types.List         `tfsdk:"shared_credentials_files"`
+	SkipMetadataApiCheck   types.Bool         `tfsdk:"skip_medatadata_api_check"`
+	Token                  types.String       `tfsdk:"token"`
+	AssumeRole             *assumeRoleData    `tfsdk:"assume_role"`
+	UserAgent              []userAgentProduct `tfsdk:"user_agent"`
 	terraformVersion       string
+}
+
+type userAgentProduct struct {
+	ProductName    types.String `tfsdk:"product_name"`
+	ProductVersion types.String `tfsdk:"product_version"`
+	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -355,12 +387,13 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		Token:                  pd.Token.Value,
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
-			Products: []awsbase.APNProduct{
+			Products: []awsbase.UserAgentProduct{
 				{Name: "Terraform", Version: pd.terraformVersion, Comment: "+https://www.terraform.io"},
 				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
 			},
 		},
 	}
+	config.UserAgent = userAgentProducts(pd.UserAgent)
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
@@ -413,4 +446,16 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 	default:
 		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
 	}
+}
+
+func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
+	results := make([]awsbase.UserAgentProduct, len(products))
+	for i, p := range products {
+		results[i] = awsbase.UserAgentProduct{
+			Name:    p.ProductName.Value,
+			Version: p.ProductVersion.Value,
+			Comment: p.Comment.Value,
+		}
+	}
+	return results
 }
