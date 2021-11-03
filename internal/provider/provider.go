@@ -393,7 +393,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 		Token:                  pd.Token.Value,
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
-			Products: []awsbase.APNProduct{
+			Products: []awsbase.UserAgentProduct{
 				{Name: "Terraform", Version: pd.terraformVersion, Comment: "+https://www.terraform.io"},
 				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
 			},
@@ -454,7 +454,7 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 	}
 }
 
-func appendProducts(products []awsbase.APNProduct, addProducts []*apnProduct) []awsbase.APNProduct {
+func appendProducts(products []awsbase.UserAgentProduct, addProducts []*apnProduct) []awsbase.UserAgentProduct {
 	for _, p := range addProducts {
 		if p.Version == nil {
 			p.Version = &defaultUserAgentVersion
@@ -462,7 +462,7 @@ func appendProducts(products []awsbase.APNProduct, addProducts []*apnProduct) []
 		if p.Comment == nil {
 			p.Comment = &defaultUserAgentComment
 		}
-		products = append(products, awsbase.APNProduct{
+		products = append(products, awsbase.UserAgentProduct{
 			Name:    *p.Name,
 			Version: *p.Version,
 			Comment: *p.Comment,

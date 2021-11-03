@@ -12,19 +12,19 @@ func TestProvider(t *testing.T) {}
 func TestAppendProducts(t *testing.T) {
 	t.Parallel()
 
-	defaultProducts := []awsbase.APNProduct{
+	defaultProducts := []awsbase.UserAgentProduct{
 		{Name: "awscc-test", Version: "0.0.0", Comment: "unit test"},
 		{Name: "terraform", Version: "0.0.0", Comment: "unit test"},
 	}
-	simpleProduct := awsbase.APNProduct{Name: "simple", Version: "t", Comment: "t"}
+	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "t", Comment: "t"}
 	simpleAddProduct := apnProduct{Name: &simpleProduct.Name, Version: &simpleProduct.Version, Comment: &simpleProduct.Comment}
-	minimalProduct := awsbase.APNProduct{Name: "minimal", Version: defaultUserAgentVersion, Comment: defaultUserAgentComment}
+	minimalProduct := awsbase.UserAgentProduct{Name: "minimal", Version: defaultUserAgentVersion, Comment: defaultUserAgentComment}
 	minimalAddProduct := apnProduct{Name: &minimalProduct.Name}
 
 	testcases := map[string]struct {
-		products    []awsbase.APNProduct
+		products    []awsbase.UserAgentProduct
 		addProducts []*apnProduct
-		expected    []awsbase.APNProduct
+		expected    []awsbase.UserAgentProduct
 	}{
 		"none_added": {
 			products:    defaultProducts,
@@ -44,7 +44,7 @@ func TestAppendProducts(t *testing.T) {
 		"both_added": {
 			products:    defaultProducts,
 			addProducts: []*apnProduct{&simpleAddProduct, &minimalAddProduct},
-			expected:    append(defaultProducts, []awsbase.APNProduct{simpleProduct, minimalProduct}...),
+			expected:    append(defaultProducts, []awsbase.UserAgentProduct{simpleProduct, minimalProduct}...),
 		},
 	}
 
