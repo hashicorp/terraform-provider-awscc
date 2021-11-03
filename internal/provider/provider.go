@@ -118,14 +118,13 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 			"user_agent": {
 				Attributes: tfsdk.ListNestedAttributes(
 					map[string]tfsdk.Attribute{
-						"name": {
+						"product_name": {
 							Type:        types.StringType,
 							Description: "Product name.",
 							Required:    true,
 						},
-						"version": {
+						"product_version": {
 							Type:        types.StringType,
-							Attributes:  nil,
 							Description: "Optional product version.",
 							Optional:    true,
 						},
@@ -233,9 +232,9 @@ type providerData struct {
 }
 
 type userAgentProduct struct {
-	Name    types.String `tfsdk:"name"`
-	Version types.String `tfsdk:"version"`
-	Comment types.String `tfsdk:"comment"`
+	ProductName    types.String `tfsdk:"product_name"`
+	ProductVersion types.String `tfsdk:"product_version"`
+	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -453,8 +452,8 @@ func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
 	results := make([]awsbase.UserAgentProduct, len(products))
 	for i, p := range products {
 		results[i] = awsbase.UserAgentProduct{
-			Name:    p.Name.Value,
-			Version: p.Version.Value,
+			Name:    p.ProductName.Value,
+			Version: p.ProductVersion.Value,
 			Comment: p.Comment.Value,
 		}
 	}

@@ -14,9 +14,9 @@ func TestAppendProducts(t *testing.T) {
 	t.Parallel()
 
 	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "t", Comment: "t"}
-	simpleAddProduct := userAgentProduct{Name: types.String{Value: simpleProduct.Name}, Version: types.String{Value: simpleProduct.Version}, Comment: types.String{Value: simpleProduct.Comment}}
+	simpleAddProduct := userAgentProduct{ProductName: types.String{Value: simpleProduct.Name}, ProductVersion: types.String{Value: simpleProduct.Version}, Comment: types.String{Value: simpleProduct.Comment}}
 	minimalProduct := awsbase.UserAgentProduct{Name: "minimal"}
-	minimalAddProduct := userAgentProduct{Name: types.String{Value: minimalProduct.Name}}
+	minimalAddProduct := userAgentProduct{ProductName: types.String{Value: minimalProduct.Name}}
 
 	testcases := map[string]struct {
 		addProducts []userAgentProduct
