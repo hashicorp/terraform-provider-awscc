@@ -1,5 +1,9 @@
 ## 0.5.0 (Unreleased)
 
+FEATURES:
+
+* provider: Adds `user_agent` argument ([#247](https://github.com/hashicorp/terraform-provider-awscc/issues/247))
+
 ## [0.4.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.4.0) (October 21, 2021)
 
 BREAKING CHANGES:
