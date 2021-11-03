@@ -104,7 +104,7 @@ This method also supports the `profile` configuration and corresponding `AWS_PRO
 Usage:
 
 ```terraform
-provider "aws" {
+provider "awscc" {
   region                   = "us-west-2"
   shared_config_files      = ["/Users/tf_user/.aws/conf"]
   shared_credentials_files = ["/Users/tf_user/.aws/creds"]
@@ -122,7 +122,28 @@ If you're running Terraform on EKS and have configured [IAM Roles for Service Ac
 
 ### Custom User-Agent Information
 
-By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions. To provide additional information in the User-Agent headers, the `TF_APPEND_USER_AGENT` environment variable can be set and its value will be directly added to HTTP requests. e.g.
+By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
+To provide additional information in the User-Agent headers, set the User-Agent product or comment information using the `user_agent` argument.
+For example,
+
+```terraform
+provider "awscc" {
+  user_agent = [
+    {
+      product_name    = "example-module"
+      product_version = "1.0"
+    }
+    {
+      product_name    = "BuildID"
+      product_version = "1234"
+    }
+  ]
+}
+```
+
+will append `example-module/1.0 BuildID/1234` to the User-Agent.
+
+In addition, the `TF_APPEND_USER_AGENT` environment variable can be set and its value will be directly added to HTTP requests. e.g.
 
 ```sh
 $ export TF_APPEND_USER_AGENT="JenkinsAgent/i-12345678 BuildID/1234 (Optional Extra Information)"

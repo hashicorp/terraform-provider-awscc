@@ -120,17 +120,17 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 					map[string]tfsdk.Attribute{
 						"product_name": {
 							Type:        types.StringType,
-							Description: "Product name.",
+							Description: "Product name. At least one of `product_name` or `comment` must be set.",
 							Required:    true,
 						},
 						"product_version": {
 							Type:        types.StringType,
-							Description: "Optional product version.",
+							Description: "Product version. Optional, and should only be set when `product_name` is set.",
 							Optional:    true,
 						},
 						"comment": {
 							Type:        types.StringType,
-							Description: "Optional product comment.",
+							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
 							Optional:    true,
 						},
 					},
