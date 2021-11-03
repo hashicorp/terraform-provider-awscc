@@ -10,7 +10,7 @@ import (
 
 func TestProvider(t *testing.T) {}
 
-func TestAppendProducts(t *testing.T) {
+func TestUserAgentProducts(t *testing.T) {
 	t.Parallel()
 
 	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "t", Comment: "t"}
