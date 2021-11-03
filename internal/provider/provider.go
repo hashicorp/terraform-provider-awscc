@@ -26,11 +26,6 @@ const (
 	defaultAssumeRoleDuration = 1 * time.Hour
 )
 
-var (
-	defaultUserAgentVersion = "undefined"
-	defaultUserAgentComment = ""
-)
-
 func New() tfsdk.Provider {
 	return &AwsCloudControlApiProvider{}
 }
@@ -220,27 +215,27 @@ func (p *AwsCloudControlApiProvider) GetSchema(ctx context.Context) (tfsdk.Schem
 }
 
 type providerData struct {
-	AccessKey              types.String    `tfsdk:"access_key"`
-	HTTPProxy              types.String    `tfsdk:"http_proxy"`
-	Insecure               types.Bool      `tfsdk:"insecure"`
-	MaxRetries             types.Int64     `tfsdk:"max_retries"`
-	Profile                types.String    `tfsdk:"profile"`
-	Region                 types.String    `tfsdk:"region"`
-	RoleARN                types.String    `tfsdk:"role_arn"`
-	SecretKey              types.String    `tfsdk:"secret_key"`
-	SharedConfigFiles      types.List      `tfsdk:"shared_config_files"`
-	SharedCredentialsFiles types.List      `tfsdk:"shared_credentials_files"`
-	SkipMetadataApiCheck   types.Bool      `tfsdk:"skip_medatadata_api_check"`
-	Token                  types.String    `tfsdk:"token"`
-	AssumeRole             *assumeRoleData `tfsdk:"assume_role"`
-	UserAgent              []*apnProduct   `tfsdk:"user_agent"`
+	AccessKey              types.String       `tfsdk:"access_key"`
+	HTTPProxy              types.String       `tfsdk:"http_proxy"`
+	Insecure               types.Bool         `tfsdk:"insecure"`
+	MaxRetries             types.Int64        `tfsdk:"max_retries"`
+	Profile                types.String       `tfsdk:"profile"`
+	Region                 types.String       `tfsdk:"region"`
+	RoleARN                types.String       `tfsdk:"role_arn"`
+	SecretKey              types.String       `tfsdk:"secret_key"`
+	SharedConfigFiles      types.List         `tfsdk:"shared_config_files"`
+	SharedCredentialsFiles types.List         `tfsdk:"shared_credentials_files"`
+	SkipMetadataApiCheck   types.Bool         `tfsdk:"skip_medatadata_api_check"`
+	Token                  types.String       `tfsdk:"token"`
+	AssumeRole             *assumeRoleData    `tfsdk:"assume_role"`
+	UserAgent              []userAgentProduct `tfsdk:"user_agent"`
 	terraformVersion       string
 }
 
-type apnProduct struct {
-	Name    *string `tfsdk:"name"`
-	Version *string `tfsdk:"version"`
-	Comment *string `tfsdk:"comment"`
+type userAgentProduct struct {
+	Name    types.String `tfsdk:"name"`
+	Version types.String `tfsdk:"version"`
+	Comment types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
@@ -399,7 +394,7 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 			},
 		},
 	}
-	config.APNInfo.Products = appendProducts(config.APNInfo.Products, pd.UserAgent)
+	config.UserAgent = userAgentProducts(pd.UserAgent)
 	if pd.MaxRetries.Null {
 		config.MaxRetries = defaultMaxRetries
 	} else {
@@ -454,19 +449,14 @@ func (l awsSdkContextLogger) Logf(classification logging.Classification, format 
 	}
 }
 
-func appendProducts(products []awsbase.UserAgentProduct, addProducts []*apnProduct) []awsbase.UserAgentProduct {
-	for _, p := range addProducts {
-		if p.Version == nil {
-			p.Version = &defaultUserAgentVersion
+func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
+	results := make([]awsbase.UserAgentProduct, len(products))
+	for i, p := range products {
+		results[i] = awsbase.UserAgentProduct{
+			Name:    p.Name.Value,
+			Version: p.Version.Value,
+			Comment: p.Comment.Value,
 		}
-		if p.Comment == nil {
-			p.Comment = &defaultUserAgentComment
-		}
-		products = append(products, awsbase.UserAgentProduct{
-			Name:    *p.Name,
-			Version: *p.Version,
-			Comment: *p.Comment,
-		})
 	}
-	return products
+	return results
 }

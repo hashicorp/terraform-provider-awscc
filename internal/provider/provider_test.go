@@ -5,6 +5,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 func TestProvider(t *testing.T) {}
@@ -12,39 +13,30 @@ func TestProvider(t *testing.T) {}
 func TestAppendProducts(t *testing.T) {
 	t.Parallel()
 
-	defaultProducts := []awsbase.UserAgentProduct{
-		{Name: "awscc-test", Version: "0.0.0", Comment: "unit test"},
-		{Name: "terraform", Version: "0.0.0", Comment: "unit test"},
-	}
 	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "t", Comment: "t"}
-	simpleAddProduct := apnProduct{Name: &simpleProduct.Name, Version: &simpleProduct.Version, Comment: &simpleProduct.Comment}
-	minimalProduct := awsbase.UserAgentProduct{Name: "minimal", Version: defaultUserAgentVersion, Comment: defaultUserAgentComment}
-	minimalAddProduct := apnProduct{Name: &minimalProduct.Name}
+	simpleAddProduct := userAgentProduct{Name: types.String{Value: simpleProduct.Name}, Version: types.String{Value: simpleProduct.Version}, Comment: types.String{Value: simpleProduct.Comment}}
+	minimalProduct := awsbase.UserAgentProduct{Name: "minimal"}
+	minimalAddProduct := userAgentProduct{Name: types.String{Value: minimalProduct.Name}}
 
 	testcases := map[string]struct {
-		products    []awsbase.UserAgentProduct
-		addProducts []*apnProduct
+		addProducts []userAgentProduct
 		expected    []awsbase.UserAgentProduct
 	}{
 		"none_added": {
-			products:    defaultProducts,
-			addProducts: []*apnProduct{},
-			expected:    defaultProducts,
+			addProducts: []userAgentProduct{},
+			expected:    []awsbase.UserAgentProduct{},
 		},
 		"simple_added": {
-			products:    defaultProducts,
-			addProducts: []*apnProduct{&simpleAddProduct},
-			expected:    append(defaultProducts, simpleProduct),
+			addProducts: []userAgentProduct{simpleAddProduct},
+			expected:    []awsbase.UserAgentProduct{simpleProduct},
 		},
 		"minimal_added": {
-			products:    defaultProducts,
-			addProducts: []*apnProduct{&minimalAddProduct},
-			expected:    append(defaultProducts, minimalProduct),
+			addProducts: []userAgentProduct{minimalAddProduct},
+			expected:    []awsbase.UserAgentProduct{minimalProduct},
 		},
 		"both_added": {
-			products:    defaultProducts,
-			addProducts: []*apnProduct{&simpleAddProduct, &minimalAddProduct},
-			expected:    append(defaultProducts, []awsbase.UserAgentProduct{simpleProduct, minimalProduct}...),
+			addProducts: []userAgentProduct{simpleAddProduct, minimalAddProduct},
+			expected:    []awsbase.UserAgentProduct{simpleProduct, minimalProduct},
 		},
 	}
 
@@ -52,7 +44,7 @@ func TestAppendProducts(t *testing.T) {
 		name, testcase := name, testcase
 
 		t.Run(name, func(t *testing.T) {
-			actual := appendProducts(testcase.products, testcase.addProducts)
+			actual := userAgentProducts(testcase.addProducts)
 			if !cmp.Equal(testcase.expected, actual) {
 				t.Errorf("expected %q, got %q", testcase.expected, actual)
 			}
