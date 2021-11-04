@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_event_subscription.example <resource ID>
