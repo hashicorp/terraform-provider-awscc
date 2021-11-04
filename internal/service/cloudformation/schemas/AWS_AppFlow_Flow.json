@@ -254,6 +254,9 @@
                 "S3": {
                     "$ref": "#/definitions/S3SourceProperties"
                 },
+                "SAPOData": {
+                    "$ref": "#/definitions/SAPODataSourceProperties"
+                },
                 "Salesforce": {
                     "$ref": "#/definitions/SalesforceSourceProperties"
                 },
@@ -301,6 +304,9 @@
                 },
                 "S3": {
                     "$ref": "#/definitions/S3ConnectorOperator"
+                },
+                "SAPOData": {
+                    "$ref": "#/definitions/SAPODataConnectorOperator"
                 },
                 "Salesforce": {
                     "$ref": "#/definitions/SalesforceConnectorOperator"
@@ -410,6 +416,18 @@
         "BucketPrefix": {
             "type": "string",
             "maxLength": 512
+        },
+        "S3InputFormatConfig": {
+            "type": "object",
+            "properties": {
+                "S3InputFileType": {
+                    "type": "string",
+                    "enum": [
+                        "CSV",
+                        "JSON"
+                    ]
+                }
+            }
         },
         "ErrorHandlingConfig": {
             "type": "object",
@@ -528,6 +546,7 @@
         "ConnectorType": {
             "type": "string",
             "enum": [
+                "SAPOData",
                 "Salesforce",
                 "Singular",
                 "Slack",
@@ -635,11 +654,26 @@
                 },
                 "BucketPrefix": {
                     "$ref": "#/definitions/BucketPrefix"
+                },
+                "S3InputFormatConfig": {
+                    "$ref": "#/definitions/S3InputFormatConfig"
                 }
             },
             "required": [
                 "BucketName",
                 "BucketPrefix"
+            ],
+            "additionalProperties": false
+        },
+        "SAPODataSourceProperties": {
+            "type": "object",
+            "properties": {
+                "ObjectPath": {
+                    "$ref": "#/definitions/Object"
+                }
+            },
+            "required": [
+                "ObjectPath"
             ],
             "additionalProperties": false
         },
@@ -1056,6 +1090,32 @@
             "enum": [
                 "PROJECTION",
                 "LESS_THAN",
+                "GREATER_THAN",
+                "BETWEEN",
+                "LESS_THAN_OR_EQUAL_TO",
+                "GREATER_THAN_OR_EQUAL_TO",
+                "EQUAL_TO",
+                "NOT_EQUAL_TO",
+                "ADDITION",
+                "MULTIPLICATION",
+                "DIVISION",
+                "SUBTRACTION",
+                "MASK_ALL",
+                "MASK_FIRST_N",
+                "MASK_LAST_N",
+                "VALIDATE_NON_NULL",
+                "VALIDATE_NON_ZERO",
+                "VALIDATE_NON_NEGATIVE",
+                "VALIDATE_NUMERIC",
+                "NO_OP"
+            ]
+        },
+        "SAPODataConnectorOperator": {
+            "type": "string",
+            "enum": [
+                "PROJECTION",
+                "LESS_THAN",
+                "CONTAINS",
                 "GREATER_THAN",
                 "BETWEEN",
                 "LESS_THAN_OR_EQUAL_TO",

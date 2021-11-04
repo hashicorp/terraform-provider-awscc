@@ -22,6 +22,7 @@ Data Source schema for AWS::EC2::TransitGatewayPeeringAttachment
 ### Read-Only
 
 - **creation_time** (String) The time the transit gateway peering attachment was created.
+- **options** (Attributes) Options for transit gateway peering attachment (see [below for nested schema](#nestedatt--options))
 - **peer_account_id** (String) The ID of the peer account
 - **peer_region** (String) Peer Region
 - **peer_transit_gateway_id** (String) The ID of the peer transit gateway.
@@ -30,6 +31,14 @@ Data Source schema for AWS::EC2::TransitGatewayPeeringAttachment
 - **tags** (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
 - **transit_gateway_attachment_id** (String) The ID of the transit gateway peering attachment.
 - **transit_gateway_id** (String) The ID of the transit gateway.
+
+<a id="nestedatt--options"></a>
+### Nested Schema for `options`
+
+Read-Only:
+
+- **dynamic_routing** (String) Whether to enable dynamic routing. (enable/disable)
+
 
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`

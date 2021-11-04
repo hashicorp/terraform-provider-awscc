@@ -376,7 +376,8 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "GbPerMonthAllocated of the Instance.",
 			//           "type": "string"
 			//         }
-			//       }
+			//       },
+			//       "type": "object"
 			//     },
 			//     "Ports": {
 			//       "description": "Ports to the Instance.",

@@ -2,6 +2,56 @@
 
 FEATURES:
 
+* **New Data Source:** `awscc_cloudfront_response_headers_policies`
+* **New Data Source:** `awscc_cloudfront_response_headers_policy`
+* **New Data Source:** `awscc_ec2_capacity_reservation_fleet`
+* **New Data Source:** `awscc_ec2_capacity_reservation_fleets`
+* **New Data Source:** `awscc_ec2_internet_gateway`
+* **New Data Source:** `awscc_ec2_internet_gateways`
+* **New Data Source:** `awscc_ec2_network_interface`
+* **New Data Source:** `awscc_ec2_network_interfaces`
+* **New Data Source:** `awscc_ec2_subnet`
+* **New Data Source:** `awscc_eks_cluster`
+* **New Data Source:** `awscc_eks_clusters`
+* **New Data Source:** `awscc_iot_logging`
+* **New Data Source:** `awscc_iot_loggings`
+* **New Data Source:** `awscc_iot_resource_specific_logging`
+* **New Data Source:** `awscc_iot_resource_specific_loggings`
+* **New Data Source:** `awscc_lightsail_database`
+* **New Data Source:** `awscc_lightsail_databases`
+* **New Data Source:** `awscc_lightsail_static_ip`
+* **New Data Source:** `awscc_lightsail_static_ips`
+* **New Data Source:** `awscc_pinpoint_in_app_template`
+* **New Data Source:** `awscc_pinpoint_in_app_templates`
+* **New Data Source:** `awscc_redshift_endpoint_access`
+* **New Data Source:** `awscc_redshift_endpoint_accesses`
+* **New Data Source:** `awscc_redshift_endpoint_authorization`
+* **New Data Source:** `awscc_redshift_endpoint_authorizations`
+* **New Data Source:** `awscc_redshift_event_subscription`
+* **New Data Source:** `awscc_redshift_event_subscriptions`
+* **New Data Source:** `awscc_redshift_scheduled_action`
+* **New Data Source:** `awscc_redshift_scheduled_actions`
+* **New Data Source:** `awscc_route53resolver_resolver_config`
+* **New Data Source:** `awscc_route53resolver_resolver_configs`
+* **New Data Source:** `awscc_route53resolver_resolver_rule`
+* **New Data Source:** `awscc_route53resolver_resolver_rules`
+* **New Resource:** `awscc_cloudfront_response_headers_policy`
+* **New Resource:** `awscc_ec2_capacity_reservation_fleet`
+* **New Resource:** `awscc_ec2_internet_gateway`
+* **New Resource:** `awscc_ec2_network_interface`
+* **New Resource:** `awscc_ec2_subnet`
+* **New Resource:** `awscc_eks_cluster`
+* **New Resource:** `awscc_iot_logging`
+* **New Resource:** `awscc_iot_resource_specific_logging`
+* **New Resource:** `awscc_lightsail_database`
+* **New Resource:** `awscc_lightsail_static_ip`
+* **New Resource:** `awscc_pinpoint_in_app_template`
+* **New Resource:** `awscc_redshift_endpoint_access`
+* **New Resource:** `awscc_redshift_endpoint_authorization`
+* **New Resource:** `awscc_redshift_event_subscription`
+* **New Resource:** `awscc_redshift_scheduled_action`
+* **New Resource:** `awscc_route53resolver_resolver_config`
+* **New Resource:** `awscc_route53resolver_resolver_rule`
 * provider: Adds `user_agent` argument ([#247](https://github.com/hashicorp/terraform-provider-awscc/issues/247))
 
 ## [0.4.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.4.0) (October 21, 2021)

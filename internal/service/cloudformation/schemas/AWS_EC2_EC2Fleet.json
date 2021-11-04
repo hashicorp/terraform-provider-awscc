@@ -90,6 +90,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "MaintenanceStrategies" : {
+          "$ref": "#/definitions/MaintenanceStrategies"
+        },
         "SingleAvailabilityZone": {
           "type": "boolean"
         },
@@ -133,6 +136,14 @@
           "enum": [
             "on-demand",
             "spot"
+          ]
+        },
+        "TargetCapacityUnitType": {
+          "type": "string",
+          "enum": [
+            "vcpu",
+            "memory-mib",
+            "units"
           ]
         },
         "TotalTargetCapacity": {
@@ -247,6 +258,9 @@
         "InstanceType": {
           "type": "string"
         },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirementsRequest"
+        },
         "MaxPrice": {
           "type": "string"
         }
@@ -330,6 +344,277 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        }
+      }
+    },
+    "InstanceRequirementsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "VCpuCount": {
+          "$ref": "#/definitions/VCpuCountRangeRequest"
+        },
+        "MemoryMiB": {
+          "$ref": "#/definitions/MemoryMiBRequest"
+        },
+        "CpuManufacturers": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "intel",
+              "amd",
+              "amazon-web-services"
+            ]
+          }
+        },
+        "MemoryGiBPerVCpu": {
+          "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
+        },
+        "ExcludedInstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": ""
+          }
+        },
+        "InstanceGenerations": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "current",
+              "previous"
+            ]
+          }
+        },
+        "SpotMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "OnDemandMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "BareMetal": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "BurstablePerformance": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "RequireHibernateSupport": {
+          "type": "boolean"
+        },
+        "NetworkInterfaceCount": {
+          "$ref": "#/definitions/NetworkInterfaceCountRequest"
+        },
+        "LocalStorage": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "LocalStorageTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "hdd",
+              "ssd"
+            ]
+          }
+        },
+        "TotalLocalStorageGB": {
+          "$ref": "#/definitions/TotalLocalStorageGBRequest"
+        },
+        "BaselineEbsBandwidthMbps": {
+          "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
+        },
+        "AcceleratorTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "gpu",
+              "fpga",
+              "inference"
+            ]
+          }
+        },
+        "AcceleratorCount": {
+          "$ref": "#/definitions/AcceleratorCountRequest"
+        },
+        "AcceleratorManufacturers": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "nvidia",
+              "amd",
+              "amazon-web-services",
+              "xilinx"
+            ]
+          }
+        },
+        "AcceleratorNames": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "a100",
+              "v100",
+              "k80",
+              "t4",
+              "m60",
+              "radeon-pro-v520",
+              "vu9p",
+              "inferentia",
+              "k520"
+            ]
+          }
+        },
+        "AcceleratorTotalMemoryMiB": {
+          "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        }
+      }
+    },
+    "VCpuCountRangeRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MemoryMiBRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MemoryGiBPerVCpuRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "NetworkInterfaceCountRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "TotalLocalStorageGBRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "BaselineEbsBandwidthMbpsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "AcceleratorCountRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "AcceleratorTotalMemoryMiBRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MaintenanceStrategies" : {
+      "type": "object",
+      "additionalProperties": false,
+      "properties" : {
+        "CapacityRebalance" : {
+          "$ref": "#/definitions/CapacityRebalance"
+        }
+      }
+    },
+    "CapacityRebalance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReplacementStrategy": {
+          "type": "string",
+          "enum": [
+            "launch",
+            "launch-before-terminate"
+          ]
+        },
+        "TerminationDelay": {
+          "type": "integer"
         }
       }
     }

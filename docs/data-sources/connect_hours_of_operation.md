@@ -35,8 +35,8 @@ Data Source schema for AWS::Connect::HoursOfOperation
 Read-Only:
 
 - **day** (String) The day that the hours of operation applies to.
-- **end_time** (Attributes) The end time that your contact center is closes. (see [below for nested schema](#nestedatt--config--end_time))
-- **start_time** (Attributes) The start time that your contact center is open. (see [below for nested schema](#nestedatt--config--start_time))
+- **end_time** (Attributes) The end time that your contact center closes. (see [below for nested schema](#nestedatt--config--end_time))
+- **start_time** (Attributes) The start time that your contact center opens. (see [below for nested schema](#nestedatt--config--start_time))
 
 <a id="nestedatt--config--end_time"></a>
 ### Nested Schema for `config.end_time`

@@ -262,6 +262,66 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//           ],
 			//           "type": "object"
 			//         },
+			//         "SAPOData": {
+			//           "properties": {
+			//             "BasicAuthCredentials": {
+			//               "properties": {
+			//                 "Password": {
+			//                   "description": "The password that corresponds to the username.",
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "Username": {
+			//                   "description": "The name of the user.",
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "OAuthCredentials": {
+			//               "properties": {
+			//                 "AccessToken": {
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "ClientId": {
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "ClientSecret": {
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "ConnectorOAuthRequest": {
+			//                   "properties": {
+			//                     "AuthCode": {
+			//                       "description": "The code provided by the connector when it has been authenticated via the connected app.",
+			//                       "type": "string"
+			//                     },
+			//                     "RedirectUri": {
+			//                       "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+			//                       "type": "string"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "RefreshToken": {
+			//                   "maxLength": 512,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
 			//         "Salesforce": {
 			//           "properties": {
 			//             "AccessToken": {
@@ -566,6 +626,66 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "BucketName",
 			//             "RoleArn"
 			//           ],
+			//           "type": "object"
+			//         },
+			//         "SAPOData": {
+			//           "properties": {
+			//             "ApplicationHostUrl": {
+			//               "maxLength": 256,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "ApplicationServicePath": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "ClientNumber": {
+			//               "maxLength": 3,
+			//               "minLength": 3,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "LogonLanguage": {
+			//               "maxLength": 2,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "OAuthProperties": {
+			//               "properties": {
+			//                 "AuthCodeUrl": {
+			//                   "maxLength": 256,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 },
+			//                 "OAuthScopes": {
+			//                   "items": {
+			//                     "maxLength": 128,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": true
+			//                 },
+			//                 "TokenUrl": {
+			//                   "maxLength": 256,
+			//                   "pattern": "",
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "PortNumber": {
+			//               "maximum": 65535,
+			//               "minimum": 1,
+			//               "type": "integer"
+			//             },
+			//             "PrivateLinkServiceName": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
 			//           "type": "object"
 			//         },
 			//         "Salesforce": {
@@ -961,6 +1081,100 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 												},
+											},
+										},
+									),
+									Optional: true,
+								},
+								"sapo_data": {
+									// Property: SAPOData
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"basic_auth_credentials": {
+												// Property: BasicAuthCredentials
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"password": {
+															// Property: Password
+															Description: "The password that corresponds to the username.",
+															Type:        types.StringType,
+															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"username": {
+															// Property: Username
+															Description: "The name of the user.",
+															Type:        types.StringType,
+															Optional:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"o_auth_credentials": {
+												// Property: OAuthCredentials
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"access_token": {
+															// Property: AccessToken
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"client_id": {
+															// Property: ClientId
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"client_secret": {
+															// Property: ClientSecret
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"connector_o_auth_request": {
+															// Property: ConnectorOAuthRequest
+															Attributes: tfsdk.SingleNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"auth_code": {
+																		// Property: AuthCode
+																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
+																		Type:        types.StringType,
+																		Optional:    true,
+																	},
+																	"redirect_uri": {
+																		// Property: RedirectUri
+																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+																		Type:        types.StringType,
+																		Optional:    true,
+																	},
+																},
+															),
+															Optional: true,
+														},
+														"refresh_token": {
+															// Property: RefreshToken
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+													},
+												),
+												Optional: true,
 											},
 										},
 									),
@@ -1367,6 +1581,95 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									),
 									Optional: true,
 								},
+								"sapo_data": {
+									// Property: SAPOData
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"application_host_url": {
+												// Property: ApplicationHostUrl
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(256),
+												},
+											},
+											"application_service_path": {
+												// Property: ApplicationServicePath
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+												},
+											},
+											"client_number": {
+												// Property: ClientNumber
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(3, 3),
+												},
+											},
+											"logon_language": {
+												// Property: LogonLanguage
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(2),
+												},
+											},
+											"o_auth_properties": {
+												// Property: OAuthProperties
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"auth_code_url": {
+															// Property: AuthCodeUrl
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(256),
+															},
+														},
+														"o_auth_scopes": {
+															// Property: OAuthScopes
+															Type:     types.ListType{ElemType: types.StringType},
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.UniqueItems(),
+																validate.ArrayForEach(validate.StringLenAtMost(128)),
+															},
+														},
+														"token_url": {
+															// Property: TokenUrl
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(256),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"port_number": {
+												// Property: PortNumber
+												Type:     types.NumberType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.IntBetween(1, 65535),
+												},
+											},
+											"private_link_service_name": {
+												// Property: PrivateLinkServiceName
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
 								"salesforce": {
 									// Property: Salesforce
 									Attributes: tfsdk.SingleNestedAttributes(
@@ -1570,6 +1873,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//     "Googleanalytics",
 			//     "Zendesk",
 			//     "Servicenow",
+			//     "SAPOData",
 			//     "Datadog",
 			//     "Trendmicro",
 			//     "Snowflake",
@@ -1593,6 +1897,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"Googleanalytics",
 					"Zendesk",
 					"Servicenow",
+					"SAPOData",
 					"Datadog",
 					"Trendmicro",
 					"Snowflake",
@@ -1667,12 +1972,17 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"api_key":                       "ApiKey",
 		"api_secret_key":                "ApiSecretKey",
 		"api_token":                     "ApiToken",
+		"application_host_url":          "ApplicationHostUrl",
 		"application_key":               "ApplicationKey",
+		"application_service_path":      "ApplicationServicePath",
 		"auth_code":                     "AuthCode",
+		"auth_code_url":                 "AuthCodeUrl",
+		"basic_auth_credentials":        "BasicAuthCredentials",
 		"bucket_name":                   "BucketName",
 		"bucket_prefix":                 "BucketPrefix",
 		"client_credentials_arn":        "ClientCredentialsArn",
 		"client_id":                     "ClientId",
+		"client_number":                 "ClientNumber",
 		"client_secret":                 "ClientSecret",
 		"connection_mode":               "ConnectionMode",
 		"connector_o_auth_request":      "ConnectorOAuthRequest",
@@ -1692,8 +2002,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"instance_url":                  "InstanceUrl",
 		"is_sandbox_environment":        "isSandboxEnvironment",
 		"kms_arn":                       "KMSArn",
+		"logon_language":                "LogonLanguage",
 		"marketo":                       "Marketo",
+		"o_auth_credentials":            "OAuthCredentials",
+		"o_auth_properties":             "OAuthProperties",
+		"o_auth_scopes":                 "OAuthScopes",
 		"password":                      "Password",
+		"port_number":                   "PortNumber",
 		"private_link_service_name":     "PrivateLinkServiceName",
 		"redirect_uri":                  "RedirectUri",
 		"redshift":                      "Redshift",
@@ -1701,6 +2016,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"region":                        "Region",
 		"role_arn":                      "RoleArn",
 		"salesforce":                    "Salesforce",
+		"sapo_data":                     "SAPOData",
 		"secret_access_key":             "SecretAccessKey",
 		"secret_key":                    "SecretKey",
 		"service_now":                   "ServiceNow",
@@ -1708,6 +2024,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		"slack":                         "Slack",
 		"snowflake":                     "Snowflake",
 		"stage":                         "Stage",
+		"token_url":                     "TokenUrl",
 		"trendmicro":                    "Trendmicro",
 		"user_id":                       "UserId",
 		"username":                      "Username",

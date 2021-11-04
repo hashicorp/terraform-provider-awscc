@@ -368,7 +368,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of your key pair.",
 			Type:        types.StringType,
-			Computed:    true,
+			Optional:    true,
 		},
 		"location": {
 			// Property: Location
@@ -422,7 +422,8 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "GbPerMonthAllocated of the Instance.",
 			//           "type": "string"
 			//         }
-			//       }
+			//       },
+			//       "type": "object"
 			//     },
 			//     "Ports": {
 			//       "description": "Ports to the Instance.",
@@ -754,7 +755,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
 			Type:        types.StringType,
-			Computed:    true,
+			Optional:    true,
 		},
 		"user_name": {
 			// Property: UserName

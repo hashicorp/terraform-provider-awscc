@@ -160,7 +160,8 @@
                     "maxItems": 10,
                     "items": {
                         "$ref": "#/definitions/NotificationTargetItem"
-                    }
+                    },
+                    "insertionOrder": false
                 },
                 "Summary": {
                     "description": "The summary string.",
@@ -270,6 +271,7 @@
         "Name",
         "IncidentTemplate"
     ],
+    "taggable": true,
     "handlers": {
         "create": {
             "permissions": [

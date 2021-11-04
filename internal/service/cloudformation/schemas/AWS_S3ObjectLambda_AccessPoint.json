@@ -148,9 +148,6 @@
         }
     },
     "additionalProperties": false,
-    "required": [
-        "Name"
-    ],
     "createOnlyProperties": [
         "/properties/Name"
     ],

@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_endpoint_authorization.example <resource ID>

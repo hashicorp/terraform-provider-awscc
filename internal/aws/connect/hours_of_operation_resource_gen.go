@@ -45,7 +45,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       },
 			//       "EndTime": {
 			//         "additionalProperties": false,
-			//         "description": "The end time that your contact center is closes.",
+			//         "description": "The end time that your contact center closes.",
 			//         "properties": {
 			//           "Hours": {
 			//             "description": "The hours.",
@@ -68,7 +68,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       },
 			//       "StartTime": {
 			//         "additionalProperties": false,
-			//         "description": "The start time that your contact center is open.",
+			//         "description": "The start time that your contact center opens.",
 			//         "properties": {
 			//           "Hours": {
 			//             "description": "The hours.",
@@ -123,7 +123,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"end_time": {
 						// Property: EndTime
-						Description: "The end time that your contact center is closes.",
+						Description: "The end time that your contact center closes.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"hours": {
@@ -150,7 +150,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"start_time": {
 						// Property: StartTime
-						Description: "The start time that your contact center is open.",
+						Description: "The start time that your contact center opens.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"hours": {

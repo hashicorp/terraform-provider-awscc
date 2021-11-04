@@ -31,6 +31,33 @@ func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (tfsdk.D
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"options": {
+			// Property: Options
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Options for transit gateway peering attachment",
+			//   "properties": {
+			//     "DynamicRouting": {
+			//       "description": "Whether to enable dynamic routing. (enable/disable)",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Options for transit gateway peering attachment",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"dynamic_routing": {
+						// Property: DynamicRouting
+						Description: "Whether to enable dynamic routing. (enable/disable)",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"peer_account_id": {
 			// Property: PeerAccountId
 			// CloudFormation resource type schema:
@@ -196,8 +223,10 @@ func transitGatewayPeeringAttachmentDataSourceType(ctx context.Context) (tfsdk.D
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"code":                          "Code",
 		"creation_time":                 "CreationTime",
+		"dynamic_routing":               "DynamicRouting",
 		"key":                           "Key",
 		"message":                       "Message",
+		"options":                       "Options",
 		"peer_account_id":               "PeerAccountId",
 		"peer_region":                   "PeerRegion",
 		"peer_transit_gateway_id":       "PeerTransitGatewayId",

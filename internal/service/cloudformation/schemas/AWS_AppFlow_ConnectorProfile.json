@@ -57,6 +57,7 @@
                 "Googleanalytics",
                 "Zendesk",
                 "Servicenow",
+                "SAPOData",
                 "Datadog",
                 "Trendmicro",
                 "Snowflake",
@@ -99,6 +100,9 @@
                 },
                 "Redshift": {
                     "$ref": "#/definitions/RedshiftConnectorProfileProperties"
+                },
+                "SAPOData": {
+                    "$ref": "#/definitions/SAPODataConnectorProfileProperties"
                 },
                 "Salesforce": {
                     "$ref": "#/definitions/SalesforceConnectorProfileProperties"
@@ -144,6 +148,9 @@
                 },
                 "Redshift": {
                     "$ref": "#/definitions/RedshiftConnectorProfileCredentials"
+                },
+                "SAPOData": {
+                    "$ref": "#/definitions/SAPODataConnectorProfileCredentials"
                 },
                 "Salesforce": {
                     "$ref": "#/definitions/SalesforceConnectorProfileCredentials"
@@ -385,6 +392,70 @@
                 "RoleArn": {
                     "description": "The Amazon Resource Name (ARN) of the IAM role.",
                     "$ref": "#/definitions/RoleArn"
+                }
+            }
+        },
+        "SAPODataConnectorProfileCredentials": {
+            "type": "object",
+            "properties": {
+                "BasicAuthCredentials": {
+                    "type": "object",
+                    "properties": {
+                        "Username": {
+                            "description": "The name of the user.",
+                            "$ref": "#/definitions/Username"
+                        },
+                        "Password": {
+                            "description": "The password that corresponds to the username.",
+                            "$ref": "#/definitions/Password"
+                        }
+                    }
+                },
+                "OAuthCredentials": {
+                    "type": "object",
+                    "properties": {
+                        "AccessToken": {
+                            "$ref": "#/definitions/AccessToken"
+                        },
+                        "RefreshToken": {
+                            "$ref": "#/definitions/RefreshToken"
+                        },
+                        "ConnectorOAuthRequest": {
+                            "$ref": "#/definitions/ConnectorOAuthRequest"
+                        },
+                        "ClientId": {
+                            "$ref": "#/definitions/ClientId"
+                        },
+                        "ClientSecret": {
+                            "$ref": "#/definitions/ClientSecret"
+                        }
+                    }
+                }
+            }
+        },
+        "SAPODataConnectorProfileProperties": {
+            "type": "object",
+            "properties": {
+                "ApplicationHostUrl": {
+                    "$ref": "#/definitions/ApplicationHostUrl"
+                },
+                "ApplicationServicePath": {
+                    "$ref": "#/definitions/ApplicationServicePath"
+                },
+                "PortNumber": {
+                    "$ref": "#/definitions/PortNumber"
+                },
+                "ClientNumber": {
+                    "$ref": "#/definitions/ClientNumber"
+                },
+                "LogonLanguage": {
+                    "$ref": "#/definitions/LogonLanguage"
+                },
+                "PrivateLinkServiceName": {
+                    "$ref": "#/definitions/PrivateLinkServiceName"
+                },
+                "OAuthProperties": {
+                    "$ref": "#/definitions/OAuthProperties"
                 }
             }
         },
@@ -769,6 +840,56 @@
             "type": "string",
             "pattern": "",
             "maxLength": 2048
+        },
+        "ApplicationHostUrl": {
+            "type": "string",
+            "maxLength": 256,
+            "pattern": ""
+        },
+        "ApplicationServicePath": {
+            "type": "string",
+            "pattern": "",
+            "maxLength": 512
+        },
+        "ClientNumber": {
+            "type": "string",
+            "pattern": "",
+            "minLength": 3,
+            "maxLength": 3
+        },
+        "LogonLanguage": {
+            "type": "string",
+            "pattern": "",
+            "maxLength": 2
+        },
+        "PortNumber": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+        },
+        "OAuthProperties": {
+            "type": "object",
+            "properties": {
+                "AuthCodeUrl": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "pattern": ""
+                },
+                "TokenUrl": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "pattern": ""
+                },
+                "OAuthScopes": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type":"string",
+                        "maxLength": 128,
+                        "pattern": ""
+                    }
+                }
+            }
         }
     },
     "required": [

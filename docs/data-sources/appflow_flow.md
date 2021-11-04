@@ -272,6 +272,7 @@ Read-Only:
 - **marketo** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--marketo))
 - **s3** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--s3))
 - **salesforce** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--salesforce))
+- **sapo_data** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data))
 - **service_now** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--service_now))
 - **singular** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--singular))
 - **slack** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--slack))
@@ -334,6 +335,15 @@ Read-Only:
 
 - **bucket_name** (String)
 - **bucket_prefix** (String)
+- **s3_input_format_config** (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--s3--s3_input_format_config))
+
+<a id="nestedatt--source_flow_config--source_connector_properties--s3--s3_input_format_config"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.s3.s3_input_format_config`
+
+Read-Only:
+
+- **s3_input_file_type** (String)
+
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--salesforce"></a>
@@ -344,6 +354,14 @@ Read-Only:
 - **enable_dynamic_field_update** (Boolean)
 - **include_deleted_records** (Boolean)
 - **object** (String)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--sapo_data"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data`
+
+Read-Only:
+
+- **object_path** (String)
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--service_now"></a>
@@ -433,6 +451,7 @@ Read-Only:
 - **marketo** (String)
 - **s3** (String)
 - **salesforce** (String)
+- **sapo_data** (String)
 - **service_now** (String)
 - **singular** (String)
 - **slack** (String)

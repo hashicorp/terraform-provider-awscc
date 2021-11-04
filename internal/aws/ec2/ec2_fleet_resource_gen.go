@@ -89,6 +89,228 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "AvailabilityZone": {
 			//               "type": "string"
 			//             },
+			//             "InstanceRequirements": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "AcceleratorCount": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "AcceleratorManufacturers": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "nvidia",
+			//                       "amd",
+			//                       "amazon-web-services",
+			//                       "xilinx"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "AcceleratorNames": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "a100",
+			//                       "v100",
+			//                       "k80",
+			//                       "t4",
+			//                       "m60",
+			//                       "radeon-pro-v520",
+			//                       "vu9p",
+			//                       "inferentia",
+			//                       "k520"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "AcceleratorTotalMemoryMiB": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "AcceleratorTypes": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "gpu",
+			//                       "fpga",
+			//                       "inference"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "BareMetal": {
+			//                   "enum": [
+			//                     "included",
+			//                     "required",
+			//                     "excluded"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "BaselineEbsBandwidthMbps": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "BurstablePerformance": {
+			//                   "enum": [
+			//                     "included",
+			//                     "required",
+			//                     "excluded"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "CpuManufacturers": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "intel",
+			//                       "amd",
+			//                       "amazon-web-services"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "ExcludedInstanceTypes": {
+			//                   "items": {
+			//                     "maxLength": 30,
+			//                     "minLength": 1,
+			//                     "pattern": "",
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "InstanceGenerations": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "current",
+			//                       "previous"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "LocalStorage": {
+			//                   "enum": [
+			//                     "included",
+			//                     "required",
+			//                     "excluded"
+			//                   ],
+			//                   "type": "string"
+			//                 },
+			//                 "LocalStorageTypes": {
+			//                   "items": {
+			//                     "enum": [
+			//                       "hdd",
+			//                       "ssd"
+			//                     ],
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array",
+			//                   "uniqueItems": false
+			//                 },
+			//                 "MemoryGiBPerVCpu": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "number"
+			//                     },
+			//                     "Min": {
+			//                       "type": "number"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "MemoryMiB": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "NetworkInterfaceCount": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "OnDemandMaxPricePercentageOverLowestPrice": {
+			//                   "type": "integer"
+			//                 },
+			//                 "RequireHibernateSupport": {
+			//                   "type": "boolean"
+			//                 },
+			//                 "SpotMaxPricePercentageOverLowestPrice": {
+			//                   "type": "integer"
+			//                 },
+			//                 "TotalLocalStorageGB": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "number"
+			//                     },
+			//                     "Min": {
+			//                       "type": "number"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 },
+			//                 "VCpuCount": {
+			//                   "additionalProperties": false,
+			//                   "properties": {
+			//                     "Max": {
+			//                       "type": "integer"
+			//                     },
+			//                     "Min": {
+			//                       "type": "integer"
+			//                     }
+			//                   },
+			//                   "type": "object"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
 			//             "InstanceType": {
 			//               "type": "string"
 			//             },
@@ -182,6 +404,294 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"availability_zone": {
 									// Property: AvailabilityZone
 									Type:     types.StringType,
+									Optional: true,
+								},
+								"instance_requirements": {
+									// Property: InstanceRequirements
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"accelerator_count": {
+												// Property: AcceleratorCount
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"accelerator_manufacturers": {
+												// Property: AcceleratorManufacturers
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"nvidia",
+														"amd",
+														"amazon-web-services",
+														"xilinx",
+													})),
+												},
+											},
+											"accelerator_names": {
+												// Property: AcceleratorNames
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"a100",
+														"v100",
+														"k80",
+														"t4",
+														"m60",
+														"radeon-pro-v520",
+														"vu9p",
+														"inferentia",
+														"k520",
+													})),
+												},
+											},
+											"accelerator_total_memory_mi_b": {
+												// Property: AcceleratorTotalMemoryMiB
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"accelerator_types": {
+												// Property: AcceleratorTypes
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"gpu",
+														"fpga",
+														"inference",
+													})),
+												},
+											},
+											"bare_metal": {
+												// Property: BareMetal
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"included",
+														"required",
+														"excluded",
+													}),
+												},
+											},
+											"baseline_ebs_bandwidth_mbps": {
+												// Property: BaselineEbsBandwidthMbps
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"burstable_performance": {
+												// Property: BurstablePerformance
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"included",
+														"required",
+														"excluded",
+													}),
+												},
+											},
+											"cpu_manufacturers": {
+												// Property: CpuManufacturers
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"intel",
+														"amd",
+														"amazon-web-services",
+													})),
+												},
+											},
+											"excluded_instance_types": {
+												// Property: ExcludedInstanceTypes
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+												},
+											},
+											"instance_generations": {
+												// Property: InstanceGenerations
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"current",
+														"previous",
+													})),
+												},
+											},
+											"local_storage": {
+												// Property: LocalStorage
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"included",
+														"required",
+														"excluded",
+													}),
+												},
+											},
+											"local_storage_types": {
+												// Property: LocalStorageTypes
+												Type:     types.ListType{ElemType: types.StringType},
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayForEach(validate.StringInSlice([]string{
+														"hdd",
+														"ssd",
+													})),
+												},
+											},
+											"memory_gi_b_per_v_cpu": {
+												// Property: MemoryGiBPerVCpu
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"memory_mi_b": {
+												// Property: MemoryMiB
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"network_interface_count": {
+												// Property: NetworkInterfaceCount
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"on_demand_max_price_percentage_over_lowest_price": {
+												// Property: OnDemandMaxPricePercentageOverLowestPrice
+												Type:     types.NumberType,
+												Optional: true,
+											},
+											"require_hibernate_support": {
+												// Property: RequireHibernateSupport
+												Type:     types.BoolType,
+												Optional: true,
+											},
+											"spot_max_price_percentage_over_lowest_price": {
+												// Property: SpotMaxPricePercentageOverLowestPrice
+												Type:     types.NumberType,
+												Optional: true,
+											},
+											"total_local_storage_gb": {
+												// Property: TotalLocalStorageGB
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"v_cpu_count": {
+												// Property: VCpuCount
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"max": {
+															// Property: Max
+															Type:     types.NumberType,
+															Optional: true,
+														},
+														"min": {
+															// Property: Min
+															Type:     types.NumberType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+										},
+									),
 									Optional: true,
 								},
 								"instance_type": {
@@ -401,6 +911,28 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "InstancePoolsToUseCount": {
 			//       "type": "integer"
 			//     },
+			//     "MaintenanceStrategies": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "CapacityRebalance": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ReplacementStrategy": {
+			//               "enum": [
+			//                 "launch",
+			//                 "launch-before-terminate"
+			//               ],
+			//               "type": "string"
+			//             },
+			//             "TerminationDelay": {
+			//               "type": "integer"
+			//             }
+			//           },
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "MaxTotalPrice": {
 			//       "type": "string"
 			//     },
@@ -446,6 +978,38 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"instance_pools_to_use_count": {
 						// Property: InstancePoolsToUseCount
 						Type:     types.NumberType,
+						Optional: true,
+					},
+					"maintenance_strategies": {
+						// Property: MaintenanceStrategies
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"capacity_rebalance": {
+									// Property: CapacityRebalance
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"replacement_strategy": {
+												// Property: ReplacementStrategy
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"launch",
+														"launch-before-terminate",
+													}),
+												},
+											},
+											"termination_delay": {
+												// Property: TerminationDelay
+												Type:     types.NumberType,
+												Optional: true,
+											},
+										},
+									),
+									Optional: true,
+								},
+							},
+						),
 						Optional: true,
 					},
 					"max_total_price": {
@@ -666,6 +1230,14 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "SpotTargetCapacity": {
 			//       "type": "integer"
 			//     },
+			//     "TargetCapacityUnitType": {
+			//       "enum": [
+			//         "vcpu",
+			//         "memory-mib",
+			//         "units"
+			//       ],
+			//       "type": "string"
+			//     },
 			//     "TotalTargetCapacity": {
 			//       "type": "integer"
 			//     }
@@ -697,6 +1269,18 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: SpotTargetCapacity
 						Type:     types.NumberType,
 						Optional: true,
+					},
+					"target_capacity_unit_type": {
+						// Property: TargetCapacityUnitType
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"vcpu",
+								"memory-mib",
+								"units",
+							}),
+						},
 					},
 					"total_target_capacity": {
 						// Property: TotalTargetCapacity
@@ -791,55 +1375,84 @@ func eC2FleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"affinity":                            "Affinity",
-		"allocation_strategy":                 "AllocationStrategy",
-		"availability_zone":                   "AvailabilityZone",
-		"capacity_reservation_options":        "CapacityReservationOptions",
-		"context":                             "Context",
-		"default_target_capacity_type":        "DefaultTargetCapacityType",
-		"excess_capacity_termination_policy":  "ExcessCapacityTerminationPolicy",
-		"fleet_id":                            "FleetId",
-		"group_name":                          "GroupName",
-		"host_id":                             "HostId",
-		"host_resource_group_arn":             "HostResourceGroupArn",
-		"instance_interruption_behavior":      "InstanceInterruptionBehavior",
-		"instance_pools_to_use_count":         "InstancePoolsToUseCount",
-		"instance_type":                       "InstanceType",
-		"key":                                 "Key",
-		"launch_template_configs":             "LaunchTemplateConfigs",
-		"launch_template_id":                  "LaunchTemplateId",
-		"launch_template_name":                "LaunchTemplateName",
-		"launch_template_specification":       "LaunchTemplateSpecification",
-		"max_price":                           "MaxPrice",
-		"max_total_price":                     "MaxTotalPrice",
-		"min_target_capacity":                 "MinTargetCapacity",
-		"on_demand_options":                   "OnDemandOptions",
-		"on_demand_target_capacity":           "OnDemandTargetCapacity",
-		"overrides":                           "Overrides",
-		"partition_number":                    "PartitionNumber",
-		"placement":                           "Placement",
-		"priority":                            "Priority",
-		"replace_unhealthy_instances":         "ReplaceUnhealthyInstances",
-		"resource_type":                       "ResourceType",
-		"single_availability_zone":            "SingleAvailabilityZone",
-		"single_instance_type":                "SingleInstanceType",
-		"spot_options":                        "SpotOptions",
-		"spot_target_capacity":                "SpotTargetCapacity",
-		"spread_domain":                       "SpreadDomain",
-		"subnet_id":                           "SubnetId",
-		"tag_specifications":                  "TagSpecifications",
-		"tags":                                "Tags",
-		"target_capacity_specification":       "TargetCapacitySpecification",
-		"tenancy":                             "Tenancy",
-		"terminate_instances_with_expiration": "TerminateInstancesWithExpiration",
-		"total_target_capacity":               "TotalTargetCapacity",
-		"type":                                "Type",
-		"usage_strategy":                      "UsageStrategy",
-		"valid_from":                          "ValidFrom",
-		"valid_until":                         "ValidUntil",
-		"value":                               "Value",
-		"version":                             "Version",
-		"weighted_capacity":                   "WeightedCapacity",
+		"accelerator_count":                  "AcceleratorCount",
+		"accelerator_manufacturers":          "AcceleratorManufacturers",
+		"accelerator_names":                  "AcceleratorNames",
+		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                  "AcceleratorTypes",
+		"affinity":                           "Affinity",
+		"allocation_strategy":                "AllocationStrategy",
+		"availability_zone":                  "AvailabilityZone",
+		"bare_metal":                         "BareMetal",
+		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"burstable_performance":              "BurstablePerformance",
+		"capacity_rebalance":                 "CapacityRebalance",
+		"capacity_reservation_options":       "CapacityReservationOptions",
+		"context":                            "Context",
+		"cpu_manufacturers":                  "CpuManufacturers",
+		"default_target_capacity_type":       "DefaultTargetCapacityType",
+		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
+		"excluded_instance_types":            "ExcludedInstanceTypes",
+		"fleet_id":                           "FleetId",
+		"group_name":                         "GroupName",
+		"host_id":                            "HostId",
+		"host_resource_group_arn":            "HostResourceGroupArn",
+		"instance_generations":               "InstanceGenerations",
+		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
+		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
+		"instance_requirements":              "InstanceRequirements",
+		"instance_type":                      "InstanceType",
+		"key":                                "Key",
+		"launch_template_configs":            "LaunchTemplateConfigs",
+		"launch_template_id":                 "LaunchTemplateId",
+		"launch_template_name":               "LaunchTemplateName",
+		"launch_template_specification":      "LaunchTemplateSpecification",
+		"local_storage":                      "LocalStorage",
+		"local_storage_types":                "LocalStorageTypes",
+		"maintenance_strategies":             "MaintenanceStrategies",
+		"max":                                "Max",
+		"max_price":                          "MaxPrice",
+		"max_total_price":                    "MaxTotalPrice",
+		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
+		"memory_mi_b":                        "MemoryMiB",
+		"min":                                "Min",
+		"min_target_capacity":                "MinTargetCapacity",
+		"network_interface_count":            "NetworkInterfaceCount",
+		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
+		"on_demand_options":                           "OnDemandOptions",
+		"on_demand_target_capacity":                   "OnDemandTargetCapacity",
+		"overrides":                                   "Overrides",
+		"partition_number":                            "PartitionNumber",
+		"placement":                                   "Placement",
+		"priority":                                    "Priority",
+		"replace_unhealthy_instances":                 "ReplaceUnhealthyInstances",
+		"replacement_strategy":                        "ReplacementStrategy",
+		"require_hibernate_support":                   "RequireHibernateSupport",
+		"resource_type":                               "ResourceType",
+		"single_availability_zone":                    "SingleAvailabilityZone",
+		"single_instance_type":                        "SingleInstanceType",
+		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
+		"spot_options":                                "SpotOptions",
+		"spot_target_capacity":                        "SpotTargetCapacity",
+		"spread_domain":                               "SpreadDomain",
+		"subnet_id":                                   "SubnetId",
+		"tag_specifications":                          "TagSpecifications",
+		"tags":                                        "Tags",
+		"target_capacity_specification":               "TargetCapacitySpecification",
+		"target_capacity_unit_type":                   "TargetCapacityUnitType",
+		"tenancy":                                     "Tenancy",
+		"terminate_instances_with_expiration":         "TerminateInstancesWithExpiration",
+		"termination_delay":                           "TerminationDelay",
+		"total_local_storage_gb":                      "TotalLocalStorageGB",
+		"total_target_capacity":                       "TotalTargetCapacity",
+		"type":                                        "Type",
+		"usage_strategy":                              "UsageStrategy",
+		"v_cpu_count":                                 "VCpuCount",
+		"valid_from":                                  "ValidFrom",
+		"valid_until":                                 "ValidUntil",
+		"value":                                       "Value",
+		"version":                                     "Version",
+		"weighted_capacity":                           "WeightedCapacity",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

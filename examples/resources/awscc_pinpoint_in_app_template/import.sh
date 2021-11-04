@@ -1,0 +1,1 @@
+$ terraform import awscc_pinpoint_in_app_template.example <resource ID>

@@ -50,6 +50,7 @@ Read-Only:
 - **marketo** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--marketo))
 - **redshift** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--redshift))
 - **salesforce** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--salesforce))
+- **sapo_data** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data))
 - **service_now** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--service_now))
 - **singular** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--singular))
 - **slack** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--slack))
@@ -168,6 +169,46 @@ granted.
 
 
 
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data`
+
+Read-Only:
+
+- **basic_auth_credentials** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--basic_auth_credentials))
+- **o_auth_credentials** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials))
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--basic_auth_credentials"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.o_auth_credentials`
+
+Read-Only:
+
+- **password** (String) The password that corresponds to the username.
+- **username** (String) The name of the user.
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.o_auth_credentials`
+
+Read-Only:
+
+- **access_token** (String)
+- **client_id** (String)
+- **client_secret** (String)
+- **connector_o_auth_request** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials--connector_o_auth_request))
+- **refresh_token** (String)
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials--connector_o_auth_request"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.o_auth_credentials.connector_o_auth_request`
+
+Read-Only:
+
+- **auth_code** (String) The code provided by the connector when it has been authenticated via the connected app.
+- **redirect_uri** (String) The URL to which the authentication server redirects the browser after authorization has been
+granted.
+
+
+
+
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--service_now"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.service_now`
 
@@ -265,6 +306,7 @@ Read-Only:
 - **marketo** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--marketo))
 - **redshift** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--redshift))
 - **salesforce** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--salesforce))
+- **sapo_data** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--sapo_data))
 - **service_now** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--service_now))
 - **slack** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--slack))
 - **snowflake** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--snowflake))
@@ -321,6 +363,30 @@ Read-Only:
 
 - **instance_url** (String) The location of the Salesforce resource
 - **is_sandbox_environment** (Boolean)
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_properties--sapo_data"></a>
+### Nested Schema for `connector_profile_config.connector_profile_properties.sapo_data`
+
+Read-Only:
+
+- **application_host_url** (String)
+- **application_service_path** (String)
+- **client_number** (String)
+- **logon_language** (String)
+- **o_auth_properties** (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--sapo_data--o_auth_properties))
+- **port_number** (Number)
+- **private_link_service_name** (String)
+
+<a id="nestedatt--connector_profile_config--connector_profile_properties--sapo_data--o_auth_properties"></a>
+### Nested Schema for `connector_profile_config.connector_profile_properties.sapo_data.private_link_service_name`
+
+Read-Only:
+
+- **auth_code_url** (String)
+- **o_auth_scopes** (List of String)
+- **token_url** (String)
+
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--service_now"></a>

@@ -26,23 +26,23 @@ Resource Type definition for AWS::Lightsail::Instance
 - **add_ons** (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
 - **availability_zone** (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
 - **hardware** (Attributes) Hardware of the Instance. (see [below for nested schema](#nestedatt--hardware))
+- **key_pair_name** (String) The name of your key pair.
 - **location** (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
 - **networking** (Attributes) Networking of the Instance. (see [below for nested schema](#nestedatt--networking))
 - **state** (Attributes) Current State of the Instance. (see [below for nested schema](#nestedatt--state))
 - **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- **user_data** (String) A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.
 
 ### Read-Only
 
 - **id** (String) Uniquely identifies the resource.
 - **instance_arn** (String)
 - **is_static_ip** (Boolean) Is the IP Address of the Instance is the static IP
-- **key_pair_name** (String) The name of your key pair.
 - **private_ip_address** (String) Private IP Address of the Instance
 - **public_ip_address** (String) Public IP Address of the Instance
 - **resource_type** (String) Resource type of Lightsail instance.
 - **ssh_key_name** (String) SSH Key Name of the  Lightsail instance.
 - **support_code** (String) Support code to help identify any issues
-- **user_data** (String) A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.
 - **user_name** (String) Username of the  Lightsail instance.
 
 <a id="nestedatt--add_ons"></a>

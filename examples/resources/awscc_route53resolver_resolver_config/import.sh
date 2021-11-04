@@ -1,0 +1,1 @@
+$ terraform import awscc_route53resolver_resolver_config.example <resource ID>

@@ -23,6 +23,8 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: ArchiveName
 			// CloudFormation resource type schema:
 			// {
+			//   "maxLength": 48,
+			//   "minLength": 1,
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

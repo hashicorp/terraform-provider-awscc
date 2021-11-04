@@ -3,10 +3,6 @@
   "description": "Resource schema for AWS::MWAA::Environment",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mwaa.git",
   "definitions": {
-    "TagMap": {
-      "type": "object",
-      "description": "A map of tags for the environment."
-    },
     "EnvironmentName": {
       "type": "string",
       "description": "Customer-defined identifier for the environment, unique per customer region.",
@@ -393,7 +389,8 @@
       "$ref": "#/definitions/WeeklyMaintenanceWindowStart"
     },
     "Tags": {
-      "$ref": "#/definitions/TagMap"
+      "type": "object",
+      "description": "A map of tags for the environment."
     },
     "WebserverAccessMode": {
       "$ref": "#/definitions/WebserverAccessMode"

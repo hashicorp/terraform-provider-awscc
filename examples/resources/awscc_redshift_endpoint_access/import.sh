@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_endpoint_access.example <resource ID>
