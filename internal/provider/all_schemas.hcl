@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 403 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 424 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -308,6 +308,10 @@ resource_schema "aws_cloudfront_realtime_log_config" {
   cloudformation_type_name = "AWS::CloudFront::RealtimeLogConfig"
 }
 
+resource_schema "aws_cloudfront_response_headers_policy" {
+  cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
+}
+
 resource_schema "aws_cloudtrail_trail" {
   cloudformation_type_name = "AWS::CloudTrail::Trail"
 }
@@ -480,6 +484,10 @@ resource_schema "aws_dynamodb_global_table" {
   cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
 }
 
+resource_schema "aws_ec2_capacity_reservation_fleet" {
+  cloudformation_type_name = "AWS::EC2::CapacityReservationFleet"
+}
+
 resource_schema "aws_ec2_carrier_gateway" {
   cloudformation_type_name = "AWS::EC2::CarrierGateway"
 }
@@ -510,6 +518,10 @@ resource_schema "aws_ec2_gateway_route_table_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_ec2_internet_gateway" {
+  cloudformation_type_name = "AWS::EC2::InternetGateway"
+}
+
 resource_schema "aws_ec2_local_gateway_route" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
 }
@@ -530,6 +542,10 @@ resource_schema "aws_ec2_network_insights_path" {
   cloudformation_type_name = "AWS::EC2::NetworkInsightsPath"
 }
 
+resource_schema "aws_ec2_network_interface" {
+  cloudformation_type_name = "AWS::EC2::NetworkInterface"
+}
+
 resource_schema "aws_ec2_prefix_list" {
   cloudformation_type_name = "AWS::EC2::PrefixList"
 }
@@ -540,6 +556,11 @@ resource_schema "aws_ec2_route_table" {
 
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
+}
+
+resource_schema "aws_ec2_subnet" {
+  cloudformation_type_name               = "AWS::EC2::Subnet"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_subnet_network_acl_association" {
@@ -651,6 +672,10 @@ resource_schema "aws_efs_mount_target" {
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eks_cluster" {
+  cloudformation_type_name = "AWS::EKS::Cluster"
 }
 
 resource_schema "aws_eks_fargate_profile" {
@@ -930,12 +955,20 @@ resource_schema "aws_iot_job_template" {
   cloudformation_type_name = "AWS::IoT::JobTemplate"
 }
 
+resource_schema "aws_iot_logging" {
+  cloudformation_type_name = "AWS::IoT::Logging"
+}
+
 resource_schema "aws_iot_mitigation_action" {
   cloudformation_type_name = "AWS::IoT::MitigationAction"
 }
 
 resource_schema "aws_iot_provisioning_template" {
   cloudformation_type_name = "AWS::IoT::ProvisioningTemplate"
+}
+
+resource_schema "aws_iot_resource_specific_logging" {
+  cloudformation_type_name = "AWS::IoT::ResourceSpecificLogging"
 }
 
 resource_schema "aws_iot_scheduled_audit" {
@@ -952,6 +985,22 @@ resource_schema "aws_iot_topic_rule" {
 
 resource_schema "aws_iot_topic_rule_destination" {
   cloudformation_type_name = "AWS::IoT::TopicRuleDestination"
+}
+
+resource_schema "aws_iotanalytics_channel" {
+  cloudformation_type_name = "AWS::IoTAnalytics::Channel"
+}
+
+resource_schema "aws_iotanalytics_dataset" {
+  cloudformation_type_name = "AWS::IoTAnalytics::Dataset"
+}
+
+resource_schema "aws_iotanalytics_datastore" {
+  cloudformation_type_name = "AWS::IoTAnalytics::Datastore"
+}
+
+resource_schema "aws_iotanalytics_pipeline" {
+  cloudformation_type_name = "AWS::IoTAnalytics::Pipeline"
 }
 
 resource_schema "aws_iotcoredeviceadvisor_suite_definition" {
@@ -1085,12 +1134,20 @@ resource_schema "aws_licensemanager_license" {
   cloudformation_type_name = "AWS::LicenseManager::License"
 }
 
+resource_schema "aws_lightsail_database" {
+  cloudformation_type_name = "AWS::Lightsail::Database"
+}
+
 resource_schema "aws_lightsail_disk" {
   cloudformation_type_name = "AWS::Lightsail::Disk"
 }
 
 resource_schema "aws_lightsail_instance" {
   cloudformation_type_name = "AWS::Lightsail::Instance"
+}
+
+resource_schema "aws_lightsail_static_ip" {
+  cloudformation_type_name = "AWS::Lightsail::StaticIp"
 }
 
 resource_schema "aws_location_geofence_collection" {
@@ -1336,6 +1393,10 @@ resource_schema "aws_panorama_package_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_pinpoint_in_app_template" {
+  cloudformation_type_name = "AWS::Pinpoint::InAppTemplate"
+}
+
 resource_schema "aws_qldb_stream" {
   cloudformation_type_name               = "AWS::QLDB::Stream"
   suppress_plural_data_source_generation = true
@@ -1395,6 +1456,22 @@ resource_schema "aws_redshift_cluster" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_redshift_endpoint_access" {
+  cloudformation_type_name = "AWS::Redshift::EndpointAccess"
+}
+
+resource_schema "aws_redshift_endpoint_authorization" {
+  cloudformation_type_name = "AWS::Redshift::EndpointAuthorization"
+}
+
+resource_schema "aws_redshift_event_subscription" {
+  cloudformation_type_name = "AWS::Redshift::EventSubscription"
+}
+
+resource_schema "aws_redshift_scheduled_action" {
+  cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
 
 resource_schema "aws_rekognition_project" {
@@ -1495,6 +1572,10 @@ resource_schema "aws_route53resolver_firewall_rule_group_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_route53resolver_resolver_config" {
+  cloudformation_type_name = "AWS::Route53Resolver::ResolverConfig"
+}
+
 resource_schema "aws_route53resolver_resolver_dnssec_config" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverDNSSECConfig"
 }
@@ -1505,6 +1586,10 @@ resource_schema "aws_route53resolver_resolver_query_logging_config" {
 
 resource_schema "aws_route53resolver_resolver_query_logging_config_association" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation"
+}
+
+resource_schema "aws_route53resolver_resolver_rule" {
+  cloudformation_type_name = "AWS::Route53Resolver::ResolverRule"
 }
 
 resource_schema "aws_s3_access_point" {
