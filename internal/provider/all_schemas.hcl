@@ -998,10 +998,20 @@ resource_schema "aws_iotanalytics_channel" {
 
 resource_schema "aws_iotanalytics_dataset" {
   cloudformation_type_name = "AWS::IoTAnalytics::Dataset"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotanalytics_datastore" {
   cloudformation_type_name = "AWS::IoTAnalytics::Datastore"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotanalytics_pipeline" {
