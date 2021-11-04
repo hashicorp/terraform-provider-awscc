@@ -37,4 +37,10 @@ Describes an endpoint authorization for authorizing Redshift-managed VPC endpoin
 - **id** (String) Uniquely identifies the resource.
 - **status** (String) The status of the authorization action.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_redshift_endpoint_authorization.example <resource ID>
+```

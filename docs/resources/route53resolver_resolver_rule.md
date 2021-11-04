@@ -50,4 +50,10 @@ Optional:
 - **ip** (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 - **port** (String) The port at Ip that you want to forward DNS queries to.
 
+## Import
 
+Import is supported using the following syntax:
+
+```shell
+$ terraform import awscc_route53resolver_resolver_rule.example <resource ID>
+```
