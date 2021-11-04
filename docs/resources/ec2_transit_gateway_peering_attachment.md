@@ -24,6 +24,7 @@ The AWS::EC2::TransitGatewayPeeringAttachment type
 
 ### Optional
 
+- **options** (Attributes) Options for transit gateway peering attachment (see [below for nested schema](#nestedatt--options))
 - **tags** (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -33,6 +34,14 @@ The AWS::EC2::TransitGatewayPeeringAttachment type
 - **state** (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
 - **status** (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
 - **transit_gateway_attachment_id** (String) The ID of the transit gateway peering attachment.
+
+<a id="nestedatt--options"></a>
+### Nested Schema for `options`
+
+Optional:
+
+- **dynamic_routing** (String) Whether to enable dynamic routing. (enable/disable)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
