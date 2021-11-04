@@ -160,7 +160,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_security_profiles -cftype AWS::IoT::SecurityProfile -package iot ../aws/iot/security_profile_plural_data_source_gen.go ../aws/iot/security_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_topic_rules -cftype AWS::IoT::TopicRule -package iot ../aws/iot/topic_rule_plural_data_source_gen.go ../aws/iot/topic_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iot_topic_rule_destinations -cftype AWS::IoT::TopicRuleDestination -package iot ../aws/iot/topic_rule_destination_plural_data_source_gen.go ../aws/iot/topic_rule_destination_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotanalytics_pipelines -cftype AWS::IoTAnalytics::Pipeline -package iotanalytics ../aws/iotanalytics/pipeline_plural_data_source_gen.go ../aws/iotanalytics/pipeline_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotevents_detector_models -cftype AWS::IoTEvents::DetectorModel -package iotevents ../aws/iotevents/detector_model_plural_data_source_gen.go ../aws/iotevents/detector_model_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotevents_inputs -cftype AWS::IoTEvents::Input -package iotevents ../aws/iotevents/input_plural_data_source_gen.go ../aws/iotevents/input_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotfleethub_applications -cftype AWS::IoTFleetHub::Application -package iotfleethub ../aws/iotfleethub/application_plural_data_source_gen.go ../aws/iotfleethub/application_plural_data_source_gen_test.go
@@ -326,7 +325,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/imagebuilder"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotanalytics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotevents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleethub"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotsitewise"

@@ -216,7 +216,6 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iot_security_profile -cfschema ../service/cloudformation/schemas/AWS_IoT_SecurityProfile.json -package iot ../aws/iot/security_profile_singular_data_source_gen.go ../aws/iot/security_profile_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iot_topic_rule -cfschema ../service/cloudformation/schemas/AWS_IoT_TopicRule.json -package iot ../aws/iot/topic_rule_singular_data_source_gen.go ../aws/iot/topic_rule_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iot_topic_rule_destination -cfschema ../service/cloudformation/schemas/AWS_IoT_TopicRuleDestination.json -package iot ../aws/iot/topic_rule_destination_singular_data_source_gen.go ../aws/iot/topic_rule_destination_singular_data_source_gen_test.go
-//go:generate go run generators/singular-data-source/main.go -data-source awscc_iotanalytics_pipeline -cfschema ../service/cloudformation/schemas/AWS_IoTAnalytics_Pipeline.json -package iotanalytics ../aws/iotanalytics/pipeline_singular_data_source_gen.go ../aws/iotanalytics/pipeline_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iotcoredeviceadvisor_suite_definition -cfschema ../service/cloudformation/schemas/AWS_IoTCoreDeviceAdvisor_SuiteDefinition.json -package iotcoredeviceadvisor ../aws/iotcoredeviceadvisor/suite_definition_singular_data_source_gen.go ../aws/iotcoredeviceadvisor/suite_definition_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iotevents_detector_model -cfschema ../service/cloudformation/schemas/AWS_IoTEvents_DetectorModel.json -package iotevents ../aws/iotevents/detector_model_singular_data_source_gen.go ../aws/iotevents/detector_model_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_iotevents_input -cfschema ../service/cloudformation/schemas/AWS_IoTEvents_Input.json -package iotevents ../aws/iotevents/input_singular_data_source_gen.go ../aws/iotevents/input_singular_data_source_gen_test.go
@@ -469,7 +468,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/imagebuilder"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotanalytics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotevents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotfleethub"
