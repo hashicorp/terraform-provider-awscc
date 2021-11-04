@@ -139,7 +139,7 @@
                     }
                 }
             },
-            "required" : [ "ProductId", "ProvisioningArtifactId" ],
+            "required" : [ "ProductId" ],
             "additionalProperties": false
         },
         "ServiceCatalogProvisionedProductDetails" : {

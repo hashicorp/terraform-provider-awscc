@@ -36,9 +36,7 @@
           "$ref": "#/definitions/Arn"
         }
       },
-      "required": [
-        "SseKmsKeyId"
-      ]
+      "required": ["SseKmsKeyId"]
     },
     "DeletionProtected": {
       "description": "Configures the ReplicationSet deletion protection.",
@@ -71,15 +69,10 @@
     }
   },
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
-  "required": [
-    "Regions"
-  ],
-  "readOnlyProperties": [
-    "/properties/Arn"
-  ],
+  "primaryIdentifier": ["/properties/Arn"],
+  "required": ["Regions"],
+  "taggable": false,
+  "readOnlyProperties": ["/properties/Arn"],
   "handlers": {
     "create": {
       "permissions": [
@@ -109,9 +102,7 @@
       ]
     },
     "list": {
-      "permissions": [
-        "ssm-incidents:ListRegions"
-      ]
+      "permissions": ["ssm-incidents:ListRegions"]
     }
   }
 }

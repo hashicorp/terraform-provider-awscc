@@ -45,13 +45,11 @@
           ]
         },
         "StartTime": {
-          "type": "string",
-          "description": "The start time that your contact center is open.",
+          "description": "The start time that your contact center opens.",
           "$ref": "#/definitions/HoursOfOperationTimeSlice"
         },
         "EndTime": {
-          "type": "string",
-          "description": "The end time that your contact center is closes.",
+          "description": "The end time that your contact center closes.",
           "$ref": "#/definitions/HoursOfOperationTimeSlice"
         }
       },

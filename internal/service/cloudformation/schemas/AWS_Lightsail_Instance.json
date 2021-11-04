@@ -235,6 +235,7 @@
         },
         "MonthlyTransfer": {
             "description": "Monthly Transfer of the Instance.",
+            "type": "object",
             "properties": {
                 "GbPerMonthAllocated": {
                     "type": "string",
@@ -369,8 +370,6 @@
     ],
     "readOnlyProperties": [
         "/properties/InstanceArn",
-        "/properties/UserData",
-        "/properties/KeyPairName",
         "/properties/SshKeyName",
         "/properties/SupportCode",
         "/properties/ResourceType",
