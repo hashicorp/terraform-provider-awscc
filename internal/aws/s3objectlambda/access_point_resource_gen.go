@@ -53,7 +53,8 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name you want to assign to this Object lambda Access Point.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 45),
 			},

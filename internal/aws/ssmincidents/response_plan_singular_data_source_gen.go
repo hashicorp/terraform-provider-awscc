@@ -270,6 +270,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//     },
 			//     "NotificationTargets": {
 			//       "description": "The list of notification targets.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "A notification target.",

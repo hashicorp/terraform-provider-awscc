@@ -198,8 +198,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "ProductId",
-			//     "ProvisioningArtifactId"
+			//     "ProductId"
 			//   ],
 			//   "type": "object"
 			// }

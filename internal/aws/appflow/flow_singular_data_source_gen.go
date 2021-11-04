@@ -50,6 +50,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "ConnectorType": {
 			//         "description": "Destination connector type",
 			//         "enum": [
+			//           "SAPOData",
 			//           "Salesforce",
 			//           "Singular",
 			//           "Slack",
@@ -902,6 +903,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "ConnectorType": {
 			//       "description": "Type of source connector",
 			//       "enum": [
+			//         "SAPOData",
 			//         "Salesforce",
 			//         "Singular",
 			//         "Slack",
@@ -1034,11 +1036,37 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "BucketPrefix": {
 			//               "maxLength": 512,
 			//               "type": "string"
+			//             },
+			//             "S3InputFormatConfig": {
+			//               "properties": {
+			//                 "S3InputFileType": {
+			//                   "enum": [
+			//                     "CSV",
+			//                     "JSON"
+			//                   ],
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
 			//             }
 			//           },
 			//           "required": [
 			//             "BucketName",
 			//             "BucketPrefix"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "SAPOData": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ObjectPath": {
+			//               "maxLength": 512,
+			//               "pattern": "",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ObjectPath"
 			//           ],
 			//           "type": "object"
 			//         },
@@ -1294,6 +1322,32 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											},
 											"bucket_prefix": {
 												// Property: BucketPrefix
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"s3_input_format_config": {
+												// Property: S3InputFormatConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"s3_input_file_type": {
+															// Property: S3InputFileType
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"sapo_data": {
+									// Property: SAPOData
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"object_path": {
+												// Property: ObjectPath
 												Type:     types.StringType,
 												Computed: true,
 											},
@@ -1610,6 +1664,32 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             ],
 			//             "type": "string"
 			//           },
+			//           "SAPOData": {
+			//             "enum": [
+			//               "PROJECTION",
+			//               "LESS_THAN",
+			//               "CONTAINS",
+			//               "GREATER_THAN",
+			//               "BETWEEN",
+			//               "LESS_THAN_OR_EQUAL_TO",
+			//               "GREATER_THAN_OR_EQUAL_TO",
+			//               "EQUAL_TO",
+			//               "NOT_EQUAL_TO",
+			//               "ADDITION",
+			//               "MULTIPLICATION",
+			//               "DIVISION",
+			//               "SUBTRACTION",
+			//               "MASK_ALL",
+			//               "MASK_FIRST_N",
+			//               "MASK_LAST_N",
+			//               "VALIDATE_NON_NULL",
+			//               "VALIDATE_NON_ZERO",
+			//               "VALIDATE_NON_NEGATIVE",
+			//               "VALIDATE_NUMERIC",
+			//               "NO_OP"
+			//             ],
+			//             "type": "string"
+			//           },
 			//           "Salesforce": {
 			//             "enum": [
 			//               "PROJECTION",
@@ -1886,6 +1966,11 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									Type:     types.StringType,
 									Computed: true,
 								},
+								"sapo_data": {
+									// Property: SAPOData
+									Type:     types.StringType,
+									Computed: true,
+								},
 								"salesforce": {
 									// Property: Salesforce
 									Type:     types.StringType,
@@ -2136,13 +2221,17 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"lookout_metrics":                  "LookoutMetrics",
 		"marketo":                          "Marketo",
 		"object":                           "Object",
+		"object_path":                      "ObjectPath",
 		"prefix_config":                    "PrefixConfig",
 		"prefix_format":                    "PrefixFormat",
 		"prefix_type":                      "PrefixType",
 		"redshift":                         "Redshift",
 		"s3":                               "S3",
+		"s3_input_file_type":               "S3InputFileType",
+		"s3_input_format_config":           "S3InputFormatConfig",
 		"s3_output_format_config":          "S3OutputFormatConfig",
 		"salesforce":                       "Salesforce",
+		"sapo_data":                        "SAPOData",
 		"schedule_end_time":                "ScheduleEndTime",
 		"schedule_expression":              "ScheduleExpression",
 		"schedule_offset":                  "ScheduleOffset",

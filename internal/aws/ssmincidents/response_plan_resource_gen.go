@@ -321,6 +321,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "NotificationTargets": {
 			//       "description": "The list of notification targets.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "A notification target.",
@@ -396,6 +397,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtMost(10),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 					"summary": {

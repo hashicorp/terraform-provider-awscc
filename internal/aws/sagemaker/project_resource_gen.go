@@ -215,8 +215,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "ProductId",
-			//     "ProvisioningArtifactId"
+			//     "ProductId"
 			//   ],
 			//   "type": "object"
 			// }
@@ -245,7 +244,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ProvisioningArtifactId
 						Description: "The identifier of the provisioning artifact (also known as a version).",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(100),
 						},
