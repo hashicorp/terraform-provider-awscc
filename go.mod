@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.1.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.11.0
-	github.com/aws/smithy-go v1.8.1
+	github.com/aws/smithy-go v1.9.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.14.0
