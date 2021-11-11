@@ -21,10 +21,12 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
+- **data_bundles** (List of String) ARNs of FinSpace Data Bundles to install
 - **description** (String) Description of the Environment
 - **federation_mode** (String) Federation mode used with the Environment
 - **federation_parameters** (Attributes) Additional parameters to identify Federation mode (see [below for nested schema](#nestedatt--federation_parameters))
 - **kms_key_id** (String) KMS key used to encrypt customer data within FinSpace Environment infrastructure
+- **superuser_parameters** (Attributes) Parameters of the first Superuser for the FinSpace Environment (see [below for nested schema](#nestedatt--superuser_parameters))
 
 ### Read-Only
 
@@ -48,6 +50,16 @@ Optional:
 - **federation_urn** (String) SAML metadata URL to link with the Environment
 - **saml_metadata_document** (String) SAML metadata document to link the federation provider to the Environment
 - **saml_metadata_url** (String) SAML metadata URL to link with the Environment
+
+
+<a id="nestedatt--superuser_parameters"></a>
+### Nested Schema for `superuser_parameters`
+
+Optional:
+
+- **email_address** (String) Email address
+- **first_name** (String) First name
+- **last_name** (String) Last name
 
 ## Import
 

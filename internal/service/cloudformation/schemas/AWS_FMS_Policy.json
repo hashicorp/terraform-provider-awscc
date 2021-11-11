@@ -25,15 +25,18 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/AccountId"
-                    }
+                    },
+                    "insertionOrder": true
                 },
                 "ORGUNIT": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/OrganizationalUnitId"
-                    }
+                    },
+                    "insertionOrder": true
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "PolicyTag": {
             "description": "A policy tag.",
@@ -51,6 +54,7 @@
                     "maxLength": 256
                 }
             },
+            "additionalProperties": false,
             "required": [
                 "Key",
                 "Value"
@@ -70,6 +74,7 @@
                     "maxLength": 256
                 }
             },
+            "additionalProperties": false,
             "required": [
                 "Key"
             ]
@@ -119,7 +124,8 @@
             "items": {
                 "$ref": "#/definitions/ResourceTag"
             },
-            "maxLength": 8
+            "maxItems": 8,
+            "insertionOrder": true
         },
         "ResourceType": {
             "$ref": "#/definitions/ResourceType"
@@ -128,7 +134,8 @@
             "type": "array",
             "items": {
                 "$ref": "#/definitions/ResourceType"
-            }
+            },
+            "insertionOrder": true
         },
         "SecurityServicePolicyData": {
             "type": "object",
@@ -152,6 +159,7 @@
                     ]
                 }
             },
+            "additionalProperties": false,
             "required": [
                 "Type"
             ]
@@ -169,7 +177,8 @@
             "type": "array",
             "items": {
                 "$ref": "#/definitions/PolicyTag"
-            }
+            },
+            "insertionOrder": true
         }
     },
     "additionalProperties": false,

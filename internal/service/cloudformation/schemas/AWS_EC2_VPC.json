@@ -106,8 +106,6 @@
         "ec2:CreateTags",
         "ec2:ModifyVpcAttribute",
         "ec2:DescribeVpcs",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeNetworkAcls",
         "ec2:DescribeVpcAttribute"
       ]
     },
@@ -126,8 +124,6 @@
         "ec2:DescribeVpcs",
         "ec2:DeleteTags",
         "ec2:ModifyVpcTenancy",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeNetworkAcls",
         "ec2:DescribeVpcAttribute"
       ]
     },

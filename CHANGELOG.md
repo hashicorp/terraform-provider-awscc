@@ -1,5 +1,20 @@
 ## 0.6.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_batch_scheduling_policies`
+* **New Data Source:** `awscc_batch_scheduling_policy`
+* **New Data Source:** `awscc_datasync_location_hdfs`
+* **New Data Source:** `awscc_datasync_location_hdfs_plural`
+* **New Data Source:** `awscc_iotwireless_fuota_task`
+* **New Data Source:** `awscc_iotwireless_fuota_tasks`
+* **New Data Source:** `awscc_iotwireless_multicast_group`
+* **New Data Source:** `awscc_iotwireless_multicast_groups`
+* **New Resource:** `awscc_batch_scheduling_policy`
+* **New Resource:** `awscc_datasync_location_hdfs`
+* **New Resource:** `awscc_iotwireless_fuota_task`
+* **New Resource:** `awscc_iotwireless_multicast_group`
+
 ## [0.5.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.5.0) (November 4, 2021)
 
 FEATURES:

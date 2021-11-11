@@ -1,0 +1,1 @@
+$ terraform import awscc_batch_scheduling_policy.example <resource ID>

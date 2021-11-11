@@ -22,6 +22,7 @@ Data Source schema for AWS::FinSpace::Environment
 ### Read-Only
 
 - **aws_account_id** (String) AWS account ID associated with the Environment
+- **data_bundles** (List of String) ARNs of FinSpace Data Bundles to install
 - **dedicated_service_account_id** (String) ID for FinSpace created account used to store Environment artifacts
 - **description** (String) Description of the Environment
 - **environment_arn** (String) ARN of the Environment
@@ -33,6 +34,7 @@ Data Source schema for AWS::FinSpace::Environment
 - **name** (String) Name of the Environment
 - **sage_maker_studio_domain_url** (String) SageMaker Studio Domain URL associated with the Environment
 - **status** (String) State of the Environment
+- **superuser_parameters** (Attributes) Parameters of the first Superuser for the FinSpace Environment (see [below for nested schema](#nestedatt--superuser_parameters))
 
 <a id="nestedatt--federation_parameters"></a>
 ### Nested Schema for `federation_parameters`
@@ -45,5 +47,15 @@ Read-Only:
 - **federation_urn** (String) SAML metadata URL to link with the Environment
 - **saml_metadata_document** (String) SAML metadata document to link the federation provider to the Environment
 - **saml_metadata_url** (String) SAML metadata URL to link with the Environment
+
+
+<a id="nestedatt--superuser_parameters"></a>
+### Nested Schema for `superuser_parameters`
+
+Read-Only:
+
+- **email_address** (String) Email address
+- **first_name** (String) First name
+- **last_name** (String) Last name
 
 

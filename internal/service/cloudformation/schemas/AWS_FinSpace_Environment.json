@@ -41,6 +41,37 @@
                     "type": "object"
                 }
             }
+        },
+        "SuperuserParameters": {
+            "description": "Parameters of the first Superuser for the FinSpace Environment",
+            "type": "object",
+            "properties": {
+                "FirstName": {
+                    "description": "First name",
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1,
+                    "maxLength": 50
+                },
+                "LastName": {
+                    "description": "Last name",
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1,
+                    "maxLength": 50
+                },
+                "EmailAddress": {
+                    "description": "Email address",
+                    "type": "string",
+                    "pattern": "",
+                    "minLength": 1,
+                    "maxLength": 128
+                }
+            }
+        },
+        "DataBundleArn": {
+            "type": "string",
+            "pattern": ""
         }
     },
     "properties": {
@@ -115,6 +146,17 @@
         },
         "FederationParameters": {
             "$ref": "#/definitions/FederationParameters"
+        },
+        "SuperuserParameters": {
+            "$ref": "#/definitions/SuperuserParameters"
+        },
+        "DataBundles" : {
+            "description": "ARNs of FinSpace Data Bundles to install",
+            "type" : "array",
+            "uniqueItems" : false,
+            "items" : {
+                "$ref" : "#/definitions/DataBundleArn"
+            }
         }
     },
     "additionalProperties": false,
@@ -131,7 +173,9 @@
         "/properties/DedicatedServiceAccountId"
     ],
     "createOnlyProperties": [
-        "/properties/KmsKeyId"
+        "/properties/KmsKeyId",
+        "/properties/SuperuserParameters",
+        "/properties/DataBundles"
     ],
     "primaryIdentifier": [
         "/properties/EnvironmentId"

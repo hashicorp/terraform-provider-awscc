@@ -122,6 +122,10 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "object"
 			//           }
 			//         },
+			//         "required": [
+			//           "Actions",
+			//           "ContentTransformation"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "type": "array",
@@ -162,7 +166,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"actions": {
 									// Property: Actions
 									Type:     types.SetType{ElemType: types.StringType},
-									Optional: true,
+									Required: true,
 								},
 								"content_transformation": {
 									// Property: ContentTransformation
@@ -191,7 +195,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 										},
 									),
-									Optional: true,
+									Required: true,
 								},
 							},
 							tfsdk.SetNestedAttributesOptions{},
@@ -200,7 +204,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 			),
-			Optional: true,
+			Required: true,
 		},
 		"policy_status": {
 			// Property: PolicyStatus

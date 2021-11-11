@@ -46,9 +46,11 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ExcludeMap
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "An FMS includeMap or excludeMap.",
 			//   "properties": {
 			//     "ACCOUNT": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
@@ -59,6 +61,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "type": "array"
 			//     },
 			//     "ORGUNIT": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
@@ -113,9 +116,11 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: IncludeMap
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "An FMS includeMap or excludeMap.",
 			//   "properties": {
 			//     "ACCOUNT": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
@@ -126,6 +131,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "type": "array"
 			//     },
 			//     "ORGUNIT": {
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
@@ -180,7 +186,9 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ResourceTags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": true,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A resource tag.",
 			//     "properties": {
 			//       "Key": {
@@ -198,7 +206,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     ],
 			//     "type": "object"
 			//   },
-			//   "maxLength": 8,
+			//   "maxItems": 8,
 			//   "type": "array"
 			// }
 			Attributes: tfsdk.ListNestedAttributes(
@@ -236,6 +244,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ResourceTypeList
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "description": "An AWS resource type",
 			//     "maxLength": 128,
@@ -261,6 +270,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: SecurityServicePolicyData
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ManagedServiceData": {
 			//       "maxLength": 4096,
@@ -306,7 +316,9 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": true,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A policy tag.",
 			//     "properties": {
 			//       "Key": {
