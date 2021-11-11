@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 424 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 428 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -204,6 +204,10 @@ resource_schema "aws_backup_framework" {
 
 resource_schema "aws_backup_report_plan" {
   cloudformation_type_name = "AWS::Backup::ReportPlan"
+}
+
+resource_schema "aws_batch_scheduling_policy" {
+  cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -441,6 +445,10 @@ resource_schema "aws_datasync_location_efs" {
 
 resource_schema "aws_datasync_location_fsx_windows" {
   cloudformation_type_name = "AWS::DataSync::LocationFSxWindows"
+}
+
+resource_schema "aws_datasync_location_hdfs" {
+  cloudformation_type_name = "AWS::DataSync::LocationHDFS"
 }
 
 resource_schema "aws_datasync_location_nfs" {
@@ -1077,6 +1085,14 @@ resource_schema "aws_iotwireless_destination" {
 
 resource_schema "aws_iotwireless_device_profile" {
   cloudformation_type_name = "AWS::IoTWireless::DeviceProfile"
+}
+
+resource_schema "aws_iotwireless_fuota_task" {
+  cloudformation_type_name = "AWS::IoTWireless::FuotaTask"
+}
+
+resource_schema "aws_iotwireless_multicast_group" {
+  cloudformation_type_name = "AWS::IoTWireless::MulticastGroup"
 }
 
 resource_schema "aws_iotwireless_partner_account" {
