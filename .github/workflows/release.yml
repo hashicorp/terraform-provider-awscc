@@ -33,7 +33,7 @@ jobs:
         with:
           github-token: ${{ secrets.HC_RELEASES_TOKEN }}
           signer: ${{ env.SIGNER }}
-      - uses: hashicorp/setup-signore@v1
+      - uses: hashicorp/setup-signore@v2
         with:
           github-token: ${{ secrets.SETUP_SIGNORE_GITHUB_TOKEN }}
           signer: interim_signing_subkey_768B676
