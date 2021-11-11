@@ -11,7 +11,7 @@ import (
 )
 
 func TestAccAWSDataSyncLocationHDFSPluralDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::DataSync::LocationHDFS", "awscc_datasync_location_hdfs", "test")
+	td := acctest.NewTestData(t, "AWS::DataSync::LocationHDFS", "awscc_datasync_location_hdfs_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

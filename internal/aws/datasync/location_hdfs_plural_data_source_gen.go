@@ -12,10 +12,10 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceTypeFactory("awscc_datasync_location_hdfs", locationHDFSPluralDataSourceType)
+	registry.AddDataSourceTypeFactory("awscc_datasync_location_hdfs_plural", locationHDFSPluralDataSourceType)
 }
 
-// locationHDFSPluralDataSourceType returns the Terraform awscc_datasync_location_hdfs data source type.
+// locationHDFSPluralDataSourceType returns the Terraform awscc_datasync_location_hdfs_plural data source type.
 // This Terraform data source type corresponds to the CloudFormation AWS::DataSync::LocationHDFS resource type.
 func locationHDFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
@@ -39,7 +39,7 @@ func locationHDFSPluralDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 
 	var opts DataSourceTypeOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationHDFS").WithTerraformTypeName("awscc_datasync_location_hdfs")
+	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationHDFS").WithTerraformTypeName("awscc_datasync_location_hdfs_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	pluralDataSourceType, err := NewPluralDataSourceType(ctx, opts...)
