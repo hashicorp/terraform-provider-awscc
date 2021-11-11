@@ -29,7 +29,6 @@ Data Source schema for AWS::EC2::Subnet
 - **map_public_ip_on_launch** (Boolean)
 - **network_acl_association_id** (String)
 - **outpost_arn** (String)
-- **subnet_id** (String)
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - **vpc_id** (String)
 

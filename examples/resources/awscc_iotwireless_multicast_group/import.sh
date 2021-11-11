@@ -1,0 +1,1 @@
+$ terraform import awscc_iotwireless_multicast_group.example <resource ID>

@@ -40,6 +40,7 @@ Optional:
 
 - **rule_variables** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
 - **rules_source** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source))
+- **stateful_rule_options** (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
 
 <a id="nestedatt--rule_group--rule_variables"></a>
 ### Nested Schema for `rule_group.rule_variables`
@@ -233,6 +234,14 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--rule_group--stateful_rule_options"></a>
+### Nested Schema for `rule_group.stateful_rule_options`
+
+Optional:
+
+- **rule_order** (String)
 
 
 
