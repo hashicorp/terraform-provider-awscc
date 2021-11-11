@@ -132,6 +132,11 @@ func TestPluralize(t *testing.T) {
 			Value:         "awscc_example_lens",
 			ExpectedValue: "awscc_example_lenses",
 		},
+		{
+			TestName:      "name ending in 'hdfs'",
+			Value:         "awscc_datasync_location_hdfs",
+			ExpectedValue: "awscc_datasync_location_hdfs_plural",
+		},
 	}
 
 	for _, testCase := range testCases {

@@ -142,7 +142,7 @@ func isCapitalLetter(ch byte) bool {
 }
 
 func isCustomName(name string) bool {
-	re1 := regexp.MustCompile(`((e|n)fs|(E|N)FS)$`)
+	re1 := regexp.MustCompile(`((e|hd|n)fs|(E|HD|N)FS)$`)
 	re2 := regexp.MustCompile(`tions$`)
 	re3 := regexp.MustCompile(`(W|w)indows$`)
 
