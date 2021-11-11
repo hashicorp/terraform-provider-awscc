@@ -31,6 +31,22 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"data_bundles": {
+			// Property: DataBundles
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "ARNs of FinSpace Data Bundles to install",
+			//   "items": {
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
+			Description: "ARNs of FinSpace Data Bundles to install",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
+		},
 		"dedicated_service_account_id": {
 			// Property: DedicatedServiceAccountId
 			// CloudFormation resource type schema:
@@ -250,6 +266,61 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"superuser_parameters": {
+			// Property: SuperuserParameters
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Parameters of the first Superuser for the FinSpace Environment",
+			//   "properties": {
+			//     "EmailAddress": {
+			//       "description": "Email address",
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "FirstName": {
+			//       "description": "First name",
+			//       "maxLength": 50,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "LastName": {
+			//       "description": "Last name",
+			//       "maxLength": 50,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Parameters of the first Superuser for the FinSpace Environment",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"email_address": {
+						// Property: EmailAddress
+						Description: "Email address",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"first_name": {
+						// Property: FirstName
+						Description: "First name",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"last_name": {
+						// Property: LastName
+						Description: "Last name",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -272,8 +343,10 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"application_call_back_url":    "ApplicationCallBackURL",
 		"attribute_map":                "AttributeMap",
 		"aws_account_id":               "AwsAccountId",
+		"data_bundles":                 "DataBundles",
 		"dedicated_service_account_id": "DedicatedServiceAccountId",
 		"description":                  "Description",
+		"email_address":                "EmailAddress",
 		"environment_arn":              "EnvironmentArn",
 		"environment_id":               "EnvironmentId",
 		"environment_url":              "EnvironmentUrl",
@@ -281,12 +354,15 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"federation_parameters":        "FederationParameters",
 		"federation_provider_name":     "FederationProviderName",
 		"federation_urn":               "FederationURN",
+		"first_name":                   "FirstName",
 		"kms_key_id":                   "KmsKeyId",
+		"last_name":                    "LastName",
 		"name":                         "Name",
 		"sage_maker_studio_domain_url": "SageMakerStudioDomainUrl",
 		"saml_metadata_document":       "SamlMetadataDocument",
 		"saml_metadata_url":            "SamlMetadataURL",
 		"status":                       "Status",
+		"superuser_parameters":         "SuperuserParameters",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

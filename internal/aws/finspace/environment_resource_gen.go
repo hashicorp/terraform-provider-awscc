@@ -32,6 +32,26 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"data_bundles": {
+			// Property: DataBundles
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "ARNs of FinSpace Data Bundles to install",
+			//   "items": {
+			//     "pattern": "",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": false
+			// }
+			Description: "ARNs of FinSpace Data Bundles to install",
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"dedicated_service_account_id": {
 			// Property: DedicatedServiceAccountId
 			// CloudFormation resource type schema:
@@ -267,6 +287,74 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"superuser_parameters": {
+			// Property: SuperuserParameters
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Parameters of the first Superuser for the FinSpace Environment",
+			//   "properties": {
+			//     "EmailAddress": {
+			//       "description": "Email address",
+			//       "maxLength": 128,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "FirstName": {
+			//       "description": "First name",
+			//       "maxLength": 50,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     },
+			//     "LastName": {
+			//       "description": "Last name",
+			//       "maxLength": 50,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Parameters of the first Superuser for the FinSpace Environment",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"email_address": {
+						// Property: EmailAddress
+						Description: "Email address",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 128),
+						},
+					},
+					"first_name": {
+						// Property: FirstName
+						Description: "First name",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 50),
+						},
+					},
+					"last_name": {
+						// Property: LastName
+						Description: "Last name",
+						Type:        types.StringType,
+						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 50),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.RequiresReplace(),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -290,8 +378,10 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"application_call_back_url":    "ApplicationCallBackURL",
 		"attribute_map":                "AttributeMap",
 		"aws_account_id":               "AwsAccountId",
+		"data_bundles":                 "DataBundles",
 		"dedicated_service_account_id": "DedicatedServiceAccountId",
 		"description":                  "Description",
+		"email_address":                "EmailAddress",
 		"environment_arn":              "EnvironmentArn",
 		"environment_id":               "EnvironmentId",
 		"environment_url":              "EnvironmentUrl",
@@ -299,12 +389,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"federation_parameters":        "FederationParameters",
 		"federation_provider_name":     "FederationProviderName",
 		"federation_urn":               "FederationURN",
+		"first_name":                   "FirstName",
 		"kms_key_id":                   "KmsKeyId",
+		"last_name":                    "LastName",
 		"name":                         "Name",
 		"sage_maker_studio_domain_url": "SageMakerStudioDomainUrl",
 		"saml_metadata_document":       "SamlMetadataDocument",
 		"saml_metadata_url":            "SamlMetadataURL",
 		"status":                       "Status",
+		"superuser_parameters":         "SuperuserParameters",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

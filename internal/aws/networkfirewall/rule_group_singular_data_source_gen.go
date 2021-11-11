@@ -527,6 +527,19 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "StatefulRuleOptions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "RuleOrder": {
+			//           "enum": [
+			//             "DEFAULT_ACTION_ORDER",
+			//             "STRICT_ORDER"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -858,6 +871,19 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 						),
 						Computed: true,
 					},
+					"stateful_rule_options": {
+						// Property: StatefulRuleOptions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"rule_order": {
+									// Property: RuleOrder
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 				},
 			),
 			Computed: true,
@@ -1014,6 +1040,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 		"rule_group_id":                      "RuleGroupId",
 		"rule_group_name":                    "RuleGroupName",
 		"rule_options":                       "RuleOptions",
+		"rule_order":                         "RuleOrder",
 		"rule_variables":                     "RuleVariables",
 		"rules_source":                       "RulesSource",
 		"rules_source_list":                  "RulesSourceList",
@@ -1023,6 +1050,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 		"source_port":                        "SourcePort",
 		"source_ports":                       "SourcePorts",
 		"sources":                            "Sources",
+		"stateful_rule_options":              "StatefulRuleOptions",
 		"stateful_rules":                     "StatefulRules",
 		"stateless_rules":                    "StatelessRules",
 		"stateless_rules_and_custom_actions": "StatelessRulesAndCustomActions",

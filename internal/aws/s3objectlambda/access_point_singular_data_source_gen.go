@@ -114,6 +114,10 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "type": "object"
 			//           }
 			//         },
+			//         "required": [
+			//           "Actions",
+			//           "ContentTransformation"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "type": "array",

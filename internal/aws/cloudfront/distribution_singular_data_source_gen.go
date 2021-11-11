@@ -180,6 +180,9 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//           "RealtimeLogConfigArn": {
 			//             "type": "string"
 			//           },
+			//           "ResponseHeadersPolicyId": {
+			//             "type": "string"
+			//           },
 			//           "SmoothStreaming": {
 			//             "default": false,
 			//             "type": "boolean"
@@ -414,6 +417,10 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//           "type": "string"
 			//         },
 			//         "RealtimeLogConfigArn": {
+			//           "default": "",
+			//           "type": "string"
+			//         },
+			//         "ResponseHeadersPolicyId": {
 			//           "default": "",
 			//           "type": "string"
 			//         },
@@ -923,6 +930,11 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 									Type:     types.StringType,
 									Computed: true,
 								},
+								"response_headers_policy_id": {
+									// Property: ResponseHeadersPolicyId
+									Type:     types.StringType,
+									Computed: true,
+								},
 								"smooth_streaming": {
 									// Property: SmoothStreaming
 									Type:     types.BoolType,
@@ -1155,6 +1167,11 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"realtime_log_config_arn": {
 									// Property: RealtimeLogConfigArn
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"response_headers_policy_id": {
+									// Property: ResponseHeadersPolicyId
 									Type:     types.StringType,
 									Computed: true,
 								},
@@ -1676,6 +1693,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"query_string_cache_keys":        "QueryStringCacheKeys",
 		"realtime_log_config_arn":        "RealtimeLogConfigArn",
 		"response_code":                  "ResponseCode",
+		"response_headers_policy_id":     "ResponseHeadersPolicyId",
 		"response_page_path":             "ResponsePagePath",
 		"restriction_type":               "RestrictionType",
 		"restrictions":                   "Restrictions",

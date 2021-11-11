@@ -37,11 +37,37 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
+			//     "StatefulDefaultActions": {
+			//       "insertionOrder": false,
+			//       "items": {
+			//         "type": "string"
+			//       },
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     },
+			//     "StatefulEngineOptions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "RuleOrder": {
+			//           "enum": [
+			//             "DEFAULT_ACTION_ORDER",
+			//             "STRICT_ORDER"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
+			//     },
 			//     "StatefulRuleGroupReferences": {
 			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
+			//           "Priority": {
+			//             "maximum": 65535,
+			//             "minimum": 1,
+			//             "type": "integer"
+			//           },
 			//           "ResourceArn": {
 			//             "description": "A resource ARN.",
 			//             "maxLength": 256,
@@ -166,10 +192,33 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"stateful_default_actions": {
+						// Property: StatefulDefaultActions
+						Type:     types.SetType{ElemType: types.StringType},
+						Computed: true,
+					},
+					"stateful_engine_options": {
+						// Property: StatefulEngineOptions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"rule_order": {
+									// Property: RuleOrder
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
 						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"priority": {
+									// Property: Priority
+									Type:     types.NumberType,
+									Computed: true,
+								},
 								"resource_arn": {
 									// Property: ResourceArn
 									Description: "A resource ARN.",
@@ -375,6 +424,9 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 		"priority":                           "Priority",
 		"publish_metric_action":              "PublishMetricAction",
 		"resource_arn":                       "ResourceArn",
+		"rule_order":                         "RuleOrder",
+		"stateful_default_actions":           "StatefulDefaultActions",
+		"stateful_engine_options":            "StatefulEngineOptions",
 		"stateful_rule_group_references":     "StatefulRuleGroupReferences",
 		"stateless_custom_actions":           "StatelessCustomActions",
 		"stateless_default_actions":          "StatelessDefaultActions",

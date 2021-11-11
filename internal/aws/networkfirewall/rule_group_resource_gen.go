@@ -534,6 +534,19 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         }
 			//       },
 			//       "type": "object"
+			//     },
+			//     "StatefulRuleOptions": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "RuleOrder": {
+			//           "enum": [
+			//             "DEFAULT_ACTION_ORDER",
+			//             "STRICT_ORDER"
+			//           ],
+			//           "type": "string"
+			//         }
+			//       },
+			//       "type": "object"
 			//     }
 			//   },
 			//   "required": [
@@ -994,6 +1007,25 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						),
 						Required: true,
 					},
+					"stateful_rule_options": {
+						// Property: StatefulRuleOptions
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"rule_order": {
+									// Property: RuleOrder
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEFAULT_ACTION_ORDER",
+											"STRICT_ORDER",
+										}),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
 				},
 			),
 			Optional: true,
@@ -1172,6 +1204,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"rule_group_id":                      "RuleGroupId",
 		"rule_group_name":                    "RuleGroupName",
 		"rule_options":                       "RuleOptions",
+		"rule_order":                         "RuleOrder",
 		"rule_variables":                     "RuleVariables",
 		"rules_source":                       "RulesSource",
 		"rules_source_list":                  "RulesSourceList",
@@ -1181,6 +1214,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"source_port":                        "SourcePort",
 		"source_ports":                       "SourcePorts",
 		"sources":                            "Sources",
+		"stateful_rule_options":              "StatefulRuleOptions",
 		"stateful_rules":                     "StatefulRules",
 		"stateless_rules":                    "StatelessRules",
 		"stateless_rules_and_custom_actions": "StatelessRulesAndCustomActions",
