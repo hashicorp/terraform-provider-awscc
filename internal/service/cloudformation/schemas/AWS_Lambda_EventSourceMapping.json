@@ -35,6 +35,23 @@
             "minLength": 12,
             "maxLength": 1024
         },
+        "FilterCriteria": {
+            "type": "object",
+            "description": "The filter criteria to control event filtering.",
+            "additionalProperties" : false,
+            "properties": {
+                "Filters": {
+                    "description": "List of filters of this FilterCriteria",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/definitions/Filter"
+                    },
+                    "minItems": 1,
+                    "maxItems": 20
+                }
+            }
+        },
         "FunctionName": {
             "description": "The name of the Lambda function.",
             "type": "string",
@@ -149,6 +166,20 @@
                 }
             }
         },
+        "Filter": {
+            "type": "object",
+            "description": "The filter object that defines parameters for ESM filtering.",
+            "additionalProperties" : false,
+            "properties": {
+                "Pattern": {
+                    "type": "string",
+                    "description": "The filter pattern that defines which events should be passed for invocations.",
+                    "pattern": "",
+                    "minLength": 0,
+                    "maxLength": 4096
+                }
+            }
+        },
         "OnFailure": {
             "type" : "object",
             "description" : "A destination for events that failed processing.",
@@ -176,7 +207,9 @@
                         "VPC_SECURITY_GROUP",
                         "SASL_SCRAM_512_AUTH",
                         "SASL_SCRAM_256_AUTH",
-                        "VIRTUAL_HOST"
+                        "VIRTUAL_HOST",
+                        "CLIENT_CERTIFICATE_TLS_AUTH",
+                        "SERVER_ROOT_CA_CERTIFICATE"
                     ],
                     "type": "string"
                 },

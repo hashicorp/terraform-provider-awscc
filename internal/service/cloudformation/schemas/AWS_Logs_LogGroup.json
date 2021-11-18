@@ -2,6 +2,31 @@
   "typeName": "AWS::Logs::LogGroup",
   "description": "Resource schema for AWS::Logs::LogGroup",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-logs.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
   "properties": {
     "LogGroupName": {
       "description": "The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.",
@@ -39,6 +64,15 @@
         3653
       ]
     },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "Arn": {
       "description": "The CloudWatch log group ARN.",
       "type": "string"
@@ -49,12 +83,14 @@
       "permissions": [
         "logs:DescribeLogGroups",
         "logs:CreateLogGroup",
-        "logs:PutRetentionPolicy"
+        "logs:PutRetentionPolicy",
+        "logs:TagLogGroup"
       ]
     },
     "read": {
       "permissions": [
-        "logs:DescribeLogGroups"
+        "logs:DescribeLogGroups",
+        "logs:ListTagsLogGroup"
       ]
     },
     "update": {
@@ -63,7 +99,9 @@
         "logs:AssociateKmsKey",
         "logs:DisassociateKmsKey",
         "logs:PutRetentionPolicy",
-        "logs:DeleteRetentionPolicy"
+        "logs:DeleteRetentionPolicy",
+        "logs:TagLogGroup",
+        "logs:UntagLogGroup"
       ]
     },
     "delete": {
@@ -74,7 +112,8 @@
     },
     "list": {
       "permissions": [
-        "logs:DescribeLogGroups"
+        "logs:DescribeLogGroups",
+        "logs:ListTagsLogGroup"
       ]
     }
   },
@@ -88,5 +127,5 @@
     "/properties/LogGroupName"
   ],
   "additionalProperties": false,
-  "taggable": false
+  "taggable": true
 }

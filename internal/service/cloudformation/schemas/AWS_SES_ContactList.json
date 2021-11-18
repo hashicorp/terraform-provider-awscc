@@ -69,6 +69,7 @@
         "Topics": {
             "description": "The topics associated with the contact list.",
             "type": "array",
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/Topic"
             },
@@ -78,6 +79,7 @@
         "Tags": {
             "description": "The tags (keys and values) associated with the contact list.",
             "type": "array",
+            "insertionOrder": false,
             "items": {
                 "$ref": "#/definitions/Tag"
             },

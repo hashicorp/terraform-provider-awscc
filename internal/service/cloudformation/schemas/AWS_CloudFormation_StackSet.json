@@ -76,6 +76,10 @@
         "PARALLEL"
       ]
     },
+    "Active": {
+      "description": "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
+      "type": "boolean"
+    },
     "OperationPreferences": {
       "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
       "type": "object",
@@ -289,6 +293,16 @@
         "SELF",
         "DELEGATED_ADMIN"
       ]
+    },
+    "ManagedExecution": {
+      "description": "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.",
+      "type": "object",
+      "properties": {
+        "Active": {
+          "$ref": "#/definitions/Active"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "required": [

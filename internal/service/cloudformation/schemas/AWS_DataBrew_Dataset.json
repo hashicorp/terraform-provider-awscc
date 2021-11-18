@@ -125,6 +125,9 @@
         },
         "DatabaseInputDefinition": {
           "$ref": "#/definitions/DatabaseInputDefinition"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata"
         }
       },
       "additionalProperties": false
@@ -177,6 +180,21 @@
         },
         "TempDirectory": {
           "$ref": "#/definitions/S3Location"
+        },
+        "QueryString": {
+          "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["GlueConnectionName"]
+    },
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "SourceArn": {
+          "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+          "type": "string"
         }
       },
       "additionalProperties": false

@@ -11,7 +11,7 @@
     },
     "PrivateIpAddresses": {
       "type": "array",
-      "uniqueItems": false,
+      "uniqueItems": true,
       "items": {
         "$ref": "#/definitions/PrivateIpAddressSpecification"
       }
@@ -24,7 +24,7 @@
     },
     "GroupSet": {
       "type": "array",
-      "uniqueItems": false,
+      "uniqueItems": true,
       "items": {
         "type": "string"
       }

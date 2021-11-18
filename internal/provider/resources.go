@@ -48,7 +48,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_cassandra_keyspace -cfschema ../service/cloudformation/schemas/AWS_Cassandra_Keyspace.json -package cassandra -- ../aws/cassandra/keyspace_resource_gen.go ../aws/cassandra/keyspace_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cassandra_table -cfschema ../service/cloudformation/schemas/AWS_Cassandra_Table.json -package cassandra -- ../aws/cassandra/table_resource_gen.go ../aws/cassandra/table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_certificatemanager_account -cfschema ../service/cloudformation/schemas/AWS_CertificateManager_Account.json -package certificatemanager -- ../aws/certificatemanager/account_resource_gen.go ../aws/certificatemanager/account_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_chatbot_slack_channel_configuration -cfschema ../service/cloudformation/schemas/AWS_Chatbot_SlackChannelConfiguration.json -package chatbot -- ../aws/chatbot/slack_channel_configuration_resource_gen.go ../aws/chatbot/slack_channel_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudformation_module_default_version -cfschema ../service/cloudformation/schemas/AWS_CloudFormation_ModuleDefaultVersion.json -package cloudformation -- ../aws/cloudformation/module_default_version_resource_gen.go ../aws/cloudformation/module_default_version_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudformation_module_version -cfschema ../service/cloudformation/schemas/AWS_CloudFormation_ModuleVersion.json -package cloudformation -- ../aws/cloudformation/module_version_resource_gen.go ../aws/cloudformation/module_version_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_cloudformation_public_type_version -cfschema ../service/cloudformation/schemas/AWS_CloudFormation_PublicTypeVersion.json -package cloudformation -- ../aws/cloudformation/public_type_version_resource_gen.go ../aws/cloudformation/public_type_version_resource_gen_test.go
@@ -431,7 +430,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ce"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/certificatemanager"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudformation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudfront"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"

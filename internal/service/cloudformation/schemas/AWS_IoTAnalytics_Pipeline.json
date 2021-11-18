@@ -42,11 +42,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attributes",
-        "Name"
-      ]
+      }
     },
     "Datastore": {
       "type": "object",
@@ -58,11 +54,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "DatastoreName",
-        "Name"
-      ]
+      }
     },
     "Filter": {
       "type": "object",
@@ -77,23 +69,14 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Filter",
-        "Name"
-      ]
+      }
     },
     "AddAttributes": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Attributes": {
-          "type": "object",
-          "patternProperties": {
-            "": {
-              "type": "string"
-            }
-          }
+          "type": "object"
         },
         "Next": {
           "type": "string"
@@ -101,11 +84,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attributes",
-        "Name"
-      ]
+      }
     },
     "Channel": {
       "type": "object",
@@ -120,11 +99,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "ChannelName",
-        "Name"
-      ]
+      }
     },
     "Activity": {
       "type": "object",
@@ -197,13 +172,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attribute",
-        "ThingName",
-        "RoleArn",
-        "Name"
-      ]
+      }
     },
     "Math": {
       "type": "object",
@@ -221,12 +190,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attribute",
-        "Math",
-        "Name"
-      ]
+      }
     },
     "Lambda": {
       "type": "object",
@@ -244,12 +208,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "BatchSize",
-        "LambdaName",
-        "Name"
-      ]
+      }
     },
     "DeviceRegistryEnrich": {
       "type": "object",
@@ -270,13 +229,7 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attribute",
-        "ThingName",
-        "RoleArn",
-        "Name"
-      ]
+      }
     },
     "RemoveAttributes": {
       "type": "object",
@@ -295,15 +248,10 @@
         "Name": {
           "type": "string"
         }
-      },
-      "required": [
-        "Attributes",
-        "Name"
-      ]
+      }
     }
   },
   "required": [
-    "PipelineName",
     "PipelineActivities"
   ],
   "createOnlyProperties": [
