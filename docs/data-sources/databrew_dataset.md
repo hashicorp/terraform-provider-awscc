@@ -72,6 +72,7 @@ Read-Only:
 
 - **data_catalog_input_definition** (Attributes) (see [below for nested schema](#nestedatt--input--data_catalog_input_definition))
 - **database_input_definition** (Attributes) (see [below for nested schema](#nestedatt--input--database_input_definition))
+- **metadata** (Attributes) (see [below for nested schema](#nestedatt--input--metadata))
 - **s3_input_definition** (Attributes) Input location (see [below for nested schema](#nestedatt--input--s3_input_definition))
 
 <a id="nestedatt--input--data_catalog_input_definition"></a>
@@ -101,6 +102,7 @@ Read-Only:
 
 - **database_table_name** (String) Database table name
 - **glue_connection_name** (String) Glue connection name
+- **query_string** (String) Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.
 - **temp_directory** (Attributes) Input location (see [below for nested schema](#nestedatt--input--database_input_definition--temp_directory))
 
 <a id="nestedatt--input--database_input_definition--temp_directory"></a>
@@ -111,6 +113,14 @@ Read-Only:
 - **bucket** (String)
 - **key** (String)
 
+
+
+<a id="nestedatt--input--metadata"></a>
+### Nested Schema for `input.metadata`
+
+Read-Only:
+
+- **source_arn** (String) Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.
 
 
 <a id="nestedatt--input--s3_input_definition"></a>

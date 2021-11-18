@@ -28,6 +28,7 @@ StackSet as a resource provides one-click experience for provisioning a StackSet
 - **capabilities** (Set of String) In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.
 - **description** (String) A description of the stack set. You can use the description to identify the stack set's purpose or other important information.
 - **execution_role_name** (String) The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation.
+- **managed_execution** (Attributes) Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations. (see [below for nested schema](#nestedatt--managed_execution))
 - **operation_preferences** (Attributes) The user-specified preferences for how AWS CloudFormation performs a stack set operation. (see [below for nested schema](#nestedatt--operation_preferences))
 - **parameters** (Attributes Set) The input parameters for the stack set template. (see [below for nested schema](#nestedatt--parameters))
 - **stack_instances_group** (Attributes Set) A group of stack instances with parameters in some specific accounts and regions. (see [below for nested schema](#nestedatt--stack_instances_group))
@@ -47,6 +48,14 @@ Optional:
 
 - **enabled** (Boolean) If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.
 - **retain_stacks_on_account_removal** (Boolean) If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.
+
+
+<a id="nestedatt--managed_execution"></a>
+### Nested Schema for `managed_execution`
+
+Optional:
+
+- **active** (Boolean) When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.
 
 
 <a id="nestedatt--operation_preferences"></a>

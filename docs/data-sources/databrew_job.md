@@ -40,6 +40,7 @@ Data Source schema for AWS::DataBrew::Job
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - **timeout** (Number) Timeout
 - **type** (String) Job type
+- **validation_configurations** (Attributes List) Data quality rules configuration (see [below for nested schema](#nestedatt--validation_configurations))
 
 <a id="nestedatt--data_catalog_outputs"></a>
 ### Nested Schema for `data_catalog_outputs`
@@ -180,6 +181,7 @@ Read-Only:
 
 - **column_statistics_configurations** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations))
 - **dataset_statistics_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration))
+- **entity_detector_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration))
 - **profile_columns** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--profile_columns))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations"></a>
@@ -236,6 +238,23 @@ Read-Only:
 
 
 
+<a id="nestedatt--profile_configuration--entity_detector_configuration"></a>
+### Nested Schema for `profile_configuration.entity_detector_configuration`
+
+Read-Only:
+
+- **allowed_statistics** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics))
+- **entity_types** (List of String)
+
+<a id="nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics"></a>
+### Nested Schema for `profile_configuration.entity_detector_configuration.allowed_statistics`
+
+Read-Only:
+
+- **statistics** (List of String)
+
+
+
 <a id="nestedatt--profile_configuration--profile_columns"></a>
 ### Nested Schema for `profile_configuration.profile_columns`
 
@@ -262,5 +281,14 @@ Read-Only:
 
 - **key** (String)
 - **value** (String)
+
+
+<a id="nestedatt--validation_configurations"></a>
+### Nested Schema for `validation_configurations`
+
+Read-Only:
+
+- **ruleset_arn** (String) Arn of the Ruleset
+- **validation_mode** (String)
 
 

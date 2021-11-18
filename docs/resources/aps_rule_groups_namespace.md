@@ -18,11 +18,11 @@ RuleGroupsNamespace schema for cloudformation.
 ### Required
 
 - **data** (String) The RuleGroupsNamespace data.
+- **name** (String) The RuleGroupsNamespace name.
 - **workspace** (String) Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.
 
 ### Optional
 
-- **name** (String) The RuleGroupsNamespace name.
 - **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
