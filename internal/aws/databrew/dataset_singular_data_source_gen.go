@@ -225,6 +225,10 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "Glue connection name",
 			//           "type": "string"
 			//         },
+			//         "QueryString": {
+			//           "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+			//           "type": "string"
+			//         },
 			//         "TempDirectory": {
 			//           "additionalProperties": false,
 			//           "description": "Input location",
@@ -240,6 +244,19 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "Bucket"
 			//           ],
 			//           "type": "object"
+			//         }
+			//       },
+			//       "required": [
+			//         "GlueConnectionName"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "Metadata": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "SourceArn": {
+			//           "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+			//           "type": "string"
 			//         }
 			//       },
 			//       "type": "object"
@@ -327,6 +344,12 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									Type:        types.StringType,
 									Computed:    true,
 								},
+								"query_string": {
+									// Property: QueryString
+									Description: "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
 								"temp_directory": {
 									// Property: TempDirectory
 									Description: "Input location",
@@ -345,6 +368,20 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 										},
 									),
 									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"metadata": {
+						// Property: Metadata
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"source_arn": {
+									// Property: SourceArn
+									Description: "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+									Type:        types.StringType,
+									Computed:    true,
 								},
 							},
 						),
@@ -849,6 +886,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"last_modified_date_condition":  "LastModifiedDateCondition",
 		"locale_code":                   "LocaleCode",
 		"max_files":                     "MaxFiles",
+		"metadata":                      "Metadata",
 		"multi_line":                    "MultiLine",
 		"name":                          "Name",
 		"order":                         "Order",
@@ -856,9 +894,11 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"parameters":                    "Parameters",
 		"path_options":                  "PathOptions",
 		"path_parameter_name":           "PathParameterName",
+		"query_string":                  "QueryString",
 		"s3_input_definition":           "S3InputDefinition",
 		"sheet_indexes":                 "SheetIndexes",
 		"sheet_names":                   "SheetNames",
+		"source_arn":                    "SourceArn",
 		"table_name":                    "TableName",
 		"tags":                          "Tags",
 		"temp_directory":                "TempDirectory",

@@ -849,6 +849,46 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "type": "object"
 			//     },
+			//     "EntityDetectorConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AllowedStatistics": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Statistics": {
+			//               "insertionOrder": true,
+			//               "items": {
+			//                 "maxLength": 128,
+			//                 "minLength": 1,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "minItems": 1,
+			//               "type": "array"
+			//             }
+			//           },
+			//           "required": [
+			//             "Statistics"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "EntityTypes": {
+			//           "insertionOrder": true,
+			//           "items": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "minItems": 1,
+			//           "type": "array"
+			//         }
+			//       },
+			//       "required": [
+			//         "EntityTypes"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "ProfileColumns": {
 			//       "insertionOrder": true,
 			//       "items": {
@@ -996,6 +1036,40 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"entity_detector_configuration": {
+						// Property: EntityDetectorConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"allowed_statistics": {
+									// Property: AllowedStatistics
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"statistics": {
+												// Property: Statistics
+												Type:     types.ListType{ElemType: types.StringType},
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.ArrayLenAtLeast(1),
+													validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+								"entity_types": {
+									// Property: EntityTypes
+									Type:     types.ListType{ElemType: types.StringType},
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.ArrayLenAtLeast(1),
+										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
 									},
 								},
 							},
@@ -1191,6 +1265,67 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"validation_configurations": {
+			// Property: ValidationConfigurations
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Data quality rules configuration",
+			//   "insertionOrder": true,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Configuration to attach Rulesets to the job",
+			//     "properties": {
+			//       "RulesetArn": {
+			//         "description": "Arn of the Ruleset",
+			//         "maxLength": 2048,
+			//         "minLength": 20,
+			//         "type": "string"
+			//       },
+			//       "ValidationMode": {
+			//         "enum": [
+			//           "CHECK_ALL"
+			//         ],
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "RulesetArn"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
+			Description: "Data quality rules configuration",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"ruleset_arn": {
+						// Property: RulesetArn
+						Description: "Arn of the Ruleset",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(20, 2048),
+						},
+					},
+					"validation_mode": {
+						// Property: ValidationMode
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"CHECK_ALL",
+							}),
+						},
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayLenAtLeast(1),
+			},
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -1211,6 +1346,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_statistics":               "AllowedStatistics",
 		"bucket":                           "Bucket",
 		"catalog_id":                       "CatalogId",
 		"column_statistics_configurations": "ColumnStatisticsConfigurations",
@@ -1226,6 +1362,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"delimiter":                        "Delimiter",
 		"encryption_key_arn":               "EncryptionKeyArn",
 		"encryption_mode":                  "EncryptionMode",
+		"entity_detector_configuration":    "EntityDetectorConfiguration",
+		"entity_types":                     "EntityTypes",
 		"format":                           "Format",
 		"format_options":                   "FormatOptions",
 		"glue_connection_name":             "GlueConnectionName",
@@ -1250,6 +1388,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"recipe":                           "Recipe",
 		"regex":                            "Regex",
 		"role_arn":                         "RoleArn",
+		"ruleset_arn":                      "RulesetArn",
 		"s3_options":                       "S3Options",
 		"selectors":                        "Selectors",
 		"size":                             "Size",
@@ -1260,6 +1399,8 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"temp_directory":                   "TempDirectory",
 		"timeout":                          "Timeout",
 		"type":                             "Type",
+		"validation_configurations":        "ValidationConfigurations",
+		"validation_mode":                  "ValidationMode",
 		"value":                            "Value",
 		"version":                          "Version",
 	})

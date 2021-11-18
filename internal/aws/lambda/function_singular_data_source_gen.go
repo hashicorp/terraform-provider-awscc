@@ -30,6 +30,7 @@ func functionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     ],
 			//     "type": "string"
 			//   },
+			//   "maxItems": 1,
 			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true

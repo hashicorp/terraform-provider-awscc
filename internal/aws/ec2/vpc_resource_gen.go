@@ -98,17 +98,6 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.BoolType,
 			Optional:    true,
 		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Id for the model.",
-			//   "type": "string"
-			// }
-			Description: "The Id for the model.",
-			Type:        types.StringType,
-			Computed:    true,
-		},
 		"instance_tenancy": {
 			// Property: InstanceTenancy
 			// CloudFormation resource type schema:
@@ -185,6 +174,23 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				Multiset(),
 			},
 		},
+		"vpc_id": {
+			// Property: VpcId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Id for the model.",
+			//   "type": "string"
+			// }
+			Description: "The Id for the model.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
+	}
+
+	attributes["id"] = tfsdk.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Computed:    true,
 	}
 
 	schema := tfsdk.Schema{
@@ -197,7 +203,7 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPC").WithTerraformTypeName("awscc_ec2_vpc")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cidr_block":              "CidrBlock",
 		"cidr_block_associations": "CidrBlockAssociations",
@@ -205,12 +211,12 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"default_security_group":  "DefaultSecurityGroup",
 		"enable_dns_hostnames":    "EnableDnsHostnames",
 		"enable_dns_support":      "EnableDnsSupport",
-		"id":                      "Id",
 		"instance_tenancy":        "InstanceTenancy",
 		"ipv_6_cidr_blocks":       "Ipv6CidrBlocks",
 		"key":                     "Key",
 		"tags":                    "Tags",
 		"value":                   "Value",
+		"vpc_id":                  "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

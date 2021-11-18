@@ -36,7 +36,7 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//     "type": "string"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": false
+			//   "uniqueItems": true
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
@@ -138,7 +138,7 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//     "type": "object"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": false
+			//   "uniqueItems": true
 			// }
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{

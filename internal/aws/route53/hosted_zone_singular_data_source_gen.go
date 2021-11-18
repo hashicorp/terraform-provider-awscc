@@ -23,6 +23,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: HostedZoneConfig
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
 			//   "properties": {
 			//     "Comment": {
@@ -53,6 +54,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
 			//     "properties": {
 			//       "Key": {
@@ -133,6 +135,7 @@ func hostedZoneDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: QueryLoggingConfig
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "A complex type that contains information about a configuration for DNS query logging.",
 			//   "properties": {
 			//     "CloudWatchLogsLogGroupArn": {

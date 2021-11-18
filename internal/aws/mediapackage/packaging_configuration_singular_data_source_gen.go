@@ -379,10 +379,10 @@ func packagingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//     },
 			//     "PeriodTriggers": {
 			//       "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
-			//       "enum": [
-			//         "ADS"
-			//       ],
 			//       "items": {
+			//         "enum": [
+			//           "ADS"
+			//         ],
 			//         "type": "string"
 			//       },
 			//       "type": "array"

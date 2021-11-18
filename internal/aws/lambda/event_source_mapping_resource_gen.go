@@ -128,6 +128,67 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"filter_criteria": {
+			// Property: FilterCriteria
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The filter criteria to control event filtering.",
+			//   "properties": {
+			//     "Filters": {
+			//       "description": "List of filters of this FilterCriteria",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "The filter object that defines parameters for ESM filtering.",
+			//         "properties": {
+			//           "Pattern": {
+			//             "description": "The filter pattern that defines which events should be passed for invocations.",
+			//             "maxLength": 4096,
+			//             "minLength": 0,
+			//             "pattern": "",
+			//             "type": "string"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "maxItems": 20,
+			//       "minItems": 1,
+			//       "type": "array",
+			//       "uniqueItems": true
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "The filter criteria to control event filtering.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"filters": {
+						// Property: Filters
+						Description: "List of filters of this FilterCriteria",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"pattern": {
+									// Property: Pattern
+									Description: "The filter pattern that defines which events should be passed for invocations.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 4096),
+									},
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayLenBetween(1, 20),
+							validate.UniqueItems(),
+						},
+					},
+				},
+			),
+			Optional: true,
+		},
 		"function_name": {
 			// Property: FunctionName
 			// CloudFormation resource type schema:
@@ -353,7 +414,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           "VPC_SECURITY_GROUP",
 			//           "SASL_SCRAM_512_AUTH",
 			//           "SASL_SCRAM_256_AUTH",
-			//           "VIRTUAL_HOST"
+			//           "VIRTUAL_HOST",
+			//           "CLIENT_CERTIFICATE_TLS_AUTH",
+			//           "SERVER_ROOT_CA_CERTIFICATE"
 			//         ],
 			//         "type": "string"
 			//       },
@@ -388,6 +451,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 								"SASL_SCRAM_512_AUTH",
 								"SASL_SCRAM_256_AUTH",
 								"VIRTUAL_HOST",
+								"CLIENT_CERTIFICATE_TLS_AUTH",
+								"SERVER_ROOT_CA_CERTIFICATE",
 							}),
 						},
 					},
@@ -503,6 +568,8 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"enabled":                            "Enabled",
 		"endpoints":                          "Endpoints",
 		"event_source_arn":                   "EventSourceArn",
+		"filter_criteria":                    "FilterCriteria",
+		"filters":                            "Filters",
 		"function_name":                      "FunctionName",
 		"function_response_types":            "FunctionResponseTypes",
 		"id":                                 "Id",
@@ -512,6 +579,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		"maximum_retry_attempts":             "MaximumRetryAttempts",
 		"on_failure":                         "OnFailure",
 		"parallelization_factor":             "ParallelizationFactor",
+		"pattern":                            "Pattern",
 		"queues":                             "Queues",
 		"self_managed_event_source":          "SelfManagedEventSource",
 		"source_access_configurations":       "SourceAccessConfigurations",

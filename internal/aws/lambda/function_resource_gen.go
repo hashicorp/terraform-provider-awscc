@@ -31,6 +31,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     ],
 			//     "type": "string"
 			//   },
+			//   "maxItems": 1,
 			//   "minItems": 1,
 			//   "type": "array",
 			//   "uniqueItems": true
@@ -38,7 +39,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
+				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringInSlice([]string{
 					"x86_64",

@@ -54,8 +54,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Description: "The RuleGroupsNamespace name.",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
 			},

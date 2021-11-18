@@ -767,6 +767,46 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       },
 			//       "type": "object"
 			//     },
+			//     "EntityDetectorConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "AllowedStatistics": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "Statistics": {
+			//               "insertionOrder": true,
+			//               "items": {
+			//                 "maxLength": 128,
+			//                 "minLength": 1,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "minItems": 1,
+			//               "type": "array"
+			//             }
+			//           },
+			//           "required": [
+			//             "Statistics"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "EntityTypes": {
+			//           "insertionOrder": true,
+			//           "items": {
+			//             "maxLength": 128,
+			//             "minLength": 1,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "minItems": 1,
+			//           "type": "array"
+			//         }
+			//       },
+			//       "required": [
+			//         "EntityTypes"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "ProfileColumns": {
 			//       "insertionOrder": true,
 			//       "items": {
@@ -882,6 +922,32 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 										},
 										tfsdk.ListNestedAttributesOptions{},
 									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"entity_detector_configuration": {
+						// Property: EntityDetectorConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"allowed_statistics": {
+									// Property: AllowedStatistics
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"statistics": {
+												// Property: Statistics
+												Type:     types.ListType{ElemType: types.StringType},
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"entity_types": {
+									// Property: EntityTypes
+									Type:     types.ListType{ElemType: types.StringType},
 									Computed: true,
 								},
 							},
@@ -1045,6 +1111,56 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"validation_configurations": {
+			// Property: ValidationConfigurations
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "Data quality rules configuration",
+			//   "insertionOrder": true,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "Configuration to attach Rulesets to the job",
+			//     "properties": {
+			//       "RulesetArn": {
+			//         "description": "Arn of the Ruleset",
+			//         "maxLength": 2048,
+			//         "minLength": 20,
+			//         "type": "string"
+			//       },
+			//       "ValidationMode": {
+			//         "enum": [
+			//           "CHECK_ALL"
+			//         ],
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "RulesetArn"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "minItems": 1,
+			//   "type": "array"
+			// }
+			Description: "Data quality rules configuration",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"ruleset_arn": {
+						// Property: RulesetArn
+						Description: "Arn of the Ruleset",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"validation_mode": {
+						// Property: ValidationMode
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -1064,6 +1180,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Job").WithTerraformTypeName("awscc_databrew_job")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_statistics":               "AllowedStatistics",
 		"bucket":                           "Bucket",
 		"catalog_id":                       "CatalogId",
 		"column_statistics_configurations": "ColumnStatisticsConfigurations",
@@ -1079,6 +1196,8 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"delimiter":                        "Delimiter",
 		"encryption_key_arn":               "EncryptionKeyArn",
 		"encryption_mode":                  "EncryptionMode",
+		"entity_detector_configuration":    "EntityDetectorConfiguration",
+		"entity_types":                     "EntityTypes",
 		"format":                           "Format",
 		"format_options":                   "FormatOptions",
 		"glue_connection_name":             "GlueConnectionName",
@@ -1103,6 +1222,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"recipe":                           "Recipe",
 		"regex":                            "Regex",
 		"role_arn":                         "RoleArn",
+		"ruleset_arn":                      "RulesetArn",
 		"s3_options":                       "S3Options",
 		"selectors":                        "Selectors",
 		"size":                             "Size",
@@ -1113,6 +1233,8 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"temp_directory":                   "TempDirectory",
 		"timeout":                          "Timeout",
 		"type":                             "Type",
+		"validation_configurations":        "ValidationConfigurations",
+		"validation_mode":                  "ValidationMode",
 		"value":                            "Value",
 		"version":                          "Version",
 	})

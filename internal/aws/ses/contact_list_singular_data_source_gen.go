@@ -48,6 +48,7 @@ func contactListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The tags (keys and values) associated with the contact list.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -95,6 +96,7 @@ func contactListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The topics associated with the contact list.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {

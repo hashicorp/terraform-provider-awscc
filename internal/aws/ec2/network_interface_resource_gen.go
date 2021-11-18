@@ -37,10 +37,13 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//     "type": "string"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": false
+			//   "uniqueItems": true
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -150,7 +153,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//     "type": "object"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": false
+			//   "uniqueItems": true
 			// }
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
@@ -168,6 +171,9 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
 		},
 		"secondary_private_ip_address_count": {
 			// Property: SecondaryPrivateIpAddressCount

@@ -92,17 +92,6 @@ func vPCDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.BoolType,
 			Computed:    true,
 		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "The Id for the model.",
-			//   "type": "string"
-			// }
-			Description: "The Id for the model.",
-			Type:        types.StringType,
-			Computed:    true,
-		},
 		"instance_tenancy": {
 			// Property: InstanceTenancy
 			// CloudFormation resource type schema:
@@ -173,6 +162,17 @@ func vPCDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
+		"vpc_id": {
+			// Property: VpcId
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The Id for the model.",
+			//   "type": "string"
+			// }
+			Description: "The Id for the model.",
+			Type:        types.StringType,
+			Computed:    true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -198,12 +198,12 @@ func vPCDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"default_security_group":  "DefaultSecurityGroup",
 		"enable_dns_hostnames":    "EnableDnsHostnames",
 		"enable_dns_support":      "EnableDnsSupport",
-		"id":                      "Id",
 		"instance_tenancy":        "InstanceTenancy",
 		"ipv_6_cidr_blocks":       "Ipv6CidrBlocks",
 		"key":                     "Key",
 		"tags":                    "Tags",
 		"value":                   "Value",
+		"vpc_id":                  "VpcId",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

@@ -639,6 +639,11 @@ resource_schema "aws_ec2_vpc" {
 
 resource_schema "aws_ec2_vpcdhcp_options_association" {
   cloudformation_type_name = "AWS::EC2::VPCDHCPOptionsAssociation"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ecr_registry_policy" {
