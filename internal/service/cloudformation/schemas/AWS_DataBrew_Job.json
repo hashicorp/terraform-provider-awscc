@@ -77,7 +77,6 @@
       "maxLength": 255
     },
     "Recipe": {
-      "type": "object",
       "$ref": "#/definitions/Recipe"
     },
     "RoleArn": {
@@ -103,6 +102,15 @@
     "ProfileConfiguration": {
       "description": "Profile Job configuration",
       "$ref": "#/definitions/ProfileConfiguration"
+    },
+    "ValidationConfigurations": {
+      "description": "Data quality rules configuration",
+      "type": "array",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ValidationConfiguration"
+      },
+      "minItems": 1
     }
   },
   "definitions": {
@@ -359,9 +367,48 @@
             "$ref": "#/definitions/ColumnStatisticsConfiguration"
           },
           "minItems": 1
+        },
+        "EntityDetectorConfiguration": {
+          "$ref": "#/definitions/EntityDetectorConfiguration"
         }
       },
       "additionalProperties": false
+    },
+    "EntityDetectorConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["EntityTypes"],
+      "properties": {
+        "EntityTypes": {
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": ""
+          }
+        },
+        "AllowedStatistics": {
+          "$ref": "#/definitions/AllowedStatistics"
+        }
+      }
+    },
+    "AllowedStatistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Statistics"],
+      "properties": {
+        "Statistics": {
+          "type": "array",
+          "insertionOrder": true,
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Statistic"
+          }
+        }
+      }
     },
     "ColumnStatisticsConfiguration": {
       "type": "object",
@@ -446,6 +493,27 @@
           "type": "string"
         }
       }
+    },
+    "ValidationMode": {
+      "type" : "string",
+      "enum" : [ "CHECK_ALL" ]
+    },
+    "ValidationConfiguration": {
+      "description": "Configuration to attach Rulesets to the job",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RulesetArn": {
+          "description": "Arn of the Ruleset",
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048
+        },
+        "ValidationMode": {
+          "$ref": "#/definitions/ValidationMode"
+        }
+      },
+      "required": ["RulesetArn"]
     }
   },
   "additionalProperties": false,

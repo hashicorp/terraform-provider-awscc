@@ -131,6 +131,33 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"managed_execution": {
+			// Property: ManagedExecution
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.",
+			//   "properties": {
+			//     "Active": {
+			//       "description": "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Description: "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"active": {
+						// Property: Active
+						Description: "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.",
+						Type:        types.BoolType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"operation_preferences": {
 			// Property: OperationPreferences
 			// CloudFormation resource type schema:
@@ -540,6 +567,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accounts":                         "Accounts",
+		"active":                           "Active",
 		"administration_role_arn":          "AdministrationRoleARN",
 		"auto_deployment":                  "AutoDeployment",
 		"call_as":                          "CallAs",
@@ -551,6 +579,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"failure_tolerance_count":          "FailureToleranceCount",
 		"failure_tolerance_percentage":     "FailureTolerancePercentage",
 		"key":                              "Key",
+		"managed_execution":                "ManagedExecution",
 		"max_concurrent_count":             "MaxConcurrentCount",
 		"max_concurrent_percentage":        "MaxConcurrentPercentage",
 		"operation_preferences":            "OperationPreferences",

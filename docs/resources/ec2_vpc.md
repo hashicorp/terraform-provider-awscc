@@ -37,8 +37,9 @@ Updating InstanceTenancy requires no replacement only if you are updating its va
 - **cidr_block_associations** (List of String) A list of IPv4 CIDR block association IDs for the VPC.
 - **default_network_acl** (String) The default network ACL ID that is associated with the VPC.
 - **default_security_group** (String) The default security group ID that is associated with the VPC.
-- **id** (String) The Id for the model.
+- **id** (String) Uniquely identifies the resource.
 - **ipv_6_cidr_blocks** (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
+- **vpc_id** (String) The Id for the model.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

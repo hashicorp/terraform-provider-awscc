@@ -169,7 +169,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			//   "properties": {
 			//     "ConfigUri": {
 			//       "description": "The S3 URI to an analysis configuration file",
-			//       "maxLength": 255,
+			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
 			//     },
@@ -211,7 +211,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(255),
+							validate.StringLenAtMost(1024),
 						},
 					},
 					"environment": {

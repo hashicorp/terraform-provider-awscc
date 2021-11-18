@@ -6,6 +6,7 @@
     "HostedZoneConfig": {
       "description": "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Comment": {
           "description": "Any comments that you want to include about the hosted zone.",
@@ -17,6 +18,7 @@
     "HostedZoneTag": {
       "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Key": {
           "type": "string",
@@ -37,6 +39,7 @@
     "QueryLoggingConfig": {
       "description": "A complex type that contains information about a configuration for DNS query logging.",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "CloudWatchLogsLogGroupArn": {
           "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
@@ -109,9 +112,6 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "Name"
-  ],
   "createOnlyProperties": [
     "/properties/Name"
   ],

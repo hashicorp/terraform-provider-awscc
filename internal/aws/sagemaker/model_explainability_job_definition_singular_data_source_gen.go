@@ -152,7 +152,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 			//   "properties": {
 			//     "ConfigUri": {
 			//       "description": "The S3 URI to an analysis configuration file",
-			//       "maxLength": 255,
+			//       "maxLength": 1024,
 			//       "pattern": "",
 			//       "type": "string"
 			//     },

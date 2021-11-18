@@ -87,6 +87,58 @@ func logGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.NumberType,
 			Computed:    true,
 		},
+		"tags": {
+			// Property: Tags
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "description": "A key-value pair to associate with a resource.",
+			//     "properties": {
+			//       "Key": {
+			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+			//         "maxLength": 128,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+			//         "maxLength": 256,
+			//         "minLength": 0,
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Description: "An array of key-value pairs to apply to this resource.",
+			Attributes: tfsdk.SetNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"value": {
+						// Property: Value
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+				tfsdk.SetNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -107,9 +159,12 @@ func logGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":               "Arn",
+		"key":               "Key",
 		"kms_key_id":        "KmsKeyId",
 		"log_group_name":    "LogGroupName",
 		"retention_in_days": "RetentionInDays",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

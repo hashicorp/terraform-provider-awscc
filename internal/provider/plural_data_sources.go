@@ -22,7 +22,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ce_anomaly_subscriptions -cftype AWS::CE::AnomalySubscription -package ce ../aws/ce/anomaly_subscription_plural_data_source_gen.go ../aws/ce/anomaly_subscription_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_keyspaces -cftype AWS::Cassandra::Keyspace -package cassandra ../aws/cassandra/keyspace_plural_data_source_gen.go ../aws/cassandra/keyspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_tables -cftype AWS::Cassandra::Table -package cassandra ../aws/cassandra/table_plural_data_source_gen.go ../aws/cassandra/table_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_chatbot_slack_channel_configurations -cftype AWS::Chatbot::SlackChannelConfiguration -package chatbot ../aws/chatbot/slack_channel_configuration_plural_data_source_gen.go ../aws/chatbot/slack_channel_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudformation_module_versions -cftype AWS::CloudFormation::ModuleVersion -package cloudformation ../aws/cloudformation/module_version_plural_data_source_gen.go ../aws/cloudformation/module_version_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudformation_public_type_versions -cftype AWS::CloudFormation::PublicTypeVersion -package cloudformation ../aws/cloudformation/public_type_version_plural_data_source_gen.go ../aws/cloudformation/public_type_version_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudformation_stack_sets -cftype AWS::CloudFormation::StackSet -package cloudformation ../aws/cloudformation/stack_set_plural_data_source_gen.go ../aws/cloudformation/stack_set_plural_data_source_gen_test.go
@@ -55,6 +54,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_jobs -cftype AWS::DataBrew::Job -package databrew ../aws/databrew/job_plural_data_source_gen.go ../aws/databrew/job_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_projects -cftype AWS::DataBrew::Project -package databrew ../aws/databrew/project_plural_data_source_gen.go ../aws/databrew/project_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_recipes -cftype AWS::DataBrew::Recipe -package databrew ../aws/databrew/recipe_plural_data_source_gen.go ../aws/databrew/recipe_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_rulesets -cftype AWS::DataBrew::Ruleset -package databrew ../aws/databrew/ruleset_plural_data_source_gen.go ../aws/databrew/ruleset_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_databrew_schedules -cftype AWS::DataBrew::Schedule -package databrew ../aws/databrew/schedule_plural_data_source_gen.go ../aws/databrew/schedule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_agents -cftype AWS::DataSync::Agent -package datasync ../aws/datasync/agent_plural_data_source_gen.go ../aws/datasync/agent_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_efs_plural -cftype AWS::DataSync::LocationEFS -package datasync ../aws/datasync/location_efs_plural_data_source_gen.go ../aws/datasync/location_efs_plural_data_source_gen_test.go
@@ -292,7 +292,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ce"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudformation"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudfront"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"

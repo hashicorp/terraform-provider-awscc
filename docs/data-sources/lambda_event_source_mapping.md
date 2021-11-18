@@ -26,6 +26,7 @@ Data Source schema for AWS::Lambda::EventSourceMapping
 - **destination_config** (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
 - **enabled** (Boolean) Disables the event source mapping to pause polling and invocation.
 - **event_source_arn** (String) The Amazon Resource Name (ARN) of the event source.
+- **filter_criteria** (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
 - **function_name** (String) The name of the Lambda function.
 - **function_response_types** (List of String) (Streams) A list of response types supported by the function.
 - **maximum_batching_window_in_seconds** (Number) (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
@@ -53,6 +54,22 @@ Read-Only:
 Read-Only:
 
 - **destination** (String) The Amazon Resource Name (ARN) of the destination resource.
+
+
+
+<a id="nestedatt--filter_criteria"></a>
+### Nested Schema for `filter_criteria`
+
+Read-Only:
+
+- **filters** (Attributes List) List of filters of this FilterCriteria (see [below for nested schema](#nestedatt--filter_criteria--filters))
+
+<a id="nestedatt--filter_criteria--filters"></a>
+### Nested Schema for `filter_criteria.filters`
+
+Read-Only:
+
+- **pattern** (String) The filter pattern that defines which events should be passed for invocations.
 
 
 

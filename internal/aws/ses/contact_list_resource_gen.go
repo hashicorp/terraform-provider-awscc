@@ -56,6 +56,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The tags (keys and values) associated with the contact list.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -106,12 +107,16 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 50),
 			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"topics": {
 			// Property: Topics
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The topics associated with the contact list.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -185,6 +190,9 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 20),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 	}

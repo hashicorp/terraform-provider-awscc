@@ -394,10 +394,10 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//     },
 			//     "PeriodTriggers": {
 			//       "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
-			//       "enum": [
-			//         "ADS"
-			//       ],
 			//       "items": {
+			//         "enum": [
+			//           "ADS"
+			//         ],
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -551,6 +551,11 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringInSlice([]string{
+								"ADS",
+							})),
+						},
 					},
 					"segment_duration_seconds": {
 						// Property: SegmentDurationSeconds

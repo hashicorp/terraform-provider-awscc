@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 428 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 433 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -140,6 +140,21 @@ resource_schema "aws_appintegrations_event_integration" {
 
 resource_schema "aws_apprunner_service" {
   cloudformation_type_name = "AWS::AppRunner::Service"
+}
+
+resource_schema "aws_appstream_app_block" {
+  cloudformation_type_name               = "AWS::AppStream::AppBlock"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appstream_application" {
+  cloudformation_type_name               = "AWS::AppStream::Application"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appstream_application_fleet_association" {
+  cloudformation_type_name               = "AWS::AppStream::ApplicationFleetAssociation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_applicationinsights_application" {
@@ -431,6 +446,10 @@ resource_schema "aws_databrew_recipe" {
   suppress_singular_data_source_generation = true
 }
 
+resource_schema "aws_databrew_ruleset" {
+  cloudformation_type_name = "AWS::DataBrew::Ruleset"
+}
+
 resource_schema "aws_databrew_schedule" {
   cloudformation_type_name = "AWS::DataBrew::Schedule"
 }
@@ -616,6 +635,15 @@ resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
 
 resource_schema "aws_ec2_vpc" {
   cloudformation_type_name = "AWS::EC2::VPC"
+}
+
+resource_schema "aws_ec2_vpcdhcp_options_association" {
+  cloudformation_type_name = "AWS::EC2::VPCDHCPOptionsAssociation"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ecr_registry_policy" {

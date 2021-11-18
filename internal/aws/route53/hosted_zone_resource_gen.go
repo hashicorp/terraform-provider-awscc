@@ -24,6 +24,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: HostedZoneConfig
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "A complex type that contains an optional comment.\n\nIf you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.",
 			//   "properties": {
 			//     "Comment": {
@@ -57,6 +58,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Adds, edits, or deletes tags for a health check or a hosted zone.\n\nFor information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.",
 			//   "insertionOrder": false,
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
 			//     "properties": {
 			//       "Key": {
@@ -124,7 +126,8 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.\n\nIf you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
 			},
@@ -149,6 +152,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: QueryLoggingConfig
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "A complex type that contains information about a configuration for DNS query logging.",
 			//   "properties": {
 			//     "CloudWatchLogsLogGroupArn": {

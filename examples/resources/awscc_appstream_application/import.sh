@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_application.example <resource ID>

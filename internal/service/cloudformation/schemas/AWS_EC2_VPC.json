@@ -3,7 +3,7 @@
   "description": "Resource Type definition for AWS::EC2::VPC",
   "additionalProperties": false,
   "properties": {
-    "Id": {
+    "VpcId": {
       "type": "string",
       "description": "The Id for the model."
     },
@@ -90,14 +90,14 @@
     "/properties/InstanceTenancy"
   ],
   "readOnlyProperties": [
-    "/properties/Id",
+    "/properties/VpcId",
     "/properties/DefaultSecurityGroup",
     "/properties/CidrBlockAssociations",
     "/properties/DefaultNetworkAcl",
     "/properties/Ipv6CidrBlocks"
   ],
   "primaryIdentifier": [
-    "/properties/Id"
+    "/properties/VpcId"
   ],
   "handlers": {
     "create": {

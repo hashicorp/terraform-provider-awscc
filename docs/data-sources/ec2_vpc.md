@@ -36,6 +36,7 @@ Data Source schema for AWS::EC2::VPC
 Updating InstanceTenancy requires no replacement only if you are updating its value from "dedicated" to "default". Updating InstanceTenancy from "default" to "dedicated" requires replacement.
 - **ipv_6_cidr_blocks** (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
 - **tags** (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
+- **vpc_id** (String) The Id for the model.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
