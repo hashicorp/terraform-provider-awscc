@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/aws/aws-sdk-go-v2 v1.11.1
 	github.com/aws/aws-sdk-go-v2/config v1.10.1
-	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.15.0
 	github.com/aws/smithy-go v1.9.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
@@ -18,7 +18,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework v0.4.1
 	github.com/hashicorp/terraform-plugin-go v0.4.0
 	github.com/hashicorp/terraform-plugin-log v0.1.0
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.8.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.9.0
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
 	github.com/mattn/go-colorable v0.1.8 // indirect
