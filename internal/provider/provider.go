@@ -293,7 +293,7 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	}
 
 	if !request.Config.Raw.IsFullyKnown() {
-		response.AddError("Unknown Value", "An attribute value is not yet known")
+		response.Diagnostics.AddError("Unknown Value", "An attribute value is not yet known")
 	}
 
 	config.terraformVersion = request.TerraformVersion
