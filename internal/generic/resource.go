@@ -13,7 +13,6 @@ import (
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -756,17 +755,14 @@ func (r *resource) describe(ctx context.Context, conn *cloudcontrol.Client, id s
 
 // getId returns the resource's primary identifier value from State.
 func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, diags := state.GetAttribute(ctx, idAttributePath)
+	var val string
+	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
+	return val, nil
 }
 
 // setId sets the resource's primary identifier value in State.

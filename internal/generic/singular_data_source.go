@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
@@ -138,17 +137,14 @@ func (sd *singularDataSource) describe(ctx context.Context, conn *cloudcontrol.C
 
 // getId returns the data source's primary identifier value from Config.
 func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (string, error) {
-	val, diags := config.GetAttribute(ctx, idAttributePath)
+	var val string
+	diags := config.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
+	return val, nil
 }
 
 // setId sets the data source's primary identifier value in State.
