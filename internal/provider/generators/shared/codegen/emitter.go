@@ -602,6 +602,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 	}
 
+	if computed {
+		// Computed.
+		planModifiers = append(planModifiers, "tfsdk.UseStateForUnknown()")
+	}
+
 	if createOnly {
 		// ForceNew.
 		planModifiers = append(planModifiers, "tfsdk.RequiresReplace()")
