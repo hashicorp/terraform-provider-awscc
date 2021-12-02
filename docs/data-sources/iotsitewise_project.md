@@ -21,6 +21,7 @@ Data Source schema for AWS::IoTSiteWise::Project
 
 ### Read-Only
 
+- **asset_ids** (List of String) The IDs of the assets to be associated to the project.
 - **portal_id** (String) The ID of the portal in which to create the project.
 - **project_arn** (String) The ARN of the project.
 - **project_description** (String) A description for the project.

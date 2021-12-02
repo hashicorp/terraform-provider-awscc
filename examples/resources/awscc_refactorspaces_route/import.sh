@@ -1,0 +1,1 @@
+$ terraform import awscc_refactorspaces_route.example <resource ID>

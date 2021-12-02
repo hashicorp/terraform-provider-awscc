@@ -115,7 +115,16 @@ Required:
 
 Required:
 
+- **cloudwatch_metrics** (Attributes) CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--cloudwatch_metrics))
 - **s3_bucket_destination** (Attributes) S3 bucket destination settings for the Amazon S3 Storage Lens metrics export. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination))
+
+<a id="nestedatt--storage_lens_configuration--data_export--cloudwatch_metrics"></a>
+### Nested Schema for `storage_lens_configuration.data_export.cloudwatch_metrics`
+
+Required:
+
+- **is_enabled** (Boolean) Specifies whether CloudWatch metrics are enabled or disabled.
+
 
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination"></a>
 ### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination`

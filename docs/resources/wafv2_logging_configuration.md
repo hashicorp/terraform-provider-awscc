@@ -17,7 +17,7 @@ A WAFv2 Logging Configuration Resource Provider
 
 ### Required
 
-- **log_destination_configs** (List of String) The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that you want to associate with the web ACL.
+- **log_destination_configs** (List of String) The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.
 - **resource_arn** (String) The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.
 
 ### Optional
