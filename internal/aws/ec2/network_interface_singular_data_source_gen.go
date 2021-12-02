@@ -23,55 +23,68 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// Property: Description
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A description for the network interface.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "A description for the network interface.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"group_set": {
 			// Property: GroupSet
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "A list of security group IDs associated with this network interface.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": true
+			//   "uniqueItems": false
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Description: "A list of security group IDs associated with this network interface.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Network interface id.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Network interface id.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"interface_type": {
 			// Property: InterfaceType
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Indicates the type of network interface.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Indicates the type of network interface.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"ipv_6_address_count": {
 			// Property: Ipv6AddressCount
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
-			Computed: true,
+			Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
+			Type:        types.NumberType,
+			Computed:    true,
 		},
 		"ipv_6_addresses": {
 			// Property: Ipv6Addresses
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -87,7 +100,8 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "type": "array",
 			//   "uniqueItems": true
 			// }
-			Attributes: tfsdk.ListNestedAttributes(
+			Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property.",
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"ipv_6_address": {
 						// Property: Ipv6Address
@@ -95,7 +109,7 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},
@@ -103,24 +117,30 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// Property: PrimaryPrivateIpAddress
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Returns the primary private IP address of the network interface.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Returns the primary private IP address of the network interface.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"private_ip_address": {
 			// Property: PrivateIpAddress
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property. ",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"private_ip_addresses": {
 			// Property: PrivateIpAddresses
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -138,8 +158,9 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//     "type": "object"
 			//   },
 			//   "type": "array",
-			//   "uniqueItems": true
+			//   "uniqueItems": false
 			// }
+			Description: "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"primary": {
@@ -161,46 +182,57 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// Property: SecondaryPrivateIpAddressCount
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
-			Computed: true,
+			Description: "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
+			Type:        types.NumberType,
+			Computed:    true,
 		},
 		"secondary_private_ip_addresses": {
 			// Property: SecondaryPrivateIpAddresses
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Returns the secondary private IP addresses of the network interface.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
+			Description: "Returns the secondary private IP addresses of the network interface.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
 		},
 		"source_dest_check": {
 			// Property: SourceDestCheck
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "Indicates whether traffic to or from the instance is validated.",
 			//   "type": "boolean"
 			// }
-			Type:     types.BoolType,
-			Computed: true,
+			Description: "Indicates whether traffic to or from the instance is validated.",
+			Type:        types.BoolType,
+			Computed:    true,
 		},
 		"subnet_id": {
 			// Property: SubnetId
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "The ID of the subnet to associate with the network interface.",
 			//   "type": "string"
 			// }
-			Type:     types.StringType,
-			Computed: true,
+			Description: "The ID of the subnet to associate with the network interface.",
+			Type:        types.StringType,
+			Computed:    true,
 		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "description": "An arbitrary set of tags (key-value pairs) for this network interface.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -220,6 +252,7 @@ func networkInterfaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "type": "array",
 			//   "uniqueItems": false
 			// }
+			Description: "An arbitrary set of tags (key-value pairs) for this network interface.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {

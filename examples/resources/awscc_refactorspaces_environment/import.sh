@@ -1,0 +1,1 @@
+$ terraform import awscc_refactorspaces_environment.example <resource ID>

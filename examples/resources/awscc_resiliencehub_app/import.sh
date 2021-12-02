@@ -1,0 +1,1 @@
+$ terraform import awscc_resiliencehub_app.example <resource ID>

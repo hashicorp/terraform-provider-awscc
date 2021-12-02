@@ -1,0 +1,1 @@
+$ terraform import awscc_evidently_project.example <resource ID>

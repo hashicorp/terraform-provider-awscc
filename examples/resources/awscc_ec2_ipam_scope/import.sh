@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_ipam_scope.example <resource ID>

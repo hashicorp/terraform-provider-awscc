@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 433 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 448 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -388,6 +388,16 @@ resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
 }
 
+resource_schema "aws_connect_contact_flow" {
+  cloudformation_type_name               = "AWS::Connect::ContactFlow"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_contact_flow_module" {
+  cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_hours_of_operation" {
   cloudformation_type_name               = "AWS::Connect::HoursOfOperation"
   suppress_plural_data_source_generation = true
@@ -549,6 +559,23 @@ resource_schema "aws_ec2_internet_gateway" {
   cloudformation_type_name = "AWS::EC2::InternetGateway"
 }
 
+resource_schema "aws_ec2_ipam" {
+  cloudformation_type_name = "AWS::EC2::IPAM"
+}
+
+resource_schema "aws_ec2_ipam_allocation" {
+  cloudformation_type_name               = "AWS::EC2::IPAMAllocation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_ipam_pool" {
+  cloudformation_type_name = "AWS::EC2::IPAMPool"
+}
+
+resource_schema "aws_ec2_ipam_scope" {
+  cloudformation_type_name = "AWS::EC2::IPAMScope"
+}
+
 resource_schema "aws_ec2_local_gateway_route" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
 }
@@ -635,6 +662,10 @@ resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
 
 resource_schema "aws_ec2_vpc" {
   cloudformation_type_name = "AWS::EC2::VPC"
+}
+
+resource_schema "aws_ec2_vpc_endpoint" {
+  cloudformation_type_name = "AWS::EC2::VPCEndpoint"
 }
 
 resource_schema "aws_ec2_vpcdhcp_options_association" {
@@ -780,6 +811,26 @@ resource_schema "aws_events_connection" {
   # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_evidently_experiment" {
+  cloudformation_type_name               = "AWS::Evidently::Experiment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_evidently_feature" {
+  cloudformation_type_name               = "AWS::Evidently::Feature"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_evidently_launch" {
+  cloudformation_type_name               = "AWS::Evidently::Launch"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_evidently_project" {
+  cloudformation_type_name               = "AWS::Evidently::Project"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_fis_experiment_template" {
@@ -1513,6 +1564,10 @@ resource_schema "aws_rds_global_cluster" {
   cloudformation_type_name = "AWS::RDS::GlobalCluster"
 }
 
+resource_schema "aws_rum_app_monitor" {
+  cloudformation_type_name = "AWS::RUM::AppMonitor"
+}
+
 resource_schema "aws_redshift_cluster" {
   cloudformation_type_name = "AWS::Redshift::Cluster"
 
@@ -1538,8 +1593,36 @@ resource_schema "aws_redshift_scheduled_action" {
   cloudformation_type_name = "AWS::Redshift::ScheduledAction"
 }
 
+# Validation  error: "minLength cannot be greater than maxLength"
+# resource_schema "aws_refactorspaces_application" {
+#   cloudformation_type_name               = "AWS::RefactorSpaces::Application"
+#   suppress_plural_data_source_generation = true
+# }
+
+resource_schema "aws_refactorspaces_environment" {
+  cloudformation_type_name = "AWS::RefactorSpaces::Environment"
+}
+
+resource_schema "aws_refactorspaces_route" {
+  cloudformation_type_name               = "AWS::RefactorSpaces::Route"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_refactorspaces_service" {
+  cloudformation_type_name               = "AWS::RefactorSpaces::Service"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_rekognition_project" {
   cloudformation_type_name = "AWS::Rekognition::Project"
+}
+
+resource_schema "aws_resiliencehub_app" {
+  cloudformation_type_name = "AWS::ResilienceHub::App"
+}
+
+resource_schema "aws_resiliencehub_resiliency_policy" {
+  cloudformation_type_name = "AWS::ResilienceHub::ResiliencyPolicy"
 }
 
 resource_schema "aws_resourcegroups_group" {
@@ -1906,8 +1989,16 @@ resource_schema "aws_timestream_database" {
   cloudformation_type_name = "AWS::Timestream::Database"
 }
 
+resource_schema "aws_timestream_scheduled_query" {
+  cloudformation_type_name = "AWS::Timestream::ScheduledQuery"
+}
+
 resource_schema "aws_timestream_table" {
   cloudformation_type_name = "AWS::Timestream::Table"
+}
+
+resource_schema "aws_transfer_workflow" {
+  cloudformation_type_name = "AWS::Transfer::Workflow"
 }
 
 resource_schema "aws_wafv2_ip_set" {

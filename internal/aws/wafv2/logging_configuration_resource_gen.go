@@ -24,13 +24,13 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: LogDestinationConfigs
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that you want to associate with the web ACL.",
+			//   "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
 			//   "items": {
 			//     "type": "string"
 			//   },
 			//   "type": "array"
 			// }
-			Description: "The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that you want to associate with the web ACL.",
+			Description: "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
 		},

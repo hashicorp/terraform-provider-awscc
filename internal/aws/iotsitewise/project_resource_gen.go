@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -19,6 +20,25 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::IoTSiteWise::Project resource type.
 func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"asset_ids": {
+			// Property: AssetIds
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The IDs of the assets to be associated to the project.",
+			//   "items": {
+			//     "description": "The ID of the asset",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Description: "The IDs of the assets to be associated to the project.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.UniqueItems(),
+			},
+		},
 		"portal_id": {
 			// Property: PortalId
 			// CloudFormation resource type schema:
@@ -144,6 +164,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"asset_ids":           "AssetIds",
 		"key":                 "Key",
 		"portal_id":           "PortalId",
 		"project_arn":         "ProjectArn",

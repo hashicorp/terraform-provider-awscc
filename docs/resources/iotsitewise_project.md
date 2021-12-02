@@ -22,6 +22,7 @@ Resource schema for AWS::IoTSiteWise::Project
 
 ### Optional
 
+- **asset_ids** (List of String) The IDs of the assets to be associated to the project.
 - **project_description** (String) A description for the project.
 - **tags** (Attributes List) A list of key-value pairs that contain metadata for the project. (see [below for nested schema](#nestedatt--tags))
 
