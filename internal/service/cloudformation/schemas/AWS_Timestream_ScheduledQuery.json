@@ -1,0 +1,529 @@
+{
+    "typeName": "AWS::Timestream::ScheduledQuery",
+    "description": "The AWS::Timestream::ScheduledQuery resource creates a Timestream Scheduled Query.",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-timestream.git",
+    "definitions": {
+        "Arn": {
+            "description": "Amazon Resource Name of the scheduled query that is generated upon creation.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "ScheduledQueryName": {
+            "description": "The name for the scheduled query.",
+            "type": "string",
+            "pattern": "",
+            "minLength": 1,
+            "maxLength": 64
+        },
+        "QueryString": {
+            "description": "The query scheduled to be executed.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 262144
+        },
+        "ScheduleConfiguration": {
+            "description": "Configuration that indicates when the scheduled query is executed.",
+            "type": "object",
+            "properties": {
+                "ScheduleExpression": {
+                    "$ref": "#/definitions/ScheduleExpression"
+                }
+            },
+            "required": [
+                "ScheduleExpression"
+            ],
+            "additionalProperties": false
+        },
+        "NotificationConfiguration": {
+            "description": "Configuration for notification upon scheduled query execution.",
+            "type": "object",
+            "properties": {
+                "SnsConfiguration": {
+                    "$ref": "#/definitions/SnsConfiguration"
+                }
+            },
+            "required": [
+                "SnsConfiguration"
+            ],
+            "additionalProperties": false
+        },
+        "ClientToken": {
+            "description": "Token provided to ensure idempotency when creating scheduled queries.",
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 128
+        },
+        "ScheduledQueryExecutionRoleArn": {
+            "description": "Role that AWS Timestream will assume to execute scheduled query.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "TargetConfiguration": {
+            "description": "Configuration of target destination table to query.",
+            "type": "object",
+            "properties": {
+                "TimestreamConfiguration": {
+                    "$ref": "#/definitions/TimestreamConfiguration"
+                }
+            },
+            "required": [
+                "TimestreamConfiguration"
+            ],
+            "additionalProperties": false
+        },
+        "ErrorReportConfiguration": {
+            "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "type": "object",
+            "properties": {
+                "S3Configuration": {
+                    "$ref": "#/definitions/S3Configuration"
+                }
+            },
+            "required": [
+                "S3Configuration"
+            ],
+            "additionalProperties": false
+        },
+        "KmsKeyId": {
+            "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "Tags": {
+            "description": "An array of key-value pairs to apply to this resource.",
+            "type": "array",
+            "insertionOrder": false,
+            "maxItems": 200,
+            "items": {
+                "$ref": "#/definitions/Tag"
+            }
+        },
+        "ScheduleExpression": {
+            "description": "The cron expression that indicates when the scheduled query is executed.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+        },
+        "SnsConfiguration": {
+            "description": "SNS configuration for notification upon scheduled query execution.",
+            "type": "object",
+            "properties": {
+                "TopicArn": {
+                    "$ref": "#/definitions/TopicArn"
+                }
+            },
+            "required": [
+                "TopicArn"
+            ],
+            "additionalProperties": false
+        },
+        "TopicArn": {
+            "description": "SNS Topic to be notified upon scheduled query execution.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+        },
+        "TimestreamConfiguration": {
+            "description": "Timestream configuration of destination table to query.",
+            "type": "object",
+            "properties": {
+                "DatabaseName": {
+                    "$ref": "#/definitions/DatabaseName"
+                },
+                "TableName": {
+                    "$ref": "#/definitions/TableName"
+                },
+                "TimeColumn": {
+                    "$ref": "#/definitions/TimeColumn"
+                },
+                "DimensionMappings": {
+                    "$ref": "#/definitions/DimensionMappings"
+                },
+                "MultiMeasureMappings": {
+                    "$ref": "#/definitions/MultiMeasureMappings"
+                },
+                "MixedMeasureMappings": {
+                    "$ref": "#/definitions/MixedMeasureMappings"
+                },
+                "MeasureNameColumn": {
+                    "$ref": "#/definitions/MeasureNameColumn"
+                }
+            },
+            "required": [
+                "DatabaseName",
+                "TableName",
+                "TimeColumn",
+                "DimensionMappings"
+            ],
+            "additionalProperties": false
+        },
+        "DatabaseName": {
+            "description": "The source database to query.",
+            "type": "string"
+        },
+        "TableName": {
+            "description": "The source table to query.",
+            "type": "string"
+        },
+        "TimeColumn": {
+            "description": "Name of the \"time\" column.",
+            "type": "string"
+        },
+        "DimensionMappings": {
+            "description": "Mappings of dimension names to dimension value types.",
+            "type": "array",
+            "insertionOrder": false,
+            "items": {
+                "$ref": "#/definitions/DimensionMapping"
+            }
+        },
+        "DimensionMapping": {
+            "description": "Mapping of dimension column name to dimension column value type.",
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "$ref": "#/definitions/DimensionMappingName"
+                },
+                "DimensionValueType": {
+                    "$ref": "#/definitions/DimensionValueType"
+                }
+            },
+            "required": [
+                "Name",
+                "DimensionValueType"
+            ],
+            "additionalProperties": false
+        },
+        "DimensionMappingName": {
+            "description": "Name of the dimension column.",
+            "type": "string"
+        },
+        "DimensionValueType": {
+            "description": "Value type of the dimension column.",
+            "type": "string",
+            "enum": ["VARCHAR"]
+        },
+        "MultiMeasureMappings": {
+            "description": "Mapping of measure value columns from the source table to the destination table.",
+            "type": "object",
+            "properties": {
+                "TargetMultiMeasureName": {
+                    "$ref": "#/definitions/TargetMultiMeasureName"
+                },
+                "MultiMeasureAttributeMappings": {
+                    "$ref": "#/definitions/MultiMeasureAttributeMappingList"
+                }
+            },
+            "required": [
+                "MultiMeasureAttributeMappings"
+            ],
+            "additionalProperties": false
+        },
+        "TargetMultiMeasureName": {
+            "description": "Name of the multi-measure in the destination table.",
+            "type": "string"
+        },
+        "MultiMeasureAttributeMappingList": {
+            "description": "List of multi-measure value column mappings.",
+            "type": "array",
+            "insertionOrder": false,
+            "minItems": 1,
+            "items": {
+                "$ref": "#/definitions/MultiMeasureAttributeMapping"
+            }
+        },
+        "MultiMeasureAttributeMapping": {
+            "description": "Mapping of measure value columns from the source table to the destination table.",
+            "type": "object",
+            "properties": {
+                "SourceColumn": {
+                    "$ref": "#/definitions/MultiMeasureAttributeMappingSourceColumn"
+                },
+                "MeasureValueType": {
+                    "$ref": "#/definitions/MultiMeasureAttributeMappingMeasureValueType"
+                },
+                "TargetMultiMeasureAttributeName": {
+                    "$ref": "#/definitions/TargetMultiMeasureAttributeName"
+                }
+            },
+            "required": [
+                "SourceColumn",
+                "MeasureValueType"
+            ],
+            "additionalProperties": false
+        },
+        "MultiMeasureAttributeMappingSourceColumn": {
+            "description": "Name of the measure value column in the source table.",
+            "type": "string"
+        },
+        "MultiMeasureAttributeMappingMeasureValueType": {
+            "description": "Value type of the measure value column in the destination table.",
+            "type": "string",
+            "enum": ["BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"]
+        },
+        "TargetMultiMeasureAttributeName": {
+            "description": "Name of the measure value column in the destination table.",
+            "type": "string"
+        },
+        "MixedMeasureMappings": {
+            "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+            "type": "array",
+            "insertionOrder": false,
+            "minItems": 1,
+            "items": {
+                "$ref": "#/definitions/MixedMeasureMapping"
+            }
+        },
+        "MixedMeasureMapping": {
+            "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+            "type": "object",
+            "properties": {
+                "MeasureName": {
+                    "$ref": "#/definitions/MixedMeasureMappingMeasureName"
+                },
+                "SourceColumn": {
+                    "$ref": "#/definitions/MixedMeasureMappingSourceColumn"
+                },
+                "TargetMeasureName": {
+                    "$ref": "#/definitions/MixedMeasureMappingTargetMeasureName"
+                },
+                "MeasureValueType": {
+                    "$ref": "#/definitions/MixedMeasureMappingMeasureValueType"
+                },
+                "MultiMeasureAttributeMappings": {
+                    "$ref": "#/definitions/MultiMeasureAttributeMappingList"
+                }
+            },
+            "required": [
+                "MeasureValueType"
+            ],
+            "additionalProperties": false
+        },
+        "MixedMeasureMappingMeasureName": {
+            "description": "Name of the measure in source table.",
+            "type": "string"
+        },
+        "MixedMeasureMappingSourceColumn": {
+            "description": "Name of the measure value column in the source table.",
+            "type": "string"
+        },
+        "MixedMeasureMappingTargetMeasureName": {
+            "description": "Name of the measure in the destination table.",
+            "type": "string"
+        },
+        "MixedMeasureMappingMeasureValueType": {
+            "description": "Value type of the measure value column in the destination table.",
+            "type": "string",
+            "enum": ["BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "MULTI"]
+        },
+        "MeasureNameColumn": {
+            "description": "Name of the source measure names column.",
+            "type": "string"
+        },
+        "S3Configuration": {
+            "description": "S3 configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "type": "object",
+            "properties": {
+                "BucketName": {
+                    "$ref": "#/definitions/BucketName"
+                },
+                "ObjectKeyPrefix": {
+                    "$ref": "#/definitions/ObjectKeyPrefix"
+                },
+                "EncryptionOption": {
+                    "$ref": "#/definitions/EncryptionOption"
+                }
+            },
+            "required": [
+                "BucketName"
+            ],
+            "additionalProperties": false
+        },
+        "BucketName": {
+            "description": "S3 bucket where error reports will be placed.",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": ""
+        },
+        "ObjectKeyPrefix": {
+            "description": "Prefix for error report names.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 896,
+            "pattern": ""
+        },
+        "EncryptionOption": {
+            "description": "How error reports will be encrypted.",
+            "type": "string",
+            "enum": ["SSE_S3", "SSE_KMS"]
+        },
+        "Tag": {
+            "description": "A key-value pair to associate with a resource.",
+            "type": "object",
+            "properties": {
+                "Key": {
+                    "$ref": "#/definitions/Key"
+                },
+                "Value": {
+                    "$ref": "#/definitions/Value"
+                }
+            },
+            "required": [
+                "Key",
+                "Value"
+            ],
+            "additionalProperties": false
+        },
+        "Key": {
+            "type": "string",
+            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+            "minLength": 1,
+            "maxLength": 128
+        },
+        "Value": {
+            "type": "string",
+            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+            "minLength": 0,
+            "maxLength": 256
+        }
+    },
+    "properties": {
+        "Arn": {
+            "$ref": "#/definitions/Arn"
+        },
+        "ScheduledQueryName": {
+            "$ref": "#/definitions/ScheduledQueryName"
+        },
+        "QueryString": {
+            "$ref": "#/definitions/QueryString"
+        },
+        "ScheduleConfiguration": {
+            "$ref": "#/definitions/ScheduleConfiguration"
+        },
+        "NotificationConfiguration": {
+            "$ref": "#/definitions/NotificationConfiguration"
+        },
+        "ClientToken": {
+            "$ref": "#/definitions/ClientToken"
+        },
+        "ScheduledQueryExecutionRoleArn": {
+            "$ref": "#/definitions/ScheduledQueryExecutionRoleArn"
+        },
+        "TargetConfiguration": {
+            "$ref": "#/definitions/TargetConfiguration"
+        },
+        "ErrorReportConfiguration": {
+            "$ref": "#/definitions/ErrorReportConfiguration"
+        },
+        "KmsKeyId": {
+            "$ref": "#/definitions/KmsKeyId"
+        },
+        "SQName": {
+            "description": "The name for the scheduled query.",
+            "type": "string"
+        },
+        "SQQueryString": {
+            "description": "The query scheduled to be executed.",
+            "type": "string"
+        },
+        "SQScheduleConfiguration": {
+            "description": "Configuration that indicates when the scheduled query is executed.",
+            "type": "string"
+        },
+        "SQNotificationConfiguration": {
+            "description": "Configuration for notification upon scheduled query execution.",
+            "type": "string"
+        },
+        "SQScheduledQueryExecutionRoleArn": {
+            "description": "Role that AWS Timestream will assume to execute scheduled query.",
+            "type": "string"
+        },
+        "SQTargetConfiguration": {
+            "description": "Target data source to export query results from.",
+            "type": "string"
+        },
+        "SQErrorReportConfiguration": {
+            "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "type": "string"
+        },
+        "SQKmsKeyId": {
+            "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream owned KMS key located in the Timestream account.",
+            "type": "string"
+        },
+        "Tags": {
+            "$ref": "#/definitions/Tags"
+        }
+    },
+    "required": [
+        "QueryString",
+        "ScheduleConfiguration",
+        "NotificationConfiguration",
+        "ScheduledQueryExecutionRoleArn",
+        "ErrorReportConfiguration"
+    ],
+    "additionalProperties": false,
+    "primaryIdentifier": [
+        "/properties/Arn"
+    ],
+    "createOnlyProperties": [
+        "/properties/ScheduledQueryName",
+        "/properties/QueryString",
+        "/properties/ScheduleConfiguration",
+        "/properties/NotificationConfiguration",
+        "/properties/ClientToken",
+        "/properties/ScheduledQueryExecutionRoleArn",
+        "/properties/TargetConfiguration",
+        "/properties/ErrorReportConfiguration",
+        "/properties/KmsKeyId"
+    ],
+    "readOnlyProperties": [
+        "/properties/Arn",
+        "/properties/SQName",
+        "/properties/SQQueryString",
+        "/properties/SQScheduleConfiguration",
+        "/properties/SQNotificationConfiguration",
+        "/properties/SQScheduledQueryExecutionRoleArn",
+        "/properties/SQTargetConfiguration",
+        "/properties/SQErrorReportConfiguration",
+        "/properties/SQKmsKeyId"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "timestream:CreateScheduledQuery",
+                "timestream:DescribeEndpoints"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "timestream:DescribeScheduledQuery",
+                "timestream:ListTagsForResource",
+                "timestream:DescribeEndpoints"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "timestream:UpdateScheduledQuery",
+                "timestream:TagResource",
+                "timestream:UntagResource",
+                "timestream:DescribeEndpoints"
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "timestream:DeleteScheduledQuery",
+                "timestream:DescribeEndpoints"
+            ]
+        },
+        "list": {
+            "permissions": [
+                "timestream:ListScheduledQueries",
+                "timestream:DescribeEndpoints"
+            ]
+        }
+    }
+}

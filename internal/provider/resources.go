@@ -83,6 +83,8 @@
 //go:generate go run generators/resource/main.go -resource awscc_config_conformance_pack -cfschema ../service/cloudformation/schemas/AWS_Config_ConformancePack.json -package config -- ../aws/config/conformance_pack_resource_gen.go ../aws/config/conformance_pack_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_config_organization_conformance_pack -cfschema ../service/cloudformation/schemas/AWS_Config_OrganizationConformancePack.json -package config -- ../aws/config/organization_conformance_pack_resource_gen.go ../aws/config/organization_conformance_pack_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_config_stored_query -cfschema ../service/cloudformation/schemas/AWS_Config_StoredQuery.json -package config -- ../aws/config/stored_query_resource_gen.go ../aws/config/stored_query_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlow.json -package connect -- ../aws/connect/contact_flow_resource_gen.go ../aws/connect/contact_flow_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_connect_contact_flow_module -cfschema ../service/cloudformation/schemas/AWS_Connect_ContactFlowModule.json -package connect -- ../aws/connect/contact_flow_module_resource_gen.go ../aws/connect/contact_flow_module_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_hours_of_operation -cfschema ../service/cloudformation/schemas/AWS_Connect_HoursOfOperation.json -package connect -- ../aws/connect/hours_of_operation_resource_gen.go ../aws/connect/hours_of_operation_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_quick_connect -cfschema ../service/cloudformation/schemas/AWS_Connect_QuickConnect.json -package connect -- ../aws/connect/quick_connect_resource_gen.go ../aws/connect/quick_connect_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_connect_user -cfschema ../service/cloudformation/schemas/AWS_Connect_User.json -package connect -- ../aws/connect/user_resource_gen.go ../aws/connect/user_resource_gen_test.go
@@ -119,6 +121,10 @@
 //go:generate go run generators/resource/main.go -resource awscc_ec2_flow_log -cfschema ../service/cloudformation/schemas/AWS_EC2_FlowLog.json -package ec2 -- ../aws/ec2/flow_log_resource_gen.go ../aws/ec2/flow_log_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_gateway_route_table_association -cfschema ../service/cloudformation/schemas/AWS_EC2_GatewayRouteTableAssociation.json -package ec2 -- ../aws/ec2/gateway_route_table_association_resource_gen.go ../aws/ec2/gateway_route_table_association_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_internet_gateway -cfschema ../service/cloudformation/schemas/AWS_EC2_InternetGateway.json -package ec2 -- ../aws/ec2/internet_gateway_resource_gen.go ../aws/ec2/internet_gateway_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_ipam -cfschema ../service/cloudformation/schemas/AWS_EC2_IPAM.json -package ec2 -- ../aws/ec2/ipam_resource_gen.go ../aws/ec2/ipam_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_ipam_allocation -cfschema ../service/cloudformation/schemas/AWS_EC2_IPAMAllocation.json -package ec2 -- ../aws/ec2/ipam_allocation_resource_gen.go ../aws/ec2/ipam_allocation_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_ipam_pool -cfschema ../service/cloudformation/schemas/AWS_EC2_IPAMPool.json -package ec2 -- ../aws/ec2/ipam_pool_resource_gen.go ../aws/ec2/ipam_pool_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_ipam_scope -cfschema ../service/cloudformation/schemas/AWS_EC2_IPAMScope.json -package ec2 -- ../aws/ec2/ipam_scope_resource_gen.go ../aws/ec2/ipam_scope_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_local_gateway_route -cfschema ../service/cloudformation/schemas/AWS_EC2_LocalGatewayRoute.json -package ec2 -- ../aws/ec2/local_gateway_route_resource_gen.go ../aws/ec2/local_gateway_route_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_local_gateway_route_table_vpc_association -cfschema ../service/cloudformation/schemas/AWS_EC2_LocalGatewayRouteTableVPCAssociation.json -package ec2 -- ../aws/ec2/local_gateway_route_table_vpc_association_resource_gen.go ../aws/ec2/local_gateway_route_table_vpc_association_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_network_acl -cfschema ../service/cloudformation/schemas/AWS_EC2_NetworkAcl.json -package ec2 -- ../aws/ec2/network_acl_resource_gen.go ../aws/ec2/network_acl_resource_gen_test.go
@@ -140,6 +146,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_peering_attachment -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayPeeringAttachment.json -package ec2 -- ../aws/ec2/transit_gateway_peering_attachment_resource_gen.go ../aws/ec2/transit_gateway_peering_attachment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_transit_gateway_vpc_attachment -cfschema ../service/cloudformation/schemas/AWS_EC2_TransitGatewayVpcAttachment.json -package ec2 -- ../aws/ec2/transit_gateway_vpc_attachment_resource_gen.go ../aws/ec2/transit_gateway_vpc_attachment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_vpc -cfschema ../service/cloudformation/schemas/AWS_EC2_VPC.json -package ec2 -- ../aws/ec2/vpc_resource_gen.go ../aws/ec2/vpc_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ec2_vpc_endpoint -cfschema ../service/cloudformation/schemas/AWS_EC2_VPCEndpoint.json -package ec2 -- ../aws/ec2/vpc_endpoint_resource_gen.go ../aws/ec2/vpc_endpoint_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ecr_registry_policy -cfschema ../service/cloudformation/schemas/AWS_ECR_RegistryPolicy.json -package ecr -- ../aws/ecr/registry_policy_resource_gen.go ../aws/ecr/registry_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ecr_replication_configuration -cfschema ../service/cloudformation/schemas/AWS_ECR_ReplicationConfiguration.json -package ecr -- ../aws/ecr/replication_configuration_resource_gen.go ../aws/ecr/replication_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ecr_public_repository -cfschema ../service/cloudformation/schemas/AWS_ECR_PublicRepository.json -package ecr -- ../aws/ecr/public_repository_resource_gen.go ../aws/ecr/public_repository_resource_gen_test.go
@@ -166,6 +173,10 @@
 //go:generate go run generators/resource/main.go -resource awscc_eventschemas_registry_policy -cfschema ../service/cloudformation/schemas/AWS_EventSchemas_RegistryPolicy.json -package eventschemas -- ../aws/eventschemas/registry_policy_resource_gen.go ../aws/eventschemas/registry_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_api_destination -cfschema ../service/cloudformation/schemas/AWS_Events_ApiDestination.json -package events -- ../aws/events/api_destination_resource_gen.go ../aws/events/api_destination_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_events_archive -cfschema ../service/cloudformation/schemas/AWS_Events_Archive.json -package events -- ../aws/events/archive_resource_gen.go ../aws/events/archive_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_evidently_experiment -cfschema ../service/cloudformation/schemas/AWS_Evidently_Experiment.json -package evidently -- ../aws/evidently/experiment_resource_gen.go ../aws/evidently/experiment_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_evidently_feature -cfschema ../service/cloudformation/schemas/AWS_Evidently_Feature.json -package evidently -- ../aws/evidently/feature_resource_gen.go ../aws/evidently/feature_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_evidently_launch -cfschema ../service/cloudformation/schemas/AWS_Evidently_Launch.json -package evidently -- ../aws/evidently/launch_resource_gen.go ../aws/evidently/launch_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_evidently_project -cfschema ../service/cloudformation/schemas/AWS_Evidently_Project.json -package evidently -- ../aws/evidently/project_resource_gen.go ../aws/evidently/project_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fis_experiment_template -cfschema ../service/cloudformation/schemas/AWS_FIS_ExperimentTemplate.json -package fis -- ../aws/fis/experiment_template_resource_gen.go ../aws/fis/experiment_template_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_notification_channel -cfschema ../service/cloudformation/schemas/AWS_FMS_NotificationChannel.json -package fms -- ../aws/fms/notification_channel_resource_gen.go ../aws/fms/notification_channel_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_fms_policy -cfschema ../service/cloudformation/schemas/AWS_FMS_Policy.json -package fms -- ../aws/fms/policy_resource_gen.go ../aws/fms/policy_resource_gen_test.go
@@ -320,11 +331,17 @@
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_endpoint -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyEndpoint.json -package rds -- ../aws/rds/db_proxy_endpoint_resource_gen.go ../aws/rds/db_proxy_endpoint_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_db_proxy_target_group -cfschema ../service/cloudformation/schemas/AWS_RDS_DBProxyTargetGroup.json -package rds -- ../aws/rds/db_proxy_target_group_resource_gen.go ../aws/rds/db_proxy_target_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rds_global_cluster -cfschema ../service/cloudformation/schemas/AWS_RDS_GlobalCluster.json -package rds -- ../aws/rds/global_cluster_resource_gen.go ../aws/rds/global_cluster_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_rum_app_monitor -cfschema ../service/cloudformation/schemas/AWS_RUM_AppMonitor.json -package rum -- ../aws/rum/app_monitor_resource_gen.go ../aws/rum/app_monitor_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_redshift_endpoint_access -cfschema ../service/cloudformation/schemas/AWS_Redshift_EndpointAccess.json -package redshift -- ../aws/redshift/endpoint_access_resource_gen.go ../aws/redshift/endpoint_access_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_redshift_endpoint_authorization -cfschema ../service/cloudformation/schemas/AWS_Redshift_EndpointAuthorization.json -package redshift -- ../aws/redshift/endpoint_authorization_resource_gen.go ../aws/redshift/endpoint_authorization_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_redshift_event_subscription -cfschema ../service/cloudformation/schemas/AWS_Redshift_EventSubscription.json -package redshift -- ../aws/redshift/event_subscription_resource_gen.go ../aws/redshift/event_subscription_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_redshift_scheduled_action -cfschema ../service/cloudformation/schemas/AWS_Redshift_ScheduledAction.json -package redshift -- ../aws/redshift/scheduled_action_resource_gen.go ../aws/redshift/scheduled_action_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_refactorspaces_environment -cfschema ../service/cloudformation/schemas/AWS_RefactorSpaces_Environment.json -package refactorspaces -- ../aws/refactorspaces/environment_resource_gen.go ../aws/refactorspaces/environment_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_refactorspaces_route -cfschema ../service/cloudformation/schemas/AWS_RefactorSpaces_Route.json -package refactorspaces -- ../aws/refactorspaces/route_resource_gen.go ../aws/refactorspaces/route_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_refactorspaces_service -cfschema ../service/cloudformation/schemas/AWS_RefactorSpaces_Service.json -package refactorspaces -- ../aws/refactorspaces/service_resource_gen.go ../aws/refactorspaces/service_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_rekognition_project -cfschema ../service/cloudformation/schemas/AWS_Rekognition_Project.json -package rekognition -- ../aws/rekognition/project_resource_gen.go ../aws/rekognition/project_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_resiliencehub_app -cfschema ../service/cloudformation/schemas/AWS_ResilienceHub_App.json -package resiliencehub -- ../aws/resiliencehub/app_resource_gen.go ../aws/resiliencehub/app_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_resiliencehub_resiliency_policy -cfschema ../service/cloudformation/schemas/AWS_ResilienceHub_ResiliencyPolicy.json -package resiliencehub -- ../aws/resiliencehub/resiliency_policy_resource_gen.go ../aws/resiliencehub/resiliency_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_resourcegroups_group -cfschema ../service/cloudformation/schemas/AWS_ResourceGroups_Group.json -package resourcegroups -- ../aws/resourcegroups/group_resource_gen.go ../aws/resourcegroups/group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_robomaker_fleet -cfschema ../service/cloudformation/schemas/AWS_RoboMaker_Fleet.json -package robomaker -- ../aws/robomaker/fleet_resource_gen.go ../aws/robomaker/fleet_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_robomaker_robot -cfschema ../service/cloudformation/schemas/AWS_RoboMaker_Robot.json -package robomaker -- ../aws/robomaker/robot_resource_gen.go ../aws/robomaker/robot_resource_gen_test.go
@@ -402,7 +419,9 @@
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_activity -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_Activity.json -package stepfunctions -- ../aws/stepfunctions/activity_resource_gen.go ../aws/stepfunctions/activity_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_stepfunctions_state_machine -cfschema ../service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json -package stepfunctions -- ../aws/stepfunctions/state_machine_resource_gen.go ../aws/stepfunctions/state_machine_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_database -cfschema ../service/cloudformation/schemas/AWS_Timestream_Database.json -package timestream -- ../aws/timestream/database_resource_gen.go ../aws/timestream/database_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_timestream_scheduled_query -cfschema ../service/cloudformation/schemas/AWS_Timestream_ScheduledQuery.json -package timestream -- ../aws/timestream/scheduled_query_resource_gen.go ../aws/timestream/scheduled_query_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_timestream_table -cfschema ../service/cloudformation/schemas/AWS_Timestream_Table.json -package timestream -- ../aws/timestream/table_resource_gen.go ../aws/timestream/table_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_transfer_workflow -cfschema ../service/cloudformation/schemas/AWS_Transfer_Workflow.json -package transfer -- ../aws/transfer/workflow_resource_gen.go ../aws/transfer/workflow_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_ip_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_IPSet.json -package wafv2 -- ../aws/wafv2/ip_set_resource_gen.go ../aws/wafv2/ip_set_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_logging_configuration -cfschema ../service/cloudformation/schemas/AWS_WAFv2_LoggingConfiguration.json -package wafv2 -- ../aws/wafv2/logging_configuration_resource_gen.go ../aws/wafv2/logging_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_wafv2_regex_pattern_set -cfschema ../service/cloudformation/schemas/AWS_WAFv2_RegexPatternSet.json -package wafv2 -- ../aws/wafv2/regex_pattern_set_resource_gen.go ../aws/wafv2/regex_pattern_set_resource_gen_test.go
@@ -465,6 +484,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/events"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/eventschemas"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/evidently"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/finspace"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fis"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/fms"
@@ -510,13 +530,16 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/quicksight"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshift"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/refactorspaces"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rekognition"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resiliencehub"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/resourcegroups"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/robomaker"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoveryreadiness"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53resolver"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rum"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3objectlambda"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3outposts"
@@ -531,6 +554,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspaces"
