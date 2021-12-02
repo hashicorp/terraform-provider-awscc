@@ -1,4 +1,5 @@
-## 0.8.0 (Unreleased)
+## 0.9.0 (Unreleased)
+## [0.8.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.8.0) (December  2, 2021)
 ## 0.8.0 (Unreleased)
 
 FEATURES:
