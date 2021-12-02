@@ -126,6 +126,7 @@
       }
     }
   },
+  "taggable": true,
   "additionalProperties": false,
   "required": [],
   "createOnlyProperties": [

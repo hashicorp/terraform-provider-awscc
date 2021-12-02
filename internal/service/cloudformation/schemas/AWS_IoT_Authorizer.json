@@ -62,6 +62,7 @@
       }
     }
   },
+  "taggable": true,
   "additionalProperties": false,
   "required": [
     "AuthorizerFunctionArn"

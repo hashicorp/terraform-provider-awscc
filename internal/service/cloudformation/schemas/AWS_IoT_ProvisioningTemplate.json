@@ -64,6 +64,7 @@
       }
     }
   },
+  "taggable": true,
   "additionalProperties": false,
   "required": [
     "ProvisioningRoleArn",
