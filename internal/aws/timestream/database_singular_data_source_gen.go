@@ -58,6 +58,7 @@ func databaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",

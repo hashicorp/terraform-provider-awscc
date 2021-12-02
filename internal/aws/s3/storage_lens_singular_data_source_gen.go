@@ -122,6 +122,20 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "additionalProperties": false,
 			//       "description": "Specifies how Amazon S3 Storage Lens metrics should be exported.",
 			//       "properties": {
+			//         "CloudWatchMetrics": {
+			//           "additionalProperties": false,
+			//           "description": "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
+			//           "properties": {
+			//             "IsEnabled": {
+			//               "description": "Specifies whether CloudWatch metrics are enabled or disabled.",
+			//               "type": "boolean"
+			//             }
+			//           },
+			//           "required": [
+			//             "IsEnabled"
+			//           ],
+			//           "type": "object"
+			//         },
 			//         "S3BucketDestination": {
 			//           "additionalProperties": false,
 			//           "description": "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
@@ -188,9 +202,6 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           "type": "object"
 			//         }
 			//       },
-			//       "required": [
-			//         "S3BucketDestination"
-			//       ],
 			//       "type": "object"
 			//     },
 			//     "Exclude": {
@@ -387,6 +398,21 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 						Description: "Specifies how Amazon S3 Storage Lens metrics should be exported.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
+								"cloudwatch_metrics": {
+									// Property: CloudWatchMetrics
+									Description: "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"is_enabled": {
+												// Property: IsEnabled
+												Description: "Specifies whether CloudWatch metrics are enabled or disabled.",
+												Type:        types.BoolType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
 								"s3_bucket_destination": {
 									// Property: S3BucketDestination
 									Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
@@ -596,6 +622,7 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"aws_org":                      "AwsOrg",
 		"bucket_level":                 "BucketLevel",
 		"buckets":                      "Buckets",
+		"cloudwatch_metrics":           "CloudWatchMetrics",
 		"data_export":                  "DataExport",
 		"delimiter":                    "Delimiter",
 		"encryption":                   "Encryption",

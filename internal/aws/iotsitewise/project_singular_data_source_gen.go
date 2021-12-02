@@ -19,6 +19,22 @@ func init() {
 // This Terraform data source type corresponds to the CloudFormation AWS::IoTSiteWise::Project resource type.
 func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"asset_ids": {
+			// Property: AssetIds
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The IDs of the assets to be associated to the project.",
+			//   "items": {
+			//     "description": "The ID of the asset",
+			//     "type": "string"
+			//   },
+			//   "type": "array",
+			//   "uniqueItems": true
+			// }
+			Description: "The IDs of the assets to be associated to the project.",
+			Type:        types.ListType{ElemType: types.StringType},
+			Computed:    true,
+		},
 		"portal_id": {
 			// Property: PortalId
 			// CloudFormation resource type schema:
@@ -137,6 +153,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Project").WithTerraformTypeName("awscc_iotsitewise_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"asset_ids":           "AssetIds",
 		"key":                 "Key",
 		"portal_id":           "PortalId",
 		"project_arn":         "ProjectArn",
