@@ -30,6 +30,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the event type.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -41,6 +44,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the event type was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -632,6 +638,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the event type was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -719,6 +728,9 @@ func eventTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

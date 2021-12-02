@@ -49,6 +49,9 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorizer_result_ttl_in_seconds": {
 			// Property: AuthorizerResultTtlInSeconds
@@ -152,6 +155,9 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -27,6 +27,9 @@ func networkAclResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

@@ -100,6 +100,9 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ARN (Amazon resource name) of the scheduled audit.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"scheduled_audit_name": {
 			// Property: ScheduledAuditName
@@ -119,6 +122,7 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -206,6 +210,9 @@ func scheduledAuditResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

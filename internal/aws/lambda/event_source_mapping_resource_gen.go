@@ -125,6 +125,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(12, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -245,6 +246,9 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Event Source Mapping Identifier UUID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"maximum_batching_window_in_seconds": {
 			// Property: MaximumBatchingWindowInSeconds
@@ -394,6 +398,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -492,6 +497,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(6, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

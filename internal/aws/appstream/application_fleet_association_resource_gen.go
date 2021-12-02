@@ -49,6 +49,9 @@ func applicationFleetAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

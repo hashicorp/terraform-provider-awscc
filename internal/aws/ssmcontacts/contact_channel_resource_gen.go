@@ -30,6 +30,9 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"channel_address": {
 			// Property: ChannelAddress
@@ -83,6 +86,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -104,6 +108,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -124,6 +129,9 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -144,6 +144,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -155,6 +156,9 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -191,6 +195,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(32768),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -211,6 +216,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 1350),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -226,6 +232,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// JobArn is a write-only property.
@@ -352,6 +359,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -424,6 +432,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -490,6 +499,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
@@ -530,6 +540,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -539,6 +550,9 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

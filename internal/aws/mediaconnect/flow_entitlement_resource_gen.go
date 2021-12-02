@@ -35,6 +35,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(0)}),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -151,6 +152,7 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "static-key"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"region": {
@@ -197,6 +199,9 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ARN of the entitlement.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"entitlement_status": {
 			// Property: EntitlementStatus
@@ -264,6 +269,9 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

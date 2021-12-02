@@ -155,6 +155,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -244,6 +247,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) of the event integration.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -332,6 +338,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -349,6 +349,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"firewall_policy_id": {
 			// Property: FirewallPolicyId
@@ -361,6 +364,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"firewall_policy_name": {
 			// Property: FirewallPolicyName
@@ -439,6 +445,9 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

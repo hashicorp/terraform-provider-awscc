@@ -60,6 +60,9 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"target_name": {
 			// Property: TargetName
@@ -109,6 +112,9 @@ func resourceSpecificLoggingResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

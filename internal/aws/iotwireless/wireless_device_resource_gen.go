@@ -30,6 +30,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -72,6 +75,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Wireless device Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt
@@ -492,6 +498,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type

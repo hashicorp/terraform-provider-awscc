@@ -30,6 +30,9 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "ARN of the WAF entity.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -54,6 +57,9 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Id of the RegexPatternSet",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -68,6 +74,7 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

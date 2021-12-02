@@ -48,6 +48,9 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Arn of the grant.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"grant_name": {
 			// Property: GrantName
@@ -124,6 +127,9 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The version of the grant.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -131,6 +137,9 @@ func grantResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -33,6 +33,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -48,6 +49,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -63,6 +65,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"public_version_number": {
 			// Property: PublicVersionNumber
@@ -81,6 +86,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(5, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -97,6 +103,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type
@@ -120,6 +129,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -136,6 +146,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -150,6 +161,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -157,6 +171,9 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

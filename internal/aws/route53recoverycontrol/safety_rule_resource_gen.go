@@ -80,6 +80,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -225,6 +226,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -238,6 +240,9 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the safety rule.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -254,6 +259,9 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -308,6 +316,7 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
@@ -318,6 +327,9 @@ func safetyRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -32,6 +32,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the repository.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -80,6 +83,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -110,6 +114,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the repository. This is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"permissions_policy_document": {
 			// Property: PermissionsPolicyDocument
@@ -220,6 +227,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -47,6 +47,9 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Number (ARN) of the custom metric.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"metric_name": {
 			// Property: MetricName
@@ -66,6 +69,7 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -165,6 +169,9 @@ func customMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

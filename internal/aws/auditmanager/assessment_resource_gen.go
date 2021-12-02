@@ -33,6 +33,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the assessment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"assessment_id": {
 			// Property: AssessmentId
@@ -45,6 +48,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"assessment_reports_destination": {
 			// Property: AssessmentReportsDestination
@@ -157,6 +163,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -170,6 +177,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The sequence of characters that identifies when the event occurred.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"delegations": {
 			// Property: Delegations
@@ -361,6 +371,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -392,6 +405,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(32, 36),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -671,6 +685,9 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

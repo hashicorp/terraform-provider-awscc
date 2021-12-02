@@ -33,6 +33,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the NFS location.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -46,6 +49,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the NFS location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"mount_options": {
 			// Property: MountOptions
@@ -101,6 +107,7 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 				),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"on_prem_config": {
@@ -255,6 +262,9 @@ func locationNFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -46,6 +46,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"attribute_group": {
 			// Property: AttributeGroup
@@ -73,6 +76,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -82,6 +88,9 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

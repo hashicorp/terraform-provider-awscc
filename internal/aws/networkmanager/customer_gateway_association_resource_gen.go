@@ -73,6 +73,7 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -82,6 +83,9 @@ func customerGatewayAssociationResourceType(ctx context.Context) (tfsdk.Resource
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

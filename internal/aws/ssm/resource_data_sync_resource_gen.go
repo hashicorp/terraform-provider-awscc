@@ -35,6 +35,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -53,6 +54,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -71,6 +73,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -89,6 +92,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -178,6 +182,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -196,6 +201,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(0, 1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -325,6 +331,7 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -334,6 +341,9 @@ func resourceDataSyncResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

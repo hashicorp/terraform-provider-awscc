@@ -30,6 +30,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the template.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -60,6 +63,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>Time when this was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// CreatedTime is a write-only property.
 		},
 		"last_updated_time": {
@@ -73,6 +79,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>Time when this was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
@@ -757,6 +766,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// Version is a write-only property.
 		},
 		"version_description": {
@@ -782,6 +794,9 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

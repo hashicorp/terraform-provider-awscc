@@ -30,6 +30,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Description: "The time at which the job definition was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"job_definition_arn": {
 			// Property: JobDefinitionArn
@@ -43,6 +46,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"job_definition_name": {
 			// Property: JobDefinitionName
@@ -61,6 +67,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -303,6 +310,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -695,6 +703,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -754,6 +763,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -819,6 +829,7 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -828,6 +839,9 @@ func modelExplainabilityJobDefinitionResourceType(ctx context.Context) (tfsdk.Re
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

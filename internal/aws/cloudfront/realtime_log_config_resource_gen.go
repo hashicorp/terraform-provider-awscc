@@ -28,6 +28,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"end_points": {
 			// Property: EndPoints
@@ -148,6 +151,9 @@ func realtimeLogConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -33,6 +33,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_creation_date": {
 			// Property: ApplicationCreationDate
@@ -44,6 +47,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "When the Application was created",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_description": {
 			// Property: ApplicationDescription
@@ -75,6 +81,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_last_update_date": {
 			// Property: ApplicationLastUpdateDate
@@ -86,6 +95,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "When the Application was last updated",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_name": {
 			// Property: ApplicationName
@@ -114,6 +126,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The current state of the application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_url": {
 			// Property: ApplicationUrl
@@ -125,6 +140,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"error_message": {
 			// Property: ErrorMessage
@@ -136,6 +154,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A message indicating why Create or Delete Application failed.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -164,6 +185,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -234,6 +258,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

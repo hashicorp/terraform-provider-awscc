@@ -32,6 +32,9 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ARN of the ReplicationSet.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"deletion_protected": {
 			// Property: DeletionProtected
@@ -47,6 +50,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"regions": {
@@ -132,6 +136,9 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

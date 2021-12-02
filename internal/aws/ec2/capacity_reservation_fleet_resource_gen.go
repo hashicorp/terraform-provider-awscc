@@ -30,6 +30,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -41,6 +42,9 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"end_date": {
 			// Property: EndDate
@@ -52,6 +56,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -73,6 +78,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -163,6 +169,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -258,6 +265,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -279,6 +287,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -302,6 +311,9 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

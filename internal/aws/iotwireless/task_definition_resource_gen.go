@@ -30,6 +30,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "TaskDefinition arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"auto_create_tasks": {
 			// Property: AutoCreateTasks
@@ -53,6 +56,9 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ID of the new wireless gateway task definition",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan_update_gateway_task_entry": {
 			// Property: LoRaWANUpdateGatewayTaskEntry

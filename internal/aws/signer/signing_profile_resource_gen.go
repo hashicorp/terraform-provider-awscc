@@ -31,6 +31,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"platform_id": {
 			// Property: PlatformId
@@ -64,6 +67,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"profile_version": {
 			// Property: ProfileVersion
@@ -76,6 +82,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"profile_version_arn": {
 			// Property: ProfileVersionArn
@@ -88,6 +97,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"signature_validity_period": {
 			// Property: SignatureValidityPeriod
@@ -135,6 +147,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -192,6 +205,9 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

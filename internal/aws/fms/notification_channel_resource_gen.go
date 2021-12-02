@@ -60,6 +60,9 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

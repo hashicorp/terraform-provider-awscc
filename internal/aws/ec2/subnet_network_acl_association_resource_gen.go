@@ -27,6 +27,9 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"network_acl_id": {
 			// Property: NetworkAclId
@@ -62,6 +65,9 @@ func subnetNetworkAclAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

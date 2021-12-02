@@ -60,6 +60,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"datastore_arn": {
 			// Property: DatastoreArn
@@ -72,6 +75,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The Amazon Resource Name used in the creation of the Data Store.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"datastore_endpoint": {
 			// Property: DatastoreEndpoint
@@ -84,6 +90,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"datastore_id": {
 			// Property: DatastoreId
@@ -97,6 +106,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The AWS-generated ID number for the Data Store.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"datastore_name": {
 			// Property: DatastoreName
@@ -115,6 +127,7 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -134,6 +147,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"datastore_type_version": {
 			// Property: DatastoreTypeVersion
@@ -196,6 +212,7 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -275,6 +292,7 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -342,6 +360,9 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

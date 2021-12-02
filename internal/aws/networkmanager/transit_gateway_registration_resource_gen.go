@@ -53,6 +53,9 @@ func transitGatewayRegistrationResourceType(ctx context.Context) (tfsdk.Resource
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -32,6 +32,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cluster_endpoints": {
 			// Property: ClusterEndpoints
@@ -82,6 +85,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -101,6 +105,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -119,6 +124,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -173,6 +181,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
@@ -183,6 +192,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

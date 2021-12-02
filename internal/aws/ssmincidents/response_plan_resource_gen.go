@@ -202,6 +202,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"arn": {
@@ -216,6 +217,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the response plan.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"chat_channel": {
 			// Property: ChatChannel
@@ -298,6 +302,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"incident_template": {
@@ -507,6 +512,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -515,6 +521,9 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

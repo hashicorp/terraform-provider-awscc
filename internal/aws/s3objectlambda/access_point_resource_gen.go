@@ -29,6 +29,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_date": {
 			// Property: CreationDate
@@ -40,6 +43,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The date and time when the Object lambda Access Point was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -59,6 +65,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(3, 45),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -230,6 +237,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"public_access_block_configuration": {
 			// Property: PublicAccessBlockConfiguration
@@ -287,6 +297,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -294,6 +307,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

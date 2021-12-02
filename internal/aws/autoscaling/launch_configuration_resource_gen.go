@@ -32,6 +32,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -179,6 +180,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -194,6 +196,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -214,6 +217,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -229,6 +233,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -244,6 +249,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -273,6 +279,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -288,6 +295,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -317,6 +325,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -332,6 +341,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -352,6 +362,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -403,6 +414,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -418,6 +430,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -433,6 +446,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -453,6 +467,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -468,6 +483,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -487,6 +503,7 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenAtMost(21847),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -496,6 +513,9 @@ func launchConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

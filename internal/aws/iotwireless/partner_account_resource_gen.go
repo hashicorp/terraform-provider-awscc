@@ -41,6 +41,9 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "PartnerAccount arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"fingerprint": {
 			// Property: Fingerprint
@@ -70,6 +73,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtMost(256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -176,6 +180,9 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sidewalk_update": {
 			// Property: SidewalkUpdate
@@ -267,6 +274,9 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

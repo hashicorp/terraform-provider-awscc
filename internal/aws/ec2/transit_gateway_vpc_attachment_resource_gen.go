@@ -44,6 +44,9 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"options": {
 			// Property: Options
@@ -125,6 +128,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -182,6 +186,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -195,6 +200,7 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

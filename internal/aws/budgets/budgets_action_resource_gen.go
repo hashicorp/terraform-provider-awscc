@@ -28,6 +28,9 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"action_threshold": {
 			// Property: ActionThreshold
@@ -408,6 +411,9 @@ func budgetsActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

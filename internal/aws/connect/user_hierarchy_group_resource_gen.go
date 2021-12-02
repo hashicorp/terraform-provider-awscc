@@ -61,6 +61,7 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -75,6 +76,9 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) for the user hierarchy group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -82,6 +86,9 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

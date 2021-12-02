@@ -30,6 +30,9 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ID of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -41,6 +44,9 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ID of the owner.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -52,6 +58,9 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The state of the carrier gateway.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -124,6 +133,9 @@ func carrierGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -36,6 +36,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -277,6 +278,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -330,6 +332,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -371,6 +374,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -422,6 +426,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -431,6 +436,9 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -38,6 +38,7 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -61,6 +62,9 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipv_6_cidr_block": {
 			// Property: Ipv6CidrBlock
@@ -83,6 +87,9 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"map_public_ip_on_launch": {
 			// Property: MapPublicIpOnLaunch
@@ -101,6 +108,9 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"outpost_arn": {
 			// Property: OutpostArn
@@ -112,6 +122,7 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

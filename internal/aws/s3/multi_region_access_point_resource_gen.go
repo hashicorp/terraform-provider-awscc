@@ -30,6 +30,9 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_at": {
 			// Property: CreatedAt
@@ -41,6 +44,9 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The timestamp of the when the Multi Region Access Point is created",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -60,6 +66,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(3, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -121,6 +128,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -178,6 +186,9 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

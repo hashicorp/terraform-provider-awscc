@@ -30,6 +30,9 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The Amazon Resource Name (ARN) of the distribution configuration.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -381,6 +384,9 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -67,6 +67,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"launch_profile_protocol_versions": {
 			// Property: LaunchProfileProtocolVersions
@@ -272,6 +275,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -281,6 +285,9 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

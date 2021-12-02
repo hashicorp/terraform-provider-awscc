@@ -30,6 +30,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the detector.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"associated_models": {
 			// Property: AssociatedModels
@@ -80,6 +83,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the detector was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -127,6 +133,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The active version ID of the detector",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"detector_version_status": {
 			// Property: DetectorVersionStatus
@@ -464,12 +473,18 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the event type.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"created_time": {
 						// Property: CreatedTime
 						Description: "The time when the event type was created.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"description": {
 						// Property: Description
@@ -809,6 +824,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The time when the event type was last updated.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
@@ -865,6 +883,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the detector was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_execution_mode": {
 			// Property: RuleExecutionMode
@@ -1274,6 +1295,9 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

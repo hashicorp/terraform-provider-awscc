@@ -80,6 +80,9 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the gateway device.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"gateway_name": {
 			// Property: GatewayName
@@ -197,6 +200,9 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

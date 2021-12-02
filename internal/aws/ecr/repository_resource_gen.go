@@ -28,6 +28,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"encryption_configuration": {
 			// Property: EncryptionConfiguration
@@ -84,6 +87,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.StringLenBetween(1, 2048),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
 							tfsdk.RequiresReplace(),
 						},
 					},
@@ -92,6 +96,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -209,6 +214,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(2, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -231,6 +237,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -300,6 +309,9 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

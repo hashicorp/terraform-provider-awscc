@@ -28,6 +28,9 @@ func inAppTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"content": {
 			// Property: Content
@@ -665,6 +668,9 @@ func inAppTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

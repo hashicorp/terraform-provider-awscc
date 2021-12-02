@@ -28,6 +28,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ca_certificate_pem": {
 			// Property: CACertificatePem
@@ -44,6 +47,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 65536),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// CACertificatePem is a write-only property.
@@ -68,6 +72,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -86,6 +91,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 65536),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -99,6 +105,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// CertificateSigningRequest is a write-only property.
@@ -111,6 +118,9 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status

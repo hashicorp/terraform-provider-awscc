@@ -46,6 +46,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -64,6 +65,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The type of account used as the identity provider when registering this publisher with CloudFormation.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"publisher_id": {
 			// Property: PublisherId
@@ -78,6 +82,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"publisher_profile": {
 			// Property: PublisherProfile
@@ -91,6 +98,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL to the publisher's profile with the identity provider.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"publisher_status": {
 			// Property: PublisherStatus
@@ -106,6 +116,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Whether the publisher is verified.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -113,6 +126,9 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

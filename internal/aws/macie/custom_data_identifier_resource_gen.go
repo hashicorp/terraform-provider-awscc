@@ -29,6 +29,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Custom data identifier ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -42,6 +45,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -55,6 +59,9 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Custom data identifier ID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ignore_words": {
 			// Property: IgnoreWords
@@ -71,6 +78,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -89,6 +97,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -104,6 +113,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

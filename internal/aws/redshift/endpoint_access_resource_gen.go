@@ -29,6 +29,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The DNS address of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cluster_identifier": {
 			// Property: ClusterIdentifier
@@ -42,6 +45,7 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -55,6 +59,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The time (UTC) that the endpoint was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint_name": {
 			// Property: EndpointName
@@ -81,6 +88,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The status of the endpoint.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"port": {
 			// Property: Port
@@ -92,6 +102,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The port number on which the cluster accepts incoming connections.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_owner": {
 			// Property: ResourceOwner
@@ -106,6 +119,7 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -122,6 +136,7 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -226,6 +241,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
@@ -289,6 +307,7 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -297,6 +316,9 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

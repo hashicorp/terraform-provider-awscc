@@ -138,6 +138,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -253,6 +254,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "CPU count of the Instance.",
 						Type:        types.NumberType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"disks": {
 						// Property: Disks
@@ -314,6 +318,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "RAM Size of the Instance.",
 						Type:        types.NumberType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -327,6 +334,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"instance_name": {
 			// Property: InstanceName
@@ -358,6 +368,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Is the IP Address of the Instance is the static IP",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"key_pair_name": {
 			// Property: KeyPairName
@@ -396,12 +409,18 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"region_name": {
 						// Property: RegionName
 						Description: "The Region Name in which to create your instance.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -509,6 +528,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "GbPerMonthAllocated of the Instance.",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 							},
 						),
@@ -607,6 +629,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Private IP Address of the Instance",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"public_ip_address": {
 			// Property: PublicIpAddress
@@ -618,6 +643,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Public IP Address of the Instance",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -629,6 +657,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Resource type of Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ssh_key_name": {
 			// Property: SshKeyName
@@ -640,6 +671,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "SSH Key Name of the  Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -667,12 +701,18 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Status code of the Instance.",
 						Type:        types.NumberType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"name": {
 						// Property: Name
 						Description: "Status code of the Instance.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -688,6 +728,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Support code to help identify any issues",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -767,6 +810,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Username of the  Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -774,6 +820,9 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

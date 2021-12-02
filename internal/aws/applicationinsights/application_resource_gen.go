@@ -30,6 +30,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the ApplicationInsights application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"auto_configuration_enabled": {
 			// Property: AutoConfigurationEnabled
@@ -1882,6 +1885,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

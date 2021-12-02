@@ -30,6 +30,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Amazon Resource Name (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"http_url_properties": {
 			// Property: HttpUrlProperties
@@ -57,6 +60,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -93,6 +97,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The reasoning for the current status of the TopicRuleDestination.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_properties": {
 			// Property: VpcProperties
@@ -158,6 +165,7 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -167,6 +175,9 @@ func topicRuleDestinationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"calculator_arn": {
 			// Property: CalculatorArn
@@ -41,6 +44,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"calculator_name": {
 			// Property: CalculatorName
@@ -71,6 +77,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_source": {
 			// Property: DataSource
@@ -99,6 +108,7 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -135,6 +145,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -142,6 +155,9 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

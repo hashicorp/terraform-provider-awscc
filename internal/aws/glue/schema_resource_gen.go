@@ -31,6 +31,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name for the Schema.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"checkpoint_version": {
 			// Property: CheckpointVersion
@@ -158,6 +161,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Represents the version ID associated with the initial schema version.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -222,6 +228,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -311,6 +318,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

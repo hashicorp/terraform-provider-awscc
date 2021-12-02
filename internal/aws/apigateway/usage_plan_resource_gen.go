@@ -138,6 +138,9 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The provider-assigned unique ID for this managed resource.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"quota": {
 			// Property: Quota

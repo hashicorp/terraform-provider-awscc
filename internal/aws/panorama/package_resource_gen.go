@@ -30,6 +30,9 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -39,6 +42,9 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.NumberType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"package_id": {
 			// Property: PackageId
@@ -51,6 +57,9 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"package_name": {
 			// Property: PackageName
@@ -100,30 +109,48 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: BinaryPrefixLocation
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"bucket": {
 						// Property: Bucket
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"generated_prefix_location": {
 						// Property: GeneratedPrefixLocation
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"manifest_prefix_location": {
 						// Property: ManifestPrefixLocation
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"repo_prefix_location": {
 						// Property: RepoPrefixLocation
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -184,6 +211,9 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

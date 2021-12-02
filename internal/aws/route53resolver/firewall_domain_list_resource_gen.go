@@ -32,6 +32,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -45,6 +48,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -58,6 +64,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_count": {
 			// Property: DomainCount
@@ -70,6 +79,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_file_url": {
 			// Property: DomainFileUrl
@@ -123,6 +135,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"managed_owner_name": {
 			// Property: ManagedOwnerName
@@ -136,6 +151,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -149,6 +167,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -168,6 +189,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -189,6 +211,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "ResolverFirewallDomainList, possible values are COMPLETE, DELETING, UPDATING, COMPLETE_IMPORT_FAILED, IMPORTING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_message": {
 			// Property: StatusMessage
@@ -200,6 +225,9 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "FirewallDomainListAssociationStatus",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

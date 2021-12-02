@@ -106,6 +106,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(0, 20),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -149,6 +150,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "JSON"}),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -196,6 +198,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -212,6 +215,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -271,6 +275,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -344,6 +349,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -360,6 +366,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -369,6 +376,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The date and time the workgroup was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -254,6 +257,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"selected_engine_version": {
 									// Property: SelectedEngineVersion
@@ -439,6 +445,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"selected_engine_version": {
 									// Property: SelectedEngineVersion
@@ -531,6 +540,9 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

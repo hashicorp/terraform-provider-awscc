@@ -30,6 +30,9 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -281,6 +284,9 @@ func infrastructureConfigurationResourceType(ctx context.Context) (tfsdk.Resourc
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

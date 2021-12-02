@@ -210,6 +210,9 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"instance_arn": {
 			// Property: InstanceArn
@@ -318,6 +321,9 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

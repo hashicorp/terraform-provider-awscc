@@ -32,6 +32,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -45,6 +48,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the S3 location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"s3_bucket_arn": {
 			// Property: S3BucketArn
@@ -136,6 +142,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "STANDARD"}),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -156,6 +163,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
@@ -230,6 +238,9 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

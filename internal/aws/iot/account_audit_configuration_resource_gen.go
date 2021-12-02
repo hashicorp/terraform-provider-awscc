@@ -512,6 +512,9 @@ func accountAuditConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

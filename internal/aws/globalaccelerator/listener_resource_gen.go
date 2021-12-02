@@ -58,6 +58,7 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "NONE"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"listener_arn": {
@@ -70,6 +71,9 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the listener.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"port_ranges": {
 			// Property: PortRanges
@@ -149,6 +153,7 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "TCP"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -157,6 +162,9 @@ func listenerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

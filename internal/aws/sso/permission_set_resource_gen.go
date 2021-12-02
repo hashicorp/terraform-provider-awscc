@@ -125,6 +125,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The permission set that the policy will be attached to",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"relay_state_type": {
 			// Property: RelayStateType
@@ -226,6 +229,9 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

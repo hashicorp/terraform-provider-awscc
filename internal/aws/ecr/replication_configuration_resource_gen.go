@@ -30,6 +30,9 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Description: "The RegistryId associated with the aws account.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"replication_configuration": {
 			// Property: ReplicationConfiguration
@@ -197,6 +200,9 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

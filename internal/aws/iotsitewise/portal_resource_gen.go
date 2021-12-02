@@ -77,6 +77,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the portal, which has the following format.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"portal_auth_mode": {
 			// Property: PortalAuthMode
@@ -90,6 +93,7 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -103,6 +107,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The AWS SSO application generated client ID (used with AWS SSO APIs).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"portal_contact_email": {
 			// Property: PortalContactEmail
@@ -136,6 +143,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the portal.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"portal_name": {
 			// Property: PortalName
@@ -158,6 +168,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -224,6 +237,9 @@ func portalResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

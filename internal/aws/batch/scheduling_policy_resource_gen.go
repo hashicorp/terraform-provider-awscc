@@ -30,6 +30,9 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "ARN of the Scheduling Policy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"fairshare_policy": {
 			// Property: FairsharePolicy
@@ -132,6 +135,7 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -154,6 +158,7 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -163,6 +168,9 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

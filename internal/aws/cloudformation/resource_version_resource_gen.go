@@ -31,6 +31,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"execution_role_arn": {
 			// Property: ExecutionRoleArn
@@ -44,6 +47,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -57,6 +61,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Indicates if this type version is the current default version",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"logging_config": {
 			// Property: LoggingConfig
@@ -107,6 +114,7 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -125,6 +133,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"schema_handler_package": {
 			// Property: SchemaHandlerPackage
@@ -152,6 +163,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource Name (ARN) of the type without the versionID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"type_name": {
 			// Property: TypeName
@@ -179,6 +193,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ID of the version of the type represented by this resource instance.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"visibility": {
 			// Property: Visibility
@@ -194,6 +211,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The scope at which the type is visible and usable in CloudFormation operations.\n\nValid values include:\n\nPRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.\n\nPUBLIC: The type is publically visible and usable within any Amazon account.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -201,6 +221,9 @@ func resourceVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

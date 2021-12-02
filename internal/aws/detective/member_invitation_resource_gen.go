@@ -34,6 +34,7 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"graph_arn": {
@@ -100,6 +101,9 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

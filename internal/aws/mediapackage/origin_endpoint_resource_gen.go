@@ -30,6 +30,9 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) assigned to the OriginEndpoint.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorization": {
 			// Property: Authorization
@@ -1593,6 +1596,9 @@ func originEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The URL of the packaged OriginEndpoint for consumption.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"whitelist": {
 			// Property: Whitelist

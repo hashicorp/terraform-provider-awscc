@@ -30,6 +30,9 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of `CreationTime` is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"deployment_status": {
 			// Property: DeploymentStatus
@@ -41,6 +44,9 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"framework_arn": {
 			// Property: FrameworkArn
@@ -52,6 +58,9 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"framework_controls": {
 			// Property: FrameworkControls
@@ -274,6 +283,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -287,6 +297,9 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"framework_tags": {
 			// Property: FrameworkTags
@@ -354,6 +367,9 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -51,6 +51,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"notification_arns": {
 			// Property: NotificationArns
@@ -71,6 +74,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -91,6 +95,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"path_id": {
 			// Property: PathId
@@ -158,6 +165,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"provisioned_product_name": {
 			// Property: ProvisionedProductName
@@ -174,6 +184,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -375,6 +386,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -433,6 +447,9 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

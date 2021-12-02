@@ -73,6 +73,9 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "A unique Arn for CodeSigningConfig resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"code_signing_config_id": {
 			// Property: CodeSigningConfigId
@@ -85,6 +88,9 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "A unique identifier for CodeSigningConfig resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"code_signing_policies": {
 			// Property: CodeSigningPolicies
@@ -125,6 +131,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "Warn"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -153,6 +160,9 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

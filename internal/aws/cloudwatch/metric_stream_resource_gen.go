@@ -32,6 +32,9 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name of the metric stream.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_date": {
 			// Property: CreationDate
@@ -44,6 +47,9 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The date of creation of the metric stream.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"exclude_filters": {
 			// Property: ExcludeFilters
@@ -164,6 +170,9 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The date of the last update of the metric stream.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -182,6 +191,7 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -229,6 +239,9 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Displays the state of the Metric Stream.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -298,6 +311,9 @@ func metricStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

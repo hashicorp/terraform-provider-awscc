@@ -30,6 +30,9 @@ func outcomeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The outcome ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -41,6 +44,9 @@ func outcomeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The timestamp when the outcome was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -68,6 +74,9 @@ func outcomeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The timestamp when the outcome was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -155,6 +164,9 @@ func outcomeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

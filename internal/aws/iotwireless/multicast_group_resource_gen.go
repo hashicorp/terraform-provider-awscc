@@ -30,6 +30,9 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Multicast group arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"associate_wireless_device": {
 			// Property: AssociateWirelessDevice
@@ -87,6 +90,9 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Multicast group id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -139,12 +145,18 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "Multicast group number of devices in group. Returned after successful read.",
 						Type:        types.NumberType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"number_of_devices_requested": {
 						// Property: NumberOfDevicesRequested
 						Description: "Multicast group number of devices requested. Returned after successful read.",
 						Type:        types.NumberType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"rf_region": {
 						// Property: RfRegion
@@ -184,6 +196,9 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Multicast group status. Returned after successful read.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

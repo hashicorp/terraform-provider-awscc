@@ -68,6 +68,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"schedule": {
@@ -133,6 +134,9 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The state of the scheduled action.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"target_action": {
 			// Property: TargetAction
@@ -270,6 +274,9 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

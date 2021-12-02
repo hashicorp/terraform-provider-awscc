@@ -28,6 +28,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"destination": {
 			// Property: Destination
@@ -51,6 +54,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -64,6 +68,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -75,6 +80,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"network_insights_path_id": {
 			// Property: NetworkInsightsPathId
@@ -84,6 +92,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"protocol": {
 			// Property: Protocol
@@ -129,6 +140,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -180,6 +192,9 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

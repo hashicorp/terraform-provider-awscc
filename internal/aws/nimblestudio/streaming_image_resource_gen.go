@@ -103,6 +103,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"eula_ids": {
 			// Property: EulaIds
@@ -117,6 +120,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "<p>The list of EULAs that must be accepted before a Streaming Session can be started using this streaming image.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -144,6 +150,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "<p>The owner of the streaming image, either the studioId that contains the streaming image, or 'amazon' for images that are provided by Amazon Nimble Studio.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"platform": {
 			// Property: Platform
@@ -156,6 +165,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"streaming_image_id": {
 			// Property: StreamingImageId
@@ -165,6 +177,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"studio_id": {
 			// Property: StudioId
@@ -199,6 +214,7 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -208,6 +224,9 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -57,6 +57,9 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A unique primary identifier for a Resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId
@@ -78,6 +81,9 @@ func resourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

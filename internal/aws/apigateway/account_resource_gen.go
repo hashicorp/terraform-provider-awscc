@@ -40,6 +40,9 @@ func accountResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Primary identifier which is manually generated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

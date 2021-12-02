@@ -60,6 +60,9 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -103,6 +106,9 @@ func flowVpcInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

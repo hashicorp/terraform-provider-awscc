@@ -559,6 +559,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN for the Amazon S3 Storage Lens configuration.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
@@ -629,6 +632,9 @@ func storageLensResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

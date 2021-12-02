@@ -111,6 +111,9 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"compute_platform": {
 			// Property: ComputePlatform
@@ -134,6 +137,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -225,6 +229,9 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

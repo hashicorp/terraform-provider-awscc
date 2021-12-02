@@ -66,6 +66,7 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -87,6 +88,9 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

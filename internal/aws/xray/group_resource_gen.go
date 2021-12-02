@@ -43,6 +43,9 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the group that was generated on creation.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"group_name": {
 			// Property: GroupName
@@ -140,6 +143,9 @@ func groupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

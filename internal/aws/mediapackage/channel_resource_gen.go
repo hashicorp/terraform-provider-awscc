@@ -30,6 +30,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) assigned to the Channel.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -152,6 +155,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -252,6 +258,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

@@ -75,6 +75,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -88,6 +91,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the SMB location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"mount_options": {
 			// Property: MountOptions
@@ -141,6 +147,7 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 				},
 				),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"password": {
@@ -283,6 +290,9 @@ func locationSMBResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

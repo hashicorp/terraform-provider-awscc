@@ -30,6 +30,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"certificate_authority_data": {
 			// Property: CertificateAuthorityData
@@ -41,6 +44,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The certificate-authority-data for your cluster.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cluster_security_group_id": {
 			// Property: ClusterSecurityGroupId
@@ -52,6 +58,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"encryption_config": {
 			// Property: EncryptionConfig
@@ -119,6 +128,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -132,6 +142,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint": {
 			// Property: Endpoint
@@ -143,6 +156,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"kubernetes_network_config": {
 			// Property: KubernetesNetworkConfig
@@ -202,6 +218,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -307,6 +324,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -320,6 +338,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resources_vpc_config": {
 			// Property: ResourcesVpcConfig
@@ -401,6 +422,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
+							tfsdk.UseStateForUnknown(),
 							tfsdk.RequiresReplace(),
 						},
 					},
@@ -508,6 +530,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

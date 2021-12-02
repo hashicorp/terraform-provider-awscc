@@ -33,6 +33,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -49,6 +50,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// ModuleName is a write-only property.
@@ -66,6 +68,7 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// VersionId is a write-only property.
@@ -76,6 +79,9 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

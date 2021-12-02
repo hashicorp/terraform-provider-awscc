@@ -32,6 +32,9 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource name for the suite definition.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"suite_definition_configuration": {
 			// Property: SuiteDefinitionConfiguration
@@ -170,6 +173,9 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The unique identifier for the suite definition.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"suite_definition_version": {
 			// Property: SuiteDefinitionVersion
@@ -183,6 +189,9 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The suite definition version of a test suite.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -248,6 +257,9 @@ func suiteDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

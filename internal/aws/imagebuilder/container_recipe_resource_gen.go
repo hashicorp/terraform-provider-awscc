@@ -30,6 +30,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The Amazon Resource Name (ARN) of the container recipe.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"components": {
 			// Property: Components
@@ -64,6 +67,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -87,6 +91,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -102,6 +107,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -117,6 +123,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// DockerfileTemplateData is a write-only property.
@@ -133,6 +140,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// DockerfileTemplateUri is a write-only property.
@@ -149,6 +157,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -347,6 +356,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -362,6 +372,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -377,6 +388,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -392,6 +404,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -417,6 +430,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -439,6 +453,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -488,6 +503,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -503,6 +519,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -518,6 +535,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -527,6 +545,9 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

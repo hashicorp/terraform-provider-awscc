@@ -76,6 +76,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "ON_DEMAND"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"provisioned_throughput": {
@@ -184,6 +185,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "ASC"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -195,6 +197,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -256,6 +259,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "AWS_OWNED_KMS_KEY"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"kms_key_identifier": {
@@ -403,6 +407,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -471,6 +476,9 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

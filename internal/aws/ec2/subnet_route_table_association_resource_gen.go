@@ -27,6 +27,9 @@ func subnetRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resourc
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"route_table_id": {
 			// Property: RouteTableId

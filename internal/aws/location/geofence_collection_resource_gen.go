@@ -30,6 +30,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"collection_arn": {
 			// Property: CollectionArn
@@ -41,6 +44,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"collection_name": {
 			// Property: CollectionName
@@ -71,6 +77,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -87,6 +96,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(0, 1000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -138,6 +148,7 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -152,6 +163,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -159,6 +173,9 @@ func geofenceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

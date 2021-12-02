@@ -28,6 +28,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cluster_name": {
 			// Property: ClusterName
@@ -63,6 +66,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -191,6 +195,7 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -260,6 +265,9 @@ func fargateProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

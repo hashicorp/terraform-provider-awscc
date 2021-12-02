@@ -30,6 +30,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the asset model, which has the following format.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"asset_model_composite_models": {
 			// Property: AssetModelCompositeModels
@@ -635,6 +638,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the asset model.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"asset_model_name": {
 			// Property: AssetModelName
@@ -1155,6 +1161,9 @@ func assetModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

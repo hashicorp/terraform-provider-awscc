@@ -48,6 +48,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the analysis.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -78,6 +81,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that the analysis was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_set_arns": {
 			// Property: DataSetArns
@@ -94,6 +100,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The ARNs of the datasets of the analysis.</p>",
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"errors": {
 			// Property: Errors
@@ -177,6 +186,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that the analysis was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
@@ -544,6 +556,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// Sheets is a write-only property.
 		},
 		"source_entity": {
@@ -661,6 +676,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// Status is a write-only property.
 		},
 		"tags": {
@@ -741,6 +759,9 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

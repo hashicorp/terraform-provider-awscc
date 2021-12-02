@@ -514,6 +514,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the stack set that you're creating.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"stack_set_name": {
 			// Property: StackSetName
@@ -636,6 +639,9 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

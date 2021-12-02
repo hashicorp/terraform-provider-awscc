@@ -30,6 +30,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The ID of the local gateway.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"local_gateway_route_table_id": {
 			// Property: LocalGatewayRouteTableId
@@ -55,6 +58,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The ID of the association.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -66,6 +72,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The state of the association.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -138,6 +147,9 @@ func localGatewayRouteTableVPCAssociationResourceType(ctx context.Context) (tfsd
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -1037,6 +1037,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -1054,6 +1057,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -1068,6 +1072,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that this data source was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"credentials": {
 			// Property: Credentials
@@ -2162,6 +2169,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -3229,6 +3237,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The last time that this data source was updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -3352,6 +3363,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -3477,6 +3491,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -3515,6 +3530,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

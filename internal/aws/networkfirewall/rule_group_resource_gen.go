@@ -1043,6 +1043,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_group_id": {
 			// Property: RuleGroupId
@@ -1055,6 +1058,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_group_name": {
 			// Property: RuleGroupName
@@ -1155,6 +1161,9 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

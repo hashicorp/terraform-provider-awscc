@@ -29,6 +29,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -94,6 +95,9 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"multicast_support": {
 			// Property: MulticastSupport
@@ -105,6 +109,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

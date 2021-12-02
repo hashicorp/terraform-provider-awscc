@@ -29,6 +29,9 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The Amazon Resource Name (ARN) of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -51,6 +54,9 @@ func globalNetworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The ID of the global network.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

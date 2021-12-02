@@ -32,6 +32,9 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "The accountId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"frequency": {
 			// Property: Frequency
@@ -161,6 +164,9 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "Subscription ARN",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subscription_name": {
 			// Property: SubscriptionName
@@ -200,6 +206,9 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -31,6 +31,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"application_instance_id_to_replace": {
 			// Property: ApplicationInstanceIdToReplace
@@ -48,6 +51,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -61,6 +65,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -70,6 +77,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.NumberType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"default_runtime_context_device": {
 			// Property: DefaultRuntimeContextDevice
@@ -100,6 +110,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -117,6 +130,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(0, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -148,6 +162,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -157,6 +174,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.NumberType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"manifest_overrides_payload": {
 			// Property: ManifestOverridesPayload
@@ -188,6 +208,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -239,6 +260,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -258,6 +280,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -281,6 +304,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_description": {
 			// Property: StatusDescription
@@ -292,6 +318,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_filter": {
 			// Property: StatusFilter
@@ -385,6 +414,9 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

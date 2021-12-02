@@ -30,6 +30,9 @@ func resolverRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the resolver rule.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -92,6 +95,9 @@ func resolverRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the endpoint that the rule is associated with.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_type": {
 			// Property: RuleType
@@ -239,6 +245,9 @@ func resolverRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

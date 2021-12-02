@@ -163,6 +163,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) representing the target group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"target_group_name": {
 			// Property: TargetGroupName
@@ -192,6 +195,9 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

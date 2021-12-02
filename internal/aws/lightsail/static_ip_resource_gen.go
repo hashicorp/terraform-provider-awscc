@@ -40,6 +40,9 @@ func staticIpResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The static IP address.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"is_attached": {
 			// Property: IsAttached
@@ -51,6 +54,9 @@ func staticIpResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A Boolean value indicating whether the static IP is attached.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"static_ip_arn": {
 			// Property: StaticIpArn
@@ -60,6 +66,9 @@ func staticIpResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"static_ip_name": {
 			// Property: StaticIpName
@@ -81,6 +90,9 @@ func staticIpResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

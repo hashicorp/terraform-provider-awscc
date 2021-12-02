@@ -30,6 +30,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the asset",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"asset_hierarchies": {
 			// Property: AssetHierarchies
@@ -95,6 +98,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the asset",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"asset_model_id": {
 			// Property: AssetModelId
@@ -243,6 +249,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

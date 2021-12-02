@@ -32,6 +32,9 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Amazon Resource Name (ARN) of the server certificate",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"certificate_body": {
 			// Property: CertificateBody
@@ -49,6 +52,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -68,6 +72,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 2097152),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -102,6 +107,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 16384),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -121,6 +127,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -185,6 +192,9 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

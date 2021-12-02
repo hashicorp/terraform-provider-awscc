@@ -30,6 +30,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Description: "The time at which the job definition was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_quality_app_specification": {
 			// Property: DataQualityAppSpecification
@@ -259,6 +262,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -521,6 +525,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Description: "The Amazon Resource Name (ARN) of job definition.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"job_definition_name": {
 			// Property: JobDefinitionName
@@ -539,6 +546,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.StringLenAtMost(63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -738,6 +746,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -797,6 +806,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -862,6 +872,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -871,6 +882,9 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

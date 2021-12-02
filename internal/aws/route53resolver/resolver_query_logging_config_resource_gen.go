@@ -32,6 +32,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"association_count": {
 			// Property: AssociationCount
@@ -43,6 +46,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -56,6 +62,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -69,6 +78,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"destination_arn": {
 			// Property: DestinationArn
@@ -87,6 +99,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringLenBetween(1, 600),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -102,6 +115,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -121,6 +137,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -136,6 +153,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"share_status": {
 			// Property: ShareStatus
@@ -152,6 +172,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -169,6 +192,9 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			Description: "ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

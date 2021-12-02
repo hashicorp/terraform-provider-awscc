@@ -116,6 +116,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Amazon Resource Name (ARN) of the alarm",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"insufficient_data_actions": {
 			// Property: InsufficientDataActions
@@ -167,6 +170,9 @@ func compositeAlarmResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

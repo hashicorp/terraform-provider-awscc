@@ -32,6 +32,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -64,6 +67,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -80,6 +84,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The name of the domain. This field is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"owner": {
 			// Property: Owner
@@ -92,6 +99,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"permissions_policy_document": {
 			// Property: PermissionsPolicyDocument
@@ -168,6 +178,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

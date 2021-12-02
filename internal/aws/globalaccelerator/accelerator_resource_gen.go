@@ -30,6 +30,9 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dns_name": {
 			// Property: DnsName
@@ -41,6 +44,9 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -56,6 +62,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: true}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"ip_address_type": {
@@ -82,6 +89,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "IPV4"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"ip_addresses": {
@@ -177,6 +185,9 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

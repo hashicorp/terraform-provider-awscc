@@ -123,6 +123,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "static-key"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"region": {
@@ -202,6 +203,9 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The IP address that the flow will be listening on for incoming content.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ingest_port": {
 			// Property: IngestPort
@@ -239,6 +243,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"name": {
@@ -290,6 +295,9 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the source.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"source_ingest_port": {
 			// Property: SourceIngestPort
@@ -301,6 +309,9 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"stream_id": {
 			// Property: StreamId
@@ -341,6 +352,9 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

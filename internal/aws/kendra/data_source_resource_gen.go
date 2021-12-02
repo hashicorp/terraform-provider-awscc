@@ -29,6 +29,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
@@ -3728,6 +3731,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ID of data source",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"index_id": {
 			// Property: IndexId

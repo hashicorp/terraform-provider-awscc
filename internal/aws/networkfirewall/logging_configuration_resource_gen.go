@@ -56,6 +56,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -172,6 +173,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

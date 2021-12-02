@@ -59,6 +59,9 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Network interface id.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"interface_type": {
 			// Property: InterfaceType
@@ -72,6 +75,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -130,6 +134,9 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Returns the primary private IP address of the network interface.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"private_ip_address": {
 			// Property: PrivateIpAddress
@@ -143,6 +150,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -219,6 +227,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				Multiset(),
 			},
 		},

@@ -29,6 +29,9 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the access policy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"access_policy_id": {
 			// Property: AccessPolicyId
@@ -40,6 +43,9 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the access policy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"access_policy_identity": {
 			// Property: AccessPolicyIdentity
@@ -222,6 +228,9 @@ func accessPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

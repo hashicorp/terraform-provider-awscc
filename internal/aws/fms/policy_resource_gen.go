@@ -33,6 +33,9 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "A resource ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"delete_all_policy_resources": {
 			// Property: DeleteAllPolicyResources
@@ -119,6 +122,9 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"include_map": {
 			// Property: IncludeMap

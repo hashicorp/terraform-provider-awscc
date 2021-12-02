@@ -115,6 +115,9 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -132,6 +135,7 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -147,6 +151,9 @@ func hostedZoneResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"query_logging_config": {
 			// Property: QueryLoggingConfig
