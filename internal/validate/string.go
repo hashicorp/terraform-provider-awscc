@@ -5,8 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // stringLenBetweenValidator validates that a string Attribute's length is in a range.
@@ -28,31 +31,15 @@ func (validator stringLenBetweenValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l < validator.minLength || l > validator.maxLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be in the range [%d, %d], got %d", validator.minLength, validator.maxLength, l),
-		)
+	if l := len(s); l < validator.minLength || l > validator.maxLength {
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthBetweenAttributeError(
+			request.AttributePath, validator.minLength, validator.maxLength, l,
+		))
 
 		return
 	}
@@ -89,31 +76,15 @@ func (validator stringLenAtLeastValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l < validator.minLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be at least %d, got %d", validator.minLength, l),
-		)
+	if l := len(s); l < validator.minLength {
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthAtLeastAttributeError(
+			request.AttributePath, validator.minLength, l,
+		))
 
 		return
 	}
@@ -149,31 +120,15 @@ func (validator stringLenAtMostValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator stringLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	var l int
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	l = len(s.Value)
-
-	if l > validator.maxLength {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid length",
-			fmt.Sprintf("expected length to be at most %d, got %d", validator.maxLength, l),
-		)
+	if l := len(s); l > validator.maxLength {
+		response.Diagnostics.Append(ccdiag.NewInvalidLengthAtMostAttributeError(
+			request.AttributePath, validator.maxLength, l,
+		))
 
 		return
 	}
@@ -209,32 +164,28 @@ func (validator stringInSliceValidator) MarkdownDescription(ctx context.Context)
 
 // Validate performs the validation.
 func (validator stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
-		return
-	}
-
-	if s.Unknown || s.Null {
 		return
 	}
 
 	for _, val := range validator.valid {
-		if s.Value == val {
+		if s == val {
 			return
 		}
 	}
 
-	response.Diagnostics.AddAttributeError(
+	response.Diagnostics.Append(newStringNotInSliceError(
 		request.AttributePath,
-		"Invalid value",
-		fmt.Sprintf("expected value to be one of %v, got %s", validator.valid, s.Value),
+		validator.valid,
+		s,
+	))
+}
+
+func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value string) diag.Diagnostic {
+	return ccdiag.NewInvalidValueAttributeError(
+		path,
+		fmt.Sprintf("expected value to be one of %v, got %s", valid, value),
 	)
 }
 
@@ -262,46 +213,51 @@ func (validator stringIsJsonObjectValidator) MarkdownDescription(ctx context.Con
 
 // Validate performs the validation.
 func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
-		return
-	}
-
-	if s.Unknown || s.Null {
 		return
 	}
 
 	// A JSON object starts with a '{'
-	if s.Value[:1] != "{" {
-		response.Diagnostics.AddAttributeError(
+	if s[:1] != "{" {
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
 			"expected value to be a valid JSON object",
-		)
+		))
 		return
 	}
 
 	// Use json.Unmarshal() instead of just json.Valid() to get the parsing error
 	var i interface{}
-	err := json.Unmarshal([]byte(s.Value), &i)
+	err := json.Unmarshal([]byte(s), &i)
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be valid JSON: %s", err),
-		)
+		))
 	}
-
 }
 
 // StringIsJsonObject returns a new string is JSON validator.
 func StringIsJsonObject() tfsdk.AttributeValidator {
 	return stringIsJsonObjectValidator{}
+}
+
+func validateString(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (string, bool) {
+	s, ok := request.AttributeConfig.(types.String)
+
+	if !ok {
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
+			request.AttributePath,
+			request.AttributeConfig,
+		))
+
+		return "", false
+	}
+
+	if s.Unknown || s.Null {
+		return "", false
+	}
+
+	return s.Value, true
 }

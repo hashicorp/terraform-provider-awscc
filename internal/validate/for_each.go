@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 // arrayForEachValidator validates that a List Attribute's contents all satisfy the included validator.
@@ -27,20 +26,16 @@ func (validator arrayForEachValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator arrayForEachValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	l, ok := request.AttributeConfig.(types.List)
-
+	elems, elemKeyer, ok := validateArray(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	for i, e := range l.Elems {
-		elemPath := request.AttributePath.WithElementKeyInt(i)
+	for i, e := range elems {
+		elemPath, diag := elemKeyer(ctx, request.AttributePath, i, e)
+		if diag != nil {
+			response.Diagnostics.Append(diag)
+		}
 
 		elemRequest := tfsdk.ValidateAttributeRequest{
 			AttributePath:   elemPath,

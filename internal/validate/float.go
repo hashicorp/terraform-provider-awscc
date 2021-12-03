@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // floatBetweenValidator validates that an float Attribute's value is in a range.
@@ -27,30 +28,16 @@ func (validator floatBetweenValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator floatBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	f, ok := validateFloat(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
-
-	if n.Unknown || n.Null {
-		return
-	}
-
-	f, _ := n.Value.Float64()
 
 	if f < validator.min || f > validator.max {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be in the range [%f, %f], got %f", validator.min, validator.max, f),
-		)
+		))
 
 		return
 	}
@@ -87,30 +74,16 @@ func (validator floatAtLeastValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator floatAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	f, ok := validateFloat(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
-
-	if n.Unknown || n.Null {
-		return
-	}
-
-	f, _ := n.Value.Float64()
 
 	if f < validator.min {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be at least %f, got %f", validator.min, f),
-		)
+		))
 
 		return
 	}
@@ -142,30 +115,16 @@ func (validator floatAtMostValidator) MarkdownDescription(ctx context.Context) s
 
 // Validate performs the validation.
 func (validator floatAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	f, ok := validateFloat(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
-
-	if n.Unknown || n.Null {
-		return
-	}
-
-	f, _ := n.Value.Float64()
 
 	if f > validator.max {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be at most %f, got %f", validator.max, f),
-		)
+		))
 
 		return
 	}
@@ -176,4 +135,25 @@ func FloatAtMost(max float64) tfsdk.AttributeValidator {
 	return floatAtMostValidator{
 		max: max,
 	}
+}
+
+func validateFloat(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (float64, bool) {
+	n, ok := request.AttributeConfig.(types.Number)
+
+	if !ok {
+		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
+			request.AttributePath,
+			request.AttributeConfig,
+		))
+
+		return 0, false
+	}
+
+	if n.Unknown || n.Null {
+		return 0, false
+	}
+
+	f, _ := n.Value.Float64()
+
+	return f, true
 }

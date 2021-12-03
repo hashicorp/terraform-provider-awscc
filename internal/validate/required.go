@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 type RequiredAttributesFunc func(names []string) tfdiag.Diagnostics
@@ -145,11 +146,10 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 		}
 
 	default:
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", v),
-		)
+			v,
+		))
 
 		return
 	}
@@ -157,11 +157,10 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	val, err := request.AttributeConfig.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(ccdiag.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
-			"No Terraform value",
-			"unable to obtain Terraform value:\n\n"+err.Error(),
-		)
+			err,
+		))
 
 		return
 	}
@@ -186,14 +185,14 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 			}
 		}
 
-		for _, val := range v {
+		for i, val := range v {
 			// Each array element must be an Object.
 			var vals map[string]tftypes.Value
 			if err := val.As(&vals); err != nil {
-				response.Diagnostics.AddError(
-					"Invalid value type",
-					"unable to convert value type:\n\n"+err.Error(),
-				)
+				response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeAttributeError(
+					request.AttributePath.WithElementKeyInt(i),
+					err,
+				))
 
 				return
 			}
@@ -247,10 +246,7 @@ func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.
 	}
 
 	if typ := val.Type(); !typ.Is(tftypes.Object{}) {
-		response.Diagnostics.AddError(
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%s)", typ),
-		)
+		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeResourceConfigError(typ))
 
 		return
 	}
@@ -258,10 +254,7 @@ func (validator resourceConfigRequiredAttributesValidator) Validate(ctx context.
 	var vals map[string]tftypes.Value
 
 	if err := val.As(&vals); err != nil {
-		response.Diagnostics.AddError(
-			"Invalid value type",
-			"unable to convert value type:\n\n"+err.Error(),
-		)
+		response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeResourceConfigError(err))
 
 		return
 	}
