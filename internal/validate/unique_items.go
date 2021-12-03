@@ -2,11 +2,11 @@ package validate
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 // uniqueItemsValidator validates that an Attribute's list items have unique values.
@@ -29,11 +29,10 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	list, ok := request.AttributeConfig.(types.List)
 
 	if !ok {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
+			request.AttributeConfig,
+		))
 
 		return
 	}
@@ -45,11 +44,10 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 	val, err := list.ToTerraformValue(ctx)
 
 	if err != nil {
-		response.Diagnostics.AddAttributeError(
+		response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
 			request.AttributePath,
-			"No Terraform value",
-			"unable to obtain Terraform value:\n\n"+err.Error(),
-		)
+			err,
+		))
 
 		return
 	}

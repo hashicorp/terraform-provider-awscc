@@ -223,6 +223,20 @@
         "Arn"
       ]
     },
+    "CloudWatchMetrics": {
+      "description": "CloudWatch metrics settings for the Amazon S3 Storage Lens metrics export.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IsEnabled": {
+          "description": "Specifies whether CloudWatch metrics are enabled or disabled.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "IsEnabled"
+      ]
+    },
     "DataExport": {
       "description": "Specifies how Amazon S3 Storage Lens metrics should be exported.",
       "type": "object",
@@ -230,11 +244,11 @@
       "properties": {
         "S3BucketDestination": {
           "$ref": "#/definitions/S3BucketDestination"
+        },
+        "CloudWatchMetrics": {
+          "$ref": "#/definitions/CloudWatchMetrics"
         }
-      },
-      "required": [
-        "S3BucketDestination"
-      ]
+      }
     },
     "Tag": {
       "type": "object",

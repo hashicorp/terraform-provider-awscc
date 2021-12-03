@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_vpc_endpoint.example <resource ID>

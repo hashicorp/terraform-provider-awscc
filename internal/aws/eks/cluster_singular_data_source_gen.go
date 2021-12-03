@@ -142,8 +142,20 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "additionalProperties": false,
 			//   "description": "The Kubernetes network configuration for the cluster.",
 			//   "properties": {
+			//     "IpFamily": {
+			//       "description": "Ipv4 or Ipv6, Ipv6 is only supported on cluster with k8s version 1.21",
+			//       "enum": [
+			//         "ipv4",
+			//         "ipv6"
+			//       ],
+			//       "type": "string"
+			//     },
 			//     "ServiceIpv4Cidr": {
 			//       "description": "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
+			//       "type": "string"
+			//     },
+			//     "ServiceIpv6Cidr": {
+			//       "description": "The CIDR block to assign Kubernetes service IP addresses from.",
 			//       "type": "string"
 			//     }
 			//   },
@@ -152,9 +164,21 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Description: "The Kubernetes network configuration for the cluster.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"ip_family": {
+						// Property: IpFamily
+						Description: "Ipv4 or Ipv6, Ipv6 is only supported on cluster with k8s version 1.21",
+						Type:        types.StringType,
+						Computed:    true,
+					},
 					"service_ipv_4_cidr": {
 						// Property: ServiceIpv4Cidr
 						Description: "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"service_ipv_6_cidr": {
+						// Property: ServiceIpv6Cidr
+						Description: "The CIDR block to assign Kubernetes service IP addresses from.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -241,7 +265,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The unique name to give to your cluster.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
 			//   "type": "string"
 			// }
 			Description: "The unique name to give to your cluster.",
@@ -412,7 +436,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
-			//   "pattern": "",
+			//   "pattern": "1\\.\\d\\d",
 			//   "type": "string"
 			// }
 			Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
@@ -448,6 +472,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"endpoint":                   "Endpoint",
 		"endpoint_private_access":    "EndpointPrivateAccess",
 		"endpoint_public_access":     "EndpointPublicAccess",
+		"ip_family":                  "IpFamily",
 		"key":                        "Key",
 		"key_arn":                    "KeyArn",
 		"kubernetes_network_config":  "KubernetesNetworkConfig",
@@ -461,6 +486,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"role_arn":                   "RoleArn",
 		"security_group_ids":         "SecurityGroupIds",
 		"service_ipv_4_cidr":         "ServiceIpv4Cidr",
+		"service_ipv_6_cidr":         "ServiceIpv6Cidr",
 		"subnet_ids":                 "SubnetIds",
 		"tags":                       "Tags",
 		"type":                       "Type",

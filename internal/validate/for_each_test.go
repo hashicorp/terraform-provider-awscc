@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
 func TestArrayForEachValidator(t *testing.T) {
@@ -29,10 +30,9 @@ func TestArrayForEachValidator(t *testing.T) {
 			val:       tftypes.NewValue(tftypes.Bool, true),
 			f:         types.BoolType.ValueFromTerraform,
 			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: diag.NewAttributeErrorDiagnostic(
+			expectedDiag: ccdiag.NewIncorrectValueTypeAttributeError(
 				rootPath,
-				"Invalid value type",
-				"received incorrect value type (types.Bool)",
+				types.Bool{},
 			),
 		},
 
@@ -69,11 +69,69 @@ func TestArrayForEachValidator(t *testing.T) {
 			}),
 			f:         types.ListType{ElemType: types.StringType}.ValueFromTerraform,
 			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: diag.NewAttributeErrorDiagnostic(
+			expectedDiag: newStringNotInSliceError(
 				rootPath.WithElementKeyInt(3),
-				"Invalid value",
-				"expected value to be one of [alpha beta gamma], got delta",
+				[]string{"alpha", "beta", "gamma"},
+				"delta",
 			),
+		},
+		"list of string with unknown element": {
+			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.ListType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+
+		"unknown set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, tftypes.UnknownValue),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"null set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, nil),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"empty set": {
+			val:       tftypes.NewValue(tftypes.Set{ElementType: tftypes.Number}, []tftypes.Value{}),
+			f:         types.SetType{ElemType: types.NumberType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"valid set of string": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, "beta"),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+		},
+		"invalid set of string": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, "beta"),
+				tftypes.NewValue(tftypes.String, "gamma"),
+				tftypes.NewValue(tftypes.String, "delta"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
+			expectedDiag: newStringNotInSliceError(
+				rootPath.WithElementKeyValue(tftypes.NewValue(tftypes.String, "delta")),
+				[]string{"alpha", "beta", "gamma"},
+				"delta",
+			),
+		},
+		"set of string with unknown element": {
+			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
+				tftypes.NewValue(tftypes.String, "alpha"),
+				tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+				tftypes.NewValue(tftypes.String, "gamma"),
+			}),
+			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
 		},
 	}
 

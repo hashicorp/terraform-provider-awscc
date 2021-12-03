@@ -3,6 +3,10 @@
     "description":"Resource schema for AWS::IoTSiteWise::Project",
     "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-IoTSiteWise.git",
     "definitions": {
+        "AssetId": {
+            "description": "The ID of the asset",
+            "type": "string"
+        },
         "Tag":{
             "description":"To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
             "type":"object",
@@ -42,6 +46,14 @@
             "description":"The ARN of the project.",
             "type":"string"
         },
+        "AssetIds":{
+            "description":"The IDs of the assets to be associated to the project.",
+            "type":"array",
+            "uniqueItems":true,
+            "items":{
+                "$ref":"#/definitions/AssetId"
+            }
+        },
         "Tags":{
             "description":"A list of key-value pairs that contain metadata for the project.",
             "type":"array",
@@ -71,19 +83,24 @@
     "handlers": {
         "create": {
             "permissions": [
-                "iotsitewise:CreateProject"
+                "iotsitewise:CreateProject",
+                "iotsitewise:BatchAssociateProjectAssets"
             ]
         },
         "read": {
             "permissions": [
                 "iotsitewise:DescribeProject",
-                "iotsitewise:ListTagsForResource"
+                "iotsitewise:ListTagsForResource",
+                "iotsitewise:ListProjectAssets"
             ]
         },
         "update": {
             "permissions": [
                 "iotsitewise:DescribeProject",
                 "iotsitewise:UpdateProject",
+                "iotsitewise:BatchAssociateProjectAssets",
+                "iotsitewise:BatchDisAssociateProjectAssets",
+                "iotsitewise:ListProjectAssets",
                 "iotsitewise:TagResource",
                 "iotsitewise:UntagResource",
                 "iotsitewise:ListTagsForResource"
