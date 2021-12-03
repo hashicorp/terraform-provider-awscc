@@ -30,6 +30,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM scope.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -50,6 +53,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM this scope is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipam_id": {
 			// Property: IpamId
@@ -76,6 +82,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Id of the IPAM scope.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipam_scope_type": {
 			// Property: IpamScopeType
@@ -99,6 +108,7 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -112,6 +122,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Is this one of the default scopes created with the IPAM.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"pool_count": {
 			// Property: PoolCount
@@ -123,6 +136,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The number of pools that currently exist in this scope.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -188,6 +204,9 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

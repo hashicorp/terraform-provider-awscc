@@ -102,6 +102,9 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"policy_description": {
 			// Property: PolicyDescription
@@ -180,6 +183,9 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

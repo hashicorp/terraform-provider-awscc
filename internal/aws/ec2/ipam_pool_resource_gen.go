@@ -145,6 +145,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM Pool.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"auto_import": {
 			// Property: AutoImport
@@ -176,6 +179,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM this pool is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipam_pool_id": {
 			// Property: IpamPoolId
@@ -187,6 +193,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Id of the IPAM Pool.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipam_scope_arn": {
 			// Property: IpamScopeArn
@@ -198,6 +207,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the scope this pool is a part of.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"ipam_scope_id": {
 			// Property: IpamScopeId
@@ -228,6 +240,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Determines whether this scope contains publicly routable space or space for a private network",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"locale": {
 			// Property: Locale
@@ -241,6 +256,7 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -254,6 +270,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The depth of this pool in the source pool hierarchy.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"provisioned_cidrs": {
 			// Property: ProvisionedCidrs
@@ -304,6 +323,7 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -319,6 +339,7 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -340,6 +361,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The state of this pool. This can be one of the following values: \"create-in-progress\", \"create-complete\", \"modify-in-progress\", \"modify-complete\", \"delete-in-progress\", or \"delete-complete\"",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"state_message": {
 			// Property: StateMessage
@@ -351,6 +375,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "An explanation of how the pool arrived at it current state.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -416,6 +443,9 @@ func iPAMPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

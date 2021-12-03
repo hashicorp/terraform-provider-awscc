@@ -227,8 +227,8 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"source_dest_check": {

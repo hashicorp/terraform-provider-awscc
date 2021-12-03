@@ -212,6 +212,9 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The CIDR block to assign Kubernetes service IP addresses from.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),
