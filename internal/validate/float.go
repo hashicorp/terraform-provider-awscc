@@ -121,7 +121,7 @@ func (validator floatAtMostValidator) Validate(ctx context.Context, request tfsd
 	}
 
 	if f > validator.max {
-		response.Diagnostics.Append(diags.NewInvalidValueError(
+		response.Diagnostics.Append(diag.NewInvalidValueAttributeError(
 			request.AttributePath,
 			fmt.Sprintf("expected value to be at most %f, got %f", validator.max, f),
 		))

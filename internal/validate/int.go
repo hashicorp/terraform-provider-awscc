@@ -117,43 +117,16 @@ func (validator intAtMostValidator) MarkdownDescription(ctx context.Context) str
 
 // Validate performs the validation.
 func (validator intAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	n, ok := request.AttributeConfig.(types.Number)
-
+	i, ok := validateInt(request, response)
 	if !ok {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value type",
-			fmt.Sprintf("received incorrect value type (%T)", request.AttributeConfig),
-		)
-
 		return
 	}
 
-	if n.Unknown || n.Null {
-		return
-	}
-
-	val := n.Value
-
-	if !val.IsInt() {
-		response.Diagnostics.AddAttributeError(
+	if i > int64(validator.max) {
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
 			request.AttributePath,
-			"Invalid value",
-			"Not an integer",
-		)
-
-		return
-	}
-
-	var i big.Int
-	_, _ = val.Int(&i)
-
-	if i := i.Int64(); i > int64(validator.max) {
-		response.Diagnostics.AddAttributeError(
-			request.AttributePath,
-			"Invalid value",
 			fmt.Sprintf("expected value to be at most %d, got %d", validator.max, i),
-		)
+		))
 
 		return
 	}
