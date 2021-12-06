@@ -1,4 +1,9 @@
 ## 0.9.0 (Unreleased)
+
+BUG FIXES:
+
+* provider: Ensure `darwin/arm64` platform is included in releases
+
 ## [0.8.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.8.0) (December  3, 2021)
 
 FEATURES:
