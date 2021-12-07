@@ -38,8 +38,6 @@ publishers:
     signature: true
     cmd: hc-releases upload-file {{ abs .ArtifactPath }}
     env:
-      - AWS_DEFAULT_REGION={{ .Env.AWS_DEFAULT_REGION }}
-      - AWS_REGION={{ .Env.AWS_REGION }}
       - AWS_ACCESS_KEY_ID={{ .Env.AWS_ACCESS_KEY_ID }}
       - AWS_SECRET_ACCESS_KEY={{ .Env.AWS_SECRET_ACCESS_KEY }}
       - AWS_SESSION_TOKEN={{ .Env.AWS_SESSION_TOKEN }}
@@ -59,7 +57,6 @@ signs:
       sign
       --dearmor
       --file ${artifact}
-      --signer {{ .Env.SIGNER }}
       --out ${signature}
     artifacts: checksum
   # Signature file with GPG Public Key ID in filename (i.e. terraform-provider-awscc_VERSION_SHA256SUMS.7685B676.sig)
@@ -73,7 +70,6 @@ signs:
       sign
       --dearmor
       --file ${artifact}
-      --signer {{ .Env.SIGNER }}
       --out ${signature}
     artifacts: checksum
 snapshot:
