@@ -6,8 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
-	"github.com/hashicorp/terraform-plugin-log/tfsdklog"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -62,7 +60,7 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
-		ctx := getTestContext()
+		ctx := context.TODO()
 
 		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlApiClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
@@ -75,7 +73,7 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 			return fmt.Errorf("unable to convert %T to CloudControlApiProvider", td.provider)
 		}
 
-		ctx := getTestContext()
+		ctx := context.TODO()
 
 		return existsFunc(shouldExist)(
 			ctx,
@@ -125,8 +123,4 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudcontrol.Client, st
 			return nil
 		}
 	}
-}
-
-func getTestContext() context.Context {
-	return tfsdklog.NewRootProviderLogger(context.TODO(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 }

@@ -12,12 +12,11 @@ require (
 	github.com/google/go-cmp v0.5.6
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.14.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.3
-	github.com/hashicorp/go-hclog v1.0.0
+	github.com/hashicorp/go-hclog v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.11.1
 	github.com/hashicorp/terraform-plugin-framework v0.5.1-0.20211213220612-574e52cdb9f8
 	github.com/hashicorp/terraform-plugin-go v0.4.0
-	github.com/hashicorp/terraform-plugin-log v0.2.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.9.0
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24

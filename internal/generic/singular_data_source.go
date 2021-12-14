@@ -3,14 +3,13 @@ package generic
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -69,7 +68,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 	cfTypeName := sd.dataSourceType.cfTypeName
 	tfTypeName := sd.dataSourceType.tfTypeName
 
-	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] DataSource.Read enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
 	conn := sd.provider.CloudControlApiClient(ctx)
 
@@ -123,9 +122,9 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
 
-	tflog.Debug(ctx, "DataSource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] DataSource.Read exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 // describe returns the live state of the specified resource.
