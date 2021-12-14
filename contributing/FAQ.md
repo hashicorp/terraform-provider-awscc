@@ -46,7 +46,7 @@ It's possible that as AWS release new services, the code which generates the pro
 
 We release weekly on Thursday rolling up the preceding week's CloudFormation additions/enhancements. For this reason there may be a delay of up to a week before a feature available in AWS can be usable in the provider. We do plan to narrow this gap as the provider reaches GA status.
 
-### Cloudformation doesn't support the service or resource I want to use, how do I request coverage?
+### CloudFormation doesn't support the service or resource I want to use, how do I request coverage?
 
 AWS are aiming for 100% coverage of their AWS service area in CloudFormation. New services will nearly always launch with CloudFormation support, and older services will be updated in time. Please refer to the [CloudFormation](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1) Open Coverage roadmap for more details or to upvote the service you would like to see coverage for.
 

@@ -1,5 +1,5 @@
 <a href="https://terraform.io">
-    <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" alt="Terraform logo" title="Terraform" align="right" height="50" />
+    <img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-terraform-main.svg" alt="Terraform logo" title="Terraform" align="right" height="50" />
 </a>
 
 # Terraform AWS Cloud Control Provider
@@ -22,7 +22,7 @@ The AWS Cloud Control API supports **C**reate, **R**ead, **U**pdate, **D**elete 
 
 #### Coverage
 
-At launch a subset of AWS resources which can be managed by CloudFormation are supported, some services use an older CloudFormation schema and cannot be used with Cloud Control. AWS are updating all of the older CloudFormation schemas to conform to the new standard, and are actively pursuing full coverage for CloudFormation. For the latest coverage information please refer to the AWS Cloudformation public (roadmap)[https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1]
+At launch a subset of AWS resources which can be managed by CloudFormation are supported, some services use an older CloudFormation schema and cannot be used with Cloud Control. AWS are updating all of the older CloudFormation schemas to conform to the new standard, and are actively pursuing full coverage for CloudFormation. For the latest coverage information please refer to the AWS CloudFormation public [roadmap](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1).
 
 To see the list of supported resources within this provider please refer to the registry.
 
