@@ -19,13 +19,7 @@ $ git clone git@github.com:terraform-providers/terraform-provider-awscc
 ...
 ```
 
-Enter the provider directory and run `make tools`. This will install the needed tools for the provider.
-
-```sh
-$ make tools
-```
-
-To compile the provider, run `make all`. This will generate the resources and datasources, build the provider and put the provider binary in the `$GOPATH/bin` directory.
+To compile the provider and install tool dependencies, run `make all`. This will generate the resources and datasources, build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
 ```sh
 $ make all
@@ -56,7 +50,7 @@ $ make testacc
 
 [Development overrides for provider developers](https://www.terraform.io/docs/cli/config/config-file.html#development-overrides-for-provider-developers) can be leveraged in order to use the provider built from source.
 
-To do this, populate a Terraform CLI configuration file (`~/.terraformrc` for all platforms other than Windows; `terraform.rc` in the `%APPDATA%` directory when using Windows) with at least the following options:
+To do this, populate a [Terraform CLI configuration file](https://www.terraform.io/docs/cli/config/config-file.html) (`~/.terraformrc` for all platforms other than Windows; `terraform.rc` in the `%APPDATA%` directory when using Windows) with at least the following options:
 
 ```hcl
 provider_installation {
