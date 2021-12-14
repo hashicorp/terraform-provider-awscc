@@ -30,6 +30,9 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -42,6 +45,9 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN

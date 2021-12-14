@@ -44,6 +44,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"allowed_vp_cs": {
 			// Property: AllowedVPCs
@@ -62,6 +65,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"authorize_time": {
@@ -74,6 +78,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The time (UTC) when the authorization was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cluster_identifier": {
 			// Property: ClusterIdentifier
@@ -100,6 +107,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The status of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint_count": {
 			// Property: EndpointCount
@@ -111,6 +121,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"force": {
 			// Property: Force
@@ -135,6 +148,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The AWS account ID of the grantee of the cluster.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"grantor": {
 			// Property: Grantor
@@ -147,6 +163,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The AWS account ID of the cluster owner.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -158,6 +177,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The status of the authorization action.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_ids": {
 			// Property: VpcIds
@@ -184,6 +206,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

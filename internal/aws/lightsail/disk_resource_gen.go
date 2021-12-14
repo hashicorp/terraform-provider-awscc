@@ -131,6 +131,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Name of the attached Lightsail Instance",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"attachment_state": {
 			// Property: AttachmentState
@@ -142,6 +145,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Attachment State of the Lightsail disk",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"availability_zone": {
 			// Property: AvailabilityZone
@@ -160,6 +166,7 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -171,6 +178,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"disk_name": {
 			// Property: DiskName
@@ -202,6 +212,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Iops of the Lightsail disk",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"is_attached": {
 			// Property: IsAttached
@@ -213,6 +226,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Check is Disk is attached state",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location": {
 			// Property: Location
@@ -250,6 +266,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"path": {
 			// Property: Path
@@ -261,6 +280,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Path of the  attached Disk",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -272,6 +294,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Resource type of Lightsail instance.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"size_in_gb": {
 			// Property: SizeInGb
@@ -297,6 +322,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "State of the Lightsail disk",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"support_code": {
 			// Property: SupportCode
@@ -308,6 +336,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Support code to help identify any issues",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -372,6 +403,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

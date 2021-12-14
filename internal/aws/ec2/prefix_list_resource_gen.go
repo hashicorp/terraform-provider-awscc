@@ -51,6 +51,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"entries": {
 			// Property: Entries
@@ -127,6 +130,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Owner Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"prefix_list_id": {
 			// Property: PrefixListId
@@ -138,6 +144,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Id of Prefix List.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"prefix_list_name": {
 			// Property: PrefixListName
@@ -214,6 +223,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Version of Prefix List.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -221,6 +233,9 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

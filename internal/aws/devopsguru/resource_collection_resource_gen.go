@@ -88,6 +88,9 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The type of ResourceCollection",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -95,6 +98,9 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -60,6 +60,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sso_client_id": {
 			// Property: SsoClientId
@@ -71,6 +74,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble Studio portal.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"studio_encryption_configuration": {
 			// Property: StudioEncryptionConfiguration
@@ -135,6 +141,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"studio_name": {
 			// Property: StudioName
@@ -166,6 +175,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The address of the web page for the studio.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -186,6 +198,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -206,6 +219,9 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

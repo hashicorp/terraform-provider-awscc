@@ -32,6 +32,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Amazon Resource Name of the scheduled query that is generated upon creation.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"client_token": {
 			// Property: ClientToken
@@ -50,6 +53,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(32, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -164,6 +168,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -253,6 +258,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_kms_key_id": {
 			// Property: SQKmsKeyId
@@ -264,6 +272,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream owned KMS key located in the Timestream account.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_name": {
 			// Property: SQName
@@ -275,6 +286,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The name for the scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_notification_configuration": {
 			// Property: SQNotificationConfiguration
@@ -286,6 +300,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Configuration for notification upon scheduled query execution.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_query_string": {
 			// Property: SQQueryString
@@ -297,6 +314,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The query scheduled to be executed.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_schedule_configuration": {
 			// Property: SQScheduleConfiguration
@@ -308,6 +328,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Configuration that indicates when the scheduled query is executed.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_scheduled_query_execution_role_arn": {
 			// Property: SQScheduledQueryExecutionRoleArn
@@ -319,6 +342,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Role that AWS Timestream will assume to execute scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"sq_target_configuration": {
 			// Property: SQTargetConfiguration
@@ -330,6 +356,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Target data source to export query results from.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"schedule_configuration": {
 			// Property: ScheduleConfiguration
@@ -406,6 +435,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -884,6 +914,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -893,6 +924,9 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

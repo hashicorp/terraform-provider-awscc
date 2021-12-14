@@ -33,6 +33,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"bucket_name": {
 			// Property: BucketName
@@ -52,6 +55,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -73,6 +77,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(0, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -114,6 +119,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 100),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -179,6 +185,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.ArrayLenAtMost(50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -216,6 +223,9 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

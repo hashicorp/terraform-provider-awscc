@@ -30,6 +30,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time of this integration got created",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dead_letter_queue_url": {
 			// Property: DeadLetterQueueUrl
@@ -109,6 +112,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time of this integration got last updated at",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -173,6 +179,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -526,6 +529,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The date and time that the theme was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -538,6 +544,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The date and time that the theme was last updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -711,6 +720,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"version": {
 			// Property: Version
@@ -1320,6 +1332,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"version_description": {
 			// Property: VersionDescription
@@ -1344,6 +1359,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

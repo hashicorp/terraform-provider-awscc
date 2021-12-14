@@ -41,6 +41,9 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"arn": {
 			// Property: Arn
@@ -51,6 +54,9 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"current_revision_id": {
 			// Property: CurrentRevisionId
@@ -70,6 +76,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringLenBetween(1, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -79,6 +86,9 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -44,6 +44,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique identifier of the association.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"association_name": {
 			// Property: AssociationName
@@ -397,6 +400,9 @@ func associationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

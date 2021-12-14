@@ -73,6 +73,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"error_code": {
@@ -85,6 +86,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"error_detail": {
 			// Property: ErrorDetail
@@ -96,6 +100,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Detailed description of an error that was encountered during the task execution.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"excludes": {
 			// Property: Excludes
@@ -622,6 +629,7 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"status": {
@@ -641,6 +649,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The status of the task that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -718,6 +729,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the task.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -725,6 +739,9 @@ func taskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

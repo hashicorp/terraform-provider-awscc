@@ -67,6 +67,9 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 			Description: "The complete certificate chain, including the Certificate Authority certificate.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -85,6 +88,9 @@ func certificateAuthorityActivationResourceType(ctx context.Context) (tfsdk.Reso
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

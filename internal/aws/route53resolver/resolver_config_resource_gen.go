@@ -36,6 +36,9 @@ func resolverConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"autodefined_reverse_flag": {
 			// Property: AutodefinedReverseFlag
@@ -71,6 +74,9 @@ func resolverConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -84,6 +90,9 @@ func resolverConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId

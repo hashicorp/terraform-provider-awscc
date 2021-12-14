@@ -31,6 +31,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -48,6 +51,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(12, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -211,6 +215,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.</p>",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -223,6 +230,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that this dataset was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_set_id": {
 			// Property: DataSetId
@@ -234,6 +244,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -342,6 +353,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Number{Value: big.NewFloat(36.000000)}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"wait_for_spice_ingestion": {
@@ -352,6 +364,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: true}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -370,6 +383,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The last time that this dataset was updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"logical_table_map": {
 			// Property: LogicalTableMap
@@ -1089,6 +1105,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"permissions": {
 			// Property: Permissions
@@ -1802,6 +1821,9 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

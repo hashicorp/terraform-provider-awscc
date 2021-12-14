@@ -248,6 +248,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"redacted_fields": {
 			// Property: RedactedFields
@@ -462,6 +465,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

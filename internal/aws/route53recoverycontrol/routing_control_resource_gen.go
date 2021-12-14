@@ -32,6 +32,7 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// ClusterArn is a write-only property.
@@ -48,6 +49,7 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -77,6 +79,9 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The Amazon Resource Name (ARN) of the routing control.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -93,6 +98,9 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -100,6 +108,9 @@ func routingControlResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

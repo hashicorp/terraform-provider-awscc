@@ -32,6 +32,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -45,6 +48,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -58,6 +64,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"firewall_rule_group_id": {
 			// Property: FirewallRuleGroupId
@@ -90,6 +99,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"managed_owner_name": {
 			// Property: ManagedOwnerName
@@ -103,6 +115,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "ServicePrincipal",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -116,6 +131,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"mutation_protection": {
 			// Property: MutationProtection
@@ -182,6 +200,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_message": {
 			// Property: StatusMessage
@@ -193,6 +214,9 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "FirewallDomainListAssociationStatus",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

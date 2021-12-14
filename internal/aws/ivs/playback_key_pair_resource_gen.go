@@ -33,6 +33,9 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"fingerprint": {
 			// Property: Fingerprint
@@ -44,6 +47,9 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Key-pair identifier.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -63,6 +69,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -143,6 +150,9 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

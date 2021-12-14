@@ -60,6 +60,9 @@ func workspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Workspace arn.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"prometheus_endpoint": {
 			// Property: PrometheusEndpoint
@@ -71,6 +74,9 @@ func workspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "AMP Workspace prometheus endpoint",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -143,6 +149,9 @@ func workspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Required to identify a specific APS Workspace.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -150,6 +159,9 @@ func workspaceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

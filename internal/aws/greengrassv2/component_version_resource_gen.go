@@ -28,6 +28,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"component_name": {
 			// Property: ComponentName
@@ -37,6 +40,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"component_version": {
 			// Property: ComponentVersion
@@ -46,6 +52,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"inline_recipe": {
 			// Property: InlineRecipe
@@ -57,6 +66,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// InlineRecipe is a write-only property.
@@ -515,6 +525,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// LambdaFunction is a write-only property.
@@ -542,6 +553,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Arn for Wireless Gateway. Returned upon successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -57,6 +60,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Id for Wireless Gateway. Returned upon successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_uplink_received_at": {
 			// Property: LastUplinkReceivedAt
@@ -201,6 +207,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

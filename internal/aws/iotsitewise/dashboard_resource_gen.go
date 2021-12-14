@@ -29,6 +29,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the dashboard.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dashboard_definition": {
 			// Property: DashboardDefinition
@@ -62,6 +65,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the dashboard.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dashboard_name": {
 			// Property: DashboardName
@@ -86,6 +92,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -142,6 +149,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

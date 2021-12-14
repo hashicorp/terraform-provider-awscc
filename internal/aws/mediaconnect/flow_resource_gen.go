@@ -33,6 +33,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -46,6 +47,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"flow_availability_zone": {
 			// Property: FlowAvailabilityZone
@@ -57,6 +61,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -252,6 +259,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.String{Value: "static-key"}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"region": {
@@ -305,6 +313,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The IP address that the flow will be listening on for incoming content.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"ingest_port": {
 						// Property: IngestPort
@@ -326,6 +337,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"min_latency": {
@@ -336,6 +348,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"name": {
@@ -345,6 +358,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
 							tfsdk.RequiresReplace(),
 						},
 					},
@@ -368,12 +382,18 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the source.",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"source_ingest_port": {
 						// Property: SourceIngestPort
 						Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"stream_id": {
 						// Property: StreamId
@@ -448,6 +468,9 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

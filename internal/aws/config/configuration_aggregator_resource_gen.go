@@ -85,6 +85,9 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Description: "The Amazon Resource Name (ARN) of the aggregator.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"configuration_aggregator_name": {
 			// Property: ConfigurationAggregatorName
@@ -104,6 +107,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 				validate.StringLenBetween(1, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -221,6 +225,9 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

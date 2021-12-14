@@ -33,6 +33,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The date when the monitor was created. ",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dimensional_value_count": {
 			// Property: DimensionalValueCount
@@ -45,6 +48,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The value for evaluated dimensions.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_evaluated_date": {
 			// Property: LastEvaluatedDate
@@ -59,6 +65,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The date when the monitor last evaluated for anomalies.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_updated_date": {
 			// Property: LastUpdatedDate
@@ -73,6 +82,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The date when the monitor was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"monitor_arn": {
 			// Property: MonitorArn
@@ -85,6 +97,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Monitor ARN",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"monitor_dimension": {
 			// Property: MonitorDimension
@@ -106,6 +121,7 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -136,6 +152,7 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -167,6 +184,9 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

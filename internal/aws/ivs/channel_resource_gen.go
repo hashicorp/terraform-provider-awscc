@@ -33,6 +33,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorized": {
 			// Property: Authorized
@@ -55,6 +58,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"latency_mode": {
 			// Property: LatencyMode
@@ -104,6 +110,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Channel Playback URL.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"recording_configuration_arn": {
 			// Property: RecordingConfigurationArn
@@ -125,6 +134,7 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: ""}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -211,6 +221,9 @@ func channelResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

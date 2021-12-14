@@ -27,6 +27,9 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
@@ -36,6 +39,9 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"response_headers_policy_config": {
 			// Property: ResponseHeadersPolicyConfig

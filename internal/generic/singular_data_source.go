@@ -3,15 +3,13 @@ package generic
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -67,12 +65,10 @@ func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceTyp
 }
 
 func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := sd.dataSourceType.cfTypeName
 	tfTypeName := sd.dataSourceType.tfTypeName
 
-	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] DataSource.Read enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
 	conn := sd.provider.CloudControlApiClient(ctx)
 
@@ -126,9 +122,9 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
 
-	tflog.Debug(ctx, "DataSource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] DataSource.Read exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 // describe returns the live state of the specified resource.
@@ -138,17 +134,14 @@ func (sd *singularDataSource) describe(ctx context.Context, conn *cloudcontrol.C
 
 // getId returns the data source's primary identifier value from Config.
 func (sd *singularDataSource) getId(ctx context.Context, config *tfsdk.Config) (string, error) {
-	val, diags := config.GetAttribute(ctx, idAttributePath)
+	var val string
+	diags := config.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
+	return val, nil
 }
 
 // setId sets the data source's primary identifier value in State.

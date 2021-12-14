@@ -32,6 +32,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Arn",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creation_time": {
 			// Property: CreationTime
@@ -45,6 +48,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"creator_request_id": {
 			// Property: CreatorRequestId
@@ -58,6 +64,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The id of the creator request.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"firewall_rules": {
 			// Property: FirewallRules
@@ -217,6 +226,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "ResourceId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"modification_time": {
 			// Property: ModificationTime
@@ -230,6 +242,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -249,6 +264,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -264,6 +280,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_count": {
 			// Property: RuleCount
@@ -275,6 +294,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "Count",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"share_status": {
 			// Property: ShareStatus
@@ -291,6 +313,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -308,6 +333,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_message": {
 			// Property: StatusMessage
@@ -319,6 +347,9 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "FirewallRuleGroupStatus",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

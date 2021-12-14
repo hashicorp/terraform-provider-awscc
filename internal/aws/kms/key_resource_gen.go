@@ -28,6 +28,9 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -75,6 +78,9 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"key_policy": {
 			// Property: KeyPolicy
@@ -123,6 +129,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "SYMMETRIC_DEFAULT"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"key_usage": {
@@ -149,6 +156,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "ENCRYPT_DECRYPT"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"multi_region": {
@@ -165,6 +173,7 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"pending_window_in_days": {
@@ -248,6 +257,9 @@ func keyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

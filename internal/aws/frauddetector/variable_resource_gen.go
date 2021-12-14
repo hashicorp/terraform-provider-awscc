@@ -30,6 +30,9 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the variable.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_time": {
 			// Property: CreatedTime
@@ -41,6 +44,9 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the variable was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_source": {
 			// Property: DataSource
@@ -125,6 +131,9 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time when the variable was last updated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -290,6 +299,9 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

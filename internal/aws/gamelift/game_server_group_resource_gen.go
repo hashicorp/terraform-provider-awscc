@@ -33,6 +33,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"auto_scaling_policy": {
 			// Property: AutoScalingPolicy
@@ -153,6 +156,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "A generated unique ID for the game server group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"game_server_group_name": {
 			// Property: GameServerGroupName
@@ -424,6 +430,9 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

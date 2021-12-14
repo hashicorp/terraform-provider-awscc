@@ -30,6 +30,9 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Description: "The ARN of the AggregationAuthorization.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorized_account_id": {
 			// Property: AuthorizedAccountId
@@ -133,6 +136,9 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

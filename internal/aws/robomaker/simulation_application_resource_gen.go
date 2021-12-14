@@ -29,6 +29,9 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"current_revision_id": {
 			// Property: CurrentRevisionId
@@ -70,6 +73,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -365,6 +369,9 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

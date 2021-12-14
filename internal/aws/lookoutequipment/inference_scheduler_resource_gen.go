@@ -278,6 +278,9 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"inference_scheduler_name": {
 			// Property: InferenceSchedulerName
@@ -297,6 +300,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 200),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -355,6 +359,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenBetween(1, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -428,6 +433,9 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -29,6 +29,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The Amazon Resource Name (ARN) of the certificate authority.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"certificate_signing_request": {
 			// Property: CertificateSigningRequest
@@ -40,6 +43,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"csr_extensions": {
 			// Property: CsrExtensions
@@ -250,6 +256,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"data_encipherment": {
@@ -259,6 +266,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"decipher_only": {
@@ -268,6 +276,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"digital_signature": {
@@ -277,6 +286,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"encipher_only": {
@@ -286,6 +296,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"key_agreement": {
@@ -295,6 +306,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"key_cert_sign": {
@@ -304,6 +316,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"key_encipherment": {
@@ -313,6 +326,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"non_repudiation": {
@@ -322,6 +336,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										DefaultValue(types.Bool{Value: false}),
+										tfsdk.UseStateForUnknown(),
 									},
 								},
 							},
@@ -521,6 +536,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -550,6 +566,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -860,6 +877,9 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

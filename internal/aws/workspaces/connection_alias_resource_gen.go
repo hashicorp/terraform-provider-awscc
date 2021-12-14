@@ -31,6 +31,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"associations": {
 			// Property: Associations
@@ -112,6 +115,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"connection_alias_state": {
 			// Property: ConnectionAliasState
@@ -126,6 +132,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"connection_string": {
 			// Property: ConnectionString
@@ -186,6 +195,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -195,6 +205,9 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

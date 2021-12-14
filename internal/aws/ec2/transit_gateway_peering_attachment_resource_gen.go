@@ -30,6 +30,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The time the transit gateway peering attachment was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"options": {
 			// Property: Options
@@ -111,6 +114,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -148,6 +154,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -200,6 +209,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 			Description: "The ID of the transit gateway peering attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
@@ -221,6 +233,9 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

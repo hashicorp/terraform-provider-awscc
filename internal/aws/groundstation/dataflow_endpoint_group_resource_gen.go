@@ -28,6 +28,9 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint_details": {
 			// Property: EndpointDetails
@@ -165,6 +168,9 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags

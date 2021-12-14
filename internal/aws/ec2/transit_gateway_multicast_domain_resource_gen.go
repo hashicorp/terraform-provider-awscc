@@ -30,6 +30,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Description: "The time the transit gateway multicast domain was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"options": {
 			// Property: Options
@@ -88,6 +91,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Description: "The state of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -154,6 +160,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Description: "The Amazon Resource Name (ARN) of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
@@ -165,6 +174,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 			Description: "The ID of the transit gateway multicast domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -172,6 +184,9 @@ func transitGatewayMulticastDomainResourceType(ctx context.Context) (tfsdk.Resou
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

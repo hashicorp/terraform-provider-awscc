@@ -35,6 +35,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -47,6 +48,9 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"knowledge_base_id": {
 			// Property: KnowledgeBaseId
@@ -57,6 +61,9 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"knowledge_base_type": {
 			// Property: KnowledgeBaseType
@@ -154,6 +161,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -244,6 +252,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -300,6 +309,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -309,6 +319,9 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

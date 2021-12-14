@@ -42,6 +42,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -559,6 +560,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the created domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_id": {
 			// Property: DomainId
@@ -572,6 +576,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The domain name.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"domain_name": {
 			// Property: DomainName
@@ -603,6 +610,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"kms_key_id": {
 			// Property: KmsKeyId
@@ -621,6 +631,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -635,6 +646,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The SSO managed application instance ID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subnet_ids": {
 			// Property: SubnetIds
@@ -720,6 +734,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(0, 50),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
@@ -735,6 +750,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL to the created domain.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId
@@ -761,6 +779,9 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

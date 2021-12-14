@@ -50,6 +50,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The name of the Amazon S3 bucket to which the certificate was uploaded.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"certificate_s3_object_key": {
 			// Property: CertificateS3ObjectKey
@@ -61,6 +64,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"encryption_kms_key_id": {
 			// Property: EncryptionKmsKeyId
@@ -72,6 +78,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 			Description: "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -99,6 +108,9 @@ func enclaveCertificateIamRoleAssociationResourceType(ctx context.Context) (tfsd
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

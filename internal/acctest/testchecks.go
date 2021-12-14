@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -62,7 +61,6 @@ func (td TestData) DeleteResource() resource.TestCheckFunc {
 		}
 
 		ctx := context.TODO()
-		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 		return tfcloudcontrol.DeleteResource(ctx, provider.CloudControlApiClient(ctx), provider.RoleARN(ctx), td.CloudFormationResourceType, id, deleteResourceTimeout)
 	}
@@ -76,7 +74,6 @@ func (td TestData) checkExists(shouldExist bool) resource.TestCheckFunc {
 		}
 
 		ctx := context.TODO()
-		ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
 
 		return existsFunc(shouldExist)(
 			ctx,

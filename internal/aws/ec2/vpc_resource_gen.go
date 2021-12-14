@@ -50,6 +50,7 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"default_network_acl": {
@@ -63,6 +64,9 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The default network ACL ID that is associated with the VPC.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"default_security_group": {
 			// Property: DefaultSecurityGroup
@@ -75,6 +79,9 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The default security group ID that is associated with the VPC.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"enable_dns_hostnames": {
 			// Property: EnableDnsHostnames
@@ -126,6 +133,7 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"tags": {
@@ -184,6 +192,9 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Id for the model.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -191,6 +202,9 @@ func vPCResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -28,6 +28,9 @@ func publicRepositoryResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"repository_catalog_data": {
 			// Property: RepositoryCatalogData
@@ -152,6 +155,7 @@ func publicRepositoryResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(2, 256),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -234,6 +238,9 @@ func publicRepositoryResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

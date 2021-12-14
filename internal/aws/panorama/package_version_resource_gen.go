@@ -28,6 +28,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.BoolType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"mark_latest": {
 			// Property: MarkLatest
@@ -54,6 +57,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringLenBetween(1, 12),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -67,6 +71,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"package_id": {
 			// Property: PackageId
@@ -97,6 +104,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"package_version": {
 			// Property: PackageVersion
@@ -142,6 +152,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.NumberType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -157,6 +170,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status_description": {
 			// Property: StatusDescription
@@ -168,6 +184,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"updated_latest_patch_version": {
 			// Property: UpdatedLatestPatchVersion
@@ -190,6 +209,9 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

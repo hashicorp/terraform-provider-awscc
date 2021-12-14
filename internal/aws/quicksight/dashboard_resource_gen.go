@@ -30,6 +30,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"aws_account_id": {
 			// Property: AwsAccountId
@@ -60,6 +63,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The time that this dataset was created.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// CreatedTime is a write-only property.
 		},
 		"dashboard_id": {
@@ -211,6 +217,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The last time that this dataset was published.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_updated_time": {
 			// Property: LastUpdatedTime
@@ -223,6 +232,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "<p>The last time that this dataset was updated.</p>",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// LastUpdatedTime is a write-only property.
 		},
 		"name": {
@@ -966,6 +978,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 			// Version is a write-only property.
 		},
 		"version_description": {
@@ -991,6 +1006,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

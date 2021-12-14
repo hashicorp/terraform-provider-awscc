@@ -28,6 +28,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorizer_config": {
 			// Property: AuthorizerConfig
@@ -82,6 +85,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -119,6 +123,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.StringLenBetween(1, 253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -135,6 +140,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"server_certificate_arns": {
 			// Property: ServerCertificateArns
@@ -158,6 +166,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// ServerCertificateArns is a write-only property.
@@ -220,6 +229,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"service_type": {
 			// Property: ServiceType
@@ -243,6 +255,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -296,6 +309,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -305,6 +319,9 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

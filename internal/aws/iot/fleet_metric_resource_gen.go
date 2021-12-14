@@ -89,6 +89,9 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The creation date of a fleet metric",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -122,6 +125,9 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The last modified date of a fleet metric",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"metric_arn": {
 			// Property: MetricArn
@@ -133,6 +139,9 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Number (ARN) of a fleet metric metric",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"metric_name": {
 			// Property: MetricName
@@ -264,6 +273,9 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The version of a fleet metric",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -271,6 +283,9 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

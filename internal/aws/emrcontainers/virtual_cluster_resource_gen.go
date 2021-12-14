@@ -28,6 +28,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"container_provider": {
 			// Property: ContainerProvider
@@ -140,6 +143,9 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Id of the virtual cluster.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name

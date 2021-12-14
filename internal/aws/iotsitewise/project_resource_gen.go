@@ -63,6 +63,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the project.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"project_description": {
 			// Property: ProjectDescription
@@ -85,6 +88,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ID of the project.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"project_name": {
 			// Property: ProjectName
@@ -150,6 +156,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

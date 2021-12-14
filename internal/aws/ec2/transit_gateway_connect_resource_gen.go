@@ -29,6 +29,9 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The creation time.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"options": {
 			// Property: Options
@@ -70,6 +73,9 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The state of the attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -122,6 +128,9 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The ID of the Connect attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_id": {
 			// Property: TransitGatewayId
@@ -133,6 +142,9 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The ID of the transit gateway.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transport_transit_gateway_attachment_id": {
 			// Property: TransportTransitGatewayAttachmentId
@@ -154,6 +166,9 @@ func transitGatewayConnectResourceType(ctx context.Context) (tfsdk.ResourceType,
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

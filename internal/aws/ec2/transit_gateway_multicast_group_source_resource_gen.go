@@ -43,6 +43,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "Indicates that the resource is a transit gateway multicast group member.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"group_source": {
 			// Property: GroupSource
@@ -54,6 +57,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "Indicates that the resource is a transit gateway multicast group member.",
 			Type:        types.BoolType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"member_type": {
 			// Property: MemberType
@@ -65,6 +71,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The member type (for example, static).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"network_interface_id": {
 			// Property: NetworkInterfaceId
@@ -90,6 +99,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The ID of the resource.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -101,6 +113,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The type of resource, for example a VPC attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"source_type": {
 			// Property: SourceType
@@ -112,6 +127,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The source type.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -123,6 +141,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The ID of the subnet.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_attachment_id": {
 			// Property: TransitGatewayAttachmentId
@@ -134,6 +155,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 			Description: "The ID of the transit gateway attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"transit_gateway_multicast_domain_id": {
 			// Property: TransitGatewayMulticastDomainId
@@ -155,6 +179,9 @@ func transitGatewayMulticastGroupSourceResourceType(ctx context.Context) (tfsdk.
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

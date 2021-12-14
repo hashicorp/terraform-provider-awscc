@@ -31,6 +31,9 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"type_name": {
 			// Property: TypeName
@@ -74,6 +77,9 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

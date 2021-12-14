@@ -30,6 +30,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The time at which the model package group was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"model_package_group_arn": {
 			// Property: ModelPackageGroupArn
@@ -44,6 +47,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"model_package_group_description": {
 			// Property: ModelPackageGroupDescription
@@ -62,6 +68,7 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -111,6 +118,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The status of a modelpackage group job.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -179,6 +189,9 @@ func modelPackageGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -33,6 +33,9 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"destination_configuration": {
 			// Property: DestinationConfiguration
@@ -114,6 +117,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 				validate.StringLenBetween(0, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -132,6 +136,9 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "Recording Configuration State.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -196,6 +203,9 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

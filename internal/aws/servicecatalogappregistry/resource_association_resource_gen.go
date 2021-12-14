@@ -46,6 +46,9 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -55,6 +58,9 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource": {
 			// Property: Resource
@@ -77,6 +83,9 @@ func resourceAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType

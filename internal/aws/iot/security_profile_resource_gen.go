@@ -600,6 +600,9 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "The ARN (Amazon resource name) of the created security profile.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"security_profile_description": {
 			// Property: SecurityProfileDescription
@@ -634,6 +637,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -726,6 +730,9 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

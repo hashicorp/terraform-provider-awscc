@@ -38,6 +38,7 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -316,6 +317,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"mitigation_action_id": {
 			// Property: MitigationActionId
@@ -325,6 +329,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn
@@ -403,6 +410,9 @@ func mitigationActionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

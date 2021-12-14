@@ -53,6 +53,9 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"s3_canonical_user_id": {
 			// Property: S3CanonicalUserId
@@ -62,6 +65,9 @@ func cloudFrontOriginAccessIdentityResourceType(ctx context.Context) (tfsdk.Reso
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

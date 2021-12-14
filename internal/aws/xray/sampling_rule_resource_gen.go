@@ -30,6 +30,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rule_name": {
 			// Property: RuleName
@@ -712,6 +715,9 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

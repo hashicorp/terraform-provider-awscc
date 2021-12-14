@@ -98,6 +98,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 				validate.StringLenBetween(1, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -111,6 +112,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"kms_key_arn": {
 			// Property: KmsKeyArn
@@ -1055,6 +1059,9 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

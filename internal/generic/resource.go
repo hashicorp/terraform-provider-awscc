@@ -4,18 +4,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
@@ -396,16 +394,14 @@ var (
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Create enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
-	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
+	log.Printf("[DEBUG] Request.Plan.Raw. value: %v", request.Plan.Raw)
 
 	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
@@ -416,7 +412,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudControl DesiredState", "value", desiredState)
+	log.Printf("[DEBUG] CloudControl DesiredState. value: %s", desiredState)
 
 	input := &cloudcontrol.CreateResourceInput{
 		ClientToken:  aws.String(tfresource.UniqueId()),
@@ -456,19 +452,10 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 		// Save any ID to state so that the resource will be marked as tainted.
 		if id != "" {
-			err := r.setEmptyAttributes(ctx, &response.State)
+			err := r.setId(ctx, id, &response.State)
 
-			if err == nil {
-				err = r.setId(ctx, id, &response.State)
-
-				if err != nil {
-					response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
-				}
-			} else {
-				response.Diagnostics.AddError(
-					"Creation Of Terraform State Unsuccessful",
-					fmt.Sprintf("Unable to set Terraform State empty values. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-				)
+			if err != nil {
+				response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
 			}
 		}
 
@@ -497,20 +484,18 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
 
-	tflog.Trace(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Create exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Read enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
-	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
+	log.Printf("[DEBUG] Request.State.Raw. value: %v", request.State.Raw)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -582,18 +567,16 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		}
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
 
-	tflog.Trace(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Read exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Update enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -634,7 +617,7 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "Cloud Control API PatchDocument", "value", patchDocument)
+	log.Printf("[DEBUG] Cloud Control API PatchDocument: %s", patchDocument)
 
 	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
@@ -684,16 +667,14 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Trace(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Update exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Delete enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -715,27 +696,20 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	response.State.RemoveResource(ctx)
 
-	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	log.Printf("[TRACE] Resource.Delete exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
+	cfTypeName := r.resourceType.cfTypeName
+	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.ImportState enter", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+	log.Printf("[TRACE] Resource.ImportState enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 
-	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
-
-	err := r.setEmptyAttributes(ctx, &response.State)
-
-	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceAttributeNotSetInImportStateDiag(err))
-
-		return
-	}
+	log.Printf("[DEBUG] Request.ID: %s", request.ID)
 
 	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 
-	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+	log.Printf("[TRACE] Resource.ImportState exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
 }
 
 // ConfigValidators returns a list of functions which will all be performed during validation.
@@ -756,17 +730,14 @@ func (r *resource) describe(ctx context.Context, conn *cloudcontrol.Client, id s
 
 // getId returns the resource's primary identifier value from State.
 func (r *resource) getId(ctx context.Context, state *tfsdk.State) (string, error) {
-	val, diags := state.GetAttribute(ctx, idAttributePath)
+	var val string
+	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
 		return "", tfresource.DiagsError(diags)
 	}
 
-	if val, ok := val.(types.String); ok {
-		return val.Value, nil
-	}
-
-	return "", fmt.Errorf("invalid identifier type %T", val)
+	return val, nil
 }
 
 // setId sets the resource's primary identifier value in State.
@@ -775,41 +746,6 @@ func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) er
 
 	if diags.HasError() {
 		return tfresource.DiagsError(diags)
-	}
-
-	return nil
-}
-
-func (r *resource) setEmptyAttributes(ctx context.Context, state *tfsdk.State) error {
-	for name, attr := range r.resourceType.tfSchema.Attributes {
-		path := tftypes.NewAttributePath().WithAttributeName(name)
-
-		var diags diag.Diagnostics
-
-		if t := attr.Type; t != nil {
-			if t.TerraformType(ctx).Is(tftypes.String) {
-				diags = state.SetAttribute(ctx, path, "")
-			} else if t.TerraformType(ctx).Is(tftypes.Number) {
-				diags = state.SetAttribute(ctx, path, float64(0))
-			} else if t.TerraformType(ctx).Is(tftypes.Bool) {
-				diags = state.SetAttribute(ctx, path, false)
-			} else if t.TerraformType(ctx).Is(tftypes.Set{}) || t.TerraformType(ctx).Is(tftypes.List{}) || t.TerraformType(ctx).Is(tftypes.Tuple{}) {
-				diags = state.SetAttribute(ctx, path, []interface{}{})
-			} else if t.TerraformType(ctx).Is(tftypes.Map{}) || t.TerraformType(ctx).Is(tftypes.Object{}) {
-				diags = state.SetAttribute(ctx, path, map[string]interface{}{})
-			}
-		} else if attr.Attributes != nil { // attribute is a not a "tftype" e.g. providertypes.SetNestedAttributes
-			diags = state.SetAttribute(ctx, path, []interface{}{})
-		} else {
-			diags.Append(diag.NewErrorDiagnostic(
-				"Unknown Terraform Type for Attribute",
-				fmt.Sprintf("unknown terraform type for attribute (%s): %T", name, t),
-			))
-		}
-
-		if diags.HasError() {
-			return tfresource.DiagsError(diags)
-		}
 	}
 
 	return nil

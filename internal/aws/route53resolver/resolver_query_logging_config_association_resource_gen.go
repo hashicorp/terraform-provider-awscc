@@ -32,6 +32,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "Rfc3339TimeString",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"error": {
 			// Property: Error
@@ -48,6 +51,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "ResolverQueryLogConfigAssociationError",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"error_message": {
 			// Property: ErrorMessage
@@ -59,6 +65,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "ResolverQueryLogConfigAssociationErrorMessage",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -72,6 +81,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resolver_query_log_config_id": {
 			// Property: ResolverQueryLogConfigId
@@ -90,6 +102,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -110,6 +123,7 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -131,6 +145,9 @@ func resolverQueryLoggingConfigAssociationResourceType(ctx context.Context) (tfs
 			Description: "ResolverQueryLogConfigAssociationStatus",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

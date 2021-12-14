@@ -31,6 +31,7 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -44,6 +45,9 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "ID of the request validator.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"rest_api_id": {
 			// Property: RestApiId
@@ -87,6 +91,9 @@ func requestValidatorResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -2,16 +2,16 @@ package cloudcontrol
 
 import (
 	"context"
+	"log"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName string) ([]types.ResourceDescription, error) {
-	tflog.Debug(ctx, "ListResourcesByTypeName", "cfTypeName", typeName)
+	log.Printf("[DEBUG] ListResourcesByTypeName. cfTypeName: %s", typeName)
 
 	input := &cloudcontrol.ListResourcesInput{
 		TypeName: aws.String(typeName),

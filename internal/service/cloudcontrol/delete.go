@@ -3,16 +3,16 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func DeleteResource(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string, maxWaitTime time.Duration) error {
-	tflog.Debug(ctx, "DeleteResource", "cfTypeName", typeName, "id", id)
+	log.Printf("[DEBUG] DeleteResource. cfTypeName: %s, id: %s", typeName, id)
 
 	input := &cloudcontrol.DeleteResourceInput{
 		ClientToken: aws.String(tfresource.UniqueId()),

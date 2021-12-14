@@ -155,6 +155,9 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the HDFS location.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -168,6 +171,9 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The URL of the HDFS location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name_nodes": {
 			// Property: NameNodes
@@ -284,6 +290,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "PRIVACY"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"rpc_protection": {
@@ -302,6 +309,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "PRIVACY"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -328,6 +336,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"simple_user": {
@@ -432,6 +441,9 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

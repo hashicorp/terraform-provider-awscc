@@ -128,6 +128,9 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"template_body": {
 			// Property: TemplateBody
@@ -154,6 +157,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 36),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -163,6 +167,9 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

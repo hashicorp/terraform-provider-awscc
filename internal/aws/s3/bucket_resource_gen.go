@@ -316,6 +316,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"bucket_encryption": {
 			// Property: BucketEncryption
@@ -438,6 +441,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(3, 63),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -616,6 +620,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The IPv4 DNS name of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dual_stack_domain_name": {
 			// Property: DualStackDomainName
@@ -630,6 +637,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"intelligent_tiering_configurations": {
 			// Property: IntelligentTieringConfigurations
@@ -2141,6 +2151,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -2277,6 +2288,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Returns the regional domain name of the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"replication_configuration": {
 			// Property: ReplicationConfiguration
@@ -2983,6 +2997,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.String{Value: "Suspended"}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -3225,6 +3240,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon S3 website endpoint for the specified bucket.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -3232,6 +3250,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

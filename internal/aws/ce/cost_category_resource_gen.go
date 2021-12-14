@@ -31,6 +31,9 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Cost category ARN",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"default_value": {
 			// Property: DefaultValue
@@ -61,6 +64,9 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ISO 8601 date time with offset format",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -124,6 +130,9 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

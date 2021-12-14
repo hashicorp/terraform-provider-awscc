@@ -56,6 +56,9 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "A collection of tags associated with a resource.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"recovery_group_name": {
 			// Property: RecoveryGroupName
@@ -136,6 +139,9 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

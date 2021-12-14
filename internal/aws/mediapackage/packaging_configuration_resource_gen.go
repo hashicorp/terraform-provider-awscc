@@ -30,6 +30,9 @@ func packagingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Description: "The ARN of the PackagingConfiguration.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"cmaf_package": {
 			// Property: CmafPackage

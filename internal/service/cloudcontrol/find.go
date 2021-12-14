@@ -3,17 +3,17 @@ package cloudcontrol
 import (
 	"context"
 	"errors"
+	"log"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string) (*types.ResourceDescription, error) {
-	tflog.Debug(ctx, "FindResourceByTypeNameAndID", "cfTypeName", typeName, "id", id)
+	log.Printf("[DEBUG] FindResourceByTypeNameAndID. cfTypeName: %s, id: %s", typeName, id)
 
 	input := &cloudcontrol.GetResourceInput{
 		Identifier: aws.String(id),
@@ -43,7 +43,7 @@ func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client,
 		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
-	tflog.Debug(ctx, "ResourceDescription.ResourceModel", "value", aws.ToString(output.ResourceDescription.Properties))
+	log.Printf("[DEBUG] ResourceDescription.ResourceModel. value: %s", aws.ToString(output.ResourceDescription.Properties))
 
 	return output.ResourceDescription, nil
 }

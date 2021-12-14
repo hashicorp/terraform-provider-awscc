@@ -90,6 +90,9 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -97,6 +100,9 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

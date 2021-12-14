@@ -29,6 +29,9 @@ func egressOnlyInternetGatewayResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "Service Generated ID of the EgressOnlyInternetGateway",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_id": {
 			// Property: VpcId

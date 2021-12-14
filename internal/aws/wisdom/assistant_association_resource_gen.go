@@ -29,6 +29,9 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"assistant_association_arn": {
 			// Property: AssistantAssociationArn
@@ -39,6 +42,9 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"assistant_association_id": {
 			// Property: AssistantAssociationId
@@ -49,6 +55,9 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"assistant_id": {
 			// Property: AssistantId
@@ -166,6 +175,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -175,6 +185,9 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

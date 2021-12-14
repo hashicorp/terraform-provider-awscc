@@ -30,6 +30,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -50,6 +53,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Id of the IPAM.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"operating_regions": {
 			// Property: OperatingRegions
@@ -98,6 +104,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"public_default_scope_id": {
 			// Property: PublicDefaultScopeId
@@ -110,6 +119,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"scope_count": {
 			// Property: ScopeCount
@@ -121,6 +133,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The number of scopes that currently exist in this IPAM.",
 			Type:        types.NumberType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -186,6 +201,9 @@ func iPAMResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -31,6 +31,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "Amazon Resource Name (ARN) of the configuration",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"configuration_name": {
 			// Property: ConfigurationName
@@ -94,6 +97,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "NONE"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"slack_channel_id": {
@@ -161,6 +165,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Bool{Value: false}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -169,6 +174,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

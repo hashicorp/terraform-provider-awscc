@@ -65,6 +65,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Bool{Value: true}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 					"endpoint_id": {
@@ -84,6 +85,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							DefaultValue(types.Number{Value: big.NewFloat(100)}),
+							tfsdk.UseStateForUnknown(),
 						},
 					},
 				},
@@ -101,6 +103,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Description: "The Amazon Resource Name (ARN) of the endpoint group",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint_group_region": {
 			// Property: EndpointGroupRegion
@@ -130,6 +135,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(30)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"health_check_path": {
@@ -146,6 +152,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "/"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"health_check_port": {
@@ -167,6 +174,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(-1)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"health_check_protocol": {
@@ -195,6 +203,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "TCP"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"listener_arn": {
@@ -279,6 +288,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"traffic_dial_percentage": {
@@ -300,6 +310,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Number{Value: big.NewFloat(100.000000)}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -308,6 +319,9 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

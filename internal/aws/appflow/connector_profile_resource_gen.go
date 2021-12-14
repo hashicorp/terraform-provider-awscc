@@ -53,6 +53,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "Unique identifier for connector profile resources",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"connector_profile_config": {
 			// Property: ConnectorProfileConfig
@@ -1923,6 +1926,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Description: "A unique Arn for Connector-Profile resource",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"kms_arn": {
 			// Property: KMSArn
@@ -1942,6 +1948,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(20, 2048),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -1951,6 +1958,9 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

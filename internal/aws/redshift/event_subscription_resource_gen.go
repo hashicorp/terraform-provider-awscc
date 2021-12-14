@@ -30,6 +30,9 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The name of the Amazon Redshift event notification subscription.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"customer_aws_id": {
 			// Property: CustomerAwsId
@@ -41,6 +44,9 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The AWS account associated with the Amazon Redshift event notification subscription.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"enabled": {
 			// Property: Enabled
@@ -103,6 +109,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"severity": {
@@ -171,6 +178,7 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"source_type": {
@@ -215,6 +223,9 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The status of the Amazon Redshift event notification subscription.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subscription_creation_time": {
 			// Property: SubscriptionCreationTime
@@ -226,6 +237,9 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The date and time the Amazon Redshift event notification subscription was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subscription_name": {
 			// Property: SubscriptionName
@@ -308,6 +322,9 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

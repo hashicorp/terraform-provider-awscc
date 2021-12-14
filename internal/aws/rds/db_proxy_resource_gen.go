@@ -127,6 +127,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) for the proxy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName
@@ -168,6 +171,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"engine_family": {
 			// Property: EngineFamily
@@ -287,6 +293,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "VPC ID to associate with the new DB proxy.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
@@ -339,6 +348,9 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

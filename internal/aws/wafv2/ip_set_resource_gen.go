@@ -50,6 +50,9 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN of the WAF entity.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -95,6 +98,9 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Id of the IPSet",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -109,6 +115,7 @@ func iPSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

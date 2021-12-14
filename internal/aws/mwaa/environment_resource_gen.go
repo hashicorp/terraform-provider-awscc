@@ -60,6 +60,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN for the MWAA environment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"dag_s3_path": {
 			// Property: DagS3Path
@@ -126,6 +129,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1224),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -292,6 +296,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -328,6 +335,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -364,6 +374,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -400,6 +413,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -436,6 +452,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "",
 									Type:        types.StringType,
 									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										tfsdk.UseStateForUnknown(),
+									},
 								},
 								"enabled": {
 									// Property: Enabled
@@ -577,6 +596,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
 							tfsdk.RequiresReplace(),
 						},
 					},
@@ -723,6 +743,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Url endpoint for the environment's Airflow UI.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"weekly_maintenance_window_start": {
 			// Property: WeeklyMaintenanceWindowStart
@@ -746,6 +769,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

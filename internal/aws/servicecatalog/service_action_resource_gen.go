@@ -129,6 +129,9 @@ func serviceActionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name

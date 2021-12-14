@@ -32,6 +32,9 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "Id",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"owner_id": {
 			// Property: OwnerId
@@ -45,6 +48,9 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "AccountId",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_id": {
 			// Property: ResourceId
@@ -63,6 +69,7 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 				validate.StringLenBetween(1, 64),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -82,6 +89,9 @@ func resolverDNSSECConfigResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 

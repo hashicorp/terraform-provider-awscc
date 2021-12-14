@@ -30,6 +30,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The time at which the schedule was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"endpoint_name": {
 			// Property: EndpointName
@@ -73,6 +76,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "A timestamp that indicates the last time the monitoring job was modified.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_monitoring_execution_summary": {
 			// Property: LastMonitoringExecutionSummary
@@ -228,6 +234,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) of the monitoring schedule.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"monitoring_schedule_config": {
 			// Property: MonitoringScheduleConfig
@@ -1150,6 +1159,9 @@ func monitoringScheduleResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

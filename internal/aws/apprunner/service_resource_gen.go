@@ -75,6 +75,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -258,6 +259,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"service_id": {
 			// Property: ServiceId
@@ -271,6 +275,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The AppRunner Service Id",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"service_name": {
 			// Property: ServiceName
@@ -290,6 +297,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenBetween(4, 40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -303,6 +311,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Service Url of the AppRunner Service.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"source_configuration": {
 			// Property: SourceConfiguration
@@ -735,6 +746,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "AppRunner Service status.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -772,6 +786,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Tags is a write-only property.
@@ -782,6 +797,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

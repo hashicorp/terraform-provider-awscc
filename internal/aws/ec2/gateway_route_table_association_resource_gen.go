@@ -29,6 +29,9 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			Description: "The route table association ID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"gateway_id": {
 			// Property: GatewayId
@@ -61,6 +64,9 @@ func gatewayRouteTableAssociationResourceType(ctx context.Context) (tfsdk.Resour
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

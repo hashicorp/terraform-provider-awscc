@@ -30,6 +30,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The ARN of the Asset.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"created_at": {
 			// Property: CreatedAt
@@ -41,6 +44,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time the Asset was initially submitted for Ingest.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"egress_endpoints": {
 			// Property: EgressEndpoints
@@ -87,6 +93,9 @@ func assetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id

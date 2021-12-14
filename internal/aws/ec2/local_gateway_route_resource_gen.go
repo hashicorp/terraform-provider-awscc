@@ -71,6 +71,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The state of the route.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"type": {
 			// Property: Type
@@ -82,6 +85,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The route type.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 	}
 
@@ -89,6 +95,9 @@ func localGatewayRouteResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

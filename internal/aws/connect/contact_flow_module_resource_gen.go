@@ -33,6 +33,9 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The identifier of the contact flow module (ARN).",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"content": {
 			// Property: Content
@@ -135,6 +138,9 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Description: "The status of the contact flow module.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -204,6 +210,9 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

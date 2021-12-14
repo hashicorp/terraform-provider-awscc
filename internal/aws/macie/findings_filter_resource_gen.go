@@ -51,6 +51,9 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Findings filter ARN.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -195,6 +198,9 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -206,6 +212,9 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Findings filter ID.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"name": {
 			// Property: Name

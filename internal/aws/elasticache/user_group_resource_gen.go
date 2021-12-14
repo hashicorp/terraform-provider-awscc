@@ -30,6 +30,9 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the user account.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"engine": {
 			// Property: Engine
@@ -63,6 +66,9 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"user_group_id": {
 			// Property: UserGroupId
@@ -104,6 +110,9 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

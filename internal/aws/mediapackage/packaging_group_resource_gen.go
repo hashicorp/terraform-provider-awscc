@@ -30,6 +30,9 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The ARN of the PackagingGroup.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"authorization": {
 			// Property: Authorization
@@ -82,6 +85,9 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "The fully qualified domain name for Assets in the PackagingGroup.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"egress_access_logs": {
 			// Property: EgressAccessLogs
@@ -182,6 +188,7 @@ func packagingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.UniqueItems(),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

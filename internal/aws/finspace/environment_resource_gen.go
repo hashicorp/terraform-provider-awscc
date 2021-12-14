@@ -31,6 +31,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "AWS account ID associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"data_bundles": {
 			// Property: DataBundles
@@ -49,6 +52,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -63,6 +67,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ID for FinSpace created account used to store Environment artifacts",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"description": {
 			// Property: Description
@@ -87,6 +94,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "ARN of the Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"environment_id": {
 			// Property: EnvironmentId
@@ -99,6 +109,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Unique identifier for representing FinSpace Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"environment_url": {
 			// Property: EnvironmentUrl
@@ -111,6 +124,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "URL used to login to the Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"federation_mode": {
 			// Property: FederationMode
@@ -237,6 +253,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -263,6 +280,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "SageMaker Studio Domain URL associated with the Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -286,6 +306,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "State of the Environment",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"superuser_parameters": {
 			// Property: SuperuserParameters
@@ -352,6 +375,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -361,6 +385,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

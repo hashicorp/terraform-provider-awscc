@@ -30,6 +30,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The time at which the project was created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"project_arn": {
 			// Property: ProjectArn
@@ -44,6 +47,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the Project.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"project_description": {
 			// Property: ProjectDescription
@@ -62,6 +68,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringLenAtMost(1024),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -77,6 +84,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Project Id.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"project_name": {
 			// Property: ProjectName
@@ -117,6 +127,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The status of a project.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"service_catalog_provisioned_product_details": {
 			// Property: ServiceCatalogProvisionedProductDetails
@@ -159,6 +172,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"service_catalog_provisioning_details": {
 			// Property: ServiceCatalogProvisioningDetails
@@ -346,6 +362,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtMost(40),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -355,6 +372,9 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "AWS account ID of customer",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"finding_publishing_frequency": {
 			// Property: FindingPublishingFrequency
@@ -57,6 +60,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "SIX_HOURS"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"service_role": {
@@ -69,6 +73,9 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Service role used by Macie",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"status": {
 			// Property: Status
@@ -94,6 +101,7 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "ENABLED"}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 	}
@@ -102,6 +110,9 @@ func sessionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

@@ -30,6 +30,9 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Service profile Arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -42,6 +45,9 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Description: "Service profile Id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -122,91 +128,145 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: ChannelMask
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dev_status_req_freq": {
 						// Property: DevStatusReqFreq
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dl_bucket_size": {
 						// Property: DlBucketSize
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dl_rate": {
 						// Property: DlRate
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dl_rate_policy": {
 						// Property: DlRatePolicy
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dr_max": {
 						// Property: DrMax
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"dr_min": {
 						// Property: DrMin
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"hr_allowed": {
 						// Property: HrAllowed
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"min_gw_diversity": {
 						// Property: MinGwDiversity
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"nwk_geo_loc": {
 						// Property: NwkGeoLoc
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"pr_allowed": {
 						// Property: PrAllowed
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"ra_allowed": {
 						// Property: RaAllowed
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"report_dev_status_battery": {
 						// Property: ReportDevStatusBattery
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"report_dev_status_margin": {
 						// Property: ReportDevStatusMargin
 						Type:     types.BoolType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"target_per": {
 						// Property: TargetPer
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"ul_bucket_size": {
 						// Property: UlBucketSize
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"ul_rate": {
 						// Property: UlRate
 						Type:     types.NumberType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 					"ul_rate_policy": {
 						// Property: UlRatePolicy
 						Type:     types.StringType,
 						Computed: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),

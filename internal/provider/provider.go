@@ -11,11 +11,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
@@ -293,7 +291,7 @@ func (p *AwsCloudControlApiProvider) Configure(ctx context.Context, request tfsd
 	}
 
 	if !request.Config.Raw.IsFullyKnown() {
-		response.AddError("Unknown Value", "An attribute value is not yet known")
+		response.Diagnostics.AddError("Unknown Value", "An attribute value is not yet known")
 	}
 
 	config.terraformVersion = request.TerraformVersion
@@ -427,26 +425,27 @@ func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol
 }
 
 type awsSdkLogger struct{}
-type awsSdkContextLogger struct {
-	ctx context.Context
-}
 
 func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
 	log.Printf("[%s] [aws-sdk-go-v2] %s", classification, fmt.Sprintf(format, v...))
 }
 
-func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
-	return awsSdkContextLogger{ctx: ctx}
-}
+// func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
+// 	return awsSdkContextLogger{ctx: ctx}
+// }
 
-func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	switch classification {
-	case logging.Warn:
-		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
-	default:
-		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
-	}
-}
+// type awsSdkContextLogger struct {
+// 	ctx context.Context
+// }
+
+// func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
+// 	switch classification {
+// 	case logging.Warn:
+// 		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+// 	default:
+// 		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+// 	}
+// }
 
 func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
 	results := make([]awsbase.UserAgentProduct, len(products))

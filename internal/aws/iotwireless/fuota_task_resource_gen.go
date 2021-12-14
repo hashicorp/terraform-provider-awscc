@@ -30,6 +30,9 @@ func fuotaTaskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "FUOTA task arn. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"associate_multicast_group": {
 			// Property: AssociateMulticastGroup
@@ -148,6 +151,9 @@ func fuotaTaskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "FUOTA task status. Returned after successful read.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"id": {
 			// Property: Id
@@ -160,6 +166,9 @@ func fuotaTaskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "FUOTA task id. Returned after successful create.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"lo_ra_wan": {
 			// Property: LoRaWAN
@@ -202,6 +211,9 @@ func fuotaTaskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "FUOTA task LoRaWAN start time",
 						Type:        types.StringType,
 						Computed:    true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							tfsdk.UseStateForUnknown(),
+						},
 					},
 				},
 			),

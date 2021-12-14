@@ -29,6 +29,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The ID of the resource.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"resource_type": {
 			// Property: ResourceType
@@ -40,6 +43,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The type of resource, for example a VPC attachment.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"state": {
 			// Property: State
@@ -51,6 +57,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 			Description: "The state of the subnet association.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -100,6 +109,9 @@ func transitGatewayMulticastDomainAssociationResourceType(ctx context.Context) (
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

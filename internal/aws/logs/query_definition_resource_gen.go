@@ -74,6 +74,9 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Description: "Unique identifier of a query definition",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"query_string": {
 			// Property: QueryString
@@ -97,6 +100,9 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

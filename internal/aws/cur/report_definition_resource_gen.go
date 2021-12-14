@@ -51,6 +51,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 			},
 		},
 		"additional_schema_elements": {
@@ -79,6 +80,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.List{ElemType: types.StringType, Elems: []attr.Value{}}),
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -100,6 +102,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				validate.StringLenBetween(1, 128),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -279,6 +282,9 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

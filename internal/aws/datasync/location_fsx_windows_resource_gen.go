@@ -37,6 +37,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenAtMost(253),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -72,6 +73,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"location_uri": {
 			// Property: LocationUri
@@ -85,6 +89,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "The URL of the FSx for Windows location that was described.",
 			Type:        types.StringType,
 			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"password": {
 			// Property: Password
@@ -147,6 +154,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.StringLenAtMost(4096),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 			// Subdirectory is a write-only property.
@@ -240,6 +248,9 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 		Description: "Uniquely identifies the resource.",
 		Type:        types.StringType,
 		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
 	}
 
 	schema := tfsdk.Schema{

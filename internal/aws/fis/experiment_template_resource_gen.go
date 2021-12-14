@@ -153,6 +153,9 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"role_arn": {
 			// Property: RoleArn

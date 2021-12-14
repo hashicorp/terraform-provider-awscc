@@ -27,6 +27,9 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"last_modified_time": {
 			// Property: LastModifiedTime
@@ -36,6 +39,9 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// }
 			Type:     types.StringType,
 			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"origin_request_policy_config": {
 			// Property: OriginRequestPolicyConfig
