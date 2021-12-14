@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
@@ -395,8 +395,6 @@ var (
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
@@ -493,8 +491,6 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
@@ -578,8 +574,6 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
@@ -678,8 +672,6 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
@@ -709,8 +701,6 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 }
 
 func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	tflog.Trace(ctx, "Resource.ImportState enter", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))

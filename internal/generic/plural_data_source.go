@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
@@ -66,8 +66,6 @@ func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *p
 }
 
 func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := pd.dataSourceType.cfTypeName
 	tfTypeName := pd.dataSourceType.tfTypeName
 

@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -66,8 +66,6 @@ func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceTyp
 }
 
 func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
-	ctx = tflog.New(ctx, tflog.WithStderrFromInit(), tflog.WithLevelFromEnv("TF_LOG"), tflog.WithoutLocation())
-
 	cfTypeName := sd.dataSourceType.cfTypeName
 	tfTypeName := sd.dataSourceType.tfTypeName
 

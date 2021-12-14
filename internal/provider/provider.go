@@ -15,7 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"

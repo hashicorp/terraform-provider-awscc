@@ -8,7 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	tflog "github.com/hashicorp/terraform-plugin-log"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 // Translates a Terraform Value to Cloud Control DesiredState.
