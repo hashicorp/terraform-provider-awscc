@@ -4,13 +4,15 @@ PKG_NAME=internal/aws/...
 ACCTEST_TIMEOUT?=180m
 ACCTEST_PARALLELISM?=20
 
-default: build
+default: install
 
-.PHONY: all build default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
+.PHONY: all install default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources singular-data-sources plural-data-sources build docs
+all: tools schemas resources singular-data-sources plural-data-sources install docs
 
-build:
+build: schemas resources singular-data-sources plural-data-sources install docs
+
+install:
 	go install
 
 plural-data-sources:
