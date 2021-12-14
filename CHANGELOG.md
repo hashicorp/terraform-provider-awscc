@@ -3,6 +3,8 @@
 BUG FIXES:
 
 * provider: Ensure `darwin/arm64` platform is included in releases
+* Prevent `terraform plan` showing that a resource must be replaced immediately after creation ([#306](https://github.com/hashicorp/terraform-provider-awscc/issues/306))
+* Prevent errors like `An unexpected error was encountered trying to read an attribute from the state.` during resource read ([#306](https://github.com/hashicorp/terraform-provider-awscc/issues/306))
 
 ## [0.8.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.8.0) (December  3, 2021)
 
@@ -179,6 +181,7 @@ FEATURES:
 * **New Resource:** `awscc_s3outposts_bucket`
 
 BUG FIXES:
+
 * Persist any resource `id` to state if Create fails while waiting for async operation completion ([#252](https://github.com/hashicorp/terraform-provider-awscc/issues/252))
 * data-source/awscc_s3_storagelens: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
 * data-source/awscc_s3objectlambda_access_point: Fix incorrectly generated schema ([#255](https://github.com/hashicorp/terraform-provider-awscc/issues/255))
