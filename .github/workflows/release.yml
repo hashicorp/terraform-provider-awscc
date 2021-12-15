@@ -2,17 +2,60 @@ name: Release
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Pre-Release"]
-    branches: [main]
-    types:
-      - completed
+    inputs:
+      release-version:
+        description: '(Optional) Release Version e.g. 1.x.x'
+        required: false
+        type: string
 
 env:
   GOPROXY: https://proxy.golang.org/
 
 jobs:
+  Tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+      - if: ${{ !github.event.inputs.release-version }}
+        name: Get next tag
+        id: tag
+        run: |
+          PREVIOUS_RELEASE_TAG=$(git describe --abbrev=0 --match='v*.*.*' --tags)
+          NEW_RELEASE_TAG=v$(echo $PREVIOUS_RELEASE_TAG | awk -F. '{
+                        $1 = substr($1,2)
+                        $2 += 1
+                        printf("%s.%01d.0\n\n", $1, $2);
+                    }')
+          echo ::set-output name=new_release_tag::$NEW_RELEASE_TAG
+      - if: github.event.inputs.release-version
+        name: Create tag from input
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/v${{ github.event.inputs.release-version }}",
+              sha: context.sha
+            })
+      - if: steps.tag.outputs.new_release_tag
+        name: Create computed tag
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.tag.outputs.new_release_tag }}",
+              sha: context.sha
+            })
   Release:
+    needs: [Tag]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -62,3 +105,42 @@ jobs:
         env:
           FASTLY_API_TOKEN: ${{ secrets.FASTLY_STATIC_PURGE_TOKEN }}
           TERRAFORM_REGISTRY_SYNC_TOKEN: ${{ secrets.TF_PROVIDER_RELEASE_TERRAFORM_REGISTRY_SYNC_TOKEN }}
+  Changelog:
+    needs: [Release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: main
+      - name: Update Changelog Header
+        id: changelog
+        run: |
+          CHANGELOG_FILE_NAME="CHANGELOG.md"
+          CURR_RELEASE_TAG=$(git describe --abbrev=0 --match='v*.*.*' --tags)
+          TAG=${CURR_RELEASE_TAG:1}
+
+          # Add Release Date
+          RELEASE_DATE=`date +%B' '%e', '%Y`
+          sed -i -e "1 s/$TAG (Unreleased)/[$TAG](https:\/\/github.com\/hashicorp\/${{ github.event.repository.name }}\/releases\/tag\/$CURR_RELEASE_TAG) ($RELEASE_DATE)/" $CHANGELOG_FILE_NAME
+
+          # Prepend next release line
+          echo Previous release is: $CURR_RELEASE_TAG
+
+          NEXT_RELEASE_LINE=$(echo $CURR_RELEASE_TAG | awk -F. '{
+              $1 = substr($1,2)
+              $2 += 1
+              printf("%s.%01d.0\n\n", $1, $2);
+          }')
+
+          echo New minor version is: v$NEXT_RELEASE_LINE
+
+          echo -e "## $NEXT_RELEASE_LINE (Unreleased)\n$(cat $CHANGELOG_FILE_NAME)" > $CHANGELOG_FILE_NAME
+
+          echo ::set-output name=curr_release_tag::$CURR_RELEASE_TAG
+      - run: |
+          git config --local user.email changelogbot@hashicorp.com
+          git config --local user.name changelogbot
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md after ${{ steps.changelog.outputs.curr_release_tag }}"
+          git push
