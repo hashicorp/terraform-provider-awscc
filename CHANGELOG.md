@@ -1,5 +1,23 @@
 ## 0.9.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_deployment`
+* **New Data Source:** `awscc_appsync_domain_name`
+* **New Data Source:** `awscc_appsync_domain_name_api_association`
+* **New Data Source:** `awscc_lex_bot`
+* **New Data Source:** `awscc_lex_bot_alias`
+* **New Data Source:** `awscc_lex_bot_version`
+* **New Data Source:** `awscc_lex_bots`
+* **New Data Source:** `awscc_lex_resource_policy`
+* **New Resource:** `awscc_apigateway_deployment`
+* **New Resource:** `awscc_appsync_domain_name`
+* **New Resource:** `awscc_appsync_domain_name_api_association`
+* **New Resource:** `awscc_lex_bot`
+* **New Resource:** `awscc_lex_bot_alias`
+* **New Resource:** `awscc_lex_bot_version`
+* **New Resource:** `awscc_lex_resource_policy`
+
 BUG FIXES:
 
 * provider: Ensure `darwin/arm64` platform is included in releases
