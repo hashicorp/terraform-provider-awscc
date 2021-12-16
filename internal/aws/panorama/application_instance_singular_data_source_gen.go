@@ -218,7 +218,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "DEPLOYMENT_PENDING",
 			//     "DEPLOYMENT_REQUESTED",
 			//     "DEPLOYMENT_IN_PROGRESS",
-			//     "DEPLOYMENT_FAILED",
+			//     "DEPLOYMENT_ERROR",
 			//     "DEPLOYMENT_SUCCEEDED",
 			//     "REMOVAL_PENDING",
 			//     "REMOVAL_REQUESTED",
@@ -248,7 +248,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "enum": [
 			//     "DEPLOYMENT_SUCCEEDED",
-			//     "DEPLOYMENT_FAILED",
+			//     "DEPLOYMENT_ERROR",
 			//     "REMOVAL_SUCCEEDED",
 			//     "REMOVAL_FAILED",
 			//     "PROCESSING_DEPLOYMENT",

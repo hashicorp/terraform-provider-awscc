@@ -28,6 +28,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "Attributes": {
 			//       "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
@@ -62,7 +63,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"attributes": {
 						// Property: Attributes
 						Description: "The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input.",
-						Attributes: tfsdk.ListNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"json_path": {
 									// Property: JsonPath
@@ -71,7 +72,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									Computed:    true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -111,6 +112,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Tags to be applied to Input.",

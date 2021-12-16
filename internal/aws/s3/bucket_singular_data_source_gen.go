@@ -941,7 +941,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "NoncurrentVersionTransition": {
 			//             "additionalProperties": false,
-			//             "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+			//             "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 			//             "properties": {
 			//               "StorageClass": {
 			//                 "description": "The class of storage used to store the object.",
@@ -949,6 +949,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "DEEP_ARCHIVE",
 			//                   "GLACIER",
 			//                   "Glacier",
+			//                   "GLACIER_IR",
 			//                   "INTELLIGENT_TIERING",
 			//                   "ONEZONE_IA",
 			//                   "STANDARD_IA"
@@ -970,7 +971,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "insertionOrder": true,
 			//             "items": {
 			//               "additionalProperties": false,
-			//               "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+			//               "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 			//               "properties": {
 			//                 "StorageClass": {
 			//                   "description": "The class of storage used to store the object.",
@@ -978,6 +979,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                     "DEEP_ARCHIVE",
 			//                     "GLACIER",
 			//                     "Glacier",
+			//                     "GLACIER_IR",
 			//                     "INTELLIGENT_TIERING",
 			//                     "ONEZONE_IA",
 			//                     "STANDARD_IA"
@@ -1039,6 +1041,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "DEEP_ARCHIVE",
 			//                   "GLACIER",
 			//                   "Glacier",
+			//                   "GLACIER_IR",
 			//                   "INTELLIGENT_TIERING",
 			//                   "ONEZONE_IA",
 			//                   "STANDARD_IA"
@@ -1070,6 +1073,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                     "DEEP_ARCHIVE",
 			//                     "GLACIER",
 			//                     "Glacier",
+			//                     "GLACIER_IR",
 			//                     "INTELLIGENT_TIERING",
 			//                     "ONEZONE_IA",
 			//                     "STANDARD_IA"
@@ -1159,7 +1163,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"noncurrent_version_transition": {
 									// Property: NoncurrentVersionTransition
-									Description: "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+									Description: "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"storage_class": {
@@ -2156,6 +2160,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "enum": [
 			//                   "DEEP_ARCHIVE",
 			//                   "GLACIER",
+			//                   "GLACIER_IR",
 			//                   "INTELLIGENT_TIERING",
 			//                   "ONEZONE_IA",
 			//                   "REDUCED_REDUNDANCY",

@@ -24,10 +24,6 @@ func iPAMPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The address family of the address space in this pool. Either IPv4 or IPv6.",
-			//   "enum": [
-			//     "IPv4",
-			//     "IPv6"
-			//   ],
 			//   "type": "string"
 			// }
 			Description: "The address family of the address space in this pool. Either IPv4 or IPv6.",

@@ -46,15 +46,6 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
-			Type:     types.StringType,
-			Computed: true,
-		},
 		"ipv_6_cidr_block": {
 			// Property: Ipv6CidrBlock
 			// CloudFormation resource type schema:
@@ -97,6 +88,15 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		},
 		"outpost_arn": {
 			// Property: OutpostArn
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
+		"subnet_id": {
+			// Property: SubnetId
 			// CloudFormation resource type schema:
 			// {
 			//   "type": "string"
@@ -175,13 +175,13 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"assign_ipv_6_address_on_creation": "AssignIpv6AddressOnCreation",
 		"availability_zone":                "AvailabilityZone",
 		"cidr_block":                       "CidrBlock",
-		"id":                               "Id",
 		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
 		"ipv_6_cidr_blocks":                "Ipv6CidrBlocks",
 		"key":                              "Key",
 		"map_public_ip_on_launch":          "MapPublicIpOnLaunch",
 		"network_acl_association_id":       "NetworkAclAssociationId",
 		"outpost_arn":                      "OutpostArn",
+		"subnet_id":                        "SubnetId",
 		"tags":                             "Tags",
 		"value":                            "Value",
 		"vpc_id":                           "VpcId",

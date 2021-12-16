@@ -143,7 +143,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//           "type": "string"
 			//         },
 			//         "StatefulRules": {
-			//           "insertionOrder": false,
+			//           "insertionOrder": true,
 			//           "items": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -621,7 +621,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								},
 								"stateful_rules": {
 									// Property: StatefulRules
-									Attributes: tfsdk.SetNestedAttributes(
+									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"action": {
 												// Property: Action
@@ -686,7 +686,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 												Computed: true,
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Computed: true,
 								},

@@ -35,9 +35,11 @@ func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Parameters": {
 			//         "items": {
+			//           "additionalProperties": false,
 			//           "properties": {
 			//             "Name": {
 			//               "type": "string"
@@ -120,8 +122,10 @@ func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ResourceQuery
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "properties": {
 			//     "Query": {
+			//       "additionalProperties": false,
 			//       "properties": {
 			//         "ResourceTypeFilters": {
 			//           "items": {
@@ -134,6 +138,7 @@ func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         },
 			//         "TagFilters": {
 			//           "items": {
+			//             "additionalProperties": false,
 			//             "properties": {
 			//               "Key": {
 			//                 "type": "string"
@@ -227,6 +232,7 @@ func groupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "items": {
+			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "pattern": "",

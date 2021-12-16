@@ -87,6 +87,12 @@ func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
+			//     "CertificateRevocationCheckType": {
+			//       "type": "string"
+			//     },
+			//     "CertificateRevocationSourceUri": {
+			//       "type": "string"
+			//     },
 			//     "TruststoreUri": {
 			//       "type": "string"
 			//     },
@@ -98,6 +104,16 @@ func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"certificate_revocation_check_type": {
+						// Property: CertificateRevocationCheckType
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"certificate_revocation_source_uri": {
+						// Property: CertificateRevocationSourceUri
+						Type:     types.StringType,
+						Computed: true,
+					},
 					"truststore_uri": {
 						// Property: TruststoreUri
 						Type:     types.StringType,
@@ -212,6 +228,8 @@ func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_arn":                        "CertificateArn",
+		"certificate_revocation_check_type":      "CertificateRevocationCheckType",
+		"certificate_revocation_source_uri":      "CertificateRevocationSourceUri",
 		"distribution_domain_name":               "DistributionDomainName",
 		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
 		"domain_name":                            "DomainName",
