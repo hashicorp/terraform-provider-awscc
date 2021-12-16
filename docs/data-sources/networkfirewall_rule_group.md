@@ -71,7 +71,7 @@ Read-Only:
 
 - **rules_source_list** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--rules_source_list))
 - **rules_string** (String)
-- **stateful_rules** (Attributes Set) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules))
+- **stateful_rules** (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules))
 - **stateless_rules_and_custom_actions** (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions))
 
 <a id="nestedatt--rule_group--rules_source--rules_source_list"></a>

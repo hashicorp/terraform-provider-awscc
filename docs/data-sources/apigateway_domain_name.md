@@ -47,6 +47,8 @@ Read-Only:
 
 Read-Only:
 
+- **certificate_revocation_check_type** (String)
+- **certificate_revocation_source_uri** (String)
 - **truststore_uri** (String)
 - **truststore_version** (String)
 
