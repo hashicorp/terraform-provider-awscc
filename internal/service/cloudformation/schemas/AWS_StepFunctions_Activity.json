@@ -64,7 +64,8 @@
     },
     "read": {
       "permissions": [
-        "states:DescribeActivity"
+        "states:DescribeActivity",
+        "states:ListTagsForResource"
       ]
     },
     "update": {

@@ -35,6 +35,7 @@
       "type": "array",
       "$comment": "List of passwords.",
       "uniqueItems": true,
+      "insertionOrder": true,
       "items": {
         "type": "string"
       },

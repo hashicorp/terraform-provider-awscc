@@ -23,6 +23,7 @@
       "type": "array",
       "$comment": "List of users.",
       "uniqueItems": true,
+      "insertionOrder": true,
       "items": {
         "type": "string"
       },

@@ -24,9 +24,7 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The authorization mechanism that the proxy uses.",
-			//   "insertionOrder": false,
 			//   "items": {
-			//     "additionalProperties": false,
 			//     "properties": {
 			//       "AuthScheme": {
 			//         "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -198,9 +196,7 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
-			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
@@ -235,23 +231,11 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "VPC ID to associate with the new DB proxy.",
-			//   "type": "string"
-			// }
-			Description: "VPC ID to associate with the new DB proxy.",
-			Type:        types.StringType,
-			Computed:    true,
-		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC security group IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -267,7 +251,6 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC subnet IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -314,7 +297,6 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"tags":                   "Tags",
 		"user_name":              "UserName",
 		"value":                  "Value",
-		"vpc_id":                 "VpcId",
 		"vpc_security_group_ids": "VpcSecurityGroupIds",
 		"vpc_subnet_ids":         "VpcSubnetIds",
 	})

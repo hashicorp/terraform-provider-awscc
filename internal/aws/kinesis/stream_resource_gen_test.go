@@ -3,7 +3,6 @@
 package kinesis_test
 
 import (
-	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -15,8 +14,30 @@ func TestAccAWSKinesisStream_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config:      td.EmptyConfig(),
-			ExpectError: regexp.MustCompile("Missing required argument"),
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
+func TestAccAWSKinesisStream_disappears(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::Kinesis::Stream", "awscc_kinesis_stream", "test")
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				td.DeleteResource(),
+			),
+			ExpectNonEmptyPlan: true,
 		},
 	})
 }

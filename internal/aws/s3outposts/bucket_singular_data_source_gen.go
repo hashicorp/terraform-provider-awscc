@@ -56,6 +56,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "Rules": {
 			//       "description": "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "anyOf": [
@@ -135,6 +136,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   },
 			//                   "Tags": {
 			//                     "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+			//                     "insertionOrder": false,
 			//                     "items": {
 			//                       "additionalProperties": false,
 			//                       "description": "Tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
@@ -225,7 +227,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"rules": {
 						// Property: Rules
 						Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-						Attributes: tfsdk.ListNestedAttributes(
+						Attributes: tfsdk.SetNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"abort_incomplete_multipart_upload": {
 									// Property: AbortIncompleteMultipartUpload
@@ -273,7 +275,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 														"tags": {
 															// Property: Tags
 															Description: "All of these tags must exist in the object's tag set in order for the rule to apply.",
-															Attributes: tfsdk.ListNestedAttributes(
+															Attributes: tfsdk.SetNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"key": {
 																		// Property: Key
@@ -286,7 +288,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																		Computed: true,
 																	},
 																},
-																tfsdk.ListNestedAttributesOptions{},
+																tfsdk.SetNestedAttributesOptions{},
 															),
 															Computed: true,
 														},
@@ -335,7 +337,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									Computed: true,
 								},
 							},
-							tfsdk.ListNestedAttributesOptions{},
+							tfsdk.SetNestedAttributesOptions{},
 						),
 						Computed: true,
 					},
@@ -360,6 +362,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -386,7 +389,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "uniqueItems": true
 			// }
 			Description: "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
+			Attributes: tfsdk.SetNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
 						// Property: Key
@@ -399,7 +402,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 						Computed: true,
 					},
 				},
-				tfsdk.ListNestedAttributesOptions{},
+				tfsdk.SetNestedAttributesOptions{},
 			),
 			Computed: true,
 		},

@@ -95,6 +95,20 @@
                                     "items": {
                                         "type": "string"
                                     }
+                                },
+                                "OrganizationArns": {
+                                    "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "OrganizationalUnitArns": {
+                                    "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 }
                             }
                         }

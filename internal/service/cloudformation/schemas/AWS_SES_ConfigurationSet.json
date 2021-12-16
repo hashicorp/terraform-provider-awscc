@@ -25,6 +25,7 @@
         },
         "read": {
             "permissions": [
+                "ses:GetConfigurationSet",
                 "ses:DescribeConfigurationSet"
             ]
         },

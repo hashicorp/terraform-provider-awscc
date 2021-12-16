@@ -53,7 +53,9 @@
                             "enum": [
                                 "ALLOW",
                                 "BLOCK",
-                                "COUNT"
+                                "COUNT",
+                                "CAPTCHA",
+                                "EXCLUDED_AS_COUNT"
                             ]
                         }
                     },

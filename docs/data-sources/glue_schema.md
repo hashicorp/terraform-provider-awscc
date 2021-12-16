@@ -24,7 +24,7 @@ Data Source schema for AWS::Glue::Schema
 - **arn** (String) Amazon Resource Name for the Schema.
 - **checkpoint_version** (Attributes) Specify checkpoint version for update. This is only required to update the Compatibility. (see [below for nested schema](#nestedatt--checkpoint_version))
 - **compatibility** (String) Compatibility setting for the schema.
-- **data_format** (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'
+- **data_format** (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'
 - **description** (String) A description of the schema. If description is not provided, there will not be any default value for this.
 - **initial_schema_version_id** (String) Represents the version ID associated with the initial schema version.
 - **name** (String) Name of the schema.

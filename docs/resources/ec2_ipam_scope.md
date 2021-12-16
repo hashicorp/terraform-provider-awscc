@@ -22,7 +22,6 @@ Resource Schema of AWS::EC2::IPAMScope Type
 ### Optional
 
 - **description** (String)
-- **ipam_scope_type** (String) Determines whether this scope contains publicly routable space or space for a private network
 - **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -31,6 +30,7 @@ Resource Schema of AWS::EC2::IPAMScope Type
 - **id** (String) Uniquely identifies the resource.
 - **ipam_arn** (String) The Amazon Resource Name (ARN) of the IPAM this scope is a part of.
 - **ipam_scope_id** (String) Id of the IPAM scope.
+- **ipam_scope_type** (String) Determines whether this scope contains publicly routable space or space for a private network
 - **is_default** (Boolean) Is this one of the default scopes created with the IPAM.
 - **pool_count** (Number) The number of pools that currently exist in this scope.
 

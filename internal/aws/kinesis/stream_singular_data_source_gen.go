@@ -60,11 +60,11 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: ShardCount
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The number of shards that the stream uses.",
+			//   "description": "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Description: "The number of shards that the stream uses.",
+			Description: "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
 			Type:        types.NumberType,
 			Computed:    true,
 		},
@@ -107,6 +107,43 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"key_id": {
 						// Property: KeyId
 						Description: "The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
+		"stream_mode_details": {
+			// Property: StreamModeDetails
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "default": {
+			//     "StreamMode": "PROVISIONED"
+			//   },
+			//   "description": "The mode in which the stream is running.",
+			//   "properties": {
+			//     "StreamMode": {
+			//       "description": "The mode of the stream",
+			//       "enum": [
+			//         "ON_DEMAND",
+			//         "PROVISIONED"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "StreamMode"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "The mode in which the stream is running.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"stream_mode": {
+						// Property: StreamMode
+						Description: "The mode of the stream",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -193,6 +230,8 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"retention_period_hours": "RetentionPeriodHours",
 		"shard_count":            "ShardCount",
 		"stream_encryption":      "StreamEncryption",
+		"stream_mode":            "StreamMode",
+		"stream_mode_details":    "StreamModeDetails",
 		"tags":                   "Tags",
 		"value":                  "Value",
 	})

@@ -292,7 +292,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//     "DEPLOYMENT_PENDING",
 			//     "DEPLOYMENT_REQUESTED",
 			//     "DEPLOYMENT_IN_PROGRESS",
-			//     "DEPLOYMENT_FAILED",
+			//     "DEPLOYMENT_ERROR",
 			//     "DEPLOYMENT_SUCCEEDED",
 			//     "REMOVAL_PENDING",
 			//     "REMOVAL_REQUESTED",
@@ -328,7 +328,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "enum": [
 			//     "DEPLOYMENT_SUCCEEDED",
-			//     "DEPLOYMENT_FAILED",
+			//     "DEPLOYMENT_ERROR",
 			//     "REMOVAL_SUCCEEDED",
 			//     "REMOVAL_FAILED",
 			//     "PROCESSING_DEPLOYMENT",
@@ -341,7 +341,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"DEPLOYMENT_SUCCEEDED",
-					"DEPLOYMENT_FAILED",
+					"DEPLOYMENT_ERROR",
 					"REMOVAL_SUCCEEDED",
 					"REMOVAL_FAILED",
 					"PROCESSING_DEPLOYMENT",

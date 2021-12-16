@@ -25,14 +25,14 @@ Data Source schema for AWS::S3Outposts::Bucket
 - **bucket_name** (String) A name for the bucket.
 - **lifecycle_configuration** (Attributes) Rules that define how Amazon S3Outposts manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - **outpost_id** (String) The id of the customer outpost on which the bucket resides.
-- **tags** (Attributes List) An arbitrary set of tags (key-value pairs) for this S3Outposts bucket. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An arbitrary set of tags (key-value pairs) for this S3Outposts bucket. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--lifecycle_configuration"></a>
 ### Nested Schema for `lifecycle_configuration`
 
 Read-Only:
 
-- **rules** (Attributes List) A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
+- **rules** (Attributes Set) A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
 
 <a id="nestedatt--lifecycle_configuration--rules"></a>
 ### Nested Schema for `lifecycle_configuration.rules`
@@ -69,7 +69,7 @@ Read-Only:
 Read-Only:
 
 - **prefix** (String) Prefix identifies one or more objects to which the rule applies.
-- **tags** (Attributes List) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag--tags))
+- **tags** (Attributes Set) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag--tags))
 
 <a id="nestedatt--lifecycle_configuration--rules--filter--tag--tags"></a>
 ### Nested Schema for `lifecycle_configuration.rules.filter.tag.tags`

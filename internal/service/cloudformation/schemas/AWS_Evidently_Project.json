@@ -21,7 +21,6 @@
       "maxLength": 160
     },
     "DataDelivery": {
-      "type": "object",
       "$ref": "#/definitions/DataDeliveryObject"
     },
     "Tags": {
@@ -40,7 +39,6 @@
       "description": "Destinations for data.",
       "properties": {
         "S3": {
-          "type": "object",
           "$ref": "#/definitions/S3Destination"
         },
         "LogGroup": {

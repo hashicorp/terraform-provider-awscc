@@ -18,7 +18,7 @@ This resource represents a schema of Glue Schema Registry.
 ### Required
 
 - **compatibility** (String) Compatibility setting for the schema.
-- **data_format** (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'
+- **data_format** (String) Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'
 - **name** (String) Name of the schema.
 - **schema_definition** (String) Definition for the initial schema version in plain-text.
 

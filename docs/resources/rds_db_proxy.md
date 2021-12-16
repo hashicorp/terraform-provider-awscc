@@ -36,7 +36,6 @@ Resource schema for AWS::RDS::DBProxy
 - **db_proxy_arn** (String) The Amazon Resource Name (ARN) for the proxy.
 - **endpoint** (String) The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
 - **id** (String) Uniquely identifies the resource.
-- **vpc_id** (String) VPC ID to associate with the new DB proxy.
 
 <a id="nestedatt--auth"></a>
 ### Nested Schema for `auth`

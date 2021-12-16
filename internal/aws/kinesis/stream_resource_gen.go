@@ -5,6 +5,7 @@ package kinesis
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -75,13 +76,13 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: ShardCount
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The number of shards that the stream uses.",
+			//   "description": "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Description: "The number of shards that the stream uses.",
+			Description: "The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.",
 			Type:        types.NumberType,
-			Required:    true,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
 			},
@@ -139,6 +140,62 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+		},
+		"stream_mode_details": {
+			// Property: StreamModeDetails
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "default": {
+			//     "StreamMode": "PROVISIONED"
+			//   },
+			//   "description": "The mode in which the stream is running.",
+			//   "properties": {
+			//     "StreamMode": {
+			//       "description": "The mode of the stream",
+			//       "enum": [
+			//         "ON_DEMAND",
+			//         "PROVISIONED"
+			//       ],
+			//       "type": "string"
+			//     }
+			//   },
+			//   "required": [
+			//     "StreamMode"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "The mode in which the stream is running.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"stream_mode": {
+						// Property: StreamMode
+						Description: "The mode of the stream",
+						Type:        types.StringType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"ON_DEMAND",
+								"PROVISIONED",
+							}),
+						},
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				DefaultValue(types.Object{
+					AttrTypes: map[string]attr.Type{
+						"stream_mode": types.StringType,
+					},
+					Attrs: map[string]attr.Value{
+						"stream_mode": types.String{Value: "PROVISIONED"},
+					},
+				},
+				),
+				tfsdk.UseStateForUnknown(),
+			},
 		},
 		"tags": {
 			// Property: Tags
@@ -232,6 +289,8 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"retention_period_hours": "RetentionPeriodHours",
 		"shard_count":            "ShardCount",
 		"stream_encryption":      "StreamEncryption",
+		"stream_mode":            "StreamMode",
+		"stream_mode_details":    "StreamModeDetails",
 		"tags":                   "Tags",
 		"value":                  "Value",
 	})

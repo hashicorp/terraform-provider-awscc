@@ -223,7 +223,7 @@ Read-Only:
 - **expired_object_delete_marker** (Boolean)
 - **id** (String) The ID of this resource.
 - **noncurrent_version_expiration_in_days** (Number)
-- **noncurrent_version_transition** (Attributes) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transition))
+- **noncurrent_version_transition** (Attributes) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transition))
 - **noncurrent_version_transitions** (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transitions))
 - **prefix** (String)
 - **status** (String)

@@ -124,7 +124,7 @@
         },
         "StatefulRules": {
           "type": "array",
-          "insertionOrder": false,
+          "insertionOrder": true,
           "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/StatefulRule"

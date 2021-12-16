@@ -28,6 +28,7 @@
   "primaryIdentifier": [
     "/properties/AliasName"
   ],
+  "taggable": false,
   "handlers": {
     "create": {
       "permissions": [

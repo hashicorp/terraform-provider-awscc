@@ -78,8 +78,8 @@ func iPAMScopeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "description": "Determines whether this scope contains publicly routable space or space for a private network",
 			//   "enum": [
-			//     "Public",
-			//     "Private"
+			//     "public",
+			//     "private"
 			//   ],
 			//   "type": "string"
 			// }

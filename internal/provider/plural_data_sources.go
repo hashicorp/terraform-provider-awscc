@@ -191,6 +191,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_code_signing_configs -cftype AWS::Lambda::CodeSigningConfig -package lambda ../aws/lambda/code_signing_config_plural_data_source_gen.go ../aws/lambda/code_signing_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_event_source_mappings -cftype AWS::Lambda::EventSourceMapping -package lambda ../aws/lambda/event_source_mapping_plural_data_source_gen.go ../aws/lambda/event_source_mapping_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lambda_functions -cftype AWS::Lambda::Function -package lambda ../aws/lambda/function_plural_data_source_gen.go ../aws/lambda/function_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_lex_bots -cftype AWS::Lex::Bot -package lex ../aws/lex/bot_plural_data_source_gen.go ../aws/lex/bot_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_grants -cftype AWS::LicenseManager::Grant -package licensemanager ../aws/licensemanager/grant_plural_data_source_gen.go ../aws/licensemanager/grant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_licensemanager_licenses -cftype AWS::LicenseManager::License -package licensemanager ../aws/licensemanager/license_plural_data_source_gen.go ../aws/licensemanager/license_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lightsail_databases -cftype AWS::Lightsail::Database -package lightsail ../aws/lightsail/database_plural_data_source_gen.go ../aws/lightsail/database_plural_data_source_gen_test.go
@@ -351,6 +352,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisfirehose"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lambda"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lex"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/licensemanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lightsail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/location"

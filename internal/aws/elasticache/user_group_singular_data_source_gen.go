@@ -73,6 +73,7 @@ func userGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "$comment": "List of users.",
 			//   "description": "List of users associated to this user group.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "type": "string"
 			//   },

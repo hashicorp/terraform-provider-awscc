@@ -35,6 +35,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     },
 			//     "States": {
 			//       "description": "Information about the states of the detector.",
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "description": "Information that defines a state of a detector.",
@@ -45,12 +46,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//             "properties": {
 			//               "Events": {
 			//                 "description": "Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "Specifies the `actions` to be performed when the `condition` evaluates to `TRUE`.",
 			//                   "properties": {
 			//                     "Actions": {
 			//                       "description": "The actions to be performed.",
+			//                       "insertionOrder": false,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "The actions to be performed.",
@@ -575,12 +578,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//             "properties": {
 			//               "Events": {
 			//                 "description": "Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "Specifies the `actions` to be performed when the `condition` evaluates to `TRUE`.",
 			//                   "properties": {
 			//                     "Actions": {
 			//                       "description": "The actions to be performed.",
+			//                       "insertionOrder": false,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "The actions to be performed.",
@@ -1105,12 +1110,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//             "properties": {
 			//               "Events": {
 			//                 "description": "Specifies the `actions` performed when the `condition` evaluates to `TRUE`.",
+			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "Specifies the `actions` to be performed when the `condition` evaluates to `TRUE`.",
 			//                   "properties": {
 			//                     "Actions": {
 			//                       "description": "The actions to be performed.",
+			//                       "insertionOrder": false,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "The actions to be performed.",
@@ -1628,12 +1635,14 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//               },
 			//               "TransitionEvents": {
 			//                 "description": "Specifies the `actions` performed, and the next `state` entered, when a `condition` evaluates to `TRUE`.",
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "description": "Specifies the `actions `performed and the next `state` entered when a `condition` evaluates to `TRUE`.",
 			//                   "properties": {
 			//                     "Actions": {
 			//                       "description": "The actions to be performed.",
+			//                       "insertionOrder": false,
 			//                       "items": {
 			//                         "additionalProperties": false,
 			//                         "description": "The actions to be performed.",
@@ -2802,6 +2811,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"condition": {
 															// Property: Condition
@@ -2825,6 +2837,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 										},
 									),
@@ -3431,6 +3446,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"condition": {
 															// Property: Condition
@@ -3454,6 +3472,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 										},
 									),
@@ -4060,6 +4081,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"condition": {
 															// Property: Condition
@@ -4083,6 +4107,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
+												PlanModifiers: []tfsdk.AttributePlanModifier{
+													Multiset(),
+												},
 											},
 											"transition_events": {
 												// Property: TransitionEvents
@@ -4680,6 +4707,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"condition": {
 															// Property: Condition
@@ -4732,6 +4762,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
+						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
 						},
 					},
 				},
@@ -4839,6 +4872,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "description": "Tags to be applied to Input.",
@@ -4880,6 +4914,9 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 	}
 

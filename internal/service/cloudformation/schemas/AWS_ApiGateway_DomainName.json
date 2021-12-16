@@ -23,6 +23,12 @@
                 },
                 "TruststoreVersion": {
                     "type": "string"
+                },
+                "CertificateRevocationCheckType": {
+                    "type": "string"
+                },
+                "CertificateRevocationSourceUri": {
+                    "type": "string"
                 }
             },
             "additionalProperties": false

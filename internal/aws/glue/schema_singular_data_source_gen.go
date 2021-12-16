@@ -95,14 +95,15 @@ func schemaDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: DataFormat
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
+			//   "description": "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'",
 			//   "enum": [
 			//     "AVRO",
-			//     "JSON"
+			//     "JSON",
+			//     "PROTOBUF"
 			//   ],
 			//   "type": "string"
 			// }
-			Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON'",
+			Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'",
 			Type:        types.StringType,
 			Computed:    true,
 		},

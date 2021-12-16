@@ -110,7 +110,6 @@
         "/properties/StorageLocation/GeneratedPrefixLocation",
         "/properties/StorageLocation/BinaryPrefixLocation",
         "/properties/StorageLocation/ManifestPrefixLocation"
-
     ],
     "createOnlyProperties": [
         "/properties/PackageName"
@@ -130,6 +129,14 @@
             "permissions": [
                 "panorama:DescribePackage",
                 "panorama:ListTagsForResource"
+            ]
+        },
+        "update": {
+            "permissions": [
+                "panorama:DescribePackage",
+                "panorama:ListTagsForResource",
+                "panorama:TagResource",
+                "panorama:UntagResource"
             ]
         },
         "list": {

@@ -25,9 +25,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The authorization mechanism that the proxy uses.",
-			//   "insertionOrder": false,
 			//   "items": {
-			//     "additionalProperties": false,
 			//     "properties": {
 			//       "AuthScheme": {
 			//         "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
@@ -112,9 +110,6 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 			},
 		},
 		"db_proxy_arn": {
@@ -237,9 +232,7 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
-			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
@@ -279,30 +272,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
-		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			// {
-			//   "description": "VPC ID to associate with the new DB proxy.",
-			//   "type": "string"
-			// }
-			Description: "VPC ID to associate with the new DB proxy.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-			},
 		},
 		"vpc_security_group_ids": {
 			// Property: VpcSecurityGroupIds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC security group IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -315,16 +290,12 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
 		},
 		"vpc_subnet_ids": {
 			// Property: VpcSubnetIds
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "VPC subnet IDs to associate with the new proxy.",
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -338,7 +309,6 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(2),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -382,7 +352,6 @@ func dBProxyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"tags":                   "Tags",
 		"user_name":              "UserName",
 		"value":                  "Value",
-		"vpc_id":                 "VpcId",
 		"vpc_security_group_ids": "VpcSecurityGroupIds",
 		"vpc_subnet_ids":         "VpcSubnetIds",
 	})

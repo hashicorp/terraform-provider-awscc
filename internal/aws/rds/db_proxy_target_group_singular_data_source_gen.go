@@ -23,7 +23,6 @@ func dBProxyTargetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
 			// {
-			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ConnectionBorrowTimeout": {
 			//       "description": "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
@@ -47,7 +46,6 @@ func dBProxyTargetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//     },
 			//     "SessionPinningFilters": {
 			//       "description": "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -96,7 +94,6 @@ func dBProxyTargetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// Property: DBClusterIdentifiers
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -109,7 +106,6 @@ func dBProxyTargetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// Property: DBInstanceIdentifiers
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },

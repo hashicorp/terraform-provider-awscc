@@ -75,7 +75,9 @@ func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//                       "enum": [
 			//                         "ALLOW",
 			//                         "BLOCK",
-			//                         "COUNT"
+			//                         "COUNT",
+			//                         "CAPTCHA",
+			//                         "EXCLUDED_AS_COUNT"
 			//                       ],
 			//                       "type": "string"
 			//                     }
