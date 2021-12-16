@@ -16,7 +16,8 @@
                 "Query": {
                     "$ref": "#/definitions/Query"
                 }
-            }
+            },
+          "additionalProperties": false
         },
         "Query": {
             "type": "object",
@@ -36,7 +37,8 @@
                         "$ref": "#/definitions/TagFilter"
                     }
                 }
-            }
+            },
+          "additionalProperties": false
         },
         "TagFilter": {
             "type": "object",
@@ -50,7 +52,8 @@
                         "type": "string"
                     }
                 }
-            }
+            },
+          "additionalProperties": false
         },
         "Tag": {
             "type": "object",
@@ -62,7 +65,8 @@
                 "Value": {
                     "type": "string"
                 }
-            }
+            },
+          "additionalProperties": false
         },
         "Configuration": {
             "type": "array",
@@ -82,7 +86,8 @@
                         "$ref": "#/definitions/ConfigurationParameter"
                     }
                 }
-            }
+            },
+          "additionalProperties": false
         },
         "ConfigurationParameter": {
             "type": "object",
@@ -96,7 +101,8 @@
                         "type": "string"
                     }
                 }
-            }
+            },
+          "additionalProperties": false
         }
     },
     "properties": {

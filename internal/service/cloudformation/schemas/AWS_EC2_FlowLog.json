@@ -82,8 +82,32 @@
         "ALL",
         "REJECT"
       ]
+    },
+    "DestinationOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FileFormat": {
+          "type": "string",
+          "enum": [
+            "plain-text",
+            "parquet"
+          ]
+        },
+        "HiveCompatiblePartitions": {
+          "type": "boolean"
+        },
+        "PerHourPartition": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "FileDestination",
+        "HiveCompatiblePartitions",
+        "PerHourPartition"
+      ]
     }
-  },
+   },
   "required": [
     "ResourceType",
     "ResourceId",
@@ -98,7 +122,8 @@
     "/properties/LogDestinationType",
     "/properties/ResourceType",
     "/properties/LogFormat",
-    "/properties/MaxAggregationInterval"
+    "/properties/MaxAggregationInterval",
+    "/properties/DestinationOptions"
   ],
   "readOnlyProperties": [
     "/properties/Id"

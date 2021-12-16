@@ -49,8 +49,8 @@
             "description": "Determines whether this scope contains publicly routable space or space for a private network",
             "type": "string",
             "enum": [
-                "Public",
-                "Private"
+                "public",
+                "private"
             ]
         },
         "IsDefault": {
@@ -86,14 +86,14 @@
         "/properties/Arn",
         "/properties/IpamArn",
         "/properties/IsDefault",
-        "/properties/PoolCount"
+        "/properties/PoolCount",
+        "/properties/IpamScopeType"
     ],
     "writeOnlyProperties": [
         "/properties/IpamId"
     ],
     "createOnlyProperties": [
-        "/properties/IpamId",
-        "/properties/IpamScopeType"
+        "/properties/IpamId"
     ],
     "handlers": {
         "create": {

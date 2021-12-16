@@ -24,7 +24,8 @@
                         "maxLength": 100000
                     },
                     "minItems": 1,
-                    "maxItems": 1
+                    "maxItems": 1,
+                    "insertionOrder": false
                 },
                 "Name": {
                     "description": "The name of the document attachment file.",
@@ -90,7 +91,8 @@
                 "$ref": "#/definitions/AttachmentsSource"
             },
             "minItems": 0,
-            "maxItems": 20
+            "maxItems": 20,
+            "insertionOrder": false
         },
         "Name": {
             "description": "A name for the Systems Manager document.",
@@ -142,7 +144,8 @@
             "items": {
                 "$ref": "#/definitions/Tag"
             },
-            "maxItems": 1000
+            "maxItems": 1000,
+            "insertionOrder": false
         },
         "Requires": {
             "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
@@ -150,7 +153,8 @@
             "items": {
                 "$ref": "#/definitions/DocumentRequires"
             },
-            "minItems": 1
+            "minItems": 1,
+            "insertionOrder": false
         }
     },
     "additionalProperties": false,

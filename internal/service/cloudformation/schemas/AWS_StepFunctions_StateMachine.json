@@ -178,6 +178,11 @@
   "createOnlyProperties": [
     "/properties/StateMachineName"
   ],
+  "writeOnlyProperties": [
+    "/properties/Definition",
+    "/properties/DefinitionS3Location",
+    "/properties/DefinitionSubstitutions"
+  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],
@@ -191,7 +196,8 @@
     },
     "read": {
       "permissions": [
-        "states:DescribeStateMachine"
+        "states:DescribeStateMachine",
+        "states:ListTagsForResource"
       ]
     },
     "update": {

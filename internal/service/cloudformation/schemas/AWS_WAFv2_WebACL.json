@@ -471,6 +471,9 @@
         },
         "VisibilityConfig": {
           "$ref": "#/definitions/VisibilityConfig"
+        },
+        "CaptchaConfig": {
+          "$ref": "#/definitions/CaptchaConfig"
         }
       },
       "required": [
@@ -500,6 +503,9 @@
         },
         "Count": {
           "$ref": "#/definitions/CountAction"
+        },
+        "Captcha": {
+          "$ref": "#/definitions/CaptchaAction"
         }
       },
       "additionalProperties": false
@@ -516,6 +522,16 @@
     },
     "CountAction": {
       "description": "Allow traffic towards application.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaptchaAction": {
+      "description": "Checks valid token exists with request.",
       "type": "object",
       "properties": {
         "CustomRequestHandling": {
@@ -585,7 +601,7 @@
       "description": "Custom response code.",
       "type": "integer",
       "minimum": 200,
-      "maximum": 600
+      "maximum": 599
     },
     "ResponseContentType": {
       "description": "Valid values are TEXT_PLAIN, TEXT_HTML, and APPLICATION_JSON.",
@@ -816,6 +832,9 @@
         },
         "LabelMatchStatement": {
           "$ref": "#/definitions/LabelMatchStatement"
+        },
+        "RegexMatchStatement": {
+          "$ref": "#/definitions/RegexMatchStatement"
         }
       },
       "additionalProperties": false
@@ -974,6 +993,54 @@
         "Key"
       ],
       "additionalProperties": false
+    },
+    "RegexMatchStatement": {
+      "type": "object",
+      "properties": {
+        "RegexString": {
+          "type": "string",
+          "maxLength": 512,
+          "minLength": 1
+        },
+        "FieldToMatch": {
+          "$ref": "#/definitions/FieldToMatch"
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "RegexString",
+        "FieldToMatch",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "CaptchaConfig" : {
+      "type": "object",
+      "properties": {
+        "ImmunityTimeProperty": {
+          "$ref": "#/definitions/ImmunityTimeProperty"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImmunityTimeProperty" : {
+      "type": "object",
+      "properties": {
+        "ImmunityTime": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 259200
+        }
+      },
+      "required": [
+        "ImmunityTime"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -1021,6 +1088,9 @@
     },
     "CustomResponseBodies": {
       "$ref": "#/definitions/CustomResponseBodies"
+    },
+    "CaptchaConfig": {
+      "$ref": "#/definitions/CaptchaConfig"
     }
   },
   "required": [
