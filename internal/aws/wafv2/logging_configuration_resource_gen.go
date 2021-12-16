@@ -76,7 +76,9 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//                       "enum": [
 			//                         "ALLOW",
 			//                         "BLOCK",
-			//                         "COUNT"
+			//                         "COUNT",
+			//                         "CAPTCHA",
+			//                         "EXCLUDED_AS_COUNT"
 			//                       ],
 			//                       "type": "string"
 			//                     }
@@ -184,6 +186,8 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 																	"ALLOW",
 																	"BLOCK",
 																	"COUNT",
+																	"CAPTCHA",
+																	"EXCLUDED_AS_COUNT",
 																}),
 															},
 														},

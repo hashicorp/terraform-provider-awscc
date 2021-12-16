@@ -9,8 +9,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_amplify_app -cfschema ../service/cloudformation/schemas/AWS_Amplify_App.json -package amplify -- ../aws/amplify/app_resource_gen.go ../aws/amplify/app_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_amplify_branch -cfschema ../service/cloudformation/schemas/AWS_Amplify_Branch.json -package amplify -- ../aws/amplify/branch_resource_gen.go ../aws/amplify/branch_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_amplify_domain -cfschema ../service/cloudformation/schemas/AWS_Amplify_Domain.json -package amplify -- ../aws/amplify/domain_resource_gen.go ../aws/amplify/domain_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_amplifyuibuilder_component -cfschema ../service/cloudformation/schemas/AWS_AmplifyUIBuilder_Component.json -package amplifyuibuilder -- ../aws/amplifyuibuilder/component_resource_gen.go ../aws/amplifyuibuilder/component_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_amplifyuibuilder_theme -cfschema ../service/cloudformation/schemas/AWS_AmplifyUIBuilder_Theme.json -package amplifyuibuilder -- ../aws/amplifyuibuilder/theme_resource_gen.go ../aws/amplifyuibuilder/theme_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_account -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Account.json -package apigateway -- ../aws/apigateway/account_resource_gen.go ../aws/apigateway/account_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_api_key -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_ApiKey.json -package apigateway -- ../aws/apigateway/api_key_resource_gen.go ../aws/apigateway/api_key_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_authorizer -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Authorizer.json -package apigateway -- ../aws/apigateway/authorizer_resource_gen.go ../aws/apigateway/authorizer_resource_gen_test.go
@@ -448,7 +446,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/accessanalyzer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/acmpca"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplifyuibuilder"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appflow"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"

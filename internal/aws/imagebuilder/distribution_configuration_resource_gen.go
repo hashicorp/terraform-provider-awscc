@@ -80,6 +80,20 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//             "additionalProperties": false,
 			//             "description": "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
 			//             "properties": {
+			//               "OrganizationArns": {
+			//                 "description": "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "OrganizationalUnitArns": {
+			//                 "description": "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
 			//               "UserGroups": {
 			//                 "description": "The name of the group.",
 			//                 "items": {
@@ -222,6 +236,18 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 									Description: "Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"organization_arns": {
+												// Property: OrganizationArns
+												Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
+												Type:        types.ListType{ElemType: types.StringType},
+												Optional:    true,
+											},
+											"organizational_unit_arns": {
+												// Property: OrganizationalUnitArns
+												Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
+												Type:        types.ListType{ElemType: types.StringType},
+												Optional:    true,
+											},
 											"user_groups": {
 												// Property: UserGroups
 												Description: "The name of the group.",
@@ -415,6 +441,8 @@ func distributionConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 		"launch_template_id":                   "LaunchTemplateId",
 		"license_configuration_arns":           "LicenseConfigurationArns",
 		"name":                                 "Name",
+		"organization_arns":                    "OrganizationArns",
+		"organizational_unit_arns":             "OrganizationalUnitArns",
 		"region":                               "Region",
 		"repository_name":                      "RepositoryName",
 		"service":                              "Service",

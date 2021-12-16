@@ -25,6 +25,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of key and value pairs that describe attachments to a version of a document.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -46,6 +47,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "Values": {
 			//         "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
+			//         "insertionOrder": false,
 			//         "items": {
 			//           "maxLength": 100000,
 			//           "minLength": 1,
@@ -96,6 +98,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							validate.ArrayLenBetween(1, 1),
 							validate.ArrayForEach(validate.StringLenBetween(1, 100000)),
 						},
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -106,6 +111,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenBetween(0, 20),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
@@ -224,6 +230,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -275,6 +282,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.ArrayLenAtLeast(1),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
@@ -284,6 +292,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {
@@ -334,6 +343,9 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(1000),
+			},
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
 			},
 		},
 		"target_type": {

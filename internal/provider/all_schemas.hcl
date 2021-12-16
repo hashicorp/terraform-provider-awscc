@@ -59,11 +59,19 @@ resource_schema "aws_amplify_domain" {
 resource_schema "aws_amplifyuibuilder_component" {
   cloudformation_type_name               = "AWS::AmplifyUIBuilder::Component"
   suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_amplifyuibuilder_theme" {
   cloudformation_type_name               = "AWS::AmplifyUIBuilder::Theme"
   suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_account" {

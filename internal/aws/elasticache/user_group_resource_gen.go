@@ -91,6 +91,7 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "$comment": "List of users.",
 			//   "description": "List of users associated to this user group.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "type": "string"
 			//   },

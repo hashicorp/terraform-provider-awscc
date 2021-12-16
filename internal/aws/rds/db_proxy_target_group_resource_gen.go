@@ -24,7 +24,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// Property: ConnectionPoolConfigurationInfo
 			// CloudFormation resource type schema:
 			// {
-			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ConnectionBorrowTimeout": {
 			//       "description": "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
@@ -48,7 +47,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//     },
 			//     "SessionPinningFilters": {
 			//       "description": "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-			//       "insertionOrder": false,
 			//       "items": {
 			//         "type": "string"
 			//       },
@@ -94,9 +92,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-						},
 					},
 				},
 			),
@@ -106,7 +101,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// Property: DBClusterIdentifiers
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -114,15 +108,11 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
 		},
 		"db_instance_identifiers": {
 			// Property: DBInstanceIdentifiers
 			// CloudFormation resource type schema:
 			// {
-			//   "insertionOrder": false,
 			//   "items": {
 			//     "type": "string"
 			//   },
@@ -130,9 +120,6 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
 			Optional: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
 		},
 		"db_proxy_name": {
 			// Property: DBProxyName

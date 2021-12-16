@@ -150,7 +150,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "type": "string"
 			//         },
 			//         "StatefulRules": {
-			//           "insertionOrder": false,
+			//           "insertionOrder": true,
 			//           "items": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -649,7 +649,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"stateful_rules": {
 									// Property: StatefulRules
-									Attributes: tfsdk.SetNestedAttributes(
+									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"action": {
 												// Property: Action
@@ -768,9 +768,12 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 											},
 										},
-										tfsdk.SetNestedAttributesOptions{},
+										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.UniqueItems(),
+									},
 								},
 								"stateless_rules_and_custom_actions": {
 									// Property: StatelessRulesAndCustomActions

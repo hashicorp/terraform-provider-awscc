@@ -54,18 +54,6 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			// {
-			//   "type": "string"
-			// }
-			Type:     types.StringType,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-			},
-		},
 		"ipv_6_cidr_block": {
 			// Property: Ipv6CidrBlock
 			// CloudFormation resource type schema:
@@ -126,6 +114,18 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"subnet_id": {
+			// Property: SubnetId
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -180,6 +180,15 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		},
 	}
 
+	attributes["id"] = tfsdk.Attribute{
+		Description: "Uniquely identifies the resource.",
+		Type:        types.StringType,
+		Computed:    true,
+		PlanModifiers: []tfsdk.AttributePlanModifier{
+			tfsdk.UseStateForUnknown(),
+		},
+	}
+
 	schema := tfsdk.Schema{
 		Description: "Resource Type definition for AWS::EC2::Subnet",
 		Version:     1,
@@ -190,18 +199,18 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Subnet").WithTerraformTypeName("awscc_ec2_subnet")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"assign_ipv_6_address_on_creation": "AssignIpv6AddressOnCreation",
 		"availability_zone":                "AvailabilityZone",
 		"cidr_block":                       "CidrBlock",
-		"id":                               "Id",
 		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
 		"ipv_6_cidr_blocks":                "Ipv6CidrBlocks",
 		"key":                              "Key",
 		"map_public_ip_on_launch":          "MapPublicIpOnLaunch",
 		"network_acl_association_id":       "NetworkAclAssociationId",
 		"outpost_arn":                      "OutpostArn",
+		"subnet_id":                        "SubnetId",
 		"tags":                             "Tags",
 		"value":                            "Value",
 		"vpc_id":                           "VpcId",
