@@ -47,6 +47,7 @@
       "type": "object"
     }
   },
+  "taggable": false,
   "additionalProperties": false,
   "required": [
     "Bucket",

@@ -24,13 +24,13 @@ Data Source schema for AWS::EC2::VPCEndpoint
 - **creation_timestamp** (String)
 - **dns_entries** (List of String)
 - **network_interface_ids** (List of String)
-- **policy_document** (String) A policy to attach to the endpoint that controls access to the service.
-- **private_dns_enabled** (Boolean) Indicate whether to associate a private hosted zone with the specified VPC.
-- **route_table_ids** (Set of String) One or more route table IDs.
-- **security_group_ids** (Set of String) The ID of one or more security groups to associate with the endpoint network interface.
-- **service_name** (String) The service name.
-- **subnet_ids** (Set of String) The ID of one or more subnets in which to create an endpoint network interface.
+- **policy_document** (Map of String)
+- **private_dns_enabled** (Boolean)
+- **route_table_ids** (List of String)
+- **security_group_ids** (List of String)
+- **service_name** (String)
+- **subnet_ids** (List of String)
 - **vpc_endpoint_type** (String)
-- **vpc_id** (String) The ID of the VPC in which the endpoint will be used.
+- **vpc_id** (String)
 
 

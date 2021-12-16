@@ -16,6 +16,7 @@
       "type": "object"
     }
   },
+  "taggable": false,
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/Bucket"

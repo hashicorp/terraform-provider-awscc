@@ -13,6 +13,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_api_key -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_ApiKey.json -package apigateway -- ../aws/apigateway/api_key_resource_gen.go ../aws/apigateway/api_key_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_authorizer -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Authorizer.json -package apigateway -- ../aws/apigateway/authorizer_resource_gen.go ../aws/apigateway/authorizer_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_client_certificate -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_ClientCertificate.json -package apigateway -- ../aws/apigateway/client_certificate_resource_gen.go ../aws/apigateway/client_certificate_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_apigateway_deployment -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Deployment.json -package apigateway -- ../aws/apigateway/deployment_resource_gen.go ../aws/apigateway/deployment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_documentation_version -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_DocumentationVersion.json -package apigateway -- ../aws/apigateway/documentation_version_resource_gen.go ../aws/apigateway/documentation_version_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_domain_name -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_DomainName.json -package apigateway -- ../aws/apigateway/domain_name_resource_gen.go ../aws/apigateway/domain_name_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apigateway_method -cfschema ../service/cloudformation/schemas/AWS_ApiGateway_Method.json -package apigateway -- ../aws/apigateway/method_resource_gen.go ../aws/apigateway/method_resource_gen_test.go
@@ -29,6 +30,8 @@
 //go:generate go run generators/resource/main.go -resource awscc_appstream_app_block -cfschema ../service/cloudformation/schemas/AWS_AppStream_AppBlock.json -package appstream -- ../aws/appstream/app_block_resource_gen.go ../aws/appstream/app_block_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appstream_application -cfschema ../service/cloudformation/schemas/AWS_AppStream_Application.json -package appstream -- ../aws/appstream/application_resource_gen.go ../aws/appstream/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appstream_application_fleet_association -cfschema ../service/cloudformation/schemas/AWS_AppStream_ApplicationFleetAssociation.json -package appstream -- ../aws/appstream/application_fleet_association_resource_gen.go ../aws/appstream/application_fleet_association_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_appsync_domain_name -cfschema ../service/cloudformation/schemas/AWS_AppSync_DomainName.json -package appsync -- ../aws/appsync/domain_name_resource_gen.go ../aws/appsync/domain_name_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_appsync_domain_name_api_association -cfschema ../service/cloudformation/schemas/AWS_AppSync_DomainNameApiAssociation.json -package appsync -- ../aws/appsync/domain_name_api_association_resource_gen.go ../aws/appsync/domain_name_api_association_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_applicationinsights_application -cfschema ../service/cloudformation/schemas/AWS_ApplicationInsights_Application.json -package applicationinsights -- ../aws/applicationinsights/application_resource_gen.go ../aws/applicationinsights/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_athena_data_catalog -cfschema ../service/cloudformation/schemas/AWS_Athena_DataCatalog.json -package athena -- ../aws/athena/data_catalog_resource_gen.go ../aws/athena/data_catalog_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_athena_named_query -cfschema ../service/cloudformation/schemas/AWS_Athena_NamedQuery.json -package athena -- ../aws/athena/named_query_resource_gen.go ../aws/athena/named_query_resource_gen_test.go
@@ -264,6 +267,10 @@
 //go:generate go run generators/resource/main.go -resource awscc_lambda_code_signing_config -cfschema ../service/cloudformation/schemas/AWS_Lambda_CodeSigningConfig.json -package lambda -- ../aws/lambda/code_signing_config_resource_gen.go ../aws/lambda/code_signing_config_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_lambda_event_source_mapping -cfschema ../service/cloudformation/schemas/AWS_Lambda_EventSourceMapping.json -package lambda -- ../aws/lambda/event_source_mapping_resource_gen.go ../aws/lambda/event_source_mapping_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_lambda_function -cfschema ../service/cloudformation/schemas/AWS_Lambda_Function.json -package lambda -- ../aws/lambda/function_resource_gen.go ../aws/lambda/function_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_lex_bot -cfschema ../service/cloudformation/schemas/AWS_Lex_Bot.json -package lex -- ../aws/lex/bot_resource_gen.go ../aws/lex/bot_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_lex_bot_alias -cfschema ../service/cloudformation/schemas/AWS_Lex_BotAlias.json -package lex -- ../aws/lex/bot_alias_resource_gen.go ../aws/lex/bot_alias_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_lex_bot_version -cfschema ../service/cloudformation/schemas/AWS_Lex_BotVersion.json -package lex -- ../aws/lex/bot_version_resource_gen.go ../aws/lex/bot_version_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_lex_resource_policy -cfschema ../service/cloudformation/schemas/AWS_Lex_ResourcePolicy.json -package lex -- ../aws/lex/resource_policy_resource_gen.go ../aws/lex/resource_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_licensemanager_grant -cfschema ../service/cloudformation/schemas/AWS_LicenseManager_Grant.json -package licensemanager -- ../aws/licensemanager/grant_resource_gen.go ../aws/licensemanager/grant_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_licensemanager_license -cfschema ../service/cloudformation/schemas/AWS_LicenseManager_License.json -package licensemanager -- ../aws/licensemanager/license_resource_gen.go ../aws/licensemanager/license_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_lightsail_database -cfschema ../service/cloudformation/schemas/AWS_Lightsail_Database.json -package lightsail -- ../aws/lightsail/database_resource_gen.go ../aws/lightsail/database_resource_gen_test.go
@@ -445,6 +452,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apprunner"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appstream"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appsync"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/auditmanager"
@@ -509,6 +517,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisfirehose"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kms"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lambda"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lex"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/licensemanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lightsail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/location"

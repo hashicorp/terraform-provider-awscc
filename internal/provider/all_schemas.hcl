@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 448 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 457 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -56,6 +56,24 @@ resource_schema "aws_amplify_domain" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_amplifyuibuilder_component" {
+  cloudformation_type_name               = "AWS::AmplifyUIBuilder::Component"
+  suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_amplifyuibuilder_theme" {
+  cloudformation_type_name               = "AWS::AmplifyUIBuilder::Theme"
+  suppress_plural_data_source_generation = true
+
+  # Goes into infinite recursion while generating code...
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
 resource_schema "aws_apigateway_account" {
   cloudformation_type_name               = "AWS::ApiGateway::Account"
   suppress_plural_data_source_generation = true
@@ -81,6 +99,11 @@ resource_schema "aws_apigateway_base_path_mapping" {
 
 resource_schema "aws_apigateway_client_certificate" {
   cloudformation_type_name = "AWS::ApiGateway::ClientCertificate"
+}
+
+resource_schema "aws_apigateway_deployment" {
+  cloudformation_type_name               = "AWS::ApiGateway::Deployment"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_documentation_version" {
@@ -154,6 +177,16 @@ resource_schema "aws_appstream_application" {
 
 resource_schema "aws_appstream_application_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::ApplicationFleetAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appsync_domain_name" {
+  cloudformation_type_name               = "AWS::AppSync::DomainName"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appsync_domain_name_api_association" {
+  cloudformation_type_name               = "AWS::AppSync::DomainNameApiAssociation"
   suppress_plural_data_source_generation = true
 }
 
@@ -1239,6 +1272,25 @@ resource_schema "aws_lambda_event_source_mapping" {
 
 resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
+}
+
+resource_schema "aws_lex_bot" {
+  cloudformation_type_name = "AWS::Lex::Bot"
+}
+
+resource_schema "aws_lex_bot_alias" {
+  cloudformation_type_name               = "AWS::Lex::BotAlias"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_lex_bot_version" {
+  cloudformation_type_name               = "AWS::Lex::BotVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_lex_resource_policy" {
+  cloudformation_type_name               = "AWS::Lex::ResourcePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_licensemanager_grant" {

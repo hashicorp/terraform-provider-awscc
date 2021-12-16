@@ -54,6 +54,11 @@
       "permissions": [
         "ec2:DisassociateEnclaveCertificateIamRole"
       ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:GetAssociatedEnclaveCertificateIamRoles"
+      ]
     }
   },
   "readOnlyProperties": [

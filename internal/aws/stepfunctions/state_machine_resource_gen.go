@@ -42,6 +42,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			// Definition is a write-only property.
 		},
 		"definition_s3_location": {
 			// Property: DefinitionS3Location
@@ -85,6 +86,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 			),
 			Optional: true,
+			// DefinitionS3Location is a write-only property.
 		},
 		"definition_string": {
 			// Property: DefinitionString
@@ -115,6 +117,7 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Pattern: ""
 			Type:     types.MapType{ElemType: types.StringType},
 			Optional: true,
+			// DefinitionSubstitutions is a write-only property.
 		},
 		"logging_configuration": {
 			// Property: LoggingConfiguration
@@ -396,6 +399,11 @@ func stateMachineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"version":                   "Version",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Definition",
+		"/properties/DefinitionS3Location",
+		"/properties/DefinitionSubstitutions",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

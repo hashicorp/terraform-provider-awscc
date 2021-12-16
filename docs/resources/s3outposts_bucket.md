@@ -23,7 +23,7 @@ Resource Type Definition for AWS::S3Outposts::Bucket
 ### Optional
 
 - **lifecycle_configuration** (Attributes) Rules that define how Amazon S3Outposts manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
-- **tags** (Attributes List) An arbitrary set of tags (key-value pairs) for this S3Outposts bucket. (see [below for nested schema](#nestedatt--tags))
+- **tags** (Attributes Set) An arbitrary set of tags (key-value pairs) for this S3Outposts bucket. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -35,7 +35,7 @@ Resource Type Definition for AWS::S3Outposts::Bucket
 
 Optional:
 
-- **rules** (Attributes List) A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
+- **rules** (Attributes Set) A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules))
 
 <a id="nestedatt--lifecycle_configuration--rules"></a>
 ### Nested Schema for `lifecycle_configuration.rules`
@@ -72,7 +72,7 @@ Optional:
 Optional:
 
 - **prefix** (String) Prefix identifies one or more objects to which the rule applies.
-- **tags** (Attributes List) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag--tags))
+- **tags** (Attributes Set) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag--tags))
 
 <a id="nestedatt--lifecycle_configuration--rules--filter--tag--tags"></a>
 ### Nested Schema for `lifecycle_configuration.rules.filter.tag.tags`

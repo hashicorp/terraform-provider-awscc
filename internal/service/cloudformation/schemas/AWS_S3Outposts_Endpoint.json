@@ -52,6 +52,7 @@
     "NetworkInterfaces": {
       "description": "The network interfaces of the endpoint.",
       "type": "array",
+      "insertionOrder": false,
       "uniqueItems": true,
       "items": {
         "$ref": "#/definitions/NetworkInterface"
@@ -99,6 +100,7 @@
       "pattern": ""
     }
   },
+  "taggable": false,
   "additionalProperties": false,
   "required": [
     "OutpostId",

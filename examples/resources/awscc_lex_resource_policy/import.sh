@@ -1,0 +1,1 @@
+$ terraform import awscc_lex_resource_policy.example <resource ID>

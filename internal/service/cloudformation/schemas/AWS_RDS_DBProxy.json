@@ -33,8 +33,7 @@
           "description": "The name of the database user to which the proxy connects.",
           "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     },
     "TagFormat": {
       "type": "object",
@@ -49,15 +48,13 @@
           "pattern": "",
           "maxLength": 128
         }
-      },
-      "additionalProperties": false
+      }
     }
   },
   "properties": {
     "Auth": {
       "description": "The authorization mechanism that the proxy uses.",
       "type": "array",
-      "insertionOrder": false,
       "minItems": 1,
       "items": {
         "$ref": "#/definitions/AuthFormat"
@@ -104,19 +101,13 @@
     "Tags": {
       "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
       "type": "array",
-      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/TagFormat"
       }
     },
-    "VpcId": {
-      "description": "VPC ID to associate with the new DB proxy.",
-      "type": "string"
-    },
     "VpcSecurityGroupIds": {
       "description": "VPC security group IDs to associate with the new proxy.",
       "type": "array",
-      "insertionOrder": false,
       "minItems": 1,
       "items": {
         "type": "string"
@@ -125,7 +116,6 @@
     "VpcSubnetIds": {
       "description": "VPC subnet IDs to associate with the new proxy.",
       "type": "array",
-      "insertionOrder": false,
       "minItems": 2,
       "items": {
         "type": "string"
@@ -142,8 +132,7 @@
   ],
   "readOnlyProperties": [
     "/properties/DBProxyArn",
-    "/properties/Endpoint",
-    "/properties/VpcId"
+    "/properties/Endpoint"
   ],
   "createOnlyProperties": [
     "/properties/DBProxyName",

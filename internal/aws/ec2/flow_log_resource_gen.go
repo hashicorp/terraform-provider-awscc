@@ -36,6 +36,65 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"destination_options": {
+			// Property: DestinationOptions
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "FileFormat": {
+			//       "enum": [
+			//         "plain-text",
+			//         "parquet"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "HiveCompatiblePartitions": {
+			//       "type": "boolean"
+			//     },
+			//     "PerHourPartition": {
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "required": [
+			//     "FileDestination",
+			//     "HiveCompatiblePartitions",
+			//     "PerHourPartition"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"file_format": {
+						// Property: FileFormat
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringInSlice([]string{
+								"plain-text",
+								"parquet",
+							}),
+						},
+					},
+					"hive_compatible_partitions": {
+						// Property: HiveCompatiblePartitions
+						Type:     types.BoolType,
+						Required: true,
+					},
+					"per_hour_partition": {
+						// Property: PerHourPartition
+						Type:     types.BoolType,
+						Required: true,
+					},
+				},
+			),
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
@@ -263,6 +322,9 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
+		"destination_options":         "DestinationOptions",
+		"file_format":                 "FileFormat",
+		"hive_compatible_partitions":  "HiveCompatiblePartitions",
 		"id":                          "Id",
 		"key":                         "Key",
 		"log_destination":             "LogDestination",
@@ -270,6 +332,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"log_format":                  "LogFormat",
 		"log_group_name":              "LogGroupName",
 		"max_aggregation_interval":    "MaxAggregationInterval",
+		"per_hour_partition":          "PerHourPartition",
 		"resource_id":                 "ResourceId",
 		"resource_type":               "ResourceType",
 		"tags":                        "Tags",

@@ -115,11 +115,7 @@
         },
         "AddressFamily": {
             "description": "The address family of the address space in this pool. Either IPv4 or IPv6.",
-            "type": "string",
-            "enum": [
-                "IPv4",
-                "IPv6"
-            ]
+            "type": "string"
         },
         "AllocationMinNetmaskLength": {
             "description": "The minimum allowed netmask length for allocations made from this pool.",
@@ -162,6 +158,9 @@
         }
     },
     "additionalProperties": false,
+    "propertyTransform": {
+        "/properties/AddressFamily": "$lowercase(AddressFamily)"
+    },
     "required": [
         "IpamScopeId",
         "AddressFamily"

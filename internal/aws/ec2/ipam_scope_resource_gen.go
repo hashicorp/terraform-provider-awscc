@@ -92,24 +92,16 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Determines whether this scope contains publicly routable space or space for a private network",
 			//   "enum": [
-			//     "Public",
-			//     "Private"
+			//     "public",
+			//     "private"
 			//   ],
 			//   "type": "string"
 			// }
 			Description: "Determines whether this scope contains publicly routable space or space for a private network",
 			Type:        types.StringType,
-			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
-					"Public",
-					"Private",
-				}),
-			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
 			},
 		},
 		"is_default": {

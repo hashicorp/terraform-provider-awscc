@@ -98,6 +98,12 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "properties": {
+			//     "CertificateRevocationCheckType": {
+			//       "type": "string"
+			//     },
+			//     "CertificateRevocationSourceUri": {
+			//       "type": "string"
+			//     },
 			//     "TruststoreUri": {
 			//       "type": "string"
 			//     },
@@ -109,6 +115,16 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"certificate_revocation_check_type": {
+						// Property: CertificateRevocationCheckType
+						Type:     types.StringType,
+						Optional: true,
+					},
+					"certificate_revocation_source_uri": {
+						// Property: CertificateRevocationSourceUri
+						Type:     types.StringType,
+						Optional: true,
+					},
 					"truststore_uri": {
 						// Property: TruststoreUri
 						Type:     types.StringType,
@@ -233,6 +249,8 @@ func domainNameResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_arn":                        "CertificateArn",
+		"certificate_revocation_check_type":      "CertificateRevocationCheckType",
+		"certificate_revocation_source_uri":      "CertificateRevocationSourceUri",
 		"distribution_domain_name":               "DistributionDomainName",
 		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
 		"domain_name":                            "DomainName",

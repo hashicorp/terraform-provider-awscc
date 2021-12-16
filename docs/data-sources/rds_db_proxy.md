@@ -31,7 +31,6 @@ Data Source schema for AWS::RDS::DBProxy
 - **require_tls** (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
 - **role_arn** (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 - **tags** (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String) VPC ID to associate with the new DB proxy.
 - **vpc_security_group_ids** (List of String) VPC security group IDs to associate with the new proxy.
 - **vpc_subnet_ids** (List of String) VPC subnet IDs to associate with the new proxy.
 

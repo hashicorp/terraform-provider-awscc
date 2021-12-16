@@ -72,6 +72,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "$comment": "List of passwords.",
 			//   "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+			//   "insertionOrder": true,
 			//   "items": {
 			//     "type": "string"
 			//   },
