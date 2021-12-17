@@ -790,7 +790,7 @@ func (r *resource) populateUnknownValues(ctx context.Context, id string, state *
 		return diags
 	}
 
-	err = unknowns.SetValuesFromString(ctx, state, aws.ToString(description.Properties), r.resourceType.cfToTfNameMap)
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.resourceType.cfToTfNameMap)
 
 	if err != nil {
 		diags.AddError(

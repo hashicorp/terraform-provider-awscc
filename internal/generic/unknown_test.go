@@ -56,7 +56,7 @@ func TestUnknowns(t *testing.T) {
 			}
 
 			if err == nil {
-				if diff := cmp.Diff(got, unknowns(testCase.ExpectedPaths), opts); diff != "" {
+				if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
 					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 				}
 			}
@@ -108,7 +108,7 @@ func TestUnknowsSetValue(t *testing.T) {
 				t.Fatalf("unexpected error: %s", err)
 			}
 
-			err = unknowns.SetValuesFromString(context.TODO(), &testCase.State, testCase.ResourceModel, testCase.CfToTfNameMap)
+			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, testCase.CfToTfNameMap)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")

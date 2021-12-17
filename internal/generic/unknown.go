@@ -7,27 +7,18 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-// unknowns represents the paths to an unknown (!val.IsKnown()) values in a Terraform Value.
-type unknowns []*tftypes.AttributePath
-
 // UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
-func UnknownValuePaths(ctx context.Context, val tftypes.Value) (unknowns, error) {
-	unknowns, err := unknownValuePaths(ctx, nil, val)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return unknowns, nil
+func UnknownValuePaths(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+	return unknownValuePaths(ctx, nil, val)
 }
 
-// unknownValuePaths returns all the unknownValuePaths for the specified Terraform Value.
+// unknownValuePaths returns all the paths to all the unknown values for the specified Terraform Value.
 func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) { //nolint:unparam
 	if !val.IsKnown() {
 		return []*tftypes.AttributePath{path}, nil
 	}
 
-	unknowns := make([]*tftypes.AttributePath, 0)
+	var unknowns []*tftypes.AttributePath
 
 	typ := val.Type()
 	switch {
@@ -75,57 +66,12 @@ func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tft
 	return unknowns, nil
 }
 
-// SetValuesFromRaw fills any unknown State values from a Cloud Control ResourceModel (raw map[string]interface{}).
-// func (u unknowns) SetValuesFromRaw(ctx context.Context, state *tfsdk.State, resourceModel map[string]interface{}) error {
-// 	for _, path := range u {
-// 		// Get the value from the Cloud Control ResourceModel.
-// 		val, _, err := tftypes.WalkAttributePath(resourceModel, path.InCloudControlResourceModel)
-
-// 		if errors.Is(err, tftypes.ErrInvalidStep) {
-// 			// Value not found in Cloud Control ResourceModel. Set to Nil in State.
-
-// 			// TODO
-// 			// TODO State.SetAttribute does not support passing `nil` to set a Null value.
-// 			// TODO https://github.com/hashicorp/terraform-plugin-framework/issues/66.
-// 			// TODO
-
-// 			attrType, err := state.Schema.AttributeTypeAtPath(path.InTerraformState)
-
-// 			if err != nil {
-// 				return fmt.Errorf("error getting attribute type at %s: %w", path.InTerraformState, err)
-// 			}
-
-// 			state.Raw, err = tftypes.Transform(state.Raw, func(p *tftypes.AttributePath, v tftypes.Value) (tftypes.Value, error) {
-// 				if p.Equal(path.InTerraformState) {
-// 					return tftypes.NewValue(attrType.TerraformType(ctx), nil), nil
-// 				}
-// 				return v, nil
-// 			})
-
-// 			if err != nil {
-// 				return fmt.Errorf("error setting attribute in state: %w", err)
-// 			}
-
-// 			continue
-// 		}
-
-// 		if err != nil {
-// 			return fmt.Errorf("error getting value at %s: %w", path.InCloudControlResourceModel, err)
-// 		}
-
-// 		// Set it in the Terraform State.
-// 		diags := state.SetAttribute(ctx, path.InTerraformState, val)
-
-// 		if diags.HasError() {
-// 			return fmt.Errorf("error setting value at %s: %w", path.InTerraformState, tfresource.DiagsError(diags))
-// 		}
-// 	}
-
-// 	return nil
-// }
-
-// SetValuesFromRaw fills any unknown State values from a Cloud Control ResourceModel (string).
-func (u unknowns) SetValuesFromString(ctx context.Context, state *tfsdk.State, resourceModel string, cfToTfNameMap map[string]string) error {
+// SetUnknownValuesFromResourceModel fills any unknown State values from a Cloud Control ResourceModel (string).
+// The unknown value paths are obtained from the State via a previous call to UnknownValuePaths.
+// Functionality is split between these 2 functions, rather than calling UnknownValuePaths from within this function,
+// so as to avoid unnecessary Cloud Control API calls to obtain the current ResourceModel.
+func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, cfToTfNameMap map[string]string) error {
+	// Get the Terraform Value of the ResourceModel.
 	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
 	schema := &state.Schema
 	val, err := translator.FromString(ctx, schema, resourceModel)
@@ -139,7 +85,8 @@ func (u unknowns) SetValuesFromString(ctx context.Context, state *tfsdk.State, r
 		Raw:    val,
 	}
 
-	for _, path := range u {
+	// Copy all unknown values from the ResourceModel to destination State.
+	for _, path := range unknowns {
 		err = CopyValueAtPath(ctx, state, &src, path)
 
 		if err != nil {
@@ -148,16 +95,4 @@ func (u unknowns) SetValuesFromString(ctx context.Context, state *tfsdk.State, r
 	}
 
 	return nil
-
-	// var v interface{}
-
-	// if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
-	// 	return err
-	// }
-
-	// if v, ok := v.(map[string]interface{}); ok {
-	// 	return u.SetValuesFromRaw(ctx, state, v)
-	// }
-
-	// return fmt.Errorf("unexpected raw type: %T", v)
 }
