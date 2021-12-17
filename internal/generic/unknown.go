@@ -7,15 +7,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-// unknownValuePath represents the path to an unknown (!val.IsKnown()) value in Terraform State.
-type unknownValuePath struct {
-	InTerraformState *tftypes.AttributePath
-}
+// unknowns represents the paths to an unknown (!val.IsKnown()) values in a Terraform Value.
+type unknowns []*tftypes.AttributePath
 
-type unknowns []unknownValuePath
-
-// Unknowns returns all the unknowns in the specified Terraform Value.
-func Unknowns(ctx context.Context, val tftypes.Value) (unknowns, error) {
+// UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
+func UnknownValuePaths(ctx context.Context, val tftypes.Value) (unknowns, error) {
 	unknowns, err := unknownValuePaths(ctx, nil, val)
 
 	if err != nil {
@@ -26,57 +22,53 @@ func Unknowns(ctx context.Context, val tftypes.Value) (unknowns, error) {
 }
 
 // unknownValuePaths returns all the unknownValuePaths for the specified Terraform Value.
-func unknownValuePaths(ctx context.Context, inTerraformState *tftypes.AttributePath, val tftypes.Value) ([]unknownValuePath, error) { //nolint:unparam
+func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) { //nolint:unparam
 	if !val.IsKnown() {
-		return []unknownValuePath{
-			{
-				InTerraformState: inTerraformState,
-			},
-		}, nil
+		return []*tftypes.AttributePath{path}, nil
 	}
 
-	unknowns := make([]unknownValuePath, 0)
+	unknowns := make([]*tftypes.AttributePath, 0)
 
 	typ := val.Type()
 	switch {
 	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
 		var vals []tftypes.Value
 		if err := val.As(&vals); err != nil {
-			return nil, inTerraformState.NewError(err)
+			return nil, path.NewError(err)
 		}
 
 		for idx, val := range vals {
 			if typ.Is(tftypes.Set{}) {
-				inTerraformState = inTerraformState.WithElementKeyValue(val)
+				path = path.WithElementKeyValue(val)
 			} else {
-				inTerraformState = inTerraformState.WithElementKeyInt(idx)
+				path = path.WithElementKeyInt(idx)
 			}
-			paths, err := unknownValuePaths(ctx, inTerraformState, val)
+			paths, err := unknownValuePaths(ctx, path, val)
 			if err != nil {
 				return nil, err
 			}
 			unknowns = append(unknowns, paths...)
-			inTerraformState = inTerraformState.WithoutLastStep()
+			path = path.WithoutLastStep()
 		}
 
 	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
 		var vals map[string]tftypes.Value
 		if err := val.As(&vals); err != nil {
-			return nil, inTerraformState.NewError(err)
+			return nil, path.NewError(err)
 		}
 
 		for key, val := range vals {
 			if typ.Is(tftypes.Map{}) {
-				inTerraformState = inTerraformState.WithElementKeyString(key)
+				path = path.WithElementKeyString(key)
 			} else if typ.Is(tftypes.Object{}) {
-				inTerraformState = inTerraformState.WithAttributeName(key)
+				path = path.WithAttributeName(key)
 			}
-			paths, err := unknownValuePaths(ctx, inTerraformState, val)
+			paths, err := unknownValuePaths(ctx, path, val)
 			if err != nil {
 				return nil, err
 			}
 			unknowns = append(unknowns, paths...)
-			inTerraformState = inTerraformState.WithoutLastStep()
+			path = path.WithoutLastStep()
 		}
 	}
 
@@ -148,7 +140,7 @@ func (u unknowns) SetValuesFromString(ctx context.Context, state *tfsdk.State, r
 	}
 
 	for _, path := range u {
-		err = CopyValueAtPath(ctx, state, &src, path.InTerraformState)
+		err = CopyValueAtPath(ctx, state, &src, path)
 
 		if err != nil {
 			return err

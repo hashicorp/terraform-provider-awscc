@@ -16,42 +16,36 @@ func TestUnknowns(t *testing.T) {
 		Value         tftypes.Value
 		TfToCfNameMap map[string]string
 		ExpectedError bool
-		ExpectedPaths unknowns
+		ExpectedPaths []*tftypes.AttributePath
 	}{
 		{
 			TestName:      "simple State",
 			Value:         makeSimpleValueWithUnknowns(),
 			TfToCfNameMap: simpleTfToCfNameMap,
-			ExpectedPaths: []unknownValuePath{
-				{
-					InTerraformState: tftypes.NewAttributePath().WithAttributeName("arn"),
-				},
-				{
-					InTerraformState: tftypes.NewAttributePath().WithAttributeName("identifier"),
-				},
+			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("arn"),
+				tftypes.NewAttributePath().WithAttributeName("identifier"),
 			},
 		},
 		{
 			TestName:      "complex State",
 			Value:         makeComplexValueWithUnknowns(),
 			TfToCfNameMap: complexTfToCfNameMap,
-			ExpectedPaths: []unknownValuePath{
-				{
-					InTerraformState: tftypes.NewAttributePath().WithAttributeName("identifier"),
-				},
+			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("identifier"),
 			},
 		},
 	}
 
 	opts := cmp.Options{
-		cmpopts.SortSlices(func(i, j unknownValuePath) bool {
-			return i.InTerraformState.String() < j.InTerraformState.String()
+		cmpopts.SortSlices(func(i, j *tftypes.AttributePath) bool {
+			return i.String() < j.String()
 		}),
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := Unknowns(context.TODO(), testCase.Value)
+			got, err := UnknownValuePaths(context.TODO(), testCase.Value)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -62,7 +56,7 @@ func TestUnknowns(t *testing.T) {
 			}
 
 			if err == nil {
-				if diff := cmp.Diff(got, testCase.ExpectedPaths, opts); diff != "" {
+				if diff := cmp.Diff(got, unknowns(testCase.ExpectedPaths), opts); diff != "" {
 					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 				}
 			}
@@ -108,7 +102,7 @@ func TestUnknowsSetValue(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			unknowns, err := Unknowns(context.TODO(), testCase.State.Raw)
+			unknowns, err := UnknownValuePaths(context.TODO(), testCase.State.Raw)
 
 			if err != nil {
 				t.Fatalf("unexpected error: %s", err)
