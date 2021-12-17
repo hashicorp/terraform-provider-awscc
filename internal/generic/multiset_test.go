@@ -15,6 +15,12 @@ import (
 func TestMultiset(t *testing.T) {
 	t.Parallel()
 
+	tagAttrTypes := map[string]attr.Type{
+		"key":   types.StringType,
+		"value": types.StringType,
+	}
+	tagElemType := types.ObjectType{AttrTypes: tagAttrTypes}
+
 	type testCase struct {
 		plannedValue  attr.Value
 		currentValue  attr.Value
@@ -71,6 +77,38 @@ func TestMultiset(t *testing.T) {
 				types.String{Value: "gamma"},
 				types.String{Value: "beta"},
 				types.String{Value: "gamma"},
+			}},
+		},
+		"list of objects": {
+			plannedValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k2"},
+					"value": types.String{Value: "v2"},
+				}},
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k1"},
+					"value": types.String{Value: "v1"},
+				}},
+			}},
+			currentValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k1"},
+					"value": types.String{Value: "v1"},
+				}},
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k2"},
+					"value": types.String{Value: "v2"},
+				}},
+			}},
+			expectedValue: types.List{ElemType: tagElemType, Elems: []attr.Value{
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k1"},
+					"value": types.String{Value: "v1"},
+				}},
+				types.Object{AttrTypes: tagAttrTypes, Attrs: map[string]attr.Value{
+					"key":   types.String{Value: "k2"},
+					"value": types.String{Value: "v2"},
+				}},
 			}},
 		},
 	}
