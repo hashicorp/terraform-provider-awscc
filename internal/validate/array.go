@@ -159,7 +159,7 @@ func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Va
 		return nil, ccdiag.NewUnableToObtainValueAttributeError(path, err)
 	}
 
-	return path.WithElementKeyValue(tftypes.NewValue(v.Type(ctx).TerraformType(ctx), val)), nil
+	return path.WithElementKeyValue(val), nil
 }
 
 func validateArray(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) ([]attr.Value, arrayKeyer, bool) {

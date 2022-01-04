@@ -129,21 +129,26 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	// * Object (SingleNestedAttribute)
 	// * List (ListNestedAttribute)
 	// * Set (SetNestedAttribute)
+	isMap := false
+	isSlice := false
 	switch v := request.AttributeConfig.(type) {
 	case types.Object:
 		if v.Null || v.Unknown {
 			return
 		}
+		isMap = true
 
 	case types.List:
 		if v.Null || v.Unknown {
 			return
 		}
+		isSlice = true
 
 	case types.Set:
 		if v.Null || v.Unknown {
 			return
 		}
+		isSlice = true
 
 	default:
 		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
@@ -166,8 +171,17 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 	}
 
 	var diags tfdiag.Diagnostics
-	switch v := val.(type) {
-	case map[string]tftypes.Value:
+	if isMap {
+		var v map[string]tftypes.Value
+		if err := val.As(&v); err != nil {
+			response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeAttributeError(
+				request.AttributePath,
+				err,
+			))
+
+			return
+		}
+
 		// Ensure that the object is fully known.
 		for _, val := range v {
 			if !val.IsFullyKnown() {
@@ -176,8 +190,17 @@ func (validator requiredAttributesValidator) Validate(ctx context.Context, reque
 		}
 
 		diags = evaluateRequiredAttributesFuncs(specifiedAttributes(v), validator.fs...)
+	} else if isSlice {
+		var v []tftypes.Value
+		if err := val.As(&v); err != nil {
+			response.Diagnostics.Append(ccdiag.NewUnableToConvertValueTypeAttributeError(
+				request.AttributePath,
+				err,
+			))
 
-	case []tftypes.Value:
+			return
+		}
+
 		// Ensure that the array is fully known.
 		for _, val := range v {
 			if !val.IsFullyKnown() {

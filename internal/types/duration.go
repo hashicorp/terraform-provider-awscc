@@ -128,14 +128,18 @@ func (d Duration) Type(_ context.Context) attr.Type {
 // ToTerraformValue returns the data contained in the *String as a string. If
 // Unknown is true, it returns a tftypes.UnknownValue. If Null is true, it
 // returns nil.
-func (d Duration) ToTerraformValue(_ context.Context) (interface{}, error) {
+func (d Duration) ToTerraformValue(ctx context.Context) (tftypes.Value, error) {
+	t := DurationType.TerraformType(ctx)
 	if d.Null {
-		return nil, nil
+		return tftypes.NewValue(t, nil), nil
 	}
 	if d.Unknown {
-		return tftypes.UnknownValue, nil
+		return tftypes.NewValue(t, tftypes.UnknownValue), nil
 	}
-	return d.Value, nil
+	if err := tftypes.ValidateValue(tftypes.Number, d.Value); err != nil {
+		return tftypes.NewValue(t, tftypes.UnknownValue), err
+	}
+	return tftypes.NewValue(t, d.Value), nil
 }
 
 // Equal returns true if `other` is a *Duration and has the same value as `d`.

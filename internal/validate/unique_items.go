@@ -5,7 +5,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -41,26 +40,36 @@ func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.Valida
 		return
 	}
 
-	val, err := list.ToTerraformValue(ctx)
+	for i1, val1 := range list.Elems {
+		val1, err := val1.ToTerraformValue(ctx)
 
-	if err != nil {
-		response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
-			request.AttributePath,
-			err,
-		))
+		if err != nil {
+			response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
+				request.AttributePath,
+				err,
+			))
 
-		return
-	}
+			return
+		}
 
-	vals := val.([]tftypes.Value)
-	for i1, val1 := range vals {
 		if !val1.IsFullyKnown() {
 			continue
 		}
 
-		for i2, val2 := range vals {
+		for i2, val2 := range list.Elems {
 			if i2 == i1 {
 				continue
+			}
+
+			val2, err := val2.ToTerraformValue(ctx)
+
+			if err != nil {
+				response.Diagnostics.Append(diag.NewUnableToObtainValueAttributeError(
+					request.AttributePath,
+					err,
+				))
+
+				return
 			}
 
 			if !val2.IsFullyKnown() {
