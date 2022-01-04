@@ -1,4 +1,9 @@
 ## 0.10.0 (Unreleased)
+
+BUG FIXES:
+
+* Prevent errors like `Unable to set Terraform State Unknown values from Cloud Control API Properties.` during `terraform apply` ([#331](https://github.com/hashicorp/terraform-provider-awscc/issues/331))
+
 ## [0.9.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.9.0) (December 16, 2021)
 
 FEATURES:

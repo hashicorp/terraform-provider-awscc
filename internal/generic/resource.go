@@ -755,7 +755,7 @@ func (r *resource) setId(ctx context.Context, val string, state *tfsdk.State) er
 func (r *resource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	unknowns, err := Unknowns(ctx, state.Raw, r.resourceType.tfToCfNameMap)
+	unknowns, err := UnknownValuePaths(ctx, state.Raw)
 
 	if err != nil {
 		diags.AddError(
@@ -790,7 +790,7 @@ func (r *resource) populateUnknownValues(ctx context.Context, id string, state *
 		return diags
 	}
 
-	err = unknowns.SetValuesFromString(ctx, state, aws.ToString(description.Properties))
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.resourceType.cfToTfNameMap)
 
 	if err != nil {
 		diags.AddError(

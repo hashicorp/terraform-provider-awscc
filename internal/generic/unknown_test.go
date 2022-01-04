@@ -16,45 +16,36 @@ func TestUnknowns(t *testing.T) {
 		Value         tftypes.Value
 		TfToCfNameMap map[string]string
 		ExpectedError bool
-		ExpectedPaths unknowns
+		ExpectedPaths []*tftypes.AttributePath
 	}{
 		{
 			TestName:      "simple State",
 			Value:         makeSimpleValueWithUnknowns(),
 			TfToCfNameMap: simpleTfToCfNameMap,
-			ExpectedPaths: []unknownValuePath{
-				{
-					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("arn"),
-					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Arn"),
-				},
-				{
-					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
-				},
+			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("arn"),
+				tftypes.NewAttributePath().WithAttributeName("identifier"),
 			},
 		},
 		{
 			TestName:      "complex State",
 			Value:         makeComplexValueWithUnknowns(),
 			TfToCfNameMap: complexTfToCfNameMap,
-			ExpectedPaths: []unknownValuePath{
-				{
-					InTerraformState:            tftypes.NewAttributePath().WithAttributeName("identifier"),
-					InCloudControlResourceModel: tftypes.NewAttributePath().WithAttributeName("Identifier"),
-				},
+			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("identifier"),
 			},
 		},
 	}
 
 	opts := cmp.Options{
-		cmpopts.SortSlices(func(i, j unknownValuePath) bool {
-			return i.InCloudControlResourceModel.String() < j.InCloudControlResourceModel.String()
+		cmpopts.SortSlices(func(i, j *tftypes.AttributePath) bool {
+			return i.String() < j.String()
 		}),
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := Unknowns(context.TODO(), testCase.Value, testCase.TfToCfNameMap)
+			got, err := UnknownValuePaths(context.TODO(), testCase.Value)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -77,8 +68,8 @@ func TestUnknowsSetValue(t *testing.T) {
 	testCases := []struct {
 		TestName      string
 		State         tfsdk.State
-		ResourceModel map[string]interface{}
-		TfToCfNameMap map[string]string
+		ResourceModel string
+		CfToTfNameMap map[string]string
 		ExpectedError bool
 		ExpectedState tfsdk.State
 	}{
@@ -88,10 +79,8 @@ func TestUnknowsSetValue(t *testing.T) {
 				Raw:    makeSimpleValueWithUnknowns(),
 				Schema: testSimpleSchema,
 			},
-			ResourceModel: map[string]interface{}{
-				"Arn": "arn:aws:test:::test",
-			},
-			TfToCfNameMap: simpleTfToCfNameMap,
+			ResourceModel: `{"Arn": "arn:aws:test:::test"}`,
+			CfToTfNameMap: simpleCfToTfNameMap,
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -113,13 +102,13 @@ func TestUnknowsSetValue(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			unknowns, err := Unknowns(context.TODO(), testCase.State.Raw, testCase.TfToCfNameMap)
+			unknowns, err := UnknownValuePaths(context.TODO(), testCase.State.Raw)
 
 			if err != nil {
 				t.Fatalf("unexpected error: %s", err)
 			}
 
-			err = unknowns.SetValuesFromRaw(context.TODO(), &testCase.State, testCase.ResourceModel)
+			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, testCase.CfToTfNameMap)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
