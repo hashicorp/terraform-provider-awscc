@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/aws/aws-sdk-go-v2 v1.11.2
 	github.com/aws/aws-sdk-go-v2/config v1.11.1
-	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.3.2
+	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.16.0
 	github.com/aws/smithy-go v1.9.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
