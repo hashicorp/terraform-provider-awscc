@@ -431,7 +431,12 @@ type awsSdkContextLogger struct {
 }
 
 func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	hclog.Default().Info("[%s] [aws-sdk-go-v2] %s", classification, fmt.Sprintf(format, v...))
+	switch classification {
+	case logging.Warn:
+		hclog.Default().Warn("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
+	default:
+		hclog.Default().Debug("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
+	}
 }
 
 func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
