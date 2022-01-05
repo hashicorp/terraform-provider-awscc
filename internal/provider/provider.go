@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 	"time"
@@ -432,7 +431,7 @@ type awsSdkContextLogger struct {
 }
 
 func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	log.Printf("[%s] [aws-sdk-go-v2] %s", classification, fmt.Sprintf(format, v...))
+	hclog.Default().Info("[%s] [aws-sdk-go-v2] %s", classification, fmt.Sprintf(format, v...))
 }
 
 func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
