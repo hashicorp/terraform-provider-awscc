@@ -38,7 +38,7 @@ func (attributePlanModifier defaultValueAttributePlanModifier) Modify(ctx contex
 		))
 
 		return
-	} else if v == nil && request.AttributeState != nil && request.AttributeState.Equal(attributePlanModifier.val) {
+	} else if v.IsNull() && request.AttributeState != nil && request.AttributeState.Equal(attributePlanModifier.val) {
 		response.AttributePlan = request.AttributeState
 	} else {
 		response.AttributePlan = request.AttributePlan
