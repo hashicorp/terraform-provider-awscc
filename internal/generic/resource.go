@@ -398,7 +398,7 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Create enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -487,14 +487,14 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Trace(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Create exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
@@ -570,14 +570,14 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Trace(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Update enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -668,14 +668,14 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Trace(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Update exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
 	cfTypeName := r.resourceType.cfTypeName
 	tfTypeName := r.resourceType.tfTypeName
 
-	tflog.Trace(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Delete enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -697,17 +697,17 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	response.State.RemoveResource(ctx)
 
-	tflog.Trace(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	tflog.Debug(ctx, "Resource.Delete exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
 }
 
 func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
-	tflog.Trace(ctx, "Resource.ImportState enter", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.ImportState enter", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 
 	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
 	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 
-	tflog.Trace(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
+	tflog.Debug(ctx, "Resource.ImportState exit", "cfTypeName", r.resourceType.cfTypeName, "tfTypeName", r.resourceType.tfTypeName)
 }
 
 // ConfigValidators returns a list of functions which will all be performed during validation.
