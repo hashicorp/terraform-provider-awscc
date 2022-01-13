@@ -255,6 +255,13 @@
         "panorama:ListTagsForResource"
       ]
     },
+    "update": {
+      "permissions": [
+        "panorama:ListTagsForResource",
+        "panorama:TagResource",
+        "panorama:UntagResource"
+      ]
+    },
     "delete": {
       "permissions": [
         "panorama:RemoveApplicationInstance"

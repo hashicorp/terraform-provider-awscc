@@ -60,6 +60,18 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "ParallelismConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxParallelExecutionSteps": {
+          "description": "Maximum parallel execution steps",
+          "type": "integer",
+          "minimum" : 1
+        }
+      },
+      "required": ["MaxParallelExecutionSteps"]
     }
   },
   "definitions": {

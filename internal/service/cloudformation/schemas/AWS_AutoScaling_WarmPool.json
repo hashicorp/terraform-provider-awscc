@@ -3,6 +3,17 @@
   "description": "Resource schema for AWS::AutoScaling::WarmPool.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-autoscaling",
   "additionalProperties": false,
+  "definitions": {
+    "InstanceReusePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReuseOnScaleIn": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
   "properties": {
     "AutoScalingGroupName": {
       "type": "string"
@@ -15,6 +26,9 @@
     },
     "PoolState": {
       "type": "string"
+    },
+    "InstanceReusePolicy": {
+      "$ref": "#/definitions/InstanceReusePolicy"
     }
   },
   "createOnlyProperties": [

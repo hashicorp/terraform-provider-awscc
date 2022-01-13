@@ -10,20 +10,20 @@
             "maxLength": 2048
         },
         "ScheduledQueryName": {
-            "description": "The name for the scheduled query.",
+            "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
             "type": "string",
             "pattern": "",
             "minLength": 1,
             "maxLength": 64
         },
         "QueryString": {
-            "description": "The query scheduled to be executed.",
+            "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
             "type": "string",
             "minLength": 1,
             "maxLength": 262144
         },
         "ScheduleConfiguration": {
-            "description": "Configuration that indicates when the scheduled query is executed.",
+            "description": "Configuration for when the scheduled query is executed.",
             "type": "object",
             "properties": {
                 "ScheduleExpression": {
@@ -36,7 +36,7 @@
             "additionalProperties": false
         },
         "NotificationConfiguration": {
-            "description": "Configuration for notification upon scheduled query execution.",
+            "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
             "type": "object",
             "properties": {
                 "SnsConfiguration": {
@@ -49,19 +49,19 @@
             "additionalProperties": false
         },
         "ClientToken": {
-            "description": "Token provided to ensure idempotency when creating scheduled queries.",
+            "description": "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
             "type": "string",
             "minLength": 32,
             "maxLength": 128
         },
         "ScheduledQueryExecutionRoleArn": {
-            "description": "Role that AWS Timestream will assume to execute scheduled query.",
+            "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2048
         },
         "TargetConfiguration": {
-            "description": "Configuration of target destination table to query.",
+            "description": "Configuration of target store where scheduled query results are written to.",
             "type": "object",
             "properties": {
                 "TimestreamConfiguration": {
@@ -74,7 +74,7 @@
             "additionalProperties": false
         },
         "ErrorReportConfiguration": {
-            "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
             "type": "object",
             "properties": {
                 "S3Configuration": {
@@ -87,13 +87,13 @@
             "additionalProperties": false
         },
         "KmsKeyId": {
-            "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.",
+            "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2048
         },
         "Tags": {
-            "description": "An array of key-value pairs to apply to this resource.",
+            "description": "A list of key-value pairs to label the scheduled query.",
             "type": "array",
             "insertionOrder": false,
             "maxItems": 200,
@@ -102,7 +102,7 @@
             }
         },
         "ScheduleExpression": {
-            "description": "The cron expression that indicates when the scheduled query is executed.",
+            "description": "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
             "type": "string",
             "minLength": 1,
             "maxLength": 256
@@ -121,13 +121,13 @@
             "additionalProperties": false
         },
         "TopicArn": {
-            "description": "SNS Topic to be notified upon scheduled query execution.",
+            "description": "SNS topic ARN that the scheduled query status notifications will be sent to.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2048
         },
         "TimestreamConfiguration": {
-            "description": "Timestream configuration of destination table to query.",
+            "description": "Configuration needed to write data into the Timestream database and table.",
             "type": "object",
             "properties": {
                 "DatabaseName": {
@@ -161,19 +161,19 @@
             "additionalProperties": false
         },
         "DatabaseName": {
-            "description": "The source database to query.",
+            "description": "Name of Timestream database to which the query result will be written.",
             "type": "string"
         },
         "TableName": {
-            "description": "The source table to query.",
+            "description": "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
             "type": "string"
         },
         "TimeColumn": {
-            "description": "Name of the \"time\" column.",
+            "description": "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
             "type": "string"
         },
         "DimensionMappings": {
-            "description": "Mappings of dimension names to dimension value types.",
+            "description": "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
             "type": "array",
             "insertionOrder": false,
             "items": {
@@ -181,7 +181,7 @@
             }
         },
         "DimensionMapping": {
-            "description": "Mapping of dimension column name to dimension column value type.",
+            "description": "This type is used to map column(s) from the query result to a dimension in the destination table.",
             "type": "object",
             "properties": {
                 "Name": {
@@ -198,16 +198,16 @@
             "additionalProperties": false
         },
         "DimensionMappingName": {
-            "description": "Name of the dimension column.",
+            "description": "Column name from query result.",
             "type": "string"
         },
         "DimensionValueType": {
-            "description": "Value type of the dimension column.",
+            "description": "Type for the dimension.",
             "type": "string",
             "enum": ["VARCHAR"]
         },
         "MultiMeasureMappings": {
-            "description": "Mapping of measure value columns from the source table to the destination table.",
+            "description": "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
             "type": "object",
             "properties": {
                 "TargetMultiMeasureName": {
@@ -223,11 +223,11 @@
             "additionalProperties": false
         },
         "TargetMultiMeasureName": {
-            "description": "Name of the multi-measure in the destination table.",
+            "description": "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
             "type": "string"
         },
         "MultiMeasureAttributeMappingList": {
-            "description": "List of multi-measure value column mappings.",
+            "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
             "type": "array",
             "insertionOrder": false,
             "minItems": 1,
@@ -236,7 +236,7 @@
             }
         },
         "MultiMeasureAttributeMapping": {
-            "description": "Mapping of measure value columns from the source table to the destination table.",
+            "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
             "type": "object",
             "properties": {
                 "SourceColumn": {
@@ -256,20 +256,20 @@
             "additionalProperties": false
         },
         "MultiMeasureAttributeMappingSourceColumn": {
-            "description": "Name of the measure value column in the source table.",
+            "description": "Source measure value column in the query result where the attribute value is to be read.",
             "type": "string"
         },
         "MultiMeasureAttributeMappingMeasureValueType": {
-            "description": "Value type of the measure value column in the destination table.",
+            "description": "Value type of the measure value column to be read from the query result.",
             "type": "string",
             "enum": ["BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"]
         },
         "TargetMultiMeasureAttributeName": {
-            "description": "Name of the measure value column in the destination table.",
+            "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
             "type": "string"
         },
         "MixedMeasureMappings": {
-            "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+            "description": "Specifies how to map measures to multi-measure records.",
             "type": "array",
             "insertionOrder": false,
             "minItems": 1,
@@ -278,7 +278,7 @@
             }
         },
         "MixedMeasureMapping": {
-            "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+            "description": "MixedMeasureMappings are mappings that can be used to ingest data into a mixture of narrow and multi measures in the derived table.",
             "type": "object",
             "properties": {
                 "MeasureName": {
@@ -303,28 +303,28 @@
             "additionalProperties": false
         },
         "MixedMeasureMappingMeasureName": {
-            "description": "Name of the measure in source table.",
+            "description": "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
             "type": "string"
         },
         "MixedMeasureMappingSourceColumn": {
-            "description": "Name of the measure value column in the source table.",
+            "description": "This field refers to the source column from which the measure value is to be read for result materialization.",
             "type": "string"
         },
         "MixedMeasureMappingTargetMeasureName": {
-            "description": "Name of the measure in the destination table.",
+            "description": "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
             "type": "string"
         },
         "MixedMeasureMappingMeasureValueType": {
-            "description": "Value type of the measure value column in the destination table.",
+            "description": "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
             "type": "string",
             "enum": ["BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "MULTI"]
         },
         "MeasureNameColumn": {
-            "description": "Name of the source measure names column.",
+            "description": "Name of the measure name column from the query result.",
             "type": "string"
         },
         "S3Configuration": {
-            "description": "S3 configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "description": "Details on S3 location for error reports that result from running a query.",
             "type": "object",
             "properties": {
                 "BucketName": {
@@ -343,26 +343,26 @@
             "additionalProperties": false
         },
         "BucketName": {
-            "description": "S3 bucket where error reports will be placed.",
+            "description": "Name of the S3 bucket under which error reports will be created.",
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
             "pattern": ""
         },
         "ObjectKeyPrefix": {
-            "description": "Prefix for error report names.",
+            "description": "Prefix for error report keys.",
             "type": "string",
             "minLength": 1,
             "maxLength": 896,
             "pattern": ""
         },
         "EncryptionOption": {
-            "description": "How error reports will be encrypted.",
+            "description": "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
             "type": "string",
             "enum": ["SSE_S3", "SSE_KMS"]
         },
         "Tag": {
-            "description": "A key-value pair to associate with a resource.",
+            "description": "A key-value pair to label the scheduled query.",
             "type": "object",
             "properties": {
                 "Key": {
@@ -423,35 +423,35 @@
             "$ref": "#/definitions/KmsKeyId"
         },
         "SQName": {
-            "description": "The name for the scheduled query.",
+            "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
             "type": "string"
         },
         "SQQueryString": {
-            "description": "The query scheduled to be executed.",
+            "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
             "type": "string"
         },
         "SQScheduleConfiguration": {
-            "description": "Configuration that indicates when the scheduled query is executed.",
+            "description": "Configuration for when the scheduled query is executed.",
             "type": "string"
         },
         "SQNotificationConfiguration": {
-            "description": "Configuration for notification upon scheduled query execution.",
+            "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
             "type": "string"
         },
         "SQScheduledQueryExecutionRoleArn": {
-            "description": "Role that AWS Timestream will assume to execute scheduled query.",
+            "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
             "type": "string"
         },
         "SQTargetConfiguration": {
-            "description": "Target data source to export query results from.",
+            "description": "Configuration of target store where scheduled query results are written to.",
             "type": "string"
         },
         "SQErrorReportConfiguration": {
-            "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+            "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
             "type": "string"
         },
         "SQKmsKeyId": {
-            "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream owned KMS key located in the Timestream account.",
+            "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
             "type": "string"
         },
         "Tags": {

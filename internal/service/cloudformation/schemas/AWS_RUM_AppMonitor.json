@@ -162,6 +162,10 @@
   "primaryIdentifier": [
     "/properties/Name"
   ],
+  "required": [
+    "Name",
+    "Domain"
+  ],
   "handlers": {
     "create": {
       "permissions": [
