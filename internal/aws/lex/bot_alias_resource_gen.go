@@ -115,8 +115,8 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       }
 			//     },
 			//     "required": [
-			//       "Key",
-			//       "Value"
+			//       "LocaleId",
+			//       "BotAliasLocaleSetting"
 			//     ],
 			//     "type": "object"
 			//   },
@@ -176,13 +176,13 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 						),
-						Optional: true,
+						Required: true,
 					},
 					"locale_id": {
 						// Property: LocaleId
 						Description: "A string used to identify the locale",
 						Type:        types.StringType,
-						Optional:    true,
+						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
 						},
@@ -427,7 +427,8 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "required": [
 			//                   "CloudWatchLogGroupArn",
 			//                   "LogPrefix"
-			//                 ]
+			//                 ],
+			//                 "type": "object"
 			//               }
 			//             },
 			//             "type": "object"

@@ -93,7 +93,8 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "enum": [
 			//     "TimeBased",
-			//     "DistanceBased"
+			//     "DistanceBased",
+			//     "AccuracyBased"
 			//   ],
 			//   "type": "string"
 			// }
@@ -104,6 +105,7 @@ func trackerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				validate.StringInSlice([]string{
 					"TimeBased",
 					"DistanceBased",
+					"AccuracyBased",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

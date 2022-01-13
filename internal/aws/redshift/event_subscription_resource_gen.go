@@ -75,10 +75,11 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//     ],
 			//     "type": "string"
 			//   },
-			//   "type": "array"
+			//   "type": "array",
+			//   "uniqueItems": true
 			// }
 			Description: "Specifies the Amazon Redshift event categories to be published by the event notification subscription.",
-			Type:        types.ListType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringInSlice([]string{
@@ -88,9 +89,6 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"security",
 					"pending",
 				})),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 			},
 		},
 		"event_categories_list": {
@@ -102,13 +100,13 @@ func eventSubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "items": {
 			//     "type": "string"
 			//   },
-			//   "type": "array"
+			//   "type": "array",
+			//   "uniqueItems": true
 			// }
 			Description: "The list of Amazon Redshift event categories specified in the event notification subscription.",
-			Type:        types.ListType{ElemType: types.StringType},
+			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
 				tfsdk.UseStateForUnknown(),
 			},
 		},

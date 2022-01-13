@@ -20,6 +20,38 @@ func init() {
 // This Terraform resource type corresponds to the CloudFormation AWS::SageMaker::Pipeline resource type.
 func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	attributes := map[string]tfsdk.Attribute{
+		"parallelism_configuration": {
+			// Property: ParallelismConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "MaxParallelExecutionSteps": {
+			//       "description": "Maximum parallel execution steps",
+			//       "minimum": 1,
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "required": [
+			//     "MaxParallelExecutionSteps"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"max_parallel_execution_steps": {
+						// Property: MaxParallelExecutionSteps
+						Description: "Maximum parallel execution steps",
+						Type:        types.NumberType,
+						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
+					},
+				},
+			),
+			Optional: true,
+		},
 		"pipeline_definition": {
 			// Property: PipelineDefinition
 			// CloudFormation resource type schema:
@@ -238,6 +270,8 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"bucket":                          "Bucket",
 		"e_tag":                           "ETag",
 		"key":                             "Key",
+		"max_parallel_execution_steps":    "MaxParallelExecutionSteps",
+		"parallelism_configuration":       "ParallelismConfiguration",
 		"pipeline_definition":             "PipelineDefinition",
 		"pipeline_definition_body":        "PipelineDefinitionBody",
 		"pipeline_definition_s3_location": "PipelineDefinitionS3Location",

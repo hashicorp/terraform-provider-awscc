@@ -227,7 +227,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The top-level internet domain name for which your application has administrative authority.",
 			Type:        types.StringType,
-			Optional:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 253),
 			},
@@ -244,13 +244,11 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "A name for the app monitor",
 			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
