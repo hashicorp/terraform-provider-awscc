@@ -1,4 +1,5 @@
-## 0.10.0 (Unreleased)
+## 0.11.0 (Unreleased)
+## [0.10.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.10.0) (January 13, 2022)
 
 FEATURES:
 
