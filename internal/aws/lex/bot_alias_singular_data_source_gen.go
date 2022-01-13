@@ -108,8 +108,8 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       }
 			//     },
 			//     "required": [
-			//       "Key",
-			//       "Value"
+			//       "LocaleId",
+			//       "BotAliasLocaleSetting"
 			//     ],
 			//     "type": "object"
 			//   },
@@ -383,7 +383,8 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "required": [
 			//                   "CloudWatchLogGroupArn",
 			//                   "LogPrefix"
-			//                 ]
+			//                 ],
+			//                 "type": "object"
 			//               }
 			//             },
 			//             "type": "object"
