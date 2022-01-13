@@ -1,0 +1,1 @@
+$ terraform import awscc_kinesisvideo_signaling_channel.example <resource ID>

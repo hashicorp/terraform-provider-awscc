@@ -22,7 +22,7 @@ The `AWS::Redshift::EventSubscription` resource creates an Amazon Redshift Event
 ### Optional
 
 - **enabled** (Boolean) A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it.
-- **event_categories** (List of String) Specifies the Amazon Redshift event categories to be published by the event notification subscription.
+- **event_categories** (Set of String) Specifies the Amazon Redshift event categories to be published by the event notification subscription.
 - **severity** (String) Specifies the Amazon Redshift event severity to be published by the event notification subscription.
 - **sns_topic_arn** (String) The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.
 - **source_ids** (List of String) A list of one or more identifiers of Amazon Redshift source objects.
@@ -33,7 +33,7 @@ The `AWS::Redshift::EventSubscription` resource creates an Amazon Redshift Event
 
 - **cust_subscription_id** (String) The name of the Amazon Redshift event notification subscription.
 - **customer_aws_id** (String) The AWS account associated with the Amazon Redshift event notification subscription.
-- **event_categories_list** (List of String) The list of Amazon Redshift event categories specified in the event notification subscription.
+- **event_categories_list** (Set of String) The list of Amazon Redshift event categories specified in the event notification subscription.
 - **id** (String) Uniquely identifies the resource.
 - **source_ids_list** (List of String) A list of the sources that publish events to the Amazon Redshift event notification subscription.
 - **status** (String) The status of the Amazon Redshift event notification subscription.

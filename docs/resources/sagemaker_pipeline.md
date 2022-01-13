@@ -23,6 +23,7 @@ Resource Type definition for AWS::SageMaker::Pipeline
 
 ### Optional
 
+- **parallelism_configuration** (Attributes) (see [below for nested schema](#nestedatt--parallelism_configuration))
 - **pipeline_description** (String) The description of the Pipeline.
 - **pipeline_display_name** (String) The display name of the Pipeline.
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -49,6 +50,14 @@ Required:
 - **key** (String) The file name of the PipelineDefinition file (Amazon S3 object name).
 - **version** (String) For versioning-enabled buckets, a specific version of the PipelineDefinition file.
 
+
+
+<a id="nestedatt--parallelism_configuration"></a>
+### Nested Schema for `parallelism_configuration`
+
+Optional:
+
+- **max_parallel_execution_steps** (Number) Maximum parallel execution steps
 
 
 <a id="nestedatt--tags"></a>

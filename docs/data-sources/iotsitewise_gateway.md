@@ -41,7 +41,8 @@ Read-Only:
 
 Read-Only:
 
-- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- **greengrass** (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
+- **greengrass_v2** (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`
@@ -49,6 +50,14 @@ Read-Only:
 Read-Only:
 
 - **group_arn** (String) The ARN of the Greengrass group.
+
+
+<a id="nestedatt--gateway_platform--greengrass_v2"></a>
+### Nested Schema for `gateway_platform.greengrass_v2`
+
+Read-Only:
+
+- **core_device_thing_name** (String) The name of the CoreDevice in GreenGrass V2.
 
 
 
