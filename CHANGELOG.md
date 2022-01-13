@@ -1,5 +1,45 @@
 ## 0.10.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_application_entitlement_association`
+* **New Data Source:** `awscc_appstream_entitlement`
+* **New Data Source:** `awscc_ec2_host`
+* **New Data Source:** `awscc_ec2_hosts`
+* **New Data Source:** `awscc_ec2_network_insights_access_scope`
+* **New Data Source:** `awscc_ec2_network_insights_access_scope_analyses`
+* **New Data Source:** `awscc_ec2_network_insights_access_scope_analysis`
+* **New Data Source:** `awscc_ec2_network_insights_access_scopes`
+* **New Data Source:** `awscc_forecast_dataset_group`
+* **New Data Source:** `awscc_forecast_dataset_groups`
+* **New Data Source:** `awscc_inspectorv2_filter`
+* **New Data Source:** `awscc_inspectorv2_filters`
+* **New Data Source:** `awscc_kinesisvideo_signaling_channel`
+* **New Data Source:** `awscc_kinesisvideo_stream`
+* **New Data Source:** `awscc_lightsail_alarm`
+* **New Data Source:** `awscc_lightsail_alarms`
+* **New Data Source:** `awscc_lightsail_bucket`
+* **New Data Source:** `awscc_lightsail_buckets`
+* **New Data Source:** `awscc_lightsail_load_balancer`
+* **New Data Source:** `awscc_lightsail_load_balancer_tls_certificate`
+* **New Data Source:** `awscc_lightsail_load_balancers`
+* **New Data Source:** `awscc_route53resolver_resolver_rule_association`
+* **New Data Source:** `awscc_route53resolver_resolver_rule_associations`
+* **New Resource:** `awscc_appstream_application_entitlement_association`
+* **New Resource:** `awscc_appstream_entitlement`
+* **New Resource:** `awscc_ec2_host`
+* **New Resource:** `awscc_ec2_network_insights_access_scope`
+* **New Resource:** `awscc_ec2_network_insights_access_scope_analysis`
+* **New Resource:** `awscc_forecast_dataset_group`
+* **New Resource:** `awscc_inspectorv2_filter`
+* **New Resource:** `awscc_kinesisvideo_signaling_channel`
+* **New Resource:** `awscc_kinesisvideo_stream`
+* **New Resource:** `awscc_lightsail_alarm`
+* **New Resource:** `awscc_lightsail_bucket`
+* **New Resource:** `awscc_lightsail_load_balancer`
+* **New Resource:** `awscc_lightsail_load_balancer_tls_certificate`
+* **New Resource:** `awscc_route53resolver_resolver_rule_association`
+
 BUG FIXES:
 
 * Prevent errors like `Unable to set Terraform State Unknown values from Cloud Control API Properties.` during `terraform apply` ([#331](https://github.com/hashicorp/terraform-provider-awscc/issues/331))
