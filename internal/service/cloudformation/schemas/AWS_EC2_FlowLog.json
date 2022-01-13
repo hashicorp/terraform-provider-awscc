@@ -102,7 +102,7 @@
         }
       },
       "required": [
-        "FileDestination",
+        "FileFormat",
         "HiveCompatiblePartitions",
         "PerHourPartition"
       ]

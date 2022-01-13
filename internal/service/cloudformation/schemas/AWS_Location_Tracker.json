@@ -19,7 +19,8 @@
             "type": "string",
             "enum": [
                 "TimeBased",
-                "DistanceBased"
+                "DistanceBased",
+                "AccuracyBased"
             ]
         }
     },

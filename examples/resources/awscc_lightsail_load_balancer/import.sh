@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_load_balancer.example <resource ID>

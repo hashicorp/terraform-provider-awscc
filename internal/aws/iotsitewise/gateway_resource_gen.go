@@ -101,10 +101,22 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "additionalProperties": false,
 			//   "description": "The gateway's platform. You can only specify one platform in a gateway.",
+			//   "oneOf": [
+			//     {
+			//       "required": [
+			//         "Greengrass"
+			//       ]
+			//     },
+			//     {
+			//       "required": [
+			//         "GreengrassV2"
+			//       ]
+			//     }
+			//   ],
 			//   "properties": {
 			//     "Greengrass": {
 			//       "additionalProperties": false,
-			//       "description": "A gateway that runs on AWS IoT Greengrass.",
+			//       "description": "A gateway that runs on AWS IoT Greengrass V1.",
 			//       "properties": {
 			//         "GroupArn": {
 			//           "description": "The ARN of the Greengrass group.",
@@ -115,11 +127,22 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "GroupArn"
 			//       ],
 			//       "type": "object"
+			//     },
+			//     "GreengrassV2": {
+			//       "additionalProperties": false,
+			//       "description": "A gateway that runs on AWS IoT Greengrass V2.",
+			//       "properties": {
+			//         "CoreDeviceThingName": {
+			//           "description": "The name of the CoreDevice in GreenGrass V2.",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "CoreDeviceThingName"
+			//       ],
+			//       "type": "object"
 			//     }
 			//   },
-			//   "required": [
-			//     "Greengrass"
-			//   ],
 			//   "type": "object"
 			// }
 			Description: "The gateway's platform. You can only specify one platform in a gateway.",
@@ -127,7 +150,7 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"greengrass": {
 						// Property: Greengrass
-						Description: "A gateway that runs on AWS IoT Greengrass.",
+						Description: "A gateway that runs on AWS IoT Greengrass V1.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"group_arn": {
@@ -138,11 +161,38 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 						),
-						Required: true,
+						Optional: true,
+					},
+					"greengrass_v2": {
+						// Property: GreengrassV2
+						Description: "A gateway that runs on AWS IoT Greengrass V2.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"core_device_thing_name": {
+									// Property: CoreDeviceThingName
+									Description: "The name of the CoreDevice in GreenGrass V2.",
+									Type:        types.StringType,
+									Required:    true,
+								},
+							},
+						),
+						Optional: true,
 					},
 				},
 			),
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.RequiredAttributes(
+					validate.OneOfRequired(
+						validate.Required(
+							"greengrass",
+						),
+						validate.Required(
+							"greengrass_v2",
+						),
+					),
+				),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -219,11 +269,13 @@ func gatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"capability_configuration":     "CapabilityConfiguration",
 		"capability_namespace":         "CapabilityNamespace",
+		"core_device_thing_name":       "CoreDeviceThingName",
 		"gateway_capability_summaries": "GatewayCapabilitySummaries",
 		"gateway_id":                   "GatewayId",
 		"gateway_name":                 "GatewayName",
 		"gateway_platform":             "GatewayPlatform",
 		"greengrass":                   "Greengrass",
+		"greengrass_v2":                "GreengrassV2",
 		"group_arn":                    "GroupArn",
 		"key":                          "Key",
 		"tags":                         "Tags",

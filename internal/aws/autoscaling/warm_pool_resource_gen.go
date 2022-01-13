@@ -31,6 +31,29 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"instance_reuse_policy": {
+			// Property: InstanceReusePolicy
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "ReuseOnScaleIn": {
+			//       "type": "boolean"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"reuse_on_scale_in": {
+						// Property: ReuseOnScaleIn
+						Type:     types.BoolType,
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"max_group_prepared_capacity": {
 			// Property: MaxGroupPreparedCapacity
 			// CloudFormation resource type schema:
@@ -82,9 +105,11 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_group_name":     "AutoScalingGroupName",
+		"instance_reuse_policy":       "InstanceReusePolicy",
 		"max_group_prepared_capacity": "MaxGroupPreparedCapacity",
 		"min_size":                    "MinSize",
 		"pool_state":                  "PoolState",
+		"reuse_on_scale_in":           "ReuseOnScaleIn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

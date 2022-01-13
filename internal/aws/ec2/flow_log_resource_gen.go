@@ -57,7 +57,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "FileDestination",
+			//     "FileFormat",
 			//     "HiveCompatiblePartitions",
 			//     "PerHourPartition"
 			//   ],
@@ -68,7 +68,7 @@ func flowLogResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"file_format": {
 						// Property: FileFormat
 						Type:     types.StringType,
-						Optional: true,
+						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"plain-text",

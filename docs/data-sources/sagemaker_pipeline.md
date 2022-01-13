@@ -21,12 +21,21 @@ Data Source schema for AWS::SageMaker::Pipeline
 
 ### Read-Only
 
+- **parallelism_configuration** (Attributes) (see [below for nested schema](#nestedatt--parallelism_configuration))
 - **pipeline_definition** (Attributes) (see [below for nested schema](#nestedatt--pipeline_definition))
 - **pipeline_description** (String) The description of the Pipeline.
 - **pipeline_display_name** (String) The display name of the Pipeline.
 - **pipeline_name** (String) The name of the Pipeline.
 - **role_arn** (String) Role Arn
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--parallelism_configuration"></a>
+### Nested Schema for `parallelism_configuration`
+
+Read-Only:
+
+- **max_parallel_execution_steps** (Number) Maximum parallel execution steps
+
 
 <a id="nestedatt--pipeline_definition"></a>
 ### Nested Schema for `pipeline_definition`

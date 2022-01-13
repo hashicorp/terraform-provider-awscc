@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_bucket.example <resource ID>

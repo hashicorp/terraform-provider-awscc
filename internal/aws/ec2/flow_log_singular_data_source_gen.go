@@ -51,7 +51,7 @@ func flowLogDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     }
 			//   },
 			//   "required": [
-			//     "FileDestination",
+			//     "FileFormat",
 			//     "HiveCompatiblePartitions",
 			//     "PerHourPartition"
 			//   ],

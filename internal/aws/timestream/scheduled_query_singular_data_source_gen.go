@@ -36,12 +36,12 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: ClientToken
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Token provided to ensure idempotency when creating scheduled queries.",
+			//   "description": "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
 			//   "maxLength": 128,
 			//   "minLength": 32,
 			//   "type": "string"
 			// }
-			Description: "Token provided to ensure idempotency when creating scheduled queries.",
+			Description: "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -50,21 +50,21 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+			//   "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			//   "properties": {
 			//     "S3Configuration": {
 			//       "additionalProperties": false,
-			//       "description": "S3 configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+			//       "description": "Details on S3 location for error reports that result from running a query.",
 			//       "properties": {
 			//         "BucketName": {
-			//           "description": "S3 bucket where error reports will be placed.",
+			//           "description": "Name of the S3 bucket under which error reports will be created.",
 			//           "maxLength": 63,
 			//           "minLength": 3,
 			//           "pattern": "",
 			//           "type": "string"
 			//         },
 			//         "EncryptionOption": {
-			//           "description": "How error reports will be encrypted.",
+			//           "description": "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
 			//           "enum": [
 			//             "SSE_S3",
 			//             "SSE_KMS"
@@ -72,7 +72,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "type": "string"
 			//         },
 			//         "ObjectKeyPrefix": {
-			//           "description": "Prefix for error report names.",
+			//           "description": "Prefix for error report keys.",
 			//           "maxLength": 896,
 			//           "minLength": 1,
 			//           "pattern": "",
@@ -90,29 +90,29 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"s3_configuration": {
 						// Property: S3Configuration
-						Description: "S3 configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+						Description: "Details on S3 location for error reports that result from running a query.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"bucket_name": {
 									// Property: BucketName
-									Description: "S3 bucket where error reports will be placed.",
+									Description: "Name of the S3 bucket under which error reports will be created.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"encryption_option": {
 									// Property: EncryptionOption
-									Description: "How error reports will be encrypted.",
+									Description: "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"object_key_prefix": {
 									// Property: ObjectKeyPrefix
-									Description: "Prefix for error report names.",
+									Description: "Prefix for error report keys.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -128,12 +128,12 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: KmsKeyId
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.",
+			//   "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Description: "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.",
+			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -142,14 +142,14 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Configuration for notification upon scheduled query execution.",
+			//   "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			//   "properties": {
 			//     "SnsConfiguration": {
 			//       "additionalProperties": false,
 			//       "description": "SNS configuration for notification upon scheduled query execution.",
 			//       "properties": {
 			//         "TopicArn": {
-			//           "description": "SNS Topic to be notified upon scheduled query execution.",
+			//           "description": "SNS topic ARN that the scheduled query status notifications will be sent to.",
 			//           "maxLength": 2048,
 			//           "minLength": 1,
 			//           "type": "string"
@@ -166,7 +166,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Configuration for notification upon scheduled query execution.",
+			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"sns_configuration": {
@@ -176,7 +176,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"topic_arn": {
 									// Property: TopicArn
-									Description: "SNS Topic to be notified upon scheduled query execution.",
+									Description: "SNS topic ARN that the scheduled query status notifications will be sent to.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
@@ -192,12 +192,12 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: QueryString
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The query scheduled to be executed.",
+			//   "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			//   "maxLength": 262144,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Description: "The query scheduled to be executed.",
+			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -205,10 +205,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQErrorReportConfiguration
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+			//   "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			//   "type": "string"
 			// }
-			Description: "Configuration for where error reports will be placed, how they will be named, and how they will be encrypted.",
+			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -216,10 +216,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQKmsKeyId
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream owned KMS key located in the Timestream account.",
+			//   "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			//   "type": "string"
 			// }
-			Description: "The KMS key for the scheduled query. If the KMS key is not specified, the database will be encrypted with a Timestream owned KMS key located in the Timestream account.",
+			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -227,10 +227,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The name for the scheduled query.",
+			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			//   "type": "string"
 			// }
-			Description: "The name for the scheduled query.",
+			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -238,10 +238,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQNotificationConfiguration
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Configuration for notification upon scheduled query execution.",
+			//   "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			//   "type": "string"
 			// }
-			Description: "Configuration for notification upon scheduled query execution.",
+			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -249,10 +249,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQQueryString
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The query scheduled to be executed.",
+			//   "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			//   "type": "string"
 			// }
-			Description: "The query scheduled to be executed.",
+			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -260,10 +260,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQScheduleConfiguration
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Configuration that indicates when the scheduled query is executed.",
+			//   "description": "Configuration for when the scheduled query is executed.",
 			//   "type": "string"
 			// }
-			Description: "Configuration that indicates when the scheduled query is executed.",
+			Description: "Configuration for when the scheduled query is executed.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -271,10 +271,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQScheduledQueryExecutionRoleArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Role that AWS Timestream will assume to execute scheduled query.",
+			//   "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			//   "type": "string"
 			// }
-			Description: "Role that AWS Timestream will assume to execute scheduled query.",
+			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -282,10 +282,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: SQTargetConfiguration
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Target data source to export query results from.",
+			//   "description": "Configuration of target store where scheduled query results are written to.",
 			//   "type": "string"
 			// }
-			Description: "Target data source to export query results from.",
+			Description: "Configuration of target store where scheduled query results are written to.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -294,10 +294,10 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Configuration that indicates when the scheduled query is executed.",
+			//   "description": "Configuration for when the scheduled query is executed.",
 			//   "properties": {
 			//     "ScheduleExpression": {
-			//       "description": "The cron expression that indicates when the scheduled query is executed.",
+			//       "description": "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
 			//       "type": "string"
@@ -308,12 +308,12 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Configuration that indicates when the scheduled query is executed.",
+			Description: "Configuration for when the scheduled query is executed.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"schedule_expression": {
 						// Property: ScheduleExpression
-						Description: "The cron expression that indicates when the scheduled query is executed.",
+						Description: "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -325,12 +325,12 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: ScheduledQueryExecutionRoleArn
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "Role that AWS Timestream will assume to execute scheduled query.",
+			//   "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
 			//   "type": "string"
 			// }
-			Description: "Role that AWS Timestream will assume to execute scheduled query.",
+			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -338,13 +338,13 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: ScheduledQueryName
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "The name for the scheduled query.",
+			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
 			//   "pattern": "",
 			//   "type": "string"
 			// }
-			Description: "The name for the scheduled query.",
+			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			Type:        types.StringType,
 			Computed:    true,
 		},
@@ -352,11 +352,11 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
-			//   "description": "An array of key-value pairs to apply to this resource.",
+			//   "description": "A list of key-value pairs to label the scheduled query.",
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
-			//     "description": "A key-value pair to associate with a resource.",
+			//     "description": "A key-value pair to label the scheduled query.",
 			//     "properties": {
 			//       "Key": {
 			//         "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -380,7 +380,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "maxItems": 200,
 			//   "type": "array"
 			// }
-			Description: "An array of key-value pairs to apply to this resource.",
+			Description: "A list of key-value pairs to label the scheduled query.",
 			Attributes: tfsdk.ListNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"key": {
@@ -405,32 +405,32 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "Configuration of target destination table to query.",
+			//   "description": "Configuration of target store where scheduled query results are written to.",
 			//   "properties": {
 			//     "TimestreamConfiguration": {
 			//       "additionalProperties": false,
-			//       "description": "Timestream configuration of destination table to query.",
+			//       "description": "Configuration needed to write data into the Timestream database and table.",
 			//       "properties": {
 			//         "DatabaseName": {
-			//           "description": "The source database to query.",
+			//           "description": "Name of Timestream database to which the query result will be written.",
 			//           "type": "string"
 			//         },
 			//         "DimensionMappings": {
-			//           "description": "Mappings of dimension names to dimension value types.",
+			//           "description": "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
 			//           "insertionOrder": false,
 			//           "items": {
 			//             "additionalProperties": false,
-			//             "description": "Mapping of dimension column name to dimension column value type.",
+			//             "description": "This type is used to map column(s) from the query result to a dimension in the destination table.",
 			//             "properties": {
 			//               "DimensionValueType": {
-			//                 "description": "Value type of the dimension column.",
+			//                 "description": "Type for the dimension.",
 			//                 "enum": [
 			//                   "VARCHAR"
 			//                 ],
 			//                 "type": "string"
 			//               },
 			//               "Name": {
-			//                 "description": "Name of the dimension column.",
+			//                 "description": "Column name from query result.",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -443,22 +443,22 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "type": "array"
 			//         },
 			//         "MeasureNameColumn": {
-			//           "description": "Name of the source measure names column.",
+			//           "description": "Name of the measure name column from the query result.",
 			//           "type": "string"
 			//         },
 			//         "MixedMeasureMappings": {
-			//           "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+			//           "description": "Specifies how to map measures to multi-measure records.",
 			//           "insertionOrder": false,
 			//           "items": {
 			//             "additionalProperties": false,
-			//             "description": "Mapping of measure names and measure value columns from the source table to the destination table.",
+			//             "description": "MixedMeasureMappings are mappings that can be used to ingest data into a mixture of narrow and multi measures in the derived table.",
 			//             "properties": {
 			//               "MeasureName": {
-			//                 "description": "Name of the measure in source table.",
+			//                 "description": "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
 			//                 "type": "string"
 			//               },
 			//               "MeasureValueType": {
-			//                 "description": "Value type of the measure value column in the destination table.",
+			//                 "description": "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
 			//                 "enum": [
 			//                   "BIGINT",
 			//                   "BOOLEAN",
@@ -469,14 +469,14 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//                 "type": "string"
 			//               },
 			//               "MultiMeasureAttributeMappings": {
-			//                 "description": "List of multi-measure value column mappings.",
+			//                 "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 			//                 "insertionOrder": false,
 			//                 "items": {
 			//                   "additionalProperties": false,
-			//                   "description": "Mapping of measure value columns from the source table to the destination table.",
+			//                   "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
 			//                   "properties": {
 			//                     "MeasureValueType": {
-			//                       "description": "Value type of the measure value column in the destination table.",
+			//                       "description": "Value type of the measure value column to be read from the query result.",
 			//                       "enum": [
 			//                         "BIGINT",
 			//                         "BOOLEAN",
@@ -486,11 +486,11 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//                       "type": "string"
 			//                     },
 			//                     "SourceColumn": {
-			//                       "description": "Name of the measure value column in the source table.",
+			//                       "description": "Source measure value column in the query result where the attribute value is to be read.",
 			//                       "type": "string"
 			//                     },
 			//                     "TargetMultiMeasureAttributeName": {
-			//                       "description": "Name of the measure value column in the destination table.",
+			//                       "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -504,11 +504,11 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//                 "type": "array"
 			//               },
 			//               "SourceColumn": {
-			//                 "description": "Name of the measure value column in the source table.",
+			//                 "description": "This field refers to the source column from which the measure value is to be read for result materialization.",
 			//                 "type": "string"
 			//               },
 			//               "TargetMeasureName": {
-			//                 "description": "Name of the measure in the destination table.",
+			//                 "description": "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -522,17 +522,17 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         },
 			//         "MultiMeasureMappings": {
 			//           "additionalProperties": false,
-			//           "description": "Mapping of measure value columns from the source table to the destination table.",
+			//           "description": "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
 			//           "properties": {
 			//             "MultiMeasureAttributeMappings": {
-			//               "description": "List of multi-measure value column mappings.",
+			//               "description": "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 			//               "insertionOrder": false,
 			//               "items": {
 			//                 "additionalProperties": false,
-			//                 "description": "Mapping of measure value columns from the source table to the destination table.",
+			//                 "description": "An attribute mapping to be used for mapping query results to ingest data for multi-measure attributes.",
 			//                 "properties": {
 			//                   "MeasureValueType": {
-			//                     "description": "Value type of the measure value column in the destination table.",
+			//                     "description": "Value type of the measure value column to be read from the query result.",
 			//                     "enum": [
 			//                       "BIGINT",
 			//                       "BOOLEAN",
@@ -542,11 +542,11 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//                     "type": "string"
 			//                   },
 			//                   "SourceColumn": {
-			//                     "description": "Name of the measure value column in the source table.",
+			//                     "description": "Source measure value column in the query result where the attribute value is to be read.",
 			//                     "type": "string"
 			//                   },
 			//                   "TargetMultiMeasureAttributeName": {
-			//                     "description": "Name of the measure value column in the destination table.",
+			//                     "description": "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -560,7 +560,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//               "type": "array"
 			//             },
 			//             "TargetMultiMeasureName": {
-			//               "description": "Name of the multi-measure in the destination table.",
+			//               "description": "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
 			//               "type": "string"
 			//             }
 			//           },
@@ -570,11 +570,11 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "type": "object"
 			//         },
 			//         "TableName": {
-			//           "description": "The source table to query.",
+			//           "description": "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
 			//           "type": "string"
 			//         },
 			//         "TimeColumn": {
-			//           "description": "Name of the \"time\" column.",
+			//           "description": "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
 			//           "type": "string"
 			//         }
 			//       },
@@ -592,34 +592,34 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "Configuration of target destination table to query.",
+			Description: "Configuration of target store where scheduled query results are written to.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"timestream_configuration": {
 						// Property: TimestreamConfiguration
-						Description: "Timestream configuration of destination table to query.",
+						Description: "Configuration needed to write data into the Timestream database and table.",
 						Attributes: tfsdk.SingleNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"database_name": {
 									// Property: DatabaseName
-									Description: "The source database to query.",
+									Description: "Name of Timestream database to which the query result will be written.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"dimension_mappings": {
 									// Property: DimensionMappings
-									Description: "Mappings of dimension names to dimension value types.",
+									Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"dimension_value_type": {
 												// Property: DimensionValueType
-												Description: "Value type of the dimension column.",
+												Description: "Type for the dimension.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
 											"name": {
 												// Property: Name
-												Description: "Name of the dimension column.",
+												Description: "Column name from query result.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
@@ -630,47 +630,47 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 								},
 								"measure_name_column": {
 									// Property: MeasureNameColumn
-									Description: "Name of the source measure names column.",
+									Description: "Name of the measure name column from the query result.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"mixed_measure_mappings": {
 									// Property: MixedMeasureMappings
-									Description: "Mapping of measure names and measure value columns from the source table to the destination table.",
+									Description: "Specifies how to map measures to multi-measure records.",
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"measure_name": {
 												// Property: MeasureName
-												Description: "Name of the measure in source table.",
+												Description: "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
 											"measure_value_type": {
 												// Property: MeasureValueType
-												Description: "Value type of the measure value column in the destination table.",
+												Description: "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
 											"multi_measure_attribute_mappings": {
 												// Property: MultiMeasureAttributeMappings
-												Description: "List of multi-measure value column mappings.",
+												Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"measure_value_type": {
 															// Property: MeasureValueType
-															Description: "Value type of the measure value column in the destination table.",
+															Description: "Value type of the measure value column to be read from the query result.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
 														"source_column": {
 															// Property: SourceColumn
-															Description: "Name of the measure value column in the source table.",
+															Description: "Source measure value column in the query result where the attribute value is to be read.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
 														"target_multi_measure_attribute_name": {
 															// Property: TargetMultiMeasureAttributeName
-															Description: "Name of the measure value column in the destination table.",
+															Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
@@ -681,13 +681,13 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 											},
 											"source_column": {
 												// Property: SourceColumn
-												Description: "Name of the measure value column in the source table.",
+												Description: "This field refers to the source column from which the measure value is to be read for result materialization.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
 											"target_measure_name": {
 												// Property: TargetMeasureName
-												Description: "Name of the measure in the destination table.",
+												Description: "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
@@ -698,29 +698,29 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 								},
 								"multi_measure_mappings": {
 									// Property: MultiMeasureMappings
-									Description: "Mapping of measure value columns from the source table to the destination table.",
+									Description: "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
 											"multi_measure_attribute_mappings": {
 												// Property: MultiMeasureAttributeMappings
-												Description: "List of multi-measure value column mappings.",
+												Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"measure_value_type": {
 															// Property: MeasureValueType
-															Description: "Value type of the measure value column in the destination table.",
+															Description: "Value type of the measure value column to be read from the query result.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
 														"source_column": {
 															// Property: SourceColumn
-															Description: "Name of the measure value column in the source table.",
+															Description: "Source measure value column in the query result where the attribute value is to be read.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
 														"target_multi_measure_attribute_name": {
 															// Property: TargetMultiMeasureAttributeName
-															Description: "Name of the measure value column in the destination table.",
+															Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
 															Type:        types.StringType,
 															Computed:    true,
 														},
@@ -731,7 +731,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 											},
 											"target_multi_measure_name": {
 												// Property: TargetMultiMeasureName
-												Description: "Name of the multi-measure in the destination table.",
+												Description: "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
 												Type:        types.StringType,
 												Computed:    true,
 											},
@@ -741,13 +741,13 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 								},
 								"table_name": {
 									// Property: TableName
-									Description: "The source table to query.",
+									Description: "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
 									Type:        types.StringType,
 									Computed:    true,
 								},
 								"time_column": {
 									// Property: TimeColumn
-									Description: "Name of the \"time\" column.",
+									Description: "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
 									Type:        types.StringType,
 									Computed:    true,
 								},

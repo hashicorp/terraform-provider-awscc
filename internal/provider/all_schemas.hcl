@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 457 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 475 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -175,8 +175,18 @@ resource_schema "aws_appstream_application" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appstream_application_entitlement_association" {
+  cloudformation_type_name               = "AWS::AppStream::ApplicationEntitlementAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appstream_application_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::ApplicationFleetAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appstream_entitlement" {
+  cloudformation_type_name               = "AWS::AppStream::Entitlement"
   suppress_plural_data_source_generation = true
 }
 
@@ -588,6 +598,10 @@ resource_schema "aws_ec2_gateway_route_table_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_ec2_host" {
+  cloudformation_type_name = "AWS::EC2::Host"
+}
+
 resource_schema "aws_ec2_internet_gateway" {
   cloudformation_type_name = "AWS::EC2::InternetGateway"
 }
@@ -619,6 +633,14 @@ resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
 
 resource_schema "aws_ec2_network_acl" {
   cloudformation_type_name = "AWS::EC2::NetworkAcl"
+}
+
+resource_schema "aws_ec2_network_insights_access_scope" {
+  cloudformation_type_name = "AWS::EC2::NetworkInsightsAccessScope"
+}
+
+resource_schema "aws_ec2_network_insights_access_scope_analysis" {
+  cloudformation_type_name = "AWS::EC2::NetworkInsightsAccessScopeAnalysis"
 }
 
 resource_schema "aws_ec2_network_insights_analysis" {
@@ -870,6 +892,19 @@ resource_schema "aws_fis_experiment_template" {
   cloudformation_type_name = "AWS::FIS::ExperimentTemplate"
 }
 
+resource_schema "aws_forecast_dataset" {
+  cloudformation_type_name = "AWS::Forecast::Dataset"
+
+  # "Tags/Key is of unsupported type: "
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_forecast_dataset_group" {
+  cloudformation_type_name = "AWS::Forecast::DatasetGroup"
+}
+
 resource_schema "aws_fms_notification_channel" {
   cloudformation_type_name               = "AWS::FMS::NotificationChannel"
   suppress_plural_data_source_generation = true
@@ -1041,6 +1076,10 @@ resource_schema "aws_imagebuilder_image_recipe" {
 
 resource_schema "aws_imagebuilder_infrastructure_configuration" {
   cloudformation_type_name = "AWS::ImageBuilder::InfrastructureConfiguration"
+}
+
+resource_schema "aws_inspectorv2_filter" {
+  cloudformation_type_name = "AWS::InspectorV2::Filter"
 }
 
 resource_schema "aws_iot_account_audit_configuration" {
@@ -1262,6 +1301,16 @@ resource_schema "aws_kinesisfirehose_delivery_stream" {
   cloudformation_type_name = "AWS::KinesisFirehose::DeliveryStream"
 }
 
+resource_schema "aws_kinesisvideo_signaling_channel" {
+  cloudformation_type_name               = "AWS::KinesisVideo::SignalingChannel"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_kinesisvideo_stream" {
+  cloudformation_type_name               = "AWS::KinesisVideo::Stream"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lambda_code_signing_config" {
   cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
 }
@@ -1301,6 +1350,14 @@ resource_schema "aws_licensemanager_license" {
   cloudformation_type_name = "AWS::LicenseManager::License"
 }
 
+resource_schema "aws_lightsail_alarm" {
+  cloudformation_type_name = "AWS::Lightsail::Alarm"
+}
+
+resource_schema "aws_lightsail_bucket" {
+  cloudformation_type_name = "AWS::Lightsail::Bucket"
+}
+
 resource_schema "aws_lightsail_database" {
   cloudformation_type_name = "AWS::Lightsail::Database"
 }
@@ -1311,6 +1368,15 @@ resource_schema "aws_lightsail_disk" {
 
 resource_schema "aws_lightsail_instance" {
   cloudformation_type_name = "AWS::Lightsail::Instance"
+}
+
+resource_schema "aws_lightsail_load_balancer" {
+  cloudformation_type_name = "AWS::Lightsail::LoadBalancer"
+}
+
+resource_schema "aws_lightsail_load_balancer_tls_certificate" {
+  cloudformation_type_name               = "AWS::Lightsail::LoadBalancerTlsCertificate"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_lightsail_static_ip" {
@@ -1777,6 +1843,10 @@ resource_schema "aws_route53resolver_resolver_config" {
 
 resource_schema "aws_route53resolver_resolver_dnssec_config" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverDNSSECConfig"
+}
+
+resource_schema "aws_route53resolver_resolver_rule_association" {
+  cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
 }
 
 resource_schema "aws_route53resolver_resolver_query_logging_config" {

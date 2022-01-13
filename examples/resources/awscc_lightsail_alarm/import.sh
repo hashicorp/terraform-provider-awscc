@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_alarm.example <resource ID>

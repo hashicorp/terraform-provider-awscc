@@ -70,7 +70,8 @@ func trackerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "enum": [
 			//     "TimeBased",
-			//     "DistanceBased"
+			//     "DistanceBased",
+			//     "AccuracyBased"
 			//   ],
 			//   "type": "string"
 			// }
