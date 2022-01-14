@@ -28,13 +28,16 @@ builds:
     mod_timestamp: '{{ .CommitTimestamp }}'
 checksum:
   extra_files:
-    - glob: '{{ .ProjectName }}_manifest.json'
+    - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   name_template: '{{ .ProjectName }}_{{ .Version }}_SHA256SUMS'
   algorithm: sha256
 publishers:
   - name: hc-releases
     checksum: true
+    extra_files:
+      - glob: 'terraform-registry-manifest.json'
+        name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
     signature: true
     cmd: hc-releases upload-file {{ abs .ArtifactPath }}
     env:
@@ -43,7 +46,7 @@ publishers:
       - AWS_SESSION_TOKEN={{ .Env.AWS_SESSION_TOKEN }}
 release:
   extra_files:
-    - glob: '{{ .ProjectName }}_manifest.json'
+    - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   ids:
     - none
