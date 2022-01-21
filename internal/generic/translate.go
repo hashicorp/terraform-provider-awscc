@@ -200,6 +200,9 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 	// Complex types.
 	//
 	case []interface{}:
+		if len(v) == 0 {
+			return tftypes.NewValue(typ, nil), nil
+		}
 		var vals []tftypes.Value
 		for idx, v := range v {
 			if typ.Is(tftypes.Set{}) {
