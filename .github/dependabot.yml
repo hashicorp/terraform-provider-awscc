@@ -12,6 +12,9 @@ updates:
   # Maintain dependencies for Go modules
   - package-ecosystem: "gomod"
     directory: "/"
+    ignore:
+      # terraform-plugin-go should only be updated via terraform-plugin-framework
+      - dependency-name: "github.com/hashicorp/terraform-plugin-go"
     schedule:
       # Check for updates to Go modules every weekday
       interval: "daily"
