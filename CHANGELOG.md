@@ -1,4 +1,11 @@
 ## 0.11.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_forecast_dataset`
+* **New Data Source:** `awscc_forecast_datasets`
+* **New Resource:** `awscc_forecast_dataset`
+
 ## [0.10.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.10.0) (January 13, 2022)
 
 FEATURES:
