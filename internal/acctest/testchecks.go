@@ -117,7 +117,7 @@ func existsFunc(shouldExist bool) func(context.Context, *cloudcontrol.Client, st
 			}
 
 			if err != nil {
-				return fmt.Errorf("error reading (%s/%s) resource (%s): %w", cfTypeName, tfTypeName, id, err)
+				return fmt.Errorf("reading (%s/%s) resource (%s): %w", cfTypeName, tfTypeName, id, err)
 			}
 
 			return nil
