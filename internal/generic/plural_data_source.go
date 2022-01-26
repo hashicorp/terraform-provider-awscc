@@ -66,10 +66,9 @@ func newGenericPluralDataSource(provider tfsdk.Provider, pluralDataSourceType *p
 }
 
 func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
-	cfTypeName := pd.dataSourceType.cfTypeName
-	tfTypeName := pd.dataSourceType.tfTypeName
+	ctx = pd.cfnTypeContext(ctx)
 
-	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	traceEntry(ctx, "PluralDataSource.Read")
 
 	conn := pd.provider.CloudControlApiClient(ctx)
 
@@ -90,12 +89,19 @@ func (pd *pluralDataSource) Read(ctx context.Context, _ tfsdk.ReadDataSourceRequ
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "DataSource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	traceExit(ctx, "PluralDataSource.Read")
 }
 
 // list returns the ResourceDescriptions of the specified CloudFormation type.
 func (pd *pluralDataSource) list(ctx context.Context, conn *cloudcontrol.Client) ([]cctypes.ResourceDescription, error) {
 	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.dataSourceType.cfTypeName)
+}
+
+// cfnTypeContext injects the CloudFormation type name into logger contexts.
+func (pd *pluralDataSource) cfnTypeContext(ctx context.Context) context.Context {
+	ctx = tflog.With(ctx, LoggingKeyCFNType, pd.dataSourceType.cfTypeName)
+
+	return ctx
 }
 
 // GetCloudControlResourceDescriptionsValue returns the Terraform Value for the specified Cloud Control API ResourceDescriptions.

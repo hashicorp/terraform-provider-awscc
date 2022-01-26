@@ -66,10 +66,9 @@ func newGenericSingularDataSource(provider tfsdk.Provider, singularDataSourceTyp
 }
 
 func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSourceRequest, response *tfsdk.ReadDataSourceResponse) {
-	cfTypeName := sd.dataSourceType.cfTypeName
-	tfTypeName := sd.dataSourceType.tfTypeName
+	ctx = sd.cfnTypeContext(ctx)
 
-	tflog.Debug(ctx, "DataSource.Read enter", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	traceEntry(ctx, "SingularDataSource.Read")
 
 	conn := sd.provider.CloudControlApiClient(ctx)
 
@@ -125,7 +124,7 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 
 	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	tflog.Debug(ctx, "DataSource.Read exit", "cfTypeName", cfTypeName, "tfTypeName", tfTypeName)
+	traceExit(ctx, "SingularDataSource.Read")
 }
 
 // describe returns the live state of the specified resource.
@@ -154,4 +153,11 @@ func (sd *singularDataSource) setId(ctx context.Context, val string, state *tfsd
 	}
 
 	return nil
+}
+
+// cfnTypeContext injects the CloudFormation type name into logger contexts.
+func (sd *singularDataSource) cfnTypeContext(ctx context.Context) context.Context {
+	ctx = tflog.With(ctx, LoggingKeyCFNType, sd.dataSourceType.cfTypeName)
+
+	return ctx
 }
