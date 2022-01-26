@@ -894,11 +894,6 @@ resource_schema "aws_fis_experiment_template" {
 
 resource_schema "aws_forecast_dataset" {
   cloudformation_type_name = "AWS::Forecast::Dataset"
-
-  # "Tags/Key is of unsupported type: "
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_forecast_dataset_group" {
