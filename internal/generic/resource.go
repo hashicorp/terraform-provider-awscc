@@ -4,16 +4,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
@@ -394,14 +395,13 @@ var (
 )
 
 func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceRequest, response *tfsdk.CreateResourceResponse) {
-	cfTypeName := r.resourceType.cfTypeName
-	tfTypeName := r.resourceType.tfTypeName
+	ctx = r.cfnTypeContext(ctx)
 
-	log.Printf("[TRACE] Resource.Create enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceEntry(ctx, "Resource.Create")
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
-	log.Printf("[DEBUG] Request.Plan.Raw. value: %v", request.Plan.Raw)
+	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
 
 	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
@@ -412,12 +412,12 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] CloudControl DesiredState. value: %s", desiredState)
+	tflog.Debug(ctx, "CloudControl DesiredState", "value", desiredState)
 
 	input := &cloudcontrol.CreateResourceInput{
 		ClientToken:  aws.String(tfresource.UniqueId()),
 		DesiredState: aws.String(desiredState),
-		TypeName:     aws.String(cfTypeName),
+		TypeName:     aws.String(r.resourceType.cfTypeName),
 	}
 
 	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
@@ -484,18 +484,17 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
+	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	log.Printf("[TRACE] Resource.Create exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceExit(ctx, "Resource.Create")
 }
 
 func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, response *tfsdk.ReadResourceResponse) {
-	cfTypeName := r.resourceType.cfTypeName
-	tfTypeName := r.resourceType.tfTypeName
+	ctx = r.cfnTypeContext(ctx)
 
-	log.Printf("[TRACE] Resource.Read enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceEntry(ctx, "Resource.Read")
 
-	log.Printf("[DEBUG] Request.State.Raw. value: %v", request.State.Raw)
+	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -567,16 +566,15 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		}
 	}
 
-	log.Printf("[DEBUG] Response.State.Raw. value: %v", response.State.Raw)
+	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
 
-	log.Printf("[TRACE] Resource.Read exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceExit(ctx, "Resource.Read")
 }
 
 func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceRequest, response *tfsdk.UpdateResourceResponse) {
-	cfTypeName := r.resourceType.cfTypeName
-	tfTypeName := r.resourceType.tfTypeName
+	ctx = r.cfnTypeContext(ctx)
 
-	log.Printf("[TRACE] Resource.Update enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceEntry(ctx, "Resource.Update")
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -617,13 +615,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	log.Printf("[DEBUG] Cloud Control API PatchDocument: %s", patchDocument)
+	tflog.Debug(ctx, "Cloud Control API PatchDocument", "value", patchDocument)
 
 	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
 		Identifier:    aws.String(id),
 		PatchDocument: aws.String(patchDocument),
-		TypeName:      aws.String(cfTypeName),
+		TypeName:      aws.String(r.resourceType.cfTypeName),
 	}
 
 	if roleARN := r.provider.RoleARN(ctx); roleARN != "" {
@@ -667,14 +665,13 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	log.Printf("[TRACE] Resource.Update exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceExit(ctx, "Resource.Update")
 }
 
 func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceRequest, response *tfsdk.DeleteResourceResponse) {
-	cfTypeName := r.resourceType.cfTypeName
-	tfTypeName := r.resourceType.tfTypeName
+	ctx = r.cfnTypeContext(ctx)
 
-	log.Printf("[TRACE] Resource.Delete enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceEntry(ctx, "Resource.Delete")
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -686,7 +683,7 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 		return
 	}
 
-	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), cfTypeName, id, r.resourceType.deleteTimeout)
+	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), r.resourceType.cfTypeName, id, r.resourceType.deleteTimeout)
 
 	if err != nil {
 		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "DeleteResource", err))
@@ -696,20 +693,19 @@ func (r *resource) Delete(ctx context.Context, request tfsdk.DeleteResourceReque
 
 	response.State.RemoveResource(ctx)
 
-	log.Printf("[TRACE] Resource.Delete exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceExit(ctx, "Resource.Delete")
 }
 
 func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResourceStateRequest, response *tfsdk.ImportResourceStateResponse) {
-	cfTypeName := r.resourceType.cfTypeName
-	tfTypeName := r.resourceType.tfTypeName
+	ctx = r.cfnTypeContext(ctx)
 
-	log.Printf("[TRACE] Resource.ImportState enter. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceEntry(ctx, "Resource.ImportState")
 
-	log.Printf("[DEBUG] Request.ID: %s", request.ID)
+	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
 
 	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 
-	log.Printf("[TRACE] Resource.ImportState exit. cfTypeName: %s, tfTypeName: %s", cfTypeName, tfTypeName)
+	traceExit(ctx, "Resource.ImportState")
 }
 
 // ConfigValidators returns a list of functions which will all be performed during validation.
@@ -802,6 +798,13 @@ func (r *resource) populateUnknownValues(ctx context.Context, id string, state *
 	}
 
 	return nil
+}
+
+// cfnTypeContext injects the CloudFormation type name into logger contexts.
+func (r *resource) cfnTypeContext(ctx context.Context) context.Context {
+	ctx = tflog.With(ctx, LoggingKeyCFNType, r.resourceType.tfTypeName)
+
+	return ctx
 }
 
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
