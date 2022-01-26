@@ -15,6 +15,10 @@ updates:
     ignore:
       # terraform-plugin-go should only be updated via terraform-plugin-framework
       - dependency-name: "github.com/hashicorp/terraform-plugin-go"
+      # terraform-plugin-log should only be updated via terraform-plugin-framework
+      - dependency-name: "github.com/hashicorp/terraform-plugin-log"
+      # go-hclog should only be updated via terraform-plugin-log
+      - dependency-name: "github.com/hashicorp/go-hclog"
     schedule:
       # Check for updates to Go modules every weekday
       interval: "daily"
