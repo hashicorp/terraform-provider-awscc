@@ -177,7 +177,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 		attrType, err := schema.AttributeTypeAtPath(path)
 
 		if err != nil {
-			return tftypes.Value{}, fmt.Errorf("error getting attribute type at %s: %w", path, err)
+			return tftypes.Value{}, fmt.Errorf("getting attribute type at %s: %w", path, err)
 		}
 
 		typ = attrType.TerraformType(ctx)

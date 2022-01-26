@@ -208,7 +208,7 @@ func (d *Downloader) MetaSchema() error {
 	metaSchema, err := cfschema.NewMetaJsonSchemaPath(d.config.MetaSchema.Path)
 
 	if err != nil {
-		return fmt.Errorf("error loading CloudFormation Resource Provider Definition Schema: %w", err)
+		return fmt.Errorf("loading CloudFormation Resource Provider Definition Schema: %w", err)
 	}
 
 	d.metaSchema = metaSchema
@@ -328,7 +328,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		output, err := d.client.DescribeType(context.TODO(), input)
 
 		if err != nil {
-			return "", "", fmt.Errorf("error describing CloudFormation type: %w", err)
+			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
 		}
 
 		schema := cfschema.Sanitize(aws.ToString(output.Schema))
@@ -336,21 +336,21 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
 		if err != nil {
-			return "", "", fmt.Errorf("error writing schema to %q: %w", dst, err)
+			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)
 		}
 
 		resourceSchema, err := cfschema.NewResourceJsonSchemaPath(dst)
 
 		if err != nil {
-			return "", "", fmt.Errorf("error loading %s: %w", dst, err)
+			return "", "", fmt.Errorf("loading %s: %w", dst, err)
 		}
 
 		if err := d.metaSchema.ValidateResourceJsonSchema(resourceSchema); err != nil {
-			return "", "", fmt.Errorf("error validating %s: %w", dst, err)
+			return "", "", fmt.Errorf("validating %s: %w", dst, err)
 		}
 
 		if err := copyFile(resourceSchemaFilename, dst); err != nil {
-			return "", "", fmt.Errorf("error copying: %w", err)
+			return "", "", fmt.Errorf("copying: %w", err)
 		}
 	} else {
 		d.infof("using cached CloudFormation Resource Provider Schema %q", resourceSchemaFilename)
@@ -360,13 +360,13 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 	resourceSchema, err := cfschema.NewResourceJsonSchemaPath(resourceSchemaFilename)
 
 	if err != nil {
-		return "", "", fmt.Errorf("error loading %s: %w", resourceSchemaFilename, err)
+		return "", "", fmt.Errorf("loading %s: %w", resourceSchemaFilename, err)
 	}
 
 	resource, err := resourceSchema.Resource()
 
 	if err != nil {
-		return "", "", fmt.Errorf("error parsing %s: %w", resourceSchemaFilename, err)
+		return "", "", fmt.Errorf("parsing %s: %w", resourceSchemaFilename, err)
 	}
 
 	return resourceSchemaFilename, *resource.TypeName, nil
@@ -434,26 +434,26 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 	tmpl, err := template.New("function").Parse(resourceTemplateBody)
 
 	if err != nil {
-		return fmt.Errorf("error parsing function template: %w", err)
+		return fmt.Errorf("parsing function template: %w", err)
 	}
 
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, templateData)
 
 	if err != nil {
-		return fmt.Errorf("error executing template: %w", err)
+		return fmt.Errorf("executing template: %w", err)
 	}
 
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		return fmt.Errorf("error formatting generated file: %w", err)
+		return fmt.Errorf("formatting generated file: %w", err)
 	}
 
 	f, err := os.Create(filename)
 
 	if err != nil {
-		return fmt.Errorf("error creating file (%s): %w", filename, err)
+		return fmt.Errorf("creating file (%s): %w", filename, err)
 	}
 
 	defer f.Close()
@@ -461,7 +461,7 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 	_, err = f.Write(generatedFileContents)
 
 	if err != nil {
-		return fmt.Errorf("error writing to file (%s): %w", filename, err)
+		return fmt.Errorf("writing to file (%s): %w", filename, err)
 	}
 
 	return nil
@@ -497,26 +497,26 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 	tmpl, err := template.New("function").Parse(dataSourceTemplateBody)
 
 	if err != nil {
-		return fmt.Errorf("error parsing function template: %w", err)
+		return fmt.Errorf("parsing function template: %w", err)
 	}
 
 	var buffer bytes.Buffer
 	err = tmpl.Execute(&buffer, templateData)
 
 	if err != nil {
-		return fmt.Errorf("error executing template: %w", err)
+		return fmt.Errorf("executing template: %w", err)
 	}
 
 	generatedFileContents, err := format.Source(buffer.Bytes())
 
 	if err != nil {
-		return fmt.Errorf("error formatting generated file: %w", err)
+		return fmt.Errorf("formatting generated file: %w", err)
 	}
 
 	f, err := os.Create(filename)
 
 	if err != nil {
-		return fmt.Errorf("error creating file (%s): %w", filename, err)
+		return fmt.Errorf("creating file (%s): %w", filename, err)
 	}
 
 	defer f.Close()
@@ -524,7 +524,7 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 	_, err = f.Write(generatedFileContents)
 
 	if err != nil {
-		return fmt.Errorf("error writing to file (%s): %w", filename, err)
+		return fmt.Errorf("writing to file (%s): %w", filename, err)
 	}
 
 	return nil

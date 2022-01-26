@@ -123,7 +123,7 @@ func resourceWithWriteOnlyPropertyPaths(v []string) ResourceTypeOptionsFunc {
 			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
 
 			if err != nil {
-				return fmt.Errorf("error creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
+				return fmt.Errorf("creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
 			}
 
 			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
