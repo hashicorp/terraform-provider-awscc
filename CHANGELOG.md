@@ -1,5 +1,9 @@
 ## 0.11.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_frauddetector_event_types: Temporarily removed
+
 FEATURES:
 
 * **New Data Source:** `awscc_forecast_dataset`
