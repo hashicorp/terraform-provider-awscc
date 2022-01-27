@@ -981,7 +981,8 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 		case "uri":
 			// TODO
 		default:
-			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
+			// TODO
+			// return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 
