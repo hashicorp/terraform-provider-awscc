@@ -19,11 +19,11 @@ Definition of AWS::Location::RouteCalculator Resource Type
 
 - **calculator_name** (String)
 - **data_source** (String)
-- **pricing_plan** (String)
 
 ### Optional
 
 - **description** (String)
+- **pricing_plan** (String)
 
 ### Read-Only
 

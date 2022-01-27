@@ -62,6 +62,8 @@ Optional:
 
 - **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics))
 - **alarms** (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms))
+- **ha_cluster_prometheus_exporter** (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
+- **hana_prometheus_exporter** (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter))
 - **jmx_prometheus_exporter** (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter))
 - **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs))
 - **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events))
@@ -83,6 +85,29 @@ Optional:
 - **severity** (String) Indicates the degree of outage when the alarm goes off.
 
 
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+
+Optional:
+
+- **prometheus_port** (String) Prometheus exporter port.
+
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+
+Optional:
+
+- **agree_to_install_hanadb_client** (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
+- **hana_port** (String) The HANA DB port.
+- **hana_secret_name** (String) The secret name which manages the HANA DB credentials e.g. {
+  "username": "<>",
+  "password": "<>"
+}.
+- **hanasid** (String) HANA DB SID.
+- **prometheus_port** (String) Prometheus exporter port.
+
+
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
@@ -90,7 +115,7 @@ Optional:
 
 - **host_port** (String) Java agent host port
 - **jmxurl** (String) JMX service URL.
-- **prometheus_port** (String) Prometheus exporter port
+- **prometheus_port** (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs"></a>
@@ -183,6 +208,8 @@ Optional:
 
 - **alarm_metrics** (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics))
 - **alarms** (Attributes List) A list of alarms to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms))
+- **ha_cluster_prometheus_exporter** (Attributes) The HA cluster Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter))
+- **hana_prometheus_exporter** (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter))
 - **jmx_prometheus_exporter** (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter))
 - **logs** (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs))
 - **windows_events** (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events))
@@ -204,6 +231,29 @@ Optional:
 - **severity** (String) Indicates the degree of outage when the alarm goes off.
 
 
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+
+Optional:
+
+- **prometheus_port** (String) Prometheus exporter port.
+
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+
+Optional:
+
+- **agree_to_install_hanadb_client** (Boolean) A flag which indicates agreeing to install SAP HANA DB client.
+- **hana_port** (String) The HANA DB port.
+- **hana_secret_name** (String) The secret name which manages the HANA DB credentials e.g. {
+  "username": "<>",
+  "password": "<>"
+}.
+- **hanasid** (String) HANA DB SID.
+- **prometheus_port** (String) Prometheus exporter port.
+
+
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
@@ -211,7 +261,7 @@ Optional:
 
 - **host_port** (String) Java agent host port
 - **jmxurl** (String) JMX service URL.
-- **prometheus_port** (String) Prometheus exporter port
+- **prometheus_port** (String) Prometheus exporter port.
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs"></a>

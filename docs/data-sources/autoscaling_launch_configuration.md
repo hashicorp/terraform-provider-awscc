@@ -24,7 +24,7 @@ Data Source schema for AWS::AutoScaling::LaunchConfiguration
 - **associate_public_ip_address** (Boolean) For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.
 - **block_device_mappings** (Attributes Set) Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes. (see [below for nested schema](#nestedatt--block_device_mappings))
 - **classic_link_vpc_id** (String) The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.
-- **classic_link_vpc_security_groups** (Set of String) The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.
+- **classic_link_vpc_security_groups** (List of String) The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.
 - **ebs_optimized** (Boolean) Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).
 - **iam_instance_profile** (String) Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.
 - **image_id** (String) Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.
@@ -37,7 +37,7 @@ Data Source schema for AWS::AutoScaling::LaunchConfiguration
 - **metadata_options** (Attributes) The metadata options for the instances. (see [below for nested schema](#nestedatt--metadata_options))
 - **placement_tenancy** (String) The tenancy of the instance, either default or dedicated.
 - **ram_disk_id** (String) The ID of the RAM disk to select.
-- **security_groups** (Set of String) A list that contains the security groups to assign to the instances in the Auto Scaling group.
+- **security_groups** (List of String) A list that contains the security groups to assign to the instances in the Auto Scaling group.
 - **spot_price** (String) The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.
 - **user_data** (String) The Base64-encoded user data to make available to the launched EC2 instances.
 

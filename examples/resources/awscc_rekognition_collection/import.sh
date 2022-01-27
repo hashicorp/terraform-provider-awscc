@@ -1,0 +1,1 @@
+$ terraform import awscc_rekognition_collection.example <resource ID>

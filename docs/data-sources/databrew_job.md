@@ -68,6 +68,7 @@ Read-Only:
 Read-Only:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -85,6 +86,7 @@ Read-Only:
 Read-Only:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -113,6 +115,7 @@ Read-Only:
 Read-Only:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -133,6 +136,7 @@ Read-Only:
 Read-Only:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -170,6 +174,7 @@ Read-Only:
 Read-Only:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 

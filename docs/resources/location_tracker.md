@@ -17,7 +17,6 @@ Definition of AWS::Location::Tracker Resource Type
 
 ### Required
 
-- **pricing_plan** (String)
 - **tracker_name** (String)
 
 ### Optional
@@ -25,6 +24,7 @@ Definition of AWS::Location::Tracker Resource Type
 - **description** (String)
 - **kms_key_id** (String)
 - **position_filtering** (String)
+- **pricing_plan** (String)
 - **pricing_plan_data_source** (String)
 
 ### Read-Only

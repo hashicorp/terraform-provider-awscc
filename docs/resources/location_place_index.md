@@ -19,12 +19,12 @@ Definition of AWS::Location::PlaceIndex Resource Type
 
 - **data_source** (String)
 - **index_name** (String)
-- **pricing_plan** (String)
 
 ### Optional
 
 - **data_source_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
 - **description** (String)
+- **pricing_plan** (String)
 
 ### Read-Only
 

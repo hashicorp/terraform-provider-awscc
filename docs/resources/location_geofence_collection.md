@@ -18,12 +18,12 @@ Definition of AWS::Location::GeofenceCollection Resource Type
 ### Required
 
 - **collection_name** (String)
-- **pricing_plan** (String)
 
 ### Optional
 
 - **description** (String)
 - **kms_key_id** (String)
+- **pricing_plan** (String)
 - **pricing_plan_data_source** (String)
 
 ### Read-Only
