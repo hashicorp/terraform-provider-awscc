@@ -6,6 +6,10 @@ FEATURES:
 * **New Data Source:** `awscc_forecast_datasets`
 * **New Resource:** `awscc_forecast_dataset`
 
+BUG FIXES:
+
+* Prevent errors like `planned value ... for a non-computed attribute` for list arguments during `terraform plan` ([#368](https://github.com/hashicorp/terraform-provider-awscc/issues/368))
+
 ## [0.10.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.10.0) (January 13, 2022)
 
 FEATURES:
