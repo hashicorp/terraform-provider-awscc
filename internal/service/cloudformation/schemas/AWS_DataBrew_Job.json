@@ -123,6 +123,11 @@
         },
         "Key": {
           "type": "string"
+        },
+        "BucketOwner": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 12
         }
       },
       "additionalProperties": false,
@@ -159,6 +164,11 @@
         },
         "Key": {
           "type": "string"
+        },
+        "BucketOwner": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 12
         }
       },
       "additionalProperties": false,

@@ -68,7 +68,6 @@
         },
         "Device": {
             "description": "The Edge Device you want to register against a device fleet",
-            "type": "object",
             "$ref": "#/definitions/Device"
         },
         "Tags": {
