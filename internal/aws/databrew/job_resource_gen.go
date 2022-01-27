@@ -53,6 +53,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "Bucket": {
 			//                 "type": "string"
 			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
+			//                 "type": "string"
+			//               },
 			//               "Key": {
 			//                 "type": "string"
 			//               }
@@ -79,6 +84,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "S3 Output location",
 			//             "properties": {
 			//               "Bucket": {
+			//                 "type": "string"
+			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
 			//                 "type": "string"
 			//               },
 			//               "Key": {
@@ -150,6 +160,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Type:     types.StringType,
 												Required: true,
 											},
+											"bucket_owner": {
+												// Property: BucketOwner
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(12, 12),
+												},
+											},
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -181,6 +199,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Bucket
 												Type:     types.StringType,
 												Required: true,
+											},
+											"bucket_owner": {
+												// Property: BucketOwner
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(12, 12),
+												},
 											},
 											"key": {
 												// Property: Key
@@ -229,6 +255,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "S3 Output location",
 			//             "properties": {
 			//               "Bucket": {
+			//                 "type": "string"
+			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
 			//                 "type": "string"
 			//               },
 			//               "Key": {
@@ -289,6 +320,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Bucket
 												Type:     types.StringType,
 												Required: true,
+											},
+											"bucket_owner": {
+												// Property: BucketOwner
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenBetween(12, 12),
+												},
 											},
 											"key": {
 												// Property: Key
@@ -498,6 +537,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "Bucket": {
 			//       "type": "string"
 			//     },
+			//     "BucketOwner": {
+			//       "maxLength": 12,
+			//       "minLength": 12,
+			//       "type": "string"
+			//     },
 			//     "Key": {
 			//       "type": "string"
 			//     }
@@ -514,6 +558,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Bucket
 						Type:     types.StringType,
 						Required: true,
+					},
+					"bucket_owner": {
+						// Property: BucketOwner
+						Type:     types.StringType,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(12, 12),
+						},
 					},
 					"key": {
 						// Property: Key
@@ -583,6 +635,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "S3 Output location",
 			//         "properties": {
 			//           "Bucket": {
+			//             "type": "string"
+			//           },
+			//           "BucketOwner": {
+			//             "maxLength": 12,
+			//             "minLength": 12,
 			//             "type": "string"
 			//           },
 			//           "Key": {
@@ -685,6 +742,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Bucket
 									Type:     types.StringType,
 									Required: true,
+								},
+								"bucket_owner": {
+									// Property: BucketOwner
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(12, 12),
+									},
 								},
 								"key": {
 									// Property: Key
@@ -1352,6 +1417,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_statistics":               "AllowedStatistics",
 		"bucket":                           "Bucket",
+		"bucket_owner":                     "BucketOwner",
 		"catalog_id":                       "CatalogId",
 		"column_statistics_configurations": "ColumnStatisticsConfigurations",
 		"compression_format":               "CompressionFormat",

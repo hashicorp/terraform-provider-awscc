@@ -23,6 +23,7 @@ Resource Type definition for AWS::IVS::RecordingConfiguration
 
 - **name** (String) Recording Configuration Name.
 - **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- **thumbnail_configuration** (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
 
 ### Read-Only
 
@@ -53,6 +54,15 @@ Optional:
 
 - **key** (String)
 - **value** (String)
+
+
+<a id="nestedatt--thumbnail_configuration"></a>
+### Nested Schema for `thumbnail_configuration`
+
+Optional:
+
+- **recording_mode** (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
+- **target_interval_seconds** (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
 
 ## Import
 

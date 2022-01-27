@@ -161,6 +161,52 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			),
 			Computed: true,
 		},
+		"thumbnail_configuration": {
+			// Property: ThumbnailConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Recording Thumbnail Configuration.",
+			//   "properties": {
+			//     "RecordingMode": {
+			//       "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+			//       "enum": [
+			//         "INTERVAL",
+			//         "DISABLED"
+			//       ],
+			//       "type": "string"
+			//     },
+			//     "TargetIntervalSeconds": {
+			//       "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+			//       "maximum": 60,
+			//       "minimum": 5,
+			//       "type": "integer"
+			//     }
+			//   },
+			//   "required": [
+			//     "RecordingMode"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Recording Thumbnail Configuration.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"recording_mode": {
+						// Property: RecordingMode
+						Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+					"target_interval_seconds": {
+						// Property: TargetIntervalSeconds
+						Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+						Type:        types.NumberType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 	}
 
 	attributes["id"] = tfsdk.Attribute{
@@ -185,9 +231,12 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 		"destination_configuration": "DestinationConfiguration",
 		"key":                       "Key",
 		"name":                      "Name",
+		"recording_mode":            "RecordingMode",
 		"s3":                        "S3",
 		"state":                     "State",
 		"tags":                      "Tags",
+		"target_interval_seconds":   "TargetIntervalSeconds",
+		"thumbnail_configuration":   "ThumbnailConfiguration",
 		"value":                     "Value",
 	})
 

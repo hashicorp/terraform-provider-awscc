@@ -48,7 +48,7 @@ Read-Only:
             time is 30 days.</p>
 - **max_stopped_session_length_in_minutes** (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
             can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>
-        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call
+        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call
             StopStreamingSession, the session fails. If the time that a session stays in the READY
             state exceeds the maxSessionLengthInMinutes value, the session will automatically be
             terminated by AWS (instead of stopped).</p>
@@ -56,7 +56,7 @@ Read-Only:
             StopStreamingSession to stop sessions in the READY state. If the time that a session
             stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will
             automatically be stopped by AWS (instead of terminated).</p>
-- **session_storage** (Attributes) <p>The configuration for a streaming session?s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
+- **session_storage** (Attributes) <p>The configuration for a streaming session’s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
 - **streaming_image_ids** (List of String) <p>The streaming images that users can select from when launching a streaming session
             with this launch profile.</p>
 

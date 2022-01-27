@@ -96,6 +96,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//           "type": "object"
 			//         },
 			//         "EventSources": {
+			//           "insertionOrder": false,
 			//           "items": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -115,6 +116,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//           "type": "array"
 			//         },
 			//         "ExecArgs": {
+			//           "insertionOrder": true,
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -134,6 +136,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//               "additionalProperties": false,
 			//               "properties": {
 			//                 "Devices": {
+			//                   "insertionOrder": false,
 			//                   "items": {
 			//                     "additionalProperties": false,
 			//                     "properties": {
@@ -162,6 +165,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//                   "type": "boolean"
 			//                 },
 			//                 "Volumes": {
+			//                   "insertionOrder": false,
 			//                   "items": {
 			//                     "additionalProperties": false,
 			//                     "properties": {
@@ -224,6 +228,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//       "type": "string"
 			//     },
 			//     "ComponentPlatforms": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {

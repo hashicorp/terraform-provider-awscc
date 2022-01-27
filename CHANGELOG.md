@@ -1,10 +1,40 @@
 ## 0.11.0 (Unreleased)
 
+BREAKING CHANGES:
+
+* data-source/awscc_frauddetector_event_types: Temporarily removed
+
 FEATURES:
 
+* **New Data Source:** `awscc_appintegrations_data_integration`
+* **New Data Source:** `awscc_appintegrations_data_integrations`
+* **New Data Source:** `awscc_athena_data_catalogs`
+* **New Data Source:** `awscc_cloudformation_module_default_versions`
+* **New Data Source:** `awscc_iotcoredeviceadvisor_suite_definitions`
 * **New Data Source:** `awscc_forecast_dataset`
 * **New Data Source:** `awscc_forecast_datasets`
+* **New Data Source:** `awscc_kafkaconnect_connector`
+* **New Data Source:** `awscc_kafkaconnect_connectors`
+* **New Data Source:** `awscc_lightsail_certificate`
+* **New Data Source:** `awscc_lightsail_certificates`
+* **New Data Source:** `awscc_lightsail_container`
+* **New Data Source:** `awscc_lightsail_containers`
+* **New Data Source:** `awscc_lightsail_distribution`
+* **New Data Source:** `awscc_lightsail_distributions`
+* **New Data Source:** `awscc_rekognition_collection`
+* **New Data Source:** `awscc_rekognition_collections`
+* **New Data Source:** `awscc_route53_dnssecs`
+* **New Data Source:** `awscc_route53_key_signing_keys`
+* **New Data Source:** `awscc_route53recoveryreadiness_readiness_checks`
+* **New Data Source:** `awscc_servicecatalogappregistry_applications`
+* **New Data Source:** `awscc_servicecatalogappregistry_attribute_groups`
+* **New Resource:** `awscc_appintegrations_data_integration`
 * **New Resource:** `awscc_forecast_dataset`
+* **New Resource:** `awscc_kafkaconnect_connector`
+* **New Resource:** `awscc_lightsail_certificate`
+* **New Resource:** `awscc_lightsail_container`
+* **New Resource:** `awscc_lightsail_distribution`
+* **New Resource:** `awscc_rekognition_collection`
 
 BUG FIXES:
 

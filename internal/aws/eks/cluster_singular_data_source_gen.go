@@ -143,7 +143,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Kubernetes network configuration for the cluster.",
 			//   "properties": {
 			//     "IpFamily": {
-			//       "description": "Ipv4 or Ipv6, Ipv6 is only supported on cluster with k8s version 1.21",
+			//       "description": "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
 			//       "enum": [
 			//         "ipv4",
 			//         "ipv6"
@@ -166,7 +166,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"ip_family": {
 						// Property: IpFamily
-						Description: "Ipv4 or Ipv6, Ipv6 is only supported on cluster with k8s version 1.21",
+						Description: "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
 						Type:        types.StringType,
 						Computed:    true,
 					},
@@ -265,7 +265,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The unique name to give to your cluster.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
+			//   "pattern": "",
 			//   "type": "string"
 			// }
 			Description: "The unique name to give to your cluster.",
@@ -436,7 +436,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
-			//   "pattern": "1\\.\\d\\d",
+			//   "pattern": "",
 			//   "type": "string"
 			// }
 			Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",

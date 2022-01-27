@@ -158,6 +158,44 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 },
 			//                 "type": "array"
 			//               },
+			//               "HAClusterPrometheusExporter": {
+			//                 "additionalProperties": false,
+			//                 "description": "The HA cluster Prometheus Exporter settings.",
+			//                 "properties": {
+			//                   "PrometheusPort": {
+			//                     "description": "Prometheus exporter port.",
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "HANAPrometheusExporter": {
+			//                 "additionalProperties": false,
+			//                 "description": "The HANA DB Prometheus Exporter settings.",
+			//                 "properties": {
+			//                   "AgreeToInstallHANADBClient": {
+			//                     "description": "A flag which indicates agreeing to install SAP HANA DB client.",
+			//                     "type": "boolean"
+			//                   },
+			//                   "HANAPort": {
+			//                     "description": "The HANA DB port.",
+			//                     "type": "string"
+			//                   },
+			//                   "HANASID": {
+			//                     "description": "HANA DB SID.",
+			//                     "type": "string"
+			//                   },
+			//                   "HANASecretName": {
+			//                     "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
+			//                     "type": "string"
+			//                   },
+			//                   "PrometheusPort": {
+			//                     "description": "Prometheus exporter port.",
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
 			//               "JMXPrometheusExporter": {
 			//                 "additionalProperties": false,
 			//                 "description": "The JMX Prometheus Exporter settings.",
@@ -171,7 +209,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "string"
 			//                   },
 			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port",
+			//                     "description": "Prometheus exporter port.",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -501,6 +539,44 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 },
 			//                 "type": "array"
 			//               },
+			//               "HAClusterPrometheusExporter": {
+			//                 "additionalProperties": false,
+			//                 "description": "The HA cluster Prometheus Exporter settings.",
+			//                 "properties": {
+			//                   "PrometheusPort": {
+			//                     "description": "Prometheus exporter port.",
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "HANAPrometheusExporter": {
+			//                 "additionalProperties": false,
+			//                 "description": "The HANA DB Prometheus Exporter settings.",
+			//                 "properties": {
+			//                   "AgreeToInstallHANADBClient": {
+			//                     "description": "A flag which indicates agreeing to install SAP HANA DB client.",
+			//                     "type": "boolean"
+			//                   },
+			//                   "HANAPort": {
+			//                     "description": "The HANA DB port.",
+			//                     "type": "string"
+			//                   },
+			//                   "HANASID": {
+			//                     "description": "HANA DB SID.",
+			//                     "type": "string"
+			//                   },
+			//                   "HANASecretName": {
+			//                     "description": "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"\u003c\u003e\",\n  \"password\": \"\u003c\u003e\"\n}.",
+			//                     "type": "string"
+			//                   },
+			//                   "PrometheusPort": {
+			//                     "description": "Prometheus exporter port.",
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
 			//               "JMXPrometheusExporter": {
 			//                 "additionalProperties": false,
 			//                 "description": "The JMX Prometheus Exporter settings.",
@@ -514,7 +590,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "string"
 			//                   },
 			//                   "PrometheusPort": {
-			//                     "description": "Prometheus exporter port",
+			//                     "description": "Prometheus exporter port.",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -894,6 +970,60 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												),
 												Optional: true,
 											},
+											"ha_cluster_prometheus_exporter": {
+												// Property: HAClusterPrometheusExporter
+												Description: "The HA cluster Prometheus Exporter settings.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"prometheus_port": {
+															// Property: PrometheusPort
+															Description: "Prometheus exporter port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"hana_prometheus_exporter": {
+												// Property: HANAPrometheusExporter
+												Description: "The HANA DB Prometheus Exporter settings.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"agree_to_install_hanadb_client": {
+															// Property: AgreeToInstallHANADBClient
+															Description: "A flag which indicates agreeing to install SAP HANA DB client.",
+															Type:        types.BoolType,
+															Optional:    true,
+														},
+														"hana_port": {
+															// Property: HANAPort
+															Description: "The HANA DB port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"hanasid": {
+															// Property: HANASID
+															Description: "HANA DB SID.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"hana_secret_name": {
+															// Property: HANASecretName
+															Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"prometheus_port": {
+															// Property: PrometheusPort
+															Description: "Prometheus exporter port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+													},
+												),
+												Optional: true,
+											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
 												Description: "The JMX Prometheus Exporter settings.",
@@ -913,7 +1043,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort
-															Description: "Prometheus exporter port",
+															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
@@ -1255,6 +1385,60 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												),
 												Optional: true,
 											},
+											"ha_cluster_prometheus_exporter": {
+												// Property: HAClusterPrometheusExporter
+												Description: "The HA cluster Prometheus Exporter settings.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"prometheus_port": {
+															// Property: PrometheusPort
+															Description: "Prometheus exporter port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"hana_prometheus_exporter": {
+												// Property: HANAPrometheusExporter
+												Description: "The HANA DB Prometheus Exporter settings.",
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"agree_to_install_hanadb_client": {
+															// Property: AgreeToInstallHANADBClient
+															Description: "A flag which indicates agreeing to install SAP HANA DB client.",
+															Type:        types.BoolType,
+															Optional:    true,
+														},
+														"hana_port": {
+															// Property: HANAPort
+															Description: "The HANA DB port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"hanasid": {
+															// Property: HANASID
+															Description: "HANA DB SID.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"hana_secret_name": {
+															// Property: HANASecretName
+															Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+														"prometheus_port": {
+															// Property: PrometheusPort
+															Description: "Prometheus exporter port.",
+															Type:        types.StringType,
+															Optional:    true,
+														},
+													},
+												),
+												Optional: true,
+											},
 											"jmx_prometheus_exporter": {
 												// Property: JMXPrometheusExporter
 												Description: "The JMX Prometheus Exporter settings.",
@@ -1274,7 +1458,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort
-															Description: "Prometheus exporter port",
+															Description: "Prometheus exporter port.",
 															Type:        types.StringType,
 															Optional:    true,
 														},
@@ -1902,6 +2086,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agree_to_install_hanadb_client":            "AgreeToInstallHANADBClient",
 		"alarm_metric_name":                         "AlarmMetricName",
 		"alarm_metrics":                             "AlarmMetrics",
 		"alarm_name":                                "AlarmName",
@@ -1920,6 +2105,11 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encoding":                                  "Encoding",
 		"event_levels":                              "EventLevels",
 		"event_name":                                "EventName",
+		"ha_cluster_prometheus_exporter":            "HAClusterPrometheusExporter",
+		"hana_port":                                 "HANAPort",
+		"hana_prometheus_exporter":                  "HANAPrometheusExporter",
+		"hana_secret_name":                          "HANASecretName",
+		"hanasid":                                   "HANASID",
 		"host_port":                                 "HostPort",
 		"jmx_prometheus_exporter":                   "JMXPrometheusExporter",
 		"jmxurl":                                    "JMXURL",

@@ -5,8 +5,7 @@
         "PricingPlan": {
             "type": "string",
             "enum": [
-                "RequestBasedUsage",
-                "MobileAssetManagement"
+                "RequestBasedUsage"
             ]
         },
         "iso8601UTC": {
@@ -64,8 +63,7 @@
     ],
     "required": [
         "CalculatorName",
-        "DataSource",
-        "PricingPlan"
+        "DataSource"
     ],
     "primaryIdentifier": [
         "/properties/CalculatorName"

@@ -71,6 +71,7 @@ Optional:
 Optional:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -88,6 +89,7 @@ Optional:
 Optional:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -116,6 +118,7 @@ Optional:
 Optional:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -136,6 +139,7 @@ Optional:
 Optional:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 
@@ -173,6 +177,7 @@ Optional:
 Optional:
 
 - **bucket** (String)
+- **bucket_owner** (String)
 - **key** (String)
 
 

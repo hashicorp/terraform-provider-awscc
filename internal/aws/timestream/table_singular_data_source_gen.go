@@ -40,6 +40,112 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"magnetic_store_write_properties": {
+			// Property: MagneticStoreWriteProperties
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "The properties that determine whether magnetic store writes are enabled.",
+			//   "properties": {
+			//     "EnableMagneticStoreWrites": {
+			//       "description": "Boolean flag indicating whether magnetic store writes are enabled.",
+			//       "type": "boolean"
+			//     },
+			//     "MagneticStoreRejectedDataLocation": {
+			//       "additionalProperties": false,
+			//       "description": "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+			//       "properties": {
+			//         "S3Configuration": {
+			//           "additionalProperties": false,
+			//           "description": "S3 configuration for location to store rejections from magnetic store writes",
+			//           "properties": {
+			//             "BucketName": {
+			//               "description": "The bucket name used to store the data.",
+			//               "type": "string"
+			//             },
+			//             "EncryptionOption": {
+			//               "description": "Either SSE_KMS or SSE_S3.",
+			//               "type": "string"
+			//             },
+			//             "KmsKeyId": {
+			//               "description": "Must be provided if SSE_KMS is specified as the encryption option",
+			//               "type": "string"
+			//             },
+			//             "ObjectKeyPrefix": {
+			//               "description": "String used to prefix all data in the bucket.",
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "EncryptionOption",
+			//             "BucketName"
+			//           ],
+			//           "type": "object"
+			//         }
+			//       },
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "EnableMagneticStoreWrites"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "The properties that determine whether magnetic store writes are enabled.",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"enable_magnetic_store_writes": {
+						// Property: EnableMagneticStoreWrites
+						Description: "Boolean flag indicating whether magnetic store writes are enabled.",
+						Type:        types.BoolType,
+						Computed:    true,
+					},
+					"magnetic_store_rejected_data_location": {
+						// Property: MagneticStoreRejectedDataLocation
+						Description: "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"s3_configuration": {
+									// Property: S3Configuration
+									Description: "S3 configuration for location to store rejections from magnetic store writes",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"bucket_name": {
+												// Property: BucketName
+												Description: "The bucket name used to store the data.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+											"encryption_option": {
+												// Property: EncryptionOption
+												Description: "Either SSE_KMS or SSE_S3.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+											"kms_key_id": {
+												// Property: KmsKeyId
+												Description: "Must be provided if SSE_KMS is specified as the encryption option",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+											"object_key_prefix": {
+												// Property: ObjectKeyPrefix
+												Description: "String used to prefix all data in the bucket.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+										},
+									),
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"name": {
 			// Property: Name
 			// CloudFormation resource type schema:
@@ -163,13 +269,21 @@ func tableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Table").WithTerraformTypeName("awscc_timestream_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"database_name": "DatabaseName",
-		"key":           "Key",
+		"arn":                                   "Arn",
+		"bucket_name":                           "BucketName",
+		"database_name":                         "DatabaseName",
+		"enable_magnetic_store_writes":          "EnableMagneticStoreWrites",
+		"encryption_option":                     "EncryptionOption",
+		"key":                                   "Key",
+		"kms_key_id":                            "KmsKeyId",
+		"magnetic_store_rejected_data_location": "MagneticStoreRejectedDataLocation",
 		"magnetic_store_retention_period_in_days": "MagneticStoreRetentionPeriodInDays",
+		"magnetic_store_write_properties":         "MagneticStoreWriteProperties",
 		"memory_store_retention_period_in_hours":  "MemoryStoreRetentionPeriodInHours",
 		"name":                                    "Name",
+		"object_key_prefix":                       "ObjectKeyPrefix",
 		"retention_properties":                    "RetentionProperties",
+		"s3_configuration":                        "S3Configuration",
 		"table_name":                              "TableName",
 		"tags":                                    "Tags",
 		"value":                                   "Value",

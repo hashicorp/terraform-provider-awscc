@@ -20,9 +20,7 @@
         "PricingPlan": {
             "type": "string",
             "enum": [
-                "RequestBasedUsage",
-                "MobileAssetTracking",
-                "MobileAssetManagement"
+                "RequestBasedUsage"
             ]
         },
         "iso8601UTC": {
@@ -84,8 +82,7 @@
     ],
     "required" : [
         "MapName",
-        "Configuration",
-        "PricingPlan"
+        "Configuration"
     ],
     "primaryIdentifier": [
         "/properties/MapName"

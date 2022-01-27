@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 475 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 481 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -157,6 +157,10 @@ resource_schema "aws_appflow_flow" {
   cloudformation_type_name = "AWS::AppFlow::Flow"
 }
 
+resource_schema "aws_appintegrations_data_integration" {
+  cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
+}
+
 resource_schema "aws_appintegrations_event_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::EventIntegration"
 }
@@ -205,8 +209,7 @@ resource_schema "aws_applicationinsights_application" {
 }
 
 resource_schema "aws_athena_data_catalog" {
-  cloudformation_type_name               = "AWS::Athena::DataCatalog"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Athena::DataCatalog"
 }
 
 resource_schema "aws_athena_named_query" {
@@ -303,8 +306,7 @@ resource_schema "aws_chatbot_slack_channel_configuration" {
 }
 
 resource_schema "aws_cloudformation_module_default_version" {
-  cloudformation_type_name               = "AWS::CloudFormation::ModuleDefaultVersion"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::CloudFormation::ModuleDefaultVersion"
 }
 
 resource_schema "aws_cloudformation_module_version" {
@@ -923,7 +925,8 @@ resource_schema "aws_frauddetector_entity_type" {
 }
 
 resource_schema "aws_frauddetector_event_type" {
-  cloudformation_type_name = "AWS::FraudDetector::EventType"
+  cloudformation_type_name               = "AWS::FraudDetector::EventType"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_frauddetector_label" {
@@ -1178,8 +1181,7 @@ resource_schema "aws_iotanalytics_pipeline" {
 }
 
 resource_schema "aws_iotcoredeviceadvisor_suite_definition" {
-  cloudformation_type_name               = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::IoTCoreDeviceAdvisor::SuiteDefinition"
 }
 
 resource_schema "aws_iotevents_detector_model" {
@@ -1274,6 +1276,10 @@ resource_schema "aws_kms_replica_key" {
   cloudformation_type_name = "AWS::KMS::ReplicaKey"
 }
 
+resource_schema "aws_kafkaconnect_connector" {
+  cloudformation_type_name = "AWS::KafkaConnect::Connector"
+}
+
 resource_schema "aws_kendra_data_source" {
   cloudformation_type_name               = "AWS::Kendra::DataSource"
   suppress_plural_data_source_generation = true
@@ -1353,12 +1359,24 @@ resource_schema "aws_lightsail_bucket" {
   cloudformation_type_name = "AWS::Lightsail::Bucket"
 }
 
+resource_schema "aws_lightsail_certificate" {
+  cloudformation_type_name = "AWS::Lightsail::Certificate"
+}
+
+resource_schema "aws_lightsail_container" {
+  cloudformation_type_name = "AWS::Lightsail::Container"
+}
+
 resource_schema "aws_lightsail_database" {
   cloudformation_type_name = "AWS::Lightsail::Database"
 }
 
 resource_schema "aws_lightsail_disk" {
   cloudformation_type_name = "AWS::Lightsail::Disk"
+}
+
+resource_schema "aws_lightsail_distribution" {
+  cloudformation_type_name = "AWS::Lightsail::Distribution"
 }
 
 resource_schema "aws_lightsail_instance" {
@@ -1726,6 +1744,10 @@ resource_schema "aws_refactorspaces_service" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_rekognition_collection" {
+  cloudformation_type_name = "AWS::Rekognition::Collection"
+}
+
 resource_schema "aws_rekognition_project" {
   cloudformation_type_name = "AWS::Rekognition::Project"
 }
@@ -1765,8 +1787,7 @@ resource_schema "aws_robomaker_simulation_application_version" {
 }
 
 resource_schema "aws_route53_dnssec" {
-  cloudformation_type_name               = "AWS::Route53::DNSSEC"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53::DNSSEC"
 }
 
 resource_schema "aws_route53_health_check" {
@@ -1778,8 +1799,7 @@ resource_schema "aws_route53_hosted_zone" {
 }
 
 resource_schema "aws_route53_key_signing_key" {
-  cloudformation_type_name               = "AWS::Route53::KeySigningKey"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53::KeySigningKey"
 }
 
 resource_schema "aws_route53recoverycontrol_cluster" {
@@ -1805,8 +1825,7 @@ resource_schema "aws_route53recoveryreadiness_cell" {
 }
 
 resource_schema "aws_route53recoveryreadiness_readiness_check" {
-  cloudformation_type_name               = "AWS::Route53RecoveryReadiness::ReadinessCheck"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53RecoveryReadiness::ReadinessCheck"
 }
 
 resource_schema "aws_route53recoveryreadiness_recovery_group" {
@@ -2055,13 +2074,11 @@ resource_schema "aws_servicecatalog_service_action_association" {
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {
-  cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::Application"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::Application"
 }
 
 resource_schema "aws_servicecatalogappregistry_attribute_group" {
-  cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::AttributeGroup"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::ServiceCatalogAppRegistry::AttributeGroup"
 }
 
 resource_schema "aws_servicecatalogappregistry_attribute_group_association" {

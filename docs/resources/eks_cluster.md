@@ -73,7 +73,7 @@ Optional:
 
 Optional:
 
-- **ip_family** (String) Ipv4 or Ipv6, Ipv6 is only supported on cluster with k8s version 1.21
+- **ip_family** (String) Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on
 - **service_ipv_4_cidr** (String) The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC.
 - **service_ipv_6_cidr** (String) The CIDR block to assign Kubernetes service IP addresses from.
 

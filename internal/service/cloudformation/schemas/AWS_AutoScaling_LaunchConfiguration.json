@@ -106,7 +106,6 @@
       "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
       "type": "array",
       "insertionOrder": false,
-      "uniqueItems": true,
       "items": {
         "type": "string"
       }
@@ -165,7 +164,6 @@
       "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
       "type": "array",
       "insertionOrder": false,
-      "uniqueItems": true,
       "items": {
         "type": "string"
       }

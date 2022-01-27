@@ -117,20 +117,20 @@ func routeCalculatorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "enum": [
-			//     "RequestBasedUsage",
-			//     "MobileAssetManagement"
+			//     "RequestBasedUsage"
 			//   ],
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"RequestBasedUsage",
-					"MobileAssetManagement",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

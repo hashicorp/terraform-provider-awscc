@@ -5,9 +5,7 @@
         "PricingPlan": {
             "type": "string",
             "enum": [
-                "RequestBasedUsage",
-                "MobileAssetTracking",
-                "MobileAssetManagement"
+                "RequestBasedUsage"
             ]
         },
         "iso8601UTC": {
@@ -82,7 +80,6 @@
         "/properties/PositionFiltering"
     ],
     "required" : [
-        "PricingPlan",
         "TrackerName"
     ],
     "primaryIdentifier": [

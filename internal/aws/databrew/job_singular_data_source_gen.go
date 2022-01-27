@@ -52,6 +52,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "Bucket": {
 			//                 "type": "string"
 			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
+			//                 "type": "string"
+			//               },
 			//               "Key": {
 			//                 "type": "string"
 			//               }
@@ -78,6 +83,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "description": "S3 Output location",
 			//             "properties": {
 			//               "Bucket": {
+			//                 "type": "string"
+			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
 			//                 "type": "string"
 			//               },
 			//               "Key": {
@@ -140,6 +150,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 												Type:     types.StringType,
 												Computed: true,
 											},
+											"bucket_owner": {
+												// Property: BucketOwner
+												Type:     types.StringType,
+												Computed: true,
+											},
 											"key": {
 												// Property: Key
 												Type:     types.StringType,
@@ -169,6 +184,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"bucket_owner": {
+												// Property: BucketOwner
 												Type:     types.StringType,
 												Computed: true,
 											},
@@ -216,6 +236,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "description": "S3 Output location",
 			//             "properties": {
 			//               "Bucket": {
+			//                 "type": "string"
+			//               },
+			//               "BucketOwner": {
+			//                 "maxLength": 12,
+			//                 "minLength": 12,
 			//                 "type": "string"
 			//               },
 			//               "Key": {
@@ -271,6 +296,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 										map[string]tfsdk.Attribute{
 											"bucket": {
 												// Property: Bucket
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"bucket_owner": {
+												// Property: BucketOwner
 												Type:     types.StringType,
 												Computed: true,
 											},
@@ -447,6 +477,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "Bucket": {
 			//       "type": "string"
 			//     },
+			//     "BucketOwner": {
+			//       "maxLength": 12,
+			//       "minLength": 12,
+			//       "type": "string"
+			//     },
 			//     "Key": {
 			//       "type": "string"
 			//     }
@@ -461,6 +496,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"bucket": {
 						// Property: Bucket
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"bucket_owner": {
+						// Property: BucketOwner
 						Type:     types.StringType,
 						Computed: true,
 					},
@@ -534,6 +574,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "Bucket": {
 			//             "type": "string"
 			//           },
+			//           "BucketOwner": {
+			//             "maxLength": 12,
+			//             "minLength": 12,
+			//             "type": "string"
+			//           },
 			//           "Key": {
 			//             "type": "string"
 			//           }
@@ -604,6 +649,11 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 							map[string]tfsdk.Attribute{
 								"bucket": {
 									// Property: Bucket
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"bucket_owner": {
+									// Property: BucketOwner
 									Type:     types.StringType,
 									Computed: true,
 								},
@@ -1182,6 +1232,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_statistics":               "AllowedStatistics",
 		"bucket":                           "Bucket",
+		"bucket_owner":                     "BucketOwner",
 		"catalog_id":                       "CatalogId",
 		"column_statistics_configurations": "ColumnStatisticsConfigurations",
 		"compression_format":               "CompressionFormat",

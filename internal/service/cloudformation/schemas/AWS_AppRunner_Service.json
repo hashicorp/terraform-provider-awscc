@@ -1,7 +1,7 @@
 {
     "typeName": "AWS::AppRunner::Service",
     "description": "The AWS::AppRunner::Service resource specifies an AppRunner Service.",
-    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-fusion.git",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apprunner.git",
     "definitions": {
         "SourceConfiguration": {
             "description": "Source Code configuration",
@@ -359,6 +359,13 @@
             "maxLength": 1011,
             "pattern": ""
         }
+    },
+    "tagging": {
+        "taggable": true,
+        "tagOnCreate": true,
+        "tagUpdatable": false,
+        "cloudFormationSystemTags": false,
+        "tagProperty": "/properties/Tags"
     },
     "required": [
         "SourceConfiguration"

@@ -19,11 +19,11 @@ Definition of AWS::Location::Map Resource Type
 
 - **configuration** (Attributes) (see [below for nested schema](#nestedatt--configuration))
 - **map_name** (String)
-- **pricing_plan** (String)
 
 ### Optional
 
 - **description** (String)
+- **pricing_plan** (String)
 
 ### Read-Only
 

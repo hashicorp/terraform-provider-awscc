@@ -5,9 +5,7 @@
         "PricingPlan": {
             "type": "string",
             "enum": [
-                "RequestBasedUsage",
-                "MobileAssetTracking",
-                "MobileAssetManagement"
+                "RequestBasedUsage"
             ]
         },
         "iso8601UTC": {
@@ -69,8 +67,7 @@
         "/properties/CollectionName"
     ],
     "required" : [
-        "CollectionName",
-        "PricingPlan"
+        "CollectionName"
     ],
     "primaryIdentifier": [
         "/properties/CollectionName"

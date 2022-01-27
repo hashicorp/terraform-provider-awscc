@@ -23,10 +23,39 @@ Data Source schema for AWS::Timestream::Table
 
 - **arn** (String)
 - **database_name** (String) The name for the database which the table to be created belongs to.
+- **magnetic_store_write_properties** (Attributes) The properties that determine whether magnetic store writes are enabled. (see [below for nested schema](#nestedatt--magnetic_store_write_properties))
 - **name** (String) The table name exposed as a read-only attribute.
 - **retention_properties** (Attributes) The retention duration of the memory store and the magnetic store. (see [below for nested schema](#nestedatt--retention_properties))
 - **table_name** (String) The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.
 - **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--magnetic_store_write_properties"></a>
+### Nested Schema for `magnetic_store_write_properties`
+
+Read-Only:
+
+- **enable_magnetic_store_writes** (Boolean) Boolean flag indicating whether magnetic store writes are enabled.
+- **magnetic_store_rejected_data_location** (Attributes) Location to store information about records that were asynchronously rejected during magnetic store writes. (see [below for nested schema](#nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location))
+
+<a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location"></a>
+### Nested Schema for `magnetic_store_write_properties.magnetic_store_rejected_data_location`
+
+Read-Only:
+
+- **s3_configuration** (Attributes) S3 configuration for location to store rejections from magnetic store writes (see [below for nested schema](#nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location--s3_configuration))
+
+<a id="nestedatt--magnetic_store_write_properties--magnetic_store_rejected_data_location--s3_configuration"></a>
+### Nested Schema for `magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration`
+
+Read-Only:
+
+- **bucket_name** (String) The bucket name used to store the data.
+- **encryption_option** (String) Either SSE_KMS or SSE_S3.
+- **kms_key_id** (String) Must be provided if SSE_KMS is specified as the encryption option
+- **object_key_prefix** (String) String used to prefix all data in the bucket.
+
+
+
 
 <a id="nestedatt--retention_properties"></a>
 ### Nested Schema for `retention_properties`

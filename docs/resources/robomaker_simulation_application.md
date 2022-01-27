@@ -17,7 +17,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **robot_software_suite** (Attributes) The robot software suite (ROS distribution) used by the simulation application. (see [below for nested schema](#nestedatt--robot_software_suite))
+- **robot_software_suite** (Attributes) The robot software suite used by the simulation application. (see [below for nested schema](#nestedatt--robot_software_suite))
 - **simulation_software_suite** (Attributes) The simulation software suite used by the simulation application. (see [below for nested schema](#nestedatt--simulation_software_suite))
 
 ### Optional
@@ -39,8 +39,8 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 Required:
 
-- **name** (String) The name of the robot software suite (ROS distribution).
-- **version** (String) The version of the robot software suite (ROS distribution).
+- **name** (String) The name of the robot software suite.
+- **version** (String) The version of the robot software suite.
 
 
 <a id="nestedatt--simulation_software_suite"></a>
