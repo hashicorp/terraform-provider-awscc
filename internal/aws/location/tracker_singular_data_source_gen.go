@@ -83,9 +83,7 @@ func trackerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "enum": [
-			//     "RequestBasedUsage",
-			//     "MobileAssetTracking",
-			//     "MobileAssetManagement"
+			//     "RequestBasedUsage"
 			//   ],
 			//   "type": "string"
 			// }

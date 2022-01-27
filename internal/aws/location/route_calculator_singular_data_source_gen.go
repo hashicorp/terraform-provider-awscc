@@ -90,8 +90,7 @@ func routeCalculatorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "enum": [
-			//     "RequestBasedUsage",
-			//     "MobileAssetManagement"
+			//     "RequestBasedUsage"
 			//   ],
 			//   "type": "string"
 			// }

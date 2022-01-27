@@ -193,11 +193,10 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "items": {
 			//     "type": "string"
 			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
+			//   "type": "array"
 			// }
 			Description: "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			Type:        types.SetType{ElemType: types.StringType},
+			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
 		"ebs_optimized": {
@@ -379,11 +378,10 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "items": {
 			//     "type": "string"
 			//   },
-			//   "type": "array",
-			//   "uniqueItems": true
+			//   "type": "array"
 			// }
 			Description: "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			Type:        types.SetType{ElemType: types.StringType},
+			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
 		},
 		"spot_price": {

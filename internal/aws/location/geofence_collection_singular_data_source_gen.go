@@ -92,9 +92,7 @@ func geofenceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "enum": [
-			//     "RequestBasedUsage",
-			//     "MobileAssetTracking",
-			//     "MobileAssetManagement"
+			//     "RequestBasedUsage"
 			//   ],
 			//   "type": "string"
 			// }
