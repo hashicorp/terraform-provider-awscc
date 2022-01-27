@@ -132,18 +132,19 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "additionalProperties": false,
-			//   "description": "The robot software suite (ROS distribution) used by the simulation application.",
+			//   "description": "The robot software suite used by the simulation application.",
 			//   "properties": {
 			//     "Name": {
-			//       "description": "The name of the robot software suite (ROS distribution).",
+			//       "description": "The name of the robot software suite.",
 			//       "enum": [
 			//         "ROS",
-			//         "ROS2"
+			//         "ROS2",
+			//         "General"
 			//       ],
 			//       "type": "string"
 			//     },
 			//     "Version": {
-			//       "description": "The version of the robot software suite (ROS distribution).",
+			//       "description": "The version of the robot software suite.",
 			//       "enum": [
 			//         "Kinetic",
 			//         "Melodic",
@@ -154,31 +155,31 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//     }
 			//   },
 			//   "required": [
-			//     "Name",
-			//     "Version"
+			//     "Name"
 			//   ],
 			//   "type": "object"
 			// }
-			Description: "The robot software suite (ROS distribution) used by the simulation application.",
+			Description: "The robot software suite used by the simulation application.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
 					"name": {
 						// Property: Name
-						Description: "The name of the robot software suite (ROS distribution).",
+						Description: "The name of the robot software suite.",
 						Type:        types.StringType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"ROS",
 								"ROS2",
+								"General",
 							}),
 						},
 					},
 					"version": {
 						// Property: Version
-						Description: "The version of the robot software suite (ROS distribution).",
+						Description: "The version of the robot software suite.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"Kinetic",
@@ -203,7 +204,8 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//       "description": "The name of the simulation software suite.",
 			//       "enum": [
 			//         "Gazebo",
-			//         "RosbagPlay"
+			//         "RosbagPlay",
+			//         "SimulationRuntime"
 			//       ],
 			//       "type": "string"
 			//     },
@@ -222,8 +224,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//     }
 			//   },
 			//   "required": [
-			//     "Name",
-			//     "Version"
+			//     "Name"
 			//   ],
 			//   "type": "object"
 			// }
@@ -239,6 +240,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 							validate.StringInSlice([]string{
 								"Gazebo",
 								"RosbagPlay",
+								"SimulationRuntime",
 							}),
 						},
 					},
@@ -246,7 +248,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						// Property: Version
 						Description: "The version of the simulation software suite.",
 						Type:        types.StringType,
-						Required:    true,
+						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringInSlice([]string{
 								"7",

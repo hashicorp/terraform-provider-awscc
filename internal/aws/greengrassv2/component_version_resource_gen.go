@@ -112,6 +112,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//           "type": "object"
 			//         },
 			//         "EventSources": {
+			//           "insertionOrder": false,
 			//           "items": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -131,6 +132,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//           "type": "array"
 			//         },
 			//         "ExecArgs": {
+			//           "insertionOrder": true,
 			//           "items": {
 			//             "type": "string"
 			//           },
@@ -150,6 +152,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "additionalProperties": false,
 			//               "properties": {
 			//                 "Devices": {
+			//                   "insertionOrder": false,
 			//                   "items": {
 			//                     "additionalProperties": false,
 			//                     "properties": {
@@ -178,6 +181,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//                   "type": "boolean"
 			//                 },
 			//                 "Volumes": {
+			//                   "insertionOrder": false,
 			//                   "items": {
 			//                     "additionalProperties": false,
 			//                     "properties": {
@@ -240,6 +244,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       "type": "string"
 			//     },
 			//     "ComponentPlatforms": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -332,6 +337,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										Multiset(),
+									},
 								},
 								"exec_args": {
 									// Property: ExecArgs
@@ -386,6 +394,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 														"memory_size_in_kb": {
 															// Property: MemorySizeInKB
@@ -431,6 +442,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 																tfsdk.ListNestedAttributesOptions{},
 															),
 															Optional: true,
+															PlanModifiers: []tfsdk.AttributePlanModifier{
+																Multiset(),
+															},
 														},
 													},
 												),
@@ -509,6 +523,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						PlanModifiers: []tfsdk.AttributePlanModifier{
+							Multiset(),
+						},
 					},
 					"component_version": {
 						// Property: ComponentVersion
