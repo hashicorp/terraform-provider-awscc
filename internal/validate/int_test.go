@@ -46,34 +46,66 @@ func TestIntBetweenValidator(t *testing.T) {
 			max:         3,
 			expectError: true,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 1,
 			max: 3,
 		},
-		"valid integer min": {
+		"valid integer as Int64": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.Int64Type.ValueFromTerraform,
+			min: 1,
+			max: 3,
+		},
+		"valid integer as Number min": {
 			val: tftypes.NewValue(tftypes.Number, 1),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 1,
 			max: 3,
 		},
-		"valid integer max": {
+		"valid integer as Int64 min": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.Int64Type.ValueFromTerraform,
+			min: 1,
+			max: 3,
+		},
+		"valid integer as Number max": {
 			val: tftypes.NewValue(tftypes.Number, 3),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 1,
 			max: 3,
 		},
-		"too small integer": {
+		"valid integer as Int64 max": {
+			val: tftypes.NewValue(tftypes.Number, 3),
+			f:   types.Int64Type.ValueFromTerraform,
+			min: 1,
+			max: 3,
+		},
+		"too small integer as Number": {
 			val:         tftypes.NewValue(tftypes.Number, -1),
 			f:           types.NumberType.ValueFromTerraform,
 			min:         1,
 			max:         3,
 			expectError: true,
 		},
-		"too large integer": {
+		"too small integer as Int64": {
+			val:         tftypes.NewValue(tftypes.Number, -1),
+			f:           types.Int64Type.ValueFromTerraform,
+			min:         1,
+			max:         3,
+			expectError: true,
+		},
+		"too large integer as Number": {
 			val:         tftypes.NewValue(tftypes.Number, 42),
 			f:           types.NumberType.ValueFromTerraform,
+			min:         1,
+			max:         3,
+			expectError: true,
+		},
+		"too large integer as Int64": {
+			val:         tftypes.NewValue(tftypes.Number, 42),
+			f:           types.Int64Type.ValueFromTerraform,
 			min:         1,
 			max:         3,
 			expectError: true,
@@ -139,17 +171,27 @@ func TestIntAtLeastValidator(t *testing.T) {
 			min:         1,
 			expectError: true,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 1,
 		},
-		"valid integer min": {
+		"valid integer as Int64": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.Int64Type.ValueFromTerraform,
+			min: 1,
+		},
+		"valid integer as Number min": {
 			val: tftypes.NewValue(tftypes.Number, 1),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 1,
 		},
-		"too small integer": {
+		"valid integer as Int64 min": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.Int64Type.ValueFromTerraform,
+			min: 1,
+		},
+		"too small integer as Number": {
 			val:         tftypes.NewValue(tftypes.Number, -1),
 			f:           types.NumberType.ValueFromTerraform,
 			min:         1,
@@ -216,17 +258,27 @@ func TestIntAtMostValidator(t *testing.T) {
 			max:         2,
 			expectError: true,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 1),
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2,
 		},
-		"valid integer min": {
+		"valid integer as Int64": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.Int64Type.ValueFromTerraform,
+			max: 2,
+		},
+		"valid integer as Number min": {
 			val: tftypes.NewValue(tftypes.Number, 2),
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2,
 		},
-		"too large integer": {
+		"valid integer as Int64 min": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.Int64Type.ValueFromTerraform,
+			max: 2,
+		},
+		"too large integer as Number": {
 			val:         tftypes.NewValue(tftypes.Number, 4),
 			f:           types.NumberType.ValueFromTerraform,
 			max:         2,
@@ -290,12 +342,17 @@ func TestIntInSliceValidator(t *testing.T) {
 			f:           types.NumberType.ValueFromTerraform,
 			expectError: true,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val:   tftypes.NewValue(tftypes.Number, 2),
 			f:     types.NumberType.ValueFromTerraform,
 			valid: []int{-1, 2, 42},
 		},
-		"invalid integer": {
+		"valid integer as Int64": {
+			val:   tftypes.NewValue(tftypes.Number, 2),
+			f:     types.Int64Type.ValueFromTerraform,
+			valid: []int{-1, 2, 42},
+		},
+		"invalid integer as Number": {
 			val:         tftypes.NewValue(tftypes.Number, 1),
 			f:           types.NumberType.ValueFromTerraform,
 			valid:       []int{-1, 2, 42},

@@ -196,9 +196,34 @@ func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
 }
 
 func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
-	n, ok := request.AttributeConfig.(types.Number)
+	switch n := request.AttributeConfig.(type) {
+	case types.Int64:
+		if n.Unknown || n.Null {
+			return 0, false
+		}
 
-	if !ok {
+		return n.Value, true
+
+	case types.Number:
+		if n.Unknown || n.Null {
+			return 0, false
+		}
+
+		val := n.Value
+
+		if !val.IsInt() {
+			response.Diagnostics.Append(newNotAnIntegerValueError(
+				request.AttributePath,
+			))
+
+			return 0, false
+		}
+
+		i, _ := val.Int64()
+
+		return i, true
+
+	default:
 		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
@@ -206,22 +231,4 @@ func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.Validat
 
 		return 0, false
 	}
-
-	if n.Unknown || n.Null {
-		return 0, false
-	}
-
-	val := n.Value
-
-	if !val.IsInt() {
-		response.Diagnostics.Append(newNotAnIntegerValueError(
-			request.AttributePath,
-		))
-
-		return 0, false
-	}
-
-	i, _ := val.Int64()
-
-	return i, true
 }
