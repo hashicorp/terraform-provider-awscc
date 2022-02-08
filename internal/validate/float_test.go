@@ -39,38 +39,62 @@ func TestFloatBetweenValidator(t *testing.T) {
 			min: 0.90,
 			max: 3.10,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 			max: 3.10,
 		},
-		"valid float": {
+		"valid integer as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+			max: 3.10,
+		},
+		"valid float as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2.2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 			max: 3.10,
 		},
-		"valid float min": {
+		"valid float as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 2.2),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+			max: 3.10,
+		},
+		"valid float as Number min": {
 			val: tftypes.NewValue(tftypes.Number, 0.9),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 			max: 3.10,
 		},
-		"valid float max": {
+		"valid float as Float64 min": {
+			val: tftypes.NewValue(tftypes.Number, 0.9),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+			max: 3.10,
+		},
+		"valid float as Number max": {
 			val: tftypes.NewValue(tftypes.Number, 3.10),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 			max: 3.10,
 		},
-		"too small float": {
+		"valid float as Float64 max": {
+			val: tftypes.NewValue(tftypes.Number, 3.10),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+			max: 3.10,
+		},
+		"too small float as Number": {
 			val:         tftypes.NewValue(tftypes.Number, -1.1111),
 			f:           types.NumberType.ValueFromTerraform,
 			min:         0.90,
 			max:         3.10,
 			expectError: true,
 		},
-		"too large float": {
+		"too large float as Number": {
 			val:         tftypes.NewValue(tftypes.Number, 4.2),
 			f:           types.NumberType.ValueFromTerraform,
 			min:         0.90,
@@ -132,22 +156,37 @@ func TestFloatAtLeastValidator(t *testing.T) {
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 		},
-		"valid float": {
+		"valid integer as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 2),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+		},
+		"valid float as Number": {
 			val: tftypes.NewValue(tftypes.Number, 2.2),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 		},
-		"valid float min": {
+		"valid float as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 2.2),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+		},
+		"valid float as Number min": {
 			val: tftypes.NewValue(tftypes.Number, 0.9),
 			f:   types.NumberType.ValueFromTerraform,
 			min: 0.90,
 		},
-		"too small float": {
+		"valid float as Float64 min": {
+			val: tftypes.NewValue(tftypes.Number, 0.9),
+			f:   types.Float64Type.ValueFromTerraform,
+			min: 0.90,
+		},
+		"too small float as Number": {
 			val:         tftypes.NewValue(tftypes.Number, -1.1111),
 			f:           types.NumberType.ValueFromTerraform,
 			min:         0.90,
@@ -208,22 +247,37 @@ func TestFloatAtMostValidator(t *testing.T) {
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2.00,
 		},
-		"valid integer": {
+		"valid integer as Number": {
 			val: tftypes.NewValue(tftypes.Number, 1),
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2.00,
 		},
-		"valid float": {
+		"valid integer as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 1),
+			f:   types.Float64Type.ValueFromTerraform,
+			max: 2.00,
+		},
+		"valid float as Number": {
 			val: tftypes.NewValue(tftypes.Number, 1.1),
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2.00,
 		},
-		"valid float max": {
+		"valid float as Float64": {
+			val: tftypes.NewValue(tftypes.Number, 1.1),
+			f:   types.Float64Type.ValueFromTerraform,
+			max: 2.00,
+		},
+		"valid float as Number max": {
 			val: tftypes.NewValue(tftypes.Number, 2.00),
 			f:   types.NumberType.ValueFromTerraform,
 			max: 2.00,
 		},
-		"too large float": {
+		"valid float as Float64 max": {
+			val: tftypes.NewValue(tftypes.Number, 2.00),
+			f:   types.Float64Type.ValueFromTerraform,
+			max: 2.00,
+		},
+		"too large float as Number": {
 			val:         tftypes.NewValue(tftypes.Number, 3.00),
 			f:           types.NumberType.ValueFromTerraform,
 			max:         2.00,
