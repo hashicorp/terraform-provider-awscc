@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -113,7 +114,6 @@ package {{ .PackageName }}
 
 import (
 	"context"
-	{{ if .ImportMathBig }}"math/big"{{- end }}
 
 	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"

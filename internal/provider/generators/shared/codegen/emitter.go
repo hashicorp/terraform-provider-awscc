@@ -19,7 +19,6 @@ const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
 	HasRequiredRootProperty                      // At least one root property is required.
 	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
-	UsesMathBig                                  // Uses a type from the math/big package.
 	UsesValidation                               // Uses a type from the internal/validate package.
 	HasIDRootProperty                            // Has a root property named "id"
 )
@@ -132,7 +131,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		e.printf("Type:types.BoolType,\n")
 
 	case cfschema.PropertyTypeInteger:
-		e.printf("Type:types.NumberType,\n")
+		e.printf("Type:types.Int64Type,\n")
 
 		if v, err := integerValidators(path, property); err != nil {
 			return 0, err
@@ -141,7 +140,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 
 	case cfschema.PropertyTypeNumber:
-		e.printf("Type:types.NumberType,\n")
+		e.printf("Type:types.Float64Type,\n")
 
 		if v, err := numberValidators(path, property); err != nil {
 			return 0, err
@@ -176,11 +175,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger:
-				elementType = "types.NumberType" //nolint:goconst
+				elementType = "types.Int64Type" //nolint:goconst
 				validatorsGenerator = integerValidators
 
 			case cfschema.PropertyTypeNumber:
-				elementType = "types.NumberType"
+				elementType = "types.Float64Type"
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
@@ -265,11 +264,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger:
-				elementType = "types.NumberType"
+				elementType = "types.Int64Type"
 				validatorsGenerator = integerValidators
 
 			case cfschema.PropertyTypeNumber:
-				elementType = "types.NumberType"
+				elementType = "types.Float64Type"
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
@@ -395,8 +394,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			case cfschema.PropertyTypeBoolean:
 				e.printf("Type:types.MapType{ElemType:types.BoolType},\n")
 
-			case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-				e.printf("Type:types.MapType{ElemType:types.NumberType},\n")
+			case cfschema.PropertyTypeInteger:
+				e.printf("Type:types.MapType{ElemType:types.Int64Type},\n")
+
+			case cfschema.PropertyTypeNumber:
+				e.printf("Type:types.MapType{ElemType:types.Float64Type},\n")
 
 			case cfschema.PropertyTypeString:
 				e.printf("Type:types.MapType{ElemType:types.StringType},\n")
@@ -410,8 +412,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					case cfschema.PropertyTypeBoolean:
 						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
 
-					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.NumberType}},\n")
+					case cfschema.PropertyTypeInteger:
+						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.Int64Type}},\n")
+
+					case cfschema.PropertyTypeNumber:
+						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.Float64Type}},\n")
 
 					case cfschema.PropertyTypeString:
 						e.printf("Type: types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
@@ -424,8 +429,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					case cfschema.PropertyTypeBoolean:
 						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
 
-					case cfschema.PropertyTypeInteger, cfschema.PropertyTypeNumber:
-						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.NumberType}},\n")
+					case cfschema.PropertyTypeInteger:
+						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.Int64Type}},\n")
+
+					case cfschema.PropertyTypeNumber:
+						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.Float64Type}},\n")
 
 					case cfschema.PropertyTypeString:
 						e.printf("Type:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
@@ -768,12 +776,11 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	case bool:
 		return features, fmt.Sprintf("DefaultValue(types.Bool{Value: %t})", v), nil
 	case float64:
-		features |= UsesMathBig
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("DefaultValue(types.Number{Value: big.NewFloat(%d)})", int64(v)), nil
+			return features, fmt.Sprintf("DefaultValue(types.Int64{Value: %d})", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("DefaultValue(types.Number{Value: big.NewFloat(%f)})", v), nil
+			return features, fmt.Sprintf("DefaultValue(types.Float64{Value: %f})", v), nil
 		default:
 			return 0, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
