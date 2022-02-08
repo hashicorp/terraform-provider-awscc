@@ -243,7 +243,7 @@ func scheduledActionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								},
 								"number_of_nodes": {
 									// Property: NumberOfNodes
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},

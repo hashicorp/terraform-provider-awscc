@@ -4,7 +4,6 @@ package mediaconnect
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -215,7 +214,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The port that the flow will be listening on for incoming content.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"max_bitrate": {
@@ -226,7 +225,7 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"max_latency": {
@@ -238,11 +237,11 @@ func flowSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(2000)}),
+				DefaultValue(types.Int64{Value: 2000}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},

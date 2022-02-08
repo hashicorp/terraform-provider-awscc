@@ -60,7 +60,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"default_runtime_context_device": {
@@ -131,7 +131,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"manifest_overrides_payload": {

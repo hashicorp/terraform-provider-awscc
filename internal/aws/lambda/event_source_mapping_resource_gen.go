@@ -30,7 +30,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10000),
@@ -260,7 +260,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 300),
@@ -276,7 +276,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 604800),
@@ -292,7 +292,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 10000),
@@ -308,7 +308,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 10),
@@ -509,7 +509,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "number"
 			// }
 			Description: "With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Optional:    true,
 		},
 		"topics": {
@@ -547,7 +547,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 900),

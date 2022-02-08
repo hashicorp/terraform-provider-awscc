@@ -25,7 +25,7 @@ func transitGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"association_default_route_table_id": {

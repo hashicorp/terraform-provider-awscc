@@ -226,7 +226,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 65535),
@@ -312,7 +312,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 65535),

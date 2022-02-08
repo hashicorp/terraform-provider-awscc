@@ -100,7 +100,7 @@ func endpointAccessResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The port number on which the cluster accepts incoming connections.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

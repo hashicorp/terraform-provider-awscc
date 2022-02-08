@@ -315,7 +315,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"timeout_seconds": {
 									// Property: TimeoutSeconds
 									Description: "Timeout, in seconds, for the step.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1800),
@@ -675,7 +675,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"timeout_seconds": {
 									// Property: TimeoutSeconds
 									Description: "Timeout, in seconds, for the step.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1800),

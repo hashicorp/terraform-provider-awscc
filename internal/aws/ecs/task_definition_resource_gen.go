@@ -513,7 +513,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"cpu": {
 						// Property: Cpu
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"depends_on": {
@@ -666,25 +666,25 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"interval": {
 									// Property: Interval
 									Description: "The time period in seconds between each health check execution. You may specify between 5 and 300 seconds. The default value is 30 seconds.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"retries": {
 									// Property: Retries
 									Description: "The number of times to retry a failed health check before the container is considered unhealthy. You may specify between 1 and 10 retries. The default value is three retries.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"start_period": {
 									// Property: StartPeriod
 									Description: "The optional grace period within which to provide containers time to bootstrap before failed health checks count towards the maximum number of retries. You may specify between 0 and 300 seconds. The startPeriod is disabled by default.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"timeout": {
 									// Property: Timeout
 									Description: "The time period in seconds to wait for a health check to succeed before it is considered a failure. You may specify between 2 and 60 seconds. The default value is 5 seconds.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 							},
@@ -771,17 +771,17 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"max_swap": {
 									// Property: MaxSwap
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"shared_memory_size": {
 									// Property: SharedMemorySize
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"swappiness": {
 									// Property: Swappiness
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"tmpfs": {
@@ -800,7 +800,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 											},
 											"size": {
 												// Property: Size
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 											},
 										},
@@ -853,12 +853,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"memory": {
 						// Property: Memory
 						Description: "The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 					},
 					"memory_reservation": {
 						// Property: MemoryReservation
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"mount_points": {
@@ -901,12 +901,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"container_port": {
 									// Property: ContainerPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"host_port": {
 									// Property: HostPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"protocol": {
@@ -990,12 +990,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"start_timeout": {
 						// Property: StartTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"stop_timeout": {
 						// Property: StopTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"system_controls": {
@@ -1023,7 +1023,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"hard_limit": {
 									// Property: HardLimit
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 								"name": {
@@ -1033,7 +1033,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"soft_limit": {
 									// Property: SoftLimit
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 							},
@@ -1116,7 +1116,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"size_in_gi_b": {
 						// Property: SizeInGiB
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 				},
@@ -1687,7 +1687,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"transit_encryption_port": {
 									// Property: TransitEncryptionPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},

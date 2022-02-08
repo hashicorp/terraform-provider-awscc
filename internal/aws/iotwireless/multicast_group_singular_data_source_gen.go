@@ -124,13 +124,13 @@ func multicastGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					"number_of_devices_in_group": {
 						// Property: NumberOfDevicesInGroup
 						Description: "Multicast group number of devices in group. Returned after successful read.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"number_of_devices_requested": {
 						// Property: NumberOfDevicesRequested
 						Description: "Multicast group number of devices requested. Returned after successful read.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"rf_region": {

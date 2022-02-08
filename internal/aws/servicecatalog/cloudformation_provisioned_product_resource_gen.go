@@ -322,7 +322,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -330,7 +330,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_failure_tolerance_percentage": {
 						// Property: StackSetFailureTolerancePercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
@@ -338,7 +338,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_max_concurrency_count": {
 						// Property: StackSetMaxConcurrencyCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
@@ -346,7 +346,7 @@ func cloudFormationProvisionedProductResourceType(ctx context.Context) (tfsdk.Re
 					},
 					"stack_set_max_concurrency_percentage": {
 						// Property: StackSetMaxConcurrencyPercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 100),

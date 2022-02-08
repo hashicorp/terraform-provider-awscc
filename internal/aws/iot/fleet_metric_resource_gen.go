@@ -87,7 +87,7 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "The creation date of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -123,7 +123,7 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "The last modified date of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -165,7 +165,7 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The period of metric emission in seconds",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"query_string": {
@@ -271,7 +271,7 @@ func fleetMetricResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "The version of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

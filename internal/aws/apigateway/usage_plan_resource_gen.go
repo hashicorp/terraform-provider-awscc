@@ -89,7 +89,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"burst_limit": {
 									// Property: BurstLimit
 									Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
@@ -98,7 +98,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"rate_limit": {
 									// Property: RateLimit
 									Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatAtLeast(0.000000),
@@ -172,7 +172,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"limit": {
 						// Property: Limit
 						Description: "The maximum number of requests that users can make within the specified time period.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -181,7 +181,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"offset": {
 						// Property: Offset
 						Description: "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -283,7 +283,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"burst_limit": {
 						// Property: BurstLimit
 						Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -292,7 +292,7 @@ func usagePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"rate_limit": {
 						// Property: RateLimit
 						Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(0.000000),

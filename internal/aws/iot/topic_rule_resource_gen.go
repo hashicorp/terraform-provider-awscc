@@ -1952,7 +1952,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"role_arn": {
@@ -2728,7 +2728,7 @@ func topicRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"role_arn": {

@@ -410,7 +410,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"size": {
 						// Property: Size
 						Description: "Sample configuration size for profile jobs.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -440,7 +440,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Max capacity",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"max_retries": {
@@ -451,7 +451,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Max retries",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {
@@ -1143,7 +1143,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Timeout",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"type": {

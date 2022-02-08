@@ -665,7 +665,7 @@ func templateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>The version number of the template version.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 				},

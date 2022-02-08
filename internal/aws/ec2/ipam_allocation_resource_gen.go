@@ -85,7 +85,7 @@ func iPAMAllocationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

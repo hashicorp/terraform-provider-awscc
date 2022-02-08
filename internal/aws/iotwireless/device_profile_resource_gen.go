@@ -123,7 +123,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 				map[string]tfsdk.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
@@ -131,7 +131,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),
@@ -147,7 +147,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
@@ -155,7 +155,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"max_eirp": {
 						// Property: MaxEirp
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 15),
@@ -163,7 +163,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 15),
@@ -171,7 +171,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1000000, 16700000),
@@ -179,7 +179,7 @@ func deviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(128, 4096),

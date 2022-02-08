@@ -116,7 +116,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
 						Description: "TimeoutMinutes",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

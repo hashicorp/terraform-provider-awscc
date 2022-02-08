@@ -106,7 +106,7 @@ func iPAMScopeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The number of pools that currently exist in this scope.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"tags": {

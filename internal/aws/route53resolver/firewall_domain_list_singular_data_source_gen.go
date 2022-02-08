@@ -67,7 +67,7 @@ func firewallDomainListDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"domain_file_url": {

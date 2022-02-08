@@ -117,13 +117,13 @@ func hoursOfOperationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 								"hours": {
 									// Property: Hours
 									Description: "The hours.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"minutes": {
 									// Property: Minutes
 									Description: "The minutes.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -138,13 +138,13 @@ func hoursOfOperationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 								"hours": {
 									// Property: Hours
 									Description: "The hours.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"minutes": {
 									// Property: Minutes
 									Description: "The minutes.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},

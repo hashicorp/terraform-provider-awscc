@@ -140,17 +140,17 @@ func cachePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"default_ttl": {
 						// Property: DefaultTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"max_ttl": {
 						// Property: MaxTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"min_ttl": {
 						// Property: MinTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"name": {

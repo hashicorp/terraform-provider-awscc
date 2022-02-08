@@ -60,7 +60,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"query_capacity_units": {
 						// Property: QueryCapacityUnits
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -68,7 +68,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"storage_capacity_units": {
 						// Property: StorageCapacityUnits
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -219,7 +219,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"importance": {
 									// Property: Importance
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
@@ -250,7 +250,7 @@ func indexResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"value": {
 												// Property: Value
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 10),

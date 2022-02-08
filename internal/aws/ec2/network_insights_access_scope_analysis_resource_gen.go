@@ -25,7 +25,7 @@ func networkInsightsAccessScopeAnalysisResourceType(ctx context.Context) (tfsdk.
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

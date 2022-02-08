@@ -1655,7 +1655,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 											},
 											"port_number": {
 												// Property: PortNumber
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),

@@ -2739,7 +2739,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"schedule_end_time": {
 									// Property: ScheduleEndTime
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 								},
 								"schedule_expression": {
@@ -2752,7 +2752,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"schedule_offset": {
 									// Property: ScheduleOffset
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 36000.000000),
@@ -2760,7 +2760,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"schedule_start_time": {
 									// Property: ScheduleStartTime
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 								},
 								"time_zone": {

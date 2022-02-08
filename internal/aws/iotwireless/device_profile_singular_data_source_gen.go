@@ -116,12 +116,12 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 				map[string]tfsdk.Attribute{
 					"class_b_timeout": {
 						// Property: ClassBTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"class_c_timeout": {
 						// Property: ClassCTimeout
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"mac_version": {
@@ -131,27 +131,27 @@ func deviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					},
 					"max_duty_cycle": {
 						// Property: MaxDutyCycle
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"max_eirp": {
 						// Property: MaxEirp
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ping_slot_dr": {
 						// Property: PingSlotDr
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ping_slot_freq": {
 						// Property: PingSlotFreq
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ping_slot_period": {
 						// Property: PingSlotPeriod
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"reg_params_revision": {

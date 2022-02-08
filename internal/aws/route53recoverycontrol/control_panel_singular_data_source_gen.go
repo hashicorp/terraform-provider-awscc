@@ -73,7 +73,7 @@ func controlPanelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "Count of associated routing controls",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"status": {

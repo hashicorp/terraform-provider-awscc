@@ -3954,7 +3954,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																	"delay_in_seconds": {
 																		// Property: DelayInSeconds
 																		Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-																		Type:        types.NumberType,
+																		Type:        types.Int64Type,
 																		Computed:    true,
 																	},
 																	"message_groups": {
@@ -4181,7 +4181,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 														"timeout_in_seconds": {
 															// Property: TimeoutInSeconds
 															Description: "The length of time that the fulfillment Lambda function should run before it times out.",
-															Type:        types.NumberType,
+															Type:        types.Int64Type,
 															Computed:    true,
 														},
 														"update_response": {
@@ -4198,7 +4198,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																	"frequency_in_seconds": {
 																		// Property: FrequencyInSeconds
 																		Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-																		Type:        types.NumberType,
+																		Type:        types.Int64Type,
 																		Computed:    true,
 																	},
 																	"message_groups": {
@@ -5653,7 +5653,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 														"max_retries": {
 															// Property: MaxRetries
 															Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-															Type:        types.NumberType,
+															Type:        types.Int64Type,
 															Computed:    true,
 														},
 														"message_groups_list": {
@@ -5928,13 +5928,13 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											"time_to_live_in_seconds": {
 												// Property: TimeToLiveInSeconds
 												Description: "The amount of time, in seconds, that the output context should remain active.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 											"turns_to_live": {
 												// Property: TurnsToLive
 												Description: "The number of conversation turns that the output context should remain active.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},
@@ -5972,7 +5972,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											"priority": {
 												// Property: Priority
 												Description: "The priority that a slot should be elicited.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 											"slot_name": {
@@ -6082,7 +6082,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																	"max_retries": {
 																		// Property: MaxRetries
 																		Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-																		Type:        types.NumberType,
+																		Type:        types.Int64Type,
 																		Computed:    true,
 																	},
 																	"message_groups_list": {
@@ -6585,7 +6585,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																				"frequency_in_seconds": {
 																					// Property: FrequencyInSeconds
 																					Description: "How often a message should be sent to the user in seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"message_groups_list": {
@@ -6808,7 +6808,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 																				"timeout_in_seconds": {
 																					// Property: TimeoutInSeconds
 																					Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																			},
@@ -7074,7 +7074,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"nlu_confidence_threshold": {
 						// Property: NluConfidenceThreshold
 						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"slot_types": {
@@ -7359,7 +7359,7 @@ func botDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "IdleSessionTTLInSeconds of the resource",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {

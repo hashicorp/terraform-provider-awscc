@@ -772,7 +772,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 				},
@@ -809,7 +809,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 				},

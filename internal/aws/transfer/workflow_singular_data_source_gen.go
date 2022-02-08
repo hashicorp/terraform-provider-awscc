@@ -282,7 +282,7 @@ func workflowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"timeout_seconds": {
 									// Property: TimeoutSeconds
 									Description: "Timeout, in seconds, for the step.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -586,7 +586,7 @@ func workflowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"timeout_seconds": {
 									// Property: TimeoutSeconds
 									Description: "Timeout, in seconds, for the step.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},

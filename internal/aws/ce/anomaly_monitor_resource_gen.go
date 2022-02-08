@@ -46,7 +46,7 @@ func anomalyMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The value for evaluated dimensions.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

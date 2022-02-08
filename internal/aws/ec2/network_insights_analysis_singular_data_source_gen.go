@@ -622,12 +622,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -646,7 +646,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 								},
 								"rule_number": {
 									// Property: RuleNumber
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -697,12 +697,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 							map[string]tfsdk.Attribute{
 								"instance_port": {
 									// Property: InstancePort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"load_balancer_port": {
 									// Property: LoadBalancerPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -852,7 +852,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 					},
 					"load_balancer_listener_port": {
 						// Property: LoadBalancerListenerPort
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"load_balancer_target": {
@@ -889,7 +889,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 								},
 								"port": {
 									// Property: Port
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -935,7 +935,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 					},
 					"load_balancer_target_port": {
 						// Property: LoadBalancerTargetPort
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"missing_component": {
@@ -986,7 +986,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 					},
 					"port": {
 						// Property: Port
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"port_ranges": {
@@ -995,12 +995,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 							map[string]tfsdk.Attribute{
 								"from": {
 									// Property: From
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"to": {
 									// Property: To
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1145,12 +1145,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1662,12 +1662,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1686,7 +1686,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 								},
 								"rule_number": {
 									// Property: RuleNumber
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1744,12 +1744,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1773,12 +1773,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1805,12 +1805,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1834,12 +1834,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1929,12 +1929,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1962,7 +1962,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 					},
 					"sequence_number": {
 						// Property: SequenceNumber
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"source_vpc": {
@@ -2361,12 +2361,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2385,7 +2385,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 								},
 								"rule_number": {
 									// Property: RuleNumber
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -2443,12 +2443,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2472,12 +2472,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2504,12 +2504,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2533,12 +2533,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2628,12 +2628,12 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 										map[string]tfsdk.Attribute{
 											"from": {
 												// Property: From
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"to": {
 												// Property: To
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2661,7 +2661,7 @@ func networkInsightsAnalysisDataSourceType(ctx context.Context) (tfsdk.DataSourc
 					},
 					"sequence_number": {
 						// Property: SequenceNumber
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"source_vpc": {

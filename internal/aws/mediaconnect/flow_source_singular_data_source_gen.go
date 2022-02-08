@@ -192,7 +192,7 @@ func flowSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The port that the flow will be listening on for incoming content.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"max_bitrate": {
@@ -203,7 +203,7 @@ func flowSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"max_latency": {
@@ -215,7 +215,7 @@ func flowSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {

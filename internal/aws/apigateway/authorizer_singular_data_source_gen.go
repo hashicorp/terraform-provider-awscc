@@ -58,7 +58,7 @@ func authorizerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The TTL in seconds of cached authorizer results.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"authorizer_uri": {

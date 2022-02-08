@@ -25,7 +25,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"description": {
@@ -744,7 +744,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"priority": {
 															// Property: Priority
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"rule_definition": {
@@ -766,12 +766,12 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Computed: true,
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Computed: true,
 																							},
 																						},
@@ -795,7 +795,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																				},
 																				"protocols": {
 																					// Property: Protocols
-																					Type:     types.SetType{ElemType: types.NumberType},
+																					Type:     types.SetType{ElemType: types.Int64Type},
 																					Computed: true,
 																				},
 																				"source_ports": {
@@ -804,12 +804,12 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Computed: true,
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Computed: true,
 																							},
 																						},

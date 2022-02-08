@@ -28,7 +28,7 @@ func flowEntitlementDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "type": "integer"
 			// }
 			Description: "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"description": {

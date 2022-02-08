@@ -114,7 +114,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Max Entries of Prefix List.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(1),
@@ -221,7 +221,7 @@ func prefixListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Version of Prefix List.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

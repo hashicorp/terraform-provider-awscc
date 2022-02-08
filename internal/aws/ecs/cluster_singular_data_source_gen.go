@@ -220,7 +220,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"capacity_provider": {
@@ -230,7 +230,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

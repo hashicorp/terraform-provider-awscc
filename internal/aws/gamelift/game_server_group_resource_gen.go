@@ -74,7 +74,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"estimated_instance_warmup": {
 						// Property: EstimatedInstanceWarmup
 						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 					},
 					"target_tracking_configuration": {
@@ -85,7 +85,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"target_value": {
 									// Property: TargetValue
 									Description: "Desired value to use with a game server group target-based scaling policy.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Required:    true,
 								},
 							},
@@ -309,7 +309,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "number"
 			// }
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatAtLeast(1.000000),
@@ -324,7 +324,7 @@ func gameServerGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "number"
 			// }
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatAtLeast(0.000000),

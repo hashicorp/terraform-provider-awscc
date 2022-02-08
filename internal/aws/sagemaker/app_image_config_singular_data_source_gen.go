@@ -124,13 +124,13 @@ func appImageConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 								"default_gid": {
 									// Property: DefaultGid
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"default_uid": {
 									// Property: DefaultUid
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"mount_path": {

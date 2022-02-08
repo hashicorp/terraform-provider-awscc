@@ -2675,7 +2675,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Optional:    true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.IntBetween(60, 31622400),
@@ -3310,7 +3310,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Optional:    true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.IntBetween(60, 31622400),
@@ -3945,7 +3945,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Optional:    true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.IntBetween(60, 31622400),
@@ -4571,7 +4571,7 @@ func detectorModelResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Optional:    true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.IntBetween(60, 31622400),

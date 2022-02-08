@@ -41,7 +41,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "When the Application was created",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"application_description": {
@@ -80,7 +80,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "When the Application was last updated",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"application_name": {

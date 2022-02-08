@@ -52,7 +52,7 @@ func networkInsightsPathDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"network_insights_path_arn": {

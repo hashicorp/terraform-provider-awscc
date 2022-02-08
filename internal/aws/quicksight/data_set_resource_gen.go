@@ -4,7 +4,6 @@ package quicksight
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -213,7 +212,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "<p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.</p>",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -345,14 +344,14 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ingestion_wait_time_in_hours": {
 						// Property: IngestionWaitTimeInHours
 						Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(1.000000, 36.000000),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Number{Value: big.NewFloat(36.000000)}),
+							DefaultValue(types.Float64{Value: 36.000000}),
 							tfsdk.UseStateForUnknown(),
 						},
 					},
@@ -1643,7 +1642,7 @@ func dataSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"start_from_row": {
 												// Property: StartFromRow
 												Description: "<p>A row number to start reading data from.</p>",
-												Type:        types.NumberType,
+												Type:        types.Float64Type,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.FloatAtLeast(1.000000),

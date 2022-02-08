@@ -46,7 +46,7 @@ func accountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"days_before_expiry": {
 						// Property: DaysBeforeExpiry
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

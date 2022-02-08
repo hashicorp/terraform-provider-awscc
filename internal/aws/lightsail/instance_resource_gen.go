@@ -252,7 +252,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"cpu_count": {
 						// Property: CpuCount
 						Description: "CPU count of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -287,7 +287,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"iops": {
 									// Property: IOPS
 									Description: "IOPS of disk.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"is_system_disk": {
@@ -316,7 +316,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"ram_size_in_gb": {
 						// Property: RamSizeInGb
 						Description: "RAM Size of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -586,7 +586,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"from_port": {
 									// Property: FromPort
 									Description: "From Port of the Instance.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"ipv_6_cidrs": {
@@ -607,7 +607,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"to_port": {
 									// Property: ToPort
 									Description: "To Port of the Instance.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 							},
@@ -699,7 +699,7 @@ func instanceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"code": {
 						// Property: Code
 						Description: "Status code of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),

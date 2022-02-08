@@ -245,7 +245,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 					"target_interval_seconds": {
 						// Property: TargetIntervalSeconds
 						Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{

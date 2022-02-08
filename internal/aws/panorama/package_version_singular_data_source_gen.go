@@ -114,7 +114,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"status": {

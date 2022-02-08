@@ -26,7 +26,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -835,7 +835,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													map[string]tfsdk.Attribute{
 														"priority": {
 															// Property: Priority
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(1, 65535),
@@ -860,7 +860,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.IntBetween(0, 65535),
@@ -868,7 +868,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.IntBetween(0, 65535),
@@ -898,7 +898,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				},
 																				"protocols": {
 																					// Property: Protocols
-																					Type:     types.SetType{ElemType: types.NumberType},
+																					Type:     types.SetType{ElemType: types.Int64Type},
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayForEach(validate.IntBetween(0, 255)),
@@ -910,7 +910,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.IntBetween(0, 65535),
@@ -918,7 +918,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																							},
 																							"to_port": {
 																								// Property: ToPort
-																								Type:     types.NumberType,
+																								Type:     types.Int64Type,
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.IntBetween(0, 65535),

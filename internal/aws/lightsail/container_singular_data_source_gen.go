@@ -235,7 +235,7 @@ func containerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"container_port": {
 									// Property: ContainerPort
 									Description: "The port of the container to which traffic is forwarded to.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"health_check_config": {
@@ -246,13 +246,13 @@ func containerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											"healthy_threshold": {
 												// Property: HealthyThreshold
 												Description: "The number of consecutive health checks successes required before moving the container to the Healthy state. The default value is 2.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 											"interval_seconds": {
 												// Property: IntervalSeconds
 												Description: "The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is 5.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 											"path": {
@@ -270,13 +270,13 @@ func containerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											"timeout_seconds": {
 												// Property: TimeoutSeconds
 												Description: "The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 											"unhealthy_threshold": {
 												// Property: UnhealthyThreshold
 												Description: "The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},
@@ -370,7 +370,7 @@ func containerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The scale specification for the container service.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"service_name": {

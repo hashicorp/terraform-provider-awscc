@@ -161,7 +161,7 @@ func alertDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"anomaly_detector_arn": {

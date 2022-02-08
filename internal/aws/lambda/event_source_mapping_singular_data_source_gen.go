@@ -29,7 +29,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"bisect_batch_on_function_error": {
@@ -226,7 +226,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum amount of time to gather records before invoking the function, in seconds.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"maximum_record_age_in_seconds": {
@@ -239,7 +239,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum age of a record that Lambda sends to a function for processing.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"maximum_retry_attempts": {
@@ -252,7 +252,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The maximum number of times to retry when the function returns an error.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"parallelization_factor": {
@@ -265,7 +265,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "(Streams) The number of batches to process from each shard concurrently.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"queues": {
@@ -421,7 +421,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "number"
 			// }
 			Description: "With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"topics": {
@@ -454,7 +454,7 @@ func eventSourceMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "(Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 	}

@@ -83,7 +83,7 @@ func endpointAccessDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "integer"
 			// }
 			Description: "The port number on which the cluster accepts incoming connections.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"resource_owner": {

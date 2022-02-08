@@ -42,7 +42,7 @@ func pipelineResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"max_parallel_execution_steps": {
 						// Property: MaxParallelExecutionSteps
 						Description: "Maximum parallel execution steps",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),

@@ -177,7 +177,7 @@ func healthCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"failure_threshold": {
 						// Property: FailureThreshold
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"fully_qualified_domain_name": {
@@ -187,7 +187,7 @@ func healthCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ip_address": {
@@ -212,7 +212,7 @@ func healthCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"port": {
 						// Property: Port
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"regions": {
@@ -222,7 +222,7 @@ func healthCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 					},
 					"request_interval": {
 						// Property: RequestInterval
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"resource_path": {

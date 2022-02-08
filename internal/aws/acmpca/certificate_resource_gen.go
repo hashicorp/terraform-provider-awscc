@@ -848,7 +848,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 					},
 				},
@@ -888,7 +888,7 @@ func certificateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 					},
 				},

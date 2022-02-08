@@ -214,7 +214,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"cpu_count": {
 						// Property: CpuCount
 						Description: "CPU count of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"disks": {
@@ -243,7 +243,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"iops": {
 									// Property: IOPS
 									Description: "IOPS of disk.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"is_system_disk": {
@@ -272,7 +272,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"ram_size_in_gb": {
 						// Property: RamSizeInGb
 						Description: "RAM Size of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -512,7 +512,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"from_port": {
 									// Property: FromPort
 									Description: "From Port of the Instance.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"ipv_6_cidrs": {
@@ -530,7 +530,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"to_port": {
 									// Property: ToPort
 									Description: "To Port of the Instance.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -610,7 +610,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"code": {
 						// Property: Code
 						Description: "Status code of the Instance.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"name": {

@@ -25,7 +25,7 @@ func transitGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

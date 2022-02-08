@@ -246,7 +246,7 @@ func rulesetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"value": {
 									// Property: Value
 									Description: "Threshold value for a rule",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},

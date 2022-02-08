@@ -141,7 +141,7 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"default_ttl": {
 						// Property: DefaultTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(0.000000),
@@ -149,7 +149,7 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_ttl": {
 						// Property: MaxTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(0.000000),
@@ -157,7 +157,7 @@ func cachePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"min_ttl": {
 						// Property: MinTTL
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(0.000000),

@@ -243,7 +243,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"max_session_length_in_minutes": {
 						// Property: MaxSessionLengthInMinutes
 						Description: "<p>The length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(1.000000, 43200.000000),
@@ -252,7 +252,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"max_stopped_session_length_in_minutes": {
 						// Property: MaxStoppedSessionLengthInMinutes
 						Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can’t be stopped. If you then call\n            StopStreamingSession, the session fails. If the time that a session stays in the READY\n            state exceeds the maxSessionLengthInMinutes value, the session will automatically be\n            terminated by AWS (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n            StopStreamingSession to stop sessions in the READY state. If the time that a session\n            stays in the READY state exceeds the maxSessionLengthInMinutes value, the session will\n            automatically be stopped by AWS (instead of terminated).</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 5760.000000),

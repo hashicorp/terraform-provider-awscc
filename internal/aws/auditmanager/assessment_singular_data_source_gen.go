@@ -149,7 +149,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "number"
 			// }
 			Description: "The sequence of characters that identifies when the event occurred.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"delegations": {
@@ -272,7 +272,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"creation_time": {
 						// Property: CreationTime
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"id": {
@@ -283,7 +283,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"last_updated": {
 						// Property: LastUpdated
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"role_arn": {

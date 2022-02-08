@@ -153,7 +153,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"after_contact_work_time_limit": {
 						// Property: AfterContactWorkTimeLimit
 						Description: "The After Call Work (ACW) timeout setting, in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"auto_accept": {

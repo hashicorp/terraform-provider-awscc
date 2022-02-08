@@ -91,7 +91,7 @@ func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (tfs
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"capacity_provider": {
@@ -102,7 +102,7 @@ func clusterCapacityProviderAssociationsDataSourceType(ctx context.Context) (tfs
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

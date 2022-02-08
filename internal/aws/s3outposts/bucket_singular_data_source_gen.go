@@ -237,7 +237,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											"days_after_initiation": {
 												// Property: DaysAfterInitiation
 												Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},
@@ -253,7 +253,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"expiration_in_days": {
 									// Property: ExpirationInDays
 									Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"filter": {

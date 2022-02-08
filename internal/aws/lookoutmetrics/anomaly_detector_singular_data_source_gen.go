@@ -644,7 +644,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"role_arn": {
@@ -705,7 +705,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"role_arn": {
@@ -839,7 +839,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 					"offset": {
 						// Property: Offset
 						Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"timestamp_column": {

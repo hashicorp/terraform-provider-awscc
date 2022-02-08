@@ -78,7 +78,7 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 				map[string]tfsdk.Attribute{
 					"compute_reservation": {
 						// Property: ComputeReservation
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 99.000000),
@@ -86,7 +86,7 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					},
 					"share_decay_seconds": {
 						// Property: ShareDecaySeconds
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 604800.000000),
@@ -104,7 +104,7 @@ func schedulingPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"weight_factor": {
 									// Property: WeightFactor
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 1000.000000),

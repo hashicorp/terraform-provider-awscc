@@ -91,7 +91,7 @@ func objectTypeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The default number of days until the data within the domain expires.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"fields": {

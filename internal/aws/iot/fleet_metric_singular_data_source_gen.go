@@ -83,7 +83,7 @@ func fleetMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "number"
 			// }
 			Description: "The creation date of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"description": {
@@ -116,7 +116,7 @@ func fleetMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "number"
 			// }
 			Description: "The last modified date of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"metric_arn": {
@@ -149,7 +149,7 @@ func fleetMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "The period of metric emission in seconds",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"query_string": {
@@ -246,7 +246,7 @@ func fleetMetricDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "number"
 			// }
 			Description: "The version of a fleet metric",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 	}

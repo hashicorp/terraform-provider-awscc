@@ -1476,7 +1476,7 @@ func connectorProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 											},
 											"port_number": {
 												// Property: PortNumber
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"private_link_service_name": {

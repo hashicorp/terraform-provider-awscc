@@ -1934,7 +1934,7 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"role_arn": {
@@ -2686,7 +2686,7 @@ func topicRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 										map[string]tfsdk.Attribute{
 											"qos": {
 												// Property: Qos
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"role_arn": {

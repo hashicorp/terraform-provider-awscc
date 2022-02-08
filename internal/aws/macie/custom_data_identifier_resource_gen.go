@@ -109,7 +109,7 @@ func customDataIdentifierResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "type": "integer"
 			// }
 			Description: "Maximum match distance.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

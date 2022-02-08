@@ -64,7 +64,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"kerberos_keytab": {
@@ -187,7 +187,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"port": {
 						// Property: Port
 						Description: "The port on which the Name Node is listening on for client requests.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -258,7 +258,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "Number of copies of each block that exists inside the HDFS cluster.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"simple_user": {

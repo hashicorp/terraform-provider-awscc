@@ -228,7 +228,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"capacity_provider": {
@@ -238,7 +238,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 				},

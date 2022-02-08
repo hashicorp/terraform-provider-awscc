@@ -25,7 +25,7 @@ func networkInsightsAccessScopeAnalysisDataSourceType(ctx context.Context) (tfsd
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"end_date": {

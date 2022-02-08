@@ -350,7 +350,7 @@ func inAppTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 											},
 											"border_radius": {
 												// Property: BorderRadius
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"button_action": {
@@ -450,7 +450,7 @@ func inAppTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 											},
 											"border_radius": {
 												// Property: BorderRadius
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"button_action": {

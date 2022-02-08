@@ -159,7 +159,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"duration_in_minutes": {
 						// Property: DurationInMinutes
 						Description: "The time to wait until beginning the next stage.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 					},
 					"targets": {
@@ -181,7 +181,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"retry_interval_in_minutes": {
 												// Property: RetryIntervalInMinutes
 												Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 											},
 										},

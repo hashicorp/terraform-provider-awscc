@@ -143,7 +143,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"number_of_devices_in_group": {
 						// Property: NumberOfDevicesInGroup
 						Description: "Multicast group number of devices in group. Returned after successful read.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -152,7 +152,7 @@ func multicastGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					"number_of_devices_requested": {
 						// Property: NumberOfDevicesRequested
 						Description: "Multicast group number of devices requested. Returned after successful read.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),

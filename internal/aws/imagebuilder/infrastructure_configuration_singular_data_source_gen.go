@@ -69,7 +69,7 @@ func infrastructureConfigurationDataSourceType(ctx context.Context) (tfsdk.DataS
 					"http_put_response_hop_limit": {
 						// Property: HttpPutResponseHopLimit
 						Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"http_tokens": {

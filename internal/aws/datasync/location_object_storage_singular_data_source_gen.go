@@ -129,7 +129,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "type": "integer"
 			// }
 			Description: "The port that your self-managed server accepts inbound network traffic on.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"server_protocol": {

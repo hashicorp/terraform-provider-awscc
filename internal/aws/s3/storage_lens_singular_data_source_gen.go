@@ -349,13 +349,13 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 																				"max_depth": {
 																					// Property: MaxDepth
 																					Description: "Max depth of prefixes of S3 key that Amazon S3 Storage Lens will analyze.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"min_storage_bytes_percentage": {
 																					// Property: MinStorageBytesPercentage
 																					Description: "The minimum storage bytes threshold for the prefixes to be included in the analysis.",
-																					Type:        types.NumberType,
+																					Type:        types.Float64Type,
 																					Computed:    true,
 																				},
 																			},

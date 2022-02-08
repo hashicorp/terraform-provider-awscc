@@ -29,7 +29,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "type": "integer"
 			// }
 			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"data_input_configuration": {

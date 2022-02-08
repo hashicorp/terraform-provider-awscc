@@ -97,17 +97,17 @@ func backupVaultDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
 						// Property: ChangeableForDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"max_retention_days": {
 						// Property: MaxRetentionDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"min_retention_days": {
 						// Property: MinRetentionDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 				},

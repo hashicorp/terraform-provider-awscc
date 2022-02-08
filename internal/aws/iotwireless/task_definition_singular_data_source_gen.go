@@ -338,7 +338,7 @@ func taskDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 								},
 								"sig_key_crc": {
 									// Property: SigKeyCrc
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"update_signature": {

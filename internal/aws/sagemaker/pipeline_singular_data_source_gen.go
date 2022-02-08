@@ -41,7 +41,7 @@ func pipelineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"max_parallel_execution_steps": {
 						// Property: MaxParallelExecutionSteps
 						Description: "Maximum parallel execution steps",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

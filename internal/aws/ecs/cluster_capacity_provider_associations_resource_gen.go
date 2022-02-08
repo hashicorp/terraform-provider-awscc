@@ -101,7 +101,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100000),
@@ -115,7 +115,7 @@ func clusterCapacityProviderAssociationsResourceType(ctx context.Context) (tfsdk
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 1000),

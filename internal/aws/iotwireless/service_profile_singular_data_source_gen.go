@@ -124,17 +124,17 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"dev_status_req_freq": {
 						// Property: DevStatusReqFreq
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"dl_bucket_size": {
 						// Property: DlBucketSize
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"dl_rate": {
 						// Property: DlRate
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"dl_rate_policy": {
@@ -144,12 +144,12 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"dr_max": {
 						// Property: DrMax
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"dr_min": {
 						// Property: DrMin
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"hr_allowed": {
@@ -159,7 +159,7 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"min_gw_diversity": {
 						// Property: MinGwDiversity
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"nwk_geo_loc": {
@@ -189,17 +189,17 @@ func serviceProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"target_per": {
 						// Property: TargetPer
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ul_bucket_size": {
 						// Property: UlBucketSize
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ul_rate": {
 						// Property: UlRate
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"ul_rate_policy": {

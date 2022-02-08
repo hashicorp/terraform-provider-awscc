@@ -85,17 +85,17 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 							map[string]tfsdk.Attribute{
 								"instance_warmup_period": {
 									// Property: InstanceWarmupPeriod
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"maximum_scaling_step_size": {
 									// Property: MaximumScalingStepSize
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"minimum_scaling_step_size": {
 									// Property: MinimumScalingStepSize
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"status": {
@@ -111,7 +111,7 @@ func capacityProviderResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"target_capacity": {
 									// Property: TargetCapacity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},

@@ -4,7 +4,6 @@ package cloudfront
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -836,11 +835,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+										DefaultValue(types.Float64{Value: 86400.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
@@ -953,21 +952,21 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+										DefaultValue(types.Float64{Value: 31536000.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+										DefaultValue(types.Float64{Value: 0.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
@@ -1042,22 +1041,22 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"error_caching_min_ttl": {
 									// Property: ErrorCachingMinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(300.000000)}),
+										DefaultValue(types.Float64{Value: 300.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"error_code": {
 									// Property: ErrorCode
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 								"response_code": {
 									// Property: ResponseCode
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"response_page_path": {
@@ -1081,21 +1080,21 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"http_port": {
 									// Property: HTTPPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(80)}),
+										DefaultValue(types.Int64{Value: 80}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"https_port": {
 									// Property: HTTPSPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(443)}),
+										DefaultValue(types.Int64{Value: 443}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
@@ -1165,11 +1164,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(86400.000000)}),
+										DefaultValue(types.Float64{Value: 86400.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
@@ -1282,21 +1281,21 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(31536000.000000)}),
+										DefaultValue(types.Float64{Value: 31536000.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.Number{Value: big.NewFloat(0.000000)}),
+										DefaultValue(types.Float64{Value: 0.000000}),
 										tfsdk.UseStateForUnknown(),
 									},
 								},
@@ -1445,12 +1444,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"items": {
 																		// Property: Items
-																		Type:     types.ListType{ElemType: types.NumberType},
+																		Type:     types.ListType{ElemType: types.Int64Type},
 																		Required: true,
 																	},
 																	"quantity": {
 																		// Property: Quantity
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Required: true,
 																	},
 																},
@@ -1486,7 +1485,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"quantity": {
 															// Property: Quantity
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Required: true,
 														},
 													},
@@ -1500,7 +1499,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"quantity": {
 									// Property: Quantity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 							},
@@ -1513,12 +1512,12 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"connection_attempts": {
 									// Property: ConnectionAttempts
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"connection_timeout": {
 									// Property: ConnectionTimeout
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"custom_origin_config": {
@@ -1527,31 +1526,31 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"http_port": {
 												// Property: HTTPPort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Number{Value: big.NewFloat(80)}),
+													DefaultValue(types.Int64{Value: 80}),
 													tfsdk.UseStateForUnknown(),
 												},
 											},
 											"https_port": {
 												// Property: HTTPSPort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Number{Value: big.NewFloat(443)}),
+													DefaultValue(types.Int64{Value: 443}),
 													tfsdk.UseStateForUnknown(),
 												},
 											},
 											"origin_keepalive_timeout": {
 												// Property: OriginKeepaliveTimeout
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Number{Value: big.NewFloat(5)}),
+													DefaultValue(types.Int64{Value: 5}),
 													tfsdk.UseStateForUnknown(),
 												},
 											},
@@ -1562,11 +1561,11 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"origin_read_timeout": {
 												// Property: OriginReadTimeout
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Computed: true,
 												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Number{Value: big.NewFloat(30)}),
+													DefaultValue(types.Int64{Value: 30}),
 													tfsdk.UseStateForUnknown(),
 												},
 											},

@@ -86,7 +86,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -94,7 +94,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"write_capacity_units": {
 									// Property: WriteCapacityUnits
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -210,7 +210,7 @@ func tableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntAtLeast(0),

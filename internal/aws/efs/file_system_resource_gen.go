@@ -235,7 +235,7 @@ func fileSystemResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "number"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Float64Type,
 			Optional: true,
 		},
 		"throughput_mode": {

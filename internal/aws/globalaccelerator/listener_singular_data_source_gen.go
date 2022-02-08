@@ -91,13 +91,13 @@ func listenerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"from_port": {
 						// Property: FromPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"to_port": {
 						// Property: ToPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

@@ -1229,7 +1229,7 @@ func themeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>The version number of the theme.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 				},

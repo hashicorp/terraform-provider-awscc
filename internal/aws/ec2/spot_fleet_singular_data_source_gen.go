@@ -1040,7 +1040,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 					},
 					"instance_pools_to_use_count": {
 						// Property: InstancePoolsToUseCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"launch_specifications": {
@@ -1072,7 +1072,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 														},
 														"iops": {
 															// Property: Iops
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"snapshot_id": {
@@ -1082,7 +1082,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 														},
 														"volume_size": {
 															// Property: VolumeSize
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"volume_type": {
@@ -1142,12 +1142,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1170,12 +1170,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1198,12 +1198,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1246,12 +1246,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -1264,12 +1264,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1282,12 +1282,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1296,7 +1296,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"on_demand_max_price_percentage_over_lowest_price": {
 												// Property: OnDemandMaxPricePercentageOverLowestPrice
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"require_hibernate_support": {
@@ -1306,7 +1306,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"spot_max_price_percentage_over_lowest_price": {
 												// Property: SpotMaxPricePercentageOverLowestPrice
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"total_local_storage_gb": {
@@ -1315,12 +1315,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -1333,12 +1333,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 													map[string]tfsdk.Attribute{
 														"max": {
 															// Property: Max
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min": {
 															// Property: Min
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1398,7 +1398,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"device_index": {
 												// Property: DeviceIndex
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"groups": {
@@ -1408,7 +1408,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"ipv_6_address_count": {
 												// Property: Ipv6AddressCount
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"ipv_6_addresses": {
@@ -1451,7 +1451,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"secondary_private_ip_address_count": {
 												// Property: SecondaryPrivateIpAddressCount
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"subnet_id": {
@@ -1556,7 +1556,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								},
 								"weighted_capacity": {
 									// Property: WeightedCapacity
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 							},
@@ -1610,12 +1610,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1638,12 +1638,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1666,12 +1666,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1714,12 +1714,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																},
@@ -1732,12 +1732,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1750,12 +1750,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1764,7 +1764,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 														},
 														"on_demand_max_price_percentage_over_lowest_price": {
 															// Property: OnDemandMaxPricePercentageOverLowestPrice
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"require_hibernate_support": {
@@ -1774,7 +1774,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 														},
 														"spot_max_price_percentage_over_lowest_price": {
 															// Property: SpotMaxPricePercentageOverLowestPrice
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"total_local_storage_gb": {
@@ -1783,12 +1783,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																},
@@ -1801,12 +1801,12 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 																map[string]tfsdk.Attribute{
 																	"max": {
 																		// Property: Max
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"min": {
 																		// Property: Min
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1834,7 +1834,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"weighted_capacity": {
 												// Property: WeightedCapacity
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Computed: true,
 											},
 										},
@@ -1911,7 +1911,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 					},
 					"on_demand_target_capacity": {
 						// Property: OnDemandTargetCapacity
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"replace_unhealthy_instances": {
@@ -1934,7 +1934,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											},
 											"termination_delay": {
 												// Property: TerminationDelay
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1957,7 +1957,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 					},
 					"target_capacity": {
 						// Property: TargetCapacity
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"target_capacity_unit_type": {

@@ -348,7 +348,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "minimum": 15,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 	}

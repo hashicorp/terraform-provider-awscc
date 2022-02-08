@@ -317,7 +317,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"impact": {
 						// Property: Impact
 						Description: "The impact value.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"notification_targets": {

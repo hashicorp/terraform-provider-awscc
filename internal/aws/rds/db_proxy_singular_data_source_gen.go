@@ -166,7 +166,7 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"require_tls": {

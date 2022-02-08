@@ -140,19 +140,19 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"max_worker_count": {
 									// Property: MaxWorkerCount
 									Description: "The maximum number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"mcu_count": {
 									// Property: McuCount
 									Description: "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"min_worker_count": {
 									// Property: MinWorkerCount
 									Description: "The minimum number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"scale_in_policy": {
@@ -163,7 +163,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											"cpu_utilization_percentage": {
 												// Property: CpuUtilizationPercentage
 												Description: "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},
@@ -178,7 +178,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 											"cpu_utilization_percentage": {
 												// Property: CpuUtilizationPercentage
 												Description: "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},
@@ -197,13 +197,13 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"mcu_count": {
 									// Property: McuCount
 									Description: "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"worker_count": {
 									// Property: WorkerCount
 									Description: "Number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -671,7 +671,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"revision": {
 									// Property: Revision
 									Description: "The revision of the custom plugin to use.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -726,7 +726,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 					"revision": {
 						// Property: Revision
 						Description: "The revision of the worker configuration to use.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"worker_configuration_arn": {

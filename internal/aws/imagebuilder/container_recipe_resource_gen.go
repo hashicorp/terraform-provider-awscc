@@ -280,7 +280,7 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											"iops": {
 												// Property: Iops
 												Description: "Use to configure device IOPS.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Optional:    true,
 											},
 											"kms_key_id": {
@@ -298,13 +298,13 @@ func containerRecipeResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											"throughput": {
 												// Property: Throughput
 												Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Optional:    true,
 											},
 											"volume_size": {
 												// Property: VolumeSize
 												Description: "Use to override the device's volume size.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Optional:    true,
 											},
 											"volume_type": {

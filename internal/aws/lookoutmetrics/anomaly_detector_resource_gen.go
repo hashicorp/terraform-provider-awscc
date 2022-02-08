@@ -727,7 +727,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),
@@ -815,7 +815,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),
@@ -1005,7 +1005,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 					"offset": {
 						// Property: Offset
 						Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 432000),

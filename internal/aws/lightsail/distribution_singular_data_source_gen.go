@@ -152,7 +152,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"default_ttl": {
 						// Property: DefaultTTL
 						Description: "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"forwarded_cookies": {
@@ -221,13 +221,13 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"maximum_ttl": {
 						// Property: MaximumTTL
 						Description: "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"minimum_ttl": {
 						// Property: MinimumTTL
 						Description: "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

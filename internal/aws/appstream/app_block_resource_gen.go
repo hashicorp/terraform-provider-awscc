@@ -154,7 +154,7 @@ func appBlockResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"timeout_in_seconds": {
 						// Property: TimeoutInSeconds
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Required: true,
 					},
 				},

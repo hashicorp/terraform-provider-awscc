@@ -57,7 +57,7 @@ func safetyRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
 						Description: "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -128,7 +128,7 @@ func safetyRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"wait_period_ms": {
 						// Property: WaitPeriodMs
 						Description: "An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -190,7 +190,7 @@ func safetyRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"threshold": {
 						// Property: Threshold
 						Description: "The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"type": {
