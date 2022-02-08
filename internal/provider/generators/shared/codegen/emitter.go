@@ -928,7 +928,7 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 	return validators, nil
 }
 
-// numberValidators returns any validators for the specified integer Property.
+// numberValidators returns any validators for the specified number Property.
 func numberValidators(path []string, property *cfschema.Property) ([]string, error) {
 	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeNumber {
 		return nil, fmt.Errorf("invalid property type: %s", propertyType)
