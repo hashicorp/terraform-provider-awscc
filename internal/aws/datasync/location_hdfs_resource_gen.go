@@ -4,7 +4,6 @@ package datasync
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -79,7 +78,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1048576, 1073741824),
@@ -222,7 +221,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"port": {
 						// Property: Port
 						Description: "The port on which the Name Node is listening on for client requests.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 65536),
@@ -328,14 +327,14 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "Number of copies of each block that exists inside the HDFS cluster.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 512),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+				DefaultValue(types.Int64{Value: 3}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},

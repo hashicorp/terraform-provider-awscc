@@ -38,7 +38,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"allocation_max_netmask_length": {
@@ -49,7 +49,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The maximum allowed netmask length for allocations made from this pool.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"allocation_min_netmask_length": {
@@ -60,7 +60,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The minimum allowed netmask length for allocations made from this pool.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"allocation_resource_tags": {
@@ -224,7 +224,7 @@ func iPAMPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The depth of this pool in the source pool hierarchy.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"provisioned_cidrs": {

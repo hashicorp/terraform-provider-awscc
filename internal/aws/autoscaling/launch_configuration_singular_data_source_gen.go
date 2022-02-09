@@ -125,7 +125,7 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 								"iops": {
 									// Property: Iops
 									Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"snapshot_id": {
@@ -137,13 +137,13 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 								"throughput": {
 									// Property: Throughput
 									Description: "The throughput (MiBps) to provision for a gp3 volume.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"volume_size": {
 									// Property: VolumeSize
 									Description: "The volume size, in GiBs.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"volume_type": {
@@ -334,7 +334,7 @@ func launchConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 					"http_put_response_hop_limit": {
 						// Property: HttpPutResponseHopLimit
 						Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"http_tokens": {

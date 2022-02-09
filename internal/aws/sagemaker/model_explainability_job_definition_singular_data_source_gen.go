@@ -114,7 +114,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 								"instance_count": {
 									// Property: InstanceCount
 									Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"instance_type": {
@@ -132,7 +132,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 								"volume_size_in_gb": {
 									// Property: VolumeSizeInGB
 									Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -641,7 +641,7 @@ func modelExplainabilityJobDefinitionDataSourceType(ctx context.Context) (tfsdk.
 					"max_runtime_in_seconds": {
 						// Property: MaxRuntimeInSeconds
 						Description: "The maximum runtime allowed in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

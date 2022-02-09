@@ -408,7 +408,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"image_version_number": {
 												// Property: ImageVersionNumber
 												Description: "The version number of the CustomImage.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),

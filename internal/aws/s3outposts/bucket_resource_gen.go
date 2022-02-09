@@ -247,7 +247,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"days_after_initiation": {
 												// Property: DaysAfterInitiation
 												Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
@@ -266,7 +266,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"expiration_in_days": {
 									// Property: ExpirationInDays
 									Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),

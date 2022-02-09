@@ -55,7 +55,7 @@ func loadBalancerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The instance port where you're creating your load balancer.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

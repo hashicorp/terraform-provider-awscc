@@ -370,7 +370,7 @@ func dashboardDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"values": {
 									// Property: Values
 									Description: "<p>The values for the decimal parameter.</p>",
-									Type:        types.ListType{ElemType: types.NumberType},
+									Type:        types.ListType{ElemType: types.Float64Type},
 									Computed:    true,
 								},
 							},
@@ -392,7 +392,7 @@ func dashboardDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 								"values": {
 									// Property: Values
 									Description: "<p>The values for the integer parameter.</p>",
-									Type:        types.ListType{ElemType: types.NumberType},
+									Type:        types.ListType{ElemType: types.Float64Type},
 									Computed:    true,
 								},
 							},
@@ -844,7 +844,7 @@ func dashboardDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>Version number for this version of the dashboard.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 				},

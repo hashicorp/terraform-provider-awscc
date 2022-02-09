@@ -327,7 +327,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"split_weight": {
 									// Property: SplitWeight
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 							},

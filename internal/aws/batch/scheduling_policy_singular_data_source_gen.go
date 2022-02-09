@@ -74,12 +74,12 @@ func schedulingPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 				map[string]tfsdk.Attribute{
 					"compute_reservation": {
 						// Property: ComputeReservation
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"share_decay_seconds": {
 						// Property: ShareDecaySeconds
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"share_distribution": {
@@ -94,7 +94,7 @@ func schedulingPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 								},
 								"weight_factor": {
 									// Property: WeightFactor
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 							},

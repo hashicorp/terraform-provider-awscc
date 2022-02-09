@@ -75,7 +75,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -172,7 +172,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

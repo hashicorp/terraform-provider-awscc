@@ -77,13 +77,13 @@ func resiliencyPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 					"rpo_in_secs": {
 						// Property: RpoInSecs
 						Description: "RPO in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 					},
 					"rto_in_secs": {
 						// Property: RtoInSecs
 						Description: "RTO in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 					},
 				},

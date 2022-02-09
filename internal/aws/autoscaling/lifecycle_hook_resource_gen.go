@@ -53,7 +53,7 @@ func lifecycleHookResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The maximum time, in seconds, that can elapse before the lifecycle hook times out. The range is from 30 to 7200 seconds. The default value is 3600 seconds (1 hour). If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the action that you specified in the DefaultResult property.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"lifecycle_hook_name": {

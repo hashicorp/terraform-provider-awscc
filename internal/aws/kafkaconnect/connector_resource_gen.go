@@ -141,13 +141,13 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"max_worker_count": {
 									// Property: MaxWorkerCount
 									Description: "The maximum number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 								"mcu_count": {
 									// Property: McuCount
 									Description: "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntInSlice([]int{
@@ -161,7 +161,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"min_worker_count": {
 									// Property: MinWorkerCount
 									Description: "The minimum number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 								"scale_in_policy": {
@@ -172,7 +172,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"cpu_utilization_percentage": {
 												// Property: CpuUtilizationPercentage
 												Description: "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 100),
@@ -190,7 +190,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"cpu_utilization_percentage": {
 												// Property: CpuUtilizationPercentage
 												Description: "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 100),
@@ -212,7 +212,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"mcu_count": {
 									// Property: McuCount
 									Description: "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntInSlice([]int{
@@ -226,7 +226,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"worker_count": {
 									// Property: WorkerCount
 									Description: "Number of workers for a connector.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 							},
@@ -758,7 +758,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"revision": {
 									// Property: Revision
 									Description: "The revision of the custom plugin to use.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -825,7 +825,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"revision": {
 						// Property: Revision
 						Description: "The revision of the worker configuration to use.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),

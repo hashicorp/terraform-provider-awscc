@@ -389,7 +389,7 @@ func methodResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"timeout_in_millis": {
 						// Property: TimeoutInMillis
 						Description: "Custom timeout between 50 and 29,000 milliseconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(50, 29000),

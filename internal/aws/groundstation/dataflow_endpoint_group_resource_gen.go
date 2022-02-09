@@ -108,7 +108,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 											},
 											"port": {
 												// Property: Port
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -117,7 +117,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 								},
 								"mtu": {
 									// Property: Mtu
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"name": {

@@ -1926,7 +1926,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"rank": {
 									// Property: Rank
 									Description: "Rank of the log pattern.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 							},

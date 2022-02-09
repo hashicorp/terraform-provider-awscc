@@ -98,7 +98,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "The version number of the image version.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 	}

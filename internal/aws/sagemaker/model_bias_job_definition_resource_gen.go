@@ -129,7 +129,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 								"instance_count": {
 									// Property: InstanceCount
 									Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 100),
@@ -150,7 +150,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 								"volume_size_in_gb": {
 									// Property: VolumeSizeInGB
 									Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 16384),
@@ -480,7 +480,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 								},
 								"probability_threshold_attribute": {
 									// Property: ProbabilityThresholdAttribute
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 								},
 								"s3_data_distribution_type": {
@@ -828,7 +828,7 @@ func modelBiasJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType
 					"max_runtime_in_seconds": {
 						// Property: MaxRuntimeInSeconds
 						Description: "The maximum runtime allowed in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 86400),

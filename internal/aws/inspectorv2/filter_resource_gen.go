@@ -1329,12 +1329,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"end_inclusive": {
 									// Property: EndInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1564,12 +1564,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"end_inclusive": {
 									// Property: EndInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1589,12 +1589,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"lower_inclusive": {
 									// Property: LowerInclusive
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 								},
 								"upper_inclusive": {
 									// Property: UpperInclusive
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 								},
 							},
@@ -1614,12 +1614,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"end_inclusive": {
 									// Property: EndInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1674,7 +1674,7 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"begin_inclusive": {
 									// Property: BeginInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
@@ -1682,7 +1682,7 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"end_inclusive": {
 									// Property: EndInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
@@ -1921,12 +1921,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"end_inclusive": {
 									// Property: EndInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"start_inclusive": {
 									// Property: StartInclusive
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -2083,12 +2083,12 @@ func filterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"lower_inclusive": {
 												// Property: LowerInclusive
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Optional: true,
 											},
 											"upper_inclusive": {
 												// Property: UpperInclusive
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Optional: true,
 											},
 										},

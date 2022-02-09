@@ -126,7 +126,7 @@ func iPAMScopeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of pools that currently exist in this scope.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

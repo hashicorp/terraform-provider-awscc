@@ -538,7 +538,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -565,7 +565,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -592,7 +592,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -619,7 +619,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -642,7 +642,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								},
 								"port": {
 									// Property: Port
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 							},
@@ -669,7 +669,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -696,7 +696,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -750,7 +750,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -828,7 +828,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -855,7 +855,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -882,7 +882,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -1497,7 +1497,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1524,7 +1524,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1551,7 +1551,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1578,7 +1578,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1601,7 +1601,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														},
 														"port": {
 															// Property: Port
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -1628,7 +1628,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1655,7 +1655,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1709,7 +1709,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1787,7 +1787,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1814,7 +1814,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -1841,7 +1841,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														"port": {
 															// Property: Port
 															Description: "<p>Port.</p>",
-															Type:        types.NumberType,
+															Type:        types.Float64Type,
 															Computed:    true,
 														},
 													},
@@ -2395,7 +2395,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2422,7 +2422,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2449,7 +2449,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2476,7 +2476,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2499,7 +2499,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								},
 								"port": {
 									// Property: Port
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 							},
@@ -2526,7 +2526,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2553,7 +2553,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2607,7 +2607,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2685,7 +2685,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2712,7 +2712,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -2739,7 +2739,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								"port": {
 									// Property: Port
 									Description: "<p>Port.</p>",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},

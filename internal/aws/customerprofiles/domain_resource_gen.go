@@ -76,7 +76,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The default number of days until the data within the domain expires.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 1098),

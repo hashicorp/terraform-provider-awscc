@@ -216,7 +216,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"resource_arn": {
@@ -290,7 +290,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"resource_arn": {

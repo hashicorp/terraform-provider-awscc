@@ -48,7 +48,7 @@ func fHIRDatastoreResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"nanos": {
 						// Property: Nanos
 						Description: "Nanoseconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 					},
 					"seconds": {

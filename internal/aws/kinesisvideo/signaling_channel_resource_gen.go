@@ -44,7 +44,7 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "The period of time a signaling channel retains undelivered messages before they are discarded.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(5, 120),

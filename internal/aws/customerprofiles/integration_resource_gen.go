@@ -903,12 +903,12 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"first_execution_from": {
 															// Property: FirstExecutionFrom
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Optional: true,
 														},
 														"schedule_end_time": {
 															// Property: ScheduleEndTime
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Optional: true,
 														},
 														"schedule_expression": {
@@ -921,7 +921,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"schedule_offset": {
 															// Property: ScheduleOffset
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(0, 36000),
@@ -929,7 +929,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"schedule_start_time": {
 															// Property: ScheduleStartTime
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Optional: true,
 														},
 														"timezone": {

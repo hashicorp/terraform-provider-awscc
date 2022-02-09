@@ -139,7 +139,7 @@ func signingProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 				},

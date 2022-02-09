@@ -2199,7 +2199,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),
@@ -3425,7 +3425,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"port": {
 															// Property: Port
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.IntBetween(1, 65535),
@@ -3445,7 +3445,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"crawl_depth": {
 									// Property: CrawlDepth
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
@@ -3453,7 +3453,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_content_size_per_page_in_mega_bytes": {
 									// Property: MaxContentSizePerPageInMegaBytes
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 50.000000),
@@ -3461,7 +3461,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_links_per_page": {
 									// Property: MaxLinksPerPage
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 1000),
@@ -3469,7 +3469,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_urls_per_minute_crawl_rate": {
 									// Property: MaxUrlsPerMinuteCrawlRate
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 300),
@@ -3497,7 +3497,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"port": {
 												// Property: Port
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntBetween(1, 65535),

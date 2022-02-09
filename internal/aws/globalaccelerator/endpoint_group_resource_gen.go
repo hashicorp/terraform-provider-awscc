@@ -4,7 +4,6 @@ package globalaccelerator
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -77,14 +76,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"weight": {
 						// Property: Weight
 						Description: "The weight for the endpoint.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Computed:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 255),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.Number{Value: big.NewFloat(100)}),
+							DefaultValue(types.Int64{Value: 100}),
 							tfsdk.UseStateForUnknown(),
 						},
 					},
@@ -130,11 +129,11 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(30)}),
+				DefaultValue(types.Int64{Value: 30}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},
@@ -166,14 +165,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(-1, 65535),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(-1)}),
+				DefaultValue(types.Int64{Value: -1}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},
@@ -254,7 +253,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"endpoint_port": {
 						// Property: EndpointPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 65535),
@@ -263,7 +262,7 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 					"listener_port": {
 						// Property: ListenerPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 65535),
@@ -283,11 +282,11 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "integer"
 			// }
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(3)}),
+				DefaultValue(types.Int64{Value: 3}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},
@@ -302,14 +301,14 @@ func endpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "type": "number"
 			// }
 			Description: "The percentage of traffic to sent to an AWS Region",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.FloatBetween(0.000000, 100.000000),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(100.000000)}),
+				DefaultValue(types.Float64{Value: 100.000000}),
 				tfsdk.UseStateForUnknown(),
 			},
 		},

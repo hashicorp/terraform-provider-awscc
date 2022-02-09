@@ -113,7 +113,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"min_number_of_executed_things": {
 									// Property: MinNumberOfExecutedThings
 									Description: "The minimum number of things which must receive job execution notifications before the job can be aborted.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -122,7 +122,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"threshold_percentage": {
 									// Property: ThresholdPercentage
 									Description: "The minimum percentage of job execution failures that must occur to initiate the job abort.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatAtMost(100.000000),
@@ -292,7 +292,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"number_of_retries": {
 									// Property: NumberOfRetries
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 10),
@@ -377,7 +377,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"base_rate_per_minute": {
 									// Property: BaseRatePerMinute
 									Description: "The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -386,7 +386,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"increment_factor": {
 									// Property: IncrementFactor
 									Description: "The exponential factor to increase the rate of rollout for a job.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(1.000000, 5.000000),
@@ -399,7 +399,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"number_of_notified_things": {
 												// Property: NumberOfNotifiedThings
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
@@ -407,7 +407,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"number_of_succeeded_things": {
 												// Property: NumberOfSucceededThings
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(1),
@@ -424,7 +424,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"maximum_per_minute": {
 						// Property: MaximumPerMinute
 						Description: "The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
@@ -488,7 +488,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"expires_in_sec": {
 						// Property: ExpiresInSec
 						Description: "How number (in seconds) pre-signed URLs are valid.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(60, 3600),
@@ -605,7 +605,7 @@ func jobTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"in_progress_timeout_in_minutes": {
 						// Property: InProgressTimeoutInMinutes
 						Description: "Specifies the amount of time, in minutes, this device has to finish execution of this job.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 10080),

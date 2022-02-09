@@ -88,7 +88,7 @@ func customDataIdentifierDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//   "type": "integer"
 			// }
 			Description: "Maximum match distance.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {

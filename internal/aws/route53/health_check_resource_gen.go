@@ -187,7 +187,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"failure_threshold": {
 						// Property: FailureThreshold
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 10),
@@ -203,7 +203,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"health_threshold": {
 						// Property: HealthThreshold
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 256),
@@ -246,7 +246,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"port": {
 						// Property: Port
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 65535),
@@ -265,7 +265,7 @@ func healthCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"request_interval": {
 						// Property: RequestInterval
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Computed: true,
 						Validators: []tfsdk.AttributeValidator{

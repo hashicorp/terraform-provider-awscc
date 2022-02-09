@@ -117,7 +117,7 @@ func imagePipelineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					"timeout_minutes": {
 						// Property: TimeoutMinutes
 						Description: "The maximum time in minutes that tests are permitted to run.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

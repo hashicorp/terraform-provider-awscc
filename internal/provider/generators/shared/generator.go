@@ -133,9 +133,6 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.UsesFrameworkAttr > 0 {
 		templateData.ImportFrameworkAttr = true
 	}
-	if codeFeatures&codegen.UsesMathBig > 0 {
-		templateData.ImportMathBig = true
-	}
 
 	if resType == DataSourceType {
 		templateData.SchemaDescription = fmt.Sprintf("Data Source schema for %s", cfTypeName)
@@ -192,7 +189,6 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportFrameworkAttr          bool
-	ImportMathBig                bool
 	ImportValidate               bool
 	PackageName                  string
 	RequiredAttributesValidator  string

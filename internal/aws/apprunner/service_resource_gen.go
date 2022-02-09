@@ -129,7 +129,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"healthy_threshold": {
 						// Property: HealthyThreshold
 						Description: "Health check Healthy Threshold",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),
@@ -138,7 +138,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"interval": {
 						// Property: Interval
 						Description: "Health check Interval",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 					},
 					"path": {
@@ -162,7 +162,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"timeout": {
 						// Property: Timeout
 						Description: "Health check Timeout",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),
@@ -171,7 +171,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"unhealthy_threshold": {
 						// Property: UnhealthyThreshold
 						Description: "Health check Unhealthy Threshold",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 20),

@@ -36,7 +36,7 @@ func missionProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "integer"
 			// }
 			Description: "Post-pass time needed after the contact.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"contact_pre_pass_duration_seconds": {
@@ -47,7 +47,7 @@ func missionProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "integer"
 			// }
 			Description: "Pre-pass time needed before the contact.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"dataflow_edges": {
@@ -105,7 +105,7 @@ func missionProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "integer"
 			// }
 			Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {

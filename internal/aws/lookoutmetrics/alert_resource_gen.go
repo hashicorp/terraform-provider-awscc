@@ -193,7 +193,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 100),

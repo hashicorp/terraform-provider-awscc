@@ -181,7 +181,7 @@ func firewallRuleGroupAssociationResourceType(ctx context.Context) (tfsdk.Resour
 			//   "type": "integer"
 			// }
 			Description: "Priority",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 		},
 		"status": {

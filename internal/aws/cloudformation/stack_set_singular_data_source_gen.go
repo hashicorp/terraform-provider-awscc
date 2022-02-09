@@ -206,22 +206,22 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"failure_tolerance_count": {
 						// Property: FailureToleranceCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"region_concurrency_type": {

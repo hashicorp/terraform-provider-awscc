@@ -126,7 +126,7 @@ func realtimeLogConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "minimum": 1,
 			//   "type": "number"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Float64Type,
 			Computed: true,
 		},
 	}

@@ -137,7 +137,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"http_method": {
@@ -155,13 +155,13 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"resource_arn": {
@@ -203,7 +203,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"version": {
 						// Property: Version
 						Description: "The version of the sampling rule format (1)",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -334,7 +334,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								"fixed_rate": {
 									// Property: FixedRate
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 								"http_method": {
@@ -352,13 +352,13 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								"priority": {
 									// Property: Priority
 									Description: "The priority of the sampling rule.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"reservoir_size": {
 									// Property: ReservoirSize
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"resource_arn": {
@@ -400,7 +400,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								"version": {
 									// Property: Version
 									Description: "The version of the sampling rule format (1)",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -500,7 +500,7 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"http_method": {
@@ -518,13 +518,13 @@ func samplingRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"resource_arn": {

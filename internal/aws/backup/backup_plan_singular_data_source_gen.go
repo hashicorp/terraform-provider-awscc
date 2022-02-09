@@ -168,7 +168,7 @@ func backupPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 							map[string]tfsdk.Attribute{
 								"completion_window_minutes": {
 									// Property: CompletionWindowMinutes
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"copy_actions": {
@@ -186,12 +186,12 @@ func backupPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 													map[string]tfsdk.Attribute{
 														"delete_after_days": {
 															// Property: DeleteAfterDays
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 														"move_to_cold_storage_after_days": {
 															// Property: MoveToColdStorageAfterDays
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -214,12 +214,12 @@ func backupPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 										map[string]tfsdk.Attribute{
 											"delete_after_days": {
 												// Property: DeleteAfterDays
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Computed: true,
 											},
 											"move_to_cold_storage_after_days": {
 												// Property: MoveToColdStorageAfterDays
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Computed: true,
 											},
 										},
@@ -244,7 +244,7 @@ func backupPlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								},
 								"start_window_minutes": {
 									// Property: StartWindowMinutes
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"target_backup_vault": {

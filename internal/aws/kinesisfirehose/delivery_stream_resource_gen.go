@@ -306,12 +306,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -445,7 +445,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -489,12 +489,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -1042,12 +1042,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1181,7 +1181,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1225,12 +1225,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -1824,12 +1824,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -1952,7 +1952,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																	"bloom_filter_columns": {
@@ -1965,7 +1965,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Optional: true,
 																	},
 																	"compression": {
@@ -1975,7 +1975,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"dictionary_key_threshold": {
 																		// Property: DictionaryKeyThreshold
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Optional: true,
 																	},
 																	"enable_padding": {
@@ -1990,17 +1990,17 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"padding_tolerance": {
 																		// Property: PaddingTolerance
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Optional: true,
 																	},
 																	"row_index_stride": {
 																		// Property: RowIndexStride
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																	"stripe_size_bytes": {
 																		// Property: StripeSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																},
@@ -2013,7 +2013,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																	"compression": {
@@ -2028,12 +2028,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																	},
 																	"max_padding_bytes": {
 																		// Property: MaxPaddingBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																	"page_size_bytes": {
 																		// Property: PageSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Optional: true,
 																	},
 																	"writer_version": {
@@ -2113,7 +2113,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"duration_in_seconds": {
 												// Property: DurationInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -2257,12 +2257,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -2653,12 +2653,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -2834,7 +2834,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -2872,12 +2872,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -3505,7 +3505,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -3538,12 +3538,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -3675,12 +3675,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -3907,12 +3907,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -4250,7 +4250,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"hec_acknowledgment_timeout_in_seconds": {
 						// Property: HECAcknowledgmentTimeoutInSeconds
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(180, 600),
@@ -4349,7 +4349,7 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},
@@ -4379,12 +4379,12 @@ func deliveryStreamResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},

@@ -61,7 +61,7 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The TTL in seconds of cached authorizer results.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"authorizer_uri": {

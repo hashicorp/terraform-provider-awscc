@@ -102,7 +102,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"size": {
 						// Property: Size
 						Description: "Sample size",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"type": {

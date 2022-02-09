@@ -60,7 +60,7 @@ func budgetsActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 				},

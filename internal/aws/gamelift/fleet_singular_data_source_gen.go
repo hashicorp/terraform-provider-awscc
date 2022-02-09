@@ -85,7 +85,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"ec2_inbound_permissions": {
@@ -141,7 +141,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"from_port": {
 						// Property: FromPort
 						Description: "A starting value for a range of allowed port numbers.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"ip_range": {
@@ -159,7 +159,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"to_port": {
 						// Property: ToPort
 						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -286,19 +286,19 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"desired_ec2_instances": {
 									// Property: DesiredEC2Instances
 									Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"max_size": {
 									// Property: MaxSize
 									Description: "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"min_size": {
 									// Property: MinSize
 									Description: "The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},
@@ -334,7 +334,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"metric_groups": {
@@ -362,7 +362,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "[DEPRECATED] The minimum value allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to \"0\". After the fleet is active, you can change this value.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {
@@ -447,13 +447,13 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"new_game_sessions_per_creator": {
 						// Property: NewGameSessionsPerCreator
 						Description: "The maximum number of game sessions that an individual can create during the policy period.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"policy_period_in_minutes": {
 						// Property: PolicyPeriodInMinutes
 						Description: "The time span used in evaluating the resource creation limit policy.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -523,13 +523,13 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"game_session_activation_timeout_seconds": {
 						// Property: GameSessionActivationTimeoutSeconds
 						Description: "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"max_concurrent_game_session_activations": {
 						// Property: MaxConcurrentGameSessionActivations
 						Description: "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"server_processes": {
@@ -540,7 +540,7 @@ func fleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								"concurrent_executions": {
 									// Property: ConcurrentExecutions
 									Description: "The number of server processes that use this configuration to run concurrently on an instance.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"launch_path": {

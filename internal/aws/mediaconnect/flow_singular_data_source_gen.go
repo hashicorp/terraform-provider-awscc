@@ -282,25 +282,25 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"ingest_port": {
 						// Property: IngestPort
 						Description: "The port that the flow will be listening on for incoming content.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"max_bitrate": {
 						// Property: MaxBitrate
 						Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"max_latency": {
 						// Property: MaxLatency
 						Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"min_latency": {
 						// Property: MinLatency
 						Description: "The minimum latency in milliseconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"name": {
@@ -376,7 +376,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"recovery_window": {
 						// Property: RecoveryWindow
 						Description: "Search window time to look for dash-7 packets",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"state": {

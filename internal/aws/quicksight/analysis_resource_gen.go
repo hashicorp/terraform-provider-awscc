@@ -376,7 +376,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"values": {
 									// Property: Values
 									Description: "<p>The values for the decimal parameter.</p>",
-									Type:        types.ListType{ElemType: types.NumberType},
+									Type:        types.ListType{ElemType: types.Float64Type},
 									Required:    true,
 								},
 							},
@@ -401,7 +401,7 @@ func analysisResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"values": {
 									// Property: Values
 									Description: "<p>The values for the integer parameter.</p>",
-									Type:        types.ListType{ElemType: types.NumberType},
+									Type:        types.ListType{ElemType: types.Float64Type},
 									Required:    true,
 								},
 							},

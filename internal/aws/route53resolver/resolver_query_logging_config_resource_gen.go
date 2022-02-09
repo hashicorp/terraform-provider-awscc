@@ -44,7 +44,7 @@ func resolverQueryLoggingConfigResourceType(ctx context.Context) (tfsdk.Resource
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

@@ -135,7 +135,7 @@ func appBlockDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"timeout_in_seconds": {
 						// Property: TimeoutInSeconds
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

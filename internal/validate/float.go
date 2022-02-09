@@ -138,9 +138,24 @@ func FloatAtMost(max float64) tfsdk.AttributeValidator {
 }
 
 func validateFloat(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (float64, bool) {
-	n, ok := request.AttributeConfig.(types.Number)
+	switch n := request.AttributeConfig.(type) {
+	case types.Float64:
+		if n.Unknown || n.Null {
+			return 0, false
+		}
 
-	if !ok {
+		return n.Value, true
+
+	case types.Number:
+		if n.Unknown || n.Null {
+			return 0, false
+		}
+
+		f, _ := n.Value.Float64()
+
+		return f, true
+
+	default:
 		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
 			request.AttributePath,
 			request.AttributeConfig,
@@ -148,12 +163,4 @@ func validateFloat(request tfsdk.ValidateAttributeRequest, response *tfsdk.Valid
 
 		return 0, false
 	}
-
-	if n.Unknown || n.Null {
-		return 0, false
-	}
-
-	f, _ := n.Value.Float64()
-
-	return f, true
 }

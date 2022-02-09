@@ -589,7 +589,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"max_age": {
 									// Property: MaxAge
 									Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
@@ -798,7 +798,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"days": {
 									// Property: Days
 									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 							},
@@ -1274,7 +1274,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"days_after_initiation": {
 												// Property: DaysAfterInitiation
 												Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.IntAtLeast(0),
@@ -1292,7 +1292,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"expired_object_delete_marker": {
@@ -1310,7 +1310,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"noncurrent_version_expiration_in_days": {
 									// Property: NoncurrentVersionExpirationInDays
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"noncurrent_version_transition": {
@@ -1338,7 +1338,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"transition_in_days": {
 												// Property: TransitionInDays
 												Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 											},
 										},
@@ -1369,7 +1369,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											"transition_in_days": {
 												// Property: TransitionInDays
 												Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Required:    true,
 											},
 										},
@@ -1447,7 +1447,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -1482,7 +1482,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -2116,7 +2116,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"days": {
 												// Property: Days
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 											"mode": {
@@ -2132,7 +2132,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"years": {
 												// Property: Years
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Optional: true,
 											},
 										},
@@ -2670,7 +2670,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"minutes": {
 																		// Property: Minutes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Required: true,
 																	},
 																},
@@ -2713,7 +2713,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"minutes": {
 																		// Property: Minutes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Required: true,
 																	},
 																},
@@ -2833,7 +2833,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"priority": {
 									// Property: Priority
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"source_selection_criteria": {

@@ -70,7 +70,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					"weight": {
 						// Property: Weight
 						Description: "The weight for the endpoint.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -109,7 +109,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "type": "integer"
 			// }
 			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"health_check_path": {
@@ -135,7 +135,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "type": "integer"
 			// }
 			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"health_check_protocol": {
@@ -200,13 +200,13 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 					"endpoint_port": {
 						// Property: EndpointPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"listener_port": {
 						// Property: ListenerPort
 						Description: "A network port number",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -223,7 +223,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "type": "integer"
 			// }
 			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"traffic_dial_percentage": {
@@ -237,7 +237,7 @@ func endpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "type": "number"
 			// }
 			Description: "The percentage of traffic to sent to an AWS Region",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 	}

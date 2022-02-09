@@ -186,7 +186,7 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								"iops": {
 									// Property: Iops
 									Description: "Use to configure device IOPS.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"kms_key_id": {
@@ -204,13 +204,13 @@ func imageRecipeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								"throughput": {
 									// Property: Throughput
 									Description: "For GP3 volumes only ? The throughput in MiB/s that the volume supports.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"volume_size": {
 									// Property: VolumeSize
 									Description: "Use to override the device's volume size.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 								"volume_type": {

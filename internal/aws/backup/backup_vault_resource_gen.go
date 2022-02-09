@@ -108,17 +108,17 @@ func backupVaultResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"changeable_for_days": {
 						// Property: ChangeableForDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Optional: true,
 					},
 					"max_retention_days": {
 						// Property: MaxRetentionDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Optional: true,
 					},
 					"min_retention_days": {
 						// Property: MinRetentionDays
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Required: true,
 					},
 				},

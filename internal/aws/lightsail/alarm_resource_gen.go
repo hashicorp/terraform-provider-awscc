@@ -81,7 +81,7 @@ func alarmResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"evaluation_periods": {
@@ -92,7 +92,7 @@ func alarmResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 		},
 		"metric_name": {
@@ -172,7 +172,7 @@ func alarmResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "The value against which the specified statistic is compared.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Required:    true,
 		},
 		"treat_missing_data": {

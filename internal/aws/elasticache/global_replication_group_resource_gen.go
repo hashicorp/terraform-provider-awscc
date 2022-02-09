@@ -75,7 +75,7 @@ func globalReplicationGroupResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "type": "integer"
 			// }
 			Description: "Indicates the number of node groups in the Global Datastore.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			// GlobalNodeGroupCount is a write-only property.
 		},

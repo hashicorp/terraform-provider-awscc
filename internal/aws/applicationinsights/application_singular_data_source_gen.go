@@ -1702,7 +1702,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								"rank": {
 									// Property: Rank
 									Description: "Rank of the log pattern.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Computed:    true,
 								},
 							},

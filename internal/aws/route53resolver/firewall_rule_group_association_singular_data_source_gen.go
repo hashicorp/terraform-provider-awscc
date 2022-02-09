@@ -147,7 +147,7 @@ func firewallRuleGroupAssociationDataSourceType(ctx context.Context) (tfsdk.Data
 			//   "type": "integer"
 			// }
 			Description: "Priority",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"status": {

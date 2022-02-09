@@ -129,7 +129,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"hours": {
 									// Property: Hours
 									Description: "The hours.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 23),
@@ -138,7 +138,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"minutes": {
 									// Property: Minutes
 									Description: "The minutes.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 59),
@@ -156,7 +156,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"hours": {
 									// Property: Hours
 									Description: "The hours.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 23),
@@ -165,7 +165,7 @@ func hoursOfOperationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								"minutes": {
 									// Property: Minutes
 									Description: "The minutes.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 59),

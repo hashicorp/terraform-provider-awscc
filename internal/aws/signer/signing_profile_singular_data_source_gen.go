@@ -111,7 +111,7 @@ func signingProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"value": {
 						// Property: Value
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},

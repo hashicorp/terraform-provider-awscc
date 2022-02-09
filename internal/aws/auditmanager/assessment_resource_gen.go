@@ -175,7 +175,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "number"
 			// }
 			Description: "The sequence of characters that identifies when the event occurred.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -316,7 +316,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"creation_time": {
 						// Property: CreationTime
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 					},
 					"id": {
@@ -330,7 +330,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"last_updated": {
 						// Property: LastUpdated
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 					},
 					"role_arn": {

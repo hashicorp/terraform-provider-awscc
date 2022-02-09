@@ -30,7 +30,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 60),

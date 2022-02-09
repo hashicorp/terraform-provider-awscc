@@ -119,7 +119,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "type": "integer"
 			// }
 			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

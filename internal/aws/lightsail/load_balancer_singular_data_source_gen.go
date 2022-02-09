@@ -54,7 +54,7 @@ func loadBalancerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "The instance port where you're creating your load balancer.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"ip_address_type": {

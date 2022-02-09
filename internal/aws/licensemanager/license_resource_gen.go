@@ -84,7 +84,7 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"max_time_to_live_in_minutes": {
 									// Property: MaxTimeToLiveInMinutes
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 							},
@@ -97,7 +97,7 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"max_time_to_live_in_minutes": {
 									// Property: MaxTimeToLiveInMinutes
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 								},
 							},
@@ -157,7 +157,7 @@ func licenseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_count": {
 						// Property: MaxCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 					},
 					"name": {

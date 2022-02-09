@@ -149,7 +149,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 					},
 					"priority": {
 						// Property: Priority
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 999),
@@ -157,7 +157,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Optional: true,
 					},
 				},
@@ -299,7 +299,7 @@ func capacityReservationFleetResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(1, 25000),

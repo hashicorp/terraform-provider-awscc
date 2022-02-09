@@ -70,7 +70,7 @@ func archiveResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 		},
 		"source_arn": {

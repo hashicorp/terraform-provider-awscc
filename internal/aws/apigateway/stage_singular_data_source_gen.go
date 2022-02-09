@@ -124,7 +124,7 @@ func stageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"percent_traffic": {
 						// Property: PercentTraffic
 						Description: "The percentage (0-100) of traffic diverted to a canary deployment.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"stage_variable_overrides": {
@@ -258,7 +258,7 @@ func stageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"cache_ttl_in_seconds": {
 						// Property: CacheTtlInSeconds
 						Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"caching_enabled": {
@@ -300,13 +300,13 @@ func stageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"throttling_burst_limit": {
 						// Property: ThrottlingBurstLimit
 						Description: "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"throttling_rate_limit": {
 						// Property: ThrottlingRateLimit
 						Description: "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 				},

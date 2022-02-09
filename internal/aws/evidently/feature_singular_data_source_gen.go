@@ -257,12 +257,12 @@ func featureDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"double_value": {
 						// Property: DoubleValue
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"long_value": {
 						// Property: LongValue
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 					"string_value": {

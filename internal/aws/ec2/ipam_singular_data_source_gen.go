@@ -118,7 +118,7 @@ func iPAMDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of scopes that currently exist in this IPAM.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"tags": {

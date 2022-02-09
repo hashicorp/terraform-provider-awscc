@@ -375,7 +375,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 								},
 								"access_control_max_age_sec": {
 									// Property: AccessControlMaxAgeSec
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"origin_override": {
@@ -504,7 +504,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 										map[string]tfsdk.Attribute{
 											"access_control_max_age_sec": {
 												// Property: AccessControlMaxAgeSec
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Required: true,
 											},
 											"include_subdomains": {

@@ -40,7 +40,7 @@ func resolverQueryLoggingConfigDataSourceType(ctx context.Context) (tfsdk.DataSo
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"creation_time": {

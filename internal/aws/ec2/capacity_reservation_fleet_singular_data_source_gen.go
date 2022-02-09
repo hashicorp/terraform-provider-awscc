@@ -125,12 +125,12 @@ func capacityReservationFleetDataSourceType(ctx context.Context) (tfsdk.DataSour
 					},
 					"priority": {
 						// Property: Priority
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Float64Type,
 						Computed: true,
 					},
 				},
@@ -245,7 +245,7 @@ func capacityReservationFleetDataSourceType(ctx context.Context) (tfsdk.DataSour
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 	}

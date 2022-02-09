@@ -64,7 +64,7 @@ func networkInsightsPathResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{

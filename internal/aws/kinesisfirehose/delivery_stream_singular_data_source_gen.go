@@ -305,12 +305,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -412,7 +412,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -444,12 +444,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -922,12 +922,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1029,7 +1029,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1061,12 +1061,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1613,12 +1613,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1729,7 +1729,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"bloom_filter_columns": {
@@ -1739,7 +1739,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																	},
 																	"bloom_filter_false_positive_probability": {
 																		// Property: BloomFilterFalsePositiveProbability
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																	"compression": {
@@ -1749,7 +1749,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																	},
 																	"dictionary_key_threshold": {
 																		// Property: DictionaryKeyThreshold
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																	"enable_padding": {
@@ -1764,17 +1764,17 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																	},
 																	"padding_tolerance": {
 																		// Property: PaddingTolerance
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																	"row_index_stride": {
 																		// Property: RowIndexStride
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"stripe_size_bytes": {
 																		// Property: StripeSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1787,7 +1787,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																map[string]tfsdk.Attribute{
 																	"block_size_bytes": {
 																		// Property: BlockSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"compression": {
@@ -1802,12 +1802,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 																	},
 																	"max_padding_bytes": {
 																		// Property: MaxPaddingBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"page_size_bytes": {
 																		// Property: PageSizeBytes
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"writer_version": {
@@ -1884,7 +1884,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"duration_in_seconds": {
 												// Property: DurationInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -1997,12 +1997,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -2364,12 +2364,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -2506,7 +2506,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -2538,12 +2538,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -3108,7 +3108,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -3135,12 +3135,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -3240,12 +3240,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -3443,12 +3443,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"interval_in_seconds": {
 									// Property: IntervalInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"size_in_m_bs": {
 									// Property: SizeInMBs
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -3763,7 +3763,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 					},
 					"hec_acknowledgment_timeout_in_seconds": {
 						// Property: HECAcknowledgmentTimeoutInSeconds
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"hec_endpoint": {
@@ -3833,7 +3833,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 							map[string]tfsdk.Attribute{
 								"duration_in_seconds": {
 									// Property: DurationInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -3860,12 +3860,12 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 										map[string]tfsdk.Attribute{
 											"interval_in_seconds": {
 												// Property: IntervalInSeconds
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"size_in_m_bs": {
 												// Property: SizeInMBs
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},

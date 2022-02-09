@@ -233,7 +233,7 @@ func scheduledActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 								},
 								"number_of_nodes": {
 									// Property: NumberOfNodes
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},

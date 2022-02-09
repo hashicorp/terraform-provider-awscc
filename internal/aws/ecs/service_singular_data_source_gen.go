@@ -44,7 +44,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 				map[string]tfsdk.Attribute{
 					"base": {
 						// Property: Base
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"capacity_provider": {
@@ -54,7 +54,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"weight": {
 						// Property: Weight
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},
@@ -124,12 +124,12 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"maximum_percent": {
 						// Property: MaximumPercent
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"minimum_healthy_percent": {
 						// Property: MinimumHealthyPercent
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 				},
@@ -170,7 +170,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"enable_ecs_managed_tags": {
@@ -197,7 +197,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"launch_type": {
@@ -247,7 +247,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"container_port": {
 						// Property: ContainerPort
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"load_balancer_name": {
@@ -518,12 +518,12 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					},
 					"container_port": {
 						// Property: ContainerPort
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"port": {
 						// Property: Port
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"registry_arn": {

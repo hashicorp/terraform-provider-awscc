@@ -42,7 +42,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "type": "integer"
 			// }
 			Description: "The value for evaluated dimensions.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"last_evaluated_date": {

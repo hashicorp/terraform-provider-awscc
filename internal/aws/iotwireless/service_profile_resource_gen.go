@@ -134,7 +134,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dev_status_req_freq": {
 						// Property: DevStatusReqFreq
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -142,7 +142,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dl_bucket_size": {
 						// Property: DlBucketSize
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -150,7 +150,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dl_rate": {
 						// Property: DlRate
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -166,7 +166,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dr_max": {
 						// Property: DrMax
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -174,7 +174,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"dr_min": {
 						// Property: DrMin
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -190,7 +190,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"min_gw_diversity": {
 						// Property: MinGwDiversity
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -238,7 +238,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"target_per": {
 						// Property: TargetPer
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -246,7 +246,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"ul_bucket_size": {
 						// Property: UlBucketSize
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -254,7 +254,7 @@ func serviceProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"ul_rate": {
 						// Property: UlRate
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),

@@ -282,7 +282,7 @@ func launchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"split_weight": {
 									// Property: SplitWeight
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},

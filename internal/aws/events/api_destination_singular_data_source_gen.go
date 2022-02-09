@@ -87,7 +87,7 @@ func apiDestinationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "minimum": 1,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"name": {

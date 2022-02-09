@@ -155,7 +155,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 								"sheet_indexes": {
 									// Property: SheetIndexes
-									Type:     types.ListType{ElemType: types.NumberType},
+									Type:     types.ListType{ElemType: types.Int64Type},
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 1),
@@ -674,7 +674,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"max_files": {
 									// Property: MaxFiles
 									Description: "Maximum number of files",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Required:    true,
 								},
 								"order": {

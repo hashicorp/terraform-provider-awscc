@@ -400,7 +400,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 														},
 														"memory_size_in_kb": {
 															// Property: MemorySizeInKB
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Optional: true,
 														},
 														"mount_ro_sysfs": {
@@ -467,17 +467,17 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"max_idle_time_in_seconds": {
 									// Property: MaxIdleTimeInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"max_instances_count": {
 									// Property: MaxInstancesCount
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"max_queue_size": {
 									// Property: MaxQueueSize
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"pinned": {
@@ -487,12 +487,12 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 								},
 								"status_timeout_in_seconds": {
 									// Property: StatusTimeoutInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"timeout_in_seconds": {
 									// Property: TimeoutInSeconds
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 							},

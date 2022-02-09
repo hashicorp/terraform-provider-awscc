@@ -63,7 +63,7 @@ func schemaDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"version_number": {
 						// Property: VersionNumber
 						Description: "Indicates the version number in the schema to update.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

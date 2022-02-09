@@ -2127,7 +2127,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"schedule_end_time": {
 									// Property: ScheduleEndTime
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"schedule_expression": {
@@ -2137,12 +2137,12 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 								},
 								"schedule_offset": {
 									// Property: ScheduleOffset
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"schedule_start_time": {
 									// Property: ScheduleStartTime
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"time_zone": {

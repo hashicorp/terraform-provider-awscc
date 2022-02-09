@@ -104,7 +104,7 @@ func dataflowEndpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 											},
 											"port": {
 												// Property: Port
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -113,7 +113,7 @@ func dataflowEndpointGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 								},
 								"mtu": {
 									// Property: Mtu
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"name": {

@@ -107,7 +107,7 @@ func taskSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"container_port": {
 						// Property: ContainerPort
 						Description: "The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"load_balancer_name": {
@@ -251,7 +251,7 @@ func taskSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"value": {
 						// Property: Value
 						Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 				},
@@ -310,13 +310,13 @@ func taskSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"container_port": {
 						// Property: ContainerPort
 						Description: "The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"port": {
 						// Property: Port
 						Description: "The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"registry_arn": {

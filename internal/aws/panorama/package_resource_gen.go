@@ -40,7 +40,7 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

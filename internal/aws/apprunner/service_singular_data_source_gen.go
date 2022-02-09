@@ -116,13 +116,13 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"healthy_threshold": {
 						// Property: HealthyThreshold
 						Description: "Health check Healthy Threshold",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"interval": {
 						// Property: Interval
 						Description: "Health check Interval",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"path": {
@@ -140,13 +140,13 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 					"timeout": {
 						// Property: Timeout
 						Description: "Health check Timeout",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"unhealthy_threshold": {
 						// Property: UnhealthyThreshold
 						Description: "Health check Unhealthy Threshold",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},

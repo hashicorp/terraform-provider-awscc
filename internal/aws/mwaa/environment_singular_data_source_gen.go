@@ -410,7 +410,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "Maximum worker compute units.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"min_workers": {
@@ -422,7 +422,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "Minimum worker compute units.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {
@@ -554,7 +554,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "Scheduler compute units.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"source_bucket_arn": {

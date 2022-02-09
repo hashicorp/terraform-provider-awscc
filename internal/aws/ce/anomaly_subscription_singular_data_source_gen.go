@@ -159,7 +159,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "type": "number"
 			// }
 			Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 	}

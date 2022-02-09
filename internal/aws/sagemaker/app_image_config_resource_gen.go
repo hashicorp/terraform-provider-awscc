@@ -134,7 +134,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"default_gid": {
 									// Property: DefaultGid
 									Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),
@@ -143,7 +143,7 @@ func appImageConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								"default_uid": {
 									// Property: DefaultUid
 									Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 65535),

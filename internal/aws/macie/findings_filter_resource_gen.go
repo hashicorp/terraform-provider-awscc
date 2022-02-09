@@ -130,22 +130,22 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"gt": {
 									// Property: gt
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"gte": {
 									// Property: gte
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"lt": {
 									// Property: lt
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"lte": {
 									// Property: lte
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"neq": {
@@ -235,7 +235,7 @@ func findingsFilterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Findings filter position.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 	}

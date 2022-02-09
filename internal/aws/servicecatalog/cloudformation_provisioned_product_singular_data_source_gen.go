@@ -264,22 +264,22 @@ func cloudFormationProvisionedProductDataSourceType(ctx context.Context) (tfsdk.
 					},
 					"stack_set_failure_tolerance_count": {
 						// Property: StackSetFailureToleranceCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"stack_set_failure_tolerance_percentage": {
 						// Property: StackSetFailureTolerancePercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"stack_set_max_concurrency_count": {
 						// Property: StackSetMaxConcurrencyCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"stack_set_max_concurrency_percentage": {
 						// Property: StackSetMaxConcurrencyPercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Computed: true,
 					},
 					"stack_set_operation_type": {

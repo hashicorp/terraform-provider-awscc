@@ -389,7 +389,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 								},
 								"sig_key_crc": {
 									// Property: SigKeyCrc
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Optional: true,
 								},
 								"update_signature": {

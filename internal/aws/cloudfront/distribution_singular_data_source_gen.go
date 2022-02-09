@@ -813,7 +813,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"field_level_encryption_id": {
@@ -907,12 +907,12 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"origin_request_policy_id": {
@@ -976,17 +976,17 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 							map[string]tfsdk.Attribute{
 								"error_caching_min_ttl": {
 									// Property: ErrorCachingMinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"error_code": {
 									// Property: ErrorCode
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"response_code": {
 									// Property: ResponseCode
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"response_page_path": {
@@ -1010,12 +1010,12 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"http_port": {
 									// Property: HTTPPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"https_port": {
 									// Property: HTTPSPort
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"origin_protocol_policy": {
@@ -1058,7 +1058,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"default_ttl": {
 									// Property: DefaultTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"field_level_encryption_id": {
@@ -1152,12 +1152,12 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"max_ttl": {
 									// Property: MaxTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"min_ttl": {
 									// Property: MinTTL
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"origin_request_policy_id": {
@@ -1265,12 +1265,12 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 																map[string]tfsdk.Attribute{
 																	"items": {
 																		// Property: Items
-																		Type:     types.ListType{ElemType: types.NumberType},
+																		Type:     types.ListType{ElemType: types.Int64Type},
 																		Computed: true,
 																	},
 																	"quantity": {
 																		// Property: Quantity
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																},
@@ -1306,7 +1306,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 														},
 														"quantity": {
 															// Property: Quantity
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -1320,7 +1320,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 								},
 								"quantity": {
 									// Property: Quantity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1333,12 +1333,12 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 							map[string]tfsdk.Attribute{
 								"connection_attempts": {
 									// Property: ConnectionAttempts
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"connection_timeout": {
 									// Property: ConnectionTimeout
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"custom_origin_config": {
@@ -1347,17 +1347,17 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 										map[string]tfsdk.Attribute{
 											"http_port": {
 												// Property: HTTPPort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"https_port": {
 												// Property: HTTPSPort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"origin_keepalive_timeout": {
 												// Property: OriginKeepaliveTimeout
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"origin_protocol_policy": {
@@ -1367,7 +1367,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 											},
 											"origin_read_timeout": {
 												// Property: OriginReadTimeout
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"origin_ssl_protocols": {

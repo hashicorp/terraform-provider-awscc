@@ -4,7 +4,6 @@ package mediaconnect
 
 import (
 	"context"
-	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -30,11 +29,11 @@ func flowEntitlementResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "type": "integer"
 			// }
 			Description: "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Number{Value: big.NewFloat(0)}),
+				DefaultValue(types.Int64{Value: 0}),
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},

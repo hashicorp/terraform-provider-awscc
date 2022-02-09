@@ -57,7 +57,7 @@ func warmPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"min_size": {
@@ -66,7 +66,7 @@ func warmPoolDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"pool_state": {

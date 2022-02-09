@@ -757,7 +757,7 @@ func templateResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"version_number": {
 						// Property: VersionNumber
 						Description: "<p>The version number of the template version.</p>",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatAtLeast(1.000000),

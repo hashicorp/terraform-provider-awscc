@@ -40,7 +40,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Post-pass time needed after the contact.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"contact_pre_pass_duration_seconds": {
@@ -51,7 +51,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Pre-pass time needed before the contact.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"dataflow_edges": {
@@ -115,7 +115,7 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Required:    true,
 		},
 		"name": {

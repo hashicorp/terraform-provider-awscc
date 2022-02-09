@@ -77,7 +77,7 @@ func dHCPOptionsDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "type": "integer"
 			// }
 			Description: "The NetBIOS node type (1, 2, 4, or 8).",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"ntp_servers": {

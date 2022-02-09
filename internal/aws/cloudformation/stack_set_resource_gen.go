@@ -230,7 +230,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				map[string]tfsdk.Attribute{
 					"failure_tolerance_count": {
 						// Property: FailureToleranceCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -238,7 +238,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"failure_tolerance_percentage": {
 						// Property: FailureTolerancePercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
@@ -246,7 +246,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_concurrent_count": {
 						// Property: MaxConcurrentCount
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
@@ -254,7 +254,7 @@ func stackSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					},
 					"max_concurrent_percentage": {
 						// Property: MaxConcurrentPercentage
-						Type:     types.NumberType,
+						Type:     types.Int64Type,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),

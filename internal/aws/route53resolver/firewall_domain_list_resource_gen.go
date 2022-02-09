@@ -77,7 +77,7 @@ func firewallDomainListResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

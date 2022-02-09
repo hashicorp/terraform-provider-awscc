@@ -336,7 +336,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 											"image_version_number": {
 												// Property: ImageVersionNumber
 												Description: "The version number of the CustomImage.",
-												Type:        types.NumberType,
+												Type:        types.Int64Type,
 												Computed:    true,
 											},
 										},

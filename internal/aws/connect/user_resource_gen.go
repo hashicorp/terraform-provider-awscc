@@ -155,7 +155,7 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"after_contact_work_time_limit": {
 						// Property: AfterContactWorkTimeLimit
 						Description: "The After Call Work (ACW) timeout setting, in seconds.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),

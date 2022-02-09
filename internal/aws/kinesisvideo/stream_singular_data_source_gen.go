@@ -40,7 +40,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "integer"
 			// }
 			Description: "The number of hours till which Kinesis Video will retain the data in the stream",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"device_name": {

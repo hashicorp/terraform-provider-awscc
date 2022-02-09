@@ -2037,7 +2037,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 											},
 											"database_port": {
 												// Property: DatabasePort
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"secret_arn": {
@@ -2852,7 +2852,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 														},
 														"port": {
 															// Property: Port
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 													},
@@ -2866,22 +2866,22 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 								},
 								"crawl_depth": {
 									// Property: CrawlDepth
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"max_content_size_per_page_in_mega_bytes": {
 									// Property: MaxContentSizePerPageInMegaBytes
-									Type:     types.NumberType,
+									Type:     types.Float64Type,
 									Computed: true,
 								},
 								"max_links_per_page": {
 									// Property: MaxLinksPerPage
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"max_urls_per_minute_crawl_rate": {
 									// Property: MaxUrlsPerMinuteCrawlRate
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"proxy_configuration": {
@@ -2900,7 +2900,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 											},
 											"port": {
 												// Property: Port
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},

@@ -571,7 +571,7 @@ func certificateAuthorityDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"s3_bucket_name": {

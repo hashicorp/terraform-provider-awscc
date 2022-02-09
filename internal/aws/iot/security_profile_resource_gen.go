@@ -405,7 +405,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"consecutive_datapoints_to_alarm": {
 									// Property: ConsecutiveDatapointsToAlarm
 									Description: "If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
@@ -414,7 +414,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"consecutive_datapoints_to_clear": {
 									// Property: ConsecutiveDatapointsToClear
 									Description: "If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 10),
@@ -423,7 +423,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 								"duration_seconds": {
 									// Property: DurationSeconds
 									Description: "Use this to specify the time duration over which the behavior is evaluated.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 								},
 								"ml_detection_config": {
@@ -499,19 +499,19 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 											"number": {
 												// Property: Number
 												Description: "The numeral value of a metric.",
-												Type:        types.NumberType,
+												Type:        types.Float64Type,
 												Optional:    true,
 											},
 											"numbers": {
 												// Property: Numbers
 												Description: "The numeral values of a metric.",
-												Type:        types.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.Float64Type},
 												Optional:    true,
 											},
 											"ports": {
 												// Property: Ports
 												Description: "If the ComparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.",
-												Type:        types.SetType{ElemType: types.NumberType},
+												Type:        types.SetType{ElemType: types.Int64Type},
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.IntBetween(0, 65535)),

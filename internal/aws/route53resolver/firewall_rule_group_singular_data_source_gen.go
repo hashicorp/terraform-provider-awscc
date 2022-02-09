@@ -150,7 +150,7 @@ func firewallRuleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
 						Description: "BlockOverrideTtl",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 					"block_response": {
@@ -168,7 +168,7 @@ func firewallRuleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 					"priority": {
 						// Property: Priority
 						Description: "Rule Priority",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Computed:    true,
 					},
 				},
@@ -237,7 +237,7 @@ func firewallRuleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"share_status": {

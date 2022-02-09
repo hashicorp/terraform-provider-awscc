@@ -232,7 +232,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							map[string]tfsdk.Attribute{
 								"split_weight": {
 									// Property: SplitWeight
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(0, 100000),
@@ -296,7 +296,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "minimum": 0,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.IntBetween(0, 100000),

@@ -70,7 +70,7 @@ func gameServerGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 					"estimated_instance_warmup": {
 						// Property: EstimatedInstanceWarmup
 						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"target_tracking_configuration": {
@@ -81,7 +81,7 @@ func gameServerGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 								"target_value": {
 									// Property: TargetValue
 									Description: "Desired value to use with a game server group target-based scaling policy.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Computed:    true,
 								},
 							},
@@ -272,7 +272,7 @@ func gameServerGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "type": "number"
 			// }
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"min_size": {
@@ -284,7 +284,7 @@ func gameServerGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "type": "number"
 			// }
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.NumberType,
+			Type:        types.Float64Type,
 			Computed:    true,
 		},
 		"role_arn": {

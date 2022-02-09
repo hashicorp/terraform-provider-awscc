@@ -2635,7 +2635,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"timer_name": {
@@ -3201,7 +3201,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"timer_name": {
@@ -3767,7 +3767,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"timer_name": {
@@ -4324,7 +4324,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 																				"seconds": {
 																					// Property: Seconds
 																					Description: "The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.",
-																					Type:        types.NumberType,
+																					Type:        types.Int64Type,
 																					Computed:    true,
 																				},
 																				"timer_name": {

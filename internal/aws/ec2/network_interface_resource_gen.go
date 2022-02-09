@@ -87,7 +87,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"ipv_6_addresses": {
@@ -208,7 +208,7 @@ func networkInterfaceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "type": "integer"
 			// }
 			Description: "The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Optional:    true,
 		},
 		"secondary_private_ip_addresses": {

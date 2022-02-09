@@ -60,7 +60,7 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 		},
 		"min_size": {
@@ -69,7 +69,7 @@ func warmPoolResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Optional: true,
 		},
 		"pool_state": {

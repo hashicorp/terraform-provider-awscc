@@ -357,7 +357,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 								},
 								"access_control_max_age_sec": {
 									// Property: AccessControlMaxAgeSec
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"origin_override": {
@@ -483,7 +483,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 										map[string]tfsdk.Attribute{
 											"access_control_max_age_sec": {
 												// Property: AccessControlMaxAgeSec
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"include_subdomains": {

@@ -175,7 +175,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"block_override_ttl": {
 						// Property: BlockOverrideTtl
 						Description: "BlockOverrideTtl",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 604800),
@@ -206,7 +206,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 					"priority": {
 						// Property: Priority
 						Description: "Rule Priority",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Required:    true,
 					},
 				},
@@ -292,7 +292,7 @@ func firewallRuleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "type": "integer"
 			// }
 			Description: "Count",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

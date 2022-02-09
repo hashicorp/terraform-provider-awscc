@@ -254,17 +254,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 										map[string]tfsdk.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"min_capacity": {
 												// Property: MinCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"target_tracking_scaling_policy_configuration": {
@@ -278,17 +278,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"target_value": {
 															// Property: TargetValue
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -733,17 +733,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 													map[string]tfsdk.Attribute{
 														"max_capacity": {
 															// Property: MaxCapacity
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"min_capacity": {
 															// Property: MinCapacity
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"seed_capacity": {
 															// Property: SeedCapacity
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"target_tracking_scaling_policy_configuration": {
@@ -757,17 +757,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 																	},
 																	"scale_in_cooldown": {
 																		// Property: ScaleInCooldown
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"scale_out_cooldown": {
 																		// Property: ScaleOutCooldown
-																		Type:     types.NumberType,
+																		Type:     types.Int64Type,
 																		Computed: true,
 																	},
 																	"target_value": {
 																		// Property: TargetValue
-																		Type:     types.NumberType,
+																		Type:     types.Float64Type,
 																		Computed: true,
 																	},
 																},
@@ -780,7 +780,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 											},
 											"read_capacity_units": {
 												// Property: ReadCapacityUnits
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 										},
@@ -815,17 +815,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 										map[string]tfsdk.Attribute{
 											"max_capacity": {
 												// Property: MaxCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"min_capacity": {
 												// Property: MinCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"seed_capacity": {
 												// Property: SeedCapacity
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"target_tracking_scaling_policy_configuration": {
@@ -839,17 +839,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 														},
 														"scale_in_cooldown": {
 															// Property: ScaleInCooldown
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"scale_out_cooldown": {
 															// Property: ScaleOutCooldown
-															Type:     types.NumberType,
+															Type:     types.Int64Type,
 															Computed: true,
 														},
 														"target_value": {
 															// Property: TargetValue
-															Type:     types.NumberType,
+															Type:     types.Float64Type,
 															Computed: true,
 														},
 													},
@@ -862,7 +862,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								},
 								"read_capacity_units": {
 									// Property: ReadCapacityUnits
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 							},
@@ -1096,17 +1096,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 							map[string]tfsdk.Attribute{
 								"max_capacity": {
 									// Property: MaxCapacity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"min_capacity": {
 									// Property: MinCapacity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"seed_capacity": {
 									// Property: SeedCapacity
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"target_tracking_scaling_policy_configuration": {
@@ -1120,17 +1120,17 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 											},
 											"scale_in_cooldown": {
 												// Property: ScaleInCooldown
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"scale_out_cooldown": {
 												// Property: ScaleOutCooldown
-												Type:     types.NumberType,
+												Type:     types.Int64Type,
 												Computed: true,
 											},
 											"target_value": {
 												// Property: TargetValue
-												Type:     types.NumberType,
+												Type:     types.Float64Type,
 												Computed: true,
 											},
 										},

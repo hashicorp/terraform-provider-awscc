@@ -144,7 +144,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 1.000000),
@@ -171,7 +171,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 9999),
@@ -180,7 +180,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),
@@ -240,7 +240,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"version": {
 						// Property: Version
 						Description: "The version of the sampling rule format (1)",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(1),
@@ -374,7 +374,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"fixed_rate": {
 									// Property: FixedRate
 									Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-									Type:        types.NumberType,
+									Type:        types.Float64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.FloatBetween(0.000000, 1.000000),
@@ -401,7 +401,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"priority": {
 									// Property: Priority
 									Description: "The priority of the sampling rule.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntBetween(1, 9999),
@@ -410,7 +410,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"reservoir_size": {
 									// Property: ReservoirSize
 									Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(0),
@@ -470,7 +470,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"version": {
 									// Property: Version
 									Description: "The version of the sampling rule format (1)",
-									Type:        types.NumberType,
+									Type:        types.Int64Type,
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.IntAtLeast(1),
@@ -573,7 +573,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"fixed_rate": {
 						// Property: FixedRate
 						Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.FloatBetween(0.000000, 1.000000),
@@ -600,7 +600,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"priority": {
 						// Property: Priority
 						Description: "The priority of the sampling rule.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(1, 9999),
@@ -609,7 +609,7 @@ func samplingRuleResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 					"reservoir_size": {
 						// Property: ReservoirSize
 						Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntAtLeast(0),

@@ -60,7 +60,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"connection_borrow_timeout": {
 						// Property: ConnectionBorrowTimeout
 						Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 					},
 					"init_query": {
@@ -72,7 +72,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"max_connections_percent": {
 						// Property: MaxConnectionsPercent
 						Description: "The maximum size of the connection pool for each target in a target group.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),
@@ -81,7 +81,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 					"max_idle_connections_percent": {
 						// Property: MaxIdleConnectionsPercent
 						Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
-						Type:        types.NumberType,
+						Type:        types.Int64Type,
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.IntBetween(0, 100),

@@ -154,7 +154,7 @@ func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 					"session_sample_rate": {
 						// Property: SessionSampleRate
 						Description: "Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.",
-						Type:        types.NumberType,
+						Type:        types.Float64Type,
 						Computed:    true,
 					},
 					"telemetries": {

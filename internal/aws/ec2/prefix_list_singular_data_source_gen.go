@@ -98,7 +98,7 @@ func prefixListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Max Entries of Prefix List.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"owner_id": {
@@ -187,7 +187,7 @@ func prefixListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "Version of Prefix List.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 	}

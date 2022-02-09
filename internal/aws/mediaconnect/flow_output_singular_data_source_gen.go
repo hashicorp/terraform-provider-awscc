@@ -145,7 +145,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"min_latency": {
@@ -156,7 +156,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The minimum latency in milliseconds.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"name": {
@@ -189,7 +189,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The port to use when content is distributed to this output.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"protocol": {
@@ -230,7 +230,7 @@ func flowOutputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "type": "integer"
 			// }
 			Description: "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
-			Type:        types.NumberType,
+			Type:        types.Int64Type,
 			Computed:    true,
 		},
 		"stream_id": {

@@ -200,7 +200,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 							map[string]tfsdk.Attribute{
 								"split_weight": {
 									// Property: SplitWeight
-									Type:     types.NumberType,
+									Type:     types.Int64Type,
 									Computed: true,
 								},
 								"treatment": {
@@ -249,7 +249,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "minimum": 0,
 			//   "type": "integer"
 			// }
-			Type:     types.NumberType,
+			Type:     types.Int64Type,
 			Computed: true,
 		},
 		"tags": {
