@@ -986,7 +986,7 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 			validators = append(validators, "validate.IsRFC3339Time()")
 		case "string":
 		case "uri":
-			// TODO
+			validators = append(validators, "validate.IsURI()")
 		default:
 			// TODO
 			// return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
