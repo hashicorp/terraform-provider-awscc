@@ -175,7 +175,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				elementType = "types.BoolType"
 
 			case cfschema.PropertyTypeInteger:
-				elementType = "types.Int64Type" //nolint:goconst
+				elementType = "types.Int64Type"
 				validatorsGenerator = integerValidators
 
 			case cfschema.PropertyTypeNumber:
