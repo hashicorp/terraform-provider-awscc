@@ -42,7 +42,12 @@
         "/properties/DestinationCidrBlock",
         "/properties/LocalGatewayRouteTableId"
     ],
-    "taggable": false,
+    "tagging": {
+        "taggable": false,
+        "tagOnCreate":  false,
+        "tagUpdatable": false,
+        "cloudFormationSystemTags": false
+    },
     "handlers": {
         "create": {
             "permissions": [

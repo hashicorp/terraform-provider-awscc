@@ -72,6 +72,11 @@
         "devops-guru:UpdateResourceCollection"
       ]
     },
+    "list": {
+      "permissions": [
+        "devops-guru:GetResourceCollection"
+      ]
+    },
     "update": {
       "permissions": [
         "devops-guru:UpdateResourceCollection",

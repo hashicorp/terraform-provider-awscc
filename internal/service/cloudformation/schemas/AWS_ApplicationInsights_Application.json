@@ -385,6 +385,12 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "HANASID",
+                "HANAPort",
+                "HANASecretName",
+                "AgreeToInstallHANADBClient"
+            ],
             "additionalProperties": false
         },
         "HAClusterPrometheusExporter": {
