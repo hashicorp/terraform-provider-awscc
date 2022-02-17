@@ -32,7 +32,7 @@ jobs:
           echo ::set-output name=new_release_tag::$NEW_RELEASE_TAG
       - if: github.event.inputs.release-version
         name: Create tag from input
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -44,7 +44,7 @@ jobs:
             })
       - if: steps.tag.outputs.new_release_tag
         name: Create computed tag
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
