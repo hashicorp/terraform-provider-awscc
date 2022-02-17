@@ -181,7 +181,8 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "The kind of extension",
 			//   "enum": [
 			//     "RESOURCE",
-			//     "MODULE"
+			//     "MODULE",
+			//     "HOOK"
 			//   ],
 			//   "type": "string"
 			// }
@@ -193,6 +194,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				validate.StringInSlice([]string{
 					"RESOURCE",
 					"MODULE",
+					"HOOK",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

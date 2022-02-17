@@ -89,7 +89,8 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The kind of extension",
 			//   "enum": [
 			//     "RESOURCE",
-			//     "MODULE"
+			//     "MODULE",
+			//     "HOOK"
 			//   ],
 			//   "type": "string"
 			// }

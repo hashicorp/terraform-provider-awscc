@@ -60,6 +60,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "pattern": "",
 			//     "type": "string"
@@ -69,6 +70,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"iam_role_arn": {
 			// Property: IamRoleArn
@@ -141,6 +145,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "pattern": "",
 			//     "type": "string"
@@ -150,6 +155,9 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				Multiset(),
+			},
 		},
 		"user_role_required": {
 			// Property: UserRoleRequired

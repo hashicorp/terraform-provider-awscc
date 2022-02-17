@@ -860,6 +860,9 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                 "InstanceType": {
 			//                   "type": "string"
 			//                 },
+			//                 "Priority": {
+			//                   "type": "number"
+			//                 },
 			//                 "SpotPrice": {
 			//                   "type": "string"
 			//                 },
@@ -1822,6 +1825,11 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 												Type:     types.StringType,
 												Computed: true,
 											},
+											"priority": {
+												// Property: Priority
+												Type:     types.Float64Type,
+												Computed: true,
+											},
 											"spot_price": {
 												// Property: SpotPrice
 												Type:     types.StringType,
@@ -2080,6 +2088,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 		"overrides":                                        "Overrides",
 		"placement":                                        "Placement",
 		"primary":                                          "Primary",
+		"priority":                                         "Priority",
 		"private_ip_address":                               "PrivateIpAddress",
 		"private_ip_addresses":                             "PrivateIpAddresses",
 		"ramdisk_id":                                       "RamdiskId",

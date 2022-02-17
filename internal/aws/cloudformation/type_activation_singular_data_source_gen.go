@@ -142,7 +142,8 @@ func typeActivationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The kind of extension",
 			//   "enum": [
 			//     "RESOURCE",
-			//     "MODULE"
+			//     "MODULE",
+			//     "HOOK"
 			//   ],
 			//   "type": "string"
 			// }

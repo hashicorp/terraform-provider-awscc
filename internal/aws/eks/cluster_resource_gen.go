@@ -584,7 +584,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(150)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

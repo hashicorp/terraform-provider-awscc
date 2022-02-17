@@ -721,6 +721,9 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         ],
 			//         "type": "object"
 			//       },
+			//       "TableClass": {
+			//         "type": "string"
+			//       },
 			//       "Tags": {
 			//         "insertionOrder": false,
 			//         "items": {
@@ -990,6 +993,11 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								},
 							},
 						),
+						Optional: true,
+					},
+					"table_class": {
+						// Property: TableClass
+						Type:     types.StringType,
 						Optional: true,
 					},
 					"tags": {
@@ -1338,6 +1346,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"stream_arn":                           "StreamArn",
 		"stream_specification":                 "StreamSpecification",
 		"stream_view_type":                     "StreamViewType",
+		"table_class":                          "TableClass",
 		"table_id":                             "TableId",
 		"table_name":                           "TableName",
 		"tags":                                 "Tags",

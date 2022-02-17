@@ -769,6 +769,52 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			Type:        types.StringType,
 			Computed:    true,
 		},
+		"object_type_names": {
+			// Property: ObjectTypeNames
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The mapping between 3rd party event types and ObjectType names",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "The mapping between 3rd party event types and ObjectType names",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Computed: true,
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Computed: true,
+		},
 		"tags": {
 			// Property: Tags
 			// CloudFormation resource type schema:
@@ -872,6 +918,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"marketo":                     "Marketo",
 		"object":                      "Object",
 		"object_type_name":            "ObjectTypeName",
+		"object_type_names":           "ObjectTypeNames",
 		"operator_property_key":       "OperatorPropertyKey",
 		"property":                    "Property",
 		"s3":                          "S3",

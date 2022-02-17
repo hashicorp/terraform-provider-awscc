@@ -50,6 +50,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "pattern": "",
 			//     "type": "string"
@@ -117,6 +118,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "pattern": "",
 			//     "type": "string"

@@ -194,6 +194,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "string"
 			//                   }
 			//                 },
+			//                 "required": [
+			//                   "HANASID",
+			//                   "HANAPort",
+			//                   "HANASecretName",
+			//                   "AgreeToInstallHANADBClient"
+			//                 ],
 			//                 "type": "object"
 			//               },
 			//               "JMXPrometheusExporter": {
@@ -575,6 +581,12 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "type": "string"
 			//                   }
 			//                 },
+			//                 "required": [
+			//                   "HANASID",
+			//                   "HANAPort",
+			//                   "HANASecretName",
+			//                   "AgreeToInstallHANADBClient"
+			//                 ],
 			//                 "type": "object"
 			//               },
 			//               "JMXPrometheusExporter": {
@@ -994,25 +1006,25 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: AgreeToInstallHANADBClient
 															Description: "A flag which indicates agreeing to install SAP HANA DB client.",
 															Type:        types.BoolType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hana_port": {
 															// Property: HANAPort
 															Description: "The HANA DB port.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hanasid": {
 															// Property: HANASID
 															Description: "HANA DB SID.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hana_secret_name": {
 															// Property: HANASecretName
 															Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort
@@ -1409,25 +1421,25 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															// Property: AgreeToInstallHANADBClient
 															Description: "A flag which indicates agreeing to install SAP HANA DB client.",
 															Type:        types.BoolType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hana_port": {
 															// Property: HANAPort
 															Description: "The HANA DB port.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hanasid": {
 															// Property: HANASID
 															Description: "HANA DB SID.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"hana_secret_name": {
 															// Property: HANASecretName
 															Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
 															Type:        types.StringType,
-															Optional:    true,
+															Required:    true,
 														},
 														"prometheus_port": {
 															// Property: PrometheusPort

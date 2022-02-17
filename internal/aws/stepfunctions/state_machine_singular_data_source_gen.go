@@ -116,6 +116,7 @@ func stateMachineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "Destinations": {
+			//       "insertionOrder": false,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -239,6 +240,7 @@ func stateMachineDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "insertionOrder": false,
 			//   "items": {
 			//     "additionalProperties": false,
 			//     "properties": {

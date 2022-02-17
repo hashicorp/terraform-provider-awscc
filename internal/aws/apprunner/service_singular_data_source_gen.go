@@ -209,6 +209,72 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			),
 			Computed: true,
 		},
+		"network_configuration": {
+			// Property: NetworkConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Network configuration",
+			//   "properties": {
+			//     "EgressConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Network egress configuration",
+			//       "properties": {
+			//         "EgressType": {
+			//           "description": "Network egress type.",
+			//           "enum": [
+			//             "DEFAULT",
+			//             "VPC"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "VpcConnectorArn": {
+			//           "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+			//           "maxLength": 1011,
+			//           "minLength": 44,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "EgressType"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "EgressConfiguration"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Network configuration",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"egress_configuration": {
+						// Property: EgressConfiguration
+						Description: "Network egress configuration",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"egress_type": {
+									// Property: EgressType
+									Description: "Network egress type.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+								"vpc_connector_arn": {
+									// Property: VpcConnectorArn
+									Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+									Type:        types.StringType,
+									Computed:    true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
@@ -726,6 +792,8 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"configuration_source":           "ConfigurationSource",
 		"connection_arn":                 "ConnectionArn",
 		"cpu":                            "Cpu",
+		"egress_configuration":           "EgressConfiguration",
+		"egress_type":                    "EgressType",
 		"encryption_configuration":       "EncryptionConfiguration",
 		"health_check_configuration":     "HealthCheckConfiguration",
 		"healthy_threshold":              "HealthyThreshold",
@@ -740,6 +808,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"kms_key":                        "KmsKey",
 		"memory":                         "Memory",
 		"name":                           "Name",
+		"network_configuration":          "NetworkConfiguration",
 		"path":                           "Path",
 		"port":                           "Port",
 		"protocol":                       "Protocol",
@@ -759,6 +828,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"type":                           "Type",
 		"unhealthy_threshold":            "UnhealthyThreshold",
 		"value":                          "Value",
+		"vpc_connector_arn":              "VpcConnectorArn",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)
