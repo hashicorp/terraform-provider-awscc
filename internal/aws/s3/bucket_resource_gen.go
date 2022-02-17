@@ -1082,6 +1082,24 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 255,
 			//             "type": "string"
 			//           },
+			//           "NoncurrentVersionExpiration": {
+			//             "additionalProperties": false,
+			//             "description": "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
+			//             "properties": {
+			//               "NewerNoncurrentVersions": {
+			//                 "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+			//                 "type": "integer"
+			//               },
+			//               "NoncurrentDays": {
+			//                 "description": "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
+			//                 "type": "integer"
+			//               }
+			//             },
+			//             "required": [
+			//               "NoncurrentDays"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "NoncurrentVersionExpirationInDays": {
 			//             "type": "integer"
 			//           },
@@ -1089,6 +1107,10 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "additionalProperties": false,
 			//             "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 			//             "properties": {
+			//               "NewerNoncurrentVersions": {
+			//                 "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+			//                 "type": "integer"
+			//               },
 			//               "StorageClass": {
 			//                 "description": "The class of storage used to store the object.",
 			//                 "enum": [
@@ -1119,6 +1141,10 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "additionalProperties": false,
 			//               "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 			//               "properties": {
+			//                 "NewerNoncurrentVersions": {
+			//                   "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+			//                   "type": "integer"
+			//                 },
 			//                 "StorageClass": {
 			//                   "description": "The class of storage used to store the object.",
 			//                   "enum": [
@@ -1145,6 +1171,16 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "type": "array",
 			//             "uniqueItems": true
+			//           },
+			//           "ObjectSizeGreaterThan": {
+			//             "maxLength": 20,
+			//             "pattern": "",
+			//             "type": "string"
+			//           },
+			//           "ObjectSizeLessThan": {
+			//             "maxLength": 20,
+			//             "pattern": "",
+			//             "type": "string"
 			//           },
 			//           "Prefix": {
 			//             "type": "string"
@@ -1308,6 +1344,27 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										validate.StringLenAtMost(255),
 									},
 								},
+								"noncurrent_version_expiration": {
+									// Property: NoncurrentVersionExpiration
+									Description: "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"newer_noncurrent_versions": {
+												// Property: NewerNoncurrentVersions
+												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+												Type:        types.Int64Type,
+												Optional:    true,
+											},
+											"noncurrent_days": {
+												// Property: NoncurrentDays
+												Description: "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
+												Type:        types.Int64Type,
+												Required:    true,
+											},
+										},
+									),
+									Optional: true,
+								},
 								"noncurrent_version_expiration_in_days": {
 									// Property: NoncurrentVersionExpirationInDays
 									Type:     types.Int64Type,
@@ -1318,6 +1375,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"newer_noncurrent_versions": {
+												// Property: NewerNoncurrentVersions
+												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+												Type:        types.Int64Type,
+												Optional:    true,
+											},
 											"storage_class": {
 												// Property: StorageClass
 												Description: "The class of storage used to store the object.",
@@ -1349,6 +1412,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: NoncurrentVersionTransitions
 									Attributes: tfsdk.ListNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"newer_noncurrent_versions": {
+												// Property: NewerNoncurrentVersions
+												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+												Type:        types.Int64Type,
+												Optional:    true,
+											},
 											"storage_class": {
 												// Property: StorageClass
 												Description: "The class of storage used to store the object.",
@@ -1378,6 +1447,22 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.UniqueItems(),
+									},
+								},
+								"object_size_greater_than": {
+									// Property: ObjectSizeGreaterThan
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(20),
+									},
+								},
+								"object_size_less_than": {
+									// Property: ObjectSizeLessThan
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenAtMost(20),
 									},
 								},
 								"prefix": {
@@ -1644,6 +1729,21 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "description": "Configuration that defines how Amazon S3 handles bucket notifications.",
 			//   "properties": {
+			//     "EventBridgeConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
+			//       "properties": {
+			//         "EventBridgeEnabled": {
+			//           "default": "true",
+			//           "description": "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
+			//           "type": "boolean"
+			//         }
+			//       },
+			//       "required": [
+			//         "EventBridgeEnabled"
+			//       ],
+			//       "type": "object"
+			//     },
 			//     "LambdaConfigurations": {
 			//       "insertionOrder": true,
 			//       "items": {
@@ -1851,6 +1951,26 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
 			Attributes: tfsdk.SingleNestedAttributes(
 				map[string]tfsdk.Attribute{
+					"event_bridge_configuration": {
+						// Property: EventBridgeConfiguration
+						Description: "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"event_bridge_enabled": {
+									// Property: EventBridgeEnabled
+									Description: "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
+									Type:        types.BoolType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []tfsdk.AttributePlanModifier{
+										DefaultValue(types.String{Value: "true"}),
+										tfsdk.UseStateForUnknown(),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
 					"lambda_configurations": {
 						// Property: LambdaConfigurations
 						Attributes: tfsdk.ListNestedAttributes(
@@ -2179,7 +2299,8 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "Specifies an object ownership rule.",
 			//             "enum": [
 			//               "ObjectWriter",
-			//               "BucketOwnerPreferred"
+			//               "BucketOwnerPreferred",
+			//               "BucketOwnerEnforced"
 			//             ],
 			//             "type": "string"
 			//           }
@@ -2211,6 +2332,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										validate.StringInSlice([]string{
 											"ObjectWriter",
 											"BucketOwnerPreferred",
+											"BucketOwnerEnforced",
 										}),
 									},
 								},
@@ -3314,6 +3436,8 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"encryption_configuration":              "EncryptionConfiguration",
 		"error_document":                        "ErrorDocument",
 		"event":                                 "Event",
+		"event_bridge_configuration":            "EventBridgeConfiguration",
+		"event_bridge_enabled":                  "EventBridgeEnabled",
 		"event_threshold":                       "EventThreshold",
 		"expiration_date":                       "ExpirationDate",
 		"expiration_in_days":                    "ExpirationInDays",
@@ -3344,6 +3468,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"minutes":                               "Minutes",
 		"mode":                                  "Mode",
 		"name":                                  "Name",
+		"newer_noncurrent_versions":             "NewerNoncurrentVersions",
+		"noncurrent_days":                       "NoncurrentDays",
+		"noncurrent_version_expiration":         "NoncurrentVersionExpiration",
 		"noncurrent_version_expiration_in_days": "NoncurrentVersionExpirationInDays",
 		"noncurrent_version_transition":         "NoncurrentVersionTransition",
 		"noncurrent_version_transitions":        "NoncurrentVersionTransitions",
@@ -3351,6 +3478,8 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"object_lock_configuration":             "ObjectLockConfiguration",
 		"object_lock_enabled":                   "ObjectLockEnabled",
 		"object_ownership":                      "ObjectOwnership",
+		"object_size_greater_than":              "ObjectSizeGreaterThan",
+		"object_size_less_than":                 "ObjectSizeLessThan",
 		"optional_fields":                       "OptionalFields",
 		"output_schema_version":                 "OutputSchemaVersion",
 		"owner":                                 "Owner",

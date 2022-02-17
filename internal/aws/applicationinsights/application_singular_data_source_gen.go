@@ -190,6 +190,12 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     "type": "string"
 			//                   }
 			//                 },
+			//                 "required": [
+			//                   "HANASID",
+			//                   "HANAPort",
+			//                   "HANASecretName",
+			//                   "AgreeToInstallHANADBClient"
+			//                 ],
 			//                 "type": "object"
 			//               },
 			//               "JMXPrometheusExporter": {
@@ -571,6 +577,12 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                     "type": "string"
 			//                   }
 			//                 },
+			//                 "required": [
+			//                   "HANASID",
+			//                   "HANAPort",
+			//                   "HANASecretName",
+			//                   "AgreeToInstallHANADBClient"
+			//                 ],
 			//                 "type": "object"
 			//               },
 			//               "JMXPrometheusExporter": {

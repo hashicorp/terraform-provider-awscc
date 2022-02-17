@@ -37,7 +37,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "ARN(s) of the agent(s) to use for an HDFS location.",
 			Type:        types.ListType{ElemType: types.StringType},
-			Optional:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
 				validate.ArrayForEach(validate.StringLenAtMost(128)),
@@ -59,7 +59,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The authentication mode used to determine identity of user.",
 			Type:        types.StringType,
-			Optional:    true,
+			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SIMPLE",
@@ -230,7 +230,7 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				},
 				tfsdk.ListNestedAttributesOptions{},
 			),
-			Optional: true,
+			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtLeast(1),
 			},
@@ -488,22 +488,6 @@ func locationHDFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
-
-	opts = opts.WithRequiredAttributesValidators(validate.OneOfRequired(
-		validate.Required(
-			"name_nodes",
-			"authentication_type",
-			"agent_arns",
-			"simple_user",
-		),
-		validate.Required(
-			"name_nodes",
-			"authentication_type",
-			"agent_arns",
-			"kerberos_principal",
-		),
-	),
-	)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

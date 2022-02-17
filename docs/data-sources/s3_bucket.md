@@ -222,9 +222,12 @@ Read-Only:
 - **expiration_in_days** (Number)
 - **expired_object_delete_marker** (Boolean)
 - **id** (String) The ID of this resource.
+- **noncurrent_version_expiration** (Attributes) Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_expiration))
 - **noncurrent_version_expiration_in_days** (Number)
 - **noncurrent_version_transition** (Attributes) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transition))
 - **noncurrent_version_transitions** (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--noncurrent_version_transitions))
+- **object_size_greater_than** (String)
+- **object_size_less_than** (String)
 - **prefix** (String)
 - **status** (String)
 - **tag_filters** (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--tag_filters))
@@ -239,11 +242,21 @@ Read-Only:
 - **days_after_initiation** (Number) Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
 
 
+<a id="nestedatt--lifecycle_configuration--rules--noncurrent_version_expiration"></a>
+### Nested Schema for `lifecycle_configuration.rules.noncurrent_version_expiration`
+
+Read-Only:
+
+- **newer_noncurrent_versions** (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
+- **noncurrent_days** (Number) Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action
+
+
 <a id="nestedatt--lifecycle_configuration--rules--noncurrent_version_transition"></a>
 ### Nested Schema for `lifecycle_configuration.rules.noncurrent_version_transition`
 
 Read-Only:
 
+- **newer_noncurrent_versions** (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
 - **storage_class** (String) The class of storage used to store the object.
 - **transition_in_days** (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 
@@ -253,6 +266,7 @@ Read-Only:
 
 Read-Only:
 
+- **newer_noncurrent_versions** (Number) Specified the number of newer noncurrent and current versions that must exists before performing the associated action
 - **storage_class** (String) The class of storage used to store the object.
 - **transition_in_days** (Number) Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.
 
@@ -322,9 +336,18 @@ Read-Only:
 
 Read-Only:
 
+- **event_bridge_configuration** (Attributes) Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket. (see [below for nested schema](#nestedatt--notification_configuration--event_bridge_configuration))
 - **lambda_configurations** (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations))
 - **queue_configurations** (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations))
 - **topic_configurations** (Attributes List) (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations))
+
+<a id="nestedatt--notification_configuration--event_bridge_configuration"></a>
+### Nested Schema for `notification_configuration.event_bridge_configuration`
+
+Read-Only:
+
+- **event_bridge_enabled** (Boolean) Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.
+
 
 <a id="nestedatt--notification_configuration--lambda_configurations"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations`

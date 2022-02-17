@@ -246,6 +246,81 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			),
 			Optional: true,
 		},
+		"network_configuration": {
+			// Property: NetworkConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "description": "Network configuration",
+			//   "properties": {
+			//     "EgressConfiguration": {
+			//       "additionalProperties": false,
+			//       "description": "Network egress configuration",
+			//       "properties": {
+			//         "EgressType": {
+			//           "description": "Network egress type.",
+			//           "enum": [
+			//             "DEFAULT",
+			//             "VPC"
+			//           ],
+			//           "type": "string"
+			//         },
+			//         "VpcConnectorArn": {
+			//           "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+			//           "maxLength": 1011,
+			//           "minLength": 44,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "EgressType"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "EgressConfiguration"
+			//   ],
+			//   "type": "object"
+			// }
+			Description: "Network configuration",
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"egress_configuration": {
+						// Property: EgressConfiguration
+						Description: "Network egress configuration",
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"egress_type": {
+									// Property: EgressType
+									Description: "Network egress type.",
+									Type:        types.StringType,
+									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringInSlice([]string{
+											"DEFAULT",
+											"VPC",
+										}),
+									},
+								},
+								"vpc_connector_arn": {
+									// Property: VpcConnectorArn
+									Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(44, 1011),
+									},
+								},
+							},
+						),
+						Required: true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"service_arn": {
 			// Property: ServiceArn
 			// CloudFormation resource type schema:
@@ -825,6 +900,8 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"configuration_source":           "ConfigurationSource",
 		"connection_arn":                 "ConnectionArn",
 		"cpu":                            "Cpu",
+		"egress_configuration":           "EgressConfiguration",
+		"egress_type":                    "EgressType",
 		"encryption_configuration":       "EncryptionConfiguration",
 		"health_check_configuration":     "HealthCheckConfiguration",
 		"healthy_threshold":              "HealthyThreshold",
@@ -839,6 +916,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"kms_key":                        "KmsKey",
 		"memory":                         "Memory",
 		"name":                           "Name",
+		"network_configuration":          "NetworkConfiguration",
 		"path":                           "Path",
 		"port":                           "Port",
 		"protocol":                       "Protocol",
@@ -858,6 +936,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"type":                           "Type",
 		"unhealthy_threshold":            "UnhealthyThreshold",
 		"value":                          "Value",
+		"vpc_connector_arn":              "VpcConnectorArn",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

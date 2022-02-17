@@ -36,21 +36,8 @@
             "maxLength": 1024
         },
         "FilterCriteria": {
-            "type": "object",
             "description": "The filter criteria to control event filtering.",
-            "additionalProperties" : false,
-            "properties": {
-                "Filters": {
-                    "description": "List of filters of this FilterCriteria",
-                    "type": "array",
-                    "uniqueItems": true,
-                    "items": {
-                        "$ref": "#/definitions/Filter"
-                    },
-                    "minItems": 1,
-                    "maxItems": 20
-                }
-            }
+            "$ref": "#/definitions/FilterCriteria"
         },
         "FunctionName": {
             "description": "The name of the Lambda function.",
@@ -166,6 +153,23 @@
                 }
             }
         },
+        "FilterCriteria": {
+            "type": "object",
+            "description": "The filter criteria to control event filtering.",
+            "additionalProperties" : false,
+            "properties": {
+                "Filters": {
+                    "description": "List of filters of this FilterCriteria",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "$ref": "#/definitions/Filter"
+                    },
+                    "minItems": 1,
+                    "maxItems": 20
+                }
+            }
+        },
         "Filter": {
             "type": "object",
             "description": "The filter object that defines parameters for ESM filtering.",
@@ -256,7 +260,7 @@
         }
     },
     "required" : [ "FunctionName" ],
-    "createOnlyProperties" : [ "/properties/EventSourceArn", "/properties/StartingPosition", "/properties/SelfManagedEventSource" ],
+    "createOnlyProperties" : [ "/properties/EventSourceArn", "/properties/StartingPosition", "/properties/StartingPositionTimestamp", "/properties/SelfManagedEventSource" ],
     "readOnlyProperties" : [ "/properties/Id" ],
     "primaryIdentifier" : [ "/properties/Id" ],
     "handlers": {

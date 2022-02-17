@@ -29,6 +29,535 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"custom_document_enrichment_configuration": {
+			// Property: CustomDocumentEnrichmentConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "InlineConfigurations": {
+			//       "description": "List of InlineCustomDocumentEnrichmentConfigurations",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "properties": {
+			//           "Condition": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ConditionDocumentAttributeKey": {
+			//                 "maxLength": 200,
+			//                 "minLength": 1,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "ConditionOnValue": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "DateValue": {
+			//                     "type": "string"
+			//                   },
+			//                   "LongValue": {
+			//                     "format": "int64",
+			//                     "type": "integer"
+			//                   },
+			//                   "StringListValue": {
+			//                     "items": {
+			//                       "type": "string"
+			//                     },
+			//                     "type": "array"
+			//                   },
+			//                   "StringValue": {
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "Operator": {
+			//                 "enum": [
+			//                   "GreaterThan",
+			//                   "GreaterThanOrEquals",
+			//                   "LessThan",
+			//                   "LessThanOrEquals",
+			//                   "Equals",
+			//                   "NotEquals",
+			//                   "Contains",
+			//                   "NotContains",
+			//                   "Exists",
+			//                   "NotExists",
+			//                   "BeginsWith"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "ConditionDocumentAttributeKey",
+			//               "Operator"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "DocumentContentDeletion": {
+			//             "type": "boolean"
+			//           },
+			//           "Target": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "TargetDocumentAttributeKey": {
+			//                 "maxLength": 200,
+			//                 "minLength": 1,
+			//                 "pattern": "",
+			//                 "type": "string"
+			//               },
+			//               "TargetDocumentAttributeValue": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "DateValue": {
+			//                     "type": "string"
+			//                   },
+			//                   "LongValue": {
+			//                     "format": "int64",
+			//                     "type": "integer"
+			//                   },
+			//                   "StringListValue": {
+			//                     "items": {
+			//                       "type": "string"
+			//                     },
+			//                     "type": "array"
+			//                   },
+			//                   "StringValue": {
+			//                     "maxLength": 2048,
+			//                     "minLength": 1,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "TargetDocumentAttributeValueDeletion": {
+			//                 "type": "boolean"
+			//               }
+			//             },
+			//             "required": [
+			//               "TargetDocumentAttributeKey"
+			//             ],
+			//             "type": "object"
+			//           }
+			//         },
+			//         "type": "object"
+			//       },
+			//       "maxItems": 100,
+			//       "type": "array"
+			//     },
+			//     "PostExtractionHookConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "InvocationCondition": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ConditionDocumentAttributeKey": {
+			//               "maxLength": 200,
+			//               "minLength": 1,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "ConditionOnValue": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "DateValue": {
+			//                   "type": "string"
+			//                 },
+			//                 "LongValue": {
+			//                   "format": "int64",
+			//                   "type": "integer"
+			//                 },
+			//                 "StringListValue": {
+			//                   "items": {
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array"
+			//                 },
+			//                 "StringValue": {
+			//                   "maxLength": 2048,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Operator": {
+			//               "enum": [
+			//                 "GreaterThan",
+			//                 "GreaterThanOrEquals",
+			//                 "LessThan",
+			//                 "LessThanOrEquals",
+			//                 "Equals",
+			//                 "NotEquals",
+			//                 "Contains",
+			//                 "NotContains",
+			//                 "Exists",
+			//                 "NotExists",
+			//                 "BeginsWith"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ConditionDocumentAttributeKey",
+			//             "Operator"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "LambdaArn": {
+			//           "maxLength": 2048,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "S3Bucket": {
+			//           "maxLength": 63,
+			//           "minLength": 3,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "LambdaArn",
+			//         "S3Bucket"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "PreExtractionHookConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "InvocationCondition": {
+			//           "additionalProperties": false,
+			//           "properties": {
+			//             "ConditionDocumentAttributeKey": {
+			//               "maxLength": 200,
+			//               "minLength": 1,
+			//               "pattern": "",
+			//               "type": "string"
+			//             },
+			//             "ConditionOnValue": {
+			//               "additionalProperties": false,
+			//               "properties": {
+			//                 "DateValue": {
+			//                   "type": "string"
+			//                 },
+			//                 "LongValue": {
+			//                   "format": "int64",
+			//                   "type": "integer"
+			//                 },
+			//                 "StringListValue": {
+			//                   "items": {
+			//                     "type": "string"
+			//                   },
+			//                   "type": "array"
+			//                 },
+			//                 "StringValue": {
+			//                   "maxLength": 2048,
+			//                   "minLength": 1,
+			//                   "type": "string"
+			//                 }
+			//               },
+			//               "type": "object"
+			//             },
+			//             "Operator": {
+			//               "enum": [
+			//                 "GreaterThan",
+			//                 "GreaterThanOrEquals",
+			//                 "LessThan",
+			//                 "LessThanOrEquals",
+			//                 "Equals",
+			//                 "NotEquals",
+			//                 "Contains",
+			//                 "NotContains",
+			//                 "Exists",
+			//                 "NotExists",
+			//                 "BeginsWith"
+			//               ],
+			//               "type": "string"
+			//             }
+			//           },
+			//           "required": [
+			//             "ConditionDocumentAttributeKey",
+			//             "Operator"
+			//           ],
+			//           "type": "object"
+			//         },
+			//         "LambdaArn": {
+			//           "maxLength": 2048,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         },
+			//         "S3Bucket": {
+			//           "maxLength": 63,
+			//           "minLength": 3,
+			//           "pattern": "",
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "LambdaArn",
+			//         "S3Bucket"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "RoleArn": {
+			//       "description": "Role ARN",
+			//       "maxLength": 1284,
+			//       "minLength": 1,
+			//       "pattern": "",
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"inline_configurations": {
+						// Property: InlineConfigurations
+						Description: "List of InlineCustomDocumentEnrichmentConfigurations",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"condition": {
+									// Property: Condition
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_document_attribute_key": {
+												// Property: ConditionDocumentAttributeKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_on_value": {
+												// Property: ConditionOnValue
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"date_value": {
+															// Property: DateValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"long_value": {
+															// Property: LongValue
+															Type:     types.Int64Type,
+															Computed: true,
+														},
+														"string_list_value": {
+															// Property: StringListValue
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+														"string_value": {
+															// Property: StringValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"operator": {
+												// Property: Operator
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"document_content_deletion": {
+									// Property: DocumentContentDeletion
+									Type:     types.BoolType,
+									Computed: true,
+								},
+								"target": {
+									// Property: Target
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"target_document_attribute_key": {
+												// Property: TargetDocumentAttributeKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"target_document_attribute_value": {
+												// Property: TargetDocumentAttributeValue
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"date_value": {
+															// Property: DateValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"long_value": {
+															// Property: LongValue
+															Type:     types.Int64Type,
+															Computed: true,
+														},
+														"string_list_value": {
+															// Property: StringListValue
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+														"string_value": {
+															// Property: StringValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"target_document_attribute_value_deletion": {
+												// Property: TargetDocumentAttributeValueDeletion
+												Type:     types.BoolType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
+						Computed: true,
+					},
+					"post_extraction_hook_configuration": {
+						// Property: PostExtractionHookConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"invocation_condition": {
+									// Property: InvocationCondition
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_document_attribute_key": {
+												// Property: ConditionDocumentAttributeKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_on_value": {
+												// Property: ConditionOnValue
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"date_value": {
+															// Property: DateValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"long_value": {
+															// Property: LongValue
+															Type:     types.Int64Type,
+															Computed: true,
+														},
+														"string_list_value": {
+															// Property: StringListValue
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+														"string_value": {
+															// Property: StringValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"operator": {
+												// Property: Operator
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"lambda_arn": {
+									// Property: LambdaArn
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"s3_bucket": {
+									// Property: S3Bucket
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"pre_extraction_hook_configuration": {
+						// Property: PreExtractionHookConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"invocation_condition": {
+									// Property: InvocationCondition
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"condition_document_attribute_key": {
+												// Property: ConditionDocumentAttributeKey
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"condition_on_value": {
+												// Property: ConditionOnValue
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"date_value": {
+															// Property: DateValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"long_value": {
+															// Property: LongValue
+															Type:     types.Int64Type,
+															Computed: true,
+														},
+														"string_list_value": {
+															// Property: StringListValue
+															Type:     types.ListType{ElemType: types.StringType},
+															Computed: true,
+														},
+														"string_value": {
+															// Property: StringValue
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"operator": {
+												// Property: Operator
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"lambda_arn": {
+									// Property: LambdaArn
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"s3_bucket": {
+									// Property: S3Bucket
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"role_arn": {
+						// Property: RoleArn
+						Description: "Role ARN",
+						Type:        types.StringType,
+						Computed:    true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"data_source_configuration": {
 			// Property: DataSourceConfiguration
 			// CloudFormation resource type schema:
@@ -3209,6 +3738,9 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"change_detecting_columns":                      "ChangeDetectingColumns",
 		"chatter_feed_configuration":                    "ChatterFeedConfiguration",
 		"column_configuration":                          "ColumnConfiguration",
+		"condition":                                     "Condition",
+		"condition_document_attribute_key":              "ConditionDocumentAttributeKey",
+		"condition_on_value":                            "ConditionOnValue",
 		"confluence_configuration":                      "ConfluenceConfiguration",
 		"connection_configuration":                      "ConnectionConfiguration",
 		"crawl_archived_spaces":                         "CrawlArchivedSpaces",
@@ -3217,6 +3749,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"crawl_depth":                                   "CrawlDepth",
 		"crawl_personal_spaces":                         "CrawlPersonalSpaces",
 		"credentials":                                   "Credentials",
+		"custom_document_enrichment_configuration":      "CustomDocumentEnrichmentConfiguration",
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
@@ -3226,8 +3759,10 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"database_name":                                 "DatabaseName",
 		"database_port":                                 "DatabasePort",
 		"date_field_format":                             "DateFieldFormat",
+		"date_value":                                    "DateValue",
 		"description":                                   "Description",
 		"disable_local_groups":                          "DisableLocalGroups",
+		"document_content_deletion":                     "DocumentContentDeletion",
 		"document_data_column_name":                     "DocumentDataColumnName",
 		"document_data_field_name":                      "DocumentDataFieldName",
 		"document_id_column_name":                       "DocumentIdColumnName",
@@ -3254,9 +3789,13 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"inclusion_prefixes":                            "InclusionPrefixes",
 		"index_field_name":                              "IndexFieldName",
 		"index_id":                                      "IndexId",
+		"inline_configurations":                         "InlineConfigurations",
+		"invocation_condition":                          "InvocationCondition",
 		"key":                                           "Key",
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
+		"lambda_arn":                                    "LambdaArn",
+		"long_value":                                    "LongValue",
 		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
 		"max_links_per_page":                            "MaxLinksPerPage",
 		"max_urls_per_minute_crawl_rate":                "MaxUrlsPerMinuteCrawlRate",
@@ -3265,13 +3804,17 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"one_drive_user_list":                           "OneDriveUserList",
 		"one_drive_user_s3_path":                        "OneDriveUserS3Path",
 		"one_drive_users":                               "OneDriveUsers",
+		"operator":                                      "Operator",
 		"organization_id":                               "OrganizationId",
 		"page_configuration":                            "PageConfiguration",
 		"page_field_mappings":                           "PageFieldMappings",
 		"port":                                          "Port",
+		"post_extraction_hook_configuration":            "PostExtractionHookConfiguration",
+		"pre_extraction_hook_configuration":             "PreExtractionHookConfiguration",
 		"proxy_configuration":                           "ProxyConfiguration",
 		"query_identifiers_enclosing_option":            "QueryIdentifiersEnclosingOption",
 		"role_arn":                                      "RoleArn",
+		"s3_bucket":                                     "S3Bucket",
 		"s3_configuration":                              "S3Configuration",
 		"s3_prefix":                                     "S3Prefix",
 		"salesforce_configuration":                      "SalesforceConfiguration",
@@ -3295,9 +3838,15 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"standard_knowledge_article_type_configuration": "StandardKnowledgeArticleTypeConfiguration",
 		"standard_object_attachment_configuration":      "StandardObjectAttachmentConfiguration",
 		"standard_object_configurations":                "StandardObjectConfigurations",
+		"string_list_value":                             "StringListValue",
+		"string_value":                                  "StringValue",
 		"subnet_ids":                                    "SubnetIds",
 		"table_name":                                    "TableName",
 		"tags":                                          "Tags",
+		"target":                                        "Target",
+		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
+		"target_document_attribute_value":               "TargetDocumentAttributeValue",
+		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

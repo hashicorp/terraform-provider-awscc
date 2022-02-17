@@ -995,10 +995,62 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			Type:        types.StringType,
-			Required:    true,
+			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
 			},
+		},
+		"object_type_names": {
+			// Property: ObjectTypeNames
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "The mapping between 3rd party event types and ObjectType names",
+			//   "items": {
+			//     "additionalProperties": false,
+			//     "properties": {
+			//       "Key": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "type": "string"
+			//       },
+			//       "Value": {
+			//         "maxLength": 255,
+			//         "minLength": 1,
+			//         "pattern": "",
+			//         "type": "string"
+			//       }
+			//     },
+			//     "required": [
+			//       "Key",
+			//       "Value"
+			//     ],
+			//     "type": "object"
+			//   },
+			//   "type": "array"
+			// }
+			Description: "The mapping between 3rd party event types and ObjectType names",
+			Attributes: tfsdk.ListNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"key": {
+						// Property: Key
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+					},
+					"value": {
+						// Property: Value
+						Type:     types.StringType,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringLenBetween(1, 255),
+						},
+					},
+				},
+				tfsdk.ListNestedAttributesOptions{},
+			),
+			Optional: true,
 		},
 		"tags": {
 			// Property: Tags
@@ -1124,6 +1176,7 @@ func integrationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"marketo":                     "Marketo",
 		"object":                      "Object",
 		"object_type_name":            "ObjectTypeName",
+		"object_type_names":           "ObjectTypeNames",
 		"operator_property_key":       "OperatorPropertyKey",
 		"property":                    "Property",
 		"s3":                          "S3",

@@ -511,6 +511,11 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Description: "With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.",
 			Type:        types.Float64Type,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
 		},
 		"topics": {
 			// Property: Topics

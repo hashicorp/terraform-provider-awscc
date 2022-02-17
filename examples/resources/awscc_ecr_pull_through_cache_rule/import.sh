@@ -1,0 +1,1 @@
+$ terraform import awscc_ecr_pull_through_cache_rule.example <resource ID>

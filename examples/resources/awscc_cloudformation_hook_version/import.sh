@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_hook_version.example <resource ID>

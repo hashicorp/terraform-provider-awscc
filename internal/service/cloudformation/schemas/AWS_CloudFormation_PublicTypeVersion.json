@@ -43,7 +43,7 @@
     },
     "Type": {
       "description": "The kind of extension",
-      "enum": ["RESOURCE", "MODULE"],
+      "enum": ["RESOURCE", "MODULE", "HOOK"],
       "type": "string"
     }
   },

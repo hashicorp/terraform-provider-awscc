@@ -5,6 +5,43 @@ BREAKING CHANGES:
 * data-source/awscc_cloudfront_distribution: `distribution_config.cnam_es` attribute renamed to `distribution_config.cnames`
 * resource/awscc_cloudfront_distribution: `distribution_config.cnam_es` attribute renamed to `distribution_config.cnames`
 
+FEATURES:
+
+* **New Data Source:** `awscc_amplify_apps.md`
+* **New Data Source:** `awscc_apprunner_vpc_connector.md`
+* **New Data Source:** `awscc_apprunner_vpc_connectors.md`
+* **New Data Source:** `awscc_batch_compute_environment.md`
+* **New Data Source:** `awscc_batch_compute_environments.md`
+* **New Data Source:** `awscc_batch_job_queue.md`
+* **New Data Source:** `awscc_batch_job_queues.md`
+* **New Data Source:** `awscc_cloudformation_hook_default_version.md`
+* **New Data Source:** `awscc_cloudformation_hook_type_config.md`
+* **New Data Source:** `awscc_cloudformation_hook_version.md`
+* **New Data Source:** `awscc_ecr_pull_through_cache_rule.md`
+* **New Data Source:** `awscc_ecr_pull_through_cache_rules.md`
+* **New Data Source:** `awscc_eks_nodegroup.md`
+* **New Data Source:** `awscc_frauddetector_event_types.md`
+* **New Data Source:** `awscc_gamelift_game_server_groups.md`
+* **New Data Source:** `awscc_robomaker_robot_application.md`
+* **New Data Source:** `awscc_robomaker_robot_applications.md`
+* **New Data Source:** `awscc_ses_configuration_set_event_destination.md`
+* **New Data Source:** `awscc_ses_template.md`
+* **New Data Source:** `awscc_ses_templates.md`
+* **New Data Source:** `awscc_sqs_queue.md`
+* **New Data Source:** `awscc_sqs_queues.md`
+* **New Resource:** `awscc_apprunner_vpc_connector.md`
+* **New Resource:** `awscc_batch_compute_environment.md`
+* **New Resource:** `awscc_batch_job_queue.md`
+* **New Resource:** `awscc_cloudformation_hook_default_version.md`
+* **New Resource:** `awscc_cloudformation_hook_type_config.md`
+* **New Resource:** `awscc_cloudformation_hook_version.md`
+* **New Resource:** `awscc_ecr_pull_through_cache_rule.md`
+* **New Resource:** `awscc_eks_nodegroup.md`
+* **New Resource:** `awscc_robomaker_robot_application.md`
+* **New Resource:** `awscc_ses_configuration_set_event_destination.md`
+* **New Resource:** `awscc_ses_template.md`
+* **New Resource:** `awscc_sqs_queue.md`
+
 ## [0.11.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.11.0) (January 27, 2022)
 
 BREAKING CHANGES:

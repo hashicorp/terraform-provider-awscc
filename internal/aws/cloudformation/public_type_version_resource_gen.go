@@ -114,7 +114,8 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The kind of extension",
 			//   "enum": [
 			//     "RESOURCE",
-			//     "MODULE"
+			//     "MODULE",
+			//     "HOOK"
 			//   ],
 			//   "type": "string"
 			// }
@@ -126,6 +127,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 				validate.StringInSlice([]string{
 					"RESOURCE",
 					"MODULE",
+					"HOOK",
 				}),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{

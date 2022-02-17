@@ -130,6 +130,9 @@
         "PointInTimeRecoverySpecification" : {
           "$ref" : "#/definitions/PointInTimeRecoverySpecification"
         },
+        "TableClass" : {
+          "type" : "string"
+        },
         "SSESpecification": {
           "$ref": "#/definitions/ReplicaSSESpecification"
         },

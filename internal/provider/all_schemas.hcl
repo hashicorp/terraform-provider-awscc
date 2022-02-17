@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 481 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 494 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -42,8 +42,7 @@ resource_schema "aws_accessanalyzer_analyzer" {
 }
 
 resource_schema "aws_amplify_app" {
-  cloudformation_type_name               = "AWS::Amplify::App"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Amplify::App"
 }
 
 resource_schema "aws_amplify_branch" {
@@ -169,6 +168,10 @@ resource_schema "aws_apprunner_service" {
   cloudformation_type_name = "AWS::AppRunner::Service"
 }
 
+resource_schema "aws_apprunner_vpc_connector" {
+  cloudformation_type_name = "AWS::AppRunner::VpcConnector"
+}
+
 resource_schema "aws_appstream_app_block" {
   cloudformation_type_name               = "AWS::AppStream::AppBlock"
   suppress_plural_data_source_generation = true
@@ -267,6 +270,14 @@ resource_schema "aws_backup_report_plan" {
   cloudformation_type_name = "AWS::Backup::ReportPlan"
 }
 
+resource_schema "aws_batch_compute_environment" {
+  cloudformation_type_name = "AWS::Batch::ComputeEnvironment"
+}
+
+resource_schema "aws_batch_job_queue" {
+  cloudformation_type_name = "AWS::Batch::JobQueue"
+}
+
 resource_schema "aws_batch_scheduling_policy" {
   cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
 }
@@ -303,6 +314,21 @@ resource_schema "aws_certificatemanager_account" {
 
 resource_schema "aws_chatbot_slack_channel_configuration" {
   cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
+}
+
+resource_schema "aws_cloudformation_hook_default_version" {
+  cloudformation_type_name               = "AWS::CloudFormation::HookDefaultVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cloudformation_hook_type_config" {
+  cloudformation_type_name               = "AWS::CloudFormation::HookTypeConfig"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cloudformation_hook_version" {
+  cloudformation_type_name               = "AWS::CloudFormation::HookVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cloudformation_module_default_version" {
@@ -734,6 +760,10 @@ resource_schema "aws_ec2_vpcdhcp_options_association" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_ecr_pull_through_cache_rule" {
+  cloudformation_type_name = "AWS::ECR::PullThroughCacheRule"
+}
+
 resource_schema "aws_ecr_registry_policy" {
   cloudformation_type_name = "AWS::ECR::RegistryPolicy"
 }
@@ -804,6 +834,11 @@ resource_schema "aws_eks_cluster" {
 
 resource_schema "aws_eks_fargate_profile" {
   cloudformation_type_name               = "AWS::EKS::FargateProfile"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eks_nodegroup" {
+  cloudformation_type_name               = "AWS::EKS::Nodegroup"
   suppress_plural_data_source_generation = true
 }
 
@@ -925,8 +960,7 @@ resource_schema "aws_frauddetector_entity_type" {
 }
 
 resource_schema "aws_frauddetector_event_type" {
-  cloudformation_type_name               = "AWS::FraudDetector::EventType"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::FraudDetector::EventType"
 }
 
 resource_schema "aws_frauddetector_label" {
@@ -950,8 +984,7 @@ resource_schema "aws_gamelift_fleet" {
 }
 
 resource_schema "aws_gamelift_game_server_group" {
-  cloudformation_type_name               = "AWS::GameLift::GameServerGroup"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::GameLift::GameServerGroup"
 }
 
 resource_schema "aws_globalaccelerator_accelerator" {
@@ -1772,6 +1805,10 @@ resource_schema "aws_robomaker_robot" {
   cloudformation_type_name = "AWS::RoboMaker::Robot"
 }
 
+resource_schema "aws_robomaker_robot_application" {
+  cloudformation_type_name = "AWS::RoboMaker::RobotApplication"
+}
+
 resource_schema "aws_robomaker_robot_application_version" {
   cloudformation_type_name               = "AWS::RoboMaker::RobotApplicationVersion"
   suppress_plural_data_source_generation = true
@@ -1933,8 +1970,17 @@ resource_schema "aws_ses_configuration_set" {
   cloudformation_type_name = "AWS::SES::ConfigurationSet"
 }
 
+resource_schema "aws_ses_configuration_set_event_destination" {
+  cloudformation_type_name               = "AWS::SES::ConfigurationSetEventDestination"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ses_contact_list" {
   cloudformation_type_name = "AWS::SES::ContactList"
+}
+
+resource_schema "aws_ses_template" {
+  cloudformation_type_name = "AWS::SES::Template"
 }
 
 resource_schema "aws_ssm_association" {
@@ -1982,6 +2028,10 @@ resource_schema "aws_sso_instance_access_control_attribute_configuration" {
 resource_schema "aws_sso_permission_set" {
   cloudformation_type_name               = "AWS::SSO::PermissionSet"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_sqs_queue" {
+  cloudformation_type_name = "AWS::SQS::Queue"
 }
 
 resource_schema "aws_sagemaker_app" {

@@ -293,7 +293,8 @@
                 "eks:DescribeUpdate",
                 "eks:TagResource",
                 "eks:UntagResource"
-            ]
+            ],
+            "timeoutInMinutes": 150
         },
         "delete": {
             "permissions": [

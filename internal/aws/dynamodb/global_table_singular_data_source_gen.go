@@ -655,6 +655,9 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         ],
 			//         "type": "object"
 			//       },
+			//       "TableClass": {
+			//         "type": "string"
+			//       },
 			//       "Tags": {
 			//         "insertionOrder": false,
 			//         "items": {
@@ -885,6 +888,11 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								},
 							},
 						),
+						Computed: true,
+					},
+					"table_class": {
+						// Property: TableClass
+						Type:     types.StringType,
 						Computed: true,
 					},
 					"tags": {
@@ -1200,6 +1208,7 @@ func globalTableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"stream_arn":                           "StreamArn",
 		"stream_specification":                 "StreamSpecification",
 		"stream_view_type":                     "StreamViewType",
+		"table_class":                          "TableClass",
 		"table_id":                             "TableId",
 		"table_name":                           "TableName",
 		"tags":                                 "Tags",

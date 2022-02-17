@@ -49,6 +49,15 @@ func authorizerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"enable_caching_for_http": {
+			// Property: EnableCachingForHttp
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Computed: true,
+		},
 		"signing_disabled": {
 			// Property: SigningDisabled
 			// CloudFormation resource type schema:
@@ -123,6 +132,7 @@ func authorizerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: TokenSigningPublicKeys
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "patternProperties": {
 			//     "": {
 			//       "maxLength": 5120,
@@ -157,6 +167,7 @@ func authorizerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 		"arn":                       "Arn",
 		"authorizer_function_arn":   "AuthorizerFunctionArn",
 		"authorizer_name":           "AuthorizerName",
+		"enable_caching_for_http":   "EnableCachingForHttp",
 		"key":                       "Key",
 		"signing_disabled":          "SigningDisabled",
 		"status":                    "Status",

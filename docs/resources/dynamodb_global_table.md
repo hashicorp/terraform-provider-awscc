@@ -68,6 +68,7 @@ Required:
 - **read_provisioned_throughput_settings** (Attributes) (see [below for nested schema](#nestedatt--replicas--read_provisioned_throughput_settings))
 - **region** (String)
 - **sse_specification** (Attributes) (see [below for nested schema](#nestedatt--replicas--sse_specification))
+- **table_class** (String)
 - **tags** (Attributes Set) (see [below for nested schema](#nestedatt--replicas--tags))
 
 <a id="nestedatt--replicas--contributor_insights_specification"></a>

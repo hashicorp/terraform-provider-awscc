@@ -24,6 +24,7 @@ Data Source schema for AWS::IoT::Authorizer
 - **arn** (String)
 - **authorizer_function_arn** (String)
 - **authorizer_name** (String)
+- **enable_caching_for_http** (Boolean)
 - **signing_disabled** (Boolean)
 - **status** (String)
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
