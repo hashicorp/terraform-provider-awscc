@@ -17,23 +17,23 @@ Resource Schema describing various properties for ECS TaskDefinition
 
 ### Optional
 
-- **container_definitions** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions))
+- **container_definitions** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions))
 - **cpu** (String)
 - **ephemeral_storage** (Attributes) (see [below for nested schema](#nestedatt--ephemeral_storage))
 - **execution_role_arn** (String)
 - **family** (String)
-- **inference_accelerators** (Attributes List) (see [below for nested schema](#nestedatt--inference_accelerators))
+- **inference_accelerators** (Attributes Set) (see [below for nested schema](#nestedatt--inference_accelerators))
 - **ipc_mode** (String)
 - **memory** (String)
 - **network_mode** (String)
 - **pid_mode** (String)
-- **placement_constraints** (Attributes List) (see [below for nested schema](#nestedatt--placement_constraints))
+- **placement_constraints** (Attributes Set) (see [below for nested schema](#nestedatt--placement_constraints))
 - **proxy_configuration** (Attributes) (see [below for nested schema](#nestedatt--proxy_configuration))
-- **requires_compatibilities** (List of String)
+- **requires_compatibilities** (Set of String)
 - **runtime_platform** (Attributes) (see [below for nested schema](#nestedatt--runtime_platform))
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - **task_role_arn** (String)
-- **volumes** (Attributes List) (see [below for nested schema](#nestedatt--volumes))
+- **volumes** (Attributes Set) (see [below for nested schema](#nestedatt--volumes))
 
 ### Read-Only
 
@@ -63,14 +63,14 @@ Optional:
 - **hostname** (String)
 - **image** (String) The image used to start a container. This string is passed directly to the Docker daemon.
 - **interactive** (Boolean)
-- **links** (List of String)
+- **links** (Set of String)
 - **linux_parameters** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--linux_parameters))
 - **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--log_configuration))
 - **memory** (Number) The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.
 - **memory_reservation** (Number)
-- **mount_points** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
+- **mount_points** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
 - **name** (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
-- **port_mappings** (Attributes List) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
+- **port_mappings** (Attributes Set) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
 - **privileged** (Boolean)
 - **pseudo_terminal** (Boolean)
 - **readonly_root_filesystem** (Boolean)
@@ -82,7 +82,7 @@ Optional:
 - **system_controls** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--system_controls))
 - **ulimits** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--ulimits))
 - **user** (String)
-- **volumes_from** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--volumes_from))
+- **volumes_from** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions--volumes_from))
 - **working_directory** (String)
 
 <a id="nestedatt--container_definitions--depends_on"></a>
@@ -171,7 +171,7 @@ Optional:
 
 - **container_path** (String)
 - **host_path** (String)
-- **permissions** (List of String)
+- **permissions** (Set of String)
 
 
 <a id="nestedatt--container_definitions--linux_parameters--tmpfs"></a>
@@ -311,7 +311,7 @@ Optional:
 Optional:
 
 - **container_name** (String)
-- **proxy_configuration_properties** (Attributes List) (see [below for nested schema](#nestedatt--proxy_configuration--proxy_configuration_properties))
+- **proxy_configuration_properties** (Attributes Set) (see [below for nested schema](#nestedatt--proxy_configuration--proxy_configuration_properties))
 - **type** (String)
 
 <a id="nestedatt--proxy_configuration--proxy_configuration_properties"></a>

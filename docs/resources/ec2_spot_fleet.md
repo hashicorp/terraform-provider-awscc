@@ -313,6 +313,7 @@ Required:
 - **availability_zone** (String)
 - **instance_requirements** (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements))
 - **instance_type** (String)
+- **priority** (Number)
 - **spot_price** (String)
 - **subnet_id** (String)
 - **weighted_capacity** (Number)

@@ -22,6 +22,7 @@ Data Source schema for AWS::Kendra::DataSource
 ### Read-Only
 
 - **arn** (String)
+- **custom_document_enrichment_configuration** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration))
 - **data_source_configuration** (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
 - **description** (String) Description of data source
 - **index_id** (String) ID of Index
@@ -30,6 +31,131 @@ Data Source schema for AWS::Kendra::DataSource
 - **schedule** (String) Schedule
 - **tags** (Attributes List) Tags for labeling the data source (see [below for nested schema](#nestedatt--tags))
 - **type** (String) Data source type
+
+<a id="nestedatt--custom_document_enrichment_configuration"></a>
+### Nested Schema for `custom_document_enrichment_configuration`
+
+Read-Only:
+
+- **inline_configurations** (Attributes List) List of InlineCustomDocumentEnrichmentConfigurations (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--inline_configurations))
+- **post_extraction_hook_configuration** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration))
+- **pre_extraction_hook_configuration** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration))
+- **role_arn** (String) Role ARN
+
+<a id="nestedatt--custom_document_enrichment_configuration--inline_configurations"></a>
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations`
+
+Read-Only:
+
+- **condition** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--inline_configurations--condition))
+- **document_content_deletion** (Boolean)
+- **target** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--inline_configurations--target))
+
+<a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--condition"></a>
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.condition`
+
+Read-Only:
+
+- **condition_document_attribute_key** (String)
+- **condition_on_value** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--inline_configurations--condition--condition_on_value))
+- **operator** (String)
+
+<a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--condition--condition_on_value"></a>
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.condition.operator`
+
+Read-Only:
+
+- **date_value** (String)
+- **long_value** (Number)
+- **string_list_value** (List of String)
+- **string_value** (String)
+
+
+
+<a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--target"></a>
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target`
+
+Read-Only:
+
+- **target_document_attribute_key** (String)
+- **target_document_attribute_value** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--inline_configurations--target--target_document_attribute_value))
+- **target_document_attribute_value_deletion** (Boolean)
+
+<a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--target--target_document_attribute_value"></a>
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target.target_document_attribute_value_deletion`
+
+Read-Only:
+
+- **date_value** (String)
+- **long_value** (Number)
+- **string_list_value** (List of String)
+- **string_value** (String)
+
+
+
+
+<a id="nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration"></a>
+### Nested Schema for `custom_document_enrichment_configuration.post_extraction_hook_configuration`
+
+Read-Only:
+
+- **invocation_condition** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition))
+- **lambda_arn** (String)
+- **s3_bucket** (String)
+
+<a id="nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition"></a>
+### Nested Schema for `custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition`
+
+Read-Only:
+
+- **condition_document_attribute_key** (String)
+- **condition_on_value** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition--condition_on_value))
+- **operator** (String)
+
+<a id="nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition--condition_on_value"></a>
+### Nested Schema for `custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.operator`
+
+Read-Only:
+
+- **date_value** (String)
+- **long_value** (Number)
+- **string_list_value** (List of String)
+- **string_value** (String)
+
+
+
+
+<a id="nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration"></a>
+### Nested Schema for `custom_document_enrichment_configuration.pre_extraction_hook_configuration`
+
+Read-Only:
+
+- **invocation_condition** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition))
+- **lambda_arn** (String)
+- **s3_bucket** (String)
+
+<a id="nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition"></a>
+### Nested Schema for `custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition`
+
+Read-Only:
+
+- **condition_document_attribute_key** (String)
+- **condition_on_value** (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition--condition_on_value))
+- **operator** (String)
+
+<a id="nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition--condition_on_value"></a>
+### Nested Schema for `custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.operator`
+
+Read-Only:
+
+- **date_value** (String)
+- **long_value** (Number)
+- **string_list_value** (List of String)
+- **string_value** (String)
+
+
+
+
 
 <a id="nestedatt--data_source_configuration"></a>
 ### Nested Schema for `data_source_configuration`

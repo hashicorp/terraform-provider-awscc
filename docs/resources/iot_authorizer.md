@@ -22,6 +22,7 @@ Creates an authorizer.
 ### Optional
 
 - **authorizer_name** (String)
+- **enable_caching_for_http** (Boolean)
 - **signing_disabled** (Boolean)
 - **status** (String)
 - **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))

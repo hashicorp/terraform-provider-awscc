@@ -25,6 +25,7 @@ Data Source schema for AWS::AppRunner::Service
 - **encryption_configuration** (Attributes) Encryption configuration (KMS key) (see [below for nested schema](#nestedatt--encryption_configuration))
 - **health_check_configuration** (Attributes) Health check configuration (see [below for nested schema](#nestedatt--health_check_configuration))
 - **instance_configuration** (Attributes) Instance Configuration (see [below for nested schema](#nestedatt--instance_configuration))
+- **network_configuration** (Attributes) Network configuration (see [below for nested schema](#nestedatt--network_configuration))
 - **service_arn** (String) The Amazon Resource Name (ARN) of the AppRunner Service.
 - **service_id** (String) The AppRunner Service Id
 - **service_name** (String) The AppRunner Service Name.
@@ -62,6 +63,23 @@ Read-Only:
 - **cpu** (String) CPU
 - **instance_role_arn** (String) Instance Role Arn
 - **memory** (String) Memory
+
+
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Read-Only:
+
+- **egress_configuration** (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
+
+<a id="nestedatt--network_configuration--egress_configuration"></a>
+### Nested Schema for `network_configuration.egress_configuration`
+
+Read-Only:
+
+- **egress_type** (String) Network egress type.
+- **vpc_connector_arn** (String) The Amazon Resource Name (ARN) of the App Runner VpcConnector.
+
 
 
 <a id="nestedatt--source_configuration"></a>
