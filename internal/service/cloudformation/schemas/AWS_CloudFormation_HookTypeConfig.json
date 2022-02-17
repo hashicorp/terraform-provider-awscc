@@ -1,0 +1,88 @@
+{
+  "typeName": "AWS::CloudFormation::HookTypeConfig",
+  "description": "Specifies the configuration data for a registered hook in CloudFormation Registry.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudformation",
+  "properties": {
+    "TypeArn": {
+      "description": "The Amazon Resource Name (ARN) of the type version.",
+      "pattern": "",
+      "type": "string"
+    },
+    "TypeName": {
+      "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+      "pattern": "",
+      "type": "string"
+    },
+    "ConfigurationArn": {
+      "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
+      "pattern": "",
+      "type": "string"
+    },
+    "Configuration": {
+      "description": "The configuration data for the extension, in this account and region.",
+      "pattern": "",
+      "type": "string"
+    },
+    "ConfigurationAlias": {
+      "description": "An alias by which to refer to this extension configuration data.",
+      "pattern": "",
+      "default": "default",
+      "enum": [
+        "default"
+      ],
+      "type": "string"
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "TypeArn",
+        "Configuration"
+      ]
+    },
+    {
+      "required": [
+        "TypeName",
+        "Configuration"
+      ]
+    }
+  ],
+  "readOnlyProperties": [
+    "/properties/ConfigurationArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/ConfigurationAlias",
+    "/properties/TypeArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/TypeArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudformation:SetTypeConfiguration"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudformation:BatchDescribeTypeConfigurations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudformation:SetTypeConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudformation:SetTypeConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudformation:BatchDescribeTypeConfigurations"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
