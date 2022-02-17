@@ -783,7 +783,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
-					"cnam_es": {
+					"cnames": {
 						// Property: CNAMEs
 						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
@@ -1895,7 +1895,7 @@ func distributionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"cache_policy_id":                "CachePolicyId",
 		"cached_methods":                 "CachedMethods",
 		"cloudfront_default_certificate": "CloudFrontDefaultCertificate",
-		"cnam_es":                        "CNAMEs",
+		"cnames":                         "CNAMEs",
 		"comment":                        "Comment",
 		"compress":                       "Compress",
 		"connection_attempts":            "ConnectionAttempts",
