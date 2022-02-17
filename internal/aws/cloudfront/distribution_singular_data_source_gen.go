@@ -782,7 +782,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 						Type:     types.ListType{ElemType: types.StringType},
 						Computed: true,
 					},
-					"cnam_es": {
+					"cnames": {
 						// Property: CNAMEs
 						Type:     types.ListType{ElemType: types.StringType},
 						Computed: true,
@@ -1625,7 +1625,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 		"cache_policy_id":                "CachePolicyId",
 		"cached_methods":                 "CachedMethods",
 		"cloudfront_default_certificate": "CloudFrontDefaultCertificate",
-		"cnam_es":                        "CNAMEs",
+		"cnames":                         "CNAMEs",
 		"comment":                        "Comment",
 		"compress":                       "Compress",
 		"connection_attempts":            "ConnectionAttempts",
