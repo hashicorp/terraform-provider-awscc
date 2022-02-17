@@ -35,7 +35,7 @@ Required:
 
 - **aliases** (List of String)
 - **cache_behaviors** (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--cache_behaviors))
-- **cnam_es** (List of String)
+- **cnames** (List of String)
 - **comment** (String)
 - **custom_error_responses** (Attributes List) (see [below for nested schema](#nestedatt--distribution_config--custom_error_responses))
 - **custom_origin** (Attributes) (see [below for nested schema](#nestedatt--distribution_config--custom_origin))

@@ -43,9 +43,14 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			ExpectedValue: "aws99_thing",
 		},
 		{
-			TestName:      "including replacement",
+			TestName:      "including replacement CloudWatch",
 			Value:         "CloudWatchLogsLogGroupArn",
 			ExpectedValue: "cloudwatch_logs_log_group_arn",
+		},
+		{
+			TestName:      "including replacement CNAMEs",
+			Value:         "CNAMEs",
+			ExpectedValue: "cnames",
 		},
 	}
 

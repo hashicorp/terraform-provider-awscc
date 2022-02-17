@@ -1,4 +1,10 @@
 ## 0.12.0 (Unreleased)
+
+BREAKING CHANGES:
+
+* data-source/awscc_cloudfront_distribution: `distribution_config.cnam_es` attribute renamed to `distribution_config.cnames`
+* resource/awscc_cloudfront_distribution: `distribution_config.cnam_es` attribute renamed to `distribution_config.cnames`
+
 ## [0.11.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.11.0) (January 27, 2022)
 
 BREAKING CHANGES:
