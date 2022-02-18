@@ -5,7 +5,7 @@
     "definitions": {
         "Arn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"
         },
         "Tags": {
             "description": "A key-value pair to associate with a resource.",
@@ -32,7 +32,7 @@
                 "Version" : {
                     "type": "string",
                     "description": "The version of the rendering engine.",
-                    "pattern": ""
+                    "pattern": "1.x"
                 }
             },
             "required": [
@@ -68,7 +68,7 @@
                 "S3Bucket": {
                     "type": "string",
                     "description": "The Amazon S3 bucket name.",
-                    "pattern": ""
+                    "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]"
                 },
                 "S3Key": {
                     "type": "string",
@@ -119,7 +119,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9_\\-]*"
         },
         "CurrentRevisionId": {
             "description": "The current revision id.",

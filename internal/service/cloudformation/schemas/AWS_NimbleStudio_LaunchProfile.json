@@ -31,7 +31,7 @@
             "type": "string",
             "maxLength": 22,
             "minLength": 0,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9-_]*$"
           },
           "maxItems": 20,
           "minItems": 1,
@@ -104,14 +104,14 @@
           "type": "string",
           "maxLength": 128,
           "minLength": 1,
-          "pattern": "",
+          "pattern": "^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$",
           "description": "<p>The folder path in Linux workstations where files are uploaded.</p>"
         },
         "Windows": {
           "type": "string",
           "maxLength": 128,
           "minLength": 1,
-          "pattern": "",
+          "pattern": "^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$",
           "description": "<p>The folder path in Windows workstations where files are uploaded.</p>"
         }
       },
@@ -152,7 +152,7 @@
         "type": "string",
         "maxLength": 10,
         "minLength": 0,
-        "pattern": "",
+        "pattern": "^2021\\-03\\-31$",
         "description": "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>"
       },
       "description": "<p>The version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".</p>"

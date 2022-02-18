@@ -117,13 +117,13 @@
         "Name": {
             "description": "The name you want to assign to this Object lambda Access Point.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
             "minLength": 3,
             "maxLength": 45
         },
         "Arn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*"
         },
         "CreationDate": {
             "description": "The date and time when the Object lambda Access Point was created.",

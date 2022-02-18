@@ -38,13 +38,13 @@
       "type": "string",
       "maxLength": 256,
       "minLength": 1,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$"
     },
     "EnvironmentIdentifier": {
       "type": "string",
       "maxLength": 14,
       "minLength": 14,
-      "pattern": ""
+      "pattern": "^env-([0-9A-Za-z]{10}$)"
     },
     "Name": {
       "type": "string",
@@ -59,13 +59,13 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 20,
-      "pattern": ""
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_\/]+$"
     },
     "TransitGatewayId": {
       "type": "string",
       "maxLength": 21,
       "minLength": 21,
-      "pattern": ""
+      "pattern": "^tgw-[-a-f0-9]{17}$"
     },
     "Tags": {
       "type": "array",

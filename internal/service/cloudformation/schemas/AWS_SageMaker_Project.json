@@ -11,13 +11,13 @@
                     "description" : "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "minLength" : 1,
                     "maxLength" : 128,
-                    "pattern": ""
+                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
                 },
                 "Value" : {
                     "type" : "string",
                     "description" : "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "maxLength" : 256,
-                    "pattern": ""
+                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
                 }
             },
             "required" : [ "Key", "Value" ],
@@ -26,13 +26,13 @@
         "ProjectDescription": {
             "type" : "string",
             "description" : "The description of the project.",
-            "pattern": "",
+            "pattern": ".*",
             "maxLength" : 1024
         },
         "ProjectId": {
             "type" : "string",
             "description" : "Project Id.",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
             "maxLength" : 20
         },
         "ProvisionedProductStatusMessage": {
@@ -42,7 +42,7 @@
         "ProjectName": {
             "type" : "string",
             "description" : "The name of the project.",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
             "minLength": 1,
             "maxLength" : 32
         },
@@ -51,24 +51,24 @@
             "type" : "string",
             "minLength": 1,
             "maxLength": 2048,
-            "pattern": ""
+            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project.*"
         },
         "ProductId": {
             "type" : "string",
             "description" : "Service Catalog product identifier.",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
             "maxLength" : 100
         },
         "ProvisioningArtifactId": {
             "type" : "string",
             "description" : "The identifier of the provisioning artifact (also known as a version).",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
             "maxLength" : 100
         },
         "PathId": {
             "type" : "string",
             "description" : "The path identifier of the product.",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
             "maxLength" : 100
         },
         "ProvisioningParameter" : {
@@ -80,13 +80,13 @@
                     "description" : "The parameter key.",
                     "minLength" : 1,
                     "maxLength" : 1000,
-                    "pattern": ""
+                    "pattern": ".*"
                 },
                 "Value" : {
                     "type" : "string",
                     "description" : "The parameter value.",
                     "maxLength" : 4096,
-                    "pattern": ""
+                    "pattern": ".*"
                 }
             },
             "required" : [ "Key", "Value" ],

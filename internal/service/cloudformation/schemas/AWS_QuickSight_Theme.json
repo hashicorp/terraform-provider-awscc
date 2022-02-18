@@ -19,14 +19,14 @@
       "properties": {
         "EmptyFillColor": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>"
         },
         "Colors": {
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^#[A-F0-9]{6}$"
           },
           "maxItems": 100,
           "minItems": 0,
@@ -36,7 +36,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^#[A-F0-9]{6}$"
           },
           "maxItems": 100,
           "minItems": 0,
@@ -178,7 +178,7 @@
         },
         "Message": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>The error message.</p>"
         }
       },
@@ -231,7 +231,7 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "pattern": "",
+          "pattern": "[\\w\\-]+",
           "description": "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.</p>"
         },
         "Arn": {
@@ -290,82 +290,82 @@
       "properties": {
         "Warning": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>This color that applies to warning and informational messages.</p>"
         },
         "Accent": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>This color is that applies to selected states and buttons.</p>"
         },
         "AccentForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>"
         },
         "SecondaryBackground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The background color that applies to the sheet background and sheet controls.</p>"
         },
         "DangerForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>"
         },
         "PrimaryBackground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The background color that applies to visuals and other high emphasis UI.</p>"
         },
         "Dimension": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>"
         },
         "SecondaryForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>"
         },
         "WarningForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>"
         },
         "DimensionForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>"
         },
         "PrimaryForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>"
         },
         "Success": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>"
         },
         "Danger": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The color that applies to error messages.</p>"
         },
         "SuccessForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>"
         },
         "Measure": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The color that applies to the names of fields that are identified as measures.</p>"
         },
         "MeasureForeground": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^#[A-F0-9]{6}$",
           "description": "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>"
         }
       },
@@ -381,13 +381,13 @@
       "type": "string",
       "maxLength": 12,
       "minLength": 12,
-      "pattern": ""
+      "pattern": "^[0-9]{12}$"
     },
     "BaseThemeId": {
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": "",
+      "pattern": "[\\w\\-]+",
       "description": "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a QuickSight analysis. </p>"
     },
     "Configuration": {
@@ -431,7 +431,7 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": ""
+      "pattern": "[\\w\\-]+"
     },
     "Type": {
       "$ref": "#/definitions/ThemeType"

@@ -5,13 +5,13 @@
   "properties": {
     "Arn": {
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*",
       "minLength": 0,
       "maxLength": 2048
     },
     "Name": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[-a-zA-Z0-9._]*",
       "minLength": 1,
       "maxLength": 127
     },
@@ -43,7 +43,7 @@
         },
         "LogGroup": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^[-a-zA-Z0-9._/]+$",
           "minLength": 1,
           "maxLength": 512
         }
@@ -67,13 +67,13 @@
       "properties": {
         "BucketName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^[a-z0-9][-a-z0-9]*[a-z0-9]$",
           "minLength": 3,
           "maxLength": 63
         },
         "Prefix": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^[-a-zA-Z0-9!_.*'()/]*$",
           "minLength": 1,
           "maxLength": 1024
         }

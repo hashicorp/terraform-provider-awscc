@@ -5,11 +5,11 @@
     "definitions": {
         "AwsAccount": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^\\d{12}$"
         },
         "VpcId": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^vpc-\\d{1,17}$"
         }
     },
     "properties": {

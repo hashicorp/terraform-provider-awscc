@@ -50,15 +50,15 @@
     "Account": {
       "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9]{12}$"
     },
     "Region": {
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9-]{1,128}$"
     },
     "OrganizationalUnitId": {
       "type": "string",
-      "pattern": ""
+      "pattern": "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$"
     },
     "Capability": {
       "type": "string",
@@ -197,7 +197,7 @@
     "StackSetName": {
       "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,127}$",
       "maxLength": 128
     },
     "StackSetId": {

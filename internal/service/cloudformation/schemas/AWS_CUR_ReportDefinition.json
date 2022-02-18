@@ -8,7 +8,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "[0-9A-Za-z!\\-_.*\\'()]+"
     },
     "TimeUnit": {
       "description": "The granularity of the line items in the report.",
@@ -53,14 +53,14 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "[A-Za-z0-9_\\.\\-]+"
     },
     "S3Prefix": {
       "description": "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "[0-9A-Za-z!\\-_.*\\'()/]*"
     },
     "S3Region": {
       "description": "The region of the S3 bucket that AWS delivers the report into.",
@@ -96,7 +96,7 @@
       "description": "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
       "type": "string",
       "default": null,
-      "pattern": "",
+      "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}",
       "minLength": 1,
       "maxLength": 128
     }

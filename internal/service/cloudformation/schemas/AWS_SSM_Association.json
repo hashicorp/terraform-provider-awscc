@@ -8,7 +8,7 @@
             "properties": {
                 "Key": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]{1,128}$|resource-groups:Name"
                 },
                 "Values": {
                     "type": "array",
@@ -74,7 +74,7 @@
         "AssociationId": {
             "description": "Unique identifier of the association.",
             "type": "string",
-            "pattern": "",
+            "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
             "examples": [
                 "88df7b09-95e8-48c4-a3cb-08c2c20d5110",
                 "203dd0ec-0055-4bf0-a872-707f72ef06aa"
@@ -83,17 +83,17 @@
         "AssociationName": {
             "description": "The name of the association.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$"
         },
         "DocumentVersion": {
             "description": "The version of the SSM document to associate with the target.",
             "type": "string",
-            "pattern": ""
+            "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"
         },
         "InstanceId": {
             "description": "The ID of the instance that the SSM document is associated with.",
             "type": "string",
-            "pattern": "",
+            "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
             "examples": [
                 "i-0e60836d21cf313c4",
                 "mi-0532c22e49636ee13"
@@ -102,7 +102,7 @@
         "Name": {
             "description": "The name of the SSM document.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
             "examples": [
                 "AWS-GatherSoftwareInventory",
                 "MyCustomSSMDocument"
@@ -149,7 +149,7 @@
         },
         "MaxErrors": {
             "type": "string",
-            "pattern": "",
+            "pattern": "^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$",
             "examples": [
                 "1%",
                 "10%",
@@ -159,7 +159,7 @@
         },
         "MaxConcurrency": {
             "type": "string",
-            "pattern": "",
+            "pattern": "^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$",
             "examples": [
                 "1%",
                 "10%",

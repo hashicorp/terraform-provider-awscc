@@ -7,12 +7,12 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 20,
-      "pattern": ""
+      "pattern": "d[a-z0-9]+"
     },
     "Arn": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "AutoSubDomainCreationPatterns": {
       "type": "array",
@@ -21,12 +21,12 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 2048,
-        "pattern": ""
+        "pattern": "(?s).+"
       }
     },
     "AutoSubDomainIAMRole": {
       "type": "string",
-      "pattern": "",
+      "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
       "maxLength": 1000
     },
     "CertificateRecord": {
@@ -65,13 +65,13 @@
         "Prefix": {
           "type": "string",
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "(?s).*"
         },
         "BranchName": {
           "type": "string",
           "minLength": 1,
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "(?s).+"
         }
       },
       "required": [

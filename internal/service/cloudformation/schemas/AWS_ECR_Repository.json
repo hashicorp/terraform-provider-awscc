@@ -27,7 +27,7 @@
             "description": "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
             "minLength": 12,
             "maxLength": 12,
-            "pattern": ""
+            "pattern": "^[0-9]{12}$"
         },
         "Tag": {
             "description": "A key-value pair to associate with a resource.",

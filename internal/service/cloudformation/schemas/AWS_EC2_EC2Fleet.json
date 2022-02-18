@@ -168,7 +168,7 @@
           "type": "string",
           "minLength": 3,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+"
         },
         "LaunchTemplateId": {
           "type": "string"
@@ -379,7 +379,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 30,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9\\.\\*]+"
           }
         },
         "InstanceGenerations": {

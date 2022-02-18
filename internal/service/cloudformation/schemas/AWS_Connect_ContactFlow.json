@@ -31,14 +31,14 @@
         "InstanceArn": {
             "description": "The identifier of the Amazon Connect instance (ARN).",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
             "minLength": 1,
             "maxLength": 256
         },
         "ContactFlowArn": {
             "description": "The identifier of the contact flow (ARN).",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
             "minLength": 1,
             "maxLength": 500
         },

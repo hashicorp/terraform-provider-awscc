@@ -6,7 +6,7 @@
         "LoadBalancerName": {
             "description": "The name of your load balancer.",
             "type": "string",
-            "pattern": ""
+            "pattern": "\\w[\\w\\-]*\\w"
         },
         "CertificateName": {
             "description": "The SSL/TLS certificate name.",

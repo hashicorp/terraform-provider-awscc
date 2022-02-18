@@ -70,7 +70,7 @@
         "Filter": {
             "type": "string",
             "description": "The repository filter to be applied for replication.",
-            "pattern": ""
+            "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$"
         },
         "FilterType": {
             "description": "Type of repository filter",
@@ -97,12 +97,12 @@
         "RegistryId": {
             "type": "string",
             "description": "The account ID of the destination registry to replicate to.",
-            "pattern": ""
+            "pattern": "^[0-9]{12}$"
         },
         "Region": {
             "description": "A Region to replicate to.",
             "type": "string",
-            "pattern": ""
+            "pattern": "[0-9a-z-]{2,25}"
         }
     },
     "properties": {

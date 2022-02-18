@@ -161,7 +161,7 @@
         },
         "TrailName": {
             "type": "string",
-            "pattern": "",
+            "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)",
             "minLength": 3,
             "maxLength": 128
         },

@@ -8,27 +8,27 @@
             "type":"string",
             "maxLength":36,
             "minLength":32,
-            "pattern":""
+            "pattern":"^([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|.*\\S.*)$"
         },
         "UUID": {
             "type":"string",
             "maxLength":36,
             "minLength":36,
-            "pattern":""
+            "pattern":"^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
         },
         "AccountId": {
             "description": "The identifier for the specified AWS account.",
             "type":"string",
             "maxLength":12,
             "minLength":12,
-            "pattern":""
+            "pattern":"^[0-9]{12}$"
         },
         "EmailAddress": {
             "description": "The unique identifier for the email account.",
             "type":"string",
             "maxLength":320,
             "minLength":1,
-            "pattern":""
+            "pattern":"^.*@.*$"
         },
         "AccountName": {
             "description": "The name of the specified AWS account.",
@@ -58,7 +58,7 @@
             "type":"string",
             "maxLength":2048,
             "minLength":20,
-            "pattern":""
+            "pattern":"^arn:.*:auditmanager:.*"
         },
         "Timestamp": {
             "description": "The sequence of characters that identifies when the event occurred.",
@@ -69,34 +69,34 @@
             "type":"string",
             "maxLength":300,
             "minLength":1,
-            "pattern":""
+            "pattern":"^[\\w\\W\\s\\S]*$"
         },
         "CreatedBy": {
             "description": "The IAM user or role that performed the action.",
             "type":"string",
             "maxLength":100,
             "minLength":1,
-            "pattern":""
+            "pattern":"^[a-zA-Z0-9-_()\\[\\]\\s]+$"
         },
         "IamArn": {
             "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
             "type":"string",
             "maxLength":2048,
             "minLength":20,
-            "pattern":""
+            "pattern":"^arn:.*:iam:.*"
         },
         "AssessmentName": {
             "description": "The name of the related assessment.",
             "type":"string",
             "maxLength":127,
             "minLength":1,
-            "pattern":""
+            "pattern":"^[a-zA-Z0-9-_\\.]+$"
         },
         "DelegationComment": {
             "description": "The comment related to the delegation.",
             "type":"string",
             "maxLength":350,
-            "pattern":""
+            "pattern":"^[\\w\\W\\s\\S]*$"
         },
         "RoleType": {
             "description": " The IAM role type.",

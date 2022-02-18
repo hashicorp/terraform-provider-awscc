@@ -7,12 +7,12 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 20,
-      "pattern": ""
+      "pattern": "d[a-z0-9]+"
     },
     "Arn": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "BasicAuthConfig": {
       "$ref": "#/definitions/BasicAuthConfig"
@@ -21,18 +21,18 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "(?s).+"
     },
     "BuildSpec": {
       "type": "string",
       "minLength": 1,
       "maxLength": 25000,
-      "pattern": ""
+      "pattern": "(?s).+"
     },
     "Description": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "EnableAutoBuild": {
       "type": "boolean"
@@ -53,7 +53,7 @@
     "PullRequestEnvironmentName": {
       "type": "string",
       "maxLength": 20,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "Stage": {
       "type": "string",
@@ -81,12 +81,12 @@
         "Name": {
           "type": "string",
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "(?s).*"
         },
         "Value": {
           "type": "string",
           "maxLength": 5500,
-          "pattern": ""
+          "pattern": "(?s).*"
         }
       },
       "required": [
@@ -109,7 +109,7 @@
           "type": "string",
           "minLength": 0,
           "maxLength": 256,
-          "pattern": ""
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
         }
       },
       "required": [

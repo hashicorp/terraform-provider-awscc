@@ -11,14 +11,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
           "maxLength": 256,
           "minLength": 1
         }
@@ -35,7 +35,7 @@
       "type": "string",
       "minLength": 8,
       "maxLength": 200,
-      "pattern": ""
+      "pattern": "^.+$"
     },
     "AgentArns": {
       "description": "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
@@ -43,7 +43,7 @@
       "items": {
         "type": "string",
         "maxLength": 128,
-        "pattern": ""
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"
       },
       "minItems": 1,
       "maxItems": 4,
@@ -54,20 +54,20 @@
       "type": "string",
       "maxLength": 63,
       "minLength": 3,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
     },
     "SecretKey": {
       "description": "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
       "type": "string",
       "minLength": 8,
       "maxLength": 200,
-      "pattern": ""
+      "pattern": "^.+$"
     },
     "ServerHostname": {
       "description": "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
       "type": "string",
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
     },
     "ServerPort": {
       "description": "The port that your self-managed server accepts inbound network traffic on.",
@@ -87,7 +87,7 @@
       "description": "The subdirectory in the self-managed object storage server that is used to read data from.",
       "type": "string",
       "maxLength": 4096,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -102,13 +102,13 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the location that is created.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
       "maxLength": 128
     },
     "LocationUri": {
       "description": "The URL of the object storage location that was described.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^(efs|nfs|s3|smb|fsxw|object-storage)://[a-zA-Z0-9./\\-]+$",
       "maxLength": 4356
     }
   },

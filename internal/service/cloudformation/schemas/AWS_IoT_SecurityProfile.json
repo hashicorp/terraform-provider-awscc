@@ -10,14 +10,14 @@
         "Name": {
           "description": "The name for the behavior.",
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-zA-Z0-9:_-]+",
           "minLength": 1,
           "maxLength": 128
         },
         "Metric": {
           "description": "What is measured by the behavior.",
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-zA-Z0-9:_-]+",
           "minLength": 1,
           "maxLength": 128
         },
@@ -44,7 +44,7 @@
         "DimensionName": {
           "description": "A unique identifier for the dimension.",
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-zA-Z0-9:_-]+",
           "minLength": 1,
           "maxLength": 128
         },
@@ -234,7 +234,7 @@
         "Metric": {
           "description": "What is measured by the behavior.",
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-zA-Z0-9:_-]+",
           "minLength": 1,
           "maxLength": 128
         },
@@ -275,7 +275,7 @@
     "SecurityProfileName": {
       "description": "A unique identifier for the security profile.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9:_-]+",
       "minLength": 1,
       "maxLength": 128
     },

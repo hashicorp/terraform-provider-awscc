@@ -31,20 +31,20 @@
     "DomainName": {
       "description": "The name of the domain.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
       "minLength": 2,
       "maxLength": 50
     },
     "Name": {
       "description": "The name of the domain. This field is used for GetAtt",
       "type": "string",
-      "pattern": "",
+      "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
       "minLength": 2,
       "maxLength": 50
     },
     "Owner": {
       "description": "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
-      "pattern": "",
+      "pattern": "[0-9]{12}",
       "type": "string"
     },
     "EncryptionKey": {

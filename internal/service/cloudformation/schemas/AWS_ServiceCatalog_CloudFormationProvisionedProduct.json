@@ -12,7 +12,7 @@
                     "uniqueItems": true,
                     "items" : {
                         "type" : "string",
-                        "pattern": ""
+                        "pattern": "^[0-9]{12}$"
                     }
                 },
                 "StackSetFailureToleranceCount": {
@@ -46,7 +46,7 @@
                     "uniqueItems": true,
                     "items" : {
                         "type" : "string",
-                        "pattern": ""
+                        "pattern": "^[a-z]{2}-([a-z]+-)+[1-9]"
                     }
                 }
             },
@@ -78,13 +78,13 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": ""
+                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
                 },
                 "Value": {
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 256,
-                    "pattern": ""
+                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
                 }
             },
             "additionalProperties": false,

@@ -37,7 +37,7 @@
     "ConformancePackName": {
       "description": "Name of the conformance pack which will be assigned as the unique identifier.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
       "minLength": 1,
       "maxLength": 256
     },
@@ -62,7 +62,7 @@
     "TemplateS3Uri": {
       "description": "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
       "type": "string",
-      "pattern": "",
+      "pattern": "s3://.*",
       "minLength": 1,
       "maxLength": 1024
     },

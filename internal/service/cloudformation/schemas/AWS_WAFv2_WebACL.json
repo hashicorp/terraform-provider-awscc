@@ -67,12 +67,12 @@
     "EntityDescription": {
       "description": "Description of the entity.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$"
     },
     "EntityName": {
       "description": "Name of the WebACL.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9A-Za-z_-]{1,128}$"
     },
     "ExcludedRule": {
       "description": "Excluded Rule in the RuleGroup or ManagedRuleGroup will not be evaluated.",
@@ -228,7 +228,7 @@
     "EntityId": {
       "description": "Id of the WebACL",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
     },
     "IPSetReferenceStatement": {
       "type": "object",
@@ -256,7 +256,7 @@
         },
         "Version": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^[\\w#:\\.\\-/]+$",
           "minLength": 1,
           "maxLength": 64
         },
@@ -653,7 +653,7 @@
         "CustomResponseBodyKey": {
           "description": "Custom response body key.",
           "type": "string",
-          "pattern": ""
+          "pattern": "^[\\w\\-]+$"
         },
         "ResponseHeaders": {
           "description": "Collection of HTTP headers.",
@@ -1056,7 +1056,7 @@
       "properties": {
         "LoginPath": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 256
         },
@@ -1081,7 +1081,7 @@
       "properties": {
         "Identifier": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 512
         }

@@ -7,7 +7,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 253,
-      "pattern": ""
+      "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$"
     },
     "Description": {
       "type": "string",
@@ -18,7 +18,7 @@
       "type": "string",
       "minLength": 3,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^arn:[a-z-]*:acm:[a-z0-9-]*:\\d{12}:certificate/[0-9A-Za-z_/-]*$"
     },
     "AppSyncDomainName": {
       "type": "string"

@@ -8,7 +8,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 2048,
-            "pattern": ""
+            "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"
         },
         "ChannelName": {
             "description": "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",

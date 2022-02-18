@@ -9,7 +9,7 @@
     },
     "UserGroupId": {
       "description": "The ID of the user group.",
-      "pattern": "",
+      "pattern": "[a-z][a-z0-9\\\\-]*",
       "type": "string"
     },
     "Engine": {

@@ -8,21 +8,21 @@
       "description": "The Name of the FeatureGroup.",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
     },
     "RecordIdentifierFeatureName": {
       "type": "string",
       "description": "The Record Identifier Feature Name.",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
     },
     "EventTimeFeatureName": {
       "type": "string",
       "description": "The Event Time Feature Name.",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
     },
     "FeatureDefinitions": {
       "type": "array",
@@ -67,7 +67,7 @@
       "description": "Role Arn",
       "minLength": 20,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "Description": {
       "type": "string",
@@ -93,7 +93,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 64,
-          "pattern": ""
+          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
         },
         "FeatureType": {
           "type": "string",
@@ -126,7 +126,7 @@
          "S3Uri": {
           "type": "string",
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^(https|s3)://([^/]+)/?(.*)$"
         },
         "KmsKeyId": {
           "$ref": "#/definitions/KmsKeyId"

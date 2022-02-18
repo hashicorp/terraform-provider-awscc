@@ -12,14 +12,14 @@
         "SlackChannelId": {
             "description": "The id of the Slack channel",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[A-Za-z0-9]+$",
             "minLength": 1,
             "maxLength": 256
         },
         "ConfigurationName": {
             "description": "The name of the configuration",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[A-Za-z0-9-_]+$",
             "minLength": 1,
             "maxLength":128
         },
@@ -40,7 +40,7 @@
         "LoggingLevel": {
             "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
             "type": "string",
-            "pattern": "",
+            "pattern": "^(ERROR|INFO|NONE)$",
             "default": "NONE"
         },
         "Arn": {

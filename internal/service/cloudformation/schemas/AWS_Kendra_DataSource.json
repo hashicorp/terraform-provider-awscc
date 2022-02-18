@@ -69,7 +69,7 @@
       "type": "string",
       "minLength": 3,
       "maxLength": 63,
-      "pattern": ""
+      "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
     },
     "S3ObjectKey": {
       "type": "string",
@@ -126,7 +126,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^(https?|ftp|file)://([^\\s]*)"
     },
     "SecretArn": {
       "type": "string",
@@ -144,7 +144,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 200,
-            "pattern": ""
+            "pattern": "[\\-0-9a-zA-Z]+"
           }
         },
         "SecurityGroupIds": {
@@ -154,7 +154,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 200,
-            "pattern": ""
+            "pattern": "[\\-0-9a-zA-Z]+"
           }
         }
       },
@@ -678,7 +678,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$"
     },
     "OneDriveUsers": {
       "type": "object",
@@ -1175,7 +1175,7 @@
     },
     "WebCrawlerSiteMap": {
       "type": "string",
-      "pattern": "",
+      "pattern": "^(https?):\\/\\/([^\\s]*)",
       "minLength": 1,
       "maxLength": 2048
     },
@@ -1201,7 +1201,7 @@
     },
     "WebCrawlerSeedUrl": {
       "type": "string",
-      "pattern": "",
+      "pattern": "^(https?):\/\/([^\\s]*)",
       "minLength": 1,
       "maxLength": 2048
     },
@@ -1250,7 +1250,7 @@
       "properties": {
         "Host": {
           "type": "string",
-          "pattern": "",
+          "pattern": "([^\\s]*)",
           "minLength": 1,
           "maxLength": 253
         },
@@ -1274,7 +1274,7 @@
       "properties": {
         "Host": {
           "type": "string",
-          "pattern": "",
+          "pattern": "([^\\s]*)",
           "minLength": 1,
           "maxLength": 253
         },
@@ -1361,7 +1361,7 @@
           "type": "string",
           "minLength": 12,
           "maxLength": 12,
-          "pattern": ""
+          "pattern": "d-[0-9a-fA-F]{10}"
         },
         "CrawlComments": {
           "type": "boolean"
@@ -1620,7 +1620,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 200,
-      "pattern": ""
+      "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*"
     },
     "DocumentAttributeValue": {
       "type": "object",

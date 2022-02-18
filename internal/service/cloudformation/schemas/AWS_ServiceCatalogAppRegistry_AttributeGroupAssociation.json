@@ -9,22 +9,22 @@
       "description": "The name or the Id of the Application.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "\\w+|[a-z0-9]{12}"
     },
     "AttributeGroup": {
       "type": "string",
       "description": "The name or the Id of the AttributeGroup.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "\\w+|[a-z0-9]{12}"
     },
     "ApplicationArn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+"
     },
     "AttributeGroupArn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+"
     },
     "Id": {
       "type": "string"

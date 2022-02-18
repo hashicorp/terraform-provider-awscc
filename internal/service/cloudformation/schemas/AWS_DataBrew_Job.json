@@ -397,7 +397,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "^[A-Z_][A-Z\\\\d_]*$"
           }
         },
         "AllowedStatistics": {
@@ -480,7 +480,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^[A-Z\\_]+$"
     },
     "StatisticOverride": {
       "type": "object",

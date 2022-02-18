@@ -32,7 +32,7 @@
         "ImageName": {
             "type" : "string",
             "description" : "The name of the image.",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$",
             "minLength": 1,
             "maxLength" : 63
         },
@@ -41,26 +41,26 @@
             "type" : "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$"
         },
         "ImageRoleArn": {
             "description": "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
             "type" : "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*$"
         },
         "ImageDisplayName": {
             "type" : "string",
             "description" : "The display name of the image.",
-            "pattern": "",
+            "pattern": "^[A-Za-z0-9 -_]+$",
             "minLength" : 1,
             "maxLength" : 128
         },
         "ImageDescription": {
             "type" : "string",
             "description" : "A description of the image.",
-            "pattern": "",
+            "pattern": ".+",
             "minLength" : 1,
             "maxLength" : 512
         },

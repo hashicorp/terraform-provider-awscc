@@ -7,7 +7,7 @@
     "AuthorizedAccountId": {
       "description": "The 12-digit account ID of the account authorized to aggregate data.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^\\d{12}$"
     },
     "AuthorizedAwsRegion": {
       "description": "The region authorized to collect aggregated data.",

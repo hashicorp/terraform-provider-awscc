@@ -45,7 +45,7 @@
         "BucketName": {
             "description": "The name for the bucket.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$",
             "minLength": 3,
             "maxLength": 54
         },

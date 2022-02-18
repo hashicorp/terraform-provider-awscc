@@ -6,14 +6,14 @@
     "Arn": {
       "description": "Subscription ARN",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
     },
     "Subscriber": {
       "type": "object",
       "properties": {
         "Address": {
           "type": "string",
-          "pattern": ""
+          "pattern": "(^[a-zA-Z0-9.!#$%&'*+=?^_\u2018{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)"
         },
         "Status": {
           "type": "string",
@@ -44,7 +44,7 @@
     "SubscriptionName": {
       "description": "The name of the subscription.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\S\\s]*",
       "minLength": 0,
       "maxLength": 1024
     },

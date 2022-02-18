@@ -17,7 +17,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"
         }
       },
       "required": [
@@ -134,7 +134,7 @@
     "iso8601UTC": {
       "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
       "type": "string",
-      "pattern": ""
+      "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"
     },
     "AbortIncompleteMultipartUpload": {
       "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3Outposts will wait before permanently removing all parts of the upload.",
@@ -164,13 +164,13 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"
         },
         "Value": {
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"
         }
       },
       "required": [
@@ -211,7 +211,7 @@
       "description": "The Amazon Resource Name (ARN) of the specified bucket.",
       "maxLength": 2048,
       "minLength": 20,
-      "pattern": "",
+      "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
       "type": "string"
     },
     "BucketName": {
@@ -223,7 +223,7 @@
     },
     "OutpostId": {
       "description": "The id of the customer outpost on which the bucket resides.",
-      "pattern": "",
+      "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
       "type": "string"
     },
     "Tags": {

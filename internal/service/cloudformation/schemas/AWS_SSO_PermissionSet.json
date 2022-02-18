@@ -10,13 +10,13 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[\\w+=,.@-]+",
           "minLength": 1,
           "maxLength": 128
         },
         "Value": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[\\w+=,.@-]+",
           "minLength": 0,
           "maxLength": 256
         }
@@ -38,28 +38,28 @@
     "Name": {
       "description": "The name you want to assign to this permission set.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\w+=,.@-]+",
       "minLength": 1,
       "maxLength": 32
     },
     "PermissionSetArn": {
       "description": "The permission set that the policy will be attached to",
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
     "Description": {
       "description": "The permission set description.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
       "minLength": 1,
       "maxLength": 700
     },
     "InstanceArn": {
       "description": "The sso instance arn that the permission set is owned.",
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
@@ -73,7 +73,7 @@
     "RelayStateType": {
       "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9&amp;$@#\\/%?=~\\-_'&quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
       "minLength": 1,
       "maxLength": 240
     },

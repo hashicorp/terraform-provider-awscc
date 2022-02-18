@@ -186,7 +186,7 @@
         "Name": {
             "description": "The unique name to give to your cluster.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
             "minLength": 1,
             "maxLength": 100
         },
@@ -200,7 +200,7 @@
         "Version": {
             "description": "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
             "type": "string",
-            "pattern": ""
+            "pattern": "1\\.\\d\\d"
         },
         "Tags": {
             "description": "An array of key-value pairs to apply to this resource.",

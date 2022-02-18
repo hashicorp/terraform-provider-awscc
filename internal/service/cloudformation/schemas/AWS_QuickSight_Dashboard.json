@@ -28,7 +28,7 @@
         },
         "Message": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>Message.</p>"
         }
       },
@@ -179,7 +179,7 @@
         },
         "DataSetPlaceholder": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>Dataset placeholder.</p>"
         }
       },
@@ -202,7 +202,7 @@
         },
         "Name": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>A display name for the date-time parameter.</p>"
         }
       },
@@ -225,7 +225,7 @@
         },
         "Name": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>A display name for the decimal parameter.</p>"
         }
       },
@@ -258,7 +258,7 @@
         },
         "Name": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>The name of the integer parameter.</p>"
         }
       },
@@ -357,12 +357,12 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "pattern": "",
+          "pattern": "[\\w\\-]+",
           "description": "<p>The unique identifier associated with a sheet.</p>"
         },
         "Name": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>"
         }
       },
@@ -391,7 +391,7 @@
         },
         "Name": {
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "description": "<p>A display name for a string parameter.</p>"
         }
       },
@@ -434,7 +434,7 @@
       "type": "string",
       "maxLength": 12,
       "minLength": 12,
-      "pattern": ""
+      "pattern": "^[0-9]{12}$"
     },
     "CreatedTime": {
       "type": "string",
@@ -445,7 +445,7 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": ""
+      "pattern": "[\\w\\-]+"
     },
     "DashboardPublishOptions": {
       "$ref": "#/definitions/DashboardPublishOptions"

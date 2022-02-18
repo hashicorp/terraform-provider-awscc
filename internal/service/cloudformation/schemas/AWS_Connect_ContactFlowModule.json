@@ -31,14 +31,14 @@
         "InstanceArn": {
             "description": "The identifier of the Amazon Connect instance (ARN).",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
             "minLength": 1,
             "maxLength": 256
         },
         "ContactFlowModuleArn": {
             "description": "The identifier of the contact flow module (ARN).",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/flow-module/[-a-zA-Z0-9]*$",
             "minLength": 1,
             "maxLength": 256
         },
@@ -47,7 +47,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 127,
-            "pattern": ""
+            "pattern": ".*\\S.*"
         },
         "Content": {
             "description": "The content of the contact flow module in JSON format.",
@@ -59,7 +59,7 @@
             "description": "The description of the contact flow module.",
             "type": "string",
             "maxLength": 500,
-            "pattern": ""
+            "pattern": ".*\\S.*"
         },
         "State": {
             "type": "string",

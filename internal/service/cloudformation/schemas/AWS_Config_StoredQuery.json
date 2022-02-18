@@ -13,25 +13,25 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 36,
-          "pattern": ""
+          "pattern": "^\\S+$"
         },
         "QueryName": {
           "type": "string",
           "minLength": 1,
           "maxLength": 64,
-          "pattern": ""
+          "pattern": "^[a-zA-Z0-9-_]+$"
         },
         "QueryDescription": {
           "type": "string",
           "minLength": 0,
           "maxLength": 256,
-          "pattern": ""
+          "pattern": "[\\s\\S]*"
         },
         "QueryExpression": {
           "type": "string",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": ""
+          "pattern": "[\\s\\S]*"
         },
         "Tags": {
           "description": "The tags for the stored query.",

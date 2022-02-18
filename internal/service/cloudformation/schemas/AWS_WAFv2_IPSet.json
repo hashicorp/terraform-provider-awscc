@@ -6,17 +6,17 @@
     "EntityName": {
       "description": "Name of the IPSet.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9A-Za-z_-]{1,128}$"
     },
     "EntityDescription": {
       "description": "Description of the entity.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$"
     },
     "EntityId": {
       "description": "Id of the IPSet",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
     },
     "Scope": {
       "description": "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.",

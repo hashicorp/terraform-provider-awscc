@@ -15,7 +15,7 @@
                 },
                 "ResourceId": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": ".+",
                     "minLength": 1,
                     "maxLength": 1000
                 },
@@ -23,7 +23,7 @@
                     "type": "string",
                     "maxLength": 20,
                     "minLength": 1,
-                    "pattern": ""
+                    "pattern": "^[a-zA-Z0-9]+$"
                 }
             }
         },
@@ -52,13 +52,13 @@
         },
         "AliasId": {
             "type": "string",
-            "pattern": "",
+            "pattern": "^wsca-[0-9a-z]{8,63}$",
             "maxLength": 68,
             "minLength": 13
         },
         "ConnectionString": {
             "type": "string",
-            "pattern": "",
+            "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
             "minLength": 1,
             "maxLength": 255
         },

@@ -21,7 +21,7 @@
           "type": "string",
           "minLength": 36,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"
         }
       },
       "additionalProperties": false
@@ -36,7 +36,7 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36,
-      "pattern": ""
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
     }
   },
   "additionalProperties": false,

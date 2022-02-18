@@ -12,7 +12,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*"
     }
   },
   "properties": {

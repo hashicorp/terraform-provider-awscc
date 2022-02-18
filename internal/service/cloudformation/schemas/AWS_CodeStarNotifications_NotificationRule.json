@@ -43,7 +43,7 @@
         },
         "Resource": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws[^:\\s]*:[^:\\s]*:[^:\\s]*:[0-9]{12}:[^\\s]+$"
         },
         "Targets": {
             "type": "array",
@@ -58,13 +58,13 @@
         },
         "Name": {
             "type": "string",
-            "pattern": "",
+            "pattern": "[A-Za-z0-9\\-_ ]+$",
             "minLength": 1,
             "maxLength": 64
         },
         "Arn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws[^:\\s]*:codestar-notifications:[^:\\s]+:\\d{12}:notificationrule\\/(.*\\S)?$"
         }
     },
     "definitions": {

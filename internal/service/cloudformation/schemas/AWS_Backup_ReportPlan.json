@@ -8,7 +8,7 @@
             "description": "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "[a-zA-Z][_a-zA-Z0-9]*"
         },
         "ReportPlanArn": {
             "type": "string",
@@ -19,7 +19,7 @@
             "description": "An optional description of the report plan with a maximum of 1,024 characters.",
             "minLength": 0,
             "maxLength": 1024,
-            "pattern": ""
+            "pattern": ".*\\S.*"
         },
         "ReportPlanTags": {
             "description": "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",

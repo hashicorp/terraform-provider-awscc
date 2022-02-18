@@ -31,7 +31,7 @@
     "Name": {
       "description": "A unique identifier for the dimension.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9:_-]+",
       "minLength": 1,
       "maxLength": 128
     },

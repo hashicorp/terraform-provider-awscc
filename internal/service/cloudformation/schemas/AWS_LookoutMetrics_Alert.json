@@ -6,7 +6,7 @@
     "Arn": {
       "type": "string",
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+"
     },
     "Action": {
       "type": "object",
@@ -65,7 +65,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 63,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
     },
     "Arn": {
       "description": "ARN assigned to the alert.",
@@ -75,13 +75,13 @@
       "description": "A description for the alert.",
       "type": "string",
       "maxLength": 256,
-      "pattern": ""
+      "pattern": ".*\\S.*"
     },
     "AnomalyDetectorArn": {
       "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
       "type": "string",
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+"
     },
     "AlertSensitivityThreshold": {
       "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",

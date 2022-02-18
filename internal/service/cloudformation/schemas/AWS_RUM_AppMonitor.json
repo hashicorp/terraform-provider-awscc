@@ -12,7 +12,7 @@
           "description": "The ID of the identity pool that is used to authorize the sending of data to RUM.",
           "minLength": 1,
           "maxLength": 55,
-          "pattern": "",
+          "pattern": "[\\w-]+:[0-9a-f-]+",
           "type": "string"
         },
         "ExcludedPages": {
@@ -111,14 +111,14 @@
     "Url": {
       "description": "Page Url",
       "type": "string",
-      "pattern": "",
+      "pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
       "minLength": 1,
       "maxLength": 1260
     },
     "Arn": {
       "description": "Resource ARN",
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"
     },
     "Telemetry": {
       "type": "string",
@@ -133,7 +133,7 @@
     "Name": {
       "description": "A name for the app monitor",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
       "minLength": 1,
       "maxLength": 255
     },

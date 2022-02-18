@@ -18,7 +18,7 @@
     "SecurityProfileArn": {
       "description": "The identifier of the security profile for the user.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*$"
     },
     "AfterContactWorkTimeLimit": {
       "description": "The After Call Work (ACW) timeout setting, in seconds.",
@@ -107,7 +107,7 @@
     "InstanceArn": {
       "description": "The identifier of the Amazon Connect instance.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
     },
     "DirectoryUserId": {
       "description": "The identifier of the user account in the directory used for identity management.",
@@ -116,14 +116,14 @@
     "HierarchyGroupArn": {
       "description": "The identifier of the hierarchy group for the user.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$"
     },
     "Username": {
       "description": "The user name for the account.",
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "[a-zA-Z0-9\\_\\-\\.\\@]+"
     },
     "Password": {
       "description": "The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.",
@@ -133,7 +133,7 @@
     "RoutingProfileArn": {
       "description": "The identifier of the routing profile for the user.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/routing-profile/[-a-zA-Z0-9]*$"
     },
     "IdentityInfo": {
       "description": "The information about the identity of the user.",
@@ -157,7 +157,7 @@
     "UserArn": {
       "description": "The Amazon Resource Name (ARN) for the user.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"
     },
     "Tags": {
       "type": "array",

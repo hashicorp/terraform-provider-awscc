@@ -37,7 +37,7 @@
             "properties": {
                 "Bucket": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9.\\-_]*$",
                     "minLength": 3,
                     "maxLength": 255
                 },
@@ -48,7 +48,7 @@
                 },
                 "KeyPrefix": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9!_.*'()/{}:-]*/$",
                     "minLength": 1,
                     "maxLength": 255
                 }

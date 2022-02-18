@@ -6,7 +6,7 @@
     "iso8601UTC": {
       "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
       "type": "string",
-      "pattern": ""
+      "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"
     },
     "NetworkInterface": {
       "description": "The container for the network interface.",
@@ -30,7 +30,7 @@
       "minLength": 5,
       "maxLength": 500,
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/endpoint/[a-zA-Z0-9]{19}$"
     },
     "CidrBlock": {
       "description": "The VPC CIDR committed by this endpoint.",
@@ -47,7 +47,7 @@
       "minLength": 5,
       "maxLength": 500,
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9]{19}$"
     },
     "NetworkInterfaces": {
       "description": "The network interfaces of the endpoint.",
@@ -60,7 +60,7 @@
     },
     "OutpostId": {
       "description": "The id of the customer outpost on which the bucket resides.",
-      "pattern": "",
+      "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
       "type": "string"
     },
     "SecurityGroupId": {
@@ -68,7 +68,7 @@
       "minLength": 1,
       "maxLength": 100,
       "type": "string",
-      "pattern": ""
+      "pattern": "^sg-([0-9a-f]{8}|[0-9a-f]{17})$"
     },
     "Status": {
       "type": "string",
@@ -83,7 +83,7 @@
       "minLength": 1,
       "maxLength": 100,
       "type": "string",
-      "pattern": ""
+      "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"
     },
     "AccessType": {
       "description": "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
@@ -97,7 +97,7 @@
     "CustomerOwnedIpv4Pool": {
       "description": "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^ipv4pool-coip-([0-9a-f]{17})$"
     }
   },
   "taggable": false,

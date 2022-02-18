@@ -23,14 +23,14 @@
     "GlobalClusterIdentifier": {
       "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"
     },
     "SourceDBClusterIdentifier": {
       "description": "The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.",
       "type": "string",
       "oneOf": [
         {
-          "pattern": ""
+          "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"
         },
         {
           "pattern": ""

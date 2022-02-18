@@ -5,11 +5,11 @@
   "definitions": {
     "ProfilingGroupArn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$"
     },
     "IamArn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$"
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -37,12 +37,12 @@
     "ChannelId": {
       "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
       "type": "string",
-      "pattern": ""
+      "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
     },
     "ChannelUri": {
       "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$"
     },
     "Channel": {
       "description": "Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.",
@@ -66,7 +66,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[\\w-]+$"
     },
     "ComputePlatform": {
       "description": "The compute platform of the profiling group.",

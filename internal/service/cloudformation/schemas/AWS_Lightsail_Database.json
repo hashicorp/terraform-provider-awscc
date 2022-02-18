@@ -69,7 +69,7 @@
         "RelationalDatabaseName": {
             "description": "The name to use for your new Lightsail database resource.",
             "type": "string",
-            "pattern": "",
+            "pattern": "\\w[\\w\\-]*\\w",
             "minLength": 2,
             "maxLength": 255
         },

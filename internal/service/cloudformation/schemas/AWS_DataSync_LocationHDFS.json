@@ -11,7 +11,7 @@
                 "Hostname": {
                     "description": "The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
                     "maxLength": 255
                 },
                 "Port": {
@@ -109,7 +109,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$"
         },
         "QopConfiguration": {
             "$ref": "#/definitions/QopConfiguration"
@@ -125,14 +125,14 @@
         "SimpleUser": {
             "description": "The user name that has read and write permissions on the specified HDFS cluster.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[_.A-Za-z0-9][-_.A-Za-z0-9]*$",
             "minLength": 1,
             "maxLength": 256
         },
         "KerberosPrincipal": {
             "description": "The unique identity, or principal, to which Kerberos can assign tickets.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^.+$",
             "minLength": 1,
             "maxLength": 256
         },
@@ -159,7 +159,7 @@
             "type": "array",
             "items": {
                 "type": "string",
-                "pattern": "",
+                "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
                 "maxLength": 128
             },
             "minItems": 1,
@@ -170,18 +170,18 @@
             "description": "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
             "type": "string",
             "maxLength": 4096,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
         },
         "LocationArn": {
             "description": "The Amazon Resource Name (ARN) of the HDFS location.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
             "maxLength": 128
         },
         "LocationUri": {
             "description": "The URL of the HDFS location that was described.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs)://[a-zA-Z0-9.:/\\-]+$",
             "maxLength": 4356
         }
     },

@@ -7,7 +7,7 @@
         "ObjectLambdaAccessPoint": {
             "description": "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
             "minLength": 3,
             "maxLength": 45
         },

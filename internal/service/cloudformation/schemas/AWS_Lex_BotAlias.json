@@ -215,7 +215,7 @@
                     "description" : "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
                     "minLength" : 1,
                     "maxLength" : 2048,
-                    "pattern" : ""
+                    "pattern" : "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
                 },
                 "LogPrefix" : {
                     "type" : "string",
@@ -228,7 +228,7 @@
                     "description" : "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
                     "minLength" : 20,
                     "maxLength" : 2048,
-                    "pattern": ""
+                    "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
                 }
             },
             "required": [
@@ -242,21 +242,21 @@
             "type": "string",
             "minLength": 10,
             "maxLength": 10,
-            "pattern": ""
+            "pattern": "^[0-9a-zA-Z]+$"
         },
         "Name": {
             "description": "A unique identifier for a resource.",
             "type": "string",
             "minLength": 1,
             "maxLength": 100,
-            "pattern": ""
+            "pattern": "^([0-9a-zA-Z][_-]?)+$"
         },
         "BotVersion": {
             "description": "The version of a bot.",
             "type": "string",
             "minLength": 1,
             "maxLength": 5,
-            "pattern": ""
+            "pattern": "^(DRAFT|[0-9]+)$"
         },
         "Description": {
             "description": "A description of the bot alias. Use the description to help identify the bot alias in lists.",

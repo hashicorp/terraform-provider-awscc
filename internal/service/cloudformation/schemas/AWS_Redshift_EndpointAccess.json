@@ -62,7 +62,7 @@
         "ResourceOwner": {
             "description": "The AWS account ID of the owner of the cluster.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^\\d{12}$"
         },
         "EndpointStatus": {
             "description": "The status of the endpoint.",

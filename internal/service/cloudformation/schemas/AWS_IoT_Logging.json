@@ -10,7 +10,7 @@
             "type": "string",
             "minLength": 12,
             "maxLength": 12,
-            "pattern": ""
+            "pattern": "^[0-9]{12}$"
         },
         "RoleArn": {
             "description": "The ARN of the role that allows IoT to write to Cloudwatch logs.",

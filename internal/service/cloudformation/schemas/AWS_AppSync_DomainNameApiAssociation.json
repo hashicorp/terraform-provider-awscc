@@ -7,7 +7,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 253,
-      "pattern": ""
+      "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$"
     },
     "ApiId": {
       "type": "string"

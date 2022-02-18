@@ -115,7 +115,7 @@
     "Id": {
       "description": "The ID of the new wireless gateway task definition",
       "type": "string",
-      "pattern": ""
+      "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
     },
     "TaskDefinitionType": {
       "description": "A filter to list only the wireless gateway task definitions that use this task definition type",

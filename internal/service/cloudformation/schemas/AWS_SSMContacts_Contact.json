@@ -94,14 +94,14 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^[a-z0-9_\\-\\.]*$"
         },
         "DisplayName": {
             "description": "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9_\\-\\s]*$"
         },
         "Type": {
             "description": "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",

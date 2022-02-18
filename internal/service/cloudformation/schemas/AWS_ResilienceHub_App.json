@@ -22,11 +22,11 @@
             "properties": {
                 "AwsAccountId": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[0-9]{12}$"
                 },
                 "AwsRegion": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$"
                 },
                 "Identifier": {
                     "type": "string",
@@ -35,7 +35,7 @@
                 },
                 "Type": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "Arn|Native"
                 }
             },
             "required": [
@@ -53,11 +53,11 @@
                 },
                 "MappingType": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "CfnStack|Resource"
                 },
                 "ResourceName": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
                 },
                 "PhysicalResourceId": {
                     "$ref": "#/definitions/PhysicalResourceId"
@@ -73,7 +73,7 @@
         "Name": {
             "description": "Name of the app.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
         },
         "Description": {
             "description": "App description.",
@@ -99,7 +99,7 @@
             "type": "string",
             "minLength": 0,
             "maxLength": 5000,
-            "pattern": ""
+            "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$"
         },
         "ResourceMappings": {
             "description": "An array of ResourceMapping objects.",

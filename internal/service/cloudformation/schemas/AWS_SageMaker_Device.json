@@ -10,21 +10,21 @@
                 "Description": {
                     "description": "Description of the device",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "[\\S\\s]+",
                     "minLength": 1,
                     "maxLength": 40
                 },
                 "DeviceName": {
                     "description": "The name of the device",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
                     "minLength": 1,
                     "maxLength": 63
                 },
                 "IotThingName": {
                     "description": "AWS Internet of Things (IoT) object name.",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "[a-zA-Z0-9:_-]+",
                     "maxLength": 128
                 }
             },
@@ -46,7 +46,7 @@
                 "Value": {
                     "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
                     "minLength": 0,
                     "maxLength": 256
                 }
@@ -62,7 +62,7 @@
         "DeviceFleetName": {
             "description": "The name of the edge device fleet",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
             "minLength": 1,
             "maxLength": 63
         },

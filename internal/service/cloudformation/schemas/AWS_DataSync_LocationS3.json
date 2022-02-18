@@ -11,7 +11,7 @@
         "BucketAccessRoleArn": {
           "description": "The ARN of the IAM role of the Amazon S3 bucket.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
           "maxLength": 2048
         }
       },
@@ -27,14 +27,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
           "maxLength": 256,
           "minLength": 1
         }
@@ -53,13 +53,13 @@
       "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
       "type": "string",
       "maxLength": 156,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$"
     },
     "Subdirectory": {
       "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
       "type": "string",
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$"
     },
     "S3StorageClass": {
       "description": "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
@@ -87,13 +87,13 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
       "maxLength": 128
     },
     "LocationUri": {
       "description": "The URL of the S3 location that was described.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
       "maxLength": 4356
     }
   },

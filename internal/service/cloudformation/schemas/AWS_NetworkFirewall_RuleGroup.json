@@ -7,7 +7,7 @@
     "ResourceArn": {
       "description": "A resource ARN.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^(arn:aws.*)$",
       "minLength": 1,
       "maxLength": 256
     },
@@ -18,13 +18,13 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^.*$"
         },
         "Value": {
           "type": "string",
           "minLength": 0,
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "^.*$"
         }
       },
       "required": [
@@ -111,7 +111,7 @@
     "VariableDefinition": {
       "type": "string",
       "minLength": 1,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "RulesSource": {
       "type": "object",
@@ -241,7 +241,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^.*$"
         },
         "SourcePort": {
           "$ref": "#/definitions/Port"
@@ -257,7 +257,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^.*$"
         },
         "DestinationPort": {
           "$ref": "#/definitions/Port"
@@ -280,7 +280,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^.*$"
         },
         "Settings": {
           "type": "array",
@@ -300,13 +300,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 8192,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "Port": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "StatelessRulesAndCustomActions": {
       "type": "object",
@@ -433,7 +433,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$"
         }
       },
       "required": [
@@ -512,7 +512,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^[a-zA-Z0-9]+$"
         },
         "ActionDefinition": {
           "$ref": "#/definitions/ActionDefinition"
@@ -557,7 +557,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^[a-zA-Z0-9-_ ]+$"
         }
       },
       "required": [
@@ -587,7 +587,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9-]+$"
     },
     "RuleGroupArn": {
       "$ref": "#/definitions/ResourceArn"
@@ -596,7 +596,7 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36,
-      "pattern": ""
+      "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$"
     },
     "RuleGroup": {
       "$ref": "#/definitions/RuleGroup"
@@ -615,7 +615,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 512,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "Tags": {
       "type": "array",

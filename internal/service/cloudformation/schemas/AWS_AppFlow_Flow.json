@@ -7,26 +7,26 @@
         "FlowArn": {
             "description": "ARN identifier of the flow.",
             "type": "string",
-            "pattern": "",
+            "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
             "maxLength": 512
         },
         "FlowName": {
             "description": "Name of the flow.",
             "type": "string",
-            "pattern": "",
+            "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
             "maxLength": 256,
             "minLength": 1
         },
         "Description": {
             "description": "Description of the flow.",
             "type": "string",
-            "pattern": "",
+            "pattern": "[\\w!@#\\-.?,\\s]*",
             "maxLength": 2048
         },
         "KMSArn": {
             "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
             "type": "string",
-            "pattern": "",
+            "pattern": "arn:aws:kms:.*:[0-9]+:.*",
             "maxLength": 2048,
             "minLength": 20
         },
@@ -379,7 +379,7 @@
         "Object": {
             "type": "string",
             "maxLength": 512,
-            "pattern": ""
+            "pattern": "\\S+"
         },
         "EnableDynamicFieldUpdate": {
             "type": "boolean"
@@ -399,19 +399,19 @@
         "DocumentType": {
             "type": "string",
             "maxLength": 512,
-            "pattern": ""
+            "pattern": "[\\s\\w_-]+"
         },
         "BucketName": {
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "\\S+"
         },
         "UpsolverBucketName": {
             "type": "string",
             "minLength": 16,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "^(upsolver-appflow)\\S*"
         },
         "BucketPrefix": {
             "type": "string",
@@ -447,7 +447,7 @@
         "Name": {
             "type": "string",
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "\\S+"
         },
         "WriteOperationType": {
             "type": "string",
@@ -571,7 +571,7 @@
         "ConnectorProfileName": {
             "description": "Name of connector profile",
             "type": "string",
-            "pattern": "",
+            "pattern": "[\\w/!@#+=.-]+",
             "maxLength": 256
         },
         "AmplitudeSourceProperties": {
@@ -982,7 +982,7 @@
                 "Value": {
                     "type": "string",
                     "maxLength": 2048,
-                    "pattern": ""
+                    "pattern": ".+"
                 }
             },
             "required": [

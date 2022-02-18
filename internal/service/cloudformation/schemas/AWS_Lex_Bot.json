@@ -8,27 +8,27 @@
       "type": "string",
       "minLength": 32,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$"
     },
     "Id": {
       "description": "Unique ID of resource",
       "type": "string",
       "minLength": 10,
       "maxLength": 10,
-      "pattern": ""
+      "pattern": "^[0-9a-zA-Z]+$"
     },
     "BotArn": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1011,
-      "pattern": ""
+      "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$"
     },
     "Name": {
       "description": "Unique name for a resource.",
       "type": "string",
       "minLength": 1,
       "maxLength": 100,
-      "pattern": ""
+      "pattern": "^([0-9a-zA-Z][_-]?)+$"
     },
     "Description": {
       "description": "A description of the resource",
@@ -605,7 +605,7 @@
       "type": "string",
       "minLength": 32,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"
     },
     "QueryFilterString": {
       "description": "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
@@ -822,13 +822,13 @@
       "type": "string",
       "minLength": 3,
       "maxLength": 63,
-      "pattern": ""
+      "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
     },
     "S3ObjectKey": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"
     },
     "GrammarSlotTypeSource": {
       "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
@@ -847,7 +847,7 @@
               "type": "string",
               "minLength": 20,
               "maxLength": 2048,
-              "pattern": ""
+              "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"
           }
       },
       "required": [

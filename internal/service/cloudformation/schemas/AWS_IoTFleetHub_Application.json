@@ -31,28 +31,28 @@
     "ApplicationId": {
       "description": "The ID of the application.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
       "minLength": 36,
       "maxLength": 36
     },
     "ApplicationArn": {
       "description": "The ARN of the application.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:[!-~]+$",
       "minLength": 1,
       "maxLength": 1600
     },
     "ApplicationName": {
       "description": "Application Name, should be between 1 and 256 characters.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[ -~]*$",
       "minLength": 1,
       "maxLength": 256
     },
     "ApplicationDescription": {
       "description": "Application Description, should be between 1 and 2048 characters.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[ -~]*$",
       "minLength": 1,
       "maxLength": 2048
     },
@@ -75,7 +75,7 @@
     "RoleArn": {
       "description": "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:[!-~]+$",
       "minLength": 1,
       "maxLength": 1600
     },

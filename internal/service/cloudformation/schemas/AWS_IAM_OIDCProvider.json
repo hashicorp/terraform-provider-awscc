@@ -21,7 +21,7 @@
             "items": {
                 "minLength": 40,
                 "maxLength": 40,
-                "pattern": "",
+                "pattern": "[0-9A-Fa-f]{40}",
                 "type": "string"
             },
             "maxItems": 5

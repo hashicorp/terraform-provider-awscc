@@ -27,14 +27,14 @@
         "RegistryId": {
             "type": "string",
             "description": "The account ID of the registry pull-through cache repository will be created in.",
-            "pattern": ""
+            "pattern": "^[0-9]{12}$"
         },
         "EcrRepositoryPrefix": {
             "type": "string",
             "minLength": 2,
             "maxLength": 20,
             "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
-            "pattern": ""
+            "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$"
         },
         "UpstreamRegistryUrl": {
             "type": "string",
@@ -47,7 +47,7 @@
             "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
             "minLength": 2,
             "maxLength": 20,
-            "pattern": ""
+            "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$"
         },
         "UpstreamRegistryUrl": {
             "type": "string",

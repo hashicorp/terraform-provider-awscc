@@ -12,18 +12,18 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 20,
-      "pattern": ""
+      "pattern": "d[a-z0-9]+"
     },
     "AppName": {
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "(?s).+"
     },
     "Arn": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "AutoBranchCreationConfig": {
       "$ref": "#/definitions/AutoBranchCreationConfig"
@@ -35,13 +35,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 25000,
-      "pattern": ""
+      "pattern": "(?s).+"
     },
     "CustomHeaders": {
       "type": "string",
       "minLength": 0,
       "maxLength": 25000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "CustomRules": {
       "type": "array",
@@ -58,7 +58,7 @@
     "Description": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "EnableBranchAutoDeletion": {
       "type": "boolean"
@@ -74,22 +74,22 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "Name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "(?s).+"
     },
     "OauthToken": {
       "type": "string",
       "maxLength": 1000,
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "Repository": {
       "type": "string",
-      "pattern": ""
+      "pattern": "(?s).*"
     },
     "Tags": {
       "type": "array",
@@ -143,7 +143,7 @@
         "PullRequestEnvironmentName": {
           "type": "string",
           "maxLength": 20,
-          "pattern": ""
+          "pattern": "(?s).*"
         },
         "Stage": {
           "type": "string",
@@ -184,25 +184,25 @@
           "type": "string",
           "minLength": 0,
           "maxLength": 2048,
-          "pattern": ""
+          "pattern": "(?s).*"
         },
         "Status": {
           "type": "string",
           "minLength": 3,
           "maxLength": 7,
-          "pattern": ""
+          "pattern": ".{3,7}"
         },
         "Target": {
           "type": "string",
           "minLength": 1,
           "maxLength": 2048,
-          "pattern": ""
+          "pattern": "(?s).+"
         },
         "Source": {
           "type": "string",
           "minLength": 1,
           "maxLength": 2048,
-          "pattern": ""
+          "pattern": "(?s).+"
         }
       },
       "required": [
@@ -217,12 +217,12 @@
         "Name": {
           "type": "string",
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "(?s).*"
         },
         "Value": {
           "type": "string",
           "maxLength": 5500,
-          "pattern": ""
+          "pattern": "(?s).*"
         }
       },
       "required": [

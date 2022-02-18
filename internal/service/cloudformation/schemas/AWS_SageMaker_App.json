@@ -8,14 +8,14 @@
             "description": "The Amazon Resource Name (ARN) of the app.",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*"
         },
         "AppName": {
             "type": "string",
             "description": "The name of the app.",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
         },
         "AppType": {
             "type": "string",
@@ -50,7 +50,7 @@
             "description": "The user profile name.",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
         }
     },
     "definitions": {
@@ -101,14 +101,14 @@
                     "description": "The ARN of the SageMaker image that the image version belongs to.",
                     "minLength": 1,
                     "maxLength": 256,
-                    "pattern": ""
+                    "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
                 },
                 "SageMakerImageVersionArn": {
                     "type": "string",
                     "description": "The ARN of the image version created on the instance.",
                     "minLength": 1,
                     "maxLength": 256,
-                    "pattern": ""
+                    "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
                 }
             }
         },

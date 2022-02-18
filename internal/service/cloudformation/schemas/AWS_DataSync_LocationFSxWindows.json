@@ -11,14 +11,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
           "maxLength": 256,
           "minLength": 1
         }
@@ -34,19 +34,19 @@
       "description": "The name of the Windows domain that the FSx for Windows server belongs to.",
       "type": "string",
       "maxLength": 253,
-      "pattern": ""
+      "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"
     },
     "FsxFilesystemArn": {
       "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
       "type": "string",
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
     },
     "Password": {
       "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
       "type": "string",
       "maxLength": 104,
-      "pattern": ""
+      "pattern": "^.{0,104}$"
     },
     "SecurityGroupArns": {
       "description": "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
@@ -54,7 +54,7 @@
       "items": {
         "type": "string",
         "maxLength": 128,
-        "pattern": ""
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
       },
       "insertionOrder": false
     },
@@ -62,13 +62,13 @@
       "description": "A subdirectory in the location's path.",
       "type": "string",
       "maxLength": 4096,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
     },
     "User": {
       "description": "The user who has the permissions to access files and folders in the FSx for Windows file system.",
       "type": "string",
       "maxLength": 104,
-      "pattern": ""
+      "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -83,13 +83,13 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
       "maxLength": 128
     },
     "LocationUri": {
       "description": "The URL of the FSx for Windows location that was described.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
       "maxLength": 4356
     }
   },

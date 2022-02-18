@@ -28,17 +28,17 @@
     "Description": {
       "description": "Description of the entity.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$"
     },
     "Name": {
       "description": "Name of the RegexPatternSet.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9A-Za-z_-]{1,128}$"
     },
     "Id": {
       "description": "Id of the RegexPatternSet",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$"
     },
     "RegularExpressionList": {
       "type": "array",

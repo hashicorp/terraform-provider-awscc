@@ -28,14 +28,14 @@
         "Arn": {
             "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
             "minLength": 1,
             "maxLength": 128
         },
         "ChannelArn": {
             "description": "Channel ARN for the stream.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"
         },
         "Tags": {
             "description": "A list of key-value pairs that contain metadata for the asset model.",

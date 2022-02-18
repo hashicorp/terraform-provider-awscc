@@ -37,7 +37,7 @@
         },
         "ACLName": {
             "description": "The name of the acl.",
-            "pattern": "",
+            "pattern": "[a-z][a-z0-9\\\\-]*",
             "type": "string"
         },
         "UserNames": {

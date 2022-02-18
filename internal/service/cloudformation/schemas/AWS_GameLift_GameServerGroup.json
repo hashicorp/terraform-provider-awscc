@@ -61,7 +61,7 @@
     "GameServerGroupName": {
       "type": "string",
       "description": "An identifier for the new game server group.",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9-\\.]+",
       "minLength": 1,
       "maxLength": 128
     },
@@ -76,7 +76,7 @@
     "GameServerGroupArn": {
       "description": "A generated unique ID for the game server group.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*",
       "minLength": 1,
       "maxLength": 256
     },
@@ -156,7 +156,7 @@
     "RoleArn": {
       "type": "string",
       "description": "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
-      "pattern": "",
+      "pattern": "^arn:.*:role\\/[\\w+=,.@-]+",
       "minLength": 1,
       "maxLength": 256
     },
@@ -189,7 +189,7 @@
       "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
       "items": {
         "type": "string",
-        "pattern": "",
+        "pattern": "^subnet-[0-9a-z]+$",
         "minLength": 15,
         "maxLength": 24
       },
@@ -245,7 +245,7 @@
       "description": "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
       "minLength": 0,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "[ -\ud7ff\ue000-\ufffd\ud800\udc00-\udbff\udfff\r\n\t]*"
     },
     "CreationTime": {
       "type": "string",

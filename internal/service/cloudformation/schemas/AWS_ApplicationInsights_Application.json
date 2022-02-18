@@ -8,7 +8,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9.-_]*"
         },
         "ApplicationARN": {
             "description": "The ARN of the ApplicationInsights application.",
@@ -27,7 +27,7 @@
             "type": "string",
             "minLength": 20,
             "maxLength": 300,
-            "pattern": ""
+            "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
         },
         "Tags": {
             "description": "The tags of Application Insights application.",
@@ -103,7 +103,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": ""
+                    "pattern": "^[\\d\\w\\-_.+]*$"
                 },
                 "ResourceList": {
                     "description": "The list of resource ARNs that belong to the component.",
@@ -112,7 +112,7 @@
                         "type": "string",
                         "minLength": 20,
                         "maxLength": 300,
-                        "pattern": ""
+                        "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
                     },
                     "minItems": 1,
                     "insertionOrder": true
@@ -133,7 +133,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 30,
-                    "pattern": ""
+                    "pattern": "[a-zA-Z0-9.-_]*"
                 },
                 "LogPatterns": {
                     "description": "The log patterns of a set.",
@@ -160,7 +160,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 50,
-                    "pattern": ""
+                    "pattern": "[a-zA-Z0-9.-_]*"
                 },
                 "Pattern": {
                     "description": "The log pattern.",
@@ -189,19 +189,19 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": ""
+                    "pattern": "^[\\d\\w\\-_.+]*$"
                 },
                 "ComponentARN": {
                     "description": "The ARN of the compnonent.",
                     "type": "string",
                     "minLength": 20,
                     "maxLength": 300,
-                    "pattern": ""
+                    "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"
                 },
                 "Tier": {
                     "description": "The tier of the application component.",
                     "type": "string",
-		    "pattern": ""
+		    "pattern": "^[A-Z][[A-Z]_]*$"
                 },
                 "ComponentConfigurationMode": {
                     "description": "The component monitoring configuration mode.",
@@ -427,19 +427,19 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 512,
-                    "pattern": ""
+                    "pattern": "[\\.\\-_/#A-Za-z0-9]+"
                 },
                 "LogPath": {
                     "description": "The path of the logs to be monitored.",
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 260,
-                    "pattern": ""
+                    "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"
                 },
                 "LogType": {
                     "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[A-Z][[A-Z]_]*$"
                 },
                 "Encoding": {
                     "description": "The type of encoding of the logs to be monitored.",
@@ -455,7 +455,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 30,
-                    "pattern": ""
+                    "pattern": "[a-zA-Z0-9.-_]*"
                 }
             },
             "required": [
@@ -472,14 +472,14 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 512,
-                    "pattern": ""
+                    "pattern": "[\\.\\-_/#A-Za-z0-9]+"
                 },
                 "EventName": {
                     "description": "The type of Windows Events to log.",
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 260,
-                    "pattern": ""
+                    "pattern": "^[a-zA-Z0-9_ \\\\/-]$"
                 },
                 "EventLevels": {
                     "description": "The levels of event to log. ",
@@ -495,7 +495,7 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 30,
-                    "pattern": ""
+                    "pattern": "[a-zA-Z0-9.-_]*"
                 }
             },
             "required": [

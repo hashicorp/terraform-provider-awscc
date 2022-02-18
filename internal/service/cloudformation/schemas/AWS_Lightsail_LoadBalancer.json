@@ -30,7 +30,7 @@
         "LoadBalancerName": {
             "description": "The name of your load balancer.",
             "type": "string",
-            "pattern": ""
+            "pattern": "\\w[\\w\\-]*\\w"
         },
         "LoadBalancerArn": {
             "type": "string"

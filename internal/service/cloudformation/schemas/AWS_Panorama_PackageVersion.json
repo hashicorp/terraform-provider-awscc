@@ -7,13 +7,13 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 12,
-            "pattern": ""
+            "pattern": "^[0-9a-z\\_]+$"
         },
         "NodePackageId": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$"
         },
         "NodePackageArn": {
             "type": "string",
@@ -24,19 +24,19 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_]+$"
         },
         "NodePackageVersion": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^([0-9]+)\\.([0-9]+)$"
         },
         "NodePackagePatchVersion": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^[a-z0-9]+$"
         },
         "PackageVersionStatus": {
             "type": "string",

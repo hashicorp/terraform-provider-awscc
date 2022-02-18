@@ -10,26 +10,26 @@
                 "SamlMetadataURL": {
                     "description": "SAML metadata URL to link with the Environment",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"
                 },
                 "FederationProviderName": {
                     "description": "Federation provider name to link with the Environment",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
                     "minLength": 1,
                     "maxLength": 32
                 },
                 "SamlMetadataDocument": {
                     "description": "SAML metadata document to link the federation provider to the Environment",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": ".*",
                     "minLength": 1000,
                     "maxLength": 10000000
                 },
                 "ApplicationCallBackURL": {
                     "description": "SAML metadata URL to link with the Environment",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"
                 },
                 "FederationURN": {
                     "description": "SAML metadata URL to link with the Environment",
@@ -49,21 +49,21 @@
                 "FirstName": {
                     "description": "First name",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9]{1,50}$",
                     "minLength": 1,
                     "maxLength": 50
                 },
                 "LastName": {
                     "description": "Last name",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9]{1,50}$",
                     "minLength": 1,
                     "maxLength": 50
                 },
                 "EmailAddress": {
                     "description": "Email address",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
                     "minLength": 1,
                     "maxLength": 128
                 }
@@ -71,29 +71,29 @@
         },
         "DataBundleArn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$"
         }
     },
     "properties": {
         "EnvironmentId": {
             "description": "Unique identifier for representing FinSpace Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9]{1,26}$"
         },
         "Name": {
             "description": "Name of the Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$"
         },
         "AwsAccountId": {
             "description": "AWS account ID associated with the Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9]{1,26}$"
         },
         "Description": {
             "description": "Description of the Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9. ]{1,1000}$"
         },
         "Status": {
             "description": "State of the Environment",
@@ -114,12 +114,12 @@
         "EnvironmentUrl": {
             "description": "URL used to login to the Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"
         },
         "EnvironmentArn": {
             "description": "ARN of the Environment",
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$"
         },
         "SageMakerStudioDomainUrl": {
             "description": "SageMaker Studio Domain URL associated with the Environment",
@@ -134,7 +134,7 @@
         "DedicatedServiceAccountId": {
             "description": "ID for FinSpace created account used to store Environment artifacts",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9]{1,26}$"
         },
         "FederationMode": {
             "description": "Federation mode used with the Environment",

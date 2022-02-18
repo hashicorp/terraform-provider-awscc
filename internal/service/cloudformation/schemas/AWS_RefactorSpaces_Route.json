@@ -34,7 +34,7 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "pattern": ""
+          "pattern": "^(/[a-zA-Z0-9._-]+)+$"
         },
         "ActivationState": {
           "$ref": "#/definitions/RouteActivationState"
@@ -88,25 +88,25 @@
       "type": "string",
       "minLength": 20,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_\/]+$"
     },
     "ApplicationIdentifier": {
       "type": "string",
       "maxLength": 14,
       "minLength": 14,
-      "pattern": ""
+      "pattern": "^app-([0-9A-Za-z]{10}$)"
     },
     "EnvironmentIdentifier": {
       "type": "string",
       "maxLength": 14,
       "minLength": 14,
-      "pattern": ""
+      "pattern": "^env-([0-9A-Za-z]{10}$)"
     },
     "RouteIdentifier": {
       "type": "string",
       "maxLength": 14,
       "minLength": 14,
-      "pattern": ""
+      "pattern": "^rte-([0-9A-Za-z]{10}$)"
     },
     "RouteType": {
       "$ref": "#/definitions/RouteType"
@@ -115,7 +115,7 @@
       "type": "string",
       "maxLength": 14,
       "minLength": 14,
-      "pattern": ""
+      "pattern": "^svc-([0-9A-Za-z]{10}$)"
     },
     "UriPathRoute": {
       "$ref": "#/definitions/UriPathRouteInput"

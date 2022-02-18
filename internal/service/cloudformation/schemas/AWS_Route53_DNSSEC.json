@@ -5,7 +5,7 @@
         "HostedZoneId": {
             "description": "The unique string (ID) used to identify a hosted zone.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[A-Z0-9]{1,32}$"
         }
     },
     "additionalProperties": false,
