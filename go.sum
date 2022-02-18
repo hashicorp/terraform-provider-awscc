@@ -201,6 +201,8 @@ github.com/googleapis/gax-go/v2 v2.0.5 h1:sjZBwGj9Jlw33ImPtvFviGYvseOtDM7hkSKB7+
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.15.0 h1:n/ICe8cTnmPQfvn2bupsrubnwIEXcHLrE18RUAdVcgY=
 github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.15.0/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.15.1-0.20220218184328-15be89965483 h1:d1aOm82tPbx4gJezcutU6otdtR1/gL1E0kDQb7Zn80M=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.15.1-0.20220218184328-15be89965483/go.mod h1:C6GVuO9RWOrt6QCGTmLCOYuSHpkfQSBDuRqTteOlo0g=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.3 h1:fw9FTvekjXAQrHwkYwEBnesZS/lb/XZsV/5hqA1lxqA=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.3/go.mod h1:mt5V7NshmBoY+q96yicADdPd/Eu2AyNXVdzlO4LqFM8=
 github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
