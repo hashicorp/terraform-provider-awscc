@@ -980,6 +980,10 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", *property.MinLength, *property.MaxLength))
 	}
 
+	if property.Pattern != nil {
+		validators = append(validators, fmt.Sprintf("validate.StringMatch(`%s`, \"\")", *property.Pattern))
+	}
+
 	if property.Format != nil {
 		switch format := *property.Format; format {
 		case "date-time":
