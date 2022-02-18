@@ -1360,7 +1360,7 @@ func globalTableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(360)
+	opts = opts.WithUpdateTimeoutInMinutes(1200)
 
 	resourceType, err := NewResourceType(ctx, opts...)
 

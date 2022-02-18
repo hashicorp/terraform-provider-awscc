@@ -273,7 +273,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ManagedServiceData": {
-			//       "maxLength": 4096,
+			//       "maxLength": 8192,
 			//       "minLength": 1,
 			//       "type": "string"
 			//     },

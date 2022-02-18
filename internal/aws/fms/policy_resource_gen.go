@@ -311,7 +311,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "ManagedServiceData": {
-			//       "maxLength": 4096,
+			//       "maxLength": 8192,
 			//       "minLength": 1,
 			//       "type": "string"
 			//     },
@@ -341,7 +341,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 4096),
+							validate.StringLenBetween(1, 8192),
 						},
 					},
 					"type": {

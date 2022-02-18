@@ -42,12 +42,12 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "StatefulDefaultActions": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "type": "string"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     },
 			//     "StatefulEngineOptions": {
 			//       "additionalProperties": false,
@@ -63,7 +63,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "type": "object"
 			//     },
 			//     "StatefulRuleGroupReferences": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -86,10 +86,10 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "type": "object"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     },
 			//     "StatelessCustomActions": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -100,7 +100,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                 "additionalProperties": false,
 			//                 "properties": {
 			//                   "Dimensions": {
-			//                     "insertionOrder": false,
+			//                     "insertionOrder": true,
 			//                     "items": {
 			//                       "additionalProperties": false,
 			//                       "properties": {
@@ -117,7 +117,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//                       "type": "object"
 			//                     },
 			//                     "type": "array",
-			//                     "uniqueItems": true
+			//                     "uniqueItems": false
 			//                   }
 			//                 },
 			//                 "required": [
@@ -142,26 +142,26 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "type": "object"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     },
 			//     "StatelessDefaultActions": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "type": "string"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     },
 			//     "StatelessFragmentDefaultActions": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "type": "string"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     },
 			//     "StatelessRuleGroupReferences": {
-			//       "insertionOrder": false,
+			//       "insertionOrder": true,
 			//       "items": {
 			//         "additionalProperties": false,
 			//         "properties": {
@@ -185,7 +185,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "type": "object"
 			//       },
 			//       "type": "array",
-			//       "uniqueItems": true
+			//       "uniqueItems": false
 			//     }
 			//   },
 			//   "required": [
@@ -198,7 +198,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 				map[string]tfsdk.Attribute{
 					"stateful_default_actions": {
 						// Property: StatefulDefaultActions
-						Type:     types.SetType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
 						Optional: true,
 					},
 					"stateful_engine_options": {
@@ -222,7 +222,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"stateful_rule_group_references": {
 						// Property: StatefulRuleGroupReferences
-						Attributes: tfsdk.SetNestedAttributes(
+						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
@@ -242,13 +242,13 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"stateless_custom_actions": {
 						// Property: StatelessCustomActions
-						Attributes: tfsdk.SetNestedAttributes(
+						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"action_definition": {
 									// Property: ActionDefinition
@@ -260,7 +260,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 													map[string]tfsdk.Attribute{
 														"dimensions": {
 															// Property: Dimensions
-															Attributes: tfsdk.SetNestedAttributes(
+															Attributes: tfsdk.ListNestedAttributes(
 																map[string]tfsdk.Attribute{
 																	"value": {
 																		// Property: Value
@@ -271,7 +271,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 																		},
 																	},
 																},
-																tfsdk.SetNestedAttributesOptions{},
+																tfsdk.ListNestedAttributesOptions{},
 															),
 															Required: true,
 														},
@@ -292,23 +292,23 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
 					"stateless_default_actions": {
 						// Property: StatelessDefaultActions
-						Type:     types.SetType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"stateless_fragment_default_actions": {
 						// Property: StatelessFragmentDefaultActions
-						Type:     types.SetType{ElemType: types.StringType},
+						Type:     types.ListType{ElemType: types.StringType},
 						Required: true,
 					},
 					"stateless_rule_group_references": {
 						// Property: StatelessRuleGroupReferences
-						Attributes: tfsdk.SetNestedAttributes(
+						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"priority": {
 									// Property: Priority
@@ -328,7 +328,7 @@ func firewallPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									},
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
 					},
