@@ -467,7 +467,7 @@
                 "kms:RevokeGrant",
                 "cloudwatch:PutMetricData"
             ],
-            "timeoutInMinutes": 360
+            "timeoutInMinutes": 1200
         },
         "delete": {
             "permissions": [

@@ -63,14 +63,14 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "additionalProperties": false,
 			//               "properties": {
 			//                 "Definition": {
-			//                   "insertionOrder": false,
+			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
 			//                     "pattern": "",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
-			//                   "uniqueItems": true
+			//                   "uniqueItems": false
 			//                 }
 			//               },
 			//               "type": "object"
@@ -85,14 +85,14 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "additionalProperties": false,
 			//               "properties": {
 			//                 "Definition": {
-			//                   "insertionOrder": false,
+			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
 			//                     "pattern": "",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
-			//                   "uniqueItems": true
+			//                   "uniqueItems": false
 			//                 }
 			//               },
 			//               "type": "object"
@@ -117,7 +117,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "type": "string"
 			//             },
 			//             "TargetTypes": {
-			//               "insertionOrder": false,
+			//               "insertionOrder": true,
 			//               "items": {
 			//                 "enum": [
 			//                   "TLS_SNI",
@@ -126,15 +126,15 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "string"
 			//               },
 			//               "type": "array",
-			//               "uniqueItems": true
+			//               "uniqueItems": false
 			//             },
 			//             "Targets": {
-			//               "insertionOrder": false,
+			//               "insertionOrder": true,
 			//               "items": {
 			//                 "type": "string"
 			//               },
 			//               "type": "array",
-			//               "uniqueItems": true
+			//               "uniqueItems": false
 			//             }
 			//           },
 			//           "required": [
@@ -232,7 +232,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               },
 			//               "RuleOptions": {
-			//                 "insertionOrder": false,
+			//                 "insertionOrder": true,
 			//                 "items": {
 			//                   "additionalProperties": false,
 			//                   "properties": {
@@ -243,7 +243,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "type": "string"
 			//                     },
 			//                     "Settings": {
-			//                       "insertionOrder": false,
+			//                       "insertionOrder": true,
 			//                       "items": {
 			//                         "maxLength": 8192,
 			//                         "minLength": 1,
@@ -251,7 +251,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                         "type": "string"
 			//                       },
 			//                       "type": "array",
-			//                       "uniqueItems": true
+			//                       "uniqueItems": false
 			//                     }
 			//                   },
 			//                   "required": [
@@ -260,7 +260,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "type": "object"
 			//                 },
 			//                 "type": "array",
-			//                 "uniqueItems": true
+			//                 "uniqueItems": false
 			//               }
 			//             },
 			//             "required": [
@@ -271,13 +271,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "object"
 			//           },
 			//           "type": "array",
-			//           "uniqueItems": true
+			//           "uniqueItems": false
 			//         },
 			//         "StatelessRulesAndCustomActions": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "CustomActions": {
-			//               "insertionOrder": false,
+			//               "insertionOrder": true,
 			//               "items": {
 			//                 "additionalProperties": false,
 			//                 "properties": {
@@ -288,7 +288,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                         "additionalProperties": false,
 			//                         "properties": {
 			//                           "Dimensions": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
@@ -305,7 +305,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           }
 			//                         },
 			//                         "required": [
@@ -330,10 +330,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               },
 			//               "type": "array",
-			//               "uniqueItems": true
+			//               "uniqueItems": false
 			//             },
 			//             "StatelessRules": {
-			//               "insertionOrder": false,
+			//               "insertionOrder": true,
 			//               "items": {
 			//                 "additionalProperties": false,
 			//                 "properties": {
@@ -346,18 +346,18 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "additionalProperties": false,
 			//                     "properties": {
 			//                       "Actions": {
-			//                         "insertionOrder": false,
+			//                         "insertionOrder": true,
 			//                         "items": {
 			//                           "type": "string"
 			//                         },
 			//                         "type": "array",
-			//                         "uniqueItems": true
+			//                         "uniqueItems": false
 			//                       },
 			//                       "MatchAttributes": {
 			//                         "additionalProperties": false,
 			//                         "properties": {
 			//                           "DestinationPorts": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
@@ -379,10 +379,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           },
 			//                           "Destinations": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
@@ -399,20 +399,20 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           },
 			//                           "Protocols": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "maximum": 255,
 			//                               "minimum": 0,
 			//                               "type": "integer"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           },
 			//                           "SourcePorts": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
@@ -434,10 +434,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           },
 			//                           "Sources": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
@@ -454,15 +454,15 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           },
 			//                           "TCPFlags": {
-			//                             "insertionOrder": false,
+			//                             "insertionOrder": true,
 			//                             "items": {
 			//                               "additionalProperties": false,
 			//                               "properties": {
 			//                                 "Flags": {
-			//                                   "insertionOrder": false,
+			//                                   "insertionOrder": true,
 			//                                   "items": {
 			//                                     "enum": [
 			//                                       "FIN",
@@ -477,10 +477,10 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                                     "type": "string"
 			//                                   },
 			//                                   "type": "array",
-			//                                   "uniqueItems": true
+			//                                   "uniqueItems": false
 			//                                 },
 			//                                 "Masks": {
-			//                                   "insertionOrder": false,
+			//                                   "insertionOrder": true,
 			//                                   "items": {
 			//                                     "enum": [
 			//                                       "FIN",
@@ -495,7 +495,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                                     "type": "string"
 			//                                   },
 			//                                   "type": "array",
-			//                                   "uniqueItems": true
+			//                                   "uniqueItems": false
 			//                                 }
 			//                               },
 			//                               "required": [
@@ -504,7 +504,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                               "type": "object"
 			//                             },
 			//                             "type": "array",
-			//                             "uniqueItems": true
+			//                             "uniqueItems": false
 			//                           }
 			//                         },
 			//                         "type": "object"
@@ -524,7 +524,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               },
 			//               "type": "array",
-			//               "uniqueItems": true
+			//               "uniqueItems": false
 			//             }
 			//           },
 			//           "required": [
@@ -567,7 +567,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"definition": {
 												// Property: Definition
-												Type:     types.SetType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
@@ -585,7 +585,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"definition": {
 												// Property: Definition
-												Type:     types.SetType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
@@ -621,7 +621,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"target_types": {
 												// Property: TargetTypes
-												Type:     types.SetType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringInSlice([]string{
@@ -632,7 +632,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"targets": {
 												// Property: Targets
-												Type:     types.SetType{ElemType: types.StringType},
+												Type:     types.ListType{ElemType: types.StringType},
 												Required: true,
 											},
 										},
@@ -744,7 +744,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 											},
 											"rule_options": {
 												// Property: RuleOptions
-												Attributes: tfsdk.SetNestedAttributes(
+												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"keyword": {
 															// Property: Keyword
@@ -756,14 +756,14 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 														"settings": {
 															// Property: Settings
-															Type:     types.SetType{ElemType: types.StringType},
+															Type:     types.ListType{ElemType: types.StringType},
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 8192)),
 															},
 														},
 													},
-													tfsdk.SetNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},
@@ -771,9 +771,6 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										tfsdk.ListNestedAttributesOptions{},
 									),
 									Optional: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
 								},
 								"stateless_rules_and_custom_actions": {
 									// Property: StatelessRulesAndCustomActions
@@ -781,7 +778,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										map[string]tfsdk.Attribute{
 											"custom_actions": {
 												// Property: CustomActions
-												Attributes: tfsdk.SetNestedAttributes(
+												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"action_definition": {
 															// Property: ActionDefinition
@@ -793,7 +790,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																			map[string]tfsdk.Attribute{
 																				"dimensions": {
 																					// Property: Dimensions
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"value": {
 																								// Property: Value
@@ -804,7 +801,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Required: true,
 																				},
@@ -825,13 +822,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															},
 														},
 													},
-													tfsdk.SetNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Optional: true,
 											},
 											"stateless_rules": {
 												// Property: StatelessRules
-												Attributes: tfsdk.SetNestedAttributes(
+												Attributes: tfsdk.ListNestedAttributes(
 													map[string]tfsdk.Attribute{
 														"priority": {
 															// Property: Priority
@@ -847,7 +844,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																map[string]tfsdk.Attribute{
 																	"actions": {
 																		// Property: Actions
-																		Type:     types.SetType{ElemType: types.StringType},
+																		Type:     types.ListType{ElemType: types.StringType},
 																		Required: true,
 																	},
 																	"match_attributes": {
@@ -856,7 +853,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																			map[string]tfsdk.Attribute{
 																				"destination_ports": {
 																					// Property: DestinationPorts
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
@@ -875,13 +872,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																				},
 																				"destinations": {
 																					// Property: Destinations
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
@@ -892,13 +889,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																				},
 																				"protocols": {
 																					// Property: Protocols
-																					Type:     types.SetType{ElemType: types.Int64Type},
+																					Type:     types.ListType{ElemType: types.Int64Type},
 																					Optional: true,
 																					Validators: []tfsdk.AttributeValidator{
 																						validate.ArrayForEach(validate.IntBetween(0, 255)),
@@ -906,7 +903,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																				},
 																				"source_ports": {
 																					// Property: SourcePorts
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"from_port": {
 																								// Property: FromPort
@@ -925,13 +922,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																				},
 																				"sources": {
 																					// Property: Sources
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"address_definition": {
 																								// Property: AddressDefinition
@@ -942,17 +939,17 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																				},
 																				"tcp_flags": {
 																					// Property: TCPFlags
-																					Attributes: tfsdk.SetNestedAttributes(
+																					Attributes: tfsdk.ListNestedAttributes(
 																						map[string]tfsdk.Attribute{
 																							"flags": {
 																								// Property: Flags
-																								Type:     types.SetType{ElemType: types.StringType},
+																								Type:     types.ListType{ElemType: types.StringType},
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayForEach(validate.StringInSlice([]string{
@@ -969,7 +966,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																							},
 																							"masks": {
 																								// Property: Masks
-																								Type:     types.SetType{ElemType: types.StringType},
+																								Type:     types.ListType{ElemType: types.StringType},
 																								Optional: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.ArrayForEach(validate.StringInSlice([]string{
@@ -985,7 +982,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								},
 																							},
 																						},
-																						tfsdk.SetNestedAttributesOptions{},
+																						tfsdk.ListNestedAttributesOptions{},
 																					),
 																					Optional: true,
 																				},
@@ -998,7 +995,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 														},
 													},
-													tfsdk.SetNestedAttributesOptions{},
+													tfsdk.ListNestedAttributesOptions{},
 												),
 												Required: true,
 											},

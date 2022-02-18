@@ -36,13 +36,13 @@ Resource type definition for AWS::NetworkFirewall::FirewallPolicy
 
 Required:
 
-- **stateful_default_actions** (Set of String)
+- **stateful_default_actions** (List of String)
 - **stateful_engine_options** (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
-- **stateful_rule_group_references** (Attributes Set) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
-- **stateless_custom_actions** (Attributes Set) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
-- **stateless_default_actions** (Set of String)
-- **stateless_fragment_default_actions** (Set of String)
-- **stateless_rule_group_references** (Attributes Set) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+- **stateful_rule_group_references** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
+- **stateless_custom_actions** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
+- **stateless_default_actions** (List of String)
+- **stateless_fragment_default_actions** (List of String)
+- **stateless_rule_group_references** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`
@@ -81,7 +81,7 @@ Required:
 
 Required:
 
-- **dimensions** (Attributes Set) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions))
+- **dimensions** (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions))
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions--action_definition--publish_metric_action--dimensions"></a>
 ### Nested Schema for `firewall_policy.stateless_custom_actions.action_definition.publish_metric_action.dimensions`
