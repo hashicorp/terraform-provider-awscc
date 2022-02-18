@@ -147,6 +147,9 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
 	}
+	if codeFeatures&codegen.UsesRegexp > 0 {
+		templateData.ImportRegexp = true
+	}
 	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
 		templateData.ImportValidate = true
 	}
@@ -189,6 +192,7 @@ type TemplateData struct {
 	HasRequiredAttribute         bool
 	HasUpdateMethod              bool
 	ImportFrameworkAttr          bool
+	ImportRegexp                 bool
 	ImportValidate               bool
 	PackageName                  string
 	RequiredAttributesValidator  string
