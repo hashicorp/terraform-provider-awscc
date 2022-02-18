@@ -24,3 +24,5 @@ require (
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mitchellh/cli v1.1.2
 )
+
+replace github.com/xeipuuv/gojsonschema => github.com/ewbankkit/gojsonschema v1.2.1-0.20220218201251-4d7168031961
