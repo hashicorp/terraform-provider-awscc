@@ -331,7 +331,11 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
 		}
 
-		schema := cfschema.Sanitize(aws.ToString(output.Schema))
+		schema, err := cfschema.Sanitize(aws.ToString(output.Schema))
+
+		if err != nil {
+			return "", "", fmt.Errorf("sanitizing schema: %w", err)
+		}
 
 		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
 
