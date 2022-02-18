@@ -85,8 +85,8 @@
       "properties": {
         "Definition": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/VariableDefinition"
           }
@@ -99,8 +99,8 @@
       "properties": {
         "Definition": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/VariableDefinition"
           }
@@ -125,7 +125,7 @@
         "StatefulRules": {
           "type": "array",
           "insertionOrder": true,
-          "uniqueItems": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/StatefulRule"
           }
@@ -141,16 +141,16 @@
       "properties": {
         "Targets": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "type": "string"
           }
         },
         "TargetTypes": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/TargetType"
           }
@@ -196,8 +196,8 @@
         },
         "RuleOptions": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/RuleOption"
           }
@@ -284,8 +284,8 @@
         },
         "Settings": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Setting"
           }
@@ -313,16 +313,16 @@
       "properties": {
         "StatelessRules": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/StatelessRule"
           }
         },
         "CustomActions": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/CustomAction"
           }
@@ -359,8 +359,8 @@
         },
         "Actions": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "type": "string"
           }
@@ -377,48 +377,48 @@
       "properties": {
         "Sources": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Address"
           }
         },
         "Destinations": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Address"
           }
         },
         "SourcePorts": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/PortRange"
           }
         },
         "DestinationPorts": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/PortRange"
           }
         },
         "Protocols": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/ProtocolNumber"
           }
         },
         "TCPFlags": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/TCPFlagField"
           }
@@ -472,16 +472,16 @@
       "properties": {
         "Flags": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/TCPFlag"
           }
         },
         "Masks": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/TCPFlag"
           }
@@ -538,8 +538,8 @@
       "properties": {
         "Dimensions": {
           "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": true,
+          "insertionOrder": true,
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/Dimension"
           }

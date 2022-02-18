@@ -268,6 +268,14 @@
         },
         "ScopeDownStatement": {
           "$ref": "#/definitions/Statement"
+        },
+        "ManagedRuleGroupConfigs": {
+          "description": "Collection of ManagedRuleGroupConfig.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupConfig"
+          },
+          "minItems": 1
         }
       },
       "required": [
@@ -1039,6 +1047,47 @@
       },
       "required": [
         "ImmunityTime"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedRuleGroupConfig": {
+      "description": "ManagedRuleGroupConfig.",
+      "type": "object",
+      "properties": {
+        "LoginPath": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "PayloadType": {
+          "type": "string",
+          "enum": [
+            "JSON",
+            "FORM_ENCODED"
+          ]
+        },
+        "UsernameField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        },
+        "PasswordField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FieldIdentifier" : {
+      "type": "object",
+      "properties": {
+        "Identifier": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "Identifier"
       ],
       "additionalProperties": false
     }
