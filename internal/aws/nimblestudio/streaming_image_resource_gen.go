@@ -4,6 +4,7 @@ package nimblestudio
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,12 +42,15 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
-			//   "pattern": "",
+			//   "pattern": "^ami-[0-9A-z]+$",
 			//   "type": "string"
 			// }
 			Description: "<p>The ID of an EC2 machine image with which to create this streaming image.</p>",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^ami-[0-9A-z]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -61,7 +65,7 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "KeyArn": {
 			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "^arn:.*",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
@@ -87,6 +91,7 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtLeast(4),
+							validate.StringMatch(regexp.MustCompile("^arn:.*"), ""),
 						},
 					},
 					"key_type": {
@@ -159,7 +164,7 @@ func streamingImageResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z]*$",
 			//   "type": "string"
 			// }
 			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",

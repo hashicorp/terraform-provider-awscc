@@ -4,6 +4,7 @@ package sso
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -31,7 +32,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
 			//         "type": "string"
 			//       },
 			//       "Value": {
@@ -42,7 +43,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//             "items": {
 			//               "maxLength": 256,
 			//               "minLength": 0,
-			//               "pattern": "",
+			//               "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
 			//               "type": "string"
 			//             },
 			//             "maxItems": 1,
@@ -72,6 +73,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
 						},
 					},
 					"value": {
@@ -85,6 +87,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(1),
 										validate.ArrayForEach(validate.StringLenBetween(0, 256)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), "")),
 									},
 								},
 							},
@@ -117,7 +120,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//           "Key": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
 			//             "type": "string"
 			//           },
 			//           "Value": {
@@ -128,7 +131,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//                 "items": {
 			//                   "maxLength": 256,
 			//                   "minLength": 0,
-			//                   "pattern": "",
+			//                   "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -169,6 +172,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+										validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+"), ""),
 									},
 								},
 								"value": {
@@ -182,6 +186,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(1),
 													validate.ArrayForEach(validate.StringLenBetween(0, 256)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*"), "")),
 												},
 											},
 										},
@@ -210,7 +215,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			//   "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",
@@ -218,6 +223,7 @@ func instanceAccessControlAttributeConfigurationResourceType(ctx context.Context
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
+				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

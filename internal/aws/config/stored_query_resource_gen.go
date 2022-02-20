@@ -4,6 +4,7 @@ package config
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -40,13 +41,14 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+				validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
 			},
 		},
 		"query_expression": {
@@ -55,13 +57,14 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 4096,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 4096),
+				validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), ""),
 			},
 		},
 		"query_id": {
@@ -70,7 +73,7 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -85,13 +88,14 @@ func storedQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

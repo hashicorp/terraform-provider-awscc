@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 			//   "description": "The name of the Multi Region Access Point to apply policy",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Multi Region Access Point to apply policy",
@@ -35,6 +36,7 @@ func multiRegionAccessPointPolicyResourceType(ctx context.Context) (tfsdk.Resour
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 50),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

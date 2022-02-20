@@ -4,6 +4,7 @@ package emrcontainers
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -43,7 +44,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "description": "The ID of the container cluster",
 			//       "maxLength": 100,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
 			//       "type": "string"
 			//     },
 			//     "Info": {
@@ -55,7 +56,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//             "Namespace": {
 			//               "maxLength": 63,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
 			//               "type": "string"
 			//             }
 			//           },
@@ -92,6 +93,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
+							validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z][A-Za-z0-9\\-_]*"), ""),
 						},
 					},
 					"info": {
@@ -108,6 +110,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 63),
+													validate.StringMatch(regexp.MustCompile("[a-z0-9]([-a-z0-9]*[a-z0-9])?"), ""),
 												},
 											},
 										},
@@ -154,7 +157,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "Name of the virtual cluster.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//   "type": "string"
 			// }
 			Description: "Name of the virtual cluster.",
@@ -162,6 +165,7 @@ func virtualClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

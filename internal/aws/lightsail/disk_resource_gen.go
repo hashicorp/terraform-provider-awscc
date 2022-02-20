@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "SnapshotTimeOfDay": {
 			//             "description": "The daily time when an automatic snapshot will be created.",
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{2}:00$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -91,6 +92,9 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The daily time when an automatic snapshot will be created.",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[0-9]{2}:00$"), ""),
+									},
 								},
 							},
 						),
@@ -189,7 +193,7 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The names to use for your new Lightsail disk.",
 			//   "maxLength": 254,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The names to use for your new Lightsail disk.",
@@ -197,6 +201,7 @@ func diskResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 254),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

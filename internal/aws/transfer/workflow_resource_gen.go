@@ -4,6 +4,7 @@ package transfer
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
 			//   "maxLength": 1600,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:.*",
 			//   "type": "string"
 			// }
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
@@ -44,7 +45,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A textual description for the workflow.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[\\w\\- ]*$",
 			//   "type": "string"
 			// }
 			Description: "A textual description for the workflow.",
@@ -53,6 +54,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+				validate.StringMatch(regexp.MustCompile("^[\\w\\- ]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -85,14 +87,14 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Specifies the S3 bucket that contains the file being copied.",
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//                     "type": "string"
 			//                   },
 			//                   "Key": {
 			//                     "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
 			//                     "maxLength": 1024,
 			//                     "minLength": 0,
-			//                     "pattern": "",
+			//                     "pattern": ".*",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -105,7 +107,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "OverwriteExisting": {
@@ -127,14 +129,14 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "Target": {
 			//             "description": "The ARN for the lambda function that is being called.",
 			//             "maxLength": 170,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "arn:[a-z-]+:lambda:.*$",
 			//             "type": "string"
 			//           },
 			//           "TimeoutSeconds": {
@@ -154,7 +156,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -168,7 +170,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "Tags": {
@@ -245,6 +247,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 															},
 														},
 														"key": {
@@ -254,6 +257,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(0, 1024),
+																validate.StringMatch(regexp.MustCompile(".*"), ""),
 															},
 														},
 													},
@@ -271,6 +275,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"overwrite_existing": {
@@ -301,6 +306,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"target": {
@@ -310,6 +316,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 170),
+										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
 									},
 								},
 								"timeout_seconds": {
@@ -337,6 +344,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 							},
@@ -355,6 +363,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"tags": {
@@ -445,14 +454,14 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Specifies the S3 bucket that contains the file being copied.",
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//                     "type": "string"
 			//                   },
 			//                   "Key": {
 			//                     "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
 			//                     "maxLength": 1024,
 			//                     "minLength": 0,
-			//                     "pattern": "",
+			//                     "pattern": ".*",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -465,7 +474,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "OverwriteExisting": {
@@ -487,14 +496,14 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "Target": {
 			//             "description": "The ARN for the lambda function that is being called.",
 			//             "maxLength": 170,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "arn:[a-z-]+:lambda:.*$",
 			//             "type": "string"
 			//           },
 			//           "TimeoutSeconds": {
@@ -514,7 +523,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -528,7 +537,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The name of the step, used as an identifier.",
 			//             "maxLength": 30,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
 			//           },
 			//           "Tags": {
@@ -605,6 +614,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 															},
 														},
 														"key": {
@@ -614,6 +624,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(0, 1024),
+																validate.StringMatch(regexp.MustCompile(".*"), ""),
 															},
 														},
 													},
@@ -631,6 +642,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"overwrite_existing": {
@@ -661,6 +673,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"target": {
@@ -670,6 +683,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 170),
+										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
 									},
 								},
 								"timeout_seconds": {
@@ -697,6 +711,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 							},
@@ -715,6 +730,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
+										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
 								"tags": {
@@ -846,7 +862,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A unique identifier for the workflow.",
 			//   "maxLength": 19,
 			//   "minLength": 19,
-			//   "pattern": "",
+			//   "pattern": "^w-([a-z0-9]{17})$",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the workflow.",

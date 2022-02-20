@@ -4,6 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -67,7 +68,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The name of the recovery group to create.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the recovery group to create.",
@@ -75,6 +76,7 @@ func recoveryGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

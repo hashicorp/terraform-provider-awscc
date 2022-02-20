@@ -4,6 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "Name of the ReadinessCheck to create.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "Name of the ReadinessCheck to create.",
@@ -50,6 +51,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -62,7 +64,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "The name of the resource set to check.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the resource set to check.",
@@ -70,6 +72,7 @@ func readinessCheckResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 			},
 		},
 		"tags": {

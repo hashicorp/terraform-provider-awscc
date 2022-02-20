@@ -4,6 +4,7 @@ package appflow
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -47,7 +48,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "description": "Unique identifier for connector profile resources",
 			//   "maxLength": 512,
-			//   "pattern": "",
+			//   "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
 			//   "type": "string"
 			// }
 			Description: "Unique identifier for connector profile resources",
@@ -71,12 +72,12 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "ApiKey": {
 			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "SecretKey": {
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -91,13 +92,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "ApiKey": {
 			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ApplicationKey": {
 			//               "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -112,7 +113,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "ApiToken": {
 			//               "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -126,19 +127,19 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessToken": {
 			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
 			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
 			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
@@ -158,7 +159,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "RefreshToken": {
 			//               "description": "The credentials used to acquire new access tokens.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -173,25 +174,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessKeyId": {
 			//               "description": "The Access Key portion of the credentials.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Datakey": {
 			//               "description": "The encryption keys used to encrypt data.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "SecretAccessKey": {
 			//               "description": "The secret key used to sign requests.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "UserId": {
 			//               "description": "The identi?er for the user.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -208,19 +209,19 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessToken": {
 			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
 			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
 			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
@@ -249,13 +250,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "Password": {
 			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Username": {
 			//               "description": "The name of the user.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -272,13 +273,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//                 "Password": {
 			//                   "description": "The password that corresponds to the username.",
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "Username": {
 			//                   "description": "The name of the user.",
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -288,17 +289,17 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "properties": {
 			//                 "AccessToken": {
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "ClientId": {
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "ClientSecret": {
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "ConnectorOAuthRequest": {
@@ -316,7 +317,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//                 },
 			//                 "RefreshToken": {
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -330,13 +331,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessToken": {
 			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientCredentialsArn": {
 			//               "description": "The client credentials to fetch access token and refresh token.",
 			//               "maxLength": 2048,
-			//               "pattern": "",
+			//               "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
@@ -356,7 +357,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "RefreshToken": {
 			//               "description": "The credentials used to acquire new access tokens.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -367,13 +368,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "Password": {
 			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Username": {
 			//               "description": "The name of the user.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -388,7 +389,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "ApiKey": {
 			//               "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -402,19 +403,19 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessToken": {
 			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
 			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
 			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
@@ -443,13 +444,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "Password": {
 			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Username": {
 			//               "description": "The name of the user.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -464,7 +465,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "ApiSecretKey": {
 			//               "description": "The Secret Access Key portion of the credentials.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -478,13 +479,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "Password": {
 			//               "description": "The password that corresponds to the username.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Username": {
 			//               "description": "The name of the user.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -499,19 +500,19 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccessToken": {
 			//               "description": "The credentials used to access protected resources.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientId": {
 			//               "description": "The identi?er for the desired client.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientSecret": {
 			//               "description": "The client secret used by the oauth client to authenticate to the authorization server.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ConnectorOAuthRequest": {
@@ -546,7 +547,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Datadog resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -560,7 +561,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Dynatrace resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -574,7 +575,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the InforNexus resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -588,7 +589,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Marketo resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -603,7 +604,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "description": "The name of the Amazon S3 bucket associated with Redshift.",
 			//               "maxLength": 63,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "BucketPrefix": {
@@ -614,13 +615,13 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "DatabaseUrl": {
 			//               "description": "The JDBC URL of the Amazon Redshift cluster.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "RoleArn": {
 			//               "description": "The Amazon Resource Name (ARN) of the IAM role.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "arn:aws:iam:.*:[0-9]+:.*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -635,36 +636,36 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//           "properties": {
 			//             "ApplicationHostUrl": {
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
 			//               "type": "string"
 			//             },
 			//             "ApplicationServicePath": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "ClientNumber": {
 			//               "maxLength": 3,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "^\\d{3}$",
 			//               "type": "string"
 			//             },
 			//             "LogonLanguage": {
 			//               "maxLength": 2,
-			//               "pattern": "",
+			//               "pattern": "^[a-zA-Z0-9_]*$",
 			//               "type": "string"
 			//             },
 			//             "OAuthProperties": {
 			//               "properties": {
 			//                 "AuthCodeUrl": {
 			//                   "maxLength": 256,
-			//                   "pattern": "",
+			//                   "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
 			//                   "type": "string"
 			//                 },
 			//                 "OAuthScopes": {
 			//                   "items": {
 			//                     "maxLength": 128,
-			//                     "pattern": "",
+			//                     "pattern": "[/\\w]*",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -672,7 +673,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//                 },
 			//                 "TokenUrl": {
 			//                   "maxLength": 256,
-			//                   "pattern": "",
+			//                   "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -685,7 +686,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             },
 			//             "PrivateLinkServiceName": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -696,7 +697,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Salesforce resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "isSandboxEnvironment": {
@@ -710,7 +711,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the ServiceNow resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -724,7 +725,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Slack resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -738,14 +739,14 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "AccountName": {
 			//               "description": "The name of the account.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "BucketName": {
 			//               "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
 			//               "maxLength": 63,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "BucketPrefix": {
@@ -756,25 +757,25 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "PrivateLinkServiceName": {
 			//               "description": "The Snow?ake Private Link service name to be used for private data transfers.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Region": {
 			//               "description": "The region of the Snow?ake account.",
 			//               "maxLength": 64,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Stage": {
 			//               "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
 			//               "maxLength": 16,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "Warehouse": {
 			//               "description": "The name of the Snow?ake warehouse.",
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "[\\s\\w/!@#+=.-]*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -790,7 +791,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Veeva resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -804,7 +805,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//             "InstanceUrl": {
 			//               "description": "The location of the Zendesk resource",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -841,6 +842,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"secret_key": {
@@ -849,6 +851,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -866,6 +869,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"application_key": {
@@ -875,6 +879,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -892,6 +897,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -909,6 +915,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_id": {
@@ -918,6 +925,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_secret": {
@@ -927,6 +935,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"connector_o_auth_request": {
@@ -957,6 +966,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -974,6 +984,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"datakey": {
@@ -983,6 +994,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"secret_access_key": {
@@ -992,6 +1004,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"user_id": {
@@ -1001,6 +1014,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1018,6 +1032,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_id": {
@@ -1027,6 +1042,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_secret": {
@@ -1036,6 +1052,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1074,6 +1091,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"username": {
@@ -1083,6 +1101,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1104,6 +1123,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 														"username": {
@@ -1113,6 +1133,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 													},
@@ -1129,6 +1150,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 														"client_id": {
@@ -1137,6 +1159,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 														"client_secret": {
@@ -1145,6 +1168,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 														"connector_o_auth_request": {
@@ -1173,6 +1197,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(512),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 															},
 														},
 													},
@@ -1194,6 +1219,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_credentials_arn": {
@@ -1203,6 +1229,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(2048),
+													validate.StringMatch(regexp.MustCompile("arn:aws:secretsmanager:.*:[0-9]+:.*"), ""),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1233,6 +1260,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1250,6 +1278,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"username": {
@@ -1259,6 +1288,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1276,6 +1306,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1293,6 +1324,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_id": {
@@ -1302,6 +1334,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_secret": {
@@ -1311,6 +1344,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1349,6 +1383,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"username": {
@@ -1358,6 +1393,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1375,6 +1411,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1392,6 +1429,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"username": {
@@ -1401,6 +1439,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1418,6 +1457,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_id": {
@@ -1427,6 +1467,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_secret": {
@@ -1436,6 +1477,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"connector_o_auth_request": {
@@ -1483,6 +1525,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1500,6 +1543,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1517,6 +1561,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1534,6 +1579,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1551,6 +1597,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 63),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"bucket_prefix": {
@@ -1569,6 +1616,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"role_arn": {
@@ -1578,6 +1626,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
 												},
 											},
 										},
@@ -1594,6 +1643,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
 												},
 											},
 											"application_service_path": {
@@ -1602,6 +1652,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"client_number": {
@@ -1610,6 +1661,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 3),
+													validate.StringMatch(regexp.MustCompile("^\\d{3}$"), ""),
 												},
 											},
 											"logon_language": {
@@ -1618,6 +1670,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(2),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_]*$"), ""),
 												},
 											},
 											"o_auth_properties": {
@@ -1630,6 +1683,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
+																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
 															},
 														},
 														"o_auth_scopes": {
@@ -1639,6 +1693,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Validators: []tfsdk.AttributeValidator{
 																validate.UniqueItems(),
 																validate.ArrayForEach(validate.StringLenAtMost(128)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[/\\w]*"), "")),
 															},
 														},
 														"token_url": {
@@ -1647,6 +1702,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenAtMost(256),
+																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
 															},
 														},
 													},
@@ -1667,6 +1723,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1684,6 +1741,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"is_sandbox_environment": {
@@ -1706,6 +1764,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1723,6 +1782,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1740,6 +1800,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"bucket_name": {
@@ -1749,6 +1810,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 63),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"bucket_prefix": {
@@ -1767,6 +1829,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"region": {
@@ -1776,6 +1839,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(64),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"stage": {
@@ -1785,6 +1849,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(16),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 											"warehouse": {
@@ -1794,6 +1859,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
 												},
 											},
 										},
@@ -1811,6 +1877,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1828,6 +1895,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
 												},
 											},
 										},
@@ -1849,7 +1917,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "description": "The maximum number of items to retrieve in a single batch.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "[\\w/!@#+=.-]+",
 			//   "type": "string"
 			// }
 			Description: "The maximum number of items to retrieve in a single batch.",
@@ -1857,6 +1925,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+				validate.StringMatch(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -1920,7 +1989,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "description": "A unique Arn for Connector-Profile resource",
 			//   "maxLength": 512,
-			//   "pattern": "",
+			//   "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 			//   "type": "string"
 			// }
 			Description: "A unique Arn for Connector-Profile resource",
@@ -1937,7 +2006,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws:kms:.*:[0-9]+:.*",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
@@ -1946,6 +2015,7 @@ func connectorProfileResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("arn:aws:kms:.*:[0-9]+:.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -32,7 +33,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//       "items": {
 			//         "maxLength": 1024,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 20,
@@ -56,6 +57,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 20),
 							validate.ArrayForEach(validate.StringLenBetween(12, 1024)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), "")),
 						},
 					},
 				},
@@ -67,7 +69,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique Arn for CodeSigningConfig resource",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
 			//   "type": "string"
 			// }
 			Description: "A unique Arn for CodeSigningConfig resource",
@@ -82,7 +84,7 @@ func codeSigningConfigResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique identifier for CodeSigningConfig resource",
-			//   "pattern": "",
+			//   "pattern": "csc-[a-zA-Z0-9-_\\.]{17}",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for CodeSigningConfig resource",

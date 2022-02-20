@@ -4,6 +4,7 @@ package networkfirewall
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -34,13 +35,14 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 512,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(512),
+				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 			},
 		},
 		"endpoint_ids": {
@@ -66,7 +68,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -82,7 +84,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -97,13 +99,14 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -116,7 +119,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -124,6 +127,7 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^arn:aws.*$"), ""),
 			},
 		},
 		"firewall_policy_change_protection": {
@@ -239,13 +243,14 @@ func firewallResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^vpc-[0-9a-f]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^vpc-[0-9a-f]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

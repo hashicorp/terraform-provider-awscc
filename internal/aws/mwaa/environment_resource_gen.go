@@ -4,6 +4,7 @@ package mwaa
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -37,7 +38,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Version of airflow to deploy to the environment.",
 			//   "maxLength": 32,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z.]+$",
 			//   "type": "string"
 			// }
 			Description: "Version of airflow to deploy to the environment.",
@@ -45,6 +46,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(32),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-z.]+$"), ""),
 			},
 		},
 		"arn": {
@@ -54,7 +56,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "ARN for the MWAA environment.",
 			//   "maxLength": 1224,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+",
 			//   "type": "string"
 			// }
 			Description: "ARN for the MWAA environment.",
@@ -70,7 +72,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
@@ -78,6 +80,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 		},
 		"environment_class": {
@@ -102,7 +105,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "IAM role to be used by tasks.",
 			//   "maxLength": 1224,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "IAM role to be used by tasks.",
@@ -110,6 +113,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1224),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 		},
 		"kms_key": {
@@ -118,7 +122,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
 			//   "maxLength": 1224,
-			//   "pattern": "",
+			//   "pattern": "^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
@@ -127,6 +131,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1224),
+				validate.StringMatch(regexp.MustCompile("^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -147,7 +152,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "CloudWatchLogGroupArn": {
 			//           "description": "",
 			//           "maxLength": 1224,
-			//           "pattern": "",
+			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
 			//           "type": "string"
 			//         },
 			//         "Enabled": {
@@ -175,7 +180,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "CloudWatchLogGroupArn": {
 			//           "description": "",
 			//           "maxLength": 1224,
-			//           "pattern": "",
+			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
 			//           "type": "string"
 			//         },
 			//         "Enabled": {
@@ -203,7 +208,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "CloudWatchLogGroupArn": {
 			//           "description": "",
 			//           "maxLength": 1224,
-			//           "pattern": "",
+			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
 			//           "type": "string"
 			//         },
 			//         "Enabled": {
@@ -231,7 +236,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "CloudWatchLogGroupArn": {
 			//           "description": "",
 			//           "maxLength": 1224,
-			//           "pattern": "",
+			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
 			//           "type": "string"
 			//         },
 			//         "Enabled": {
@@ -259,7 +264,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "CloudWatchLogGroupArn": {
 			//           "description": "",
 			//           "maxLength": 1224,
-			//           "pattern": "",
+			//           "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+",
 			//           "type": "string"
 			//         },
 			//         "Enabled": {
@@ -522,7 +527,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Customer-defined identifier for the environment, unique per customer region.",
 			//   "maxLength": 80,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][0-9a-zA-Z\\-_]*$",
 			//   "type": "string"
 			// }
 			Description: "Customer-defined identifier for the environment, unique per customer region.",
@@ -530,6 +535,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 80),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z][0-9a-zA-Z\\-_]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -549,7 +555,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "",
 			//         "maxLength": 1024,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 5,
@@ -562,7 +568,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "items": {
 			//         "description": "",
 			//         "maxLength": 1024,
-			//         "pattern": "",
+			//         "pattern": "^subnet-[a-zA-Z0-9\\-._]+$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 2,
@@ -583,6 +589,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^sg-[a-zA-Z0-9\\-._]+$"), "")),
 						},
 					},
 					"subnet_ids": {
@@ -594,6 +601,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(2, 2),
 							validate.ArrayForEach(validate.StringLenAtMost(1024)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^subnet-[a-zA-Z0-9\\-._]+$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							tfsdk.UseStateForUnknown(),
@@ -625,7 +633,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
@@ -633,6 +641,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 		},
 		"requirements_s3_object_version": {
@@ -656,7 +665,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
@@ -664,6 +673,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 		},
 		"schedulers": {
@@ -688,7 +698,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			//   "maxLength": 1224,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
@@ -696,6 +706,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1224),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"), ""),
 			},
 		},
 		"tags": {
@@ -737,7 +748,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Url endpoint for the environment's Airflow UI.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^https://.+$",
 			//   "type": "string"
 			// }
 			Description: "Url endpoint for the environment's Airflow UI.",
@@ -753,7 +764,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Start time for the weekly maintenance window.",
 			//   "maxLength": 9,
-			//   "pattern": "",
+			//   "pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)",
 			//   "type": "string"
 			// }
 			Description: "Start time for the weekly maintenance window.",
@@ -761,6 +772,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(9),
+				validate.StringMatch(regexp.MustCompile("(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"), ""),
 			},
 		},
 	}

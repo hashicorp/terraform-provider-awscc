@@ -4,6 +4,7 @@ package route53
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,12 +26,15 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The unique string (ID) used to identify a hosted zone.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Z0-9]{1,32}$",
 			//   "type": "string"
 			// }
 			Description: "The unique string (ID) used to identify a hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Z0-9]{1,32}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -59,12 +63,15 @@ func keySigningKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_]{3,128}$",
 			//   "type": "string"
 			// }
 			Description: "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_]{3,128}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

@@ -4,6 +4,7 @@ package config
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -96,7 +97,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "description": "The name of the aggregator.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the aggregator.",
@@ -105,6 +106,7 @@ func configurationAggregatorResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

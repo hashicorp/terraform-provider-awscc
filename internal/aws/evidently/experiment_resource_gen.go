@@ -4,6 +4,7 @@ package evidently
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/experiment/[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -73,13 +74,13 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "MetricName": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\S]+$",
 			//         "type": "string"
 			//       },
 			//       "UnitLabel": {
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": ".*",
 			//         "type": "string"
 			//       },
 			//       "ValueKey": {
@@ -132,6 +133,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile("^[\\S]+$"), ""),
 						},
 					},
 					"unit_label": {
@@ -140,6 +142,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile(".*"), ""),
 						},
 					},
 					"value_key": {
@@ -163,13 +166,14 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
+				validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -184,7 +188,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "ControlTreatmentName": {
 			//       "maxLength": 127,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[-a-zA-Z0-9._]*",
 			//       "type": "string"
 			//     },
 			//     "TreatmentWeights": {
@@ -200,7 +204,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "Treatment": {
 			//             "maxLength": 127,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[-a-zA-Z0-9._]*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -224,6 +228,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
+							validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 						},
 					},
 					"treatment_weights": {
@@ -244,6 +249,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 127),
+										validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 									},
 								},
 							},
@@ -261,13 +267,14 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
+				validate.StringMatch(regexp.MustCompile("([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -279,13 +286,14 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 127),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 		},
 		"sampling_rate": {
@@ -373,19 +381,19 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "Feature": {
-			//         "pattern": "",
+			//         "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:.*)",
 			//         "type": "string"
 			//       },
 			//       "TreatmentName": {
 			//         "maxLength": 127,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[-a-zA-Z0-9._]*",
 			//         "type": "string"
 			//       },
 			//       "Variation": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[-a-zA-Z0-9._]*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -412,6 +420,9 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: Feature
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:.*)"), ""),
+						},
 					},
 					"treatment_name": {
 						// Property: TreatmentName
@@ -419,6 +430,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
+							validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 						},
 					},
 					"variation": {
@@ -427,6 +439,7 @@ func experimentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 						},
 					},
 				},

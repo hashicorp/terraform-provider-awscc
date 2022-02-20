@@ -4,6 +4,7 @@ package detective
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,12 +43,15 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ARN of the graph to which the member account will be invited",
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the graph to which the member account will be invited",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -57,24 +61,30 @@ func memberInvitationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			//   "pattern": "",
+			//   "pattern": ".*@.*",
 			//   "type": "string"
 			// }
 			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile(".*@.*"), ""),
+			},
 		},
 		"member_id": {
 			// Property: MemberId
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID to be invited to join the graph as a member",
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID to be invited to join the graph as a member",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[0-9]{12}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -31,20 +32,20 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Description of the device",
 			//       "maxLength": 40,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\S\\s]+",
 			//       "type": "string"
 			//     },
 			//     "DeviceName": {
 			//       "description": "The name of the device",
 			//       "maxLength": 63,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "IotThingName": {
 			//       "description": "AWS Internet of Things (IoT) object name.",
 			//       "maxLength": 128,
-			//       "pattern": "",
+			//       "pattern": "[a-zA-Z0-9:_-]+",
 			//       "type": "string"
 			//     }
 			//   },
@@ -63,6 +64,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 40),
+							validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
 						},
 					},
 					"device_name": {
@@ -72,6 +74,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"iot_thing_name": {
@@ -81,6 +84,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 						},
 					},
 				},
@@ -94,7 +98,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the edge device fleet",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the edge device fleet",
@@ -102,6 +106,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -126,7 +131,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -157,6 +162,7 @@ func deviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 				},

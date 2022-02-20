@@ -4,6 +4,7 @@ package workspaces
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "maxLength": 68,
 			//   "minLength": 13,
-			//   "pattern": "",
+			//   "pattern": "^wsca-[0-9a-z]{8,63}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -58,13 +59,13 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       "ConnectionIdentifier": {
 			//         "maxLength": 20,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9]+$",
 			//         "type": "string"
 			//       },
 			//       "ResourceId": {
 			//         "maxLength": 1000,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": ".+",
 			//         "type": "string"
 			//       }
 			//     },
@@ -101,6 +102,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 20),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
 						},
 					},
 					"resource_id": {
@@ -109,6 +111,7 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1000),
+							validate.StringMatch(regexp.MustCompile(".+"), ""),
 						},
 					},
 				},
@@ -142,13 +145,14 @@ func connectionAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[.0-9a-zA-Z\\-]{1,255}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

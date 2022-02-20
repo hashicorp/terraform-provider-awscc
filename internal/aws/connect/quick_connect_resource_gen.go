@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,12 +42,15 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -69,7 +73,7 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the quick connect.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the quick connect.",
@@ -92,7 +96,7 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "properties": {
 			//         "PhoneNumber": {
 			//           "description": "The phone number in E.164 format.",
-			//           "pattern": "",
+			//           "pattern": "^\\+[1-9]\\d{1,14}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -107,12 +111,12 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "properties": {
 			//         "ContactFlowArn": {
 			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         },
 			//         "QueueArn": {
 			//           "description": "The identifier for the queue.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -137,12 +141,12 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "properties": {
 			//         "ContactFlowArn": {
 			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         },
 			//         "UserArn": {
 			//           "description": "The identifier of the user.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -171,6 +175,9 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The phone number in E.164 format.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^\\+[1-9]\\d{1,14}$"), ""),
+									},
 								},
 							},
 						),
@@ -186,12 +193,18 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The identifier of the contact flow.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"), ""),
+									},
 								},
 								"queue_arn": {
 									// Property: QueueArn
 									Description: "The identifier for the queue.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"), ""),
+									},
 								},
 							},
 						),
@@ -220,12 +233,18 @@ func quickConnectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The identifier of the contact flow.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"), ""),
+									},
 								},
 								"user_arn": {
 									// Property: UserArn
 									Description: "The identifier of the user.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"), ""),
+									},
 								},
 							},
 						),

@@ -4,6 +4,7 @@ package panorama
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -41,7 +42,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -49,6 +50,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -87,13 +89,14 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -105,7 +108,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -120,7 +123,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -128,6 +131,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 255),
+				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -140,13 +144,14 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 		},
 		"health_status": {
@@ -187,7 +192,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//     "PayloadData": {
 			//       "maxLength": 51200,
 			//       "minLength": 0,
-			//       "pattern": "",
+			//       "pattern": "^.+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -201,6 +206,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 51200),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 				},
@@ -221,7 +227,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//     "PayloadData": {
 			//       "maxLength": 51200,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^.+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -235,6 +241,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 51200),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 				},
@@ -250,7 +257,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -258,6 +265,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -270,7 +278,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -278,6 +286,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -362,14 +371,14 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//         "description": "A string used to identify this tag",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "A string containing the value for the tag",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -392,6 +401,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 					"value": {
@@ -401,6 +411,7 @@ func applicationInstanceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 				},

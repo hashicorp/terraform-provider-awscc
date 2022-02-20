@@ -4,6 +4,7 @@ package nimblestudio
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -111,7 +112,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Linux virtual workstation.\u003c/p\u003e",
 			//           "maxLength": 128,
 			//           "minLength": 0,
-			//           "pattern": "",
+			//           "pattern": "^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$",
 			//           "type": "string"
 			//         },
 			//         "ShareName": {
@@ -120,7 +121,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         },
 			//         "WindowsMountDrive": {
 			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Windows virtual workstation.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^[A-Z]$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -247,6 +248,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 128),
+										validate.StringMatch(regexp.MustCompile("^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$"), ""),
 									},
 								},
 								"share_name": {
@@ -260,6 +262,9 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Description: "<p>The mount location for a shared file system on a Windows virtual workstation.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[A-Z]$"), ""),
+									},
 								},
 							},
 						),
@@ -318,7 +323,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
 			//         "maxLength": 10,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^2021\\-03\\-31$",
 			//         "type": "string"
 			//       },
 			//       "Platform": {
@@ -358,6 +363,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 10),
+							validate.StringMatch(regexp.MustCompile("^2021\\-03\\-31$"), ""),
 						},
 					},
 					"platform": {
@@ -427,7 +433,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "\u003cp\u003eA script parameter key.\u003c/p\u003e",
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
@@ -453,6 +459,7 @@ func studioComponentResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]+$"), ""),
 						},
 					},
 					"value": {

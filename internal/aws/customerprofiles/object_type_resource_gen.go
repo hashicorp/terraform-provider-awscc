@@ -4,6 +4,7 @@ package customerprofiles
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -68,7 +69,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The unique name of the domain.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The unique name of the domain.",
@@ -76,6 +77,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -125,7 +127,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Name": {
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_-]+$",
 			//         "type": "string"
 			//       },
 			//       "ObjectTypeField": {
@@ -172,6 +174,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 						},
 					},
 					"object_type_field": {
@@ -236,7 +239,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Name": {
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_-]+$",
 			//         "type": "string"
 			//       },
 			//       "ObjectTypeKeyList": {
@@ -250,7 +253,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 64,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9_-]+$",
 			//                 "type": "string"
 			//               },
 			//               "type": "array"
@@ -288,6 +291,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 						},
 					},
 					"object_type_key_list": {
@@ -301,6 +305,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayForEach(validate.StringLenBetween(1, 64)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), "")),
 									},
 								},
 								"standard_identifiers": {
@@ -355,7 +360,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the profile object type.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the profile object type.",
@@ -364,6 +369,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z_][a-zA-Z_0-9-]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -434,7 +440,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A unique identifier for the object template.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]+$",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the object template.",
@@ -442,6 +448,7 @@ func objectTypeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			},
 		},
 	}

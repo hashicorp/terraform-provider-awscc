@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Amazon Resource Name for the Schema.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//   "type": "string"
 			// }
 			Description: "Amazon Resource Name for the Schema.",
@@ -157,7 +158,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the initial schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the initial schema version.",
@@ -195,7 +196,7 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "Arn": {
 			//       "description": "Amazon Resource Name for the Registry.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//       "type": "string"
 			//     },
 			//     "Name": {
@@ -215,6 +216,9 @@ func schemaResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "Amazon Resource Name for the Registry.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):glue:.*"), ""),
+						},
 					},
 					"name": {
 						// Property: Name

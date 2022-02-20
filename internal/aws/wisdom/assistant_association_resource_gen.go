@@ -4,6 +4,7 @@ package wisdom
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: AssistantArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -37,7 +38,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: AssistantAssociationArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -50,7 +51,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: AssistantAssociationId
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -63,11 +64,14 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// Property: AssistantId
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -79,7 +83,7 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "additionalProperties": false,
 			//   "properties": {
 			//     "KnowledgeBaseId": {
-			//       "pattern": "",
+			//       "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -94,6 +98,9 @@ func assistantAssociationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 						// Property: KnowledgeBaseId
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+						},
 					},
 				},
 			),

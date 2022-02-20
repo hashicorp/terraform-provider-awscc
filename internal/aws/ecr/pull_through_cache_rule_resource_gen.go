@@ -4,6 +4,7 @@ package ecr
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
 			//   "maxLength": 20,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
 			//   "type": "string"
 			// }
 			Description: "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
@@ -36,6 +37,7 @@ func pullThroughCacheRuleResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 20),
+				validate.StringMatch(regexp.MustCompile("^([a-z0-9]+(?:[._-][a-z0-9]+)*)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

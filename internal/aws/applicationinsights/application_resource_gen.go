@@ -4,6 +4,7 @@ package applicationinsights
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -82,7 +83,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The ARN of the compnonent.",
 			//         "maxLength": 300,
 			//         "minLength": 20,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
 			//         "type": "string"
 			//       },
 			//       "ComponentConfigurationMode": {
@@ -98,7 +99,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The name of the component.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\d\\w\\-_.+]*$",
 			//         "type": "string"
 			//       },
 			//       "CustomComponentConfiguration": {
@@ -241,26 +242,26 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                       "maxLength": 512,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                       "type": "string"
 			//                     },
 			//                     "LogPath": {
 			//                       "description": "The path of the logs to be monitored.",
 			//                       "maxLength": 260,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
 			//                       "type": "string"
 			//                     },
 			//                     "LogType": {
 			//                       "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                       "pattern": "",
+			//                       "pattern": "^[A-Z][[A-Z]_]*$",
 			//                       "type": "string"
 			//                     },
 			//                     "PatternSet": {
 			//                       "description": "The name of the log pattern set.",
 			//                       "maxLength": 30,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[a-zA-Z0-9.-_]*",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -299,21 +300,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "description": "The type of Windows Events to log.",
 			//                       "maxLength": 260,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
 			//                       "type": "string"
 			//                     },
 			//                     "LogGroupName": {
 			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                       "maxLength": 512,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                       "type": "string"
 			//                     },
 			//                     "PatternSet": {
 			//                       "description": "The name of the log pattern set.",
 			//                       "maxLength": 30,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[a-zA-Z0-9.-_]*",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -379,26 +380,26 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                             "maxLength": 512,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                             "type": "string"
 			//                           },
 			//                           "LogPath": {
 			//                             "description": "The path of the logs to be monitored.",
 			//                             "maxLength": 260,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
 			//                             "type": "string"
 			//                           },
 			//                           "LogType": {
 			//                             "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                             "pattern": "",
+			//                             "pattern": "^[A-Z][[A-Z]_]*$",
 			//                             "type": "string"
 			//                           },
 			//                           "PatternSet": {
 			//                             "description": "The name of the log pattern set.",
 			//                             "maxLength": 30,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[a-zA-Z0-9.-_]*",
 			//                             "type": "string"
 			//                           }
 			//                         },
@@ -437,21 +438,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                             "description": "The type of Windows Events to log.",
 			//                             "maxLength": 260,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
 			//                             "type": "string"
 			//                           },
 			//                           "LogGroupName": {
 			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                             "maxLength": 512,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                             "type": "string"
 			//                           },
 			//                           "PatternSet": {
 			//                             "description": "The name of the log pattern set.",
 			//                             "maxLength": 30,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[a-zA-Z0-9.-_]*",
 			//                             "type": "string"
 			//                           }
 			//                         },
@@ -628,26 +629,26 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                       "maxLength": 512,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                       "type": "string"
 			//                     },
 			//                     "LogPath": {
 			//                       "description": "The path of the logs to be monitored.",
 			//                       "maxLength": 260,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
 			//                       "type": "string"
 			//                     },
 			//                     "LogType": {
 			//                       "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                       "pattern": "",
+			//                       "pattern": "^[A-Z][[A-Z]_]*$",
 			//                       "type": "string"
 			//                     },
 			//                     "PatternSet": {
 			//                       "description": "The name of the log pattern set.",
 			//                       "maxLength": 30,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[a-zA-Z0-9.-_]*",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -686,21 +687,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "description": "The type of Windows Events to log.",
 			//                       "maxLength": 260,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
 			//                       "type": "string"
 			//                     },
 			//                     "LogGroupName": {
 			//                       "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                       "maxLength": 512,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                       "type": "string"
 			//                     },
 			//                     "PatternSet": {
 			//                       "description": "The name of the log pattern set.",
 			//                       "maxLength": 30,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[a-zA-Z0-9.-_]*",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -766,26 +767,26 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                             "maxLength": 512,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                             "type": "string"
 			//                           },
 			//                           "LogPath": {
 			//                             "description": "The path of the logs to be monitored.",
 			//                             "maxLength": 260,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$",
 			//                             "type": "string"
 			//                           },
 			//                           "LogType": {
 			//                             "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-			//                             "pattern": "",
+			//                             "pattern": "^[A-Z][[A-Z]_]*$",
 			//                             "type": "string"
 			//                           },
 			//                           "PatternSet": {
 			//                             "description": "The name of the log pattern set.",
 			//                             "maxLength": 30,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[a-zA-Z0-9.-_]*",
 			//                             "type": "string"
 			//                           }
 			//                         },
@@ -824,21 +825,21 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                             "description": "The type of Windows Events to log.",
 			//                             "maxLength": 260,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
 			//                             "type": "string"
 			//                           },
 			//                           "LogGroupName": {
 			//                             "description": "The CloudWatch log group name to be associated to the monitored log.",
 			//                             "maxLength": 512,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//                             "type": "string"
 			//                           },
 			//                           "PatternSet": {
 			//                             "description": "The name of the log pattern set.",
 			//                             "maxLength": 30,
 			//                             "minLength": 1,
-			//                             "pattern": "",
+			//                             "pattern": "[a-zA-Z0-9.-_]*",
 			//                             "type": "string"
 			//                           }
 			//                         },
@@ -877,7 +878,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "Tier": {
 			//         "description": "The tier of the application component.",
-			//         "pattern": "",
+			//         "pattern": "^[A-Z][[A-Z]_]*$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -900,6 +901,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 300),
+							validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 						},
 					},
 					"component_configuration_mode": {
@@ -922,6 +924,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
 						},
 					},
 					"custom_component_configuration": {
@@ -1088,6 +1091,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
+																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 															},
 														},
 														"log_path": {
@@ -1097,6 +1101,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
+																validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 															},
 														},
 														"log_type": {
@@ -1104,6 +1109,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringMatch(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+															},
 														},
 														"pattern_set": {
 															// Property: PatternSet
@@ -1112,6 +1120,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
+																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 															},
 														},
 													},
@@ -1147,6 +1156,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
+																validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
 															},
 														},
 														"log_group_name": {
@@ -1156,6 +1166,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
+																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 															},
 														},
 														"pattern_set": {
@@ -1165,6 +1176,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
+																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 															},
 														},
 													},
@@ -1227,6 +1239,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
+																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																		},
 																	},
 																	"log_path": {
@@ -1236,6 +1249,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
+																			validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 																		},
 																	},
 																	"log_type": {
@@ -1243,6 +1257,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
 																		Type:        types.StringType,
 																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringMatch(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																		},
 																	},
 																	"pattern_set": {
 																		// Property: PatternSet
@@ -1251,6 +1268,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
+																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																		},
 																	},
 																},
@@ -1286,6 +1304,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
+																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
 																		},
 																	},
 																	"log_group_name": {
@@ -1295,6 +1314,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
+																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																		},
 																	},
 																	"pattern_set": {
@@ -1304,6 +1324,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
+																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																		},
 																	},
 																},
@@ -1503,6 +1524,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
+																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 															},
 														},
 														"log_path": {
@@ -1512,6 +1534,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
+																validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 															},
 														},
 														"log_type": {
@@ -1519,6 +1542,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
 															Type:        types.StringType,
 															Required:    true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringMatch(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+															},
 														},
 														"pattern_set": {
 															// Property: PatternSet
@@ -1527,6 +1553,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
+																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 															},
 														},
 													},
@@ -1562,6 +1589,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 260),
+																validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
 															},
 														},
 														"log_group_name": {
@@ -1571,6 +1599,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 512),
+																validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 															},
 														},
 														"pattern_set": {
@@ -1580,6 +1609,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 30),
+																validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 															},
 														},
 													},
@@ -1642,6 +1672,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
+																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																		},
 																	},
 																	"log_path": {
@@ -1651,6 +1682,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
+																			validate.StringMatch(regexp.MustCompile("^([a-zA-Z]:\\\\[\\\\\\S|*\\S]?.*|/[^\"']*)$"), ""),
 																		},
 																	},
 																	"log_type": {
@@ -1658,6 +1690,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
 																		Type:        types.StringType,
 																		Required:    true,
+																		Validators: []tfsdk.AttributeValidator{
+																			validate.StringMatch(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																		},
 																	},
 																	"pattern_set": {
 																		// Property: PatternSet
@@ -1666,6 +1701,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
+																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																		},
 																	},
 																},
@@ -1701,6 +1737,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 260),
+																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
 																		},
 																	},
 																	"log_group_name": {
@@ -1710,6 +1747,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 512),
+																			validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 																		},
 																	},
 																	"pattern_set": {
@@ -1719,6 +1757,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 30),
+																			validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 																		},
 																	},
 																},
@@ -1759,6 +1798,9 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The tier of the application component.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -1792,7 +1834,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The name of the component.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\d\\w\\-_.+]*$",
 			//         "type": "string"
 			//       },
 			//       "ResourceList": {
@@ -1801,7 +1843,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "items": {
 			//           "maxLength": 300,
 			//           "minLength": 20,
-			//           "pattern": "",
+			//           "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
 			//           "type": "string"
 			//         },
 			//         "minItems": 1,
@@ -1827,6 +1869,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^[\\d\\w\\-_.+]*$"), ""),
 						},
 					},
 					"resource_list": {
@@ -1837,6 +1880,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(1),
 							validate.ArrayForEach(validate.StringLenBetween(20, 300)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), "")),
 						},
 					},
 				},
@@ -1874,7 +1918,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "description": "The name of the log pattern.",
 			//               "maxLength": 50,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-zA-Z0-9.-_]*",
 			//               "type": "string"
 			//             },
 			//             "Rank": {
@@ -1896,7 +1940,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The name of the log pattern set.",
 			//         "maxLength": 30,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9.-_]*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -1933,6 +1977,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 50),
+										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 									},
 								},
 								"rank": {
@@ -1956,6 +2001,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 30),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 						},
 					},
 				},
@@ -1984,7 +2030,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The SNS topic provided to Application Insights that is associated to the created opsItem.",
 			//   "maxLength": 300,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
 			//   "type": "string"
 			// }
 			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
@@ -1992,6 +2038,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 300),
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$"), ""),
 			},
 		},
 		"resource_group_name": {
@@ -2001,7 +2048,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the resource group.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9.-_]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the resource group.",
@@ -2009,6 +2056,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.-_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

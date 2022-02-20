@@ -4,6 +4,7 @@ package databrew
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -68,7 +69,7 @@ func rulesetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "Expression with rule conditions",
 			//         "maxLength": 1024,
 			//         "minLength": 4,
-			//         "pattern": "",
+			//         "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//         "type": "string"
 			//       },
 			//       "ColumnSelectors": {
@@ -121,7 +122,7 @@ func rulesetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "description": "Variable name",
 			//               "maxLength": 128,
 			//               "minLength": 2,
-			//               "pattern": "",
+			//               "pattern": "^:[A-Za-z0-9_]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -184,6 +185,7 @@ func rulesetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(4, 1024),
+							validate.StringMatch(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
 						},
 					},
 					"column_selectors": {
@@ -251,6 +253,7 @@ func rulesetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(2, 128),
+										validate.StringMatch(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
 									},
 								},
 							},

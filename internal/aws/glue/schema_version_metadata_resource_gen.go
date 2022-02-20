@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -44,12 +45,15 @@ func schemaVersionMetadataResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the schema version.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

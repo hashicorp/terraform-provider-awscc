@@ -4,6 +4,7 @@ package ses
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -56,14 +57,14 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			//                 "description": "The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionName": {
 			//                 "description": "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionValueSource": {
@@ -118,7 +119,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			//     },
 			//     "Name": {
 			//       "description": "The name of the event destination set.",
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -147,6 +148,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 256),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,256}$"), ""),
 												},
 											},
 											"dimension_name": {
@@ -156,6 +158,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 256),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,256}$"), ""),
 												},
 											},
 											"dimension_value_source": {
@@ -217,6 +220,9 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 						Description: "The name of the event destination set.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{0,64}$"), ""),
+						},
 					},
 				},
 			),

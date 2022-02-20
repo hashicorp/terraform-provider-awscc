@@ -4,6 +4,7 @@ package iotwireless
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -124,18 +125,18 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "DevAddr": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{8}",
 			//           "type": "string"
 			//         },
 			//         "SessionKeys": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "AppSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "NwkSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             }
 			//           },
@@ -156,26 +157,26 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "DevAddr": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{8}",
 			//           "type": "string"
 			//         },
 			//         "SessionKeys": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "AppSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "FNwkSIntKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "NwkSEncKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "SNwkSIntKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             }
 			//           },
@@ -195,7 +196,7 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "type": "object"
 			//     },
 			//     "DevEui": {
-			//       "pattern": "",
+			//       "pattern": "[a-f0-9]{16}",
 			//       "type": "string"
 			//     },
 			//     "DeviceProfileId": {
@@ -206,11 +207,11 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AppEui": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{16}",
 			//           "type": "string"
 			//         },
 			//         "AppKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         }
 			//       },
@@ -224,15 +225,15 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AppKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         },
 			//         "JoinEui": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{16}",
 			//           "type": "string"
 			//         },
 			//         "NwkKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         }
 			//       },
@@ -261,6 +262,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DevAddr
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+									},
 								},
 								"session_keys": {
 									// Property: SessionKeys
@@ -270,11 +274,17 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: AppSKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 											"nwk_s_key": {
 												// Property: NwkSKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 										},
 									),
@@ -292,6 +302,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: DevAddr
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+									},
 								},
 								"session_keys": {
 									// Property: SessionKeys
@@ -301,21 +314,33 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 												// Property: AppSKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 											"f_nwk_s_int_key": {
 												// Property: FNwkSIntKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 											"nwk_s_enc_key": {
 												// Property: NwkSEncKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 											"s_nwk_s_int_key": {
 												// Property: SNwkSIntKey
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+												},
 											},
 										},
 									),
@@ -329,6 +354,9 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: DevEui
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-f0-9]{16}"), ""),
+						},
 					},
 					"device_profile_id": {
 						// Property: DeviceProfileId
@@ -346,11 +374,17 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: AppEui
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+									},
 								},
 								"app_key": {
 									// Property: AppKey
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									},
 								},
 							},
 						),
@@ -364,16 +398,25 @@ func wirelessDeviceResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									// Property: AppKey
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									},
 								},
 								"join_eui": {
 									// Property: JoinEui
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+									},
 								},
 								"nwk_key": {
 									// Property: NwkKey
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									},
 								},
 							},
 						),

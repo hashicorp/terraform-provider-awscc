@@ -4,6 +4,7 @@ package kinesisvideo
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -57,7 +58,7 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The name of the Kinesis Video Signaling Channel.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the Kinesis Video Signaling Channel.",
@@ -66,6 +67,7 @@ func signalingChannelResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

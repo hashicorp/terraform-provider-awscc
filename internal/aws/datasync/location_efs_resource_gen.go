@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -32,7 +33,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "insertionOrder": false,
 			//       "items": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 5,
@@ -42,7 +43,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "SubnetArn": {
 			//       "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 			//       "maxLength": 128,
-			//       "pattern": "",
+			//       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -63,6 +64,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 5),
 							validate.ArrayForEach(validate.StringLenAtMost(128)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -75,6 +77,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+							validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"), ""),
 						},
 					},
 				},
@@ -90,7 +93,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
@@ -98,6 +101,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -110,7 +114,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
@@ -126,7 +130,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The URL of the EFS location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the EFS location that was described.",
@@ -142,7 +146,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
@@ -151,6 +155,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -172,14 +177,14 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -203,6 +208,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 						},
 					},
 					"value": {
@@ -212,6 +218,7 @@ func locationEFSResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 						},
 					},
 				},

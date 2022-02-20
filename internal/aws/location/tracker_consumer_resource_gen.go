@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,13 +26,14 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1600,
-			//   "pattern": "",
+			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1600),
+				validate.StringMatch(regexp.MustCompile("^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -43,13 +45,14 @@ func trackerConsumerResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[-._\\w]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^[-._\\w]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

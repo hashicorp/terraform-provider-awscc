@@ -4,6 +4,7 @@ package codeartifact
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -58,7 +59,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the domain that contains the repository.",
 			//   "maxLength": 50,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the domain that contains the repository.",
@@ -66,6 +67,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 50),
+				validate.StringMatch(regexp.MustCompile("^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -76,7 +78,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The 12-digit account ID of the AWS account that owns the domain.",
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The 12-digit account ID of the AWS account that owns the domain.",
@@ -108,7 +110,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the repository. This is used for GetAtt",
 			//   "maxLength": 100,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 			//   "type": "string"
 			// }
 			Description: "The name of the repository. This is used for GetAtt",
@@ -138,7 +140,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the repository.",
 			//   "maxLength": 100,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 			//   "type": "string"
 			// }
 			Description: "The name of the repository.",
@@ -146,6 +148,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 100),
+				validate.StringMatch(regexp.MustCompile("^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -4,6 +4,7 @@ package glue
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -35,7 +36,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     },
 			//     "SchemaArn": {
 			//       "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//       "type": "string"
 			//     },
 			//     "SchemaName": {
@@ -64,6 +65,9 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):glue:.*"), ""),
+						},
 					},
 					"schema_name": {
 						// Property: SchemaName
@@ -105,7 +109,7 @@ func schemaVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the schema version.",

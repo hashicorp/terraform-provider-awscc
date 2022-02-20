@@ -4,6 +4,7 @@ package aps
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The RuleGroupsNamespace ARN.",
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:rulegroupsnamespace/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
 			//   "type": "string"
 			// }
 			Description: "The RuleGroupsNamespace ARN.",
@@ -128,12 +129,15 @@ func ruleGroupsNamespaceResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"), ""),
+			},
 		},
 	}
 

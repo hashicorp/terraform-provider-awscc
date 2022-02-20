@@ -4,6 +4,7 @@ package auditmanager
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the assessment.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:.*:auditmanager:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the assessment.",
@@ -43,7 +44,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -108,14 +109,14 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The unique identifier for the email account.",
 			//       "maxLength": 320,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^.*@.*$",
 			//       "type": "string"
 			//     },
 			//     "Id": {
 			//       "description": "The identifier for the specified AWS account.",
 			//       "maxLength": 12,
 			//       "minLength": 12,
-			//       "pattern": "",
+			//       "pattern": "^[0-9]{12}$",
 			//       "type": "string"
 			//     },
 			//     "Name": {
@@ -138,6 +139,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 320),
+							validate.StringMatch(regexp.MustCompile("^.*@.*$"), ""),
 						},
 					},
 					"id": {
@@ -147,6 +149,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(12, 12),
+							validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 						},
 					},
 					"name": {
@@ -193,34 +196,34 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "AssessmentId": {
 			//         "maxLength": 36,
 			//         "minLength": 36,
-			//         "pattern": "",
+			//         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//         "type": "string"
 			//       },
 			//       "AssessmentName": {
 			//         "description": "The name of the related assessment.",
 			//         "maxLength": 127,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_\\.]+$",
 			//         "type": "string"
 			//       },
 			//       "Comment": {
 			//         "description": "The comment related to the delegation.",
 			//         "maxLength": 350,
-			//         "pattern": "",
+			//         "pattern": "^[\\w\\W\\s\\S]*$",
 			//         "type": "string"
 			//       },
 			//       "ControlSetId": {
 			//         "description": "The identifier for the specified control set.",
 			//         "maxLength": 300,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\w\\W\\s\\S]*$",
 			//         "type": "string"
 			//       },
 			//       "CreatedBy": {
 			//         "description": "The IAM user or role that performed the action.",
 			//         "maxLength": 100,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_()\\[\\]\\s]+$",
 			//         "type": "string"
 			//       },
 			//       "CreationTime": {
@@ -230,7 +233,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Id": {
 			//         "maxLength": 36,
 			//         "minLength": 36,
-			//         "pattern": "",
+			//         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//         "type": "string"
 			//       },
 			//       "LastUpdated": {
@@ -241,7 +244,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
 			//         "maxLength": 2048,
 			//         "minLength": 20,
-			//         "pattern": "",
+			//         "pattern": "^arn:.*:iam:.*",
 			//         "type": "string"
 			//       },
 			//       "RoleType": {
@@ -275,6 +278,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(36, 36),
+							validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
 						},
 					},
 					"assessment_name": {
@@ -284,6 +288,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
 						},
 					},
 					"comment": {
@@ -293,6 +298,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(350),
+							validate.StringMatch(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
 						},
 					},
 					"control_set_id": {
@@ -302,6 +308,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 300),
+							validate.StringMatch(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
 						},
 					},
 					"created_by": {
@@ -311,6 +318,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_()\\[\\]\\s]+$"), ""),
 						},
 					},
 					"creation_time": {
@@ -325,6 +333,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(36, 36),
+							validate.StringMatch(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
 						},
 					},
 					"last_updated": {
@@ -340,6 +349,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+							validate.StringMatch(regexp.MustCompile("^arn:.*:iam:.*"), ""),
 						},
 					},
 					"role_type": {
@@ -394,7 +404,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The identifier for the specified framework.",
 			//   "maxLength": 36,
 			//   "minLength": 32,
-			//   "pattern": "",
+			//   "pattern": "^([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|.*\\S.*)$",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the specified framework.",
@@ -403,6 +413,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(32, 36),
+				validate.StringMatch(regexp.MustCompile("^([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|.*\\S.*)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -416,7 +427,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the related assessment.",
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_\\.]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the related assessment.",
@@ -424,6 +435,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
 			},
 			// Name is a write-only property.
 		},
@@ -440,7 +452,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
 			//         "maxLength": 2048,
 			//         "minLength": 20,
-			//         "pattern": "",
+			//         "pattern": "^arn:.*:iam:.*",
 			//         "type": "string"
 			//       },
 			//       "RoleType": {
@@ -466,6 +478,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+							validate.StringMatch(regexp.MustCompile("^arn:.*:iam:.*"), ""),
 						},
 					},
 					"role_type": {
@@ -502,14 +515,14 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The unique identifier for the email account.",
 			//             "maxLength": 320,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^.*@.*$",
 			//             "type": "string"
 			//           },
 			//           "Id": {
 			//             "description": "The identifier for the specified AWS account.",
 			//             "maxLength": 12,
 			//             "minLength": 12,
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{12}$",
 			//             "type": "string"
 			//           },
 			//           "Name": {
@@ -557,6 +570,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 320),
+										validate.StringMatch(regexp.MustCompile("^.*@.*$"), ""),
 									},
 								},
 								"id": {
@@ -566,6 +580,7 @@ func assessmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 12),
+										validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 									},
 								},
 								"name": {

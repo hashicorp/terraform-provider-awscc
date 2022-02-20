@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -140,12 +141,15 @@ func variableResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the variable.",
-			//   "pattern": "",
+			//   "pattern": "^[a-z_][a-z0-9_]{0,99}?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the variable.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-z_][a-z0-9_]{0,99}?$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

@@ -4,6 +4,7 @@ package finspace
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "AWS account ID associated with the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "AWS account ID associated with the Environment",
@@ -41,7 +42,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "ARNs of FinSpace Data Bundles to install",
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array",
@@ -51,6 +52,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$"), "")),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -61,7 +65,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ID for FinSpace created account used to store Environment artifacts",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "ID for FinSpace created account used to store Environment artifacts",
@@ -76,19 +80,22 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Description of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
 			//   "type": "string"
 			// }
 			Description: "Description of the Environment",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9. ]{1,1000}$"), ""),
+			},
 		},
 		"environment_arn": {
 			// Property: EnvironmentArn
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ARN of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "ARN of the Environment",
@@ -103,7 +110,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Unique identifier for representing FinSpace Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "Unique identifier for representing FinSpace Environment",
@@ -118,7 +125,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "URL used to login to the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//   "type": "string"
 			// }
 			Description: "URL used to login to the Environment",
@@ -157,7 +164,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "ApplicationCallBackURL": {
 			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//       "type": "string"
 			//     },
 			//     "AttributeMap": {
@@ -168,7 +175,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Federation provider name to link with the Environment",
 			//       "maxLength": 32,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
 			//       "type": "string"
 			//     },
 			//     "FederationURN": {
@@ -180,12 +187,12 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "SAML metadata document to link the federation provider to the Environment",
 			//       "maxLength": 10000000,
 			//       "minLength": 1000,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     },
 			//     "SamlMetadataURL": {
 			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -199,6 +206,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"), ""),
+						},
 					},
 					"attribute_map": {
 						// Property: AttributeMap
@@ -213,6 +223,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 32),
+							validate.StringMatch(regexp.MustCompile("[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+"), ""),
 						},
 					},
 					"federation_urn": {
@@ -228,6 +239,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1000, 10000000),
+							validate.StringMatch(regexp.MustCompile(".*"), ""),
 						},
 					},
 					"saml_metadata_url": {
@@ -235,6 +247,9 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "SAML metadata URL to link with the Environment",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^https?://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]{1,1000}"), ""),
+						},
 					},
 				},
 			),
@@ -262,12 +277,15 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
 			//   "type": "string"
 			// }
 			Description: "Name of the Environment",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$"), ""),
+			},
 		},
 		"sage_maker_studio_domain_url": {
 			// Property: SageMakerStudioDomainUrl
@@ -320,21 +338,21 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "Email address",
 			//       "maxLength": 128,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
 			//       "type": "string"
 			//     },
 			//     "FirstName": {
 			//       "description": "First name",
 			//       "maxLength": 50,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
 			//       "type": "string"
 			//     },
 			//     "LastName": {
 			//       "description": "Last name",
 			//       "maxLength": 50,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -350,6 +368,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+"), ""),
 						},
 					},
 					"first_name": {
@@ -359,6 +378,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 50),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1,50}$"), ""),
 						},
 					},
 					"last_name": {
@@ -368,6 +388,7 @@ func environmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 50),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1,50}$"), ""),
 						},
 					},
 				},

@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -150,12 +151,15 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique Arn for CodeSigningConfig resource",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
 			//   "type": "string"
 			// }
 			Description: "A unique Arn for CodeSigningConfig resource",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}"), ""),
+			},
 		},
 		"dead_letter_config": {
 			// Property: DeadLetterConfig
@@ -166,7 +170,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "TargetArn": {
 			//       "description": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
-			//       "pattern": "",
+			//       "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -180,6 +184,9 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+						},
 					},
 				},
 			),
@@ -245,13 +252,13 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Arn": {
 			//         "description": "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
 			//         "maxLength": 200,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$",
 			//         "type": "string"
 			//       },
 			//       "LocalMountPath": {
 			//         "description": "The path where the function can access the file system, starting with /mnt/.",
 			//         "maxLength": 160,
-			//         "pattern": "",
+			//         "pattern": "^/mnt/[a-zA-Z0-9-_.]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -274,6 +281,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(200),
+							validate.StringMatch(regexp.MustCompile("^arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$"), ""),
 						},
 					},
 					"local_mount_path": {
@@ -283,6 +291,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(160),
+							validate.StringMatch(regexp.MustCompile("^/mnt/[a-zA-Z0-9-_.]+$"), ""),
 						},
 					},
 				},
@@ -319,7 +328,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^[^\\s]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime",
@@ -327,6 +336,7 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("^[^\\s]+$"), ""),
 			},
 		},
 		"image_config": {
@@ -399,12 +409,15 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			//   "pattern": "",
+			//   "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+			},
 		},
 		"layers": {
 			// Property: Layers
@@ -473,12 +486,15 @@ func functionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the function's execution role.",
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the function's execution role.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			},
 		},
 		"runtime": {
 			// Property: Runtime

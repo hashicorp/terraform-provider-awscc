@@ -4,11 +4,13 @@ package lightsail
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -84,12 +86,15 @@ func loadBalancerTlsCertificateResourceType(ctx context.Context) (tfsdk.Resource
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of your load balancer.",
-			//   "pattern": "",
+			//   "pattern": "\\w[\\w\\-]*\\w",
 			//   "type": "string"
 			// }
 			Description: "The name of your load balancer.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

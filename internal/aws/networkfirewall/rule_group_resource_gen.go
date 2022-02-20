@@ -4,6 +4,7 @@ package networkfirewall
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -38,13 +39,14 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 512,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
+				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 			},
 		},
 		"rule_group": {
@@ -66,7 +68,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -88,7 +90,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -168,13 +170,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "Destination": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "DestinationPort": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "Direction": {
@@ -211,13 +213,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "Source": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "SourcePort": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -239,7 +241,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "Keyword": {
 			//                       "maxLength": 128,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^.*$",
 			//                       "type": "string"
 			//                     },
 			//                     "Settings": {
@@ -247,7 +249,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "items": {
 			//                         "maxLength": 8192,
 			//                         "minLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "^.*$",
 			//                         "type": "string"
 			//                       },
 			//                       "type": "array",
@@ -295,7 +297,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                                 "Value": {
 			//                                   "maxLength": 128,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^[a-zA-Z0-9-_ ]+$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -319,7 +321,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "ActionName": {
 			//                     "maxLength": 128,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^[a-zA-Z0-9]+$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -389,7 +391,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                                 "AddressDefinition": {
 			//                                   "maxLength": 255,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -444,7 +446,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                                 "AddressDefinition": {
 			//                                   "maxLength": 255,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -571,6 +573,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
 												},
 											},
 										},
@@ -589,6 +592,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenAtLeast(1)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
 												},
 											},
 										},
@@ -673,6 +677,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 															},
 														},
 														"destination_port": {
@@ -681,6 +686,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 															},
 														},
 														"direction": {
@@ -728,6 +734,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 															},
 														},
 														"source_port": {
@@ -736,6 +743,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 1024),
+																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 															},
 														},
 													},
@@ -752,6 +760,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 128),
+																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 															},
 														},
 														"settings": {
@@ -760,6 +769,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 8192)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
 															},
 														},
 													},
@@ -798,6 +808,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 128),
+																									validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
 																								},
 																							},
 																						},
@@ -819,6 +830,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 128),
+																validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
 															},
 														},
 													},
@@ -886,6 +898,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 255),
+																									validate.StringMatch(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
 																								},
 																							},
 																						},
@@ -936,6 +949,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																								Required: true,
 																								Validators: []tfsdk.AttributeValidator{
 																									validate.StringLenBetween(1, 255),
+																									validate.StringMatch(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
 																								},
 																							},
 																						},
@@ -1037,7 +1051,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(arn:aws.*)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -1053,7 +1067,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -1068,13 +1082,14 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -1091,13 +1106,13 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 255,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -1118,6 +1133,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 						},
 					},
 					"value": {
@@ -1126,6 +1142,7 @@ func ruleGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 255),
+							validate.StringMatch(regexp.MustCompile("^.*$"), ""),
 						},
 					},
 				},

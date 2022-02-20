@@ -4,6 +4,7 @@ package ecr
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -165,7 +166,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
 			//       "maxLength": 12,
 			//       "minLength": 12,
-			//       "pattern": "",
+			//       "pattern": "^[0-9]{12}$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -190,6 +191,7 @@ func repositoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(12, 12),
+							validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 						},
 					},
 				},

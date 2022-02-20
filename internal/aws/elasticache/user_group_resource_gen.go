@@ -4,6 +4,7 @@ package elasticache
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -75,12 +76,15 @@ func userGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the user group.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The ID of the user group.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9\\\\-]*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

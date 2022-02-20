@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -96,7 +97,7 @@ func reportPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "An optional description of the report plan with a maximum of 1,024 characters.",
 			//   "maxLength": 1024,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "An optional description of the report plan with a maximum of 1,024 characters.",
@@ -104,6 +105,7 @@ func reportPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 		},
 		"report_plan_name": {
@@ -113,7 +115,7 @@ func reportPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
@@ -122,6 +124,7 @@ func reportPlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z][_a-zA-Z0-9]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

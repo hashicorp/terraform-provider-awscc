@@ -4,6 +4,7 @@ package fms
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]*)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -60,7 +61,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "^([0-9]*)$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -71,7 +72,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
 			//         "minLength": 16,
-			//         "pattern": "",
+			//         "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -88,6 +89,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([0-9]*)$"), "")),
 						},
 					},
 					"orgunit": {
@@ -96,6 +98,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), "")),
 						},
 					},
 				},
@@ -117,7 +120,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9A-Z-]{36}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -139,7 +142,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "^([0-9]*)$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -150,7 +153,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
 			//         "minLength": 16,
-			//         "pattern": "",
+			//         "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -167,6 +170,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(12, 12)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([0-9]*)$"), "")),
 						},
 					},
 					"orgunit": {
@@ -175,6 +179,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayForEach(validate.StringLenBetween(16, 68)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"), "")),
 						},
 					},
 				},
@@ -187,13 +192,14 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@]+)$"), ""),
 			},
 		},
 		"remediation_enabled": {
@@ -265,7 +271,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "An AWS resource type",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]*)$",
 			//   "type": "string"
 			// }
 			Description: "An AWS resource type",
@@ -273,6 +279,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^([^\\s]*)$"), ""),
 			},
 		},
 		"resource_type_list": {
@@ -284,7 +291,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "description": "An AWS resource type",
 			//     "maxLength": 128,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "^([^\\s]*)$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -293,6 +300,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^([^\\s]*)$"), "")),
 			},
 		},
 		"resources_clean_up": {
@@ -377,12 +385,12 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([^\\s]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([^\\s]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -402,6 +410,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^([^\\s]*)$"), ""),
 						},
 					},
 					"value": {
@@ -410,6 +419,7 @@ func policyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("^([^\\s]*)$"), ""),
 						},
 					},
 				},

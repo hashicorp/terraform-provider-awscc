@@ -4,6 +4,7 @@ package s3objectlambda
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -54,7 +55,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name you want to assign to this Object lambda Access Point.",
 			//   "maxLength": 45,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this Object lambda Access Point.",
@@ -63,6 +64,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 45),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

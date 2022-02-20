@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -430,7 +431,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
@@ -439,6 +440,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -1069,7 +1071,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           },
 			//           "ExpirationDate": {
 			//             "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//             "pattern": "",
+			//             "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//             "type": "string"
 			//           },
 			//           "ExpirationInDays": {
@@ -1174,12 +1176,12 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           },
 			//           "ObjectSizeGreaterThan": {
 			//             "maxLength": 20,
-			//             "pattern": "",
+			//             "pattern": "[0-9]+",
 			//             "type": "string"
 			//           },
 			//           "ObjectSizeLessThan": {
 			//             "maxLength": 20,
-			//             "pattern": "",
+			//             "pattern": "[0-9]+",
 			//             "type": "string"
 			//           },
 			//           "Prefix": {
@@ -1232,7 +1234,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "TransitionDate": {
 			//                 "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//                 "pattern": "",
+			//                 "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//                 "type": "string"
 			//               },
 			//               "TransitionInDays": {
@@ -1264,7 +1266,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 },
 			//                 "TransitionDate": {
 			//                   "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//                   "pattern": "",
+			//                   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//                   "type": "string"
 			//                 },
 			//                 "TransitionInDays": {
@@ -1325,6 +1327,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+									},
 								},
 								"expiration_in_days": {
 									// Property: ExpirationInDays
@@ -1455,6 +1460,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(20),
+										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
 									},
 								},
 								"object_size_less_than": {
@@ -1463,6 +1469,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(20),
+										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
 									},
 								},
 								"prefix": {
@@ -1529,6 +1536,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+												},
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays
@@ -1564,6 +1574,9 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+												},
 											},
 											"transition_in_days": {
 												// Property: TransitionInDays

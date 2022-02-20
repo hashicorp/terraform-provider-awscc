@@ -4,6 +4,7 @@ package rum
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "Page Url",
 			//         "maxLength": 1260,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?\u0026//=]*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 50,
@@ -61,14 +62,14 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "GuestRoleArn": {
 			//       "description": "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
-			//       "pattern": "",
+			//       "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
 			//       "type": "string"
 			//     },
 			//     "IdentityPoolId": {
 			//       "description": "The ID of the identity pool that is used to authorize the sending of data to RUM.",
 			//       "maxLength": 55,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\w-]+:[0-9a-f-]+",
 			//       "type": "string"
 			//     },
 			//     "IncludedPages": {
@@ -78,7 +79,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "Page Url",
 			//         "maxLength": 1260,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?\u0026//=]*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 50,
@@ -130,6 +131,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1260)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -152,6 +154,9 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"), ""),
+						},
 					},
 					"identity_pool_id": {
 						// Property: IdentityPoolId
@@ -160,6 +165,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 55),
+							validate.StringMatch(regexp.MustCompile("[\\w-]+:[0-9a-f-]+"), ""),
 						},
 					},
 					"included_pages": {
@@ -170,6 +176,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 50),
 							validate.ArrayForEach(validate.StringLenBetween(1, 1260)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -239,7 +246,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the app monitor",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//   "type": "string"
 			// }
 			Description: "A name for the app monitor",
@@ -247,6 +254,7 @@ func appMonitorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -4,6 +4,7 @@ package apprunner
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -131,7 +132,7 @@ func vpcConnectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
 			//   "maxLength": 40,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$",
 			//   "type": "string"
 			// }
 			Description: "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
@@ -140,6 +141,7 @@ func vpcConnectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 40),
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

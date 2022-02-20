@@ -4,6 +4,7 @@ package ses
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,13 +26,16 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the contact list.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the contact list.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -138,7 +142,7 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "TopicName": {
 			//         "description": "The name of the topic.",
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -184,6 +188,9 @@ func contactListResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The name of the topic.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

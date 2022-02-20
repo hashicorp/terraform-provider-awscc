@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,12 +26,15 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The configuration data for the extension, in this account and region.",
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]+",
 			//   "type": "string"
 			// }
 			Description: "The configuration data for the extension, in this account and region.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[\\s\\S]+"), ""),
+			},
 		},
 		"configuration_alias": {
 			// Property: ConfigurationAlias
@@ -41,7 +45,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "enum": [
 			//     "default"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,256}$",
 			//   "type": "string"
 			// }
 			Description: "An alias by which to refer to this extension configuration data.",
@@ -49,6 +53,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Optional:    true,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]{1,256}$"), ""),
 				validate.StringInSlice([]string{
 					"default",
 				}),
@@ -64,7 +69,7 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
@@ -79,13 +84,16 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type version.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type version.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -96,12 +104,15 @@ func hookTypeConfigResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"), ""),
+			},
 		},
 	}
 

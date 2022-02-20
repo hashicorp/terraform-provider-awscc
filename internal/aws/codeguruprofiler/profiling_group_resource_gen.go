@@ -4,6 +4,7 @@ package codeguruprofiler
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -30,7 +31,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "Principals": {
 			//       "description": "The principals for the agent permissions.",
 			//       "items": {
-			//         "pattern": "",
+			//         "pattern": "^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -49,6 +50,9 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "The principals for the agent permissions.",
 						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$"), "")),
+						},
 					},
 				},
 			),
@@ -64,12 +68,12 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "properties": {
 			//       "channelId": {
 			//         "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
-			//         "pattern": "",
+			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//         "type": "string"
 			//       },
 			//       "channelUri": {
 			//         "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
-			//         "pattern": "",
+			//         "pattern": "^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -88,12 +92,18 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Description: "Unique identifier for each Channel in the notification configuration of a Profiling Group",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
+						},
 					},
 					"channel_uri": {
 						// Property: channelUri
 						Description: "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -105,7 +115,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the specified profiling group.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
@@ -148,7 +158,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "The name of the profiling group.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[\\w-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the profiling group.",
@@ -156,6 +166,7 @@ func profilingGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[\\w-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

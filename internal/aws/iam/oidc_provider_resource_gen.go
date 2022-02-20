@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -115,7 +116,7 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "items": {
 			//     "maxLength": 40,
 			//     "minLength": 40,
-			//     "pattern": "",
+			//     "pattern": "[0-9A-Fa-f]{40}",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,
@@ -126,6 +127,7 @@ func oIDCProviderResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenAtMost(5),
 				validate.ArrayForEach(validate.StringLenBetween(40, 40)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[0-9A-Fa-f]{40}"), "")),
 			},
 		},
 		"url": {

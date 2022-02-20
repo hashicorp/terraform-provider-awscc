@@ -4,6 +4,7 @@ package cur
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -91,7 +92,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}",
 			//   "type": "string"
 			// }
 			Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
@@ -100,6 +101,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -168,7 +170,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9A-Za-z!\\-_.*\\'()]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
@@ -176,6 +178,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -212,7 +215,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The S3 bucket where AWS delivers the report.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9_\\.\\-]+",
 			//   "type": "string"
 			// }
 			Description: "The S3 bucket where AWS delivers the report.",
@@ -220,6 +223,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9_\\.\\-]+"), ""),
 			},
 		},
 		"s3_prefix": {
@@ -229,7 +233,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9A-Za-z!\\-_.*\\'()/]*",
 			//   "type": "string"
 			// }
 			Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
@@ -237,6 +241,7 @@ func reportDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()/]*"), ""),
 			},
 		},
 		"s3_region": {

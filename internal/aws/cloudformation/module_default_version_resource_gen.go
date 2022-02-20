@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,13 +26,16 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the module version to set as the default version.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the module version to set as the default version.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+/[0-9]{8}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -42,13 +46,16 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of a module existing in the registry.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE",
 			//   "type": "string"
 			// }
 			Description: "The name of a module existing in the registry.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -60,13 +67,16 @@ func moduleDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of an existing version of the named module to set as the default.",
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{8}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of an existing version of the named module to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[0-9]{8}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

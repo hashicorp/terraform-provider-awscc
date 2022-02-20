@@ -4,6 +4,7 @@ package rekognition
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,7 +42,7 @@ func collectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The name of the collection",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "\\A[a-zA-Z0-9_\\.\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the collection",
@@ -49,6 +50,7 @@ func collectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(255),
+				validate.StringMatch(regexp.MustCompile("\\A[a-zA-Z0-9_\\.\\-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -73,7 +75,7 @@ func collectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -107,6 +109,7 @@ func collectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$"), ""),
 						},
 					},
 				},

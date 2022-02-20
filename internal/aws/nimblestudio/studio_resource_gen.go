@@ -4,6 +4,7 @@ package nimblestudio
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -54,7 +55,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
 			//   "maxLength": 50,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
 			//   "type": "string"
 			// }
 			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
@@ -88,7 +89,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "KeyArn": {
 			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "^arn:.*",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
@@ -115,6 +116,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtLeast(4),
+							validate.StringMatch(regexp.MustCompile("^arn:.*"), ""),
 						},
 					},
 					"key_type": {
@@ -152,7 +154,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
 			//   "maxLength": 64,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>",
@@ -160,6 +162,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -4,6 +4,7 @@ package kinesis
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -42,7 +43,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the Kinesis stream.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_.-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Kinesis stream.",
@@ -51,6 +52,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

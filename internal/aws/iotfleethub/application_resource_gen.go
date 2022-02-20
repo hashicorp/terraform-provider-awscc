@@ -4,6 +4,7 @@ package iotfleethub
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ARN of the application.",
 			//   "maxLength": 1600,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:[!-~]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the application.",
@@ -58,7 +59,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Application Description, should be between 1 and 2048 characters.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[ -~]*$",
 			//   "type": "string"
 			// }
 			Description: "Application Description, should be between 1 and 2048 characters.",
@@ -66,6 +67,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile("^[ -~]*$"), ""),
 			},
 		},
 		"application_id": {
@@ -75,7 +77,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ID of the application.",
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the application.",
@@ -106,7 +108,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Application Name, should be between 1 and 256 characters.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[ -~]*$",
 			//   "type": "string"
 			// }
 			Description: "Application Name, should be between 1 and 256 characters.",
@@ -114,6 +116,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^[ -~]*$"), ""),
 			},
 		},
 		"application_state": {
@@ -165,7 +168,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
 			//   "maxLength": 1600,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:[!-~]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the role that the web application assumes when it interacts with AWS IoT Core. For more info on configuring this attribute, see https://docs.aws.amazon.com/iot/latest/apireference/API_iotfleethub_CreateApplication.html#API_iotfleethub_CreateApplication_RequestSyntax",
@@ -173,6 +176,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1600),
+				validate.StringMatch(regexp.MustCompile("^arn:[!-~]+$"), ""),
 			},
 		},
 		"sso_client_id": {

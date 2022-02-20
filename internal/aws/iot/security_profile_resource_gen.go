@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -34,7 +35,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "What is measured by the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "MetricDimension": {
@@ -45,7 +46,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//             "description": "A unique identifier for the dimension.",
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[a-zA-Z0-9:_-]+",
 			//             "type": "string"
 			//           },
 			//           "Operator": {
@@ -81,6 +82,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 						},
 					},
 					"metric_dimension": {
@@ -95,6 +97,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 									},
 								},
 								"operator": {
@@ -325,7 +328,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "What is measured by the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "MetricDimension": {
@@ -336,7 +339,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//             "description": "A unique identifier for the dimension.",
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[a-zA-Z0-9:_-]+",
 			//             "type": "string"
 			//           },
 			//           "Operator": {
@@ -357,7 +360,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "The name for the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "SuppressAlerts": {
@@ -538,6 +541,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 						},
 					},
 					"metric_dimension": {
@@ -552,6 +556,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 128),
+										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 									},
 								},
 								"operator": {
@@ -577,6 +582,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 						},
 					},
 					"suppress_alerts": {
@@ -626,7 +632,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "A unique identifier for the security profile.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the security profile.",
@@ -635,6 +641,7 @@ func securityProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

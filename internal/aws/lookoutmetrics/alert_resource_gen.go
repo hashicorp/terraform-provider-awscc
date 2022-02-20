@@ -4,6 +4,7 @@ package lookoutmetrics
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -34,13 +35,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "LambdaArn": {
 			//           "description": "ARN of a Lambda to send alert notifications to.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//           "type": "string"
 			//         },
 			//         "RoleArn": {
 			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//           "type": "string"
 			//         }
 			//       },
@@ -57,13 +58,13 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "RoleArn": {
 			//           "description": "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//           "type": "string"
 			//         },
 			//         "SnsTopicArn": {
 			//           "description": "ARN of an SNS topic to send alert notifications to.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//           "type": "string"
 			//         }
 			//       },
@@ -91,6 +92,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 									},
 								},
 								"role_arn": {
@@ -100,6 +102,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 									},
 								},
 							},
@@ -118,6 +121,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 									},
 								},
 								"sns_topic_arn": {
@@ -127,6 +131,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 									},
 								},
 							},
@@ -146,7 +151,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "A description for the alert.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "A description for the alert.",
@@ -155,6 +160,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -168,7 +174,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the alert. If not provided, a name is generated automatically.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the alert. If not provided, a name is generated automatically.",
@@ -177,6 +183,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -208,7 +215,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
@@ -216,6 +223,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+				validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -227,7 +235,7 @@ func alertResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "ARN assigned to the alert.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//   "type": "string"
 			// }
 			Description: "ARN assigned to the alert.",

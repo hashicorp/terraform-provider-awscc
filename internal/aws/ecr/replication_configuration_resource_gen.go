@@ -4,6 +4,7 @@ package ecr
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -55,12 +56,12 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//               "properties": {
 			//                 "Region": {
 			//                   "description": "A Region to replicate to.",
-			//                   "pattern": "",
+			//                   "pattern": "[0-9a-z-]{2,25}",
 			//                   "type": "string"
 			//                 },
 			//                 "RegistryId": {
 			//                   "description": "The account ID of the destination registry to replicate to.",
-			//                   "pattern": "",
+			//                   "pattern": "^[0-9]{12}$",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -82,7 +83,7 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//               "properties": {
 			//                 "Filter": {
 			//                   "description": "The repository filter to be applied for replication.",
-			//                   "pattern": "",
+			//                   "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$",
 			//                   "type": "string"
 			//                 },
 			//                 "FilterType": {
@@ -137,12 +138,18 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Description: "A Region to replicate to.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("[0-9a-z-]{2,25}"), ""),
+												},
 											},
 											"registry_id": {
 												// Property: RegistryId
 												Description: "The account ID of the destination registry to replicate to.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -162,6 +169,9 @@ func replicationConfigurationResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Description: "The repository filter to be applied for replication.",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$"), ""),
+												},
 											},
 											"filter_type": {
 												// Property: FilterType

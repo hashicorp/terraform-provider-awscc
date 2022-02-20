@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the EMR Studio.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the EMR Studio.",
@@ -66,7 +67,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
 			//   "maxLength": 10280,
 			//   "minLength": 6,
-			//   "pattern": "",
+			//   "pattern": "^s3://.*",
 			//   "type": "string"
 			// }
 			Description: "The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.",
@@ -74,6 +75,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(6, 10280),
+				validate.StringMatch(regexp.MustCompile("^s3://.*"), ""),
 			},
 		},
 		"description": {
@@ -99,7 +101,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
 			//   "maxLength": 256,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
@@ -107,6 +109,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 256),
+				validate.StringMatch(regexp.MustCompile("^sg-[a-zA-Z0-9\\-._]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -118,7 +121,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
 			//   "type": "string"
 			// }
 			Description: "Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.",
@@ -126,6 +129,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
+				validate.StringMatch(regexp.MustCompile("^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$"), ""),
 			},
 		},
 		"idp_relay_state_parameter_name": {
@@ -151,7 +155,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A descriptive name for the Amazon EMR Studio.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_-]+",
 			//   "type": "string"
 			// }
 			Description: "A descriptive name for the Amazon EMR Studio.",
@@ -159,6 +163,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_-]+"), ""),
 			},
 		},
 		"service_role": {
@@ -166,12 +171,15 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -183,7 +191,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ID of the EMR Studio.",
 			//   "maxLength": 256,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^es-[0-9A-Z]+",
 			//   "type": "string"
 			// }
 			Description: "The ID of the EMR Studio.",
@@ -234,7 +242,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z+-=._:/]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -266,6 +274,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z+-=._:/]+$"), ""),
 						},
 					},
 				},
@@ -279,7 +288,7 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The unique Studio access URL.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^https://[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])(:[0-9]*)*([?/#].*)?$",
 			//   "type": "string"
 			// }
 			Description: "The unique Studio access URL.",
@@ -294,13 +303,16 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -311,12 +323,15 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
-			//   "pattern": "",
+			//   "pattern": "^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -326,12 +341,15 @@ func studioResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
-			//   "pattern": "",
+			//   "pattern": "^sg-[a-zA-Z0-9\\-._]+$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^sg-[a-zA-Z0-9\\-._]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

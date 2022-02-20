@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -110,7 +111,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The ID of the detector",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the detector",
@@ -118,6 +119,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-z_-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -432,7 +434,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The name for the event type",
 			//       "maxLength": 64,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[0-9a-z_-]+$",
 			//       "type": "string"
 			//     },
 			//     "Tags": {
@@ -835,6 +837,7 @@ func detectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[0-9a-z_-]+$"), ""),
 						},
 					},
 					"tags": {

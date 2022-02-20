@@ -4,6 +4,7 @@ package ssmcontacts
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -97,7 +98,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "ARN of the contact resource",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
 			//   "type": "string"
 			// }
 			Description: "ARN of the contact resource",
@@ -106,6 +107,7 @@ func contactChannelResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile("arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

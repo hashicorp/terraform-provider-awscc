@@ -4,6 +4,7 @@ package lex
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 1011,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -58,14 +59,14 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
 			//       "maxLength": 63,
 			//       "minLength": 3,
-			//       "pattern": "",
+			//       "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//       "type": "string"
 			//     },
 			//     "S3ObjectKey": {
 			//       "description": "The Amazon S3 key of the deployment package.",
 			//       "maxLength": 1024,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
 			//       "type": "string"
 			//     },
 			//     "S3ObjectVersion": {
@@ -91,6 +92,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 63),
+							validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 						},
 					},
 					"s3_object_key": {
@@ -100,6 +102,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 1024),
+							validate.StringMatch(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
 						},
 					},
 					"s3_object_version": {
@@ -1526,7 +1529,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "The name of the context.",
 			//                     "maxLength": 100,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -2363,7 +2366,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "description": "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
 			//                   "maxLength": 2048,
 			//                   "minLength": 32,
-			//                   "pattern": "",
+			//                   "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
 			//                   "type": "string"
 			//                 },
 			//                 "QueryFilterString": {
@@ -2386,7 +2389,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "description": "Unique name for a resource.",
 			//               "maxLength": 100,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//               "type": "string"
 			//             },
 			//             "OutputContexts": {
@@ -2400,7 +2403,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Unique name for a resource.",
 			//                     "maxLength": 100,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//                     "type": "string"
 			//                   },
 			//                   "TimeToLiveInSeconds": {
@@ -2466,7 +2469,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "The name of the slot.",
 			//                     "maxLength": 100,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -2504,7 +2507,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Unique name for a resource.",
 			//                     "maxLength": 100,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//                     "type": "string"
 			//                   },
 			//                   "ObfuscationSetting": {
@@ -3738,21 +3741,21 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
 			//                           "maxLength": 2048,
 			//                           "minLength": 20,
-			//                           "pattern": "",
+			//                           "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
 			//                           "type": "string"
 			//                         },
 			//                         "S3BucketName": {
 			//                           "description": "The name of the S3 bucket that contains the grammar source.",
 			//                           "maxLength": 63,
 			//                           "minLength": 3,
-			//                           "pattern": "",
+			//                           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//                           "type": "string"
 			//                         },
 			//                         "S3ObjectKey": {
 			//                           "description": "The path to the grammar in the S3 bucket.",
 			//                           "maxLength": 1024,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
 			//                           "type": "string"
 			//                         }
 			//                       },
@@ -3772,7 +3775,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "description": "Unique name for a resource.",
 			//               "maxLength": 100,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//               "type": "string"
 			//             },
 			//             "ParentSlotTypeSignature": {
@@ -5537,6 +5540,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 												},
 											},
 										},
@@ -6511,6 +6515,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(32, 2048),
+													validate.StringMatch(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$"), ""),
 												},
 											},
 											"query_filter_string": {
@@ -6539,6 +6544,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
+										validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 									},
 								},
 								"output_contexts": {
@@ -6553,6 +6559,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 												},
 											},
 											"time_to_live_in_seconds": {
@@ -6630,6 +6637,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 												},
 											},
 										},
@@ -6675,6 +6683,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 												},
 											},
 											"obfuscation_setting": {
@@ -8103,6 +8112,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Optional:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(20, 2048),
+																			validate.StringMatch(regexp.MustCompile("^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$"), ""),
 																		},
 																	},
 																	"s3_bucket_name": {
@@ -8112,6 +8122,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(3, 63),
+																			validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 																		},
 																	},
 																	"s3_object_key": {
@@ -8121,6 +8132,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(1, 1024),
+																			validate.StringMatch(regexp.MustCompile("[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$"), ""),
 																		},
 																	},
 																},
@@ -8142,6 +8154,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 100),
+										validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 									},
 								},
 								"parent_slot_type_signature": {
@@ -8391,7 +8404,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Unique ID of resource",
 			//   "maxLength": 10,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]+$",
 			//   "type": "string"
 			// }
 			Description: "Unique ID of resource",
@@ -8424,7 +8437,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Unique name for a resource.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-zA-Z][_-]?)+$",
 			//   "type": "string"
 			// }
 			Description: "Unique name for a resource.",
@@ -8432,6 +8445,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^([0-9a-zA-Z][_-]?)+$"), ""),
 			},
 		},
 		"role_arn": {
@@ -8441,7 +8455,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
 			//   "maxLength": 2048,
 			//   "minLength": 32,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
@@ -8449,6 +8463,7 @@ func botResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(32, 2048),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$"), ""),
 			},
 		},
 		"test_bot_alias_tags": {

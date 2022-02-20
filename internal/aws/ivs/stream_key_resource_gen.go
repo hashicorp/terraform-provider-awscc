@@ -4,6 +4,7 @@ package ivs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
@@ -42,12 +43,15 @@ func streamKeyResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Channel ARN for the stream.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Channel ARN for the stream.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

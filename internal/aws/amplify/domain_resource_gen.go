@@ -4,6 +4,7 @@ package amplify
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,13 +27,14 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 20),
+				validate.StringMatch(regexp.MustCompile("d[a-z0-9]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -43,7 +45,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -59,7 +61,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "items": {
 			//     "maxLength": 2048,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "(?s).+",
 			//     "type": "string"
 			//   },
 			//   "type": "array",
@@ -69,6 +71,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("(?s).+"), "")),
 			},
 		},
 		"auto_sub_domain_iam_role": {
@@ -76,13 +79,14 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+				validate.StringMatch(regexp.MustCompile("^$|^arn:.+:iam::\\d{12}:role.+"), ""),
 			},
 		},
 		"certificate_record": {
@@ -159,12 +163,12 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "BranchName": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       },
 			//       "Prefix": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -186,6 +190,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 						},
 					},
 					"prefix": {
@@ -194,6 +199,7 @@ func domainResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 				},

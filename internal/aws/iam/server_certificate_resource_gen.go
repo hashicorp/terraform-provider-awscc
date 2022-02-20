@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -117,7 +118,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -125,6 +126,7 @@ func serverCertificateResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

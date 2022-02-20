@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -50,7 +51,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "ConditionDocumentAttributeKey": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//                 "type": "string"
 			//               },
 			//               "ConditionOnValue": {
@@ -109,7 +110,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "TargetDocumentAttributeKey": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//                 "type": "string"
 			//               },
 			//               "TargetDocumentAttributeValue": {
@@ -160,7 +161,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "ConditionDocumentAttributeKey": {
 			//               "maxLength": 200,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//               "type": "string"
 			//             },
 			//             "ConditionOnValue": {
@@ -218,7 +219,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "S3Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         }
 			//       },
@@ -237,7 +238,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "ConditionDocumentAttributeKey": {
 			//               "maxLength": 200,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//               "type": "string"
 			//             },
 			//             "ConditionOnValue": {
@@ -295,7 +296,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "S3Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         }
 			//       },
@@ -332,6 +333,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 200),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z0-9_-]*"), ""),
 												},
 											},
 											"condition_on_value": {
@@ -404,6 +406,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 200),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z0-9_-]*"), ""),
 												},
 											},
 											"target_document_attribute_value": {
@@ -468,6 +471,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 200),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z0-9_-]*"), ""),
 												},
 											},
 											"condition_on_value": {
@@ -539,6 +543,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 									},
 								},
 							},
@@ -559,6 +564,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 200),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z0-9_-]*"), ""),
 												},
 											},
 											"condition_on_value": {
@@ -630,6 +636,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 									},
 								},
 							},
@@ -880,7 +887,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "ServerUrl": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//           "type": "string"
 			//         },
 			//         "SpaceConfiguration": {
@@ -961,7 +968,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -971,7 +978,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -1142,7 +1149,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -1152,7 +1159,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -1350,7 +1357,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "Bucket": {
 			//                   "maxLength": 63,
 			//                   "minLength": 3,
-			//                   "pattern": "",
+			//                   "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//                   "type": "string"
 			//                 },
 			//                 "Key": {
@@ -1377,7 +1384,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "TenantDomain": {
 			//           "maxLength": 256,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -1406,7 +1413,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "BucketName": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         },
 			//         "DocumentsMetadataConfiguration": {
@@ -1675,7 +1682,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "ServerUrl": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//           "type": "string"
 			//         },
 			//         "StandardObjectAttachmentConfiguration": {
@@ -2063,7 +2070,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "Bucket": {
 			//               "maxLength": 63,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//               "type": "string"
 			//             },
 			//             "Key": {
@@ -2082,7 +2089,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "items": {
 			//             "maxLength": 2048,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 100,
@@ -2098,7 +2105,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -2108,7 +2115,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -2148,7 +2155,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "Host": {
 			//                     "maxLength": 253,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "Port": {
@@ -2202,7 +2209,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "Host": {
 			//               "maxLength": 253,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "([^\\s]*)",
 			//               "type": "string"
 			//             },
 			//             "Port": {
@@ -2245,7 +2252,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "items": {
 			//                     "maxLength": 2048,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(https?)://([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 100,
@@ -2273,7 +2280,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "items": {
 			//                     "maxLength": 2048,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(https?):\\/\\/([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 3,
@@ -2351,7 +2358,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "OrganizationId": {
 			//           "maxLength": 12,
 			//           "minLength": 12,
-			//           "pattern": "",
+			//           "pattern": "d-[0-9a-fA-F]{10}",
 			//           "type": "string"
 			//         },
 			//         "UseChangeLog": {
@@ -2576,6 +2583,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
+										validate.StringMatch(regexp.MustCompile("^(https?|ftp|file)://([^\\s]*)"), ""),
 									},
 								},
 								"space_configuration": {
@@ -2677,6 +2685,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 											"subnet_ids": {
@@ -2686,6 +2695,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 										},
@@ -2884,6 +2894,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 											"subnet_ids": {
@@ -2893,6 +2904,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 										},
@@ -3086,6 +3098,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 															},
 														},
 														"key": {
@@ -3130,6 +3143,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 256),
+										validate.StringMatch(regexp.MustCompile("^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$"), ""),
 									},
 								},
 							},
@@ -3163,6 +3177,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 									},
 								},
 								"documents_metadata_configuration": {
@@ -3478,6 +3493,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
+										validate.StringMatch(regexp.MustCompile("^(https?|ftp|file)://([^\\s]*)"), ""),
 									},
 								},
 								"standard_object_attachment_configuration": {
@@ -3953,6 +3969,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 63),
+													validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 												},
 											},
 											"key": {
@@ -3974,6 +3991,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtMost(100),
 										validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(https?|ftp|file)://([^\\s]*)"), "")),
 									},
 								},
 								"use_change_log": {
@@ -3992,6 +4010,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(10),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 											"subnet_ids": {
@@ -4001,6 +4020,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtMost(6),
 													validate.ArrayForEach(validate.StringLenBetween(1, 200)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 												},
 											},
 										},
@@ -4037,6 +4057,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 253),
+																validate.StringMatch(regexp.MustCompile("([^\\s]*)"), ""),
 															},
 														},
 														"port": {
@@ -4109,6 +4130,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 253),
+													validate.StringMatch(regexp.MustCompile("([^\\s]*)"), ""),
 												},
 											},
 											"port": {
@@ -4156,6 +4178,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenBetween(0, 100),
 																validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(https?)://([^\\s]*)"), "")),
 															},
 														},
 														"web_crawler_mode": {
@@ -4185,6 +4208,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayLenBetween(0, 3),
 																validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(https?):\\/\\/([^\\s]*)"), "")),
 															},
 														},
 													},
@@ -4268,6 +4292,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 12),
+										validate.StringMatch(regexp.MustCompile("d-[0-9a-fA-F]{10}"), ""),
 									},
 								},
 								"use_change_log": {

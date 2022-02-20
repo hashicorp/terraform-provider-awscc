@@ -4,6 +4,7 @@ package databrew
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -819,7 +820,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "items": {
 			//                   "maxLength": 128,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "^[A-Z\\_]+$",
 			//                   "type": "string"
 			//                 },
 			//                 "minItems": 1,
@@ -842,7 +843,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "Statistic": {
 			//                       "maxLength": 128,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^[A-Z\\_]+$",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -875,7 +876,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[A-Z\\_]+$",
 			//             "type": "string"
 			//           },
 			//           "minItems": 1,
@@ -898,7 +899,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "Statistic": {
 			//                 "maxLength": 128,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[A-Z\\_]+$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -925,7 +926,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "items": {
 			//                 "maxLength": 128,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[A-Z\\_]+$",
 			//                 "type": "string"
 			//               },
 			//               "minItems": 1,
@@ -942,7 +943,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[A-Z_][A-Z\\\\d_]*$",
 			//             "type": "string"
 			//           },
 			//           "minItems": 1,
@@ -1024,6 +1025,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 													validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), "")),
 												},
 											},
 											"overrides": {
@@ -1042,6 +1044,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 128),
+																validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 															},
 														},
 													},
@@ -1075,6 +1078,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), "")),
 									},
 								},
 								"overrides": {
@@ -1093,6 +1097,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
+													validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), ""),
 												},
 											},
 										},
@@ -1122,6 +1127,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenAtLeast(1),
 													validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z\\_]+$"), "")),
 												},
 											},
 										},
@@ -1135,6 +1141,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenAtLeast(1),
 										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[A-Z_][A-Z\\\\d_]*$"), "")),
 									},
 								},
 							},

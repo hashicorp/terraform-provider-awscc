@@ -4,6 +4,7 @@ package codegurureviewer
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The Amazon Resource Name (ARN) of the repository association.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
@@ -44,7 +45,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^\\S(.*\\S)?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
@@ -53,6 +54,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
+				validate.StringMatch(regexp.MustCompile("^\\S(.*\\S)?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -66,7 +68,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
@@ -75,6 +77,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+				validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -88,7 +91,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "Name of the repository to be associated.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S[\\w.-]*$",
 			//   "type": "string"
 			// }
 			Description: "Name of the repository to be associated.",
@@ -96,6 +99,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^\\S[\\w.-]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -108,7 +112,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S(.*\\S)?$",
 			//   "type": "string"
 			// }
 			Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
@@ -117,6 +121,7 @@ func repositoryAssociationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^\\S(.*\\S)?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

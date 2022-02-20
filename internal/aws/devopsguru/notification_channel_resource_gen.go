@@ -4,6 +4,7 @@ package devopsguru
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -34,7 +35,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//         "TopicArn": {
 			//           "maxLength": 1024,
 			//           "minLength": 36,
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -57,6 +58,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(36, 1024),
+										validate.StringMatch(regexp.MustCompile("^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"), ""),
 									},
 								},
 							},
@@ -77,7 +79,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "description": "The ID of a notification channel.",
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of a notification channel.",

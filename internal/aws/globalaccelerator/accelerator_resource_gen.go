@@ -4,6 +4,7 @@ package globalaccelerator
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -99,7 +100,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The IP addresses from BYOIP Prefix pool.",
 			//   "items": {
 			//     "description": "The IP addresses from BYOIP Prefix pool.",
-			//     "pattern": "",
+			//     "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -107,6 +108,9 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The IP addresses from BYOIP Prefix pool.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$"), "")),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -115,7 +119,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Name of accelerator.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//   "type": "string"
 			// }
 			Description: "Name of accelerator.",
@@ -123,6 +127,7 @@ func acceleratorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{0,64}$"), ""),
 			},
 		},
 		"tags": {

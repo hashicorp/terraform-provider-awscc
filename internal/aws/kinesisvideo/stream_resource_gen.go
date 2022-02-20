@@ -4,6 +4,7 @@ package kinesisvideo
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -57,7 +58,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the device that is writing to the stream.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the device that is writing to the stream.",
@@ -65,6 +66,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			},
 		},
 		"kms_key_id": {
@@ -74,7 +76,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
@@ -82,6 +84,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile(".+"), ""),
 			},
 		},
 		"media_type": {
@@ -91,7 +94,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*",
 			//   "type": "string"
 			// }
 			Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
@@ -99,6 +102,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*"), ""),
 			},
 		},
 		"name": {
@@ -108,7 +112,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the Kinesis Video stream.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the Kinesis Video stream.",
@@ -117,6 +121,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

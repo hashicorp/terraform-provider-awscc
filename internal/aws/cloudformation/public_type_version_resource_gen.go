@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,13 +26,16 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Number (ARN) of the extension.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) of the extension.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -59,7 +63,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// {
 			//   "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
@@ -97,7 +101,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9a-zA-Z]{40}",
 			//   "type": "string"
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
@@ -140,13 +144,16 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -157,7 +164,7 @@ func publicTypeVersionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",

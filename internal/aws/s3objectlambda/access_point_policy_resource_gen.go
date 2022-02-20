@@ -4,6 +4,7 @@ package s3objectlambda
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			//   "maxLength": 45,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
@@ -35,6 +36,7 @@ func accessPointPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 45),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

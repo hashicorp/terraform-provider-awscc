@@ -4,6 +4,7 @@ package evidently
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/launch/[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -66,7 +67,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "GroupName": {
 			//         "maxLength": 127,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[-a-zA-Z0-9._]*",
 			//         "type": "string"
 			//       },
 			//       "Variation": {
@@ -106,6 +107,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 127),
+							validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 						},
 					},
 					"variation": {
@@ -141,13 +143,13 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "MetricName": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\S]+$",
 			//         "type": "string"
 			//       },
 			//       "UnitLabel": {
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": ".*",
 			//         "type": "string"
 			//       },
 			//       "ValueKey": {
@@ -188,6 +190,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile("^[\\S]+$"), ""),
 						},
 					},
 					"unit_label": {
@@ -196,6 +199,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile(".*"), ""),
 						},
 					},
 					"value_key": {
@@ -219,13 +223,14 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
+				validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -237,13 +242,14 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 2048),
+				validate.StringMatch(regexp.MustCompile("([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -255,13 +261,14 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 127),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 		},
 		"scheduled_splits_config": {
@@ -280,7 +287,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "GroupName": {
 			//               "maxLength": 127,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[-a-zA-Z0-9._]*",
 			//               "type": "string"
 			//             },
 			//             "SplitWeight": {
@@ -323,6 +330,7 @@ func launchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 127),
+										validate.StringMatch(regexp.MustCompile("[-a-zA-Z0-9._]*"), ""),
 									},
 								},
 								"split_weight": {

@@ -25,7 +25,7 @@ func registryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Amazon Resource Name for the created Registry.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//   "type": "string"
 			// }
 			Description: "Amazon Resource Name for the created Registry.",

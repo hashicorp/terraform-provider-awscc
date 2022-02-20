@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -62,7 +63,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           "description": "The Amazon Resource Name (ARN) of the destination resource.",
 			//           "maxLength": 1024,
 			//           "minLength": 12,
-			//           "pattern": "",
+			//           "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 			//           "type": "string"
 			//         }
 			//       },
@@ -86,6 +87,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(12, 1024),
+										validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 									},
 								},
 							},
@@ -114,7 +116,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The Amazon Resource Name (ARN) of the event source.",
 			//   "maxLength": 1024,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the event source.",
@@ -123,6 +125,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 1024),
+				validate.StringMatch(regexp.MustCompile("arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -146,7 +149,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//             "description": "The filter pattern that defines which events should be passed for invocations.",
 			//             "maxLength": 4096,
 			//             "minLength": 0,
-			//             "pattern": "",
+			//             "pattern": ".*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -175,6 +178,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 4096),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
 									},
 								},
 							},
@@ -197,7 +201,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The name of the Lambda function.",
 			//   "maxLength": 140,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
 			//   "type": "string"
 			// }
 			Description: "The name of the Lambda function.",
@@ -205,6 +209,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 140),
+				validate.StringMatch(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"), ""),
 			},
 		},
 		"function_response_types": {
@@ -240,7 +245,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "Event Source Mapping Identifier UUID.",
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Event Source Mapping Identifier UUID.",
@@ -322,7 +327,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "items": {
 			//     "maxLength": 1000,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "[\\s\\S]*",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 1,
@@ -337,6 +342,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenBetween(1, 1000)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\s\\S]*"), "")),
 			},
 		},
 		"self_managed_event_source": {
@@ -356,7 +362,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//             "description": "The URL of a Kafka server.",
 			//             "maxLength": 300,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 10,
@@ -387,6 +393,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 										validate.ArrayLenBetween(1, 10),
 										validate.UniqueItems(),
 										validate.ArrayForEach(validate.StringLenBetween(1, 300)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}"), "")),
 									},
 								},
 							},
@@ -429,7 +436,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//         "description": "The URI for the source access configuration resource.",
 			//         "maxLength": 200,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9-\\/*:_+=.@-]*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -468,6 +475,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 200),
+							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9-\\/*:_+=.@-]*"), ""),
 						},
 					},
 				},
@@ -486,7 +494,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
 			//   "maxLength": 12,
 			//   "minLength": 6,
-			//   "pattern": "",
+			//   "pattern": "(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+",
 			//   "type": "string"
 			// }
 			Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.",
@@ -495,6 +503,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(6, 12),
+				validate.StringMatch(regexp.MustCompile("(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -525,7 +534,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "items": {
 			//     "maxLength": 249,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 1,
@@ -540,6 +549,7 @@ func eventSourceMappingResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				validate.ArrayLenBetween(1, 1),
 				validate.UniqueItems(),
 				validate.ArrayForEach(validate.StringLenBetween(1, 249)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)"), "")),
 			},
 		},
 		"tumbling_window_in_seconds": {

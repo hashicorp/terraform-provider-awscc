@@ -4,6 +4,7 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "description": "The name or the Id of the Application.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+|[a-z0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The name or the Id of the Application.",
@@ -35,13 +36,14 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
 			},
 		},
 		"application_arn": {
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -57,7 +59,7 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "description": "The name or the Id of the AttributeGroup.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+|[a-z0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The name or the Id of the AttributeGroup.",
@@ -65,13 +67,14 @@ func attributeGroupAssociationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
 			},
 		},
 		"attribute_group_arn": {
 			// Property: AttributeGroupArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

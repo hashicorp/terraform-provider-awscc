@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -80,19 +81,19 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//     "ImageUri": {
 			//       "description": "The container image to be run by the monitoring job.",
 			//       "maxLength": 255,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     },
 			//     "PostAnalyticsProcessorSourceUri": {
 			//       "description": "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
 			//       "maxLength": 1024,
-			//       "pattern": "",
+			//       "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//       "type": "string"
 			//     },
 			//     "RecordPreprocessorSourceUri": {
 			//       "description": "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
 			//       "maxLength": 1024,
-			//       "pattern": "",
+			//       "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -139,6 +140,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+							validate.StringMatch(regexp.MustCompile(".*"), ""),
 						},
 					},
 					"post_analytics_processor_source_uri": {
@@ -148,6 +150,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
+							validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 						},
 					},
 					"record_preprocessor_source_uri": {
@@ -157,6 +160,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(1024),
+							validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 						},
 					},
 				},
@@ -177,7 +181,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//       "description": "The name of a processing job",
 			//       "maxLength": 63,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ConstraintsResource": {
@@ -187,7 +191,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//         "S3Uri": {
 			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -200,7 +204,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//         "S3Uri": {
 			//           "description": "The Amazon S3 URI for the baseline statistics file in Amazon S3 that the current monitoring job should be validated against.",
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -219,6 +223,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"constraints_resource": {
@@ -233,6 +238,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 									},
 								},
 							},
@@ -251,6 +257,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 									},
 								},
 							},
@@ -280,13 +287,13 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//         "EndpointName": {
 			//           "description": "The name of the endpoint used to run the monitoring job.",
 			//           "maxLength": 63,
-			//           "pattern": "",
+			//           "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 			//           "type": "string"
 			//         },
 			//         "LocalPath": {
 			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": ".*",
 			//           "type": "string"
 			//         },
 			//         "S3DataDistributionType": {
@@ -333,6 +340,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
+										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 									},
 								},
 								"local_path": {
@@ -342,6 +350,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(256),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
 									},
 								},
 								"s3_data_distribution_type": {
@@ -389,7 +398,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//     "KmsKeyId": {
 			//       "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 			//       "maxLength": 2048,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     },
 			//     "MonitoringOutputs": {
@@ -405,7 +414,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//               "LocalPath": {
 			//                 "description": "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": ".*",
 			//                 "type": "string"
 			//               },
 			//               "S3UploadMode": {
@@ -419,7 +428,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//               "S3Uri": {
 			//                 "description": "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -455,6 +464,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(2048),
+							validate.StringMatch(regexp.MustCompile(".*"), ""),
 						},
 					},
 					"monitoring_outputs": {
@@ -474,6 +484,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile(".*"), ""),
 												},
 											},
 											"s3_upload_mode": {
@@ -495,6 +506,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 												},
 											},
 										},
@@ -535,7 +547,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			// {
 			//   "description": "The name of the job definition.",
 			//   "maxLength": 63,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the job definition.",
@@ -544,6 +556,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -669,7 +682,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//           "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 			//           "items": {
 			//             "maxLength": 32,
-			//             "pattern": "",
+			//             "pattern": "[-0-9a-zA-Z]+",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 5,
@@ -680,7 +693,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//           "description": "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 			//           "items": {
 			//             "maxLength": 32,
-			//             "pattern": "",
+			//             "pattern": "[-0-9a-zA-Z]+",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 16,
@@ -725,6 +738,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 5),
 										validate.ArrayForEach(validate.StringLenAtMost(32)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 									},
 								},
 								"subnets": {
@@ -735,6 +749,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 16),
 										validate.ArrayForEach(validate.StringLenAtMost(32)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 									},
 								},
 							},
@@ -757,7 +772,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//   "description": "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
@@ -765,6 +780,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -823,13 +839,13 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -852,6 +868,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 					"value": {
@@ -861,6 +878,7 @@ func dataQualityJobDefinitionResourceType(ctx context.Context) (tfsdk.ResourceTy
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 				},

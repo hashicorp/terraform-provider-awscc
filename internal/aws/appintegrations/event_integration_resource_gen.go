@@ -4,6 +4,7 @@ package appintegrations
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -37,14 +38,14 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//               "description": "A key to identify the metadata.",
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": ".*\\S.*",
 			//               "type": "string"
 			//             },
 			//             "Value": {
 			//               "description": "Corresponding metadata value for the key.",
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": ".*\\S.*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -66,7 +67,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//         "description": "The name of the Eventbridge rule.",
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//         "type": "string"
 			//       },
 			//       "EventIntegrationAssociationArn": {
@@ -78,7 +79,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       },
 			//       "EventIntegrationAssociationId": {
 			//         "description": "The identifier for the event integration association.",
-			//         "pattern": "",
+			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//         "type": "string"
 			//       }
 			//     },
@@ -102,6 +103,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 									},
 								},
 								"value": {
@@ -111,6 +113,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 									},
 								},
 							},
@@ -134,6 +137,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 						},
 					},
 					"event_integration_association_arn": {
@@ -150,6 +154,9 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Description: "The identifier for the event integration association.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},
@@ -182,7 +189,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The Amazon Eventbridge bus for the event integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Eventbridge bus for the event integration.",
@@ -190,6 +197,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -206,7 +214,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       "description": "The source of the events.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^aws\\.partner\\/.*$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -225,6 +233,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^aws\\.partner\\/.*$"), ""),
 						},
 					},
 				},
@@ -258,7 +267,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//   "description": "The name of the event integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the event integration.",
@@ -266,6 +275,7 @@ func eventIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

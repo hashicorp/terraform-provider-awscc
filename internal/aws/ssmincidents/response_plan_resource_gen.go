@@ -4,6 +4,7 @@ package ssmincidents
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -84,7 +85,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "RoleArn": {
 			//             "description": "The role ARN to use when starting the SSM automation document.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           },
 			//           "TargetAccount": {
@@ -173,6 +174,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1000),
+										validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
 									},
 								},
 								"target_account": {
@@ -211,7 +213,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The ARN of the response plan.",
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the response plan.",
@@ -233,7 +235,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "items": {
 			//         "description": "The ARN of the Chatbot SNS topic.",
 			//         "maxLength": 1000,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//         "type": "string"
 			//       },
 			//       "type": "array",
@@ -252,6 +254,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.UniqueItems(),
 							validate.ArrayForEach(validate.StringLenAtMost(1000)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 						},
 					},
 				},
@@ -284,7 +287,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "items": {
 			//     "description": "The ARN of the contact.",
 			//     "maxLength": 1000,
-			//     "pattern": "",
+			//     "pattern": "^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,
@@ -299,6 +302,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 5),
 				validate.ArrayForEach(validate.StringLenAtMost(1000)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.Set{ElemType: types.StringType, Elems: []attr.Value{}}),
@@ -334,7 +338,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "SnsTopicArn": {
 			//             "description": "The ARN of the Chatbot SNS topic.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -394,6 +398,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1000),
+										validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
 									},
 								},
 							},
@@ -436,7 +441,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the response plan.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the response plan.",
@@ -444,6 +449,7 @@ func responsePlanResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 200),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
