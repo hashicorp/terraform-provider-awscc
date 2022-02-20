@@ -19,8 +19,8 @@ const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
 	HasRequiredRootProperty                      // At least one root property is required.
 	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
-	UsesRegexp                                   // Uses a type from the Go standard regexp package.
-	UsesValidation                               // Uses a type from the internal/validate package.
+	UsesRegexpInValidation                       // Uses a type from the Go standard regexp package for attribute validation.
+	UsesValidation                               // Uses a type or function from the internal/validate package.
 	HasIDRootProperty                            // Has a root property named "id"
 )
 
@@ -614,6 +614,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 			e.printf("},\n")
 		}
+	} else {
+		features &^= UsesRegexpInValidation
 	}
 
 	if computed {
@@ -993,7 +995,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	}
 
 	if property.Pattern != nil && *property.Pattern != "" {
-		features |= UsesRegexp
+		features |= UsesRegexpInValidation
 		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(`%s`), \"\")", *property.Pattern))
 	}
 
