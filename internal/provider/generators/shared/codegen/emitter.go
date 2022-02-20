@@ -16,12 +16,12 @@ import (
 type Features int
 
 const (
-	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
-	HasRequiredRootProperty                      // At least one root property is required.
-	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
-	UsesRegexp                                   // Uses a type from the Go standard regexp package.
-	UsesValidation                               // Uses a type from the internal/validate package.
-	HasIDRootProperty                            // Has a root property named "id"
+	HasUpdatableProperty     Features = 1 << iota // At least one property can be updated.
+	HasRequiredRootProperty                       // At least one root property is required.
+	UsesFrameworkAttr                             // Uses a type from the terraform-plugin-framework/attr package.
+	UsesRegexpWithValidation                      // Uses a type from the Go standard regexp package with a type or function from the internal/validate package.
+	UsesValidation                                // Uses a type or function from the internal/validate package.
+	HasIDRootProperty                             // Has a root property named "id"
 )
 
 var (
@@ -993,8 +993,8 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	}
 
 	if property.Pattern != nil && *property.Pattern != "" {
-		features |= UsesRegexp
-		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(`%s`), \"\")", *property.Pattern))
+		features |= UsesRegexpWithValidation
+		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(%q), \"\")", *property.Pattern))
 	}
 
 	if property.Format != nil {
