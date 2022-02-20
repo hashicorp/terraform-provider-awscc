@@ -147,12 +147,11 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures&codegen.HasUpdatableProperty == 0 {
 		templateData.HasUpdateMethod = false
 	}
+	if codeFeatures&codegen.UsesRegexp > 0 {
+		templateData.ImportRegexp = true
+	}
 	if codeFeatures&codegen.UsesValidation > 0 || requiredAttributesValidator != "" {
 		templateData.ImportValidate = true
-
-		if codeFeatures&codegen.UsesRegexpWithValidation > 0 {
-			templateData.ImportRegexp = true
-		}
 	}
 	if codeFeatures&codegen.HasIDRootProperty > 0 {
 		templateData.SyntheticIDAttribute = false
