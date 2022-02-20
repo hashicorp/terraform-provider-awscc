@@ -37,7 +37,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9_.-]+"
         },
         "DataRetentionInHours": {
             "description": "The number of hours till which Kinesis Video will retain the data in the stream",
@@ -50,21 +50,21 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9_.-]+"
         },
         "KmsKeyId": {
             "description": "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
             "type": "string",
             "minLength": 1,
             "maxLength": 2048,
-            "pattern": ""
+            "pattern": ".+"
         },
         "MediaType": {
             "description": "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*"
         },
         "Tags": {
             "description": "An array of key-value pairs associated with the Kinesis Video Stream.",

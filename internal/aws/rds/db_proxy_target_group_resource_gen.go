@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -127,7 +128,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The identifier for the proxy.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[A-z][0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the proxy.",
@@ -135,6 +136,7 @@ func dBProxyTargetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(64),
+				validate.StringMatch(regexp.MustCompile("[A-z][0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -7,7 +7,7 @@
             "properties": {
                 "KnowledgeBaseId": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
                 }
             },
             "required": [
@@ -46,19 +46,19 @@
     "properties": {
         "AssistantAssociationArn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$"
         },
         "AssistantArn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$"
         },
         "AssistantAssociationId": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
         },
         "AssistantId": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
         },
         "Association": {
             "$ref": "#/definitions/AssociationData"

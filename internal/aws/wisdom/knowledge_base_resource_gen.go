@@ -4,6 +4,7 @@ package wisdom
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -43,7 +44,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: KnowledgeBaseArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -56,7 +57,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// Property: KnowledgeBaseId
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -184,7 +185,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//         "AppIntegrationArn": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$",
 			//           "type": "string"
 			//         },
 			//         "ObjectFields": {
@@ -220,6 +221,7 @@ func knowledgeBaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
+										validate.StringMatch(regexp.MustCompile("^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"), ""),
 									},
 								},
 								"object_fields": {

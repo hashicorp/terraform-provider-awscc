@@ -37,7 +37,7 @@
         },
         "UserName": {
             "description": "The name of the user.",
-            "pattern": "",
+            "pattern": "[a-z][a-z0-9\\\\-]*",
             "type": "string"
         },
         "AccessString": {

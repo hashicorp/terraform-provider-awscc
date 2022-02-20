@@ -12,7 +12,7 @@
         "ScheduledQueryName": {
             "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
             "type": "string",
-            "pattern": "",
+            "pattern": "[a-zA-Z0-9_.-]+",
             "minLength": 1,
             "maxLength": 64
         },
@@ -347,14 +347,14 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
         },
         "ObjectKeyPrefix": {
             "description": "Prefix for error report keys.",
             "type": "string",
             "minLength": 1,
             "maxLength": 896,
-            "pattern": ""
+            "pattern": "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+"
         },
         "EncryptionOption": {
             "description": "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",

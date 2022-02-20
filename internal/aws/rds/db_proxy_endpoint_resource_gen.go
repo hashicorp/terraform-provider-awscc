@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:rds:[A-Za-z0-9-]{1,64}:[0-9]{12}:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
@@ -41,7 +42,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "description": "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
@@ -49,6 +50,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(64),
+				validate.StringMatch(regexp.MustCompile("[0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -60,7 +62,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
@@ -68,6 +70,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(64),
+				validate.StringMatch(regexp.MustCompile("[0-z]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -113,12 +116,12 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -135,6 +138,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
 						},
 					},
 					"value": {
@@ -143,6 +147,7 @@ func dBProxyEndpointResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(128),
+							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
 						},
 					},
 				},

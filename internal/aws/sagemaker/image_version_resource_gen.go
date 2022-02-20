@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The registry path of the container image on which this image version is based.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "The registry path of the container image on which this image version is based.",
@@ -35,6 +36,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile(".+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -47,7 +49,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The registry path of the container image that contains this image version.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "The registry path of the container image that contains this image version.",
@@ -64,7 +66,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the parent image.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
@@ -81,7 +83,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the image this version belongs to.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the image this version belongs to.",
@@ -89,6 +91,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -101,7 +104,7 @@ func imageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the image version.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image version.",

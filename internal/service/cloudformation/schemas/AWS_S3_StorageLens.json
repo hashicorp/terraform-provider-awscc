@@ -8,7 +8,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-_.]+$"
     },
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the specified resource.",

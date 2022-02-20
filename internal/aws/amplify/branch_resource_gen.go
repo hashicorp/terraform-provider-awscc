@@ -4,6 +4,7 @@ package amplify
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,13 +27,14 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 20),
+				validate.StringMatch(regexp.MustCompile("d[a-z0-9]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -43,7 +45,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -112,13 +114,14 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -130,13 +133,14 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 25000),
+				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 			},
 		},
 		"description": {
@@ -144,13 +148,14 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 		},
 		"enable_auto_build": {
@@ -189,12 +194,12 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "properties": {
 			//       "Name": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 5500,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -215,6 +220,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 					"value": {
@@ -223,6 +229,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(5500),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 				},
@@ -235,13 +242,14 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 20,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(20),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 		},
 		"stage": {
@@ -286,7 +294,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -315,6 +323,7 @@ func branchResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 				},

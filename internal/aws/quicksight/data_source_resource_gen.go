@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -1047,7 +1048,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -1055,6 +1056,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
+				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -1084,7 +1086,7 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "CopySourceArn": {
 			//       "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
-			//       "pattern": "",
+			//       "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+",
 			//       "type": "string"
 			//     },
 			//     "CredentialPair": {
@@ -1568,6 +1570,9 @@ func dataSourceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"), ""),
+						},
 					},
 					"credential_pair": {
 						// Property: CredentialPair

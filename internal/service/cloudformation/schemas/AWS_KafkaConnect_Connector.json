@@ -11,7 +11,7 @@
     "ConnectorArn": {
       "description": "Amazon Resource Name for the created Connector.",
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
     },
     "ConnectorConfiguration": {
       "description": "The configuration for the connector.",
@@ -63,7 +63,7 @@
     "ServiceExecutionRoleArn": {
       "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*"
     },
     "WorkerConfiguration": {
       "$ref": "#/definitions/WorkerConfiguration"
@@ -162,7 +162,7 @@
         "CustomPluginArn": {
           "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
           "type": "string",
-          "pattern": ""
+          "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
         },
         "Revision": {
           "description": "The revision of the custom plugin to use.",
@@ -363,7 +363,7 @@
         "WorkerConfigurationArn": {
           "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
           "type": "string",
-          "pattern": ""
+          "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
         }
       },
       "required": [ "Revision", "WorkerConfigurationArn" ]

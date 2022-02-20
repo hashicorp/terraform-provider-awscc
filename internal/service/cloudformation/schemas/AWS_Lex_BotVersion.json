@@ -8,7 +8,7 @@
       "type": "string",
       "minLength": 10,
       "maxLength": 10,
-      "pattern": ""
+      "pattern": "^[0-9a-zA-Z]+$"
     },
     "Description": {
       "description": "A description of the version. Use the description to help identify the version in lists.",
@@ -24,7 +24,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 5,
-      "pattern": ""
+      "pattern": "^(DRAFT|[0-9]+)$"
     },
     "BotVersionLocaleDetails": {
       "description": "The version of a bot used for a bot locale.",

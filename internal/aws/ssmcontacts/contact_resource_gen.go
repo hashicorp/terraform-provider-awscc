@@ -4,6 +4,7 @@ package ssmcontacts
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9_\\-\\.]*$",
 			//   "type": "string"
 			// }
 			Description: "Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.",
@@ -35,6 +36,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9_\\-\\.]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -61,7 +63,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\s]*$",
 			//   "type": "string"
 			// }
 			Description: "Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.",
@@ -69,6 +71,7 @@ func contactResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\s]*$"), ""),
 			},
 		},
 		"plan": {

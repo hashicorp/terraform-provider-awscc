@@ -5,17 +5,17 @@
   "properties": {
     "Arn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/launch/[-a-zA-Z0-9._]*"
     },
     "Name": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[-a-zA-Z0-9._]*",
       "minLength": 1,
       "maxLength": 127
     },
     "Project": {
       "type": "string",
-      "pattern": "",
+      "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
       "minLength": 0,
       "maxLength": 2048
     },
@@ -28,7 +28,7 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 127,
-      "pattern": ""
+      "pattern": ".*"
     },
     "ScheduledSplitsConfig": {
       "type": "array",
@@ -76,7 +76,7 @@
       "properties": {
         "GroupName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },
@@ -104,7 +104,7 @@
       "properties": {
         "GroupName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },
@@ -146,7 +146,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "^[\\S]+$"
         },
         "EntityIdKey": {
           "description": "The JSON path to reference the entity id in the event.",
@@ -164,7 +164,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 256,
-          "pattern": ""
+          "pattern": ".*"
         }
       },
       "required": [

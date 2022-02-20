@@ -4,6 +4,7 @@ package groundstation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -123,12 +124,15 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A name used to identify a mission profile.",
-			//   "pattern": "",
+			//   "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
 			//   "type": "string"
 			// }
 			Description: "A name used to identify a mission profile.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9_:-]{1,256}$"), ""),
+			},
 		},
 		"region": {
 			// Property: Region
@@ -150,11 +154,11 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -168,11 +172,17 @@ func missionProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"), ""),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

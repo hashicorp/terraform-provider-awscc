@@ -31,7 +31,7 @@
     "MetricName": {
       "description": "The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws: . Cannot be updated once defined.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9:_-]+",
       "minLength": 1,
       "maxLength": 128
     },

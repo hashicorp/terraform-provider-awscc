@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -47,7 +48,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Event Time Feature Name.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 			//   "type": "string"
 			// }
 			Description: "The Event Time Feature Name.",
@@ -55,6 +56,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -71,7 +73,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "FeatureName": {
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 			//         "type": "string"
 			//       },
 			//       "FeatureType": {
@@ -103,6 +105,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 						},
 					},
 					"feature_type": {
@@ -135,7 +138,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Name of the FeatureGroup.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 			//   "type": "string"
 			// }
 			Description: "The Name of the FeatureGroup.",
@@ -143,6 +146,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -195,7 +199,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "S3Uri": {
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -267,6 +271,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 									},
 								},
 							},
@@ -343,7 +348,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Record Identifier Feature Name.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}",
 			//   "type": "string"
 			// }
 			Description: "The Record Identifier Feature Name.",
@@ -351,6 +356,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -363,7 +369,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Role Arn",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "Role Arn",
@@ -372,6 +378,7 @@ func featureGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

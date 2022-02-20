@@ -25,7 +25,7 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Cost category ARN",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//   "type": "string"
 			// }
 			Description: "Cost category ARN",
@@ -58,7 +58,7 @@ func costCategoryResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "ISO 8601 date time with offset format",
 			//   "maxLength": 25,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
 			//   "type": "string"
 			// }
 			Description: "ISO 8601 date time with offset format",

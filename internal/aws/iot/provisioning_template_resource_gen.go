@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -147,7 +148,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9A-Za-z_-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -155,6 +156,7 @@ func provisioningTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 36),
+				validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z_-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

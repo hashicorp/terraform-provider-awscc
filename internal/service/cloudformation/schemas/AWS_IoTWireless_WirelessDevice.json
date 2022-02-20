@@ -9,11 +9,11 @@
       "properties": {
         "AppKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "AppEui": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{16}"
         }
       },
       "required": [
@@ -27,15 +27,15 @@
       "properties": {
         "AppKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "NwkKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "JoinEui": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{16}"
         }
       },
       "required": [
@@ -50,19 +50,19 @@
       "properties": {
         "FNwkSIntKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "SNwkSIntKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "NwkSEncKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "AppSKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         }
       },
       "required": [
@@ -78,7 +78,7 @@
       "properties": {
         "DevAddr": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{8}"
         },
         "SessionKeys": {
           "$ref": "#/definitions/SessionKeysAbpV11"
@@ -95,11 +95,11 @@
       "properties": {
         "NwkSKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         },
         "AppSKey": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{32}"
         }
       },
       "required": [
@@ -113,7 +113,7 @@
       "properties": {
         "DevAddr": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-fA-F0-9]{8}"
         },
         "SessionKeys": {
           "$ref": "#/definitions/SessionKeysAbpV10x"
@@ -130,7 +130,7 @@
       "properties": {
         "DevEui": {
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-f0-9]{16}"
         },
         "DeviceProfileId": {
           "type": "string",

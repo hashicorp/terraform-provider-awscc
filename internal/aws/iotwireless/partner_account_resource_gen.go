@@ -4,6 +4,7 @@ package iotwireless
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -50,12 +51,15 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The fingerprint of the Sidewalk application server private key.",
-			//   "pattern": "",
+			//   "pattern": "[a-fA-F0-9]{64}",
 			//   "type": "string"
 			// }
 			Description: "The fingerprint of the Sidewalk application server private key.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{64}"), ""),
+			},
 		},
 		"partner_account_id": {
 			// Property: PartnerAccountId
@@ -106,7 +110,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "AppServerPrivateKey": {
 			//       "maxLength": 4096,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -124,6 +128,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4096),
+							validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{64}"), ""),
 						},
 					},
 				},
@@ -147,7 +152,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "Fingerprint": {
 			//       "maxLength": 64,
 			//       "minLength": 64,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -175,6 +180,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(64, 64),
+							validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{64}"), ""),
 						},
 					},
 				},
@@ -194,7 +200,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//     "AppServerPrivateKey": {
 			//       "maxLength": 4096,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -209,6 +215,7 @@ func partnerAccountResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 4096),
+							validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{64}"), ""),
 						},
 					},
 				},

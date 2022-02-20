@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -166,7 +167,7 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "Bucket": {
 			//       "maxLength": 63,
 			//       "minLength": 3,
-			//       "pattern": "",
+			//       "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//       "type": "string"
 			//     },
 			//     "Key": {
@@ -190,6 +191,7 @@ func faqResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 63),
+							validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 						},
 					},
 					"key": {

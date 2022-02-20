@@ -7,19 +7,19 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-\\_]+$"
     },
     "Description": {
       "type": "string",
       "minLength": 0,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "ManifestPayloadData": {
       "type": "string",
       "minLength": 1,
       "maxLength": 51200,
-      "pattern": ""
+      "pattern": "^.+$"
     },
     "ManifestPayload": {
       "type": "object",
@@ -34,7 +34,7 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 51200,
-      "pattern": ""
+      "pattern": "^.+$"
     },
     "ManifestOverridesPayload": {
       "type": "object",
@@ -49,25 +49,25 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"
     },
     "DefaultRuntimeContextDevice": {
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-\\_]+$"
     },
     "DeviceName": {
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-\\_]+$"
     },
     "ApplicationInstanceId": {
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-\\_]+$"
     },
     "ApplicationInstanceArn": {
       "type": "string",
@@ -86,7 +86,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9\\-\\_]+$"
     },
     "ApplicationInstanceStatus": {
       "type": "string",
@@ -130,14 +130,14 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^.+$"
         },
         "Value": {
           "description": "A string containing the value for the tag",
           "type": "string",
           "minLength": 0,
           "maxLength": 256,
-          "pattern": ""
+          "pattern": "^.+$"
         }
       },
       "required": [

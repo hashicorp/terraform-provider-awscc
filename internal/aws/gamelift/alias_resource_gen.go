@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -57,7 +58,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
@@ -65,6 +66,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 		},
 		"routing_strategy": {
@@ -88,7 +90,7 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "properties": {
 			//     "FleetId": {
 			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-			//       "pattern": "",
+			//       "pattern": "^fleet-\\S+",
 			//       "type": "string"
 			//     },
 			//     "Message": {
@@ -117,6 +119,9 @@ func aliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^fleet-\\S+"), ""),
+						},
 					},
 					"message": {
 						// Property: Message

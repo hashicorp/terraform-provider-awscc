@@ -4,6 +4,7 @@ package location
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1600,
-			//   "pattern": "",
+			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -43,7 +44,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "Style": {
 			//       "maxLength": 100,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[-._\\w]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -60,6 +61,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 100),
+							validate.StringMatch(regexp.MustCompile("^[-._\\w]+$"), ""),
 						},
 					},
 				},
@@ -74,7 +76,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			//   "pattern": "",
+			//   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//   "type": "string"
 			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
@@ -120,7 +122,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1600,
-			//   "pattern": "",
+			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -135,13 +137,14 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[-._\\w]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^[-._\\w]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -174,7 +177,7 @@ func mapResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			//   "pattern": "",
+			//   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//   "type": "string"
 			// }
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",

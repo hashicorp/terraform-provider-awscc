@@ -177,7 +177,7 @@
         "DistributionName": {
             "description": "The name for the distribution.",
             "type": "string",
-            "pattern": ""
+            "pattern": "\\w[\\w\\-]*\\w"
         },
         "DistributionArn": {
             "type": "string"

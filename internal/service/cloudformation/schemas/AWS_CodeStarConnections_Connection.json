@@ -32,7 +32,7 @@
             "type": "string",
             "minLength": 0,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
         },
         "ConnectionName": {
             "description": "The name of the connection. Connection names must be unique in an AWS user account.",
@@ -49,7 +49,7 @@
             "type": "string",
             "minLength": 12,
             "maxLength": 12,
-            "pattern": ""
+            "pattern": "[0-9]{12}"
         },
         "ProviderType": {
             "description": "The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.",
@@ -60,7 +60,7 @@
             "type": "string",
             "minLength": 0,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
         },
         "Tags": {
             "description": "Specifies the tags applied to a connection.",

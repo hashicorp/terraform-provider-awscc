@@ -4,6 +4,7 @@ package greengrassv2
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -269,7 +270,7 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			//       "type": "string"
 			//     },
 			//     "LambdaArn": {
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -536,6 +537,9 @@ func componentVersionResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 						// Property: LambdaArn
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+						},
 					},
 				},
 			),

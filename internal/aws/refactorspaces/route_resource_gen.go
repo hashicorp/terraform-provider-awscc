@@ -4,6 +4,7 @@ package refactorspaces
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,13 +27,14 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^app-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(14, 14),
+				validate.StringMatch(regexp.MustCompile("^app-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -44,7 +46,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -59,13 +61,14 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(14, 14),
+				validate.StringMatch(regexp.MustCompile("^env-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -89,7 +92,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^rte-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -129,13 +132,14 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^svc-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(14, 14),
+				validate.StringMatch(regexp.MustCompile("^svc-([0-9A-Za-z]{10}$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -237,7 +241,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "SourcePath": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^(/[a-zA-Z0-9._-]+)+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -288,6 +292,7 @@ func routeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("^(/[a-zA-Z0-9._-]+)+$"), ""),
 						},
 					},
 				},

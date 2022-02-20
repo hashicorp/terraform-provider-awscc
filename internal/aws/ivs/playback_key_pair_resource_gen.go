@@ -4,6 +4,7 @@ package ivs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "Key-pair identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:playback-key/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Key-pair identifier.",
@@ -58,7 +59,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]*$",
 			//   "type": "string"
 			// }
 			Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
@@ -67,6 +68,7 @@ func playbackKeyPairResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

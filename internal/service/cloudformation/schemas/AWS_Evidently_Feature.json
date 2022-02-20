@@ -5,19 +5,19 @@
   "properties": {
     "Arn": {
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/feature/[-a-zA-Z0-9._]*",
       "minLength": 0,
       "maxLength": 2048
     },
     "Project": {
       "type": "string",
-      "pattern": "",
+      "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
       "minLength": 0,
       "maxLength": 2048
     },
     "Name": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[-a-zA-Z0-9._]*",
       "minLength": 1,
       "maxLength": 127
     },
@@ -45,7 +45,7 @@
     },
     "DefaultVariation": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[-a-zA-Z0-9._]*",
       "minLength": 1,
       "maxLength": 127
     },
@@ -75,7 +75,7 @@
       "properties": {
         "VariationName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },
@@ -130,7 +130,7 @@
         },
         "Variation": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         }

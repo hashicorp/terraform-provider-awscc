@@ -4,6 +4,7 @@ package eks
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -316,7 +317,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The unique name to give to your cluster.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
 			//   "type": "string"
 			// }
 			Description: "The unique name to give to your cluster.",
@@ -325,6 +326,7 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 100),
+				validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z][A-Za-z0-9\\-_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -520,12 +522,15 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
-			//   "pattern": "",
+			//   "pattern": "1\\.\\d\\d",
 			//   "type": "string"
 			// }
 			Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("1\\.\\d\\d"), ""),
+			},
 		},
 	}
 

@@ -4,6 +4,7 @@ package lookoutmetrics
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -70,7 +71,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// {
 			//   "description": "A description for the AnomalyDetector.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "A description for the AnomalyDetector.",
@@ -78,6 +79,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(256),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 		},
 		"anomaly_detector_name": {
@@ -87,7 +89,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//   "type": "string"
 			// }
 			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
@@ -96,6 +98,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -107,7 +110,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -123,7 +126,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "KMS key used to encrypt the AnomalyDetector data",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
 			//   "type": "string"
 			// }
 			Description: "KMS key used to encrypt the AnomalyDetector data",
@@ -131,6 +134,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("arn:aws.*:kms:.*:[0-9]{12}:key/.*"), ""),
 			},
 		},
 		"metric_set_list": {
@@ -148,7 +152,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           "description": "Name of a column in the data.",
 			//           "maxLength": 63,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//           "type": "string"
 			//         },
 			//         "minItems": 0,
@@ -172,13 +176,13 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               "description": "Name of a column in the data.",
 			//               "maxLength": 63,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//               "type": "string"
 			//             },
 			//             "Namespace": {
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[^:].*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -194,7 +198,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       "MetricSetDescription": {
 			//         "description": "A description for the MetricSet.",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": ".*\\S.*",
 			//         "type": "string"
 			//       },
 			//       "MetricSetFrequency": {
@@ -211,7 +215,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//         "description": "The name of the MetricSet.",
 			//         "maxLength": 63,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//         "type": "string"
 			//       },
 			//       "MetricSource": {
@@ -222,12 +226,12 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//             "properties": {
 			//               "FlowName": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 			//                 "type": "string"
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -242,7 +246,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//             "properties": {
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -263,13 +267,13 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               "DatabaseHost": {
 			//                 "maxLength": 253,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": ".*\\S.*",
 			//                 "type": "string"
 			//               },
 			//               "DatabaseName": {
 			//                 "maxLength": 64,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_]+",
 			//                 "type": "string"
 			//               },
 			//               "DatabasePort": {
@@ -279,18 +283,18 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "SecretManagerArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
 			//                 "type": "string"
 			//               },
 			//               "TableName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                 "type": "string"
 			//               },
 			//               "VpcConfiguration": {
@@ -300,7 +304,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                     "items": {
 			//                       "maxLength": 255,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -308,7 +312,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                   "SubnetIdList": {
 			//                     "items": {
 			//                       "maxLength": 255,
-			//                       "pattern": "",
+			//                       "pattern": "[\\-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -345,13 +349,13 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               "DatabaseHost": {
 			//                 "maxLength": 253,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": ".*\\S.*",
 			//                 "type": "string"
 			//               },
 			//               "DatabaseName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-z0-9]+",
 			//                 "type": "string"
 			//               },
 			//               "DatabasePort": {
@@ -361,18 +365,18 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "SecretManagerArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
 			//                 "type": "string"
 			//               },
 			//               "TableName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                 "type": "string"
 			//               },
 			//               "VpcConfiguration": {
@@ -382,7 +386,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                     "items": {
 			//                       "maxLength": 255,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -390,7 +394,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                   "SubnetIdList": {
 			//                     "items": {
 			//                       "maxLength": 255,
-			//                       "pattern": "",
+			//                       "pattern": "[\\-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -426,7 +430,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                     "properties": {
 			//                       "Charset": {
 			//                         "maxLength": 63,
-			//                         "pattern": "",
+			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                         "type": "string"
 			//                       },
 			//                       "ContainsHeader": {
@@ -434,7 +438,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                       },
 			//                       "Delimiter": {
 			//                         "maxLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[^\\r\\n]",
 			//                         "type": "string"
 			//                       },
 			//                       "FileCompression": {
@@ -449,14 +453,14 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                           "description": "Name of a column in the data.",
 			//                           "maxLength": 63,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                           "type": "string"
 			//                         },
 			//                         "type": "array"
 			//                       },
 			//                       "QuoteSymbol": {
 			//                         "maxLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[^\\r\\n]|^$",
 			//                         "type": "string"
 			//                       }
 			//                     },
@@ -467,7 +471,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//                     "properties": {
 			//                       "Charset": {
 			//                         "maxLength": 63,
-			//                         "pattern": "",
+			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                         "type": "string"
 			//                       },
 			//                       "FileCompression": {
@@ -486,7 +490,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               "HistoricalDataPathList": {
 			//                 "items": {
 			//                   "maxLength": 1024,
-			//                   "pattern": "",
+			//                   "pattern": "^s3://[a-z0-9].+$",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -495,13 +499,13 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "TemplatedPathList": {
 			//                 "items": {
 			//                   "maxLength": 1024,
-			//                   "pattern": "",
+			//                   "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -530,14 +534,14 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//           "ColumnFormat": {
 			//             "description": "A timestamp format for the timestamps in the dataset",
 			//             "maxLength": 63,
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "ColumnName": {
 			//             "description": "Name of a column in the data.",
 			//             "maxLength": 63,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -545,7 +549,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       },
 			//       "Timezone": {
 			//         "maxLength": 60,
-			//         "pattern": "",
+			//         "pattern": ".*\\S.*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -571,6 +575,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenAtLeast(0),
 							validate.ArrayForEach(validate.StringLenBetween(1, 63)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), "")),
 						},
 						PlanModifiers: []tfsdk.AttributePlanModifier{
 							Multiset(),
@@ -600,6 +605,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 63),
+										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 									},
 								},
 								"namespace": {
@@ -608,6 +614,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 255),
+										validate.StringMatch(regexp.MustCompile("[^:].*"), ""),
 									},
 								},
 							},
@@ -628,6 +635,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 						},
 					},
 					"metric_set_frequency": {
@@ -651,6 +659,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 63),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 						},
 					},
 					"metric_source": {
@@ -667,6 +676,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
 												},
 											},
 											"role_arn": {
@@ -675,6 +685,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 												},
 											},
 										},
@@ -691,6 +702,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 												},
 											},
 										},
@@ -715,6 +727,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 253),
+													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 												},
 											},
 											"database_name": {
@@ -723,6 +736,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 64),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 												},
 											},
 											"database_port": {
@@ -739,6 +753,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 												},
 											},
 											"secret_manager_arn": {
@@ -747,6 +762,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
 												},
 											},
 											"table_name": {
@@ -755,6 +771,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 												},
 											},
 											"vpc_configuration": {
@@ -767,6 +784,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 															},
 														},
 														"subnet_id_list": {
@@ -775,6 +793,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenAtMost(255)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 															},
 														},
 													},
@@ -803,6 +822,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 253),
+													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 												},
 											},
 											"database_name": {
@@ -811,6 +831,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("[a-z0-9]+"), ""),
 												},
 											},
 											"database_port": {
@@ -827,6 +848,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 												},
 											},
 											"secret_manager_arn": {
@@ -835,6 +857,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
 												},
 											},
 											"table_name": {
@@ -843,6 +866,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 100),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
 												},
 											},
 											"vpc_configuration": {
@@ -855,6 +879,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 															},
 														},
 														"subnet_id_list": {
@@ -863,6 +888,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 															Required: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenAtMost(255)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
 															},
 														},
 													},
@@ -891,6 +917,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(63),
+																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 																		},
 																	},
 																	"contains_header": {
@@ -904,6 +931,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(1),
+																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]"), ""),
 																		},
 																	},
 																	"file_compression": {
@@ -923,6 +951,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.ArrayForEach(validate.StringLenBetween(1, 63)),
+																			validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), "")),
 																		},
 																	},
 																	"quote_symbol": {
@@ -931,6 +960,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(1),
+																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]|^$"), ""),
 																		},
 																	},
 																},
@@ -947,6 +977,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 																		Optional: true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenAtMost(63),
+																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 																		},
 																	},
 																	"file_compression": {
@@ -975,6 +1006,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
 													validate.ArrayForEach(validate.StringLenAtMost(1024)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-z0-9].+$"), "")),
 												},
 											},
 											"role_arn": {
@@ -983,6 +1015,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
 												},
 											},
 											"templated_path_list": {
@@ -992,6 +1025,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(1, 1),
 													validate.ArrayForEach(validate.StringLenAtMost(1024)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-zA-Z0-9_\\-\\/ {}=]+$"), "")),
 												},
 											},
 										},
@@ -1022,6 +1056,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(63),
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 									},
 								},
 								"column_name": {
@@ -1031,6 +1066,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 63),
+										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 									},
 								},
 							},
@@ -1043,6 +1079,7 @@ func anomalyDetectorResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(60),
+							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 						},
 					},
 				},

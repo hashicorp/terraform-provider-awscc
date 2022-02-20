@@ -301,7 +301,7 @@
         "Name": {
           "description": "The name for the event type",
           "type": "string",
-          "pattern": "",
+          "pattern": "^[0-9a-z_-]+$",
           "minLength": 1,
           "maxLength": 64
         },
@@ -381,7 +381,7 @@
     "DetectorId": {
       "description": "The ID of the detector",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[0-9a-z_-]+$",
       "minLength": 1,
       "maxLength": 64
     },

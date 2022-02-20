@@ -4,6 +4,7 @@ package logs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -30,7 +31,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//     "description": "LogGroup name",
 			//     "maxLength": 512,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -40,6 +41,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(1, 512)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -52,7 +54,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "A name for the saved query definition",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 			//   "type": "string"
 			// }
 			Description: "A name for the saved query definition",
@@ -60,6 +62,7 @@ func queryDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
 			},
 		},
 		"query_definition_id": {

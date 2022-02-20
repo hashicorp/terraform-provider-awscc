@@ -4,6 +4,7 @@ package panorama
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -52,7 +53,7 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -67,13 +68,14 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -163,13 +165,13 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -190,6 +192,7 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 					"value": {
@@ -198,6 +201,7 @@ func packageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 						},
 					},
 				},

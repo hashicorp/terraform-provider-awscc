@@ -4,6 +4,7 @@ package config
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -134,7 +135,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "description": "The name of the organization conformance pack.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the organization conformance pack.",
@@ -142,6 +143,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z][-a-zA-Z0-9]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -171,7 +173,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "description": "Location of file containing the template body.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "s3://.*",
 			//   "type": "string"
 			// }
 			Description: "Location of file containing the template body.",
@@ -179,6 +181,7 @@ func organizationConformancePackResourceType(ctx context.Context) (tfsdk.Resourc
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("s3://.*"), ""),
 			},
 			// TemplateS3Uri is a write-only property.
 		},

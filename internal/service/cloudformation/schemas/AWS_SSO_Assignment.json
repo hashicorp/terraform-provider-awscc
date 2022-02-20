@@ -7,14 +7,14 @@
     "InstanceArn": {
       "description": "The sso instance that the permission set is owned.",
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
     "TargetId": {
       "description": "The account id to be provisioned.",
       "type": "string",
-      "pattern": ""
+      "pattern": "\\d{12}"
     },
     "TargetType": {
       "description": "The type of resource to be provsioned to, only aws account now",
@@ -26,7 +26,7 @@
     "PermissionSetArn": {
       "description": "The permission set that the assignemt will be assigned",
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
@@ -41,7 +41,7 @@
     "PrincipalId": {
       "description": "The assignee's identifier, user id/group id",
       "type": "string",
-      "pattern": "",
+      "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
       "minLength": 1,
       "maxLength": 47
     }

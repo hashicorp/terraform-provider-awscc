@@ -4,6 +4,7 @@ package cloudtrail
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -386,7 +387,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -394,6 +395,7 @@ func trailResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 128),
+				validate.StringMatch(regexp.MustCompile("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

@@ -4,11 +4,13 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -38,13 +40,16 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -76,7 +81,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9a-zA-Z]{40}",
 			//   "type": "string"
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
@@ -92,7 +97,7 @@ func publisherResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The URL to the publisher's profile with the identity provider.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "(http:|https:)+[^s]+[w]",
 			//   "type": "string"
 			// }
 			Description: "The URL to the publisher's profile with the identity provider.",

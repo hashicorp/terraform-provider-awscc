@@ -4,6 +4,7 @@ package ce
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -67,7 +68,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "description": "Subscription ARN",
-			//     "pattern": "",
+			//     "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -75,6 +76,9 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Description: "A list of cost anomaly monitors.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"), "")),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},
@@ -89,7 +93,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Address": {
-			//         "pattern": "",
+			//         "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)",
 			//         "type": "string"
 			//       },
 			//       "Status": {
@@ -122,6 +126,9 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						// Property: Address
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("(^[a-zA-Z0-9.!#$%&'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)"), ""),
+						},
 					},
 					"status": {
 						// Property: Status
@@ -158,7 +165,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Subscription ARN",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//   "type": "string"
 			// }
 			Description: "Subscription ARN",
@@ -175,7 +182,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "description": "The name of the subscription.",
 			//   "maxLength": 1024,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\S\\s]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the subscription.",
@@ -183,6 +190,7 @@ func anomalySubscriptionResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 1024),
+				validate.StringMatch(regexp.MustCompile("[\\S\\s]*"), ""),
 			},
 		},
 		"threshold": {

@@ -4,6 +4,7 @@ package lookoutequipment
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -51,12 +52,12 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           "description": "Indicates the delimiter character used between items in the data.",
 			//           "maxLength": 1,
 			//           "minLength": 0,
-			//           "pattern": "",
+			//           "pattern": "^(\\-|\\_|\\s)?$",
 			//           "type": "string"
 			//         },
 			//         "TimestampFormat": {
 			//           "description": "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
-			//           "pattern": "",
+			//           "pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -64,7 +65,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//     },
 			//     "InputTimeZoneOffset": {
 			//       "description": "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
-			//       "pattern": "",
+			//       "pattern": "^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$",
 			//       "type": "string"
 			//     },
 			//     "S3InputConfiguration": {
@@ -74,7 +75,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//         "Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//           "type": "string"
 			//         },
 			//         "Prefix": {
@@ -109,6 +110,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 1),
+										validate.StringMatch(regexp.MustCompile("^(\\-|\\_|\\s)?$"), ""),
 									},
 								},
 								"timestamp_format": {
@@ -116,6 +118,9 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"), ""),
+									},
 								},
 							},
 						),
@@ -126,6 +131,9 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
 						Type:        types.StringType,
 						Optional:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$"), ""),
+						},
 					},
 					"s3_input_configuration": {
 						// Property: S3InputConfiguration
@@ -138,6 +146,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 									},
 								},
 								"prefix": {
@@ -177,7 +186,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//         "Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//           "type": "string"
 			//         },
 			//         "Prefix": {
@@ -220,6 +229,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
 									},
 								},
 								"prefix": {
@@ -272,7 +282,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The Amazon Resource Name (ARN) of the inference scheduler being created.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
@@ -289,7 +299,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The name of the inference scheduler being created.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the inference scheduler being created.",
@@ -298,6 +308,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 200),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -311,7 +322,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The name of the previously trained ML model being used to create the inference scheduler.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
@@ -319,6 +330,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 200),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -331,7 +343,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "description": "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
@@ -339,6 +351,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"), ""),
 			},
 		},
 		"server_side_kms_key_id": {
@@ -384,7 +397,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//         "description": "The value for the specified tag.",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "[\\s\\w+-=\\.:/@]*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -417,6 +430,7 @@ func inferenceSchedulerResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("[\\s\\w+-=\\.:/@]*"), ""),
 						},
 					},
 				},

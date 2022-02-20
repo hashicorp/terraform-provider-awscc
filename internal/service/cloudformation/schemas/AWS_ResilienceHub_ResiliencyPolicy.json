@@ -49,7 +49,7 @@
         "PolicyName": {
             "description": "Name of Resiliency Policy.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
         },
         "PolicyDescription": {
             "description": "Description of Resiliency Policy.",

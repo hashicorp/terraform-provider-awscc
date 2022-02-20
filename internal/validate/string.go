@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
@@ -193,6 +194,52 @@ func newStringNotInSliceError(path *tftypes.AttributePath, valid []string, value
 func StringInSlice(valid []string) tfsdk.AttributeValidator {
 	return stringInSliceValidator{
 		valid: valid,
+	}
+}
+
+// stringMatchValidator validates that a string Attribute's value matches the specified regular expression.
+type stringMatchValidator struct {
+	tfsdk.AttributeValidator
+
+	re      *regexp.Regexp
+	message string
+}
+
+// Description describes the validation in plain text formatting.
+func (validator stringMatchValidator) Description(_ context.Context) string {
+	return fmt.Sprintf("value must match regular expression '%s'", validator.re)
+}
+
+// MarkdownDescription describes the validation in Markdown formatting.
+func (validator stringMatchValidator) MarkdownDescription(ctx context.Context) string {
+	return validator.Description(ctx)
+}
+
+// Validate performs the validation.
+func (validator stringMatchValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
+	s, ok := validateString(request, response)
+	if !ok {
+		return
+	}
+
+	if ok := validator.re.MatchString(s); ok {
+		return
+	}
+
+	if v := validator.message; v != "" {
+		response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(request.AttributePath, v))
+	}
+
+	response.Diagnostics.Append(ccdiag.NewInvalidValueAttributeError(
+		request.AttributePath,
+		fmt.Sprintf("expected value of %s to match regular expression '%s'", s, validator.re)))
+}
+
+// StringMatch returns a new string match validator.
+func StringMatch(re *regexp.Regexp, message string) tfsdk.AttributeValidator {
+	return stringMatchValidator{
+		re:      re,
+		message: message,
 	}
 }
 

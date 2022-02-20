@@ -16,7 +16,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 100,
-          "pattern": ""
+          "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*"
         },
         "Info": {
           "$ref": "#/definitions/ContainerInfo"
@@ -48,7 +48,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 63,
-          "pattern": ""
+          "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
         }
       },
       "required": [
@@ -94,7 +94,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "[\\.\\-_/#A-Za-z0-9]+"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this virtual cluster.",

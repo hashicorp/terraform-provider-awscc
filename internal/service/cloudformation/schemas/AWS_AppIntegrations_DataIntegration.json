@@ -9,21 +9,21 @@
         "FirstExecutionFrom": {
           "description": "The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.",
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 255
         },
         "Object": {
           "description": "The name of the object to pull from the data source.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
           "minLength": 1,
           "maxLength": 255
         },
         "ScheduleExpression": {
           "description": "How often the data should be pulled from data source.",
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 255
         }
@@ -70,7 +70,7 @@
     "Id": {
       "description": "The unique identifer of the data integration.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
       "minLength": 1,
       "maxLength": 255
     },
@@ -84,14 +84,14 @@
     "Name": {
       "description": "The name of the data integration.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
       "minLength": 1,
       "maxLength": 255
     },
     "KmsKey": {
       "description": "The KMS key of the data integration.",
       "type": "string",
-      "pattern": "",
+      "pattern": ".*\\S.*",
       "minLength": 1,
       "maxLength": 255
     },
@@ -103,7 +103,7 @@
     "SourceURI": {
       "description": "The URI of the data source.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$",
       "minLength": 1,
       "maxLength": 255
     },

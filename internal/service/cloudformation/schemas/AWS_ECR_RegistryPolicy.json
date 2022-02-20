@@ -8,7 +8,7 @@
             "description": "The registry id.",
             "minLength": 12,
             "maxLength": 12,
-            "pattern": ""
+            "pattern": "^[0-9]{12}$"
         }
     },
     "properties": {

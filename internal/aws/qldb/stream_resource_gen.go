@@ -4,6 +4,7 @@ package qldb
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -81,7 +82,7 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "type": "boolean"
 			//     },
 			//     "StreamArn": {
-			//       "pattern": "",
+			//       "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -98,6 +99,9 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: StreamArn
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"), ""),
+						},
 					},
 				},
 			),
@@ -122,11 +126,14 @@ func streamResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

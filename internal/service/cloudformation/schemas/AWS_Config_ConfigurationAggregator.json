@@ -14,7 +14,7 @@
     "ConfigurationAggregatorName": {
       "description": "The name of the aggregator.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\w\\-]+",
       "minLength": 1,
       "maxLength": 256
     },

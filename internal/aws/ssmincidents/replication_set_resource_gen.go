@@ -4,6 +4,7 @@ package ssmincidents
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "description": "The ARN of the ReplicationSet.",
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the ReplicationSet.",
@@ -70,7 +71,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//           "SseKmsKeyId": {
 			//             "description": "The ARN of the ReplicationSet.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -107,6 +108,7 @@ func replicationSetResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1000),
+										validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
 									},
 								},
 							},

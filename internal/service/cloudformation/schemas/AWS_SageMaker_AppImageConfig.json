@@ -8,14 +8,14 @@
             "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
             "minLength": 1,
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*"
         },
         "AppImageConfigName": {
             "type": "string",
             "description": "The Name of the AppImageConfig.",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
         },
         "KernelGatewayImageConfig": {
             "$ref": "#/definitions/KernelGatewayImageConfig",
@@ -78,7 +78,7 @@
                     "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
                     "minLength": 1,
                     "maxLength": 1024,
-                    "pattern": ""
+                    "pattern": "^\/.*"
                 }
             }
         },

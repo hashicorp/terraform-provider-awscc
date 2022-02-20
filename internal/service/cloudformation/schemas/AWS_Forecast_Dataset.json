@@ -14,7 +14,7 @@
                     "AttributeName": {
                         "description": "Name of the dataset field",
                         "type": "string",
-                        "pattern": ""
+                        "pattern": "^[a-zA-Z][a-zA-Z0-9_]*"
                     },
                     "AttributeType": {
                         "description": "Data type of the field",
@@ -36,13 +36,13 @@
             "description": "KMS key used to encrypt the Dataset data",
             "type": "string",
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "arn:aws[-a-z]*:kms:.*:key/.*"
         },
         "RoleArn": {
             "description": "The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.",
             "type": "string",
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"
         },
         "Key": {
             "type": "string",
@@ -61,14 +61,14 @@
         "Arn": {
             "type": "string",
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"
         },
         "DatasetName": {
             "description": "A name for the dataset",
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": ""
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]*"
         },
         "DatasetType": {
             "description": "The dataset type",
@@ -82,7 +82,7 @@
         "DataFrequency": {
             "description": "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
             "type": "string",
-            "pattern": ""
+            "pattern": "^Y|M|W|D|H|30min|15min|10min|5min|1min$"
         },
         "Domain": {
             "description": "The domain associated with the dataset",

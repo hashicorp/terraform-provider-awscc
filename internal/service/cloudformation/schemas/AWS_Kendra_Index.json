@@ -64,7 +64,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 10,
-      "pattern": ""
+      "pattern": "[0-9]+[s]"
     },
     "Order": {
       "type": "string",
@@ -271,7 +271,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
     },
     "JsonTokenTypeConfiguration": {
       "type": "object",

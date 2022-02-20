@@ -27,14 +27,14 @@
         "Key": {
           "type": "string",
           "description": "The key for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
           "maxLength": 256,
           "minLength": 1
         },
         "Value": {
           "type": "string",
           "description": "The value for an AWS resource tag.",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
           "maxLength": 256,
           "minLength": 1
         }
@@ -51,7 +51,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "",
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
         "maxLength": 128
       },
       "minItems": 1,
@@ -62,7 +62,7 @@
       "description": "The name of the Windows domain that the SMB server belongs to.",
       "type": "string",
       "maxLength": 253,
-      "pattern": ""
+      "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"
     },
     "MountOptions": {
       "$ref": "#/definitions/MountOptions",
@@ -74,25 +74,25 @@
       "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
       "type": "string",
       "maxLength": 104,
-      "pattern": ""
+      "pattern": "^.{0,104}$"
     },
     "ServerHostname": {
       "description": "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
       "type": "string",
       "maxLength": 255,
-      "pattern": ""
+      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
     },
     "Subdirectory": {
       "description": "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
       "type": "string",
       "maxLength": 4096,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
     },
     "User": {
       "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
       "type": "string",
       "maxLength": 104,
-      "pattern": ""
+      "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
@@ -107,13 +107,13 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the SMB location that is created.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
       "maxLength": 128
     },
     "LocationUri": {
       "description": "The URL of the SMB location that was described.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
       "maxLength": 4356
     }
   },

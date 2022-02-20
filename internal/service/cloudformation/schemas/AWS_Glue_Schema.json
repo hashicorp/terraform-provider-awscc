@@ -16,7 +16,7 @@
                 "Arn": {
                     "description": "Amazon Resource Name for the Registry.",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*"
                 }
             },
             "additionalProperties": false
@@ -65,7 +65,7 @@
         "Arn": {
             "description": "Amazon Resource Name for the Schema.",
             "type": "string",
-            "pattern": ""
+            "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*"
         },
         "Registry": {
             "$ref": "#/definitions/Registry"
@@ -113,7 +113,7 @@
         "InitialSchemaVersionId": {
             "type": "string",
             "description": "Represents the version ID associated with the initial schema version.",
-            "pattern": ""
+            "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
         }
     },
     "additionalProperties": false,

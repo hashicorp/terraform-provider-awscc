@@ -4,6 +4,7 @@ package forecast
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -28,7 +29,7 @@ func datasetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "insertionOrder": true,
 			//   "items": {
 			//     "maxLength": 256,
-			//     "pattern": "",
+			//     "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -38,6 +39,7 @@ func datasetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(256)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"), "")),
 			},
 		},
 		"dataset_group_arn": {
@@ -46,7 +48,7 @@ func datasetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the dataset group to delete.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the dataset group to delete.",
@@ -63,7 +65,7 @@ func datasetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the dataset group.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//   "type": "string"
 			// }
 			Description: "A name for the dataset group.",
@@ -71,6 +73,7 @@ func datasetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

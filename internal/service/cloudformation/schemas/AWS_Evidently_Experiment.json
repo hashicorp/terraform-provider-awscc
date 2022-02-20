@@ -5,17 +5,17 @@
   "properties": {
     "Arn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/experiment/[-a-zA-Z0-9._]*"
     },
     "Name": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[-a-zA-Z0-9._]*",
       "minLength": 1,
       "maxLength": 127
     },
     "Project": {
       "type": "string",
-      "pattern": "",
+      "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
       "minLength": 0,
       "maxLength": 2048
     },
@@ -28,7 +28,7 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 127,
-      "pattern": ""
+      "pattern": ".*"
     },
     "Treatments": {
       "type": "array",
@@ -74,7 +74,7 @@
       "properties": {
         "TreatmentName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },
@@ -83,11 +83,11 @@
         },
         "Feature": {
           "type": "string",
-          "pattern": ""
+          "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:.*)"
         },
         "Variation": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 255
         }
@@ -106,7 +106,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 255,
-          "pattern": ""
+          "pattern": "^[\\S]+$"
         },
         "EntityIdKey": {
           "description": "The JSON path to reference the entity id in the event.",
@@ -124,7 +124,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 256,
-          "pattern": ""
+          "pattern": ".*"
         },
         "DesiredChange": {
           "type": "string",
@@ -148,7 +148,7 @@
       "properties": {
         "ControlTreatmentName": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },
@@ -168,7 +168,7 @@
       "properties": {
         "Treatment": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[-a-zA-Z0-9._]*",
           "minLength": 1,
           "maxLength": 127
         },

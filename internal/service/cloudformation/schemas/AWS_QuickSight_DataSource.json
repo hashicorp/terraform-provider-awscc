@@ -154,7 +154,7 @@
       "properties": {
         "CopySourceArn": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+",
           "description": "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>"
         },
         "CredentialPair": {
@@ -714,7 +714,7 @@
       "type": "string",
       "maxLength": 12,
       "minLength": 12,
-      "pattern": ""
+      "pattern": "^[0-9]{12}$"
     },
     "CreatedTime": {
       "type": "string",

@@ -4,6 +4,7 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,7 +42,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The name of the cell to create.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the cell to create.",
@@ -49,6 +50,7 @@ func cellResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(64),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

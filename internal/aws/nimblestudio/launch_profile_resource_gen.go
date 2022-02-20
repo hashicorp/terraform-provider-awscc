@@ -4,6 +4,7 @@ package nimblestudio
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -79,7 +80,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//     "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
 			//     "maxLength": 10,
 			//     "minLength": 0,
-			//     "pattern": "",
+			//     "pattern": "^2021\\-03\\-31$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -89,6 +90,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenBetween(0, 10)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^2021\\-03\\-31$"), "")),
 			},
 		},
 		"name": {
@@ -173,14 +175,14 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//               "description": "\u003cp\u003eThe folder path in Linux workstations where files are uploaded.\u003c/p\u003e",
 			//               "maxLength": 128,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$",
 			//               "type": "string"
 			//             },
 			//             "Windows": {
 			//               "description": "\u003cp\u003eThe folder path in Windows workstations where files are uploaded.\u003c/p\u003e",
 			//               "maxLength": 128,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -194,7 +196,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       "items": {
 			//         "maxLength": 22,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_]*$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 20,
@@ -287,6 +289,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
+													validate.StringMatch(regexp.MustCompile("^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$"), ""),
 												},
 											},
 											"windows": {
@@ -296,6 +299,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 128),
+													validate.StringMatch(regexp.MustCompile("^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$"), ""),
 												},
 											},
 										},
@@ -314,6 +318,7 @@ func launchProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(1, 20),
 							validate.ArrayForEach(validate.StringLenBetween(0, 22)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), "")),
 						},
 					},
 				},

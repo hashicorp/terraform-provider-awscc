@@ -6,14 +6,14 @@
     "CertificateArn": {
       "description": "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:acm:[A-Za-z0-9-]{1,64}:([0-9]{12})?:certificate/.+$",
       "minLength": 1,
       "maxLength": 1283
     },
     "RoleArn": {
       "description": "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:iam:.*:([0-9]{12})?:role/.+$",
       "minLength": 1,
       "maxLength": 1283
     },

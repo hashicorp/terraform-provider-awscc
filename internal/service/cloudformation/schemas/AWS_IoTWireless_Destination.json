@@ -24,7 +24,7 @@
     "Name": {
       "description": "Unique name of destination",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z0-9:_-]+",
       "maxLength": 128
     },
     "Expression": {

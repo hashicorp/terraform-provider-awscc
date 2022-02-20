@@ -4,11 +4,13 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -56,7 +58,7 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "CookieBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|all)$",
 			//           "type": "string"
 			//         },
 			//         "Cookies": {
@@ -76,7 +78,7 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "HeaderBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
 			//           "type": "string"
 			//         },
 			//         "Headers": {
@@ -99,7 +101,7 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "QueryStringBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|all)$",
 			//           "type": "string"
 			//         },
 			//         "QueryStrings": {
@@ -139,6 +141,9 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 									// Property: CookieBehavior
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^(none|whitelist|all)$"), ""),
+									},
 								},
 								"cookies": {
 									// Property: Cookies
@@ -157,6 +162,9 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 									// Property: HeaderBehavior
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$"), ""),
+									},
 								},
 								"headers": {
 									// Property: Headers
@@ -180,6 +188,9 @@ func originRequestPolicyResourceType(ctx context.Context) (tfsdk.ResourceType, e
 									// Property: QueryStringBehavior
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^(none|whitelist|all)$"), ""),
+									},
 								},
 								"query_strings": {
 									// Property: QueryStrings

@@ -13,7 +13,7 @@
         "KeyArn": {
           "type": "string",
           "minLength": 4,
-          "pattern": "",
+          "pattern": "^arn:.*",
           "description": "<p>The ARN for a KMS key that is used to encrypt studio data.</p>"
         }
       },
@@ -56,7 +56,7 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 0,
-      "pattern": "",
+      "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
       "description": "<p>The Amazon Web Services Region where the studio resource is located.</p>"
     },
     "SsoClientId": {
@@ -73,7 +73,7 @@
       "type": "string",
       "maxLength": 64,
       "minLength": 3,
-      "pattern": "",
+      "pattern": "^[a-z0-9]*$",
       "description": "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>"
     },
     "StudioUrl": {

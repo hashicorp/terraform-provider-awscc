@@ -20,12 +20,12 @@
         "CodeSigningConfigId": {
             "description": "A unique identifier for CodeSigningConfig resource",
             "type": "string",
-            "pattern": ""
+            "pattern": "csc-[a-zA-Z0-9-_\\.]{17}"
         },
         "CodeSigningConfigArn": {
             "description": "A unique Arn for CodeSigningConfig resource",
             "type": "string",
-            "pattern": ""
+            "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}"
         }
     },
 
@@ -42,7 +42,7 @@
                     "maxItems": 20,
                     "items": {
                         "type": "string",
-                        "pattern": "",
+                        "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
                         "minLength": 12,
                         "maxLength": 1024
                     }

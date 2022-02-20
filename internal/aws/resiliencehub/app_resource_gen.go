@@ -4,6 +4,7 @@ package resiliencehub
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A string containing full ResilienceHub app template body.",
 			//   "maxLength": 5000,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$",
 			//   "type": "string"
 			// }
 			Description: "A string containing full ResilienceHub app template body.",
@@ -50,6 +51,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 5000),
+				validate.StringMatch(regexp.MustCompile("^[\\w\\s:,-\\.'{}\\[\\]:\"]+$"), ""),
 			},
 		},
 		"description": {
@@ -73,12 +75,15 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name of the app.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 			//   "type": "string"
 			// }
 			Description: "Name of the app.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -109,18 +114,18 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "MappingType": {
-			//         "pattern": "",
+			//         "pattern": "CfnStack|Resource",
 			//         "type": "string"
 			//       },
 			//       "PhysicalResourceId": {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "AwsAccountId": {
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{12}$",
 			//             "type": "string"
 			//           },
 			//           "AwsRegion": {
-			//             "pattern": "",
+			//             "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$",
 			//             "type": "string"
 			//           },
 			//           "Identifier": {
@@ -129,7 +134,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "Type": {
-			//             "pattern": "",
+			//             "pattern": "Arn|Native",
 			//             "type": "string"
 			//           }
 			//         },
@@ -140,7 +145,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "type": "object"
 			//       },
 			//       "ResourceName": {
-			//         "pattern": "",
+			//         "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -165,6 +170,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: MappingType
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("CfnStack|Resource"), ""),
+						},
 					},
 					"physical_resource_id": {
 						// Property: PhysicalResourceId
@@ -174,11 +182,17 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: AwsAccountId
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
+									},
 								},
 								"aws_region": {
 									// Property: AwsRegion
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$"), ""),
+									},
 								},
 								"identifier": {
 									// Property: Identifier
@@ -192,6 +206,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									// Property: Type
 									Type:     types.StringType,
 									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("Arn|Native"), ""),
+									},
 								},
 							},
 						),
@@ -201,6 +218,9 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						// Property: ResourceName
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

@@ -4,11 +4,13 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -24,7 +26,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the module.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/module/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the module.",
@@ -84,12 +86,15 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the module being registered.\n\nRecommended module naming pattern: company_or_organization::service::type::MODULE.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE",
 			//   "type": "string"
 			// }
 			Description: "The name of the module being registered.\n\nRecommended module naming pattern: company_or_organization::service::type::MODULE.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::MODULE"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -144,7 +149,7 @@ func moduleVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The version ID of the module represented by this module instance.",
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{8}$",
 			//   "type": "string"
 			// }
 			Description: "The version ID of the module represented by this module instance.",

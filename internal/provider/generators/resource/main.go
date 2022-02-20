@@ -114,6 +114,7 @@ package {{ .PackageName }}
 
 import (
 	"context"
+	{{if .ImportRegexp }}"regexp"{{- end}}
 
 	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"

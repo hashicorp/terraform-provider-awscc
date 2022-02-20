@@ -6,13 +6,13 @@
     "SSMContact": {
       "description": "The ARN of the contact.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
       "maxLength": 1000
     },
     "SnsArn": {
       "description": "The ARN of the Chatbot SNS topic.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
       "maxLength": 1000
     },
     "NotificationTargetItem": {
@@ -47,7 +47,7 @@
         "RoleArn": {
           "description": "The role ARN to use when starting the SSM automation document.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
           "maxLength": 1000
         },
         "DocumentName": {
@@ -199,13 +199,13 @@
     "Arn": {
       "description": "The ARN of the response plan.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
       "maxLength": 1000
     },
     "Name": {
       "description": "The name of the response plan.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[a-zA-Z0-9_-]*$",
       "maxLength": 200,
       "minLength": 1
     },

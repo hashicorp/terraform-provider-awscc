@@ -7,7 +7,7 @@
     "ResourceArn": {
       "description": "A resource ARN.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws.*$",
       "minLength": 1,
       "maxLength": 256
     },
@@ -73,7 +73,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9-]+$"
     },
     "FirewallArn": {
       "$ref": "#/definitions/ResourceArn"

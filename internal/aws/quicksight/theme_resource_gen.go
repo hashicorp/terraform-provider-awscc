@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -40,13 +41,14 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
+				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -59,7 +61,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "\u003cp\u003eThe ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t\u003ccode\u003eListThemes\u003c/code\u003e or choose \u003cb\u003eThemes\u003c/b\u003e from\n\t\t\twithin a QuickSight analysis. \u003c/p\u003e",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-]+",
 			//   "type": "string"
 			// }
 			Description: "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a QuickSight analysis. </p>",
@@ -67,6 +69,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 			},
 			// BaseThemeId is a write-only property.
 		},
@@ -84,7 +87,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "Colors": {
 			//           "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
 			//           "items": {
-			//             "pattern": "",
+			//             "pattern": "^#[A-F0-9]{6}$",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 100,
@@ -93,13 +96,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "EmptyFillColor": {
 			//           "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "MinMaxGradient": {
 			//           "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
 			//           "items": {
-			//             "pattern": "",
+			//             "pattern": "^#[A-F0-9]{6}$",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 100,
@@ -190,82 +193,82 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "properties": {
 			//         "Accent": {
 			//           "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "AccentForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "Danger": {
 			//           "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "DangerForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "Dimension": {
 			//           "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "DimensionForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "Measure": {
 			//           "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "MeasureForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "PrimaryBackground": {
 			//           "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "PrimaryForeground": {
 			//           "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "SecondaryBackground": {
 			//           "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "SecondaryForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "Success": {
 			//           "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "SuccessForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "Warning": {
 			//           "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         },
 			//         "WarningForeground": {
 			//           "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^#[A-F0-9]{6}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -289,6 +292,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
 									},
 								},
 								"empty_fill_color": {
@@ -296,6 +300,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"min_max_gradient": {
 									// Property: MinMaxGradient
@@ -304,6 +311,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(0, 100),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
 									},
 								},
 							},
@@ -418,96 +426,144 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>This color is that applies to selected states and buttons.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"accent_foreground": {
 									// Property: AccentForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"danger": {
 									// Property: Danger
 									Description: "<p>The color that applies to error messages.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"danger_foreground": {
 									// Property: DangerForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"dimension": {
 									// Property: Dimension
 									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"dimension_foreground": {
 									// Property: DimensionForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"measure": {
 									// Property: Measure
 									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"measure_foreground": {
 									// Property: MeasureForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"primary_background": {
 									// Property: PrimaryBackground
 									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"primary_foreground": {
 									// Property: PrimaryForeground
 									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"secondary_background": {
 									// Property: SecondaryBackground
 									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"secondary_foreground": {
 									// Property: SecondaryForeground
 									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"success": {
 									// Property: Success
 									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"success_foreground": {
 									// Property: SuccessForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"warning": {
 									// Property: Warning
 									Description: "<p>This color that applies to warning and informational messages.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 								"warning_foreground": {
 									// Property: WarningForeground
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+									},
 								},
 							},
 						),
@@ -695,13 +751,14 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -739,7 +796,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "\u003cp\u003eThe Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.\u003c/p\u003e",
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\w\\-]+",
 			//       "type": "string"
 			//     },
 			//     "Configuration": {
@@ -753,7 +810,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "Colors": {
 			//               "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
 			//               "items": {
-			//                 "pattern": "",
+			//                 "pattern": "^#[A-F0-9]{6}$",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 100,
@@ -762,13 +819,13 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "EmptyFillColor": {
 			//               "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "MinMaxGradient": {
 			//               "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
 			//               "items": {
-			//                 "pattern": "",
+			//                 "pattern": "^#[A-F0-9]{6}$",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 100,
@@ -859,82 +916,82 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "properties": {
 			//             "Accent": {
 			//               "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "AccentForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "Danger": {
 			//               "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "DangerForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "Dimension": {
 			//               "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "DimensionForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "Measure": {
 			//               "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "MeasureForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "PrimaryBackground": {
 			//               "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "PrimaryForeground": {
 			//               "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "SecondaryBackground": {
 			//               "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "SecondaryForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "Success": {
 			//               "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "SuccessForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "Warning": {
 			//               "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             },
 			//             "WarningForeground": {
 			//               "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
-			//               "pattern": "",
+			//               "pattern": "^#[A-F0-9]{6}$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -962,7 +1019,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Message": {
 			//             "description": "\u003cp\u003eThe error message.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Type": {
@@ -1013,6 +1070,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 						},
 					},
 					"configuration": {
@@ -1032,6 +1090,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
 												},
 											},
 											"empty_fill_color": {
@@ -1039,6 +1098,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"min_max_gradient": {
 												// Property: MinMaxGradient
@@ -1047,6 +1109,7 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayLenBetween(0, 100),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), "")),
 												},
 											},
 										},
@@ -1161,96 +1224,144 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>This color is that applies to selected states and buttons.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"accent_foreground": {
 												// Property: AccentForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"danger": {
 												// Property: Danger
 												Description: "<p>The color that applies to error messages.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"danger_foreground": {
 												// Property: DangerForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"dimension": {
 												// Property: Dimension
 												Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"dimension_foreground": {
 												// Property: DimensionForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"measure": {
 												// Property: Measure
 												Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"measure_foreground": {
 												// Property: MeasureForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"primary_background": {
 												// Property: PrimaryBackground
 												Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"primary_foreground": {
 												// Property: PrimaryForeground
 												Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"secondary_background": {
 												// Property: SecondaryBackground
 												Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"secondary_foreground": {
 												// Property: SecondaryForeground
 												Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"success": {
 												// Property: Success
 												Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"success_foreground": {
 												// Property: SuccessForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"warning": {
 												// Property: Warning
 												Description: "<p>This color that applies to warning and informational messages.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 											"warning_foreground": {
 												// Property: WarningForeground
 												Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
 												Type:        types.StringType,
 												Optional:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
+												},
 											},
 										},
 									),
@@ -1285,6 +1396,9 @@ func themeResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The error message.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"type": {
 									// Property: Type

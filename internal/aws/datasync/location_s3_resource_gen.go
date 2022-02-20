@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
@@ -42,7 +43,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The URL of the S3 location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the S3 location that was described.",
@@ -58,7 +59,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
 			//   "maxLength": 156,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
@@ -66,6 +67,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(156),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -82,7 +84,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "BucketAccessRoleArn": {
 			//       "description": "The ARN of the IAM role of the Amazon S3 bucket.",
 			//       "maxLength": 2048,
-			//       "pattern": "",
+			//       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -101,6 +103,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(2048),
+							validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"), ""),
 						},
 					},
 				},
@@ -152,7 +155,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$",
 			//   "type": "string"
 			// }
 			Description: "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
@@ -161,6 +164,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -182,14 +186,14 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -213,6 +217,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 						},
 					},
 					"value": {
@@ -222,6 +227,7 @@ func locationS3ResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 						},
 					},
 				},

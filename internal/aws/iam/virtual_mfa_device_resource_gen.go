@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -46,7 +47,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 9,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=/:,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -129,7 +130,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// {
 			//   "maxLength": 226,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -137,6 +138,7 @@ func virtualMFADeviceResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 226),
+				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

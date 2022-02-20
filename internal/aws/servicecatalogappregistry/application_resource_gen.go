@@ -4,6 +4,7 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -52,7 +53,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Id
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "[a-z0-9]{26}",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -68,7 +69,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the application. ",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+",
 			//   "type": "string"
 			// }
 			Description: "The name of the application. ",
@@ -76,6 +77,7 @@ func applicationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("\\w+"), ""),
 			},
 		},
 		"tags": {

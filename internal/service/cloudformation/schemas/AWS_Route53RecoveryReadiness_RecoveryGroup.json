@@ -30,7 +30,7 @@
       "RecoveryGroupName": {
         "description": "The name of the recovery group to create.",
         "type": "string",
-        "pattern": "",
+        "pattern": "[a-zA-Z0-9_]+",
         "minLength": 1,
         "maxLength": 64
       },

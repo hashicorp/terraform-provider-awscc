@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func loggingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
@@ -35,6 +36,7 @@ func loggingResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
+				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

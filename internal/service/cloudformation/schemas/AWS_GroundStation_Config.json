@@ -104,7 +104,7 @@
         },
         "S3KeyPrefix": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^([a-zA-Z0-9_\\-=/]|\\{satellite_id\\}|\\{config\\-name}|\\{s3\\-config-id}|\\{year\\}|\\{month\\}|\\{day\\}){1,900}$"
         },
         "BucketArn": {
             "type": "string"
@@ -254,11 +254,11 @@
             "properties": {
                 "Key": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"
                 },
                 "Value": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"
                 }
             },
             "additionalProperties": false
@@ -267,7 +267,7 @@
     "properties": {
         "Name": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^[ a-zA-Z0-9_:-]{1,256}$"
         },
         "Tags": {
             "type": "array",

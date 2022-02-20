@@ -5,7 +5,7 @@
   "definitions": {
     "LogGroup": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
       "minLength": 1,
       "maxLength": 512
     }
@@ -14,7 +14,7 @@
     "Name": {
       "description": "A name for the saved query definition",
       "type": "string",
-      "pattern": "",
+      "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
       "minLength": 1,
       "maxLength": 255
     },

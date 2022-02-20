@@ -6,7 +6,7 @@
         "VirtualMfaDeviceName": {
             "minLength": 1,
             "maxLength": 226,
-            "pattern": "",
+            "pattern": "[\\w+=,.@-]+",
             "type": "string"
         },
         "Path": {
@@ -18,7 +18,7 @@
         "SerialNumber": {
             "minLength": 9,
             "maxLength": 256,
-            "pattern": "",
+            "pattern": "[\\w+=/:,.@-]+",
             "type": "string"
         },
         "Users": {

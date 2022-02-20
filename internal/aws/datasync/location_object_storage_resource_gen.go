@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			//   "maxLength": 200,
 			//   "minLength": 8,
-			//   "pattern": "",
+			//   "pattern": "^.+$",
 			//   "type": "string"
 			// }
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
@@ -35,6 +36,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 200),
+				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 			},
 		},
 		"agent_arns": {
@@ -45,7 +47,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 4,
@@ -58,6 +60,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(1, 4),
 				validate.ArrayForEach(validate.StringLenAtMost(128)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -70,7 +73,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The name of the bucket on the self-managed object storage server.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the bucket on the self-managed object storage server.",
@@ -78,6 +81,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -90,7 +94,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the location that is created.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
@@ -106,7 +110,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// {
 			//   "description": "The URL of the object storage location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw|object-storage)://[a-zA-Z0-9./\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the object storage location that was described.",
@@ -123,7 +127,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			//   "maxLength": 200,
 			//   "minLength": 8,
-			//   "pattern": "",
+			//   "pattern": "^.+$",
 			//   "type": "string"
 			// }
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
@@ -131,6 +135,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(8, 200),
+				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
 			},
 			// SecretKey is a write-only property.
 		},
@@ -140,7 +145,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// {
 			//   "description": "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
@@ -148,6 +153,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(255),
+				validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -197,7 +203,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// {
 			//   "description": "The subdirectory in the self-managed object storage server that is used to read data from.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$",
 			//   "type": "string"
 			// }
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
@@ -205,6 +211,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"), ""),
 			},
 			// Subdirectory is a write-only property.
 		},
@@ -222,14 +229,14 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -253,6 +260,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 						},
 					},
 					"value": {
@@ -262,6 +270,7 @@ func locationObjectStorageResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 						},
 					},
 				},

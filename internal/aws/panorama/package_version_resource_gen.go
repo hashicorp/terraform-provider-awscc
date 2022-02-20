@@ -4,6 +4,7 @@ package panorama
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -47,7 +48,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -55,6 +56,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 12),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-z\\_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -81,13 +83,14 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -99,7 +102,7 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -114,13 +117,14 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([0-9]+)\\.([0-9]+)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^([0-9]+)\\.([0-9]+)$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -132,13 +136,14 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -194,13 +199,14 @@ func packageVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]+$"), ""),
 			},
 		},
 	}

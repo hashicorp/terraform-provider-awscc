@@ -4,6 +4,7 @@ package robomaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -40,7 +41,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the fleet.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_\\-]{1,255}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the fleet.",
@@ -49,6 +50,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_\\-]{1,255}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

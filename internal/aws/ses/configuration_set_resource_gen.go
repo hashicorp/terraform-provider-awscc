@@ -4,11 +4,13 @@ package ses
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -24,13 +26,16 @@ func configurationSetResourceType(ctx context.Context) (tfsdk.ResourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the configuration set.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the configuration set.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,64}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

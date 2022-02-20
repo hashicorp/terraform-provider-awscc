@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -272,7 +273,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
@@ -281,6 +282,7 @@ func frameworkResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z][_a-zA-Z0-9]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

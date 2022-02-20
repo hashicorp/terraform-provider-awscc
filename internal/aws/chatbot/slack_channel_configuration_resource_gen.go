@@ -4,6 +4,7 @@ package chatbot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "description": "The name of the configuration",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9-_]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the configuration",
@@ -50,6 +51,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -92,13 +94,16 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			// {
 			//   "default": "NONE",
 			//   "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			//   "pattern": "",
+			//   "pattern": "^(ERROR|INFO|NONE)$",
 			//   "type": "string"
 			// }
 			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				DefaultValue(types.String{Value: "NONE"}),
 				tfsdk.UseStateForUnknown(),
@@ -111,7 +116,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			//   "description": "The id of the Slack channel",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]+$",
 			//   "type": "string"
 			// }
 			Description: "The id of the Slack channel",
@@ -119,6 +124,7 @@ func slackChannelConfigurationResourceType(ctx context.Context) (tfsdk.ResourceT
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
 			},
 		},
 		"slack_workspace_id": {

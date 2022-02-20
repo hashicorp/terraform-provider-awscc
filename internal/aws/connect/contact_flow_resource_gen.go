@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func contactFlowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The identifier of the contact flow (ARN).",
 			//   "maxLength": 500,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the contact flow (ARN).",
@@ -75,7 +76,7 @@ func contactFlowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The identifier of the Amazon Connect instance (ARN).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance (ARN).",
@@ -83,6 +84,7 @@ func contactFlowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
 			},
 		},
 		"name": {

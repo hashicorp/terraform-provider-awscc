@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -40,13 +41,14 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(12, 12),
+				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -74,13 +76,14 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 2048),
+				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -269,7 +272,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "description": "\u003cp\u003eA display name for the date-time parameter.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Values": {
@@ -298,7 +301,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "description": "\u003cp\u003eA display name for the decimal parameter.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Values": {
@@ -327,7 +330,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "description": "\u003cp\u003eThe name of the integer parameter.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Values": {
@@ -356,7 +359,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "description": "\u003cp\u003eA display name for a string parameter.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Values": {
@@ -393,6 +396,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>A display name for the date-time parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"values": {
 									// Property: Values
@@ -418,6 +424,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>A display name for the decimal parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"values": {
 									// Property: Values
@@ -443,6 +452,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The name of the integer parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"values": {
 									// Property: Values
@@ -468,6 +480,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>A display name for a string parameter.</p>",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"values": {
 									// Property: Values
@@ -579,7 +594,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               },
 			//               "DataSetPlaceholder": {
 			//                 "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-			//                 "pattern": "",
+			//                 "pattern": ".*\\S.*",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -632,6 +647,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Description: "<p>Dataset placeholder.</p>",
 												Type:        types.StringType,
 												Required:    true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+												},
 											},
 										},
 										tfsdk.ListNestedAttributesOptions{},
@@ -762,7 +780,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Message": {
 			//             "description": "\u003cp\u003eMessage.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "Type": {
@@ -794,14 +812,14 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "SheetId": {
 			//             "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
 			//             "maxLength": 2048,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[\\w\\-]+",
 			//             "type": "string"
 			//           }
 			//         },
@@ -882,6 +900,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>Message.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"type": {
 									// Property: Type
@@ -920,6 +941,9 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
+									},
 								},
 								"sheet_id": {
 									// Property: SheetId
@@ -928,6 +952,7 @@ func dashboardResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 2048),
+										validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
 									},
 								},
 							},

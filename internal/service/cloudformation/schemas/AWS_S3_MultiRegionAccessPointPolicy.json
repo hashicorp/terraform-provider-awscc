@@ -5,7 +5,7 @@
         "MrapName": {
             "description": "The name of the Multi Region Access Point to apply policy",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
             "minLength": 3,
             "maxLength": 50
         },

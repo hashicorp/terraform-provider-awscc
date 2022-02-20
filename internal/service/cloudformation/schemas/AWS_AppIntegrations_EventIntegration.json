@@ -9,7 +9,7 @@
         "Source": {
           "description": "The source of the events.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^aws\\.partner\\/.*$",
           "minLength": 1,
           "maxLength": 256
         }
@@ -48,14 +48,14 @@
         "Key": {
           "description": "A key to identify the metadata.",
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 255
         },
         "Value": {
           "description": "Corresponding metadata value for the key.",
           "type": "string",
-          "pattern": "",
+          "pattern": ".*\\S.*",
           "minLength": 1,
           "maxLength": 255
         }
@@ -85,7 +85,7 @@
         "EventBridgeRuleName": {
           "description": "The name of the Eventbridge rule.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
           "minLength": 1,
           "maxLength": 2048
         },
@@ -99,7 +99,7 @@
         "EventIntegrationAssociationId": {
           "description": "The identifier for the event integration association.",
           "type": "string",
-          "pattern": ""
+          "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
         }
       },
       "additionalProperties": false,
@@ -123,14 +123,14 @@
     "Name": {
       "description": "The name of the event integration.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
       "minLength": 1,
       "maxLength": 255
     },
     "EventBridgeBus": {
       "description": "The Amazon Eventbridge bus for the event integration.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
       "minLength": 1,
       "maxLength": 255
     },

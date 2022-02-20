@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The identifier of the contact flow module (ARN).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/flow-module/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the contact flow module (ARN).",
@@ -59,7 +60,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// {
 			//   "description": "The description of the contact flow module.",
 			//   "maxLength": 500,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The description of the contact flow module.",
@@ -67,6 +68,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(500),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 		},
 		"instance_arn": {
@@ -76,7 +78,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The identifier of the Amazon Connect instance (ARN).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance (ARN).",
@@ -84,6 +86,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
 			},
 		},
 		"name": {
@@ -93,7 +96,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			//   "description": "The name of the contact flow module.",
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The name of the contact flow module.",
@@ -101,6 +104,7 @@ func contactFlowModuleResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 127),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 		},
 		"state": {

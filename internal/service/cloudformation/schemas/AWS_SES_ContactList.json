@@ -29,7 +29,7 @@
                 "TopicName": {
                     "description": "The name of the topic.",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[a-zA-Z0-9_-]{1,64}$"
                 },
                 "DisplayName": {
                     "description": "The display name of the topic.",
@@ -59,7 +59,7 @@
         "ContactListName": {
             "description": "The name of the contact list.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9_-]{1,64}$"
         },
         "Description": {
             "description": "The description of the contact list.",

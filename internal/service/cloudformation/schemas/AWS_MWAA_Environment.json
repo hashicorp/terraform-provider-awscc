@@ -8,7 +8,7 @@
       "description": "Customer-defined identifier for the environment, unique per customer region.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": ""
+      "pattern": "^[a-zA-Z][0-9a-zA-Z\\-_]*$"
     },
     "EnvironmentStatus": {
       "type": "string",
@@ -51,21 +51,21 @@
       "description": "",
       "minLength": 1,
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+"
     },
     "EnvironmentArn": {
       "type": "string",
       "description": "ARN for the MWAA environment.",
       "minLength": 1,
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+"
     },
     "S3BucketArn": {
       "type": "string",
       "description": "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
       "minLength": 1,
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"
     },
     "CreatedAt": {
       "type": "string",
@@ -80,68 +80,68 @@
       "description": "Url endpoint for the environment's Airflow UI.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "^https://.+$"
     },
     "ExecutionRoleArn": {
       "type": "string",
       "description": "IAM role to be used by tasks.",
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "ServiceRoleArn": {
       "type": "string",
       "description": "IAM role to be used by MWAA to perform AWS API calls on behalf of the customer.",
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "KmsKey": {
       "type": "string",
       "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.\n\n    You can specify the CMK using any of the following:\n\n    Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.\n\n    Key alias. For example, alias/ExampleAlias.\n\n    Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.\n\n    Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n\n    AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.",
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^(((arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$"
     },
     "AirflowVersion": {
       "type": "string",
       "description": "Version of airflow to deploy to the environment.",
       "maxLength": 32,
-      "pattern": ""
+      "pattern": "^[0-9a-z.]+$"
     },
     "RelativePath": {
       "type": "string",
       "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": ".*"
     },
     "ConfigKey": {
       "type": "string",
       "description": "",
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-z]+([a-z._]*[a-z]+)?$"
     },
     "ConfigValue": {
       "type": "string",
       "description": "",
       "maxLength": 256,
-      "pattern": ""
+      "pattern": ".*"
     },
     "SecurityGroupId": {
       "type": "string",
       "description": "",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^sg-[a-zA-Z0-9\\-._]+$"
     },
     "SubnetId": {
       "type": "string",
       "description": "",
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^subnet-[a-zA-Z0-9\\-._]+$"
     },
     "CloudWatchLogGroupArn": {
       "type": "string",
       "description": "",
       "maxLength": 1224,
-      "pattern": ""
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b)(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+"
     },
     "LoggingEnabled": {
       "type": "boolean",
@@ -304,7 +304,7 @@
       "description": "Error message describing a failed operation.",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^.+$"
     },
     "S3ObjectVersion": {
       "type": "string",
@@ -315,7 +315,7 @@
       "type": "string",
       "description": "Start time for the weekly maintenance window.",
       "maxLength": 9,
-      "pattern": ""
+      "pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"
     },
     "WebserverAccessMode": {
       "type": "string",

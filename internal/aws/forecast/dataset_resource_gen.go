@@ -4,6 +4,7 @@ package forecast
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -39,12 +40,15 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
-			//   "pattern": "",
+			//   "pattern": "^Y|M|W|D|H|30min|15min|10min|5min|1min$",
 			//   "type": "string"
 			// }
 			Description: "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^Y|M|W|D|H|30min|15min|10min|5min|1min$"), ""),
+			},
 		},
 		"dataset_name": {
 			// Property: DatasetName
@@ -53,7 +57,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the dataset",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//   "type": "string"
 			// }
 			Description: "A name for the dataset",
@@ -61,6 +65,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -129,13 +134,13 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "KmsKeyArn": {
 			//       "description": "KMS key used to encrypt the Dataset data",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "arn:aws[-a-z]*:kms:.*:key/.*",
 			//       "type": "string"
 			//     },
 			//     "RoleArn": {
 			//       "description": "The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -150,6 +155,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("arn:aws[-a-z]*:kms:.*:key/.*"), ""),
 						},
 					},
 					"role_arn": {
@@ -159,6 +165,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"), ""),
 						},
 					},
 				},
@@ -178,7 +185,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "AttributeName": {
 			//             "description": "Name of the dataset field",
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//             "type": "string"
 			//           },
 			//           "AttributeType": {
@@ -213,6 +220,9 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Name of the dataset field",
 									Type:        types.StringType,
 									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*"), ""),
+									},
 								},
 								"attribute_type": {
 									// Property: AttributeType

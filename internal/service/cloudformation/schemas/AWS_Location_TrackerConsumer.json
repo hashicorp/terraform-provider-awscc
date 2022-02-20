@@ -5,13 +5,13 @@
         "ConsumerArn": {
             "type": "string",
             "maxLength": 1600,
-            "pattern": ""
+            "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$"
         },
         "TrackerName": {
             "type": "string",
             "maxLength": 100,
             "minLength": 1,
-            "pattern": ""
+            "pattern": "^[-._\\w]+$"
         }
     },
     "additionalProperties": false,

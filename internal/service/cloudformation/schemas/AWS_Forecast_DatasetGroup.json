@@ -29,7 +29,7 @@
         "Arn": {
             "type": "string",
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"
         },
         "MaxResults": {
             "description": "The number of items to return in the response.",
@@ -56,7 +56,7 @@
         "DatasetGroupName": {
             "description": "A name for the dataset group.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
             "minLength": 1,
             "maxLength": 63
         },
@@ -87,7 +87,7 @@
             "description": "The Amazon Resource Name (ARN) of the dataset group to delete.",
             "type": "string",
             "maxLength": 256,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$"
         }
     },
     "additionalProperties": false,

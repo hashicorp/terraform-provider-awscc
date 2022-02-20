@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the app.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the app.",
@@ -44,7 +45,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the app.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//   "type": "string"
 			// }
 			Description: "The name of the app.",
@@ -52,6 +53,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -149,14 +151,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "SageMakerImageVersionArn": {
 			//       "description": "The ARN of the image version created on the instance.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -214,6 +216,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 						},
 					},
 					"sage_maker_image_version_arn": {
@@ -223,6 +226,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 						},
 					},
 				},
@@ -299,7 +303,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The user profile name.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//   "type": "string"
 			// }
 			Description: "The user profile name.",
@@ -307,6 +311,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -44,7 +44,7 @@
         "Arn": {
             "description": "Workspace arn.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^arn:\b(aws|aws-us-gov|aws-cn)\b:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
             "minLength": 1,
             "maxLength": 128
         },

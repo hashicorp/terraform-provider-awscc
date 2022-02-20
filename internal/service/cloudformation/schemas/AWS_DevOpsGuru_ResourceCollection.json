@@ -24,7 +24,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$"
           },
           "minItems": 1,
           "maxItems": 200

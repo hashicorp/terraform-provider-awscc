@@ -40,7 +40,7 @@
     "DBProxyName": {
       "description": "The identifier for the proxy.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[A-z][0-z]*",
       "maxLength": 64
     },
     "TargetGroupArn": {

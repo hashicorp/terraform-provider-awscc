@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -42,7 +43,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The name of the document attachment file.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Values": {
@@ -87,6 +88,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 					"values": {
@@ -213,13 +215,16 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A name for the Systems Manager document.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 			//   "type": "string"
 			// }
 			Description: "A name for the Systems Manager document.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{3,128}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -237,13 +242,13 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Name": {
 			//         "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 			//         "maxLength": 200,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
 			//         "type": "string"
 			//       },
 			//       "Version": {
 			//         "description": "The document version required by the current document.",
 			//         "maxLength": 8,
-			//         "pattern": "",
+			//         "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
 			//         "type": "string"
 			//       }
 			//     },
@@ -262,6 +267,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(200),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.:/]{3,200}$"), ""),
 						},
 					},
 					"version": {
@@ -271,6 +277,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(8),
+							validate.StringMatch(regexp.MustCompile("([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"), ""),
 						},
 					},
 				},
@@ -300,14 +307,14 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The name of the tag.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value of the tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -326,6 +333,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 					"value": {
@@ -335,6 +343,7 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 				},
@@ -353,13 +362,16 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Specify a target type to define the kinds of resources the document can run on.",
-			//   "pattern": "",
+			//   "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
 			//   "type": "string"
 			// }
 			Description: "Specify a target type to define the kinds of resources the document can run on.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^\\/[\\w\\.\\-\\:\\/]*$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -370,13 +382,16 @@ func documentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{1,128}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

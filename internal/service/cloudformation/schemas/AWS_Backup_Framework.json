@@ -6,7 +6,7 @@
         "FrameworkName": {
             "description": "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
             "type": "string",
-            "pattern": "",
+            "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
             "minLength": 1,
             "maxLength": 256
         },

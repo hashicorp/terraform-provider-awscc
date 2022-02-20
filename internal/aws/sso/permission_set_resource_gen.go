@@ -4,6 +4,7 @@ package sso
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The permission set description.",
 			//   "maxLength": 700,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
 			//   "type": "string"
 			// }
 			Description: "The permission set description.",
@@ -35,6 +36,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 700),
+				validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"), ""),
 			},
 		},
 		"inline_policy": {
@@ -55,7 +57,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The sso instance arn that the permission set is owned.",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 			//   "type": "string"
 			// }
 			Description: "The sso instance arn that the permission set is owned.",
@@ -63,6 +65,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
+				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -99,7 +102,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The name you want to assign to this permission set.",
 			//   "maxLength": 32,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=,.@-]+",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this permission set.",
@@ -107,6 +110,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
+				validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -119,7 +123,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The permission set that the policy will be attached to",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 			//   "type": "string"
 			// }
 			Description: "The permission set that the policy will be attached to",
@@ -136,7 +140,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//   "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
 			//   "maxLength": 240,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
 			//   "type": "string"
 			// }
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
@@ -144,6 +148,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 240),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9&amp;$@#\\/%?=~\\-_'&quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+"), ""),
 			},
 		},
 		"session_duration": {
@@ -175,13 +180,13 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[\\w+=,.@-]+",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "[\\w+=,.@-]+",
 			//         "type": "string"
 			//       }
 			//     },
@@ -202,6 +207,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 						},
 					},
 					"value": {
@@ -210,6 +216,7 @@ func permissionSetResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("[\\w+=,.@-]+"), ""),
 						},
 					},
 				},

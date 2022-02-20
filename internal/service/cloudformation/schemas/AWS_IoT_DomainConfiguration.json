@@ -13,7 +13,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^[\\w=,@-]+$"
         }
       },
       "additionalProperties": false
@@ -23,7 +23,7 @@
       "properties": {
         "ServerCertificateArn": {
           "type": "string",
-          "pattern": "",
+          "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
           "minLength": 1,
           "maxLength": 2048
         },
@@ -62,7 +62,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^[\\w.-]+$"
     },
     "AuthorizerConfig": {
       "$ref": "#/definitions/AuthorizerConfig"
@@ -78,7 +78,7 @@
       "maxItems": 1,
       "items": {
         "type": "string",
-        "pattern": "",
+        "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
         "minLength": 1,
         "maxLength": 2048
       }
@@ -93,7 +93,7 @@
     },
     "ValidationCertificateArn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"
     },
     "Arn": {
       "type": "string"

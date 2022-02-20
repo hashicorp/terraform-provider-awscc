@@ -4,6 +4,7 @@ package iotwireless
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -87,7 +88,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Unique name of destination",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "Unique name of destination",
@@ -95,6 +96,7 @@ func destinationResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

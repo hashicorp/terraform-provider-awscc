@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -55,7 +56,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "description": "The name you want to assign to this Multi Region Access Point.",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this Multi Region Access Point.",
@@ -64,6 +65,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 50),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -144,7 +146,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 			//       "Bucket": {
 			//         "maxLength": 63,
 			//         "minLength": 3,
-			//         "pattern": "",
+			//         "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -166,6 +168,7 @@ func multiRegionAccessPointResourceType(ctx context.Context) (tfsdk.ResourceType
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 63),
+							validate.StringMatch(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
 						},
 					},
 				},

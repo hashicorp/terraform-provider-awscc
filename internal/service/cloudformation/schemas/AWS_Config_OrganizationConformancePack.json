@@ -38,14 +38,14 @@
     "OrganizationConformancePackName": {
       "description": "The name of the organization conformance pack.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
       "minLength": 1,
       "maxLength": 128
     },
     "TemplateS3Uri": {
       "description": "Location of file containing the template body.",
       "type": "string",
-      "pattern": "",
+      "pattern": "s3://.*",
       "minLength": 1,
       "maxLength": 1024
     },

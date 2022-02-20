@@ -7,7 +7,7 @@
       "properties": {
         "ColumnName": {
           "type": "string",
-          "pattern": ""
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"
         },
         "ColumnType": {
           "type": "string"
@@ -132,12 +132,12 @@
     "KeyspaceName": {
       "description": "Name for Cassandra keyspace",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"
     },
     "TableName": {
       "description": "Name for Cassandra table",
       "type": "string",
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"
     },
     "RegularColumns": {
       "description": "Non-key columns of the table",

@@ -6,14 +6,14 @@
     "UserHierarchyGroupArn": {
       "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$"
     }
   },
   "properties": {
     "InstanceArn": {
       "description": "The identifier of the Amazon Connect instance.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
     },
     "UserHierarchyGroupArn": {
       "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",

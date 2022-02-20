@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Activation key of the Agent.",
 			//   "maxLength": 29,
-			//   "pattern": "",
+			//   "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
 			//   "type": "string"
 			// }
 			Description: "Activation key of the Agent.",
@@ -34,6 +35,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(29),
+				validate.StringMatch(regexp.MustCompile("[A-Z0-9]{5}(-[A-Z0-9]{5}){4}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -46,7 +48,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The DataSync Agent ARN.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The DataSync Agent ARN.",
@@ -63,7 +65,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
@@ -71,6 +73,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 			},
 		},
 		"endpoint_type": {
@@ -100,7 +103,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -111,6 +114,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(128)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -126,7 +130,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -137,6 +141,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(128)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -158,14 +163,14 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -189,6 +194,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 						},
 					},
 					"value": {
@@ -198,6 +204,7 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 						},
 					},
 				},
@@ -213,13 +220,16 @@ func agentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the VPC endpoint that the agent has access to.",
-			//   "pattern": "",
+			//   "pattern": "^vpce-[0-9a-f]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the VPC endpoint that the agent has access to.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^vpce-[0-9a-f]{17}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

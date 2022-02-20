@@ -4,6 +4,7 @@ package memorydb
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -185,12 +186,15 @@ func userResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the user.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the user.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9\\\\-]*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

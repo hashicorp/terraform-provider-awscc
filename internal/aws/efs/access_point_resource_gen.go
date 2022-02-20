@@ -4,6 +4,7 @@ package efs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -212,7 +213,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         },
 			//         "Permissions": {
 			//           "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-			//           "pattern": "",
+			//           "pattern": "^[0-7]{3,4}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -257,6 +258,9 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[0-7]{3,4}$"), ""),
+									},
 								},
 							},
 						),

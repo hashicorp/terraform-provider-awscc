@@ -4,6 +4,7 @@ package connect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,12 +26,15 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
+			},
 		},
 		"name": {
 			// Property: Name
@@ -53,13 +57,16 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the parent user hierarchy group.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the parent user hierarchy group.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -70,7 +77,7 @@ func userHierarchyGroupResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the user hierarchy group.",

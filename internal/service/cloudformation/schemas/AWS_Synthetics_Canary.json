@@ -6,7 +6,7 @@
         "Name": {
             "description": "Name of the canary.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[0-9a-z_\\-]{1,21}$"
         },
         "Id": {
             "description": "Id of the canary",
@@ -23,7 +23,7 @@
         "ArtifactS3Location": {
             "description": "Provide the s3 bucket output location for test results",
             "type": "string",
-            "pattern": ""
+            "pattern": "^(s3|S3)://"
         },
         "ArtifactConfig": {
             "description": "Provide artifact configuration",

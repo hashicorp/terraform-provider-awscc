@@ -4,6 +4,7 @@ package databrew
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -501,7 +502,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Filtering expression for a parameter",
 			//           "maxLength": 1024,
 			//           "minLength": 4,
-			//           "pattern": "",
+			//           "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//           "type": "string"
 			//         },
 			//         "ValuesMap": {
@@ -519,7 +520,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "description": "Variable name",
 			//                 "maxLength": 128,
 			//                 "minLength": 2,
-			//                 "pattern": "",
+			//                 "pattern": "^:[A-Za-z0-9_]+$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -564,14 +565,14 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Locale code for a date parameter",
 			//                     "maxLength": 100,
 			//                     "minLength": 2,
-			//                     "pattern": "",
+			//                     "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
 			//                     "type": "string"
 			//                   },
 			//                   "TimezoneOffset": {
 			//                     "description": "Timezone offset",
 			//                     "maxLength": 6,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -587,7 +588,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                     "description": "Filtering expression for a parameter",
 			//                     "maxLength": 1024,
 			//                     "minLength": 4,
-			//                     "pattern": "",
+			//                     "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//                     "type": "string"
 			//                   },
 			//                   "ValuesMap": {
@@ -605,7 +606,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                           "description": "Variable name",
 			//                           "maxLength": 128,
 			//                           "minLength": 2,
-			//                           "pattern": "",
+			//                           "pattern": "^:[A-Za-z0-9_]+$",
 			//                           "type": "string"
 			//                         }
 			//                       },
@@ -715,6 +716,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(4, 1024),
+										validate.StringMatch(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
 									},
 								},
 								"values_map": {
@@ -736,6 +738,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(2, 128),
+													validate.StringMatch(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
 												},
 											},
 										},
@@ -781,6 +784,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(2, 100),
+																validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9_\\.#@\\-]+$"), ""),
 															},
 														},
 														"timezone_offset": {
@@ -790,6 +794,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(1, 6),
+																validate.StringMatch(regexp.MustCompile("^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"), ""),
 															},
 														},
 													},
@@ -807,6 +812,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Required:    true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.StringLenBetween(4, 1024),
+																validate.StringMatch(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
 															},
 														},
 														"values_map": {
@@ -828,6 +834,7 @@ func datasetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																		Required:    true,
 																		Validators: []tfsdk.AttributeValidator{
 																			validate.StringLenBetween(2, 128),
+																			validate.StringMatch(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
 																		},
 																	},
 																},

@@ -19,18 +19,18 @@
   "properties": {
     "Id": {
       "type": "string",
-      "pattern": ""
+      "pattern": "[a-z0-9]{12}"
     },
     "Arn": {
       "type": "string",
-      "pattern": ""
+      "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+"
     },
     "Name": {
       "type": "string",
       "description": "The name of the attribute group. ",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "\\w+"
     },
     "Description": {
       "type": "string",

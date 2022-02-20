@@ -4,6 +4,7 @@ package devopsguru
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -36,7 +37,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 200,
@@ -65,6 +66,7 @@ func resourceCollectionResourceType(ctx context.Context) (tfsdk.ResourceType, er
 									Validators: []tfsdk.AttributeValidator{
 										validate.ArrayLenBetween(1, 200),
 										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
+										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z*]+[a-zA-Z0-9-]*$"), "")),
 									},
 								},
 							},

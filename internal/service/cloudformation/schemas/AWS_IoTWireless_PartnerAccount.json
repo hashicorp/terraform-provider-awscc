@@ -9,7 +9,7 @@
       "properties": {
         "AppServerPrivateKey": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-fA-F0-9]{64}",
           "minLength": 1,
           "maxLength": 4096
         }
@@ -28,7 +28,7 @@
         },
         "Fingerprint": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-fA-F0-9]{64}",
           "minLength": 64,
           "maxLength": 64
         },
@@ -43,7 +43,7 @@
       "properties": {
         "AppServerPrivateKey": {
           "type": "string",
-          "pattern": "",
+          "pattern": "[a-fA-F0-9]{64}",
           "minLength": 1,
           "maxLength": 4096
         }
@@ -98,7 +98,7 @@
     "Fingerprint": {
       "description": "The fingerprint of the Sidewalk application server private key.",
       "type": "string",
-      "pattern": ""
+      "pattern": "[a-fA-F0-9]{64}"
     },
     "Arn": {
       "description": "PartnerAccount arn. Returned after successful create.",

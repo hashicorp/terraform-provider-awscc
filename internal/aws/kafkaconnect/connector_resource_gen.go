@@ -4,6 +4,7 @@ package kafkaconnect
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -254,7 +255,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Amazon Resource Name for the created Connector.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//   "type": "string"
 			// }
 			Description: "Amazon Resource Name for the created Connector.",
@@ -715,7 +716,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "CustomPluginArn": {
 			//             "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-			//             "pattern": "",
+			//             "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//             "type": "string"
 			//           },
 			//           "Revision": {
@@ -754,6 +755,9 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
 									Type:        types.StringType,
 									Required:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
+									},
 								},
 								"revision": {
 									// Property: Revision
@@ -784,12 +788,15 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):iam:.*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -809,7 +816,7 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "WorkerConfigurationArn": {
 			//       "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -836,6 +843,9 @@ func connectorResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "The Amazon Resource Name (ARN) of the worker configuration to use.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"), ""),
+						},
 					},
 				},
 			),

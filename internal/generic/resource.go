@@ -802,7 +802,7 @@ func (r *resource) populateUnknownValues(ctx context.Context, id string, state *
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
 func (r *resource) cfnTypeContext(ctx context.Context) context.Context {
-	ctx = tflog.With(ctx, LoggingKeyCFNType, r.resourceType.tfTypeName)
+	ctx = tflog.With(ctx, LoggingKeyCFNType, r.resourceType.cfTypeName)
 
 	return ctx
 }

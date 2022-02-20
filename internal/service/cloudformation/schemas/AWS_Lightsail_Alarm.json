@@ -6,7 +6,7 @@
         "AlarmName": {
             "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
             "type": "string",
-            "pattern": ""
+            "pattern": "\\w[\\w\\-]*\\w"
         },
         "MonitoredResourceName": {
             "description": "The validation status of the SSL/TLS certificate.",

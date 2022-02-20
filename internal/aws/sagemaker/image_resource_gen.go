@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the image.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image.",
@@ -44,7 +45,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A description of the image.",
 			//   "maxLength": 512,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "A description of the image.",
@@ -52,6 +53,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 512),
+				validate.StringMatch(regexp.MustCompile(".+"), ""),
 			},
 		},
 		"image_display_name": {
@@ -61,7 +63,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The display name of the image.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9 -_]+$",
 			//   "type": "string"
 			// }
 			Description: "The display name of the image.",
@@ -69,6 +71,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Optional:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9 -_]+$"), ""),
 			},
 		},
 		"image_name": {
@@ -78,7 +81,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the image.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the image.",
@@ -86,6 +89,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 63),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -98,7 +102,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
@@ -106,6 +110,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*$"), ""),
 			},
 		},
 		"tags": {

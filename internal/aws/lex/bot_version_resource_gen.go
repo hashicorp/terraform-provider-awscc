@@ -4,6 +4,7 @@ package lex
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func botVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "Unique ID of resource",
 			//   "maxLength": 10,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]+$",
 			//   "type": "string"
 			// }
 			Description: "Unique ID of resource",
@@ -35,6 +36,7 @@ func botVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 10),
+				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -47,7 +49,7 @@ func botVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The version of a bot.",
 			//   "maxLength": 5,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(DRAFT|[0-9]+)$",
 			//   "type": "string"
 			// }
 			Description: "The version of a bot.",
@@ -74,7 +76,7 @@ func botVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The version of a bot.",
 			//             "maxLength": 5,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(DRAFT|[0-9]+)$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -112,6 +114,7 @@ func botVersionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 5),
+										validate.StringMatch(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
 									},
 								},
 							},

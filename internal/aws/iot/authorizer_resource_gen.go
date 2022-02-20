@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -47,7 +48,7 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w=,@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -55,6 +56,7 @@ func authorizerResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("[\\w=,@-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

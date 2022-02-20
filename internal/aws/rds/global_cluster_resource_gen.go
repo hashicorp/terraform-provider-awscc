@@ -4,6 +4,7 @@ package rds
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -80,13 +81,16 @@ func globalClusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 			//   "type": "string"
 			// }
 			Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

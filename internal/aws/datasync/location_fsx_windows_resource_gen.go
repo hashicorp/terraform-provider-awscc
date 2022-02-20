@@ -4,6 +4,7 @@ package datasync
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -26,7 +27,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The name of the Windows domain that the FSx for Windows server belongs to.",
 			//   "maxLength": 253,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Windows domain that the FSx for Windows server belongs to.",
@@ -35,6 +36,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(253),
+				validate.StringMatch(regexp.MustCompile("^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -47,7 +49,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
@@ -55,6 +57,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(128),
+				validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -67,7 +70,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
@@ -83,7 +86,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The URL of the FSx for Windows location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the FSx for Windows location that was described.",
@@ -99,7 +102,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
 			//   "maxLength": 104,
-			//   "pattern": "",
+			//   "pattern": "^.{0,104}$",
 			//   "type": "string"
 			// }
 			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
@@ -107,6 +110,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(104),
+				validate.StringMatch(regexp.MustCompile("^.{0,104}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -121,7 +125,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -131,6 +135,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayForEach(validate.StringLenAtMost(128)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
@@ -143,7 +148,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "A subdirectory in the location's path.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "A subdirectory in the location's path.",
@@ -152,6 +157,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(4096),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -173,14 +179,14 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -204,6 +210,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:/-]+$"), ""),
 						},
 					},
 					"value": {
@@ -213,6 +220,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 256),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 						},
 					},
 				},
@@ -229,7 +237,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			// {
 			//   "description": "The user who has the permissions to access files and folders in the FSx for Windows file system.",
 			//   "maxLength": 104,
-			//   "pattern": "",
+			//   "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
 			//   "type": "string"
 			// }
 			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
@@ -237,6 +245,7 @@ func locationFSxWindowsResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(104),
+				validate.StringMatch(regexp.MustCompile("^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

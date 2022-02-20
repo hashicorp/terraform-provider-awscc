@@ -10,7 +10,7 @@
         "SchemaArn": {
           "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
           "type": "string",
-          "pattern": ""
+          "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*"
         },
         "SchemaName": {
           "description": "Name of the schema. This parameter requires RegistryName to be provided.",
@@ -41,7 +41,7 @@
     "VersionId": {
       "type": "string",
       "description": "Represents the version ID associated with the schema version.",
-      "pattern": ""
+      "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
     }
   },
   "required": [

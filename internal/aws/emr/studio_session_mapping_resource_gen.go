@@ -4,6 +4,7 @@ package emr
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -63,12 +64,15 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$"), ""),
+			},
 		},
 		"studio_id": {
 			// Property: StudioId
@@ -77,7 +81,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			//   "maxLength": 256,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^es-[0-9A-Z]+",
 			//   "type": "string"
 			// }
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
@@ -85,6 +89,7 @@ func studioSessionMappingResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 256),
+				validate.StringMatch(regexp.MustCompile("^es-[0-9A-Z]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

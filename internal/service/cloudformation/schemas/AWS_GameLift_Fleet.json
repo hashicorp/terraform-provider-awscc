@@ -60,7 +60,7 @@
         "IpRange": {
           "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
           "type": "string",
-          "pattern": ""
+          "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)"
         },
         "Protocol": {
           "description": "The network communication protocol used by the fleet.",
@@ -89,7 +89,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64,
-      "pattern": ""
+      "pattern": "^[a-z]+(-([a-z]+|\\d))*"
     },
     "LocationConfiguration": {
       "description": "A remote location where a multi-location fleet can deploy EC2 instances for game hosting.",
@@ -166,7 +166,7 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "pattern": ""
+          "pattern": "^([Cc]:\\\\game\\S+|/local/game/\\S+)"
         },
         "Parameters": {
           "description": "An optional list of parameters to pass to the server executable or Realtime script on launch.",
@@ -210,7 +210,7 @@
     "EC2InstanceType": {
       "description": "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^.*..*$"
     },
     "FleetType": {
       "description": "Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.",
@@ -224,7 +224,7 @@
       "description": "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
       "type": "string",
       "minLength": 1,
-      "pattern": ""
+      "pattern": "^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"
     },
     "Locations": {
       "type": "array",
@@ -281,14 +281,14 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^[0-9]{12}$"
     },
     "PeerVpcId": {
       "description": "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "pattern": ""
+      "pattern": "^vpc-\\S+"
     },
     "ResourceCreationLimitPolicy": {
       "description": "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
@@ -297,17 +297,17 @@
     "FleetId": {
       "description": "Unique fleet ID",
       "type": "string",
-      "pattern": ""
+      "pattern": "^fleet-\\S+"
     },
     "BuildId": {
       "description": "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+"
     },
     "ScriptId": {
       "description": "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+"
     },
     "RuntimeConfiguration": {
       "description": "Instructions for launching server processes on each instance in the fleet. Server processes run either a custom game build executable or a Realtime script. The runtime configuration defines the server executables or launch script file, launch parameters, and the number of processes to run concurrently on each instance. When creating a fleet, the runtime configuration must have at least one server process configuration; otherwise the request fails with an invalid request exception.\n\nThis parameter is required unless the parameters ServerLaunchPath and ServerLaunchParameters are defined. Runtime configuration has replaced these parameters, but fleets that use them will continue to work.",

@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type. This is used to uniquely identify a ResourceDefaultVersion",
@@ -40,36 +41,45 @@ func resourceDefaultVersionResourceType(ctx context.Context) (tfsdk.ResourceType
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"), ""),
+			},
 		},
 		"type_version_arn": {
 			// Property: TypeVersionArn
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type version.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type version.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$"), ""),
+			},
 		},
 		"version_id": {
 			// Property: VersionId
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of an existing version of the resource to set as the default.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9-]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of an existing version of the resource to set as the default.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9-]{1,128}$"), ""),
+			},
 		},
 	}
 

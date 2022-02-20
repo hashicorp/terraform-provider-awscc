@@ -6,7 +6,7 @@
     "definitions": {
         "IamPolicyArn": {
             "type": "string",
-            "pattern": ""
+            "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$"
         }
     },
     "properties": {
@@ -29,7 +29,7 @@
         "StudioId": {
             "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^es-[0-9A-Z]+",
             "minLength": 4,
             "maxLength": 256
         }

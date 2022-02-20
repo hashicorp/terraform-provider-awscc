@@ -4,6 +4,7 @@ package memorydb
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -50,12 +51,15 @@ func subnetGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the subnet group. This value must be unique as it also serves as the subnet group identifier.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the subnet group. This value must be unique as it also serves as the subnet group identifier.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9\\-]*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

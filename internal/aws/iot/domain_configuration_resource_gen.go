@@ -4,6 +4,7 @@ package iot
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -44,7 +45,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//     "DefaultAuthorizerName": {
 			//       "maxLength": 128,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[\\w=,@-]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -63,6 +64,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^[\\w=,@-]+$"), ""),
 						},
 					},
 				},
@@ -75,7 +77,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[\\w.-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -83,6 +85,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[\\w.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -151,7 +154,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "items": {
 			//     "maxLength": 2048,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 1,
@@ -164,6 +167,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Validators: []tfsdk.AttributeValidator{
 				validate.ArrayLenBetween(0, 1),
 				validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), "")),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -181,7 +185,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//       "ServerCertificateArn": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//         "type": "string"
 			//       },
 			//       "ServerCertificateStatus": {
@@ -207,6 +211,7 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
 						},
 					},
 					"server_certificate_status": {
@@ -302,12 +307,15 @@ func domainConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			// Property: ValidationCertificateArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

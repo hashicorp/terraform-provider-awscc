@@ -4,6 +4,7 @@ package amplify
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,7 +42,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -56,7 +57,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -70,7 +71,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -136,12 +137,12 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "maxLength": 255,
-			//             "pattern": "",
+			//             "pattern": "(?s).*",
 			//             "type": "string"
 			//           },
 			//           "Value": {
 			//             "maxLength": 5500,
-			//             "pattern": "",
+			//             "pattern": "(?s).*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -156,7 +157,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     },
 			//     "PullRequestEnvironmentName": {
 			//       "maxLength": 20,
-			//       "pattern": "",
+			//       "pattern": "(?s).*",
 			//       "type": "string"
 			//     },
 			//     "Stage": {
@@ -249,6 +250,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(255),
+										validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 									},
 								},
 								"value": {
@@ -257,6 +259,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(5500),
+										validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 									},
 								},
 							},
@@ -270,6 +273,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(20),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 					"stage": {
@@ -347,13 +351,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 25000),
+				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 			},
 		},
 		"custom_headers": {
@@ -362,13 +367,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 25000),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 		},
 		"custom_rules": {
@@ -381,25 +387,25 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Condition": {
 			//         "maxLength": 2048,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Source": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       },
 			//       "Status": {
 			//         "maxLength": 7,
 			//         "minLength": 3,
-			//         "pattern": "",
+			//         "pattern": ".{3,7}",
 			//         "type": "string"
 			//       },
 			//       "Target": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       }
 			//     },
@@ -420,6 +426,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 2048),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 					"source": {
@@ -428,6 +435,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 						},
 					},
 					"status": {
@@ -436,6 +444,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(3, 7),
+							validate.StringMatch(regexp.MustCompile(".{3,7}"), ""),
 						},
 					},
 					"target": {
@@ -444,6 +453,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 2048),
+							validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 						},
 					},
 				},
@@ -470,13 +480,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 		},
 		"enable_branch_auto_deletion": {
@@ -497,12 +508,12 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "properties": {
 			//       "Name": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 5500,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -523,6 +534,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(255),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 					"value": {
@@ -531,6 +543,7 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(5500),
+							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 						},
 					},
 				},
@@ -544,13 +557,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 1000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1000),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 		},
 		"name": {
@@ -559,13 +573,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
 			},
 		},
 		"oauth_token": {
@@ -573,13 +588,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1000),
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
 			},
 			// OauthToken is a write-only property.
 		},
@@ -587,11 +603,14 @@ func appResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Repository
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
+			},
 		},
 		"tags": {
 			// Property: Tags

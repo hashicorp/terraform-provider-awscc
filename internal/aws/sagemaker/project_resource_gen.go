@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -41,7 +42,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the Project.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the Project.",
@@ -57,7 +58,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The description of the project.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Description: "The description of the project.",
@@ -66,6 +67,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile(".*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -78,7 +80,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "Project Id.",
 			//   "maxLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 			//   "type": "string"
 			// }
 			Description: "Project Id.",
@@ -95,7 +97,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the project.",
 			//   "maxLength": 32,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the project.",
@@ -103,6 +105,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 32),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -141,7 +144,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "ProvisionedProductId": {
 			//       "description": "The identifier of the provisioning artifact (also known as a version).",
 			//       "maxLength": 100,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ProvisionedProductStatusMessage": {
@@ -161,6 +164,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(100),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"provisioned_product_status_message": {
@@ -186,19 +190,19 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "PathId": {
 			//       "description": "The path identifier of the product.",
 			//       "maxLength": 100,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ProductId": {
 			//       "description": "Service Catalog product identifier.",
 			//       "maxLength": 100,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ProvisioningArtifactId": {
 			//       "description": "The identifier of the provisioning artifact (also known as a version).",
 			//       "maxLength": 100,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ProvisioningParameters": {
@@ -211,13 +215,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The parameter key.",
 			//             "maxLength": 1000,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": ".*",
 			//             "type": "string"
 			//           },
 			//           "Value": {
 			//             "description": "The parameter value.",
 			//             "maxLength": 4096,
-			//             "pattern": "",
+			//             "pattern": ".*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -245,6 +249,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(100),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"product_id": {
@@ -254,6 +259,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(100),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"provisioning_artifact_id": {
@@ -263,6 +269,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(100),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
 						},
 					},
 					"provisioning_parameters": {
@@ -277,6 +284,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1000),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
 									},
 								},
 								"value": {
@@ -286,6 +294,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(4096),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
 									},
 								},
 							},
@@ -313,13 +322,13 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -342,6 +351,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 128),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 					"value": {
@@ -351,6 +361,7 @@ func projectResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenAtMost(256),
+							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 						},
 					},
 				},

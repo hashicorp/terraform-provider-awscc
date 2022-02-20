@@ -4,6 +4,7 @@ package appintegrations
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -60,7 +61,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "The unique identifer of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The unique identifer of the data integration.",
@@ -77,7 +78,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "The KMS key of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The KMS key of the data integration.",
@@ -85,6 +86,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -97,7 +99,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "The name of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the data integration.",
@@ -105,6 +107,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			},
 		},
 		"schedule_config": {
@@ -118,21 +121,21 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//       "description": "The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": ".*\\S.*",
 			//       "type": "string"
 			//     },
 			//     "Object": {
 			//       "description": "The name of the object to pull from the data source.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//       "type": "string"
 			//     },
 			//     "ScheduleExpression": {
 			//       "description": "How often the data should be pulled from data source.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": ".*\\S.*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -153,6 +156,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 						},
 					},
 					"object": {
@@ -162,6 +166,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 						},
 					},
 					"schedule_expression": {
@@ -171,6 +176,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 255),
+							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
 						},
 					},
 				},
@@ -187,7 +193,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "The URI of the data source.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URI of the data source.",
@@ -195,6 +201,7 @@ func dataIntegrationResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

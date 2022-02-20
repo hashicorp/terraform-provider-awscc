@@ -4,6 +4,7 @@ package networkfirewall
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -35,6 +36,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 256),
+				validate.StringMatch(regexp.MustCompile("^arn:aws.*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -46,7 +48,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -54,6 +56,7 @@ func loggingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

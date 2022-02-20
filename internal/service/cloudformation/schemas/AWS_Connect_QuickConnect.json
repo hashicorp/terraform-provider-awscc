@@ -15,22 +15,22 @@
     "PhoneNumber": {
       "description": "The phone number in E.164 format.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^\\+[1-9]\\d{1,14}$"
     },
     "ContactFlowArn": {
       "description": "The identifier of the contact flow.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"
     },
     "QueueArn": {
       "description": "The identifier for the queue.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"
     },
     "UserArn": {
       "description": "The identifier of the user.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"
     },
     "PhoneNumberQuickConnectConfig": {
       "description": "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
@@ -129,7 +129,7 @@
     "InstanceArn": {
       "description": "The identifier of the Amazon Connect instance.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
     },
     "Name": {
       "description": "The name of the quick connect.",
@@ -150,7 +150,7 @@
     "QuickConnectArn": {
       "description": "The Amazon Resource Name (ARN) for the quick connect.",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$"
     },
     "Tags": {
       "type": "array",

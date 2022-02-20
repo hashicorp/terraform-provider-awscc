@@ -31,7 +31,7 @@
                     "type": "string",
                     "minLength": 3,
                     "maxLength": 63,
-                    "pattern": ""
+                    "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"
                 }
             },
             "required": [
@@ -44,7 +44,7 @@
         "Name": {
             "description": "The name you want to assign to this Multi Region Access Point.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
             "minLength": 3,
             "maxLength": 50
         },

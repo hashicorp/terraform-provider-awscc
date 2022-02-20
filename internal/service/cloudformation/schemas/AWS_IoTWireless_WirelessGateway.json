@@ -9,7 +9,7 @@
       "properties": {
         "GatewayEui": {
           "type": "string",
-          "pattern": ""
+          "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
         },
         "RfRegion": {
           "type": "string",

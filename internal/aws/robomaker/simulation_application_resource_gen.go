@@ -4,6 +4,7 @@ package robomaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,7 +25,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -62,7 +63,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The name of the simulation application.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the simulation application.",
@@ -71,6 +72,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_\\-]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -93,7 +95,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//     },
 			//     "Version": {
 			//       "description": "The version of the rendering engine.",
-			//       "pattern": "",
+			//       "pattern": "1.x",
 			//       "type": "string"
 			//     }
 			//   },
@@ -122,6 +124,9 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Description: "The version of the rendering engine.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("1.x"), ""),
+						},
 					},
 				},
 			),
@@ -286,7 +291,7 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//       },
 			//       "S3Bucket": {
 			//         "description": "The Amazon S3 bucket name.",
-			//         "pattern": "",
+			//         "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]",
 			//         "type": "string"
 			//       },
 			//       "S3Key": {
@@ -326,6 +331,9 @@ func simulationApplicationResourceType(ctx context.Context) (tfsdk.ResourceType,
 						Description: "The Amazon S3 bucket name.",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("[a-z0-9][a-z0-9.\\-]*[a-z0-9]"), ""),
+						},
 					},
 					"s3_key": {
 						// Property: S3Key

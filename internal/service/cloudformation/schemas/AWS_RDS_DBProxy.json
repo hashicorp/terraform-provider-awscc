@@ -40,12 +40,12 @@
       "properties": {
         "Key": {
           "type": "string",
-          "pattern": "",
+          "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
           "maxLength": 128
         },
         "Value": {
           "type": "string",
-          "pattern": "",
+          "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
           "maxLength": 128
         }
       }
@@ -67,7 +67,7 @@
     "DBProxyName": {
       "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[0-z]*",
       "maxLength": 64
     },
     "DebugLogging": {

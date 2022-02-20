@@ -4,11 +4,13 @@ package redshift
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -24,12 +26,15 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The target AWS account ID to grant or revoke access for.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The target AWS account ID to grant or revoke access for.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^\\d{12}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -55,7 +60,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The VPCs allowed access to the cluster.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^vpc-\\d{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -142,7 +147,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID of the grantee of the cluster.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID of the grantee of the cluster.",
@@ -157,7 +162,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID of the cluster owner.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID of the cluster owner.",
@@ -188,7 +193,7 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//   "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^vpc-\\d{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -196,6 +201,9 @@ func endpointAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceType,
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^vpc-\\d{1,17}$"), "")),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
 			},

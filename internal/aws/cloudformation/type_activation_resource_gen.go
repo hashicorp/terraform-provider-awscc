@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,7 +26,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the extension.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the extension.",
@@ -73,7 +74,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//       "description": "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[\\.\\-_/#A-Za-z0-9]+$",
 			//       "type": "string"
 			//     },
 			//     "LogRoleArn": {
@@ -95,6 +96,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 512),
+							validate.StringMatch(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
 						},
 					},
 					"log_role_arn": {
@@ -137,7 +139,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// {
 			//   "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
@@ -146,6 +148,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtMost(1024),
+				validate.StringMatch(regexp.MustCompile("arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -159,7 +162,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9a-zA-Z]{40}",
 			//   "type": "string"
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
@@ -168,6 +171,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
+				validate.StringMatch(regexp.MustCompile("[0-9a-zA-Z]{40}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -207,13 +211,16 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -226,7 +233,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
 			//   "maxLength": 204,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 			//   "type": "string"
 			// }
 			Description: "An alias to assign to the public extension in this account and region. If you specify an alias for the extension, you must then use the alias to refer to the extension in your templates.",
@@ -235,6 +242,7 @@ func typeActivationResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 204),
+				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

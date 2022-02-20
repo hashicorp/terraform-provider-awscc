@@ -7,7 +7,7 @@
     "ResourceArn": {
       "description": "A resource ARN.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws.*$",
       "minLength": 1,
       "maxLength": 256
     },
@@ -54,7 +54,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^[a-zA-Z0-9-]+$"
     },
     "FirewallArn": {
       "$ref": "#/definitions/ResourceArn"
@@ -63,7 +63,7 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36,
-      "pattern": ""
+      "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$"
     },
     "FirewallPolicyArn": {
       "$ref": "#/definitions/ResourceArn"
@@ -72,7 +72,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 128,
-      "pattern": ""
+      "pattern": "^vpc-[0-9a-f]+$"
     },
     "SubnetMappings": {
       "type": "array",
@@ -95,7 +95,7 @@
     "Description": {
       "type": "string",
       "maxLength": 512,
-      "pattern": ""
+      "pattern": "^.*$"
     },
     "EndpointIds": {
       "type": "array",

@@ -4,11 +4,13 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -210,7 +212,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "FrameOption": {
-			//               "pattern": "",
+			//               "pattern": "^(DENY|SAMEORIGIN)$",
 			//               "type": "string"
 			//             },
 			//             "Override": {
@@ -230,7 +232,7 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//               "type": "boolean"
 			//             },
 			//             "ReferrerPolicy": {
-			//               "pattern": "",
+			//               "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -470,6 +472,9 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 												// Property: FrameOption
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^(DENY|SAMEORIGIN)$"), ""),
+												},
 											},
 											"override": {
 												// Property: Override
@@ -493,6 +498,9 @@ func responseHeadersPolicyResourceType(ctx context.Context) (tfsdk.ResourceType,
 												// Property: ReferrerPolicy
 												Type:     types.StringType,
 												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringMatch(regexp.MustCompile("^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$"), ""),
+												},
 											},
 										},
 									),

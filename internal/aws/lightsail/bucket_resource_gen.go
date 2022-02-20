@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -90,7 +91,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name for the bucket.",
 			//   "maxLength": 54,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name for the bucket.",
@@ -98,6 +99,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 54),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

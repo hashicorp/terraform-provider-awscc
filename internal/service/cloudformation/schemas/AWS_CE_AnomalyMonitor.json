@@ -6,7 +6,7 @@
     "Arn": {
       "description": "Monitor ARN",
       "type": "string",
-      "pattern": ""
+      "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
     }
   },
   "properties": {
@@ -23,7 +23,7 @@
     "MonitorName": {
       "description": "The name of the monitor.",
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\S\\s]*",
       "minLength": 0,
       "maxLength": 1024
     },
@@ -32,21 +32,21 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 40,
-      "pattern": ""
+      "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?"
     },
     "LastEvaluatedDate": {
       "description": "The date when the monitor last evaluated for anomalies.",
       "type": "string",
       "minLength": 0,
       "maxLength": 40,
-      "pattern": ""
+      "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?"
     },
     "LastUpdatedDate": {
       "description": "The date when the monitor was last updated.",
       "type": "string",
       "minLength": 0,
       "maxLength": 40,
-      "pattern": ""
+      "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?"
     },
     "MonitorDimension": {
       "description": "The dimensions to evaluate",

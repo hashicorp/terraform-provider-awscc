@@ -4,6 +4,7 @@ package iotwireless
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -84,7 +85,7 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			//   "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
 			//   "properties": {
 			//     "GatewayEui": {
-			//       "pattern": "",
+			//       "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$",
 			//       "type": "string"
 			//     },
 			//     "RfRegion": {
@@ -105,6 +106,9 @@ func wirelessGatewayResourceType(ctx context.Context) (tfsdk.ResourceType, error
 						// Property: GatewayEui
 						Type:     types.StringType,
 						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"), ""),
+						},
 					},
 					"rf_region": {
 						// Property: RfRegion

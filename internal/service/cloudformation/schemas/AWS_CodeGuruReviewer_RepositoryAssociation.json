@@ -33,7 +33,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 100,
-      "pattern": ""
+      "pattern": "^\\S[\\w.-]*$"
     },
     "Type": {
       "description": "The type of repository to be associated.",
@@ -50,28 +50,28 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 100,
-      "pattern": ""
+      "pattern": "^\\S(.*\\S)?$"
     },
     "BucketName": {
       "description": "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
       "type": "string",
       "minLength": 3,
       "maxLength": 63,
-      "pattern": ""
+      "pattern": "^\\S(.*\\S)?$"
     },
     "ConnectionArn": {
       "description": "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
       "type": "string",
       "minLength": 0,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
     },
     "AssociationArn": {
       "description": "The Amazon Resource Name (ARN) of the repository association.",
       "type": "string",
       "minLength": 0,
       "maxLength": 256,
-      "pattern": ""
+      "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
     },
     "Tags": {
       "description": "The tags associated with a repository association.",

@@ -4,6 +4,7 @@ package groundstation
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -58,7 +59,7 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//             "type": "integer"
 			//           },
 			//           "Name": {
-			//             "pattern": "",
+			//             "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -124,6 +125,9 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 									// Property: Name
 									Type:     types.StringType,
 									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9_:-]{1,256}$"), ""),
+									},
 								},
 							},
 						),
@@ -180,11 +184,11 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -198,11 +202,17 @@ func dataflowEndpointGroupResourceType(ctx context.Context) (tfsdk.ResourceType,
 						// Property: Key
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$"), ""),
+						},
 					},
 					"value": {
 						// Property: Value
 						Type:     types.StringType,
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$"), ""),
+						},
 					},
 				},
 				tfsdk.ListNestedAttributesOptions{},

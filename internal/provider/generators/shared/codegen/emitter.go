@@ -19,7 +19,8 @@ const (
 	HasUpdatableProperty    Features = 1 << iota // At least one property can be updated.
 	HasRequiredRootProperty                      // At least one root property is required.
 	UsesFrameworkAttr                            // Uses a type from the terraform-plugin-framework/attr package.
-	UsesValidation                               // Uses a type from the internal/validate package.
+	UsesRegexpInValidation                       // Uses a type from the Go standard regexp package for attribute validation.
+	UsesValidation                               // Uses a type or function from the internal/validate package.
 	HasIDRootProperty                            // Has a root property named "id"
 )
 
@@ -133,27 +134,30 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	case cfschema.PropertyTypeInteger:
 		e.printf("Type:types.Int64Type,\n")
 
-		if v, err := integerValidators(path, property); err != nil {
+		if f, v, err := integerValidators(path, property); err != nil {
 			return 0, err
 		} else if len(v) > 0 {
+			features |= f
 			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeNumber:
 		e.printf("Type:types.Float64Type,\n")
 
-		if v, err := numberValidators(path, property); err != nil {
+		if f, v, err := numberValidators(path, property); err != nil {
 			return 0, err
 		} else if len(v) > 0 {
+			features |= f
 			validators = append(validators, v...)
 		}
 
 	case cfschema.PropertyTypeString:
 		e.printf("Type:types.StringType,\n")
 
-		if v, err := stringValidators(path, property); err != nil {
+		if f, v, err := stringValidators(path, property); err != nil {
 			return 0, err
 		} else if len(v) > 0 {
+			features |= f
 			validators = append(validators, v...)
 		}
 
@@ -243,9 +247,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				if validatorsGenerator != nil {
-					if v, err := validatorsGenerator(path, property.Items); err != nil {
+					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
 						return 0, err
 					} else if len(v) > 0 {
+						features |= f
 						for _, v := range v {
 							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
 						}
@@ -346,9 +351,10 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				if validatorsGenerator != nil {
-					if v, err := validatorsGenerator(path, property.Items); err != nil {
+					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
 						return 0, err
 					} else if len(v) > 0 {
+						features |= f
 						for _, v := range v {
 							validators = append(validators, fmt.Sprintf("validate.ArrayForEach(%s)", v))
 						}
@@ -608,6 +614,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			}
 			e.printf("},\n")
 		}
+	} else {
+		features &^= UsesRegexpInValidation
 	}
 
 	if computed {
@@ -897,12 +905,14 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	}
 }
 
-type primitiveValidatorsGenerator func([]string, *cfschema.Property) ([]string, error)
+type primitiveValidatorsGenerator func([]string, *cfschema.Property) (Features, []string, error)
 
 // integerValidators returns any validators for the specified integer Property.
-func integerValidators(path []string, property *cfschema.Property) ([]string, error) {
+func integerValidators(path []string, property *cfschema.Property) (Features, []string, error) {
+	var features Features
+
 	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeInteger {
-		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+		return features, nil, fmt.Errorf("invalid property type: %s", propertyType)
 	}
 
 	var validators []string
@@ -917,7 +927,7 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 
 	if property.Format != nil {
 		if format := *property.Format; format != "int64" {
-			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
+			return features, nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 
@@ -932,13 +942,15 @@ func integerValidators(path []string, property *cfschema.Property) ([]string, er
 		validators = append(validators, w.String())
 	}
 
-	return validators, nil
+	return features, validators, nil
 }
 
 // numberValidators returns any validators for the specified number Property.
-func numberValidators(path []string, property *cfschema.Property) ([]string, error) {
+func numberValidators(path []string, property *cfschema.Property) (Features, []string, error) {
+	var features Features
+
 	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeNumber {
-		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+		return features, nil, fmt.Errorf("invalid property type: %s", propertyType)
 	}
 
 	var validators []string
@@ -953,21 +965,23 @@ func numberValidators(path []string, property *cfschema.Property) ([]string, err
 
 	if property.Format != nil {
 		if format := *property.Format; format != "double" {
-			return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
+			return features, nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
 		}
 	}
 
 	if len(property.Enum) > 0 {
-		return nil, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
+		return features, nil, fmt.Errorf("%s has enumerated values", strings.Join(path, "/"))
 	}
 
-	return validators, nil
+	return features, validators, nil
 }
 
 // stringValidators returns any validators for the specified string Property.
-func stringValidators(path []string, property *cfschema.Property) ([]string, error) {
+func stringValidators(path []string, property *cfschema.Property) (Features, []string, error) {
+	var features Features
+
 	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
-		return nil, fmt.Errorf("invalid property type: %s", propertyType)
+		return features, nil, fmt.Errorf("invalid property type: %s", propertyType)
 	}
 
 	var validators []string
@@ -978,6 +992,11 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 		validators = append(validators, fmt.Sprintf("validate.StringLenAtMost(%d)", *property.MaxLength))
 	} else if property.MinLength != nil && property.MaxLength != nil {
 		validators = append(validators, fmt.Sprintf("validate.StringLenBetween(%d,%d)", *property.MinLength, *property.MaxLength))
+	}
+
+	if property.Pattern != nil && *property.Pattern != "" {
+		features |= UsesRegexpInValidation
+		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(%q), \"\")", *property.Pattern))
 	}
 
 	if property.Format != nil {
@@ -1005,7 +1024,7 @@ func stringValidators(path []string, property *cfschema.Property) ([]string, err
 		validators = append(validators, w.String())
 	}
 
-	return validators, nil
+	return features, validators, nil
 }
 
 func addPropertyRequiredAttributes(writer io.Writer, p *cfschema.PropertySubschema) int {

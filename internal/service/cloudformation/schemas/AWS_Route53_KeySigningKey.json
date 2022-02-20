@@ -5,7 +5,7 @@
         "HostedZoneId": {
             "description": "The unique string (ID) used to identify a hosted zone.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[A-Z0-9]{1,32}$"
         },
         "Status": {
             "description": "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
@@ -18,7 +18,7 @@
         "Name": {
             "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
             "type": "string",
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9_]{3,128}$"
         },
         "KeyManagementServiceArn": {
             "description": "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",

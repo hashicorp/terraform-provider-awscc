@@ -4,6 +4,7 @@ package gamelift
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,13 +26,16 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
-			//   "pattern": "",
+			//   "pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^build-\\S+|^arn:.*:build\\/build-\\S+"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -129,7 +133,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       },
 			//       "IpRange": {
 			//         "description": "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-			//         "pattern": "",
+			//         "pattern": "(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)",
 			//         "type": "string"
 			//       },
 			//       "Protocol": {
@@ -175,6 +179,9 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
 						Type:        types.StringType,
 						Required:    true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.StringMatch(regexp.MustCompile("(^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$)"), ""),
+						},
 					},
 					"protocol": {
 						// Property: Protocol
@@ -213,13 +220,16 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
-			//   "pattern": "",
+			//   "pattern": "^.*..*$",
 			//   "type": "string"
 			// }
 			Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^.*..*$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -230,7 +240,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Unique fleet ID",
-			//   "pattern": "",
+			//   "pattern": "^fleet-\\S+",
 			//   "type": "string"
 			// }
 			Description: "Unique fleet ID",
@@ -272,7 +282,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
@@ -281,6 +291,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenAtLeast(1),
+				validate.StringMatch(regexp.MustCompile("^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -299,7 +310,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "Location": {
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-z]+(-([a-z]+|\\d))*",
 			//         "type": "string"
 			//       },
 			//       "LocationCapacity": {
@@ -347,6 +358,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(1, 64),
+							validate.StringMatch(regexp.MustCompile("^[a-z]+(-([a-z]+|\\d))*"), ""),
 						},
 					},
 					"location_capacity": {
@@ -513,7 +525,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.",
@@ -522,6 +534,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -535,7 +548,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^vpc-\\S+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
@@ -544,6 +557,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("^vpc-\\S+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -630,7 +644,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "description": "The location of the server executable in a custom game build or the name of the Realtime script file that contains the Init() function. Game builds and Realtime scripts are installed on instances at the root:\n\nWindows (for custom game builds only): C:\\game. Example: \"C:\\game\\MyGame\\server.exe\"\n\nLinux: /local/game. Examples: \"/local/game/MyGame/server.exe\" or \"/local/game/MyRealtimeScript.js\"",
 			//             "maxLength": 1024,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^([Cc]:\\\\game\\S+|/local/game/\\S+)",
 			//             "type": "string"
 			//           },
 			//           "Parameters": {
@@ -694,6 +708,7 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
+										validate.StringMatch(regexp.MustCompile("^([Cc]:\\\\game\\S+|/local/game/\\S+)"), ""),
 									},
 								},
 								"parameters": {
@@ -725,13 +740,16 @@ func fleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
-			//   "pattern": "",
+			//   "pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.\n\nNote: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^script-\\S+|^arn:.*:script\\/script-\\S+"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -262,7 +263,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "items": {
 			//                   "maxLength": 30,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "[a-zA-Z0-9\\.\\*]+",
 			//                   "type": "string"
 			//                 },
 			//                 "type": "array",
@@ -620,7 +621,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "LaunchTemplateName": {
 			//                 "maxLength": 128,
 			//                 "minLength": 3,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
 			//                 "type": "string"
 			//               },
 			//               "Version": {
@@ -753,7 +754,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                       "items": {
 			//                         "maxLength": 30,
 			//                         "minLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[a-zA-Z0-9\\.\\*]+",
 			//                         "type": "string"
 			//                       },
 			//                       "type": "array",
@@ -1342,6 +1343,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
 												},
 											},
 											"instance_generations": {
@@ -1810,6 +1812,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(3, 128),
+													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
 												},
 											},
 											"version": {
@@ -1973,6 +1976,7 @@ func spotFleetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 															Optional: true,
 															Validators: []tfsdk.AttributeValidator{
 																validate.ArrayForEach(validate.StringLenBetween(1, 30)),
+																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), "")),
 															},
 														},
 														"instance_generations": {

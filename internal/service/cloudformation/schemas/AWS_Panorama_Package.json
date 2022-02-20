@@ -7,13 +7,13 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_]+$"
         },
         "NodePackageId": {
             "type": "string",
             "minLength": 1,
             "maxLength": 255,
-            "pattern": ""
+            "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$"
         },
         "NodePackageArn": {
             "type": "string",
@@ -51,13 +51,13 @@
                     "type": "string",
                     "minLength": 1,
                     "maxLength": 128,
-                    "pattern": ""
+                    "pattern": "^.+$"
                 },
                 "Value": {
                     "type": "string",
                     "minLength": 0,
                     "maxLength": 256,
-                    "pattern": ""
+                    "pattern": "^.+$"
                 }
             },
             "required": [

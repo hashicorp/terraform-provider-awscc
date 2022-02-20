@@ -4,6 +4,7 @@ package robomaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -24,11 +25,14 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// Property: Application
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Required: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
@@ -49,7 +53,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -65,7 +69,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			//   "description": "The revision ID of robot application.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The revision ID of robot application.",
@@ -74,6 +78,7 @@ func robotApplicationVersionResourceType(ctx context.Context) (tfsdk.ResourceTyp
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 40),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.\\-]*"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

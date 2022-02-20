@@ -4,11 +4,13 @@ package signer
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -59,12 +61,15 @@ func profilePermissionResourceType(ctx context.Context) (tfsdk.ResourceType, err
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]{10}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
 			Optional: true,
 			Computed: true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z]{10}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

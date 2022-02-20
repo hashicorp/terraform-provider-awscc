@@ -4,6 +4,7 @@ package sso
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The sso instance that the permission set is owned.",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 			//   "type": "string"
 			// }
 			Description: "The sso instance that the permission set is owned.",
@@ -35,6 +36,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
+				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -47,7 +49,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The permission set that the assignemt will be assigned",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 			//   "type": "string"
 			// }
 			Description: "The permission set that the assignemt will be assigned",
@@ -55,6 +57,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(10, 1224),
+				validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -67,7 +70,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The assignee's identifier, user id/group id",
 			//   "maxLength": 47,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "The assignee's identifier, user id/group id",
@@ -75,6 +78,7 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 47),
+				validate.StringMatch(regexp.MustCompile("^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -109,12 +113,15 @@ func assignmentResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The account id to be provisioned.",
-			//   "pattern": "",
+			//   "pattern": "\\d{12}",
 			//   "type": "string"
 			// }
 			Description: "The account id to be provisioned.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("\\d{12}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

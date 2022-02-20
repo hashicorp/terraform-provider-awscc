@@ -6,7 +6,7 @@
     "PolicyName": {
       "description": "A name for resource policy",
       "type": "string",
-      "pattern": "",
+      "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
       "minLength": 1,
       "maxLength": 255
     },

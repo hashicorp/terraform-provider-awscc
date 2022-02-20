@@ -4,6 +4,7 @@ package lightsail
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -208,7 +209,7 @@ func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name to use for your new Lightsail database resource.",
 			//   "maxLength": 255,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "\\w[\\w\\-]*\\w",
 			//   "type": "string"
 			// }
 			Description: "The name to use for your new Lightsail database resource.",
@@ -216,6 +217,7 @@ func databaseResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(2, 255),
+				validate.StringMatch(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

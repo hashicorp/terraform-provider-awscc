@@ -4,6 +4,7 @@ package apprunner
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -49,7 +50,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The KMS Key",
 			//       "maxLength": 256,
 			//       "minLength": 0,
-			//       "pattern": "",
+			//       "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -68,6 +69,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Required:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(0, 256),
+							validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
 						},
 					},
 				},
@@ -192,21 +194,21 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "CPU",
 			//       "maxLength": 6,
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "1024|2048|(1|2) vCPU",
 			//       "type": "string"
 			//     },
 			//     "InstanceRoleArn": {
 			//       "description": "Instance Role Arn",
 			//       "maxLength": 102,
 			//       "minLength": 29,
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 			//       "type": "string"
 			//     },
 			//     "Memory": {
 			//       "description": "Memory",
 			//       "maxLength": 4,
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "2048|3072|4096|(2|3|4) GB",
 			//       "type": "string"
 			//     }
 			//   },
@@ -222,6 +224,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(4, 6),
+							validate.StringMatch(regexp.MustCompile("1024|2048|(1|2) vCPU"), ""),
 						},
 					},
 					"instance_role_arn": {
@@ -231,6 +234,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(29, 102),
+							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
 						},
 					},
 					"memory": {
@@ -240,6 +244,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(4, 4),
+							validate.StringMatch(regexp.MustCompile("2048|3072|4096|(2|3|4) GB"), ""),
 						},
 					},
 				},
@@ -361,7 +366,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The AppRunner Service Name.",
 			//   "maxLength": 40,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
 			//   "type": "string"
 			// }
 			Description: "The AppRunner Service Name.",
@@ -370,6 +375,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(4, 40),
+				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9-_]{3,39}"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -405,7 +411,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Access Role Arn",
 			//           "maxLength": 102,
 			//           "minLength": 29,
-			//           "pattern": "",
+			//           "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 			//           "type": "string"
 			//         },
 			//         "ConnectionArn": {
@@ -560,7 +566,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "description": "Image Identifier",
 			//           "maxLength": 1024,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
 			//           "type": "string"
 			//         },
 			//         "ImageRepositoryType": {
@@ -596,6 +602,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(29, 102),
+										validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
 									},
 								},
 								"connection_arn": {
@@ -789,6 +796,7 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 1024),
+										validate.StringMatch(regexp.MustCompile("([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)"), ""),
 									},
 								},
 								"image_repository_type": {

@@ -4,6 +4,7 @@ package config
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,12 +40,15 @@ func aggregationAuthorizationResourceType(ctx context.Context) (tfsdk.ResourceTy
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The 12-digit account ID of the account authorized to aggregate data.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The 12-digit account ID of the account authorized to aggregate data.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^\\d{12}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

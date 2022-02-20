@@ -4,6 +4,7 @@ package s3outposts
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the specified AccessPoint.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/accesspoint\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified AccessPoint.",
@@ -44,7 +45,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
@@ -52,6 +53,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(20, 2048),
+				validate.StringMatch(regexp.MustCompile("^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
@@ -64,7 +66,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "A name for the AccessPoint.",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "A name for the AccessPoint.",
@@ -72,6 +74,7 @@ func accessPointResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(3, 50),
+				validate.StringMatch(regexp.MustCompile("^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

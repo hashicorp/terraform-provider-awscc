@@ -32,14 +32,14 @@
         "Bucket": {
           "description": "Specifies the S3 bucket that contains the file being copied.",
           "type": "string",
-          "pattern": "",
+          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
           "minLength": 3,
           "maxLength": 63
         },
         "Key": {
           "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
           "type": "string",
-          "pattern": "",
+          "pattern": ".*",
           "minLength": 0,
           "maxLength": 1024
         }
@@ -70,7 +70,7 @@
             "Name": {
               "description": "The name of the step, used as an identifier.",
               "type": "string",
-              "pattern": "",
+              "pattern": "^[\\w-]*$",
               "minLength": 0,
               "maxLength": 30
             },
@@ -92,14 +92,14 @@
             "Name": {
               "description": "The name of the step, used as an identifier.",
               "type": "string",
-              "pattern": "",
+              "pattern": "^[\\w-]*$",
               "minLength": 0,
               "maxLength": 30
             },
             "Target": {
               "description": "The ARN for the lambda function that is being called.",
               "type": "string",
-              "pattern": "",
+              "pattern": "arn:[a-z-]+:lambda:.*$",
               "minLength": 0,
               "maxLength": 170
             },
@@ -119,7 +119,7 @@
             "Name": {
               "description": "The name of the step, used as an identifier.",
               "type": "string",
-              "pattern": "",
+              "pattern": "^[\\w-]*$",
               "minLength": 0,
               "maxLength": 30
             }
@@ -133,7 +133,7 @@
             "Name": {
               "description": "The name of the step, used as an identifier.",
               "type": "string",
-              "pattern": "",
+              "pattern": "^[\\w-]*$",
               "minLength": 0,
               "maxLength": 30
             },
@@ -220,21 +220,21 @@
     "Description": {
       "description": "A textual description for the workflow.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[\\w\\- ]*$",
       "minLength": 0,
       "maxLength": 256
     },
     "WorkflowId": {
       "description": "A unique identifier for the workflow.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^w-([a-z0-9]{17})$",
       "minLength": 19,
       "maxLength": 19
     },
     "Arn": {
       "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
       "type": "string",
-      "pattern": "",
+      "pattern": "arn:.*",
       "minLength": 20,
       "maxLength": 1600
     }

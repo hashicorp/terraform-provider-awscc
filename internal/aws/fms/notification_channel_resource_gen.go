@@ -4,6 +4,7 @@ package fms
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]+)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -35,6 +36,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("^([^\\s]+)$"), ""),
 			},
 		},
 		"sns_topic_arn": {
@@ -44,7 +46,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]+)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -52,6 +54,7 @@ func notificationChannelResourceType(ctx context.Context) (tfsdk.ResourceType, e
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 1024),
+				validate.StringMatch(regexp.MustCompile("^([^\\s]+)$"), ""),
 			},
 		},
 	}

@@ -4,6 +4,7 @@ package memorydb
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -25,12 +26,15 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the Access Control List to associate with the cluster.",
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the Access Control List to associate with the cluster.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z0-9\\-]*"), ""),
+			},
 		},
 		"arn": {
 			// Property: ARN
@@ -105,12 +109,15 @@ func clusterResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9\\-]*"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},

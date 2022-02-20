@@ -42,7 +42,7 @@
             "additionalProperties": false,
             "properties": {
                 "CookieBehavior": {
-                    "pattern": "",
+                    "pattern": "^(none|whitelist|allExcept|all)$",
                     "type": "string"
                 },
                 "Cookies": {
@@ -62,7 +62,7 @@
             "additionalProperties": false,
             "properties": {
                 "HeaderBehavior": {
-                    "pattern": "",
+                    "pattern": "^(none|whitelist)$",
                     "type": "string"
                 },
                 "Headers": {
@@ -109,7 +109,7 @@
             "additionalProperties": false,
             "properties": {
                 "QueryStringBehavior": {
-                    "pattern": "",
+                    "pattern": "^(none|whitelist|allExcept|all)$",
                     "type": "string"
                 },
                 "QueryStrings": {

@@ -6,7 +6,7 @@
     "Arn": {
       "description": "The ARN of the ReplicationSet.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
       "maxLength": 1000
     },
     "RegionName": {

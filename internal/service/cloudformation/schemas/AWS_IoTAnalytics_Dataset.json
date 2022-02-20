@@ -112,7 +112,7 @@
             "properties": {
                 "ActionName": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9_]+$",
                     "minLength": 1,
                     "maxLength": 128
                 },
@@ -161,7 +161,7 @@
             "properties": {
                 "InputName": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
                     "minLength": 1,
                     "maxLength": 128
                 },
@@ -185,7 +185,7 @@
                 },
                 "RuleName": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9_]+$",
                     "minLength": 1,
                     "maxLength": 128
                 }
@@ -371,7 +371,7 @@
             "properties": {
                 "FileName": {
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[\\w\\.-]{1,255}$"
                 }
             },
             "required": [
@@ -399,13 +399,13 @@
                 },
                 "Bucket": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9.\\-_]*$",
                     "minLength": 3,
                     "maxLength": 255
                 },
                 "Key": {
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9!_.*'()/{}:-]*$",
                     "minLength": 1,
                     "maxLength": 255
                 },

@@ -29,7 +29,7 @@
     },
     "AuthorizerName": {
       "type": "string",
-      "pattern": "",
+      "pattern": "[\\w=,@-]+",
       "minLength": 1,
       "maxLength": 128
     },

@@ -4,6 +4,7 @@ package logs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -44,7 +45,7 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "A name for resource policy",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 			//   "type": "string"
 			// }
 			Description: "A name for resource policy",
@@ -52,6 +53,7 @@ func resourcePolicyResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Required:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 255),
+				validate.StringMatch(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),

@@ -4,6 +4,7 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -44,13 +45,16 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			//   "pattern": "",
+			//   "pattern": "UserName",
 			//   "type": "string"
 			// }
 			Description: "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("UserName"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
@@ -146,7 +150,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// {
 			//   "description": "The user profile Amazon Resource Name (ARN).",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:user-profile/.*",
 			//   "type": "string"
 			// }
 			Description: "The user profile Amazon Resource Name (ARN).",
@@ -186,7 +190,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The user profile Amazon Resource Name (ARN).",
 			//       "maxLength": 2048,
 			//       "minLength": 20,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//       "type": "string"
 			//     },
 			//     "JupyterServerAppSettings": {
@@ -237,13 +241,13 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "SageMakerImageArn": {
 			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
 			//               "description": "The ARN of the image version created on the instance.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -265,13 +269,13 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "AppImageConfigName": {
 			//                 "description": "The Name of the AppImageConfig.",
 			//                 "maxLength": 63,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//                 "type": "string"
 			//               },
 			//               "ImageName": {
 			//                 "description": "The name of the CustomImage. Must be unique to your account.",
 			//                 "maxLength": 63,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
 			//                 "type": "string"
 			//               },
 			//               "ImageVersionNumber": {
@@ -336,13 +340,13 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "SageMakerImageArn": {
 			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
 			//               "description": "The ARN of the image version created on the instance.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -355,7 +359,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//       "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 			//       "items": {
 			//         "maxLength": 32,
-			//         "pattern": "",
+			//         "pattern": "[-0-9a-zA-Z]+",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 5,
@@ -378,13 +382,13 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         "S3KmsKeyId": {
 			//           "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 			//           "maxLength": 2048,
-			//           "pattern": "",
+			//           "pattern": ".*",
 			//           "type": "string"
 			//         },
 			//         "S3OutputPath": {
 			//           "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -403,6 +407,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Optional:    true,
 						Validators: []tfsdk.AttributeValidator{
 							validate.StringLenBetween(20, 2048),
+							validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 						},
 					},
 					"jupyter_server_app_settings": {
@@ -463,6 +468,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -472,6 +478,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 												},
 											},
 										},
@@ -499,6 +506,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(63),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
 												},
 											},
 											"image_name": {
@@ -508,6 +516,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(63),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
 												},
 											},
 											"image_version_number": {
@@ -581,6 +590,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
 												},
 											},
 											"sage_maker_image_version_arn": {
@@ -590,6 +600,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												Optional:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(256),
+													validate.StringMatch(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
 												},
 											},
 										},
@@ -608,6 +619,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Validators: []tfsdk.AttributeValidator{
 							validate.ArrayLenBetween(0, 5),
 							validate.ArrayForEach(validate.StringLenAtMost(32)),
+							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
 						},
 					},
 					"sharing_settings": {
@@ -634,6 +646,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(2048),
+										validate.StringMatch(regexp.MustCompile(".*"), ""),
 									},
 								},
 								"s3_output_path": {
@@ -643,6 +656,7 @@ func userProfileResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenAtMost(1024),
+										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
 									},
 								},
 							},

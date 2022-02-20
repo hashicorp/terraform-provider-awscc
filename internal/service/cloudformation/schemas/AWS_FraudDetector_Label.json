@@ -28,7 +28,7 @@
     "Name": {
       "description": "The name of the label.",
       "type": "string",
-      "pattern": "",
+      "pattern": "^[0-9a-z_-]+$",
       "minLength": 1,
       "maxLength": 64
     },

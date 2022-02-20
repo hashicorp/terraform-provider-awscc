@@ -10,7 +10,7 @@
                 "Name" : {
                     "description": "The name of the event destination set.",
                     "type": "string",
-                    "pattern": ""
+                    "pattern": "^[a-zA-Z0-9_-]{0,64}$"
                 },
                 "Enabled" : {
                     "description" : "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
@@ -85,14 +85,14 @@
                 "DefaultDimensionValue" : {
                     "description" : "The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9_-]{1,256}$",
                     "maxLength": 256,
                     "minLength": 1
                 },
                 "DimensionName" : {
                     "description" : "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
                     "type": "string",
-                    "pattern": "",
+                    "pattern": "^[a-zA-Z0-9_-]{1,256}$",
                     "maxLength": 256,
                     "minLength": 1
                 }

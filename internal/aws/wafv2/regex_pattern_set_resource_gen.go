@@ -4,6 +4,7 @@ package wafv2
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,19 +40,22 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Description of the entity.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
 			//   "type": "string"
 			// }
 			Description: "Description of the entity.",
 			Type:        types.StringType,
 			Optional:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$"), ""),
+			},
 		},
 		"id": {
 			// Property: Id
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Id of the RegexPatternSet",
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
 			//   "type": "string"
 			// }
 			Description: "Id of the RegexPatternSet",
@@ -66,13 +70,16 @@ func regexPatternSetResourceType(ctx context.Context) (tfsdk.ResourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name of the RegexPatternSet.",
-			//   "pattern": "",
+			//   "pattern": "^[0-9A-Za-z_-]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "Name of the RegexPatternSet.",
 			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("^[0-9A-Za-z_-]{1,128}$"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),

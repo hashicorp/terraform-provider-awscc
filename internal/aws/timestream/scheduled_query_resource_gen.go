@@ -4,6 +4,7 @@ package timestream
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -72,7 +73,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//           "description": "Name of the S3 bucket under which error reports will be created.",
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         },
 			//         "EncryptionOption": {
@@ -87,7 +88,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//           "description": "Prefix for error report keys.",
 			//           "maxLength": 896,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+",
 			//           "type": "string"
 			//         }
 			//       },
@@ -117,6 +118,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Required:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"), ""),
 									},
 								},
 								"encryption_option": {
@@ -138,6 +140,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional:    true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(1, 896),
+										validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+"), ""),
 									},
 								},
 							},
@@ -424,7 +427,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
@@ -433,6 +436,7 @@ func scheduledQueryResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(1, 64),
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_.-]+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

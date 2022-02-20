@@ -4,6 +4,7 @@ package codestarconnections
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.",
@@ -77,7 +78,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.",
@@ -86,6 +87,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 256),
+				validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
@@ -99,7 +101,7 @@ func connectionResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "description": "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.",

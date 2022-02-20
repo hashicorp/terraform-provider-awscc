@@ -6,7 +6,7 @@
         "ResourceArn": {
             "description": "A resource ARN.",
             "type": "string",
-            "pattern": "",
+            "pattern": "^([^\\s]+)$",
             "minLength": 1,
             "maxLength": 1024
         }

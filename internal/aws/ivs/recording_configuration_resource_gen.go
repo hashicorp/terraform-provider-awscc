@@ -4,6 +4,7 @@ package ivs
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -27,7 +28,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
@@ -51,7 +52,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//         "BucketName": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9-.]+$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -80,6 +81,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 									Required: true,
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(3, 63),
+										validate.StringMatch(regexp.MustCompile("^[a-z0-9-.]+$"), ""),
 									},
 									PlanModifiers: []tfsdk.AttributePlanModifier{
 										tfsdk.RequiresReplace(),
@@ -106,7 +108,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			//   "description": "Recording Configuration Name.",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]*$",
 			//   "type": "string"
 			// }
 			Description: "Recording Configuration Name.",
@@ -115,6 +117,7 @@ func recordingConfigurationResourceType(ctx context.Context) (tfsdk.ResourceType
 			Computed:    true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringLenBetween(0, 128),
+				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_]*$"), ""),
 			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),

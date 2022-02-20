@@ -4,6 +4,7 @@ package athena
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -55,12 +56,15 @@ func workGroupResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The workGroup name.",
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9._-]{1,128}",
 			//   "type": "string"
 			// }
 			Description: "The workGroup name.",
 			Type:        types.StringType,
 			Required:    true,
+			Validators: []tfsdk.AttributeValidator{
+				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9._-]{1,128}"), ""),
+			},
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.RequiresReplace(),
 			},
