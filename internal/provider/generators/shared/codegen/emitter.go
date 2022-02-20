@@ -996,7 +996,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 
 	if property.Pattern != nil && *property.Pattern != "" {
 		features |= UsesRegexpInValidation
-		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(`%s`), \"\")", *property.Pattern))
+		validators = append(validators, fmt.Sprintf("validate.StringMatch(regexp.MustCompile(%q), \"\")", *property.Pattern))
 	}
 
 	if property.Format != nil {
