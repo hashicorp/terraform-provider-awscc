@@ -1,4 +1,9 @@
 ## 0.13.0 (Unreleased)
+
+FEATURES:
+
+Support property `pattern` validation ([#88](https://github.com/hashicorp/terraform-provider-awscc/issues/88))
+
 ## [0.12.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.12.0) (February 17, 2022)
 
 BREAKING CHANGES:
