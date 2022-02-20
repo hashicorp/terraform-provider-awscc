@@ -10,7 +10,7 @@ require (
 	github.com/aws/smithy-go v1.10.0
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.7
-	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.15.1-0.20220218205657-286a497ed650
+	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.16.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.3
 	github.com/hashicorp/go-hclog v1.0.0
 	github.com/hashicorp/go-multierror v1.1.1
