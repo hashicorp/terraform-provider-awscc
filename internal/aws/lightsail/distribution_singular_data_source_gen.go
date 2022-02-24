@@ -330,7 +330,7 @@ func distributionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name for the distribution.",
-			//   "pattern": "",
+			//   "pattern": "\\w[\\w\\-]*\\w",
 			//   "type": "string"
 			// }
 			Description: "The name for the distribution.",

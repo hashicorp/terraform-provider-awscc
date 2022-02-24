@@ -35,7 +35,7 @@ func resourceCollectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 200,

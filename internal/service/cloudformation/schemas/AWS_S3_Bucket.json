@@ -1361,14 +1361,12 @@
                 "Key": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 127,
-                    "pattern": ""
+                    "maxLength": 128
                 },
                 "Value": {
                     "type": "string",
                     "minLength": 1,
-                    "maxLength": 255,
-                    "pattern": ""
+                    "maxLength": 256
                 }
             },
             "required": [

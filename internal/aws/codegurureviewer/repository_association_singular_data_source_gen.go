@@ -26,7 +26,7 @@ func repositoryAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The Amazon Resource Name (ARN) of the repository association.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the repository association.",
@@ -40,7 +40,7 @@ func repositoryAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^\\S(.*\\S)?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.",
@@ -54,7 +54,7 @@ func repositoryAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.",
@@ -68,7 +68,7 @@ func repositoryAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "Name of the repository to be associated.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S[\\w.-]*$",
 			//   "type": "string"
 			// }
 			Description: "Name of the repository to be associated.",
@@ -82,7 +82,7 @@ func repositoryAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S(.*\\S)?$",
 			//   "type": "string"
 			// }
 			Description: "The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.",

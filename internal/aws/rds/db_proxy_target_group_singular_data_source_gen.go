@@ -120,7 +120,7 @@ func dBProxyTargetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			// {
 			//   "description": "The identifier for the proxy.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[A-z][0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the proxy.",

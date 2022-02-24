@@ -258,7 +258,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                 "items": {
 			//                   "maxLength": 30,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "[a-zA-Z0-9\\.\\*]+",
 			//                   "type": "string"
 			//                 },
 			//                 "type": "array",
@@ -616,7 +616,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//               "LaunchTemplateName": {
 			//                 "maxLength": 128,
 			//                 "minLength": 3,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
 			//                 "type": "string"
 			//               },
 			//               "Version": {
@@ -749,7 +749,7 @@ func spotFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                       "items": {
 			//                         "maxLength": 30,
 			//                         "minLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[a-zA-Z0-9\\.\\*]+",
 			//                         "type": "string"
 			//                       },
 			//                       "type": "array",

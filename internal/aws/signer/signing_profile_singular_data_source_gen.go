@@ -24,7 +24,7 @@ func signingProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile.",
@@ -61,7 +61,7 @@ func signingProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]{10}$",
 			//   "type": "string"
 			// }
 			Description: "A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.",
@@ -73,7 +73,7 @@ func signingProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the specified signing profile version.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified signing profile version.",

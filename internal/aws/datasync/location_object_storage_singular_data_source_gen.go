@@ -26,7 +26,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 			//   "maxLength": 200,
 			//   "minLength": 8,
-			//   "pattern": "",
+			//   "pattern": "^.+$",
 			//   "type": "string"
 			// }
 			Description: "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
@@ -41,7 +41,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 4,
@@ -59,7 +59,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The name of the bucket on the self-managed object storage server.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the bucket on the self-managed object storage server.",
@@ -72,7 +72,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the location that is created.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the location that is created.",
@@ -85,7 +85,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// {
 			//   "description": "The URL of the object storage location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw|object-storage)://[a-zA-Z0-9./\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the object storage location that was described.",
@@ -99,7 +99,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			//   "maxLength": 200,
 			//   "minLength": 8,
-			//   "pattern": "",
+			//   "pattern": "^.+$",
 			//   "type": "string"
 			// }
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
@@ -112,7 +112,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// {
 			//   "description": "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.",
@@ -153,7 +153,7 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// {
 			//   "description": "The subdirectory in the self-managed object storage server that is used to read data from.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$",
 			//   "type": "string"
 			// }
 			Description: "The subdirectory in the self-managed object storage server that is used to read data from.",
@@ -174,14 +174,14 @@ func locationObjectStorageDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },

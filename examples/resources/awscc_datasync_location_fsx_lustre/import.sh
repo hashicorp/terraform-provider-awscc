@@ -1,0 +1,1 @@
+$ terraform import awscc_datasync_location_fsx_lustre.example <resource ID>

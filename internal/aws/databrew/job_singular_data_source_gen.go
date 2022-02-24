@@ -722,7 +722,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "items": {
 			//                   "maxLength": 128,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "^[A-Z\\_]+$",
 			//                   "type": "string"
 			//                 },
 			//                 "minItems": 1,
@@ -745,7 +745,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                     "Statistic": {
 			//                       "maxLength": 128,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^[A-Z\\_]+$",
 			//                       "type": "string"
 			//                     }
 			//                   },
@@ -778,7 +778,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[A-Z\\_]+$",
 			//             "type": "string"
 			//           },
 			//           "minItems": 1,
@@ -801,7 +801,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "Statistic": {
 			//                 "maxLength": 128,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[A-Z\\_]+$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -828,7 +828,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "items": {
 			//                 "maxLength": 128,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[A-Z\\_]+$",
 			//                 "type": "string"
 			//               },
 			//               "minItems": 1,
@@ -845,7 +845,7 @@ func jobDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "items": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[A-Z_][A-Z\\\\d_]*$",
 			//             "type": "string"
 			//           },
 			//           "minItems": 1,

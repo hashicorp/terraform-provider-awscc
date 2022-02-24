@@ -26,7 +26,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The Amazon Resource Name (ARN) of the assessment.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:.*:auditmanager:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the assessment.",
@@ -39,7 +39,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -96,14 +96,14 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "description": "The unique identifier for the email account.",
 			//       "maxLength": 320,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^.*@.*$",
 			//       "type": "string"
 			//     },
 			//     "Id": {
 			//       "description": "The identifier for the specified AWS account.",
 			//       "maxLength": 12,
 			//       "minLength": 12,
-			//       "pattern": "",
+			//       "pattern": "^[0-9]{12}$",
 			//       "type": "string"
 			//     },
 			//     "Name": {
@@ -164,34 +164,34 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "AssessmentId": {
 			//         "maxLength": 36,
 			//         "minLength": 36,
-			//         "pattern": "",
+			//         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//         "type": "string"
 			//       },
 			//       "AssessmentName": {
 			//         "description": "The name of the related assessment.",
 			//         "maxLength": 127,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_\\.]+$",
 			//         "type": "string"
 			//       },
 			//       "Comment": {
 			//         "description": "The comment related to the delegation.",
 			//         "maxLength": 350,
-			//         "pattern": "",
+			//         "pattern": "^[\\w\\W\\s\\S]*$",
 			//         "type": "string"
 			//       },
 			//       "ControlSetId": {
 			//         "description": "The identifier for the specified control set.",
 			//         "maxLength": 300,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\w\\W\\s\\S]*$",
 			//         "type": "string"
 			//       },
 			//       "CreatedBy": {
 			//         "description": "The IAM user or role that performed the action.",
 			//         "maxLength": 100,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_()\\[\\]\\s]+$",
 			//         "type": "string"
 			//       },
 			//       "CreationTime": {
@@ -201,7 +201,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "Id": {
 			//         "maxLength": 36,
 			//         "minLength": 36,
-			//         "pattern": "",
+			//         "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//         "type": "string"
 			//       },
 			//       "LastUpdated": {
@@ -212,7 +212,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
 			//         "maxLength": 2048,
 			//         "minLength": 20,
-			//         "pattern": "",
+			//         "pattern": "^arn:.*:iam:.*",
 			//         "type": "string"
 			//       },
 			//       "RoleType": {
@@ -327,7 +327,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The identifier for the specified framework.",
 			//   "maxLength": 36,
 			//   "minLength": 32,
-			//   "pattern": "",
+			//   "pattern": "^([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|.*\\S.*)$",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the specified framework.",
@@ -341,7 +341,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The name of the related assessment.",
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_\\.]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the related assessment.",
@@ -361,7 +361,7 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "description": "The Amazon Resource Name (ARN) of the IAM user or role.",
 			//         "maxLength": 2048,
 			//         "minLength": 20,
-			//         "pattern": "",
+			//         "pattern": "^arn:.*:iam:.*",
 			//         "type": "string"
 			//       },
 			//       "RoleType": {
@@ -414,14 +414,14 @@ func assessmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "description": "The unique identifier for the email account.",
 			//             "maxLength": 320,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^.*@.*$",
 			//             "type": "string"
 			//           },
 			//           "Id": {
 			//             "description": "The identifier for the specified AWS account.",
 			//             "maxLength": 12,
 			//             "minLength": 12,
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{12}$",
 			//             "type": "string"
 			//           },
 			//           "Name": {

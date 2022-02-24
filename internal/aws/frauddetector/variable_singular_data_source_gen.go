@@ -113,7 +113,7 @@ func variableDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the variable.",
-			//   "pattern": "",
+			//   "pattern": "^[a-z_][a-z0-9_]{0,99}?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the variable.",

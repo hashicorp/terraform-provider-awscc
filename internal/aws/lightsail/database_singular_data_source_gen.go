@@ -168,7 +168,7 @@ func databaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name to use for your new Lightsail database resource.",
 			//   "maxLength": 255,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "\\w[\\w\\-]*\\w",
 			//   "type": "string"
 			// }
 			Description: "The name to use for your new Lightsail database resource.",

@@ -58,7 +58,7 @@ func rulesetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "Expression with rule conditions",
 			//         "maxLength": 1024,
 			//         "minLength": 4,
-			//         "pattern": "",
+			//         "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//         "type": "string"
 			//       },
 			//       "ColumnSelectors": {
@@ -111,7 +111,7 @@ func rulesetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "description": "Variable name",
 			//               "maxLength": 128,
 			//               "minLength": 2,
-			//               "pattern": "",
+			//               "pattern": "^:[A-Za-z0-9_]+$",
 			//               "type": "string"
 			//             }
 			//           },

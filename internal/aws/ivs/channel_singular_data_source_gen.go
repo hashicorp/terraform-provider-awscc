@@ -26,7 +26,7 @@ func channelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
@@ -77,7 +77,7 @@ func channelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Channel",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]*$",
 			//   "type": "string"
 			// }
 			Description: "Channel",
@@ -103,7 +103,7 @@ func channelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).",

@@ -77,7 +77,7 @@ func conformancePackDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "Name of the conformance pack which will be assigned as the unique identifier.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "Name of the conformance pack which will be assigned as the unique identifier.",
@@ -130,7 +130,7 @@ func conformancePackDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "s3://.*",
 			//   "type": "string"
 			// }
 			Description: "Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.",

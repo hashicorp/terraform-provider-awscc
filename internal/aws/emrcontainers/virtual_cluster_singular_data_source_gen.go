@@ -39,7 +39,7 @@ func virtualClusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "description": "The ID of the container cluster",
 			//       "maxLength": 100,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
 			//       "type": "string"
 			//     },
 			//     "Info": {
@@ -51,7 +51,7 @@ func virtualClusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//             "Namespace": {
 			//               "maxLength": 63,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
 			//               "type": "string"
 			//             }
 			//           },
@@ -138,7 +138,7 @@ func virtualClusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "Name of the virtual cluster.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//   "type": "string"
 			// }
 			Description: "Name of the virtual cluster.",

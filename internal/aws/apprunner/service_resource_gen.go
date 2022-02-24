@@ -452,7 +452,10 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                   "description": "Runtime",
 			//                   "enum": [
 			//                     "PYTHON_3",
-			//                     "NODEJS_12"
+			//                     "NODEJS_12",
+			//                     "NODEJS_14",
+			//                     "CORRETTO_8",
+			//                     "CORRETTO_11"
 			//                   ],
 			//                   "type": "string"
 			//                 },
@@ -660,6 +663,9 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 																validate.StringInSlice([]string{
 																	"PYTHON_3",
 																	"NODEJS_12",
+																	"NODEJS_14",
+																	"CORRETTO_8",
+																	"CORRETTO_11",
 																}),
 															},
 														},

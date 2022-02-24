@@ -23,7 +23,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -58,7 +58,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The name of the simulation application.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the simulation application.",
@@ -81,7 +81,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//     },
 			//     "Version": {
 			//       "description": "The version of the rendering engine.",
-			//       "pattern": "",
+			//       "pattern": "1.x",
 			//       "type": "string"
 			//     }
 			//   },
@@ -236,7 +236,7 @@ func simulationApplicationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//       },
 			//       "S3Bucket": {
 			//         "description": "The Amazon S3 bucket name.",
-			//         "pattern": "",
+			//         "pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]",
 			//         "type": "string"
 			//       },
 			//       "S3Key": {

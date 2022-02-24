@@ -35,7 +35,7 @@ func aggregationAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSour
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The 12-digit account ID of the account authorized to aggregate data.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The 12-digit account ID of the account authorized to aggregate data.",

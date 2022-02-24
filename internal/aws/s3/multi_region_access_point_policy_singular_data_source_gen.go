@@ -26,7 +26,7 @@ func multiRegionAccessPointPolicyDataSourceType(ctx context.Context) (tfsdk.Data
 			//   "description": "The name of the Multi Region Access Point to apply policy",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Multi Region Access Point to apply policy",

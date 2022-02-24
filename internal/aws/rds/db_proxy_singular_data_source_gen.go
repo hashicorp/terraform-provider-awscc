@@ -114,7 +114,7 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
@@ -200,12 +200,12 @@ func dBProxyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       }
 			//     },

@@ -43,7 +43,7 @@ func authorizerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w=,@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

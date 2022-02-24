@@ -25,7 +25,7 @@ func connectionAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "maxLength": 68,
 			//   "minLength": 13,
-			//   "pattern": "",
+			//   "pattern": "^wsca-[0-9a-z]{8,63}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -54,13 +54,13 @@ func connectionAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "ConnectionIdentifier": {
 			//         "maxLength": 20,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9]+$",
 			//         "type": "string"
 			//       },
 			//       "ResourceId": {
 			//         "maxLength": 1000,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": ".+",
 			//         "type": "string"
 			//       }
 			//     },
@@ -117,7 +117,7 @@ func connectionAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

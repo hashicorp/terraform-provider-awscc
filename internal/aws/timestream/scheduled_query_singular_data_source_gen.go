@@ -60,7 +60,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "description": "Name of the S3 bucket under which error reports will be created.",
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         },
 			//         "EncryptionOption": {
@@ -75,7 +75,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "description": "Prefix for error report keys.",
 			//           "maxLength": 896,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+",
 			//           "type": "string"
 			//         }
 			//       },
@@ -341,7 +341,7 @@ func scheduledQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",

@@ -50,7 +50,7 @@ func studioSessionMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
@@ -64,7 +64,7 @@ func studioSessionMappingDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//   "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
 			//   "maxLength": 256,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^es-[0-9A-Z]+",
 			//   "type": "string"
 			// }
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",

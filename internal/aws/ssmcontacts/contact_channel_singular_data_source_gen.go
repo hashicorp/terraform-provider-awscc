@@ -78,7 +78,7 @@ func contactChannelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "ARN of the contact resource",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
 			//   "type": "string"
 			// }
 			Description: "ARN of the contact resource",

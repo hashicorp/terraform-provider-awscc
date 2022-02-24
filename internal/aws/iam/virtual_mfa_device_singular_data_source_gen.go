@@ -37,7 +37,7 @@ func virtualMFADeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 9,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=/:,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -111,7 +111,7 @@ func virtualMFADeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// {
 			//   "maxLength": 226,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

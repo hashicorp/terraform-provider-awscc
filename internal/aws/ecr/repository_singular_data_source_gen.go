@@ -133,7 +133,7 @@ func repositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "description": "The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed. ",
 			//       "maxLength": 12,
 			//       "minLength": 12,
-			//       "pattern": "",
+			//       "pattern": "^[0-9]{12}$",
 			//       "type": "string"
 			//     }
 			//   },

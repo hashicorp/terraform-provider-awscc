@@ -72,7 +72,7 @@ func outcomeDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the outcome.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the outcome.",

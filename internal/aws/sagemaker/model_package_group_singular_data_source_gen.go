@@ -37,7 +37,7 @@ func modelPackageGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The Amazon Resource Name (ARN) of the model package group.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
@@ -50,7 +50,7 @@ func modelPackageGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// {
 			//   "description": "The description of the model package group.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
 			//   "type": "string"
 			// }
 			Description: "The description of the model package group.",
@@ -63,7 +63,7 @@ func modelPackageGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// {
 			//   "description": "The name of the model package group.",
 			//   "maxLength": 63,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the model package group.",
@@ -111,13 +111,13 @@ func modelPackageGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },

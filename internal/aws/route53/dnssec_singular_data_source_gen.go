@@ -24,7 +24,7 @@ func dNSSECDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The unique string (ID) used to identify a hosted zone.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Z0-9]{1,32}$",
 			//   "type": "string"
 			// }
 			Description: "The unique string (ID) used to identify a hosted zone.",

@@ -110,7 +110,7 @@ func vpcConnectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",
 			//   "maxLength": 40,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9-\\\\_]{3,39}$",
 			//   "type": "string"
 			// }
 			Description: "A name for the VPC connector. If you don't specify a name, AWS CloudFormation generates a name for your VPC connector.",

@@ -26,7 +26,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The alias of this Access Point. This alias can be used for compatibility purposes with other AWS services and third-party applications.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The alias of this Access Point. This alias can be used for compatibility purposes with other AWS services and third-party applications.",
@@ -64,7 +64,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",

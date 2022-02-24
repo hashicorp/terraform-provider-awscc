@@ -26,7 +26,7 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//   "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
@@ -47,7 +47,7 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//         "BucketName": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9-.]+$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -90,7 +90,7 @@ func recordingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//   "description": "Recording Configuration Name.",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]*$",
 			//   "type": "string"
 			// }
 			Description: "Recording Configuration Name.",

@@ -23,7 +23,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -47,7 +47,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The name you want to assign to this Object lambda Access Point.",
 			//   "maxLength": 45,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this Object lambda Access Point.",

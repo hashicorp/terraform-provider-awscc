@@ -253,7 +253,7 @@ func componentVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//       "type": "string"
 			//     },
 			//     "LambdaArn": {
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//       "type": "string"
 			//     }
 			//   },

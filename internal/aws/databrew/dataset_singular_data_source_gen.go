@@ -465,7 +465,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "Filtering expression for a parameter",
 			//           "maxLength": 1024,
 			//           "minLength": 4,
-			//           "pattern": "",
+			//           "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//           "type": "string"
 			//         },
 			//         "ValuesMap": {
@@ -483,7 +483,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "description": "Variable name",
 			//                 "maxLength": 128,
 			//                 "minLength": 2,
-			//                 "pattern": "",
+			//                 "pattern": "^:[A-Za-z0-9_]+$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -528,14 +528,14 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                     "description": "Locale code for a date parameter",
 			//                     "maxLength": 100,
 			//                     "minLength": 2,
-			//                     "pattern": "",
+			//                     "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
 			//                     "type": "string"
 			//                   },
 			//                   "TimezoneOffset": {
 			//                     "description": "Timezone offset",
 			//                     "maxLength": 6,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -551,7 +551,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                     "description": "Filtering expression for a parameter",
 			//                     "maxLength": 1024,
 			//                     "minLength": 4,
-			//                     "pattern": "",
+			//                     "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
 			//                     "type": "string"
 			//                   },
 			//                   "ValuesMap": {
@@ -569,7 +569,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                           "description": "Variable name",
 			//                           "maxLength": 128,
 			//                           "minLength": 2,
-			//                           "pattern": "",
+			//                           "pattern": "^:[A-Za-z0-9_]+$",
 			//                           "type": "string"
 			//                         }
 			//                       },

@@ -24,7 +24,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -35,7 +35,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
-			//   "pattern": "",
+			//   "pattern": "^Y|M|W|D|H|30min|15min|10min|5min|1min$",
 			//   "type": "string"
 			// }
 			Description: "Frequency of data collection. This parameter is required for RELATED_TIME_SERIES",
@@ -49,7 +49,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A name for the dataset",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//   "type": "string"
 			// }
 			Description: "A name for the dataset",
@@ -101,13 +101,13 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "KmsKeyArn": {
 			//       "description": "KMS key used to encrypt the Dataset data",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "arn:aws[-a-z]*:kms:.*:key/.*",
 			//       "type": "string"
 			//     },
 			//     "RoleArn": {
 			//       "description": "The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS key.",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -144,7 +144,7 @@ func datasetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "properties": {
 			//           "AttributeName": {
 			//             "description": "Name of the dataset field",
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//             "type": "string"
 			//           },
 			//           "AttributeType": {

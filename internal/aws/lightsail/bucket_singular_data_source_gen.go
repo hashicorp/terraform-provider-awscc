@@ -83,7 +83,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name for the bucket.",
 			//   "maxLength": 54,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name for the bucket.",

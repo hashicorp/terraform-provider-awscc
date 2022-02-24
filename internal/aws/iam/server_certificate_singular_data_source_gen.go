@@ -86,7 +86,7 @@ func serverCertificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w+=,.@-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

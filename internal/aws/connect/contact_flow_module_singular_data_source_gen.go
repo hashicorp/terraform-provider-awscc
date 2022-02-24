@@ -26,7 +26,7 @@ func contactFlowModuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The identifier of the contact flow module (ARN).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/flow-module/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the contact flow module (ARN).",
@@ -52,7 +52,7 @@ func contactFlowModuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// {
 			//   "description": "The description of the contact flow module.",
 			//   "maxLength": 500,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The description of the contact flow module.",
@@ -66,7 +66,7 @@ func contactFlowModuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The identifier of the Amazon Connect instance (ARN).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance (ARN).",
@@ -80,7 +80,7 @@ func contactFlowModuleDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The name of the contact flow module.",
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The name of the contact flow module.",

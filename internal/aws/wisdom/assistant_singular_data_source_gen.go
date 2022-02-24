@@ -23,7 +23,7 @@ func assistantDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: AssistantArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -33,7 +33,7 @@ func assistantDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// Property: AssistantId
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

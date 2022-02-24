@@ -62,7 +62,7 @@ func globalClusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 			//   "type": "string"
 			// }
 			Description: "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",

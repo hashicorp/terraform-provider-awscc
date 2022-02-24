@@ -99,7 +99,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "Duration": {
 			//             "maxLength": 10,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[0-9]+[s]",
 			//             "type": "string"
 			//           },
 			//           "Freshness": {
@@ -477,7 +477,7 @@ func indexDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "URL": {
 			//             "maxLength": 2048,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)",
 			//             "type": "string"
 			//           },
 			//           "UserNameAttributeField": {

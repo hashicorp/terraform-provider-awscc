@@ -92,7 +92,7 @@ func configurationAggregatorDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			//   "description": "The name of the aggregator.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the aggregator.",

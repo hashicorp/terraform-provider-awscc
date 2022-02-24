@@ -24,7 +24,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "AWS account ID associated with the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "AWS account ID associated with the Environment",
@@ -37,7 +37,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "ARNs of FinSpace Data Bundles to install",
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array",
@@ -52,7 +52,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ID for FinSpace created account used to store Environment artifacts",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "ID for FinSpace created account used to store Environment artifacts",
@@ -64,7 +64,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Description of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
 			//   "type": "string"
 			// }
 			Description: "Description of the Environment",
@@ -76,7 +76,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "ARN of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "ARN of the Environment",
@@ -88,7 +88,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Unique identifier for representing FinSpace Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,26}$",
 			//   "type": "string"
 			// }
 			Description: "Unique identifier for representing FinSpace Environment",
@@ -100,7 +100,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "URL used to login to the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//   "type": "string"
 			// }
 			Description: "URL used to login to the Environment",
@@ -130,7 +130,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "properties": {
 			//     "ApplicationCallBackURL": {
 			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//       "type": "string"
 			//     },
 			//     "AttributeMap": {
@@ -141,7 +141,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "Federation provider name to link with the Environment",
 			//       "maxLength": 32,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
 			//       "type": "string"
 			//     },
 			//     "FederationURN": {
@@ -153,12 +153,12 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "SAML metadata document to link the federation provider to the Environment",
 			//       "maxLength": 10000000,
 			//       "minLength": 1000,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     },
 			//     "SamlMetadataURL": {
 			//       "description": "SAML metadata URL to link with the Environment",
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -224,7 +224,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name of the Environment",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
 			//   "type": "string"
 			// }
 			Description: "Name of the Environment",
@@ -276,21 +276,21 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "Email address",
 			//       "maxLength": 128,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
 			//       "type": "string"
 			//     },
 			//     "FirstName": {
 			//       "description": "First name",
 			//       "maxLength": 50,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
 			//       "type": "string"
 			//     },
 			//     "LastName": {
 			//       "description": "Last name",
 			//       "maxLength": 50,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9]{1,50}$",
 			//       "type": "string"
 			//     }
 			//   },

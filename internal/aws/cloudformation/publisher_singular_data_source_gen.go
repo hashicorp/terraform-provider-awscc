@@ -35,7 +35,7 @@ func publisherDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
 			//   "type": "string"
 			// }
 			Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
@@ -65,7 +65,7 @@ func publisherDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9a-zA-Z]{40}",
 			//   "type": "string"
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
@@ -78,7 +78,7 @@ func publisherDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "description": "The URL to the publisher's profile with the identity provider.",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "(http:|https:)+[^s]+[w]",
 			//   "type": "string"
 			// }
 			Description: "The URL to the publisher's profile with the identity provider.",

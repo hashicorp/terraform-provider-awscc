@@ -56,7 +56,7 @@ func recoveryGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "description": "The name of the recovery group to create.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the recovery group to create.",

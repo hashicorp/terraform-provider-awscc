@@ -27,7 +27,7 @@ func datasetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "insertionOrder": true,
 			//   "items": {
 			//     "maxLength": 256,
-			//     "pattern": "",
+			//     "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -42,7 +42,7 @@ func datasetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the dataset group to delete.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the dataset group to delete.",
@@ -56,7 +56,7 @@ func datasetGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "A name for the dataset group.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 			//   "type": "string"
 			// }
 			Description: "A name for the dataset group.",

@@ -50,7 +50,7 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "\u003cp\u003eThe Amazon Web Services Region where the studio resource is located.\u003c/p\u003e",
 			//   "maxLength": 50,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]",
 			//   "type": "string"
 			// }
 			Description: "<p>The Amazon Web Services Region where the studio resource is located.</p>",
@@ -78,7 +78,7 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "KeyArn": {
 			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "^arn:.*",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
@@ -130,7 +130,7 @@ func studioDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "\u003cp\u003eThe studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.\u003c/p\u003e",
 			//   "maxLength": 64,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "<p>The studio name that is used in the URL of the Nimble Studio portal when accessed by Nimble Studio users.</p>",

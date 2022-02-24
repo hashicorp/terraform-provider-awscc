@@ -46,7 +46,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "ConditionDocumentAttributeKey": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//                 "type": "string"
 			//               },
 			//               "ConditionOnValue": {
@@ -105,7 +105,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "TargetDocumentAttributeKey": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//                 "type": "string"
 			//               },
 			//               "TargetDocumentAttributeValue": {
@@ -156,7 +156,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "ConditionDocumentAttributeKey": {
 			//               "maxLength": 200,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//               "type": "string"
 			//             },
 			//             "ConditionOnValue": {
@@ -214,7 +214,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "S3Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         }
 			//       },
@@ -233,7 +233,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "ConditionDocumentAttributeKey": {
 			//               "maxLength": 200,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
 			//               "type": "string"
 			//             },
 			//             "ConditionOnValue": {
@@ -291,7 +291,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "S3Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         }
 			//       },
@@ -789,7 +789,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "ServerUrl": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//           "type": "string"
 			//         },
 			//         "SpaceConfiguration": {
@@ -870,7 +870,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -880,7 +880,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -1051,7 +1051,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -1061,7 +1061,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -1259,7 +1259,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                 "Bucket": {
 			//                   "maxLength": 63,
 			//                   "minLength": 3,
-			//                   "pattern": "",
+			//                   "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//                   "type": "string"
 			//                 },
 			//                 "Key": {
@@ -1286,7 +1286,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "TenantDomain": {
 			//           "maxLength": 256,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -1315,7 +1315,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "BucketName": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//           "type": "string"
 			//         },
 			//         "DocumentsMetadataConfiguration": {
@@ -1584,7 +1584,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "ServerUrl": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//           "type": "string"
 			//         },
 			//         "StandardObjectAttachmentConfiguration": {
@@ -1972,7 +1972,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "Bucket": {
 			//               "maxLength": 63,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//               "type": "string"
 			//             },
 			//             "Key": {
@@ -1991,7 +1991,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//           "items": {
 			//             "maxLength": 2048,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(https?|ftp|file)://([^\\s]*)",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 100,
@@ -2007,7 +2007,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 10,
@@ -2017,7 +2017,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//               "items": {
 			//                 "maxLength": 200,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[\\-0-9a-zA-Z]+",
 			//                 "type": "string"
 			//               },
 			//               "maxItems": 6,
@@ -2057,7 +2057,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                   "Host": {
 			//                     "maxLength": 253,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "Port": {
@@ -2111,7 +2111,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "Host": {
 			//               "maxLength": 253,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "([^\\s]*)",
 			//               "type": "string"
 			//             },
 			//             "Port": {
@@ -2154,7 +2154,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                   "items": {
 			//                     "maxLength": 2048,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(https?)://([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 100,
@@ -2182,7 +2182,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//                   "items": {
 			//                     "maxLength": 2048,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^(https?):\\/\\/([^\\s]*)",
 			//                     "type": "string"
 			//                   },
 			//                   "maxItems": 3,
@@ -2260,7 +2260,7 @@ func dataSourceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "OrganizationId": {
 			//           "maxLength": 12,
 			//           "minLength": 12,
-			//           "pattern": "",
+			//           "pattern": "d-[0-9a-fA-F]{10}",
 			//           "type": "string"
 			//         },
 			//         "UseChangeLog": {

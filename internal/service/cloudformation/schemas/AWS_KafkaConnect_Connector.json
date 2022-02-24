@@ -110,7 +110,12 @@
         "McuCount": {
           "description": "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
           "type": "integer",
-          "enum": [1, 2, 4, 8]
+          "enum": [
+            1,
+            2,
+            4,
+            8
+          ]
         }
       },
       "required": [
@@ -134,8 +139,16 @@
         }
       },
       "oneOf": [
-        { "required": [ "AutoScaling" ] },
-        { "required": [ "ProvisionedCapacity" ] }
+        {
+          "required": [
+            "AutoScaling"
+          ]
+        },
+        {
+          "required": [
+            "ProvisionedCapacity"
+          ]
+        }
       ]
     },
     "CloudWatchLogsLogDelivery": {
@@ -152,7 +165,9 @@
           "type": "string"
         }
       },
-      "required": [ "Enabled" ]
+      "required": [
+        "Enabled"
+      ]
     },
     "CustomPlugin": {
       "description": "Details about a custom plugin.",
@@ -190,7 +205,9 @@
           "type": "boolean"
         }
       },
-      "required": [ "Enabled" ]
+      "required": [
+        "Enabled"
+      ]
     },
     "KafkaCluster": {
       "description": "Details of how to connect to the Kafka cluster.",
@@ -201,7 +218,9 @@
           "$ref": "#/definitions/ApacheKafkaCluster"
         }
       },
-      "required": [ "ApacheKafkaCluster" ]
+      "required": [
+        "ApacheKafkaCluster"
+      ]
     },
     "KafkaClusterClientAuthentication": {
       "description": "Details of the client authentication used by the Kafka cluster.",
@@ -212,12 +231,17 @@
           "$ref": "#/definitions/KafkaClusterClientAuthenticationType"
         }
       },
-      "required": [ "AuthenticationType" ]
+      "required": [
+        "AuthenticationType"
+      ]
     },
     "KafkaClusterClientAuthenticationType": {
       "description": "The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.",
       "type": "string",
-      "enum": [ "NONE", "IAM" ]
+      "enum": [
+        "NONE",
+        "IAM"
+      ]
     },
     "KafkaClusterEncryptionInTransit": {
       "description": "Details of encryption in transit to the Kafka cluster.",
@@ -228,12 +252,17 @@
           "$ref": "#/definitions/KafkaClusterEncryptionInTransitType"
         }
       },
-      "required": [ "EncryptionType" ]
+      "required": [
+        "EncryptionType"
+      ]
     },
     "KafkaClusterEncryptionInTransitType": {
       "description": "The type of encryption in transit to the Kafka cluster.",
       "type": "string",
-      "enum": [ "PLAINTEXT", "TLS" ]
+      "enum": [
+        "PLAINTEXT",
+        "TLS"
+      ]
     },
     "LogDelivery": {
       "description": "Details of what logs are delivered and where they are delivered.",
@@ -244,7 +273,9 @@
           "$ref": "#/definitions/WorkerLogDelivery"
         }
       },
-      "required": [ "WorkerLogDelivery" ]
+      "required": [
+        "WorkerLogDelivery"
+      ]
     },
     "Plugin": {
       "description": "Details about a Kafka Connect plugin which will be used with the connector.",
@@ -255,7 +286,9 @@
           "$ref": "#/definitions/CustomPlugin"
         }
       },
-      "required": [ "CustomPlugin" ]
+      "required": [
+        "CustomPlugin"
+      ]
     },
     "ProvisionedCapacity": {
       "description": "Details about a fixed capacity allocated to a connector.",
@@ -265,14 +298,21 @@
         "McuCount": {
           "description": "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
           "type": "integer",
-          "enum": [1, 2, 4, 8]
+          "enum": [
+            1,
+            2,
+            4,
+            8
+          ]
         },
         "WorkerCount": {
           "description": "Number of workers for a connector.",
           "type": "integer"
         }
       },
-      "required": [ "WorkerCount" ]
+      "required": [
+        "WorkerCount"
+      ]
     },
     "S3LogDelivery": {
       "description": "Details about delivering logs to Amazon S3.",
@@ -292,7 +332,9 @@
           "type": "string"
         }
       },
-      "required": [ "Enabled" ]
+      "required": [
+        "Enabled"
+      ]
     },
     "ScaleInPolicy": {
       "description": "Information about the scale in policy of the connector.",
@@ -306,7 +348,9 @@
           "maximum": 100
         }
       },
-      "required": [ "CpuUtilizationPercentage" ]
+      "required": [
+        "CpuUtilizationPercentage"
+      ]
     },
     "ScaleOutPolicy": {
       "description": "Information about the scale out policy of the connector.",
@@ -320,7 +364,9 @@
           "maximum": 100
         }
       },
-      "required": [ "CpuUtilizationPercentage" ]
+      "required": [
+        "CpuUtilizationPercentage"
+      ]
     },
     "Vpc": {
       "description": "Information about a VPC used with the connector.",
@@ -347,7 +393,10 @@
           "insertionOrder": false
         }
       },
-      "required": [ "SecurityGroups", "Subnets" ]
+      "required": [
+        "SecurityGroups",
+        "Subnets"
+      ]
     },
     "WorkerConfiguration": {
       "description": "Specifies the worker configuration to use with the connector.",
@@ -366,7 +415,10 @@
           "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*"
         }
       },
-      "required": [ "Revision", "WorkerConfigurationArn" ]
+      "required": [
+        "Revision",
+        "WorkerConfigurationArn"
+      ]
     },
     "WorkerLogDelivery": {
       "description": "Specifies where worker logs are delivered.",
@@ -396,8 +448,12 @@
     "Plugins",
     "ServiceExecutionRoleArn"
   ],
-  "primaryIdentifier": [ "/properties/ConnectorArn" ],
-  "readOnlyProperties": [ "/properties/ConnectorArn" ],
+  "primaryIdentifier": [
+    "/properties/ConnectorArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectorArn"
+  ],
   "createOnlyProperties": [
     "/properties/ConnectorConfiguration",
     "/properties/ConnectorDescription",

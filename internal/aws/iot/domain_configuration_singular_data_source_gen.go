@@ -40,7 +40,7 @@ func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "DefaultAuthorizerName": {
 			//       "maxLength": 128,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[\\w=,@-]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -68,7 +68,7 @@ func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[\\w.-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -119,7 +119,7 @@ func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "items": {
 			//     "maxLength": 2048,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 1,
@@ -139,7 +139,7 @@ func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//       "ServerCertificateArn": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//         "type": "string"
 			//       },
 			//       "ServerCertificateStatus": {
@@ -236,7 +236,7 @@ func domainConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// Property: ValidationCertificateArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

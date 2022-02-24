@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 494 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 495 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -541,6 +541,10 @@ resource_schema "aws_datasync_agent" {
 
 resource_schema "aws_datasync_location_efs" {
   cloudformation_type_name = "AWS::DataSync::LocationEFS"
+}
+
+resource_schema "aws_datasync_location_fsx_lustre" {
+  cloudformation_type_name = "AWS::DataSync::LocationFSxLustre"
 }
 
 resource_schema "aws_datasync_location_fsx_windows" {

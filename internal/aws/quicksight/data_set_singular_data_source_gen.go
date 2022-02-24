@@ -36,7 +36,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -536,7 +536,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "description": "\u003cp\u003eLeft operand.\u003c/p\u003e",
 			//                   "maxLength": 64,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "[0-9a-zA-Z-]*",
 			//                   "type": "string"
 			//                 },
 			//                 "OnClause": {
@@ -557,7 +557,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "description": "\u003cp\u003eRight operand.\u003c/p\u003e",
 			//                   "maxLength": 64,
 			//                   "minLength": 1,
-			//                   "pattern": "",
+			//                   "pattern": "[0-9a-zA-Z-]*",
 			//                   "type": "string"
 			//                 },
 			//                 "Type": {
@@ -582,7 +582,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "description": "\u003cp\u003ePhysical table ID.\u003c/p\u003e",
 			//               "maxLength": 64,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[0-9a-zA-Z-]*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1414,7 +1414,7 @@ func dataSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "\u003cp\u003eThe namespace associated with the row-level permissions dataset.\u003c/p\u003e",
 			//       "maxLength": 64,
 			//       "minLength": 0,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9._-]*$",
 			//       "type": "string"
 			//     },
 			//     "PermissionPolicy": {

@@ -97,7 +97,6 @@
     },
     "ScheduleConfig": {
       "description": "The name of the data and how often it should be pulled from the source.",
-      "type": "object",
       "$ref": "#/definitions/ScheduleConfig"
     },
     "SourceURI": {

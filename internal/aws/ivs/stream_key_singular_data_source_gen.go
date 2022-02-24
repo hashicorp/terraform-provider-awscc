@@ -26,7 +26,7 @@ func streamKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
@@ -38,7 +38,7 @@ func streamKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Channel ARN for the stream.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Channel ARN for the stream.",

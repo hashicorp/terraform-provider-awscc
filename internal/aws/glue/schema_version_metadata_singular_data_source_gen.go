@@ -37,7 +37,7 @@ func schemaVersionMetadataDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the schema version.",

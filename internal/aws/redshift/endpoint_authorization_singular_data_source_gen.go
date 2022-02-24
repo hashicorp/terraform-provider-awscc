@@ -24,7 +24,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The target AWS account ID to grant or revoke access for.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The target AWS account ID to grant or revoke access for.",
@@ -49,7 +49,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The VPCs allowed access to the cluster.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^vpc-\\d{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -119,7 +119,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID of the grantee of the cluster.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID of the grantee of the cluster.",
@@ -131,7 +131,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID of the cluster owner.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID of the cluster owner.",
@@ -156,7 +156,7 @@ func endpointAuthorizationDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//   "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^vpc-\\d{1,17}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"

@@ -26,7 +26,7 @@ func mitigationActionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "A unique identifier for the mitigation action.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the mitigation action.",

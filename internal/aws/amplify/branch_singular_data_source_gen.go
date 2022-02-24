@@ -25,7 +25,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -36,7 +36,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -95,7 +95,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -107,7 +107,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -118,7 +118,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -160,12 +160,12 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "properties": {
 			//       "Name": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 5500,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -200,7 +200,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 20,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -239,7 +239,7 @@ func branchDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },

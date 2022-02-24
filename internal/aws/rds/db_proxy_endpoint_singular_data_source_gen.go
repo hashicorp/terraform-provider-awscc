@@ -24,7 +24,7 @@ func dBProxyEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:rds:[A-Za-z0-9-]{1,64}:[0-9]{12}:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
@@ -37,7 +37,7 @@ func dBProxyEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "description": "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
@@ -50,7 +50,7 @@ func dBProxyEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[0-z]*",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
@@ -91,12 +91,12 @@ func dBProxyEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//     "properties": {
 			//       "Key": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
 			//         "type": "string"
 			//       }
 			//     },

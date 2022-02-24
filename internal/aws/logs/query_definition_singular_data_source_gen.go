@@ -29,7 +29,7 @@ func queryDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//     "description": "LogGroup name",
 			//     "maxLength": 512,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -45,7 +45,7 @@ func queryDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "A name for the saved query definition",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 			//   "type": "string"
 			// }
 			Description: "A name for the saved query definition",

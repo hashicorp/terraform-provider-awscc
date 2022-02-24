@@ -41,7 +41,7 @@ func backupVaultDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: BackupVaultName
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]{2,50}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

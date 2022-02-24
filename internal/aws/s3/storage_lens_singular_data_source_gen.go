@@ -233,7 +233,7 @@ func storageLensDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "The ID that identifies the Amazon S3 Storage Lens configuration.",
 			//       "maxLength": 64,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9\\-_.]+$",
 			//       "type": "string"
 			//     },
 			//     "Include": {

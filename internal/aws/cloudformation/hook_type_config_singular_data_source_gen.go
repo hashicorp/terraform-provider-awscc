@@ -24,7 +24,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The configuration data for the extension, in this account and region.",
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]+",
 			//   "type": "string"
 			// }
 			Description: "The configuration data for the extension, in this account and region.",
@@ -40,7 +40,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "enum": [
 			//     "default"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]{1,256}$",
 			//   "type": "string"
 			// }
 			Description: "An alias by which to refer to this extension configuration data.",
@@ -52,7 +52,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
@@ -64,7 +64,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type version.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type version.",
@@ -76,7 +76,7 @@ func hookTypeConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",

@@ -25,7 +25,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -36,7 +36,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -49,7 +49,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "items": {
 			//     "maxLength": 2048,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "(?s).+",
 			//     "type": "string"
 			//   },
 			//   "type": "array",
@@ -63,7 +63,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -128,12 +128,12 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "BranchName": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       },
 			//       "Prefix": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },

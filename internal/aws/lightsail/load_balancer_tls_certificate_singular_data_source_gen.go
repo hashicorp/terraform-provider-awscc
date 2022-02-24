@@ -73,7 +73,7 @@ func loadBalancerTlsCertificateDataSourceType(ctx context.Context) (tfsdk.DataSo
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of your load balancer.",
-			//   "pattern": "",
+			//   "pattern": "\\w[\\w\\-]*\\w",
 			//   "type": "string"
 			// }
 			Description: "The name of your load balancer.",

@@ -26,7 +26,7 @@ func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -39,7 +39,7 @@ func loggingConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

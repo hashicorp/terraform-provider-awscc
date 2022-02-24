@@ -36,7 +36,7 @@ func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ARN of the graph to which the member account will be invited",
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the graph to which the member account will be invited",
@@ -48,7 +48,7 @@ func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			//   "pattern": "",
+			//   "pattern": ".*@.*",
 			//   "type": "string"
 			// }
 			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
@@ -60,7 +60,7 @@ func memberInvitationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID to be invited to join the graph as a member",
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID to be invited to join the graph as a member",

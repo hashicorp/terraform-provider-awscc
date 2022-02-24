@@ -56,7 +56,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "description": "Subscription ARN",
-			//     "pattern": "",
+			//     "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -75,7 +75,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Address": {
-			//         "pattern": "",
+			//         "pattern": "(^[a-zA-Z0-9.!#$%\u0026'*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)",
 			//         "type": "string"
 			//       },
 			//       "Status": {
@@ -129,7 +129,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Subscription ARN",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//   "type": "string"
 			// }
 			Description: "Subscription ARN",
@@ -143,7 +143,7 @@ func anomalySubscriptionDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "description": "The name of the subscription.",
 			//   "maxLength": 1024,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\S\\s]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the subscription.",

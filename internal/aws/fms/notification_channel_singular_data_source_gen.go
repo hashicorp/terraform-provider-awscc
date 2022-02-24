@@ -26,7 +26,7 @@ func notificationChannelDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]+)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -40,7 +40,7 @@ func notificationChannelDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]+)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",

@@ -24,7 +24,7 @@ func schemaDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Amazon Resource Name for the Schema.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//   "type": "string"
 			// }
 			Description: "Amazon Resource Name for the Schema.",
@@ -125,7 +125,7 @@ func schemaDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the initial schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the initial schema version.",
@@ -154,7 +154,7 @@ func schemaDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "Arn": {
 			//       "description": "Amazon Resource Name for the Registry.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//       "type": "string"
 			//     },
 			//     "Name": {

@@ -43,7 +43,7 @@ func domainNameApiAssociationDataSourceType(ctx context.Context) (tfsdk.DataSour
 			// {
 			//   "maxLength": 253,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

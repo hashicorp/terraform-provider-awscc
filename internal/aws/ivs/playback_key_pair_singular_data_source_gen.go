@@ -26,7 +26,7 @@ func playbackKeyPairDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "Key-pair identifier.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:playback-key/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Key-pair identifier.",
@@ -51,7 +51,7 @@ func playbackKeyPairDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",
 			//   "maxLength": 128,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]*$",
 			//   "type": "string"
 			// }
 			Description: "An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.",

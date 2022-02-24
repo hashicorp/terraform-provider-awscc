@@ -386,7 +386,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 			//   "maxLength": 63,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
@@ -923,7 +923,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "ExpirationDate": {
 			//             "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//             "pattern": "",
+			//             "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//             "type": "string"
 			//           },
 			//           "ExpirationInDays": {
@@ -1028,12 +1028,12 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "ObjectSizeGreaterThan": {
 			//             "maxLength": 20,
-			//             "pattern": "",
+			//             "pattern": "[0-9]+",
 			//             "type": "string"
 			//           },
 			//           "ObjectSizeLessThan": {
 			//             "maxLength": 20,
-			//             "pattern": "",
+			//             "pattern": "[0-9]+",
 			//             "type": "string"
 			//           },
 			//           "Prefix": {
@@ -1086,7 +1086,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               },
 			//               "TransitionDate": {
 			//                 "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//                 "pattern": "",
+			//                 "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//                 "type": "string"
 			//               },
 			//               "TransitionInDays": {
@@ -1118,7 +1118,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 },
 			//                 "TransitionDate": {
 			//                   "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//                   "pattern": "",
+			//                   "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//                   "type": "string"
 			//                 },
 			//                 "TransitionInDays": {
@@ -2701,15 +2701,13 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "maxLength": 127,
+			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "maxLength": 255,
+			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
 			//         "type": "string"
 			//       }
 			//     },

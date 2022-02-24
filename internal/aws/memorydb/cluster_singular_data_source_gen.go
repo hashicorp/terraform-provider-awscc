@@ -24,7 +24,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the Access Control List to associate with the cluster.",
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the Access Control List to associate with the cluster.",
@@ -95,7 +95,7 @@ func clusterDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the cluster. This value must be unique as it also serves as the cluster identifier.",

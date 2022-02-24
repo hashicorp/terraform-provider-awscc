@@ -40,7 +40,7 @@ func resourcePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "A name for resource policy",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 			//   "type": "string"
 			// }
 			Description: "A name for resource policy",

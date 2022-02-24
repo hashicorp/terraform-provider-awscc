@@ -46,7 +46,7 @@ func partnerAccountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The fingerprint of the Sidewalk application server private key.",
-			//   "pattern": "",
+			//   "pattern": "[a-fA-F0-9]{64}",
 			//   "type": "string"
 			// }
 			Description: "The fingerprint of the Sidewalk application server private key.",
@@ -89,7 +89,7 @@ func partnerAccountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "AppServerPrivateKey": {
 			//       "maxLength": 4096,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -127,7 +127,7 @@ func partnerAccountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "Fingerprint": {
 			//       "maxLength": 64,
 			//       "minLength": 64,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -165,7 +165,7 @@ func partnerAccountDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "AppServerPrivateKey": {
 			//       "maxLength": 4096,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[a-fA-F0-9]{64}",
 			//       "type": "string"
 			//     }
 			//   },

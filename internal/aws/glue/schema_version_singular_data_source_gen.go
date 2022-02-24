@@ -34,7 +34,7 @@ func schemaVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//     },
 			//     "SchemaArn": {
 			//       "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
 			//       "type": "string"
 			//     },
 			//     "SchemaName": {
@@ -89,7 +89,7 @@ func schemaVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Represents the version ID associated with the schema version.",
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "Represents the version ID associated with the schema version.",

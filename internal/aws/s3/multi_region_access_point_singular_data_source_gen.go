@@ -48,7 +48,7 @@ func multiRegionAccessPointDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//   "description": "The name you want to assign to this Multi Region Access Point.",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name you want to assign to this Multi Region Access Point.",
@@ -124,7 +124,7 @@ func multiRegionAccessPointDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//       "Bucket": {
 			//         "maxLength": 63,
 			//         "minLength": 3,
-			//         "pattern": "",
+			//         "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 			//         "type": "string"
 			//       }
 			//     },

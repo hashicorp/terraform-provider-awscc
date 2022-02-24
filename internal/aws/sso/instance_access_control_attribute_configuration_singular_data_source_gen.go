@@ -30,7 +30,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
 			//         "type": "string"
 			//       },
 			//       "Value": {
@@ -41,7 +41,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//             "items": {
 			//               "maxLength": 256,
 			//               "minLength": 0,
-			//               "pattern": "",
+			//               "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
 			//               "type": "string"
 			//             },
 			//             "maxItems": 1,
@@ -103,7 +103,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//           "Key": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
 			//             "type": "string"
 			//           },
 			//           "Value": {
@@ -114,7 +114,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//                 "items": {
 			//                   "maxLength": 256,
 			//                   "minLength": 0,
-			//                   "pattern": "",
+			//                   "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -183,7 +183,7 @@ func instanceAccessControlAttributeConfigurationDataSourceType(ctx context.Conte
 			//   "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",

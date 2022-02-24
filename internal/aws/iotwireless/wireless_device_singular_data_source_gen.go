@@ -111,18 +111,18 @@ func wirelessDeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "DevAddr": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{8}",
 			//           "type": "string"
 			//         },
 			//         "SessionKeys": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "AppSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "NwkSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             }
 			//           },
@@ -143,26 +143,26 @@ func wirelessDeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "DevAddr": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{8}",
 			//           "type": "string"
 			//         },
 			//         "SessionKeys": {
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "AppSKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "FNwkSIntKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "NwkSEncKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             },
 			//             "SNwkSIntKey": {
-			//               "pattern": "",
+			//               "pattern": "[a-fA-F0-9]{32}",
 			//               "type": "string"
 			//             }
 			//           },
@@ -182,7 +182,7 @@ func wirelessDeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "type": "object"
 			//     },
 			//     "DevEui": {
-			//       "pattern": "",
+			//       "pattern": "[a-f0-9]{16}",
 			//       "type": "string"
 			//     },
 			//     "DeviceProfileId": {
@@ -193,11 +193,11 @@ func wirelessDeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AppEui": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{16}",
 			//           "type": "string"
 			//         },
 			//         "AppKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         }
 			//       },
@@ -211,15 +211,15 @@ func wirelessDeviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "AppKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         },
 			//         "JoinEui": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{16}",
 			//           "type": "string"
 			//         },
 			//         "NwkKey": {
-			//           "pattern": "",
+			//           "pattern": "[a-fA-F0-9]{32}",
 			//           "type": "string"
 			//         }
 			//       },

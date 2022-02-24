@@ -37,7 +37,7 @@ func quickConnectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance.",
@@ -62,7 +62,7 @@ func quickConnectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the quick connect.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the quick connect.",
@@ -82,7 +82,7 @@ func quickConnectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "properties": {
 			//         "PhoneNumber": {
 			//           "description": "The phone number in E.164 format.",
-			//           "pattern": "",
+			//           "pattern": "^\\+[1-9]\\d{1,14}$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -97,12 +97,12 @@ func quickConnectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "properties": {
 			//         "ContactFlowArn": {
 			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         },
 			//         "QueueArn": {
 			//           "description": "The identifier for the queue.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -127,12 +127,12 @@ func quickConnectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "properties": {
 			//         "ContactFlowArn": {
 			//           "description": "The identifier of the contact flow.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         },
 			//         "UserArn": {
 			//           "description": "The identifier of the user.",
-			//           "pattern": "",
+			//           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
 			//           "type": "string"
 			//         }
 			//       },

@@ -53,7 +53,7 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "The unique identifer of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The unique identifer of the data integration.",
@@ -67,7 +67,7 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "The KMS key of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "The KMS key of the data integration.",
@@ -81,7 +81,7 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "The name of the data integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the data integration.",
@@ -99,21 +99,21 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "description": "The start date for objects to import in the first flow run. Epoch or ISO timestamp format is supported.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": ".*\\S.*",
 			//       "type": "string"
 			//     },
 			//     "Object": {
 			//       "description": "The name of the object to pull from the data source.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//       "type": "string"
 			//     },
 			//     "ScheduleExpression": {
 			//       "description": "How often the data should be pulled from data source.",
 			//       "maxLength": 255,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": ".*\\S.*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -156,7 +156,7 @@ func dataIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "The URI of the data source.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URI of the data source.",

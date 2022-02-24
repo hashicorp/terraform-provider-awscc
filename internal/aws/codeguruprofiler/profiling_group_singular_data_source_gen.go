@@ -29,7 +29,7 @@ func profilingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "Principals": {
 			//       "description": "The principals for the agent permissions.",
 			//       "items": {
-			//         "pattern": "",
+			//         "pattern": "^arn:aws([-\\w]*):iam::([0-9]{12}):[\\S]+$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -63,12 +63,12 @@ func profilingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "properties": {
 			//       "channelId": {
 			//         "description": "Unique identifier for each Channel in the notification configuration of a Profiling Group",
-			//         "pattern": "",
+			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//         "type": "string"
 			//       },
 			//       "channelUri": {
 			//         "description": "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
-			//         "pattern": "",
+			//         "pattern": "^arn:aws([-\\w]*):[a-z-]+:(([a-z]+-)+[0-9]+)?:([0-9]{12}):[^.]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -104,7 +104,7 @@ func profilingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the specified profiling group.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
@@ -133,7 +133,7 @@ func profilingGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name of the profiling group.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[\\w-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the profiling group.",

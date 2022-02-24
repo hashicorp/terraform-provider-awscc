@@ -25,7 +25,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -37,7 +37,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -49,7 +49,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -137,7 +137,7 @@ func environmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 21,
 			//   "minLength": 21,
-			//   "pattern": "",
+			//   "pattern": "^tgw-[-a-f0-9]{17}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

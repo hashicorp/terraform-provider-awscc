@@ -25,7 +25,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 			//   "maxLength": 562,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
@@ -38,7 +38,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The ARN of an AWS storage resource's location.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of an AWS storage resource's location.",
@@ -52,7 +52,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 128,
@@ -99,13 +99,13 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "SIMPLE_PATTERN"
 			//         ],
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "^[A-Z0-9_]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 			//         "maxLength": 409600,
-			//         "pattern": "",
+			//         "pattern": "^[^\\x00]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -149,13 +149,13 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "SIMPLE_PATTERN"
 			//         ],
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "^[A-Z0-9_]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
 			//         "maxLength": 409600,
-			//         "pattern": "",
+			//         "pattern": "^[^\\x00]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -191,7 +191,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of a task. This value is a text reference that is used to identify the task in the console.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
@@ -426,7 +426,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "ScheduleExpression": {
 			//       "description": "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -454,7 +454,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The ARN of the source location for the task.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the source location for the task.",
@@ -468,7 +468,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
 			//   "insertionOrder": false,
 			//   "items": {
-			//     "pattern": "",
+			//     "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 128,
@@ -510,14 +510,14 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -557,7 +557,7 @@ func taskDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The ARN of the task.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the task.",

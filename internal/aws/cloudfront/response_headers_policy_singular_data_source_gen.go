@@ -204,7 +204,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "FrameOption": {
-			//               "pattern": "",
+			//               "pattern": "^(DENY|SAMEORIGIN)$",
 			//               "type": "string"
 			//             },
 			//             "Override": {
@@ -224,7 +224,7 @@ func responseHeadersPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceT
 			//               "type": "boolean"
 			//             },
 			//             "ReferrerPolicy": {
-			//               "pattern": "",
+			//               "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
 			//               "type": "string"
 			//             }
 			//           },

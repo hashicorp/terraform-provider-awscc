@@ -65,7 +65,7 @@ func fHIRDatastoreDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name used in the creation of the Data Store.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name used in the creation of the Data Store.",
@@ -197,7 +197,7 @@ func fHIRDatastoreDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//           "description": "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
 			//           "maxLength": 400,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))",
 			//           "type": "string"
 			//         }
 			//       },

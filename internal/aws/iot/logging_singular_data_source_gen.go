@@ -26,7 +26,7 @@ func loggingDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
 			//   "maxLength": 12,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",

@@ -26,7 +26,7 @@ func appImageConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The Amazon Resource Name (ARN) of the AppImageConfig.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
@@ -40,7 +40,7 @@ func appImageConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The Name of the AppImageConfig.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//   "type": "string"
 			// }
 			Description: "The Name of the AppImageConfig.",
@@ -74,7 +74,7 @@ func appImageConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "description": "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
 			//           "maxLength": 1024,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^/.*",
 			//           "type": "string"
 			//         }
 			//       },

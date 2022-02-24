@@ -26,7 +26,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]*)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -55,7 +55,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "^([0-9]*)$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -66,7 +66,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
 			//         "minLength": 16,
-			//         "pattern": "",
+			//         "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -106,7 +106,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9A-Z-]{36}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -125,7 +125,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "An AWS account ID.",
 			//         "maxLength": 12,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "^([0-9]*)$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -136,7 +136,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "An Organizational Unit ID.",
 			//         "maxLength": 68,
 			//         "minLength": 16,
-			//         "pattern": "",
+			//         "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -167,7 +167,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -233,7 +233,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "An AWS resource type",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([^\\s]*)$",
 			//   "type": "string"
 			// }
 			Description: "An AWS resource type",
@@ -249,7 +249,7 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "description": "An AWS resource type",
 			//     "maxLength": 128,
 			//     "minLength": 1,
-			//     "pattern": "",
+			//     "pattern": "^([^\\s]*)$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -324,12 +324,12 @@ func policyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([^\\s]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([^\\s]*)$",
 			//         "type": "string"
 			//       }
 			//     },

@@ -50,7 +50,7 @@ func aliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
@@ -78,7 +78,7 @@ func aliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "properties": {
 			//     "FleetId": {
 			//       "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-			//       "pattern": "",
+			//       "pattern": "^fleet-\\S+",
 			//       "type": "string"
 			//     },
 			//     "Message": {
