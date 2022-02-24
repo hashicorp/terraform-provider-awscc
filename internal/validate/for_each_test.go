@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func TestArrayForEachValidator(t *testing.T) {
@@ -20,20 +20,17 @@ func TestArrayForEachValidator(t *testing.T) {
 	rootPath := tftypes.NewAttributePath().WithAttributeName("test")
 
 	type testCase struct {
-		val          tftypes.Value
-		f            func(context.Context, tftypes.Value) (attr.Value, error)
-		validator    tfsdk.AttributeValidator
-		expectedDiag diag.Diagnostic
+		val         tftypes.Value
+		f           func(context.Context, tftypes.Value) (attr.Value, error)
+		validator   tfsdk.AttributeValidator
+		expectError bool
 	}
 	tests := map[string]testCase{
 		"not a list": {
-			val:       tftypes.NewValue(tftypes.Bool, true),
-			f:         types.BoolType.ValueFromTerraform,
-			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: ccdiag.NewIncorrectValueTypeAttributeError(
-				rootPath,
-				types.Bool{},
-			),
+			val:         tftypes.NewValue(tftypes.Bool, true),
+			f:           types.BoolType.ValueFromTerraform,
+			validator:   StringInSlice([]string{"alpha", "beta", "gamma"}),
+			expectError: true,
 		},
 
 		"unknown list": {
@@ -67,13 +64,9 @@ func TestArrayForEachValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "gamma"),
 				tftypes.NewValue(tftypes.String, "delta"),
 			}),
-			f:         types.ListType{ElemType: types.StringType}.ValueFromTerraform,
-			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: newStringNotInSliceError(
-				rootPath.WithElementKeyInt(3),
-				[]string{"alpha", "beta", "gamma"},
-				"delta",
-			),
+			f:           types.ListType{ElemType: types.StringType}.ValueFromTerraform,
+			validator:   StringInSlice([]string{"alpha", "beta", "gamma"}),
+			expectError: true,
 		},
 		"list of string with unknown element": {
 			val: tftypes.NewValue(tftypes.List{ElementType: tftypes.String}, []tftypes.Value{
@@ -116,13 +109,9 @@ func TestArrayForEachValidator(t *testing.T) {
 				tftypes.NewValue(tftypes.String, "gamma"),
 				tftypes.NewValue(tftypes.String, "delta"),
 			}),
-			f:         types.SetType{ElemType: types.StringType}.ValueFromTerraform,
-			validator: StringInSlice([]string{"alpha", "beta", "gamma"}),
-			expectedDiag: newStringNotInSliceError(
-				rootPath.WithElementKeyValue(tftypes.NewValue(tftypes.String, "delta")),
-				[]string{"alpha", "beta", "gamma"},
-				"delta",
-			),
+			f:           types.SetType{ElemType: types.StringType}.ValueFromTerraform,
+			validator:   StringInSlice([]string{"alpha", "beta", "gamma"}),
+			expectError: true,
 		},
 		"set of string with unknown element": {
 			val: tftypes.NewValue(tftypes.Set{ElementType: tftypes.String}, []tftypes.Value{
@@ -152,16 +141,12 @@ func TestArrayForEachValidator(t *testing.T) {
 			response := tfsdk.ValidateAttributeResponse{}
 			ArrayForEach(test.validator).Validate(ctx, request, &response)
 
-			if !response.Diagnostics.HasError() && test.expectedDiag != nil {
-				t.Fatal("expected error diagnostics, got no error")
+			if !response.Diagnostics.HasError() && test.expectError {
+				t.Fatal("expected error, got no error")
 			}
 
-			if response.Diagnostics.HasError() && !response.Diagnostics.Contains(test.expectedDiag) {
-				t.Fatalf(`expected diagnostics to contain "%s", got %s`, printDiagnostic(test.expectedDiag), printDiagnostics(response.Diagnostics))
-			}
-
-			if response.Diagnostics.HasError() && test.expectedDiag == nil {
-				t.Fatalf(`got unexpected error diagnostics: %s`, printDiagnostics(response.Diagnostics))
+			if response.Diagnostics.HasError() && !test.expectError {
+				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 		})
 	}

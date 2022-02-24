@@ -25,13 +25,12 @@ func (v uniqueItemsValidator) MarkdownDescription(ctx context.Context) string {
 
 // Validate performs the validation.
 func (v uniqueItemsValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	list, ok := request.AttributeConfig.(types.List)
+	var list types.List
 
-	if !ok {
-		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			request.AttributeConfig,
-		))
+	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &list)
+
+	if diags.HasError() {
+		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return
 	}

@@ -32,7 +32,7 @@ func (validator stringLenBetweenValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -77,7 +77,7 @@ func (validator stringLenAtLeastValidator) MarkdownDescription(ctx context.Conte
 
 // Validate performs the validation.
 func (validator stringLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -121,7 +121,7 @@ func (validator stringLenAtMostValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator stringLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -165,7 +165,7 @@ func (validator stringInSliceValidator) MarkdownDescription(ctx context.Context)
 
 // Validate performs the validation.
 func (validator stringInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -217,7 +217,7 @@ func (validator stringMatchValidator) MarkdownDescription(ctx context.Context) s
 
 // Validate performs the validation.
 func (validator stringMatchValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -260,7 +260,7 @@ func (validator stringIsJsonObjectValidator) MarkdownDescription(ctx context.Con
 
 // Validate performs the validation.
 func (validator stringIsJsonObjectValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -290,14 +290,12 @@ func StringIsJsonObject() tfsdk.AttributeValidator {
 	return stringIsJsonObjectValidator{}
 }
 
-func validateString(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (string, bool) {
-	s, ok := request.AttributeConfig.(types.String)
+func validateString(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (string, bool) {
+	var s types.String
+	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &s)
 
-	if !ok {
-		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			request.AttributeConfig,
-		))
+	if diags.HasError() {
+		response.Diagnostics = append(response.Diagnostics, diags...)
 
 		return "", false
 	}
