@@ -30,7 +30,7 @@ func (validator intBetweenValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	i, ok := validateInt(request, response)
+	i, ok := validateInt(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -76,7 +76,7 @@ func (validator intAtLeastValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	i, ok := validateInt(request, response)
+	i, ok := validateInt(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -117,7 +117,7 @@ func (validator intAtMostValidator) MarkdownDescription(ctx context.Context) str
 
 // Validate performs the validation.
 func (validator intAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	i, ok := validateInt(request, response)
+	i, ok := validateInt(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -158,7 +158,7 @@ func (validator intInSliceValidator) MarkdownDescription(ctx context.Context) st
 
 // Validate performs the validation.
 func (validator intInSliceValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	i, ok := validateInt(request, response)
+	i, ok := validateInt(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -195,40 +195,44 @@ func newNotAnIntegerValueError(path *tftypes.AttributePath) diag.Diagnostic {
 	return ccdiag.NewInvalidValueAttributeError(path, "Not an integer")
 }
 
-func validateInt(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
-	switch n := request.AttributeConfig.(type) {
-	case types.Int64:
+func validateInt(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (int64, bool) {
+	var n types.Int64
+
+	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &n)
+
+	if diags.HasError() {
+		var n types.Number
+
+		diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &n)
+
+		if diags.HasError() {
+			response.Diagnostics = append(response.Diagnostics, diags...)
+
+			return 0, false
+		} else {
+			if n.Unknown || n.Null {
+				return 0, false
+			}
+
+			val := n.Value
+
+			if !val.IsInt() {
+				response.Diagnostics.Append(newNotAnIntegerValueError(
+					request.AttributePath,
+				))
+
+				return 0, false
+			}
+
+			i, _ := val.Int64()
+
+			return i, true
+		}
+	} else {
 		if n.Unknown || n.Null {
 			return 0, false
 		}
 
 		return n.Value, true
-
-	case types.Number:
-		if n.Unknown || n.Null {
-			return 0, false
-		}
-
-		val := n.Value
-
-		if !val.IsInt() {
-			response.Diagnostics.Append(newNotAnIntegerValueError(
-				request.AttributePath,
-			))
-
-			return 0, false
-		}
-
-		i, _ := val.Int64()
-
-		return i, true
-
-	default:
-		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			request.AttributeConfig,
-		))
-
-		return 0, false
 	}
 }
