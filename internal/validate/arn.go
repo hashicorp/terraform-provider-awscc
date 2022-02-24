@@ -27,7 +27,7 @@ func (validator arnValidator) MarkdownDescription(ctx context.Context) string {
 
 // Validate performs the validation.
 func (validator arnValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -67,7 +67,7 @@ func (validator iamPolicyARNValidator) Validate(ctx context.Context, request tfs
 		"expected an IAM policy ARN",
 	)
 
-	arn, ok := validateARN(request, response, errDiag)
+	arn, ok := validateARN(ctx, request, response, errDiag)
 	if !ok {
 		return
 	}
@@ -82,8 +82,8 @@ func IAMPolicyARN() tfsdk.AttributeValidator {
 	return iamPolicyARNValidator{}
 }
 
-func validateARN(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
-	s, ok := validateString(request, response)
+func validateARN(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse, errDiag diag.Diagnostic) (arn.ARN, bool) {
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return arn.ARN{}, false
 	}

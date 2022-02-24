@@ -25,7 +25,7 @@ func (validator uriValidator) MarkdownDescription(ctx context.Context) string {
 
 // Validate performs the validation.
 func (validator uriValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(request, response)
+	s, ok := validateString(ctx, request, response)
 	if !ok {
 		return
 	}
