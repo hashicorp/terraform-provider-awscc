@@ -28,7 +28,7 @@ func (validator floatBetweenValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator floatBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	f, ok := validateFloat(request, response)
+	f, ok := validateFloat(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -74,7 +74,7 @@ func (validator floatAtLeastValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator floatAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	f, ok := validateFloat(request, response)
+	f, ok := validateFloat(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -115,7 +115,7 @@ func (validator floatAtMostValidator) MarkdownDescription(ctx context.Context) s
 
 // Validate performs the validation.
 func (validator floatAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	f, ok := validateFloat(request, response)
+	f, ok := validateFloat(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -137,30 +137,34 @@ func FloatAtMost(max float64) tfsdk.AttributeValidator {
 	}
 }
 
-func validateFloat(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (float64, bool) {
-	switch n := request.AttributeConfig.(type) {
-	case types.Float64:
+func validateFloat(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) (float64, bool) {
+	var n types.Float64
+
+	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &n)
+
+	if diags.HasError() {
+		var n types.Number
+
+		diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &n)
+
+		if diags.HasError() {
+			response.Diagnostics = append(response.Diagnostics, diags...)
+
+			return 0, false
+		} else {
+			if n.Unknown || n.Null {
+				return 0, false
+			}
+
+			f, _ := n.Value.Float64()
+
+			return f, true
+		}
+	} else {
 		if n.Unknown || n.Null {
 			return 0, false
 		}
 
 		return n.Value, true
-
-	case types.Number:
-		if n.Unknown || n.Null {
-			return 0, false
-		}
-
-		f, _ := n.Value.Float64()
-
-		return f, true
-
-	default:
-		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			request.AttributeConfig,
-		))
-
-		return 0, false
 	}
 }
