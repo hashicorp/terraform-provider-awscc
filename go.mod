@@ -11,7 +11,7 @@ require (
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.7
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.16.0
-	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.3
+	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.9
 	github.com/hashicorp/go-hclog v1.0.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.11.1
