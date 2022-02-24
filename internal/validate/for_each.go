@@ -26,7 +26,7 @@ func (validator arrayForEachValidator) MarkdownDescription(ctx context.Context) 
 
 // Validate performs the validation.
 func (validator arrayForEachValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	elems, elemKeyer, ok := validateArray(request, response)
+	elems, elemKeyer, ok := validateArray(ctx, request, response)
 	if !ok {
 		return
 	}

@@ -31,7 +31,7 @@ func (validator arrayLenBetweenValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator arrayLenBetweenValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	elems, _, ok := validateArray(request, response)
+	elems, _, ok := validateArray(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -76,7 +76,7 @@ func (validator arrayLenAtLeastValidator) MarkdownDescription(ctx context.Contex
 
 // Validate performs the validation.
 func (validator arrayLenAtLeastValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	elems, _, ok := validateArray(request, response)
+	elems, _, ok := validateArray(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -120,7 +120,7 @@ func (validator arrayLenAtMostValidator) MarkdownDescription(ctx context.Context
 
 // Validate performs the validation.
 func (validator arrayLenAtMostValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	elems, _, ok := validateArray(request, response)
+	elems, _, ok := validateArray(ctx, request, response)
 	if !ok {
 		return
 	}
@@ -162,33 +162,38 @@ func setKeyer(ctx context.Context, path *tftypes.AttributePath, i int, v attr.Va
 	return path.WithElementKeyValue(val), nil
 }
 
-func validateArray(request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) ([]attr.Value, arrayKeyer, bool) {
+func validateArray(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) ([]attr.Value, arrayKeyer, bool) {
 	var elemKeyer arrayKeyer
 	var elems []attr.Value
-	switch v := request.AttributeConfig.(type) {
-	case types.List:
+
+	var v types.List
+
+	diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &v)
+
+	if diags.HasError() {
+		var v types.Set
+
+		diags := tfsdk.ValueAs(ctx, request.AttributeConfig, &v)
+
+		if diags.HasError() {
+			response.Diagnostics = append(response.Diagnostics, diags...)
+
+			return elems, elemKeyer, false
+		} else {
+			if v.Null || v.Unknown {
+				return elems, elemKeyer, false
+			}
+
+			elemKeyer = setKeyer
+			elems = v.Elems
+		}
+	} else {
 		if v.Null || v.Unknown {
 			return elems, elemKeyer, false
 		}
 
 		elemKeyer = listKeyer
 		elems = v.Elems
-
-	case types.Set:
-		if v.Null || v.Unknown {
-			return elems, elemKeyer, false
-		}
-
-		elemKeyer = setKeyer
-		elems = v.Elems
-
-	default:
-		response.Diagnostics.Append(ccdiag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			v,
-		))
-
-		return elems, elemKeyer, false
 	}
 
 	return elems, elemKeyer, true
