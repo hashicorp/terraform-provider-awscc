@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -27,25 +26,15 @@ func (validator isRFC3339TimeValidator) MarkdownDescription(ctx context.Context)
 
 // Validate performs the validation.
 func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := request.AttributeConfig.(types.String)
-
+	s, ok := validateString(ctx, request, response)
 	if !ok {
-		response.Diagnostics.Append(diag.NewIncorrectValueTypeAttributeError(
-			request.AttributePath,
-			request.AttributeConfig,
-		))
-
 		return
 	}
 
-	if s.Unknown || s.Null {
-		return
-	}
-
-	if _, err := time.Parse(time.RFC3339, s.Value); err != nil {
+	if _, err := time.Parse(time.RFC3339, s); err != nil {
 		response.Diagnostics.Append(diag.NewInvalidFormatAttributeError(
 			request.AttributePath,
-			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s.Value, err),
+			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s, err),
 		))
 
 		return
