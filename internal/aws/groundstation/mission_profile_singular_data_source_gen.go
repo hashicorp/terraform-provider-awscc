@@ -113,7 +113,7 @@ func missionProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A name used to identify a mission profile.",
-			//   "pattern": "",
+			//   "pattern": "^[ a-zA-Z0-9_:-]{1,256}$",
 			//   "type": "string"
 			// }
 			Description: "A name used to identify a mission profile.",
@@ -137,11 +137,11 @@ func missionProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,128}$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "pattern": "",
+			//         "pattern": "^[ a-zA-Z0-9\\+\\-=._:/@]{1,256}$",
 			//         "type": "string"
 			//       }
 			//     },

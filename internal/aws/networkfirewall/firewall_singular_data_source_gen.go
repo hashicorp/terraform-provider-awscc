@@ -33,7 +33,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 512,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -59,7 +59,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -72,7 +72,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -84,7 +84,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -97,7 +97,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws.*$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -208,7 +208,7 @@ func firewallDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^vpc-[0-9a-f]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

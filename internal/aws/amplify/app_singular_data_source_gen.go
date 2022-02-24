@@ -36,7 +36,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 20,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "d[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -48,7 +48,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -59,7 +59,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -122,12 +122,12 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "properties": {
 			//           "Name": {
 			//             "maxLength": 255,
-			//             "pattern": "",
+			//             "pattern": "(?s).*",
 			//             "type": "string"
 			//           },
 			//           "Value": {
 			//             "maxLength": 5500,
-			//             "pattern": "",
+			//             "pattern": "(?s).*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -142,7 +142,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     },
 			//     "PullRequestEnvironmentName": {
 			//       "maxLength": 20,
-			//       "pattern": "",
+			//       "pattern": "(?s).*",
 			//       "type": "string"
 			//     },
 			//     "Stage": {
@@ -295,7 +295,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -307,7 +307,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 25000,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -323,25 +323,25 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Condition": {
 			//         "maxLength": 2048,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Source": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       },
 			//       "Status": {
 			//         "maxLength": 7,
 			//         "minLength": 3,
-			//         "pattern": "",
+			//         "pattern": ".{3,7}",
 			//         "type": "string"
 			//       },
 			//       "Target": {
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "(?s).+",
 			//         "type": "string"
 			//       }
 			//     },
@@ -397,7 +397,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -421,12 +421,12 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "properties": {
 			//       "Name": {
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 5500,
-			//         "pattern": "",
+			//         "pattern": "(?s).*",
 			//         "type": "string"
 			//       }
 			//     },
@@ -462,7 +462,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 1000,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -474,7 +474,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(?s).+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -485,7 +485,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -495,7 +495,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Repository
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "(?s).*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

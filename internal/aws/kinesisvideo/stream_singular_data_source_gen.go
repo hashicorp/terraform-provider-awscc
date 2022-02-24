@@ -50,7 +50,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the device that is writing to the stream.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the device that is writing to the stream.",
@@ -64,7 +64,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
 			//   "maxLength": 2048,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
@@ -78,7 +78,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*",
 			//   "type": "string"
 			// }
 			Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
@@ -92,7 +92,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the Kinesis Video stream.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the Kinesis Video stream.",

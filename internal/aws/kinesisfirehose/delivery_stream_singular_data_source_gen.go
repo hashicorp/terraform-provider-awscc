@@ -55,13 +55,13 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "ClusterEndpoint": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "https:.*",
 			//       "type": "string"
 			//     },
 			//     "DomainARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "IndexName": {
@@ -142,7 +142,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "S3BackupMode": {
@@ -158,7 +158,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -235,7 +235,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -256,7 +256,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "SecurityGroupIds": {
@@ -579,7 +579,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "KeyARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
@@ -617,7 +617,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9._-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -672,13 +672,13 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "ClusterEndpoint": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "https:.*",
 			//       "type": "string"
 			//     },
 			//     "DomainARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "IndexName": {
@@ -759,7 +759,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "S3BackupMode": {
@@ -775,7 +775,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -852,7 +852,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -873,7 +873,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "SecurityGroupIds": {
@@ -1187,7 +1187,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "BucketARN": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "BufferingHints": {
@@ -1369,7 +1369,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//             "RoleARN": {
 			//               "maxLength": 512,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "arn:.*",
 			//               "type": "string"
 			//             },
 			//             "TableName": {
@@ -1490,7 +1490,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "S3BackupConfiguration": {
@@ -1499,7 +1499,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -1576,7 +1576,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -2250,7 +2250,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "S3BackupMode": {
@@ -2262,7 +2262,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -2339,7 +2339,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -2636,13 +2636,13 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "KinesisStreamARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -2786,7 +2786,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "S3BackupConfiguration": {
@@ -2795,7 +2795,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -2872,7 +2872,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -2895,7 +2895,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -2972,7 +2972,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -3343,7 +3343,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "BucketARN": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     },
 			//     "BufferingHints": {
@@ -3420,7 +3420,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "RoleARN": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "arn:.*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -3640,7 +3640,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "BucketARN": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         },
 			//         "BufferingHints": {
@@ -3717,7 +3717,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//         "RoleARN": {
 			//           "maxLength": 512,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "arn:.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -3964,7 +3964,7 @@ func deliveryStreamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$",
 			//         "type": "string"
 			//       }
 			//     },

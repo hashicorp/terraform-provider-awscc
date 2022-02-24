@@ -24,7 +24,7 @@ func trackerConsumerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 1600,
-			//   "pattern": "",
+			//   "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -36,7 +36,7 @@ func trackerConsumerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "maxLength": 100,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[-._\\w]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

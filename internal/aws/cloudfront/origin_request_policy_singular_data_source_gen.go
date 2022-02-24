@@ -50,7 +50,7 @@ func originRequestPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "CookieBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|all)$",
 			//           "type": "string"
 			//         },
 			//         "Cookies": {
@@ -70,7 +70,7 @@ func originRequestPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "HeaderBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
 			//           "type": "string"
 			//         },
 			//         "Headers": {
@@ -93,7 +93,7 @@ func originRequestPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//       "additionalProperties": false,
 			//       "properties": {
 			//         "QueryStringBehavior": {
-			//           "pattern": "",
+			//           "pattern": "^(none|whitelist|all)$",
 			//           "type": "string"
 			//         },
 			//         "QueryStrings": {

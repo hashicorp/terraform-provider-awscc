@@ -3056,15 +3056,13 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "maxLength": 127,
+			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
 			//         "type": "string"
 			//       },
 			//       "Value": {
-			//         "maxLength": 255,
+			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
 			//         "type": "string"
 			//       }
 			//     },
@@ -3084,7 +3082,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 127),
+							validate.StringLenBetween(1, 128),
 						},
 					},
 					"value": {
@@ -3092,7 +3090,7 @@ func bucketResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 						Type:     types.StringType,
 						Required: true,
 						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
+							validate.StringLenBetween(1, 256),
 						},
 					},
 				},

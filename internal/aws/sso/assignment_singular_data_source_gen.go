@@ -26,7 +26,7 @@ func assignmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The sso instance that the permission set is owned.",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 			//   "type": "string"
 			// }
 			Description: "The sso instance that the permission set is owned.",
@@ -40,7 +40,7 @@ func assignmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The permission set that the assignemt will be assigned",
 			//   "maxLength": 1224,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 			//   "type": "string"
 			// }
 			Description: "The permission set that the assignemt will be assigned",
@@ -54,7 +54,7 @@ func assignmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The assignee's identifier, user id/group id",
 			//   "maxLength": 47,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Description: "The assignee's identifier, user id/group id",
@@ -81,7 +81,7 @@ func assignmentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The account id to be provisioned.",
-			//   "pattern": "",
+			//   "pattern": "\\d{12}",
 			//   "type": "string"
 			// }
 			Description: "The account id to be provisioned.",

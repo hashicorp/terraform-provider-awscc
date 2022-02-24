@@ -38,7 +38,7 @@ func sAMLProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\w._-]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

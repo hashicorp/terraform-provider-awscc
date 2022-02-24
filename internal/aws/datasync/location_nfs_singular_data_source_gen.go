@@ -25,7 +25,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the NFS location.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the NFS location.",
@@ -38,7 +38,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The URL of the NFS location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the NFS location that was described.",
@@ -93,7 +93,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "insertionOrder": false,
 			//       "items": {
 			//         "maxLength": 128,
-			//         "pattern": "",
+			//         "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 4,
@@ -125,7 +125,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
@@ -138,7 +138,7 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
@@ -159,14 +159,14 @@ func locationNFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },

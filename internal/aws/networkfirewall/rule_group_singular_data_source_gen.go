@@ -34,7 +34,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "maxLength": 512,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -59,7 +59,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -81,7 +81,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "insertionOrder": true,
 			//                   "items": {
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "type": "array",
@@ -161,13 +161,13 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "Destination": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "DestinationPort": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "Direction": {
@@ -204,13 +204,13 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "Source": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   },
 			//                   "SourcePort": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^.*$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -232,7 +232,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                     "Keyword": {
 			//                       "maxLength": 128,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "^.*$",
 			//                       "type": "string"
 			//                     },
 			//                     "Settings": {
@@ -240,7 +240,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                       "items": {
 			//                         "maxLength": 8192,
 			//                         "minLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "^.*$",
 			//                         "type": "string"
 			//                       },
 			//                       "type": "array",
@@ -288,7 +288,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                                 "Value": {
 			//                                   "maxLength": 128,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^[a-zA-Z0-9-_ ]+$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -312,7 +312,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                   "ActionName": {
 			//                     "maxLength": 128,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^[a-zA-Z0-9]+$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -382,7 +382,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                                 "AddressDefinition": {
 			//                                   "maxLength": 255,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -437,7 +437,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//                                 "AddressDefinition": {
 			//                                   "maxLength": 255,
 			//                                   "minLength": 1,
-			//                                   "pattern": "",
+			//                                   "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
 			//                                   "type": "string"
 			//                                 }
 			//                               },
@@ -895,7 +895,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(arn:aws.*)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -908,7 +908,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -920,7 +920,7 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -937,13 +937,13 @@ func ruleGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 255,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       }
 			//     },

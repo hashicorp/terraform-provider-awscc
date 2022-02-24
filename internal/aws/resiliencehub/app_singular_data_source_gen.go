@@ -38,7 +38,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A string containing full ResilienceHub app template body.",
 			//   "maxLength": 5000,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$",
 			//   "type": "string"
 			// }
 			Description: "A string containing full ResilienceHub app template body.",
@@ -63,7 +63,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name of the app.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 			//   "type": "string"
 			// }
 			Description: "Name of the app.",
@@ -96,18 +96,18 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "type": "string"
 			//       },
 			//       "MappingType": {
-			//         "pattern": "",
+			//         "pattern": "CfnStack|Resource",
 			//         "type": "string"
 			//       },
 			//       "PhysicalResourceId": {
 			//         "additionalProperties": false,
 			//         "properties": {
 			//           "AwsAccountId": {
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{12}$",
 			//             "type": "string"
 			//           },
 			//           "AwsRegion": {
-			//             "pattern": "",
+			//             "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$",
 			//             "type": "string"
 			//           },
 			//           "Identifier": {
@@ -116,7 +116,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "type": "string"
 			//           },
 			//           "Type": {
-			//             "pattern": "",
+			//             "pattern": "Arn|Native",
 			//             "type": "string"
 			//           }
 			//         },
@@ -127,7 +127,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "type": "object"
 			//       },
 			//       "ResourceName": {
-			//         "pattern": "",
+			//         "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 			//         "type": "string"
 			//       }
 			//     },

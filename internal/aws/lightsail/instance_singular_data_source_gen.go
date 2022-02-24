@@ -41,7 +41,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "properties": {
 			//           "SnapshotTimeOfDay": {
 			//             "description": "The daily time when an automatic snapshot will be created.",
-			//             "pattern": "",
+			//             "pattern": "^[0-9]{2}:00$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -172,7 +172,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "description": "The names to use for your new Lightsail disk.",
 			//             "maxLength": 254,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
 			//             "type": "string"
 			//           },
 			//           "IOPS": {
@@ -295,7 +295,7 @@ func instanceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The names to use for your new Lightsail instance.",
 			//   "maxLength": 254,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The names to use for your new Lightsail instance.",

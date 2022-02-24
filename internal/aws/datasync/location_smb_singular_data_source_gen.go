@@ -27,7 +27,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 4,
@@ -44,7 +44,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The name of the Windows domain that the SMB server belongs to.",
 			//   "maxLength": 253,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Windows domain that the SMB server belongs to.",
@@ -57,7 +57,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the SMB location that is created.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
@@ -70,7 +70,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The URL of the SMB location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the SMB location that was described.",
@@ -118,7 +118,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
 			//   "maxLength": 104,
-			//   "pattern": "",
+			//   "pattern": "^.{0,104}$",
 			//   "type": "string"
 			// }
 			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
@@ -131,7 +131,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
@@ -144,7 +144,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
@@ -165,14 +165,14 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -212,7 +212,7 @@ func locationSMBDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
 			//   "maxLength": 104,
-			//   "pattern": "",
+			//   "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
 			//   "type": "string"
 			// }
 			Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",

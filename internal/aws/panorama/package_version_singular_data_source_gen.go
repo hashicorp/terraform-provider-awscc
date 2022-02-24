@@ -43,7 +43,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 12,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -66,7 +66,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -78,7 +78,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -90,7 +90,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^([0-9]+)\\.([0-9]+)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -102,7 +102,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -149,7 +149,7 @@ func packageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

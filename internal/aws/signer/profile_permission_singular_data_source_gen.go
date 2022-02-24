@@ -50,7 +50,7 @@ func profilePermissionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// Property: ProfileVersion
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]{10}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

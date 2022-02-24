@@ -37,7 +37,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "88df7b09-95e8-48c4-a3cb-08c2c20d5110",
 			//     "203dd0ec-0055-4bf0-a872-707f72ef06aa"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 			//   "type": "string"
 			// }
 			Description: "Unique identifier of the association.",
@@ -49,7 +49,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the association.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the association.",
@@ -109,7 +109,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The version of the SSM document to associate with the target.",
-			//   "pattern": "",
+			//   "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
 			//   "type": "string"
 			// }
 			Description: "The version of the SSM document to associate with the target.",
@@ -125,7 +125,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "i-0e60836d21cf313c4",
 			//     "mi-0532c22e49636ee13"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
 			//   "type": "string"
 			// }
 			Description: "The ID of the instance that the SSM document is associated with.",
@@ -142,7 +142,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "50%",
 			//     "1"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "^([1-9][0-9]{0,6}|[1-9][0-9]%|[1-9]%|100%)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -158,7 +158,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "50%",
 			//     "1"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "^([1-9][0-9]{0,6}|[0]|[1-9][0-9]%|[0-9]%|100%)$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -173,7 +173,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "AWS-GatherSoftwareInventory",
 			//     "MyCustomSSMDocument"
 			//   ],
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the SSM document.",
@@ -300,7 +300,7 @@ func associationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//     "additionalProperties": false,
 			//     "properties": {
 			//       "Key": {
-			//         "pattern": "",
+			//         "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]{1,128}$|resource-groups:Name",
 			//         "type": "string"
 			//       },
 			//       "Values": {

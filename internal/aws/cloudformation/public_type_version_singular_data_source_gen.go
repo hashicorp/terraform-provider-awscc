@@ -24,7 +24,7 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Number (ARN) of the extension.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) of the extension.",
@@ -48,7 +48,7 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// {
 			//   "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
 			//   "maxLength": 1024,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
@@ -75,7 +75,7 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The publisher id assigned by CloudFormation for publishing in this region.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9a-zA-Z]{40}",
 			//   "type": "string"
 			// }
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
@@ -103,7 +103,7 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
@@ -115,7 +115,7 @@ func publicTypeVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			//   "pattern": "",
+			//   "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",

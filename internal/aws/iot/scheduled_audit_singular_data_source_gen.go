@@ -24,7 +24,7 @@ func scheduledAuditDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
-			//   "pattern": "",
+			//   "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$",
 			//   "type": "string"
 			// }
 			Description: "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
@@ -88,7 +88,7 @@ func scheduledAuditDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name you want to give to the scheduled audit.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "The name you want to give to the scheduled audit.",

@@ -49,7 +49,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			// {
 			//   "description": "The name of the job definition.",
 			//   "maxLength": 63,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the job definition.",
@@ -153,7 +153,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//     "ConfigUri": {
 			//       "description": "The S3 URI to an analysis configuration file",
 			//       "maxLength": 1024,
-			//       "pattern": "",
+			//       "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//       "type": "string"
 			//     },
 			//     "Environment": {
@@ -175,7 +175,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//     "ImageUri": {
 			//       "description": "The container image to be run by the monitoring job.",
 			//       "maxLength": 255,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -223,7 +223,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//       "description": "The name of a processing job",
 			//       "maxLength": 63,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "ConstraintsResource": {
@@ -233,7 +233,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//         "S3Uri": {
 			//           "description": "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -285,13 +285,13 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//           "description": "Monitoring end time offset, e.g. PT0H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^.?P.*",
 			//           "type": "string"
 			//         },
 			//         "EndpointName": {
 			//           "description": "The name of the endpoint used to run the monitoring job.",
 			//           "maxLength": 63,
-			//           "pattern": "",
+			//           "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 			//           "type": "string"
 			//         },
 			//         "FeaturesAttribute": {
@@ -307,7 +307,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//         "LocalPath": {
 			//           "description": "Path to the filesystem where the endpoint data is available to the container.",
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": ".*",
 			//           "type": "string"
 			//         },
 			//         "ProbabilityAttribute": {
@@ -339,7 +339,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//           "description": "Monitoring start time offset, e.g. -PT1H",
 			//           "maxLength": 15,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^.?P.*",
 			//           "type": "string"
 			//         }
 			//       },
@@ -356,7 +356,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//         "S3Uri": {
 			//           "description": "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 			//           "maxLength": 512,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -472,7 +472,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//     "KmsKeyId": {
 			//       "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
 			//       "maxLength": 2048,
-			//       "pattern": "",
+			//       "pattern": ".*",
 			//       "type": "string"
 			//     },
 			//     "MonitoringOutputs": {
@@ -488,7 +488,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//               "LocalPath": {
 			//                 "description": "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": ".*",
 			//                 "type": "string"
 			//               },
 			//               "S3UploadMode": {
@@ -502,7 +502,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//               "S3Uri": {
 			//                 "description": "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -601,7 +601,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//           "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
 			//           "items": {
 			//             "maxLength": 32,
-			//             "pattern": "",
+			//             "pattern": "[-0-9a-zA-Z]+",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 5,
@@ -612,7 +612,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//           "description": "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
 			//           "items": {
 			//             "maxLength": 32,
-			//             "pattern": "",
+			//             "pattern": "[-0-9a-zA-Z]+",
 			//             "type": "string"
 			//           },
 			//           "maxItems": 16,
@@ -676,7 +676,7 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//   "description": "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
@@ -728,13 +728,13 @@ func modelBiasJobDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSource
 			//         "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },

@@ -23,7 +23,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -66,7 +66,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "type": "boolean"
 			//     },
 			//     "StreamArn": {
-			//       "pattern": "",
+			//       "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//       "type": "string"
 			//     }
 			//   },
@@ -101,7 +101,7 @@ func streamDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

@@ -37,7 +37,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The unique name of the domain.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The unique name of the domain.",
@@ -52,18 +52,18 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "properties": {
 			//     "Description": {
 			//       "maxLength": 2048,
-			//       "pattern": "",
+			//       "pattern": "[\\w!@#\\-.?,\\s]*",
 			//       "type": "string"
 			//     },
 			//     "FlowName": {
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 			//       "type": "string"
 			//     },
 			//     "KmsArn": {
 			//       "maxLength": 2048,
 			//       "minLength": 20,
-			//       "pattern": "",
+			//       "pattern": "arn:aws:kms:.*:[0-9]+:.*",
 			//       "type": "string"
 			//     },
 			//     "SourceFlowConfig": {
@@ -71,7 +71,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "properties": {
 			//         "ConnectorProfileName": {
 			//           "maxLength": 256,
-			//           "pattern": "",
+			//           "pattern": "[\\w/!@#+=.-]+",
 			//           "type": "string"
 			//         },
 			//         "ConnectorType": {
@@ -103,7 +103,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 "Object": {
 			//                   "additionalProperties": false,
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -118,12 +118,12 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 "BucketName": {
 			//                   "maxLength": 63,
 			//                   "minLength": 3,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 },
 			//                 "BucketPrefix": {
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": ".*",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -144,7 +144,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 "Object": {
 			//                   "additionalProperties": false,
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -159,7 +159,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 "Object": {
 			//                   "additionalProperties": false,
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -174,7 +174,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 "Object": {
 			//                   "additionalProperties": false,
 			//                   "maxLength": 512,
-			//                   "pattern": "",
+			//                   "pattern": "\\S+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -322,13 +322,13 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           },
 			//           "DestinationField": {
 			//             "maxLength": 256,
-			//             "pattern": "",
+			//             "pattern": ".*",
 			//             "type": "string"
 			//           },
 			//           "SourceFields": {
 			//             "items": {
 			//               "maxLength": 2048,
-			//               "pattern": "",
+			//               "pattern": ".*",
 			//               "type": "string"
 			//             },
 			//             "type": "array"
@@ -358,7 +358,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 },
 			//                 "Property": {
 			//                   "maxLength": 2048,
-			//                   "pattern": "",
+			//                   "pattern": ".+",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -415,7 +415,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 },
 			//                 "ScheduleExpression": {
 			//                   "maxLength": 256,
-			//                   "pattern": "",
+			//                   "pattern": ".*",
 			//                   "type": "string"
 			//                 },
 			//                 "ScheduleOffset": {
@@ -428,7 +428,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                 },
 			//                 "Timezone": {
 			//                   "maxLength": 256,
-			//                   "pattern": "",
+			//                   "pattern": ".*",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -762,7 +762,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The name of the ObjectType defined for the 3rd party data in Profile Service",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
@@ -785,7 +785,7 @@ func integrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "Value": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 			//         "type": "string"
 			//       }
 			//     },

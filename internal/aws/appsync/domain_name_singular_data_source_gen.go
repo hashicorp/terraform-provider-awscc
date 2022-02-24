@@ -34,7 +34,7 @@ func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*:acm:[a-z0-9-]*:\\d{12}:certificate/[0-9A-Za-z_/-]*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -57,7 +57,7 @@ func domainNameDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 253,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

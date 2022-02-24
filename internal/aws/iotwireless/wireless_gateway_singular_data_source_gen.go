@@ -74,7 +74,7 @@ func wirelessGatewayDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
 			//   "properties": {
 			//     "GatewayEui": {
-			//       "pattern": "",
+			//       "pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$",
 			//       "type": "string"
 			//     },
 			//     "RfRegion": {

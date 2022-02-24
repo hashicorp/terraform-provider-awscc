@@ -25,7 +25,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "Activation key of the Agent.",
 			//   "maxLength": 29,
-			//   "pattern": "",
+			//   "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
 			//   "type": "string"
 			// }
 			Description: "Activation key of the Agent.",
@@ -38,7 +38,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The DataSync Agent ARN.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The DataSync Agent ARN.",
@@ -52,7 +52,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
@@ -83,7 +83,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -100,7 +100,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -123,14 +123,14 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The key for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value for an AWS resource tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -169,7 +169,7 @@ func agentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the VPC endpoint that the agent has access to.",
-			//   "pattern": "",
+			//   "pattern": "^vpce-[0-9a-f]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the VPC endpoint that the agent has access to.",

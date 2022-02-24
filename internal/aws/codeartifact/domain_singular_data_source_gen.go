@@ -39,7 +39,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the domain.",
 			//   "maxLength": 50,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the domain.",
@@ -64,7 +64,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the domain. This field is used for GetAtt",
 			//   "maxLength": 50,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the domain. This field is used for GetAtt",
@@ -76,7 +76,7 @@ func domainDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The 12-digit account ID of the AWS account that owns the domain. This field is used for GetAtt",

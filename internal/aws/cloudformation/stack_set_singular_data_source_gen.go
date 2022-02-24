@@ -193,7 +193,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     },
 			//     "RegionOrder": {
 			//       "items": {
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-]{1,128}$",
 			//         "type": "string"
 			//       },
 			//       "type": "array"
@@ -320,7 +320,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "insertionOrder": false,
 			//             "items": {
 			//               "description": "AWS account that you want to create stack instances in the specified Region(s) for.",
-			//               "pattern": "",
+			//               "pattern": "^[0-9]{12}$",
 			//               "type": "string"
 			//             },
 			//             "minItems": 1,
@@ -331,7 +331,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 			//             "insertionOrder": false,
 			//             "items": {
-			//               "pattern": "",
+			//               "pattern": "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32}|r-[a-z0-9]{4,32})$",
 			//               "type": "string"
 			//             },
 			//             "minItems": 1,
@@ -369,7 +369,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
 			//         "insertionOrder": false,
 			//         "items": {
-			//           "pattern": "",
+			//           "pattern": "^[a-zA-Z0-9-]{1,128}$",
 			//           "type": "string"
 			//         },
 			//         "minItems": 1,
@@ -460,7 +460,7 @@ func stackSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,127}$",
 			//   "type": "string"
 			// }
 			Description: "The name to associate with the stack set. The name must be unique in the Region where you create your stack set.",

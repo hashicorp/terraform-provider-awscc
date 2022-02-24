@@ -74,7 +74,7 @@ func destinationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "Unique name of destination",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "Unique name of destination",

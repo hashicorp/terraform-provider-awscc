@@ -38,7 +38,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			//   "description": "The name of the configuration",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9-_]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the configuration",
@@ -79,7 +79,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			// {
 			//   "default": "NONE",
 			//   "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			//   "pattern": "",
+			//   "pattern": "^(ERROR|INFO|NONE)$",
 			//   "type": "string"
 			// }
 			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
@@ -93,7 +93,7 @@ func slackChannelConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSou
 			//   "description": "The id of the Slack channel",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]+$",
 			//   "type": "string"
 			// }
 			Description: "The id of the Slack channel",

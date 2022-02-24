@@ -26,7 +26,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The date when the monitor was created. ",
 			//   "maxLength": 40,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
 			//   "type": "string"
 			// }
 			Description: "The date when the monitor was created. ",
@@ -52,7 +52,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The date when the monitor last evaluated for anomalies.",
 			//   "maxLength": 40,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
 			//   "type": "string"
 			// }
 			Description: "The date when the monitor last evaluated for anomalies.",
@@ -66,7 +66,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The date when the monitor was last updated.",
 			//   "maxLength": 40,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
 			//   "type": "string"
 			// }
 			Description: "The date when the monitor was last updated.",
@@ -78,7 +78,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Monitor ARN",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 			//   "type": "string"
 			// }
 			Description: "Monitor ARN",
@@ -106,7 +106,7 @@ func anomalyMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name of the monitor.",
 			//   "maxLength": 1024,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\S\\s]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the monitor.",

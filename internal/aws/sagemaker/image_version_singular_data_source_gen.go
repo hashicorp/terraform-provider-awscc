@@ -26,7 +26,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The registry path of the container image on which this image version is based.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "The registry path of the container image on which this image version is based.",
@@ -40,7 +40,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The registry path of the container image that contains this image version.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "The registry path of the container image that contains this image version.",
@@ -54,7 +54,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The Amazon Resource Name (ARN) of the parent image.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
@@ -68,7 +68,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The name of the image this version belongs to.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the image this version belongs to.",
@@ -82,7 +82,7 @@ func imageVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The Amazon Resource Name (ARN) of the image version.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image version.",

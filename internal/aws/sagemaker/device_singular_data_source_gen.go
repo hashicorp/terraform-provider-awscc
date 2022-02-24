@@ -30,20 +30,20 @@ func deviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "Description of the device",
 			//       "maxLength": 40,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\S\\s]+",
 			//       "type": "string"
 			//     },
 			//     "DeviceName": {
 			//       "description": "The name of the device",
 			//       "maxLength": 63,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "IotThingName": {
 			//       "description": "AWS Internet of Things (IoT) object name.",
 			//       "maxLength": 128,
-			//       "pattern": "",
+			//       "pattern": "[a-zA-Z0-9:_-]+",
 			//       "type": "string"
 			//     }
 			//   },
@@ -84,7 +84,7 @@ func deviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the edge device fleet",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the edge device fleet",
@@ -110,7 +110,7 @@ func deviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },

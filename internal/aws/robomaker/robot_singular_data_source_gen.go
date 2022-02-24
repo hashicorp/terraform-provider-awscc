@@ -39,7 +39,7 @@ func robotDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

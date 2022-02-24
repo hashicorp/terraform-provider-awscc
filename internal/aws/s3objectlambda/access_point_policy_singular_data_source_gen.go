@@ -26,7 +26,7 @@ func accessPointPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//   "description": "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
 			//   "maxLength": 45,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",

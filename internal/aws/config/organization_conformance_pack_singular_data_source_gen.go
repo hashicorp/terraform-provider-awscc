@@ -115,7 +115,7 @@ func organizationConformancePackDataSourceType(ctx context.Context) (tfsdk.DataS
 			//   "description": "The name of the organization conformance pack.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][-a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the organization conformance pack.",
@@ -142,7 +142,7 @@ func organizationConformancePackDataSourceType(ctx context.Context) (tfsdk.DataS
 			//   "description": "Location of file containing the template body.",
 			//   "maxLength": 1024,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "s3://.*",
 			//   "type": "string"
 			// }
 			Description: "Location of file containing the template body.",

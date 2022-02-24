@@ -24,7 +24,7 @@ func keyspaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Name for Cassandra keyspace",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
 			//   "type": "string"
 			// }
 			Description: "Name for Cassandra keyspace",

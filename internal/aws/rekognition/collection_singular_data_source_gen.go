@@ -37,7 +37,7 @@ func collectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "description": "The name of the collection",
 			//   "maxLength": 255,
-			//   "pattern": "",
+			//   "pattern": "\\A[a-zA-Z0-9_\\.\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the collection",
@@ -63,7 +63,7 @@ func collectionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "Value": {
 			//         "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
 			//         "type": "string"
 			//       }
 			//     },

@@ -175,7 +175,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         },
 			//         "Permissions": {
 			//           "description": "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-			//           "pattern": "",
+			//           "pattern": "^[0-7]{3,4}$",
 			//           "type": "string"
 			//         }
 			//       },

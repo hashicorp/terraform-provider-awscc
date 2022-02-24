@@ -24,7 +24,7 @@ func keySigningKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The unique string (ID) used to identify a hosted zone.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Z0-9]{1,32}$",
 			//   "type": "string"
 			// }
 			Description: "The unique string (ID) used to identify a hosted zone.",
@@ -49,7 +49,7 @@ func keySigningKeyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_]{3,128}$",
 			//   "type": "string"
 			// }
 			Description: "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",

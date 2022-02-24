@@ -25,7 +25,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -37,7 +37,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -69,7 +69,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -81,7 +81,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -93,7 +93,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -105,7 +105,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -143,7 +143,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "PayloadData": {
 			//       "maxLength": 51200,
 			//       "minLength": 0,
-			//       "pattern": "",
+			//       "pattern": "^.+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -169,7 +169,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//     "PayloadData": {
 			//       "maxLength": 51200,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^.+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -192,7 +192,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -204,7 +204,7 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -272,14 +272,14 @@ func applicationInstanceDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//         "description": "A string used to identify this tag",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "A string containing the value for the tag",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       }
 			//     },

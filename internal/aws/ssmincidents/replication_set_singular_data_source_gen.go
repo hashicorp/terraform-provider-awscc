@@ -25,7 +25,7 @@ func replicationSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "description": "The ARN of the ReplicationSet.",
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the ReplicationSet.",
@@ -61,7 +61,7 @@ func replicationSetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "SseKmsKeyId": {
 			//             "description": "The ARN of the ReplicationSet.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov|iso(-b)?))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           }
 			//         },

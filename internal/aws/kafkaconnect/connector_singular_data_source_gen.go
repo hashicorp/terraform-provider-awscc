@@ -219,7 +219,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Amazon Resource Name for the created Connector.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//   "type": "string"
 			// }
 			Description: "Amazon Resource Name for the created Connector.",
@@ -628,7 +628,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//         "properties": {
 			//           "CustomPluginArn": {
 			//             "description": "The Amazon Resource Name (ARN) of the custom plugin to use.",
-			//             "pattern": "",
+			//             "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//             "type": "string"
 			//           },
 			//           "Revision": {
@@ -688,7 +688,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
@@ -710,7 +710,7 @@ func connectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//     },
 			//     "WorkerConfigurationArn": {
 			//       "description": "The Amazon Resource Name (ARN) of the worker configuration to use.",
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 			//       "type": "string"
 			//     }
 			//   },

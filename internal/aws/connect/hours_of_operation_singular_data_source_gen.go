@@ -174,7 +174,7 @@ func hoursOfOperationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the hours of operation.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
@@ -186,7 +186,7 @@ func hoursOfOperationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance.",

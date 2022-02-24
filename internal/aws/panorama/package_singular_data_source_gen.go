@@ -45,7 +45,7 @@ func packageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -57,7 +57,7 @@ func packageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -129,13 +129,13 @@ func packageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.+$",
 			//         "type": "string"
 			//       }
 			//     },

@@ -27,7 +27,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "maxLength": 128,
-			//     "pattern": "",
+			//     "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 4,
@@ -96,7 +96,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The unique identity, or principal, to which Kerberos can assign tickets.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^.+$",
 			//   "type": "string"
 			// }
 			Description: "The unique identity, or principal, to which Kerberos can assign tickets.",
@@ -110,7 +110,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$",
 			//   "type": "string"
 			// }
 			Description: "The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.",
@@ -123,7 +123,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the HDFS location.",
 			//   "maxLength": 128,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the HDFS location.",
@@ -136,7 +136,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "description": "The URL of the HDFS location that was described.",
 			//   "maxLength": 4356,
-			//   "pattern": "",
+			//   "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs)://[a-zA-Z0-9.:/\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The URL of the HDFS location that was described.",
@@ -156,7 +156,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "Hostname": {
 			//         "description": "The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.",
 			//         "maxLength": 255,
-			//         "pattern": "",
+			//         "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 			//         "type": "string"
 			//       },
 			//       "Port": {
@@ -268,7 +268,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The user name that has read and write permissions on the specified HDFS cluster.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[_.A-Za-z0-9][-_.A-Za-z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The user name that has read and write permissions on the specified HDFS cluster.",
@@ -281,7 +281,7 @@ func locationHDFSDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "description": "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",
 			//   "maxLength": 4096,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 			//   "type": "string"
 			// }
 			Description: "The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.",

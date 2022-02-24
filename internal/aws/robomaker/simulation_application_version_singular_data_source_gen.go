@@ -23,7 +23,7 @@ func simulationApplicationVersionDataSourceType(ctx context.Context) (tfsdk.Data
 			// Property: Application
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -42,7 +42,7 @@ func simulationApplicationVersionDataSourceType(ctx context.Context) (tfsdk.Data
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -55,7 +55,7 @@ func simulationApplicationVersionDataSourceType(ctx context.Context) (tfsdk.Data
 			//   "description": "The revision ID of robot application.",
 			//   "maxLength": 40,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The revision ID of robot application.",

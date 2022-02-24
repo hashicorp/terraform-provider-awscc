@@ -35,7 +35,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the hierarchy group for the user.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the hierarchy group for the user.",
@@ -94,7 +94,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the Amazon Connect instance.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the Amazon Connect instance.",
@@ -183,7 +183,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The identifier of the routing profile for the user.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/routing-profile/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The identifier of the routing profile for the user.",
@@ -198,7 +198,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "insertionOrder": false,
 			//   "items": {
 			//     "description": "The identifier of the security profile for the user.",
-			//     "pattern": "",
+			//     "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 10,
@@ -268,7 +268,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) for the user.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) for the user.",
@@ -282,7 +282,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The user name for the account.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9\\_\\-\\.\\@]+",
 			//   "type": "string"
 			// }
 			Description: "The user name for the account.",

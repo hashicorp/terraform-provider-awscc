@@ -94,7 +94,7 @@ func detectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The ID of the detector",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-z_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the detector",
@@ -401,7 +401,7 @@ func detectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "The name for the event type",
 			//       "maxLength": 64,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[0-9a-z_-]+$",
 			//       "type": "string"
 			//     },
 			//     "Tags": {

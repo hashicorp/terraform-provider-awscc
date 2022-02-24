@@ -38,7 +38,7 @@ func readinessCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "Name of the ReadinessCheck to create.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "Name of the ReadinessCheck to create.",
@@ -52,7 +52,7 @@ func readinessCheckDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name of the resource set to check.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the resource set to check.",

@@ -37,6 +37,15 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"availability_zone_id": {
+			// Property: AvailabilityZoneId
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Computed: true,
+		},
 		"cidr_block": {
 			// Property: CidrBlock
 			// CloudFormation resource type schema:
@@ -44,6 +53,15 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
+			Computed: true,
+		},
+		"enable_dns_64": {
+			// Property: EnableDns64
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
 			Computed: true,
 		},
 		"ipv_6_cidr_block": {
@@ -66,6 +84,15 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "uniqueItems": false
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
+			Computed: true,
+		},
+		"ipv_6_native": {
+			// Property: Ipv6Native
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
 			Computed: true,
 		},
 		"map_public_ip_on_launch": {
@@ -93,6 +120,45 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
+			Computed: true,
+		},
+		"private_dns_name_options_on_launch": {
+			// Property: PrivateDnsNameOptionsOnLaunch
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "EnableResourceNameDnsAAAARecord": {
+			//       "type": "boolean"
+			//     },
+			//     "EnableResourceNameDnsARecord": {
+			//       "type": "boolean"
+			//     },
+			//     "HostnameType": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"enable_resource_name_dns_aaaa_record": {
+						// Property: EnableResourceNameDnsAAAARecord
+						Type:     types.BoolType,
+						Computed: true,
+					},
+					"enable_resource_name_dns_a_record": {
+						// Property: EnableResourceNameDnsARecord
+						Type:     types.BoolType,
+						Computed: true,
+					},
+					"hostname_type": {
+						// Property: HostnameType
+						Type:     types.StringType,
+						Computed: true,
+					},
+				},
+			),
 			Computed: true,
 		},
 		"subnet_id": {
@@ -172,19 +238,26 @@ func subnetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Subnet").WithTerraformTypeName("awscc_ec2_subnet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assign_ipv_6_address_on_creation": "AssignIpv6AddressOnCreation",
-		"availability_zone":                "AvailabilityZone",
-		"cidr_block":                       "CidrBlock",
-		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
-		"ipv_6_cidr_blocks":                "Ipv6CidrBlocks",
-		"key":                              "Key",
-		"map_public_ip_on_launch":          "MapPublicIpOnLaunch",
-		"network_acl_association_id":       "NetworkAclAssociationId",
-		"outpost_arn":                      "OutpostArn",
-		"subnet_id":                        "SubnetId",
-		"tags":                             "Tags",
-		"value":                            "Value",
-		"vpc_id":                           "VpcId",
+		"assign_ipv_6_address_on_creation":     "AssignIpv6AddressOnCreation",
+		"availability_zone":                    "AvailabilityZone",
+		"availability_zone_id":                 "AvailabilityZoneId",
+		"cidr_block":                           "CidrBlock",
+		"enable_dns_64":                        "EnableDns64",
+		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
+		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
+		"hostname_type":                        "HostnameType",
+		"ipv_6_cidr_block":                     "Ipv6CidrBlock",
+		"ipv_6_cidr_blocks":                    "Ipv6CidrBlocks",
+		"ipv_6_native":                         "Ipv6Native",
+		"key":                                  "Key",
+		"map_public_ip_on_launch":              "MapPublicIpOnLaunch",
+		"network_acl_association_id":           "NetworkAclAssociationId",
+		"outpost_arn":                          "OutpostArn",
+		"private_dns_name_options_on_launch":   "PrivateDnsNameOptionsOnLaunch",
+		"subnet_id":                            "SubnetId",
+		"tags":                                 "Tags",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

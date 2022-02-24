@@ -24,7 +24,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource",
@@ -64,7 +64,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "description": "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[\\.\\-_/#A-Za-z0-9]+$",
 			//       "type": "string"
 			//     },
 			//     "LogRoleArn": {
@@ -127,7 +127,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The Amazon Resource Name (ARN) of the type without the versionID.",
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the type without the versionID.",
@@ -139,7 +139,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
@@ -151,7 +151,7 @@ func resourceVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the version of the type represented by this resource instance.",
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9-]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "The ID of the version of the type represented by this resource instance.",

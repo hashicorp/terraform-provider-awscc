@@ -26,7 +26,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The Amazon Resource Name (ARN) of the specified AccessPoint.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/accesspoint\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified AccessPoint.",
@@ -40,7 +40,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the bucket you want to associate this AccessPoint with.",
@@ -54,7 +54,7 @@ func accessPointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "A name for the AccessPoint.",
 			//   "maxLength": 50,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]([a-z0-9\\\\-]*[a-z0-9])?$",
 			//   "type": "string"
 			// }
 			Description: "A name for the AccessPoint.",

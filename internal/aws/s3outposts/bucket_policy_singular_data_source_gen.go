@@ -26,7 +26,7 @@ func bucketPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",

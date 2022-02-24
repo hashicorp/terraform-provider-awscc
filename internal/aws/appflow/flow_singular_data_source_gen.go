@@ -25,7 +25,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "Description of the flow.",
 			//   "maxLength": 2048,
-			//   "pattern": "",
+			//   "pattern": "[\\w!@#\\-.?,\\s]*",
 			//   "type": "string"
 			// }
 			Description: "Description of the flow.",
@@ -44,7 +44,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "ConnectorProfileName": {
 			//         "description": "Name of destination connector profile",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": "[\\w/!@#+=.-]+",
 			//         "type": "string"
 			//       },
 			//       "ConnectorType": {
@@ -85,7 +85,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "BucketName": {
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "\\S+",
 			//                     "type": "string"
 			//                   },
 			//                   "BucketPrefix": {
@@ -100,7 +100,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               },
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -114,7 +114,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "properties": {
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -133,7 +133,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "BucketName": {
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "\\S+",
 			//                     "type": "string"
 			//                   },
 			//                   "BucketPrefix": {
@@ -149,12 +149,12 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "IntermediateBucketName": {
 			//                 "maxLength": 63,
 			//                 "minLength": 3,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               },
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -170,7 +170,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "BucketName": {
 			//                 "maxLength": 63,
 			//                 "minLength": 3,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               },
 			//               "BucketPrefix": {
@@ -242,7 +242,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "BucketName": {
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "\\S+",
 			//                     "type": "string"
 			//                   },
 			//                   "BucketPrefix": {
@@ -264,7 +264,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               },
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               },
 			//               "WriteOperationType": {
@@ -294,7 +294,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "BucketName": {
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "\\S+",
 			//                     "type": "string"
 			//                   },
 			//                   "BucketPrefix": {
@@ -310,12 +310,12 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "IntermediateBucketName": {
 			//                 "maxLength": 63,
 			//                 "minLength": 3,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               },
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -331,7 +331,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               "BucketName": {
 			//                 "maxLength": 63,
 			//                 "minLength": 16,
-			//                 "pattern": "",
+			//                 "pattern": "^(upsolver-appflow)\\S*",
 			//                 "type": "string"
 			//               },
 			//               "BucketPrefix": {
@@ -407,7 +407,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "BucketName": {
 			//                     "maxLength": 63,
 			//                     "minLength": 3,
-			//                     "pattern": "",
+			//                     "pattern": "\\S+",
 			//                     "type": "string"
 			//                   },
 			//                   "BucketPrefix": {
@@ -429,7 +429,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//               },
 			//               "Object": {
 			//                 "maxLength": 512,
-			//                 "pattern": "",
+			//                 "pattern": "\\S+",
 			//                 "type": "string"
 			//               },
 			//               "WriteOperationType": {
@@ -852,7 +852,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "ARN identifier of the flow.",
 			//   "maxLength": 512,
-			//   "pattern": "",
+			//   "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
 			//   "type": "string"
 			// }
 			Description: "ARN identifier of the flow.",
@@ -866,7 +866,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "Name of the flow.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 			//   "type": "string"
 			// }
 			Description: "Name of the flow.",
@@ -880,7 +880,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws:kms:.*:[0-9]+:.*",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
@@ -897,7 +897,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "ConnectorProfileName": {
 			//       "description": "Name of source connector profile",
 			//       "maxLength": 256,
-			//       "pattern": "",
+			//       "pattern": "[\\w/!@#+=.-]+",
 			//       "type": "string"
 			//     },
 			//     "ConnectorType": {
@@ -945,7 +945,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -959,7 +959,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -973,7 +973,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -987,7 +987,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1001,7 +1001,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1015,7 +1015,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1030,7 +1030,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "BucketName": {
 			//               "maxLength": 63,
 			//               "minLength": 3,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             },
 			//             "BucketPrefix": {
@@ -1061,7 +1061,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "ObjectPath": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1081,7 +1081,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             },
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1095,7 +1095,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1109,7 +1109,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1123,7 +1123,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1137,7 +1137,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1151,7 +1151,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "DocumentType": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "[\\s\\w_-]+",
 			//               "type": "string"
 			//             },
 			//             "IncludeAllVersions": {
@@ -1165,7 +1165,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             },
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1179,7 +1179,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "properties": {
 			//             "Object": {
 			//               "maxLength": 512,
-			//               "pattern": "",
+			//               "pattern": "\\S+",
 			//               "type": "string"
 			//             }
 			//           },
@@ -1888,7 +1888,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             },
 			//             "Value": {
 			//               "maxLength": 2048,
-			//               "pattern": "",
+			//               "pattern": ".+",
 			//               "type": "string"
 			//             }
 			//           },

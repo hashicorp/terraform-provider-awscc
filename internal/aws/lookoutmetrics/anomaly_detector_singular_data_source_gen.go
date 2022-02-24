@@ -61,7 +61,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// {
 			//   "description": "A description for the AnomalyDetector.",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": ".*\\S.*",
 			//   "type": "string"
 			// }
 			Description: "A description for the AnomalyDetector.",
@@ -75,7 +75,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//   "type": "string"
 			// }
 			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
@@ -87,7 +87,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			// CloudFormation resource type schema:
 			// {
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -100,7 +100,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "KMS key used to encrypt the AnomalyDetector data",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
 			//   "type": "string"
 			// }
 			Description: "KMS key used to encrypt the AnomalyDetector data",
@@ -122,7 +122,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//           "description": "Name of a column in the data.",
 			//           "maxLength": 63,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//           "type": "string"
 			//         },
 			//         "minItems": 0,
@@ -146,13 +146,13 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               "description": "Name of a column in the data.",
 			//               "maxLength": 63,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//               "type": "string"
 			//             },
 			//             "Namespace": {
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "[^:].*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -168,7 +168,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       "MetricSetDescription": {
 			//         "description": "A description for the MetricSet.",
 			//         "maxLength": 256,
-			//         "pattern": "",
+			//         "pattern": ".*\\S.*",
 			//         "type": "string"
 			//       },
 			//       "MetricSetFrequency": {
@@ -185,7 +185,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "The name of the MetricSet.",
 			//         "maxLength": 63,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//         "type": "string"
 			//       },
 			//       "MetricSource": {
@@ -196,12 +196,12 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//             "properties": {
 			//               "FlowName": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 			//                 "type": "string"
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -216,7 +216,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//             "properties": {
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               }
 			//             },
@@ -237,13 +237,13 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               "DatabaseHost": {
 			//                 "maxLength": 253,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": ".*\\S.*",
 			//                 "type": "string"
 			//               },
 			//               "DatabaseName": {
 			//                 "maxLength": 64,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-zA-Z0-9_]+",
 			//                 "type": "string"
 			//               },
 			//               "DatabasePort": {
@@ -253,18 +253,18 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "SecretManagerArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
 			//                 "type": "string"
 			//               },
 			//               "TableName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                 "type": "string"
 			//               },
 			//               "VpcConfiguration": {
@@ -274,7 +274,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                     "items": {
 			//                       "maxLength": 255,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -282,7 +282,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                   "SubnetIdList": {
 			//                     "items": {
 			//                       "maxLength": 255,
-			//                       "pattern": "",
+			//                       "pattern": "[\\-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -319,13 +319,13 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               "DatabaseHost": {
 			//                 "maxLength": 253,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": ".*\\S.*",
 			//                 "type": "string"
 			//               },
 			//               "DatabaseName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "[a-z0-9]+",
 			//                 "type": "string"
 			//               },
 			//               "DatabasePort": {
@@ -335,18 +335,18 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "SecretManagerArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
 			//                 "type": "string"
 			//               },
 			//               "TableName": {
 			//                 "maxLength": 100,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                 "type": "string"
 			//               },
 			//               "VpcConfiguration": {
@@ -356,7 +356,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                     "items": {
 			//                       "maxLength": 255,
 			//                       "minLength": 1,
-			//                       "pattern": "",
+			//                       "pattern": "[-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -364,7 +364,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                   "SubnetIdList": {
 			//                     "items": {
 			//                       "maxLength": 255,
-			//                       "pattern": "",
+			//                       "pattern": "[\\-0-9a-zA-Z]+",
 			//                       "type": "string"
 			//                     },
 			//                     "type": "array"
@@ -400,7 +400,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                     "properties": {
 			//                       "Charset": {
 			//                         "maxLength": 63,
-			//                         "pattern": "",
+			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                         "type": "string"
 			//                       },
 			//                       "ContainsHeader": {
@@ -408,7 +408,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                       },
 			//                       "Delimiter": {
 			//                         "maxLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[^\\r\\n]",
 			//                         "type": "string"
 			//                       },
 			//                       "FileCompression": {
@@ -423,14 +423,14 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                           "description": "Name of a column in the data.",
 			//                           "maxLength": 63,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                           "type": "string"
 			//                         },
 			//                         "type": "array"
 			//                       },
 			//                       "QuoteSymbol": {
 			//                         "maxLength": 1,
-			//                         "pattern": "",
+			//                         "pattern": "[^\\r\\n]|^$",
 			//                         "type": "string"
 			//                       }
 			//                     },
@@ -441,7 +441,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//                     "properties": {
 			//                       "Charset": {
 			//                         "maxLength": 63,
-			//                         "pattern": "",
+			//                         "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//                         "type": "string"
 			//                       },
 			//                       "FileCompression": {
@@ -460,7 +460,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               "HistoricalDataPathList": {
 			//                 "items": {
 			//                   "maxLength": 1024,
-			//                   "pattern": "",
+			//                   "pattern": "^s3://[a-z0-9].+$",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -469,13 +469,13 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//               },
 			//               "RoleArn": {
 			//                 "maxLength": 256,
-			//                 "pattern": "",
+			//                 "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 			//                 "type": "string"
 			//               },
 			//               "TemplatedPathList": {
 			//                 "items": {
 			//                   "maxLength": 1024,
-			//                   "pattern": "",
+			//                   "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
 			//                   "type": "string"
 			//                 },
 			//                 "maxItems": 1,
@@ -504,14 +504,14 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//           "ColumnFormat": {
 			//             "description": "A timestamp format for the timestamps in the dataset",
 			//             "maxLength": 63,
-			//             "pattern": "",
+			//             "pattern": ".*\\S.*",
 			//             "type": "string"
 			//           },
 			//           "ColumnName": {
 			//             "description": "Name of a column in the data.",
 			//             "maxLength": 63,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -519,7 +519,7 @@ func anomalyDetectorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//       },
 			//       "Timezone": {
 			//         "maxLength": 60,
-			//         "pattern": "",
+			//         "pattern": ".*\\S.*",
 			//         "type": "string"
 			//       }
 			//     },

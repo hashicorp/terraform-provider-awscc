@@ -34,7 +34,7 @@ func knowledgeBaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: KnowledgeBaseArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -44,7 +44,7 @@ func knowledgeBaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			// Property: KnowledgeBaseId
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -143,7 +143,7 @@ func knowledgeBaseDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//         "AppIntegrationArn": {
 			//           "maxLength": 2048,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$",
 			//           "type": "string"
 			//         },
 			//         "ObjectFields": {

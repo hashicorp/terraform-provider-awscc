@@ -23,7 +23,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -45,7 +45,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// Property: Id
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "[a-z0-9]{26}",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -58,7 +58,7 @@ func applicationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The name of the application. ",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+",
 			//   "type": "string"
 			// }
 			Description: "The name of the application. ",

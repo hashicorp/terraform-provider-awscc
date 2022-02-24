@@ -50,7 +50,7 @@ func workspaceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "Workspace arn.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:\u0008(aws|aws-us-gov|aws-cn)\u0008:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Description: "Workspace arn.",

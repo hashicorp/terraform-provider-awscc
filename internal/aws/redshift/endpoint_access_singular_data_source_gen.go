@@ -91,7 +91,7 @@ func endpointAccessDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The AWS account ID of the owner of the cluster.",
-			//   "pattern": "",
+			//   "pattern": "^\\d{12}$",
 			//   "type": "string"
 			// }
 			Description: "The AWS account ID of the owner of the cluster.",

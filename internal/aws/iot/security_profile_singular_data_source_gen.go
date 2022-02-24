@@ -33,7 +33,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "What is measured by the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "MetricDimension": {
@@ -44,7 +44,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//             "description": "A unique identifier for the dimension.",
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[a-zA-Z0-9:_-]+",
 			//             "type": "string"
 			//           },
 			//           "Operator": {
@@ -306,7 +306,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "What is measured by the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "MetricDimension": {
@@ -317,7 +317,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//             "description": "A unique identifier for the dimension.",
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[a-zA-Z0-9:_-]+",
 			//             "type": "string"
 			//           },
 			//           "Operator": {
@@ -338,7 +338,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "The name for the behavior.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[a-zA-Z0-9:_-]+",
 			//         "type": "string"
 			//       },
 			//       "SuppressAlerts": {
@@ -540,7 +540,7 @@ func securityProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//   "description": "A unique identifier for the security profile.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for the security profile.",

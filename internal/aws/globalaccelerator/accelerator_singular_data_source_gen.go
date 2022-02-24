@@ -76,7 +76,7 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The IP addresses from BYOIP Prefix pool.",
 			//   "items": {
 			//     "description": "The IP addresses from BYOIP Prefix pool.",
-			//     "pattern": "",
+			//     "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -92,7 +92,7 @@ func acceleratorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "Name of accelerator.",
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//   "type": "string"
 			// }
 			Description: "Name of accelerator.",

@@ -26,7 +26,7 @@ func botVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "Unique ID of resource",
 			//   "maxLength": 10,
 			//   "minLength": 10,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z]+$",
 			//   "type": "string"
 			// }
 			Description: "Unique ID of resource",
@@ -40,7 +40,7 @@ func botVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The version of a bot.",
 			//   "maxLength": 5,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(DRAFT|[0-9]+)$",
 			//   "type": "string"
 			// }
 			Description: "The version of a bot.",
@@ -64,7 +64,7 @@ func botVersionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//             "description": "The version of a bot.",
 			//             "maxLength": 5,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(DRAFT|[0-9]+)$",
 			//             "type": "string"
 			//           }
 			//         },

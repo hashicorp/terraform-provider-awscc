@@ -360,7 +360,7 @@ func trailDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 3,
-			//   "pattern": "",
+			//   "pattern": "(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9]([a-zA-Z0-9\\._-])*[a-zA-Z0-9]$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

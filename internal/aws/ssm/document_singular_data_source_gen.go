@@ -41,7 +41,7 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The name of the document attachment file.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Values": {
@@ -148,7 +148,7 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A name for the Systems Manager document.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 			//   "type": "string"
 			// }
 			Description: "A name for the Systems Manager document.",
@@ -167,13 +167,13 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Name": {
 			//         "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
 			//         "maxLength": 200,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
 			//         "type": "string"
 			//       },
 			//       "Version": {
 			//         "description": "The document version required by the current document.",
 			//         "maxLength": 8,
-			//         "pattern": "",
+			//         "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
 			//         "type": "string"
 			//       }
 			//     },
@@ -215,14 +215,14 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "description": "The name of the tag.",
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "description": "The value of the tag.",
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },
@@ -256,7 +256,7 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "Specify a target type to define the kinds of resources the document can run on.",
-			//   "pattern": "",
+			//   "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
 			//   "type": "string"
 			// }
 			Description: "Specify a target type to define the kinds of resources the document can run on.",
@@ -268,7 +268,7 @@ func documentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
 			//   "type": "string"
 			// }
 			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",

@@ -23,7 +23,7 @@ func attributeGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -54,7 +54,7 @@ func attributeGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// Property: Id
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "[a-z0-9]{12}",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -67,7 +67,7 @@ func attributeGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The name of the attribute group. ",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+",
 			//   "type": "string"
 			// }
 			Description: "The name of the attribute group. ",

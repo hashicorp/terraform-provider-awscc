@@ -24,7 +24,7 @@ func contactListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the contact list.",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the contact list.",
@@ -117,7 +117,7 @@ func contactListDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       },
 			//       "TopicName": {
 			//         "description": "The name of the topic.",
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//         "type": "string"
 			//       }
 			//     },

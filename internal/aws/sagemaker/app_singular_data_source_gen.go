@@ -26,7 +26,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the app.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the app.",
@@ -40,7 +40,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the app.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//   "type": "string"
 			// }
 			Description: "The name of the app.",
@@ -124,14 +124,14 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//       "type": "string"
 			//     },
 			//     "SageMakerImageVersionArn": {
 			//       "description": "The ARN of the image version created on the instance.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -217,7 +217,7 @@ func appDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The user profile name.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//   "type": "string"
 			// }
 			Description: "The user profile name.",

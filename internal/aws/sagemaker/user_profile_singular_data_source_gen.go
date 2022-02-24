@@ -37,7 +37,7 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			//   "pattern": "",
+			//   "pattern": "UserName",
 			//   "type": "string"
 			// }
 			Description: "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
@@ -111,7 +111,7 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "description": "The user profile Amazon Resource Name (ARN).",
 			//   "maxLength": 256,
-			//   "pattern": "",
+			//   "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:user-profile/.*",
 			//   "type": "string"
 			// }
 			Description: "The user profile Amazon Resource Name (ARN).",
@@ -142,7 +142,7 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "The user profile Amazon Resource Name (ARN).",
 			//       "maxLength": 2048,
 			//       "minLength": 20,
-			//       "pattern": "",
+			//       "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//       "type": "string"
 			//     },
 			//     "JupyterServerAppSettings": {
@@ -193,13 +193,13 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "SageMakerImageArn": {
 			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
 			//               "description": "The ARN of the image version created on the instance.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -221,13 +221,13 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//               "AppImageConfigName": {
 			//                 "description": "The Name of the AppImageConfig.",
 			//                 "maxLength": 63,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 			//                 "type": "string"
 			//               },
 			//               "ImageName": {
 			//                 "description": "The name of the CustomImage. Must be unique to your account.",
 			//                 "maxLength": 63,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
 			//                 "type": "string"
 			//               },
 			//               "ImageVersionNumber": {
@@ -292,13 +292,13 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//             "SageMakerImageArn": {
 			//               "description": "The ARN of the SageMaker image that the image version belongs to.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
 			//               "type": "string"
 			//             },
 			//             "SageMakerImageVersionArn": {
 			//               "description": "The ARN of the image version created on the instance.",
 			//               "maxLength": 256,
-			//               "pattern": "",
+			//               "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -311,7 +311,7 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 			//       "items": {
 			//         "maxLength": 32,
-			//         "pattern": "",
+			//         "pattern": "[-0-9a-zA-Z]+",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 5,
@@ -334,13 +334,13 @@ func userProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         "S3KmsKeyId": {
 			//           "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
 			//           "maxLength": 2048,
-			//           "pattern": "",
+			//           "pattern": ".*",
 			//           "type": "string"
 			//         },
 			//         "S3OutputPath": {
 			//           "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
 			//           "maxLength": 1024,
-			//           "pattern": "",
+			//           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 			//           "type": "string"
 			//         }
 			//       },

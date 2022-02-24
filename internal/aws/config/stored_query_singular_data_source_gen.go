@@ -36,7 +36,7 @@ func storedQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -48,7 +48,7 @@ func storedQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 4096,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\s\\S]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -60,7 +60,7 @@ func storedQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^\\S+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -72,7 +72,7 @@ func storedQueryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			// {
 			//   "maxLength": 64,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

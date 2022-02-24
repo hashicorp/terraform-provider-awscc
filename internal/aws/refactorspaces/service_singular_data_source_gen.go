@@ -25,7 +25,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^app-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -37,7 +37,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -49,7 +49,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -74,7 +74,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^env-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -89,7 +89,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "Arn": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -127,7 +127,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 14,
 			//   "minLength": 14,
-			//   "pattern": "",
+			//   "pattern": "^svc-([0-9A-Za-z]{10}$)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -194,13 +194,13 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "HealthUrl": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
 			//       "type": "string"
 			//     },
 			//     "Url": {
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^https?://[-a-zA-Z0-9+\\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\\x38@#/%=~_|]$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -231,7 +231,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 21,
 			//   "minLength": 12,
-			//   "pattern": "",
+			//   "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

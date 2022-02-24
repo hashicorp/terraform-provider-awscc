@@ -36,14 +36,14 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//               "description": "A key to identify the metadata.",
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": ".*\\S.*",
 			//               "type": "string"
 			//             },
 			//             "Value": {
 			//               "description": "Corresponding metadata value for the key.",
 			//               "maxLength": 255,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": ".*\\S.*",
 			//               "type": "string"
 			//             }
 			//           },
@@ -65,7 +65,7 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//         "description": "The name of the Eventbridge rule.",
 			//         "maxLength": 2048,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//         "type": "string"
 			//       },
 			//       "EventIntegrationAssociationArn": {
@@ -77,7 +77,7 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//       },
 			//       "EventIntegrationAssociationId": {
 			//         "description": "The identifier for the event integration association.",
-			//         "pattern": "",
+			//         "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 			//         "type": "string"
 			//       }
 			//     },
@@ -160,7 +160,7 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The Amazon Eventbridge bus for the event integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Eventbridge bus for the event integration.",
@@ -178,7 +178,7 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//       "description": "The source of the events.",
 			//       "maxLength": 256,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^aws\\.partner\\/.*$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -221,7 +221,7 @@ func eventIntegrationDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The name of the event integration.",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the event integration.",

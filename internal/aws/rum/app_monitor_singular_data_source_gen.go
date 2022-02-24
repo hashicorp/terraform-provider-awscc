@@ -41,7 +41,7 @@ func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "description": "Page Url",
 			//         "maxLength": 1260,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?\u0026//=]*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 50,
@@ -60,14 +60,14 @@ func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     },
 			//     "GuestRoleArn": {
 			//       "description": "The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.",
-			//       "pattern": "",
+			//       "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
 			//       "type": "string"
 			//     },
 			//     "IdentityPoolId": {
 			//       "description": "The ID of the identity pool that is used to authorize the sending of data to RUM.",
 			//       "maxLength": 55,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[\\w-]+:[0-9a-f-]+",
 			//       "type": "string"
 			//     },
 			//     "IncludedPages": {
@@ -77,7 +77,7 @@ func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "description": "Page Url",
 			//         "maxLength": 1260,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?\u0026//=]*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 50,
@@ -199,7 +199,7 @@ func appMonitorDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "A name for the app monitor",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 			//   "type": "string"
 			// }
 			Description: "A name for the app monitor",

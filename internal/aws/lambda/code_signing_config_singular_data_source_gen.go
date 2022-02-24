@@ -31,7 +31,7 @@ func codeSigningConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			//       "items": {
 			//         "maxLength": 1024,
 			//         "minLength": 12,
-			//         "pattern": "",
+			//         "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 20,
@@ -62,7 +62,7 @@ func codeSigningConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique Arn for CodeSigningConfig resource",
-			//   "pattern": "",
+			//   "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
 			//   "type": "string"
 			// }
 			Description: "A unique Arn for CodeSigningConfig resource",
@@ -74,7 +74,7 @@ func codeSigningConfigDataSourceType(ctx context.Context) (tfsdk.DataSourceType,
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "A unique identifier for CodeSigningConfig resource",
-			//   "pattern": "",
+			//   "pattern": "csc-[a-zA-Z0-9-_\\.]{17}",
 			//   "type": "string"
 			// }
 			Description: "A unique identifier for CodeSigningConfig resource",

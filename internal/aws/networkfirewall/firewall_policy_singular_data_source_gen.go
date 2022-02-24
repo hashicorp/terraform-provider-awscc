@@ -25,7 +25,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 512,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^.*$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -72,7 +72,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//             "description": "A resource ARN.",
 			//             "maxLength": 256,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(arn:aws.*)$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -103,7 +103,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//                         "Value": {
 			//                           "maxLength": 128,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "^[a-zA-Z0-9-_ ]+$",
 			//                           "type": "string"
 			//                         }
 			//                       },
@@ -127,7 +127,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//           "ActionName": {
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^[a-zA-Z0-9]+$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -170,7 +170,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//             "description": "A resource ARN.",
 			//             "maxLength": 256,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^(arn:aws.*)$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -315,7 +315,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "A resource ARN.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^(arn:aws.*)$",
 			//   "type": "string"
 			// }
 			Description: "A resource ARN.",
@@ -328,7 +328,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 36,
-			//   "pattern": "",
+			//   "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -340,7 +340,7 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// {
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -357,13 +357,13 @@ func firewallPolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "Key": {
 			//         "maxLength": 128,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       },
 			//       "Value": {
 			//         "maxLength": 255,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^.*$",
 			//         "type": "string"
 			//       }
 			//     },

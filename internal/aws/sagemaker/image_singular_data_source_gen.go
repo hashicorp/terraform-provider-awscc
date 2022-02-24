@@ -26,7 +26,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the image.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the image.",
@@ -40,7 +40,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "A description of the image.",
 			//   "maxLength": 512,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": ".+",
 			//   "type": "string"
 			// }
 			Description: "A description of the image.",
@@ -54,7 +54,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The display name of the image.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[A-Za-z0-9 -_]+$",
 			//   "type": "string"
 			// }
 			Description: "The display name of the image.",
@@ -68,7 +68,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the image.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the image.",
@@ -82,7 +82,7 @@ func imageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on behalf of the customer.",

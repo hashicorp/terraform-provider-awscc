@@ -204,7 +204,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                               },
 			//                               "Separator": {
 			//                                 "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-			//                                 "pattern": "",
+			//                                 "pattern": "([\\n\\t])|(\\r\\n)|(,)",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -221,7 +221,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the AWS IoT Events input where the data is sent.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               },
 			//                               "Payload": {
@@ -460,7 +460,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the variable.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -736,7 +736,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                               },
 			//                               "Separator": {
 			//                                 "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-			//                                 "pattern": "",
+			//                                 "pattern": "([\\n\\t])|(\\r\\n)|(,)",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -753,7 +753,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the AWS IoT Events input where the data is sent.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               },
 			//                               "Payload": {
@@ -992,7 +992,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the variable.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -1268,7 +1268,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                               },
 			//                               "Separator": {
 			//                                 "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-			//                                 "pattern": "",
+			//                                 "pattern": "([\\n\\t])|(\\r\\n)|(,)",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -1285,7 +1285,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the AWS IoT Events input where the data is sent.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               },
 			//                               "Payload": {
@@ -1524,7 +1524,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the variable.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -1793,7 +1793,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                               },
 			//                               "Separator": {
 			//                                 "description": "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-			//                                 "pattern": "",
+			//                                 "pattern": "([\\n\\t])|(\\r\\n)|(,)",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -1810,7 +1810,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the AWS IoT Events input where the data is sent.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               },
 			//                               "Payload": {
@@ -2049,7 +2049,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//                                 "description": "The name of the variable.",
 			//                                 "maxLength": 128,
 			//                                 "minLength": 1,
-			//                                 "pattern": "",
+			//                                 "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//                                 "type": "string"
 			//                               }
 			//                             },
@@ -4501,7 +4501,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "description": "The name of the detector model.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]+$",
 			//   "type": "string"
 			// }
 			Description: "The name of the detector model.",
@@ -4530,7 +4530,7 @@ func detectorModelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//   "description": "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$",
 			//   "type": "string"
 			// }
 			Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.\n\nThis parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",

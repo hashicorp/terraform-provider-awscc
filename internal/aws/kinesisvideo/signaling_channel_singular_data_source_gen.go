@@ -50,7 +50,7 @@ func signalingChannelDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The name of the Kinesis Video Signaling Channel.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_.-]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the Kinesis Video Signaling Channel.",

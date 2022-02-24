@@ -44,7 +44,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "The KMS Key",
 			//       "maxLength": 256,
 			//       "minLength": 0,
-			//       "pattern": "",
+			//       "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 			//       "type": "string"
 			//     }
 			//   },
@@ -164,21 +164,21 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "CPU",
 			//       "maxLength": 6,
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "1024|2048|(1|2) vCPU",
 			//       "type": "string"
 			//     },
 			//     "InstanceRoleArn": {
 			//       "description": "Instance Role Arn",
 			//       "maxLength": 102,
 			//       "minLength": 29,
-			//       "pattern": "",
+			//       "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 			//       "type": "string"
 			//     },
 			//     "Memory": {
 			//       "description": "Memory",
 			//       "maxLength": 4,
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "2048|3072|4096|(2|3|4) GB",
 			//       "type": "string"
 			//     }
 			//   },
@@ -309,7 +309,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The AppRunner Service Name.",
 			//   "maxLength": 40,
 			//   "minLength": 4,
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
 			//   "type": "string"
 			// }
 			Description: "The AppRunner Service Name.",
@@ -342,7 +342,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "Access Role Arn",
 			//           "maxLength": 102,
 			//           "minLength": 29,
-			//           "pattern": "",
+			//           "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 			//           "type": "string"
 			//         },
 			//         "ConnectionArn": {
@@ -383,7 +383,10 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "description": "Runtime",
 			//                   "enum": [
 			//                     "PYTHON_3",
-			//                     "NODEJS_12"
+			//                     "NODEJS_12",
+			//                     "NODEJS_14",
+			//                     "CORRETTO_8",
+			//                     "CORRETTO_11"
 			//                   ],
 			//                   "type": "string"
 			//                 },
@@ -497,7 +500,7 @@ func serviceDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "description": "Image Identifier",
 			//           "maxLength": 1024,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
 			//           "type": "string"
 			//         },
 			//         "ImageRepositoryType": {

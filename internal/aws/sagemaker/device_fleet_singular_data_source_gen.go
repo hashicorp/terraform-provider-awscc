@@ -26,7 +26,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "Description for the edge device fleet",
 			//   "maxLength": 800,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "[\\S\\s]+",
 			//   "type": "string"
 			// }
 			Description: "Description for the edge device fleet",
@@ -40,7 +40,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "The name of the edge device fleet",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the edge device fleet",
@@ -58,13 +58,13 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//       "description": "The KMS key id used for encryption on the S3 bucket",
 			//       "maxLength": 2048,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[a-zA-Z0-9:_-]+",
 			//       "type": "string"
 			//     },
 			//     "S3OutputLocation": {
 			//       "description": "The Amazon Simple Storage (S3) bucket URI",
 			//       "maxLength": 1024,
-			//       "pattern": "",
+			//       "pattern": "^s3://([^/]+)/?(.*)$",
 			//       "type": "string"
 			//     }
 			//   },
@@ -99,7 +99,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//   "description": "Role associated with the device fleet",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 			//   "type": "string"
 			// }
 			Description: "Role associated with the device fleet",
@@ -126,7 +126,7 @@ func deviceFleetDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 			//         "type": "string"
 			//       }
 			//     },

@@ -82,7 +82,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//           "RoleArn": {
 			//             "description": "The role ARN to use when starting the SSM automation document.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           },
 			//           "TargetAccount": {
@@ -174,7 +174,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			// {
 			//   "description": "The ARN of the response plan.",
 			//   "maxLength": 1000,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//   "type": "string"
 			// }
 			Description: "The ARN of the response plan.",
@@ -193,7 +193,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//       "items": {
 			//         "description": "The ARN of the Chatbot SNS topic.",
 			//         "maxLength": 1000,
-			//         "pattern": "",
+			//         "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//         "type": "string"
 			//       },
 			//       "type": "array",
@@ -237,7 +237,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "items": {
 			//     "description": "The ARN of the contact.",
 			//     "maxLength": 1000,
-			//     "pattern": "",
+			//     "pattern": "^arn:aws(-(cn|us-gov))?:ssm-contacts:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,
@@ -278,7 +278,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//           "SnsTopicArn": {
 			//             "description": "The ARN of the Chatbot SNS topic.",
 			//             "maxLength": 1000,
-			//             "pattern": "",
+			//             "pattern": "^arn:aws(-(cn|us-gov))?:sns:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -359,7 +359,7 @@ func responsePlanDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "description": "The name of the response plan.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z0-9_-]*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the response plan.",

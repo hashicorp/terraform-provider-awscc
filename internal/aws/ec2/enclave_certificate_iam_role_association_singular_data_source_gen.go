@@ -26,7 +26,7 @@ func enclaveCertificateIamRoleAssociationDataSourceType(ctx context.Context) (tf
 			//   "description": "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
 			//   "maxLength": 1283,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:acm:[A-Za-z0-9-]{1,64}:([0-9]{12})?:certificate/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
@@ -73,7 +73,7 @@ func enclaveCertificateIamRoleAssociationDataSourceType(ctx context.Context) (tf
 			//   "description": "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
 			//   "maxLength": 1283,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:iam:.*:([0-9]{12})?:role/.+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",

@@ -51,12 +51,12 @@ func replicationConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSour
 			//               "properties": {
 			//                 "Region": {
 			//                   "description": "A Region to replicate to.",
-			//                   "pattern": "",
+			//                   "pattern": "[0-9a-z-]{2,25}",
 			//                   "type": "string"
 			//                 },
 			//                 "RegistryId": {
 			//                   "description": "The account ID of the destination registry to replicate to.",
-			//                   "pattern": "",
+			//                   "pattern": "^[0-9]{12}$",
 			//                   "type": "string"
 			//                 }
 			//               },
@@ -78,7 +78,7 @@ func replicationConfigurationDataSourceType(ctx context.Context) (tfsdk.DataSour
 			//               "properties": {
 			//                 "Filter": {
 			//                   "description": "The repository filter to be applied for replication.",
-			//                   "pattern": "",
+			//                   "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$",
 			//                   "type": "string"
 			//                 },
 			//                 "FilterType": {

@@ -47,7 +47,7 @@ func templateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "description": "The name of the template.",
 			//       "maxLength": 64,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 			//       "type": "string"
 			//     },
 			//     "TextPart": {

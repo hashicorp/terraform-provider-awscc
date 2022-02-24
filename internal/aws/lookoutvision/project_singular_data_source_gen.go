@@ -36,7 +36,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the Amazon Lookout for Vision project",
 			//   "maxLength": 255,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the Amazon Lookout for Vision project",

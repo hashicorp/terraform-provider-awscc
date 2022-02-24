@@ -102,7 +102,7 @@ func oIDCProviderDataSourceType(ctx context.Context) (tfsdk.DataSourceType, erro
 			//   "items": {
 			//     "maxLength": 40,
 			//     "minLength": 40,
-			//     "pattern": "",
+			//     "pattern": "[0-9A-Fa-f]{40}",
 			//     "type": "string"
 			//   },
 			//   "maxItems": 5,

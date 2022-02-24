@@ -50,7 +50,7 @@ func cachePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "CookieBehavior": {
-			//               "pattern": "",
+			//               "pattern": "^(none|whitelist|allExcept|all)$",
 			//               "type": "string"
 			//             },
 			//             "Cookies": {
@@ -76,7 +76,7 @@ func cachePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "HeaderBehavior": {
-			//               "pattern": "",
+			//               "pattern": "^(none|whitelist)$",
 			//               "type": "string"
 			//             },
 			//             "Headers": {
@@ -96,7 +96,7 @@ func cachePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           "additionalProperties": false,
 			//           "properties": {
 			//             "QueryStringBehavior": {
-			//               "pattern": "",
+			//               "pattern": "^(none|whitelist|allExcept|all)$",
 			//               "type": "string"
 			//             },
 			//             "QueryStrings": {

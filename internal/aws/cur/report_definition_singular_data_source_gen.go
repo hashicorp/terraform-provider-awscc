@@ -66,7 +66,7 @@ func reportDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}",
 			//   "type": "string"
 			// }
 			Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
@@ -122,7 +122,7 @@ func reportDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9A-Za-z!\\-_.*\\'()]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
@@ -151,7 +151,7 @@ func reportDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The S3 bucket where AWS delivers the report.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[A-Za-z0-9_\\.\\-]+",
 			//   "type": "string"
 			// }
 			Description: "The S3 bucket where AWS delivers the report.",
@@ -165,7 +165,7 @@ func reportDefinitionDataSourceType(ctx context.Context) (tfsdk.DataSourceType, 
 			//   "description": "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[0-9A-Za-z!\\-_.*\\'()/]*",
 			//   "type": "string"
 			// }
 			Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",

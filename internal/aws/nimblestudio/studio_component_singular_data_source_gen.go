@@ -110,7 +110,7 @@ func studioComponentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Linux virtual workstation.\u003c/p\u003e",
 			//           "maxLength": 128,
 			//           "minLength": 0,
-			//           "pattern": "",
+			//           "pattern": "^(/?|(\\$HOME)?(/[^/\\n\\s\\\\]+)*)$",
 			//           "type": "string"
 			//         },
 			//         "ShareName": {
@@ -119,7 +119,7 @@ func studioComponentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         },
 			//         "WindowsMountDrive": {
 			//           "description": "\u003cp\u003eThe mount location for a shared file system on a Windows virtual workstation.\u003c/p\u003e",
-			//           "pattern": "",
+			//           "pattern": "^[A-Z]$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -296,7 +296,7 @@ func studioComponentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid version is \"2021-03-31\".\u003c/p\u003e",
 			//         "maxLength": 10,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^2021\\-03\\-31$",
 			//         "type": "string"
 			//       },
 			//       "Platform": {
@@ -384,7 +384,7 @@ func studioComponentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, e
 			//         "description": "\u003cp\u003eA script parameter key.\u003c/p\u003e",
 			//         "maxLength": 64,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z_][a-zA-Z0-9_]+$",
 			//         "type": "string"
 			//       },
 			//       "Value": {

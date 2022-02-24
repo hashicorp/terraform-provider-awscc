@@ -24,7 +24,7 @@ func aCLDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name of the acl.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The name of the acl.",

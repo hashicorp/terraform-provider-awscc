@@ -44,7 +44,7 @@ func resourceSpecificLoggingDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			//   "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
 			//   "maxLength": 140,
 			//   "minLength": 13,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
@@ -58,7 +58,7 @@ func resourceSpecificLoggingDataSourceType(ctx context.Context) (tfsdk.DataSourc
 			//   "description": "The target name.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9:_-]+",
 			//   "type": "string"
 			// }
 			Description: "The target name.",

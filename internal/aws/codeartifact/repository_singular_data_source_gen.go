@@ -51,7 +51,7 @@ func repositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The name of the domain that contains the repository.",
 			//   "maxLength": 50,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 			//   "type": "string"
 			// }
 			Description: "The name of the domain that contains the repository.",
@@ -63,7 +63,7 @@ func repositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The 12-digit account ID of the AWS account that owns the domain.",
-			//   "pattern": "",
+			//   "pattern": "[0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The 12-digit account ID of the AWS account that owns the domain.",
@@ -91,7 +91,7 @@ func repositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The name of the repository. This is used for GetAtt",
 			//   "maxLength": 100,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 			//   "type": "string"
 			// }
 			Description: "The name of the repository. This is used for GetAtt",
@@ -118,7 +118,7 @@ func repositoryDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//   "description": "The name of the repository.",
 			//   "maxLength": 100,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 			//   "type": "string"
 			// }
 			Description: "The name of the repository.",

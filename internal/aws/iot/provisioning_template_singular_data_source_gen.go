@@ -140,7 +140,7 @@ func provisioningTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			// {
 			//   "maxLength": 36,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9A-Za-z_-]+$",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

@@ -23,7 +23,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// Property: Arn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/experiment/[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -66,13 +66,13 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//       "MetricName": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^[\\S]+$",
 			//         "type": "string"
 			//       },
 			//       "UnitLabel": {
 			//         "maxLength": 256,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": ".*",
 			//         "type": "string"
 			//       },
 			//       "ValueKey": {
@@ -140,7 +140,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -155,7 +155,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//     "ControlTreatmentName": {
 			//       "maxLength": 127,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "[-a-zA-Z0-9._]*",
 			//       "type": "string"
 			//     },
 			//     "TreatmentWeights": {
@@ -171,7 +171,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//           "Treatment": {
 			//             "maxLength": 127,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "[-a-zA-Z0-9._]*",
 			//             "type": "string"
 			//           }
 			//         },
@@ -223,7 +223,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -235,7 +235,7 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": ".*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -317,19 +317,19 @@ func experimentDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error)
 			//         "type": "string"
 			//       },
 			//       "Feature": {
-			//         "pattern": "",
+			//         "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:.*)",
 			//         "type": "string"
 			//       },
 			//       "TreatmentName": {
 			//         "maxLength": 127,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[-a-zA-Z0-9._]*",
 			//         "type": "string"
 			//       },
 			//       "Variation": {
 			//         "maxLength": 255,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "[-a-zA-Z0-9._]*",
 			//         "type": "string"
 			//       }
 			//     },

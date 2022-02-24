@@ -26,7 +26,7 @@ func pullThroughCacheRuleDataSourceType(ctx context.Context) (tfsdk.DataSourceTy
 			//   "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
 			//   "maxLength": 20,
 			//   "minLength": 2,
-			//   "pattern": "",
+			//   "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
 			//   "type": "string"
 			// }
 			Description: "The ECRRepositoryPrefix is a custom alias for upstream registry url.",

@@ -66,7 +66,7 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//     "description": "\u003cp\u003eThe version number of the protocol that is used by the launch profile. The only valid\n            version is \"2021-03-31\".\u003c/p\u003e",
 			//     "maxLength": 10,
 			//     "minLength": 0,
-			//     "pattern": "",
+			//     "pattern": "^2021\\-03\\-31$",
 			//     "type": "string"
 			//   },
 			//   "type": "array"
@@ -154,14 +154,14 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//               "description": "\u003cp\u003eThe folder path in Linux workstations where files are uploaded.\u003c/p\u003e",
 			//               "maxLength": 128,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^(/?|(\\$HOME)?(/[^\\$/\\n\\s\\\\]+)*)$",
 			//               "type": "string"
 			//             },
 			//             "Windows": {
 			//               "description": "\u003cp\u003eThe folder path in Windows workstations where files are uploaded.\u003c/p\u003e",
 			//               "maxLength": 128,
 			//               "minLength": 1,
-			//               "pattern": "",
+			//               "pattern": "^((\\%HOMEPATH\\%)|[a-zA-Z]:)[\\\\/](?:[a-zA-Z0-9_-]+[\\\\/])*[a-zA-Z0-9_-]+$",
 			//               "type": "string"
 			//             }
 			//           },
@@ -175,7 +175,7 @@ func launchProfileDataSourceType(ctx context.Context) (tfsdk.DataSourceType, err
 			//       "items": {
 			//         "maxLength": 22,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "^[a-zA-Z0-9-_]*$",
 			//         "type": "string"
 			//       },
 			//       "maxItems": 20,

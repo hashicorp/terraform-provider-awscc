@@ -26,7 +26,7 @@ func resourceAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			//   "description": "The name or the Id of the Application.",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "\\w+|[a-z0-9]{12}",
 			//   "type": "string"
 			// }
 			Description: "The name or the Id of the Application.",
@@ -37,7 +37,7 @@ func resourceAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// Property: ApplicationArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -57,7 +57,7 @@ func resourceAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The name or the Id of the Resource.",
-			//   "pattern": "",
+			//   "pattern": "\\w+|arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
 			//   "type": "string"
 			// }
 			Description: "The name or the Id of the Resource.",
@@ -68,7 +68,7 @@ func resourceAssociationDataSourceType(ctx context.Context) (tfsdk.DataSourceTyp
 			// Property: ResourceArn
 			// CloudFormation resource type schema:
 			// {
-			//   "pattern": "",
+			//   "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

@@ -99,7 +99,7 @@ func userDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The ID of the user.",
-			//   "pattern": "",
+			//   "pattern": "[a-z][a-z0-9\\\\-]*",
 			//   "type": "string"
 			// }
 			Description: "The ID of the user.",

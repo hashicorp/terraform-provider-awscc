@@ -244,7 +244,7 @@ func frameworkDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
 			//   "maxLength": 256,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
 			//   "type": "string"
 			// }
 			Description: "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",

@@ -26,7 +26,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The Amazon Resource Name (ARN) of the specified bucket.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
@@ -98,7 +98,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           },
 			//           "ExpirationDate": {
 			//             "description": "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-			//             "pattern": "",
+			//             "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 			//             "type": "string"
 			//           },
 			//           "ExpirationInDays": {
@@ -144,13 +144,13 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                         "Key": {
 			//                           "maxLength": 1024,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
 			//                           "type": "string"
 			//                         },
 			//                         "Value": {
 			//                           "maxLength": 1024,
 			//                           "minLength": 1,
-			//                           "pattern": "",
+			//                           "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
 			//                           "type": "string"
 			//                         }
 			//                       },
@@ -178,13 +178,13 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                   "Key": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
 			//                     "type": "string"
 			//                   },
 			//                   "Value": {
 			//                     "maxLength": 1024,
 			//                     "minLength": 1,
-			//                     "pattern": "",
+			//                     "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
 			//                     "type": "string"
 			//                   }
 			//                 },
@@ -350,7 +350,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The id of the customer outpost on which the bucket resides.",
-			//   "pattern": "",
+			//   "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
 			//   "type": "string"
 			// }
 			Description: "The id of the customer outpost on which the bucket resides.",
@@ -375,7 +375,7 @@ func bucketDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//       "Value": {
 			//         "maxLength": 1024,
 			//         "minLength": 1,
-			//         "pattern": "",
+			//         "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
 			//         "type": "string"
 			//       }
 			//     },

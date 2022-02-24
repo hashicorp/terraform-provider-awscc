@@ -25,7 +25,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 2048,
 			//   "minLength": 0,
-			//   "pattern": "",
+			//   "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
@@ -53,7 +53,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "LogGroup": {
 			//       "maxLength": 512,
 			//       "minLength": 1,
-			//       "pattern": "",
+			//       "pattern": "^[-a-zA-Z0-9._/]+$",
 			//       "type": "string"
 			//     },
 			//     "S3": {
@@ -62,13 +62,13 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//         "BucketName": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9][-a-z0-9]*[a-z0-9]$",
 			//           "type": "string"
 			//         },
 			//         "Prefix": {
 			//           "maxLength": 1024,
 			//           "minLength": 1,
-			//           "pattern": "",
+			//           "pattern": "^[-a-zA-Z0-9!_.*'()/]*$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -127,7 +127,7 @@ func projectDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "maxLength": 127,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "[-a-zA-Z0-9._]*",
 			//   "type": "string"
 			// }
 			Type:     types.StringType,

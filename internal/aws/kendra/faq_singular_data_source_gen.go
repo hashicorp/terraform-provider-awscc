@@ -121,7 +121,7 @@ func faqDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//     "Bucket": {
 			//       "maxLength": 63,
 			//       "minLength": 3,
-			//       "pattern": "",
+			//       "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
 			//       "type": "string"
 			//     },
 			//     "Key": {

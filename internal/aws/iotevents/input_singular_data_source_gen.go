@@ -37,7 +37,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "description": "An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.\n\n_Syntax_: `\u003cfield-name\u003e.\u003cfield-name\u003e...`",
 			//             "maxLength": 128,
 			//             "minLength": 1,
-			//             "pattern": "",
+			//             "pattern": "^((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+))(\\.((`[a-zA-Z0-9_\\- ]+`)|([a-zA-Z0-9_\\-]+)))*$",
 			//             "type": "string"
 			//           }
 			//         },
@@ -100,7 +100,7 @@ func inputDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//   "description": "The name of the input.",
 			//   "maxLength": 128,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
 			//   "type": "string"
 			// }
 			Description: "The name of the input.",

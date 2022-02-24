@@ -37,7 +37,7 @@ func cellDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			// {
 			//   "description": "The name of the cell to create.",
 			//   "maxLength": 64,
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9_]+",
 			//   "type": "string"
 			// }
 			Description: "The name of the cell to create.",

@@ -52,14 +52,14 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 			//                 "description": "The default value of the dimension that is published to Amazon CloudWatch if you do not provide the value of the dimension when you send an email.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionName": {
 			//                 "description": "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "",
+			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionValueSource": {
@@ -114,7 +114,7 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 			//     },
 			//     "Name": {
 			//       "description": "The name of the event destination set.",
-			//       "pattern": "",
+			//       "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 			//       "type": "string"
 			//     }
 			//   },

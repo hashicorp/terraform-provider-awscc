@@ -47,12 +47,12 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//           "description": "Indicates the delimiter character used between items in the data.",
 			//           "maxLength": 1,
 			//           "minLength": 0,
-			//           "pattern": "",
+			//           "pattern": "^(\\-|\\_|\\s)?$",
 			//           "type": "string"
 			//         },
 			//         "TimestampFormat": {
 			//           "description": "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
-			//           "pattern": "",
+			//           "pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$",
 			//           "type": "string"
 			//         }
 			//       },
@@ -60,7 +60,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//     },
 			//     "InputTimeZoneOffset": {
 			//       "description": "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
-			//       "pattern": "",
+			//       "pattern": "^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$",
 			//       "type": "string"
 			//     },
 			//     "S3InputConfiguration": {
@@ -70,7 +70,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//         "Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//           "type": "string"
 			//         },
 			//         "Prefix": {
@@ -164,7 +164,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//         "Bucket": {
 			//           "maxLength": 63,
 			//           "minLength": 3,
-			//           "pattern": "",
+			//           "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
 			//           "type": "string"
 			//         },
 			//         "Prefix": {
@@ -241,7 +241,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "description": "The Amazon Resource Name (ARN) of the inference scheduler being created.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
@@ -255,7 +255,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "description": "The name of the inference scheduler being created.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the inference scheduler being created.",
@@ -269,7 +269,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "description": "The name of the previously trained ML model being used to create the inference scheduler.",
 			//   "maxLength": 200,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 			//   "type": "string"
 			// }
 			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
@@ -283,7 +283,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//   "description": "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
 			//   "maxLength": 2048,
 			//   "minLength": 20,
-			//   "pattern": "",
+			//   "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 			//   "type": "string"
 			// }
 			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
@@ -325,7 +325,7 @@ func inferenceSchedulerDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//         "description": "The value for the specified tag.",
 			//         "maxLength": 256,
 			//         "minLength": 0,
-			//         "pattern": "",
+			//         "pattern": "[\\s\\w+-=\\.:/@]*",
 			//         "type": "string"
 			//       }
 			//     },

@@ -61,7 +61,7 @@ func resourcePolicyDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//   "description": "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",
 			//   "maxLength": 5,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[0-9]+$",
 			//   "type": "string"
 			// }
 			Description: "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",

@@ -42,6 +42,20 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"availability_zone_id": {
+			// Property: AvailabilityZoneId
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "string"
+			// }
+			Type:     types.StringType,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
+		},
 		"cidr_block": {
 			// Property: CidrBlock
 			// CloudFormation resource type schema:
@@ -49,10 +63,21 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Required: true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
+		},
+		"enable_dns_64": {
+			// Property: EnableDns64
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Optional: true,
 		},
 		"ipv_6_cidr_block": {
 			// Property: Ipv6CidrBlock
@@ -77,6 +102,20 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Computed: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				tfsdk.UseStateForUnknown(),
+			},
+		},
+		"ipv_6_native": {
+			// Property: Ipv6Native
+			// CloudFormation resource type schema:
+			// {
+			//   "type": "boolean"
+			// }
+			Type:     types.BoolType,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
 			},
 		},
 		"map_public_ip_on_launch": {
@@ -113,6 +152,45 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
+		},
+		"private_dns_name_options_on_launch": {
+			// Property: PrivateDnsNameOptionsOnLaunch
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "EnableResourceNameDnsAAAARecord": {
+			//       "type": "boolean"
+			//     },
+			//     "EnableResourceNameDnsARecord": {
+			//       "type": "boolean"
+			//     },
+			//     "HostnameType": {
+			//       "type": "string"
+			//     }
+			//   },
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"enable_resource_name_dns_aaaa_record": {
+						// Property: EnableResourceNameDnsAAAARecord
+						Type:     types.BoolType,
+						Optional: true,
+					},
+					"enable_resource_name_dns_a_record": {
+						// Property: EnableResourceNameDnsARecord
+						Type:     types.BoolType,
+						Optional: true,
+					},
+					"hostname_type": {
+						// Property: HostnameType
+						Type:     types.StringType,
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
 		},
 		"subnet_id": {
 			// Property: SubnetId
@@ -201,19 +279,26 @@ func subnetResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assign_ipv_6_address_on_creation": "AssignIpv6AddressOnCreation",
-		"availability_zone":                "AvailabilityZone",
-		"cidr_block":                       "CidrBlock",
-		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
-		"ipv_6_cidr_blocks":                "Ipv6CidrBlocks",
-		"key":                              "Key",
-		"map_public_ip_on_launch":          "MapPublicIpOnLaunch",
-		"network_acl_association_id":       "NetworkAclAssociationId",
-		"outpost_arn":                      "OutpostArn",
-		"subnet_id":                        "SubnetId",
-		"tags":                             "Tags",
-		"value":                            "Value",
-		"vpc_id":                           "VpcId",
+		"assign_ipv_6_address_on_creation":     "AssignIpv6AddressOnCreation",
+		"availability_zone":                    "AvailabilityZone",
+		"availability_zone_id":                 "AvailabilityZoneId",
+		"cidr_block":                           "CidrBlock",
+		"enable_dns_64":                        "EnableDns64",
+		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
+		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
+		"hostname_type":                        "HostnameType",
+		"ipv_6_cidr_block":                     "Ipv6CidrBlock",
+		"ipv_6_cidr_blocks":                    "Ipv6CidrBlocks",
+		"ipv_6_native":                         "Ipv6Native",
+		"key":                                  "Key",
+		"map_public_ip_on_launch":              "MapPublicIpOnLaunch",
+		"network_acl_association_id":           "NetworkAclAssociationId",
+		"outpost_arn":                          "OutpostArn",
+		"private_dns_name_options_on_launch":   "PrivateDnsNameOptionsOnLaunch",
+		"subnet_id":                            "SubnetId",
+		"tags":                                 "Tags",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

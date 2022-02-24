@@ -48,7 +48,7 @@ func workGroupDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "The workGroup name.",
-			//   "pattern": "",
+			//   "pattern": "[a-zA-Z0-9._-]{1,128}",
 			//   "type": "string"
 			// }
 			Description: "The workGroup name.",

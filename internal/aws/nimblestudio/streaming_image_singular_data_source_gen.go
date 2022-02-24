@@ -37,7 +37,7 @@ func streamingImageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "\u003cp\u003eThe ID of an EC2 machine image with which to create this streaming image.\u003c/p\u003e",
-			//   "pattern": "",
+			//   "pattern": "^ami-[0-9A-z]+$",
 			//   "type": "string"
 			// }
 			Description: "<p>The ID of an EC2 machine image with which to create this streaming image.</p>",
@@ -54,7 +54,7 @@ func streamingImageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//     "KeyArn": {
 			//       "description": "\u003cp\u003eThe ARN for a KMS key that is used to encrypt studio data.\u003c/p\u003e",
 			//       "minLength": 4,
-			//       "pattern": "",
+			//       "pattern": "^arn:.*",
 			//       "type": "string"
 			//     },
 			//     "KeyType": {
@@ -132,7 +132,7 @@ func streamingImageDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			// CloudFormation resource type schema:
 			// {
 			//   "description": "\u003cp\u003eThe platform of the streaming image, either WINDOWS or LINUX.\u003c/p\u003e",
-			//   "pattern": "",
+			//   "pattern": "^[a-zA-Z]*$",
 			//   "type": "string"
 			// }
 			Description: "<p>The platform of the streaming image, either WINDOWS or LINUX.</p>",

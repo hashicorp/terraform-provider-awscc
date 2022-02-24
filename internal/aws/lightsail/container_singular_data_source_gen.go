@@ -380,7 +380,7 @@ func containerDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) 
 			//   "description": "The name for the container service.",
 			//   "maxLength": 63,
 			//   "minLength": 1,
-			//   "pattern": "",
+			//   "pattern": "^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$",
 			//   "type": "string"
 			// }
 			Description: "The name for the container service.",
