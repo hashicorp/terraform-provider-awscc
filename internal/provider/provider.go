@@ -3,8 +3,6 @@ package provider
 import (
 	"context"
 	"fmt"
-	"os"
-	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
@@ -249,11 +247,11 @@ type assumeRoleData struct {
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
-		RoleARN:         a.RoleARN.Value,
-		DurationSeconds: int(a.Duration.Value.Seconds()),
-		ExternalID:      a.ExternalID.Value,
-		Policy:          a.Policy.Value,
-		SessionName:     a.SessionName.Value,
+		RoleARN:     a.RoleARN.Value,
+		Duration:    a.Duration.Value,
+		ExternalID:  a.ExternalID.Value,
+		Policy:      a.Policy.Value,
+		SessionName: a.SessionName.Value,
 	}
 	if !a.PolicyARNs.Null {
 		arns := make([]string, len(a.PolicyARNs.Elems))
@@ -371,19 +369,17 @@ func (p *AwsCloudControlApiProvider) RoleARN(_ context.Context) string {
 
 // newCloudControlClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
 func newCloudControlClient(ctx context.Context, pd *providerData) (*cloudcontrol.Client, string, error) {
-	logLevel := os.Getenv("TF_LOG")
 	config := awsbase.Config{
-		AccessKey:              pd.AccessKey.Value,
-		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
-		CallerName:             "Terraform AWS Cloud Control Provider",
-		DebugLogging:           strings.EqualFold(logLevel, "DEBUG") || strings.EqualFold(logLevel, "TRACE"),
-		HTTPProxy:              pd.HTTPProxy.Value,
-		Insecure:               pd.Insecure.Value,
-		Profile:                pd.Profile.Value,
-		Region:                 pd.Region.Value,
-		SecretKey:              pd.SecretKey.Value,
-		SkipMetadataApiCheck:   pd.SkipMetadataApiCheck.Value,
-		Token:                  pd.Token.Value,
+		AccessKey:               pd.AccessKey.Value,
+		CallerDocumentationURL:  "https://registry.terraform.io/providers/hashicorp/awscc",
+		CallerName:              "Terraform AWS Cloud Control Provider",
+		HTTPProxy:               pd.HTTPProxy.Value,
+		Insecure:                pd.Insecure.Value,
+		Profile:                 pd.Profile.Value,
+		Region:                  pd.Region.Value,
+		SecretKey:               pd.SecretKey.Value,
+		SkipEC2MetadataApiCheck: pd.SkipMetadataApiCheck.Value,
+		Token:                   pd.Token.Value,
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.UserAgentProduct{
