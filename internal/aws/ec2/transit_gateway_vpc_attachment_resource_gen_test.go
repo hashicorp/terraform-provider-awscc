@@ -3,6 +3,7 @@
 package ec2_test
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
@@ -14,30 +15,8 @@ func TestAccAWSEC2TransitGatewayVpcAttachment_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-			),
-		},
-		{
-			ResourceName:      td.ResourceName,
-			ImportState:       true,
-			ImportStateVerify: true,
-		},
-	})
-}
-
-func TestAccAWSEC2TransitGatewayVpcAttachment_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::TransitGatewayVpcAttachment", "awscc_ec2_transit_gateway_vpc_attachment", "test")
-
-	td.ResourceTest(t, []resource.TestStep{
-		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-				td.DeleteResource(),
-			),
-			ExpectNonEmptyPlan: true,
+			Config:      td.EmptyConfig(),
+			ExpectError: regexp.MustCompile("Missing required argument"),
 		},
 	})
 }

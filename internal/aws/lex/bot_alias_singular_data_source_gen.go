@@ -336,6 +336,9 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
+			//             "required": [
+			//               "S3Bucket"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Enabled": {
@@ -387,6 +390,9 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
+			//             "required": [
+			//               "CloudWatch"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Enabled": {
@@ -394,6 +400,10 @@ func botAliasDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             "type": "boolean"
 			//           }
 			//         },
+			//         "required": [
+			//           "Destination",
+			//           "Enabled"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "maxItems": 1,

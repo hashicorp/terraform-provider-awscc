@@ -353,7 +353,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 			//         "type": "integer"
 			//       },
 			//       "MountPoints": {
-			//         "insertionOrder": false,
+			//         "insertionOrder": true,
 			//         "items": {
 			//           "additionalProperties": false,
 			//           "properties": {
@@ -916,7 +916,7 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 					},
 					"mount_points": {
 						// Property: MountPoints
-						Attributes: tfsdk.SetNestedAttributes(
+						Attributes: tfsdk.ListNestedAttributes(
 							map[string]tfsdk.Attribute{
 								"container_path": {
 									// Property: ContainerPath
@@ -934,9 +934,12 @@ func taskDefinitionResourceType(ctx context.Context) (tfsdk.ResourceType, error)
 									Optional: true,
 								},
 							},
-							tfsdk.SetNestedAttributesOptions{},
+							tfsdk.ListNestedAttributesOptions{},
 						),
 						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.UniqueItems(),
+						},
 					},
 					"name": {
 						// Property: Name

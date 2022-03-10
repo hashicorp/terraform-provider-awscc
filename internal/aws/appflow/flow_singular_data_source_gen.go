@@ -233,6 +233,70 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             ],
 			//             "type": "object"
 			//           },
+			//           "SAPOData": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IdFieldNames": {
+			//                 "description": "List of fields used as ID when performing a write operation.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "ObjectPath": {
+			//                 "maxLength": 512,
+			//                 "pattern": "\\S+",
+			//                 "type": "string"
+			//               },
+			//               "SuccessResponseHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "WriteOperationType": {
+			//                 "enum": [
+			//                   "INSERT",
+			//                   "UPSERT",
+			//                   "UPDATE"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "ObjectPath"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "Salesforce": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -629,6 +693,71 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 														},
 													},
 												),
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"sapo_data": {
+									// Property: SAPOData
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"error_handling_config": {
+												// Property: ErrorHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"fail_on_first_error": {
+															// Property: FailOnFirstError
+															Type:     types.BoolType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"id_field_names": {
+												// Property: IdFieldNames
+												Description: "List of fields used as ID when performing a write operation.",
+												Type:        types.ListType{ElemType: types.StringType},
+												Computed:    true,
+											},
+											"object_path": {
+												// Property: ObjectPath
+												Type:     types.StringType,
+												Computed: true,
+											},
+											"success_response_handling_config": {
+												// Property: SuccessResponseHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
+											"write_operation_type": {
+												// Property: WriteOperationType
+												Type:     types.StringType,
 												Computed: true,
 											},
 										},
@@ -1909,6 +2038,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//           "Map_all",
 			//           "Mask",
 			//           "Merge",
+			//           "Passthrough",
 			//           "Truncate",
 			//           "Validate"
 			//         ],
@@ -2243,6 +2373,7 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 		"source_connector_properties":      "SourceConnectorProperties",
 		"source_fields":                    "SourceFields",
 		"source_flow_config":               "SourceFlowConfig",
+		"success_response_handling_config": "SuccessResponseHandlingConfig",
 		"tags":                             "Tags",
 		"task_properties":                  "TaskProperties",
 		"task_type":                        "TaskType",

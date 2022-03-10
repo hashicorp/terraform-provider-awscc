@@ -384,6 +384,9 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
+			//             "required": [
+			//               "S3Bucket"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Enabled": {
@@ -435,6 +438,9 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//                 "type": "object"
 			//               }
 			//             },
+			//             "required": [
+			//               "CloudWatch"
+			//             ],
 			//             "type": "object"
 			//           },
 			//           "Enabled": {
@@ -442,6 +448,10 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "type": "boolean"
 			//           }
 			//         },
+			//         "required": [
+			//           "Destination",
+			//           "Enabled"
+			//         ],
 			//         "type": "object"
 			//       },
 			//       "maxItems": 1,
@@ -500,7 +510,7 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 												),
-												Optional: true,
+												Required: true,
 											},
 										},
 									),
@@ -554,17 +564,17 @@ func botAliasResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 														},
 													},
 												),
-												Optional: true,
+												Required: true,
 											},
 										},
 									),
-									Optional: true,
+									Required: true,
 								},
 								"enabled": {
 									// Property: Enabled
 									Description: "",
 									Type:        types.BoolType,
-									Optional:    true,
+									Required:    true,
 								},
 							},
 							tfsdk.SetNestedAttributesOptions{},

@@ -157,6 +157,109 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 				tfsdk.UseStateForUnknown(),
 			},
 		},
+		"log_configuration": {
+			// Property: LogConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CloudWatchLogsConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "LogGroupArn": {
+			//           "maxLength": 2048,
+			//           "minLength": 20,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "LogGroupArn"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "LogSchemaVersion": {
+			//       "minimum": 1,
+			//       "type": "integer"
+			//     },
+			//     "S3Configuration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "BucketName": {
+			//           "maxLength": 63,
+			//           "minLength": 3,
+			//           "type": "string"
+			//         },
+			//         "Prefix": {
+			//           "maxLength": 1024,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "BucketName"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "LogSchemaVersion"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cloudwatch_logs_configuration": {
+						// Property: CloudWatchLogsConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"log_group_arn": {
+									// Property: LogGroupArn
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(20, 2048),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+					"log_schema_version": {
+						// Property: LogSchemaVersion
+						Type:     types.Int64Type,
+						Required: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntAtLeast(1),
+						},
+					},
+					"s3_configuration": {
+						// Property: S3Configuration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"bucket_name": {
+									// Property: BucketName
+									Type:     types.StringType,
+									Required: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(3, 63),
+									},
+								},
+								"prefix": {
+									// Property: Prefix
+									Type:     types.StringType,
+									Optional: true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(1, 1024),
+									},
+								},
+							},
+						),
+						Optional: true,
+					},
+				},
+			),
+			Optional: true,
+		},
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
@@ -279,6 +382,16 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 			//           },
 			//           "type": "array"
 			//         },
+			//         "Parameters": {
+			//           "additionalProperties": false,
+			//           "patternProperties": {
+			//             "": {
+			//               "maxLength": 1024,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
 			//         "ResourceArns": {
 			//           "description": "The Amazon Resource Names (ARNs) of the target resources.",
 			//           "items": {
@@ -349,6 +462,12 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 						),
 						Optional: true,
 					},
+					"parameters": {
+						// Property: Parameters
+						// Pattern: ""
+						Type:     types.MapType{ElemType: types.StringType},
+						Optional: true,
+					},
 					"resource_arns": {
 						// Property: ResourceArns
 						Description: "The Amazon Resource Names (ARNs) of the target resources.",
@@ -401,25 +520,32 @@ func experimentTemplateResourceType(ctx context.Context) (tfsdk.ResourceType, er
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_id":       "ActionId",
-		"actions":         "Actions",
-		"description":     "Description",
-		"filters":         "Filters",
-		"id":              "Id",
-		"parameters":      "Parameters",
-		"path":            "Path",
-		"resource_arns":   "ResourceArns",
-		"resource_tags":   "ResourceTags",
-		"resource_type":   "ResourceType",
-		"role_arn":        "RoleArn",
-		"selection_mode":  "SelectionMode",
-		"source":          "Source",
-		"start_after":     "StartAfter",
-		"stop_conditions": "StopConditions",
-		"tags":            "Tags",
-		"targets":         "Targets",
-		"value":           "Value",
-		"values":          "Values",
+		"action_id":                     "ActionId",
+		"actions":                       "Actions",
+		"bucket_name":                   "BucketName",
+		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
+		"description":                   "Description",
+		"filters":                       "Filters",
+		"id":                            "Id",
+		"log_configuration":             "LogConfiguration",
+		"log_group_arn":                 "LogGroupArn",
+		"log_schema_version":            "LogSchemaVersion",
+		"parameters":                    "Parameters",
+		"path":                          "Path",
+		"prefix":                        "Prefix",
+		"resource_arns":                 "ResourceArns",
+		"resource_tags":                 "ResourceTags",
+		"resource_type":                 "ResourceType",
+		"role_arn":                      "RoleArn",
+		"s3_configuration":              "S3Configuration",
+		"selection_mode":                "SelectionMode",
+		"source":                        "Source",
+		"start_after":                   "StartAfter",
+		"stop_conditions":               "StopConditions",
+		"tags":                          "Tags",
+		"targets":                       "Targets",
+		"value":                         "Value",
+		"values":                        "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

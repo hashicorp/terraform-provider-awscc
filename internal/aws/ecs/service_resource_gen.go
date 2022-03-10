@@ -199,11 +199,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.BoolType,
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 		},
 		"enable_execute_command": {
 			// Property: EnableExecuteCommand
@@ -299,11 +294,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 		},
 		"name": {
 			// Property: Name
@@ -521,16 +511,11 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// }
 			Type:     types.StringType,
 			Optional: true,
-			Computed: true,
 			Validators: []tfsdk.AttributeValidator{
 				validate.StringInSlice([]string{
 					"SERVICE",
 					"TASK_DEFINITION",
 				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
 			},
 		},
 		"role": {
@@ -647,11 +632,6 @@ func serviceResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.ListNestedAttributesOptions{},
 			),
 			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
-				tfsdk.RequiresReplace(),
-			},
 		},
 		"tags": {
 			// Property: Tags

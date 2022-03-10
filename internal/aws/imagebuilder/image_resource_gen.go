@@ -44,6 +44,11 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Type:        types.StringType,
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+				tfsdk.RequiresReplace(),
+			},
 		},
 		"distribution_configuration_arn": {
 			// Property: DistributionConfigurationArn
@@ -111,6 +116,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: ImageTestsConfiguration
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "The image tests configuration used when creating this image.",
 			//   "properties": {
 			//     "ImageTestsEnabled": {
@@ -153,6 +159,20 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 				tfsdk.RequiresReplace(),
 			},
 		},
+		"image_uri": {
+			// Property: ImageUri
+			// CloudFormation resource type schema:
+			// {
+			//   "description": "URI for containers created in current Region with default ECR image tag",
+			//   "type": "string"
+			// }
+			Description: "URI for containers created in current Region with default ECR image tag",
+			Type:        types.StringType,
+			Computed:    true,
+			PlanModifiers: []tfsdk.AttributePlanModifier{
+				tfsdk.UseStateForUnknown(),
+			},
+		},
 		"infrastructure_configuration_arn": {
 			// Property: InfrastructureConfigurationArn
 			// CloudFormation resource type schema:
@@ -187,6 +207,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			// Property: Tags
 			// CloudFormation resource type schema:
 			// {
+			//   "additionalProperties": false,
 			//   "description": "The tags associated with the image.",
 			//   "patternProperties": {
 			//     "": {
@@ -236,6 +257,7 @@ func imageResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"image_recipe_arn":                 "ImageRecipeArn",
 		"image_tests_configuration":        "ImageTestsConfiguration",
 		"image_tests_enabled":              "ImageTestsEnabled",
+		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
 		"name":                             "Name",
 		"tags":                             "Tags",

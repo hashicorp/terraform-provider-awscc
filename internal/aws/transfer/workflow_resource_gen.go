@@ -117,6 +117,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "FALSE"
 			//             ],
 			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//             "type": "string"
 			//           }
 			//         },
 			//         "type": "object"
@@ -130,6 +137,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 30,
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
+			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
 			//             "type": "string"
 			//           },
 			//           "Target": {
@@ -158,6 +172,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//             "type": "string"
 			//           }
 			//         },
 			//         "type": "object"
@@ -171,6 +192,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 30,
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
+			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
 			//             "type": "string"
 			//           },
 			//           "Tags": {
@@ -290,6 +318,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										}),
 									},
 								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+								},
 							},
 						),
 						Optional: true,
@@ -307,6 +345,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
 									},
 								},
 								"target": {
@@ -347,6 +395,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+								},
 							},
 						),
 						Optional: true,
@@ -364,6 +422,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
 									},
 								},
 								"tags": {
@@ -484,6 +552,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//               "FALSE"
 			//             ],
 			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//             "type": "string"
 			//           }
 			//         },
 			//         "type": "object"
@@ -497,6 +572,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 30,
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
+			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
 			//             "type": "string"
 			//           },
 			//           "Target": {
@@ -525,6 +607,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
 			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+			//             "type": "string"
 			//           }
 			//         },
 			//         "type": "object"
@@ -538,6 +627,13 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             "maxLength": 30,
 			//             "minLength": 0,
 			//             "pattern": "^[\\w-]*$",
+			//             "type": "string"
+			//           },
+			//           "SourceFileLocation": {
+			//             "description": "Specifies which file to use as input to the workflow step.",
+			//             "maxLength": 256,
+			//             "minLength": 0,
+			//             "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
 			//             "type": "string"
 			//           },
 			//           "Tags": {
@@ -657,6 +753,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										}),
 									},
 								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+								},
 							},
 						),
 						Optional: true,
@@ -674,6 +780,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
 									},
 								},
 								"target": {
@@ -714,6 +830,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
 									},
 								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+									},
+								},
 							},
 						),
 						Optional: true,
@@ -731,6 +857,16 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 									Validators: []tfsdk.AttributeValidator{
 										validate.StringLenBetween(0, 30),
 										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
+									},
+								},
+								"source_file_location": {
+									// Property: SourceFileLocation
+									Description: "Specifies which file to use as input to the workflow step.",
+									Type:        types.StringType,
+									Optional:    true,
+									Validators: []tfsdk.AttributeValidator{
+										validate.StringLenBetween(0, 256),
+										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
 									},
 								},
 								"tags": {
@@ -907,6 +1043,7 @@ func workflowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"on_exception_steps":        "OnExceptionSteps",
 		"overwrite_existing":        "OverwriteExisting",
 		"s3_file_location":          "S3FileLocation",
+		"source_file_location":      "SourceFileLocation",
 		"steps":                     "Steps",
 		"tag_step_details":          "TagStepDetails",
 		"tags":                      "Tags",
