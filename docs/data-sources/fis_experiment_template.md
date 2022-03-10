@@ -23,6 +23,7 @@ Data Source schema for AWS::FIS::ExperimentTemplate
 
 - **actions** (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
 - **description** (String) A description for the experiment template.
+- **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - **role_arn** (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
 - **stop_conditions** (Attributes List) One or more stop conditions. (see [below for nested schema](#nestedatt--stop_conditions))
 - **tags** (Map of String)
@@ -40,6 +41,33 @@ Read-Only:
 - **targets** (Map of String) One or more targets for the action.
 
 
+<a id="nestedatt--log_configuration"></a>
+### Nested Schema for `log_configuration`
+
+Read-Only:
+
+- **cloudwatch_logs_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
+- **log_schema_version** (Number)
+- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
+
+<a id="nestedatt--log_configuration--cloudwatch_logs_configuration"></a>
+### Nested Schema for `log_configuration.cloudwatch_logs_configuration`
+
+Read-Only:
+
+- **log_group_arn** (String)
+
+
+<a id="nestedatt--log_configuration--s3_configuration"></a>
+### Nested Schema for `log_configuration.s3_configuration`
+
+Read-Only:
+
+- **bucket_name** (String)
+- **prefix** (String)
+
+
+
 <a id="nestedatt--stop_conditions"></a>
 ### Nested Schema for `stop_conditions`
 
@@ -55,6 +83,7 @@ Read-Only:
 Read-Only:
 
 - **filters** (Attributes List) (see [below for nested schema](#nestedatt--targets--filters))
+- **parameters** (Map of String)
 - **resource_arns** (List of String) The Amazon Resource Names (ARNs) of the target resources.
 - **resource_tags** (Map of String)
 - **resource_type** (String) The AWS resource type. The resource type must be supported for the specified action.

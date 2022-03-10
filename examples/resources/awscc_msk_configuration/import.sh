@@ -1,0 +1,1 @@
+$ terraform import awscc_msk_configuration.example <resource ID>

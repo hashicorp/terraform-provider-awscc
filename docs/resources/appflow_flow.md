@@ -53,6 +53,7 @@ Required:
 - **redshift** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--redshift))
 - **s3** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3))
 - **salesforce** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--salesforce))
+- **sapo_data** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data))
 - **snowflake** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--snowflake))
 - **upsolver** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver))
 - **zendesk** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--zendesk))
@@ -160,6 +161,37 @@ Required:
 - **bucket_name** (String)
 - **bucket_prefix** (String)
 - **fail_on_first_error** (Boolean)
+
+
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data`
+
+Required:
+
+- **error_handling_config** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config))
+- **id_field_names** (List of String) List of fields used as ID when performing a write operation.
+- **object_path** (String)
+- **success_response_handling_config** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config))
+- **write_operation_type** (String)
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+
+Required:
+
+- **bucket_name** (String)
+- **bucket_prefix** (String)
+- **fail_on_first_error** (Boolean)
+
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+
+Required:
+
+- **bucket_name** (String)
+- **bucket_prefix** (String)
 
 
 

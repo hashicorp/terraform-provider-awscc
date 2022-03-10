@@ -1,0 +1,1 @@
+$ terraform import awscc_msk_batch_scram_secret.example <resource ID>

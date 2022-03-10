@@ -30,6 +30,7 @@ Resource schema for AWS::ImageBuilder::Image
 - **arn** (String) The Amazon Resource Name (ARN) of the image.
 - **id** (String) Uniquely identifies the resource.
 - **image_id** (String) The AMI ID of the EC2 AMI in current region.
+- **image_uri** (String) URI for containers created in current Region with default ECR image tag
 - **name** (String) The name of the image.
 
 <a id="nestedatt--image_tests_configuration"></a>

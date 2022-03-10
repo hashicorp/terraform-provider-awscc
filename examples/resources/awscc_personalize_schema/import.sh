@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_schema.example <resource ID>

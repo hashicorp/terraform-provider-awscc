@@ -26,6 +26,7 @@ Resource schema for AWS::FIS::ExperimentTemplate
 ### Optional
 
 - **actions** (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
+- **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 
 ### Read-Only
 
@@ -46,6 +47,7 @@ Required:
 Required:
 
 - **filters** (Attributes List) (see [below for nested schema](#nestedatt--targets--filters))
+- **parameters** (Map of String)
 - **resource_arns** (List of String) The Amazon Resource Names (ARNs) of the target resources.
 - **resource_tags** (Map of String)
 - **resource_type** (String) The AWS resource type. The resource type must be supported for the specified action.
@@ -71,6 +73,32 @@ Optional:
 - **parameters** (Map of String) The parameters for the action, if applicable.
 - **start_after** (List of String) The names of the actions that must be completed before the current action starts.
 - **targets** (Map of String) One or more targets for the action.
+
+
+<a id="nestedatt--log_configuration"></a>
+### Nested Schema for `log_configuration`
+
+Optional:
+
+- **cloudwatch_logs_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
+- **log_schema_version** (Number)
+- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
+
+<a id="nestedatt--log_configuration--cloudwatch_logs_configuration"></a>
+### Nested Schema for `log_configuration.cloudwatch_logs_configuration`
+
+Optional:
+
+- **log_group_arn** (String)
+
+
+<a id="nestedatt--log_configuration--s3_configuration"></a>
+### Nested Schema for `log_configuration.s3_configuration`
+
+Optional:
+
+- **bucket_name** (String)
+- **prefix** (String)
 
 ## Import
 

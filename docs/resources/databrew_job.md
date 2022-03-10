@@ -152,6 +152,7 @@ Optional:
 - **format** (String)
 - **format_options** (Attributes) Format options for job Output (see [below for nested schema](#nestedatt--outputs--format_options))
 - **location** (Attributes) S3 Output location (see [below for nested schema](#nestedatt--outputs--location))
+- **max_output_files** (Number)
 - **overwrite** (Boolean)
 - **partition_columns** (List of String)
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_identity_provider_config.example <resource ID>
