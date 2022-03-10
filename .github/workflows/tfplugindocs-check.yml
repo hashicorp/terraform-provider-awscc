@@ -22,7 +22,7 @@ jobs:
     name: tfplugindocs check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - id: go-version
         uses: juliangruber/read-file-action@v1
