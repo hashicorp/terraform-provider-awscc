@@ -1,4 +1,30 @@
 ## 0.14.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_eks_identity_provider_config`
+* **New Data Source:** `awscc_msk_batch_scram_secret`
+* **New Data Source:** `awscc_msk_cluster`
+* **New Data Source:** `awscc_msk_clusters`
+* **New Data Source:** `awscc_msk_configuration`
+* **New Data Source:** `awscc_msk_configurations`
+* **New Data Source:** `awscc_personalize_dataset`
+* **New Data Source:** `awscc_personalize_dataset_group`
+* **New Data Source:** `awscc_personalize_dataset_groups`
+* **New Data Source:** `awscc_personalize_datasets`
+* **New Data Source:** `awscc_personalize_schema`
+* **New Data Source:** `awscc_personalize_schemas`
+* **New Data Source:** `awscc_personalize_solution`
+* **New Data Source:** `awscc_personalize_solutions`
+* **New Resource:** `awscc_eks_identity_provider_config`
+* **New Resource:** `awscc_msk_batch_scram_secret`
+* **New Resource:** `awscc_msk_cluster`
+* **New Resource:** `awscc_msk_configuration`
+* **New Resource:** `awscc_personalize_dataset`
+* **New Resource:** `awscc_personalize_dataset_group`
+* **New Resource:** `awscc_personalize_schema`
+* **New Resource:** `awscc_personalize_solution`
+
 ## [0.13.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.13.0) (February 24, 2022)
 
 FEATURES:
