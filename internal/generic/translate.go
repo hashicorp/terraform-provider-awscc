@@ -238,7 +238,9 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 			if isObject {
 				attributeName, ok := t.cfToTfNameMap[key]
 				if !ok {
-					tflog.Info(ctx, "attribute name mapping not found", "key", key)
+					tflog.Info(ctx, "attribute name mapping not found", map[string]interface{}{
+						"key": key,
+					})
 					continue
 				}
 				path = path.WithAttributeName(attributeName)
@@ -248,7 +250,11 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, pat
 			val, err := t.valueFromRaw(ctx, schema, path, v)
 			if err != nil {
 				if isObject {
-					tflog.Info(ctx, "not found in Terraform schema", "key", key, "path", path, "error", err.Error())
+					tflog.Info(ctx, "not found in Terraform schema", map[string]interface{}{
+						"key":   key,
+						"path":  path,
+						"error": err.Error(),
+					})
 					path = path.WithoutLastStep()
 					continue
 				}

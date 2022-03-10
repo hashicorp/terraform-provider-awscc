@@ -446,9 +446,13 @@ func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
 func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
 	switch classification {
 	case logging.Warn:
-		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
+			"message": hclog.Fmt(format, v...),
+		})
 	default:
-		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", "message", hclog.Fmt(format, v...))
+		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
+			"message": hclog.Fmt(format, v...),
+		})
 	}
 }
 

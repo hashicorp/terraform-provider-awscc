@@ -122,7 +122,9 @@ func (sd *singularDataSource) Read(ctx context.Context, request tfsdk.ReadDataSo
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+		"value": hclog.Fmt("%v", response.State.Raw),
+	})
 
 	traceExit(ctx, "SingularDataSource.Read")
 }

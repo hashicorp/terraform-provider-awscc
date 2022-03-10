@@ -13,7 +13,10 @@ import (
 )
 
 func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string) (*types.ResourceDescription, error) {
-	tflog.Debug(ctx, "FindResourceByTypeNameAndID", "cfTypeName", typeName, "id", id)
+	tflog.Debug(ctx, "FindResourceByTypeNameAndID", map[string]interface{}{
+		"cfTypeName": typeName,
+		"id":         id,
+	})
 
 	input := &cloudcontrol.GetResourceInput{
 		Identifier: aws.String(id),
@@ -43,7 +46,9 @@ func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client,
 		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
-	tflog.Debug(ctx, "ResourceDescription.ResourceModel", "value", aws.ToString(output.ResourceDescription.Properties))
+	tflog.Debug(ctx, "ResourceDescription.ResourceModel", map[string]interface{}{
+		"value": aws.ToString(output.ResourceDescription.Properties),
+	})
 
 	return output.ResourceDescription, nil
 }
