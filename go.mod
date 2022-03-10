@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.15.0
 	github.com/aws/aws-sdk-go-v2/config v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.6.0
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.20.0
 	github.com/aws/smithy-go v1.11.1
 	github.com/evanphx/json-patch v0.5.2 // indirect
 	github.com/google/go-cmp v0.5.7
