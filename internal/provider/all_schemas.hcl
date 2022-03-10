@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 495 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 502 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -841,6 +841,11 @@ resource_schema "aws_eks_fargate_profile" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_eks_identity_provider_config" {
+  cloudformation_type_name               = "AWS::EKS::IdentityProviderConfig"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_eks_nodegroup" {
   cloudformation_type_name               = "AWS::EKS::Nodegroup"
   suppress_plural_data_source_generation = true
@@ -1486,6 +1491,19 @@ resource_schema "aws_lookoutvision_project" {
   cloudformation_type_name = "AWS::LookoutVision::Project"
 }
 
+resource_schema "aws_msk_batch_scram_secret" {
+  cloudformation_type_name               = "AWS::MSK::BatchScramSecret"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_msk_cluster" {
+  cloudformation_type_name = "AWS::MSK::Cluster"
+}
+
+resource_schema "aws_msk_configuration" {
+  cloudformation_type_name = "AWS::MSK::Configuration"
+}
+
 resource_schema "aws_mwaa_environment" {
   cloudformation_type_name = "AWS::MWAA::Environment"
 }
@@ -1674,6 +1692,22 @@ resource_schema "aws_panorama_package" {
 resource_schema "aws_panorama_package_version" {
   cloudformation_type_name               = "AWS::Panorama::PackageVersion"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_personalize_dataset" {
+  cloudformation_type_name = "AWS::Personalize::Dataset"
+}
+
+resource_schema "aws_personalize_dataset_group" {
+  cloudformation_type_name = "AWS::Personalize::DatasetGroup"
+}
+
+resource_schema "aws_personalize_schema" {
+  cloudformation_type_name = "AWS::Personalize::Schema"
+}
+
+resource_schema "aws_personalize_solution" {
+  cloudformation_type_name = "AWS::Personalize::Solution"
 }
 
 resource_schema "aws_pinpoint_in_app_template" {
