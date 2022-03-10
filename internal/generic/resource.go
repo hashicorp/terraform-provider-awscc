@@ -401,7 +401,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
-	tflog.Debug(ctx, "Request.Plan.Raw", "value", hclog.Fmt("%v", request.Plan.Raw))
+	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
+		"value": hclog.Fmt("%v", request.Plan.Raw),
+	})
 
 	translator := toCloudControl{tfToCfNameMap: r.resourceType.tfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Raw)
@@ -412,7 +414,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "CloudControl DesiredState", "value", desiredState)
+	tflog.Debug(ctx, "CloudControl DesiredState", map[string]interface{}{
+		"value": desiredState,
+	})
 
 	input := &cloudcontrol.CreateResourceInput{
 		ClientToken:  aws.String(tfresource.UniqueId()),
@@ -484,7 +488,9 @@ func (r *resource) Create(ctx context.Context, request tfsdk.CreateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+		"value": hclog.Fmt("%v", response.State.Raw),
+	})
 
 	traceExit(ctx, "Resource.Create")
 }
@@ -494,7 +500,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 
 	traceEntry(ctx, "Resource.Read")
 
-	tflog.Debug(ctx, "Request.State.Raw", "value", hclog.Fmt("%v", request.State.Raw))
+	tflog.Debug(ctx, "Request.State.Raw", map[string]interface{}{
+		"value": hclog.Fmt("%v", request.State.Raw),
+	})
 
 	conn := r.provider.CloudControlApiClient(ctx)
 
@@ -566,7 +574,9 @@ func (r *resource) Read(ctx context.Context, request tfsdk.ReadResourceRequest, 
 		}
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", "value", hclog.Fmt("%v", response.State.Raw))
+	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+		"value": hclog.Fmt("%v", response.State.Raw),
+	})
 
 	traceExit(ctx, "Resource.Read")
 }
@@ -615,7 +625,9 @@ func (r *resource) Update(ctx context.Context, request tfsdk.UpdateResourceReque
 		return
 	}
 
-	tflog.Debug(ctx, "Cloud Control API PatchDocument", "value", patchDocument)
+	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]interface{}{
+		"value": patchDocument,
+	})
 
 	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
@@ -701,7 +713,9 @@ func (r *resource) ImportState(ctx context.Context, request tfsdk.ImportResource
 
 	traceEntry(ctx, "Resource.ImportState")
 
-	tflog.Debug(ctx, "Request.ID", "value", hclog.Fmt("%v", request.ID))
+	tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+		"value": hclog.Fmt("%v", request.ID),
+	})
 
 	tfsdk.ResourceImportStatePassthroughID(ctx, idAttributePath, request, response)
 

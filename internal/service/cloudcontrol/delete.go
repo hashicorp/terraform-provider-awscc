@@ -12,7 +12,10 @@ import (
 )
 
 func DeleteResource(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string, maxWaitTime time.Duration) error {
-	tflog.Debug(ctx, "DeleteResource", "cfTypeName", typeName, "id", id)
+	tflog.Debug(ctx, "DeleteResource", map[string]interface{}{
+		"cfTypeName": typeName,
+		"id":         id,
+	})
 
 	input := &cloudcontrol.DeleteResourceInput{
 		ClientToken: aws.String(tfresource.UniqueId()),
