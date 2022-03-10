@@ -202,14 +202,16 @@
             "additionalProperties": false,
             "properties": {
                 "Value": {
+                    "description": "The key of the tag.",
                     "type": "string",
-                    "minLength": 1,
-                    "maxLength": 255
+                    "minLength": 0,
+                    "maxLength": 256
                 },
                 "Key": {
+                    "description": "The value of the tag.",
                     "type": "string",
-                    "minLength": 1,
-                    "maxLength": 127
+                    "minLength": 0,
+                    "maxLength": 128
                 }
             },
             "required": [

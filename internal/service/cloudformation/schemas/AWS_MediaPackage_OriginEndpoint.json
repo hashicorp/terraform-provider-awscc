@@ -130,7 +130,8 @@
           "type": "string",
           "enum": [
             "NONE",
-            "HBBTV_1_5"
+            "HBBTV_1_5",
+            "HYBRIDCAST"
           ]
         },
         "MinUpdatePeriodSeconds": {

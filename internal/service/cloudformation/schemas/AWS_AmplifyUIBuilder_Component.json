@@ -142,14 +142,14 @@
         "Operand": {
           "type": "string"
         },
-        "OperandType": {
-          "type": "string"
-        },
         "Then": {
           "$ref": "#/definitions/ComponentProperty"
         },
         "Else": {
           "$ref": "#/definitions/ComponentProperty"
+        },
+        "OperandType": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -466,6 +466,9 @@
     },
     "Properties": {
       "$ref": "#/definitions/ComponentProperties"
+    },
+    "SchemaVersion": {
+      "type": "string"
     },
     "SourceId": {
       "type": "string"

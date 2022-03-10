@@ -35,6 +35,10 @@
             "description": "The AMI ID of the EC2 AMI in current region.",
             "type": "string"
         },
+        "ImageUri": {
+            "description": "URI for containers created in current Region with default ECR image tag",
+            "type": "string"
+        },
         "EnhancedImageMetadataEnabled": {
             "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
             "type": "boolean"
@@ -42,6 +46,7 @@
         "Tags": {
             "description": "The tags associated with the image.",
             "type": "object",
+            "additionalProperties": false,
             "patternProperties": {
                 "": {
                     "type": "string"
@@ -53,6 +58,7 @@
         "ImageTestsConfiguration": {
             "description": "The image tests configuration used when creating this image.",
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "ImageTestsEnabled": {
                     "description": "ImageTestsEnabled",
@@ -84,10 +90,12 @@
     "readOnlyProperties": [
         "/properties/Arn",
         "/properties/Name",
-        "/properties/ImageId"
+        "/properties/ImageId",
+        "/properties/ImageUri"
     ],
     "createOnlyProperties": [
         "/properties/ImageRecipeArn",
+        "/properties/ContainerRecipeArn",
         "/properties/InfrastructureConfigurationArn",
         "/properties/DistributionConfigurationArn",
         "/properties/ImageTestsConfiguration",
@@ -117,16 +125,14 @@
             "permissions": [
                 "imagebuilder:GetImage",
                 "imagebuilder:DeleteImage",
-                "imagebuilder:UnTagResource"
+                "imagebuilder:UnTagResource",
+                "imagebuilder:CancelImageCreation"
             ]
         },
         "list": {
             "permissions": [
                 "imagebuilder:ListImages"
             ]
-        },
-        "update": {
-            "permissions": []
         }
     }
 }

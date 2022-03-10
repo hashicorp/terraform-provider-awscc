@@ -220,6 +220,11 @@
         },
         "Overwrite": {
           "type": "boolean"
+        },
+        "MaxOutputFiles": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
         }
       },
       "additionalProperties": false,
