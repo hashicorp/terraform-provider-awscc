@@ -239,6 +239,70 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             ],
 			//             "type": "object"
 			//           },
+			//           "SAPOData": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "IdFieldNames": {
+			//                 "description": "List of fields used as ID when performing a write operation.",
+			//                 "items": {
+			//                   "type": "string"
+			//                 },
+			//                 "type": "array"
+			//               },
+			//               "ObjectPath": {
+			//                 "maxLength": 512,
+			//                 "pattern": "\\S+",
+			//                 "type": "string"
+			//               },
+			//               "SuccessResponseHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "WriteOperationType": {
+			//                 "enum": [
+			//                   "INSERT",
+			//                   "UPSERT",
+			//                   "UPDATE"
+			//                 ],
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "ObjectPath"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "Salesforce": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -733,6 +797,96 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 													},
 												),
 												Optional: true,
+											},
+										},
+									),
+									Optional: true,
+								},
+								"sapo_data": {
+									// Property: SAPOData
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"error_handling_config": {
+												// Property: ErrorHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"fail_on_first_error": {
+															// Property: FailOnFirstError
+															Type:     types.BoolType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"id_field_names": {
+												// Property: IdFieldNames
+												Description: "List of fields used as ID when performing a write operation.",
+												Type:        types.ListType{ElemType: types.StringType},
+												Optional:    true,
+											},
+											"object_path": {
+												// Property: ObjectPath
+												Type:     types.StringType,
+												Required: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+											},
+											"success_response_handling_config": {
+												// Property: SuccessResponseHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+													},
+												),
+												Optional: true,
+											},
+											"write_operation_type": {
+												// Property: WriteOperationType
+												Type:     types.StringType,
+												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringInSlice([]string{
+														"INSERT",
+														"UPSERT",
+														"UPDATE",
+													}),
+												},
 											},
 										},
 									),
@@ -2231,6 +2385,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//           "Map_all",
 			//           "Mask",
 			//           "Merge",
+			//           "Passthrough",
 			//           "Truncate",
 			//           "Validate"
 			//         ],
@@ -2687,6 +2842,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 								"Map_all",
 								"Mask",
 								"Merge",
+								"Passthrough",
 								"Truncate",
 								"Validate",
 							}),
@@ -2913,6 +3069,7 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"source_connector_properties":      "SourceConnectorProperties",
 		"source_fields":                    "SourceFields",
 		"source_flow_config":               "SourceFlowConfig",
+		"success_response_handling_config": "SuccessResponseHandlingConfig",
 		"tags":                             "Tags",
 		"task_properties":                  "TaskProperties",
 		"task_type":                        "TaskType",

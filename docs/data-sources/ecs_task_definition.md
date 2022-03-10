@@ -68,7 +68,7 @@ Read-Only:
 - **log_configuration** (Attributes) (see [below for nested schema](#nestedatt--container_definitions--log_configuration))
 - **memory** (Number) The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed.
 - **memory_reservation** (Number)
-- **mount_points** (Attributes Set) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
+- **mount_points** (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--mount_points))
 - **name** (String) The name of a container. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed
 - **port_mappings** (Attributes Set) Port mappings allow containers to access ports on the host container instance to send or receive traffic. (see [below for nested schema](#nestedatt--container_definitions--port_mappings))
 - **privileged** (Boolean)

@@ -26,6 +26,9 @@
             ],
             "additionalProperties": false
         },
+        "KeyArn": {
+            "type": "string"
+        },
         "EncryptionConfig": {
             "description": "The encryption configuration for the cluster",
             "type": "object",
@@ -37,7 +40,7 @@
                     "properties": {
                         "KeyArn": {
                             "description": "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
-                            "type": "string"
+                            "$ref": "#/definitions/KeyArn"
                         }
                     }
                 },

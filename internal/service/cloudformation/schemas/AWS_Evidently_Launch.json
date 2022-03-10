@@ -221,7 +221,8 @@
     "create": {
       "permissions": [
         "evidently:CreateLaunch",
-        "evidently:TagResource"
+        "evidently:TagResource",
+        "evidently:GetLaunch"
       ]
     },
     "read": {
@@ -235,13 +236,15 @@
         "evidently:UpdateLaunch",
         "evidently:ListTagsForResource",
         "evidently:TagResource",
-        "evidently:UntagResource"
+        "evidently:UntagResource",
+        "evidently:GetLaunch"
       ]
     },
     "delete": {
       "permissions": [
         "evidently:DeleteLaunch",
-        "evidently:UntagResource"
+        "evidently:UntagResource",
+        "evidently:GetLaunch"
       ]
     }
   },

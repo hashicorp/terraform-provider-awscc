@@ -234,6 +234,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_alerts -cftype AWS::LookoutMetrics::Alert -package lookoutmetrics ../aws/lookoutmetrics/alert_plural_data_source_gen.go ../aws/lookoutmetrics/alert_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutmetrics_anomaly_detectors -cftype AWS::LookoutMetrics::AnomalyDetector -package lookoutmetrics ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen.go ../aws/lookoutmetrics/anomaly_detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_lookoutvision_projects -cftype AWS::LookoutVision::Project -package lookoutvision ../aws/lookoutvision/project_plural_data_source_gen.go ../aws/lookoutvision/project_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_clusters -cftype AWS::MSK::Cluster -package msk ../aws/msk/cluster_plural_data_source_gen.go ../aws/msk/cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_configurations -cftype AWS::MSK::Configuration -package msk ../aws/msk/configuration_plural_data_source_gen.go ../aws/msk/configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mwaa_environments -cftype AWS::MWAA::Environment -package mwaa ../aws/mwaa/environment_plural_data_source_gen.go ../aws/mwaa/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediaconnect_flows -cftype AWS::MediaConnect::Flow -package mediaconnect ../aws/mediaconnect/flow_plural_data_source_gen.go ../aws/mediaconnect/flow_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediapackage_channels -cftype AWS::MediaPackage::Channel -package mediapackage ../aws/mediapackage/channel_plural_data_source_gen.go ../aws/mediapackage/channel_plural_data_source_gen_test.go
@@ -251,6 +253,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_nimblestudio_studios -cftype AWS::NimbleStudio::Studio -package nimblestudio ../aws/nimblestudio/studio_plural_data_source_gen.go ../aws/nimblestudio/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_application_instances -cftype AWS::Panorama::ApplicationInstance -package panorama ../aws/panorama/application_instance_plural_data_source_gen.go ../aws/panorama/application_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_panorama_packages -cftype AWS::Panorama::Package -package panorama ../aws/panorama/package_plural_data_source_gen.go ../aws/panorama/package_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_datasets -cftype AWS::Personalize::Dataset -package personalize ../aws/personalize/dataset_plural_data_source_gen.go ../aws/personalize/dataset_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_dataset_groups -cftype AWS::Personalize::DatasetGroup -package personalize ../aws/personalize/dataset_group_plural_data_source_gen.go ../aws/personalize/dataset_group_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_schemas -cftype AWS::Personalize::Schema -package personalize ../aws/personalize/schema_plural_data_source_gen.go ../aws/personalize/schema_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_solutions -cftype AWS::Personalize::Solution -package personalize ../aws/personalize/solution_plural_data_source_gen.go ../aws/personalize/solution_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_pinpoint_in_app_templates -cftype AWS::Pinpoint::InAppTemplate -package pinpoint ../aws/pinpoint/in_app_template_plural_data_source_gen.go ../aws/pinpoint/in_app_template_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxies -cftype AWS::RDS::DBProxy -package rds ../aws/rds/db_proxy_plural_data_source_gen.go ../aws/rds/db_proxy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_proxy_endpoints -cftype AWS::RDS::DBProxyEndpoint -package rds ../aws/rds/db_proxy_endpoint_plural_data_source_gen.go ../aws/rds/db_proxy_endpoint_plural_data_source_gen_test.go
@@ -402,11 +408,13 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediapackage"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/memorydb"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/msk"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mwaa"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshift"

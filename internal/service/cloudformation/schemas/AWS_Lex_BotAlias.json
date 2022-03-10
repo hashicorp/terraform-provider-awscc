@@ -162,6 +162,10 @@
                     "description": ""
                 }
             },
+            "required": [
+                "Destination",
+                "Enabled"
+            ],
             "additionalProperties": false
         },
         "AudioLogDestination": {
@@ -172,6 +176,9 @@
                     "$ref": "#/definitions/S3BucketLogDestination"
                 }
             },
+            "required": [
+                "S3Bucket"
+            ],
             "additionalProperties": false
         },
         "TextLogDestination": {
@@ -182,6 +189,9 @@
                     "$ref": "#/definitions/CloudWatchLogGroupLogDestination"
                 }
             },
+            "required": [
+                "CloudWatch"
+            ],
             "additionalProperties": false
         },
         "CloudWatchLogGroupLogDestination": {

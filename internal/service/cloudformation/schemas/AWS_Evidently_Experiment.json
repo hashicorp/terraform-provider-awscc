@@ -231,7 +231,8 @@
     "create": {
       "permissions": [
         "evidently:CreateExperiment",
-        "evidently:TagResource"
+        "evidently:TagResource",
+        "evidently:GetExperiment"
       ]
     },
     "read": {
@@ -244,13 +245,15 @@
       "permissions": [
         "evidently:UpdateExperiment",
         "evidently:TagResource",
-        "evidently:UntagResource"
+        "evidently:UntagResource",
+        "evidently:GetExperiment"
       ]
     },
     "delete": {
       "permissions": [
         "evidently:DeleteExperiment",
-        "evidently:UntagResource"
+        "evidently:UntagResource",
+        "evidently:GetExperiment"
       ]
     }
   },

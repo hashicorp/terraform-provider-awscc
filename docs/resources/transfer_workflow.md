@@ -50,6 +50,7 @@ Required:
 - **destination_file_location** (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location))
 - **name** (String) The name of the step, used as an identifier.
 - **overwrite_existing** (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 
 <a id="nestedatt--steps--copy_step_details--destination_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location`
@@ -75,6 +76,7 @@ Required:
 Required:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 - **target** (String) The ARN for the lambda function that is being called.
 - **timeout_seconds** (Number) Timeout, in seconds, for the step.
 
@@ -85,6 +87,7 @@ Required:
 Required:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 
 
 <a id="nestedatt--steps--tag_step_details"></a>
@@ -93,6 +96,7 @@ Required:
 Required:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 - **tags** (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--steps--tag_step_details--tags))
 
 <a id="nestedatt--steps--tag_step_details--tags"></a>
@@ -125,6 +129,7 @@ Optional:
 - **destination_file_location** (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location))
 - **name** (String) The name of the step, used as an identifier.
 - **overwrite_existing** (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 
 <a id="nestedatt--on_exception_steps--copy_step_details--destination_file_location"></a>
 ### Nested Schema for `on_exception_steps.copy_step_details.destination_file_location`
@@ -150,6 +155,7 @@ Optional:
 Optional:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 - **target** (String) The ARN for the lambda function that is being called.
 - **timeout_seconds** (Number) Timeout, in seconds, for the step.
 
@@ -160,6 +166,7 @@ Optional:
 Optional:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 
 
 <a id="nestedatt--on_exception_steps--tag_step_details"></a>
@@ -168,6 +175,7 @@ Optional:
 Optional:
 
 - **name** (String) The name of the step, used as an identifier.
+- **source_file_location** (String) Specifies which file to use as input to the workflow step.
 - **tags** (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details--tags))
 
 <a id="nestedatt--on_exception_steps--tag_step_details--tags"></a>

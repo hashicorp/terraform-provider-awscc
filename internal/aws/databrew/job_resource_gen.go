@@ -652,6 +652,11 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//         ],
 			//         "type": "object"
 			//       },
+			//       "MaxOutputFiles": {
+			//         "maximum": 999,
+			//         "minimum": 1,
+			//         "type": "integer"
+			//       },
 			//       "Overwrite": {
 			//         "type": "boolean"
 			//       },
@@ -760,6 +765,14 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 							},
 						),
 						Required: true,
+					},
+					"max_output_files": {
+						// Property: MaxOutputFiles
+						Type:     types.Int64Type,
+						Optional: true,
+						Validators: []tfsdk.AttributeValidator{
+							validate.IntBetween(1, 999),
+						},
 					},
 					"overwrite": {
 						// Property: Overwrite
@@ -1450,6 +1463,7 @@ func jobResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 		"location":                         "Location",
 		"log_subscription":                 "LogSubscription",
 		"max_capacity":                     "MaxCapacity",
+		"max_output_files":                 "MaxOutputFiles",
 		"max_retries":                      "MaxRetries",
 		"mode":                             "Mode",
 		"name":                             "Name",

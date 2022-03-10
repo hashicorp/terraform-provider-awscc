@@ -559,7 +559,8 @@ func originEndpointDataSourceType(ctx context.Context) (tfsdk.DataSourceType, er
 			//       "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
 			//       "enum": [
 			//         "NONE",
-			//         "HBBTV_1_5"
+			//         "HBBTV_1_5",
+			//         "HYBRIDCAST"
 			//       ],
 			//       "type": "string"
 			//     },

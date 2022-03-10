@@ -141,6 +141,97 @@ func experimentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			Type:     types.StringType,
 			Computed: true,
 		},
+		"log_configuration": {
+			// Property: LogConfiguration
+			// CloudFormation resource type schema:
+			// {
+			//   "additionalProperties": false,
+			//   "properties": {
+			//     "CloudWatchLogsConfiguration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "LogGroupArn": {
+			//           "maxLength": 2048,
+			//           "minLength": 20,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "LogGroupArn"
+			//       ],
+			//       "type": "object"
+			//     },
+			//     "LogSchemaVersion": {
+			//       "minimum": 1,
+			//       "type": "integer"
+			//     },
+			//     "S3Configuration": {
+			//       "additionalProperties": false,
+			//       "properties": {
+			//         "BucketName": {
+			//           "maxLength": 63,
+			//           "minLength": 3,
+			//           "type": "string"
+			//         },
+			//         "Prefix": {
+			//           "maxLength": 1024,
+			//           "minLength": 1,
+			//           "type": "string"
+			//         }
+			//       },
+			//       "required": [
+			//         "BucketName"
+			//       ],
+			//       "type": "object"
+			//     }
+			//   },
+			//   "required": [
+			//     "LogSchemaVersion"
+			//   ],
+			//   "type": "object"
+			// }
+			Attributes: tfsdk.SingleNestedAttributes(
+				map[string]tfsdk.Attribute{
+					"cloudwatch_logs_configuration": {
+						// Property: CloudWatchLogsConfiguration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"log_group_arn": {
+									// Property: LogGroupArn
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+					"log_schema_version": {
+						// Property: LogSchemaVersion
+						Type:     types.Int64Type,
+						Computed: true,
+					},
+					"s3_configuration": {
+						// Property: S3Configuration
+						Attributes: tfsdk.SingleNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"bucket_name": {
+									// Property: BucketName
+									Type:     types.StringType,
+									Computed: true,
+								},
+								"prefix": {
+									// Property: Prefix
+									Type:     types.StringType,
+									Computed: true,
+								},
+							},
+						),
+						Computed: true,
+					},
+				},
+			),
+			Computed: true,
+		},
 		"role_arn": {
 			// Property: RoleArn
 			// CloudFormation resource type schema:
@@ -251,6 +342,16 @@ func experimentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 			//           },
 			//           "type": "array"
 			//         },
+			//         "Parameters": {
+			//           "additionalProperties": false,
+			//           "patternProperties": {
+			//             "": {
+			//               "maxLength": 1024,
+			//               "type": "string"
+			//             }
+			//           },
+			//           "type": "object"
+			//         },
 			//         "ResourceArns": {
 			//           "description": "The Amazon Resource Names (ARNs) of the target resources.",
 			//           "items": {
@@ -315,6 +416,12 @@ func experimentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 						),
 						Computed: true,
 					},
+					"parameters": {
+						// Property: Parameters
+						// Pattern: ""
+						Type:     types.MapType{ElemType: types.StringType},
+						Computed: true,
+					},
 					"resource_arns": {
 						// Property: ResourceArns
 						Description: "The Amazon Resource Names (ARNs) of the target resources.",
@@ -363,25 +470,32 @@ func experimentTemplateDataSourceType(ctx context.Context) (tfsdk.DataSourceType
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_id":       "ActionId",
-		"actions":         "Actions",
-		"description":     "Description",
-		"filters":         "Filters",
-		"id":              "Id",
-		"parameters":      "Parameters",
-		"path":            "Path",
-		"resource_arns":   "ResourceArns",
-		"resource_tags":   "ResourceTags",
-		"resource_type":   "ResourceType",
-		"role_arn":        "RoleArn",
-		"selection_mode":  "SelectionMode",
-		"source":          "Source",
-		"start_after":     "StartAfter",
-		"stop_conditions": "StopConditions",
-		"tags":            "Tags",
-		"targets":         "Targets",
-		"value":           "Value",
-		"values":          "Values",
+		"action_id":                     "ActionId",
+		"actions":                       "Actions",
+		"bucket_name":                   "BucketName",
+		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
+		"description":                   "Description",
+		"filters":                       "Filters",
+		"id":                            "Id",
+		"log_configuration":             "LogConfiguration",
+		"log_group_arn":                 "LogGroupArn",
+		"log_schema_version":            "LogSchemaVersion",
+		"parameters":                    "Parameters",
+		"path":                          "Path",
+		"prefix":                        "Prefix",
+		"resource_arns":                 "ResourceArns",
+		"resource_tags":                 "ResourceTags",
+		"resource_type":                 "ResourceType",
+		"role_arn":                      "RoleArn",
+		"s3_configuration":              "S3Configuration",
+		"selection_mode":                "SelectionMode",
+		"source":                        "Source",
+		"start_after":                   "StartAfter",
+		"stop_conditions":               "StopConditions",
+		"tags":                          "Tags",
+		"targets":                       "Targets",
+		"value":                         "Value",
+		"values":                        "Values",
 	})
 
 	singularDataSourceType, err := NewSingularDataSourceType(ctx, opts...)

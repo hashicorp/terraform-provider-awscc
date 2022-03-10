@@ -125,6 +125,7 @@
     "create": {
       "permissions": [
         "evidently:CreateProject",
+        "evidently:GetProject",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:ListLogDeliveries",
@@ -158,12 +159,14 @@
         "logs:DescribeLogGroups",
         "evidently:TagResource",
         "evidently:UntagResource",
-        "evidently:ListTagsForResource"
+        "evidently:ListTagsForResource",
+        "evidently:GetProject"
       ]
     },
     "delete": {
       "permissions": [
         "evidently:DeleteProject",
+        "evidently:GetProject",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:DeleteLogDelivery",

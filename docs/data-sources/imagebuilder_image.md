@@ -28,6 +28,7 @@ Data Source schema for AWS::ImageBuilder::Image
 - **image_id** (String) The AMI ID of the EC2 AMI in current region.
 - **image_recipe_arn** (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
 - **image_tests_configuration** (Attributes) The image tests configuration used when creating this image. (see [below for nested schema](#nestedatt--image_tests_configuration))
+- **image_uri** (String) URI for containers created in current Region with default ECR image tag
 - **infrastructure_configuration_arn** (String) The Amazon Resource Name (ARN) of the infrastructure configuration.
 - **name** (String) The name of the image.
 - **tags** (Map of String) The tags associated with the image.

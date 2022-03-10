@@ -34,34 +34,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 				tfsdk.UseStateForUnknown(),
 			},
 		},
-		"options": {
-			// Property: Options
-			// CloudFormation resource type schema:
-			// {
-			//   "additionalProperties": false,
-			//   "description": "Options for transit gateway peering attachment",
-			//   "properties": {
-			//     "DynamicRouting": {
-			//       "description": "Whether to enable dynamic routing. (enable/disable)",
-			//       "type": "string"
-			//     }
-			//   },
-			//   "type": "object"
-			// }
-			Description: "Options for transit gateway peering attachment",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"dynamic_routing": {
-						// Property: DynamicRouting
-						Description: "Whether to enable dynamic routing. (enable/disable)",
-						Type:        types.StringType,
-						Optional:    true,
-					},
-				},
-			),
-			Optional: true,
-			// Options is a write-only property.
-		},
 		"peer_account_id": {
 			// Property: PeerAccountId
 			// CloudFormation resource type schema:
@@ -252,10 +224,8 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"code":                          "Code",
 		"creation_time":                 "CreationTime",
-		"dynamic_routing":               "DynamicRouting",
 		"key":                           "Key",
 		"message":                       "Message",
-		"options":                       "Options",
 		"peer_account_id":               "PeerAccountId",
 		"peer_region":                   "PeerRegion",
 		"peer_transit_gateway_id":       "PeerTransitGatewayId",
@@ -267,9 +237,6 @@ func transitGatewayPeeringAttachmentResourceType(ctx context.Context) (tfsdk.Res
 		"value":                         "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Options",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -124,11 +124,9 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "uniqueItems": false
 			// }
 			Type:     types.ListType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
 				Multiset(),
-				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -183,10 +181,8 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},
@@ -197,10 +193,8 @@ func transitGatewayVpcAttachmentResourceType(ctx context.Context) (tfsdk.Resourc
 			//   "type": "string"
 			// }
 			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
+			Required: true,
 			PlanModifiers: []tfsdk.AttributePlanModifier{
-				tfsdk.UseStateForUnknown(),
 				tfsdk.RequiresReplace(),
 			},
 		},

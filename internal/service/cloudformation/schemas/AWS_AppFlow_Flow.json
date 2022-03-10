@@ -217,6 +217,9 @@
                 },
                 "Zendesk": {
                     "$ref": "#/definitions/ZendeskDestinationProperties"
+                },
+                "SAPOData": {
+                    "$ref": "#/definitions/SAPODataDestinationProperties"
                 }
             }
         },
@@ -435,6 +438,18 @@
                 "FailOnFirstError": {
                     "type": "boolean"
                 },
+                "BucketPrefix": {
+                    "$ref": "#/definitions/BucketPrefix"
+                },
+                "BucketName": {
+                    "$ref": "#/definitions/BucketName"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SuccessResponseHandlingConfig": {
+            "type": "object",
+            "properties": {
                 "BucketPrefix": {
                     "$ref": "#/definitions/BucketPrefix"
                 },
@@ -844,6 +859,34 @@
             ],
             "additionalProperties": false
         },
+        "SAPODataDestinationProperties": {
+            "type": "object",
+            "properties": {
+                "ObjectPath": {
+                    "$ref": "#/definitions/Object"
+                },
+                "ErrorHandlingConfig": {
+                    "$ref": "#/definitions/ErrorHandlingConfig"
+                },
+                "SuccessResponseHandlingConfig": {
+                    "$ref": "#/definitions/SuccessResponseHandlingConfig"
+                },
+                "IdFieldNames": {
+                    "description": "List of fields used as ID when performing a write operation.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "WriteOperationType": {
+                    "$ref": "#/definitions/WriteOperationType"
+                }
+            },
+            "required": [
+                "ObjectPath"
+            ],
+            "additionalProperties": false
+        },
         "SalesforceDestinationProperties": {
             "type": "object",
             "properties": {
@@ -948,6 +991,7 @@
                 "Map_all",
                 "Mask",
                 "Merge",
+                "Passthrough",
                 "Truncate",
                 "Validate"
             ]
