@@ -35,9 +35,9 @@ checksum:
 publishers:
   - name: hc-releases
     checksum: true
-    extra_files:
-      - glob: 'terraform-registry-manifest.json'
-        name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
+#     extra_files:
+#       - glob: 'terraform-registry-manifest.json'
+#         name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
     signature: true
     cmd: hc-releases upload-file {{ abs .ArtifactPath }}
     env:
