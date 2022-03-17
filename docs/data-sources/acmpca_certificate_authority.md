@@ -85,6 +85,7 @@ Read-Only:
 
 - **common_name** (String)
 - **country** (String)
+- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes))
 - **distinguished_name_qualifier** (String)
 - **generation_qualifier** (String)
 - **given_name** (String)
@@ -97,6 +98,15 @@ Read-Only:
 - **state** (String)
 - **surname** (String)
 - **title** (String)
+
+<a id="nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes"></a>
+### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier.custom_attributes`
+
+Read-Only:
+
+- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- **value** (String)
+
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name"></a>
@@ -166,6 +176,7 @@ Read-Only:
 
 - **common_name** (String)
 - **country** (String)
+- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--subject--custom_attributes))
 - **distinguished_name_qualifier** (String)
 - **generation_qualifier** (String)
 - **given_name** (String)
@@ -178,6 +189,15 @@ Read-Only:
 - **state** (String)
 - **surname** (String)
 - **title** (String)
+
+<a id="nestedatt--subject--custom_attributes"></a>
+### Nested Schema for `subject.custom_attributes`
+
+Read-Only:
+
+- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- **value** (String)
+
 
 
 <a id="nestedatt--tags"></a>

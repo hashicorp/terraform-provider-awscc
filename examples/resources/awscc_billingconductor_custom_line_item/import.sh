@@ -1,0 +1,1 @@
+$ terraform import awscc_billingconductor_custom_line_item.example <resource ID>
