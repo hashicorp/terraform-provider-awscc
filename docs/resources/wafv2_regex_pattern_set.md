@@ -17,27 +17,27 @@ Contains a list of Regular expressions based on the provided inputs. RegexPatter
 
 ### Required
 
-- **regular_expression_list** (List of String)
-- **scope** (String) Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.
+- `regular_expression_list` (List of String)
+- `scope` (String) Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.
 
 ### Optional
 
-- **description** (String) Description of the entity.
-- **name** (String) Name of the RegexPatternSet.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Description of the entity.
+- `name` (String) Name of the RegexPatternSet.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) ARN of the WAF entity.
-- **id** (String) Id of the RegexPatternSet
+- `arn` (String) ARN of the WAF entity.
+- `id` (String) Id of the RegexPatternSet
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

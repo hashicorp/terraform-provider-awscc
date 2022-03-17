@@ -17,26 +17,26 @@ AWS Cost Anomaly Detection leverages advanced Machine Learning technologies to i
 
 ### Required
 
-- **frequency** (String) The frequency at which anomaly reports are sent over email.
-- **monitor_arn_list** (List of String) A list of cost anomaly monitors.
-- **subscribers** (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
-- **subscription_name** (String) The name of the subscription.
-- **threshold** (Number) The dollar value that triggers a notification if the threshold is exceeded.
+- `frequency` (String) The frequency at which anomaly reports are sent over email.
+- `monitor_arn_list` (List of String) A list of cost anomaly monitors.
+- `subscribers` (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
+- `subscription_name` (String) The name of the subscription.
+- `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
 
 ### Read-Only
 
-- **account_id** (String) The accountId
-- **id** (String) Uniquely identifies the resource.
-- **subscription_arn** (String) Subscription ARN
+- `account_id` (String) The accountId
+- `id` (String) Uniquely identifies the resource.
+- `subscription_arn` (String) Subscription ARN
 
 <a id="nestedatt--subscribers"></a>
 ### Nested Schema for `subscribers`
 
 Required:
 
-- **address** (String)
-- **status** (String)
-- **type** (String)
+- `address` (String)
+- `status` (String)
+- `type` (String)
 
 ## Import
 

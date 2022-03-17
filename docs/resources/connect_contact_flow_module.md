@@ -17,29 +17,29 @@ Resource Type definition for AWS::Connect::ContactFlowModule.
 
 ### Required
 
-- **content** (String) The content of the contact flow module in JSON format.
-- **instance_arn** (String) The identifier of the Amazon Connect instance (ARN).
-- **name** (String) The name of the contact flow module.
+- `content` (String) The content of the contact flow module in JSON format.
+- `instance_arn` (String) The identifier of the Amazon Connect instance (ARN).
+- `name` (String) The name of the contact flow module.
 
 ### Optional
 
-- **description** (String) The description of the contact flow module.
-- **state** (String) The state of the contact flow module.
-- **tags** (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the contact flow module.
+- `state` (String) The state of the contact flow module.
+- `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **contact_flow_module_arn** (String) The identifier of the contact flow module (ARN).
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) The status of the contact flow module.
+- `contact_flow_module_arn` (String) The identifier of the contact flow module (ARN).
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) The status of the contact flow module.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

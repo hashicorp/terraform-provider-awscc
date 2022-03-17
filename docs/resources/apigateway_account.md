@@ -17,11 +17,11 @@ Resource Type definition for AWS::ApiGateway::Account
 
 ### Optional
 
-- **cloudwatch_role_arn** (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
+- `cloudwatch_role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
 
 ### Read-Only
 
-- **id** (String) Primary identifier which is manually generated.
+- `id` (String) Primary identifier which is manually generated.
 
 ## Import
 

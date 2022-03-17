@@ -17,27 +17,27 @@ Data Source schema for AWS::Amplify::Domain
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **app_id** (String)
-- **arn** (String)
-- **auto_sub_domain_creation_patterns** (List of String)
-- **auto_sub_domain_iam_role** (String)
-- **certificate_record** (String)
-- **domain_name** (String)
-- **domain_status** (String)
-- **enable_auto_sub_domain** (Boolean)
-- **status_reason** (String)
-- **sub_domain_settings** (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
+- `app_id` (String)
+- `arn` (String)
+- `auto_sub_domain_creation_patterns` (List of String)
+- `auto_sub_domain_iam_role` (String)
+- `certificate_record` (String)
+- `domain_name` (String)
+- `domain_status` (String)
+- `enable_auto_sub_domain` (Boolean)
+- `status_reason` (String)
+- `sub_domain_settings` (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
 
 <a id="nestedatt--sub_domain_settings"></a>
 ### Nested Schema for `sub_domain_settings`
 
 Read-Only:
 
-- **branch_name** (String)
-- **prefix** (String)
+- `branch_name` (String)
+- `prefix` (String)
 
 

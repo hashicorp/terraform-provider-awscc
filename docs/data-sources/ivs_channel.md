@@ -17,26 +17,26 @@ Data Source schema for AWS::IVS::Channel
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Channel ARN is automatically generated on creation and assigned as the unique identifier.
-- **authorized** (Boolean) Whether the channel is authorized.
-- **ingest_endpoint** (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
-- **latency_mode** (String) Channel latency mode.
-- **name** (String) Channel
-- **playback_url** (String) Channel Playback URL.
-- **recording_configuration_arn** (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.
+- `arn` (String) Channel ARN is automatically generated on creation and assigned as the unique identifier.
+- `authorized` (Boolean) Whether the channel is authorized.
+- `ingest_endpoint` (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+- `latency_mode` (String) Channel latency mode.
+- `name` (String) Channel
+- `playback_url` (String) Channel Playback URL.
+- `recording_configuration_arn` (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: ?? (recording is disabled).
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

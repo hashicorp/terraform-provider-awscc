@@ -17,24 +17,24 @@ Data Source schema for AWS::EC2::DHCPOptions
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **dhcp_options_id** (String)
-- **domain_name** (String) This value is used to complete unqualified DNS hostnames.
-- **domain_name_servers** (List of String) The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.
-- **netbios_name_servers** (List of String) The IPv4 addresses of up to four NetBIOS name servers.
-- **netbios_node_type** (Number) The NetBIOS node type (1, 2, 4, or 8).
-- **ntp_servers** (List of String) The IPv4 addresses of up to four Network Time Protocol (NTP) servers.
-- **tags** (Attributes List) Any tags assigned to the DHCP options set. (see [below for nested schema](#nestedatt--tags))
+- `dhcp_options_id` (String)
+- `domain_name` (String) This value is used to complete unqualified DNS hostnames.
+- `domain_name_servers` (List of String) The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.
+- `netbios_name_servers` (List of String) The IPv4 addresses of up to four NetBIOS name servers.
+- `netbios_node_type` (Number) The NetBIOS node type (1, 2, 4, or 8).
+- `ntp_servers` (List of String) The IPv4 addresses of up to four Network Time Protocol (NTP) servers.
+- `tags` (Attributes List) Any tags assigned to the DHCP options set. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

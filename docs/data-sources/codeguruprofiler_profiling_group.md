@@ -17,23 +17,23 @@ Data Source schema for AWS::CodeGuruProfiler::ProfilingGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **agent_permissions** (Attributes) The agent permissions attached to this profiling group. (see [below for nested schema](#nestedatt--agent_permissions))
-- **anomaly_detection_notification_configuration** (Attributes List) Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency (see [below for nested schema](#nestedatt--anomaly_detection_notification_configuration))
-- **arn** (String) The Amazon Resource Name (ARN) of the specified profiling group.
-- **compute_platform** (String) The compute platform of the profiling group.
-- **profiling_group_name** (String) The name of the profiling group.
-- **tags** (Attributes List) The tags associated with a profiling group. (see [below for nested schema](#nestedatt--tags))
+- `agent_permissions` (Attributes) The agent permissions attached to this profiling group. (see [below for nested schema](#nestedatt--agent_permissions))
+- `anomaly_detection_notification_configuration` (Attributes List) Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency (see [below for nested schema](#nestedatt--anomaly_detection_notification_configuration))
+- `arn` (String) The Amazon Resource Name (ARN) of the specified profiling group.
+- `compute_platform` (String) The compute platform of the profiling group.
+- `profiling_group_name` (String) The name of the profiling group.
+- `tags` (Attributes List) The tags associated with a profiling group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--agent_permissions"></a>
 ### Nested Schema for `agent_permissions`
 
 Read-Only:
 
-- **principals** (List of String) The principals for the agent permissions.
+- `principals` (List of String) The principals for the agent permissions.
 
 
 <a id="nestedatt--anomaly_detection_notification_configuration"></a>
@@ -41,8 +41,8 @@ Read-Only:
 
 Read-Only:
 
-- **channel_id** (String) Unique identifier for each Channel in the notification configuration of a Profiling Group
-- **channel_uri** (String) Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
+- `channel_id` (String) Unique identifier for each Channel in the notification configuration of a Profiling Group
+- `channel_uri` (String) Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
 
 
 <a id="nestedatt--tags"></a>
@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
 
 

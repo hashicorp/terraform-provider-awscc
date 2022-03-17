@@ -17,40 +17,40 @@ Resource schema for LookoutEquipment InferenceScheduler.
 
 ### Required
 
-- **data_input_configuration** (Attributes) Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. (see [below for nested schema](#nestedatt--data_input_configuration))
-- **data_output_configuration** (Attributes) Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output. (see [below for nested schema](#nestedatt--data_output_configuration))
-- **data_upload_frequency** (String) How often data is uploaded to the source S3 bucket for the input data.
-- **model_name** (String) The name of the previously trained ML model being used to create the inference scheduler.
-- **role_arn** (String) The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.
+- `data_input_configuration` (Attributes) Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location. (see [below for nested schema](#nestedatt--data_input_configuration))
+- `data_output_configuration` (Attributes) Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output. (see [below for nested schema](#nestedatt--data_output_configuration))
+- `data_upload_frequency` (String) How often data is uploaded to the source S3 bucket for the input data.
+- `model_name` (String) The name of the previously trained ML model being used to create the inference scheduler.
+- `role_arn` (String) The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.
 
 ### Optional
 
-- **data_delay_offset_in_minutes** (Number) A period of time (in minutes) by which inference on the data is delayed after the data starts.
-- **inference_scheduler_name** (String) The name of the inference scheduler being created.
-- **server_side_kms_key_id** (String) Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.
-- **tags** (Attributes Set) Any tags associated with the inference scheduler. (see [below for nested schema](#nestedatt--tags))
+- `data_delay_offset_in_minutes` (Number) A period of time (in minutes) by which inference on the data is delayed after the data starts.
+- `inference_scheduler_name` (String) The name of the inference scheduler being created.
+- `server_side_kms_key_id` (String) Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.
+- `tags` (Attributes Set) Any tags associated with the inference scheduler. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **inference_scheduler_arn** (String) The Amazon Resource Name (ARN) of the inference scheduler being created.
+- `id` (String) Uniquely identifies the resource.
+- `inference_scheduler_arn` (String) The Amazon Resource Name (ARN) of the inference scheduler being created.
 
 <a id="nestedatt--data_input_configuration"></a>
 ### Nested Schema for `data_input_configuration`
 
 Required:
 
-- **inference_input_name_configuration** (Attributes) Specifies configuration information for the input data for the inference, including timestamp format and delimiter. (see [below for nested schema](#nestedatt--data_input_configuration--inference_input_name_configuration))
-- **input_time_zone_offset** (String) Indicates the difference between your time zone and Greenwich Mean Time (GMT).
-- **s3_input_configuration** (Attributes) Specifies configuration information for the input data for the inference, including input data S3 location. (see [below for nested schema](#nestedatt--data_input_configuration--s3_input_configuration))
+- `inference_input_name_configuration` (Attributes) Specifies configuration information for the input data for the inference, including timestamp format and delimiter. (see [below for nested schema](#nestedatt--data_input_configuration--inference_input_name_configuration))
+- `input_time_zone_offset` (String) Indicates the difference between your time zone and Greenwich Mean Time (GMT).
+- `s3_input_configuration` (Attributes) Specifies configuration information for the input data for the inference, including input data S3 location. (see [below for nested schema](#nestedatt--data_input_configuration--s3_input_configuration))
 
 <a id="nestedatt--data_input_configuration--inference_input_name_configuration"></a>
 ### Nested Schema for `data_input_configuration.inference_input_name_configuration`
 
 Required:
 
-- **component_timestamp_delimiter** (String) Indicates the delimiter character used between items in the data.
-- **timestamp_format** (String) The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).
+- `component_timestamp_delimiter` (String) Indicates the delimiter character used between items in the data.
+- `timestamp_format` (String) The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).
 
 
 <a id="nestedatt--data_input_configuration--s3_input_configuration"></a>
@@ -58,8 +58,8 @@ Required:
 
 Required:
 
-- **bucket** (String)
-- **prefix** (String)
+- `bucket` (String)
+- `prefix` (String)
 
 
 
@@ -68,16 +68,16 @@ Required:
 
 Required:
 
-- **kms_key_id** (String) The ID number for the AWS KMS key used to encrypt the inference output.
-- **s3_output_configuration** (Attributes) Specifies configuration information for the output results from the inference, including output S3 location. (see [below for nested schema](#nestedatt--data_output_configuration--s3_output_configuration))
+- `kms_key_id` (String) The ID number for the AWS KMS key used to encrypt the inference output.
+- `s3_output_configuration` (Attributes) Specifies configuration information for the output results from the inference, including output S3 location. (see [below for nested schema](#nestedatt--data_output_configuration--s3_output_configuration))
 
 <a id="nestedatt--data_output_configuration--s3_output_configuration"></a>
 ### Nested Schema for `data_output_configuration.s3_output_configuration`
 
 Required:
 
-- **bucket** (String)
-- **prefix** (String)
+- `bucket` (String)
+- `prefix` (String)
 
 
 
@@ -86,8 +86,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key for the specified tag.
-- **value** (String) The value for the specified tag.
+- `key` (String) The key for the specified tag.
+- `value` (String) The value for the specified tag.
 
 ## Import
 

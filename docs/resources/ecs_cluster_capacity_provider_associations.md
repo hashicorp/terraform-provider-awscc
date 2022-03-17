@@ -17,22 +17,22 @@ Associate a set of ECS Capacity Providers with a specified ECS Cluster
 
 ### Required
 
-- **capacity_providers** (List of String) List of capacity providers to associate with the cluster
-- **cluster** (String) The name of the cluster
-- **default_capacity_provider_strategy** (Attributes List) List of capacity providers to associate with the cluster (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
+- `capacity_providers` (List of String) List of capacity providers to associate with the cluster
+- `cluster` (String) The name of the cluster
+- `default_capacity_provider_strategy` (Attributes List) List of capacity providers to associate with the cluster (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--default_capacity_provider_strategy"></a>
 ### Nested Schema for `default_capacity_provider_strategy`
 
 Required:
 
-- **base** (Number)
-- **capacity_provider** (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
-- **weight** (Number)
+- `base` (Number)
+- `capacity_provider` (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
+- `weight` (Number)
 
 ## Import
 

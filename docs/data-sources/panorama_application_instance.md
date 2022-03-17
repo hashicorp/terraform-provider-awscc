@@ -17,35 +17,35 @@ Data Source schema for AWS::Panorama::ApplicationInstance
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application_instance_id** (String)
-- **application_instance_id_to_replace** (String)
-- **arn** (String)
-- **created_time** (Number)
-- **default_runtime_context_device** (String)
-- **default_runtime_context_device_name** (String)
-- **description** (String)
-- **device_id** (String)
-- **health_status** (String)
-- **last_updated_time** (Number)
-- **manifest_overrides_payload** (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
-- **manifest_payload** (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
-- **name** (String)
-- **runtime_role_arn** (String)
-- **status** (String)
-- **status_description** (String)
-- **status_filter** (String)
-- **tags** (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
+- `application_instance_id` (String)
+- `application_instance_id_to_replace` (String)
+- `arn` (String)
+- `created_time` (Number)
+- `default_runtime_context_device` (String)
+- `default_runtime_context_device_name` (String)
+- `description` (String)
+- `device_id` (String)
+- `health_status` (String)
+- `last_updated_time` (Number)
+- `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
+- `manifest_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
+- `name` (String)
+- `runtime_role_arn` (String)
+- `status` (String)
+- `status_description` (String)
+- `status_filter` (String)
+- `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--manifest_overrides_payload"></a>
 ### Nested Schema for `manifest_overrides_payload`
 
 Read-Only:
 
-- **payload_data** (String)
+- `payload_data` (String)
 
 
 <a id="nestedatt--manifest_payload"></a>
@@ -53,7 +53,7 @@ Read-Only:
 
 Read-Only:
 
-- **payload_data** (String)
+- `payload_data` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 

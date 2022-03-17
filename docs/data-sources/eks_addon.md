@@ -17,24 +17,24 @@ Data Source schema for AWS::EKS::Addon
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **addon_name** (String) Name of Addon
-- **addon_version** (String) Version of Addon
-- **arn** (String) Amazon Resource Name (ARN) of the add-on
-- **cluster_name** (String) Name of Cluster
-- **resolve_conflicts** (String) Resolve parameter value conflicts
-- **service_account_role_arn** (String) IAM role to bind to the add-on's service account
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `addon_name` (String) Name of Addon
+- `addon_version` (String) Version of Addon
+- `arn` (String) Amazon Resource Name (ARN) of the add-on
+- `cluster_name` (String) Name of Cluster
+- `resolve_conflicts` (String) Resolve parameter value conflicts
+- `service_account_role_arn` (String) IAM role to bind to the add-on's service account
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

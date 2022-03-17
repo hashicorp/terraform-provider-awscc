@@ -17,18 +17,18 @@ Resource Schema of AWS::EC2::IPAMAllocation Type
 
 ### Required
 
-- **ipam_pool_id** (String) Id of the IPAM Pool.
+- `ipam_pool_id` (String) Id of the IPAM Pool.
 
 ### Optional
 
-- **cidr** (String) Represents a single IPv4 or IPv6 CIDR
-- **description** (String)
-- **netmask_length** (Number) The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.
+- `cidr` (String) Represents a single IPv4 or IPv6 CIDR
+- `description` (String)
+- `netmask_length` (Number) The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **ipam_pool_allocation_id** (String) Id of the allocation.
+- `id` (String) Uniquely identifies the resource.
+- `ipam_pool_allocation_id` (String) Id of the allocation.
 
 ## Import
 

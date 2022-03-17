@@ -17,38 +17,38 @@ Data Source schema for AWS::GroundStation::DataflowEndpointGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **endpoint_details** (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `endpoint_details` (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--endpoint_details"></a>
 ### Nested Schema for `endpoint_details`
 
 Read-Only:
 
-- **endpoint** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint))
-- **security_details** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--security_details))
+- `endpoint` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint))
+- `security_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--security_details))
 
 <a id="nestedatt--endpoint_details--endpoint"></a>
 ### Nested Schema for `endpoint_details.endpoint`
 
 Read-Only:
 
-- **address** (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint--address))
-- **mtu** (Number)
-- **name** (String)
+- `address` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details--endpoint--address))
+- `mtu` (Number)
+- `name` (String)
 
 <a id="nestedatt--endpoint_details--endpoint--address"></a>
 ### Nested Schema for `endpoint_details.endpoint.address`
 
 Read-Only:
 
-- **name** (String)
-- **port** (Number)
+- `name` (String)
+- `port` (Number)
 
 
 
@@ -57,9 +57,9 @@ Read-Only:
 
 Read-Only:
 
-- **role_arn** (String)
-- **security_group_ids** (List of String)
-- **subnet_ids** (List of String)
+- `role_arn` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
 
 
 
@@ -68,7 +68,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

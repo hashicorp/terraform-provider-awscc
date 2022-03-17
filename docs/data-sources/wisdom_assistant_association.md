@@ -17,24 +17,24 @@ Data Source schema for AWS::Wisdom::AssistantAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **assistant_arn** (String)
-- **assistant_association_arn** (String)
-- **assistant_association_id** (String)
-- **assistant_id** (String)
-- **association** (Attributes) (see [below for nested schema](#nestedatt--association))
-- **association_type** (String)
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `assistant_arn` (String)
+- `assistant_association_arn` (String)
+- `assistant_association_id` (String)
+- `assistant_id` (String)
+- `association` (Attributes) (see [below for nested schema](#nestedatt--association))
+- `association_type` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--association"></a>
 ### Nested Schema for `association`
 
 Read-Only:
 
-- **knowledge_base_id** (String)
+- `knowledge_base_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

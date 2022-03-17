@@ -17,26 +17,26 @@ Resource Type definition for AWS::WorkSpaces::ConnectionAlias
 
 ### Required
 
-- **connection_string** (String)
+- `connection_string` (String)
 
 ### Optional
 
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **alias_id** (String)
-- **associations** (Attributes List) (see [below for nested schema](#nestedatt--associations))
-- **connection_alias_state** (String)
-- **id** (String) Uniquely identifies the resource.
+- `alias_id` (String)
+- `associations` (Attributes List) (see [below for nested schema](#nestedatt--associations))
+- `connection_alias_state` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--associations"></a>
@@ -44,10 +44,10 @@ Optional:
 
 Read-Only:
 
-- **associated_account_id** (String)
-- **association_status** (String)
-- **connection_identifier** (String)
-- **resource_id** (String)
+- `associated_account_id` (String)
+- `association_status` (String)
+- `connection_identifier` (String)
+- `resource_id` (String)
 
 ## Import
 

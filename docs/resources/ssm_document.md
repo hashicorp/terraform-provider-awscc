@@ -17,31 +17,31 @@ The AWS::SSM::Document resource is an SSM document in AWS Systems Manager that d
 
 ### Required
 
-- **content** (String) The content for the Systems Manager document in JSON, YAML or String format.
+- `content` (String) The content for the Systems Manager document in JSON, YAML or String format.
 
 ### Optional
 
-- **attachments** (Attributes List) A list of key and value pairs that describe attachments to a version of a document. (see [below for nested schema](#nestedatt--attachments))
-- **document_format** (String) Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
-- **document_type** (String) The type of document to create.
-- **name** (String) A name for the Systems Manager document.
-- **requires** (Attributes List) A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document. (see [below for nested schema](#nestedatt--requires))
-- **tags** (Attributes List) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. (see [below for nested schema](#nestedatt--tags))
-- **target_type** (String) Specify a target type to define the kinds of resources the document can run on.
-- **version_name** (String) An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.
+- `attachments` (Attributes List) A list of key and value pairs that describe attachments to a version of a document. (see [below for nested schema](#nestedatt--attachments))
+- `document_format` (String) Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.
+- `document_type` (String) The type of document to create.
+- `name` (String) A name for the Systems Manager document.
+- `requires` (Attributes List) A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document. (see [below for nested schema](#nestedatt--requires))
+- `tags` (Attributes List) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. (see [below for nested schema](#nestedatt--tags))
+- `target_type` (String) Specify a target type to define the kinds of resources the document can run on.
+- `version_name` (String) An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--attachments"></a>
 ### Nested Schema for `attachments`
 
 Optional:
 
-- **key** (String) The key of a key-value pair that identifies the location of an attachment to a document.
-- **name** (String) The name of the document attachment file.
-- **values** (List of String) The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.
+- `key` (String) The key of a key-value pair that identifies the location of an attachment to a document.
+- `name` (String) The name of the document attachment file.
+- `values` (List of String) The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.
 
 
 <a id="nestedatt--requires"></a>
@@ -49,8 +49,8 @@ Optional:
 
 Optional:
 
-- **name** (String) The name of the required SSM document. The name can be an Amazon Resource Name (ARN).
-- **version** (String) The document version required by the current document.
+- `name` (String) The name of the required SSM document. The name can be an Amazon Resource Name (ARN).
+- `version` (String) The document version required by the current document.
 
 
 <a id="nestedatt--tags"></a>
@@ -58,8 +58,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The name of the tag.
-- **value** (String) The value of the tag.
+- `key` (String) The name of the tag.
+- `value` (String) The value of the tag.
 
 ## Import
 

@@ -17,44 +17,44 @@ Data Source schema for AWS::SSMIncidents::ResponsePlan
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **actions** (Attributes List) The list of actions. (see [below for nested schema](#nestedatt--actions))
-- **arn** (String) The ARN of the response plan.
-- **chat_channel** (Attributes) The chat channel configuration. (see [below for nested schema](#nestedatt--chat_channel))
-- **display_name** (String) The display name of the response plan.
-- **engagements** (Set of String) The list of engagements to use.
-- **incident_template** (Attributes) The incident template configuration. (see [below for nested schema](#nestedatt--incident_template))
-- **name** (String) The name of the response plan.
-- **tags** (Attributes Set) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
+- `actions` (Attributes List) The list of actions. (see [below for nested schema](#nestedatt--actions))
+- `arn` (String) The ARN of the response plan.
+- `chat_channel` (Attributes) The chat channel configuration. (see [below for nested schema](#nestedatt--chat_channel))
+- `display_name` (String) The display name of the response plan.
+- `engagements` (Set of String) The list of engagements to use.
+- `incident_template` (Attributes) The incident template configuration. (see [below for nested schema](#nestedatt--incident_template))
+- `name` (String) The name of the response plan.
+- `tags` (Attributes Set) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--actions"></a>
 ### Nested Schema for `actions`
 
 Read-Only:
 
-- **ssm_automation** (Attributes) The configuration to use when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation))
+- `ssm_automation` (Attributes) The configuration to use when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation))
 
 <a id="nestedatt--actions--ssm_automation"></a>
 ### Nested Schema for `actions.ssm_automation`
 
 Read-Only:
 
-- **document_name** (String) The document name to use when starting the SSM automation document.
-- **document_version** (String) The version of the document to use when starting the SSM automation document.
-- **parameters** (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
-- **role_arn** (String) The role ARN to use when starting the SSM automation document.
-- **target_account** (String) The account type to use when starting the SSM automation document.
+- `document_name` (String) The document name to use when starting the SSM automation document.
+- `document_version` (String) The version of the document to use when starting the SSM automation document.
+- `parameters` (Attributes Set) The parameters to set when starting the SSM automation document. (see [below for nested schema](#nestedatt--actions--ssm_automation--parameters))
+- `role_arn` (String) The role ARN to use when starting the SSM automation document.
+- `target_account` (String) The account type to use when starting the SSM automation document.
 
 <a id="nestedatt--actions--ssm_automation--parameters"></a>
 ### Nested Schema for `actions.ssm_automation.parameters`
 
 Read-Only:
 
-- **key** (String)
-- **values** (List of String)
+- `key` (String)
+- `values` (List of String)
 
 
 
@@ -64,7 +64,7 @@ Read-Only:
 
 Read-Only:
 
-- **chatbot_sns** (List of String)
+- `chatbot_sns` (List of String)
 
 
 <a id="nestedatt--incident_template"></a>
@@ -72,18 +72,18 @@ Read-Only:
 
 Read-Only:
 
-- **dedupe_string** (String) The deduplication string.
-- **impact** (Number) The impact value.
-- **notification_targets** (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
-- **summary** (String) The summary string.
-- **title** (String) The title string.
+- `dedupe_string` (String) The deduplication string.
+- `impact` (Number) The impact value.
+- `notification_targets` (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
+- `summary` (String) The summary string.
+- `title` (String) The title string.
 
 <a id="nestedatt--incident_template--notification_targets"></a>
 ### Nested Schema for `incident_template.notification_targets`
 
 Read-Only:
 
-- **sns_topic_arn** (String) The ARN of the Chatbot SNS topic.
+- `sns_topic_arn` (String) The ARN of the Chatbot SNS topic.
 
 
 
@@ -92,7 +92,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

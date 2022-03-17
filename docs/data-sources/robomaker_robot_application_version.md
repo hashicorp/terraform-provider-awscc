@@ -17,13 +17,13 @@ Data Source schema for AWS::RoboMaker::RobotApplicationVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application** (String)
-- **application_version** (String)
-- **arn** (String)
-- **current_revision_id** (String) The revision ID of robot application.
+- `application` (String)
+- `application_version` (String)
+- `arn` (String)
+- `current_revision_id` (String) The revision ID of robot application.
 
 

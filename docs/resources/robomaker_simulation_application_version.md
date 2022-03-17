@@ -17,17 +17,17 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- **application** (String)
+- `application` (String)
 
 ### Optional
 
-- **current_revision_id** (String) The revision ID of robot application.
+- `current_revision_id` (String) The revision ID of robot application.
 
 ### Read-Only
 
-- **application_version** (String)
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `application_version` (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

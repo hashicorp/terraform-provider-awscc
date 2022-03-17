@@ -17,25 +17,25 @@ Data Source schema for AWS::CE::AnomalySubscription
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **account_id** (String) The accountId
-- **frequency** (String) The frequency at which anomaly reports are sent over email.
-- **monitor_arn_list** (List of String) A list of cost anomaly monitors.
-- **subscribers** (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
-- **subscription_arn** (String) Subscription ARN
-- **subscription_name** (String) The name of the subscription.
-- **threshold** (Number) The dollar value that triggers a notification if the threshold is exceeded.
+- `account_id` (String) The accountId
+- `frequency` (String) The frequency at which anomaly reports are sent over email.
+- `monitor_arn_list` (List of String) A list of cost anomaly monitors.
+- `subscribers` (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
+- `subscription_arn` (String) Subscription ARN
+- `subscription_name` (String) The name of the subscription.
+- `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
 
 <a id="nestedatt--subscribers"></a>
 ### Nested Schema for `subscribers`
 
 Read-Only:
 
-- **address** (String)
-- **status** (String)
-- **type** (String)
+- `address` (String)
+- `status` (String)
+- `type` (String)
 
 

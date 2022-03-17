@@ -17,11 +17,11 @@ Data Source schema for AWS::Logs::ResourcePolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **policy_document** (String) The policy document
-- **policy_name** (String) A name for resource policy
+- `policy_document` (String) The policy document
+- `policy_name` (String) A name for resource policy
 
 

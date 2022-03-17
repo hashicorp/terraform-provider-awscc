@@ -17,17 +17,17 @@ Data Source schema for AWS::ElastiCache::User
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **access_string** (String) Access permissions string used for this user account.
-- **arn** (String) The Amazon Resource Name (ARN) of the user account.
-- **engine** (String) Must be redis.
-- **no_password_required** (Boolean) Indicates a password is not required for this user account.
-- **passwords** (List of String) Passwords used for this user account. You can create up to two passwords for each user.
-- **status** (String) Indicates the user status. Can be "active", "modifying" or "deleting".
-- **user_id** (String) The ID of the user.
-- **user_name** (String) The username of the user.
+- `access_string` (String) Access permissions string used for this user account.
+- `arn` (String) The Amazon Resource Name (ARN) of the user account.
+- `engine` (String) Must be redis.
+- `no_password_required` (Boolean) Indicates a password is not required for this user account.
+- `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
+- `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".
+- `user_id` (String) The ID of the user.
+- `user_name` (String) The username of the user.
 
 

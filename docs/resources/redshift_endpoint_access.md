@@ -17,43 +17,43 @@ Resource schema for a Redshift-managed VPC endpoint.
 
 ### Required
 
-- **endpoint_name** (String) The name of the endpoint.
-- **vpc_security_group_ids** (List of String) A list of vpc security group ids to apply to the created endpoint access.
+- `endpoint_name` (String) The name of the endpoint.
+- `vpc_security_group_ids` (List of String) A list of vpc security group ids to apply to the created endpoint access.
 
 ### Optional
 
-- **cluster_identifier** (String) A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account
-- **resource_owner** (String) The AWS account ID of the owner of the cluster.
-- **subnet_group_name** (String) The subnet group name where Amazon Redshift chooses to deploy the endpoint.
+- `cluster_identifier` (String) A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account
+- `resource_owner` (String) The AWS account ID of the owner of the cluster.
+- `subnet_group_name` (String) The subnet group name where Amazon Redshift chooses to deploy the endpoint.
 
 ### Read-Only
 
-- **address** (String) The DNS address of the endpoint.
-- **endpoint_create_time** (String) The time (UTC) that the endpoint was created.
-- **endpoint_status** (String) The status of the endpoint.
-- **id** (String) Uniquely identifies the resource.
-- **port** (Number) The port number on which the cluster accepts incoming connections.
-- **vpc_endpoint** (Attributes) The connection endpoint for connecting to an Amazon Redshift cluster through the proxy. (see [below for nested schema](#nestedatt--vpc_endpoint))
-- **vpc_security_groups** (Attributes List) A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint. (see [below for nested schema](#nestedatt--vpc_security_groups))
+- `address` (String) The DNS address of the endpoint.
+- `endpoint_create_time` (String) The time (UTC) that the endpoint was created.
+- `endpoint_status` (String) The status of the endpoint.
+- `id` (String) Uniquely identifies the resource.
+- `port` (Number) The port number on which the cluster accepts incoming connections.
+- `vpc_endpoint` (Attributes) The connection endpoint for connecting to an Amazon Redshift cluster through the proxy. (see [below for nested schema](#nestedatt--vpc_endpoint))
+- `vpc_security_groups` (Attributes List) A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint. (see [below for nested schema](#nestedatt--vpc_security_groups))
 
 <a id="nestedatt--vpc_endpoint"></a>
 ### Nested Schema for `vpc_endpoint`
 
 Read-Only:
 
-- **network_interfaces** (Attributes List) One or more network interfaces of the endpoint. Also known as an interface endpoint. (see [below for nested schema](#nestedatt--vpc_endpoint--network_interfaces))
-- **vpc_endpoint_id** (String) The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
-- **vpc_id** (String) The VPC identifier that the endpoint is associated.
+- `network_interfaces` (Attributes List) One or more network interfaces of the endpoint. Also known as an interface endpoint. (see [below for nested schema](#nestedatt--vpc_endpoint--network_interfaces))
+- `vpc_endpoint_id` (String) The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+- `vpc_id` (String) The VPC identifier that the endpoint is associated.
 
 <a id="nestedatt--vpc_endpoint--network_interfaces"></a>
 ### Nested Schema for `vpc_endpoint.network_interfaces`
 
 Read-Only:
 
-- **availability_zone** (String) The Availability Zone.
-- **network_interface_id** (String) The network interface identifier.
-- **private_ip_address** (String) The IPv4 address of the network interface within the subnet.
-- **subnet_id** (String) The subnet identifier.
+- `availability_zone` (String) The Availability Zone.
+- `network_interface_id` (String) The network interface identifier.
+- `private_ip_address` (String) The IPv4 address of the network interface within the subnet.
+- `subnet_id` (String) The subnet identifier.
 
 
 
@@ -62,8 +62,8 @@ Read-Only:
 
 Read-Only:
 
-- **status** (String) The status of the VPC security group.
-- **vpc_security_group_id** (String) The identifier of the VPC security group.
+- `status` (String) The status of the VPC security group.
+- `vpc_security_group_id` (String) The identifier of the VPC security group.
 
 ## Import
 

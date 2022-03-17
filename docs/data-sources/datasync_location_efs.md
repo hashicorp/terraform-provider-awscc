@@ -17,24 +17,24 @@ Data Source schema for AWS::DataSync::LocationEFS
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **ec_2_config** (Attributes) The subnet and security group that DataSync uses to access target EFS file system. (see [below for nested schema](#nestedatt--ec_2_config))
-- **efs_filesystem_arn** (String) The Amazon Resource Name (ARN) for the Amazon EFS file system.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.
-- **location_uri** (String) The URL of the EFS location that was described.
-- **subdirectory** (String) A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `ec_2_config` (Attributes) The subnet and security group that DataSync uses to access target EFS file system. (see [below for nested schema](#nestedatt--ec_2_config))
+- `efs_filesystem_arn` (String) The Amazon Resource Name (ARN) for the Amazon EFS file system.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.
+- `location_uri` (String) The URL of the EFS location that was described.
+- `subdirectory` (String) A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--ec_2_config"></a>
 ### Nested Schema for `ec_2_config`
 
 Read-Only:
 
-- **security_group_arns** (List of String) The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
-- **subnet_arn** (String) The ARN of the subnet that DataSync uses to access the target EFS file system.
+- `security_group_arns` (List of String) The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
+- `subnet_arn` (String) The ARN of the subnet that DataSync uses to access the target EFS file system.
 
 
 <a id="nestedatt--tags"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 

@@ -17,22 +17,22 @@ Data Source schema for AWS::Route53RecoveryReadiness::Cell
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cell_arn** (String) The Amazon Resource Name (ARN) of the cell.
-- **cell_name** (String) The name of the cell to create.
-- **cells** (List of String) A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.
-- **parent_readiness_scopes** (List of String) The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
-- **tags** (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
+- `cell_arn` (String) The Amazon Resource Name (ARN) of the cell.
+- `cell_name` (String) The name of the cell to create.
+- `cells` (List of String) A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.
+- `parent_readiness_scopes` (List of String) The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (List of String)
+- `key` (String)
+- `value` (List of String)
 
 

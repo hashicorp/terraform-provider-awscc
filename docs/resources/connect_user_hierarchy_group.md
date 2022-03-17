@@ -17,17 +17,17 @@ Resource Type definition for AWS::Connect::UserHierarchyGroup
 
 ### Required
 
-- **instance_arn** (String) The identifier of the Amazon Connect instance.
-- **name** (String) The name of the user hierarchy group.
+- `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `name` (String) The name of the user hierarchy group.
 
 ### Optional
 
-- **parent_group_arn** (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
+- `parent_group_arn` (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **user_hierarchy_group_arn** (String) The Amazon Resource Name (ARN) for the user hierarchy group.
+- `id` (String) Uniquely identifies the resource.
+- `user_hierarchy_group_arn` (String) The Amazon Resource Name (ARN) for the user hierarchy group.
 
 ## Import
 

@@ -17,30 +17,30 @@ A certificate issued via a private certificate authority
 
 ### Required
 
-- **certificate_authority_arn** (String) The Amazon Resource Name (ARN) for the private CA to issue the certificate.
-- **certificate_signing_request** (String) The certificate signing request (CSR) for the Certificate.
-- **signing_algorithm** (String) The name of the algorithm that will be used to sign the Certificate.
-- **validity** (Attributes) The time before which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity))
+- `certificate_authority_arn` (String) The Amazon Resource Name (ARN) for the private CA to issue the certificate.
+- `certificate_signing_request` (String) The certificate signing request (CSR) for the Certificate.
+- `signing_algorithm` (String) The name of the algorithm that will be used to sign the Certificate.
+- `validity` (Attributes) The time before which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity))
 
 ### Optional
 
-- **api_passthrough** (Attributes) These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored. (see [below for nested schema](#nestedatt--api_passthrough))
-- **template_arn** (String) Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.
-- **validity_not_before** (Attributes) The time after which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity_not_before))
+- `api_passthrough` (Attributes) These are fields to be overridden in a certificate at the time of issuance. These requires an API_Passthrough template be used or they will be ignored. (see [below for nested schema](#nestedatt--api_passthrough))
+- `template_arn` (String) Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1 template.
+- `validity_not_before` (Attributes) The time after which the Certificate will be valid. (see [below for nested schema](#nestedatt--validity_not_before))
 
 ### Read-Only
 
-- **arn** (String) The ARN of the issued certificate.
-- **certificate** (String) The issued certificate in base 64 PEM-encoded format.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The ARN of the issued certificate.
+- `certificate` (String) The issued certificate in base 64 PEM-encoded format.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--validity"></a>
 ### Nested Schema for `validity`
 
 Required:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 
 <a id="nestedatt--api_passthrough"></a>
@@ -48,42 +48,42 @@ Required:
 
 Optional:
 
-- **extensions** (Attributes) Structure that contains X.500 extensions for a Certificate. (see [below for nested schema](#nestedatt--api_passthrough--extensions))
-- **subject** (Attributes) Structure that contains X.500 distinguished name information. (see [below for nested schema](#nestedatt--api_passthrough--subject))
+- `extensions` (Attributes) Structure that contains X.500 extensions for a Certificate. (see [below for nested schema](#nestedatt--api_passthrough--extensions))
+- `subject` (Attributes) Structure that contains X.500 distinguished name information. (see [below for nested schema](#nestedatt--api_passthrough--subject))
 
 <a id="nestedatt--api_passthrough--extensions"></a>
 ### Nested Schema for `api_passthrough.extensions`
 
 Optional:
 
-- **certificate_policies** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies))
-- **custom_extensions** (Attributes List) Array of X.509 extensions for a certificate. (see [below for nested schema](#nestedatt--api_passthrough--extensions--custom_extensions))
-- **extended_key_usage** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--extended_key_usage))
-- **key_usage** (Attributes) Structure that contains X.509 KeyUsage information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--key_usage))
-- **subject_alternative_names** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names))
+- `certificate_policies` (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies))
+- `custom_extensions` (Attributes List) Array of X.509 extensions for a certificate. (see [below for nested schema](#nestedatt--api_passthrough--extensions--custom_extensions))
+- `extended_key_usage` (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--extended_key_usage))
+- `key_usage` (Attributes) Structure that contains X.509 KeyUsage information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--key_usage))
+- `subject_alternative_names` (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names))
 
 <a id="nestedatt--api_passthrough--extensions--certificate_policies"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies`
 
 Optional:
 
-- **cert_policy_id** (String) String that contains X.509 ObjectIdentifier information.
-- **policy_qualifiers** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers))
+- `cert_policy_id` (String) String that contains X.509 ObjectIdentifier information.
+- `policy_qualifiers` (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers))
 
 <a id="nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies.policy_qualifiers`
 
 Optional:
 
-- **policy_qualifier_id** (String)
-- **qualifier** (Attributes) Structure that contains a X.509 policy qualifier. (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers--qualifier))
+- `policy_qualifier_id` (String)
+- `qualifier` (Attributes) Structure that contains a X.509 policy qualifier. (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers--qualifier))
 
 <a id="nestedatt--api_passthrough--extensions--certificate_policies--policy_qualifiers--qualifier"></a>
 ### Nested Schema for `api_passthrough.extensions.certificate_policies.policy_qualifiers.qualifier`
 
 Optional:
 
-- **cps_uri** (String)
+- `cps_uri` (String)
 
 
 
@@ -93,9 +93,9 @@ Optional:
 
 Optional:
 
-- **critical** (Boolean)
-- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `critical` (Boolean)
+- `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 <a id="nestedatt--api_passthrough--extensions--extended_key_usage"></a>
@@ -103,8 +103,8 @@ Optional:
 
 Optional:
 
-- **extended_key_usage_object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **extended_key_usage_type** (String)
+- `extended_key_usage_object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `extended_key_usage_type` (String)
 
 
 <a id="nestedatt--api_passthrough--extensions--key_usage"></a>
@@ -112,15 +112,15 @@ Optional:
 
 Optional:
 
-- **crl_sign** (Boolean)
-- **data_encipherment** (Boolean)
-- **decipher_only** (Boolean)
-- **digital_signature** (Boolean)
-- **encipher_only** (Boolean)
-- **key_agreement** (Boolean)
-- **key_cert_sign** (Boolean)
-- **key_encipherment** (Boolean)
-- **non_repudiation** (Boolean)
+- `crl_sign` (Boolean)
+- `data_encipherment` (Boolean)
+- `decipher_only` (Boolean)
+- `digital_signature` (Boolean)
+- `encipher_only` (Boolean)
+- `key_agreement` (Boolean)
+- `key_cert_sign` (Boolean)
+- `key_encipherment` (Boolean)
+- `non_repudiation` (Boolean)
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names"></a>
@@ -128,43 +128,43 @@ Optional:
 
 Optional:
 
-- **directory_name** (Attributes) Structure that contains X.500 distinguished name information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name))
-- **dns_name** (String) String that contains X.509 DnsName information.
-- **edi_party_name** (Attributes) Structure that contains X.509 EdiPartyName information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name))
-- **ip_address** (String) String that contains X.509 IpAddress information.
-- **other_name** (Attributes) Structure that contains X.509 OtherName information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--other_name))
-- **registered_id** (String) String that contains X.509 ObjectIdentifier information.
-- **rfc_822_name** (String) String that contains X.509 Rfc822Name information.
-- **uniform_resource_identifier** (String) String that contains X.509 UniformResourceIdentifier information.
+- `directory_name` (Attributes) Structure that contains X.500 distinguished name information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name))
+- `dns_name` (String) String that contains X.509 DnsName information.
+- `edi_party_name` (Attributes) Structure that contains X.509 EdiPartyName information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name))
+- `ip_address` (String) String that contains X.509 IpAddress information.
+- `other_name` (Attributes) Structure that contains X.509 OtherName information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--other_name))
+- `registered_id` (String) String that contains X.509 ObjectIdentifier information.
+- `rfc_822_name` (String) String that contains X.509 Rfc822Name information.
+- `uniform_resource_identifier` (String) String that contains X.509 UniformResourceIdentifier information.
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name"></a>
 ### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
 
 Optional:
 
-- **common_name** (String)
-- **country** (String)
-- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes))
-- **distinguished_name_qualifier** (String)
-- **generation_qualifier** (String)
-- **given_name** (String)
-- **initials** (String)
-- **locality** (String)
-- **organization** (String)
-- **organizational_unit** (String)
-- **pseudonym** (String)
-- **serial_number** (String)
-- **state** (String)
-- **surname** (String)
-- **title** (String)
+- `common_name` (String)
+- `country` (String)
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes))
+- `distinguished_name_qualifier` (String)
+- `generation_qualifier` (String)
+- `given_name` (String)
+- `initials` (String)
+- `locality` (String)
+- `organization` (String)
+- `organizational_unit` (String)
+- `pseudonym` (String)
+- `serial_number` (String)
+- `state` (String)
+- `surname` (String)
+- `title` (String)
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes"></a>
 ### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier.custom_attributes`
 
 Optional:
 
-- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -173,8 +173,8 @@ Optional:
 
 Optional:
 
-- **name_assigner** (String)
-- **party_name** (String)
+- `name_assigner` (String)
+- `party_name` (String)
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--other_name"></a>
@@ -182,8 +182,8 @@ Optional:
 
 Optional:
 
-- **type_id** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `type_id` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -193,29 +193,29 @@ Optional:
 
 Optional:
 
-- **common_name** (String)
-- **country** (String)
-- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--subject--custom_attributes))
-- **distinguished_name_qualifier** (String)
-- **generation_qualifier** (String)
-- **given_name** (String)
-- **initials** (String)
-- **locality** (String)
-- **organization** (String)
-- **organizational_unit** (String)
-- **pseudonym** (String)
-- **serial_number** (String)
-- **state** (String)
-- **surname** (String)
-- **title** (String)
+- `common_name` (String)
+- `country` (String)
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--subject--custom_attributes))
+- `distinguished_name_qualifier` (String)
+- `generation_qualifier` (String)
+- `given_name` (String)
+- `initials` (String)
+- `locality` (String)
+- `organization` (String)
+- `organizational_unit` (String)
+- `pseudonym` (String)
+- `serial_number` (String)
+- `state` (String)
+- `surname` (String)
+- `title` (String)
 
 <a id="nestedatt--api_passthrough--subject--custom_attributes"></a>
 ### Nested Schema for `api_passthrough.subject.custom_attributes`
 
 Optional:
 
-- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
-- **value** (String)
+- `object_identifier` (String) String that contains X.509 ObjectIdentifier information.
+- `value` (String)
 
 
 
@@ -225,8 +225,8 @@ Optional:
 
 Optional:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 ## Import
 

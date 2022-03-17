@@ -17,10 +17,10 @@ Data Source schema for AWS::SES::ConfigurationSet
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **name** (String) The name of the configuration set.
+- `name` (String) The name of the configuration set.
 
 

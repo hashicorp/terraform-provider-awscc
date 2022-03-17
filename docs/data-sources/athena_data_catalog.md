@@ -17,22 +17,22 @@ Data Source schema for AWS::Athena::DataCatalog
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) A description of the data catalog to be created.
-- **name** (String) The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
-- **parameters** (Map of String) Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.
-- **tags** (Attributes List) A list of comma separated tags to add to the data catalog that is created. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+- `description` (String) A description of the data catalog to be created.
+- `name` (String) The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+- `parameters` (Map of String) Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.
+- `tags` (Attributes List) A list of comma separated tags to add to the data catalog that is created. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

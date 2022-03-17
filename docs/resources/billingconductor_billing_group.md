@@ -17,31 +17,31 @@ A billing group is a set of linked account which belong to the same end customer
 
 ### Required
 
-- **account_grouping** (Attributes) (see [below for nested schema](#nestedatt--account_grouping))
-- **computation_preference** (Attributes) (see [below for nested schema](#nestedatt--computation_preference))
-- **name** (String)
-- **primary_account_id** (String) This account will act as a virtual payer account of the billing group
+- `account_grouping` (Attributes) (see [below for nested schema](#nestedatt--account_grouping))
+- `computation_preference` (Attributes) (see [below for nested schema](#nestedatt--computation_preference))
+- `name` (String)
+- `primary_account_id` (String) This account will act as a virtual payer account of the billing group
 
 ### Optional
 
-- **description** (String)
+- `description` (String)
 
 ### Read-Only
 
-- **arn** (String) Billing Group ARN
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **id** (String) Uniquely identifies the resource.
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **size** (Number) Number of accounts in the billing group
-- **status** (String)
-- **status_reason** (String)
+- `arn` (String) Billing Group ARN
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `id` (String) Uniquely identifies the resource.
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `size` (Number) Number of accounts in the billing group
+- `status` (String)
+- `status_reason` (String)
 
 <a id="nestedatt--account_grouping"></a>
 ### Nested Schema for `account_grouping`
 
 Required:
 
-- **linked_account_ids** (Set of String)
+- `linked_account_ids` (Set of String)
 
 
 <a id="nestedatt--computation_preference"></a>
@@ -49,7 +49,7 @@ Required:
 
 Required:
 
-- **pricing_plan_arn** (String) ARN of the attached pricing plan
+- `pricing_plan_arn` (String) ARN of the attached pricing plan
 
 ## Import
 

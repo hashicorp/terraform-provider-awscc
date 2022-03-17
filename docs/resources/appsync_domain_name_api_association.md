@@ -17,13 +17,13 @@ Resource Type definition for AWS::AppSync::DomainNameApiAssociation
 
 ### Required
 
-- **api_id** (String)
-- **domain_name** (String)
+- `api_id` (String)
+- `domain_name` (String)
 
 ### Read-Only
 
-- **api_association_identifier** (String)
-- **id** (String) Uniquely identifies the resource.
+- `api_association_identifier` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

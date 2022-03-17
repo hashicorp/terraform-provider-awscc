@@ -17,33 +17,33 @@ Data Source schema for AWS::ResourceGroups::Group
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Resource Group ARN.
-- **configuration** (Attributes List) (see [below for nested schema](#nestedatt--configuration))
-- **description** (String) The description of the resource group
-- **name** (String) The name of the resource group
-- **resource_query** (Attributes) (see [below for nested schema](#nestedatt--resource_query))
-- **resources** (List of String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The Resource Group ARN.
+- `configuration` (Attributes List) (see [below for nested schema](#nestedatt--configuration))
+- `description` (String) The description of the resource group
+- `name` (String) The name of the resource group
+- `resource_query` (Attributes) (see [below for nested schema](#nestedatt--resource_query))
+- `resources` (List of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
 Read-Only:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--configuration--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--configuration--parameters))
+- `type` (String)
 
 <a id="nestedatt--configuration--parameters"></a>
 ### Nested Schema for `configuration.parameters`
 
 Read-Only:
 
-- **name** (String)
-- **values** (List of String)
+- `name` (String)
+- `values` (List of String)
 
 
 
@@ -52,25 +52,25 @@ Read-Only:
 
 Read-Only:
 
-- **query** (Attributes) (see [below for nested schema](#nestedatt--resource_query--query))
-- **type** (String)
+- `query` (Attributes) (see [below for nested schema](#nestedatt--resource_query--query))
+- `type` (String)
 
 <a id="nestedatt--resource_query--query"></a>
 ### Nested Schema for `resource_query.query`
 
 Read-Only:
 
-- **resource_type_filters** (List of String)
-- **stack_identifier** (String)
-- **tag_filters** (Attributes List) (see [below for nested schema](#nestedatt--resource_query--query--tag_filters))
+- `resource_type_filters` (List of String)
+- `stack_identifier` (String)
+- `tag_filters` (Attributes List) (see [below for nested schema](#nestedatt--resource_query--query--tag_filters))
 
 <a id="nestedatt--resource_query--query--tag_filters"></a>
 ### Nested Schema for `resource_query.query.tag_filters`
 
 Read-Only:
 
-- **key** (String)
-- **values** (List of String)
+- `key` (String)
+- `values` (List of String)
 
 
 
@@ -80,7 +80,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

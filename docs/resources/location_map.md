@@ -17,29 +17,29 @@ Definition of AWS::Location::Map Resource Type
 
 ### Required
 
-- **configuration** (Attributes) (see [below for nested schema](#nestedatt--configuration))
-- **map_name** (String)
+- `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
+- `map_name` (String)
 
 ### Optional
 
-- **description** (String)
-- **pricing_plan** (String)
+- `description` (String)
+- `pricing_plan` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **data_source** (String)
-- **id** (String) Uniquely identifies the resource.
-- **map_arn** (String)
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `data_source` (String)
+- `id` (String) Uniquely identifies the resource.
+- `map_arn` (String)
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
 Required:
 
-- **style** (String)
+- `style` (String)
 
 ## Import
 

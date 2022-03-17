@@ -17,11 +17,11 @@ Data Source schema for AWS::WAFv2::WebACLAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **resource_arn** (String)
-- **web_acl_arn** (String)
+- `resource_arn` (String)
+- `web_acl_arn` (String)
 
 

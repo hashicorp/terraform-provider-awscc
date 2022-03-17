@@ -17,16 +17,16 @@ Data Source schema for AWS::Events::ApiDestination
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The arn of the api destination.
-- **connection_arn** (String) The arn of the connection.
-- **description** (String)
-- **http_method** (String)
-- **invocation_endpoint** (String) Url endpoint to invoke.
-- **invocation_rate_limit_per_second** (Number)
-- **name** (String) Name of the apiDestination.
+- `arn` (String) The arn of the api destination.
+- `connection_arn` (String) The arn of the connection.
+- `description` (String)
+- `http_method` (String)
+- `invocation_endpoint` (String) Url endpoint to invoke.
+- `invocation_rate_limit_per_second` (Number)
+- `name` (String) Name of the apiDestination.
 
 

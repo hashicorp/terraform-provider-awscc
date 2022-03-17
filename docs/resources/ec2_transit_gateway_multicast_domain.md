@@ -17,29 +17,29 @@ The AWS::EC2::TransitGatewayMulticastDomain type
 
 ### Required
 
-- **transit_gateway_id** (String) The ID of the transit gateway.
+- `transit_gateway_id` (String) The ID of the transit gateway.
 
 ### Optional
 
-- **options** (Attributes) The options for the transit gateway multicast domain. (see [below for nested schema](#nestedatt--options))
-- **tags** (Attributes List) The tags for the transit gateway multicast domain. (see [below for nested schema](#nestedatt--tags))
+- `options` (Attributes) The options for the transit gateway multicast domain. (see [below for nested schema](#nestedatt--options))
+- `tags` (Attributes List) The tags for the transit gateway multicast domain. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **creation_time** (String) The time the transit gateway multicast domain was created.
-- **id** (String) Uniquely identifies the resource.
-- **state** (String) The state of the transit gateway multicast domain.
-- **transit_gateway_multicast_domain_arn** (String) The Amazon Resource Name (ARN) of the transit gateway multicast domain.
-- **transit_gateway_multicast_domain_id** (String) The ID of the transit gateway multicast domain.
+- `creation_time` (String) The time the transit gateway multicast domain was created.
+- `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the transit gateway multicast domain.
+- `transit_gateway_multicast_domain_arn` (String) The Amazon Resource Name (ARN) of the transit gateway multicast domain.
+- `transit_gateway_multicast_domain_id` (String) The ID of the transit gateway multicast domain.
 
 <a id="nestedatt--options"></a>
 ### Nested Schema for `options`
 
 Optional:
 
-- **auto_accept_shared_associations** (String) Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable
-- **igmpv_2_support** (String) Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable
-- **static_sources_support** (String) Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable
+- `auto_accept_shared_associations` (String) Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain. Valid Values: enable | disable
+- `igmpv_2_support` (String) Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain. Valid Values: enable | disable
+- `static_sources_support` (String) Indicates whether support for statically configuring transit gateway multicast group sources is turned on. Valid Values: enable | disable
 
 
 <a id="nestedatt--tags"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
-- **value** (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+- `key` (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
+- `value` (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
 
 ## Import
 

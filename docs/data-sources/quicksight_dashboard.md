@@ -17,49 +17,49 @@ Data Source schema for AWS::QuickSight::Dashboard
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **aws_account_id** (String)
-- **created_time** (String) <p>The time that this dataset was created.</p>
-- **dashboard_id** (String)
-- **dashboard_publish_options** (Attributes) <p>Dashboard publish options.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options))
-- **last_published_time** (String) <p>The last time that this dataset was published.</p>
-- **last_updated_time** (String) <p>The last time that this dataset was updated.</p>
-- **name** (String) <p>The display name of the dashboard.</p>
-- **parameters** (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
-- **permissions** (Attributes List) <p>A structure that contains the permissions of the dashboard. You can use this structure
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `aws_account_id` (String)
+- `created_time` (String) <p>The time that this dataset was created.</p>
+- `dashboard_id` (String)
+- `dashboard_publish_options` (Attributes) <p>Dashboard publish options.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options))
+- `last_published_time` (String) <p>The last time that this dataset was published.</p>
+- `last_updated_time` (String) <p>The last time that this dataset was updated.</p>
+- `name` (String) <p>The display name of the dashboard.</p>
+- `parameters` (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
+- `permissions` (Attributes List) <p>A structure that contains the permissions of the dashboard. You can use this structure
             for granting permissions by providing a list of IAM action information for each
             principal ARN. </p>
 
         <p>To specify no permissions, omit the permissions list.</p> (see [below for nested schema](#nestedatt--permissions))
-- **source_entity** (Attributes) <p>Dashboard source entity.</p> (see [below for nested schema](#nestedatt--source_entity))
-- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+- `source_entity` (Attributes) <p>Dashboard source entity.</p> (see [below for nested schema](#nestedatt--source_entity))
+- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             dashboard.</p> (see [below for nested schema](#nestedatt--tags))
-- **theme_arn** (String) <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
+- `theme_arn` (String) <p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
             you add a value for this field, it overrides the value that is used in the source
             entity. The theme ARN must exist in the same AWS account where you create the
             dashboard.</p>
-- **version** (Attributes) <p>Dashboard version.</p> (see [below for nested schema](#nestedatt--version))
-- **version_description** (String) <p>A description for the first version of the dashboard being created.</p>
+- `version` (Attributes) <p>Dashboard version.</p> (see [below for nested schema](#nestedatt--version))
+- `version_description` (String) <p>A description for the first version of the dashboard being created.</p>
 
 <a id="nestedatt--dashboard_publish_options"></a>
 ### Nested Schema for `dashboard_publish_options`
 
 Read-Only:
 
-- **ad_hoc_filtering_option** (Attributes) <p>Ad hoc (one-time) filtering option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--ad_hoc_filtering_option))
-- **export_to_csv_option** (Attributes) <p>Export to .csv option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--export_to_csv_option))
-- **sheet_controls_option** (Attributes) <p>Sheet controls option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--sheet_controls_option))
+- `ad_hoc_filtering_option` (Attributes) <p>Ad hoc (one-time) filtering option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--ad_hoc_filtering_option))
+- `export_to_csv_option` (Attributes) <p>Export to .csv option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--export_to_csv_option))
+- `sheet_controls_option` (Attributes) <p>Sheet controls option.</p> (see [below for nested schema](#nestedatt--dashboard_publish_options--sheet_controls_option))
 
 <a id="nestedatt--dashboard_publish_options--ad_hoc_filtering_option"></a>
 ### Nested Schema for `dashboard_publish_options.ad_hoc_filtering_option`
 
 Read-Only:
 
-- **availability_status** (String)
+- `availability_status` (String)
 
 
 <a id="nestedatt--dashboard_publish_options--export_to_csv_option"></a>
@@ -67,7 +67,7 @@ Read-Only:
 
 Read-Only:
 
-- **availability_status** (String)
+- `availability_status` (String)
 
 
 <a id="nestedatt--dashboard_publish_options--sheet_controls_option"></a>
@@ -75,7 +75,7 @@ Read-Only:
 
 Read-Only:
 
-- **visibility_state** (String)
+- `visibility_state` (String)
 
 
 
@@ -84,18 +84,18 @@ Read-Only:
 
 Read-Only:
 
-- **date_time_parameters** (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
-- **decimal_parameters** (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
-- **integer_parameters** (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
-- **string_parameters** (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
+- `date_time_parameters` (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
+- `decimal_parameters` (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
+- `integer_parameters` (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
+- `string_parameters` (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
 
 <a id="nestedatt--parameters--date_time_parameters"></a>
 ### Nested Schema for `parameters.date_time_parameters`
 
 Read-Only:
 
-- **name** (String) <p>A display name for the date-time parameter.</p>
-- **values** (List of String) <p>The values for the date-time parameter.</p>
+- `name` (String) <p>A display name for the date-time parameter.</p>
+- `values` (List of String) <p>The values for the date-time parameter.</p>
 
 
 <a id="nestedatt--parameters--decimal_parameters"></a>
@@ -103,8 +103,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>A display name for the decimal parameter.</p>
-- **values** (List of Number) <p>The values for the decimal parameter.</p>
+- `name` (String) <p>A display name for the decimal parameter.</p>
+- `values` (List of Number) <p>The values for the decimal parameter.</p>
 
 
 <a id="nestedatt--parameters--integer_parameters"></a>
@@ -112,8 +112,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>The name of the integer parameter.</p>
-- **values** (List of Number) <p>The values for the integer parameter.</p>
+- `name` (String) <p>The name of the integer parameter.</p>
+- `values` (List of Number) <p>The values for the integer parameter.</p>
 
 
 <a id="nestedatt--parameters--string_parameters"></a>
@@ -121,8 +121,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>A display name for a string parameter.</p>
-- **values** (List of String) <p>The values of a string parameter.</p>
+- `name` (String) <p>A display name for a string parameter.</p>
+- `values` (List of String) <p>The values of a string parameter.</p>
 
 
 
@@ -131,8 +131,8 @@ Read-Only:
 
 Read-Only:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -154,23 +154,23 @@ Read-Only:
 
 Read-Only:
 
-- **source_template** (Attributes) <p>Dashboard source template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+- `source_template` (Attributes) <p>Dashboard source template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
 
 <a id="nestedatt--source_entity--source_template"></a>
 ### Nested Schema for `source_entity.source_template`
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **data_set_references** (Attributes List) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `data_set_references` (Attributes List) <p>Dataset references.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
 
 <a id="nestedatt--source_entity--source_template--data_set_references"></a>
 ### Nested Schema for `source_entity.source_template.data_set_references`
 
 Read-Only:
 
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+- `data_set_arn` (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- `data_set_placeholder` (String) <p>Dataset placeholder.</p>
 
 
 
@@ -180,8 +180,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--version"></a>
@@ -189,25 +189,25 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **created_time** (String) <p>The time that this dashboard version was created.</p>
-- **data_set_arns** (List of String) <p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `created_time` (String) <p>The time that this dashboard version was created.</p>
+- `data_set_arns` (List of String) <p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this
             version of the dashboard.</p>
-- **description** (String) <p>Description.</p>
-- **errors** (Attributes List) <p>Errors associated with this dashboard version.</p> (see [below for nested schema](#nestedatt--version--errors))
-- **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
-- **source_entity_arn** (String) <p>Source entity ARN.</p>
-- **status** (String)
-- **theme_arn** (String) <p>The ARN of the theme associated with a version of the dashboard.</p>
-- **version_number** (Number) <p>Version number for this version of the dashboard.</p>
+- `description` (String) <p>Description.</p>
+- `errors` (Attributes List) <p>Errors associated with this dashboard version.</p> (see [below for nested schema](#nestedatt--version--errors))
+- `sheets` (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
+- `source_entity_arn` (String) <p>Source entity ARN.</p>
+- `status` (String)
+- `theme_arn` (String) <p>The ARN of the theme associated with a version of the dashboard.</p>
+- `version_number` (Number) <p>Version number for this version of the dashboard.</p>
 
 <a id="nestedatt--version--errors"></a>
 ### Nested Schema for `version.errors`
 
 Read-Only:
 
-- **message** (String) <p>Message.</p>
-- **type** (String)
+- `message` (String) <p>Message.</p>
+- `type` (String)
 
 
 <a id="nestedatt--version--sheets"></a>
@@ -215,8 +215,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+- `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>
-- **sheet_id** (String) <p>The unique identifier associated with a sheet.</p>
+- `sheet_id` (String) <p>The unique identifier associated with a sheet.</p>
 
 

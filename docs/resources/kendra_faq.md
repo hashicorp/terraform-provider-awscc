@@ -17,29 +17,29 @@ A Kendra FAQ resource
 
 ### Required
 
-- **index_id** (String) Index ID
-- **name** (String) FAQ name
-- **role_arn** (String) FAQ role ARN
-- **s3_path** (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))
+- `index_id` (String) Index ID
+- `name` (String) FAQ name
+- `role_arn` (String) FAQ role ARN
+- `s3_path` (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))
 
 ### Optional
 
-- **description** (String) FAQ description
-- **file_format** (String) FAQ file format
-- **tags** (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
+- `description` (String) FAQ description
+- `file_format` (String) FAQ file format
+- `tags` (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Unique ID of the FAQ
+- `arn` (String)
+- `id` (String) Unique ID of the FAQ
 
 <a id="nestedatt--s3_path"></a>
 ### Nested Schema for `s3_path`
 
 Required:
 
-- **bucket** (String)
-- **key** (String)
+- `bucket` (String)
+- `key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -47,8 +47,8 @@ Required:
 
 Optional:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 ## Import
 

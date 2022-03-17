@@ -17,28 +17,28 @@ Resource Type Definition for Resiliency Policy.
 
 ### Required
 
-- **policy** (Attributes Map) (see [below for nested schema](#nestedatt--policy))
-- **policy_name** (String) Name of Resiliency Policy.
-- **tier** (String) Resiliency Policy Tier.
+- `policy` (Attributes Map) (see [below for nested schema](#nestedatt--policy))
+- `policy_name` (String) Name of Resiliency Policy.
+- `tier` (String) Resiliency Policy Tier.
 
 ### Optional
 
-- **data_location_constraint** (String) Data Location Constraint of the Policy.
-- **policy_description** (String) Description of Resiliency Policy.
-- **tags** (Map of String)
+- `data_location_constraint` (String) Data Location Constraint of the Policy.
+- `policy_description` (String) Description of Resiliency Policy.
+- `tags` (Map of String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **policy_arn** (String) Amazon Resource Name (ARN) of the Resiliency Policy.
+- `id` (String) Uniquely identifies the resource.
+- `policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 
 <a id="nestedatt--policy"></a>
 ### Nested Schema for `policy`
 
 Required:
 
-- **rpo_in_secs** (Number) RPO in seconds.
-- **rto_in_secs** (Number) RTO in seconds.
+- `rpo_in_secs` (Number) RPO in seconds.
+- `rto_in_secs` (Number) RTO in seconds.
 
 ## Import
 

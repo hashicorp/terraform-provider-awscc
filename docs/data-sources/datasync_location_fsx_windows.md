@@ -17,26 +17,26 @@ Data Source schema for AWS::DataSync::LocationFSxWindows
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **domain** (String) The name of the Windows domain that the FSx for Windows server belongs to.
-- **fsx_filesystem_arn** (String) The Amazon Resource Name (ARN) for the FSx for Windows file system.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.
-- **location_uri** (String) The URL of the FSx for Windows location that was described.
-- **password** (String) The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
-- **security_group_arns** (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
-- **subdirectory** (String) A subdirectory in the location's path.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **user** (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
+- `domain` (String) The name of the Windows domain that the FSx for Windows server belongs to.
+- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx for Windows file system.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.
+- `location_uri` (String) The URL of the FSx for Windows location that was described.
+- `password` (String) The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
+- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
+- `subdirectory` (String) A subdirectory in the location's path.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `user` (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 

@@ -17,36 +17,36 @@ Resource schema for AWS::RDS::DBProxy
 
 ### Required
 
-- **auth** (Attributes List) The authorization mechanism that the proxy uses. (see [below for nested schema](#nestedatt--auth))
-- **db_proxy_name** (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
-- **engine_family** (String) The kinds of databases that the proxy can connect to.
-- **role_arn** (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
-- **vpc_subnet_ids** (List of String) VPC subnet IDs to associate with the new proxy.
+- `auth` (Attributes List) The authorization mechanism that the proxy uses. (see [below for nested schema](#nestedatt--auth))
+- `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
+- `engine_family` (String) The kinds of databases that the proxy can connect to.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
+- `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new proxy.
 
 ### Optional
 
-- **debug_logging** (Boolean) Whether the proxy includes detailed information about SQL statements in its logs.
-- **idle_client_timeout** (Number) The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.
-- **require_tls** (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
-- **tags** (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
-- **vpc_security_group_ids** (List of String) VPC security group IDs to associate with the new proxy.
+- `debug_logging` (Boolean) Whether the proxy includes detailed information about SQL statements in its logs.
+- `idle_client_timeout` (Number) The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.
+- `require_tls` (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
+- `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
+- `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new proxy.
 
 ### Read-Only
 
-- **db_proxy_arn** (String) The Amazon Resource Name (ARN) for the proxy.
-- **endpoint** (String) The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
-- **id** (String) Uniquely identifies the resource.
+- `db_proxy_arn` (String) The Amazon Resource Name (ARN) for the proxy.
+- `endpoint` (String) The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--auth"></a>
 ### Nested Schema for `auth`
 
 Required:
 
-- **auth_scheme** (String) The type of authentication that the proxy uses for connections from the proxy to the underlying database.
-- **description** (String) A user-specified description about the authentication used by a proxy to log in as a specific database user.
-- **iam_auth** (String) Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
-- **secret_arn** (String) The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
-- **user_name** (String) The name of the database user to which the proxy connects.
+- `auth_scheme` (String) The type of authentication that the proxy uses for connections from the proxy to the underlying database.
+- `description` (String) A user-specified description about the authentication used by a proxy to log in as a specific database user.
+- `iam_auth` (String) Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.
+- `secret_arn` (String) The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager.
+- `user_name` (String) The name of the database user to which the proxy connects.
 
 
 <a id="nestedatt--tags"></a>
@@ -54,8 +54,8 @@ Required:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

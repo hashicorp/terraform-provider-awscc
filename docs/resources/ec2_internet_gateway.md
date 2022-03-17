@@ -17,20 +17,20 @@ Resource Type definition for AWS::EC2::InternetGateway
 
 ### Optional
 
-- **tags** (Attributes List) Any tags to assign to the internet gateway. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Any tags to assign to the internet gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **internet_gateway_id** (String) ID of internet gateway.
+- `id` (String) Uniquely identifies the resource.
+- `internet_gateway_id` (String) ID of internet gateway.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,40 +17,40 @@ Resource Type Definition for AWS::ResilienceHub::App.
 
 ### Required
 
-- **app_template_body** (String) A string containing full ResilienceHub app template body.
-- **name** (String) Name of the app.
-- **resource_mappings** (Attributes List) An array of ResourceMapping objects. (see [below for nested schema](#nestedatt--resource_mappings))
+- `app_template_body` (String) A string containing full ResilienceHub app template body.
+- `name` (String) Name of the app.
+- `resource_mappings` (Attributes List) An array of ResourceMapping objects. (see [below for nested schema](#nestedatt--resource_mappings))
 
 ### Optional
 
-- **description** (String) App description.
-- **resiliency_policy_arn** (String) Amazon Resource Name (ARN) of the Resiliency Policy.
-- **tags** (Map of String)
+- `description` (String) App description.
+- `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
+- `tags` (Map of String)
 
 ### Read-Only
 
-- **app_arn** (String) Amazon Resource Name (ARN) of the App.
-- **id** (String) Uniquely identifies the resource.
+- `app_arn` (String) Amazon Resource Name (ARN) of the App.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--resource_mappings"></a>
 ### Nested Schema for `resource_mappings`
 
 Required:
 
-- **logical_stack_name** (String)
-- **mapping_type** (String)
-- **physical_resource_id** (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))
-- **resource_name** (String)
+- `logical_stack_name` (String)
+- `mapping_type` (String)
+- `physical_resource_id` (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))
+- `resource_name` (String)
 
 <a id="nestedatt--resource_mappings--physical_resource_id"></a>
 ### Nested Schema for `resource_mappings.physical_resource_id`
 
 Required:
 
-- **aws_account_id** (String)
-- **aws_region** (String)
-- **identifier** (String)
-- **type** (String)
+- `aws_account_id` (String)
+- `aws_region` (String)
+- `identifier` (String)
+- `type` (String)
 
 ## Import
 

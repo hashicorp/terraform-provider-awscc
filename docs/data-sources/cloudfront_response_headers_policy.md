@@ -17,43 +17,43 @@ Data Source schema for AWS::CloudFront::ResponseHeadersPolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **last_modified_time** (String)
-- **response_headers_policy_config** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config))
+- `last_modified_time` (String)
+- `response_headers_policy_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config))
 
 <a id="nestedatt--response_headers_policy_config"></a>
 ### Nested Schema for `response_headers_policy_config`
 
 Read-Only:
 
-- **comment** (String)
-- **cors_config** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config))
-- **custom_headers_config** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config))
-- **name** (String)
-- **security_headers_config** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config))
+- `comment` (String)
+- `cors_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config))
+- `custom_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config))
+- `name` (String)
+- `security_headers_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config))
 
 <a id="nestedatt--response_headers_policy_config--cors_config"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config`
 
 Read-Only:
 
-- **access_control_allow_credentials** (Boolean)
-- **access_control_allow_headers** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers))
-- **access_control_allow_methods** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods))
-- **access_control_allow_origins** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins))
-- **access_control_expose_headers** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers))
-- **access_control_max_age_sec** (Number)
-- **origin_override** (Boolean)
+- `access_control_allow_credentials` (Boolean)
+- `access_control_allow_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers))
+- `access_control_allow_methods` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods))
+- `access_control_allow_origins` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins))
+- `access_control_expose_headers` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers))
+- `access_control_max_age_sec` (Number)
+- `origin_override` (Boolean)
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_headers"></a>
 ### Nested Schema for `response_headers_policy_config.cors_config.access_control_allow_headers`
 
 Read-Only:
 
-- **items** (List of String)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods"></a>
@@ -61,7 +61,7 @@ Read-Only:
 
 Read-Only:
 
-- **items** (List of String)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins"></a>
@@ -69,7 +69,7 @@ Read-Only:
 
 Read-Only:
 
-- **items** (List of String)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers"></a>
@@ -77,7 +77,7 @@ Read-Only:
 
 Read-Only:
 
-- **items** (List of String)
+- `items` (List of String)
 
 
 
@@ -86,16 +86,16 @@ Read-Only:
 
 Read-Only:
 
-- **items** (Attributes List) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config--items))
+- `items` (Attributes List) (see [below for nested schema](#nestedatt--response_headers_policy_config--custom_headers_config--items))
 
 <a id="nestedatt--response_headers_policy_config--custom_headers_config--items"></a>
 ### Nested Schema for `response_headers_policy_config.custom_headers_config.items`
 
 Read-Only:
 
-- **header** (String)
-- **override** (Boolean)
-- **value** (String)
+- `header` (String)
+- `override` (Boolean)
+- `value` (String)
 
 
 
@@ -104,20 +104,20 @@ Read-Only:
 
 Read-Only:
 
-- **content_security_policy** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_security_policy))
-- **content_type_options** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_type_options))
-- **frame_options** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--frame_options))
-- **referrer_policy** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--referrer_policy))
-- **strict_transport_security** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--strict_transport_security))
-- **xss_protection** (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--xss_protection))
+- `content_security_policy` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_security_policy))
+- `content_type_options` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--content_type_options))
+- `frame_options` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--frame_options))
+- `referrer_policy` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--referrer_policy))
+- `strict_transport_security` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--strict_transport_security))
+- `xss_protection` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config--security_headers_config--xss_protection))
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--content_security_policy"></a>
 ### Nested Schema for `response_headers_policy_config.security_headers_config.content_security_policy`
 
 Read-Only:
 
-- **content_security_policy** (String)
-- **override** (Boolean)
+- `content_security_policy` (String)
+- `override` (Boolean)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--content_type_options"></a>
@@ -125,7 +125,7 @@ Read-Only:
 
 Read-Only:
 
-- **override** (Boolean)
+- `override` (Boolean)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--frame_options"></a>
@@ -133,8 +133,8 @@ Read-Only:
 
 Read-Only:
 
-- **frame_option** (String)
-- **override** (Boolean)
+- `frame_option` (String)
+- `override` (Boolean)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--referrer_policy"></a>
@@ -142,8 +142,8 @@ Read-Only:
 
 Read-Only:
 
-- **override** (Boolean)
-- **referrer_policy** (String)
+- `override` (Boolean)
+- `referrer_policy` (String)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--strict_transport_security"></a>
@@ -151,10 +151,10 @@ Read-Only:
 
 Read-Only:
 
-- **access_control_max_age_sec** (Number)
-- **include_subdomains** (Boolean)
-- **override** (Boolean)
-- **preload** (Boolean)
+- `access_control_max_age_sec` (Number)
+- `include_subdomains` (Boolean)
+- `override` (Boolean)
+- `preload` (Boolean)
 
 
 <a id="nestedatt--response_headers_policy_config--security_headers_config--xss_protection"></a>
@@ -162,9 +162,9 @@ Read-Only:
 
 Read-Only:
 
-- **mode_block** (Boolean)
-- **override** (Boolean)
-- **protection** (Boolean)
-- **report_uri** (String)
+- `mode_block` (Boolean)
+- `override` (Boolean)
+- `protection` (Boolean)
+- `report_uri` (String)
 
 

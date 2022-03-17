@@ -17,30 +17,30 @@ Resource Type definition for AWS::EC2::TransitGateway
 
 ### Optional
 
-- **amazon_side_asn** (Number)
-- **association_default_route_table_id** (String)
-- **auto_accept_shared_attachments** (String)
-- **default_route_table_association** (String)
-- **default_route_table_propagation** (String)
-- **description** (String)
-- **dns_support** (String)
-- **multicast_support** (String)
-- **propagation_default_route_table_id** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **transit_gateway_cidr_blocks** (List of String)
-- **vpn_ecmp_support** (String)
+- `amazon_side_asn` (Number)
+- `association_default_route_table_id` (String)
+- `auto_accept_shared_attachments` (String)
+- `default_route_table_association` (String)
+- `default_route_table_propagation` (String)
+- `description` (String)
+- `dns_support` (String)
+- `multicast_support` (String)
+- `propagation_default_route_table_id` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_cidr_blocks` (List of String)
+- `vpn_ecmp_support` (String)
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,18 +17,18 @@ Data Source schema for AWS::CloudFront::CloudFrontOriginAccessIdentity
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cloudfront_origin_access_identity_config** (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
-- **s3_canonical_user_id** (String)
+- `cloudfront_origin_access_identity_config` (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
+- `s3_canonical_user_id` (String)
 
 <a id="nestedatt--cloudfront_origin_access_identity_config"></a>
 ### Nested Schema for `cloudfront_origin_access_identity_config`
 
 Read-Only:
 
-- **comment** (String)
+- `comment` (String)
 
 

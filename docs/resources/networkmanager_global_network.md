@@ -17,21 +17,21 @@ The AWS::NetworkManager::GlobalNetwork type specifies a global network of the us
 
 ### Optional
 
-- **description** (String) The description of the global network.
-- **tags** (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the global network.
+- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the global network.
-- **id** (String) The ID of the global network.
+- `arn` (String) The Amazon Resource Name (ARN) of the global network.
+- `id` (String) The ID of the global network.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

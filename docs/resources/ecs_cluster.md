@@ -17,25 +17,25 @@ Create an Elastic Container Service (ECS) cluster.
 
 ### Optional
 
-- **capacity_providers** (List of String)
-- **cluster_name** (String) A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.
-- **cluster_settings** (Attributes List) (see [below for nested schema](#nestedatt--cluster_settings))
-- **configuration** (Attributes) The configurations to be set at cluster level. (see [below for nested schema](#nestedatt--configuration))
-- **default_capacity_provider_strategy** (Attributes List) (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `capacity_providers` (List of String)
+- `cluster_name` (String) A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name.
+- `cluster_settings` (Attributes List) (see [below for nested schema](#nestedatt--cluster_settings))
+- `configuration` (Attributes) The configurations to be set at cluster level. (see [below for nested schema](#nestedatt--configuration))
+- `default_capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--cluster_settings"></a>
 ### Nested Schema for `cluster_settings`
 
 Optional:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--configuration"></a>
@@ -43,27 +43,27 @@ Optional:
 
 Optional:
 
-- **execute_command_configuration** (Attributes) The configuration for ExecuteCommand. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration))
+- `execute_command_configuration` (Attributes) The configuration for ExecuteCommand. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration))
 
 <a id="nestedatt--configuration--execute_command_configuration"></a>
 ### Nested Schema for `configuration.execute_command_configuration`
 
 Optional:
 
-- **kms_key_id** (String)
-- **log_configuration** (Attributes) The session logging configuration for ExecuteCommand. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration--log_configuration))
-- **logging** (String)
+- `kms_key_id` (String)
+- `log_configuration` (Attributes) The session logging configuration for ExecuteCommand. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration--log_configuration))
+- `logging` (String)
 
 <a id="nestedatt--configuration--execute_command_configuration--log_configuration"></a>
 ### Nested Schema for `configuration.execute_command_configuration.log_configuration`
 
 Optional:
 
-- **cloudwatch_encryption_enabled** (Boolean)
-- **cloudwatch_log_group_name** (String)
-- **s3_bucket_name** (String)
-- **s3_encryption_enabled** (Boolean)
-- **s3_key_prefix** (String)
+- `cloudwatch_encryption_enabled` (Boolean)
+- `cloudwatch_log_group_name` (String)
+- `s3_bucket_name` (String)
+- `s3_encryption_enabled` (Boolean)
+- `s3_key_prefix` (String)
 
 
 
@@ -73,9 +73,9 @@ Optional:
 
 Optional:
 
-- **base** (Number)
-- **capacity_provider** (String)
-- **weight** (Number)
+- `base` (Number)
+- `capacity_provider` (String)
+- `weight` (Number)
 
 
 <a id="nestedatt--tags"></a>
@@ -83,8 +83,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

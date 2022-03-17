@@ -17,23 +17,23 @@ Definition of AWS::Location::Tracker Resource Type
 
 ### Required
 
-- **tracker_name** (String)
+- `tracker_name` (String)
 
 ### Optional
 
-- **description** (String)
-- **kms_key_id** (String)
-- **position_filtering** (String)
-- **pricing_plan** (String)
-- **pricing_plan_data_source** (String)
+- `description` (String)
+- `kms_key_id` (String)
+- `position_filtering` (String)
+- `pricing_plan` (String)
+- `pricing_plan_data_source` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **id** (String) Uniquely identifies the resource.
-- **tracker_arn** (String)
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `id` (String) Uniquely identifies the resource.
+- `tracker_arn` (String)
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 ## Import
 

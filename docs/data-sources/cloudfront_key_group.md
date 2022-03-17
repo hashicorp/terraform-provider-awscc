@@ -17,20 +17,20 @@ Data Source schema for AWS::CloudFront::KeyGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **key_group_config** (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
-- **last_modified_time** (String)
+- `key_group_config` (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
+- `last_modified_time` (String)
 
 <a id="nestedatt--key_group_config"></a>
 ### Nested Schema for `key_group_config`
 
 Read-Only:
 
-- **comment** (String)
-- **items** (List of String)
-- **name** (String)
+- `comment` (String)
+- `items` (List of String)
+- `name` (String)
 
 

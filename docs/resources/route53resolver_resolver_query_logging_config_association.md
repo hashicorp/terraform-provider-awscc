@@ -17,16 +17,16 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation.
 
 ### Optional
 
-- **resolver_query_log_config_id** (String) ResolverQueryLogConfigId
-- **resource_id** (String) ResourceId
+- `resolver_query_log_config_id` (String) ResolverQueryLogConfigId
+- `resource_id` (String) ResourceId
 
 ### Read-Only
 
-- **creation_time** (String) Rfc3339TimeString
-- **error** (String) ResolverQueryLogConfigAssociationError
-- **error_message** (String) ResolverQueryLogConfigAssociationErrorMessage
-- **id** (String) Id
-- **status** (String) ResolverQueryLogConfigAssociationStatus
+- `creation_time` (String) Rfc3339TimeString
+- `error` (String) ResolverQueryLogConfigAssociationError
+- `error_message` (String) ResolverQueryLogConfigAssociationErrorMessage
+- `id` (String) Id
+- `status` (String) ResolverQueryLogConfigAssociationStatus
 
 ## Import
 

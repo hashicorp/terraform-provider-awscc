@@ -17,20 +17,20 @@ Resource Type definition for AWS::Events::ApiDestination.
 
 ### Required
 
-- **connection_arn** (String) The arn of the connection.
-- **http_method** (String)
-- **invocation_endpoint** (String) Url endpoint to invoke.
+- `connection_arn` (String) The arn of the connection.
+- `http_method` (String)
+- `invocation_endpoint` (String) Url endpoint to invoke.
 
 ### Optional
 
-- **description** (String)
-- **invocation_rate_limit_per_second** (Number)
-- **name** (String) Name of the apiDestination.
+- `description` (String)
+- `invocation_rate_limit_per_second` (Number)
+- `name` (String) Name of the apiDestination.
 
 ### Read-Only
 
-- **arn** (String) The arn of the api destination.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The arn of the api destination.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

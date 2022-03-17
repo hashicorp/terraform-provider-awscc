@@ -17,31 +17,31 @@ Resource Type definition for AWS::Lightsail::Bucket
 
 ### Required
 
-- **bucket_name** (String) The name for the bucket.
-- **bundle_id** (String) The ID of the bundle to use for the bucket.
+- `bucket_name` (String) The name for the bucket.
+- `bundle_id` (String) The ID of the bundle to use for the bucket.
 
 ### Optional
 
-- **access_rules** (Attributes) An object that sets the public accessibility of objects in the specified bucket. (see [below for nested schema](#nestedatt--access_rules))
-- **object_versioning** (Boolean) Specifies whether to enable or disable versioning of objects in the bucket.
-- **read_only_access_accounts** (Set of String) An array of strings to specify the AWS account IDs that can access the bucket.
-- **resources_receiving_access** (Set of String) The names of the Lightsail resources for which to set bucket access.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `access_rules` (Attributes) An object that sets the public accessibility of objects in the specified bucket. (see [below for nested schema](#nestedatt--access_rules))
+- `object_versioning` (Boolean) Specifies whether to enable or disable versioning of objects in the bucket.
+- `read_only_access_accounts` (Set of String) An array of strings to specify the AWS account IDs that can access the bucket.
+- `resources_receiving_access` (Set of String) The names of the Lightsail resources for which to set bucket access.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **able_to_update_bundle** (Boolean) Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.
-- **bucket_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **url** (String) The URL of the bucket.
+- `able_to_update_bundle` (Boolean) Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.
+- `bucket_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `url` (String) The URL of the bucket.
 
 <a id="nestedatt--access_rules"></a>
 ### Nested Schema for `access_rules`
 
 Optional:
 
-- **allow_public_overrides** (Boolean) A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.
-- **get_object** (String) Specifies the anonymous access to all objects in a bucket.
+- `allow_public_overrides` (Boolean) A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.
+- `get_object` (String) Specifies the anonymous access to all objects in a bucket.
 
 
 <a id="nestedatt--tags"></a>
@@ -49,8 +49,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

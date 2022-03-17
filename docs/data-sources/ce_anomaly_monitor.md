@@ -17,18 +17,18 @@ Data Source schema for AWS::CE::AnomalyMonitor
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **creation_date** (String) The date when the monitor was created.
-- **dimensional_value_count** (Number) The value for evaluated dimensions.
-- **last_evaluated_date** (String) The date when the monitor last evaluated for anomalies.
-- **last_updated_date** (String) The date when the monitor was last updated.
-- **monitor_arn** (String) Monitor ARN
-- **monitor_dimension** (String) The dimensions to evaluate
-- **monitor_name** (String) The name of the monitor.
-- **monitor_specification** (String)
-- **monitor_type** (String)
+- `creation_date` (String) The date when the monitor was created.
+- `dimensional_value_count` (Number) The value for evaluated dimensions.
+- `last_evaluated_date` (String) The date when the monitor last evaluated for anomalies.
+- `last_updated_date` (String) The date when the monitor was last updated.
+- `monitor_arn` (String) Monitor ARN
+- `monitor_dimension` (String) The dimensions to evaluate
+- `monitor_name` (String) The name of the monitor.
+- `monitor_specification` (String)
+- `monitor_type` (String)
 
 

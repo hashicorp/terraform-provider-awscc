@@ -17,11 +17,11 @@ Data Source schema for AWS::LookoutVision::Project
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **project_name** (String) The name of the Amazon Lookout for Vision project
+- `arn` (String)
+- `project_name` (String) The name of the Amazon Lookout for Vision project
 
 

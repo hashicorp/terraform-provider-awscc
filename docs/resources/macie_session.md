@@ -17,14 +17,14 @@ The AWS::Macie::Session resource specifies a new Amazon Macie session. A session
 
 ### Optional
 
-- **finding_publishing_frequency** (String) A enumeration value that specifies how frequently finding updates are published.
-- **status** (String) A enumeration value that specifies the status of the Macie Session.
+- `finding_publishing_frequency` (String) A enumeration value that specifies how frequently finding updates are published.
+- `status` (String) A enumeration value that specifies the status of the Macie Session.
 
 ### Read-Only
 
-- **aws_account_id** (String) AWS account ID of customer
-- **id** (String) Uniquely identifies the resource.
-- **service_role** (String) Service role used by Macie
+- `aws_account_id` (String) AWS account ID of customer
+- `id` (String) Uniquely identifies the resource.
+- `service_role` (String) Service role used by Macie
 
 ## Import
 

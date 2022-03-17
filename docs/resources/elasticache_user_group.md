@@ -17,18 +17,18 @@ Resource Type definition for AWS::ElastiCache::UserGroup
 
 ### Required
 
-- **engine** (String) Must be redis.
-- **user_group_id** (String) The ID of the user group.
+- `engine` (String) Must be redis.
+- `user_group_id` (String) The ID of the user group.
 
 ### Optional
 
-- **user_ids** (List of String) List of users associated to this user group.
+- `user_ids` (List of String) List of users associated to this user group.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the user account.
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
+- `arn` (String) The Amazon Resource Name (ARN) of the user account.
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
 
 ## Import
 

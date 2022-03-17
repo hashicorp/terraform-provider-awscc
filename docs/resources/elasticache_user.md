@@ -17,21 +17,21 @@ Resource Type definition for AWS::ElastiCache::User
 
 ### Required
 
-- **engine** (String) Must be redis.
-- **user_id** (String) The ID of the user.
-- **user_name** (String) The username of the user.
+- `engine` (String) Must be redis.
+- `user_id` (String) The ID of the user.
+- `user_name` (String) The username of the user.
 
 ### Optional
 
-- **access_string** (String) Access permissions string used for this user account.
-- **no_password_required** (Boolean) Indicates a password is not required for this user account.
-- **passwords** (List of String) Passwords used for this user account. You can create up to two passwords for each user.
+- `access_string` (String) Access permissions string used for this user account.
+- `no_password_required` (Boolean) Indicates a password is not required for this user account.
+- `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the user account.
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) Indicates the user status. Can be "active", "modifying" or "deleting".
+- `arn` (String) The Amazon Resource Name (ARN) of the user account.
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".
 
 ## Import
 

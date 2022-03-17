@@ -17,22 +17,22 @@ Data Source schema for AWS::SageMaker::Device
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **device** (Attributes) The Edge Device you want to register against a device fleet (see [below for nested schema](#nestedatt--device))
-- **device_fleet_name** (String) The name of the edge device fleet
-- **tags** (Attributes List) Associate tags with the resource (see [below for nested schema](#nestedatt--tags))
+- `device` (Attributes) The Edge Device you want to register against a device fleet (see [below for nested schema](#nestedatt--device))
+- `device_fleet_name` (String) The name of the edge device fleet
+- `tags` (Attributes List) Associate tags with the resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--device"></a>
 ### Nested Schema for `device`
 
 Read-Only:
 
-- **description** (String) Description of the device
-- **device_name** (String) The name of the device
-- **iot_thing_name** (String) AWS Internet of Things (IoT) object name.
+- `description` (String) Description of the device
+- `device_name` (String) The name of the device
+- `iot_thing_name` (String) AWS Internet of Things (IoT) object name.
 
 
 <a id="nestedatt--tags"></a>
@@ -40,7 +40,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

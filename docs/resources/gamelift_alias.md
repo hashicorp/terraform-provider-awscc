@@ -17,26 +17,26 @@ The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameL
 
 ### Required
 
-- **name** (String) A descriptive label that is associated with an alias. Alias names do not need to be unique.
-- **routing_strategy** (Attributes) A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message. (see [below for nested schema](#nestedatt--routing_strategy))
+- `name` (String) A descriptive label that is associated with an alias. Alias names do not need to be unique.
+- `routing_strategy` (Attributes) A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message. (see [below for nested schema](#nestedatt--routing_strategy))
 
 ### Optional
 
-- **description** (String) A human-readable description of the alias.
+- `description` (String) A human-readable description of the alias.
 
 ### Read-Only
 
-- **alias_id** (String) Unique alias ID
-- **id** (String) Uniquely identifies the resource.
+- `alias_id` (String) Unique alias ID
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--routing_strategy"></a>
 ### Nested Schema for `routing_strategy`
 
 Required:
 
-- **fleet_id** (String) A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.
-- **message** (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
-- **type** (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
+- `fleet_id` (String) A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.
+- `message` (String) The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.
+- `type` (String) Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.
 
 ## Import
 

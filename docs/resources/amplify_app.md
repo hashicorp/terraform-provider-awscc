@@ -17,56 +17,56 @@ The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a 
 
 ### Required
 
-- **name** (String)
+- `name` (String)
 
 ### Optional
 
-- **access_token** (String)
-- **auto_branch_creation_config** (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
-- **build_spec** (String)
-- **custom_headers** (String)
-- **custom_rules** (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
-- **description** (String)
-- **enable_branch_auto_deletion** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
-- **iam_service_role** (String)
-- **oauth_token** (String)
-- **repository** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `access_token` (String)
+- `auto_branch_creation_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
+- `build_spec` (String)
+- `custom_headers` (String)
+- `custom_rules` (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
+- `description` (String)
+- `enable_branch_auto_deletion` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
+- `iam_service_role` (String)
+- `oauth_token` (String)
+- `repository` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **app_id** (String)
-- **app_name** (String)
-- **arn** (String)
-- **default_domain** (String)
-- **id** (String) Uniquely identifies the resource.
+- `app_id` (String)
+- `app_name` (String)
+- `arn` (String)
+- `default_domain` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--auto_branch_creation_config"></a>
 ### Nested Schema for `auto_branch_creation_config`
 
 Optional:
 
-- **auto_branch_creation_patterns** (List of String)
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config--basic_auth_config))
-- **build_spec** (String)
-- **enable_auto_branch_creation** (Boolean)
-- **enable_auto_build** (Boolean)
-- **enable_performance_mode** (Boolean)
-- **enable_pull_request_preview** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
-- **pull_request_environment_name** (String)
-- **stage** (String)
+- `auto_branch_creation_patterns` (List of String)
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config--basic_auth_config))
+- `build_spec` (String)
+- `enable_auto_branch_creation` (Boolean)
+- `enable_auto_build` (Boolean)
+- `enable_performance_mode` (Boolean)
+- `enable_pull_request_preview` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
+- `pull_request_environment_name` (String)
+- `stage` (String)
 
 <a id="nestedatt--auto_branch_creation_config--basic_auth_config"></a>
 ### Nested Schema for `auto_branch_creation_config.basic_auth_config`
 
 Optional:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--auto_branch_creation_config--environment_variables"></a>
@@ -74,8 +74,8 @@ Optional:
 
 Optional:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 
@@ -84,9 +84,9 @@ Optional:
 
 Optional:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--custom_rules"></a>
@@ -94,10 +94,10 @@ Optional:
 
 Optional:
 
-- **condition** (String)
-- **source** (String)
-- **status** (String)
-- **target** (String)
+- `condition` (String)
+- `source` (String)
+- `status` (String)
+- `target` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
@@ -105,8 +105,8 @@ Optional:
 
 Optional:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -114,8 +114,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

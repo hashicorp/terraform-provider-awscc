@@ -17,32 +17,32 @@ Data Source schema for AWS::LookoutMetrics::Alert
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **action** (Attributes) The action to be taken by the alert when an anomaly is detected. (see [below for nested schema](#nestedatt--action))
-- **alert_description** (String) A description for the alert.
-- **alert_name** (String) The name of the alert. If not provided, a name is generated automatically.
-- **alert_sensitivity_threshold** (Number) A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.
-- **anomaly_detector_arn** (String) The Amazon resource name (ARN) of the Anomaly Detector to alert.
-- **arn** (String) ARN assigned to the alert.
+- `action` (Attributes) The action to be taken by the alert when an anomaly is detected. (see [below for nested schema](#nestedatt--action))
+- `alert_description` (String) A description for the alert.
+- `alert_name` (String) The name of the alert. If not provided, a name is generated automatically.
+- `alert_sensitivity_threshold` (Number) A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.
+- `anomaly_detector_arn` (String) The Amazon resource name (ARN) of the Anomaly Detector to alert.
+- `arn` (String) ARN assigned to the alert.
 
 <a id="nestedatt--action"></a>
 ### Nested Schema for `action`
 
 Read-Only:
 
-- **lambda_configuration** (Attributes) Configuration options for a Lambda alert action. (see [below for nested schema](#nestedatt--action--lambda_configuration))
-- **sns_configuration** (Attributes) Configuration options for an SNS alert action. (see [below for nested schema](#nestedatt--action--sns_configuration))
+- `lambda_configuration` (Attributes) Configuration options for a Lambda alert action. (see [below for nested schema](#nestedatt--action--lambda_configuration))
+- `sns_configuration` (Attributes) Configuration options for an SNS alert action. (see [below for nested schema](#nestedatt--action--sns_configuration))
 
 <a id="nestedatt--action--lambda_configuration"></a>
 ### Nested Schema for `action.lambda_configuration`
 
 Read-Only:
 
-- **lambda_arn** (String) ARN of a Lambda to send alert notifications to.
-- **role_arn** (String) ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.
+- `lambda_arn` (String) ARN of a Lambda to send alert notifications to.
+- `role_arn` (String) ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.
 
 
 <a id="nestedatt--action--sns_configuration"></a>
@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- **role_arn** (String) ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.
-- **sns_topic_arn** (String) ARN of an SNS topic to send alert notifications to.
+- `role_arn` (String) ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.
+- `sns_topic_arn` (String) ARN of an SNS topic to send alert notifications to.
 
 

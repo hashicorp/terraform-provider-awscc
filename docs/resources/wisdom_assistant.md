@@ -17,27 +17,27 @@ Definition of AWS::Wisdom::Assistant Resource Type
 
 ### Required
 
-- **name** (String)
-- **type** (String)
+- `name` (String)
+- `type` (String)
 
 ### Optional
 
-- **description** (String)
-- **server_side_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `server_side_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **assistant_arn** (String)
-- **assistant_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `assistant_arn` (String)
+- `assistant_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--server_side_encryption_configuration"></a>
 ### Nested Schema for `server_side_encryption_configuration`
 
 Optional:
 
-- **kms_key_id** (String)
+- `kms_key_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

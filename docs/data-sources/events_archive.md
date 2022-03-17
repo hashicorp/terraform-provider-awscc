@@ -17,15 +17,15 @@ Data Source schema for AWS::Events::Archive
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **archive_name** (String)
-- **arn** (String)
-- **description** (String)
-- **event_pattern** (Map of String)
-- **retention_days** (Number)
-- **source_arn** (String)
+- `archive_name` (String)
+- `arn` (String)
+- `description` (String)
+- `event_pattern` (Map of String)
+- `retention_days` (Number)
+- `source_arn` (String)
 
 

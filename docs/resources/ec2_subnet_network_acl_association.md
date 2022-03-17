@@ -17,13 +17,13 @@ Resource Type definition for AWS::EC2::SubnetNetworkAclAssociation
 
 ### Required
 
-- **network_acl_id** (String) The ID of the network ACL
-- **subnet_id** (String) The ID of the subnet
+- `network_acl_id` (String) The ID of the network ACL
+- `subnet_id` (String) The ID of the subnet
 
 ### Read-Only
 
-- **association_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `association_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

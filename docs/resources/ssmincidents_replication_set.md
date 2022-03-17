@@ -17,31 +17,31 @@ Resource type definition for AWS::SSMIncidents::ReplicationSet
 
 ### Required
 
-- **regions** (Attributes Set) The ReplicationSet configuration. (see [below for nested schema](#nestedatt--regions))
+- `regions` (Attributes Set) The ReplicationSet configuration. (see [below for nested schema](#nestedatt--regions))
 
 ### Optional
 
-- **deletion_protected** (Boolean) Configures the ReplicationSet deletion protection.
+- `deletion_protected` (Boolean) Configures the ReplicationSet deletion protection.
 
 ### Read-Only
 
-- **arn** (String) The ARN of the ReplicationSet.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The ARN of the ReplicationSet.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--regions"></a>
 ### Nested Schema for `regions`
 
 Required:
 
-- **region_configuration** (Attributes) The ReplicationSet regional configuration. (see [below for nested schema](#nestedatt--regions--region_configuration))
-- **region_name** (String) The AWS region name.
+- `region_configuration` (Attributes) The ReplicationSet regional configuration. (see [below for nested schema](#nestedatt--regions--region_configuration))
+- `region_name` (String) The AWS region name.
 
 <a id="nestedatt--regions--region_configuration"></a>
 ### Nested Schema for `regions.region_configuration`
 
 Required:
 
-- **sse_kms_key_id** (String) The ARN of the ReplicationSet.
+- `sse_kms_key_id` (String) The ARN of the ReplicationSet.
 
 ## Import
 

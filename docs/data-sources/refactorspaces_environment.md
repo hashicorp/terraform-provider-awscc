@@ -17,24 +17,24 @@ Data Source schema for AWS::RefactorSpaces::Environment
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **description** (String)
-- **environment_identifier** (String)
-- **name** (String)
-- **network_fabric_type** (String)
-- **tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
-- **transit_gateway_id** (String)
+- `arn` (String)
+- `description` (String)
+- `environment_identifier` (String)
+- `name` (String)
+- `network_fabric_type` (String)
+- `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 

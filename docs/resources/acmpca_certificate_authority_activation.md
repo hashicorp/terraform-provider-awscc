@@ -17,18 +17,18 @@ Used to install the certificate authority certificate and update the certificate
 
 ### Required
 
-- **certificate** (String) Certificate Authority certificate that will be installed in the Certificate Authority.
-- **certificate_authority_arn** (String) Arn of the Certificate Authority.
+- `certificate` (String) Certificate Authority certificate that will be installed in the Certificate Authority.
+- `certificate_authority_arn` (String) Arn of the Certificate Authority.
 
 ### Optional
 
-- **certificate_chain** (String) Certificate chain for the Certificate Authority certificate.
-- **status** (String) The status of the Certificate Authority.
+- `certificate_chain` (String) Certificate chain for the Certificate Authority certificate.
+- `status` (String) The status of the Certificate Authority.
 
 ### Read-Only
 
-- **complete_certificate_chain** (String) The complete certificate chain, including the Certificate Authority certificate.
-- **id** (String) Uniquely identifies the resource.
+- `complete_certificate_chain` (String) The complete certificate chain, including the Certificate Authority certificate.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

@@ -17,22 +17,22 @@ Data Source schema for AWS::EC2::CarrierGateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **carrier_gateway_id** (String) The ID of the carrier gateway.
-- **owner_id** (String) The ID of the owner.
-- **state** (String) The state of the carrier gateway.
-- **tags** (Attributes Set) The tags for the carrier gateway. (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String) The ID of the VPC.
+- `carrier_gateway_id` (String) The ID of the carrier gateway.
+- `owner_id` (String) The ID of the owner.
+- `state` (String) The state of the carrier gateway.
+- `tags` (Attributes Set) The tags for the carrier gateway. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

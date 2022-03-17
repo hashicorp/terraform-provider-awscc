@@ -17,17 +17,17 @@ Resource schema for AWS::Athena::PreparedStatement
 
 ### Required
 
-- **query_statement** (String) The query string for the prepared statement.
-- **statement_name** (String) The name of the prepared statement.
-- **work_group** (String) The name of the workgroup to which the prepared statement belongs.
+- `query_statement` (String) The query string for the prepared statement.
+- `statement_name` (String) The name of the prepared statement.
+- `work_group` (String) The name of the workgroup to which the prepared statement belongs.
 
 ### Optional
 
-- **description** (String) The description of the prepared statement.
+- `description` (String) The description of the prepared statement.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

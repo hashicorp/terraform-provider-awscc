@@ -17,20 +17,20 @@ Data Source schema for AWS::NetworkManager::GlobalNetwork
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the global network.
-- **description** (String) The description of the global network.
-- **tags** (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The Amazon Resource Name (ARN) of the global network.
+- `description` (String) The description of the global network.
+- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

@@ -17,39 +17,39 @@ Resource Type definition for AWS::AppStream::AppBlock
 
 ### Required
 
-- **name** (String)
-- **setup_script_details** (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
-- **source_s3_location** (Attributes) (see [below for nested schema](#nestedatt--source_s3_location))
+- `name` (String)
+- `setup_script_details` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
+- `source_s3_location` (Attributes) (see [below for nested schema](#nestedatt--source_s3_location))
 
 ### Optional
 
-- **description** (String)
-- **display_name** (String)
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `display_name` (String)
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **created_time** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `created_time` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--setup_script_details"></a>
 ### Nested Schema for `setup_script_details`
 
 Required:
 
-- **executable_parameters** (String)
-- **executable_path** (String)
-- **script_s3_location** (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
-- **timeout_in_seconds** (Number)
+- `executable_parameters` (String)
+- `executable_path` (String)
+- `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details--script_s3_location))
+- `timeout_in_seconds` (Number)
 
 <a id="nestedatt--setup_script_details--script_s3_location"></a>
 ### Nested Schema for `setup_script_details.script_s3_location`
 
 Required:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 
@@ -58,8 +58,8 @@ Required:
 
 Required:
 
-- **s3_bucket** (String)
-- **s3_key** (String)
+- `s3_bucket` (String)
+- `s3_key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -67,8 +67,8 @@ Required:
 
 Optional:
 
-- **tag_key** (String)
-- **tag_value** (String)
+- `tag_key` (String)
+- `tag_value` (String)
 
 ## Import
 

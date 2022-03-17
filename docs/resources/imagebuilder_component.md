@@ -17,26 +17,26 @@ Resource schema for AWS::ImageBuilder::Component
 
 ### Required
 
-- **name** (String) The name of the component.
-- **platform** (String) The platform of the component.
-- **version** (String) The version of the component.
+- `name` (String) The name of the component.
+- `platform` (String) The platform of the component.
+- `version` (String) The version of the component.
 
 ### Optional
 
-- **change_description** (String) The change description of the component.
-- **data** (String) The data of the component.
-- **description** (String) The description of the component.
-- **kms_key_id** (String) The KMS key identifier used to encrypt the component.
-- **supported_os_versions** (List of String) The operating system (OS) version supported by the component.
-- **tags** (Map of String) The tags associated with the component.
-- **uri** (String) The uri of the component.
+- `change_description` (String) The change description of the component.
+- `data` (String) The data of the component.
+- `description` (String) The description of the component.
+- `kms_key_id` (String) The KMS key identifier used to encrypt the component.
+- `supported_os_versions` (List of String) The operating system (OS) version supported by the component.
+- `tags` (Map of String) The tags associated with the component.
+- `uri` (String) The uri of the component.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the component.
-- **encrypted** (Boolean) The encryption status of the component.
-- **id** (String) Uniquely identifies the resource.
-- **type** (String) The type of the component denotes whether the component is used to build the image or only to test it.
+- `arn` (String) The Amazon Resource Name (ARN) of the component.
+- `encrypted` (Boolean) The encryption status of the component.
+- `id` (String) Uniquely identifies the resource.
+- `type` (String) The type of the component denotes whether the component is used to build the image or only to test it.
 
 ## Import
 

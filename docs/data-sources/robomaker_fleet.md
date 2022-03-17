@@ -17,12 +17,12 @@ Data Source schema for AWS::RoboMaker::Fleet
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **name** (String) The name of the fleet.
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `arn` (String)
+- `name` (String) The name of the fleet.
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 

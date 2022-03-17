@@ -17,19 +17,19 @@ Resource schema for AWS::CertificateManager::Account.
 
 ### Required
 
-- **expiry_events_configuration** (Attributes) (see [below for nested schema](#nestedatt--expiry_events_configuration))
+- `expiry_events_configuration` (Attributes) (see [below for nested schema](#nestedatt--expiry_events_configuration))
 
 ### Read-Only
 
-- **account_id** (String)
-- **id** (String) Uniquely identifies the resource.
+- `account_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--expiry_events_configuration"></a>
 ### Nested Schema for `expiry_events_configuration`
 
 Required:
 
-- **days_before_expiry** (Number)
+- `days_before_expiry` (Number)
 
 ## Import
 

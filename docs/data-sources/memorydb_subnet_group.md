@@ -17,22 +17,22 @@ Data Source schema for AWS::MemoryDB::SubnetGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the subnet group.
-- **description** (String) An optional description of the subnet group.
-- **subnet_group_name** (String) The name of the subnet group. This value must be unique as it also serves as the subnet group identifier.
-- **subnet_ids** (Set of String) A list of VPC subnet IDs for the subnet group.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this subnet group. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The Amazon Resource Name (ARN) of the subnet group.
+- `description` (String) An optional description of the subnet group.
+- `subnet_group_name` (String) The name of the subnet group. This value must be unique as it also serves as the subnet group identifier.
+- `subnet_ids` (Set of String) A list of VPC subnet IDs for the subnet group.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this subnet group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key for the tag. May not be null.
-- **value** (String) The tag's value. May be null.
+- `key` (String) The key for the tag. May not be null.
+- `value` (String) The tag's value. May be null.
 
 

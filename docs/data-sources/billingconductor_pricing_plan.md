@@ -17,16 +17,16 @@ Data Source schema for AWS::BillingConductor::PricingPlan
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Pricing Plan ARN
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **description** (String)
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **name** (String)
-- **pricing_rule_arns** (List of String)
-- **size** (Number) Number of associated pricing rules
+- `arn` (String) Pricing Plan ARN
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `description` (String)
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `name` (String)
+- `pricing_rule_arns` (List of String)
+- `size` (Number) Number of associated pricing rules
 
 

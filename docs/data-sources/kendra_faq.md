@@ -17,26 +17,26 @@ Data Source schema for AWS::Kendra::Faq
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **description** (String) FAQ description
-- **file_format** (String) FAQ file format
-- **index_id** (String) Index ID
-- **name** (String) FAQ name
-- **role_arn** (String) FAQ role ARN
-- **s3_path** (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))
-- **tags** (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `description` (String) FAQ description
+- `file_format` (String) FAQ file format
+- `index_id` (String) Index ID
+- `name` (String) FAQ name
+- `role_arn` (String) FAQ role ARN
+- `s3_path` (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))
+- `tags` (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--s3_path"></a>
 ### Nested Schema for `s3_path`
 
 Read-Only:
 
-- **bucket** (String)
-- **key** (String)
+- `bucket` (String)
+- `key` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -44,7 +44,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 

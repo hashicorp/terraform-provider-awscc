@@ -17,18 +17,18 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Optional
 
-- **allowed_operations** (List of String)
-- **grant_name** (String) Name for the created Grant.
-- **home_region** (String) Home region for the created grant.
-- **license_arn** (String) License Arn for the grant.
-- **principals** (List of String)
-- **status** (String)
+- `allowed_operations` (List of String)
+- `grant_name` (String) Name for the created Grant.
+- `home_region` (String) Home region for the created grant.
+- `license_arn` (String) License Arn for the grant.
+- `principals` (List of String)
+- `status` (String)
 
 ### Read-Only
 
-- **grant_arn** (String) Arn of the grant.
-- **id** (String) Uniquely identifies the resource.
-- **version** (String) The version of the grant.
+- `grant_arn` (String) Arn of the grant.
+- `id` (String) Uniquely identifies the resource.
+- `version` (String) The version of the grant.
 
 ## Import
 

@@ -17,35 +17,35 @@ The AWS::Amplify::Branch resource creates a new branch within an app.
 
 ### Required
 
-- **app_id** (String)
-- **branch_name** (String)
+- `app_id` (String)
+- `branch_name` (String)
 
 ### Optional
 
-- **basic_auth_config** (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
-- **build_spec** (String)
-- **description** (String)
-- **enable_auto_build** (Boolean)
-- **enable_performance_mode** (Boolean)
-- **enable_pull_request_preview** (Boolean)
-- **environment_variables** (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
-- **pull_request_environment_name** (String)
-- **stage** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
+- `build_spec` (String)
+- `description` (String)
+- `enable_auto_build` (Boolean)
+- `enable_performance_mode` (Boolean)
+- `enable_pull_request_preview` (Boolean)
+- `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
+- `pull_request_environment_name` (String)
+- `stage` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--basic_auth_config"></a>
 ### Nested Schema for `basic_auth_config`
 
 Optional:
 
-- **enable_basic_auth** (Boolean)
-- **password** (String)
-- **username** (String)
+- `enable_basic_auth` (Boolean)
+- `password` (String)
+- `username` (String)
 
 
 <a id="nestedatt--environment_variables"></a>
@@ -53,8 +53,8 @@ Optional:
 
 Optional:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -62,8 +62,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

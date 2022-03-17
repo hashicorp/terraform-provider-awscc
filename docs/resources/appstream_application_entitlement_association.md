@@ -17,13 +17,13 @@ Resource Type definition for AWS::AppStream::ApplicationEntitlementAssociation
 
 ### Required
 
-- **application_identifier** (String)
-- **entitlement_name** (String)
-- **stack_name** (String)
+- `application_identifier` (String)
+- `entitlement_name` (String)
+- `stack_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

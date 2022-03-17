@@ -17,30 +17,30 @@ The AWS::EC2::TransitGatewayPeeringAttachment type
 
 ### Required
 
-- **peer_account_id** (String) The ID of the peer account
-- **peer_region** (String) Peer Region
-- **peer_transit_gateway_id** (String) The ID of the peer transit gateway.
-- **transit_gateway_id** (String) The ID of the transit gateway.
+- `peer_account_id` (String) The ID of the peer account
+- `peer_region` (String) Peer Region
+- `peer_transit_gateway_id` (String) The ID of the peer transit gateway.
+- `transit_gateway_id` (String) The ID of the transit gateway.
 
 ### Optional
 
-- **tags** (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags for the transit gateway peering attachment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **creation_time** (String) The time the transit gateway peering attachment was created.
-- **id** (String) Uniquely identifies the resource.
-- **state** (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
-- **status** (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
-- **transit_gateway_attachment_id** (String) The ID of the transit gateway peering attachment.
+- `creation_time` (String) The time the transit gateway peering attachment was created.
+- `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
+- `status` (Attributes) The status of the transit gateway peering attachment. (see [below for nested schema](#nestedatt--status))
+- `transit_gateway_attachment_id` (String) The ID of the transit gateway peering attachment.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
-- **value** (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
+- `key` (String) The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.
+- `value` (String) The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.
 
 
 <a id="nestedatt--status"></a>
@@ -48,8 +48,8 @@ Optional:
 
 Read-Only:
 
-- **code** (String) The status code.
-- **message** (String) The status message, if applicable.
+- `code` (String) The status code.
+- `message` (String) The status message, if applicable.
 
 ## Import
 

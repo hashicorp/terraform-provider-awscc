@@ -17,17 +17,17 @@ Resource Type definition for AWS::EFS::MountTarget
 
 ### Required
 
-- **file_system_id** (String)
-- **security_groups** (Set of String)
-- **subnet_id** (String)
+- `file_system_id` (String)
+- `security_groups` (Set of String)
+- `subnet_id` (String)
 
 ### Optional
 
-- **ip_address** (String)
+- `ip_address` (String)
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 ## Import
 

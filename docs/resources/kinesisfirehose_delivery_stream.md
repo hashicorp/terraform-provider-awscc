@@ -17,50 +17,50 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 
 ### Optional
 
-- **amazonopensearchservice_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration))
-- **delivery_stream_encryption_configuration_input** (Attributes) (see [below for nested schema](#nestedatt--delivery_stream_encryption_configuration_input))
-- **delivery_stream_name** (String)
-- **delivery_stream_type** (String)
-- **elasticsearch_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration))
-- **extended_s3_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
-- **http_endpoint_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
-- **kinesis_stream_source_configuration** (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_source_configuration))
-- **redshift_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
-- **s3_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
-- **splunk_destination_configuration** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `amazonopensearchservice_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration))
+- `delivery_stream_encryption_configuration_input` (Attributes) (see [below for nested schema](#nestedatt--delivery_stream_encryption_configuration_input))
+- `delivery_stream_name` (String)
+- `delivery_stream_type` (String)
+- `elasticsearch_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration))
+- `extended_s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
+- `http_endpoint_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
+- `kinesis_stream_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_source_configuration))
+- `redshift_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
+- `s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
+- `splunk_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration`
 
 Optional:
 
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--cloudwatch_logging_options))
-- **cluster_endpoint** (String)
-- **domain_arn** (String)
-- **index_name** (String)
-- **index_rotation_period** (String)
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration))
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--retry_options))
-- **role_arn** (String)
-- **s3_backup_mode** (String)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration))
-- **type_name** (String)
-- **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--vpc_configuration))
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--cloudwatch_logging_options))
+- `cluster_endpoint` (String)
+- `domain_arn` (String)
+- `index_name` (String)
+- `index_rotation_period` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--retry_options))
+- `role_arn` (String)
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration))
+- `type_name` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--vpc_configuration))
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--cloudwatch_logging_options"></a>
@@ -68,9 +68,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--processing_configuration"></a>
@@ -78,24 +78,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -105,7 +105,7 @@ Optional:
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration"></a>
@@ -113,22 +113,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--buffering_hints"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.s3_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
@@ -136,9 +136,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration"></a>
@@ -146,15 +146,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -164,9 +164,9 @@ Optional:
 
 Optional:
 
-- **role_arn** (String)
-- **security_group_ids** (List of String)
-- **subnet_ids** (List of String)
+- `role_arn` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
 
 
 
@@ -175,8 +175,8 @@ Optional:
 
 Optional:
 
-- **key_arn** (String)
-- **key_type** (String)
+- `key_arn` (String)
+- `key_type` (String)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration"></a>
@@ -184,27 +184,27 @@ Optional:
 
 Optional:
 
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--cloudwatch_logging_options))
-- **cluster_endpoint** (String)
-- **domain_arn** (String)
-- **index_name** (String)
-- **index_rotation_period** (String)
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration))
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--retry_options))
-- **role_arn** (String)
-- **s3_backup_mode** (String)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration))
-- **type_name** (String)
-- **vpc_configuration** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--vpc_configuration))
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--cloudwatch_logging_options))
+- `cluster_endpoint` (String)
+- `domain_arn` (String)
+- `index_name` (String)
+- `index_rotation_period` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--retry_options))
+- `role_arn` (String)
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration))
+- `type_name` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--vpc_configuration))
 
 <a id="nestedatt--elasticsearch_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `elasticsearch_destination_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--cloudwatch_logging_options"></a>
@@ -212,9 +212,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--processing_configuration"></a>
@@ -222,24 +222,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--elasticsearch_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `elasticsearch_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--elasticsearch_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `elasticsearch_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -249,7 +249,7 @@ Optional:
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration"></a>
@@ -257,22 +257,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration--buffering_hints"></a>
 ### Nested Schema for `elasticsearch_destination_configuration.s3_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
@@ -280,9 +280,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration"></a>
@@ -290,15 +290,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `elasticsearch_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -308,9 +308,9 @@ Optional:
 
 Optional:
 
-- **role_arn** (String)
-- **security_group_ids** (List of String)
-- **subnet_ids** (List of String)
+- `role_arn` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
 
 
 
@@ -319,27 +319,27 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **data_format_conversion_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration))
-- **dynamic_partitioning_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration))
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration))
-- **role_arn** (String)
-- **s3_backup_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration))
-- **s3_backup_mode** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `data_format_conversion_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration))
+- `dynamic_partitioning_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration))
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration))
+- `role_arn` (String)
+- `s3_backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration))
+- `s3_backup_mode` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `extended_s3_destination_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--cloudwatch_logging_options"></a>
@@ -347,9 +347,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration"></a>
@@ -357,32 +357,32 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **input_format_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration))
-- **output_format_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration))
-- **schema_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--schema_configuration))
+- `enabled` (Boolean)
+- `input_format_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration))
+- `output_format_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration))
+- `schema_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--schema_configuration))
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration"></a>
 ### Nested Schema for `extended_s3_destination_configuration.data_format_conversion_configuration.input_format_configuration`
 
 Optional:
 
-- **deserializer** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer))
+- `deserializer` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer))
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer"></a>
 ### Nested Schema for `extended_s3_destination_configuration.data_format_conversion_configuration.input_format_configuration.deserializer`
 
 Optional:
 
-- **hive_json_ser_de** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--hive_json_ser_de))
-- **open_x_json_ser_de** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--open_x_json_ser_de))
+- `hive_json_ser_de` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--hive_json_ser_de))
+- `open_x_json_ser_de` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--open_x_json_ser_de))
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--hive_json_ser_de"></a>
 ### Nested Schema for `extended_s3_destination_configuration.data_format_conversion_configuration.input_format_configuration.deserializer.hive_json_ser_de`
 
 Optional:
 
-- **timestamp_formats** (List of String)
+- `timestamp_formats` (List of String)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--input_format_configuration--deserializer--open_x_json_ser_de"></a>
@@ -390,9 +390,9 @@ Optional:
 
 Optional:
 
-- **case_insensitive** (Boolean)
-- **column_to_json_key_mappings** (Map of String)
-- **convert_dots_in_json_keys_to_underscores** (Boolean)
+- `case_insensitive` (Boolean)
+- `column_to_json_key_mappings` (Map of String)
+- `convert_dots_in_json_keys_to_underscores` (Boolean)
 
 
 
@@ -402,31 +402,31 @@ Optional:
 
 Optional:
 
-- **serializer** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer))
+- `serializer` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer))
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer"></a>
 ### Nested Schema for `extended_s3_destination_configuration.data_format_conversion_configuration.output_format_configuration.serializer`
 
 Optional:
 
-- **orc_ser_de** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--orc_ser_de))
-- **parquet_ser_de** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--parquet_ser_de))
+- `orc_ser_de` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--orc_ser_de))
+- `parquet_ser_de` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--parquet_ser_de))
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--orc_ser_de"></a>
 ### Nested Schema for `extended_s3_destination_configuration.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de`
 
 Optional:
 
-- **block_size_bytes** (Number)
-- **bloom_filter_columns** (List of String)
-- **bloom_filter_false_positive_probability** (Number)
-- **compression** (String)
-- **dictionary_key_threshold** (Number)
-- **enable_padding** (Boolean)
-- **format_version** (String)
-- **padding_tolerance** (Number)
-- **row_index_stride** (Number)
-- **stripe_size_bytes** (Number)
+- `block_size_bytes` (Number)
+- `bloom_filter_columns` (List of String)
+- `bloom_filter_false_positive_probability` (Number)
+- `compression` (String)
+- `dictionary_key_threshold` (Number)
+- `enable_padding` (Boolean)
+- `format_version` (String)
+- `padding_tolerance` (Number)
+- `row_index_stride` (Number)
+- `stripe_size_bytes` (Number)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration--output_format_configuration--serializer--parquet_ser_de"></a>
@@ -434,12 +434,12 @@ Optional:
 
 Optional:
 
-- **block_size_bytes** (Number)
-- **compression** (String)
-- **enable_dictionary_compression** (Boolean)
-- **max_padding_bytes** (Number)
-- **page_size_bytes** (Number)
-- **writer_version** (String)
+- `block_size_bytes` (Number)
+- `compression` (String)
+- `enable_dictionary_compression` (Boolean)
+- `max_padding_bytes` (Number)
+- `page_size_bytes` (Number)
+- `writer_version` (String)
 
 
 
@@ -449,12 +449,12 @@ Optional:
 
 Optional:
 
-- **catalog_id** (String)
-- **database_name** (String)
-- **region** (String)
-- **role_arn** (String)
-- **table_name** (String)
-- **version_id** (String)
+- `catalog_id` (String)
+- `database_name` (String)
+- `region` (String)
+- `role_arn` (String)
+- `table_name` (String)
+- `version_id` (String)
 
 
 
@@ -463,15 +463,15 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration--retry_options))
+- `enabled` (Boolean)
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration--retry_options))
 
 <a id="nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration--retry_options"></a>
 ### Nested Schema for `extended_s3_destination_configuration.dynamic_partitioning_configuration.retry_options`
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 
@@ -480,15 +480,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `extended_s3_destination_configuration.encryption_configuration.kms_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -497,24 +497,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--extended_s3_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `extended_s3_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `extended_s3_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -524,22 +524,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--s3_backup_configuration--buffering_hints"></a>
 ### Nested Schema for `extended_s3_destination_configuration.s3_backup_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--s3_backup_configuration--cloudwatch_logging_options"></a>
@@ -547,9 +547,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration"></a>
@@ -557,15 +557,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `extended_s3_destination_configuration.s3_backup_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -576,23 +576,23 @@ Optional:
 
 Optional:
 
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--cloudwatch_logging_options))
-- **endpoint_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--endpoint_configuration))
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration))
-- **request_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration))
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--retry_options))
-- **role_arn** (String)
-- **s3_backup_mode** (String)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration))
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--cloudwatch_logging_options))
+- `endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--endpoint_configuration))
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration))
+- `request_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--retry_options))
+- `role_arn` (String)
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration))
 
 <a id="nestedatt--http_endpoint_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--cloudwatch_logging_options"></a>
@@ -600,9 +600,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--endpoint_configuration"></a>
@@ -610,9 +610,9 @@ Optional:
 
 Optional:
 
-- **access_key** (String)
-- **name** (String)
-- **url** (String)
+- `access_key` (String)
+- `name` (String)
+- `url` (String)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--processing_configuration"></a>
@@ -620,24 +620,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--http_endpoint_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -647,16 +647,16 @@ Optional:
 
 Optional:
 
-- **common_attributes** (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes))
-- **content_encoding** (String)
+- `common_attributes` (Attributes List) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes))
+- `content_encoding` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--request_configuration--common_attributes"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.request_configuration.common_attributes`
 
 Optional:
 
-- **attribute_name** (String)
-- **attribute_value** (String)
+- `attribute_name` (String)
+- `attribute_value` (String)
 
 
 
@@ -665,7 +665,7 @@ Optional:
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration"></a>
@@ -673,22 +673,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration--buffering_hints"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.s3_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
@@ -696,9 +696,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration"></a>
@@ -706,15 +706,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -725,8 +725,8 @@ Optional:
 
 Optional:
 
-- **kinesis_stream_arn** (String)
-- **role_arn** (String)
+- `kinesis_stream_arn` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--redshift_destination_configuration"></a>
@@ -734,26 +734,26 @@ Optional:
 
 Optional:
 
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--cloudwatch_logging_options))
-- **cluster_jdbcurl** (String)
-- **copy_command** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--copy_command))
-- **password** (String)
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration))
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--retry_options))
-- **role_arn** (String)
-- **s3_backup_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration))
-- **s3_backup_mode** (String)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration))
-- **username** (String)
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--cloudwatch_logging_options))
+- `cluster_jdbcurl` (String)
+- `copy_command` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--copy_command))
+- `password` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--retry_options))
+- `role_arn` (String)
+- `s3_backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration))
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration))
+- `username` (String)
 
 <a id="nestedatt--redshift_destination_configuration--cloudwatch_logging_options"></a>
 ### Nested Schema for `redshift_destination_configuration.cloudwatch_logging_options`
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--redshift_destination_configuration--copy_command"></a>
@@ -761,9 +761,9 @@ Optional:
 
 Optional:
 
-- **copy_options** (String)
-- **data_table_columns** (String)
-- **data_table_name** (String)
+- `copy_options` (String)
+- `data_table_columns` (String)
+- `data_table_name` (String)
 
 
 <a id="nestedatt--redshift_destination_configuration--processing_configuration"></a>
@@ -771,24 +771,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--redshift_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `redshift_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--redshift_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `redshift_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -798,7 +798,7 @@ Optional:
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration"></a>
@@ -806,22 +806,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration--buffering_hints"></a>
 ### Nested Schema for `redshift_destination_configuration.s3_backup_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration--cloudwatch_logging_options"></a>
@@ -829,9 +829,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration"></a>
@@ -839,15 +839,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `redshift_destination_configuration.s3_backup_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -857,22 +857,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_configuration--buffering_hints"></a>
 ### Nested Schema for `redshift_destination_configuration.s3_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--redshift_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
@@ -880,9 +880,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration"></a>
@@ -890,15 +890,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `redshift_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -909,22 +909,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--s3_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `s3_destination_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--s3_destination_configuration--cloudwatch_logging_options"></a>
@@ -932,9 +932,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--s3_destination_configuration--encryption_configuration"></a>
@@ -942,15 +942,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--s3_destination_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `s3_destination_configuration.encryption_configuration.kms_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -960,24 +960,24 @@ Optional:
 
 Optional:
 
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
-- **hec_acknowledgment_timeout_in_seconds** (Number)
-- **hec_endpoint** (String)
-- **hec_endpoint_type** (String)
-- **hec_token** (String)
-- **processing_configuration** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration))
-- **retry_options** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
-- **s3_backup_mode** (String)
-- **s3_configuration** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
+- `hec_acknowledgment_timeout_in_seconds` (Number)
+- `hec_endpoint` (String)
+- `hec_endpoint_type` (String)
+- `hec_token` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
 
 <a id="nestedatt--splunk_destination_configuration--cloudwatch_logging_options"></a>
 ### Nested Schema for `splunk_destination_configuration.cloudwatch_logging_options`
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--splunk_destination_configuration--processing_configuration"></a>
@@ -985,24 +985,24 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **processors** (Attributes List) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration--processors))
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration--processors))
 
 <a id="nestedatt--splunk_destination_configuration--processing_configuration--processors"></a>
 ### Nested Schema for `splunk_destination_configuration.processing_configuration.processors`
 
 Optional:
 
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration--processors--parameters))
-- **type** (String)
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
 
 <a id="nestedatt--splunk_destination_configuration--processing_configuration--processors--parameters"></a>
 ### Nested Schema for `splunk_destination_configuration.processing_configuration.processors.type`
 
 Optional:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 
 
@@ -1012,7 +1012,7 @@ Optional:
 
 Optional:
 
-- **duration_in_seconds** (Number)
+- `duration_in_seconds` (Number)
 
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration"></a>
@@ -1020,22 +1020,22 @@ Optional:
 
 Optional:
 
-- **bucket_arn** (String)
-- **buffering_hints** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--buffering_hints))
-- **cloudwatch_logging_options** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--cloudwatch_logging_options))
-- **compression_format** (String)
-- **encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration))
-- **error_output_prefix** (String)
-- **prefix** (String)
-- **role_arn** (String)
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration--buffering_hints"></a>
 ### Nested Schema for `splunk_destination_configuration.s3_configuration.buffering_hints`
 
 Optional:
 
-- **interval_in_seconds** (Number)
-- **size_in_m_bs** (Number)
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
@@ -1043,9 +1043,9 @@ Optional:
 
 Optional:
 
-- **enabled** (Boolean)
-- **log_group_name** (String)
-- **log_stream_name** (String)
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration"></a>
@@ -1053,15 +1053,15 @@ Optional:
 
 Optional:
 
-- **kms_encryption_config** (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
-- **no_encryption_config** (String)
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
 ### Nested Schema for `splunk_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
 
 Optional:
 
-- **awskms_key_arn** (String)
+- `awskms_key_arn` (String)
 
 
 
@@ -1072,8 +1072,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

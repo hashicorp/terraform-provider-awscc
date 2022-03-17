@@ -17,17 +17,17 @@ The AWS::NetworkManager::CustomerGatewayAssociation type associates a customer g
 
 ### Required
 
-- **customer_gateway_arn** (String) The Amazon Resource Name (ARN) of the customer gateway.
-- **device_id** (String) The ID of the device
-- **global_network_id** (String) The ID of the global network.
+- `customer_gateway_arn` (String) The Amazon Resource Name (ARN) of the customer gateway.
+- `device_id` (String) The ID of the device
+- `global_network_id` (String) The ID of the global network.
 
 ### Optional
 
-- **link_id** (String) The ID of the link
+- `link_id` (String) The ID of the link
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

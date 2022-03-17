@@ -17,49 +17,49 @@ Data Source schema for AWS::IoTWireless::WirelessDevice
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Wireless device arn. Returned after successful create.
-- **description** (String) Wireless device description
-- **destination_name** (String) Wireless device destination name
-- **last_uplink_received_at** (String) The date and time when the most recent uplink was received.
-- **lo_ra_wan** (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device. (see [below for nested schema](#nestedatt--lo_ra_wan))
-- **name** (String) Wireless device name
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed. (see [below for nested schema](#nestedatt--tags))
-- **thing_arn** (String) Thing arn. Passed into update to associate Thing with Wireless device.
-- **thing_name** (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
-- **type** (String) Wireless device type, currently only Sidewalk and LoRa
+- `arn` (String) Wireless device arn. Returned after successful create.
+- `description` (String) Wireless device description
+- `destination_name` (String) Wireless device destination name
+- `last_uplink_received_at` (String) The date and time when the most recent uplink was received.
+- `lo_ra_wan` (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device. (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `name` (String) Wireless device name
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed. (see [below for nested schema](#nestedatt--tags))
+- `thing_arn` (String) Thing arn. Passed into update to associate Thing with Wireless device.
+- `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
+- `type` (String) Wireless device type, currently only Sidewalk and LoRa
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Read-Only:
 
-- **abp_v10_x** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v10_x))
-- **abp_v11** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11))
-- **dev_eui** (String)
-- **device_profile_id** (String)
-- **otaa_v10_x** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v10_x))
-- **otaa_v11** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v11))
-- **service_profile_id** (String)
+- `abp_v10_x` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v10_x))
+- `abp_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11))
+- `dev_eui` (String)
+- `device_profile_id` (String)
+- `otaa_v10_x` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v10_x))
+- `otaa_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v11))
+- `service_profile_id` (String)
 
 <a id="nestedatt--lo_ra_wan--abp_v10_x"></a>
 ### Nested Schema for `lo_ra_wan.abp_v10_x`
 
 Read-Only:
 
-- **dev_addr** (String)
-- **session_keys** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v10_x--session_keys))
+- `dev_addr` (String)
+- `session_keys` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v10_x--session_keys))
 
 <a id="nestedatt--lo_ra_wan--abp_v10_x--session_keys"></a>
 ### Nested Schema for `lo_ra_wan.abp_v10_x.session_keys`
 
 Read-Only:
 
-- **app_s_key** (String)
-- **nwk_s_key** (String)
+- `app_s_key` (String)
+- `nwk_s_key` (String)
 
 
 
@@ -68,18 +68,18 @@ Read-Only:
 
 Read-Only:
 
-- **dev_addr** (String)
-- **session_keys** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11--session_keys))
+- `dev_addr` (String)
+- `session_keys` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11--session_keys))
 
 <a id="nestedatt--lo_ra_wan--abp_v11--session_keys"></a>
 ### Nested Schema for `lo_ra_wan.abp_v11.session_keys`
 
 Read-Only:
 
-- **app_s_key** (String)
-- **f_nwk_s_int_key** (String)
-- **nwk_s_enc_key** (String)
-- **s_nwk_s_int_key** (String)
+- `app_s_key` (String)
+- `f_nwk_s_int_key` (String)
+- `nwk_s_enc_key` (String)
+- `s_nwk_s_int_key` (String)
 
 
 
@@ -88,8 +88,8 @@ Read-Only:
 
 Read-Only:
 
-- **app_eui** (String)
-- **app_key** (String)
+- `app_eui` (String)
+- `app_key` (String)
 
 
 <a id="nestedatt--lo_ra_wan--otaa_v11"></a>
@@ -97,9 +97,9 @@ Read-Only:
 
 Read-Only:
 
-- **app_key** (String)
-- **join_eui** (String)
-- **nwk_key** (String)
+- `app_key` (String)
+- `join_eui` (String)
+- `nwk_key` (String)
 
 
 
@@ -108,7 +108,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

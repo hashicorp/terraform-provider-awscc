@@ -17,22 +17,22 @@ This resource represents an individual schema version of a schema defined in Glu
 
 ### Required
 
-- **schema** (Attributes) Identifier for the schema where the schema version will be created. (see [below for nested schema](#nestedatt--schema))
-- **schema_definition** (String) Complete definition of the schema in plain-text.
+- `schema` (Attributes) Identifier for the schema where the schema version will be created. (see [below for nested schema](#nestedatt--schema))
+- `schema_definition` (String) Complete definition of the schema in plain-text.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **version_id** (String) Represents the version ID associated with the schema version.
+- `id` (String) Uniquely identifies the resource.
+- `version_id` (String) Represents the version ID associated with the schema version.
 
 <a id="nestedatt--schema"></a>
 ### Nested Schema for `schema`
 
 Required:
 
-- **registry_name** (String) Name of the registry to identify where the Schema is located.
-- **schema_arn** (String) Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.
-- **schema_name** (String) Name of the schema. This parameter requires RegistryName to be provided.
+- `registry_name` (String) Name of the registry to identify where the Schema is located.
+- `schema_arn` (String) Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.
+- `schema_name` (String) Name of the schema. This parameter requires RegistryName to be provided.
 
 ## Import
 

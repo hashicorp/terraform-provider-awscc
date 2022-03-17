@@ -17,24 +17,24 @@ Data Source schema for AWS::CustomerProfiles::Domain
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **created_at** (String) The time of this integration got created
-- **dead_letter_queue_url** (String) The URL of the SQS dead letter queue
-- **default_encryption_key** (String) The default encryption key
-- **default_expiration_days** (Number) The default number of days until the data within the domain expires.
-- **domain_name** (String) The unique name of the domain.
-- **last_updated_at** (String) The time of this integration got last updated at
-- **tags** (Attributes List) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
+- `created_at` (String) The time of this integration got created
+- `dead_letter_queue_url` (String) The URL of the SQS dead letter queue
+- `default_encryption_key` (String) The default encryption key
+- `default_expiration_days` (Number) The default number of days until the data within the domain expires.
+- `domain_name` (String) The unique name of the domain.
+- `last_updated_at` (String) The time of this integration got last updated at
+- `tags` (Attributes List) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

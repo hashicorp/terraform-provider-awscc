@@ -17,32 +17,32 @@ A version is a numbered snapshot of your work that you can publish for use in di
 
 ### Required
 
-- **bot_id** (String) Unique ID of resource
-- **bot_version_locale_specification** (Attributes List) Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale. (see [below for nested schema](#nestedatt--bot_version_locale_specification))
+- `bot_id` (String) Unique ID of resource
+- `bot_version_locale_specification` (Attributes List) Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale. (see [below for nested schema](#nestedatt--bot_version_locale_specification))
 
 ### Optional
 
-- **description** (String) A description of the version. Use the description to help identify the version in lists.
+- `description` (String) A description of the version. Use the description to help identify the version in lists.
 
 ### Read-Only
 
-- **bot_version** (String) The version of a bot.
-- **id** (String) Uniquely identifies the resource.
+- `bot_version` (String) The version of a bot.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--bot_version_locale_specification"></a>
 ### Nested Schema for `bot_version_locale_specification`
 
 Required:
 
-- **bot_version_locale_details** (Attributes) The version of a bot used for a bot locale. (see [below for nested schema](#nestedatt--bot_version_locale_specification--bot_version_locale_details))
-- **locale_id** (String) The identifier of the language and locale that the bot will be used in.
+- `bot_version_locale_details` (Attributes) The version of a bot used for a bot locale. (see [below for nested schema](#nestedatt--bot_version_locale_specification--bot_version_locale_details))
+- `locale_id` (String) The identifier of the language and locale that the bot will be used in.
 
 <a id="nestedatt--bot_version_locale_specification--bot_version_locale_details"></a>
 ### Nested Schema for `bot_version_locale_specification.bot_version_locale_details`
 
 Required:
 
-- **source_bot_version** (String) The version of a bot.
+- `source_bot_version` (String) The version of a bot.
 
 ## Import
 

@@ -17,29 +17,29 @@ Create and manage a Domain Configuration
 
 ### Optional
 
-- **authorizer_config** (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
-- **domain_configuration_name** (String)
-- **domain_configuration_status** (String)
-- **domain_name** (String)
-- **server_certificate_arns** (List of String)
-- **service_type** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **validation_certificate_arn** (String)
+- `authorizer_config` (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
+- `domain_configuration_name` (String)
+- `domain_configuration_status` (String)
+- `domain_name` (String)
+- `server_certificate_arns` (List of String)
+- `service_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `validation_certificate_arn` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **domain_type** (String)
-- **id** (String) Uniquely identifies the resource.
-- **server_certificates** (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
+- `arn` (String)
+- `domain_type` (String)
+- `id` (String) Uniquely identifies the resource.
+- `server_certificates` (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
 
 <a id="nestedatt--authorizer_config"></a>
 ### Nested Schema for `authorizer_config`
 
 Optional:
 
-- **allow_authorizer_override** (Boolean)
-- **default_authorizer_name** (String)
+- `allow_authorizer_override` (Boolean)
+- `default_authorizer_name` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--server_certificates"></a>
@@ -56,9 +56,9 @@ Optional:
 
 Read-Only:
 
-- **server_certificate_arn** (String)
-- **server_certificate_status** (String)
-- **server_certificate_status_detail** (String)
+- `server_certificate_arn` (String)
+- `server_certificate_status` (String)
+- `server_certificate_status_detail` (String)
 
 ## Import
 

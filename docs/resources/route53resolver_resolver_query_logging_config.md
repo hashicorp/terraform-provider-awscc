@@ -17,19 +17,19 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.
 
 ### Optional
 
-- **destination_arn** (String) destination arn
-- **name** (String) ResolverQueryLogConfigName
+- `destination_arn` (String) destination arn
+- `name` (String) ResolverQueryLogConfigName
 
 ### Read-Only
 
-- **arn** (String) Arn
-- **association_count** (Number) Count
-- **creation_time** (String) Rfc3339TimeString
-- **creator_request_id** (String) The id of the creator request.
-- **id** (String) ResourceId
-- **owner_id** (String) AccountId
-- **share_status** (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
-- **status** (String) ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.
+- `arn` (String) Arn
+- `association_count` (Number) Count
+- `creation_time` (String) Rfc3339TimeString
+- `creator_request_id` (String) The id of the creator request.
+- `id` (String) ResourceId
+- `owner_id` (String) AccountId
+- `share_status` (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
+- `status` (String) ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.
 
 ## Import
 

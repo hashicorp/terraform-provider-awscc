@@ -17,25 +17,25 @@ Data Source schema for AWS::Location::Map
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **configuration** (Attributes) (see [below for nested schema](#nestedatt--configuration))
-- **create_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-- **data_source** (String)
-- **description** (String)
-- **map_arn** (String)
-- **map_name** (String)
-- **pricing_plan** (String)
-- **update_time** (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `arn` (String)
+- `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
+- `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+- `data_source` (String)
+- `description` (String)
+- `map_arn` (String)
+- `map_name` (String)
+- `pricing_plan` (String)
+- `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
 Read-Only:
 
-- **style** (String)
+- `style` (String)
 
 

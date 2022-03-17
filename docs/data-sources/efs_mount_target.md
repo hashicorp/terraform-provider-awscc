@@ -17,13 +17,13 @@ Data Source schema for AWS::EFS::MountTarget
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **file_system_id** (String)
-- **ip_address** (String)
-- **security_groups** (Set of String)
-- **subnet_id** (String)
+- `file_system_id` (String)
+- `ip_address` (String)
+- `security_groups` (Set of String)
+- `subnet_id` (String)
 
 

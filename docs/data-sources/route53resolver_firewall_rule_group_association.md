@@ -17,30 +17,30 @@ Data Source schema for AWS::Route53Resolver::FirewallRuleGroupAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Arn
-- **creation_time** (String) Rfc3339TimeString
-- **creator_request_id** (String) The id of the creator request.
-- **firewall_rule_group_id** (String) FirewallRuleGroupId
-- **managed_owner_name** (String) ServicePrincipal
-- **modification_time** (String) Rfc3339TimeString
-- **mutation_protection** (String) MutationProtectionStatus
-- **name** (String) FirewallRuleGroupAssociationName
-- **priority** (Number) Priority
-- **status** (String) ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.
-- **status_message** (String) FirewallDomainListAssociationStatus
-- **tags** (Attributes Set) Tags (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String) VpcId
+- `arn` (String) Arn
+- `creation_time` (String) Rfc3339TimeString
+- `creator_request_id` (String) The id of the creator request.
+- `firewall_rule_group_id` (String) FirewallRuleGroupId
+- `managed_owner_name` (String) ServicePrincipal
+- `modification_time` (String) Rfc3339TimeString
+- `mutation_protection` (String) MutationProtectionStatus
+- `name` (String) FirewallRuleGroupAssociationName
+- `priority` (Number) Priority
+- `status` (String) ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.
+- `status_message` (String) FirewallDomainListAssociationStatus
+- `tags` (Attributes Set) Tags (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) VpcId
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

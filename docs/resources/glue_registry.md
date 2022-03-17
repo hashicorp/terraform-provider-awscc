@@ -17,25 +17,25 @@ This resource creates a Registry for authoring schemas as part of Glue Schema Re
 
 ### Required
 
-- **name** (String) Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.
+- `name` (String) Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.
 
 ### Optional
 
-- **description** (String) A description of the registry. If description is not provided, there will not be any default value for this.
-- **tags** (Attributes List) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
+- `description` (String) A description of the registry. If description is not provided, there will not be any default value for this.
+- `tags` (Attributes List) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name for the created Registry.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) Amazon Resource Name for the created Registry.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) A key to identify the tag.
-- **value** (String) Corresponding tag value for the key.
+- `key` (String) A key to identify the tag.
+- `value` (String) Corresponding tag value for the key.
 
 ## Import
 

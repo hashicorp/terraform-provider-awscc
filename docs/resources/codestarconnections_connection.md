@@ -17,28 +17,28 @@ Schema for AWS::CodeStarConnections::Connection resource which can be used to co
 
 ### Required
 
-- **connection_name** (String) The name of the connection. Connection names must be unique in an AWS user account.
+- `connection_name` (String) The name of the connection. Connection names must be unique in an AWS user account.
 
 ### Optional
 
-- **host_arn** (String) The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.
-- **provider_type** (String) The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.
-- **tags** (Attributes List) Specifies the tags applied to a connection. (see [below for nested schema](#nestedatt--tags))
+- `host_arn` (String) The host arn configured to represent the infrastructure where your third-party provider is installed. You must specify either a ProviderType or a HostArn.
+- `provider_type` (String) The name of the external provider where your third-party code repository is configured. You must specify either a ProviderType or a HostArn.
+- `tags` (Attributes List) Specifies the tags applied to a connection. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **connection_arn** (String) The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.
-- **connection_status** (String) The current status of the connection.
-- **id** (String) Uniquely identifies the resource.
-- **owner_account_id** (String) The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
+- `connection_arn` (String) The Amazon Resource Name (ARN) of the  connection. The ARN is used as the connection reference when the connection is shared between AWS services.
+- `connection_status` (String) The current status of the connection.
+- `id` (String) Uniquely identifies the resource.
+- `owner_account_id` (String) The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

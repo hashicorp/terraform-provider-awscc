@@ -17,27 +17,27 @@ An label for fraud detector.
 
 ### Required
 
-- **name** (String) The name of the label.
+- `name` (String) The name of the label.
 
 ### Optional
 
-- **description** (String) The label description.
-- **tags** (Attributes List) Tags associated with this label. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The label description.
+- `tags` (Attributes List) Tags associated with this label. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The label ARN.
-- **created_time** (String) The timestamp when the label was created.
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) The timestamp when the label was last updated.
+- `arn` (String) The label ARN.
+- `created_time` (String) The timestamp when the label was created.
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The timestamp when the label was last updated.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

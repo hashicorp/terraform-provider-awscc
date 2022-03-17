@@ -17,14 +17,14 @@ Data Source schema for AWS::Lightsail::StaticIp
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **attached_to** (String) The instance where the static IP is attached.
-- **ip_address** (String) The static IP address.
-- **is_attached** (Boolean) A Boolean value indicating whether the static IP is attached.
-- **static_ip_arn** (String)
-- **static_ip_name** (String) The name of the static IP address.
+- `attached_to` (String) The instance where the static IP is attached.
+- `ip_address` (String) The static IP address.
+- `is_attached` (Boolean) A Boolean value indicating whether the static IP is attached.
+- `static_ip_arn` (String)
+- `static_ip_name` (String) The name of the static IP address.
 
 

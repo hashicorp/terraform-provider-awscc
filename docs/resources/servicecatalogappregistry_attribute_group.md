@@ -17,18 +17,18 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroup.
 
 ### Required
 
-- **attributes** (Map of String)
-- **name** (String) The name of the attribute group.
+- `attributes` (Map of String)
+- `name` (String) The name of the attribute group.
 
 ### Optional
 
-- **description** (String) The description of the attribute group.
-- **tags** (Map of String)
+- `description` (String) The description of the attribute group.
+- `tags` (Map of String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) The ID of this resource.
+- `arn` (String)
+- `id` (String) The ID of this resource.
 
 ## Import
 

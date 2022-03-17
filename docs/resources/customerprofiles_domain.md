@@ -17,28 +17,28 @@ A domain defined for 3rd party data source in Profile Service
 
 ### Required
 
-- **domain_name** (String) The unique name of the domain.
+- `domain_name` (String) The unique name of the domain.
 
 ### Optional
 
-- **dead_letter_queue_url** (String) The URL of the SQS dead letter queue
-- **default_encryption_key** (String) The default encryption key
-- **default_expiration_days** (Number) The default number of days until the data within the domain expires.
-- **tags** (Attributes List) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
+- `dead_letter_queue_url` (String) The URL of the SQS dead letter queue
+- `default_encryption_key` (String) The default encryption key
+- `default_expiration_days` (Number) The default number of days until the data within the domain expires.
+- `tags` (Attributes List) The tags (keys and values) associated with the domain (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **created_at** (String) The time of this integration got created
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_at** (String) The time of this integration got last updated at
+- `created_at` (String) The time of this integration got created
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_at` (String) The time of this integration got last updated at
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

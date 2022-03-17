@@ -17,11 +17,11 @@ Data Source schema for AWS::AppStream::ApplicationFleetAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application_arn** (String)
-- **fleet_name** (String)
+- `application_arn` (String)
+- `fleet_name` (String)
 
 

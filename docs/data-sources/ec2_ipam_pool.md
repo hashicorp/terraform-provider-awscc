@@ -17,39 +17,39 @@ Data Source schema for AWS::EC2::IPAMPool
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **address_family** (String) The address family of the address space in this pool. Either IPv4 or IPv6.
-- **allocation_default_netmask_length** (Number) The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.
-- **allocation_max_netmask_length** (Number) The maximum allowed netmask length for allocations made from this pool.
-- **allocation_min_netmask_length** (Number) The minimum allowed netmask length for allocations made from this pool.
-- **allocation_resource_tags** (Attributes Set) When specified, an allocation will not be allowed unless a resource has a matching set of tags. (see [below for nested schema](#nestedatt--allocation_resource_tags))
-- **arn** (String) The Amazon Resource Name (ARN) of the IPAM Pool.
-- **auto_import** (Boolean) Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.
-- **description** (String)
-- **ipam_arn** (String) The Amazon Resource Name (ARN) of the IPAM this pool is a part of.
-- **ipam_pool_id** (String) Id of the IPAM Pool.
-- **ipam_scope_arn** (String) The Amazon Resource Name (ARN) of the scope this pool is a part of.
-- **ipam_scope_id** (String) The Id of the scope this pool is a part of.
-- **ipam_scope_type** (String) Determines whether this scope contains publicly routable space or space for a private network
-- **locale** (String) The region of this pool. If not set, this will default to "None" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.
-- **pool_depth** (Number) The depth of this pool in the source pool hierarchy.
-- **provisioned_cidrs** (Attributes Set) A list of cidrs representing the address space available for allocation in this pool. (see [below for nested schema](#nestedatt--provisioned_cidrs))
-- **publicly_advertisable** (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
-- **source_ipam_pool_id** (String) The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.
-- **state** (String) The state of this pool. This can be one of the following values: "create-in-progress", "create-complete", "modify-in-progress", "modify-complete", "delete-in-progress", or "delete-complete"
-- **state_message** (String) An explanation of how the pool arrived at it current state.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `address_family` (String) The address family of the address space in this pool. Either IPv4 or IPv6.
+- `allocation_default_netmask_length` (Number) The default netmask length for allocations made from this pool. This value is used when the netmask length of an allocation isn't specified.
+- `allocation_max_netmask_length` (Number) The maximum allowed netmask length for allocations made from this pool.
+- `allocation_min_netmask_length` (Number) The minimum allowed netmask length for allocations made from this pool.
+- `allocation_resource_tags` (Attributes Set) When specified, an allocation will not be allowed unless a resource has a matching set of tags. (see [below for nested schema](#nestedatt--allocation_resource_tags))
+- `arn` (String) The Amazon Resource Name (ARN) of the IPAM Pool.
+- `auto_import` (Boolean) Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.
+- `description` (String)
+- `ipam_arn` (String) The Amazon Resource Name (ARN) of the IPAM this pool is a part of.
+- `ipam_pool_id` (String) Id of the IPAM Pool.
+- `ipam_scope_arn` (String) The Amazon Resource Name (ARN) of the scope this pool is a part of.
+- `ipam_scope_id` (String) The Id of the scope this pool is a part of.
+- `ipam_scope_type` (String) Determines whether this scope contains publicly routable space or space for a private network
+- `locale` (String) The region of this pool. If not set, this will default to "None" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.
+- `pool_depth` (Number) The depth of this pool in the source pool hierarchy.
+- `provisioned_cidrs` (Attributes Set) A list of cidrs representing the address space available for allocation in this pool. (see [below for nested schema](#nestedatt--provisioned_cidrs))
+- `publicly_advertisable` (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
+- `source_ipam_pool_id` (String) The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.
+- `state` (String) The state of this pool. This can be one of the following values: "create-in-progress", "create-complete", "modify-in-progress", "modify-complete", "delete-in-progress", or "delete-complete"
+- `state_message` (String) An explanation of how the pool arrived at it current state.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--allocation_resource_tags"></a>
 ### Nested Schema for `allocation_resource_tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--provisioned_cidrs"></a>
@@ -57,7 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- **cidr** (String) Represents a single IPv4 or IPv6 CIDR
+- `cidr` (String) Represents a single IPv4 or IPv6 CIDR
 
 
 <a id="nestedatt--tags"></a>
@@ -65,7 +65,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

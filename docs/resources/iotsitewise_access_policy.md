@@ -17,31 +17,31 @@ Resource schema for AWS::IoTSiteWise::AccessPolicy
 
 ### Required
 
-- **access_policy_identity** (Attributes) The identity for this access policy. Choose either a user or a group but not both. (see [below for nested schema](#nestedatt--access_policy_identity))
-- **access_policy_permission** (String) The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.
-- **access_policy_resource** (Attributes) The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both. (see [below for nested schema](#nestedatt--access_policy_resource))
+- `access_policy_identity` (Attributes) The identity for this access policy. Choose either a user or a group but not both. (see [below for nested schema](#nestedatt--access_policy_identity))
+- `access_policy_permission` (String) The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.
+- `access_policy_resource` (Attributes) The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both. (see [below for nested schema](#nestedatt--access_policy_resource))
 
 ### Read-Only
 
-- **access_policy_arn** (String) The ARN of the access policy.
-- **access_policy_id** (String) The ID of the access policy.
-- **id** (String) Uniquely identifies the resource.
+- `access_policy_arn` (String) The ARN of the access policy.
+- `access_policy_id` (String) The ID of the access policy.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--access_policy_identity"></a>
 ### Nested Schema for `access_policy_identity`
 
 Required:
 
-- **iam_role** (Attributes) Contains information for an IAM role identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_role))
-- **iam_user** (Attributes) Contains information for an IAM user identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_user))
-- **user** (Attributes) Contains information for a user identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--user))
+- `iam_role` (Attributes) Contains information for an IAM role identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_role))
+- `iam_user` (Attributes) Contains information for an IAM user identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--iam_user))
+- `user` (Attributes) Contains information for a user identity in an access policy. (see [below for nested schema](#nestedatt--access_policy_identity--user))
 
 <a id="nestedatt--access_policy_identity--iam_role"></a>
 ### Nested Schema for `access_policy_identity.iam_role`
 
 Required:
 
-- **arn** (String) The ARN of the IAM role.
+- `arn` (String) The ARN of the IAM role.
 
 
 <a id="nestedatt--access_policy_identity--iam_user"></a>
@@ -49,7 +49,7 @@ Required:
 
 Required:
 
-- **arn** (String) The ARN of the IAM user.
+- `arn` (String) The ARN of the IAM user.
 
 
 <a id="nestedatt--access_policy_identity--user"></a>
@@ -57,7 +57,7 @@ Required:
 
 Required:
 
-- **id** (String) The AWS SSO ID of the user.
+- `id` (String) The AWS SSO ID of the user.
 
 
 
@@ -66,15 +66,15 @@ Required:
 
 Required:
 
-- **portal** (Attributes) A portal resource. (see [below for nested schema](#nestedatt--access_policy_resource--portal))
-- **project** (Attributes) A project resource. (see [below for nested schema](#nestedatt--access_policy_resource--project))
+- `portal` (Attributes) A portal resource. (see [below for nested schema](#nestedatt--access_policy_resource--portal))
+- `project` (Attributes) A project resource. (see [below for nested schema](#nestedatt--access_policy_resource--project))
 
 <a id="nestedatt--access_policy_resource--portal"></a>
 ### Nested Schema for `access_policy_resource.portal`
 
 Required:
 
-- **id** (String) The ID of the portal.
+- `id` (String) The ID of the portal.
 
 
 <a id="nestedatt--access_policy_resource--project"></a>
@@ -82,7 +82,7 @@ Required:
 
 Required:
 
-- **id** (String) The ID of the project.
+- `id` (String) The ID of the project.
 
 ## Import
 

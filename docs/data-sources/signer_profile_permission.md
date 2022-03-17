@@ -17,14 +17,14 @@ Data Source schema for AWS::Signer::ProfilePermission
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **action** (String)
-- **principal** (String)
-- **profile_name** (String)
-- **profile_version** (String)
-- **statement_id** (String)
+- `action` (String)
+- `principal` (String)
+- `profile_name` (String)
+- `profile_version` (String)
+- `statement_id` (String)
 
 

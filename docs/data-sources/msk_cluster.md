@@ -17,49 +17,49 @@ Data Source schema for AWS::MSK::Cluster
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **broker_node_group_info** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info))
-- **client_authentication** (Attributes) (see [below for nested schema](#nestedatt--client_authentication))
-- **cluster_name** (String)
-- **configuration_info** (Attributes) (see [below for nested schema](#nestedatt--configuration_info))
-- **current_version** (String) The current version of the MSK cluster
-- **encryption_info** (Attributes) (see [below for nested schema](#nestedatt--encryption_info))
-- **enhanced_monitoring** (String)
-- **kafka_version** (String)
-- **logging_info** (Attributes) (see [below for nested schema](#nestedatt--logging_info))
-- **number_of_broker_nodes** (Number)
-- **open_monitoring** (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
-- **tags** (Map of String) A key-value pair to associate with a resource.
+- `arn` (String)
+- `broker_node_group_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info))
+- `client_authentication` (Attributes) (see [below for nested schema](#nestedatt--client_authentication))
+- `cluster_name` (String)
+- `configuration_info` (Attributes) (see [below for nested schema](#nestedatt--configuration_info))
+- `current_version` (String) The current version of the MSK cluster
+- `encryption_info` (Attributes) (see [below for nested schema](#nestedatt--encryption_info))
+- `enhanced_monitoring` (String)
+- `kafka_version` (String)
+- `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
+- `number_of_broker_nodes` (Number)
+- `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--broker_node_group_info"></a>
 ### Nested Schema for `broker_node_group_info`
 
 Read-Only:
 
-- **broker_az_distribution** (String)
-- **client_subnets** (List of String)
-- **connectivity_info** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
-- **instance_type** (String)
-- **security_groups** (List of String)
-- **storage_info** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info))
+- `broker_az_distribution` (String)
+- `client_subnets` (List of String)
+- `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
+- `instance_type` (String)
+- `security_groups` (List of String)
+- `storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info`
 
 Read-Only:
 
-- **public_access** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
+- `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info--public_access"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.public_access`
 
 Read-Only:
 
-- **type** (String)
+- `type` (String)
 
 
 
@@ -68,23 +68,23 @@ Read-Only:
 
 Read-Only:
 
-- **ebs_storage_info** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info))
+- `ebs_storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info))
 
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info"></a>
 ### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info`
 
 Read-Only:
 
-- **provisioned_throughput** (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput))
-- **volume_size** (Number)
+- `provisioned_throughput` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput))
+- `volume_size` (Number)
 
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput"></a>
 ### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.volume_size`
 
 Read-Only:
 
-- **enabled** (Boolean)
-- **volume_throughput** (Number)
+- `enabled` (Boolean)
+- `volume_throughput` (Number)
 
 
 
@@ -95,24 +95,24 @@ Read-Only:
 
 Read-Only:
 
-- **sasl** (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl))
-- **tls** (Attributes) (see [below for nested schema](#nestedatt--client_authentication--tls))
-- **unauthenticated** (Attributes) (see [below for nested schema](#nestedatt--client_authentication--unauthenticated))
+- `sasl` (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl))
+- `tls` (Attributes) (see [below for nested schema](#nestedatt--client_authentication--tls))
+- `unauthenticated` (Attributes) (see [below for nested schema](#nestedatt--client_authentication--unauthenticated))
 
 <a id="nestedatt--client_authentication--sasl"></a>
 ### Nested Schema for `client_authentication.sasl`
 
 Read-Only:
 
-- **iam** (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl--iam))
-- **scram** (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl--scram))
+- `iam` (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl--iam))
+- `scram` (Attributes) (see [below for nested schema](#nestedatt--client_authentication--sasl--scram))
 
 <a id="nestedatt--client_authentication--sasl--iam"></a>
 ### Nested Schema for `client_authentication.sasl.iam`
 
 Read-Only:
 
-- **enabled** (Boolean)
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--client_authentication--sasl--scram"></a>
@@ -120,7 +120,7 @@ Read-Only:
 
 Read-Only:
 
-- **enabled** (Boolean)
+- `enabled` (Boolean)
 
 
 
@@ -129,8 +129,8 @@ Read-Only:
 
 Read-Only:
 
-- **certificate_authority_arn_list** (List of String)
-- **enabled** (Boolean)
+- `certificate_authority_arn_list` (List of String)
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--client_authentication--unauthenticated"></a>
@@ -138,7 +138,7 @@ Read-Only:
 
 Read-Only:
 
-- **enabled** (Boolean)
+- `enabled` (Boolean)
 
 
 
@@ -147,8 +147,8 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String)
-- **revision** (Number)
+- `arn` (String)
+- `revision` (Number)
 
 
 <a id="nestedatt--encryption_info"></a>
@@ -156,15 +156,15 @@ Read-Only:
 
 Read-Only:
 
-- **encryption_at_rest** (Attributes) (see [below for nested schema](#nestedatt--encryption_info--encryption_at_rest))
-- **encryption_in_transit** (Attributes) (see [below for nested schema](#nestedatt--encryption_info--encryption_in_transit))
+- `encryption_at_rest` (Attributes) (see [below for nested schema](#nestedatt--encryption_info--encryption_at_rest))
+- `encryption_in_transit` (Attributes) (see [below for nested schema](#nestedatt--encryption_info--encryption_in_transit))
 
 <a id="nestedatt--encryption_info--encryption_at_rest"></a>
 ### Nested Schema for `encryption_info.encryption_at_rest`
 
 Read-Only:
 
-- **data_volume_kms_key_id** (String)
+- `data_volume_kms_key_id` (String)
 
 
 <a id="nestedatt--encryption_info--encryption_in_transit"></a>
@@ -172,8 +172,8 @@ Read-Only:
 
 Read-Only:
 
-- **client_broker** (String)
-- **in_cluster** (Boolean)
+- `client_broker` (String)
+- `in_cluster` (Boolean)
 
 
 
@@ -182,24 +182,24 @@ Read-Only:
 
 Read-Only:
 
-- **broker_logs** (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
+- `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
 
 <a id="nestedatt--logging_info--broker_logs"></a>
 ### Nested Schema for `logging_info.broker_logs`
 
 Read-Only:
 
-- **cloudwatch_logs** (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--cloudwatch_logs))
-- **firehose** (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--firehose))
-- **s3** (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--s3))
+- `cloudwatch_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--cloudwatch_logs))
+- `firehose` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--firehose))
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs--s3))
 
 <a id="nestedatt--logging_info--broker_logs--cloudwatch_logs"></a>
 ### Nested Schema for `logging_info.broker_logs.cloudwatch_logs`
 
 Read-Only:
 
-- **enabled** (Boolean)
-- **log_group** (String)
+- `enabled` (Boolean)
+- `log_group` (String)
 
 
 <a id="nestedatt--logging_info--broker_logs--firehose"></a>
@@ -207,8 +207,8 @@ Read-Only:
 
 Read-Only:
 
-- **delivery_stream** (String)
-- **enabled** (Boolean)
+- `delivery_stream` (String)
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--logging_info--broker_logs--s3"></a>
@@ -216,9 +216,9 @@ Read-Only:
 
 Read-Only:
 
-- **bucket** (String)
-- **enabled** (Boolean)
-- **prefix** (String)
+- `bucket` (String)
+- `enabled` (Boolean)
+- `prefix` (String)
 
 
 
@@ -228,22 +228,22 @@ Read-Only:
 
 Read-Only:
 
-- **prometheus** (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus))
+- `prometheus` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus))
 
 <a id="nestedatt--open_monitoring--prometheus"></a>
 ### Nested Schema for `open_monitoring.prometheus`
 
 Read-Only:
 
-- **jmx_exporter** (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus--jmx_exporter))
-- **node_exporter** (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus--node_exporter))
+- `jmx_exporter` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus--jmx_exporter))
+- `node_exporter` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring--prometheus--node_exporter))
 
 <a id="nestedatt--open_monitoring--prometheus--jmx_exporter"></a>
 ### Nested Schema for `open_monitoring.prometheus.jmx_exporter`
 
 Read-Only:
 
-- **enabled_in_broker** (Boolean)
+- `enabled_in_broker` (Boolean)
 
 
 <a id="nestedatt--open_monitoring--prometheus--node_exporter"></a>
@@ -251,6 +251,6 @@ Read-Only:
 
 Read-Only:
 
-- **enabled_in_broker** (Boolean)
+- `enabled_in_broker` (Boolean)
 
 

@@ -17,31 +17,31 @@ Data Source schema for AWS::CloudFront::OriginRequestPolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **last_modified_time** (String)
-- **origin_request_policy_config** (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config))
+- `last_modified_time` (String)
+- `origin_request_policy_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config))
 
 <a id="nestedatt--origin_request_policy_config"></a>
 ### Nested Schema for `origin_request_policy_config`
 
 Read-Only:
 
-- **comment** (String)
-- **cookies_config** (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--cookies_config))
-- **headers_config** (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--headers_config))
-- **name** (String)
-- **query_strings_config** (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--query_strings_config))
+- `comment` (String)
+- `cookies_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--cookies_config))
+- `headers_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--headers_config))
+- `name` (String)
+- `query_strings_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config--query_strings_config))
 
 <a id="nestedatt--origin_request_policy_config--cookies_config"></a>
 ### Nested Schema for `origin_request_policy_config.cookies_config`
 
 Read-Only:
 
-- **cookie_behavior** (String)
-- **cookies** (List of String)
+- `cookie_behavior` (String)
+- `cookies` (List of String)
 
 
 <a id="nestedatt--origin_request_policy_config--headers_config"></a>
@@ -49,8 +49,8 @@ Read-Only:
 
 Read-Only:
 
-- **header_behavior** (String)
-- **headers** (List of String)
+- `header_behavior` (String)
+- `headers` (List of String)
 
 
 <a id="nestedatt--origin_request_policy_config--query_strings_config"></a>
@@ -58,7 +58,7 @@ Read-Only:
 
 Read-Only:
 
-- **query_string_behavior** (String)
-- **query_strings** (List of String)
+- `query_string_behavior` (String)
+- `query_strings` (List of String)
 
 

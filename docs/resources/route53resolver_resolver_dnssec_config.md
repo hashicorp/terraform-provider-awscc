@@ -17,13 +17,13 @@ Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.
 
 ### Optional
 
-- **resource_id** (String) ResourceId
+- `resource_id` (String) ResourceId
 
 ### Read-Only
 
-- **id** (String) Id
-- **owner_id** (String) AccountId
-- **validation_status** (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
+- `id` (String) Id
+- `owner_id` (String) AccountId
+- `validation_status` (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
 
 ## Import
 

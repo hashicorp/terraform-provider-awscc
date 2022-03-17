@@ -17,62 +17,62 @@ Resource schema for AWS::DataBrew::Job.
 
 ### Required
 
-- **name** (String) Job name
-- **role_arn** (String) Role arn
-- **type** (String) Job type
+- `name` (String) Job name
+- `role_arn` (String) Role arn
+- `type` (String) Job type
 
 ### Optional
 
-- **data_catalog_outputs** (Attributes List) (see [below for nested schema](#nestedatt--data_catalog_outputs))
-- **database_outputs** (Attributes List) (see [below for nested schema](#nestedatt--database_outputs))
-- **dataset_name** (String) Dataset name
-- **encryption_key_arn** (String) Encryption Key Arn
-- **encryption_mode** (String) Encryption mode
-- **job_sample** (Attributes) Job Sample (see [below for nested schema](#nestedatt--job_sample))
-- **log_subscription** (String) Log subscription
-- **max_capacity** (Number) Max capacity
-- **max_retries** (Number) Max retries
-- **output_location** (Attributes) Output location (see [below for nested schema](#nestedatt--output_location))
-- **outputs** (Attributes List) (see [below for nested schema](#nestedatt--outputs))
-- **profile_configuration** (Attributes) Profile Job configuration (see [below for nested schema](#nestedatt--profile_configuration))
-- **project_name** (String) Project name
-- **recipe** (Attributes) (see [below for nested schema](#nestedatt--recipe))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **timeout** (Number) Timeout
-- **validation_configurations** (Attributes List) Data quality rules configuration (see [below for nested schema](#nestedatt--validation_configurations))
+- `data_catalog_outputs` (Attributes List) (see [below for nested schema](#nestedatt--data_catalog_outputs))
+- `database_outputs` (Attributes List) (see [below for nested schema](#nestedatt--database_outputs))
+- `dataset_name` (String) Dataset name
+- `encryption_key_arn` (String) Encryption Key Arn
+- `encryption_mode` (String) Encryption mode
+- `job_sample` (Attributes) Job Sample (see [below for nested schema](#nestedatt--job_sample))
+- `log_subscription` (String) Log subscription
+- `max_capacity` (Number) Max capacity
+- `max_retries` (Number) Max retries
+- `output_location` (Attributes) Output location (see [below for nested schema](#nestedatt--output_location))
+- `outputs` (Attributes List) (see [below for nested schema](#nestedatt--outputs))
+- `profile_configuration` (Attributes) Profile Job configuration (see [below for nested schema](#nestedatt--profile_configuration))
+- `project_name` (String) Project name
+- `recipe` (Attributes) (see [below for nested schema](#nestedatt--recipe))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `timeout` (Number) Timeout
+- `validation_configurations` (Attributes List) Data quality rules configuration (see [below for nested schema](#nestedatt--validation_configurations))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_catalog_outputs"></a>
 ### Nested Schema for `data_catalog_outputs`
 
 Optional:
 
-- **catalog_id** (String)
-- **database_name** (String)
-- **database_options** (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options))
-- **overwrite** (Boolean)
-- **s3_options** (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options))
-- **table_name** (String)
+- `catalog_id` (String)
+- `database_name` (String)
+- `database_options` (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options))
+- `overwrite` (Boolean)
+- `s3_options` (Attributes) (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options))
+- `table_name` (String)
 
 <a id="nestedatt--data_catalog_outputs--database_options"></a>
 ### Nested Schema for `data_catalog_outputs.database_options`
 
 Optional:
 
-- **table_name** (String)
-- **temp_directory** (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options--temp_directory))
+- `table_name` (String)
+- `temp_directory` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--database_options--temp_directory))
 
 <a id="nestedatt--data_catalog_outputs--database_options--temp_directory"></a>
 ### Nested Schema for `data_catalog_outputs.database_options.temp_directory`
 
 Optional:
 
-- **bucket** (String)
-- **bucket_owner** (String)
-- **key** (String)
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
 
 
 
@@ -81,16 +81,16 @@ Optional:
 
 Optional:
 
-- **location** (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options--location))
+- `location` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--data_catalog_outputs--s3_options--location))
 
 <a id="nestedatt--data_catalog_outputs--s3_options--location"></a>
 ### Nested Schema for `data_catalog_outputs.s3_options.location`
 
 Optional:
 
-- **bucket** (String)
-- **bucket_owner** (String)
-- **key** (String)
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
 
 
 
@@ -100,26 +100,26 @@ Optional:
 
 Optional:
 
-- **database_options** (Attributes) (see [below for nested schema](#nestedatt--database_outputs--database_options))
-- **database_output_mode** (String) Database table name
-- **glue_connection_name** (String) Glue connection name
+- `database_options` (Attributes) (see [below for nested schema](#nestedatt--database_outputs--database_options))
+- `database_output_mode` (String) Database table name
+- `glue_connection_name` (String) Glue connection name
 
 <a id="nestedatt--database_outputs--database_options"></a>
 ### Nested Schema for `database_outputs.database_options`
 
 Optional:
 
-- **table_name** (String)
-- **temp_directory** (Attributes) S3 Output location (see [below for nested schema](#nestedatt--database_outputs--database_options--temp_directory))
+- `table_name` (String)
+- `temp_directory` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--database_outputs--database_options--temp_directory))
 
 <a id="nestedatt--database_outputs--database_options--temp_directory"></a>
 ### Nested Schema for `database_outputs.database_options.temp_directory`
 
 Optional:
 
-- **bucket** (String)
-- **bucket_owner** (String)
-- **key** (String)
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
 
 
 
@@ -129,8 +129,8 @@ Optional:
 
 Optional:
 
-- **mode** (String) Sample configuration mode for profile jobs.
-- **size** (Number) Sample configuration size for profile jobs.
+- `mode` (String) Sample configuration mode for profile jobs.
+- `size` (Number) Sample configuration size for profile jobs.
 
 
 <a id="nestedatt--output_location"></a>
@@ -138,9 +138,9 @@ Optional:
 
 Optional:
 
-- **bucket** (String)
-- **bucket_owner** (String)
-- **key** (String)
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
 
 
 <a id="nestedatt--outputs"></a>
@@ -148,27 +148,27 @@ Optional:
 
 Optional:
 
-- **compression_format** (String)
-- **format** (String)
-- **format_options** (Attributes) Format options for job Output (see [below for nested schema](#nestedatt--outputs--format_options))
-- **location** (Attributes) S3 Output location (see [below for nested schema](#nestedatt--outputs--location))
-- **max_output_files** (Number)
-- **overwrite** (Boolean)
-- **partition_columns** (List of String)
+- `compression_format` (String)
+- `format` (String)
+- `format_options` (Attributes) Format options for job Output (see [below for nested schema](#nestedatt--outputs--format_options))
+- `location` (Attributes) S3 Output location (see [below for nested schema](#nestedatt--outputs--location))
+- `max_output_files` (Number)
+- `overwrite` (Boolean)
+- `partition_columns` (List of String)
 
 <a id="nestedatt--outputs--format_options"></a>
 ### Nested Schema for `outputs.format_options`
 
 Optional:
 
-- **csv** (Attributes) Output Csv options (see [below for nested schema](#nestedatt--outputs--format_options--csv))
+- `csv` (Attributes) Output Csv options (see [below for nested schema](#nestedatt--outputs--format_options--csv))
 
 <a id="nestedatt--outputs--format_options--csv"></a>
 ### Nested Schema for `outputs.format_options.csv`
 
 Optional:
 
-- **delimiter** (String)
+- `delimiter` (String)
 
 
 
@@ -177,9 +177,9 @@ Optional:
 
 Optional:
 
-- **bucket** (String)
-- **bucket_owner** (String)
-- **key** (String)
+- `bucket` (String)
+- `bucket_owner` (String)
+- `key` (String)
 
 
 
@@ -188,26 +188,26 @@ Optional:
 
 Optional:
 
-- **column_statistics_configurations** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations))
-- **dataset_statistics_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration))
-- **entity_detector_configuration** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration))
-- **profile_columns** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--profile_columns))
+- `column_statistics_configurations` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations))
+- `dataset_statistics_configuration` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration))
+- `entity_detector_configuration` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration))
+- `profile_columns` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--profile_columns))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations`
 
 Optional:
 
-- **selectors** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--selectors))
-- **statistics** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics))
+- `selectors` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--selectors))
+- `statistics` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--selectors"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations.selectors`
 
 Optional:
 
-- **name** (String)
-- **regex** (String)
+- `name` (String)
+- `regex` (String)
 
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--statistics"></a>
@@ -215,16 +215,16 @@ Optional:
 
 Optional:
 
-- **included_statistics** (List of String)
-- **overrides** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides))
+- `included_statistics` (List of String)
+- `overrides` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides))
 
 <a id="nestedatt--profile_configuration--column_statistics_configurations--statistics--overrides"></a>
 ### Nested Schema for `profile_configuration.column_statistics_configurations.statistics.overrides`
 
 Optional:
 
-- **parameters** (Map of String)
-- **statistic** (String)
+- `parameters` (Map of String)
+- `statistic` (String)
 
 
 
@@ -234,16 +234,16 @@ Optional:
 
 Optional:
 
-- **included_statistics** (List of String)
-- **overrides** (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration--overrides))
+- `included_statistics` (List of String)
+- `overrides` (Attributes List) (see [below for nested schema](#nestedatt--profile_configuration--dataset_statistics_configuration--overrides))
 
 <a id="nestedatt--profile_configuration--dataset_statistics_configuration--overrides"></a>
 ### Nested Schema for `profile_configuration.dataset_statistics_configuration.overrides`
 
 Optional:
 
-- **parameters** (Map of String)
-- **statistic** (String)
+- `parameters` (Map of String)
+- `statistic` (String)
 
 
 
@@ -252,15 +252,15 @@ Optional:
 
 Optional:
 
-- **allowed_statistics** (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics))
-- **entity_types** (List of String)
+- `allowed_statistics` (Attributes) (see [below for nested schema](#nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics))
+- `entity_types` (List of String)
 
 <a id="nestedatt--profile_configuration--entity_detector_configuration--allowed_statistics"></a>
 ### Nested Schema for `profile_configuration.entity_detector_configuration.allowed_statistics`
 
 Optional:
 
-- **statistics** (List of String)
+- `statistics` (List of String)
 
 
 
@@ -269,8 +269,8 @@ Optional:
 
 Optional:
 
-- **name** (String)
-- **regex** (String)
+- `name` (String)
+- `regex` (String)
 
 
 
@@ -279,8 +279,8 @@ Optional:
 
 Optional:
 
-- **name** (String) Recipe name
-- **version** (String) Recipe version
+- `name` (String) Recipe name
+- `version` (String) Recipe version
 
 
 <a id="nestedatt--tags"></a>
@@ -288,8 +288,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--validation_configurations"></a>
@@ -297,8 +297,8 @@ Optional:
 
 Optional:
 
-- **ruleset_arn** (String) Arn of the Ruleset
-- **validation_mode** (String)
+- `ruleset_arn` (String) Arn of the Ruleset
+- `validation_mode` (String)
 
 ## Import
 

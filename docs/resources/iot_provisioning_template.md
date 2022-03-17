@@ -17,29 +17,29 @@ Creates a fleet provisioning template.
 
 ### Required
 
-- **provisioning_role_arn** (String)
-- **template_body** (String)
+- `provisioning_role_arn` (String)
+- `template_body` (String)
 
 ### Optional
 
-- **description** (String)
-- **enabled** (Boolean)
-- **pre_provisioning_hook** (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **template_name** (String)
+- `description` (String)
+- `enabled` (Boolean)
+- `pre_provisioning_hook` (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `template_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **template_arn** (String)
+- `id` (String) Uniquely identifies the resource.
+- `template_arn` (String)
 
 <a id="nestedatt--pre_provisioning_hook"></a>
 ### Nested Schema for `pre_provisioning_hook`
 
 Optional:
 
-- **payload_version** (String)
-- **target_arn** (String)
+- `payload_version` (String)
+- `target_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

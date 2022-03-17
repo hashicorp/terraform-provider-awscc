@@ -17,18 +17,18 @@ Resource Type definition for AWS::ApiGateway::RequestValidator
 
 ### Required
 
-- **rest_api_id** (String) The identifier of the targeted API entity.
+- `rest_api_id` (String) The identifier of the targeted API entity.
 
 ### Optional
 
-- **name** (String) Name of the request validator.
-- **validate_request_body** (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
-- **validate_request_parameters** (Boolean) Indicates whether to validate request parameters.
+- `name` (String) Name of the request validator.
+- `validate_request_body` (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
+- `validate_request_parameters` (Boolean) Indicates whether to validate request parameters.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **request_validator_id** (String) ID of the request validator.
+- `id` (String) Uniquely identifies the resource.
+- `request_validator_id` (String) ID of the request validator.
 
 ## Import
 

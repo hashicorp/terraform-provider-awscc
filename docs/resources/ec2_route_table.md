@@ -17,24 +17,24 @@ Resource Type definition for AWS::EC2::RouteTable
 
 ### Required
 
-- **vpc_id** (String) The ID of the VPC.
+- `vpc_id` (String) The ID of the VPC.
 
 ### Optional
 
-- **tags** (Attributes List) Any tags assigned to the route table. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Any tags assigned to the route table. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **route_table_id** (String) The route table ID.
+- `id` (String) Uniquely identifies the resource.
+- `route_table_id` (String) The route table ID.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

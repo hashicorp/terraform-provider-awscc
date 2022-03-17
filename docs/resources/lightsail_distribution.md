@@ -17,33 +17,33 @@ Resource Type definition for AWS::Lightsail::Distribution
 
 ### Required
 
-- **bundle_id** (String) The bundle ID to use for the distribution.
-- **default_cache_behavior** (Attributes) An object that describes the default cache behavior for the distribution. (see [below for nested schema](#nestedatt--default_cache_behavior))
-- **distribution_name** (String) The name for the distribution.
-- **origin** (Attributes) An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. (see [below for nested schema](#nestedatt--origin))
+- `bundle_id` (String) The bundle ID to use for the distribution.
+- `default_cache_behavior` (Attributes) An object that describes the default cache behavior for the distribution. (see [below for nested schema](#nestedatt--default_cache_behavior))
+- `distribution_name` (String) The name for the distribution.
+- `origin` (Attributes) An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. (see [below for nested schema](#nestedatt--origin))
 
 ### Optional
 
-- **cache_behavior_settings** (Attributes) An object that describes the cache behavior settings for the distribution. (see [below for nested schema](#nestedatt--cache_behavior_settings))
-- **cache_behaviors** (Attributes Set) An array of objects that describe the per-path cache behavior for the distribution. (see [below for nested schema](#nestedatt--cache_behaviors))
-- **certificate_name** (String) The certificate attached to the Distribution.
-- **ip_address_type** (String) The IP address type for the distribution.
-- **is_enabled** (Boolean) Indicates whether the distribution is enabled.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `cache_behavior_settings` (Attributes) An object that describes the cache behavior settings for the distribution. (see [below for nested schema](#nestedatt--cache_behavior_settings))
+- `cache_behaviors` (Attributes Set) An array of objects that describe the per-path cache behavior for the distribution. (see [below for nested schema](#nestedatt--cache_behaviors))
+- `certificate_name` (String) The certificate attached to the Distribution.
+- `ip_address_type` (String) The IP address type for the distribution.
+- `is_enabled` (Boolean) Indicates whether the distribution is enabled.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **able_to_update_bundle** (Boolean) Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.
-- **distribution_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) The status of the distribution.
+- `able_to_update_bundle` (Boolean) Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.
+- `distribution_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) The status of the distribution.
 
 <a id="nestedatt--default_cache_behavior"></a>
 ### Nested Schema for `default_cache_behavior`
 
 Required:
 
-- **behavior** (String) The cache behavior of the distribution.
+- `behavior` (String) The cache behavior of the distribution.
 
 
 <a id="nestedatt--origin"></a>
@@ -51,9 +51,9 @@ Required:
 
 Required:
 
-- **name** (String) The name of the origin resource.
-- **protocol_policy** (String) The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
-- **region_name** (String) The AWS Region name of the origin resource.
+- `name` (String) The name of the origin resource.
+- `protocol_policy` (String) The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
+- `region_name` (String) The AWS Region name of the origin resource.
 
 
 <a id="nestedatt--cache_behavior_settings"></a>
@@ -61,22 +61,22 @@ Required:
 
 Optional:
 
-- **allowed_http_methods** (String) The HTTP methods that are processed and forwarded to the distribution's origin.
-- **cached_http_methods** (String) The HTTP method responses that are cached by your distribution.
-- **default_ttl** (Number) The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.
-- **forwarded_cookies** (Attributes) An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_cookies))
-- **forwarded_headers** (Attributes) An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_headers))
-- **forwarded_query_strings** (Attributes) An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_query_strings))
-- **maximum_ttl** (Number) The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.
-- **minimum_ttl** (Number) The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.
+- `allowed_http_methods` (String) The HTTP methods that are processed and forwarded to the distribution's origin.
+- `cached_http_methods` (String) The HTTP method responses that are cached by your distribution.
+- `default_ttl` (Number) The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.
+- `forwarded_cookies` (Attributes) An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_cookies))
+- `forwarded_headers` (Attributes) An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_headers))
+- `forwarded_query_strings` (Attributes) An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded. (see [below for nested schema](#nestedatt--cache_behavior_settings--forwarded_query_strings))
+- `maximum_ttl` (Number) The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.
+- `minimum_ttl` (Number) The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.
 
 <a id="nestedatt--cache_behavior_settings--forwarded_cookies"></a>
 ### Nested Schema for `cache_behavior_settings.forwarded_cookies`
 
 Optional:
 
-- **cookies_allow_list** (Set of String) The specific cookies to forward to your distribution's origin.
-- **option** (String) Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.
+- `cookies_allow_list` (Set of String) The specific cookies to forward to your distribution's origin.
+- `option` (String) Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.
 
 
 <a id="nestedatt--cache_behavior_settings--forwarded_headers"></a>
@@ -84,8 +84,8 @@ Optional:
 
 Optional:
 
-- **headers_allow_list** (Set of String) The specific headers to forward to your distribution's origin.
-- **option** (String) The headers that you want your distribution to forward to your origin and base caching on.
+- `headers_allow_list` (Set of String) The specific headers to forward to your distribution's origin.
+- `option` (String) The headers that you want your distribution to forward to your origin and base caching on.
 
 
 <a id="nestedatt--cache_behavior_settings--forwarded_query_strings"></a>
@@ -93,8 +93,8 @@ Optional:
 
 Optional:
 
-- **option** (Boolean) Indicates whether the distribution forwards and caches based on query strings.
-- **query_strings_allow_list** (Set of String) The specific query strings that the distribution forwards to the origin.
+- `option` (Boolean) Indicates whether the distribution forwards and caches based on query strings.
+- `query_strings_allow_list` (Set of String) The specific query strings that the distribution forwards to the origin.
 
 
 
@@ -103,8 +103,8 @@ Optional:
 
 Optional:
 
-- **behavior** (String) The cache behavior for the specified path.
-- **path** (String) The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.
+- `behavior` (String) The cache behavior for the specified path.
+- `path` (String) The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.
 
 
 <a id="nestedatt--tags"></a>
@@ -112,8 +112,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -17,31 +17,31 @@ Definition of AWS::RefactorSpaces::Service Resource Type
 
 ### Required
 
-- **application_identifier** (String)
-- **environment_identifier** (String)
+- `application_identifier` (String)
+- `environment_identifier` (String)
 
 ### Optional
 
-- **description** (String)
-- **endpoint_type** (String)
-- **lambda_endpoint** (Attributes) (see [below for nested schema](#nestedatt--lambda_endpoint))
-- **name** (String)
-- **tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
-- **url_endpoint** (Attributes) (see [below for nested schema](#nestedatt--url_endpoint))
-- **vpc_id** (String)
+- `description` (String)
+- `endpoint_type` (String)
+- `lambda_endpoint` (Attributes) (see [below for nested schema](#nestedatt--lambda_endpoint))
+- `name` (String)
+- `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `url_endpoint` (Attributes) (see [below for nested schema](#nestedatt--url_endpoint))
+- `vpc_id` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **service_identifier** (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `service_identifier` (String)
 
 <a id="nestedatt--lambda_endpoint"></a>
 ### Nested Schema for `lambda_endpoint`
 
 Optional:
 
-- **arn** (String)
+- `arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -49,8 +49,8 @@ Optional:
 
 Optional:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 
 <a id="nestedatt--url_endpoint"></a>
@@ -58,8 +58,8 @@ Optional:
 
 Optional:
 
-- **health_url** (String)
-- **url** (String)
+- `health_url` (String)
+- `url` (String)
 
 ## Import
 

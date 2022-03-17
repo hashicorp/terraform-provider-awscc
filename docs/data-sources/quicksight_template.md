@@ -17,21 +17,21 @@ Data Source schema for AWS::QuickSight::Template
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the template.</p>
-- **aws_account_id** (String)
-- **created_time** (String) <p>Time when this was created.</p>
-- **last_updated_time** (String) <p>Time when this was last updated.</p>
-- **name** (String) <p>A display name for the template.</p>
-- **permissions** (Attributes List) <p>A list of resource permissions to be set on the template. </p> (see [below for nested schema](#nestedatt--permissions))
-- **source_entity** (Attributes) <p>The source entity of the template.</p> (see [below for nested schema](#nestedatt--source_entity))
-- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p> (see [below for nested schema](#nestedatt--tags))
-- **template_id** (String)
-- **version** (Attributes) <p>A version of a template.</p> (see [below for nested schema](#nestedatt--version))
-- **version_description** (String) <p>A description of the current template version being created. This API operation creates the
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the template.</p>
+- `aws_account_id` (String)
+- `created_time` (String) <p>Time when this was created.</p>
+- `last_updated_time` (String) <p>Time when this was last updated.</p>
+- `name` (String) <p>A display name for the template.</p>
+- `permissions` (Attributes List) <p>A list of resource permissions to be set on the template. </p> (see [below for nested schema](#nestedatt--permissions))
+- `source_entity` (Attributes) <p>The source entity of the template.</p> (see [below for nested schema](#nestedatt--source_entity))
+- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p> (see [below for nested schema](#nestedatt--tags))
+- `template_id` (String)
+- `version` (Attributes) <p>A version of a template.</p> (see [below for nested schema](#nestedatt--version))
+- `version_description` (String) <p>A description of the current template version being created. This API operation creates the
 			first version of the template. Every time <code>UpdateTemplate</code> is called, a new
 			version is created. Each version of the template maintains a description of the version
 			in the <code>VersionDescription</code> field.</p>
@@ -41,8 +41,8 @@ Data Source schema for AWS::QuickSight::Template
 
 Read-Only:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -64,16 +64,16 @@ Read-Only:
 
 Read-Only:
 
-- **source_analysis** (Attributes) <p>The source analysis of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis))
-- **source_template** (Attributes) <p>The source template of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+- `source_analysis` (Attributes) <p>The source analysis of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis))
+- `source_template` (Attributes) <p>The source template of the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
 
 <a id="nestedatt--source_entity--source_analysis"></a>
 ### Nested Schema for `source_entity.source_analysis`
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **data_set_references** (Attributes List) <p>A structure containing information about the dataset references used as placeholders
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `data_set_references` (Attributes List) <p>A structure containing information about the dataset references used as placeholders
             in the template.</p> (see [below for nested schema](#nestedatt--source_entity--source_analysis--data_set_references))
 
 <a id="nestedatt--source_entity--source_analysis--data_set_references"></a>
@@ -81,8 +81,8 @@ Read-Only:
 
 Read-Only:
 
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+- `data_set_arn` (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- `data_set_placeholder` (String) <p>Dataset placeholder.</p>
 
 
 
@@ -91,7 +91,7 @@ Read-Only:
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 
 
 
@@ -100,8 +100,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--version"></a>
@@ -109,42 +109,42 @@ Read-Only:
 
 Read-Only:
 
-- **created_time** (String) <p>The time that this template version was created.</p>
-- **data_set_configurations** (Attributes List) <p>Schema of the dataset identified by the placeholder. Any dashboard created from this
+- `created_time` (String) <p>The time that this template version was created.</p>
+- `data_set_configurations` (Attributes List) <p>Schema of the dataset identified by the placeholder. Any dashboard created from this
             template should be bound to new datasets matching the same schema described through this
             API operation.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations))
-- **description** (String) <p>The description of the template.</p>
-- **errors** (Attributes List) <p>Errors associated with this template version.</p> (see [below for nested schema](#nestedatt--version--errors))
-- **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
-- **source_entity_arn** (String) <p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this
+- `description` (String) <p>The description of the template.</p>
+- `errors` (Attributes List) <p>Errors associated with this template version.</p> (see [below for nested schema](#nestedatt--version--errors))
+- `sheets` (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--version--sheets))
+- `source_entity_arn` (String) <p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this
             template.</p>
-- **status** (String)
-- **theme_arn** (String) <p>The ARN of the theme associated with this version of the template.</p>
-- **version_number** (Number) <p>The version number of the template version.</p>
+- `status` (String)
+- `theme_arn` (String) <p>The ARN of the theme associated with this version of the template.</p>
+- `version_number` (Number) <p>The version number of the template version.</p>
 
 <a id="nestedatt--version--data_set_configurations"></a>
 ### Nested Schema for `version.data_set_configurations`
 
 Read-Only:
 
-- **column_group_schema_list** (Attributes List) <p>A structure containing the list of column group schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list))
-- **data_set_schema** (Attributes) <p>Dataset schema.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema))
-- **placeholder** (String) <p>Placeholder.</p>
+- `column_group_schema_list` (Attributes List) <p>A structure containing the list of column group schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list))
+- `data_set_schema` (Attributes) <p>Dataset schema.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema))
+- `placeholder` (String) <p>Placeholder.</p>
 
 <a id="nestedatt--version--data_set_configurations--column_group_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.column_group_schema_list`
 
 Read-Only:
 
-- **column_group_column_schema_list** (Attributes List) <p>A structure containing the list of schemas for column group columns.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list))
-- **name** (String) <p>The name of the column group schema.</p>
+- `column_group_column_schema_list` (Attributes List) <p>A structure containing the list of schemas for column group columns.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list))
+- `name` (String) <p>The name of the column group schema.</p>
 
 <a id="nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.column_group_schema_list.name`
 
 Read-Only:
 
-- **name** (String) <p>The name of the column group's column schema.</p>
+- `name` (String) <p>The name of the column group's column schema.</p>
 
 
 
@@ -153,16 +153,16 @@ Read-Only:
 
 Read-Only:
 
-- **column_schema_list** (Attributes List) <p>A structure containing the list of column schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema--column_schema_list))
+- `column_schema_list` (Attributes List) <p>A structure containing the list of column schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema--column_schema_list))
 
 <a id="nestedatt--version--data_set_configurations--data_set_schema--column_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.data_set_schema.column_schema_list`
 
 Read-Only:
 
-- **data_type** (String) <p>The data type of the column schema.</p>
-- **geographic_role** (String) <p>The geographic role of the column schema.</p>
-- **name** (String) <p>The name of the column schema.</p>
+- `data_type` (String) <p>The data type of the column schema.</p>
+- `geographic_role` (String) <p>The geographic role of the column schema.</p>
+- `name` (String) <p>The name of the column schema.</p>
 
 
 
@@ -172,8 +172,8 @@ Read-Only:
 
 Read-Only:
 
-- **message** (String) <p>Description of the error type.</p>
-- **type** (String)
+- `message` (String) <p>Description of the error type.</p>
+- `type` (String)
 
 
 <a id="nestedatt--version--sheets"></a>
@@ -181,8 +181,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+- `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>
-- **sheet_id** (String) <p>The unique identifier associated with a sheet.</p>
+- `sheet_id` (String) <p>The unique identifier associated with a sheet.</p>
 
 

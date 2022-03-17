@@ -17,13 +17,13 @@ Data Source schema for AWS::Personalize::Schema
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **domain** (String) The domain of a Domain dataset group.
-- **name** (String) Name for the schema.
-- **schema** (String) A schema in Avro JSON format.
-- **schema_arn** (String) Arn for the schema.
+- `domain` (String) The domain of a Domain dataset group.
+- `name` (String) Name for the schema.
+- `schema` (String) A schema in Avro JSON format.
+- `schema_arn` (String) Arn for the schema.
 
 

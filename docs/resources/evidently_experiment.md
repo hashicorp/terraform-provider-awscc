@@ -17,35 +17,35 @@ Resource Type definition for AWS::Evidently::Experiment.
 
 ### Required
 
-- **metric_goals** (Attributes List) (see [below for nested schema](#nestedatt--metric_goals))
-- **name** (String)
-- **online_ab_config** (Attributes) (see [below for nested schema](#nestedatt--online_ab_config))
-- **project** (String)
-- **treatments** (Attributes List) (see [below for nested schema](#nestedatt--treatments))
+- `metric_goals` (Attributes List) (see [below for nested schema](#nestedatt--metric_goals))
+- `name` (String)
+- `online_ab_config` (Attributes) (see [below for nested schema](#nestedatt--online_ab_config))
+- `project` (String)
+- `treatments` (Attributes List) (see [below for nested schema](#nestedatt--treatments))
 
 ### Optional
 
-- **description** (String)
-- **randomization_salt** (String)
-- **sampling_rate** (Number)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `randomization_salt` (String)
+- `sampling_rate` (Number)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--metric_goals"></a>
 ### Nested Schema for `metric_goals`
 
 Required:
 
-- **desired_change** (String)
-- **entity_id_key** (String) The JSON path to reference the entity id in the event.
-- **event_pattern** (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
-- **metric_name** (String)
-- **unit_label** (String)
-- **value_key** (String) The JSON path to reference the numerical metric value in the event.
+- `desired_change` (String)
+- `entity_id_key` (String) The JSON path to reference the entity id in the event.
+- `event_pattern` (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
+- `metric_name` (String)
+- `unit_label` (String)
+- `value_key` (String) The JSON path to reference the numerical metric value in the event.
 
 
 <a id="nestedatt--online_ab_config"></a>
@@ -53,16 +53,16 @@ Required:
 
 Required:
 
-- **control_treatment_name** (String)
-- **treatment_weights** (Attributes Set) (see [below for nested schema](#nestedatt--online_ab_config--treatment_weights))
+- `control_treatment_name` (String)
+- `treatment_weights` (Attributes Set) (see [below for nested schema](#nestedatt--online_ab_config--treatment_weights))
 
 <a id="nestedatt--online_ab_config--treatment_weights"></a>
 ### Nested Schema for `online_ab_config.treatment_weights`
 
 Required:
 
-- **split_weight** (Number)
-- **treatment** (String)
+- `split_weight` (Number)
+- `treatment` (String)
 
 
 
@@ -71,10 +71,10 @@ Required:
 
 Required:
 
-- **description** (String)
-- **feature** (String)
-- **treatment_name** (String)
-- **variation** (String)
+- `description` (String)
+- `feature` (String)
+- `treatment_name` (String)
+- `variation` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -82,8 +82,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -17,27 +17,27 @@ Data Source schema for AWS::EC2::NetworkInsightsPath
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **created_date** (String)
-- **destination** (String)
-- **destination_ip** (String)
-- **destination_port** (Number)
-- **network_insights_path_arn** (String)
-- **network_insights_path_id** (String)
-- **protocol** (String)
-- **source** (String)
-- **source_ip** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `created_date` (String)
+- `destination` (String)
+- `destination_ip` (String)
+- `destination_port` (Number)
+- `network_insights_path_arn` (String)
+- `network_insights_path_id` (String)
+- `protocol` (String)
+- `source` (String)
+- `source_ip` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

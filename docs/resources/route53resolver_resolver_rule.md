@@ -17,29 +17,29 @@ Resource Type definition for AWS::Route53Resolver::ResolverRule
 
 ### Required
 
-- **domain_name** (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
-- **rule_type** (String) When you want to forward DNS queries for specified domain name to resolvers on your network, specify FORWARD. When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for a subdomain of that domain, specify SYSTEM.
+- `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
+- `rule_type` (String) When you want to forward DNS queries for specified domain name to resolvers on your network, specify FORWARD. When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for a subdomain of that domain, specify SYSTEM.
 
 ### Optional
 
-- **name** (String) The name for the Resolver rule
-- **resolver_endpoint_id** (String) The ID of the endpoint that the rule is associated with.
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **target_ips** (Attributes List) An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported. (see [below for nested schema](#nestedatt--target_ips))
+- `name` (String) The name for the Resolver rule
+- `resolver_endpoint_id` (String) The ID of the endpoint that the rule is associated with.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_ips` (Attributes List) An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported. (see [below for nested schema](#nestedatt--target_ips))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the resolver rule.
-- **id** (String) Uniquely identifies the resource.
-- **resolver_rule_id** (String) The ID of the endpoint that the rule is associated with.
+- `arn` (String) The Amazon Resource Name (ARN) of the resolver rule.
+- `id` (String) Uniquely identifies the resource.
+- `resolver_rule_id` (String) The ID of the endpoint that the rule is associated with.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--target_ips"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **ip** (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
-- **port** (String) The port at Ip that you want to forward DNS queries to.
+- `ip` (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+- `port` (String) The port at Ip that you want to forward DNS queries to.
 
 ## Import
 

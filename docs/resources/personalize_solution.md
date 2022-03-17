@@ -17,40 +17,40 @@ Resource schema for AWS::Personalize::Solution.
 
 ### Required
 
-- **dataset_group_arn** (String) The ARN of the dataset group that provides the training data.
-- **name** (String) The name for the solution
+- `dataset_group_arn` (String) The ARN of the dataset group that provides the training data.
+- `name` (String) The name for the solution
 
 ### Optional
 
-- **event_type** (String) When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.
-- **perform_auto_ml** (Boolean) Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.
-- **perform_hpo** (Boolean) Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.
-- **recipe_arn** (String) The ARN of the recipe to use for model training. Only specified when performAutoML is false.
-- **solution_config** (Attributes) The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration. (see [below for nested schema](#nestedatt--solution_config))
+- `event_type` (String) When your have multiple event types (using an EVENT_TYPE schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model. If you do not provide an eventType, Amazon Personalize will use all interactions for training with equal weight regardless of type.
+- `perform_auto_ml` (Boolean) Whether to perform automated machine learning (AutoML). The default is false. For this case, you must specify recipeArn.
+- `perform_hpo` (Boolean) Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.
+- `recipe_arn` (String) The ARN of the recipe to use for model training. Only specified when performAutoML is false.
+- `solution_config` (Attributes) The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration. (see [below for nested schema](#nestedatt--solution_config))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **solution_arn** (String) The ARN of the solution
+- `id` (String) Uniquely identifies the resource.
+- `solution_arn` (String) The ARN of the solution
 
 <a id="nestedatt--solution_config"></a>
 ### Nested Schema for `solution_config`
 
 Optional:
 
-- **algorithm_hyper_parameters** (Map of String) Lists the hyperparameter names and ranges.
-- **auto_ml_config** (Attributes) The AutoMLConfig object containing a list of recipes to search when AutoML is performed. (see [below for nested schema](#nestedatt--solution_config--auto_ml_config))
-- **event_value_threshold** (String) Only events with a value greater than or equal to this threshold are used for training a model.
-- **feature_transformation_parameters** (Map of String) Lists the feature transformation parameters.
-- **hpo_config** (Attributes) Describes the properties for hyperparameter optimization (HPO) (see [below for nested schema](#nestedatt--solution_config--hpo_config))
+- `algorithm_hyper_parameters` (Map of String) Lists the hyperparameter names and ranges.
+- `auto_ml_config` (Attributes) The AutoMLConfig object containing a list of recipes to search when AutoML is performed. (see [below for nested schema](#nestedatt--solution_config--auto_ml_config))
+- `event_value_threshold` (String) Only events with a value greater than or equal to this threshold are used for training a model.
+- `feature_transformation_parameters` (Map of String) Lists the feature transformation parameters.
+- `hpo_config` (Attributes) Describes the properties for hyperparameter optimization (HPO) (see [below for nested schema](#nestedatt--solution_config--hpo_config))
 
 <a id="nestedatt--solution_config--auto_ml_config"></a>
 ### Nested Schema for `solution_config.auto_ml_config`
 
 Optional:
 
-- **metric_name** (String) The metric to optimize.
-- **recipe_list** (List of String) The list of candidate recipes.
+- `metric_name` (String) The metric to optimize.
+- `recipe_list` (List of String) The list of candidate recipes.
 
 
 <a id="nestedatt--solution_config--hpo_config"></a>
@@ -58,26 +58,26 @@ Optional:
 
 Optional:
 
-- **algorithm_hyper_parameter_ranges** (Attributes) The hyperparameters and their allowable ranges (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges))
-- **hpo_objective** (Attributes) The metric to optimize during HPO. (see [below for nested schema](#nestedatt--solution_config--hpo_config--hpo_objective))
-- **hpo_resource_config** (Attributes) Describes the resource configuration for hyperparameter optimization (HPO). (see [below for nested schema](#nestedatt--solution_config--hpo_config--hpo_resource_config))
+- `algorithm_hyper_parameter_ranges` (Attributes) The hyperparameters and their allowable ranges (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges))
+- `hpo_objective` (Attributes) The metric to optimize during HPO. (see [below for nested schema](#nestedatt--solution_config--hpo_config--hpo_objective))
+- `hpo_resource_config` (Attributes) Describes the resource configuration for hyperparameter optimization (HPO). (see [below for nested schema](#nestedatt--solution_config--hpo_config--hpo_resource_config))
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges"></a>
 ### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges`
 
 Optional:
 
-- **categorical_hyper_parameter_ranges** (Attributes List) The categorical hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--categorical_hyper_parameter_ranges))
-- **continuous_hyper_parameter_ranges** (Attributes List) The continuous hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--continuous_hyper_parameter_ranges))
-- **integer_hyper_parameter_ranges** (Attributes List) The integer hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--integer_hyper_parameter_ranges))
+- `categorical_hyper_parameter_ranges` (Attributes List) The categorical hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--categorical_hyper_parameter_ranges))
+- `continuous_hyper_parameter_ranges` (Attributes List) The continuous hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--continuous_hyper_parameter_ranges))
+- `integer_hyper_parameter_ranges` (Attributes List) The integer hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--integer_hyper_parameter_ranges))
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--categorical_hyper_parameter_ranges"></a>
 ### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges.integer_hyper_parameter_ranges`
 
 Optional:
 
-- **name** (String) The name of the hyperparameter.
-- **values** (List of String) A list of the categories for the hyperparameter.
+- `name` (String) The name of the hyperparameter.
+- `values` (List of String) A list of the categories for the hyperparameter.
 
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--continuous_hyper_parameter_ranges"></a>
@@ -85,9 +85,9 @@ Optional:
 
 Optional:
 
-- **max_value** (Number) The maximum allowable value for the hyperparameter.
-- **min_value** (Number) The minimum allowable value for the hyperparameter.
-- **name** (String) The name of the hyperparameter.
+- `max_value` (Number) The maximum allowable value for the hyperparameter.
+- `min_value` (Number) The minimum allowable value for the hyperparameter.
+- `name` (String) The name of the hyperparameter.
 
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--integer_hyper_parameter_ranges"></a>
@@ -95,9 +95,9 @@ Optional:
 
 Optional:
 
-- **max_value** (Number) The maximum allowable value for the hyperparameter.
-- **min_value** (Number) The minimum allowable value for the hyperparameter.
-- **name** (String) The name of the hyperparameter.
+- `max_value` (Number) The maximum allowable value for the hyperparameter.
+- `min_value` (Number) The minimum allowable value for the hyperparameter.
+- `name` (String) The name of the hyperparameter.
 
 
 
@@ -106,9 +106,9 @@ Optional:
 
 Optional:
 
-- **metric_name** (String) The name of the metric
-- **metric_regex** (String) A regular expression for finding the metric in the training job logs.
-- **type** (String) The type of the metric. Valid values are Maximize and Minimize.
+- `metric_name` (String) The name of the metric
+- `metric_regex` (String) A regular expression for finding the metric in the training job logs.
+- `type` (String) The type of the metric. Valid values are Maximize and Minimize.
 
 
 <a id="nestedatt--solution_config--hpo_config--hpo_resource_config"></a>
@@ -116,8 +116,8 @@ Optional:
 
 Optional:
 
-- **max_number_of_training_jobs** (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
-- **max_parallel_training_jobs** (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
+- `max_number_of_training_jobs` (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
+- `max_parallel_training_jobs` (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
 
 ## Import
 

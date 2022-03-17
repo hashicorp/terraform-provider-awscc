@@ -17,37 +17,37 @@ Resource Type definition for AWS::EC2::Subnet
 
 ### Required
 
-- **vpc_id** (String)
+- `vpc_id` (String)
 
 ### Optional
 
-- **assign_ipv_6_address_on_creation** (Boolean)
-- **availability_zone** (String)
-- **availability_zone_id** (String)
-- **cidr_block** (String)
-- **enable_dns_64** (Boolean)
-- **ipv_6_cidr_block** (String)
-- **ipv_6_native** (Boolean)
-- **map_public_ip_on_launch** (Boolean)
-- **outpost_arn** (String)
-- **private_dns_name_options_on_launch** (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `assign_ipv_6_address_on_creation` (Boolean)
+- `availability_zone` (String)
+- `availability_zone_id` (String)
+- `cidr_block` (String)
+- `enable_dns_64` (Boolean)
+- `ipv_6_cidr_block` (String)
+- `ipv_6_native` (Boolean)
+- `map_public_ip_on_launch` (Boolean)
+- `outpost_arn` (String)
+- `private_dns_name_options_on_launch` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **ipv_6_cidr_blocks** (List of String)
-- **network_acl_association_id** (String)
-- **subnet_id** (String)
+- `id` (String) Uniquely identifies the resource.
+- `ipv_6_cidr_blocks` (List of String)
+- `network_acl_association_id` (String)
+- `subnet_id` (String)
 
 <a id="nestedatt--private_dns_name_options_on_launch"></a>
 ### Nested Schema for `private_dns_name_options_on_launch`
 
 Optional:
 
-- **enable_resource_name_dns_a_record** (Boolean)
-- **enable_resource_name_dns_aaaa_record** (Boolean)
-- **hostname_type** (String)
+- `enable_resource_name_dns_a_record` (Boolean)
+- `enable_resource_name_dns_aaaa_record` (Boolean)
+- `hostname_type` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -55,8 +55,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,21 +17,21 @@ Data Source schema for AWS::Panorama::PackageVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **is_latest_patch** (Boolean)
-- **mark_latest** (Boolean)
-- **owner_account** (String)
-- **package_arn** (String)
-- **package_id** (String)
-- **package_name** (String)
-- **package_version** (String)
-- **patch_version** (String)
-- **registered_time** (Number)
-- **status** (String)
-- **status_description** (String)
-- **updated_latest_patch_version** (String)
+- `is_latest_patch` (Boolean)
+- `mark_latest` (Boolean)
+- `owner_account` (String)
+- `package_arn` (String)
+- `package_id` (String)
+- `package_name` (String)
+- `package_version` (String)
+- `patch_version` (String)
+- `registered_time` (Number)
+- `status` (String)
+- `status_description` (String)
+- `updated_latest_patch_version` (String)
 
 

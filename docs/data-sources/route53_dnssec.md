@@ -17,10 +17,10 @@ Data Source schema for AWS::Route53::DNSSEC
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **hosted_zone_id** (String) The unique string (ID) used to identify a hosted zone.
+- `hosted_zone_id` (String) The unique string (ID) used to identify a hosted zone.
 
 

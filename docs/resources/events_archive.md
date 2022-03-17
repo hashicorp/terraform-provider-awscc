@@ -17,19 +17,19 @@ Resource Type definition for AWS::Events::Archive
 
 ### Required
 
-- **source_arn** (String)
+- `source_arn` (String)
 
 ### Optional
 
-- **description** (String)
-- **event_pattern** (Map of String)
-- **retention_days** (Number)
+- `description` (String)
+- `event_pattern` (Map of String)
+- `retention_days` (Number)
 
 ### Read-Only
 
-- **archive_name** (String)
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `archive_name` (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

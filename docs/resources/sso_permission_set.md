@@ -17,30 +17,30 @@ Resource Type definition for SSO PermissionSet
 
 ### Required
 
-- **instance_arn** (String) The sso instance arn that the permission set is owned.
-- **name** (String) The name you want to assign to this permission set.
+- `instance_arn` (String) The sso instance arn that the permission set is owned.
+- `name` (String) The name you want to assign to this permission set.
 
 ### Optional
 
-- **description** (String) The permission set description.
-- **inline_policy** (String) The inline policy to put in permission set.
-- **managed_policies** (List of String)
-- **relay_state_type** (String) The relay state URL that redirect links to any service in the AWS Management Console.
-- **session_duration** (String) The length of time that a user can be signed in to an AWS account.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The permission set description.
+- `inline_policy` (String) The inline policy to put in permission set.
+- `managed_policies` (List of String)
+- `relay_state_type` (String) The relay state URL that redirect links to any service in the AWS Management Console.
+- `session_duration` (String) The length of time that a user can be signed in to an AWS account.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **permission_set_arn** (String) The permission set that the policy will be attached to
+- `id` (String) Uniquely identifies the resource.
+- `permission_set_arn` (String) The permission set that the policy will be attached to
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

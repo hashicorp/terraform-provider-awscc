@@ -17,13 +17,13 @@ Data Source schema for AWS::Route53Resolver::ResolverRuleAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **name** (String) The name of an association between a Resolver rule and a VPC.
-- **resolver_rule_association_id** (String) Primary Identifier for Resolver Rule Association
-- **resolver_rule_id** (String) The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.
-- **vpc_id** (String) The ID of the VPC that you associated the Resolver rule with.
+- `name` (String) The name of an association between a Resolver rule and a VPC.
+- `resolver_rule_association_id` (String) Primary Identifier for Resolver Rule Association
+- `resolver_rule_id` (String) The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.
+- `vpc_id` (String) The ID of the VPC that you associated the Resolver rule with.
 
 

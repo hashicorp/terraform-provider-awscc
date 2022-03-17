@@ -17,49 +17,49 @@ Data Source schema for AWS::Batch::ComputeEnvironment
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **compute_environment_arn** (String)
-- **compute_environment_name** (String)
-- **compute_resources** (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
-- **service_role** (String)
-- **state** (String)
-- **tags** (Map of String) A key-value pair to associate with a resource.
-- **type** (String)
-- **unmanagedv_cpus** (Number)
+- `compute_environment_arn` (String)
+- `compute_environment_name` (String)
+- `compute_resources` (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
+- `service_role` (String)
+- `state` (String)
+- `tags` (Map of String) A key-value pair to associate with a resource.
+- `type` (String)
+- `unmanagedv_cpus` (Number)
 
 <a id="nestedatt--compute_resources"></a>
 ### Nested Schema for `compute_resources`
 
 Read-Only:
 
-- **allocation_strategy** (String)
-- **bid_percentage** (Number)
-- **desiredv_cpus** (Number)
-- **ec_2_configuration** (Attributes List) (see [below for nested schema](#nestedatt--compute_resources--ec_2_configuration))
-- **ec_2_key_pair** (String)
-- **image_id** (String)
-- **instance_role** (String)
-- **instance_types** (List of String)
-- **launch_template** (Attributes) (see [below for nested schema](#nestedatt--compute_resources--launch_template))
-- **maxv_cpus** (Number)
-- **minv_cpus** (Number)
-- **placement_group** (String)
-- **security_group_ids** (List of String)
-- **spot_iam_fleet_role** (String)
-- **subnets** (List of String)
-- **tags** (Map of String) A key-value pair to associate with a resource.
-- **type** (String)
+- `allocation_strategy` (String)
+- `bid_percentage` (Number)
+- `desiredv_cpus` (Number)
+- `ec_2_configuration` (Attributes List) (see [below for nested schema](#nestedatt--compute_resources--ec_2_configuration))
+- `ec_2_key_pair` (String)
+- `image_id` (String)
+- `instance_role` (String)
+- `instance_types` (List of String)
+- `launch_template` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--launch_template))
+- `maxv_cpus` (Number)
+- `minv_cpus` (Number)
+- `placement_group` (String)
+- `security_group_ids` (List of String)
+- `spot_iam_fleet_role` (String)
+- `subnets` (List of String)
+- `tags` (Map of String) A key-value pair to associate with a resource.
+- `type` (String)
 
 <a id="nestedatt--compute_resources--ec_2_configuration"></a>
 ### Nested Schema for `compute_resources.ec_2_configuration`
 
 Read-Only:
 
-- **image_id_override** (String)
-- **image_type** (String)
+- `image_id_override` (String)
+- `image_type` (String)
 
 
 <a id="nestedatt--compute_resources--launch_template"></a>
@@ -67,8 +67,8 @@ Read-Only:
 
 Read-Only:
 
-- **launch_template_id** (String)
-- **launch_template_name** (String)
-- **version** (String)
+- `launch_template_id` (String)
+- `launch_template_name` (String)
+- `version` (String)
 
 

@@ -17,21 +17,21 @@ Data Source schema for AWS::AutoScaling::WarmPool
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **auto_scaling_group_name** (String)
-- **instance_reuse_policy** (Attributes) (see [below for nested schema](#nestedatt--instance_reuse_policy))
-- **max_group_prepared_capacity** (Number)
-- **min_size** (Number)
-- **pool_state** (String)
+- `auto_scaling_group_name` (String)
+- `instance_reuse_policy` (Attributes) (see [below for nested schema](#nestedatt--instance_reuse_policy))
+- `max_group_prepared_capacity` (Number)
+- `min_size` (Number)
+- `pool_state` (String)
 
 <a id="nestedatt--instance_reuse_policy"></a>
 ### Nested Schema for `instance_reuse_policy`
 
 Read-Only:
 
-- **reuse_on_scale_in** (Boolean)
+- `reuse_on_scale_in` (Boolean)
 
 

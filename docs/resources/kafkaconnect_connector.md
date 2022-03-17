@@ -17,52 +17,52 @@ Resource Type definition for AWS::KafkaConnect::Connector
 
 ### Required
 
-- **capacity** (Attributes) Information about the capacity allocated to the connector. (see [below for nested schema](#nestedatt--capacity))
-- **connector_configuration** (Map of String) The configuration for the connector.
-- **connector_name** (String) The name of the connector.
-- **kafka_cluster** (Attributes) Details of how to connect to the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster))
-- **kafka_cluster_client_authentication** (Attributes) Details of the client authentication used by the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster_client_authentication))
-- **kafka_cluster_encryption_in_transit** (Attributes) Details of encryption in transit to the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster_encryption_in_transit))
-- **kafka_connect_version** (String) The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.
-- **plugins** (Attributes Set) List of plugins to use with the connector. (see [below for nested schema](#nestedatt--plugins))
-- **service_execution_role_arn** (String) The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.
+- `capacity` (Attributes) Information about the capacity allocated to the connector. (see [below for nested schema](#nestedatt--capacity))
+- `connector_configuration` (Map of String) The configuration for the connector.
+- `connector_name` (String) The name of the connector.
+- `kafka_cluster` (Attributes) Details of how to connect to the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster))
+- `kafka_cluster_client_authentication` (Attributes) Details of the client authentication used by the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster_client_authentication))
+- `kafka_cluster_encryption_in_transit` (Attributes) Details of encryption in transit to the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster_encryption_in_transit))
+- `kafka_connect_version` (String) The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.
+- `plugins` (Attributes Set) List of plugins to use with the connector. (see [below for nested schema](#nestedatt--plugins))
+- `service_execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.
 
 ### Optional
 
-- **connector_description** (String) A summary description of the connector.
-- **log_delivery** (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
-- **worker_configuration** (Attributes) Specifies the worker configuration to use with the connector. (see [below for nested schema](#nestedatt--worker_configuration))
+- `connector_description` (String) A summary description of the connector.
+- `log_delivery` (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
+- `worker_configuration` (Attributes) Specifies the worker configuration to use with the connector. (see [below for nested schema](#nestedatt--worker_configuration))
 
 ### Read-Only
 
-- **connector_arn** (String) Amazon Resource Name for the created Connector.
-- **id** (String) Uniquely identifies the resource.
+- `connector_arn` (String) Amazon Resource Name for the created Connector.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--capacity"></a>
 ### Nested Schema for `capacity`
 
 Required:
 
-- **auto_scaling** (Attributes) Details about auto scaling of a connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling))
-- **provisioned_capacity** (Attributes) Details about a fixed capacity allocated to a connector. (see [below for nested schema](#nestedatt--capacity--provisioned_capacity))
+- `auto_scaling` (Attributes) Details about auto scaling of a connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling))
+- `provisioned_capacity` (Attributes) Details about a fixed capacity allocated to a connector. (see [below for nested schema](#nestedatt--capacity--provisioned_capacity))
 
 <a id="nestedatt--capacity--auto_scaling"></a>
 ### Nested Schema for `capacity.auto_scaling`
 
 Required:
 
-- **max_worker_count** (Number) The maximum number of workers for a connector.
-- **mcu_count** (Number) Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.
-- **min_worker_count** (Number) The minimum number of workers for a connector.
-- **scale_in_policy** (Attributes) Information about the scale in policy of the connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling--scale_in_policy))
-- **scale_out_policy** (Attributes) Information about the scale out policy of the connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling--scale_out_policy))
+- `max_worker_count` (Number) The maximum number of workers for a connector.
+- `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.
+- `min_worker_count` (Number) The minimum number of workers for a connector.
+- `scale_in_policy` (Attributes) Information about the scale in policy of the connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling--scale_in_policy))
+- `scale_out_policy` (Attributes) Information about the scale out policy of the connector. (see [below for nested schema](#nestedatt--capacity--auto_scaling--scale_out_policy))
 
 <a id="nestedatt--capacity--auto_scaling--scale_in_policy"></a>
 ### Nested Schema for `capacity.auto_scaling.scale_in_policy`
 
 Required:
 
-- **cpu_utilization_percentage** (Number) Specifies the CPU utilization percentage threshold at which connector scale in should trigger.
+- `cpu_utilization_percentage` (Number) Specifies the CPU utilization percentage threshold at which connector scale in should trigger.
 
 
 <a id="nestedatt--capacity--auto_scaling--scale_out_policy"></a>
@@ -70,7 +70,7 @@ Required:
 
 Required:
 
-- **cpu_utilization_percentage** (Number) Specifies the CPU utilization percentage threshold at which connector scale out should trigger.
+- `cpu_utilization_percentage` (Number) Specifies the CPU utilization percentage threshold at which connector scale out should trigger.
 
 
 
@@ -79,8 +79,8 @@ Required:
 
 Required:
 
-- **mcu_count** (Number) Specifies how many MSK Connect Units (MCU) are allocated to the connector.
-- **worker_count** (Number) Number of workers for a connector.
+- `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) are allocated to the connector.
+- `worker_count` (Number) Number of workers for a connector.
 
 
 
@@ -89,23 +89,23 @@ Required:
 
 Required:
 
-- **apache_kafka_cluster** (Attributes) Details of how to connect to an Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster--apache_kafka_cluster))
+- `apache_kafka_cluster` (Attributes) Details of how to connect to an Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster--apache_kafka_cluster))
 
 <a id="nestedatt--kafka_cluster--apache_kafka_cluster"></a>
 ### Nested Schema for `kafka_cluster.apache_kafka_cluster`
 
 Required:
 
-- **bootstrap_servers** (String) The bootstrap servers string of the Apache Kafka cluster.
-- **vpc** (Attributes) Information about a VPC used with the connector. (see [below for nested schema](#nestedatt--kafka_cluster--apache_kafka_cluster--vpc))
+- `bootstrap_servers` (String) The bootstrap servers string of the Apache Kafka cluster.
+- `vpc` (Attributes) Information about a VPC used with the connector. (see [below for nested schema](#nestedatt--kafka_cluster--apache_kafka_cluster--vpc))
 
 <a id="nestedatt--kafka_cluster--apache_kafka_cluster--vpc"></a>
 ### Nested Schema for `kafka_cluster.apache_kafka_cluster.vpc`
 
 Required:
 
-- **security_groups** (Set of String) The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.
-- **subnets** (Set of String) The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.
+- `security_groups` (Set of String) The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.
+- `subnets` (Set of String) The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.
 
 
 
@@ -115,7 +115,7 @@ Required:
 
 Required:
 
-- **authentication_type** (String) The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.
+- `authentication_type` (String) The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.
 
 
 <a id="nestedatt--kafka_cluster_encryption_in_transit"></a>
@@ -123,7 +123,7 @@ Required:
 
 Required:
 
-- **encryption_type** (String) The type of encryption in transit to the Kafka cluster.
+- `encryption_type` (String) The type of encryption in transit to the Kafka cluster.
 
 
 <a id="nestedatt--plugins"></a>
@@ -131,15 +131,15 @@ Required:
 
 Required:
 
-- **custom_plugin** (Attributes) Details about a custom plugin. (see [below for nested schema](#nestedatt--plugins--custom_plugin))
+- `custom_plugin` (Attributes) Details about a custom plugin. (see [below for nested schema](#nestedatt--plugins--custom_plugin))
 
 <a id="nestedatt--plugins--custom_plugin"></a>
 ### Nested Schema for `plugins.custom_plugin`
 
 Required:
 
-- **custom_plugin_arn** (String) The Amazon Resource Name (ARN) of the custom plugin to use.
-- **revision** (Number) The revision of the custom plugin to use.
+- `custom_plugin_arn` (String) The Amazon Resource Name (ARN) of the custom plugin to use.
+- `revision` (Number) The revision of the custom plugin to use.
 
 
 
@@ -148,24 +148,24 @@ Required:
 
 Optional:
 
-- **worker_log_delivery** (Attributes) Specifies where worker logs are delivered. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery))
+- `worker_log_delivery` (Attributes) Specifies where worker logs are delivered. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery))
 
 <a id="nestedatt--log_delivery--worker_log_delivery"></a>
 ### Nested Schema for `log_delivery.worker_log_delivery`
 
 Optional:
 
-- **cloudwatch_logs** (Attributes) Details about delivering logs to Amazon CloudWatch Logs. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--cloudwatch_logs))
-- **firehose** (Attributes) Details about delivering logs to Amazon Kinesis Data Firehose. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--firehose))
-- **s3** (Attributes) Details about delivering logs to Amazon S3. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--s3))
+- `cloudwatch_logs` (Attributes) Details about delivering logs to Amazon CloudWatch Logs. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--cloudwatch_logs))
+- `firehose` (Attributes) Details about delivering logs to Amazon Kinesis Data Firehose. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--firehose))
+- `s3` (Attributes) Details about delivering logs to Amazon S3. (see [below for nested schema](#nestedatt--log_delivery--worker_log_delivery--s3))
 
 <a id="nestedatt--log_delivery--worker_log_delivery--cloudwatch_logs"></a>
 ### Nested Schema for `log_delivery.worker_log_delivery.cloudwatch_logs`
 
 Optional:
 
-- **enabled** (Boolean) Specifies whether the logs get sent to the specified CloudWatch Logs destination.
-- **log_group** (String) The CloudWatch log group that is the destination for log delivery.
+- `enabled` (Boolean) Specifies whether the logs get sent to the specified CloudWatch Logs destination.
+- `log_group` (String) The CloudWatch log group that is the destination for log delivery.
 
 
 <a id="nestedatt--log_delivery--worker_log_delivery--firehose"></a>
@@ -173,8 +173,8 @@ Optional:
 
 Optional:
 
-- **delivery_stream** (String) The Kinesis Data Firehose delivery stream that is the destination for log delivery.
-- **enabled** (Boolean) Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.
+- `delivery_stream` (String) The Kinesis Data Firehose delivery stream that is the destination for log delivery.
+- `enabled` (Boolean) Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.
 
 
 <a id="nestedatt--log_delivery--worker_log_delivery--s3"></a>
@@ -182,9 +182,9 @@ Optional:
 
 Optional:
 
-- **bucket** (String) The name of the S3 bucket that is the destination for log delivery.
-- **enabled** (Boolean) Specifies whether the logs get sent to the specified Amazon S3 destination.
-- **prefix** (String) The S3 prefix that is the destination for log delivery.
+- `bucket` (String) The name of the S3 bucket that is the destination for log delivery.
+- `enabled` (Boolean) Specifies whether the logs get sent to the specified Amazon S3 destination.
+- `prefix` (String) The S3 prefix that is the destination for log delivery.
 
 
 
@@ -194,8 +194,8 @@ Optional:
 
 Optional:
 
-- **revision** (Number) The revision of the worker configuration to use.
-- **worker_configuration_arn** (String) The Amazon Resource Name (ARN) of the worker configuration to use.
+- `revision` (Number) The revision of the worker configuration to use.
+- `worker_configuration_arn` (String) The Amazon Resource Name (ARN) of the worker configuration to use.
 
 ## Import
 

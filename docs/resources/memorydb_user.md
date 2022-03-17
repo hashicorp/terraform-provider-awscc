@@ -17,27 +17,27 @@ Resource Type definition for AWS::MemoryDB::User
 
 ### Required
 
-- **access_string** (String) Access permissions string used for this user account.
-- **authentication_mode** (Attributes) (see [below for nested schema](#nestedatt--authentication_mode))
-- **user_name** (String) The name of the user.
+- `access_string` (String) Access permissions string used for this user account.
+- `authentication_mode` (Attributes) (see [below for nested schema](#nestedatt--authentication_mode))
+- `user_name` (String) The name of the user.
 
 ### Optional
 
-- **tags** (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the user account.
-- **id** (String) Uniquely identifies the resource.
-- **status** (String) Indicates the user status. Can be "active", "modifying" or "deleting".
+- `arn` (String) The Amazon Resource Name (ARN) of the user account.
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".
 
 <a id="nestedatt--authentication_mode"></a>
 ### Nested Schema for `authentication_mode`
 
 Required:
 
-- **passwords** (List of String) Passwords used for this user account. You can create up to two passwords for each user.
-- **type** (String) Type of authentication strategy for this user.
+- `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
+- `type` (String) Type of authentication strategy for this user.
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Required:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

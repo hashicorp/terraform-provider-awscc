@@ -17,28 +17,28 @@ Resource schema for AWS::IoTSiteWise::Asset
 
 ### Required
 
-- **asset_model_id** (String) The ID of the asset model from which to create the asset.
-- **asset_name** (String) A unique, friendly name for the asset.
+- `asset_model_id` (String) The ID of the asset model from which to create the asset.
+- `asset_name` (String) A unique, friendly name for the asset.
 
 ### Optional
 
-- **asset_hierarchies** (Attributes List) (see [below for nested schema](#nestedatt--asset_hierarchies))
-- **asset_properties** (Attributes List) (see [below for nested schema](#nestedatt--asset_properties))
-- **tags** (Attributes List) A list of key-value pairs that contain metadata for the asset. (see [below for nested schema](#nestedatt--tags))
+- `asset_hierarchies` (Attributes List) (see [below for nested schema](#nestedatt--asset_hierarchies))
+- `asset_properties` (Attributes List) (see [below for nested schema](#nestedatt--asset_properties))
+- `tags` (Attributes List) A list of key-value pairs that contain metadata for the asset. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **asset_arn** (String) The ARN of the asset
-- **asset_id** (String) The ID of the asset
-- **id** (String) Uniquely identifies the resource.
+- `asset_arn` (String) The ARN of the asset
+- `asset_id` (String) The ID of the asset
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--asset_hierarchies"></a>
 ### Nested Schema for `asset_hierarchies`
 
 Optional:
 
-- **child_asset_id** (String) The ID of the child asset to be associated.
-- **logical_id** (String) The LogicalID of a hierarchy in the parent asset's model.
+- `child_asset_id` (String) The ID of the child asset to be associated.
+- `logical_id` (String) The LogicalID of a hierarchy in the parent asset's model.
 
 
 <a id="nestedatt--asset_properties"></a>
@@ -46,9 +46,9 @@ Optional:
 
 Optional:
 
-- **alias** (String) The property alias that identifies the property.
-- **logical_id** (String) Customer provided ID for property.
-- **notification_state** (String) The MQTT notification state (ENABLED or DISABLED) for this asset property.
+- `alias` (String) The property alias that identifies the property.
+- `logical_id` (String) Customer provided ID for property.
+- `notification_state` (String) The MQTT notification state (ENABLED or DISABLED) for this asset property.
 
 
 <a id="nestedatt--tags"></a>
@@ -56,8 +56,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

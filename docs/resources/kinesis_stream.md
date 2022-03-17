@@ -17,25 +17,25 @@ Resource Type definition for AWS::Kinesis::Stream
 
 ### Optional
 
-- **name** (String) The name of the Kinesis stream.
-- **retention_period_hours** (Number) The number of hours for the data records that are stored in shards to remain accessible.
-- **shard_count** (Number) The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.
-- **stream_encryption** (Attributes) When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. (see [below for nested schema](#nestedatt--stream_encryption))
-- **stream_mode_details** (Attributes) The mode in which the stream is running. (see [below for nested schema](#nestedatt--stream_mode_details))
-- **tags** (Attributes List) An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream. (see [below for nested schema](#nestedatt--tags))
+- `name` (String) The name of the Kinesis stream.
+- `retention_period_hours` (Number) The number of hours for the data records that are stored in shards to remain accessible.
+- `shard_count` (Number) The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.
+- `stream_encryption` (Attributes) When specified, enables or updates server-side encryption using an AWS KMS key for a specified stream. (see [below for nested schema](#nestedatt--stream_encryption))
+- `stream_mode_details` (Attributes) The mode in which the stream is running. (see [below for nested schema](#nestedatt--stream_mode_details))
+- `tags` (Attributes List) An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon resource name (ARN) of the Kinesis stream
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon resource name (ARN) of the Kinesis stream
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--stream_encryption"></a>
 ### Nested Schema for `stream_encryption`
 
 Optional:
 
-- **encryption_type** (String) The encryption type to use. The only valid value is KMS.
-- **key_id** (String) The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
+- `encryption_type` (String) The encryption type to use. The only valid value is KMS.
+- `key_id` (String) The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
 
 
 <a id="nestedatt--stream_mode_details"></a>
@@ -43,7 +43,7 @@ Optional:
 
 Optional:
 
-- **stream_mode** (String) The mode of the stream
+- `stream_mode` (String) The mode of the stream
 
 
 <a id="nestedatt--tags"></a>
@@ -51,8 +51,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

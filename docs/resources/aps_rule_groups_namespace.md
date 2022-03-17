@@ -17,26 +17,26 @@ RuleGroupsNamespace schema for cloudformation.
 
 ### Required
 
-- **data** (String) The RuleGroupsNamespace data.
-- **name** (String) The RuleGroupsNamespace name.
-- **workspace** (String) Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.
+- `data` (String) The RuleGroupsNamespace data.
+- `name` (String) The RuleGroupsNamespace name.
+- `workspace` (String) Required to identify a specific APS Workspace associated with this RuleGroupsNamespace.
 
 ### Optional
 
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The RuleGroupsNamespace ARN.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The RuleGroupsNamespace ARN.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

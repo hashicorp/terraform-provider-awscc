@@ -17,25 +17,25 @@ The AWS::CUR::ReportDefinition resource creates a Cost & Usage Report with user-
 
 ### Required
 
-- **compression** (String) The compression format that AWS uses for the report.
-- **format** (String) The format that AWS saves the report in.
-- **refresh_closed_reports** (Boolean) Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.
-- **report_name** (String) The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.
-- **report_versioning** (String) Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
-- **s3_bucket** (String) The S3 bucket where AWS delivers the report.
-- **s3_prefix** (String) The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.
-- **s3_region** (String) The region of the S3 bucket that AWS delivers the report into.
-- **time_unit** (String) The granularity of the line items in the report.
+- `compression` (String) The compression format that AWS uses for the report.
+- `format` (String) The format that AWS saves the report in.
+- `refresh_closed_reports` (Boolean) Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.
+- `report_name` (String) The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.
+- `report_versioning` (String) Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
+- `s3_bucket` (String) The S3 bucket where AWS delivers the report.
+- `s3_prefix` (String) The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.
+- `s3_region` (String) The region of the S3 bucket that AWS delivers the report into.
+- `time_unit` (String) The granularity of the line items in the report.
 
 ### Optional
 
-- **additional_artifacts** (List of String) A list of manifests that you want Amazon Web Services to create for this report.
-- **additional_schema_elements** (List of String) A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.
-- **billing_view_arn** (String) The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.
+- `additional_artifacts` (List of String) A list of manifests that you want Amazon Web Services to create for this report.
+- `additional_schema_elements` (List of String) A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.
+- `billing_view_arn` (String) The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

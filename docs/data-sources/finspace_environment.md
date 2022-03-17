@@ -17,36 +17,36 @@ Data Source schema for AWS::FinSpace::Environment
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **aws_account_id** (String) AWS account ID associated with the Environment
-- **data_bundles** (List of String) ARNs of FinSpace Data Bundles to install
-- **dedicated_service_account_id** (String) ID for FinSpace created account used to store Environment artifacts
-- **description** (String) Description of the Environment
-- **environment_arn** (String) ARN of the Environment
-- **environment_id** (String) Unique identifier for representing FinSpace Environment
-- **environment_url** (String) URL used to login to the Environment
-- **federation_mode** (String) Federation mode used with the Environment
-- **federation_parameters** (Attributes) Additional parameters to identify Federation mode (see [below for nested schema](#nestedatt--federation_parameters))
-- **kms_key_id** (String) KMS key used to encrypt customer data within FinSpace Environment infrastructure
-- **name** (String) Name of the Environment
-- **sage_maker_studio_domain_url** (String) SageMaker Studio Domain URL associated with the Environment
-- **status** (String) State of the Environment
-- **superuser_parameters** (Attributes) Parameters of the first Superuser for the FinSpace Environment (see [below for nested schema](#nestedatt--superuser_parameters))
+- `aws_account_id` (String) AWS account ID associated with the Environment
+- `data_bundles` (List of String) ARNs of FinSpace Data Bundles to install
+- `dedicated_service_account_id` (String) ID for FinSpace created account used to store Environment artifacts
+- `description` (String) Description of the Environment
+- `environment_arn` (String) ARN of the Environment
+- `environment_id` (String) Unique identifier for representing FinSpace Environment
+- `environment_url` (String) URL used to login to the Environment
+- `federation_mode` (String) Federation mode used with the Environment
+- `federation_parameters` (Attributes) Additional parameters to identify Federation mode (see [below for nested schema](#nestedatt--federation_parameters))
+- `kms_key_id` (String) KMS key used to encrypt customer data within FinSpace Environment infrastructure
+- `name` (String) Name of the Environment
+- `sage_maker_studio_domain_url` (String) SageMaker Studio Domain URL associated with the Environment
+- `status` (String) State of the Environment
+- `superuser_parameters` (Attributes) Parameters of the first Superuser for the FinSpace Environment (see [below for nested schema](#nestedatt--superuser_parameters))
 
 <a id="nestedatt--federation_parameters"></a>
 ### Nested Schema for `federation_parameters`
 
 Read-Only:
 
-- **application_call_back_url** (String) SAML metadata URL to link with the Environment
-- **attribute_map** (Map of String) Attribute map for SAML configuration
-- **federation_provider_name** (String) Federation provider name to link with the Environment
-- **federation_urn** (String) SAML metadata URL to link with the Environment
-- **saml_metadata_document** (String) SAML metadata document to link the federation provider to the Environment
-- **saml_metadata_url** (String) SAML metadata URL to link with the Environment
+- `application_call_back_url` (String) SAML metadata URL to link with the Environment
+- `attribute_map` (Map of String) Attribute map for SAML configuration
+- `federation_provider_name` (String) Federation provider name to link with the Environment
+- `federation_urn` (String) SAML metadata URL to link with the Environment
+- `saml_metadata_document` (String) SAML metadata document to link the federation provider to the Environment
+- `saml_metadata_url` (String) SAML metadata URL to link with the Environment
 
 
 <a id="nestedatt--superuser_parameters"></a>
@@ -54,8 +54,8 @@ Read-Only:
 
 Read-Only:
 
-- **email_address** (String) Email address
-- **first_name** (String) First name
-- **last_name** (String) Last name
+- `email_address` (String) Email address
+- `first_name` (String) First name
+- `last_name` (String) Last name
 
 

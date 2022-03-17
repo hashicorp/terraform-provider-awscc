@@ -17,25 +17,25 @@ Resource Type definition for AWS::IVS::StreamKey
 
 ### Required
 
-- **channel_arn** (String) Channel ARN for the stream.
+- `channel_arn` (String) Channel ARN for the stream.
 
 ### Optional
 
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Stream Key ARN is automatically generated on creation and assigned as the unique identifier.
-- **id** (String) Uniquely identifies the resource.
-- **value** (String) Stream-key value.
+- `arn` (String) Stream Key ARN is automatically generated on creation and assigned as the unique identifier.
+- `id` (String) Uniquely identifies the resource.
+- `value` (String) Stream-key value.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

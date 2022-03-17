@@ -17,23 +17,23 @@ Resource Type Definition for AWS::KinesisVideo::SignalingChannel
 
 ### Optional
 
-- **message_ttl_seconds** (Number) The period of time a signaling channel retains undelivered messages before they are discarded.
-- **name** (String) The name of the Kinesis Video Signaling Channel.
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **type** (String) The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.
+- `message_ttl_seconds` (Number) The period of time a signaling channel retains undelivered messages before they are discarded.
+- `name` (String) The name of the Kinesis Video Signaling Channel.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -17,20 +17,20 @@ Data Source schema for AWS::EC2::RouteTable
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **route_table_id** (String) The route table ID.
-- **tags** (Attributes List) Any tags assigned to the route table. (see [below for nested schema](#nestedatt--tags))
-- **vpc_id** (String) The ID of the VPC.
+- `route_table_id` (String) The route table ID.
+- `tags` (Attributes List) Any tags assigned to the route table. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

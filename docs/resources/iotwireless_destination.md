@@ -17,28 +17,28 @@ Destination's resource schema demonstrating some basic constructs and validation
 
 ### Required
 
-- **expression** (String) Destination expression
-- **expression_type** (String) Must be RuleName
-- **name** (String) Unique name of destination
-- **role_arn** (String) AWS role ARN that grants access
+- `expression` (String) Destination expression
+- `expression_type` (String) Must be RuleName
+- `name` (String) Unique name of destination
+- `role_arn` (String) AWS role ARN that grants access
 
 ### Optional
 
-- **description** (String) Destination description
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) Destination description
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Destination arn. Returned after successful create.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) Destination arn. Returned after successful create.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

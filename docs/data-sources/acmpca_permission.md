@@ -17,13 +17,13 @@ Data Source schema for AWS::ACMPCA::Permission
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **actions** (List of String) The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.
-- **certificate_authority_arn** (String) The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.
-- **principal** (String) The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
-- **source_account** (String) The ID of the calling account.
+- `actions` (List of String) The actions that the specified AWS service principal can use. Actions IssueCertificate, GetCertificate and ListPermissions must be provided.
+- `certificate_authority_arn` (String) The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.
+- `principal` (String) The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
+- `source_account` (String) The ID of the calling account.
 
 

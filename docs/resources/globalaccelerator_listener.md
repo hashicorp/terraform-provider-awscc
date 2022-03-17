@@ -17,26 +17,26 @@ Resource Type definition for AWS::GlobalAccelerator::Listener
 
 ### Required
 
-- **accelerator_arn** (String) The Amazon Resource Name (ARN) of the accelerator.
-- **port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--port_ranges))
+- `accelerator_arn` (String) The Amazon Resource Name (ARN) of the accelerator.
+- `port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--port_ranges))
 
 ### Optional
 
-- **client_affinity** (String) Client affinity lets you direct all requests from a user to the same endpoint.
-- **protocol** (String) The protocol for the listener.
+- `client_affinity` (String) Client affinity lets you direct all requests from a user to the same endpoint.
+- `protocol` (String) The protocol for the listener.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **listener_arn** (String) The Amazon Resource Name (ARN) of the listener.
+- `id` (String) Uniquely identifies the resource.
+- `listener_arn` (String) The Amazon Resource Name (ARN) of the listener.
 
 <a id="nestedatt--port_ranges"></a>
 ### Nested Schema for `port_ranges`
 
 Required:
 
-- **from_port** (Number) A network port number
-- **to_port** (Number) A network port number
+- `from_port` (Number) A network port number
+- `to_port` (Number) A network port number
 
 ## Import
 

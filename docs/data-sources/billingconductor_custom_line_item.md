@@ -17,29 +17,29 @@ Data Source schema for AWS::BillingConductor::CustomLineItem
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) ARN
-- **association_size** (Number) Number of source values associated to this custom line item
-- **billing_group_arn** (String) Billing Group ARN
-- **billing_period_range** (Attributes) (see [below for nested schema](#nestedatt--billing_period_range))
-- **creation_time** (Number) Creation timestamp in UNIX epoch time format
-- **currency_code** (String)
-- **custom_line_item_charge_details** (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details))
-- **description** (String)
-- **last_modified_time** (Number) Latest modified timestamp in UNIX epoch time format
-- **name** (String)
-- **product_code** (String)
+- `arn` (String) ARN
+- `association_size` (Number) Number of source values associated to this custom line item
+- `billing_group_arn` (String) Billing Group ARN
+- `billing_period_range` (Attributes) (see [below for nested schema](#nestedatt--billing_period_range))
+- `creation_time` (Number) Creation timestamp in UNIX epoch time format
+- `currency_code` (String)
+- `custom_line_item_charge_details` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details))
+- `description` (String)
+- `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
+- `name` (String)
+- `product_code` (String)
 
 <a id="nestedatt--billing_period_range"></a>
 ### Nested Schema for `billing_period_range`
 
 Read-Only:
 
-- **exclusive_end_billing_period** (String)
-- **inclusive_start_billing_period** (String)
+- `exclusive_end_billing_period` (String)
+- `inclusive_start_billing_period` (String)
 
 
 <a id="nestedatt--custom_line_item_charge_details"></a>
@@ -47,16 +47,16 @@ Read-Only:
 
 Read-Only:
 
-- **flat** (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--flat))
-- **percentage** (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--percentage))
-- **type** (String)
+- `flat` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--flat))
+- `percentage` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--percentage))
+- `type` (String)
 
 <a id="nestedatt--custom_line_item_charge_details--flat"></a>
 ### Nested Schema for `custom_line_item_charge_details.flat`
 
 Read-Only:
 
-- **charge_value** (Number)
+- `charge_value` (Number)
 
 
 <a id="nestedatt--custom_line_item_charge_details--percentage"></a>
@@ -64,7 +64,7 @@ Read-Only:
 
 Read-Only:
 
-- **child_associated_resources** (Set of String)
-- **percentage_value** (Number)
+- `child_associated_resources` (Set of String)
+- `percentage_value` (Number)
 
 

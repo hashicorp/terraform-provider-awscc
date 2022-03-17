@@ -17,11 +17,11 @@ Data Source schema for AWS::Rekognition::Project
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **project_name** (String) The name of the project
+- `arn` (String)
+- `project_name` (String) The name of the project
 
 

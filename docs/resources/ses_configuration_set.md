@@ -17,11 +17,11 @@ Resource schema for AWS::SES::ConfigurationSet.
 
 ### Optional
 
-- **name** (String) The name of the configuration set.
+- `name` (String) The name of the configuration set.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

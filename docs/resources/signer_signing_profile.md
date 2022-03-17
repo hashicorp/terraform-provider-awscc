@@ -17,28 +17,28 @@ A signing profile is a signing template that can be used to carry out a pre-defi
 
 ### Required
 
-- **platform_id** (String) The ID of the target signing platform.
+- `platform_id` (String) The ID of the target signing platform.
 
 ### Optional
 
-- **signature_validity_period** (Attributes) Signature validity period of the profile. (see [below for nested schema](#nestedatt--signature_validity_period))
-- **tags** (Attributes List) A list of tags associated with the signing profile. (see [below for nested schema](#nestedatt--tags))
+- `signature_validity_period` (Attributes) Signature validity period of the profile. (see [below for nested schema](#nestedatt--signature_validity_period))
+- `tags` (Attributes List) A list of tags associated with the signing profile. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the specified signing profile.
-- **id** (String) Uniquely identifies the resource.
-- **profile_name** (String) A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
-- **profile_version** (String) A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.
-- **profile_version_arn** (String) The Amazon Resource Name (ARN) of the specified signing profile version.
+- `arn` (String) The Amazon Resource Name (ARN) of the specified signing profile.
+- `id` (String) Uniquely identifies the resource.
+- `profile_name` (String) A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
+- `profile_version` (String) A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.
+- `profile_version_arn` (String) The Amazon Resource Name (ARN) of the specified signing profile version.
 
 <a id="nestedatt--signature_validity_period"></a>
 ### Nested Schema for `signature_validity_period`
 
 Optional:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 
 <a id="nestedatt--tags"></a>
@@ -46,8 +46,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

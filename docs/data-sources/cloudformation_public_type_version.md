@@ -17,19 +17,19 @@ Data Source schema for AWS::CloudFormation::PublicTypeVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Number (ARN) of the extension.
-- **log_delivery_bucket** (String) A url to the S3 bucket where logs for the testType run will be available
-- **public_type_arn** (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
-- **public_version_number** (String) The version number of a public third-party extension
-- **publisher_id** (String) The publisher id assigned by CloudFormation for publishing in this region.
-- **type** (String) The kind of extension
-- **type_name** (String) The name of the type being registered.
+- `arn` (String) The Amazon Resource Number (ARN) of the extension.
+- `log_delivery_bucket` (String) A url to the S3 bucket where logs for the testType run will be available
+- `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
+- `public_version_number` (String) The version number of a public third-party extension
+- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `type` (String) The kind of extension
+- `type_name` (String) The name of the type being registered.
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
-- **type_version_arn** (String) The Amazon Resource Number (ARN) of the extension with the versionId.
+- `type_version_arn` (String) The Amazon Resource Number (ARN) of the extension with the versionId.
 
 

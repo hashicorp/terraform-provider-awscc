@@ -17,20 +17,20 @@ Data Source schema for AWS::SES::Template
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **template** (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
+- `template` (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`
 
 Read-Only:
 
-- **html_part** (String) The HTML body of the email.
-- **subject_part** (String) The subject line of the email.
-- **template_name** (String) The name of the template.
-- **text_part** (String) The email body that is visible to recipients whose email clients do not display HTML content.
+- `html_part` (String) The HTML body of the email.
+- `subject_part` (String) The subject line of the email.
+- `template_name` (String) The name of the template.
+- `text_part` (String) The email body that is visible to recipients whose email clients do not display HTML content.
 
 

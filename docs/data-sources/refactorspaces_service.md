@@ -17,28 +17,28 @@ Data Source schema for AWS::RefactorSpaces::Service
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **application_identifier** (String)
-- **arn** (String)
-- **description** (String)
-- **endpoint_type** (String)
-- **environment_identifier** (String)
-- **lambda_endpoint** (Attributes) (see [below for nested schema](#nestedatt--lambda_endpoint))
-- **name** (String)
-- **service_identifier** (String)
-- **tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
-- **url_endpoint** (Attributes) (see [below for nested schema](#nestedatt--url_endpoint))
-- **vpc_id** (String)
+- `application_identifier` (String)
+- `arn` (String)
+- `description` (String)
+- `endpoint_type` (String)
+- `environment_identifier` (String)
+- `lambda_endpoint` (Attributes) (see [below for nested schema](#nestedatt--lambda_endpoint))
+- `name` (String)
+- `service_identifier` (String)
+- `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `url_endpoint` (Attributes) (see [below for nested schema](#nestedatt--url_endpoint))
+- `vpc_id` (String)
 
 <a id="nestedatt--lambda_endpoint"></a>
 ### Nested Schema for `lambda_endpoint`
 
 Read-Only:
 
-- **arn** (String)
+- `arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -46,8 +46,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 
 <a id="nestedatt--url_endpoint"></a>
@@ -55,7 +55,7 @@ Read-Only:
 
 Read-Only:
 
-- **health_url** (String)
-- **url** (String)
+- `health_url` (String)
+- `url` (String)
 
 

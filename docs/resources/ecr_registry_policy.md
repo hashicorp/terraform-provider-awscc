@@ -17,12 +17,12 @@ The AWS::ECR::RegistryPolicy is used to specify permissions for another AWS acco
 
 ### Required
 
-- **policy_text** (Map of String) The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.
+- `policy_text` (Map of String) The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **registry_id** (String) The registry id.
+- `id` (String) Uniquely identifies the resource.
+- `registry_id` (String) The registry id.
 
 ## Import
 

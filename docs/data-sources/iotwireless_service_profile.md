@@ -17,39 +17,39 @@ Data Source schema for AWS::IoTWireless::ServiceProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Service profile Arn. Returned after successful create.
-- **lo_ra_wan** (Attributes) LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
-- **name** (String) Name of service profile
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) Service profile Arn. Returned after successful create.
+- `lo_ra_wan` (Attributes) LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `name` (String) Name of service profile
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Read-Only:
 
-- **add_gw_metadata** (Boolean)
-- **channel_mask** (String)
-- **dev_status_req_freq** (Number)
-- **dl_bucket_size** (Number)
-- **dl_rate** (Number)
-- **dl_rate_policy** (String)
-- **dr_max** (Number)
-- **dr_min** (Number)
-- **hr_allowed** (Boolean)
-- **min_gw_diversity** (Number)
-- **nwk_geo_loc** (Boolean)
-- **pr_allowed** (Boolean)
-- **ra_allowed** (Boolean)
-- **report_dev_status_battery** (Boolean)
-- **report_dev_status_margin** (Boolean)
-- **target_per** (Number)
-- **ul_bucket_size** (Number)
-- **ul_rate** (Number)
-- **ul_rate_policy** (String)
+- `add_gw_metadata` (Boolean)
+- `channel_mask` (String)
+- `dev_status_req_freq` (Number)
+- `dl_bucket_size` (Number)
+- `dl_rate` (Number)
+- `dl_rate_policy` (String)
+- `dr_max` (Number)
+- `dr_min` (Number)
+- `hr_allowed` (Boolean)
+- `min_gw_diversity` (Number)
+- `nwk_geo_loc` (Boolean)
+- `pr_allowed` (Boolean)
+- `ra_allowed` (Boolean)
+- `report_dev_status_battery` (Boolean)
+- `report_dev_status_margin` (Boolean)
+- `target_per` (Number)
+- `ul_bucket_size` (Number)
+- `ul_rate` (Number)
+- `ul_rate_policy` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -57,7 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

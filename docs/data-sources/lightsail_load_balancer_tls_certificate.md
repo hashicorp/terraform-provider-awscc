@@ -17,16 +17,16 @@ Data Source schema for AWS::Lightsail::LoadBalancerTlsCertificate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **certificate_alternative_names** (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
-- **certificate_domain_name** (String) The domain name (e.g., example.com ) for your SSL/TLS certificate.
-- **certificate_name** (String) The SSL/TLS certificate name.
-- **is_attached** (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
-- **load_balancer_name** (String) The name of your load balancer.
-- **load_balancer_tls_certificate_arn** (String)
-- **status** (String) The validation status of the SSL/TLS certificate.
+- `certificate_alternative_names` (Set of String) An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.
+- `certificate_domain_name` (String) The domain name (e.g., example.com ) for your SSL/TLS certificate.
+- `certificate_name` (String) The SSL/TLS certificate name.
+- `is_attached` (Boolean) When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
+- `load_balancer_name` (String) The name of your load balancer.
+- `load_balancer_tls_certificate_arn` (String)
+- `status` (String) The validation status of the SSL/TLS certificate.
 
 

@@ -17,27 +17,27 @@ Data Source schema for AWS::Budgets::BudgetsAction
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **action_id** (String)
-- **action_threshold** (Attributes) (see [below for nested schema](#nestedatt--action_threshold))
-- **action_type** (String)
-- **approval_model** (String)
-- **budget_name** (String)
-- **definition** (Attributes) (see [below for nested schema](#nestedatt--definition))
-- **execution_role_arn** (String)
-- **notification_type** (String)
-- **subscribers** (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
+- `action_id` (String)
+- `action_threshold` (Attributes) (see [below for nested schema](#nestedatt--action_threshold))
+- `action_type` (String)
+- `approval_model` (String)
+- `budget_name` (String)
+- `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
+- `execution_role_arn` (String)
+- `notification_type` (String)
+- `subscribers` (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 <a id="nestedatt--action_threshold"></a>
 ### Nested Schema for `action_threshold`
 
 Read-Only:
 
-- **type** (String)
-- **value** (Number)
+- `type` (String)
+- `value` (Number)
 
 
 <a id="nestedatt--definition"></a>
@@ -45,19 +45,19 @@ Read-Only:
 
 Read-Only:
 
-- **iam_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--iam_action_definition))
-- **scp_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--scp_action_definition))
-- **ssm_action_definition** (Attributes) (see [below for nested schema](#nestedatt--definition--ssm_action_definition))
+- `iam_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--iam_action_definition))
+- `scp_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--scp_action_definition))
+- `ssm_action_definition` (Attributes) (see [below for nested schema](#nestedatt--definition--ssm_action_definition))
 
 <a id="nestedatt--definition--iam_action_definition"></a>
 ### Nested Schema for `definition.iam_action_definition`
 
 Read-Only:
 
-- **groups** (List of String)
-- **policy_arn** (String)
-- **roles** (List of String)
-- **users** (List of String)
+- `groups` (List of String)
+- `policy_arn` (String)
+- `roles` (List of String)
+- `users` (List of String)
 
 
 <a id="nestedatt--definition--scp_action_definition"></a>
@@ -65,8 +65,8 @@ Read-Only:
 
 Read-Only:
 
-- **policy_id** (String)
-- **target_ids** (List of String)
+- `policy_id` (String)
+- `target_ids` (List of String)
 
 
 <a id="nestedatt--definition--ssm_action_definition"></a>
@@ -74,9 +74,9 @@ Read-Only:
 
 Read-Only:
 
-- **instance_ids** (List of String)
-- **region** (String)
-- **subtype** (String)
+- `instance_ids` (List of String)
+- `region` (String)
+- `subtype` (String)
 
 
 
@@ -85,7 +85,7 @@ Read-Only:
 
 Read-Only:
 
-- **address** (String)
-- **type** (String)
+- `address` (String)
+- `type` (String)
 
 

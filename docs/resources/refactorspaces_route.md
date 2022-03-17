@@ -17,30 +17,30 @@ Definition of AWS::RefactorSpaces::Route Resource Type
 
 ### Required
 
-- **application_identifier** (String)
-- **environment_identifier** (String)
-- **service_identifier** (String)
+- `application_identifier` (String)
+- `environment_identifier` (String)
+- `service_identifier` (String)
 
 ### Optional
 
-- **route_type** (String)
-- **tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
-- **uri_path_route** (Attributes) (see [below for nested schema](#nestedatt--uri_path_route))
+- `route_type` (String)
+- `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `uri_path_route` (Attributes) (see [below for nested schema](#nestedatt--uri_path_route))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **path_resource_to_id** (String)
-- **route_identifier** (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `path_resource_to_id` (String)
+- `route_identifier` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 
 <a id="nestedatt--uri_path_route"></a>
@@ -48,10 +48,10 @@ Optional:
 
 Optional:
 
-- **activation_state** (String)
-- **include_child_paths** (Boolean)
-- **methods** (List of String)
-- **source_path** (String)
+- `activation_state` (String)
+- `include_child_paths` (Boolean)
+- `methods` (List of String)
+- `source_path` (String)
 
 ## Import
 

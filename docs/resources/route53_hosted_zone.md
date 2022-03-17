@@ -17,29 +17,29 @@ Resource schema for AWS::Route53::HostedZone.
 
 ### Optional
 
-- **hosted_zone_config** (Attributes) A complex type that contains an optional comment.
+- `hosted_zone_config` (Attributes) A complex type that contains an optional comment.
 
 If you don't want to specify a comment, omit the HostedZoneConfig and Comment elements. (see [below for nested schema](#nestedatt--hosted_zone_config))
-- **hosted_zone_tags** (Attributes Set) Adds, edits, or deletes tags for a health check or a hosted zone.
+- `hosted_zone_tags` (Attributes Set) Adds, edits, or deletes tags for a health check or a hosted zone.
 
 For information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. (see [below for nested schema](#nestedatt--hosted_zone_tags))
-- **name** (String) The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
+- `name` (String) The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
 
 If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.
-- **query_logging_config** (Attributes) A complex type that contains information about a configuration for DNS query logging. (see [below for nested schema](#nestedatt--query_logging_config))
-- **vp_cs** (Attributes Set) A complex type that contains information about the VPCs that are associated with the specified hosted zone. (see [below for nested schema](#nestedatt--vp_cs))
+- `query_logging_config` (Attributes) A complex type that contains information about a configuration for DNS query logging. (see [below for nested schema](#nestedatt--query_logging_config))
+- `vp_cs` (Attributes Set) A complex type that contains information about the VPCs that are associated with the specified hosted zone. (see [below for nested schema](#nestedatt--vp_cs))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
-- **name_servers** (List of String)
+- `id` (String) The ID of this resource.
+- `name_servers` (List of String)
 
 <a id="nestedatt--hosted_zone_config"></a>
 ### Nested Schema for `hosted_zone_config`
 
 Optional:
 
-- **comment** (String) Any comments that you want to include about the hosted zone.
+- `comment` (String) Any comments that you want to include about the hosted zone.
 
 
 <a id="nestedatt--hosted_zone_tags"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag.
-- **value** (String) The value for the tag.
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 
 <a id="nestedatt--query_logging_config"></a>
@@ -56,7 +56,7 @@ Optional:
 
 Optional:
 
-- **cloudwatch_logs_log_group_arn** (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
+- `cloudwatch_logs_log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
 
 
 <a id="nestedatt--vp_cs"></a>
@@ -64,8 +64,8 @@ Optional:
 
 Optional:
 
-- **vpc_id** (String) The ID of an Amazon VPC.
-- **vpc_region** (String) The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.
+- `vpc_id` (String) The ID of an Amazon VPC.
+- `vpc_region` (String) The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.
 
 ## Import
 

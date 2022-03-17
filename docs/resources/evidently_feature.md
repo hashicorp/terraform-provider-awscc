@@ -17,33 +17,33 @@ Resource Type definition for AWS::Evidently::Feature.
 
 ### Required
 
-- **name** (String)
-- **project** (String)
-- **variations** (Attributes List) (see [below for nested schema](#nestedatt--variations))
+- `name` (String)
+- `project` (String)
+- `variations` (Attributes List) (see [below for nested schema](#nestedatt--variations))
 
 ### Optional
 
-- **default_variation** (String)
-- **description** (String)
-- **entity_overrides** (Attributes Set) (see [below for nested schema](#nestedatt--entity_overrides))
-- **evaluation_strategy** (String)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `default_variation` (String)
+- `description` (String)
+- `entity_overrides` (Attributes Set) (see [below for nested schema](#nestedatt--entity_overrides))
+- `evaluation_strategy` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--variations"></a>
 ### Nested Schema for `variations`
 
 Required:
 
-- **boolean_value** (Boolean)
-- **double_value** (Number)
-- **long_value** (Number)
-- **string_value** (String)
-- **variation_name** (String)
+- `boolean_value` (Boolean)
+- `double_value` (Number)
+- `long_value` (Number)
+- `string_value` (String)
+- `variation_name` (String)
 
 
 <a id="nestedatt--entity_overrides"></a>
@@ -51,8 +51,8 @@ Required:
 
 Optional:
 
-- **entity_id** (String)
-- **variation** (String)
+- `entity_id` (String)
+- `variation` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -60,8 +60,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

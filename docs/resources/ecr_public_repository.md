@@ -17,26 +17,26 @@ The AWS::ECR::PublicRepository resource specifies an Amazon Elastic Container Pu
 
 ### Optional
 
-- **repository_catalog_data** (Attributes) The CatalogData property type specifies Catalog data for ECR Public Repository. For information about Catalog Data, see <link> (see [below for nested schema](#nestedatt--repository_catalog_data))
-- **repository_name** (String) The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.
-- **repository_policy_text** (String) The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `repository_catalog_data` (Attributes) The CatalogData property type specifies Catalog data for ECR Public Repository. For information about Catalog Data, see <link> (see [below for nested schema](#nestedatt--repository_catalog_data))
+- `repository_name` (String) The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.
+- `repository_policy_text` (String) The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--repository_catalog_data"></a>
 ### Nested Schema for `repository_catalog_data`
 
 Optional:
 
-- **about_text** (String) Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.
-- **architectures** (Set of String) Select the system architectures that the images in your repository are compatible with.
-- **operating_systems** (Set of String) Select the operating systems that the images in your repository are compatible with.
-- **repository_description** (String) The description of the public repository.
-- **usage_text** (String) Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.
+- `about_text` (String) Provide a detailed description of the repository. Identify what is included in the repository, any licensing details, or other relevant information.
+- `architectures` (Set of String) Select the system architectures that the images in your repository are compatible with.
+- `operating_systems` (Set of String) Select the operating systems that the images in your repository are compatible with.
+- `repository_description` (String) The description of the public repository.
+- `usage_text` (String) Provide detailed information about how to use the images in the repository. This provides context, support information, and additional usage details for users of the repository.
 
 
 <a id="nestedatt--tags"></a>
@@ -44,8 +44,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

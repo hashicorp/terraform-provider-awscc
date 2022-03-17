@@ -17,31 +17,31 @@ Resource Type definition for SSO InstanceAccessControlAttributeConfiguration
 
 ### Required
 
-- **instance_arn** (String) The ARN of the AWS SSO instance under which the operation will be executed.
+- `instance_arn` (String) The ARN of the AWS SSO instance under which the operation will be executed.
 
 ### Optional
 
-- **access_control_attributes** (Attributes List) (see [below for nested schema](#nestedatt--access_control_attributes))
-- **instance_access_control_attribute_configuration** (Attributes) The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead. (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration))
+- `access_control_attributes` (Attributes List) (see [below for nested schema](#nestedatt--access_control_attributes))
+- `instance_access_control_attribute_configuration` (Attributes) The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead. (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--access_control_attributes"></a>
 ### Nested Schema for `access_control_attributes`
 
 Optional:
 
-- **key** (String)
-- **value** (Attributes) (see [below for nested schema](#nestedatt--access_control_attributes--value))
+- `key` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--access_control_attributes--value))
 
 <a id="nestedatt--access_control_attributes--value"></a>
 ### Nested Schema for `access_control_attributes.value`
 
 Optional:
 
-- **source** (List of String)
+- `source` (List of String)
 
 
 
@@ -50,22 +50,22 @@ Optional:
 
 Optional:
 
-- **access_control_attributes** (Attributes List) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes))
+- `access_control_attributes` (Attributes List) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes))
 
 <a id="nestedatt--instance_access_control_attribute_configuration--access_control_attributes"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration.access_control_attributes`
 
 Optional:
 
-- **key** (String)
-- **value** (Attributes) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes--value))
+- `key` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--instance_access_control_attribute_configuration--access_control_attributes--value))
 
 <a id="nestedatt--instance_access_control_attribute_configuration--access_control_attributes--value"></a>
 ### Nested Schema for `instance_access_control_attribute_configuration.access_control_attributes.value`
 
 Optional:
 
-- **source** (List of String)
+- `source` (List of String)
 
 ## Import
 

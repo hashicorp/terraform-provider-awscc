@@ -17,22 +17,22 @@ Resource Type definition for AWS::IoT::TopicRuleDestination
 
 ### Optional
 
-- **http_url_properties** (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
-- **status** (String) The status of the TopicRuleDestination.
-- **vpc_properties** (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
+- `http_url_properties` (Attributes) HTTP URL destination properties. (see [below for nested schema](#nestedatt--http_url_properties))
+- `status` (String) The status of the TopicRuleDestination.
+- `vpc_properties` (Attributes) VPC destination properties. (see [below for nested schema](#nestedatt--vpc_properties))
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name (ARN).
-- **id** (String) Uniquely identifies the resource.
-- **status_reason** (String) The reasoning for the current status of the TopicRuleDestination.
+- `arn` (String) Amazon Resource Name (ARN).
+- `id` (String) Uniquely identifies the resource.
+- `status_reason` (String) The reasoning for the current status of the TopicRuleDestination.
 
 <a id="nestedatt--http_url_properties"></a>
 ### Nested Schema for `http_url_properties`
 
 Optional:
 
-- **confirmation_url** (String)
+- `confirmation_url` (String)
 
 
 <a id="nestedatt--vpc_properties"></a>
@@ -40,10 +40,10 @@ Optional:
 
 Optional:
 
-- **role_arn** (String)
-- **security_groups** (List of String)
-- **subnet_ids** (List of String)
-- **vpc_id** (String)
+- `role_arn` (String)
+- `security_groups` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_id` (String)
 
 ## Import
 

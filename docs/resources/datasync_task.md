@@ -17,36 +17,36 @@ Resource schema for AWS::DataSync::Task.
 
 ### Required
 
-- **destination_location_arn** (String) The ARN of an AWS storage resource's location.
-- **source_location_arn** (String) The ARN of the source location for the task.
+- `destination_location_arn` (String) The ARN of an AWS storage resource's location.
+- `source_location_arn` (String) The ARN of the source location for the task.
 
 ### Optional
 
-- **cloudwatch_log_group_arn** (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
-- **excludes** (Attributes List) (see [below for nested schema](#nestedatt--excludes))
-- **includes** (Attributes List) (see [below for nested schema](#nestedatt--includes))
-- **name** (String) The name of a task. This value is a text reference that is used to identify the task in the console.
-- **options** (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
-- **schedule** (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
+- `excludes` (Attributes List) (see [below for nested schema](#nestedatt--excludes))
+- `includes` (Attributes List) (see [below for nested schema](#nestedatt--includes))
+- `name` (String) The name of a task. This value is a text reference that is used to identify the task in the console.
+- `options` (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
+- `schedule` (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **destination_network_interface_arns** (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
-- **error_code** (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-- **error_detail** (String) Detailed description of an error that was encountered during the task execution.
-- **id** (String) Uniquely identifies the resource.
-- **source_network_interface_arns** (List of String) The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.
-- **status** (String) The status of the task that was described.
-- **task_arn** (String) The ARN of the task.
+- `destination_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
+- `error_code` (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
+- `error_detail` (String) Detailed description of an error that was encountered during the task execution.
+- `id` (String) Uniquely identifies the resource.
+- `source_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.
+- `status` (String) The status of the task that was described.
+- `task_arn` (String) The ARN of the task.
 
 <a id="nestedatt--excludes"></a>
 ### Nested Schema for `excludes`
 
 Optional:
 
-- **filter_type** (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
-- **value** (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
+- `filter_type` (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
+- `value` (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
 
 
 <a id="nestedatt--includes"></a>
@@ -54,8 +54,8 @@ Optional:
 
 Optional:
 
-- **filter_type** (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
-- **value** (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
+- `filter_type` (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
+- `value` (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
 
 
 <a id="nestedatt--options"></a>
@@ -63,20 +63,20 @@ Optional:
 
 Optional:
 
-- **atime** (String) A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).
-- **bytes_per_second** (Number) A value that limits the bandwidth used by AWS DataSync.
-- **gid** (String) The group ID (GID) of the file's owners.
-- **log_level** (String) A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.
-- **mtime** (String) A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.
-- **overwrite_mode** (String) A value that determines whether files at the destination should be overwritten or preserved when copying files.
-- **posix_permissions** (String) A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.
-- **preserve_deleted_files** (String) A value that specifies whether files in the destination that don't exist in the source file system should be preserved.
-- **preserve_devices** (String) A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.
-- **security_descriptor_copy_flags** (String) A value that determines which components of the SMB security descriptor are copied during transfer.
-- **task_queueing** (String) A value that determines whether tasks should be queued before executing the tasks.
-- **transfer_mode** (String) A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.
-- **uid** (String) The user ID (UID) of the file's owner.
-- **verify_mode** (String) A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.
+- `atime` (String) A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).
+- `bytes_per_second` (Number) A value that limits the bandwidth used by AWS DataSync.
+- `gid` (String) The group ID (GID) of the file's owners.
+- `log_level` (String) A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.
+- `mtime` (String) A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.
+- `overwrite_mode` (String) A value that determines whether files at the destination should be overwritten or preserved when copying files.
+- `posix_permissions` (String) A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.
+- `preserve_deleted_files` (String) A value that specifies whether files in the destination that don't exist in the source file system should be preserved.
+- `preserve_devices` (String) A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.
+- `security_descriptor_copy_flags` (String) A value that determines which components of the SMB security descriptor are copied during transfer.
+- `task_queueing` (String) A value that determines whether tasks should be queued before executing the tasks.
+- `transfer_mode` (String) A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.
+- `uid` (String) The user ID (UID) of the file's owner.
+- `verify_mode` (String) A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.
 
 
 <a id="nestedatt--schedule"></a>
@@ -84,7 +84,7 @@ Optional:
 
 Optional:
 
-- **schedule_expression** (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
+- `schedule_expression` (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
 
 
 <a id="nestedatt--tags"></a>
@@ -92,8 +92,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key for an AWS resource tag.
-- **value** (String) The value for an AWS resource tag.
+- `key` (String) The key for an AWS resource tag.
+- `value` (String) The value for an AWS resource tag.
 
 ## Import
 

@@ -17,44 +17,44 @@ Resource Type definition for AWS::Lightsail::Disk
 
 ### Required
 
-- **disk_name** (String) The names to use for your new Lightsail disk.
-- **size_in_gb** (Number) Size of the Lightsail disk
+- `disk_name` (String) The names to use for your new Lightsail disk.
+- `size_in_gb` (Number) Size of the Lightsail disk
 
 ### Optional
 
-- **add_ons** (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
-- **availability_zone** (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `add_ons` (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
+- `availability_zone` (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **attached_to** (String) Name of the attached Lightsail Instance
-- **attachment_state** (String) Attachment State of the Lightsail disk
-- **disk_arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **iops** (Number) Iops of the Lightsail disk
-- **is_attached** (Boolean) Check is Disk is attached state
-- **location** (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
-- **path** (String) Path of the  attached Disk
-- **resource_type** (String) Resource type of Lightsail instance.
-- **state** (String) State of the Lightsail disk
-- **support_code** (String) Support code to help identify any issues
+- `attached_to` (String) Name of the attached Lightsail Instance
+- `attachment_state` (String) Attachment State of the Lightsail disk
+- `disk_arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `iops` (Number) Iops of the Lightsail disk
+- `is_attached` (Boolean) Check is Disk is attached state
+- `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
+- `path` (String) Path of the  attached Disk
+- `resource_type` (String) Resource type of Lightsail instance.
+- `state` (String) State of the Lightsail disk
+- `support_code` (String) Support code to help identify any issues
 
 <a id="nestedatt--add_ons"></a>
 ### Nested Schema for `add_ons`
 
 Optional:
 
-- **add_on_type** (String) The add-on type
-- **auto_snapshot_add_on_request** (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
-- **status** (String) Status of the Addon
+- `add_on_type` (String) The add-on type
+- `auto_snapshot_add_on_request` (Attributes) An object that represents additional parameters when enabling or modifying the automatic snapshot add-on (see [below for nested schema](#nestedatt--add_ons--auto_snapshot_add_on_request))
+- `status` (String) Status of the Addon
 
 <a id="nestedatt--add_ons--auto_snapshot_add_on_request"></a>
 ### Nested Schema for `add_ons.auto_snapshot_add_on_request`
 
 Optional:
 
-- **snapshot_time_of_day** (String) The daily time when an automatic snapshot will be created.
+- `snapshot_time_of_day` (String) The daily time when an automatic snapshot will be created.
 
 
 
@@ -63,8 +63,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--location"></a>
@@ -72,8 +72,8 @@ Optional:
 
 Read-Only:
 
-- **availability_zone** (String) The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
-- **region_name** (String) The Region Name in which to create your disk.
+- `availability_zone` (String) The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `region_name` (String) The Region Name in which to create your disk.
 
 ## Import
 

@@ -17,20 +17,20 @@ Resource schema for AWS::Cassandra::Keyspace
 
 ### Optional
 
-- **keyspace_name** (String) Name for Cassandra keyspace
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `keyspace_name` (String) Name for Cassandra keyspace
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -17,22 +17,22 @@ Data Source schema for AWS::MemoryDB::ACL
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **acl_name** (String) The name of the acl.
-- **arn** (String) The Amazon Resource Name (ARN) of the acl.
-- **status** (String) Indicates acl status. Can be "creating", "active", "modifying", "deleting".
-- **tags** (Attributes Set) An array of key-value pairs to apply to this cluster. (see [below for nested schema](#nestedatt--tags))
-- **user_names** (List of String) List of users associated to this acl.
+- `acl_name` (String) The name of the acl.
+- `arn` (String) The Amazon Resource Name (ARN) of the acl.
+- `status` (String) Indicates acl status. Can be "creating", "active", "modifying", "deleting".
+- `tags` (Attributes Set) An array of key-value pairs to apply to this cluster. (see [below for nested schema](#nestedatt--tags))
+- `user_names` (List of String) List of users associated to this acl.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws: or memorydb:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

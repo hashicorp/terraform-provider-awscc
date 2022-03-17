@@ -17,11 +17,11 @@ Data Source schema for AWS::FMS::NotificationChannel
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **sns_role_name** (String) A resource ARN.
-- **sns_topic_arn** (String) A resource ARN.
+- `sns_role_name` (String) A resource ARN.
+- `sns_topic_arn` (String) A resource ARN.
 
 

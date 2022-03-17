@@ -17,35 +17,35 @@ The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift
 
 ### Required
 
-- **game_server_group_name** (String) An identifier for the new game server group.
-- **instance_definitions** (Attributes List) A set of EC2 instance types to use when creating instances in the group. (see [below for nested schema](#nestedatt--instance_definitions))
-- **launch_template** (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. (see [below for nested schema](#nestedatt--launch_template))
-- **role_arn** (String) The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
+- `game_server_group_name` (String) An identifier for the new game server group.
+- `instance_definitions` (Attributes List) A set of EC2 instance types to use when creating instances in the group. (see [below for nested schema](#nestedatt--instance_definitions))
+- `launch_template` (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. (see [below for nested schema](#nestedatt--launch_template))
+- `role_arn` (String) The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
 
 ### Optional
 
-- **auto_scaling_policy** (Attributes) Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting (see [below for nested schema](#nestedatt--auto_scaling_policy))
-- **balancing_strategy** (String) The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.
-- **delete_option** (String) The type of delete to perform.
-- **game_server_protection_policy** (String) A flag that indicates whether instances in the game server group are protected from early termination.
-- **max_size** (Number) The maximum number of instances allowed in the EC2 Auto Scaling group.
-- **min_size** (Number) The minimum number of instances allowed in the EC2 Auto Scaling group.
-- **tags** (Attributes List) A list of labels to assign to the new game server group resource. (see [below for nested schema](#nestedatt--tags))
-- **vpc_subnets** (List of String) A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+- `auto_scaling_policy` (Attributes) Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting (see [below for nested schema](#nestedatt--auto_scaling_policy))
+- `balancing_strategy` (String) The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.
+- `delete_option` (String) The type of delete to perform.
+- `game_server_protection_policy` (String) A flag that indicates whether instances in the game server group are protected from early termination.
+- `max_size` (Number) The maximum number of instances allowed in the EC2 Auto Scaling group.
+- `min_size` (Number) The minimum number of instances allowed in the EC2 Auto Scaling group.
+- `tags` (Attributes List) A list of labels to assign to the new game server group resource. (see [below for nested schema](#nestedatt--tags))
+- `vpc_subnets` (List of String) A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
 
 ### Read-Only
 
-- **auto_scaling_group_arn** (String) A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.
-- **game_server_group_arn** (String) A generated unique ID for the game server group.
-- **id** (String) Uniquely identifies the resource.
+- `auto_scaling_group_arn` (String) A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.
+- `game_server_group_arn` (String) A generated unique ID for the game server group.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--instance_definitions"></a>
 ### Nested Schema for `instance_definitions`
 
 Required:
 
-- **instance_type** (String) An EC2 instance type designation.
-- **weighted_capacity** (String) Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.
+- `instance_type` (String) An EC2 instance type designation.
+- `weighted_capacity` (String) Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.
 
 
 <a id="nestedatt--launch_template"></a>
@@ -53,9 +53,9 @@ Required:
 
 Required:
 
-- **launch_template_id** (String) A unique identifier for an existing EC2 launch template.
-- **launch_template_name** (String) A readable identifier for an existing EC2 launch template.
-- **version** (String) The version of the EC2 launch template to use.
+- `launch_template_id` (String) A unique identifier for an existing EC2 launch template.
+- `launch_template_name` (String) A readable identifier for an existing EC2 launch template.
+- `version` (String) The version of the EC2 launch template to use.
 
 
 <a id="nestedatt--auto_scaling_policy"></a>
@@ -63,15 +63,15 @@ Required:
 
 Optional:
 
-- **estimated_instance_warmup** (Number) Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.
-- **target_tracking_configuration** (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
+- `estimated_instance_warmup` (Number) Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.
+- `target_tracking_configuration` (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
 
 <a id="nestedatt--auto_scaling_policy--target_tracking_configuration"></a>
 ### Nested Schema for `auto_scaling_policy.target_tracking_configuration`
 
 Optional:
 
-- **target_value** (Number) Desired value to use with a game server group target-based scaling policy.
+- `target_value` (Number) Desired value to use with a game server group target-based scaling policy.
 
 
 
@@ -80,8 +80,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key for a developer-defined key:value pair for tagging an AWS resource.
-- **value** (String) The value for a developer-defined key:value pair for tagging an AWS resource.
+- `key` (String) The key for a developer-defined key:value pair for tagging an AWS resource.
+- `value` (String) The value for a developer-defined key:value pair for tagging an AWS resource.
 
 ## Import
 

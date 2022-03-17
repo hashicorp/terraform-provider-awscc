@@ -17,52 +17,52 @@ Data Source schema for AWS::Transfer::Workflow
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Specifies the unique Amazon Resource Name (ARN) for the workflow.
-- **description** (String) A textual description for the workflow.
-- **on_exception_steps** (Attributes List) Specifies the steps (actions) to take if any errors are encountered during execution of the workflow. (see [below for nested schema](#nestedatt--on_exception_steps))
-- **steps** (Attributes List) Specifies the details for the steps that are in the specified workflow. (see [below for nested schema](#nestedatt--steps))
-- **tags** (Attributes Set) Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose. (see [below for nested schema](#nestedatt--tags))
-- **workflow_id** (String) A unique identifier for the workflow.
+- `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the workflow.
+- `description` (String) A textual description for the workflow.
+- `on_exception_steps` (Attributes List) Specifies the steps (actions) to take if any errors are encountered during execution of the workflow. (see [below for nested schema](#nestedatt--on_exception_steps))
+- `steps` (Attributes List) Specifies the details for the steps that are in the specified workflow. (see [below for nested schema](#nestedatt--steps))
+- `tags` (Attributes Set) Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose. (see [below for nested schema](#nestedatt--tags))
+- `workflow_id` (String) A unique identifier for the workflow.
 
 <a id="nestedatt--on_exception_steps"></a>
 ### Nested Schema for `on_exception_steps`
 
 Read-Only:
 
-- **copy_step_details** (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details))
-- **custom_step_details** (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--on_exception_steps--custom_step_details))
-- **delete_step_details** (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--on_exception_steps--delete_step_details))
-- **tag_step_details** (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details))
-- **type** (String)
+- `copy_step_details` (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details))
+- `custom_step_details` (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--on_exception_steps--custom_step_details))
+- `delete_step_details` (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--on_exception_steps--delete_step_details))
+- `tag_step_details` (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details))
+- `type` (String)
 
 <a id="nestedatt--on_exception_steps--copy_step_details"></a>
 ### Nested Schema for `on_exception_steps.copy_step_details`
 
 Read-Only:
 
-- **destination_file_location** (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location))
-- **name** (String) The name of the step, used as an identifier.
-- **overwrite_existing** (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
+- `destination_file_location` (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location))
+- `name` (String) The name of the step, used as an identifier.
+- `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
 
 <a id="nestedatt--on_exception_steps--copy_step_details--destination_file_location"></a>
 ### Nested Schema for `on_exception_steps.copy_step_details.destination_file_location`
 
 Read-Only:
 
-- **s3_file_location** (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location))
+- `s3_file_location` (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location"></a>
 ### Nested Schema for `on_exception_steps.copy_step_details.destination_file_location.s3_file_location`
 
 Read-Only:
 
-- **bucket** (String) Specifies the S3 bucket that contains the file being copied.
-- **key** (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+- `bucket` (String) Specifies the S3 bucket that contains the file being copied.
+- `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 
 
 
@@ -72,10 +72,10 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
-- **target** (String) The ARN for the lambda function that is being called.
-- **timeout_seconds** (Number) Timeout, in seconds, for the step.
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `target` (String) The ARN for the lambda function that is being called.
+- `timeout_seconds` (Number) Timeout, in seconds, for the step.
 
 
 <a id="nestedatt--on_exception_steps--delete_step_details"></a>
@@ -83,8 +83,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
 
 
 <a id="nestedatt--on_exception_steps--tag_step_details"></a>
@@ -92,17 +92,17 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
-- **tags** (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details--tags))
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `tags` (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details--tags))
 
 <a id="nestedatt--on_exception_steps--tag_step_details--tags"></a>
 ### Nested Schema for `on_exception_steps.tag_step_details.tags`
 
 Read-Only:
 
-- **key** (String) The name assigned to the tag that you create.
-- **value** (String) The value that corresponds to the key.
+- `key` (String) The name assigned to the tag that you create.
+- `value` (String) The value that corresponds to the key.
 
 
 
@@ -112,36 +112,36 @@ Read-Only:
 
 Read-Only:
 
-- **copy_step_details** (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--steps--copy_step_details))
-- **custom_step_details** (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--steps--custom_step_details))
-- **delete_step_details** (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--steps--delete_step_details))
-- **tag_step_details** (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--steps--tag_step_details))
-- **type** (String)
+- `copy_step_details` (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--steps--copy_step_details))
+- `custom_step_details` (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--steps--custom_step_details))
+- `delete_step_details` (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--steps--delete_step_details))
+- `tag_step_details` (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--steps--tag_step_details))
+- `type` (String)
 
 <a id="nestedatt--steps--copy_step_details"></a>
 ### Nested Schema for `steps.copy_step_details`
 
 Read-Only:
 
-- **destination_file_location** (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location))
-- **name** (String) The name of the step, used as an identifier.
-- **overwrite_existing** (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
+- `destination_file_location` (Attributes) Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location))
+- `name` (String) The name of the step, used as an identifier.
+- `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
 
 <a id="nestedatt--steps--copy_step_details--destination_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location`
 
 Read-Only:
 
-- **s3_file_location** (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location--s3_file_location))
+- `s3_file_location` (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--steps--copy_step_details--destination_file_location--s3_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location.s3_file_location`
 
 Read-Only:
 
-- **bucket** (String) Specifies the S3 bucket that contains the file being copied.
-- **key** (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+- `bucket` (String) Specifies the S3 bucket that contains the file being copied.
+- `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 
 
 
@@ -151,10 +151,10 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
-- **target** (String) The ARN for the lambda function that is being called.
-- **timeout_seconds** (Number) Timeout, in seconds, for the step.
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `target` (String) The ARN for the lambda function that is being called.
+- `timeout_seconds` (Number) Timeout, in seconds, for the step.
 
 
 <a id="nestedatt--steps--delete_step_details"></a>
@@ -162,8 +162,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
 
 
 <a id="nestedatt--steps--tag_step_details"></a>
@@ -171,17 +171,17 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) The name of the step, used as an identifier.
-- **source_file_location** (String) Specifies which file to use as input to the workflow step.
-- **tags** (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--steps--tag_step_details--tags))
+- `name` (String) The name of the step, used as an identifier.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `tags` (Attributes Set) Array that contains from 1 to 10 key/value pairs. (see [below for nested schema](#nestedatt--steps--tag_step_details--tags))
 
 <a id="nestedatt--steps--tag_step_details--tags"></a>
 ### Nested Schema for `steps.tag_step_details.tags`
 
 Read-Only:
 
-- **key** (String) The name assigned to the tag that you create.
-- **value** (String) The value that corresponds to the key.
+- `key` (String) The name assigned to the tag that you create.
+- `value` (String) The value that corresponds to the key.
 
 
 
@@ -191,7 +191,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The name assigned to the tag that you create.
-- **value** (String) Contains one or more values that you assigned to the key name you create.
+- `key` (String) The name assigned to the tag that you create.
+- `value` (String) Contains one or more values that you assigned to the key name you create.
 
 

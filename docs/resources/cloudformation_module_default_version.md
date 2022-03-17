@@ -17,13 +17,13 @@ A module that has been registered in the CloudFormation registry as the default 
 
 ### Optional
 
-- **arn** (String) The Amazon Resource Name (ARN) of the module version to set as the default version.
-- **module_name** (String) The name of a module existing in the registry.
-- **version_id** (String) The ID of an existing version of the named module to set as the default.
+- `arn` (String) The Amazon Resource Name (ARN) of the module version to set as the default version.
+- `module_name` (String) The name of a module existing in the registry.
+- `version_id` (String) The ID of an existing version of the named module to set as the default.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

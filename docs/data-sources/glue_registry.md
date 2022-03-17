@@ -17,21 +17,21 @@ Data Source schema for AWS::Glue::Registry
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name for the created Registry.
-- **description** (String) A description of the registry. If description is not provided, there will not be any default value for this.
-- **name** (String) Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.
-- **tags** (Attributes List) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) Amazon Resource Name for the created Registry.
+- `description` (String) A description of the registry. If description is not provided, there will not be any default value for this.
+- `name` (String) Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark.  No whitespace.
+- `tags` (Attributes List) List of tags to tag the Registry (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) A key to identify the tag.
-- **value** (String) Corresponding tag value for the key.
+- `key` (String) A key to identify the tag.
+- `value` (String) Corresponding tag value for the key.
 
 

@@ -17,12 +17,12 @@ Definition of AWS::Location::TrackerConsumer Resource Type
 
 ### Required
 
-- **consumer_arn** (String)
-- **tracker_name** (String)
+- `consumer_arn` (String)
+- `tracker_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

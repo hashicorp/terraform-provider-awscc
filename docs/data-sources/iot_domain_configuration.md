@@ -17,29 +17,29 @@ Data Source schema for AWS::IoT::DomainConfiguration
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **authorizer_config** (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
-- **domain_configuration_name** (String)
-- **domain_configuration_status** (String)
-- **domain_name** (String)
-- **domain_type** (String)
-- **server_certificate_arns** (List of String)
-- **server_certificates** (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
-- **service_type** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **validation_certificate_arn** (String)
+- `arn` (String)
+- `authorizer_config` (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
+- `domain_configuration_name` (String)
+- `domain_configuration_status` (String)
+- `domain_name` (String)
+- `domain_type` (String)
+- `server_certificate_arns` (List of String)
+- `server_certificates` (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
+- `service_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `validation_certificate_arn` (String)
 
 <a id="nestedatt--authorizer_config"></a>
 ### Nested Schema for `authorizer_config`
 
 Read-Only:
 
-- **allow_authorizer_override** (Boolean)
-- **default_authorizer_name** (String)
+- `allow_authorizer_override` (Boolean)
+- `default_authorizer_name` (String)
 
 
 <a id="nestedatt--server_certificates"></a>
@@ -47,9 +47,9 @@ Read-Only:
 
 Read-Only:
 
-- **server_certificate_arn** (String)
-- **server_certificate_status** (String)
-- **server_certificate_status_detail** (String)
+- `server_certificate_arn` (String)
+- `server_certificate_status` (String)
+- `server_certificate_status_detail` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -57,7 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

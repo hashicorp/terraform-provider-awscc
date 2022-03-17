@@ -17,12 +17,12 @@ Resource Type definition for AWS::EC2::SubnetRouteTableAssociation
 
 ### Required
 
-- **route_table_id** (String)
-- **subnet_id** (String)
+- `route_table_id` (String)
+- `subnet_id` (String)
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
+- `id` (String) The ID of this resource.
 
 ## Import
 

@@ -17,22 +17,22 @@ Data Source schema for AWS::IAM::OIDCProvider
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name (ARN) of the OIDC provider
-- **client_id_list** (List of String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **thumbprint_list** (List of String)
-- **url** (String)
+- `arn` (String) Amazon Resource Name (ARN) of the OIDC provider
+- `client_id_list` (List of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `thumbprint_list` (List of String)
+- `url` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

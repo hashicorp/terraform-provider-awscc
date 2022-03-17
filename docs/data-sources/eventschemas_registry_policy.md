@@ -17,12 +17,12 @@ Data Source schema for AWS::EventSchemas::RegistryPolicy
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **policy** (Map of String)
-- **registry_name** (String)
-- **revision_id** (String)
+- `policy` (Map of String)
+- `registry_name` (String)
+- `revision_id` (String)
 
 

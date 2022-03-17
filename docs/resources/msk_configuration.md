@@ -17,18 +17,18 @@ Resource Type definition for AWS::MSK::Configuration
 
 ### Required
 
-- **server_properties** (String)
+- `server_properties` (String)
 
 ### Optional
 
-- **description** (String)
-- **kafka_versions_list** (List of String)
-- **name** (String)
+- `description` (String)
+- `kafka_versions_list` (List of String)
+- `name` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

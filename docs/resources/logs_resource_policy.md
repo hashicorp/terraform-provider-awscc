@@ -17,12 +17,12 @@ The resource schema for AWSLogs ResourcePolicy
 
 ### Required
 
-- **policy_document** (String) The policy document
-- **policy_name** (String) A name for resource policy
+- `policy_document` (String) The policy document
+- `policy_name` (String) A name for resource policy
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

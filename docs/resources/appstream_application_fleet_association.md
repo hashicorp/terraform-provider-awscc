@@ -17,12 +17,12 @@ Resource Type definition for AWS::AppStream::ApplicationFleetAssociation
 
 ### Required
 
-- **application_arn** (String)
-- **fleet_name** (String)
+- `application_arn` (String)
+- `fleet_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

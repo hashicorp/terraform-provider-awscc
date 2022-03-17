@@ -17,29 +17,29 @@ Data Source schema for AWS::EC2::TransitGateway
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **amazon_side_asn** (Number)
-- **association_default_route_table_id** (String)
-- **auto_accept_shared_attachments** (String)
-- **default_route_table_association** (String)
-- **default_route_table_propagation** (String)
-- **description** (String)
-- **dns_support** (String)
-- **multicast_support** (String)
-- **propagation_default_route_table_id** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **transit_gateway_cidr_blocks** (List of String)
-- **vpn_ecmp_support** (String)
+- `amazon_side_asn` (Number)
+- `association_default_route_table_id` (String)
+- `auto_accept_shared_attachments` (String)
+- `default_route_table_association` (String)
+- `default_route_table_propagation` (String)
+- `description` (String)
+- `dns_support` (String)
+- `multicast_support` (String)
+- `propagation_default_route_table_id` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_cidr_blocks` (List of String)
+- `vpn_ecmp_support` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

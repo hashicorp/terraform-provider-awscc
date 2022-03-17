@@ -17,26 +17,26 @@ Resource Type definition for AWS::IAM::VirtualMFADevice
 
 ### Required
 
-- **users** (List of String)
+- `users` (List of String)
 
 ### Optional
 
-- **path** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **virtual_mfa_device_name** (String)
+- `path` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `virtual_mfa_device_name` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **serial_number** (String)
+- `id` (String) Uniquely identifies the resource.
+- `serial_number` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

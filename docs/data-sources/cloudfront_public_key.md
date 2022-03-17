@@ -17,21 +17,21 @@ Data Source schema for AWS::CloudFront::PublicKey
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **created_time** (String)
-- **public_key_config** (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
+- `created_time` (String)
+- `public_key_config` (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
 
 <a id="nestedatt--public_key_config"></a>
 ### Nested Schema for `public_key_config`
 
 Read-Only:
 
-- **caller_reference** (String)
-- **comment** (String)
-- **encoded_key** (String)
-- **name** (String)
+- `caller_reference` (String)
+- `comment` (String)
+- `encoded_key` (String)
+- `name` (String)
 
 

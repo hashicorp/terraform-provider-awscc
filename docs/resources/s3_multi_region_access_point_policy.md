@@ -17,20 +17,20 @@ The policy to be attached to a Multi Region Access Point
 
 ### Required
 
-- **mrap_name** (String) The name of the Multi Region Access Point to apply policy
-- **policy** (Map of String) Policy document to apply to a Multi Region Access Point
+- `mrap_name` (String) The name of the Multi Region Access Point to apply policy
+- `policy` (Map of String) Policy document to apply to a Multi Region Access Point
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **policy_status** (Attributes) The Policy Status associated with this Multi Region Access Point (see [below for nested schema](#nestedatt--policy_status))
+- `id` (String) Uniquely identifies the resource.
+- `policy_status` (Attributes) The Policy Status associated with this Multi Region Access Point (see [below for nested schema](#nestedatt--policy_status))
 
 <a id="nestedatt--policy_status"></a>
 ### Nested Schema for `policy_status`
 
 Read-Only:
 
-- **is_public** (String) Specifies whether the policy is public or not.
+- `is_public` (String) Specifies whether the policy is public or not.
 
 ## Import
 

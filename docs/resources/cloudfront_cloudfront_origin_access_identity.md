@@ -17,19 +17,19 @@ Resource Type definition for AWS::CloudFront::CloudFrontOriginAccessIdentity
 
 ### Required
 
-- **cloudfront_origin_access_identity_config** (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
+- `cloudfront_origin_access_identity_config` (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
 
 ### Read-Only
 
-- **id** (String) The ID of this resource.
-- **s3_canonical_user_id** (String)
+- `id` (String) The ID of this resource.
+- `s3_canonical_user_id` (String)
 
 <a id="nestedatt--cloudfront_origin_access_identity_config"></a>
 ### Nested Schema for `cloudfront_origin_access_identity_config`
 
 Required:
 
-- **comment** (String)
+- `comment` (String)
 
 ## Import
 

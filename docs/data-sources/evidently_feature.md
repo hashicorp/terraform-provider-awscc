@@ -17,27 +17,27 @@ Data Source schema for AWS::Evidently::Feature
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **default_variation** (String)
-- **description** (String)
-- **entity_overrides** (Attributes Set) (see [below for nested schema](#nestedatt--entity_overrides))
-- **evaluation_strategy** (String)
-- **name** (String)
-- **project** (String)
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- **variations** (Attributes List) (see [below for nested schema](#nestedatt--variations))
+- `arn` (String)
+- `default_variation` (String)
+- `description` (String)
+- `entity_overrides` (Attributes Set) (see [below for nested schema](#nestedatt--entity_overrides))
+- `evaluation_strategy` (String)
+- `name` (String)
+- `project` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `variations` (Attributes List) (see [below for nested schema](#nestedatt--variations))
 
 <a id="nestedatt--entity_overrides"></a>
 ### Nested Schema for `entity_overrides`
 
 Read-Only:
 
-- **entity_id** (String)
-- **variation** (String)
+- `entity_id` (String)
+- `variation` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,8 +45,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--variations"></a>
@@ -54,10 +54,10 @@ Read-Only:
 
 Read-Only:
 
-- **boolean_value** (Boolean)
-- **double_value** (Number)
-- **long_value** (Number)
-- **string_value** (String)
-- **variation_name** (String)
+- `boolean_value` (Boolean)
+- `double_value` (Number)
+- `long_value` (Number)
+- `string_value` (String)
+- `variation_name` (String)
 
 

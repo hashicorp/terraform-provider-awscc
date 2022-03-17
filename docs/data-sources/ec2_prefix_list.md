@@ -17,27 +17,27 @@ Data Source schema for AWS::EC2::PrefixList
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **address_family** (String) Ip Version of Prefix List.
-- **arn** (String) The Amazon Resource Name (ARN) of the Prefix List.
-- **entries** (Attributes List) Entries of Prefix List. (see [below for nested schema](#nestedatt--entries))
-- **max_entries** (Number) Max Entries of Prefix List.
-- **owner_id** (String) Owner Id of Prefix List.
-- **prefix_list_id** (String) Id of Prefix List.
-- **prefix_list_name** (String) Name of Prefix List.
-- **tags** (Attributes List) Tags for Prefix List (see [below for nested schema](#nestedatt--tags))
-- **version** (Number) Version of Prefix List.
+- `address_family` (String) Ip Version of Prefix List.
+- `arn` (String) The Amazon Resource Name (ARN) of the Prefix List.
+- `entries` (Attributes List) Entries of Prefix List. (see [below for nested schema](#nestedatt--entries))
+- `max_entries` (Number) Max Entries of Prefix List.
+- `owner_id` (String) Owner Id of Prefix List.
+- `prefix_list_id` (String) Id of Prefix List.
+- `prefix_list_name` (String) Name of Prefix List.
+- `tags` (Attributes List) Tags for Prefix List (see [below for nested schema](#nestedatt--tags))
+- `version` (Number) Version of Prefix List.
 
 <a id="nestedatt--entries"></a>
 ### Nested Schema for `entries`
 
 Read-Only:
 
-- **cidr** (String)
-- **description** (String)
+- `cidr` (String)
+- `description` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,7 +45,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

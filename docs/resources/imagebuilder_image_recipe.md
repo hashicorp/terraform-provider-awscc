@@ -17,39 +17,39 @@ Resource schema for AWS::ImageBuilder::ImageRecipe
 
 ### Required
 
-- **components** (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
-- **name** (String) The name of the image recipe.
-- **parent_image** (String) The parent image of the image recipe.
-- **version** (String) The version of the image recipe.
+- `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
+- `name` (String) The name of the image recipe.
+- `parent_image` (String) The parent image of the image recipe.
+- `version` (String) The version of the image recipe.
 
 ### Optional
 
-- **additional_instance_configuration** (Attributes) Specify additional settings and launch scripts for your build instances. (see [below for nested schema](#nestedatt--additional_instance_configuration))
-- **block_device_mappings** (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
-- **description** (String) The description of the image recipe.
-- **tags** (Map of String) The tags of the image recipe.
-- **working_directory** (String) The working directory to be used during build and test workflows.
+- `additional_instance_configuration` (Attributes) Specify additional settings and launch scripts for your build instances. (see [below for nested schema](#nestedatt--additional_instance_configuration))
+- `block_device_mappings` (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
+- `description` (String) The description of the image recipe.
+- `tags` (Map of String) The tags of the image recipe.
+- `working_directory` (String) The working directory to be used during build and test workflows.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the image recipe.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) The Amazon Resource Name (ARN) of the image recipe.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--components"></a>
 ### Nested Schema for `components`
 
 Required:
 
-- **component_arn** (String) The Amazon Resource Name (ARN) of the component.
-- **parameters** (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))
+- `component_arn` (String) The Amazon Resource Name (ARN) of the component.
+- `parameters` (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))
 
 <a id="nestedatt--components--parameters"></a>
 ### Nested Schema for `components.parameters`
 
 Required:
 
-- **name** (String) The name of the component parameter to set.
-- **value** (List of String) Sets the value for the named component parameter.
+- `name` (String) The name of the component parameter to set.
+- `value` (List of String) Sets the value for the named component parameter.
 
 
 
@@ -58,15 +58,15 @@ Required:
 
 Optional:
 
-- **systems_manager_agent** (Attributes) Contains settings for the SSM agent on your build instance. (see [below for nested schema](#nestedatt--additional_instance_configuration--systems_manager_agent))
-- **user_data_override** (String) Use this property to provide commands or a command script to run when you launch your build instance.
+- `systems_manager_agent` (Attributes) Contains settings for the SSM agent on your build instance. (see [below for nested schema](#nestedatt--additional_instance_configuration--systems_manager_agent))
+- `user_data_override` (String) Use this property to provide commands or a command script to run when you launch your build instance.
 
 <a id="nestedatt--additional_instance_configuration--systems_manager_agent"></a>
 ### Nested Schema for `additional_instance_configuration.systems_manager_agent`
 
 Optional:
 
-- **uninstall_after_build** (Boolean) Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.
+- `uninstall_after_build` (Boolean) Controls whether the SSM agent is removed from your final build image, prior to creating the new AMI. If this is set to true, then the agent is removed from the final image. If it's set to false, then the agent is left in, so that it is included in the new AMI. The default value is false.
 
 
 
@@ -75,24 +75,24 @@ Optional:
 
 Optional:
 
-- **device_name** (String) The device to which these mappings apply.
-- **ebs** (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
-- **no_device** (String) Use to remove a mapping from the parent image.
-- **virtual_name** (String) Use to manage instance ephemeral devices.
+- `device_name` (String) The device to which these mappings apply.
+- `ebs` (Attributes) Use to manage Amazon EBS-specific configuration for this mapping. (see [below for nested schema](#nestedatt--block_device_mappings--ebs))
+- `no_device` (String) Use to remove a mapping from the parent image.
+- `virtual_name` (String) Use to manage instance ephemeral devices.
 
 <a id="nestedatt--block_device_mappings--ebs"></a>
 ### Nested Schema for `block_device_mappings.ebs`
 
 Optional:
 
-- **delete_on_termination** (Boolean) Use to configure delete on termination of the associated device.
-- **encrypted** (Boolean) Use to configure device encryption.
-- **iops** (Number) Use to configure device IOPS.
-- **kms_key_id** (String) Use to configure the KMS key to use when encrypting the device.
-- **snapshot_id** (String) The snapshot that defines the device contents.
-- **throughput** (Number) For GP3 volumes only ? The throughput in MiB/s that the volume supports.
-- **volume_size** (Number) Use to override the device's volume size.
-- **volume_type** (String) Use to override the device's volume type.
+- `delete_on_termination` (Boolean) Use to configure delete on termination of the associated device.
+- `encrypted` (Boolean) Use to configure device encryption.
+- `iops` (Number) Use to configure device IOPS.
+- `kms_key_id` (String) Use to configure the KMS key to use when encrypting the device.
+- `snapshot_id` (String) The snapshot that defines the device contents.
+- `throughput` (Number) For GP3 volumes only ? The throughput in MiB/s that the volume supports.
+- `volume_size` (Number) Use to override the device's volume size.
+- `volume_type` (String) Use to override the device's volume type.
 
 ## Import
 

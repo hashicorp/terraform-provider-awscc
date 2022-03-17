@@ -17,23 +17,23 @@ Data Source schema for AWS::FraudDetector::Outcome
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The outcome ARN.
-- **created_time** (String) The timestamp when the outcome was created.
-- **description** (String) The outcome description.
-- **last_updated_time** (String) The timestamp when the outcome was last updated.
-- **name** (String) The name of the outcome.
-- **tags** (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) The outcome ARN.
+- `created_time` (String) The timestamp when the outcome was created.
+- `description` (String) The outcome description.
+- `last_updated_time` (String) The timestamp when the outcome was last updated.
+- `name` (String) The name of the outcome.
+- `tags` (Attributes List) Tags associated with this outcome. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

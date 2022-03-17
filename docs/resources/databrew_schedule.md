@@ -17,25 +17,25 @@ Resource schema for AWS::DataBrew::Schedule.
 
 ### Required
 
-- **cron_expression** (String) Schedule cron
-- **name** (String) Schedule Name
+- `cron_expression` (String) Schedule cron
+- `name` (String) Schedule Name
 
 ### Optional
 
-- **job_names** (List of String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `job_names` (List of String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

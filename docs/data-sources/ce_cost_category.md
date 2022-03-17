@@ -17,16 +17,16 @@ Data Source schema for AWS::CE::CostCategory
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Cost category ARN
-- **default_value** (String) The default value for the cost category
-- **effective_start** (String) ISO 8601 date time with offset format
-- **name** (String)
-- **rule_version** (String)
-- **rules** (String) JSON array format of Expression in Billing and Cost Management API
-- **split_charge_rules** (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
+- `arn` (String) Cost category ARN
+- `default_value` (String) The default value for the cost category
+- `effective_start` (String) ISO 8601 date time with offset format
+- `name` (String)
+- `rule_version` (String)
+- `rules` (String) JSON array format of Expression in Billing and Cost Management API
+- `split_charge_rules` (String) Json array format of CostCategorySplitChargeRule in Billing and Cost Management API
 
 

@@ -17,14 +17,14 @@ Data Source schema for AWS::ElastiCache::UserGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) The Amazon Resource Name (ARN) of the user account.
-- **engine** (String) Must be redis.
-- **status** (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
-- **user_group_id** (String) The ID of the user group.
-- **user_ids** (List of String) List of users associated to this user group.
+- `arn` (String) The Amazon Resource Name (ARN) of the user account.
+- `engine` (String) Must be redis.
+- `status` (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
+- `user_group_id` (String) The ID of the user group.
+- `user_ids` (List of String) List of users associated to this user group.
 
 

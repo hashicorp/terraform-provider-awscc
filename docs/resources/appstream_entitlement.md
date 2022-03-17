@@ -17,28 +17,28 @@ Resource Type definition for AWS::AppStream::Entitlement
 
 ### Required
 
-- **app_visibility** (String)
-- **attributes** (Attributes Set) (see [below for nested schema](#nestedatt--attributes))
-- **name** (String)
-- **stack_name** (String)
+- `app_visibility` (String)
+- `attributes` (Attributes Set) (see [below for nested schema](#nestedatt--attributes))
+- `name` (String)
+- `stack_name` (String)
 
 ### Optional
 
-- **description** (String)
+- `description` (String)
 
 ### Read-Only
 
-- **created_time** (String)
-- **id** (String) Uniquely identifies the resource.
-- **last_modified_time** (String)
+- `created_time` (String)
+- `id` (String) Uniquely identifies the resource.
+- `last_modified_time` (String)
 
 <a id="nestedatt--attributes"></a>
 ### Nested Schema for `attributes`
 
 Required:
 
-- **name** (String)
-- **value** (String)
+- `name` (String)
+- `value` (String)
 
 ## Import
 

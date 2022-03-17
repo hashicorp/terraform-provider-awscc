@@ -17,31 +17,31 @@ Data Source schema for AWS::StepFunctions::StateMachine
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **definition** (Map of String)
-- **definition_s3_location** (Attributes) (see [below for nested schema](#nestedatt--definition_s3_location))
-- **definition_string** (String)
-- **definition_substitutions** (Map of String)
-- **logging_configuration** (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
-- **name** (String)
-- **role_arn** (String)
-- **state_machine_name** (String)
-- **state_machine_type** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **tracing_configuration** (Attributes) (see [below for nested schema](#nestedatt--tracing_configuration))
+- `arn` (String)
+- `definition` (Map of String)
+- `definition_s3_location` (Attributes) (see [below for nested schema](#nestedatt--definition_s3_location))
+- `definition_string` (String)
+- `definition_substitutions` (Map of String)
+- `logging_configuration` (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
+- `name` (String)
+- `role_arn` (String)
+- `state_machine_name` (String)
+- `state_machine_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tracing_configuration` (Attributes) (see [below for nested schema](#nestedatt--tracing_configuration))
 
 <a id="nestedatt--definition_s3_location"></a>
 ### Nested Schema for `definition_s3_location`
 
 Read-Only:
 
-- **bucket** (String)
-- **key** (String)
-- **version** (String)
+- `bucket` (String)
+- `key` (String)
+- `version` (String)
 
 
 <a id="nestedatt--logging_configuration"></a>
@@ -49,23 +49,23 @@ Read-Only:
 
 Read-Only:
 
-- **destinations** (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--destinations))
-- **include_execution_data** (Boolean)
-- **level** (String)
+- `destinations` (Attributes List) (see [below for nested schema](#nestedatt--logging_configuration--destinations))
+- `include_execution_data` (Boolean)
+- `level` (String)
 
 <a id="nestedatt--logging_configuration--destinations"></a>
 ### Nested Schema for `logging_configuration.destinations`
 
 Read-Only:
 
-- **cloudwatch_logs_log_group** (Attributes) (see [below for nested schema](#nestedatt--logging_configuration--destinations--cloudwatch_logs_log_group))
+- `cloudwatch_logs_log_group` (Attributes) (see [below for nested schema](#nestedatt--logging_configuration--destinations--cloudwatch_logs_log_group))
 
 <a id="nestedatt--logging_configuration--destinations--cloudwatch_logs_log_group"></a>
 ### Nested Schema for `logging_configuration.destinations.cloudwatch_logs_log_group`
 
 Read-Only:
 
-- **log_group_arn** (String)
+- `log_group_arn` (String)
 
 
 
@@ -75,8 +75,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tracing_configuration"></a>
@@ -84,6 +84,6 @@ Read-Only:
 
 Read-Only:
 
-- **enabled** (Boolean)
+- `enabled` (Boolean)
 
 

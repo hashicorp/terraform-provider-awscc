@@ -17,25 +17,25 @@ Data Source schema for AWS::NetworkManager::Site
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) The description of the site.
-- **global_network_id** (String) The ID of the global network.
-- **location** (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
-- **site_arn** (String) The Amazon Resource Name (ARN) of the site.
-- **site_id** (String) The ID of the site.
-- **tags** (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the site.
+- `global_network_id` (String) The ID of the global network.
+- `location` (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
+- `site_arn` (String) The Amazon Resource Name (ARN) of the site.
+- `site_id` (String) The ID of the site.
+- `tags` (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
 
 Read-Only:
 
-- **address** (String) The physical address.
-- **latitude** (String) The latitude.
-- **longitude** (String) The longitude.
+- `address` (String) The physical address.
+- `latitude` (String) The latitude.
+- `longitude` (String) The longitude.
 
 
 <a id="nestedatt--tags"></a>
@@ -43,7 +43,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

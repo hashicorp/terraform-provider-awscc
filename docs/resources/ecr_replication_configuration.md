@@ -17,35 +17,35 @@ The AWS::ECR::ReplicationConfiguration resource configures the replication desti
 
 ### Required
 
-- **replication_configuration** (Attributes) An object representing the replication configuration for a registry. (see [below for nested schema](#nestedatt--replication_configuration))
+- `replication_configuration` (Attributes) An object representing the replication configuration for a registry. (see [below for nested schema](#nestedatt--replication_configuration))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **registry_id** (String) The RegistryId associated with the aws account.
+- `id` (String) Uniquely identifies the resource.
+- `registry_id` (String) The RegistryId associated with the aws account.
 
 <a id="nestedatt--replication_configuration"></a>
 ### Nested Schema for `replication_configuration`
 
 Required:
 
-- **rules** (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules. (see [below for nested schema](#nestedatt--replication_configuration--rules))
+- `rules` (Attributes List) An array of objects representing the replication rules for a replication configuration. A replication configuration may contain a maximum of 10 rules. (see [below for nested schema](#nestedatt--replication_configuration--rules))
 
 <a id="nestedatt--replication_configuration--rules"></a>
 ### Nested Schema for `replication_configuration.rules`
 
 Required:
 
-- **destinations** (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
-- **repository_filters** (Attributes List) An array of objects representing the details of a repository filter. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
+- `destinations` (Attributes List) An array of objects representing the details of a replication destination. (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+- `repository_filters` (Attributes List) An array of objects representing the details of a repository filter. (see [below for nested schema](#nestedatt--replication_configuration--rules--repository_filters))
 
 <a id="nestedatt--replication_configuration--rules--destinations"></a>
 ### Nested Schema for `replication_configuration.rules.destinations`
 
 Required:
 
-- **region** (String) A Region to replicate to.
-- **registry_id** (String) The account ID of the destination registry to replicate to.
+- `region` (String) A Region to replicate to.
+- `registry_id` (String) The account ID of the destination registry to replicate to.
 
 
 <a id="nestedatt--replication_configuration--rules--repository_filters"></a>
@@ -53,8 +53,8 @@ Required:
 
 Required:
 
-- **filter** (String) The repository filter to be applied for replication.
-- **filter_type** (String) Type of repository filter
+- `filter` (String) The repository filter to be applied for replication.
+- `filter_type` (String) Type of repository filter
 
 ## Import
 

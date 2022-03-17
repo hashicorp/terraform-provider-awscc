@@ -17,48 +17,48 @@ Creates a trail that specifies the settings for delivery of log data to an Amazo
 
 ### Required
 
-- **is_logging** (Boolean) Whether the CloudTrail is currently logging AWS API calls.
-- **s3_bucket_name** (String) Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.
+- `is_logging` (Boolean) Whether the CloudTrail is currently logging AWS API calls.
+- `s3_bucket_name` (String) Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.
 
 ### Optional
 
-- **cloudwatch_logs_log_group_arn** (String) Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
-- **cloudwatch_logs_role_arn** (String) Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
-- **enable_log_file_validation** (Boolean) Specifies whether log file validation is enabled. The default is false.
-- **event_selectors** (Attributes Set) Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail. (see [below for nested schema](#nestedatt--event_selectors))
-- **include_global_service_events** (Boolean) Specifies whether the trail is publishing events from global services such as IAM to the log files.
-- **insight_selectors** (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. (see [below for nested schema](#nestedatt--insight_selectors))
-- **is_multi_region_trail** (Boolean) Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.
-- **is_organization_trail** (Boolean) Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.
-- **kms_key_id** (String) Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
-- **s3_key_prefix** (String) Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.
-- **sns_topic_name** (String) Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **trail_name** (String)
+- `cloudwatch_logs_log_group_arn` (String) Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
+- `cloudwatch_logs_role_arn` (String) Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+- `enable_log_file_validation` (Boolean) Specifies whether log file validation is enabled. The default is false.
+- `event_selectors` (Attributes Set) Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail. (see [below for nested schema](#nestedatt--event_selectors))
+- `include_global_service_events` (Boolean) Specifies whether the trail is publishing events from global services such as IAM to the log files.
+- `insight_selectors` (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. (see [below for nested schema](#nestedatt--insight_selectors))
+- `is_multi_region_trail` (Boolean) Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.
+- `is_organization_trail` (Boolean) Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.
+- `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
+- `s3_key_prefix` (String) Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.
+- `sns_topic_name` (String) Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `trail_name` (String)
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
-- **sns_topic_arn** (String)
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
+- `sns_topic_arn` (String)
 
 <a id="nestedatt--event_selectors"></a>
 ### Nested Schema for `event_selectors`
 
 Optional:
 
-- **data_resources** (Attributes Set) (see [below for nested schema](#nestedatt--event_selectors--data_resources))
-- **exclude_management_event_sources** (Set of String) An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.
-- **include_management_events** (Boolean) Specify if you want your event selector to include management events for your trail.
-- **read_write_type** (String) Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.
+- `data_resources` (Attributes Set) (see [below for nested schema](#nestedatt--event_selectors--data_resources))
+- `exclude_management_event_sources` (Set of String) An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.
+- `include_management_events` (Boolean) Specify if you want your event selector to include management events for your trail.
+- `read_write_type` (String) Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.
 
 <a id="nestedatt--event_selectors--data_resources"></a>
 ### Nested Schema for `event_selectors.data_resources`
 
 Optional:
 
-- **type** (String) The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
-- **values** (Set of String) An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.
+- `type` (String) The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
+- `values` (Set of String) An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.
 
 
 
@@ -67,7 +67,7 @@ Optional:
 
 Optional:
 
-- **insight_type** (String) The type of insight to log on a trail.
+- `insight_type` (String) The type of insight to log on a trail.
 
 
 <a id="nestedatt--tags"></a>
@@ -75,8 +75,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -17,37 +17,37 @@ The AWS::AccessAnalyzer::Analyzer type specifies an analyzer of the user's accou
 
 ### Required
 
-- **type** (String) The type of the analyzer, must be ACCOUNT or ORGANIZATION
+- `type` (String) The type of the analyzer, must be ACCOUNT or ORGANIZATION
 
 ### Optional
 
-- **analyzer_name** (String) Analyzer name
-- **archive_rules** (Attributes List) (see [below for nested schema](#nestedatt--archive_rules))
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `analyzer_name` (String) Analyzer name
+- `archive_rules` (Attributes List) (see [below for nested schema](#nestedatt--archive_rules))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name (ARN) of the analyzer
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) Amazon Resource Name (ARN) of the analyzer
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--archive_rules"></a>
 ### Nested Schema for `archive_rules`
 
 Optional:
 
-- **filter** (Attributes List) (see [below for nested schema](#nestedatt--archive_rules--filter))
-- **rule_name** (String) The archive rule name
+- `filter` (Attributes List) (see [below for nested schema](#nestedatt--archive_rules--filter))
+- `rule_name` (String) The archive rule name
 
 <a id="nestedatt--archive_rules--filter"></a>
 ### Nested Schema for `archive_rules.filter`
 
 Optional:
 
-- **contains** (List of String)
-- **eq** (List of String)
-- **exists** (Boolean)
-- **neq** (List of String)
-- **property** (String)
+- `contains` (List of String)
+- `eq` (List of String)
+- `exists` (Boolean)
+- `neq` (List of String)
+- `property` (String)
 
 
 
@@ -56,8 +56,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

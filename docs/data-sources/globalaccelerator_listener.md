@@ -17,22 +17,22 @@ Data Source schema for AWS::GlobalAccelerator::Listener
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **accelerator_arn** (String) The Amazon Resource Name (ARN) of the accelerator.
-- **client_affinity** (String) Client affinity lets you direct all requests from a user to the same endpoint.
-- **listener_arn** (String) The Amazon Resource Name (ARN) of the listener.
-- **port_ranges** (Attributes List) (see [below for nested schema](#nestedatt--port_ranges))
-- **protocol** (String) The protocol for the listener.
+- `accelerator_arn` (String) The Amazon Resource Name (ARN) of the accelerator.
+- `client_affinity` (String) Client affinity lets you direct all requests from a user to the same endpoint.
+- `listener_arn` (String) The Amazon Resource Name (ARN) of the listener.
+- `port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--port_ranges))
+- `protocol` (String) The protocol for the listener.
 
 <a id="nestedatt--port_ranges"></a>
 ### Nested Schema for `port_ranges`
 
 Read-Only:
 
-- **from_port** (Number) A network port number
-- **to_port** (Number) A network port number
+- `from_port` (Number) A network port number
+- `to_port` (Number) A network port number
 
 

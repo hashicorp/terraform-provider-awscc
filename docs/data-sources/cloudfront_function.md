@@ -17,25 +17,25 @@ Data Source schema for AWS::CloudFront::Function
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **auto_publish** (Boolean)
-- **function_arn** (String)
-- **function_code** (String)
-- **function_config** (Attributes) (see [below for nested schema](#nestedatt--function_config))
-- **function_metadata** (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
-- **name** (String)
-- **stage** (String)
+- `auto_publish` (Boolean)
+- `function_arn` (String)
+- `function_code` (String)
+- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
+- `function_metadata` (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
+- `name` (String)
+- `stage` (String)
 
 <a id="nestedatt--function_config"></a>
 ### Nested Schema for `function_config`
 
 Read-Only:
 
-- **comment** (String)
-- **runtime** (String)
+- `comment` (String)
+- `runtime` (String)
 
 
 <a id="nestedatt--function_metadata"></a>
@@ -43,6 +43,6 @@ Read-Only:
 
 Read-Only:
 
-- **function_arn** (String)
+- `function_arn` (String)
 
 

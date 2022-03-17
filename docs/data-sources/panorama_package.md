@@ -17,27 +17,27 @@ Data Source schema for AWS::Panorama::Package
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **created_time** (Number)
-- **package_id** (String)
-- **package_name** (String)
-- **storage_location** (Attributes) (see [below for nested schema](#nestedatt--storage_location))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `created_time` (Number)
+- `package_id` (String)
+- `package_name` (String)
+- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--storage_location"></a>
 ### Nested Schema for `storage_location`
 
 Read-Only:
 
-- **binary_prefix_location** (String)
-- **bucket** (String)
-- **generated_prefix_location** (String)
-- **manifest_prefix_location** (String)
-- **repo_prefix_location** (String)
+- `binary_prefix_location` (String)
+- `bucket` (String)
+- `generated_prefix_location` (String)
+- `manifest_prefix_location` (String)
+- `repo_prefix_location` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -45,7 +45,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

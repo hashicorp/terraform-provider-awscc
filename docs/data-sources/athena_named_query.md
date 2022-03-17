@@ -17,15 +17,15 @@ Data Source schema for AWS::Athena::NamedQuery
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **database** (String) The database to which the query belongs.
-- **description** (String) The query description.
-- **name** (String) The query name.
-- **named_query_id** (String) The unique ID of the query.
-- **query_string** (String) The contents of the query with all query statements.
-- **work_group** (String) The name of the workgroup that contains the named query.
+- `database` (String) The database to which the query belongs.
+- `description` (String) The query description.
+- `name` (String) The query name.
+- `named_query_id` (String) The unique ID of the query.
+- `query_string` (String) The contents of the query with all query statements.
+- `work_group` (String) The name of the workgroup that contains the named query.
 
 

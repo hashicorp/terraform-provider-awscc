@@ -17,46 +17,46 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 
 ### Required
 
-- **function_name** (String) The name of the Lambda function.
+- `function_name` (String) The name of the Lambda function.
 
 ### Optional
 
-- **batch_size** (Number) The maximum number of items to retrieve in a single batch.
-- **bisect_batch_on_function_error** (Boolean) (Streams) If the function returns an error, split the batch in two and retry.
-- **destination_config** (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
-- **enabled** (Boolean) Disables the event source mapping to pause polling and invocation.
-- **event_source_arn** (String) The Amazon Resource Name (ARN) of the event source.
-- **filter_criteria** (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
-- **function_response_types** (List of String) (Streams) A list of response types supported by the function.
-- **maximum_batching_window_in_seconds** (Number) (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
-- **maximum_record_age_in_seconds** (Number) (Streams) The maximum age of a record that Lambda sends to a function for processing.
-- **maximum_retry_attempts** (Number) (Streams) The maximum number of times to retry when the function returns an error.
-- **parallelization_factor** (Number) (Streams) The number of batches to process from each shard concurrently.
-- **queues** (List of String) (ActiveMQ) A list of ActiveMQ queues.
-- **self_managed_event_source** (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
-- **source_access_configurations** (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
-- **starting_position** (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
-- **starting_position_timestamp** (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
-- **topics** (List of String) (Kafka) A list of Kafka topics.
-- **tumbling_window_in_seconds** (Number) (Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.
+- `batch_size` (Number) The maximum number of items to retrieve in a single batch.
+- `bisect_batch_on_function_error` (Boolean) (Streams) If the function returns an error, split the batch in two and retry.
+- `destination_config` (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
+- `enabled` (Boolean) Disables the event source mapping to pause polling and invocation.
+- `event_source_arn` (String) The Amazon Resource Name (ARN) of the event source.
+- `filter_criteria` (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
+- `function_response_types` (List of String) (Streams) A list of response types supported by the function.
+- `maximum_batching_window_in_seconds` (Number) (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+- `maximum_record_age_in_seconds` (Number) (Streams) The maximum age of a record that Lambda sends to a function for processing.
+- `maximum_retry_attempts` (Number) (Streams) The maximum number of times to retry when the function returns an error.
+- `parallelization_factor` (Number) (Streams) The number of batches to process from each shard concurrently.
+- `queues` (List of String) (ActiveMQ) A list of ActiveMQ queues.
+- `self_managed_event_source` (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
+- `source_access_configurations` (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
+- `starting_position` (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
+- `starting_position_timestamp` (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
+- `topics` (List of String) (Kafka) A list of Kafka topics.
+- `tumbling_window_in_seconds` (Number) (Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.
 
 ### Read-Only
 
-- **id** (String) Event Source Mapping Identifier UUID.
+- `id` (String) Event Source Mapping Identifier UUID.
 
 <a id="nestedatt--destination_config"></a>
 ### Nested Schema for `destination_config`
 
 Optional:
 
-- **on_failure** (Attributes) The destination configuration for failed invocations. (see [below for nested schema](#nestedatt--destination_config--on_failure))
+- `on_failure` (Attributes) The destination configuration for failed invocations. (see [below for nested schema](#nestedatt--destination_config--on_failure))
 
 <a id="nestedatt--destination_config--on_failure"></a>
 ### Nested Schema for `destination_config.on_failure`
 
 Optional:
 
-- **destination** (String) The Amazon Resource Name (ARN) of the destination resource.
+- `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
 
 
 
@@ -65,14 +65,14 @@ Optional:
 
 Optional:
 
-- **filters** (Attributes List) List of filters of this FilterCriteria (see [below for nested schema](#nestedatt--filter_criteria--filters))
+- `filters` (Attributes List) List of filters of this FilterCriteria (see [below for nested schema](#nestedatt--filter_criteria--filters))
 
 <a id="nestedatt--filter_criteria--filters"></a>
 ### Nested Schema for `filter_criteria.filters`
 
 Optional:
 
-- **pattern** (String) The filter pattern that defines which events should be passed for invocations.
+- `pattern` (String) The filter pattern that defines which events should be passed for invocations.
 
 
 
@@ -81,14 +81,14 @@ Optional:
 
 Optional:
 
-- **endpoints** (Attributes) The endpoints for a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
+- `endpoints` (Attributes) The endpoints for a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
 
 <a id="nestedatt--self_managed_event_source--endpoints"></a>
 ### Nested Schema for `self_managed_event_source.endpoints`
 
 Optional:
 
-- **kafka_bootstrap_servers** (List of String) A list of Kafka server endpoints.
+- `kafka_bootstrap_servers` (List of String) A list of Kafka server endpoints.
 
 
 
@@ -97,8 +97,8 @@ Optional:
 
 Optional:
 
-- **type** (String) The type of source access configuration.
-- **uri** (String) The URI for the source access configuration resource.
+- `type` (String) The type of source access configuration.
+- `uri` (String) The URI for the source access configuration resource.
 
 ## Import
 

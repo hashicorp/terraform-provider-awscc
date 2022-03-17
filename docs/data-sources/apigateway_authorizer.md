@@ -17,20 +17,20 @@ Data Source schema for AWS::ApiGateway::Authorizer
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **auth_type** (String) Optional customer-defined field, used in OpenAPI imports and exports without functional impact.
-- **authorizer_credentials** (String) Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.
-- **authorizer_id** (String)
-- **authorizer_result_ttl_in_seconds** (Number) The TTL in seconds of cached authorizer results.
-- **authorizer_uri** (String) Specifies the authorizer's Uniform Resource Identifier (URI).
-- **identity_source** (String) The identity source for which authorization is requested.
-- **identity_validation_expression** (String) A validation expression for the incoming identity token.
-- **name** (String) The name of the authorizer.
-- **provider_ar_ns** (Set of String) A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
-- **rest_api_id** (String) The identifier of the API.
-- **type** (String) The authorizer type.
+- `auth_type` (String) Optional customer-defined field, used in OpenAPI imports and exports without functional impact.
+- `authorizer_credentials` (String) Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.
+- `authorizer_id` (String)
+- `authorizer_result_ttl_in_seconds` (Number) The TTL in seconds of cached authorizer results.
+- `authorizer_uri` (String) Specifies the authorizer's Uniform Resource Identifier (URI).
+- `identity_source` (String) The identity source for which authorization is requested.
+- `identity_validation_expression` (String) A validation expression for the incoming identity token.
+- `name` (String) The name of the authorizer.
+- `provider_ar_ns` (Set of String) A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
+- `rest_api_id` (String) The identifier of the API.
+- `type` (String) The authorizer type.
 
 

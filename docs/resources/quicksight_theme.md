@@ -17,47 +17,47 @@ Definition of the AWS::QuickSight::Theme Resource Type.
 
 ### Required
 
-- **aws_account_id** (String)
-- **theme_id** (String)
+- `aws_account_id` (String)
+- `theme_id` (String)
 
 ### Optional
 
-- **base_theme_id** (String) <p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
+- `base_theme_id` (String) <p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
 			the starting themes defined by Amazon QuickSight. For a list of the starting themes, use
 				<code>ListThemes</code> or choose <b>Themes</b> from
 			within a QuickSight analysis. </p>
-- **configuration** (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
+- `configuration` (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--configuration))
-- **name** (String) <p>A display name for the theme.</p>
-- **permissions** (Attributes List) <p>A valid grouping of resource permissions to apply to the new theme.
+- `name` (String) <p>A display name for the theme.</p>
+- `permissions` (Attributes List) <p>A valid grouping of resource permissions to apply to the new theme.
 			</p> (see [below for nested schema](#nestedatt--permissions))
-- **tags** (Attributes List) <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
+- `tags` (Attributes List) <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
 			resource.</p> (see [below for nested schema](#nestedatt--tags))
-- **version_description** (String) <p>A description of the first version of the theme that you're creating. Every time
+- `version_description` (String) <p>A description of the first version of the theme that you're creating. Every time
 				<code>UpdateTheme</code> is called, a new version is created. Each version of the
 			theme has a description of the version in the <code>VersionDescription</code>
 			field.</p>
 
 ### Read-Only
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the theme.</p>
-- **created_time** (String) <p>The date and time that the theme was created.</p>
-- **id** (String) Uniquely identifies the resource.
-- **last_updated_time** (String) <p>The date and time that the theme was last updated.</p>
-- **type** (String)
-- **version** (Attributes) <p>A version of a theme.</p> (see [below for nested schema](#nestedatt--version))
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the theme.</p>
+- `created_time` (String) <p>The date and time that the theme was created.</p>
+- `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) <p>The date and time that the theme was last updated.</p>
+- `type` (String)
+- `version` (Attributes) <p>A version of a theme.</p> (see [below for nested schema](#nestedatt--version))
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
 Optional:
 
-- **data_color_palette** (Attributes) <p>The theme colors that are used for data colors in charts. The colors description is a
+- `data_color_palette` (Attributes) <p>The theme colors that are used for data colors in charts. The colors description is a
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--configuration--data_color_palette))
-- **sheet** (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--configuration--sheet))
-- **typography** (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--configuration--typography))
-- **ui_color_palette** (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
+- `sheet` (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--configuration--sheet))
+- `typography` (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--configuration--typography))
+- `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
                 Guide.</i>
@@ -68,10 +68,10 @@ Optional:
 
 Optional:
 
-- **colors** (List of String) <p>The hexadecimal codes for the colors.</p>
-- **empty_fill_color** (String) <p>The hexadecimal code of a color that applies to charts where a lack of data is
+- `colors` (List of String) <p>The hexadecimal codes for the colors.</p>
+- `empty_fill_color` (String) <p>The hexadecimal code of a color that applies to charts where a lack of data is
             highlighted.</p>
-- **min_max_gradient** (List of String) <p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>
+- `min_max_gradient` (List of String) <p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>
 
 
 <a id="nestedatt--configuration--sheet"></a>
@@ -79,22 +79,22 @@ Optional:
 
 Optional:
 
-- **tile** (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile))
-- **tile_layout** (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout))
+- `tile` (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile))
+- `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout))
 
 <a id="nestedatt--configuration--sheet--tile"></a>
 ### Nested Schema for `configuration.sheet.tile`
 
 Optional:
 
-- **border** (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile--border))
+- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile--border))
 
 <a id="nestedatt--configuration--sheet--tile--border"></a>
 ### Nested Schema for `configuration.sheet.tile.border`
 
 Optional:
 
-- **show** (Boolean) <p>The option to enable display of borders for visuals.</p>
+- `show` (Boolean) <p>The option to enable display of borders for visuals.</p>
 
 
 
@@ -103,15 +103,15 @@ Optional:
 
 Optional:
 
-- **gutter** (Attributes) <p>The display options for gutter spacing between tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--gutter))
-- **margin** (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--margin))
+- `gutter` (Attributes) <p>The display options for gutter spacing between tiles on a sheet.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--gutter))
+- `margin` (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--margin))
 
 <a id="nestedatt--configuration--sheet--tile_layout--gutter"></a>
 ### Nested Schema for `configuration.sheet.tile_layout.margin`
 
 Optional:
 
-- **show** (Boolean) <p>This Boolean value controls whether to display a gutter space between sheet tiles.
+- `show` (Boolean) <p>This Boolean value controls whether to display a gutter space between sheet tiles.
         </p>
 
 
@@ -120,7 +120,7 @@ Optional:
 
 Optional:
 
-- **show** (Boolean) <p>This Boolean value controls whether to display sheet margins.</p>
+- `show` (Boolean) <p>This Boolean value controls whether to display sheet margins.</p>
 
 
 
@@ -130,14 +130,14 @@ Optional:
 
 Optional:
 
-- **font_families** (Attributes List) (see [below for nested schema](#nestedatt--configuration--typography--font_families))
+- `font_families` (Attributes List) (see [below for nested schema](#nestedatt--configuration--typography--font_families))
 
 <a id="nestedatt--configuration--typography--font_families"></a>
 ### Nested Schema for `configuration.typography.font_families`
 
 Optional:
 
-- **font_family** (String)
+- `font_family` (String)
 
 
 
@@ -146,31 +146,31 @@ Optional:
 
 Optional:
 
-- **accent** (String) <p>This color is that applies to selected states and buttons.</p>
-- **accent_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `accent` (String) <p>This color is that applies to selected states and buttons.</p>
+- `accent_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             accent color.</p>
-- **danger** (String) <p>The color that applies to error messages.</p>
-- **danger_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `danger` (String) <p>The color that applies to error messages.</p>
+- `danger_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             error color.</p>
-- **dimension** (String) <p>The color that applies to the names of fields that are identified as
+- `dimension` (String) <p>The color that applies to the names of fields that are identified as
             dimensions.</p>
-- **dimension_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `dimension_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             dimension color.</p>
-- **measure** (String) <p>The color that applies to the names of fields that are identified as measures.</p>
-- **measure_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `measure` (String) <p>The color that applies to the names of fields that are identified as measures.</p>
+- `measure_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             measure color.</p>
-- **primary_background** (String) <p>The background color that applies to visuals and other high emphasis UI.</p>
-- **primary_foreground** (String) <p>The color of text and other foreground elements that appear over the primary
+- `primary_background` (String) <p>The background color that applies to visuals and other high emphasis UI.</p>
+- `primary_foreground` (String) <p>The color of text and other foreground elements that appear over the primary
             background regions, such as grid lines, borders, table banding, icons, and so on.</p>
-- **secondary_background** (String) <p>The background color that applies to the sheet background and sheet controls.</p>
-- **secondary_foreground** (String) <p>The foreground color that applies to any sheet title, sheet control text, or UI that
+- `secondary_background` (String) <p>The background color that applies to the sheet background and sheet controls.</p>
+- `secondary_foreground` (String) <p>The foreground color that applies to any sheet title, sheet control text, or UI that
             appears over the secondary background.</p>
-- **success** (String) <p>The color that applies to success messages, for example the check mark for a
+- `success` (String) <p>The color that applies to success messages, for example the check mark for a
             successful download.</p>
-- **success_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `success_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             success color.</p>
-- **warning** (String) <p>This color that applies to warning and informational messages.</p>
-- **warning_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `warning` (String) <p>This color that applies to warning and informational messages.</p>
+- `warning_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             warning color.</p>
 
 
@@ -180,8 +180,8 @@ Optional:
 
 Optional:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -203,8 +203,8 @@ Optional:
 
 Optional:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--version"></a>
@@ -212,28 +212,28 @@ Optional:
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
-- **base_theme_id** (String) <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
+- `base_theme_id` (String) <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
             themes initially inherit from a default QuickSight theme.</p>
-- **configuration** (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
+- `configuration` (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--version--configuration))
-- **created_time** (String) <p>The date and time that this theme version was created.</p>
-- **description** (String) <p>The description of the theme.</p>
-- **errors** (Attributes List) <p>Errors associated with the theme.</p> (see [below for nested schema](#nestedatt--version--errors))
-- **status** (String)
-- **version_number** (Number) <p>The version number of the theme.</p>
+- `created_time` (String) <p>The date and time that this theme version was created.</p>
+- `description` (String) <p>The description of the theme.</p>
+- `errors` (Attributes List) <p>Errors associated with the theme.</p> (see [below for nested schema](#nestedatt--version--errors))
+- `status` (String)
+- `version_number` (Number) <p>The version number of the theme.</p>
 
 <a id="nestedatt--version--configuration"></a>
 ### Nested Schema for `version.configuration`
 
 Read-Only:
 
-- **data_color_palette** (Attributes) <p>The theme colors that are used for data colors in charts. The colors description is a
+- `data_color_palette` (Attributes) <p>The theme colors that are used for data colors in charts. The colors description is a
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--version--configuration--data_color_palette))
-- **sheet** (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--version--configuration--sheet))
-- **typography** (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--version--configuration--typography))
-- **ui_color_palette** (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
+- `sheet` (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--version--configuration--sheet))
+- `typography` (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--version--configuration--typography))
+- `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
                 Guide.</i>
@@ -244,10 +244,10 @@ Read-Only:
 
 Read-Only:
 
-- **colors** (List of String) <p>The hexadecimal codes for the colors.</p>
-- **empty_fill_color** (String) <p>The hexadecimal code of a color that applies to charts where a lack of data is
+- `colors` (List of String) <p>The hexadecimal codes for the colors.</p>
+- `empty_fill_color` (String) <p>The hexadecimal code of a color that applies to charts where a lack of data is
             highlighted.</p>
-- **min_max_gradient** (List of String) <p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>
+- `min_max_gradient` (List of String) <p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>
 
 
 <a id="nestedatt--version--configuration--sheet"></a>
@@ -255,22 +255,22 @@ Read-Only:
 
 Read-Only:
 
-- **tile** (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile))
-- **tile_layout** (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
+- `tile` (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile))
+- `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
 
 <a id="nestedatt--version--configuration--sheet--tile"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout`
 
 Read-Only:
 
-- **border** (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--border))
+- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--border))
 
 <a id="nestedatt--version--configuration--sheet--tile_layout--border"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout.border`
 
 Read-Only:
 
-- **show** (Boolean) <p>The option to enable display of borders for visuals.</p>
+- `show` (Boolean) <p>The option to enable display of borders for visuals.</p>
 
 
 
@@ -279,15 +279,15 @@ Read-Only:
 
 Read-Only:
 
-- **gutter** (Attributes) <p>The display options for gutter spacing between tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--gutter))
-- **margin** (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--margin))
+- `gutter` (Attributes) <p>The display options for gutter spacing between tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--gutter))
+- `margin` (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--margin))
 
 <a id="nestedatt--version--configuration--sheet--tile_layout--gutter"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout.gutter`
 
 Read-Only:
 
-- **show** (Boolean) <p>This Boolean value controls whether to display a gutter space between sheet tiles.
+- `show` (Boolean) <p>This Boolean value controls whether to display a gutter space between sheet tiles.
         </p>
 
 
@@ -296,7 +296,7 @@ Read-Only:
 
 Read-Only:
 
-- **show** (Boolean) <p>This Boolean value controls whether to display sheet margins.</p>
+- `show` (Boolean) <p>This Boolean value controls whether to display sheet margins.</p>
 
 
 
@@ -306,14 +306,14 @@ Read-Only:
 
 Read-Only:
 
-- **font_families** (Attributes List) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
+- `font_families` (Attributes List) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
 
 <a id="nestedatt--version--configuration--typography--font_families"></a>
 ### Nested Schema for `version.configuration.typography.font_families`
 
 Read-Only:
 
-- **font_family** (String)
+- `font_family` (String)
 
 
 
@@ -322,31 +322,31 @@ Read-Only:
 
 Read-Only:
 
-- **accent** (String) <p>This color is that applies to selected states and buttons.</p>
-- **accent_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `accent` (String) <p>This color is that applies to selected states and buttons.</p>
+- `accent_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             accent color.</p>
-- **danger** (String) <p>The color that applies to error messages.</p>
-- **danger_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `danger` (String) <p>The color that applies to error messages.</p>
+- `danger_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             error color.</p>
-- **dimension** (String) <p>The color that applies to the names of fields that are identified as
+- `dimension` (String) <p>The color that applies to the names of fields that are identified as
             dimensions.</p>
-- **dimension_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `dimension_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             dimension color.</p>
-- **measure** (String) <p>The color that applies to the names of fields that are identified as measures.</p>
-- **measure_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `measure` (String) <p>The color that applies to the names of fields that are identified as measures.</p>
+- `measure_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             measure color.</p>
-- **primary_background** (String) <p>The background color that applies to visuals and other high emphasis UI.</p>
-- **primary_foreground** (String) <p>The color of text and other foreground elements that appear over the primary
+- `primary_background` (String) <p>The background color that applies to visuals and other high emphasis UI.</p>
+- `primary_foreground` (String) <p>The color of text and other foreground elements that appear over the primary
             background regions, such as grid lines, borders, table banding, icons, and so on.</p>
-- **secondary_background** (String) <p>The background color that applies to the sheet background and sheet controls.</p>
-- **secondary_foreground** (String) <p>The foreground color that applies to any sheet title, sheet control text, or UI that
+- `secondary_background` (String) <p>The background color that applies to the sheet background and sheet controls.</p>
+- `secondary_foreground` (String) <p>The foreground color that applies to any sheet title, sheet control text, or UI that
             appears over the secondary background.</p>
-- **success** (String) <p>The color that applies to success messages, for example the check mark for a
+- `success` (String) <p>The color that applies to success messages, for example the check mark for a
             successful download.</p>
-- **success_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `success_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             success color.</p>
-- **warning** (String) <p>This color that applies to warning and informational messages.</p>
-- **warning_foreground** (String) <p>The foreground color that applies to any text or other elements that appear over the
+- `warning` (String) <p>This color that applies to warning and informational messages.</p>
+- `warning_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
             warning color.</p>
 
 
@@ -356,8 +356,8 @@ Read-Only:
 
 Read-Only:
 
-- **message** (String) <p>The error message.</p>
-- **type** (String)
+- `message` (String) <p>The error message.</p>
+- `type` (String)
 
 ## Import
 

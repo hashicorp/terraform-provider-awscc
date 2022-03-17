@@ -17,12 +17,12 @@ Data Source schema for AWS::AppSync::DomainNameApiAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **api_association_identifier** (String)
-- **api_id** (String)
-- **domain_name** (String)
+- `api_association_identifier` (String)
+- `api_id` (String)
+- `domain_name` (String)
 
 

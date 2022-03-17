@@ -17,39 +17,39 @@ Data Source schema for AWS::QuickSight::Analysis
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **analysis_id** (String)
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the analysis.</p>
-- **aws_account_id** (String)
-- **created_time** (String) <p>The time that the analysis was created.</p>
-- **data_set_arns** (List of String) <p>The ARNs of the datasets of the analysis.</p>
-- **errors** (Attributes List) <p>Errors associated with the analysis.</p> (see [below for nested schema](#nestedatt--errors))
-- **last_updated_time** (String) <p>The time that the analysis was last updated.</p>
-- **name** (String) <p>The descriptive name of the analysis.</p>
-- **parameters** (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
-- **permissions** (Attributes List) <p>A structure that describes the principals and the resource-level permissions on an
+- `analysis_id` (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the analysis.</p>
+- `aws_account_id` (String)
+- `created_time` (String) <p>The time that the analysis was created.</p>
+- `data_set_arns` (List of String) <p>The ARNs of the datasets of the analysis.</p>
+- `errors` (Attributes List) <p>Errors associated with the analysis.</p> (see [below for nested schema](#nestedatt--errors))
+- `last_updated_time` (String) <p>The time that the analysis was last updated.</p>
+- `name` (String) <p>The descriptive name of the analysis.</p>
+- `parameters` (Attributes) <p>A list of QuickSight parameters and the list's override values.</p> (see [below for nested schema](#nestedatt--parameters))
+- `permissions` (Attributes List) <p>A structure that describes the principals and the resource-level permissions on an
             analysis. You can use the <code>Permissions</code> structure to grant permissions by
             providing a list of AWS Identity and Access Management (IAM) action information for each
             principal listed by Amazon Resource Name (ARN). </p>
 
         <p>To specify no permissions, omit <code>Permissions</code>.</p> (see [below for nested schema](#nestedatt--permissions))
-- **sheets** (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--sheets))
-- **source_entity** (Attributes) <p>The source entity of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity))
-- **status** (String)
-- **tags** (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
+- `sheets` (Attributes List) <p>A list of the associated sheets with the unique identifier and name of each sheet.</p> (see [below for nested schema](#nestedatt--sheets))
+- `source_entity` (Attributes) <p>The source entity of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity))
+- `status` (String)
+- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
             analysis.</p> (see [below for nested schema](#nestedatt--tags))
-- **theme_arn** (String) <p>The ARN of the theme of the analysis.</p>
+- `theme_arn` (String) <p>The ARN of the theme of the analysis.</p>
 
 <a id="nestedatt--errors"></a>
 ### Nested Schema for `errors`
 
 Read-Only:
 
-- **message** (String) <p>The message associated with the analysis error.</p>
-- **type** (String)
+- `message` (String) <p>The message associated with the analysis error.</p>
+- `type` (String)
 
 
 <a id="nestedatt--parameters"></a>
@@ -57,18 +57,18 @@ Read-Only:
 
 Read-Only:
 
-- **date_time_parameters** (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
-- **decimal_parameters** (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
-- **integer_parameters** (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
-- **string_parameters** (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
+- `date_time_parameters` (Attributes List) <p>Date-time parameters.</p> (see [below for nested schema](#nestedatt--parameters--date_time_parameters))
+- `decimal_parameters` (Attributes List) <p>Decimal parameters.</p> (see [below for nested schema](#nestedatt--parameters--decimal_parameters))
+- `integer_parameters` (Attributes List) <p>Integer parameters.</p> (see [below for nested schema](#nestedatt--parameters--integer_parameters))
+- `string_parameters` (Attributes List) <p>String parameters.</p> (see [below for nested schema](#nestedatt--parameters--string_parameters))
 
 <a id="nestedatt--parameters--date_time_parameters"></a>
 ### Nested Schema for `parameters.date_time_parameters`
 
 Read-Only:
 
-- **name** (String) <p>A display name for the date-time parameter.</p>
-- **values** (List of String) <p>The values for the date-time parameter.</p>
+- `name` (String) <p>A display name for the date-time parameter.</p>
+- `values` (List of String) <p>The values for the date-time parameter.</p>
 
 
 <a id="nestedatt--parameters--decimal_parameters"></a>
@@ -76,8 +76,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>A display name for the decimal parameter.</p>
-- **values** (List of Number) <p>The values for the decimal parameter.</p>
+- `name` (String) <p>A display name for the decimal parameter.</p>
+- `values` (List of Number) <p>The values for the decimal parameter.</p>
 
 
 <a id="nestedatt--parameters--integer_parameters"></a>
@@ -85,8 +85,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>The name of the integer parameter.</p>
-- **values** (List of Number) <p>The values for the integer parameter.</p>
+- `name` (String) <p>The name of the integer parameter.</p>
+- `values` (List of Number) <p>The values for the integer parameter.</p>
 
 
 <a id="nestedatt--parameters--string_parameters"></a>
@@ -94,8 +94,8 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>A display name for a string parameter.</p>
-- **values** (List of String) <p>The values of a string parameter.</p>
+- `name` (String) <p>A display name for a string parameter.</p>
+- `values` (List of String) <p>The values of a string parameter.</p>
 
 
 
@@ -104,8 +104,8 @@ Read-Only:
 
 Read-Only:
 
-- **actions** (List of String) <p>The IAM action to grant or revoke permissions on.</p>
-- **principal** (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
+- `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
+- `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
         <ul>
             <li>
@@ -127,9 +127,9 @@ Read-Only:
 
 Read-Only:
 
-- **name** (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+- `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>
-- **sheet_id** (String) <p>The unique identifier associated with a sheet.</p>
+- `sheet_id` (String) <p>The unique identifier associated with a sheet.</p>
 
 
 <a id="nestedatt--source_entity"></a>
@@ -137,23 +137,23 @@ Read-Only:
 
 Read-Only:
 
-- **source_template** (Attributes) <p>The source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
+- `source_template` (Attributes) <p>The source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template))
 
 <a id="nestedatt--source_entity--source_template"></a>
 ### Nested Schema for `source_entity.source_template`
 
 Read-Only:
 
-- **arn** (String) <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
-- **data_set_references** (Attributes List) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>
+- `data_set_references` (Attributes List) <p>The dataset references of the source template of an analysis.</p> (see [below for nested schema](#nestedatt--source_entity--source_template--data_set_references))
 
 <a id="nestedatt--source_entity--source_template--data_set_references"></a>
 ### Nested Schema for `source_entity.source_template.data_set_references`
 
 Read-Only:
 
-- **data_set_arn** (String) <p>Dataset Amazon Resource Name (ARN).</p>
-- **data_set_placeholder** (String) <p>Dataset placeholder.</p>
+- `data_set_arn` (String) <p>Dataset Amazon Resource Name (ARN).</p>
+- `data_set_placeholder` (String) <p>Dataset placeholder.</p>
 
 
 
@@ -163,7 +163,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String) <p>Tag key.</p>
-- **value** (String) <p>Tag value.</p>
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 

@@ -17,30 +17,30 @@ Data Source schema for AWS::SSM::ResourceDataSync
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **bucket_name** (String)
-- **bucket_prefix** (String)
-- **bucket_region** (String)
-- **kms_key_arn** (String)
-- **s3_destination** (Attributes) (see [below for nested schema](#nestedatt--s3_destination))
-- **sync_format** (String)
-- **sync_name** (String)
-- **sync_source** (Attributes) (see [below for nested schema](#nestedatt--sync_source))
-- **sync_type** (String)
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `bucket_region` (String)
+- `kms_key_arn` (String)
+- `s3_destination` (Attributes) (see [below for nested schema](#nestedatt--s3_destination))
+- `sync_format` (String)
+- `sync_name` (String)
+- `sync_source` (Attributes) (see [below for nested schema](#nestedatt--sync_source))
+- `sync_type` (String)
 
 <a id="nestedatt--s3_destination"></a>
 ### Nested Schema for `s3_destination`
 
 Read-Only:
 
-- **bucket_name** (String)
-- **bucket_prefix** (String)
-- **bucket_region** (String)
-- **kms_key_arn** (String)
-- **sync_format** (String)
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `bucket_region` (String)
+- `kms_key_arn` (String)
+- `sync_format` (String)
 
 
 <a id="nestedatt--sync_source"></a>
@@ -48,17 +48,17 @@ Read-Only:
 
 Read-Only:
 
-- **aws_organizations_source** (Attributes) (see [below for nested schema](#nestedatt--sync_source--aws_organizations_source))
-- **include_future_regions** (Boolean)
-- **source_regions** (List of String)
-- **source_type** (String)
+- `aws_organizations_source` (Attributes) (see [below for nested schema](#nestedatt--sync_source--aws_organizations_source))
+- `include_future_regions` (Boolean)
+- `source_regions` (List of String)
+- `source_type` (String)
 
 <a id="nestedatt--sync_source--aws_organizations_source"></a>
 ### Nested Schema for `sync_source.aws_organizations_source`
 
 Read-Only:
 
-- **organization_source_type** (String)
-- **organizational_units** (List of String)
+- `organization_source_type` (String)
+- `organizational_units` (List of String)
 
 

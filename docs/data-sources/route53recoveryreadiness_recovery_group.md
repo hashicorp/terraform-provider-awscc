@@ -17,21 +17,21 @@ Data Source schema for AWS::Route53RecoveryReadiness::RecoveryGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cells** (List of String) A list of the cell Amazon Resource Names (ARNs) in the recovery group.
-- **recovery_group_arn** (String) A collection of tags associated with a resource.
-- **recovery_group_name** (String) The name of the recovery group to create.
-- **tags** (Attributes List) A collection of tags associated with a resource. (see [below for nested schema](#nestedatt--tags))
+- `cells` (List of String) A list of the cell Amazon Resource Names (ARNs) in the recovery group.
+- `recovery_group_arn` (String) A collection of tags associated with a resource.
+- `recovery_group_name` (String) The name of the recovery group to create.
+- `tags` (Attributes List) A collection of tags associated with a resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (List of String)
+- `key` (String)
+- `value` (List of String)
 
 

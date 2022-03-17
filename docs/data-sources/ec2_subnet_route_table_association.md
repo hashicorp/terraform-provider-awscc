@@ -17,11 +17,11 @@ Data Source schema for AWS::EC2::SubnetRouteTableAssociation
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **route_table_id** (String)
-- **subnet_id** (String)
+- `route_table_id` (String)
+- `subnet_id` (String)
 
 

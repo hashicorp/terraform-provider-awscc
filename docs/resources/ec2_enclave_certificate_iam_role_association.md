@@ -17,15 +17,15 @@ Associates an AWS Identity and Access Management (IAM) role with an AWS Certific
 
 ### Required
 
-- **certificate_arn** (String) The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.
-- **role_arn** (String) The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
+- `certificate_arn` (String) The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
 
 ### Read-Only
 
-- **certificate_s3_bucket_name** (String) The name of the Amazon S3 bucket to which the certificate was uploaded.
-- **certificate_s3_object_key** (String) The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.
-- **encryption_kms_key_id** (String) The ID of the AWS KMS CMK used to encrypt the private key of the certificate.
-- **id** (String) Uniquely identifies the resource.
+- `certificate_s3_bucket_name` (String) The name of the Amazon S3 bucket to which the certificate was uploaded.
+- `certificate_s3_object_key` (String) The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.
+- `encryption_kms_key_id` (String) The ID of the AWS KMS CMK used to encrypt the private key of the certificate.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

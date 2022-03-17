@@ -17,12 +17,12 @@ Associates WebACL to Application Load Balancer, CloudFront or API Gateway.
 
 ### Required
 
-- **resource_arn** (String)
-- **web_acl_arn** (String)
+- `resource_arn` (String)
+- `web_acl_arn` (String)
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

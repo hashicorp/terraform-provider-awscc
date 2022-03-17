@@ -17,26 +17,26 @@ Data Source schema for AWS::IoT::ProvisioningTemplate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String)
-- **enabled** (Boolean)
-- **pre_provisioning_hook** (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
-- **provisioning_role_arn** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- **template_arn** (String)
-- **template_body** (String)
-- **template_name** (String)
+- `description` (String)
+- `enabled` (Boolean)
+- `pre_provisioning_hook` (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
+- `provisioning_role_arn` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `template_arn` (String)
+- `template_body` (String)
+- `template_name` (String)
 
 <a id="nestedatt--pre_provisioning_hook"></a>
 ### Nested Schema for `pre_provisioning_hook`
 
 Read-Only:
 
-- **payload_version** (String)
-- **target_arn** (String)
+- `payload_version` (String)
+- `target_arn` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -44,7 +44,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

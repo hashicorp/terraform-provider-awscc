@@ -17,22 +17,22 @@ Resource Type definition for AWS::CloudFront::PublicKey
 
 ### Required
 
-- **public_key_config** (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
+- `public_key_config` (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
 
 ### Read-Only
 
-- **created_time** (String)
-- **id** (String) The ID of this resource.
+- `created_time` (String)
+- `id` (String) The ID of this resource.
 
 <a id="nestedatt--public_key_config"></a>
 ### Nested Schema for `public_key_config`
 
 Required:
 
-- **caller_reference** (String)
-- **comment** (String)
-- **encoded_key** (String)
-- **name** (String)
+- `caller_reference` (String)
+- `comment` (String)
+- `encoded_key` (String)
+- `name` (String)
 
 ## Import
 

@@ -17,27 +17,27 @@ Resource Type definition for AWS::Inspector::AssessmentTemplate
 
 ### Required
 
-- **assessment_target_arn** (String)
-- **duration_in_seconds** (Number)
-- **rules_package_arns** (List of String)
+- `assessment_target_arn` (String)
+- `duration_in_seconds` (Number)
+- `rules_package_arns` (List of String)
 
 ### Optional
 
-- **assessment_template_name** (String)
-- **user_attributes_for_findings** (Attributes List) (see [below for nested schema](#nestedatt--user_attributes_for_findings))
+- `assessment_template_name` (String)
+- `user_attributes_for_findings` (Attributes List) (see [below for nested schema](#nestedatt--user_attributes_for_findings))
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--user_attributes_for_findings"></a>
 ### Nested Schema for `user_attributes_for_findings`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

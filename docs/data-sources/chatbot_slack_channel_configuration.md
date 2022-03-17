@@ -17,18 +17,18 @@ Data Source schema for AWS::Chatbot::SlackChannelConfiguration
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Amazon Resource Name (ARN) of the configuration
-- **configuration_name** (String) The name of the configuration
-- **guardrail_policies** (List of String) The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.
-- **iam_role_arn** (String) The ARN of the IAM role that defines the permissions for AWS Chatbot
-- **logging_level** (String) Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs
-- **slack_channel_id** (String) The id of the Slack channel
-- **slack_workspace_id** (String) The id of the Slack workspace
-- **sns_topic_arns** (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
-- **user_role_required** (Boolean) Enables use of a user role requirement in your chat configuration
+- `arn` (String) Amazon Resource Name (ARN) of the configuration
+- `configuration_name` (String) The name of the configuration
+- `guardrail_policies` (List of String) The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.
+- `iam_role_arn` (String) The ARN of the IAM role that defines the permissions for AWS Chatbot
+- `logging_level` (String) Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs
+- `slack_channel_id` (String) The id of the Slack channel
+- `slack_workspace_id` (String) The id of the Slack workspace
+- `sns_topic_arns` (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
+- `user_role_required` (Boolean) Enables use of a user role requirement in your chat configuration
 
 

@@ -17,34 +17,34 @@ Data Source schema for AWS::IoTWireless::DeviceProfile
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) Service profile Arn. Returned after successful create.
-- **lo_ra_wan** (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
-- **name** (String) Name of service profile
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
+- `arn` (String) Service profile Arn. Returned after successful create.
+- `lo_ra_wan` (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `name` (String) Name of service profile
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
 
 Read-Only:
 
-- **class_b_timeout** (Number)
-- **class_c_timeout** (Number)
-- **mac_version** (String)
-- **max_duty_cycle** (Number)
-- **max_eirp** (Number)
-- **ping_slot_dr** (Number)
-- **ping_slot_freq** (Number)
-- **ping_slot_period** (Number)
-- **reg_params_revision** (String)
-- **rf_region** (String)
-- **supports_32_bit_f_cnt** (Boolean)
-- **supports_class_b** (Boolean)
-- **supports_class_c** (Boolean)
-- **supports_join** (Boolean)
+- `class_b_timeout` (Number)
+- `class_c_timeout` (Number)
+- `mac_version` (String)
+- `max_duty_cycle` (Number)
+- `max_eirp` (Number)
+- `ping_slot_dr` (Number)
+- `ping_slot_freq` (Number)
+- `ping_slot_period` (Number)
+- `reg_params_revision` (String)
+- `rf_region` (String)
+- `supports_32_bit_f_cnt` (Boolean)
+- `supports_class_b` (Boolean)
+- `supports_class_c` (Boolean)
+- `supports_join` (Boolean)
 
 
 <a id="nestedatt--tags"></a>
@@ -52,7 +52,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

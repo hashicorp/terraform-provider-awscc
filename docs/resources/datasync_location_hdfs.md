@@ -17,36 +17,36 @@ Resource schema for AWS::DataSync::LocationHDFS.
 
 ### Required
 
-- **agent_arns** (List of String) ARN(s) of the agent(s) to use for an HDFS location.
-- **authentication_type** (String) The authentication mode used to determine identity of user.
-- **name_nodes** (Attributes List) An array of Name Node(s) of the HDFS location. (see [below for nested schema](#nestedatt--name_nodes))
+- `agent_arns` (List of String) ARN(s) of the agent(s) to use for an HDFS location.
+- `authentication_type` (String) The authentication mode used to determine identity of user.
+- `name_nodes` (Attributes List) An array of Name Node(s) of the HDFS location. (see [below for nested schema](#nestedatt--name_nodes))
 
 ### Optional
 
-- **block_size** (Number) Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.
-- **kerberos_keytab** (String) The Base64 string representation of the Keytab file.
-- **kerberos_krb_5_conf** (String) The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.
-- **kerberos_principal** (String) The unique identity, or principal, to which Kerberos can assign tickets.
-- **kms_key_provider_uri** (String) The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.
-- **qop_configuration** (Attributes) Configuration information for RPC Protection and Data Transfer Protection. These parameters can be set to AUTHENTICATION, INTEGRITY, or PRIVACY. The default value is PRIVACY. (see [below for nested schema](#nestedatt--qop_configuration))
-- **replication_factor** (Number) Number of copies of each block that exists inside the HDFS cluster.
-- **simple_user** (String) The user name that has read and write permissions on the specified HDFS cluster.
-- **subdirectory** (String) The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `block_size` (Number) Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.
+- `kerberos_keytab` (String) The Base64 string representation of the Keytab file.
+- `kerberos_krb_5_conf` (String) The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.
+- `kerberos_principal` (String) The unique identity, or principal, to which Kerberos can assign tickets.
+- `kms_key_provider_uri` (String) The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.
+- `qop_configuration` (Attributes) Configuration information for RPC Protection and Data Transfer Protection. These parameters can be set to AUTHENTICATION, INTEGRITY, or PRIVACY. The default value is PRIVACY. (see [below for nested schema](#nestedatt--qop_configuration))
+- `replication_factor` (Number) Number of copies of each block that exists inside the HDFS cluster.
+- `simple_user` (String) The user name that has read and write permissions on the specified HDFS cluster.
+- `subdirectory` (String) The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **location_arn** (String) The Amazon Resource Name (ARN) of the HDFS location.
-- **location_uri** (String) The URL of the HDFS location that was described.
+- `id` (String) Uniquely identifies the resource.
+- `location_arn` (String) The Amazon Resource Name (ARN) of the HDFS location.
+- `location_uri` (String) The URL of the HDFS location that was described.
 
 <a id="nestedatt--name_nodes"></a>
 ### Nested Schema for `name_nodes`
 
 Required:
 
-- **hostname** (String) The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.
-- **port** (Number) The port on which the Name Node is listening on for client requests.
+- `hostname` (String) The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.
+- `port` (Number) The port on which the Name Node is listening on for client requests.
 
 
 <a id="nestedatt--qop_configuration"></a>
@@ -54,8 +54,8 @@ Required:
 
 Optional:
 
-- **data_transfer_protection** (String) Configuration for Data Transfer Protection.
-- **rpc_protection** (String) Configuration for RPC Protection.
+- `data_transfer_protection` (String) Configuration for Data Transfer Protection.
+- `rpc_protection` (String) Configuration for RPC Protection.
 
 
 <a id="nestedatt--tags"></a>
@@ -63,8 +63,8 @@ Optional:
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

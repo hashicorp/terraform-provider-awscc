@@ -17,24 +17,24 @@ Data Source schema for AWS::Wisdom::Assistant
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **assistant_arn** (String)
-- **assistant_id** (String)
-- **description** (String)
-- **name** (String)
-- **server_side_encryption_configuration** (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
-- **tags** (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- **type** (String)
+- `assistant_arn` (String)
+- `assistant_id` (String)
+- `description` (String)
+- `name` (String)
+- `server_side_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `type` (String)
 
 <a id="nestedatt--server_side_encryption_configuration"></a>
 ### Nested Schema for `server_side_encryption_configuration`
 
 Read-Only:
 
-- **kms_key_id** (String)
+- `kms_key_id` (String)
 
 
 <a id="nestedatt--tags"></a>
@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

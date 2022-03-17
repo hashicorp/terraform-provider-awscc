@@ -17,23 +17,23 @@ Data Source schema for AWS::Inspector::AssessmentTemplate
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **assessment_target_arn** (String)
-- **assessment_template_name** (String)
-- **duration_in_seconds** (Number)
-- **rules_package_arns** (List of String)
-- **user_attributes_for_findings** (Attributes List) (see [below for nested schema](#nestedatt--user_attributes_for_findings))
+- `arn` (String)
+- `assessment_target_arn` (String)
+- `assessment_template_name` (String)
+- `duration_in_seconds` (Number)
+- `rules_package_arns` (List of String)
+- `user_attributes_for_findings` (Attributes List) (see [below for nested schema](#nestedatt--user_attributes_for_findings))
 
 <a id="nestedatt--user_attributes_for_findings"></a>
 ### Nested Schema for `user_attributes_for_findings`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

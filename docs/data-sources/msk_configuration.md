@@ -17,14 +17,14 @@ Data Source schema for AWS::MSK::Configuration
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **description** (String)
-- **kafka_versions_list** (List of String)
-- **name** (String)
-- **server_properties** (String)
+- `arn` (String)
+- `description` (String)
+- `kafka_versions_list` (List of String)
+- `name` (String)
+- `server_properties` (String)
 
 

@@ -17,19 +17,19 @@ Data Source schema for AWS::Inspector::ResourceGroup
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **resource_group_tags** (Attributes List) (see [below for nested schema](#nestedatt--resource_group_tags))
+- `arn` (String)
+- `resource_group_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_group_tags))
 
 <a id="nestedatt--resource_group_tags"></a>
 ### Nested Schema for `resource_group_tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

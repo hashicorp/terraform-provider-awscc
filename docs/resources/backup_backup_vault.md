@@ -17,29 +17,29 @@ Resource Type definition for AWS::Backup::BackupVault
 
 ### Required
 
-- **backup_vault_name** (String)
+- `backup_vault_name` (String)
 
 ### Optional
 
-- **access_policy** (String)
-- **backup_vault_tags** (Map of String)
-- **encryption_key_arn** (String)
-- **lock_configuration** (Attributes) (see [below for nested schema](#nestedatt--lock_configuration))
-- **notifications** (Attributes) (see [below for nested schema](#nestedatt--notifications))
+- `access_policy` (String)
+- `backup_vault_tags` (Map of String)
+- `encryption_key_arn` (String)
+- `lock_configuration` (Attributes) (see [below for nested schema](#nestedatt--lock_configuration))
+- `notifications` (Attributes) (see [below for nested schema](#nestedatt--notifications))
 
 ### Read-Only
 
-- **backup_vault_arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `backup_vault_arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--lock_configuration"></a>
 ### Nested Schema for `lock_configuration`
 
 Optional:
 
-- **changeable_for_days** (Number)
-- **max_retention_days** (Number)
-- **min_retention_days** (Number)
+- `changeable_for_days` (Number)
+- `max_retention_days` (Number)
+- `min_retention_days` (Number)
 
 
 <a id="nestedatt--notifications"></a>
@@ -47,8 +47,8 @@ Optional:
 
 Optional:
 
-- **backup_vault_events** (List of String)
-- **sns_topic_arn** (String)
+- `backup_vault_events` (List of String)
+- `sns_topic_arn` (String)
 
 ## Import
 

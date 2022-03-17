@@ -17,14 +17,14 @@ Data Source schema for AWS::IoTEvents::Input
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **input_definition** (Attributes) The definition of the input. (see [below for nested schema](#nestedatt--input_definition))
-- **input_description** (String) A brief description of the input.
-- **input_name** (String) The name of the input.
-- **tags** (Attributes List) An array of key-value pairs to apply to this resource.
+- `input_definition` (Attributes) The definition of the input. (see [below for nested schema](#nestedatt--input_definition))
+- `input_description` (String) A brief description of the input.
+- `input_name` (String) The name of the input.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource.
 
 For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
 
@@ -33,14 +33,14 @@ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/la
 
 Read-Only:
 
-- **attributes** (Attributes Set) The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input. (see [below for nested schema](#nestedatt--input_definition--attributes))
+- `attributes` (Attributes Set) The attributes from the JSON payload that are made available by the input. Inputs are derived from messages sent to the AWS IoT Events system using `BatchPutMessage`. Each such message contains a JSON payload, and those attributes (and their paired values) specified here are available for use in the `condition` expressions used by detectors that monitor this input. (see [below for nested schema](#nestedatt--input_definition--attributes))
 
 <a id="nestedatt--input_definition--attributes"></a>
 ### Nested Schema for `input_definition.attributes`
 
 Read-Only:
 
-- **json_path** (String) An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.
+- `json_path` (String) An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (`BatchPutMessage`). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the `condition` expressions used by detectors.
 
 _Syntax_: `<field-name>.<field-name>...`
 
@@ -51,7 +51,7 @@ _Syntax_: `<field-name>.<field-name>...`
 
 Read-Only:
 
-- **key** (String) Key of the Tag.
-- **value** (String) Value of the Tag.
+- `key` (String) Key of the Tag.
+- `value` (String) Value of the Tag.
 
 

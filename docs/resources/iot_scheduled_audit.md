@@ -17,28 +17,28 @@ Scheduled audits can be used to specify the checks you want to perform during an
 
 ### Required
 
-- **frequency** (String) How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.
-- **target_check_names** (Set of String) Which checks are performed during the scheduled audit. Checks must be enabled for your account.
+- `frequency` (String) How often the scheduled audit takes place. Can be one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY.
+- `target_check_names` (Set of String) Which checks are performed during the scheduled audit. Checks must be enabled for your account.
 
 ### Optional
 
-- **day_of_month** (String) The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.
-- **day_of_week** (String) The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.
-- **scheduled_audit_name** (String) The name you want to give to the scheduled audit.
-- **tags** (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `day_of_month` (String) The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.
+- `day_of_week` (String) The day of the week on which the scheduled audit takes place. Can be one of SUN, MON, TUE,WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.
+- `scheduled_audit_name` (String) The name you want to give to the scheduled audit.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **scheduled_audit_arn** (String) The ARN (Amazon resource name) of the scheduled audit.
+- `id` (String) Uniquely identifies the resource.
+- `scheduled_audit_arn` (String) The ARN (Amazon resource name) of the scheduled audit.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The tag's key.
-- **value** (String) The tag's value.
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 ## Import
 

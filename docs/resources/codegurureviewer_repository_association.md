@@ -17,28 +17,28 @@ This resource schema represents the RepositoryAssociation resource in the Amazon
 
 ### Required
 
-- **name** (String) Name of the repository to be associated.
-- **type** (String) The type of repository to be associated.
+- `name` (String) Name of the repository to be associated.
+- `type` (String) The type of repository to be associated.
 
 ### Optional
 
-- **bucket_name** (String) The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.
-- **connection_arn** (String) The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
-- **owner** (String) The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.
-- **tags** (Attributes List) The tags associated with a repository association. (see [below for nested schema](#nestedatt--tags))
+- `bucket_name` (String) The name of the S3 bucket associated with an associated S3 repository. It must start with `codeguru-reviewer-`.
+- `connection_arn` (String) The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
+- `owner` (String) The owner of the repository. For a Bitbucket repository, this is the username for the account that owns the repository.
+- `tags` (Attributes List) The tags associated with a repository association. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **association_arn** (String) The Amazon Resource Name (ARN) of the repository association.
-- **id** (String) Uniquely identifies the resource.
+- `association_arn` (String) The Amazon Resource Name (ARN) of the repository association.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
-- **value** (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
 
 ## Import
 

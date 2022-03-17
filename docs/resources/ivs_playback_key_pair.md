@@ -17,26 +17,26 @@ Resource Type definition for AWS::IVS::PlaybackKeyPair
 
 ### Required
 
-- **public_key_material** (String) The public portion of a customer-generated key pair.
+- `public_key_material` (String) The public portion of a customer-generated key pair.
 
 ### Optional
 
-- **name** (String) An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
+- `name` (String) An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String) Key-pair identifier.
-- **fingerprint** (String) Key-pair identifier.
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String) Key-pair identifier.
+- `fingerprint` (String) Key-pair identifier.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 

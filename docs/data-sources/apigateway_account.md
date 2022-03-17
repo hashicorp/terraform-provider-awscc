@@ -17,10 +17,10 @@ Data Source schema for AWS::ApiGateway::Account
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **cloudwatch_role_arn** (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
+- `cloudwatch_role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
 
 

@@ -17,7 +17,7 @@ Plural Data Source schema for AWS::IoT::SecurityProfile
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the data source.
-- **ids** (Set of String) Set of Resource Identifiers.
+- `id` (String) Uniquely identifies the data source.
+- `ids` (Set of String) Set of Resource Identifiers.
 
 

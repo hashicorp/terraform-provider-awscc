@@ -17,30 +17,30 @@ Data Source schema for AWS::CloudFront::RealtimeLogConfig
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **end_points** (Attributes List) (see [below for nested schema](#nestedatt--end_points))
-- **fields** (List of String)
-- **name** (String)
-- **sampling_rate** (Number)
+- `arn` (String)
+- `end_points` (Attributes List) (see [below for nested schema](#nestedatt--end_points))
+- `fields` (List of String)
+- `name` (String)
+- `sampling_rate` (Number)
 
 <a id="nestedatt--end_points"></a>
 ### Nested Schema for `end_points`
 
 Read-Only:
 
-- **kinesis_stream_config** (Attributes) (see [below for nested schema](#nestedatt--end_points--kinesis_stream_config))
-- **stream_type** (String)
+- `kinesis_stream_config` (Attributes) (see [below for nested schema](#nestedatt--end_points--kinesis_stream_config))
+- `stream_type` (String)
 
 <a id="nestedatt--end_points--kinesis_stream_config"></a>
 ### Nested Schema for `end_points.kinesis_stream_config`
 
 Read-Only:
 
-- **role_arn** (String)
-- **stream_arn** (String)
+- `role_arn` (String)
+- `stream_arn` (String)
 
 

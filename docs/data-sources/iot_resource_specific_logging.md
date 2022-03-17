@@ -17,13 +17,13 @@ Data Source schema for AWS::IoT::ResourceSpecificLogging
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **log_level** (String) The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.
-- **target_id** (String) Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.
-- **target_name** (String) The target name.
-- **target_type** (String) The target type. Value must be THING_GROUP.
+- `log_level` (String) The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.
+- `target_id` (String) Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.
+- `target_name` (String) The target name.
+- `target_type` (String) The target type. Value must be THING_GROUP.
 
 

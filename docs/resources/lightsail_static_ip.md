@@ -17,18 +17,18 @@ Resource Type definition for AWS::Lightsail::StaticIp
 
 ### Required
 
-- **static_ip_name** (String) The name of the static IP address.
+- `static_ip_name` (String) The name of the static IP address.
 
 ### Optional
 
-- **attached_to** (String) The instance where the static IP is attached.
+- `attached_to` (String) The instance where the static IP is attached.
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
-- **ip_address** (String) The static IP address.
-- **is_attached** (Boolean) A Boolean value indicating whether the static IP is attached.
-- **static_ip_arn** (String)
+- `id` (String) Uniquely identifies the resource.
+- `ip_address` (String) The static IP address.
+- `is_attached` (Boolean) A Boolean value indicating whether the static IP is attached.
+- `static_ip_arn` (String)
 
 ## Import
 

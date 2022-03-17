@@ -17,13 +17,13 @@ Associates a gateway with a route table. The gateway and route table must be in 
 
 ### Required
 
-- **gateway_id** (String) The ID of the gateway.
-- **route_table_id** (String) The ID of the route table.
+- `gateway_id` (String) The ID of the gateway.
+- `route_table_id` (String) The ID of the route table.
 
 ### Read-Only
 
-- **association_id** (String) The route table association ID.
-- **id** (String) Uniquely identifies the resource.
+- `association_id` (String) The route table association ID.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

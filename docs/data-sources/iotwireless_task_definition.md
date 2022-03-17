@@ -17,34 +17,34 @@ Data Source schema for AWS::IoTWireless::TaskDefinition
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String) TaskDefinition arn. Returned after successful create.
-- **auto_create_tasks** (Boolean) Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.
-- **lo_ra_wan_update_gateway_task_entry** (Attributes) The list of task definitions. (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
-- **name** (String) The name of the new resource.
-- **tags** (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
-- **task_definition_type** (String) A filter to list only the wireless gateway task definitions that use this task definition type
-- **update** (Attributes) Information about the gateways to update. (see [below for nested schema](#nestedatt--update))
+- `arn` (String) TaskDefinition arn. Returned after successful create.
+- `auto_create_tasks` (Boolean) Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.
+- `lo_ra_wan_update_gateway_task_entry` (Attributes) The list of task definitions. (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry))
+- `name` (String) The name of the new resource.
+- `tags` (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
+- `task_definition_type` (String) A filter to list only the wireless gateway task definitions that use this task definition type
+- `update` (Attributes) Information about the gateways to update. (see [below for nested schema](#nestedatt--update))
 
 <a id="nestedatt--lo_ra_wan_update_gateway_task_entry"></a>
 ### Nested Schema for `lo_ra_wan_update_gateway_task_entry`
 
 Read-Only:
 
-- **current_version** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry--current_version))
-- **update_version** (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry--update_version))
+- `current_version` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry--current_version))
+- `update_version` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan_update_gateway_task_entry--update_version))
 
 <a id="nestedatt--lo_ra_wan_update_gateway_task_entry--current_version"></a>
 ### Nested Schema for `lo_ra_wan_update_gateway_task_entry.current_version`
 
 Read-Only:
 
-- **model** (String)
-- **package_version** (String)
-- **station** (String)
+- `model` (String)
+- `package_version` (String)
+- `station` (String)
 
 
 <a id="nestedatt--lo_ra_wan_update_gateway_task_entry--update_version"></a>
@@ -52,9 +52,9 @@ Read-Only:
 
 Read-Only:
 
-- **model** (String)
-- **package_version** (String)
-- **station** (String)
+- `model` (String)
+- `package_version` (String)
+- `station` (String)
 
 
 
@@ -63,8 +63,8 @@ Read-Only:
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--update"></a>
@@ -72,28 +72,28 @@ Read-Only:
 
 Read-Only:
 
-- **lo_ra_wan** (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan))
-- **update_data_role** (String)
-- **update_data_source** (String)
+- `lo_ra_wan` (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan))
+- `update_data_role` (String)
+- `update_data_source` (String)
 
 <a id="nestedatt--update--lo_ra_wan"></a>
 ### Nested Schema for `update.lo_ra_wan`
 
 Read-Only:
 
-- **current_version** (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan--current_version))
-- **sig_key_crc** (Number)
-- **update_signature** (String)
-- **update_version** (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan--update_version))
+- `current_version` (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan--current_version))
+- `sig_key_crc` (Number)
+- `update_signature` (String)
+- `update_version` (Attributes) (see [below for nested schema](#nestedatt--update--lo_ra_wan--update_version))
 
 <a id="nestedatt--update--lo_ra_wan--current_version"></a>
 ### Nested Schema for `update.lo_ra_wan.current_version`
 
 Read-Only:
 
-- **model** (String)
-- **package_version** (String)
-- **station** (String)
+- `model` (String)
+- `package_version` (String)
+- `station` (String)
 
 
 <a id="nestedatt--update--lo_ra_wan--update_version"></a>
@@ -101,8 +101,8 @@ Read-Only:
 
 Read-Only:
 
-- **model** (String)
-- **package_version** (String)
-- **station** (String)
+- `model` (String)
+- `package_version` (String)
+- `station` (String)
 
 

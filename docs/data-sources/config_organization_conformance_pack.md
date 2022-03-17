@@ -17,24 +17,24 @@ Data Source schema for AWS::Config::OrganizationConformancePack
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **conformance_pack_input_parameters** (Attributes List) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
-- **delivery_s3_bucket** (String) AWS Config stores intermediate files while processing conformance pack template.
-- **delivery_s3_key_prefix** (String) The prefix for the delivery S3 bucket.
-- **excluded_accounts** (List of String) A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.
-- **organization_conformance_pack_name** (String) The name of the organization conformance pack.
-- **template_body** (String) A string containing full conformance pack template body.
-- **template_s3_uri** (String) Location of file containing the template body.
+- `conformance_pack_input_parameters` (Attributes List) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
+- `delivery_s3_bucket` (String) AWS Config stores intermediate files while processing conformance pack template.
+- `delivery_s3_key_prefix` (String) The prefix for the delivery S3 bucket.
+- `excluded_accounts` (List of String) A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.
+- `organization_conformance_pack_name` (String) The name of the organization conformance pack.
+- `template_body` (String) A string containing full conformance pack template body.
+- `template_s3_uri` (String) Location of file containing the template body.
 
 <a id="nestedatt--conformance_pack_input_parameters"></a>
 ### Nested Schema for `conformance_pack_input_parameters`
 
 Read-Only:
 
-- **parameter_name** (String)
-- **parameter_value** (String)
+- `parameter_name` (String)
+- `parameter_value` (String)
 
 

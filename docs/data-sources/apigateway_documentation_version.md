@@ -17,12 +17,12 @@ Data Source schema for AWS::ApiGateway::DocumentationVersion
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **description** (String) The description of the API documentation snapshot.
-- **documentation_version** (String) The version identifier of the API documentation snapshot.
-- **rest_api_id** (String) The identifier of the API.
+- `description` (String) The description of the API documentation snapshot.
+- `documentation_version` (String) The version identifier of the API documentation snapshot.
+- `rest_api_id` (String) The identifier of the API.
 
 

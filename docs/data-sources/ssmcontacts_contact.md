@@ -17,39 +17,39 @@ Data Source schema for AWS::SSMContacts::Contact
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **alias** (String) Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.
-- **arn** (String) The Amazon Resource Name (ARN) of the contact.
-- **display_name** (String) Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.
-- **plan** (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
-- **type** (String) Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.
+- `alias` (String) Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.
+- `arn` (String) The Amazon Resource Name (ARN) of the contact.
+- `display_name` (String) Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.
+- `plan` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
+- `type` (String) Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.
 
 <a id="nestedatt--plan"></a>
 ### Nested Schema for `plan`
 
 Read-Only:
 
-- **duration_in_minutes** (Number) The time to wait until beginning the next stage.
-- **targets** (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
+- `duration_in_minutes` (Number) The time to wait until beginning the next stage.
+- `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
 
 <a id="nestedatt--plan--targets"></a>
 ### Nested Schema for `plan.targets`
 
 Read-Only:
 
-- **channel_target_info** (Attributes) Information about the contact channel that SSM Incident Manager uses to engage the contact. (see [below for nested schema](#nestedatt--plan--targets--channel_target_info))
-- **contact_target_info** (Attributes) The contact that SSM Incident Manager is engaging during an incident. (see [below for nested schema](#nestedatt--plan--targets--contact_target_info))
+- `channel_target_info` (Attributes) Information about the contact channel that SSM Incident Manager uses to engage the contact. (see [below for nested schema](#nestedatt--plan--targets--channel_target_info))
+- `contact_target_info` (Attributes) The contact that SSM Incident Manager is engaging during an incident. (see [below for nested schema](#nestedatt--plan--targets--contact_target_info))
 
 <a id="nestedatt--plan--targets--channel_target_info"></a>
 ### Nested Schema for `plan.targets.channel_target_info`
 
 Read-Only:
 
-- **channel_id** (String) The Amazon Resource Name (ARN) of the contact channel.
-- **retry_interval_in_minutes** (Number) The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
+- `channel_id` (String) The Amazon Resource Name (ARN) of the contact channel.
+- `retry_interval_in_minutes` (Number) The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
 
 
 <a id="nestedatt--plan--targets--contact_target_info"></a>
@@ -57,7 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- **contact_id** (String) The Amazon Resource Name (ARN) of the contact.
-- **is_essential** (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+- `contact_id` (String) The Amazon Resource Name (ARN) of the contact.
+- `is_essential` (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
 
 

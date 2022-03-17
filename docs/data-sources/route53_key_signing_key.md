@@ -17,13 +17,13 @@ Data Source schema for AWS::Route53::KeySigningKey
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **hosted_zone_id** (String) The unique string (ID) used to identify a hosted zone.
-- **key_management_service_arn** (String) The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.
-- **name** (String) An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.
-- **status** (String) A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.
+- `hosted_zone_id` (String) The unique string (ID) used to identify a hosted zone.
+- `key_management_service_arn` (String) The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.
+- `name` (String) An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.
+- `status` (String) A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.
 
 

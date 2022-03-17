@@ -17,12 +17,12 @@ The AWS::Rekognition::Project type creates an Amazon Rekognition CustomLabels Pr
 
 ### Required
 
-- **project_name** (String) The name of the project
+- `project_name` (String) The name of the project
 
 ### Read-Only
 
-- **arn** (String)
-- **id** (String) Uniquely identifies the resource.
+- `arn` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

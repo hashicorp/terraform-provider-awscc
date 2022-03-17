@@ -17,20 +17,20 @@ Data Source schema for AWS::StepFunctions::Activity
 
 ### Required
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 ### Read-Only
 
-- **arn** (String)
-- **name** (String)
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `arn` (String)
+- `name` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 

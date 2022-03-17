@@ -17,25 +17,25 @@ Definition of AWS::RefactorSpaces::Environment Resource Type
 
 ### Optional
 
-- **description** (String)
-- **name** (String)
-- **network_fabric_type** (String)
-- **tags** (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
+- `description` (String)
+- `name` (String)
+- `network_fabric_type` (String)
+- `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **arn** (String)
-- **environment_identifier** (String)
-- **id** (String) Uniquely identifies the resource.
-- **transit_gateway_id** (String)
+- `arn` (String)
+- `environment_identifier` (String)
+- `id` (String) Uniquely identifies the resource.
+- `transit_gateway_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- **key** (String) A string used to identify this tag
-- **value** (String) A string containing the value for the tag
+- `key` (String) A string used to identify this tag
+- `value` (String) A string containing the value for the tag
 
 ## Import
 

@@ -17,47 +17,47 @@ Resource schema for AWS::DataBrew::Dataset.
 
 ### Required
 
-- **input** (Attributes) Input (see [below for nested schema](#nestedatt--input))
-- **name** (String) Dataset name
+- `input` (Attributes) Input (see [below for nested schema](#nestedatt--input))
+- `name` (String) Dataset name
 
 ### Optional
 
-- **format** (String) Dataset format
-- **format_options** (Attributes) Format options for dataset (see [below for nested schema](#nestedatt--format_options))
-- **path_options** (Attributes) PathOptions (see [below for nested schema](#nestedatt--path_options))
-- **tags** (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `format` (String) Dataset format
+- `format_options` (Attributes) Format options for dataset (see [below for nested schema](#nestedatt--format_options))
+- `path_options` (Attributes) PathOptions (see [below for nested schema](#nestedatt--path_options))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- **id** (String) Uniquely identifies the resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--input"></a>
 ### Nested Schema for `input`
 
 Required:
 
-- **data_catalog_input_definition** (Attributes) (see [below for nested schema](#nestedatt--input--data_catalog_input_definition))
-- **database_input_definition** (Attributes) (see [below for nested schema](#nestedatt--input--database_input_definition))
-- **metadata** (Attributes) (see [below for nested schema](#nestedatt--input--metadata))
-- **s3_input_definition** (Attributes) Input location (see [below for nested schema](#nestedatt--input--s3_input_definition))
+- `data_catalog_input_definition` (Attributes) (see [below for nested schema](#nestedatt--input--data_catalog_input_definition))
+- `database_input_definition` (Attributes) (see [below for nested schema](#nestedatt--input--database_input_definition))
+- `metadata` (Attributes) (see [below for nested schema](#nestedatt--input--metadata))
+- `s3_input_definition` (Attributes) Input location (see [below for nested schema](#nestedatt--input--s3_input_definition))
 
 <a id="nestedatt--input--data_catalog_input_definition"></a>
 ### Nested Schema for `input.data_catalog_input_definition`
 
 Required:
 
-- **catalog_id** (String) Catalog id
-- **database_name** (String) Database name
-- **table_name** (String) Table name
-- **temp_directory** (Attributes) Input location (see [below for nested schema](#nestedatt--input--data_catalog_input_definition--temp_directory))
+- `catalog_id` (String) Catalog id
+- `database_name` (String) Database name
+- `table_name` (String) Table name
+- `temp_directory` (Attributes) Input location (see [below for nested schema](#nestedatt--input--data_catalog_input_definition--temp_directory))
 
 <a id="nestedatt--input--data_catalog_input_definition--temp_directory"></a>
 ### Nested Schema for `input.data_catalog_input_definition.temp_directory`
 
 Required:
 
-- **bucket** (String)
-- **key** (String)
+- `bucket` (String)
+- `key` (String)
 
 
 
@@ -66,18 +66,18 @@ Required:
 
 Required:
 
-- **database_table_name** (String) Database table name
-- **glue_connection_name** (String) Glue connection name
-- **query_string** (String) Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.
-- **temp_directory** (Attributes) Input location (see [below for nested schema](#nestedatt--input--database_input_definition--temp_directory))
+- `database_table_name` (String) Database table name
+- `glue_connection_name` (String) Glue connection name
+- `query_string` (String) Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.
+- `temp_directory` (Attributes) Input location (see [below for nested schema](#nestedatt--input--database_input_definition--temp_directory))
 
 <a id="nestedatt--input--database_input_definition--temp_directory"></a>
 ### Nested Schema for `input.database_input_definition.temp_directory`
 
 Required:
 
-- **bucket** (String)
-- **key** (String)
+- `bucket` (String)
+- `key` (String)
 
 
 
@@ -86,7 +86,7 @@ Required:
 
 Required:
 
-- **source_arn** (String) Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.
+- `source_arn` (String) Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.
 
 
 <a id="nestedatt--input--s3_input_definition"></a>
@@ -94,8 +94,8 @@ Required:
 
 Required:
 
-- **bucket** (String)
-- **key** (String)
+- `bucket` (String)
+- `key` (String)
 
 
 
@@ -104,17 +104,17 @@ Required:
 
 Optional:
 
-- **csv** (Attributes) Csv options (see [below for nested schema](#nestedatt--format_options--csv))
-- **excel** (Attributes) (see [below for nested schema](#nestedatt--format_options--excel))
-- **json** (Attributes) Json options (see [below for nested schema](#nestedatt--format_options--json))
+- `csv` (Attributes) Csv options (see [below for nested schema](#nestedatt--format_options--csv))
+- `excel` (Attributes) (see [below for nested schema](#nestedatt--format_options--excel))
+- `json` (Attributes) Json options (see [below for nested schema](#nestedatt--format_options--json))
 
 <a id="nestedatt--format_options--csv"></a>
 ### Nested Schema for `format_options.csv`
 
 Optional:
 
-- **delimiter** (String)
-- **header_row** (Boolean)
+- `delimiter` (String)
+- `header_row` (Boolean)
 
 
 <a id="nestedatt--format_options--excel"></a>
@@ -122,9 +122,9 @@ Optional:
 
 Optional:
 
-- **header_row** (Boolean)
-- **sheet_indexes** (List of Number)
-- **sheet_names** (List of String)
+- `header_row` (Boolean)
+- `sheet_indexes` (List of Number)
+- `sheet_names` (List of String)
 
 
 <a id="nestedatt--format_options--json"></a>
@@ -132,7 +132,7 @@ Optional:
 
 Optional:
 
-- **multi_line** (Boolean)
+- `multi_line` (Boolean)
 
 
 
@@ -141,18 +141,18 @@ Optional:
 
 Optional:
 
-- **files_limit** (Attributes) (see [below for nested schema](#nestedatt--path_options--files_limit))
-- **last_modified_date_condition** (Attributes) (see [below for nested schema](#nestedatt--path_options--last_modified_date_condition))
-- **parameters** (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters))
+- `files_limit` (Attributes) (see [below for nested schema](#nestedatt--path_options--files_limit))
+- `last_modified_date_condition` (Attributes) (see [below for nested schema](#nestedatt--path_options--last_modified_date_condition))
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters))
 
 <a id="nestedatt--path_options--files_limit"></a>
 ### Nested Schema for `path_options.files_limit`
 
 Optional:
 
-- **max_files** (Number) Maximum number of files
-- **order** (String) Order
-- **ordered_by** (String) Ordered by
+- `max_files` (Number) Maximum number of files
+- `order` (String) Order
+- `ordered_by` (String) Ordered by
 
 
 <a id="nestedatt--path_options--last_modified_date_condition"></a>
@@ -160,16 +160,16 @@ Optional:
 
 Optional:
 
-- **expression** (String) Filtering expression for a parameter
-- **values_map** (Attributes List) (see [below for nested schema](#nestedatt--path_options--last_modified_date_condition--values_map))
+- `expression` (String) Filtering expression for a parameter
+- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--last_modified_date_condition--values_map))
 
 <a id="nestedatt--path_options--last_modified_date_condition--values_map"></a>
 ### Nested Schema for `path_options.last_modified_date_condition.values_map`
 
 Optional:
 
-- **value** (String)
-- **value_reference** (String) Variable name
+- `value` (String)
+- `value_reference` (String) Variable name
 
 
 
@@ -178,28 +178,28 @@ Optional:
 
 Optional:
 
-- **dataset_parameter** (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter))
-- **path_parameter_name** (String) Parameter name
+- `dataset_parameter` (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter))
+- `path_parameter_name` (String) Parameter name
 
 <a id="nestedatt--path_options--parameters--dataset_parameter"></a>
 ### Nested Schema for `path_options.parameters.dataset_parameter`
 
 Optional:
 
-- **create_column** (Boolean) Add the value of this parameter as a column in a dataset.
-- **datetime_options** (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--datetime_options))
-- **filter** (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--filter))
-- **name** (String) Parameter name
-- **type** (String) Parameter type
+- `create_column` (Boolean) Add the value of this parameter as a column in a dataset.
+- `datetime_options` (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--datetime_options))
+- `filter` (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--filter))
+- `name` (String) Parameter name
+- `type` (String) Parameter type
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--datetime_options"></a>
 ### Nested Schema for `path_options.parameters.dataset_parameter.type`
 
 Optional:
 
-- **format** (String) Date/time format of a date parameter
-- **locale_code** (String) Locale code for a date parameter
-- **timezone_offset** (String) Timezone offset
+- `format` (String) Date/time format of a date parameter
+- `locale_code` (String) Locale code for a date parameter
+- `timezone_offset` (String) Timezone offset
 
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--filter"></a>
@@ -207,16 +207,16 @@ Optional:
 
 Optional:
 
-- **expression** (String) Filtering expression for a parameter
-- **values_map** (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--type--values_map))
+- `expression` (String) Filtering expression for a parameter
+- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--type--values_map))
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--type--values_map"></a>
 ### Nested Schema for `path_options.parameters.dataset_parameter.type.values_map`
 
 Optional:
 
-- **value** (String)
-- **value_reference** (String) Variable name
+- `value` (String)
+- `value_reference` (String) Variable name
 
 
 
@@ -228,8 +228,8 @@ Optional:
 
 Optional:
 
-- **key** (String)
-- **value** (String)
+- `key` (String)
+- `value` (String)
 
 ## Import
 
