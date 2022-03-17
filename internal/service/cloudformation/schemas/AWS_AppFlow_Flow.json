@@ -215,6 +215,9 @@
                 "LookoutMetrics": {
                     "$ref": "#/definitions/LookoutMetricsDestinationProperties"
                 },
+                "Marketo": {
+                    "$ref": "#/definitions/MarketoDestinationProperties"
+                },
                 "Zendesk": {
                     "$ref": "#/definitions/ZendeskDestinationProperties"
                 },
@@ -976,6 +979,21 @@
                 }
             },
           "additionalProperties": false
+        },
+        "MarketoDestinationProperties": {
+            "type": "object",
+            "properties": {
+                "Object": {
+                    "$ref": "#/definitions/Object"
+                },
+                "ErrorHandlingConfig": {
+                    "$ref": "#/definitions/ErrorHandlingConfig"
+                }
+            },
+            "required": [
+                "Object"
+            ],
+            "additionalProperties": false
         },
         "DatetimeTypeFieldName": {
             "description": "Name of the datetime/timestamp data type field to be used for importing incremental records from the source",

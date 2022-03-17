@@ -92,7 +92,7 @@
                 "DimensionName" : {
                     "description" : "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
                     "type": "string",
-                    "pattern": "^[a-zA-Z0-9_-]{1,256}$",
+                    "pattern": "^[a-zA-Z0-9_:-]{1,256}$",
                     "maxLength": 256,
                     "minLength": 1
                 }
