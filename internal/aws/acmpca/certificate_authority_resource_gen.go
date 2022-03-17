@@ -117,6 +117,28 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//                   "Country": {
 			//                     "type": "string"
 			//                   },
+			//                   "CustomAttributes": {
+			//                     "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//                     "items": {
+			//                       "additionalProperties": false,
+			//                       "description": "Structure that contains X.500 attribute type and value.",
+			//                       "properties": {
+			//                         "ObjectIdentifier": {
+			//                           "description": "String that contains X.509 ObjectIdentifier information.",
+			//                           "type": "string"
+			//                         },
+			//                         "Value": {
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "ObjectIdentifier",
+			//                         "Value"
+			//                       ],
+			//                       "type": "object"
+			//                     },
+			//                     "type": "array"
+			//                   },
 			//                   "DistinguishedNameQualifier": {
 			//                     "type": "string"
 			//                   },
@@ -366,6 +388,27 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 														"country": {
 															// Property: Country
 															Type:     types.StringType,
+															Optional: true,
+														},
+														"custom_attributes": {
+															// Property: CustomAttributes
+															Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"object_identifier": {
+																		// Property: ObjectIdentifier
+																		Description: "String that contains X.509 ObjectIdentifier information.",
+																		Type:        types.StringType,
+																		Required:    true,
+																	},
+																	"value": {
+																		// Property: Value
+																		Type:     types.StringType,
+																		Required: true,
+																	},
+																},
+																tfsdk.ListNestedAttributesOptions{},
+															),
 															Optional: true,
 														},
 														"distinguished_name_qualifier": {
@@ -702,6 +745,28 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 			//     "Country": {
 			//       "type": "string"
 			//     },
+			//     "CustomAttributes": {
+			//       "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//       "items": {
+			//         "additionalProperties": false,
+			//         "description": "Structure that contains X.500 attribute type and value.",
+			//         "properties": {
+			//           "ObjectIdentifier": {
+			//             "description": "String that contains X.509 ObjectIdentifier information.",
+			//             "type": "string"
+			//           },
+			//           "Value": {
+			//             "type": "string"
+			//           }
+			//         },
+			//         "required": [
+			//           "ObjectIdentifier",
+			//           "Value"
+			//         ],
+			//         "type": "object"
+			//       },
+			//       "type": "array"
+			//     },
 			//     "DistinguishedNameQualifier": {
 			//       "type": "string"
 			//     },
@@ -752,6 +817,27 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 					"country": {
 						// Property: Country
 						Type:     types.StringType,
+						Optional: true,
+					},
+					"custom_attributes": {
+						// Property: CustomAttributes
+						Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+						Attributes: tfsdk.ListNestedAttributes(
+							map[string]tfsdk.Attribute{
+								"object_identifier": {
+									// Property: ObjectIdentifier
+									Description: "String that contains X.509 ObjectIdentifier information.",
+									Type:        types.StringType,
+									Required:    true,
+								},
+								"value": {
+									// Property: Value
+									Type:     types.StringType,
+									Required: true,
+								},
+							},
+							tfsdk.ListNestedAttributesOptions{},
+						),
 						Optional: true,
 					},
 					"distinguished_name_qualifier": {
@@ -904,6 +990,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"crl_configuration":             "CrlConfiguration",
 		"crl_sign":                      "CRLSign",
 		"csr_extensions":                "CsrExtensions",
+		"custom_attributes":             "CustomAttributes",
 		"custom_cname":                  "CustomCname",
 		"custom_object_identifier":      "CustomObjectIdentifier",
 		"data_encipherment":             "DataEncipherment",
@@ -930,6 +1017,7 @@ func certificateAuthorityResourceType(ctx context.Context) (tfsdk.ResourceType, 
 		"locality":                      "Locality",
 		"name_assigner":                 "NameAssigner",
 		"non_repudiation":               "NonRepudiation",
+		"object_identifier":             "ObjectIdentifier",
 		"ocsp_configuration":            "OcspConfiguration",
 		"ocsp_custom_cname":             "OcspCustomCname",
 		"organization":                  "Organization",

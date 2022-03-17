@@ -64,7 +64,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 			//                 "description": "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
+			//                 "pattern": "^[a-zA-Z0-9_:-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionValueSource": {
@@ -158,7 +158,7 @@ func configurationSetEventDestinationResourceType(ctx context.Context) (tfsdk.Re
 												Required:    true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenBetween(1, 256),
-													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_-]{1,256}$"), ""),
+													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_:-]{1,256}$"), ""),
 												},
 											},
 											"dimension_value_source": {

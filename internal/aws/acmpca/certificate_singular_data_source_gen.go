@@ -77,6 +77,31 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//           },
 			//           "type": "array"
 			//         },
+			//         "CustomExtensions": {
+			//           "description": "Array of X.509 extensions for a certificate.",
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "description": "Structure that contains X.509 extension information for a certificate.",
+			//             "properties": {
+			//               "Critical": {
+			//                 "type": "boolean"
+			//               },
+			//               "ObjectIdentifier": {
+			//                 "description": "String that contains X.509 ObjectIdentifier information.",
+			//                 "type": "string"
+			//               },
+			//               "Value": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "ObjectIdentifier",
+			//               "Value"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array"
+			//         },
 			//         "ExtendedKeyUsage": {
 			//           "items": {
 			//             "additionalProperties": false,
@@ -151,6 +176,28 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//                   },
 			//                   "Country": {
 			//                     "type": "string"
+			//                   },
+			//                   "CustomAttributes": {
+			//                     "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//                     "items": {
+			//                       "additionalProperties": false,
+			//                       "description": "Structure that contains X.500 attribute type and value.",
+			//                       "properties": {
+			//                         "ObjectIdentifier": {
+			//                           "description": "String that contains X.509 ObjectIdentifier information.",
+			//                           "type": "string"
+			//                         },
+			//                         "Value": {
+			//                           "type": "string"
+			//                         }
+			//                       },
+			//                       "required": [
+			//                         "ObjectIdentifier",
+			//                         "Value"
+			//                       ],
+			//                       "type": "object"
+			//                     },
+			//                     "type": "array"
 			//                   },
 			//                   "DistinguishedNameQualifier": {
 			//                     "type": "string"
@@ -264,6 +311,28 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 			//         "Country": {
 			//           "type": "string"
 			//         },
+			//         "CustomAttributes": {
+			//           "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+			//           "items": {
+			//             "additionalProperties": false,
+			//             "description": "Structure that contains X.500 attribute type and value.",
+			//             "properties": {
+			//               "ObjectIdentifier": {
+			//                 "description": "String that contains X.509 ObjectIdentifier information.",
+			//                 "type": "string"
+			//               },
+			//               "Value": {
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "ObjectIdentifier",
+			//               "Value"
+			//             ],
+			//             "type": "object"
+			//           },
+			//           "type": "array"
+			//         },
 			//         "DistinguishedNameQualifier": {
 			//           "type": "string"
 			//         },
@@ -350,6 +419,32 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 													},
 													tfsdk.ListNestedAttributesOptions{},
 												),
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
+									Computed: true,
+								},
+								"custom_extensions": {
+									// Property: CustomExtensions
+									Description: "Array of X.509 extensions for a certificate.",
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"critical": {
+												// Property: Critical
+												Type:     types.BoolType,
+												Computed: true,
+											},
+											"object_identifier": {
+												// Property: ObjectIdentifier
+												Description: "String that contains X.509 ObjectIdentifier information.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+											"value": {
+												// Property: Value
+												Type:     types.StringType,
 												Computed: true,
 											},
 										},
@@ -448,6 +543,27 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 														"country": {
 															// Property: Country
 															Type:     types.StringType,
+															Computed: true,
+														},
+														"custom_attributes": {
+															// Property: CustomAttributes
+															Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+															Attributes: tfsdk.ListNestedAttributes(
+																map[string]tfsdk.Attribute{
+																	"object_identifier": {
+																		// Property: ObjectIdentifier
+																		Description: "String that contains X.509 ObjectIdentifier information.",
+																		Type:        types.StringType,
+																		Computed:    true,
+																	},
+																	"value": {
+																		// Property: Value
+																		Type:     types.StringType,
+																		Computed: true,
+																	},
+																},
+																tfsdk.ListNestedAttributesOptions{},
+															),
 															Computed: true,
 														},
 														"distinguished_name_qualifier": {
@@ -605,6 +721,27 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 								"country": {
 									// Property: Country
 									Type:     types.StringType,
+									Computed: true,
+								},
+								"custom_attributes": {
+									// Property: CustomAttributes
+									Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+									Attributes: tfsdk.ListNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"object_identifier": {
+												// Property: ObjectIdentifier
+												Description: "String that contains X.509 ObjectIdentifier information.",
+												Type:        types.StringType,
+												Computed:    true,
+											},
+											"value": {
+												// Property: Value
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+										tfsdk.ListNestedAttributesOptions{},
+									),
 									Computed: true,
 								},
 								"distinguished_name_qualifier": {
@@ -845,7 +982,10 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"common_name":                          "CommonName",
 		"country":                              "Country",
 		"cps_uri":                              "CpsUri",
+		"critical":                             "Critical",
 		"crl_sign":                             "CRLSign",
+		"custom_attributes":                    "CustomAttributes",
+		"custom_extensions":                    "CustomExtensions",
 		"data_encipherment":                    "DataEncipherment",
 		"decipher_only":                        "DecipherOnly",
 		"digital_signature":                    "DigitalSignature",
@@ -869,6 +1009,7 @@ func certificateDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error
 		"locality":                             "Locality",
 		"name_assigner":                        "NameAssigner",
 		"non_repudiation":                      "NonRepudiation",
+		"object_identifier":                    "ObjectIdentifier",
 		"organization":                         "Organization",
 		"organizational_unit":                  "OrganizationalUnit",
 		"other_name":                           "OtherName",

@@ -126,6 +126,39 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 			//             },
 			//             "type": "object"
 			//           },
+			//           "Marketo": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "\\S+",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "Redshift": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -631,6 +664,53 @@ func flowResourceType(ctx context.Context) (tfsdk.ResourceType, error) {
 												// Property: Object
 												Type:     types.StringType,
 												Optional: true,
+												Validators: []tfsdk.AttributeValidator{
+													validate.StringLenAtMost(512),
+													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+												},
+											},
+										},
+									),
+									Optional: true,
+								},
+								"marketo": {
+									// Property: Marketo
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"error_handling_config": {
+												// Property: ErrorHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenBetween(3, 63),
+																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
+															},
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Optional: true,
+															Validators: []tfsdk.AttributeValidator{
+																validate.StringLenAtMost(512),
+															},
+														},
+														"fail_on_first_error": {
+															// Property: FailOnFirstError
+															Type:     types.BoolType,
+															Optional: true,
+														},
+													},
+												),
+												Optional: true,
+											},
+											"object": {
+												// Property: Object
+												Type:     types.StringType,
+												Required: true,
 												Validators: []tfsdk.AttributeValidator{
 													validate.StringLenAtMost(512),
 													validate.StringMatch(regexp.MustCompile("\\S+"), ""),

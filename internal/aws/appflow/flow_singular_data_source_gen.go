@@ -120,6 +120,39 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 			//             },
 			//             "type": "object"
 			//           },
+			//           "Marketo": {
+			//             "additionalProperties": false,
+			//             "properties": {
+			//               "ErrorHandlingConfig": {
+			//                 "additionalProperties": false,
+			//                 "properties": {
+			//                   "BucketName": {
+			//                     "maxLength": 63,
+			//                     "minLength": 3,
+			//                     "pattern": "\\S+",
+			//                     "type": "string"
+			//                   },
+			//                   "BucketPrefix": {
+			//                     "maxLength": 512,
+			//                     "type": "string"
+			//                   },
+			//                   "FailOnFirstError": {
+			//                     "type": "boolean"
+			//                   }
+			//                 },
+			//                 "type": "object"
+			//               },
+			//               "Object": {
+			//                 "maxLength": 512,
+			//                 "pattern": "\\S+",
+			//                 "type": "string"
+			//               }
+			//             },
+			//             "required": [
+			//               "Object"
+			//             ],
+			//             "type": "object"
+			//           },
 			//           "Redshift": {
 			//             "additionalProperties": false,
 			//             "properties": {
@@ -582,6 +615,42 @@ func flowDataSourceType(ctx context.Context) (tfsdk.DataSourceType, error) {
 									// Property: LookoutMetrics
 									Attributes: tfsdk.SingleNestedAttributes(
 										map[string]tfsdk.Attribute{
+											"object": {
+												// Property: Object
+												Type:     types.StringType,
+												Computed: true,
+											},
+										},
+									),
+									Computed: true,
+								},
+								"marketo": {
+									// Property: Marketo
+									Attributes: tfsdk.SingleNestedAttributes(
+										map[string]tfsdk.Attribute{
+											"error_handling_config": {
+												// Property: ErrorHandlingConfig
+												Attributes: tfsdk.SingleNestedAttributes(
+													map[string]tfsdk.Attribute{
+														"bucket_name": {
+															// Property: BucketName
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"bucket_prefix": {
+															// Property: BucketPrefix
+															Type:     types.StringType,
+															Computed: true,
+														},
+														"fail_on_first_error": {
+															// Property: FailOnFirstError
+															Type:     types.BoolType,
+															Computed: true,
+														},
+													},
+												),
+												Computed: true,
+											},
 											"object": {
 												// Property: Object
 												Type:     types.StringType,
