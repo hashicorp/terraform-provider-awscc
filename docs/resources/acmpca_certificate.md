@@ -57,6 +57,7 @@ Optional:
 Optional:
 
 - **certificate_policies** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--certificate_policies))
+- **custom_extensions** (Attributes List) Array of X.509 extensions for a certificate. (see [below for nested schema](#nestedatt--api_passthrough--extensions--custom_extensions))
 - **extended_key_usage** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--extended_key_usage))
 - **key_usage** (Attributes) Structure that contains X.509 KeyUsage information. (see [below for nested schema](#nestedatt--api_passthrough--extensions--key_usage))
 - **subject_alternative_names** (Attributes List) (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names))
@@ -85,6 +86,16 @@ Optional:
 - **cps_uri** (String)
 
 
+
+
+<a id="nestedatt--api_passthrough--extensions--custom_extensions"></a>
+### Nested Schema for `api_passthrough.extensions.custom_extensions`
+
+Optional:
+
+- **critical** (Boolean)
+- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- **value** (String)
 
 
 <a id="nestedatt--api_passthrough--extensions--extended_key_usage"></a>
@@ -133,6 +144,7 @@ Optional:
 
 - **common_name** (String)
 - **country** (String)
+- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes))
 - **distinguished_name_qualifier** (String)
 - **generation_qualifier** (String)
 - **given_name** (String)
@@ -145,6 +157,15 @@ Optional:
 - **state** (String)
 - **surname** (String)
 - **title** (String)
+
+<a id="nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes"></a>
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier.custom_attributes`
+
+Optional:
+
+- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- **value** (String)
+
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name"></a>
@@ -174,6 +195,7 @@ Optional:
 
 - **common_name** (String)
 - **country** (String)
+- **custom_attributes** (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--api_passthrough--subject--custom_attributes))
 - **distinguished_name_qualifier** (String)
 - **generation_qualifier** (String)
 - **given_name** (String)
@@ -186,6 +208,15 @@ Optional:
 - **state** (String)
 - **surname** (String)
 - **title** (String)
+
+<a id="nestedatt--api_passthrough--subject--custom_attributes"></a>
+### Nested Schema for `api_passthrough.subject.custom_attributes`
+
+Optional:
+
+- **object_identifier** (String) String that contains X.509 ObjectIdentifier information.
+- **value** (String)
+
 
 
 

@@ -50,6 +50,7 @@ Required:
 
 - **event_bridge** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge))
 - **lookout_metrics** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--lookout_metrics))
+- **marketo** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo))
 - **redshift** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--redshift))
 - **s3** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3))
 - **salesforce** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--salesforce))
@@ -83,6 +84,25 @@ Required:
 Required:
 
 - **object** (String)
+
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo`
+
+Required:
+
+- **error_handling_config** (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config))
+- **object** (String)
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.object`
+
+Required:
+
+- **bucket_name** (String)
+- **bucket_prefix** (String)
+- **fail_on_first_error** (Boolean)
+
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--redshift"></a>

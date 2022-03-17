@@ -59,7 +59,7 @@ func configurationSetEventDestinationDataSourceType(ctx context.Context) (tfsdk.
 			//                 "description": "The name of an Amazon CloudWatch dimension associated with an email sending metric.",
 			//                 "maxLength": 256,
 			//                 "minLength": 1,
-			//                 "pattern": "^[a-zA-Z0-9_-]{1,256}$",
+			//                 "pattern": "^[a-zA-Z0-9_:-]{1,256}$",
 			//                 "type": "string"
 			//               },
 			//               "DimensionValueSource": {

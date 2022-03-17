@@ -160,6 +160,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_playback_key_pairs -cftype AWS::IVS::PlaybackKeyPair -package ivs ../aws/ivs/playback_key_pair_plural_data_source_gen.go ../aws/ivs/playback_key_pair_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_recording_configurations -cftype AWS::IVS::RecordingConfiguration -package ivs ../aws/ivs/recording_configuration_plural_data_source_gen.go ../aws/ivs/recording_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_stream_keys -cftype AWS::IVS::StreamKey -package ivs ../aws/ivs/stream_key_plural_data_source_gen.go ../aws/ivs/stream_key_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_inspector_assessment_targets -cftype AWS::Inspector::AssessmentTarget -package inspector ../aws/inspector/assessment_target_plural_data_source_gen.go ../aws/inspector/assessment_target_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_inspector_assessment_templates -cftype AWS::Inspector::AssessmentTemplate -package inspector ../aws/inspector/assessment_template_plural_data_source_gen.go ../aws/inspector/assessment_template_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_imagebuilder_container_recipes -cftype AWS::ImageBuilder::ContainerRecipe -package imagebuilder ../aws/imagebuilder/container_recipe_plural_data_source_gen.go ../aws/imagebuilder/container_recipe_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_imagebuilder_distribution_configurations -cftype AWS::ImageBuilder::DistributionConfiguration -package imagebuilder ../aws/imagebuilder/distribution_configuration_plural_data_source_gen.go ../aws/imagebuilder/distribution_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_imagebuilder_images -cftype AWS::ImageBuilder::Image -package imagebuilder ../aws/imagebuilder/image_plural_data_source_gen.go ../aws/imagebuilder/image_plural_data_source_gen_test.go
@@ -383,6 +385,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/imagebuilder"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspector"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspectorv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"

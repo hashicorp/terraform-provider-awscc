@@ -1,0 +1,1 @@
+$ terraform import awscc_billingconductor_pricing_rule.example <resource ID>

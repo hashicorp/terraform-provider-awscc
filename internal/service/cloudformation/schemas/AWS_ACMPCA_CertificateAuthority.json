@@ -36,8 +36,29 @@
                 "GivenName": { "type": "string" },
                 "Initials": { "type": "string" },
                 "Pseudonym": { "type": "string" },
-                "GenerationQualifier": { "type": "string" }
+                "GenerationQualifier": { "type": "string" },
+                "CustomAttributes": { "$ref": "#/definitions/CustomAttributeList" }
             }
+        },
+        "CustomAttributeList": {
+            "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/CustomAttribute"
+            }
+        },
+        "CustomAttribute": {
+            "description": "Structure that contains X.500 attribute type and value.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "ObjectIdentifier": { "$ref": "#/definitions/CustomObjectIdentifier" },
+                "Value": { "type": "string" }
+            },
+            "required": [
+                "ObjectIdentifier",
+                "Value"
+            ]
         },
         "CrlConfiguration": {
             "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",

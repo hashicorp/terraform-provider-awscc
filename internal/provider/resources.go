@@ -53,6 +53,10 @@
 //go:generate go run generators/resource/main.go -resource awscc_batch_compute_environment -cfschema ../service/cloudformation/schemas/AWS_Batch_ComputeEnvironment.json -package batch -- ../aws/batch/compute_environment_resource_gen.go ../aws/batch/compute_environment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_batch_job_queue -cfschema ../service/cloudformation/schemas/AWS_Batch_JobQueue.json -package batch -- ../aws/batch/job_queue_resource_gen.go ../aws/batch/job_queue_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_batch_scheduling_policy -cfschema ../service/cloudformation/schemas/AWS_Batch_SchedulingPolicy.json -package batch -- ../aws/batch/scheduling_policy_resource_gen.go ../aws/batch/scheduling_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_billingconductor_billing_group -cfschema ../service/cloudformation/schemas/AWS_BillingConductor_BillingGroup.json -package billingconductor -- ../aws/billingconductor/billing_group_resource_gen.go ../aws/billingconductor/billing_group_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_billingconductor_custom_line_item -cfschema ../service/cloudformation/schemas/AWS_BillingConductor_CustomLineItem.json -package billingconductor -- ../aws/billingconductor/custom_line_item_resource_gen.go ../aws/billingconductor/custom_line_item_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_billingconductor_pricing_plan -cfschema ../service/cloudformation/schemas/AWS_BillingConductor_PricingPlan.json -package billingconductor -- ../aws/billingconductor/pricing_plan_resource_gen.go ../aws/billingconductor/pricing_plan_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_billingconductor_pricing_rule -cfschema ../service/cloudformation/schemas/AWS_BillingConductor_PricingRule.json -package billingconductor -- ../aws/billingconductor/pricing_rule_resource_gen.go ../aws/billingconductor/pricing_rule_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_budgets_budgets_action -cfschema ../service/cloudformation/schemas/AWS_Budgets_BudgetsAction.json -package budgets -- ../aws/budgets/budgets_action_resource_gen.go ../aws/budgets/budgets_action_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ce_anomaly_monitor -cfschema ../service/cloudformation/schemas/AWS_CE_AnomalyMonitor.json -package ce -- ../aws/ce/anomaly_monitor_resource_gen.go ../aws/ce/anomaly_monitor_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ce_anomaly_subscription -cfschema ../service/cloudformation/schemas/AWS_CE_AnomalySubscription.json -package ce -- ../aws/ce/anomaly_subscription_resource_gen.go ../aws/ce/anomaly_subscription_resource_gen_test.go
@@ -231,6 +235,9 @@
 //go:generate go run generators/resource/main.go -resource awscc_ivs_playback_key_pair -cfschema ../service/cloudformation/schemas/AWS_IVS_PlaybackKeyPair.json -package ivs -- ../aws/ivs/playback_key_pair_resource_gen.go ../aws/ivs/playback_key_pair_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ivs_recording_configuration -cfschema ../service/cloudformation/schemas/AWS_IVS_RecordingConfiguration.json -package ivs -- ../aws/ivs/recording_configuration_resource_gen.go ../aws/ivs/recording_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ivs_stream_key -cfschema ../service/cloudformation/schemas/AWS_IVS_StreamKey.json -package ivs -- ../aws/ivs/stream_key_resource_gen.go ../aws/ivs/stream_key_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_inspector_assessment_target -cfschema ../service/cloudformation/schemas/AWS_Inspector_AssessmentTarget.json -package inspector -- ../aws/inspector/assessment_target_resource_gen.go ../aws/inspector/assessment_target_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_inspector_assessment_template -cfschema ../service/cloudformation/schemas/AWS_Inspector_AssessmentTemplate.json -package inspector -- ../aws/inspector/assessment_template_resource_gen.go ../aws/inspector/assessment_template_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_inspector_resource_group -cfschema ../service/cloudformation/schemas/AWS_Inspector_ResourceGroup.json -package inspector -- ../aws/inspector/resource_group_resource_gen.go ../aws/inspector/resource_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_imagebuilder_component -cfschema ../service/cloudformation/schemas/AWS_ImageBuilder_Component.json -package imagebuilder -- ../aws/imagebuilder/component_resource_gen.go ../aws/imagebuilder/component_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_imagebuilder_container_recipe -cfschema ../service/cloudformation/schemas/AWS_ImageBuilder_ContainerRecipe.json -package imagebuilder -- ../aws/imagebuilder/container_recipe_resource_gen.go ../aws/imagebuilder/container_recipe_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_imagebuilder_distribution_configuration -cfschema ../service/cloudformation/schemas/AWS_ImageBuilder_DistributionConfiguration.json -package imagebuilder -- ../aws/imagebuilder/distribution_configuration_resource_gen.go ../aws/imagebuilder/distribution_configuration_resource_gen_test.go
@@ -501,6 +508,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/autoscaling"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ce"
@@ -548,6 +556,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/healthlake"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/imagebuilder"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspector"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/inspectorv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iot"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/iotcoredeviceadvisor"

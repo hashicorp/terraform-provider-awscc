@@ -1,4 +1,24 @@
 ## 0.15.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_billingconductor_billing_group`
+* **New Data Source:** `awscc_billingconductor_custom_line_item`
+* **New Data Source:** `awscc_billingconductor_pricing_plan`
+* **New Data Source:** `awscc_billingconductor_pricing_rule`
+* **New Data Source:** `awscc_inspector_assessment_target`
+* **New Data Source:** `awscc_inspector_assessment_targets`
+* **New Data Source:** `awscc_inspector_assessment_template`
+* **New Data Source:** `awscc_inspector_assessment_templates`
+* **New Data Source:** `awscc_inspector_resource_group`
+* **New Resource:** `awscc_billingconductor_billing_group`
+* **New Resource:** `awscc_billingconductor_custom_line_item`
+* **New Resource:** `awscc_billingconductor_pricing_plan`
+* **New Resource:** `awscc_billingconductor_pricing_rule`
+* **New Resource:** `awscc_inspector_assessment_target`
+* **New Resource:** `awscc_inspector_assessment_template`
+* **New Resource:** `awscc_inspector_resource_group`
+
 ## [0.14.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.14.0) (March 11, 2022)
 
 FEATURES:

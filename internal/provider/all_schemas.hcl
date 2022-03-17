@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 502 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 510 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -280,6 +280,26 @@ resource_schema "aws_batch_job_queue" {
 
 resource_schema "aws_batch_scheduling_policy" {
   cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
+}
+
+resource_schema "aws_billingconductor_billing_group" {
+  cloudformation_type_name               = "AWS::BillingConductor::BillingGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_billingconductor_custom_line_item" {
+  cloudformation_type_name               = "AWS::BillingConductor::CustomLineItem"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_billingconductor_pricing_plan" {
+  cloudformation_type_name               = "AWS::BillingConductor::PricingPlan"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_billingconductor_pricing_rule" {
+  cloudformation_type_name               = "AWS::BillingConductor::PricingRule"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -1087,6 +1107,19 @@ resource_schema "aws_ivs_recording_configuration" {
 
 resource_schema "aws_ivs_stream_key" {
   cloudformation_type_name = "AWS::IVS::StreamKey"
+}
+
+resource_schema "aws_inspector_assessment_target" {
+  cloudformation_type_name = "AWS::Inspector::AssessmentTarget"
+}
+
+resource_schema "aws_inspector_assessment_template" {
+  cloudformation_type_name = "AWS::Inspector::AssessmentTemplate"
+}
+
+resource_schema "aws_inspector_resource_group" {
+  cloudformation_type_name               = "AWS::Inspector::ResourceGroup"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_imagebuilder_component" {
